@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,40 @@ type ListServiceInstanceProvisionedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceInstanceProvisionedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceInstanceProvisionedResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceInstanceProvisionedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceInstanceProvisionedResourcesInput_nextToken, *v.NextToken)
+	}
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.ListServiceInstanceProvisionedResourcesInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.ListServiceInstanceProvisionedResourcesInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *ListServiceInstanceProvisionedResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceInstanceProvisionedResourcesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceInstanceProvisionedResourcesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceInstanceProvisionedResourcesInput_nextToken, v.NextToken)
+		case schemas.ListServiceInstanceProvisionedResourcesInput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.ListServiceInstanceProvisionedResourcesInput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.ListServiceInstanceProvisionedResourcesInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.ListServiceInstanceProvisionedResourcesInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type ListServiceInstanceProvisionedResourcesOutput struct {
 
 	// An array of provisioned resources for a service instance.
@@ -65,13 +101,35 @@ type ListServiceInstanceProvisionedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceInstanceProvisionedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceInstanceProvisionedResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceInstanceProvisionedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceInstanceProvisionedResourcesOutput_nextToken, *v.NextToken)
+	}
+	serializeProvisionedResourceList(s, schemas.ListServiceInstanceProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+}
+func (v *ListServiceInstanceProvisionedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceInstanceProvisionedResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceInstanceProvisionedResourcesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceInstanceProvisionedResourcesOutput_nextToken, v.NextToken)
+		case schemas.ListServiceInstanceProvisionedResourcesOutput_provisionedResources:
+			return deserializeProvisionedResourceList(d, schemas.ListServiceInstanceProvisionedResourcesOutput_provisionedResources, &v.ProvisionedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceInstanceProvisionedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListServiceInstanceProvisionedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceInstanceProvisionedResources, schemas.ListServiceInstanceProvisionedResourcesInput, schemas.ListServiceInstanceProvisionedResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListServiceInstanceProvisionedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceInstanceProvisionedResources, schemas.ListServiceInstanceProvisionedResourcesInput, schemas.ListServiceInstanceProvisionedResourcesOutput), output: &ListServiceInstanceProvisionedResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

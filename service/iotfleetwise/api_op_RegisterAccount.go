@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,38 @@ type RegisterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IamResources != nil {
+		s.WriteStruct(schemas.RegisterAccountRequest_iamResources)
+		v.IamResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimestreamResources != nil {
+		s.WriteStruct(schemas.RegisterAccountRequest_timestreamResources)
+		v.TimestreamResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterAccountInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterAccountRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterAccountRequest_iamResources:
+			v.IamResources = &types.IamResources{}
+			return v.IamResources.Deserialize(d)
+		case schemas.RegisterAccountRequest_timestreamResources:
+			v.TimestreamResources = &types.TimestreamResources{}
+			return v.TimestreamResources.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type RegisterAccountOutput struct {
 
 	//  The time the account was registered, in seconds since epoch (January 1, 1970
@@ -109,13 +143,64 @@ type RegisterAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.RegisterAccountResponse_creationTime, *v.CreationTime)
+	}
+	if v.IamResources != nil {
+		s.WriteStruct(schemas.RegisterAccountResponse_iamResources)
+		v.IamResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.RegisterAccountResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	if v.RegisterAccountStatus != "" {
+		s.WriteString(schemas.RegisterAccountResponse_registerAccountStatus, string(v.RegisterAccountStatus))
+	}
+	if v.TimestreamResources != nil {
+		s.WriteStruct(schemas.RegisterAccountResponse_timestreamResources)
+		v.TimestreamResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterAccountResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.RegisterAccountResponse_creationTime, v.CreationTime)
+		case schemas.RegisterAccountResponse_iamResources:
+			v.IamResources = &types.IamResources{}
+			return v.IamResources.Deserialize(d)
+		case schemas.RegisterAccountResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.RegisterAccountResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.RegisterAccountResponse_registerAccountStatus:
+			var ev string
+			if err := d.ReadString(schemas.RegisterAccountResponse_registerAccountStatus, &ev); err != nil {
+				return err
+			}
+			v.RegisterAccountStatus = types.RegistrationStatus(ev)
+			return nil
+		case schemas.RegisterAccountResponse_timestreamResources:
+			v.TimestreamResources = &types.TimestreamResources{}
+			return v.TimestreamResources.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAccount, schemas.RegisterAccountRequest, schemas.RegisterAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRegisterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAccount, schemas.RegisterAccountRequest, schemas.RegisterAccountResponse), output: &RegisterAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

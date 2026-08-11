@@ -4,6 +4,8 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type StopContinuousExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopContinuousExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopContinuousExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopContinuousExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportId != nil {
+		s.WriteString(schemas.StopContinuousExportRequest_exportId, *v.ExportId)
+	}
+}
+
 type StopContinuousExportOutput struct {
 
 	// Timestamp that represents when this continuous export started collecting data.
@@ -48,13 +62,38 @@ type StopContinuousExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopContinuousExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopContinuousExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopContinuousExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StopContinuousExportResponse_startTime, *v.StartTime)
+	}
+	if v.StopTime != nil {
+		s.WriteTime(schemas.StopContinuousExportResponse_stopTime, *v.StopTime)
+	}
+}
+func (v *StopContinuousExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopContinuousExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopContinuousExportResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.StopContinuousExportResponse_startTime, v.StartTime)
+		case schemas.StopContinuousExportResponse_stopTime:
+			v.StopTime = new(time.Time)
+			return d.ReadTime(schemas.StopContinuousExportResponse_stopTime, v.StopTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopContinuousExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopContinuousExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopContinuousExport, schemas.StopContinuousExportRequest, schemas.StopContinuousExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopContinuousExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopContinuousExport, schemas.StopContinuousExportRequest, schemas.StopContinuousExportResponse), output: &StopContinuousExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

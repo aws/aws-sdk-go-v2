@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type DeleteEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteEnvironmentInput_name, *v.Name)
+	}
+}
+func (v *DeleteEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeleteEnvironmentOutput struct {
 
 	// The detailed data of the environment being deleted.
@@ -47,13 +71,34 @@ type DeleteEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteStruct(schemas.DeleteEnvironmentOutput_environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentOutput_environment:
+			v.Environment = &types.Environment{}
+			return v.Environment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironment, schemas.DeleteEnvironmentInput, schemas.DeleteEnvironmentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironment, schemas.DeleteEnvironmentInput, schemas.DeleteEnvironmentOutput), output: &DeleteEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

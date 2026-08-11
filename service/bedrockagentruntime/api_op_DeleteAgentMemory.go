@@ -4,6 +4,8 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type DeleteAgentMemoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentMemoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentMemoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentMemoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAliasId != nil {
+		s.WriteString(schemas.DeleteAgentMemoryRequest_agentAliasId, *v.AgentAliasId)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.DeleteAgentMemoryRequest_agentId, *v.AgentId)
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.DeleteAgentMemoryRequest_memoryId, *v.MemoryId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.DeleteAgentMemoryRequest_sessionId, *v.SessionId)
+	}
+}
+
 type DeleteAgentMemoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +74,26 @@ type DeleteAgentMemoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentMemoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentMemoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentMemoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAgentMemoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAgentMemoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAgentMemoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAgentMemory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentMemory, schemas.DeleteAgentMemoryRequest, schemas.DeleteAgentMemoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAgentMemory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentMemory, schemas.DeleteAgentMemoryRequest, schemas.DeleteAgentMemoryResponse), output: &DeleteAgentMemoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,20 @@ type DetectDocumentTextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectDocumentTextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectDocumentTextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectDocumentTextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteStruct(schemas.DetectDocumentTextRequest_Document)
+		v.Document.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DetectDocumentTextOutput struct {
 
 	// An array of Block objects that contain the text that's detected in the document.
@@ -72,13 +88,43 @@ type DetectDocumentTextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectDocumentTextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectDocumentTextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectDocumentTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlockList(s, schemas.DetectDocumentTextResponse_Blocks, v.Blocks)
+	if v.DetectDocumentTextModelVersion != nil {
+		s.WriteString(schemas.DetectDocumentTextResponse_DetectDocumentTextModelVersion, *v.DetectDocumentTextModelVersion)
+	}
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.DetectDocumentTextResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectDocumentTextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectDocumentTextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectDocumentTextResponse_Blocks:
+			return deserializeBlockList(d, schemas.DetectDocumentTextResponse_Blocks, &v.Blocks)
+		case schemas.DetectDocumentTextResponse_DetectDocumentTextModelVersion:
+			v.DetectDocumentTextModelVersion = new(string)
+			return d.ReadString(schemas.DetectDocumentTextResponse_DetectDocumentTextModelVersion, v.DetectDocumentTextModelVersion)
+		case schemas.DetectDocumentTextResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectDocumentTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectDocumentText{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectDocumentText, schemas.DetectDocumentTextRequest, schemas.DetectDocumentTextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectDocumentText{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectDocumentText, schemas.DetectDocumentTextRequest, schemas.DetectDocumentTextResponse), output: &DetectDocumentTextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

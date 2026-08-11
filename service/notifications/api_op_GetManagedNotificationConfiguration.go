@@ -4,6 +4,8 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetManagedNotificationConfigurationInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetManagedNotificationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedNotificationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetManagedNotificationConfigurationRequest_arn, *v.Arn)
+	}
 }
 
 type GetManagedNotificationConfigurationOutput struct {
@@ -67,13 +81,56 @@ type GetManagedNotificationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedNotificationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedNotificationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedNotificationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetManagedNotificationConfigurationResponse_arn, *v.Arn)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.GetManagedNotificationConfigurationResponse_category, *v.Category)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetManagedNotificationConfigurationResponse_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetManagedNotificationConfigurationResponse_name, *v.Name)
+	}
+	if v.SubCategory != nil {
+		s.WriteString(schemas.GetManagedNotificationConfigurationResponse_subCategory, *v.SubCategory)
+	}
+}
+func (v *GetManagedNotificationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedNotificationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedNotificationConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetManagedNotificationConfigurationResponse_arn, v.Arn)
+		case schemas.GetManagedNotificationConfigurationResponse_category:
+			v.Category = new(string)
+			return d.ReadString(schemas.GetManagedNotificationConfigurationResponse_category, v.Category)
+		case schemas.GetManagedNotificationConfigurationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetManagedNotificationConfigurationResponse_description, v.Description)
+		case schemas.GetManagedNotificationConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetManagedNotificationConfigurationResponse_name, v.Name)
+		case schemas.GetManagedNotificationConfigurationResponse_subCategory:
+			v.SubCategory = new(string)
+			return d.ReadString(schemas.GetManagedNotificationConfigurationResponse_subCategory, v.SubCategory)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedNotificationConfiguration, schemas.GetManagedNotificationConfigurationRequest, schemas.GetManagedNotificationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedNotificationConfiguration, schemas.GetManagedNotificationConfigurationRequest, schemas.GetManagedNotificationConfigurationResponse), output: &GetManagedNotificationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

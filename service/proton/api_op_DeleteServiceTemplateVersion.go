@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,40 @@ type DeleteServiceTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceTemplateVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceTemplateVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceTemplateVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MajorVersion != nil {
+		s.WriteString(schemas.DeleteServiceTemplateVersionInput_majorVersion, *v.MajorVersion)
+	}
+	if v.MinorVersion != nil {
+		s.WriteString(schemas.DeleteServiceTemplateVersionInput_minorVersion, *v.MinorVersion)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DeleteServiceTemplateVersionInput_templateName, *v.TemplateName)
+	}
+}
+func (v *DeleteServiceTemplateVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceTemplateVersionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceTemplateVersionInput_majorVersion:
+			v.MajorVersion = new(string)
+			return d.ReadString(schemas.DeleteServiceTemplateVersionInput_majorVersion, v.MajorVersion)
+		case schemas.DeleteServiceTemplateVersionInput_minorVersion:
+			v.MinorVersion = new(string)
+			return d.ReadString(schemas.DeleteServiceTemplateVersionInput_minorVersion, v.MinorVersion)
+		case schemas.DeleteServiceTemplateVersionInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.DeleteServiceTemplateVersionInput_templateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 type DeleteServiceTemplateVersionOutput struct {
 
 	// The detailed data of the service template version being deleted.
@@ -66,13 +102,34 @@ type DeleteServiceTemplateVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceTemplateVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceTemplateVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceTemplateVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceTemplateVersion != nil {
+		s.WriteStruct(schemas.DeleteServiceTemplateVersionOutput_serviceTemplateVersion)
+		v.ServiceTemplateVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteServiceTemplateVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceTemplateVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceTemplateVersionOutput_serviceTemplateVersion:
+			v.ServiceTemplateVersion = &types.ServiceTemplateVersion{}
+			return v.ServiceTemplateVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteServiceTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceTemplateVersion, schemas.DeleteServiceTemplateVersionInput, schemas.DeleteServiceTemplateVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteServiceTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceTemplateVersion, schemas.DeleteServiceTemplateVersionInput, schemas.DeleteServiceTemplateVersionOutput), output: &DeleteServiceTemplateVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

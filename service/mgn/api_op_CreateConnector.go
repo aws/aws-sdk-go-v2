@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type CreateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConnectorRequest_name, *v.Name)
+	}
+	if v.SsmCommandConfig != nil {
+		s.WriteStruct(schemas.CreateConnectorRequest_ssmCommandConfig)
+		v.SsmCommandConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SsmInstanceID != nil {
+		s.WriteString(schemas.CreateConnectorRequest_ssmInstanceID, *v.SsmInstanceID)
+	}
+	serializeTagsMap(s, schemas.CreateConnectorRequest_tags, v.Tags)
+}
+
 type CreateConnectorOutput struct {
 
 	// Connector arn.
@@ -71,13 +94,61 @@ type CreateConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Connector_arn, *v.Arn)
+	}
+	if v.ConnectorID != nil {
+		s.WriteString(schemas.Connector_connectorID, *v.ConnectorID)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Connector_name, *v.Name)
+	}
+	if v.SsmCommandConfig != nil {
+		s.WriteStruct(schemas.Connector_ssmCommandConfig)
+		v.SsmCommandConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SsmInstanceID != nil {
+		s.WriteString(schemas.Connector_ssmInstanceID, *v.SsmInstanceID)
+	}
+	serializeTagsMap(s, schemas.Connector_tags, v.Tags)
+}
+func (v *CreateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connector_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Connector_arn, v.Arn)
+		case schemas.Connector_connectorID:
+			v.ConnectorID = new(string)
+			return d.ReadString(schemas.Connector_connectorID, v.ConnectorID)
+		case schemas.Connector_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Connector_name, v.Name)
+		case schemas.Connector_ssmCommandConfig:
+			v.SsmCommandConfig = &types.ConnectorSsmCommandConfig{}
+			return v.SsmCommandConfig.Deserialize(d)
+		case schemas.Connector_ssmInstanceID:
+			v.SsmInstanceID = new(string)
+			return d.ReadString(schemas.Connector_ssmInstanceID, v.SsmInstanceID)
+		case schemas.Connector_tags:
+			return deserializeTagsMap(d, schemas.Connector_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.Connector)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.Connector), output: &CreateConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

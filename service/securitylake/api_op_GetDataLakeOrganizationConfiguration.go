@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,15 @@ type GetDataLakeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeOrganizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeOrganizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetDataLakeOrganizationConfigurationOutput struct {
 
 	// The configuration used for new accounts in Security Lake.
@@ -41,13 +52,29 @@ type GetDataLakeOrganizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeOrganizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeOrganizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeOrganizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataLakeAutoEnableNewAccountConfigurationList(s, schemas.GetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount, v.AutoEnableNewAccount)
+}
+func (v *GetDataLakeOrganizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataLakeOrganizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount:
+			return deserializeDataLakeAutoEnableNewAccountConfigurationList(d, schemas.GetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount, &v.AutoEnableNewAccount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataLakeOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataLakeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeOrganizationConfiguration, schemas.GetDataLakeOrganizationConfigurationRequest, schemas.GetDataLakeOrganizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataLakeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeOrganizationConfiguration, schemas.GetDataLakeOrganizationConfigurationRequest, schemas.GetDataLakeOrganizationConfigurationResponse), output: &GetDataLakeOrganizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type BatchUpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterNameList(s, schemas.BatchUpdateClusterRequest_ClusterNames, v.ClusterNames)
+	if v.ServiceUpdate != nil {
+		s.WriteStruct(schemas.BatchUpdateClusterRequest_ServiceUpdate)
+		v.ServiceUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type BatchUpdateClusterOutput struct {
 
 	// The list of clusters that have been updated.
@@ -54,13 +71,32 @@ type BatchUpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterList(s, schemas.BatchUpdateClusterResponse_ProcessedClusters, v.ProcessedClusters)
+	serializeUnprocessedClusterList(s, schemas.BatchUpdateClusterResponse_UnprocessedClusters, v.UnprocessedClusters)
+}
+func (v *BatchUpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateClusterResponse_ProcessedClusters:
+			return deserializeClusterList(d, schemas.BatchUpdateClusterResponse_ProcessedClusters, &v.ProcessedClusters)
+		case schemas.BatchUpdateClusterResponse_UnprocessedClusters:
+			return deserializeUnprocessedClusterList(d, schemas.BatchUpdateClusterResponse_UnprocessedClusters, &v.UnprocessedClusters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateCluster, schemas.BatchUpdateClusterRequest, schemas.BatchUpdateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateCluster, schemas.BatchUpdateClusterRequest, schemas.BatchUpdateClusterResponse), output: &BatchUpdateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,20 @@ type CreateACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACLName != nil {
+		s.WriteString(schemas.CreateACLRequest_ACLName, *v.ACLName)
+	}
+	serializeTagList(s, schemas.CreateACLRequest_Tags, v.Tags)
+	serializeUserNameListInput(s, schemas.CreateACLRequest_UserNames, v.UserNames)
+}
+
 type CreateACLOutput struct {
 
 	// The newly-created Access Control List.
@@ -54,13 +70,34 @@ type CreateACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateACLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateACLResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACL != nil {
+		s.WriteStruct(schemas.CreateACLResponse_ACL)
+		v.ACL.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateACLResponse_ACL:
+			v.ACL = &types.ACL{}
+			return v.ACL.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateACL, schemas.CreateACLRequest, schemas.CreateACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateACL, schemas.CreateACLRequest, schemas.CreateACLResponse), output: &CreateACLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

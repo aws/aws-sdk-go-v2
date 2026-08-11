@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,35 @@ type UpdateExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperienceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperienceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateExperienceRequest_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateExperienceRequest_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateExperienceRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.UpdateExperienceRequest_IndexId, *v.IndexId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateExperienceRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateExperienceRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type UpdateExperienceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +96,26 @@ type UpdateExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperienceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperienceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperience, schemas.UpdateExperienceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperience, schemas.UpdateExperienceRequest, nil), output: &UpdateExperienceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,18 @@ type DescribeDatasetImportJobInput struct {
 	DatasetImportJobArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDatasetImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetImportJobArn != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobRequest_DatasetImportJobArn, *v.DatasetImportJobArn)
+	}
 }
 
 type DescribeDatasetImportJobOutput struct {
@@ -146,13 +160,130 @@ type DescribeDatasetImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeDatasetImportJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DataSize != nil {
+		s.WriteFloat64(schemas.DescribeDatasetImportJobResponse_DataSize, *v.DataSize)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.DescribeDatasetImportJobResponse_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetImportJobArn != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_DatasetImportJobArn, *v.DatasetImportJobArn)
+	}
+	if v.DatasetImportJobName != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_DatasetImportJobName, *v.DatasetImportJobName)
+	}
+	if v.EstimatedTimeRemainingInMinutes != nil {
+		s.WriteInt64(schemas.DescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes, *v.EstimatedTimeRemainingInMinutes)
+	}
+	serializeFieldStatistics(s, schemas.DescribeDatasetImportJobResponse_FieldStatistics, v.FieldStatistics)
+	if v.Format != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_Format, *v.Format)
+	}
+	if v.GeolocationFormat != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_GeolocationFormat, *v.GeolocationFormat)
+	}
+	if v.ImportMode != "" {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_ImportMode, string(v.ImportMode))
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeDatasetImportJobResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_Status, *v.Status)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_TimeZone, *v.TimeZone)
+	}
+	if v.TimestampFormat != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobResponse_TimestampFormat, *v.TimestampFormat)
+	}
+	if v.UseGeolocationForTimeZone != false {
+		s.WriteBool(schemas.DescribeDatasetImportJobResponse_UseGeolocationForTimeZone, v.UseGeolocationForTimeZone)
+	}
+}
+func (v *DescribeDatasetImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetImportJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetImportJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeDatasetImportJobResponse_DataSize:
+			v.DataSize = new(float64)
+			return d.ReadFloat64(schemas.DescribeDatasetImportJobResponse_DataSize, v.DataSize)
+		case schemas.DescribeDatasetImportJobResponse_DataSource:
+			v.DataSource = &types.DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.DescribeDatasetImportJobResponse_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetImportJobResponse_DatasetArn, v.DatasetArn)
+		case schemas.DescribeDatasetImportJobResponse_DatasetImportJobArn:
+			v.DatasetImportJobArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetImportJobResponse_DatasetImportJobArn, v.DatasetImportJobArn)
+		case schemas.DescribeDatasetImportJobResponse_DatasetImportJobName:
+			v.DatasetImportJobName = new(string)
+			return d.ReadString(schemas.DescribeDatasetImportJobResponse_DatasetImportJobName, v.DatasetImportJobName)
+		case schemas.DescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes:
+			v.EstimatedTimeRemainingInMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes, v.EstimatedTimeRemainingInMinutes)
+		case schemas.DescribeDatasetImportJobResponse_FieldStatistics:
+			return deserializeFieldStatistics(d, schemas.DescribeDatasetImportJobResponse_FieldStatistics, &v.FieldStatistics)
+		case schemas.DescribeDatasetImportJobResponse_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.DescribeDatasetImportJobResponse_Format, v.Format)
+		case schemas.DescribeDatasetImportJobResponse_GeolocationFormat:
+			v.GeolocationFormat = new(string)
+			return d.ReadString(schemas.DescribeDatasetImportJobResponse_GeolocationFormat, v.GeolocationFormat)
+		case schemas.DescribeDatasetImportJobResponse_ImportMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetImportJobResponse_ImportMode, &ev); err != nil {
+				return err
+			}
+			v.ImportMode = types.ImportMode(ev)
+			return nil
+		case schemas.DescribeDatasetImportJobResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetImportJobResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeDatasetImportJobResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeDatasetImportJobResponse_Message, v.Message)
+		case schemas.DescribeDatasetImportJobResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeDatasetImportJobResponse_Status, v.Status)
+		case schemas.DescribeDatasetImportJobResponse_TimeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.DescribeDatasetImportJobResponse_TimeZone, v.TimeZone)
+		case schemas.DescribeDatasetImportJobResponse_TimestampFormat:
+			v.TimestampFormat = new(string)
+			return d.ReadString(schemas.DescribeDatasetImportJobResponse_TimestampFormat, v.TimestampFormat)
+		case schemas.DescribeDatasetImportJobResponse_UseGeolocationForTimeZone:
+			return d.ReadBool(schemas.DescribeDatasetImportJobResponse_UseGeolocationForTimeZone, &v.UseGeolocationForTimeZone)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDatasetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDatasetImportJob, schemas.DescribeDatasetImportJobRequest, schemas.DescribeDatasetImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDatasetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDatasetImportJob, schemas.DescribeDatasetImportJobRequest, schemas.DescribeDatasetImportJobResponse), output: &DescribeDatasetImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

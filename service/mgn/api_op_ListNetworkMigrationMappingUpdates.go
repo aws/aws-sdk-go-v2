@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,32 @@ type ListNetworkMigrationMappingUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationMappingUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationMappingUpdatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationMappingUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListNetworkMigrationMappingUpdatesRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNetworkMigrationMappingUpdatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationMappingUpdatesRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationMappingUpdatesRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationMappingUpdatesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListNetworkMigrationMappingUpdatesOutput struct {
 
 	// A list of mapping update job details.
@@ -65,13 +93,35 @@ type ListNetworkMigrationMappingUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationMappingUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationMappingUpdatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationMappingUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkMigrationMappingUpdatesList(s, schemas.ListNetworkMigrationMappingUpdatesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationMappingUpdatesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworkMigrationMappingUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkMigrationMappingUpdatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkMigrationMappingUpdatesResponse_items:
+			return deserializeNetworkMigrationMappingUpdatesList(d, schemas.ListNetworkMigrationMappingUpdatesResponse_items, &v.Items)
+		case schemas.ListNetworkMigrationMappingUpdatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworkMigrationMappingUpdatesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkMigrationMappingUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworkMigrationMappingUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationMappingUpdates, schemas.ListNetworkMigrationMappingUpdatesRequest, schemas.ListNetworkMigrationMappingUpdatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworkMigrationMappingUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationMappingUpdates, schemas.ListNetworkMigrationMappingUpdatesRequest, schemas.ListNetworkMigrationMappingUpdatesResponse), output: &ListNetworkMigrationMappingUpdatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type AssociateSigninDelegateGroupsWithAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSigninDelegateGroupsWithAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSigninDelegateGroupsWithAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSigninDelegateGroupsWithAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AssociateSigninDelegateGroupsWithAccountRequest_AccountId, *v.AccountId)
+	}
+	serializeSigninDelegateGroupList(s, schemas.AssociateSigninDelegateGroupsWithAccountRequest_SigninDelegateGroups, v.SigninDelegateGroups)
+}
+
 type AssociateSigninDelegateGroupsWithAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +62,26 @@ type AssociateSigninDelegateGroupsWithAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSigninDelegateGroupsWithAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSigninDelegateGroupsWithAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSigninDelegateGroupsWithAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateSigninDelegateGroupsWithAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSigninDelegateGroupsWithAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSigninDelegateGroupsWithAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSigninDelegateGroupsWithAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSigninDelegateGroupsWithAccount, schemas.AssociateSigninDelegateGroupsWithAccountRequest, schemas.AssociateSigninDelegateGroupsWithAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSigninDelegateGroupsWithAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSigninDelegateGroupsWithAccount, schemas.AssociateSigninDelegateGroupsWithAccountRequest, schemas.AssociateSigninDelegateGroupsWithAccountResponse), output: &AssociateSigninDelegateGroupsWithAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

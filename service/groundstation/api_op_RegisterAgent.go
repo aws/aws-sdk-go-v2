@@ -4,7 +4,9 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type RegisterAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentDetails != nil {
+		s.WriteStruct(schemas.RegisterAgentRequest_agentDetails)
+		v.AgentDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DiscoveryData != nil {
+		s.WriteStruct(schemas.RegisterAgentRequest_discoveryData)
+		v.DiscoveryData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.RegisterAgentRequest_tags, v.Tags)
+}
+
 type RegisterAgentOutput struct {
 
 	// UUID of registered agent.
@@ -55,13 +77,32 @@ type RegisterAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.RegisterAgentResponse_agentId, *v.AgentId)
+	}
+}
+func (v *RegisterAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterAgentResponse_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.RegisterAgentResponse_agentId, v.AgentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAgent, schemas.RegisterAgentRequest, schemas.RegisterAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAgent, schemas.RegisterAgentRequest, schemas.RegisterAgentResponse), output: &RegisterAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

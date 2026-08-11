@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,50 @@ type SubmitFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyInstanceId != nil {
+		s.WriteString(schemas.SubmitFeedbackRequest_anomalyInstanceId, *v.AnomalyInstanceId)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.SubmitFeedbackRequest_comment, *v.Comment)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.SubmitFeedbackRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SubmitFeedbackRequest_type, string(v.Type))
+	}
+}
+func (v *SubmitFeedbackInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitFeedbackRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitFeedbackRequest_anomalyInstanceId:
+			v.AnomalyInstanceId = new(string)
+			return d.ReadString(schemas.SubmitFeedbackRequest_anomalyInstanceId, v.AnomalyInstanceId)
+		case schemas.SubmitFeedbackRequest_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.SubmitFeedbackRequest_comment, v.Comment)
+		case schemas.SubmitFeedbackRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.SubmitFeedbackRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.SubmitFeedbackRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.SubmitFeedbackRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.FeedbackType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The structure representing the SubmitFeedbackResponse.
 type SubmitFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -60,13 +106,26 @@ type SubmitFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SubmitFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubmitFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitFeedback, schemas.SubmitFeedbackRequest, schemas.SubmitFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSubmitFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitFeedback, schemas.SubmitFeedbackRequest, schemas.SubmitFeedbackResponse), output: &SubmitFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

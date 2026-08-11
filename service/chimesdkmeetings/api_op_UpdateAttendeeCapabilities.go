@@ -4,7 +4,9 @@ package chimesdkmeetings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,26 @@ type UpdateAttendeeCapabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAttendeeCapabilitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAttendeeCapabilitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAttendeeCapabilitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttendeeId != nil {
+		s.WriteString(schemas.UpdateAttendeeCapabilitiesRequest_AttendeeId, *v.AttendeeId)
+	}
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.UpdateAttendeeCapabilitiesRequest_Capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MeetingId != nil {
+		s.WriteString(schemas.UpdateAttendeeCapabilitiesRequest_MeetingId, *v.MeetingId)
+	}
+}
+
 type UpdateAttendeeCapabilitiesOutput struct {
 
 	// The updated attendee data.
@@ -91,13 +113,34 @@ type UpdateAttendeeCapabilitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAttendeeCapabilitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAttendeeCapabilitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAttendeeCapabilitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attendee != nil {
+		s.WriteStruct(schemas.UpdateAttendeeCapabilitiesResponse_Attendee)
+		v.Attendee.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAttendeeCapabilitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAttendeeCapabilitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAttendeeCapabilitiesResponse_Attendee:
+			v.Attendee = &types.Attendee{}
+			return v.Attendee.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAttendeeCapabilitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAttendeeCapabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAttendeeCapabilities, schemas.UpdateAttendeeCapabilitiesRequest, schemas.UpdateAttendeeCapabilitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAttendeeCapabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAttendeeCapabilities, schemas.UpdateAttendeeCapabilitiesRequest, schemas.UpdateAttendeeCapabilitiesResponse), output: &UpdateAttendeeCapabilitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

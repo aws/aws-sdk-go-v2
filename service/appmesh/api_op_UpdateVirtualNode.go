@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,54 @@ type UpdateVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateVirtualNodeInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.UpdateVirtualNodeInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.UpdateVirtualNodeInput_meshOwner, *v.MeshOwner)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.UpdateVirtualNodeInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualNodeName != nil {
+		s.WriteString(schemas.UpdateVirtualNodeInput_virtualNodeName, *v.VirtualNodeName)
+	}
+}
+func (v *UpdateVirtualNodeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVirtualNodeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVirtualNodeInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateVirtualNodeInput_clientToken, v.ClientToken)
+		case schemas.UpdateVirtualNodeInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.UpdateVirtualNodeInput_meshName, v.MeshName)
+		case schemas.UpdateVirtualNodeInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.UpdateVirtualNodeInput_meshOwner, v.MeshOwner)
+		case schemas.UpdateVirtualNodeInput_spec:
+			v.Spec = &types.VirtualNodeSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.UpdateVirtualNodeInput_virtualNodeName:
+			v.VirtualNodeName = new(string)
+			return d.ReadString(schemas.UpdateVirtualNodeInput_virtualNodeName, v.VirtualNodeName)
+		}
+		return nil
+	})
+}
+
 type UpdateVirtualNodeOutput struct {
 
 	// A full description of the virtual node that was updated.
@@ -69,13 +119,34 @@ type UpdateVirtualNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualNode != nil {
+		s.WriteStruct(schemas.UpdateVirtualNodeOutput_virtualNode)
+		v.VirtualNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateVirtualNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVirtualNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVirtualNodeOutput_virtualNode:
+			v.VirtualNode = &types.VirtualNodeData{}
+			return v.VirtualNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVirtualNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualNode, schemas.UpdateVirtualNodeInput, schemas.UpdateVirtualNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVirtualNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualNode, schemas.UpdateVirtualNodeInput, schemas.UpdateVirtualNodeOutput), output: &UpdateVirtualNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

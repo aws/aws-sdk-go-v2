@@ -4,6 +4,8 @@ package kinesisanalytics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type DeleteApplicationInputProcessingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationInputProcessingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationInputProcessingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationInputProcessingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DeleteApplicationInputProcessingConfigurationRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.DeleteApplicationInputProcessingConfigurationRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+	if v.InputId != nil {
+		s.WriteString(schemas.DeleteApplicationInputProcessingConfigurationRequest_InputId, *v.InputId)
+	}
+}
+
 type DeleteApplicationInputProcessingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +80,26 @@ type DeleteApplicationInputProcessingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationInputProcessingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationInputProcessingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationInputProcessingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteApplicationInputProcessingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApplicationInputProcessingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApplicationInputProcessingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationInputProcessingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationInputProcessingConfiguration, schemas.DeleteApplicationInputProcessingConfigurationRequest, schemas.DeleteApplicationInputProcessingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteApplicationInputProcessingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationInputProcessingConfiguration, schemas.DeleteApplicationInputProcessingConfigurationRequest, schemas.DeleteApplicationInputProcessingConfigurationResponse), output: &DeleteApplicationInputProcessingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

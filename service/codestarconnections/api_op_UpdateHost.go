@@ -4,7 +4,9 @@ package codestarconnections
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,26 @@ type UpdateHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostArn != nil {
+		s.WriteString(schemas.UpdateHostInput_HostArn, *v.HostArn)
+	}
+	if v.ProviderEndpoint != nil {
+		s.WriteString(schemas.UpdateHostInput_ProviderEndpoint, *v.ProviderEndpoint)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.UpdateHostInput_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateHostOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +71,26 @@ type UpdateHostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHostOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHostOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHostOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateHostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHostOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHost, schemas.UpdateHostInput, schemas.UpdateHostOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHost, schemas.UpdateHostInput, schemas.UpdateHostOutput), output: &UpdateHostOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

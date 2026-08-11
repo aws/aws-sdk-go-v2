@@ -4,7 +4,9 @@ package chimesdkmeetings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,26 @@ type CreateAttendeeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAttendeeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAttendeeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAttendeeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.CreateAttendeeRequest_Capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExternalUserId != nil {
+		s.WriteString(schemas.CreateAttendeeRequest_ExternalUserId, *v.ExternalUserId)
+	}
+	if v.MeetingId != nil {
+		s.WriteString(schemas.CreateAttendeeRequest_MeetingId, *v.MeetingId)
+	}
+}
+
 type CreateAttendeeOutput struct {
 
 	// The attendee information, including attendee ID and join token.
@@ -102,13 +124,34 @@ type CreateAttendeeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAttendeeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAttendeeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAttendeeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attendee != nil {
+		s.WriteStruct(schemas.CreateAttendeeResponse_Attendee)
+		v.Attendee.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAttendeeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAttendeeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAttendeeResponse_Attendee:
+			v.Attendee = &types.Attendee{}
+			return v.Attendee.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAttendee{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAttendee, schemas.CreateAttendeeRequest, schemas.CreateAttendeeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAttendee{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAttendee, schemas.CreateAttendeeRequest, schemas.CreateAttendeeResponse), output: &CreateAttendeeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,28 @@ type DeleteServiceSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceSyncConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceSyncConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceSyncConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceName != nil {
+		s.WriteString(schemas.DeleteServiceSyncConfigInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *DeleteServiceSyncConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceSyncConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceSyncConfigInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.DeleteServiceSyncConfigInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type DeleteServiceSyncConfigOutput struct {
 
 	// The detailed data for the service sync config.
@@ -48,13 +72,34 @@ type DeleteServiceSyncConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceSyncConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceSyncConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceSyncConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSyncConfig != nil {
+		s.WriteStruct(schemas.DeleteServiceSyncConfigOutput_serviceSyncConfig)
+		v.ServiceSyncConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteServiceSyncConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceSyncConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceSyncConfigOutput_serviceSyncConfig:
+			v.ServiceSyncConfig = &types.ServiceSyncConfig{}
+			return v.ServiceSyncConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceSyncConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteServiceSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceSyncConfig, schemas.DeleteServiceSyncConfigInput, schemas.DeleteServiceSyncConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteServiceSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceSyncConfig, schemas.DeleteServiceSyncConfigInput, schemas.DeleteServiceSyncConfigOutput), output: &DeleteServiceSyncConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

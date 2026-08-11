@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type DisassociateVehicleFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateVehicleFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateVehicleFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateVehicleFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DisassociateVehicleFleetRequest_fleetId, *v.FleetId)
+	}
+	if v.VehicleName != nil {
+		s.WriteString(schemas.DisassociateVehicleFleetRequest_vehicleName, *v.VehicleName)
+	}
+}
+func (v *DisassociateVehicleFleetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateVehicleFleetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateVehicleFleetRequest_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.DisassociateVehicleFleetRequest_fleetId, v.FleetId)
+		case schemas.DisassociateVehicleFleetRequest_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.DisassociateVehicleFleetRequest_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
+}
+
 type DisassociateVehicleFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +76,26 @@ type DisassociateVehicleFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateVehicleFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateVehicleFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateVehicleFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateVehicleFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateVehicleFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateVehicleFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateVehicleFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateVehicleFleet, schemas.DisassociateVehicleFleetRequest, schemas.DisassociateVehicleFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateVehicleFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateVehicleFleet, schemas.DisassociateVehicleFleetRequest, schemas.DisassociateVehicleFleetResponse), output: &DisassociateVehicleFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,29 @@ type AddApplicationVpcConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationVpcConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationVpcConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationVpcConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.AddApplicationVpcConfigurationRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.ConditionalToken != nil {
+		s.WriteString(schemas.AddApplicationVpcConfigurationRequest_ConditionalToken, *v.ConditionalToken)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.AddApplicationVpcConfigurationRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.AddApplicationVpcConfigurationRequest_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AddApplicationVpcConfigurationOutput struct {
 
 	// The ARN of the application.
@@ -84,13 +109,52 @@ type AddApplicationVpcConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationVpcConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationVpcConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationVpcConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.AddApplicationVpcConfigurationResponse_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.AddApplicationVpcConfigurationResponse_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.AddApplicationVpcConfigurationResponse_OperationId, *v.OperationId)
+	}
+	if v.VpcConfigurationDescription != nil {
+		s.WriteStruct(schemas.AddApplicationVpcConfigurationResponse_VpcConfigurationDescription)
+		v.VpcConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AddApplicationVpcConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddApplicationVpcConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddApplicationVpcConfigurationResponse_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.AddApplicationVpcConfigurationResponse_ApplicationARN, v.ApplicationARN)
+		case schemas.AddApplicationVpcConfigurationResponse_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.AddApplicationVpcConfigurationResponse_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.AddApplicationVpcConfigurationResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.AddApplicationVpcConfigurationResponse_OperationId, v.OperationId)
+		case schemas.AddApplicationVpcConfigurationResponse_VpcConfigurationDescription:
+			v.VpcConfigurationDescription = &types.VpcConfigurationDescription{}
+			return v.VpcConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddApplicationVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationVpcConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationVpcConfiguration, schemas.AddApplicationVpcConfigurationRequest, schemas.AddApplicationVpcConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddApplicationVpcConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationVpcConfiguration, schemas.AddApplicationVpcConfigurationRequest, schemas.AddApplicationVpcConfigurationResponse), output: &AddApplicationVpcConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type AssociateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociateChannelRequest_arn, *v.Arn)
+	}
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.AssociateChannelRequest_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+}
+
 type AssociateChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +70,26 @@ type AssociateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateChannel, schemas.AssociateChannelRequest, schemas.AssociateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateChannel, schemas.AssociateChannelRequest, schemas.AssociateChannelResponse), output: &AssociateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

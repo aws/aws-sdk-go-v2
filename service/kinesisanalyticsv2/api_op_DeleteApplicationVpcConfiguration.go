@@ -4,6 +4,8 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type DeleteApplicationVpcConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationVpcConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationVpcConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationVpcConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.ConditionalToken != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationRequest_ConditionalToken, *v.ConditionalToken)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.DeleteApplicationVpcConfigurationRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+	if v.VpcConfigurationId != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationRequest_VpcConfigurationId, *v.VpcConfigurationId)
+	}
+}
+
 type DeleteApplicationVpcConfigurationOutput struct {
 
 	// The ARN of the Managed Service for Apache Flink application.
@@ -68,13 +91,44 @@ type DeleteApplicationVpcConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationVpcConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationVpcConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationVpcConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationResponse_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.DeleteApplicationVpcConfigurationResponse_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *DeleteApplicationVpcConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApplicationVpcConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteApplicationVpcConfigurationResponse_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.DeleteApplicationVpcConfigurationResponse_ApplicationARN, v.ApplicationARN)
+		case schemas.DeleteApplicationVpcConfigurationResponse_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.DeleteApplicationVpcConfigurationResponse_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.DeleteApplicationVpcConfigurationResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.DeleteApplicationVpcConfigurationResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApplicationVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationVpcConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationVpcConfiguration, schemas.DeleteApplicationVpcConfigurationRequest, schemas.DeleteApplicationVpcConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteApplicationVpcConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationVpcConfiguration, schemas.DeleteApplicationVpcConfigurationRequest, schemas.DeleteApplicationVpcConfigurationResponse), output: &DeleteApplicationVpcConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

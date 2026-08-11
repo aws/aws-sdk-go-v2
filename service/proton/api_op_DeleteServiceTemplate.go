@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,28 @@ type DeleteServiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteServiceTemplateInput_name, *v.Name)
+	}
+}
+func (v *DeleteServiceTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceTemplateInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteServiceTemplateInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeleteServiceTemplateOutput struct {
 
 	// The detailed data of the service template being deleted.
@@ -48,13 +72,34 @@ type DeleteServiceTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceTemplate != nil {
+		s.WriteStruct(schemas.DeleteServiceTemplateOutput_serviceTemplate)
+		v.ServiceTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteServiceTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceTemplateOutput_serviceTemplate:
+			v.ServiceTemplate = &types.ServiceTemplate{}
+			return v.ServiceTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteServiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceTemplate, schemas.DeleteServiceTemplateInput, schemas.DeleteServiceTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteServiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceTemplate, schemas.DeleteServiceTemplateInput, schemas.DeleteServiceTemplateOutput), output: &DeleteServiceTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

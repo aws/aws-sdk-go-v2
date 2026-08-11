@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type UpdateVoiceProfileDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVoiceProfileDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVoiceProfileDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVoiceProfileDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateVoiceProfileDomainRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVoiceProfileDomainRequest_Name, *v.Name)
+	}
+	if v.VoiceProfileDomainId != nil {
+		s.WriteString(schemas.UpdateVoiceProfileDomainRequest_VoiceProfileDomainId, *v.VoiceProfileDomainId)
+	}
+}
+
 type UpdateVoiceProfileDomainOutput struct {
 
 	// The updated details of the voice profile domain.
@@ -51,13 +71,34 @@ type UpdateVoiceProfileDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVoiceProfileDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVoiceProfileDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVoiceProfileDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceProfileDomain != nil {
+		s.WriteStruct(schemas.UpdateVoiceProfileDomainResponse_VoiceProfileDomain)
+		v.VoiceProfileDomain.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateVoiceProfileDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVoiceProfileDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVoiceProfileDomainResponse_VoiceProfileDomain:
+			v.VoiceProfileDomain = &types.VoiceProfileDomain{}
+			return v.VoiceProfileDomain.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVoiceProfileDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVoiceProfileDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVoiceProfileDomain, schemas.UpdateVoiceProfileDomainRequest, schemas.UpdateVoiceProfileDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVoiceProfileDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVoiceProfileDomain, schemas.UpdateVoiceProfileDomainRequest, schemas.UpdateVoiceProfileDomainResponse), output: &UpdateVoiceProfileDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package codecommit
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListRepositoriesForApprovalRuleTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositoriesForApprovalRuleTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositoriesForApprovalRuleTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositoriesForApprovalRuleTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleTemplateName != nil {
+		s.WriteString(schemas.ListRepositoriesForApprovalRuleTemplateInput_approvalRuleTemplateName, *v.ApprovalRuleTemplateName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRepositoriesForApprovalRuleTemplateInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositoriesForApprovalRuleTemplateInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListRepositoriesForApprovalRuleTemplateOutput struct {
 
 	// An enumeration token that allows the operation to batch the next results of the
@@ -58,13 +78,35 @@ type ListRepositoriesForApprovalRuleTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositoriesForApprovalRuleTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositoriesForApprovalRuleTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositoriesForApprovalRuleTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositoriesForApprovalRuleTemplateOutput_nextToken, *v.NextToken)
+	}
+	serializeRepositoryNameList(s, schemas.ListRepositoriesForApprovalRuleTemplateOutput_repositoryNames, v.RepositoryNames)
+}
+func (v *ListRepositoriesForApprovalRuleTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRepositoriesForApprovalRuleTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRepositoriesForApprovalRuleTemplateOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRepositoriesForApprovalRuleTemplateOutput_nextToken, v.NextToken)
+		case schemas.ListRepositoriesForApprovalRuleTemplateOutput_repositoryNames:
+			return deserializeRepositoryNameList(d, schemas.ListRepositoriesForApprovalRuleTemplateOutput_repositoryNames, &v.RepositoryNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRepositoriesForApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRepositoriesForApprovalRuleTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositoriesForApprovalRuleTemplate, schemas.ListRepositoriesForApprovalRuleTemplateInput, schemas.ListRepositoriesForApprovalRuleTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRepositoriesForApprovalRuleTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositoriesForApprovalRuleTemplate, schemas.ListRepositoriesForApprovalRuleTemplateInput, schemas.ListRepositoriesForApprovalRuleTemplateOutput), output: &ListRepositoriesForApprovalRuleTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package kendraranking
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kendraranking/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendraranking/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,30 @@ type CreateRescoreExecutionPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRescoreExecutionPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRescoreExecutionPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRescoreExecutionPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityUnits != nil {
+		s.WriteStruct(schemas.CreateRescoreExecutionPlanRequest_CapacityUnits)
+		v.CapacityUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRescoreExecutionPlanRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRescoreExecutionPlanRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRescoreExecutionPlanRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateRescoreExecutionPlanRequest_Tags, v.Tags)
+}
+
 type CreateRescoreExecutionPlanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the rescore execution plan.
@@ -83,13 +109,38 @@ type CreateRescoreExecutionPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRescoreExecutionPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRescoreExecutionPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRescoreExecutionPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateRescoreExecutionPlanResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateRescoreExecutionPlanResponse_Id, *v.Id)
+	}
+}
+func (v *CreateRescoreExecutionPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRescoreExecutionPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRescoreExecutionPlanResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateRescoreExecutionPlanResponse_Arn, v.Arn)
+		case schemas.CreateRescoreExecutionPlanResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateRescoreExecutionPlanResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRescoreExecutionPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateRescoreExecutionPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRescoreExecutionPlan, schemas.CreateRescoreExecutionPlanRequest, schemas.CreateRescoreExecutionPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateRescoreExecutionPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRescoreExecutionPlan, schemas.CreateRescoreExecutionPlanRequest, schemas.CreateRescoreExecutionPlanResponse), output: &CreateRescoreExecutionPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

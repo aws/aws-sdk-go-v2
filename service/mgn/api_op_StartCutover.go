@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,34 @@ type StartCutoverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCutoverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCutoverRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCutoverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.StartCutoverRequest_accountID, *v.AccountID)
+	}
+	serializeStartCutoverRequestSourceServerIDs(s, schemas.StartCutoverRequest_sourceServerIDs, v.SourceServerIDs)
+	serializeTagsMap(s, schemas.StartCutoverRequest_tags, v.Tags)
+}
+func (v *StartCutoverInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCutoverRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCutoverRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.StartCutoverRequest_accountID, v.AccountID)
+		case schemas.StartCutoverRequest_sourceServerIDs:
+			return deserializeStartCutoverRequestSourceServerIDs(d, schemas.StartCutoverRequest_sourceServerIDs, &v.SourceServerIDs)
+		case schemas.StartCutoverRequest_tags:
+			return deserializeTagsMap(d, schemas.StartCutoverRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type StartCutoverOutput struct {
 
 	// Start Cutover Job response.
@@ -53,13 +83,34 @@ type StartCutoverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCutoverOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCutoverResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCutoverOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.StartCutoverResponse_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartCutoverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCutoverResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCutoverResponse_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCutoverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCutover{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCutover, schemas.StartCutoverRequest, schemas.StartCutoverResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCutover{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCutover, schemas.StartCutoverRequest, schemas.StartCutoverResponse), output: &StartCutoverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

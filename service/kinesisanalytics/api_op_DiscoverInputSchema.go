@@ -4,7 +4,9 @@ package kinesisanalytics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,36 @@ type DiscoverInputSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverInputSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverInputSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverInputSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputProcessingConfiguration != nil {
+		s.WriteStruct(schemas.DiscoverInputSchemaRequest_InputProcessingConfiguration)
+		v.InputProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputStartingPositionConfiguration != nil {
+		s.WriteStruct(schemas.DiscoverInputSchemaRequest_InputStartingPositionConfiguration)
+		v.InputStartingPositionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.DiscoverInputSchemaRequest_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.DiscoverInputSchemaRequest_RoleARN, *v.RoleARN)
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.DiscoverInputSchemaRequest_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DiscoverInputSchemaOutput struct {
 
 	// Schema inferred from the streaming source. It identifies the format of the data
@@ -90,13 +122,43 @@ type DiscoverInputSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverInputSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverInputSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverInputSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputSchema != nil {
+		s.WriteStruct(schemas.DiscoverInputSchemaResponse_InputSchema)
+		v.InputSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeParsedInputRecords(s, schemas.DiscoverInputSchemaResponse_ParsedInputRecords, v.ParsedInputRecords)
+	serializeProcessedInputRecords(s, schemas.DiscoverInputSchemaResponse_ProcessedInputRecords, v.ProcessedInputRecords)
+	serializeRawInputRecords(s, schemas.DiscoverInputSchemaResponse_RawInputRecords, v.RawInputRecords)
+}
+func (v *DiscoverInputSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscoverInputSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscoverInputSchemaResponse_InputSchema:
+			v.InputSchema = &types.SourceSchema{}
+			return v.InputSchema.Deserialize(d)
+		case schemas.DiscoverInputSchemaResponse_ParsedInputRecords:
+			return deserializeParsedInputRecords(d, schemas.DiscoverInputSchemaResponse_ParsedInputRecords, &v.ParsedInputRecords)
+		case schemas.DiscoverInputSchemaResponse_ProcessedInputRecords:
+			return deserializeProcessedInputRecords(d, schemas.DiscoverInputSchemaResponse_ProcessedInputRecords, &v.ProcessedInputRecords)
+		case schemas.DiscoverInputSchemaResponse_RawInputRecords:
+			return deserializeRawInputRecords(d, schemas.DiscoverInputSchemaResponse_RawInputRecords, &v.RawInputRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDiscoverInputSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDiscoverInputSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverInputSchema, schemas.DiscoverInputSchemaRequest, schemas.DiscoverInputSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDiscoverInputSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverInputSchema, schemas.DiscoverInputSchemaRequest, schemas.DiscoverInputSchemaResponse), output: &DiscoverInputSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

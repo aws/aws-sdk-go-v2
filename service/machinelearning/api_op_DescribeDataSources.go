@@ -5,7 +5,9 @@ package machinelearning
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -104,6 +106,48 @@ type DescribeDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EQ != nil {
+		s.WriteString(schemas.DescribeDataSourcesInput_EQ, *v.EQ)
+	}
+	if v.FilterVariable != "" {
+		s.WriteString(schemas.DescribeDataSourcesInput_FilterVariable, string(v.FilterVariable))
+	}
+	if v.GE != nil {
+		s.WriteString(schemas.DescribeDataSourcesInput_GE, *v.GE)
+	}
+	if v.GT != nil {
+		s.WriteString(schemas.DescribeDataSourcesInput_GT, *v.GT)
+	}
+	if v.LE != nil {
+		s.WriteString(schemas.DescribeDataSourcesInput_LE, *v.LE)
+	}
+	if v.LT != nil {
+		s.WriteString(schemas.DescribeDataSourcesInput_LT, *v.LT)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeDataSourcesInput_Limit, *v.Limit)
+	}
+	if v.NE != nil {
+		s.WriteString(schemas.DescribeDataSourcesInput_NE, *v.NE)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataSourcesInput_NextToken, *v.NextToken)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.DescribeDataSourcesInput_Prefix, *v.Prefix)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.DescribeDataSourcesInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 // Represents the query results from a DescribeDataSources operation. The content is essentially a
 // list of DataSource .
 type DescribeDataSourcesOutput struct {
@@ -121,13 +165,35 @@ type DescribeDataSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataSourcesOutput_NextToken, *v.NextToken)
+	}
+	serializeDataSources(s, schemas.DescribeDataSourcesOutput_Results, v.Results)
+}
+func (v *DescribeDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSourcesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDataSourcesOutput_NextToken, v.NextToken)
+		case schemas.DescribeDataSourcesOutput_Results:
+			return deserializeDataSources(d, schemas.DescribeDataSourcesOutput_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSources, schemas.DescribeDataSourcesInput, schemas.DescribeDataSourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSources, schemas.DescribeDataSourcesInput, schemas.DescribeDataSourcesOutput), output: &DescribeDataSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

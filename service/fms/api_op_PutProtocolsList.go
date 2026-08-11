@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type PutProtocolsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProtocolsListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProtocolsListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProtocolsListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtocolsList != nil {
+		s.WriteStruct(schemas.PutProtocolsListRequest_ProtocolsList)
+		v.ProtocolsList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.PutProtocolsListRequest_TagList, v.TagList)
+}
+
 type PutProtocolsListOutput struct {
 
 	// The details of the Firewall Manager protocols list.
@@ -51,13 +68,40 @@ type PutProtocolsListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProtocolsListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProtocolsListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProtocolsListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtocolsList != nil {
+		s.WriteStruct(schemas.PutProtocolsListResponse_ProtocolsList)
+		v.ProtocolsList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProtocolsListArn != nil {
+		s.WriteString(schemas.PutProtocolsListResponse_ProtocolsListArn, *v.ProtocolsListArn)
+	}
+}
+func (v *PutProtocolsListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutProtocolsListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutProtocolsListResponse_ProtocolsList:
+			v.ProtocolsList = &types.ProtocolsListData{}
+			return v.ProtocolsList.Deserialize(d)
+		case schemas.PutProtocolsListResponse_ProtocolsListArn:
+			v.ProtocolsListArn = new(string)
+			return d.ReadString(schemas.PutProtocolsListResponse_ProtocolsListArn, v.ProtocolsListArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutProtocolsList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProtocolsList, schemas.PutProtocolsListRequest, schemas.PutProtocolsListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutProtocolsList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProtocolsList, schemas.PutProtocolsListRequest, schemas.PutProtocolsListResponse), output: &PutProtocolsListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

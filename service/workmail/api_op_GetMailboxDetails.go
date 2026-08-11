@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type GetMailboxDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMailboxDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMailboxDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMailboxDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetMailboxDetailsRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetMailboxDetailsRequest_UserId, *v.UserId)
+	}
+}
+
 type GetMailboxDetailsOutput struct {
 
 	// The maximum allowed mailbox size, in MB, for the specified user.
@@ -63,13 +80,37 @@ type GetMailboxDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMailboxDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMailboxDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMailboxDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MailboxQuota != nil {
+		s.WriteInt32(schemas.GetMailboxDetailsResponse_MailboxQuota, *v.MailboxQuota)
+	}
+	if v.MailboxSize != 0 {
+		s.WriteFloat64(schemas.GetMailboxDetailsResponse_MailboxSize, v.MailboxSize)
+	}
+}
+func (v *GetMailboxDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMailboxDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMailboxDetailsResponse_MailboxQuota:
+			v.MailboxQuota = new(int32)
+			return d.ReadInt32(schemas.GetMailboxDetailsResponse_MailboxQuota, v.MailboxQuota)
+		case schemas.GetMailboxDetailsResponse_MailboxSize:
+			return d.ReadFloat64(schemas.GetMailboxDetailsResponse_MailboxSize, &v.MailboxSize)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMailboxDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMailboxDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMailboxDetails, schemas.GetMailboxDetailsRequest, schemas.GetMailboxDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMailboxDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMailboxDetails, schemas.GetMailboxDetailsRequest, schemas.GetMailboxDetailsResponse), output: &GetMailboxDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

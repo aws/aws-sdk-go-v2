@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,34 @@ type TerminateTargetInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateTargetInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateTargetInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateTargetInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.TerminateTargetInstancesRequest_accountID, *v.AccountID)
+	}
+	serializeTerminateTargetInstancesRequestSourceServerIDs(s, schemas.TerminateTargetInstancesRequest_sourceServerIDs, v.SourceServerIDs)
+	serializeTagsMap(s, schemas.TerminateTargetInstancesRequest_tags, v.Tags)
+}
+func (v *TerminateTargetInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateTargetInstancesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateTargetInstancesRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.TerminateTargetInstancesRequest_accountID, v.AccountID)
+		case schemas.TerminateTargetInstancesRequest_sourceServerIDs:
+			return deserializeTerminateTargetInstancesRequestSourceServerIDs(d, schemas.TerminateTargetInstancesRequest_sourceServerIDs, &v.SourceServerIDs)
+		case schemas.TerminateTargetInstancesRequest_tags:
+			return deserializeTagsMap(d, schemas.TerminateTargetInstancesRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type TerminateTargetInstancesOutput struct {
 
 	// Terminate Target instance Job response.
@@ -53,13 +83,34 @@ type TerminateTargetInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateTargetInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateTargetInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateTargetInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.TerminateTargetInstancesResponse_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TerminateTargetInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateTargetInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateTargetInstancesResponse_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateTargetInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTerminateTargetInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateTargetInstances, schemas.TerminateTargetInstancesRequest, schemas.TerminateTargetInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTerminateTargetInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateTargetInstances, schemas.TerminateTargetInstancesRequest, schemas.TerminateTargetInstancesResponse), output: &TerminateTargetInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

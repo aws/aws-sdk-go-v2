@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,34 @@ type GetServiceSyncBlockerSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceSyncBlockerSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSyncBlockerSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSyncBlockerSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.GetServiceSyncBlockerSummaryInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetServiceSyncBlockerSummaryInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *GetServiceSyncBlockerSummaryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceSyncBlockerSummaryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceSyncBlockerSummaryInput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.GetServiceSyncBlockerSummaryInput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.GetServiceSyncBlockerSummaryInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GetServiceSyncBlockerSummaryInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type GetServiceSyncBlockerSummaryOutput struct {
 
 	// The detailed data of the requested service sync blocker summary.
@@ -53,13 +83,34 @@ type GetServiceSyncBlockerSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceSyncBlockerSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSyncBlockerSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSyncBlockerSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSyncBlockerSummary != nil {
+		s.WriteStruct(schemas.GetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary)
+		v.ServiceSyncBlockerSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceSyncBlockerSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceSyncBlockerSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary:
+			v.ServiceSyncBlockerSummary = &types.ServiceSyncBlockerSummary{}
+			return v.ServiceSyncBlockerSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceSyncBlockerSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceSyncBlockerSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSyncBlockerSummary, schemas.GetServiceSyncBlockerSummaryInput, schemas.GetServiceSyncBlockerSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetServiceSyncBlockerSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSyncBlockerSummary, schemas.GetServiceSyncBlockerSummaryInput, schemas.GetServiceSyncBlockerSummaryOutput), output: &GetServiceSyncBlockerSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

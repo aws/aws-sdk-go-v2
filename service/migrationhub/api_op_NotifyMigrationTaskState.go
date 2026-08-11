@@ -4,7 +4,9 @@ package migrationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,33 @@ type NotifyMigrationTaskStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyMigrationTaskStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyMigrationTaskStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyMigrationTaskStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != false {
+		s.WriteBool(schemas.NotifyMigrationTaskStateRequest_DryRun, v.DryRun)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.NotifyMigrationTaskStateRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	s.WriteInt32(schemas.NotifyMigrationTaskStateRequest_NextUpdateSeconds, v.NextUpdateSeconds)
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.NotifyMigrationTaskStateRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+	if v.Task != nil {
+		s.WriteStruct(schemas.NotifyMigrationTaskStateRequest_Task)
+		v.Task.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.NotifyMigrationTaskStateRequest_UpdateDateTime, *v.UpdateDateTime)
+	}
+}
+
 type NotifyMigrationTaskStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +107,26 @@ type NotifyMigrationTaskStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyMigrationTaskStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyMigrationTaskStateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyMigrationTaskStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *NotifyMigrationTaskStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyMigrationTaskStateResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNotifyMigrationTaskStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyMigrationTaskState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyMigrationTaskState, schemas.NotifyMigrationTaskStateRequest, schemas.NotifyMigrationTaskStateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpNotifyMigrationTaskState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyMigrationTaskState, schemas.NotifyMigrationTaskStateRequest, schemas.NotifyMigrationTaskStateResult), output: &NotifyMigrationTaskStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

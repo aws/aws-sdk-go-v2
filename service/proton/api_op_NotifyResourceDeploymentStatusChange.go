@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,53 @@ type NotifyResourceDeploymentStatusChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyResourceDeploymentStatusChangeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyResourceDeploymentStatusChangeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyResourceDeploymentStatusChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.NotifyResourceDeploymentStatusChangeInput_deploymentId, *v.DeploymentId)
+	}
+	serializeOutputsList(s, schemas.NotifyResourceDeploymentStatusChangeInput_outputs, v.Outputs)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.NotifyResourceDeploymentStatusChangeInput_resourceArn, *v.ResourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NotifyResourceDeploymentStatusChangeInput_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.NotifyResourceDeploymentStatusChangeInput_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *NotifyResourceDeploymentStatusChangeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyResourceDeploymentStatusChangeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotifyResourceDeploymentStatusChangeInput_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.NotifyResourceDeploymentStatusChangeInput_deploymentId, v.DeploymentId)
+		case schemas.NotifyResourceDeploymentStatusChangeInput_outputs:
+			return deserializeOutputsList(d, schemas.NotifyResourceDeploymentStatusChangeInput_outputs, &v.Outputs)
+		case schemas.NotifyResourceDeploymentStatusChangeInput_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.NotifyResourceDeploymentStatusChangeInput_resourceArn, v.ResourceArn)
+		case schemas.NotifyResourceDeploymentStatusChangeInput_status:
+			var ev string
+			if err := d.ReadString(schemas.NotifyResourceDeploymentStatusChangeInput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceDeploymentStatus(ev)
+			return nil
+		case schemas.NotifyResourceDeploymentStatusChangeInput_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.NotifyResourceDeploymentStatusChangeInput_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 type NotifyResourceDeploymentStatusChangeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +109,26 @@ type NotifyResourceDeploymentStatusChangeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyResourceDeploymentStatusChangeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyResourceDeploymentStatusChangeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyResourceDeploymentStatusChangeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *NotifyResourceDeploymentStatusChangeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyResourceDeploymentStatusChangeOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNotifyResourceDeploymentStatusChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpNotifyResourceDeploymentStatusChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyResourceDeploymentStatusChange, schemas.NotifyResourceDeploymentStatusChangeInput, schemas.NotifyResourceDeploymentStatusChangeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpNotifyResourceDeploymentStatusChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyResourceDeploymentStatusChange, schemas.NotifyResourceDeploymentStatusChangeInput, schemas.NotifyResourceDeploymentStatusChangeOutput), output: &NotifyResourceDeploymentStatusChangeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

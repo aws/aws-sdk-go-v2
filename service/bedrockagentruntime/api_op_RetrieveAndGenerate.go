@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,38 @@ type RetrieveAndGenerateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveAndGenerateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveAndGenerateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveAndGenerateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateRequest_input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrieveAndGenerateConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateRequest_retrieveAndGenerateConfiguration)
+		v.RetrieveAndGenerateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateRequest_sessionConfiguration)
+		v.SessionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.RetrieveAndGenerateRequest_sessionId, *v.SessionId)
+	}
+	if v.UserContext != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateRequest_userContext)
+		v.UserContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RetrieveAndGenerateOutput struct {
 
 	// Contains the response generated from querying the knowledge base.
@@ -93,13 +127,53 @@ type RetrieveAndGenerateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveAndGenerateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveAndGenerateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveAndGenerateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCitations(s, schemas.RetrieveAndGenerateResponse_citations, v.Citations)
+	if v.GuardrailAction != "" {
+		s.WriteString(schemas.RetrieveAndGenerateResponse_guardrailAction, string(v.GuardrailAction))
+	}
+	if v.Output != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateResponse_output)
+		v.Output.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.RetrieveAndGenerateResponse_sessionId, *v.SessionId)
+	}
+}
+func (v *RetrieveAndGenerateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveAndGenerateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveAndGenerateResponse_citations:
+			return deserializeCitations(d, schemas.RetrieveAndGenerateResponse_citations, &v.Citations)
+		case schemas.RetrieveAndGenerateResponse_guardrailAction:
+			var ev string
+			if err := d.ReadString(schemas.RetrieveAndGenerateResponse_guardrailAction, &ev); err != nil {
+				return err
+			}
+			v.GuardrailAction = types.GuadrailAction(ev)
+			return nil
+		case schemas.RetrieveAndGenerateResponse_output:
+			v.Output = &types.RetrieveAndGenerateOutput{}
+			return v.Output.Deserialize(d)
+		case schemas.RetrieveAndGenerateResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.RetrieveAndGenerateResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveAndGenerateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetrieveAndGenerate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveAndGenerate, schemas.RetrieveAndGenerateRequest, schemas.RetrieveAndGenerateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetrieveAndGenerate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveAndGenerate, schemas.RetrieveAndGenerateRequest, schemas.RetrieveAndGenerateResponse), output: &RetrieveAndGenerateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package chimesdkmediapipelines
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteMediaPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMediaPipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMediaPipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMediaPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaPipelineId != nil {
+		s.WriteString(schemas.DeleteMediaPipelineRequest_MediaPipelineId, *v.MediaPipelineId)
+	}
+}
+
 type DeleteMediaPipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteMediaPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMediaPipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMediaPipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMediaPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMediaPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMediaPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMediaPipeline, schemas.DeleteMediaPipelineRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMediaPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMediaPipeline, schemas.DeleteMediaPipelineRequest, nil), output: &DeleteMediaPipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

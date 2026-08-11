@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type AssociateVehicleFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateVehicleFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateVehicleFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateVehicleFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.AssociateVehicleFleetRequest_fleetId, *v.FleetId)
+	}
+	if v.VehicleName != nil {
+		s.WriteString(schemas.AssociateVehicleFleetRequest_vehicleName, *v.VehicleName)
+	}
+}
+func (v *AssociateVehicleFleetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateVehicleFleetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateVehicleFleetRequest_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.AssociateVehicleFleetRequest_fleetId, v.FleetId)
+		case schemas.AssociateVehicleFleetRequest_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.AssociateVehicleFleetRequest_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
+}
+
 type AssociateVehicleFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +75,26 @@ type AssociateVehicleFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateVehicleFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateVehicleFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateVehicleFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateVehicleFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateVehicleFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateVehicleFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateVehicleFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVehicleFleet, schemas.AssociateVehicleFleetRequest, schemas.AssociateVehicleFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateVehicleFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateVehicleFleet, schemas.AssociateVehicleFleetRequest, schemas.AssociateVehicleFleetResponse), output: &AssociateVehicleFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

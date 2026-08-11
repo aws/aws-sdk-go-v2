@@ -5,7 +5,9 @@ package connectcases
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,43 @@ type GetCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.GetCaseRequest_caseId, *v.CaseId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetCaseRequest_domainId, *v.DomainId)
+	}
+	serializeFieldIdentifierList(s, schemas.GetCaseRequest_fields, v.Fields)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCaseRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *GetCaseInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCaseRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCaseRequest_caseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.GetCaseRequest_caseId, v.CaseId)
+		case schemas.GetCaseRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetCaseRequest_domainId, v.DomainId)
+		case schemas.GetCaseRequest_fields:
+			return deserializeFieldIdentifierList(d, schemas.GetCaseRequest_fields, &v.Fields)
+		case schemas.GetCaseRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCaseRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type GetCaseOutput struct {
 
 	// A list of detailed field information.
@@ -75,13 +114,44 @@ type GetCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldValueList(s, schemas.GetCaseResponse_fields, v.Fields)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCaseResponse_nextToken, *v.NextToken)
+	}
+	serializeTags(s, schemas.GetCaseResponse_tags, v.Tags)
+	if v.TemplateId != nil {
+		s.WriteString(schemas.GetCaseResponse_templateId, *v.TemplateId)
+	}
+}
+func (v *GetCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCaseResponse_fields:
+			return deserializeFieldValueList(d, schemas.GetCaseResponse_fields, &v.Fields)
+		case schemas.GetCaseResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCaseResponse_nextToken, v.NextToken)
+		case schemas.GetCaseResponse_tags:
+			return deserializeTags(d, schemas.GetCaseResponse_tags, &v.Tags)
+		case schemas.GetCaseResponse_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.GetCaseResponse_templateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCase, schemas.GetCaseRequest, schemas.GetCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCase, schemas.GetCaseRequest, schemas.GetCaseResponse), output: &GetCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

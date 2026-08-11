@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,28 @@ type DeleteEnvironmentAccountConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentAccountConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentAccountConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentAccountConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteEnvironmentAccountConnectionInput_id, *v.Id)
+	}
+}
+func (v *DeleteEnvironmentAccountConnectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentAccountConnectionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentAccountConnectionInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentAccountConnectionInput_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type DeleteEnvironmentAccountConnectionOutput struct {
 
 	// The detailed data of the environment account connection being deleted.
@@ -57,13 +81,34 @@ type DeleteEnvironmentAccountConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentAccountConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentAccountConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentAccountConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentAccountConnection != nil {
+		s.WriteStruct(schemas.DeleteEnvironmentAccountConnectionOutput_environmentAccountConnection)
+		v.EnvironmentAccountConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteEnvironmentAccountConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentAccountConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentAccountConnectionOutput_environmentAccountConnection:
+			v.EnvironmentAccountConnection = &types.EnvironmentAccountConnection{}
+			return v.EnvironmentAccountConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentAccountConnection, schemas.DeleteEnvironmentAccountConnectionInput, schemas.DeleteEnvironmentAccountConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentAccountConnection, schemas.DeleteEnvironmentAccountConnectionInput, schemas.DeleteEnvironmentAccountConnectionOutput), output: &DeleteEnvironmentAccountConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

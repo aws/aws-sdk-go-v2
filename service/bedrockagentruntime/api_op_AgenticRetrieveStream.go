@@ -5,7 +5,9 @@ package bedrockagentruntime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -71,6 +73,38 @@ type AgenticRetrieveStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AgenticRetrieveStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgenticRetrieveConfiguration != nil {
+		s.WriteStruct(schemas.AgenticRetrieveStreamRequest_agenticRetrieveConfiguration)
+		v.AgenticRetrieveConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GenerateResponse != nil {
+		s.WriteBool(schemas.AgenticRetrieveStreamRequest_generateResponse, *v.GenerateResponse)
+	}
+	serializeAgenticRetrieveMessages(s, schemas.AgenticRetrieveStreamRequest_messages, v.Messages)
+	if v.NextToken != nil {
+		s.WriteString(schemas.AgenticRetrieveStreamRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyConfiguration != nil {
+		s.WriteStruct(schemas.AgenticRetrieveStreamRequest_policyConfiguration)
+		v.PolicyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAgenticRetrievers(s, schemas.AgenticRetrieveStreamRequest_retrievers, v.Retrievers)
+	if v.UserContext != nil {
+		s.WriteStruct(schemas.AgenticRetrieveStreamRequest_userContext)
+		v.UserContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Response structure for the agentic retrieve stream operation.
 type AgenticRetrieveStreamOutput struct {
 	eventStream *AgenticRetrieveStreamEventStream
@@ -80,6 +114,22 @@ type AgenticRetrieveStreamOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AgenticRetrieveStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -100,18 +150,16 @@ func (o *AgenticRetrieveStreamOutput) GetInitialReply() <-chan AgenticRetrieveSt
 }
 
 func (c *Client) addOperationAgenticRetrieveStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAgenticRetrieveStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AgenticRetrieveStream, schemas.AgenticRetrieveStreamRequest, schemas.AgenticRetrieveStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAgenticRetrieveStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AgenticRetrieveStream, schemas.AgenticRetrieveStreamRequest, schemas.AgenticRetrieveStreamResponse), output: &AgenticRetrieveStreamOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamAgenticRetrieveStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamAgenticRetrieveStreamMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamBuild_opAgenticRetrieveStreamMiddleware(stack); err != nil {
 		return err
 	}

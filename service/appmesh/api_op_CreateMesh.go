@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,45 @@ type CreateMeshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMeshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMeshInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMeshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMeshInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.CreateMeshInput_meshName, *v.MeshName)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.CreateMeshInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateMeshInput_tags, v.Tags)
+}
+func (v *CreateMeshInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMeshInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMeshInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateMeshInput_clientToken, v.ClientToken)
+		case schemas.CreateMeshInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.CreateMeshInput_meshName, v.MeshName)
+		case schemas.CreateMeshInput_spec:
+			v.Spec = &types.MeshSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.CreateMeshInput_tags:
+			return deserializeTagList(d, schemas.CreateMeshInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateMeshOutput struct {
 
 	// The full description of your service mesh following the create call.
@@ -70,13 +111,34 @@ type CreateMeshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMeshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMeshOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMeshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mesh != nil {
+		s.WriteStruct(schemas.CreateMeshOutput_mesh)
+		v.Mesh.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMeshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMeshOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMeshOutput_mesh:
+			v.Mesh = &types.MeshData{}
+			return v.Mesh.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMesh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMesh, schemas.CreateMeshInput, schemas.CreateMeshOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMesh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMesh, schemas.CreateMeshInput, schemas.CreateMeshOutput), output: &CreateMeshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,19 @@ type UpdateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.UpdateSessionRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+	serializeSessionMetadataMap(s, schemas.UpdateSessionRequest_sessionMetadata, v.SessionMetadata)
+}
+
 type UpdateSessionOutput struct {
 
 	// The timestamp for when the session was created.
@@ -77,13 +92,60 @@ type UpdateSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateSessionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateSessionResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.SessionArn != nil {
+		s.WriteString(schemas.UpdateSessionResponse_sessionArn, *v.SessionArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.UpdateSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.SessionStatus != "" {
+		s.WriteString(schemas.UpdateSessionResponse_sessionStatus, string(v.SessionStatus))
+	}
+}
+func (v *UpdateSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSessionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateSessionResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateSessionResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateSessionResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateSessionResponse_sessionArn:
+			v.SessionArn = new(string)
+			return d.ReadString(schemas.UpdateSessionResponse_sessionArn, v.SessionArn)
+		case schemas.UpdateSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.UpdateSessionResponse_sessionId, v.SessionId)
+		case schemas.UpdateSessionResponse_sessionStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSessionResponse_sessionStatus, &ev); err != nil {
+				return err
+			}
+			v.SessionStatus = types.SessionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSession, schemas.UpdateSessionRequest, schemas.UpdateSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSession, schemas.UpdateSessionRequest, schemas.UpdateSessionResponse), output: &UpdateSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

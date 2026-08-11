@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -69,6 +71,38 @@ type RetrieveAndGenerateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveAndGenerateStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveAndGenerateStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveAndGenerateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateStreamRequest_input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrieveAndGenerateConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateStreamRequest_retrieveAndGenerateConfiguration)
+		v.RetrieveAndGenerateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateStreamRequest_sessionConfiguration)
+		v.SessionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.RetrieveAndGenerateStreamRequest_sessionId, *v.SessionId)
+	}
+	if v.UserContext != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateStreamRequest_userContext)
+		v.UserContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RetrieveAndGenerateStreamOutput struct {
 
 	// The session ID.
@@ -84,24 +118,44 @@ type RetrieveAndGenerateStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveAndGenerateStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveAndGenerateStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveAndGenerateStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.RetrieveAndGenerateStreamResponse_sessionId, *v.SessionId)
+	}
+}
+func (v *RetrieveAndGenerateStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveAndGenerateStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveAndGenerateStreamResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.RetrieveAndGenerateStreamResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *RetrieveAndGenerateStreamOutput) GetStream() *RetrieveAndGenerateStreamEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationRetrieveAndGenerateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetrieveAndGenerateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveAndGenerateStream, schemas.RetrieveAndGenerateStreamRequest, schemas.RetrieveAndGenerateStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetrieveAndGenerateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveAndGenerateStream, schemas.RetrieveAndGenerateStreamRequest, schemas.RetrieveAndGenerateStreamResponse), output: &RetrieveAndGenerateStreamOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamRetrieveAndGenerateStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamRetrieveAndGenerateStreamMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}

@@ -5,6 +5,8 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type DeleteOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteOrganizationRequest_ClientToken, *v.ClientToken)
+	}
+	s.WriteBool(schemas.DeleteOrganizationRequest_DeleteDirectory, v.DeleteDirectory)
+	if v.DeleteIdentityCenterApplication != false {
+		s.WriteBool(schemas.DeleteOrganizationRequest_DeleteIdentityCenterApplication, v.DeleteIdentityCenterApplication)
+	}
+	if v.ForceDelete != false {
+		s.WriteBool(schemas.DeleteOrganizationRequest_ForceDelete, v.ForceDelete)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteOrganizationRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeleteOrganizationOutput struct {
 
 	// The organization ID.
@@ -69,13 +93,38 @@ type DeleteOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteOrganizationResponse_OrganizationId, *v.OrganizationId)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.DeleteOrganizationResponse_State, *v.State)
+	}
+}
+func (v *DeleteOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteOrganizationResponse_OrganizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.DeleteOrganizationResponse_OrganizationId, v.OrganizationId)
+		case schemas.DeleteOrganizationResponse_State:
+			v.State = new(string)
+			return d.ReadString(schemas.DeleteOrganizationResponse_State, v.State)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOrganization, schemas.DeleteOrganizationRequest, schemas.DeleteOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOrganization, schemas.DeleteOrganizationRequest, schemas.DeleteOrganizationResponse), output: &DeleteOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

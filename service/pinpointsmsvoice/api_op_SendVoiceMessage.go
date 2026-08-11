@@ -4,7 +4,9 @@ package pinpointsmsvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,32 @@ type SendVoiceMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendVoiceMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendVoiceMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendVoiceMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallerId != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_CallerId, *v.CallerId)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.SendVoiceMessageRequest_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.OriginationPhoneNumber != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_OriginationPhoneNumber, *v.OriginationPhoneNumber)
+	}
+}
+
 // An object that that contains the Message ID of a Voice message that was sent
 // successfully.
 type SendVoiceMessageOutput struct {
@@ -63,13 +91,32 @@ type SendVoiceMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendVoiceMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendVoiceMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendVoiceMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendVoiceMessageResponse_MessageId, *v.MessageId)
+	}
+}
+func (v *SendVoiceMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendVoiceMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendVoiceMessageResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendVoiceMessageResponse_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendVoiceMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendVoiceMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendVoiceMessage, schemas.SendVoiceMessageRequest, schemas.SendVoiceMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendVoiceMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendVoiceMessage, schemas.SendVoiceMessageRequest, schemas.SendVoiceMessageResponse), output: &SendVoiceMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

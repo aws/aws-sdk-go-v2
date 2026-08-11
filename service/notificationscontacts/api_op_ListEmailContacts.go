@@ -5,7 +5,9 @@ package notificationscontacts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/notificationscontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notificationscontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListEmailContactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailContactsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailContactsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailContactsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEmailContactsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailContactsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEmailContactsOutput struct {
 
 	// A list of email contacts.
@@ -58,13 +75,35 @@ type ListEmailContactsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEmailContactsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEmailContactsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEmailContactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEmailContacts(s, schemas.ListEmailContactsResponse_emailContacts, v.EmailContacts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEmailContactsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEmailContactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEmailContactsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEmailContactsResponse_emailContacts:
+			return deserializeEmailContacts(d, schemas.ListEmailContactsResponse_emailContacts, &v.EmailContacts)
+		case schemas.ListEmailContactsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEmailContactsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEmailContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEmailContacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailContacts, schemas.ListEmailContactsRequest, schemas.ListEmailContactsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEmailContacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEmailContacts, schemas.ListEmailContactsRequest, schemas.ListEmailContactsResponse), output: &ListEmailContactsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

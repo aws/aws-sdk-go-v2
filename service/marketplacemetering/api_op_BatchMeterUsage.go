@@ -4,7 +4,9 @@ package marketplacemetering
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,19 @@ type BatchMeterUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchMeterUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchMeterUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchMeterUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductCode != nil {
+		s.WriteString(schemas.BatchMeterUsageRequest_ProductCode, *v.ProductCode)
+	}
+	serializeUsageRecordList(s, schemas.BatchMeterUsageRequest_UsageRecords, v.UsageRecords)
+}
+
 // Contains the UsageRecords processed by BatchMeterUsage and any records that
 // have failed due to transient error.
 type BatchMeterUsageOutput struct {
@@ -100,13 +115,32 @@ type BatchMeterUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchMeterUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchMeterUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchMeterUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUsageRecordResultList(s, schemas.BatchMeterUsageResult_Results, v.Results)
+	serializeUsageRecordList(s, schemas.BatchMeterUsageResult_UnprocessedRecords, v.UnprocessedRecords)
+}
+func (v *BatchMeterUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchMeterUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchMeterUsageResult_Results:
+			return deserializeUsageRecordResultList(d, schemas.BatchMeterUsageResult_Results, &v.Results)
+		case schemas.BatchMeterUsageResult_UnprocessedRecords:
+			return deserializeUsageRecordList(d, schemas.BatchMeterUsageResult_UnprocessedRecords, &v.UnprocessedRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchMeterUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchMeterUsage, schemas.BatchMeterUsageRequest, schemas.BatchMeterUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchMeterUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchMeterUsage, schemas.BatchMeterUsageRequest, schemas.BatchMeterUsageResult), output: &BatchMeterUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

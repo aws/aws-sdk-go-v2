@@ -4,6 +4,8 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteExplainabilityExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExplainabilityExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExplainabilityExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExplainabilityExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplainabilityExportArn != nil {
+		s.WriteString(schemas.DeleteExplainabilityExportRequest_ExplainabilityExportArn, *v.ExplainabilityExportArn)
+	}
+}
+
 type DeleteExplainabilityExportOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteExplainabilityExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExplainabilityExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExplainabilityExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteExplainabilityExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExplainabilityExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteExplainabilityExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExplainabilityExport, schemas.DeleteExplainabilityExportRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteExplainabilityExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExplainabilityExport, schemas.DeleteExplainabilityExportRequest, nil), output: &DeleteExplainabilityExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package codestarconnections
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListRepositoryLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositoryLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositoryLinksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositoryLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListRepositoryLinksInput_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositoryLinksInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListRepositoryLinksOutput struct {
 
 	// Lists the repository links called by the list repository links operation.
@@ -54,13 +71,35 @@ type ListRepositoryLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositoryLinksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositoryLinksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositoryLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositoryLinksOutput_NextToken, *v.NextToken)
+	}
+	serializeRepositoryLinkList(s, schemas.ListRepositoryLinksOutput_RepositoryLinks, v.RepositoryLinks)
+}
+func (v *ListRepositoryLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRepositoryLinksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRepositoryLinksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRepositoryLinksOutput_NextToken, v.NextToken)
+		case schemas.ListRepositoryLinksOutput_RepositoryLinks:
+			return deserializeRepositoryLinkList(d, schemas.ListRepositoryLinksOutput_RepositoryLinks, &v.RepositoryLinks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRepositoryLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRepositoryLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositoryLinks, schemas.ListRepositoryLinksInput, schemas.ListRepositoryLinksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRepositoryLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositoryLinks, schemas.ListRepositoryLinksInput, schemas.ListRepositoryLinksOutput), output: &ListRepositoryLinksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

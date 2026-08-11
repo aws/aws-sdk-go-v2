@@ -4,6 +4,8 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteAdapterVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAdapterVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAdapterVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAdapterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.DeleteAdapterVersionRequest_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterVersion != nil {
+		s.WriteString(schemas.DeleteAdapterVersionRequest_AdapterVersion, *v.AdapterVersion)
+	}
+}
+
 type DeleteAdapterVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteAdapterVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAdapterVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAdapterVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAdapterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAdapterVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAdapterVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAdapterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAdapterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAdapterVersion, schemas.DeleteAdapterVersionRequest, schemas.DeleteAdapterVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAdapterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAdapterVersion, schemas.DeleteAdapterVersionRequest, schemas.DeleteAdapterVersionResponse), output: &DeleteAdapterVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

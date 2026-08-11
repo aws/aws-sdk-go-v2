@@ -5,7 +5,9 @@ package taxsettings
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListSupplementalTaxRegistrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupplementalTaxRegistrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupplementalTaxRegistrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupplementalTaxRegistrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSupplementalTaxRegistrationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSupplementalTaxRegistrationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSupplementalTaxRegistrationsOutput struct {
 
 	//  The list of supplemental tax registrations.
@@ -52,13 +69,35 @@ type ListSupplementalTaxRegistrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupplementalTaxRegistrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupplementalTaxRegistrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupplementalTaxRegistrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSupplementalTaxRegistrationsResponse_nextToken, *v.NextToken)
+	}
+	serializeSupplementalTaxRegistrationList(s, schemas.ListSupplementalTaxRegistrationsResponse_taxRegistrations, v.TaxRegistrations)
+}
+func (v *ListSupplementalTaxRegistrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSupplementalTaxRegistrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSupplementalTaxRegistrationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSupplementalTaxRegistrationsResponse_nextToken, v.NextToken)
+		case schemas.ListSupplementalTaxRegistrationsResponse_taxRegistrations:
+			return deserializeSupplementalTaxRegistrationList(d, schemas.ListSupplementalTaxRegistrationsResponse_taxRegistrations, &v.TaxRegistrations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSupplementalTaxRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSupplementalTaxRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupplementalTaxRegistrations, schemas.ListSupplementalTaxRegistrationsRequest, schemas.ListSupplementalTaxRegistrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSupplementalTaxRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupplementalTaxRegistrations, schemas.ListSupplementalTaxRegistrationsRequest, schemas.ListSupplementalTaxRegistrationsResponse), output: &ListSupplementalTaxRegistrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

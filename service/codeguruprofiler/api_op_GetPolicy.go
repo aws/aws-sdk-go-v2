@@ -4,6 +4,8 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.GetPolicyRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *GetPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.GetPolicyRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the getPolicyResponse .
 type GetPolicyOutput struct {
 
@@ -53,13 +77,38 @@ type GetPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.GetPolicyResponse_policy, *v.Policy)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.GetPolicyResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *GetPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetPolicyResponse_policy, v.Policy)
+		case schemas.GetPolicyResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.GetPolicyResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicy, schemas.GetPolicyRequest, schemas.GetPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicy, schemas.GetPolicyRequest, schemas.GetPolicyResponse), output: &GetPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type RetryDataReplicationInput struct {
 	AccountID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetryDataReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryDataReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryDataReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.RetryDataReplicationRequest_accountID, *v.AccountID)
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.RetryDataReplicationRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *RetryDataReplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryDataReplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryDataReplicationRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.RetryDataReplicationRequest_accountID, v.AccountID)
+		case schemas.RetryDataReplicationRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.RetryDataReplicationRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
 }
 
 type RetryDataReplicationOutput struct {
@@ -90,13 +120,121 @@ type RetryDataReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryDataReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceServer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryDataReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationID != nil {
+		s.WriteString(schemas.SourceServer_applicationID, *v.ApplicationID)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.SourceServer_arn, *v.Arn)
+	}
+	if v.ConnectorAction != nil {
+		s.WriteStruct(schemas.SourceServer_connectorAction)
+		v.ConnectorAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataReplicationInfo != nil {
+		s.WriteStruct(schemas.SourceServer_dataReplicationInfo)
+		v.DataReplicationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FqdnForActionFramework != nil {
+		s.WriteString(schemas.SourceServer_fqdnForActionFramework, *v.FqdnForActionFramework)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.SourceServer_isArchived, *v.IsArchived)
+	}
+	if v.LaunchedInstance != nil {
+		s.WriteStruct(schemas.SourceServer_launchedInstance)
+		v.LaunchedInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifeCycle != nil {
+		s.WriteStruct(schemas.SourceServer_lifeCycle)
+		v.LifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationType != "" {
+		s.WriteString(schemas.SourceServer_replicationType, string(v.ReplicationType))
+	}
+	if v.SourceProperties != nil {
+		s.WriteStruct(schemas.SourceServer_sourceProperties)
+		v.SourceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.SourceServer_sourceServerID, *v.SourceServerID)
+	}
+	serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	if v.UserProvidedID != nil {
+		s.WriteString(schemas.SourceServer_userProvidedID, *v.UserProvidedID)
+	}
+	if v.VcenterClientID != nil {
+		s.WriteString(schemas.SourceServer_vcenterClientID, *v.VcenterClientID)
+	}
+}
+func (v *RetryDataReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceServer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceServer_applicationID:
+			v.ApplicationID = new(string)
+			return d.ReadString(schemas.SourceServer_applicationID, v.ApplicationID)
+		case schemas.SourceServer_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SourceServer_arn, v.Arn)
+		case schemas.SourceServer_connectorAction:
+			v.ConnectorAction = &types.SourceServerConnectorAction{}
+			return v.ConnectorAction.Deserialize(d)
+		case schemas.SourceServer_dataReplicationInfo:
+			v.DataReplicationInfo = &types.DataReplicationInfo{}
+			return v.DataReplicationInfo.Deserialize(d)
+		case schemas.SourceServer_fqdnForActionFramework:
+			v.FqdnForActionFramework = new(string)
+			return d.ReadString(schemas.SourceServer_fqdnForActionFramework, v.FqdnForActionFramework)
+		case schemas.SourceServer_isArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.SourceServer_isArchived, v.IsArchived)
+		case schemas.SourceServer_launchedInstance:
+			v.LaunchedInstance = &types.LaunchedInstance{}
+			return v.LaunchedInstance.Deserialize(d)
+		case schemas.SourceServer_lifeCycle:
+			v.LifeCycle = &types.LifeCycle{}
+			return v.LifeCycle.Deserialize(d)
+		case schemas.SourceServer_replicationType:
+			var ev string
+			if err := d.ReadString(schemas.SourceServer_replicationType, &ev); err != nil {
+				return err
+			}
+			v.ReplicationType = types.ReplicationType(ev)
+			return nil
+		case schemas.SourceServer_sourceProperties:
+			v.SourceProperties = &types.SourceProperties{}
+			return v.SourceProperties.Deserialize(d)
+		case schemas.SourceServer_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.SourceServer_sourceServerID, v.SourceServerID)
+		case schemas.SourceServer_tags:
+			return deserializeTagsMap(d, schemas.SourceServer_tags, &v.Tags)
+		case schemas.SourceServer_userProvidedID:
+			v.UserProvidedID = new(string)
+			return d.ReadString(schemas.SourceServer_userProvidedID, v.UserProvidedID)
+		case schemas.SourceServer_vcenterClientID:
+			v.VcenterClientID = new(string)
+			return d.ReadString(schemas.SourceServer_vcenterClientID, v.VcenterClientID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetryDataReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetryDataReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryDataReplication, schemas.RetryDataReplicationRequest, schemas.SourceServer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetryDataReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryDataReplication, schemas.RetryDataReplicationRequest, schemas.SourceServer), output: &RetryDataReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,29 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationInputProcessingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationInputProcessingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationInputProcessingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.AddApplicationInputProcessingConfigurationRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.AddApplicationInputProcessingConfigurationRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+	if v.InputId != nil {
+		s.WriteString(schemas.AddApplicationInputProcessingConfigurationRequest_InputId, *v.InputId)
+	}
+	if v.InputProcessingConfiguration != nil {
+		s.WriteStruct(schemas.AddApplicationInputProcessingConfigurationRequest_InputProcessingConfiguration)
+		v.InputProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AddApplicationInputProcessingConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application.
@@ -81,13 +106,52 @@ type AddApplicationInputProcessingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationInputProcessingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationInputProcessingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationInputProcessingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.AddApplicationInputProcessingConfigurationResponse_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.AddApplicationInputProcessingConfigurationResponse_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+	if v.InputId != nil {
+		s.WriteString(schemas.AddApplicationInputProcessingConfigurationResponse_InputId, *v.InputId)
+	}
+	if v.InputProcessingConfigurationDescription != nil {
+		s.WriteStruct(schemas.AddApplicationInputProcessingConfigurationResponse_InputProcessingConfigurationDescription)
+		v.InputProcessingConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AddApplicationInputProcessingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddApplicationInputProcessingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddApplicationInputProcessingConfigurationResponse_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.AddApplicationInputProcessingConfigurationResponse_ApplicationARN, v.ApplicationARN)
+		case schemas.AddApplicationInputProcessingConfigurationResponse_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.AddApplicationInputProcessingConfigurationResponse_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.AddApplicationInputProcessingConfigurationResponse_InputId:
+			v.InputId = new(string)
+			return d.ReadString(schemas.AddApplicationInputProcessingConfigurationResponse_InputId, v.InputId)
+		case schemas.AddApplicationInputProcessingConfigurationResponse_InputProcessingConfigurationDescription:
+			v.InputProcessingConfigurationDescription = &types.InputProcessingConfigurationDescription{}
+			return v.InputProcessingConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddApplicationInputProcessingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationInputProcessingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationInputProcessingConfiguration, schemas.AddApplicationInputProcessingConfigurationRequest, schemas.AddApplicationInputProcessingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddApplicationInputProcessingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationInputProcessingConfiguration, schemas.AddApplicationInputProcessingConfigurationRequest, schemas.AddApplicationInputProcessingConfigurationResponse), output: &AddApplicationInputProcessingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

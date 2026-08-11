@@ -4,7 +4,9 @@ package kendraranking
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendraranking/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendraranking/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,29 @@ type UpdateRescoreExecutionPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRescoreExecutionPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRescoreExecutionPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRescoreExecutionPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityUnits != nil {
+		s.WriteStruct(schemas.UpdateRescoreExecutionPlanRequest_CapacityUnits)
+		v.CapacityUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRescoreExecutionPlanRequest_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateRescoreExecutionPlanRequest_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRescoreExecutionPlanRequest_Name, *v.Name)
+	}
+}
+
 type UpdateRescoreExecutionPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +83,26 @@ type UpdateRescoreExecutionPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRescoreExecutionPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRescoreExecutionPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRescoreExecutionPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRescoreExecutionPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateRescoreExecutionPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRescoreExecutionPlan, schemas.UpdateRescoreExecutionPlanRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateRescoreExecutionPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRescoreExecutionPlan, schemas.UpdateRescoreExecutionPlanRequest, nil), output: &UpdateRescoreExecutionPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

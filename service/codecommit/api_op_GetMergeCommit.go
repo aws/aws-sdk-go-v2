@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,30 @@ type GetMergeCommitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMergeCommitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMergeCommitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMergeCommitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConflictDetailLevel != "" {
+		s.WriteString(schemas.GetMergeCommitInput_conflictDetailLevel, string(v.ConflictDetailLevel))
+	}
+	if v.ConflictResolutionStrategy != "" {
+		s.WriteString(schemas.GetMergeCommitInput_conflictResolutionStrategy, string(v.ConflictResolutionStrategy))
+	}
+	if v.DestinationCommitSpecifier != nil {
+		s.WriteString(schemas.GetMergeCommitInput_destinationCommitSpecifier, *v.DestinationCommitSpecifier)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.GetMergeCommitInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitSpecifier != nil {
+		s.WriteString(schemas.GetMergeCommitInput_sourceCommitSpecifier, *v.SourceCommitSpecifier)
+	}
+}
+
 type GetMergeCommitOutput struct {
 
 	// The commit ID of the merge base.
@@ -83,13 +109,50 @@ type GetMergeCommitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMergeCommitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMergeCommitOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMergeCommitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseCommitId != nil {
+		s.WriteString(schemas.GetMergeCommitOutput_baseCommitId, *v.BaseCommitId)
+	}
+	if v.DestinationCommitId != nil {
+		s.WriteString(schemas.GetMergeCommitOutput_destinationCommitId, *v.DestinationCommitId)
+	}
+	if v.MergedCommitId != nil {
+		s.WriteString(schemas.GetMergeCommitOutput_mergedCommitId, *v.MergedCommitId)
+	}
+	if v.SourceCommitId != nil {
+		s.WriteString(schemas.GetMergeCommitOutput_sourceCommitId, *v.SourceCommitId)
+	}
+}
+func (v *GetMergeCommitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMergeCommitOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMergeCommitOutput_baseCommitId:
+			v.BaseCommitId = new(string)
+			return d.ReadString(schemas.GetMergeCommitOutput_baseCommitId, v.BaseCommitId)
+		case schemas.GetMergeCommitOutput_destinationCommitId:
+			v.DestinationCommitId = new(string)
+			return d.ReadString(schemas.GetMergeCommitOutput_destinationCommitId, v.DestinationCommitId)
+		case schemas.GetMergeCommitOutput_mergedCommitId:
+			v.MergedCommitId = new(string)
+			return d.ReadString(schemas.GetMergeCommitOutput_mergedCommitId, v.MergedCommitId)
+		case schemas.GetMergeCommitOutput_sourceCommitId:
+			v.SourceCommitId = new(string)
+			return d.ReadString(schemas.GetMergeCommitOutput_sourceCommitId, v.SourceCommitId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMergeCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMergeCommit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMergeCommit, schemas.GetMergeCommitInput, schemas.GetMergeCommitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMergeCommit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMergeCommit, schemas.GetMergeCommitInput, schemas.GetMergeCommitOutput), output: &GetMergeCommitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

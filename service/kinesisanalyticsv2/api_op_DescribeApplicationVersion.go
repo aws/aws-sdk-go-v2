@@ -4,7 +4,9 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeApplicationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DescribeApplicationVersionRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.DescribeApplicationVersionRequest_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+}
+
 type DescribeApplicationVersionOutput struct {
 
 	// Describes the application, including the application Amazon Resource Name
@@ -54,13 +71,34 @@ type DescribeApplicationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationVersionDetail != nil {
+		s.WriteStruct(schemas.DescribeApplicationVersionResponse_ApplicationVersionDetail)
+		v.ApplicationVersionDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeApplicationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationVersionResponse_ApplicationVersionDetail:
+			v.ApplicationVersionDetail = &types.ApplicationDetail{}
+			return v.ApplicationVersionDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationVersion, schemas.DescribeApplicationVersionRequest, schemas.DescribeApplicationVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationVersion, schemas.DescribeApplicationVersionRequest, schemas.DescribeApplicationVersionResponse), output: &DescribeApplicationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

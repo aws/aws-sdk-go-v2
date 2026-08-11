@@ -4,6 +4,8 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetDataLakeExceptionSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeExceptionSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeExceptionSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeExceptionSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetDataLakeExceptionSubscriptionOutput struct {
 
 	// The expiration period and time-to-live (TTL). It is the duration of time until
@@ -46,13 +57,44 @@ type GetDataLakeExceptionSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeExceptionSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeExceptionSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeExceptionSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExceptionTimeToLive != nil {
+		s.WriteInt64(schemas.GetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive, *v.ExceptionTimeToLive)
+	}
+	if v.NotificationEndpoint != nil {
+		s.WriteString(schemas.GetDataLakeExceptionSubscriptionResponse_notificationEndpoint, *v.NotificationEndpoint)
+	}
+	if v.SubscriptionProtocol != nil {
+		s.WriteString(schemas.GetDataLakeExceptionSubscriptionResponse_subscriptionProtocol, *v.SubscriptionProtocol)
+	}
+}
+func (v *GetDataLakeExceptionSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataLakeExceptionSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive:
+			v.ExceptionTimeToLive = new(int64)
+			return d.ReadInt64(schemas.GetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive, v.ExceptionTimeToLive)
+		case schemas.GetDataLakeExceptionSubscriptionResponse_notificationEndpoint:
+			v.NotificationEndpoint = new(string)
+			return d.ReadString(schemas.GetDataLakeExceptionSubscriptionResponse_notificationEndpoint, v.NotificationEndpoint)
+		case schemas.GetDataLakeExceptionSubscriptionResponse_subscriptionProtocol:
+			v.SubscriptionProtocol = new(string)
+			return d.ReadString(schemas.GetDataLakeExceptionSubscriptionResponse_subscriptionProtocol, v.SubscriptionProtocol)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataLakeExceptionSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataLakeExceptionSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeExceptionSubscription, schemas.GetDataLakeExceptionSubscriptionRequest, schemas.GetDataLakeExceptionSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataLakeExceptionSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeExceptionSubscription, schemas.GetDataLakeExceptionSubscriptionRequest, schemas.GetDataLakeExceptionSubscriptionResponse), output: &GetDataLakeExceptionSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

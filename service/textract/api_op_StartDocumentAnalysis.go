@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -96,6 +98,50 @@ type StartDocumentAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDocumentAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDocumentAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDocumentAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptersConfig != nil {
+		s.WriteStruct(schemas.StartDocumentAnalysisRequest_AdaptersConfig)
+		v.AdaptersConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartDocumentAnalysisRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DocumentLocation != nil {
+		s.WriteStruct(schemas.StartDocumentAnalysisRequest_DocumentLocation)
+		v.DocumentLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFeatureTypes(s, schemas.StartDocumentAnalysisRequest_FeatureTypes, v.FeatureTypes)
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartDocumentAnalysisRequest_JobTag, *v.JobTag)
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.StartDocumentAnalysisRequest_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartDocumentAnalysisRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.StartDocumentAnalysisRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueriesConfig != nil {
+		s.WriteStruct(schemas.StartDocumentAnalysisRequest_QueriesConfig)
+		v.QueriesConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartDocumentAnalysisOutput struct {
 
 	// The identifier for the document text detection job. Use JobId to identify the
@@ -109,13 +155,32 @@ type StartDocumentAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDocumentAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDocumentAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDocumentAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartDocumentAnalysisResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartDocumentAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDocumentAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDocumentAnalysisResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartDocumentAnalysisResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDocumentAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDocumentAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDocumentAnalysis, schemas.StartDocumentAnalysisRequest, schemas.StartDocumentAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDocumentAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDocumentAnalysis, schemas.StartDocumentAnalysisRequest, schemas.StartDocumentAnalysisResponse), output: &StartDocumentAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

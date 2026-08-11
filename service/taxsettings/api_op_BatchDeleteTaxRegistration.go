@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type BatchDeleteTaxRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteTaxRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.BatchDeleteTaxRegistrationRequest_accountIds, v.AccountIds)
+}
+
 type BatchDeleteTaxRegistrationOutput struct {
 
 	// The list of errors for the accounts the TRN information could not be deleted
@@ -54,13 +66,29 @@ type BatchDeleteTaxRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteTaxRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteTaxRegistrationErrors(s, schemas.BatchDeleteTaxRegistrationResponse_errors, v.Errors)
+}
+func (v *BatchDeleteTaxRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteTaxRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteTaxRegistrationResponse_errors:
+			return deserializeBatchDeleteTaxRegistrationErrors(d, schemas.BatchDeleteTaxRegistrationResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteTaxRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteTaxRegistration, schemas.BatchDeleteTaxRegistrationRequest, schemas.BatchDeleteTaxRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteTaxRegistration, schemas.BatchDeleteTaxRegistrationRequest, schemas.BatchDeleteTaxRegistrationResponse), output: &BatchDeleteTaxRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

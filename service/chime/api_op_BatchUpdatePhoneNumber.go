@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,16 @@ type BatchUpdatePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdatePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdatePhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdatePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdatePhoneNumberRequestItemList(s, schemas.BatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems, v.UpdatePhoneNumberRequestItems)
+}
+
 type BatchUpdatePhoneNumberOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list
@@ -57,13 +69,29 @@ type BatchUpdatePhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdatePhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdatePhoneNumberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdatePhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePhoneNumberErrorList(s, schemas.BatchUpdatePhoneNumberResponse_PhoneNumberErrors, v.PhoneNumberErrors)
+}
+func (v *BatchUpdatePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdatePhoneNumberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdatePhoneNumberResponse_PhoneNumberErrors:
+			return deserializePhoneNumberErrorList(d, schemas.BatchUpdatePhoneNumberResponse_PhoneNumberErrors, &v.PhoneNumberErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdatePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdatePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdatePhoneNumber, schemas.BatchUpdatePhoneNumberRequest, schemas.BatchUpdatePhoneNumberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdatePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdatePhoneNumber, schemas.BatchUpdatePhoneNumberRequest, schemas.BatchUpdatePhoneNumberResponse), output: &BatchUpdatePhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

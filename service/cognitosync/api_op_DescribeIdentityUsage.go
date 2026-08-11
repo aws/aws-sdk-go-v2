@@ -4,7 +4,9 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,21 @@ type DescribeIdentityUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityId != nil {
+		s.WriteString(schemas.DescribeIdentityUsageRequest_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.DescribeIdentityUsageRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 // The response to a successful DescribeIdentityUsage request.
 type DescribeIdentityUsageOutput struct {
 
@@ -80,13 +97,34 @@ type DescribeIdentityUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityUsageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityUsage != nil {
+		s.WriteStruct(schemas.DescribeIdentityUsageResponse_IdentityUsage)
+		v.IdentityUsage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeIdentityUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIdentityUsageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIdentityUsageResponse_IdentityUsage:
+			v.IdentityUsage = &types.IdentityUsage{}
+			return v.IdentityUsage.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIdentityUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIdentityUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityUsage, schemas.DescribeIdentityUsageRequest, schemas.DescribeIdentityUsageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeIdentityUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityUsage, schemas.DescribeIdentityUsageRequest, schemas.DescribeIdentityUsageResponse), output: &DescribeIdentityUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

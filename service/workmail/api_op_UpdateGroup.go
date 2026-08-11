@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type UpdateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.UpdateGroupRequest_GroupId, *v.GroupId)
+	}
+	if v.HiddenFromGlobalAddressList != nil {
+		s.WriteBool(schemas.UpdateGroupRequest_HiddenFromGlobalAddressList, *v.HiddenFromGlobalAddressList)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.UpdateGroupRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type UpdateGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +78,26 @@ type UpdateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupRequest, schemas.UpdateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupRequest, schemas.UpdateGroupResponse), output: &UpdateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

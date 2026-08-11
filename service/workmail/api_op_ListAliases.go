@@ -5,6 +5,8 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.ListAliasesRequest_EntityId, *v.EntityId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAliasesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListAliasesRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListAliasesOutput struct {
 
 	// The entity's paginated aliases.
@@ -61,13 +84,35 @@ type ListAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAliases(s, schemas.ListAliasesResponse_Aliases, v.Aliases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAliasesResponse_Aliases:
+			return deserializeAliases(d, schemas.ListAliasesResponse_Aliases, &v.Aliases)
+		case schemas.ListAliasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAliasesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesRequest, schemas.ListAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesRequest, schemas.ListAliasesResponse), output: &ListAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

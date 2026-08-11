@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,18 @@ type ReleasePhoneNumberInput struct {
 	PhoneNumberId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReleasePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReleasePhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReleasePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.ReleasePhoneNumberRequest_PhoneNumberId, *v.PhoneNumberId)
+	}
 }
 
 type ReleasePhoneNumberOutput struct {
@@ -108,13 +122,129 @@ type ReleasePhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReleasePhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReleasePhoneNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReleasePhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.ReleasePhoneNumberResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.ReleasePhoneNumberResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.ReleasePhoneNumberResult_MessageType, string(v.MessageType))
+	}
+	if v.MonthlyLeasingPrice != nil {
+		s.WriteString(schemas.ReleasePhoneNumberResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
+	}
+	serializeNumberCapabilityList(s, schemas.ReleasePhoneNumberResult_NumberCapabilities, v.NumberCapabilities)
+	if v.NumberType != "" {
+		s.WriteString(schemas.ReleasePhoneNumberResult_NumberType, string(v.NumberType))
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.ReleasePhoneNumberResult_OptOutListName, *v.OptOutListName)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.ReleasePhoneNumberResult_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.PhoneNumberArn != nil {
+		s.WriteString(schemas.ReleasePhoneNumberResult_PhoneNumberArn, *v.PhoneNumberArn)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.ReleasePhoneNumberResult_PhoneNumberId, *v.PhoneNumberId)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.ReleasePhoneNumberResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.SelfManagedOptOutsEnabled != false {
+		s.WriteBool(schemas.ReleasePhoneNumberResult_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReleasePhoneNumberResult_Status, string(v.Status))
+	}
+	if v.TwoWayChannelArn != nil {
+		s.WriteString(schemas.ReleasePhoneNumberResult_TwoWayChannelArn, *v.TwoWayChannelArn)
+	}
+	if v.TwoWayChannelRole != nil {
+		s.WriteString(schemas.ReleasePhoneNumberResult_TwoWayChannelRole, *v.TwoWayChannelRole)
+	}
+	if v.TwoWayEnabled != false {
+		s.WriteBool(schemas.ReleasePhoneNumberResult_TwoWayEnabled, v.TwoWayEnabled)
+	}
+}
+func (v *ReleasePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReleasePhoneNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReleasePhoneNumberResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ReleasePhoneNumberResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.ReleasePhoneNumberResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.ReleasePhoneNumberResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.ReleasePhoneNumberResult_MessageType:
+			var ev string
+			if err := d.ReadString(schemas.ReleasePhoneNumberResult_MessageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = types.MessageType(ev)
+			return nil
+		case schemas.ReleasePhoneNumberResult_MonthlyLeasingPrice:
+			v.MonthlyLeasingPrice = new(string)
+			return d.ReadString(schemas.ReleasePhoneNumberResult_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
+		case schemas.ReleasePhoneNumberResult_NumberCapabilities:
+			return deserializeNumberCapabilityList(d, schemas.ReleasePhoneNumberResult_NumberCapabilities, &v.NumberCapabilities)
+		case schemas.ReleasePhoneNumberResult_NumberType:
+			var ev string
+			if err := d.ReadString(schemas.ReleasePhoneNumberResult_NumberType, &ev); err != nil {
+				return err
+			}
+			v.NumberType = types.NumberType(ev)
+			return nil
+		case schemas.ReleasePhoneNumberResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.ReleasePhoneNumberResult_OptOutListName, v.OptOutListName)
+		case schemas.ReleasePhoneNumberResult_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.ReleasePhoneNumberResult_PhoneNumber, v.PhoneNumber)
+		case schemas.ReleasePhoneNumberResult_PhoneNumberArn:
+			v.PhoneNumberArn = new(string)
+			return d.ReadString(schemas.ReleasePhoneNumberResult_PhoneNumberArn, v.PhoneNumberArn)
+		case schemas.ReleasePhoneNumberResult_PhoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.ReleasePhoneNumberResult_PhoneNumberId, v.PhoneNumberId)
+		case schemas.ReleasePhoneNumberResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.ReleasePhoneNumberResult_RegistrationId, v.RegistrationId)
+		case schemas.ReleasePhoneNumberResult_SelfManagedOptOutsEnabled:
+			return d.ReadBool(schemas.ReleasePhoneNumberResult_SelfManagedOptOutsEnabled, &v.SelfManagedOptOutsEnabled)
+		case schemas.ReleasePhoneNumberResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.ReleasePhoneNumberResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NumberStatus(ev)
+			return nil
+		case schemas.ReleasePhoneNumberResult_TwoWayChannelArn:
+			v.TwoWayChannelArn = new(string)
+			return d.ReadString(schemas.ReleasePhoneNumberResult_TwoWayChannelArn, v.TwoWayChannelArn)
+		case schemas.ReleasePhoneNumberResult_TwoWayChannelRole:
+			v.TwoWayChannelRole = new(string)
+			return d.ReadString(schemas.ReleasePhoneNumberResult_TwoWayChannelRole, v.TwoWayChannelRole)
+		case schemas.ReleasePhoneNumberResult_TwoWayEnabled:
+			return d.ReadBool(schemas.ReleasePhoneNumberResult_TwoWayEnabled, &v.TwoWayEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReleasePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpReleasePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReleasePhoneNumber, schemas.ReleasePhoneNumberRequest, schemas.ReleasePhoneNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpReleasePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReleasePhoneNumber, schemas.ReleasePhoneNumberRequest, schemas.ReleasePhoneNumberResult), output: &ReleasePhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

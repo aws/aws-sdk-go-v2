@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -162,6 +164,45 @@ type CreateDatasetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.CreateDatasetImportJobRequest_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetImportJobName != nil {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_DatasetImportJobName, *v.DatasetImportJobName)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_Format, *v.Format)
+	}
+	if v.GeolocationFormat != nil {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_GeolocationFormat, *v.GeolocationFormat)
+	}
+	if v.ImportMode != "" {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_ImportMode, string(v.ImportMode))
+	}
+	serializeTags(s, schemas.CreateDatasetImportJobRequest_Tags, v.Tags)
+	if v.TimeZone != nil {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_TimeZone, *v.TimeZone)
+	}
+	if v.TimestampFormat != nil {
+		s.WriteString(schemas.CreateDatasetImportJobRequest_TimestampFormat, *v.TimestampFormat)
+	}
+	if v.UseGeolocationForTimeZone != false {
+		s.WriteBool(schemas.CreateDatasetImportJobRequest_UseGeolocationForTimeZone, v.UseGeolocationForTimeZone)
+	}
+}
+
 type CreateDatasetImportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset import job.
@@ -173,13 +214,32 @@ type CreateDatasetImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetImportJobArn != nil {
+		s.WriteString(schemas.CreateDatasetImportJobResponse_DatasetImportJobArn, *v.DatasetImportJobArn)
+	}
+}
+func (v *CreateDatasetImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetImportJobResponse_DatasetImportJobArn:
+			v.DatasetImportJobArn = new(string)
+			return d.ReadString(schemas.CreateDatasetImportJobResponse_DatasetImportJobArn, v.DatasetImportJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDatasetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetImportJob, schemas.CreateDatasetImportJobRequest, schemas.CreateDatasetImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDatasetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetImportJob, schemas.CreateDatasetImportJobRequest, schemas.CreateDatasetImportJobResponse), output: &CreateDatasetImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

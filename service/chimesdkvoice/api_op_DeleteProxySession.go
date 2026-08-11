@@ -4,6 +4,8 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DeleteProxySessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProxySessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProxySessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProxySessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxySessionId != nil {
+		s.WriteString(schemas.DeleteProxySessionRequest_ProxySessionId, *v.ProxySessionId)
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.DeleteProxySessionRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type DeleteProxySessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +70,26 @@ type DeleteProxySessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProxySessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProxySessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProxySessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProxySession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProxySession, schemas.DeleteProxySessionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProxySession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProxySession, schemas.DeleteProxySessionRequest, nil), output: &DeleteProxySessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

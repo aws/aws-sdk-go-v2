@@ -4,7 +4,9 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetControlOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetControlOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetControlOperationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetControlOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.GetControlOperationInput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+
 type GetControlOperationOutput struct {
 
 	// An operation performed by the control.
@@ -52,13 +66,34 @@ type GetControlOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetControlOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetControlOperationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetControlOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlOperation != nil {
+		s.WriteStruct(schemas.GetControlOperationOutput_controlOperation)
+		v.ControlOperation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetControlOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetControlOperationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetControlOperationOutput_controlOperation:
+			v.ControlOperation = &types.ControlOperation{}
+			return v.ControlOperation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetControlOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetControlOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetControlOperation, schemas.GetControlOperationInput, schemas.GetControlOperationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetControlOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetControlOperation, schemas.GetControlOperationInput, schemas.GetControlOperationOutput), output: &GetControlOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

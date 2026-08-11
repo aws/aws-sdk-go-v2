@@ -4,7 +4,9 @@ package resourcegroups
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type GetTagSyncTaskInput struct {
 	TaskArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTagSyncTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagSyncTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagSyncTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskArn != nil {
+		s.WriteString(schemas.GetTagSyncTaskInput_TaskArn, *v.TaskArn)
+	}
 }
 
 type GetTagSyncTaskOutput struct {
@@ -121,13 +135,92 @@ type GetTagSyncTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagSyncTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagSyncTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagSyncTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetTagSyncTaskOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetTagSyncTaskOutput_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.GroupArn != nil {
+		s.WriteString(schemas.GetTagSyncTaskOutput_GroupArn, *v.GroupArn)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GetTagSyncTaskOutput_GroupName, *v.GroupName)
+	}
+	if v.ResourceQuery != nil {
+		s.WriteStruct(schemas.GetTagSyncTaskOutput_ResourceQuery)
+		v.ResourceQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetTagSyncTaskOutput_RoleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTagSyncTaskOutput_Status, string(v.Status))
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.GetTagSyncTaskOutput_TagKey, *v.TagKey)
+	}
+	if v.TagValue != nil {
+		s.WriteString(schemas.GetTagSyncTaskOutput_TagValue, *v.TagValue)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.GetTagSyncTaskOutput_TaskArn, *v.TaskArn)
+	}
+}
+func (v *GetTagSyncTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTagSyncTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTagSyncTaskOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTagSyncTaskOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetTagSyncTaskOutput_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetTagSyncTaskOutput_ErrorMessage, v.ErrorMessage)
+		case schemas.GetTagSyncTaskOutput_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.GetTagSyncTaskOutput_GroupArn, v.GroupArn)
+		case schemas.GetTagSyncTaskOutput_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.GetTagSyncTaskOutput_GroupName, v.GroupName)
+		case schemas.GetTagSyncTaskOutput_ResourceQuery:
+			v.ResourceQuery = &types.ResourceQuery{}
+			return v.ResourceQuery.Deserialize(d)
+		case schemas.GetTagSyncTaskOutput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetTagSyncTaskOutput_RoleArn, v.RoleArn)
+		case schemas.GetTagSyncTaskOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetTagSyncTaskOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TagSyncTaskStatus(ev)
+			return nil
+		case schemas.GetTagSyncTaskOutput_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.GetTagSyncTaskOutput_TagKey, v.TagKey)
+		case schemas.GetTagSyncTaskOutput_TagValue:
+			v.TagValue = new(string)
+			return d.ReadString(schemas.GetTagSyncTaskOutput_TagValue, v.TagValue)
+		case schemas.GetTagSyncTaskOutput_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.GetTagSyncTaskOutput_TaskArn, v.TaskArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTagSyncTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTagSyncTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTagSyncTask, schemas.GetTagSyncTaskInput, schemas.GetTagSyncTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTagSyncTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTagSyncTask, schemas.GetTagSyncTaskInput, schemas.GetTagSyncTaskOutput), output: &GetTagSyncTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

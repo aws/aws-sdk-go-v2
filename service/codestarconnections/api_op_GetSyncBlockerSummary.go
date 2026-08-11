@@ -4,7 +4,9 @@ package codestarconnections
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetSyncBlockerSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSyncBlockerSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSyncBlockerSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSyncBlockerSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceName != nil {
+		s.WriteString(schemas.GetSyncBlockerSummaryInput_ResourceName, *v.ResourceName)
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.GetSyncBlockerSummaryInput_SyncType, string(v.SyncType))
+	}
+}
+
 type GetSyncBlockerSummaryOutput struct {
 
 	// The list of sync blockers for a specified resource.
@@ -53,13 +70,34 @@ type GetSyncBlockerSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSyncBlockerSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSyncBlockerSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSyncBlockerSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SyncBlockerSummary != nil {
+		s.WriteStruct(schemas.GetSyncBlockerSummaryOutput_SyncBlockerSummary)
+		v.SyncBlockerSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSyncBlockerSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSyncBlockerSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSyncBlockerSummaryOutput_SyncBlockerSummary:
+			v.SyncBlockerSummary = &types.SyncBlockerSummary{}
+			return v.SyncBlockerSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSyncBlockerSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetSyncBlockerSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSyncBlockerSummary, schemas.GetSyncBlockerSummaryInput, schemas.GetSyncBlockerSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetSyncBlockerSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSyncBlockerSummary, schemas.GetSyncBlockerSummaryInput, schemas.GetSyncBlockerSummaryOutput), output: &GetSyncBlockerSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

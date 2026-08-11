@@ -4,7 +4,9 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type GetNotificationsAccessForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationsAccessForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationsAccessForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationsAccessForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetNotificationsAccessForOrganizationOutput struct {
 
 	// The AccessStatus of Service Trust Enablement for User Notifications to Amazon
@@ -43,13 +54,34 @@ type GetNotificationsAccessForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationsAccessForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationsAccessForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationsAccessForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationsAccessForOrganization != nil {
+		s.WriteStruct(schemas.GetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization)
+		v.NotificationsAccessForOrganization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNotificationsAccessForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotificationsAccessForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotificationsAccessForOrganizationResponse_notificationsAccessForOrganization:
+			v.NotificationsAccessForOrganization = &types.NotificationsAccessForOrganization{}
+			return v.NotificationsAccessForOrganization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNotificationsAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNotificationsAccessForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationsAccessForOrganization, schemas.GetNotificationsAccessForOrganizationRequest, schemas.GetNotificationsAccessForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNotificationsAccessForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationsAccessForOrganization, schemas.GetNotificationsAccessForOrganizationRequest, schemas.GetNotificationsAccessForOrganizationResponse), output: &GetNotificationsAccessForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

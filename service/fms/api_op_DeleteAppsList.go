@@ -4,6 +4,8 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteAppsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppsListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppsListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppsListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListId != nil {
+		s.WriteString(schemas.DeleteAppsListRequest_ListId, *v.ListId)
+	}
+}
+
 type DeleteAppsListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteAppsListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppsListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppsListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAppsListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAppsList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppsList, schemas.DeleteAppsListRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAppsList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppsList, schemas.DeleteAppsListRequest, nil), output: &DeleteAppsListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type RegenerateSecurityTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegenerateSecurityTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegenerateSecurityTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegenerateSecurityTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RegenerateSecurityTokenRequest_AccountId, *v.AccountId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.RegenerateSecurityTokenRequest_BotId, *v.BotId)
+	}
+}
+
 type RegenerateSecurityTokenOutput struct {
 
 	// A resource that allows Enterprise account administrators to configure an
@@ -51,13 +68,34 @@ type RegenerateSecurityTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegenerateSecurityTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegenerateSecurityTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegenerateSecurityTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bot != nil {
+		s.WriteStruct(schemas.RegenerateSecurityTokenResponse_Bot)
+		v.Bot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegenerateSecurityTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegenerateSecurityTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegenerateSecurityTokenResponse_Bot:
+			v.Bot = &types.Bot{}
+			return v.Bot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegenerateSecurityTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegenerateSecurityToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegenerateSecurityToken, schemas.RegenerateSecurityTokenRequest, schemas.RegenerateSecurityTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegenerateSecurityToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegenerateSecurityToken, schemas.RegenerateSecurityTokenRequest, schemas.RegenerateSecurityTokenResponse), output: &RegenerateSecurityTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

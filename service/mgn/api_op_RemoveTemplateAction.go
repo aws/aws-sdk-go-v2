@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type RemoveTemplateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTemplateActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTemplateActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTemplateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionID != nil {
+		s.WriteString(schemas.RemoveTemplateActionRequest_actionID, *v.ActionID)
+	}
+	if v.LaunchConfigurationTemplateID != nil {
+		s.WriteString(schemas.RemoveTemplateActionRequest_launchConfigurationTemplateID, *v.LaunchConfigurationTemplateID)
+	}
+}
+func (v *RemoveTemplateActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveTemplateActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveTemplateActionRequest_actionID:
+			v.ActionID = new(string)
+			return d.ReadString(schemas.RemoveTemplateActionRequest_actionID, v.ActionID)
+		case schemas.RemoveTemplateActionRequest_launchConfigurationTemplateID:
+			v.LaunchConfigurationTemplateID = new(string)
+			return d.ReadString(schemas.RemoveTemplateActionRequest_launchConfigurationTemplateID, v.LaunchConfigurationTemplateID)
+		}
+		return nil
+	})
+}
+
 type RemoveTemplateActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +75,26 @@ type RemoveTemplateActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTemplateActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTemplateActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTemplateActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveTemplateActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveTemplateActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveTemplateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveTemplateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTemplateAction, schemas.RemoveTemplateActionRequest, schemas.RemoveTemplateActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveTemplateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTemplateAction, schemas.RemoveTemplateActionRequest, schemas.RemoveTemplateActionResponse), output: &RemoveTemplateActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloud9
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DescribeEnvironmentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DescribeEnvironmentStatusRequest_environmentId, *v.EnvironmentId)
+	}
+}
+
 type DescribeEnvironmentStatusOutput struct {
 
 	// Any informational message about the status of the environment.
@@ -71,13 +85,42 @@ type DescribeEnvironmentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentStatusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeEnvironmentStatusResult_message, *v.Message)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeEnvironmentStatusResult_status, string(v.Status))
+	}
+}
+func (v *DescribeEnvironmentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEnvironmentStatusResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEnvironmentStatusResult_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeEnvironmentStatusResult_message, v.Message)
+		case schemas.DescribeEnvironmentStatusResult_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeEnvironmentStatusResult_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EnvironmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEnvironmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEnvironmentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentStatus, schemas.DescribeEnvironmentStatusRequest, schemas.DescribeEnvironmentStatusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEnvironmentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentStatus, schemas.DescribeEnvironmentStatusRequest, schemas.DescribeEnvironmentStatusResult), output: &DescribeEnvironmentStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

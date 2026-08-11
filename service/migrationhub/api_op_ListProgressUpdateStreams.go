@@ -5,7 +5,9 @@ package migrationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListProgressUpdateStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProgressUpdateStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProgressUpdateStreamsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProgressUpdateStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProgressUpdateStreamsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProgressUpdateStreamsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListProgressUpdateStreamsOutput struct {
 
 	// If there are more streams created than the max result, return the next token to
@@ -54,13 +71,35 @@ type ListProgressUpdateStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProgressUpdateStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProgressUpdateStreamsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProgressUpdateStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProgressUpdateStreamsResult_NextToken, *v.NextToken)
+	}
+	serializeProgressUpdateStreamSummaryList(s, schemas.ListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList, v.ProgressUpdateStreamSummaryList)
+}
+func (v *ListProgressUpdateStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProgressUpdateStreamsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProgressUpdateStreamsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProgressUpdateStreamsResult_NextToken, v.NextToken)
+		case schemas.ListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList:
+			return deserializeProgressUpdateStreamSummaryList(d, schemas.ListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList, &v.ProgressUpdateStreamSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProgressUpdateStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProgressUpdateStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProgressUpdateStreams, schemas.ListProgressUpdateStreamsRequest, schemas.ListProgressUpdateStreamsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProgressUpdateStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProgressUpdateStreams, schemas.ListProgressUpdateStreamsRequest, schemas.ListProgressUpdateStreamsResult), output: &ListProgressUpdateStreamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -32,6 +34,28 @@ type GetFleetInput struct {
 	FleetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetFleetRequest_fleetId, *v.FleetId)
+	}
+}
+func (v *GetFleetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFleetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFleetRequest_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GetFleetRequest_fleetId, v.FleetId)
+		}
+		return nil
+	})
 }
 
 type GetFleetOutput struct {
@@ -72,13 +96,62 @@ type GetFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFleetResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetFleetResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFleetResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFleetResponse_id, *v.Id)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetFleetResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	if v.SignalCatalogArn != nil {
+		s.WriteString(schemas.GetFleetResponse_signalCatalogArn, *v.SignalCatalogArn)
+	}
+}
+func (v *GetFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFleetResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFleetResponse_arn, v.Arn)
+		case schemas.GetFleetResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetFleetResponse_creationTime, v.CreationTime)
+		case schemas.GetFleetResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFleetResponse_description, v.Description)
+		case schemas.GetFleetResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFleetResponse_id, v.Id)
+		case schemas.GetFleetResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetFleetResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.GetFleetResponse_signalCatalogArn:
+			v.SignalCatalogArn = new(string)
+			return d.ReadString(schemas.GetFleetResponse_signalCatalogArn, v.SignalCatalogArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFleet, schemas.GetFleetRequest, schemas.GetFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFleet, schemas.GetFleetRequest, schemas.GetFleetResponse), output: &GetFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

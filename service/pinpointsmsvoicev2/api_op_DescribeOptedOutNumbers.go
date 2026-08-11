@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,26 @@ type DescribeOptedOutNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOptedOutNumbersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOptedOutNumbersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOptedOutNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOptedOutFilterList(s, schemas.DescribeOptedOutNumbersRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeOptedOutNumbersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOptedOutNumbersRequest_NextToken, *v.NextToken)
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.DescribeOptedOutNumbersRequest_OptOutListName, *v.OptOutListName)
+	}
+	serializeOptedOutNumberList(s, schemas.DescribeOptedOutNumbersRequest_OptedOutNumbers, v.OptedOutNumbers)
+}
+
 type DescribeOptedOutNumbersOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -85,13 +107,47 @@ type DescribeOptedOutNumbersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOptedOutNumbersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOptedOutNumbersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOptedOutNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOptedOutNumbersResult_NextToken, *v.NextToken)
+	}
+	if v.OptOutListArn != nil {
+		s.WriteString(schemas.DescribeOptedOutNumbersResult_OptOutListArn, *v.OptOutListArn)
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.DescribeOptedOutNumbersResult_OptOutListName, *v.OptOutListName)
+	}
+	serializeOptedOutNumberInformationList(s, schemas.DescribeOptedOutNumbersResult_OptedOutNumbers, v.OptedOutNumbers)
+}
+func (v *DescribeOptedOutNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOptedOutNumbersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOptedOutNumbersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeOptedOutNumbersResult_NextToken, v.NextToken)
+		case schemas.DescribeOptedOutNumbersResult_OptOutListArn:
+			v.OptOutListArn = new(string)
+			return d.ReadString(schemas.DescribeOptedOutNumbersResult_OptOutListArn, v.OptOutListArn)
+		case schemas.DescribeOptedOutNumbersResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.DescribeOptedOutNumbersResult_OptOutListName, v.OptOutListName)
+		case schemas.DescribeOptedOutNumbersResult_OptedOutNumbers:
+			return deserializeOptedOutNumberInformationList(d, schemas.DescribeOptedOutNumbersResult_OptedOutNumbers, &v.OptedOutNumbers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOptedOutNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeOptedOutNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOptedOutNumbers, schemas.DescribeOptedOutNumbersRequest, schemas.DescribeOptedOutNumbersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeOptedOutNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOptedOutNumbers, schemas.DescribeOptedOutNumbersRequest, schemas.DescribeOptedOutNumbersResult), output: &DescribeOptedOutNumbersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

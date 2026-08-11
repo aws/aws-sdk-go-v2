@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type ListMailboxPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMailboxPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMailboxPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMailboxPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.ListMailboxPermissionsRequest_EntityId, *v.EntityId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMailboxPermissionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMailboxPermissionsRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListMailboxPermissionsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListMailboxPermissionsOutput struct {
 
 	// The token to use to retrieve the next page of results. The value is "null" when
@@ -74,13 +97,35 @@ type ListMailboxPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMailboxPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMailboxPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMailboxPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMailboxPermissionsResponse_NextToken, *v.NextToken)
+	}
+	serializePermissions(s, schemas.ListMailboxPermissionsResponse_Permissions, v.Permissions)
+}
+func (v *ListMailboxPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMailboxPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMailboxPermissionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMailboxPermissionsResponse_NextToken, v.NextToken)
+		case schemas.ListMailboxPermissionsResponse_Permissions:
+			return deserializePermissions(d, schemas.ListMailboxPermissionsResponse_Permissions, &v.Permissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMailboxPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMailboxPermissions, schemas.ListMailboxPermissionsRequest, schemas.ListMailboxPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMailboxPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMailboxPermissions, schemas.ListMailboxPermissionsRequest, schemas.ListMailboxPermissionsResponse), output: &ListMailboxPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

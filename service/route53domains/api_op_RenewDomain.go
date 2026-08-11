@@ -4,6 +4,8 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,22 @@ type RenewDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.RenewDomainRequest_CurrentExpiryYear, v.CurrentExpiryYear)
+	if v.DomainName != nil {
+		s.WriteString(schemas.RenewDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.DurationInYears != nil {
+		s.WriteInt32(schemas.RenewDomainRequest_DurationInYears, *v.DurationInYears)
+	}
+}
+
 type RenewDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
@@ -72,13 +90,32 @@ type RenewDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.RenewDomainResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *RenewDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenewDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenewDomainResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.RenewDomainResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRenewDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenewDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenewDomain, schemas.RenewDomainRequest, schemas.RenewDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRenewDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenewDomain, schemas.RenewDomainRequest, schemas.RenewDomainResponse), output: &RenewDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

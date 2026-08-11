@@ -4,6 +4,8 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type RedactConversationMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedactConversationMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactConversationMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactConversationMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RedactConversationMessageRequest_AccountId, *v.AccountId)
+	}
+	if v.ConversationId != nil {
+		s.WriteString(schemas.RedactConversationMessageRequest_ConversationId, *v.ConversationId)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.RedactConversationMessageRequest_MessageId, *v.MessageId)
+	}
+}
+
 type RedactConversationMessageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type RedactConversationMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedactConversationMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactConversationMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactConversationMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RedactConversationMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedactConversationMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRedactConversationMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRedactConversationMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedactConversationMessage, schemas.RedactConversationMessageRequest, schemas.RedactConversationMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRedactConversationMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedactConversationMessage, schemas.RedactConversationMessageRequest, schemas.RedactConversationMessageResponse), output: &RedactConversationMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

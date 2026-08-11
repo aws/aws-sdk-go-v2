@@ -5,7 +5,9 @@ package textract
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,27 @@ type ListAdaptersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdaptersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdaptersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdaptersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterCreationTime != nil {
+		s.WriteTime(schemas.ListAdaptersRequest_AfterCreationTime, *v.AfterCreationTime)
+	}
+	if v.BeforeCreationTime != nil {
+		s.WriteTime(schemas.ListAdaptersRequest_BeforeCreationTime, *v.BeforeCreationTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdaptersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdaptersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAdaptersOutput struct {
 
 	// A list of adapters that matches the filtering criteria specified when calling
@@ -60,13 +83,35 @@ type ListAdaptersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdaptersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdaptersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdaptersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdapterList(s, schemas.ListAdaptersResponse_Adapters, v.Adapters)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdaptersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAdaptersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdaptersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdaptersResponse_Adapters:
+			return deserializeAdapterList(d, schemas.ListAdaptersResponse_Adapters, &v.Adapters)
+		case schemas.ListAdaptersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdaptersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdaptersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAdapters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdapters, schemas.ListAdaptersRequest, schemas.ListAdaptersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAdapters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdapters, schemas.ListAdaptersRequest, schemas.ListAdaptersResponse), output: &ListAdaptersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

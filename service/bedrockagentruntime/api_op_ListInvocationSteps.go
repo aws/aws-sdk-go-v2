@@ -5,7 +5,9 @@ package bedrockagentruntime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type ListInvocationStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvocationStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvocationStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvocationStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationIdentifier != nil {
+		s.WriteString(schemas.ListInvocationStepsRequest_invocationIdentifier, *v.InvocationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInvocationStepsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvocationStepsRequest_nextToken, *v.NextToken)
+	}
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.ListInvocationStepsRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+}
+
 type ListInvocationStepsOutput struct {
 
 	// A list of summaries for each invocation step associated with a session and if
@@ -73,13 +96,35 @@ type ListInvocationStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvocationStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvocationStepsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvocationStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInvocationStepSummaries(s, schemas.ListInvocationStepsResponse_invocationStepSummaries, v.InvocationStepSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvocationStepsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListInvocationStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInvocationStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInvocationStepsResponse_invocationStepSummaries:
+			return deserializeInvocationStepSummaries(d, schemas.ListInvocationStepsResponse_invocationStepSummaries, &v.InvocationStepSummaries)
+		case schemas.ListInvocationStepsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInvocationStepsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInvocationStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInvocationSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvocationSteps, schemas.ListInvocationStepsRequest, schemas.ListInvocationStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInvocationSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvocationSteps, schemas.ListInvocationStepsRequest, schemas.ListInvocationStepsResponse), output: &ListInvocationStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

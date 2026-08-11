@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,28 @@ type DescribeProfilingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProfilingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProfilingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProfilingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.DescribeProfilingGroupRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *DescribeProfilingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProfilingGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProfilingGroupRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.DescribeProfilingGroupRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the describeProfilingGroupResponse.
 type DescribeProfilingGroupOutput struct {
 
@@ -56,13 +80,34 @@ type DescribeProfilingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProfilingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProfilingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProfilingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilingGroup != nil {
+		s.WriteStruct(schemas.DescribeProfilingGroupResponse_profilingGroup)
+		v.ProfilingGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeProfilingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProfilingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProfilingGroupResponse_profilingGroup:
+			v.ProfilingGroup = &types.ProfilingGroupDescription{}
+			return v.ProfilingGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProfilingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProfilingGroup, schemas.DescribeProfilingGroupRequest, schemas.DescribeProfilingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeProfilingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProfilingGroup, schemas.DescribeProfilingGroupRequest, schemas.DescribeProfilingGroupResponse), output: &DescribeProfilingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

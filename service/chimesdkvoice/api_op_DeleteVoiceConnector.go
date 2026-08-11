@@ -4,6 +4,8 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteVoiceConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVoiceConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVoiceConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVoiceConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.DeleteVoiceConnectorRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type DeleteVoiceConnectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteVoiceConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVoiceConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVoiceConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVoiceConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVoiceConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVoiceConnector, schemas.DeleteVoiceConnectorRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVoiceConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVoiceConnector, schemas.DeleteVoiceConnectorRequest, nil), output: &DeleteVoiceConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

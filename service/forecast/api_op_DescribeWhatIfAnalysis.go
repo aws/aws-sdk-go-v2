@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,18 @@ type DescribeWhatIfAnalysisInput struct {
 	WhatIfAnalysisArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeWhatIfAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWhatIfAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWhatIfAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WhatIfAnalysisArn != nil {
+		s.WriteString(schemas.DescribeWhatIfAnalysisRequest_WhatIfAnalysisArn, *v.WhatIfAnalysisArn)
+	}
 }
 
 type DescribeWhatIfAnalysisOutput struct {
@@ -113,13 +127,82 @@ type DescribeWhatIfAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWhatIfAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWhatIfAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWhatIfAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeWhatIfAnalysisResponse_CreationTime, *v.CreationTime)
+	}
+	if v.EstimatedTimeRemainingInMinutes != nil {
+		s.WriteInt64(schemas.DescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes, *v.EstimatedTimeRemainingInMinutes)
+	}
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.DescribeWhatIfAnalysisResponse_ForecastArn, *v.ForecastArn)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeWhatIfAnalysisResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeWhatIfAnalysisResponse_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeWhatIfAnalysisResponse_Status, *v.Status)
+	}
+	if v.TimeSeriesSelector != nil {
+		s.WriteStruct(schemas.DescribeWhatIfAnalysisResponse_TimeSeriesSelector)
+		v.TimeSeriesSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WhatIfAnalysisArn != nil {
+		s.WriteString(schemas.DescribeWhatIfAnalysisResponse_WhatIfAnalysisArn, *v.WhatIfAnalysisArn)
+	}
+	if v.WhatIfAnalysisName != nil {
+		s.WriteString(schemas.DescribeWhatIfAnalysisResponse_WhatIfAnalysisName, *v.WhatIfAnalysisName)
+	}
+}
+func (v *DescribeWhatIfAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWhatIfAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWhatIfAnalysisResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeWhatIfAnalysisResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes:
+			v.EstimatedTimeRemainingInMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeWhatIfAnalysisResponse_EstimatedTimeRemainingInMinutes, v.EstimatedTimeRemainingInMinutes)
+		case schemas.DescribeWhatIfAnalysisResponse_ForecastArn:
+			v.ForecastArn = new(string)
+			return d.ReadString(schemas.DescribeWhatIfAnalysisResponse_ForecastArn, v.ForecastArn)
+		case schemas.DescribeWhatIfAnalysisResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeWhatIfAnalysisResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeWhatIfAnalysisResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeWhatIfAnalysisResponse_Message, v.Message)
+		case schemas.DescribeWhatIfAnalysisResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeWhatIfAnalysisResponse_Status, v.Status)
+		case schemas.DescribeWhatIfAnalysisResponse_TimeSeriesSelector:
+			v.TimeSeriesSelector = &types.TimeSeriesSelector{}
+			return v.TimeSeriesSelector.Deserialize(d)
+		case schemas.DescribeWhatIfAnalysisResponse_WhatIfAnalysisArn:
+			v.WhatIfAnalysisArn = new(string)
+			return d.ReadString(schemas.DescribeWhatIfAnalysisResponse_WhatIfAnalysisArn, v.WhatIfAnalysisArn)
+		case schemas.DescribeWhatIfAnalysisResponse_WhatIfAnalysisName:
+			v.WhatIfAnalysisName = new(string)
+			return d.ReadString(schemas.DescribeWhatIfAnalysisResponse_WhatIfAnalysisName, v.WhatIfAnalysisName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWhatIfAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWhatIfAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWhatIfAnalysis, schemas.DescribeWhatIfAnalysisRequest, schemas.DescribeWhatIfAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWhatIfAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWhatIfAnalysis, schemas.DescribeWhatIfAnalysisRequest, schemas.DescribeWhatIfAnalysisResponse), output: &DescribeWhatIfAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

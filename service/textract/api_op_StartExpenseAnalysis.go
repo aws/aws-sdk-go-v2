@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,39 @@ type StartExpenseAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExpenseAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExpenseAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExpenseAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartExpenseAnalysisRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DocumentLocation != nil {
+		s.WriteStruct(schemas.StartExpenseAnalysisRequest_DocumentLocation)
+		v.DocumentLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartExpenseAnalysisRequest_JobTag, *v.JobTag)
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.StartExpenseAnalysisRequest_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartExpenseAnalysisRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.StartExpenseAnalysisRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartExpenseAnalysisOutput struct {
 
 	// A unique identifier for the text detection job. The JobId is returned from
@@ -94,13 +129,32 @@ type StartExpenseAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExpenseAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExpenseAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExpenseAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartExpenseAnalysisResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartExpenseAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExpenseAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExpenseAnalysisResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartExpenseAnalysisResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExpenseAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartExpenseAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExpenseAnalysis, schemas.StartExpenseAnalysisRequest, schemas.StartExpenseAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartExpenseAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExpenseAnalysis, schemas.StartExpenseAnalysisRequest, schemas.StartExpenseAnalysisResponse), output: &StartExpenseAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

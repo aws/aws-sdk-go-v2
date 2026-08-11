@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type UpdateAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateAccountRequest_AccountId, *v.AccountId)
+	}
+	if v.DefaultLicense != "" {
+		s.WriteString(schemas.UpdateAccountRequest_DefaultLicense, string(v.DefaultLicense))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAccountRequest_Name, *v.Name)
+	}
+}
+
 type UpdateAccountOutput struct {
 
 	// The updated Amazon Chime account details.
@@ -52,13 +72,34 @@ type UpdateAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteStruct(schemas.UpdateAccountResponse_Account)
+		v.Account.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountResponse_Account:
+			v.Account = &types.Account{}
+			return v.Account.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccount, schemas.UpdateAccountRequest, schemas.UpdateAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccount, schemas.UpdateAccountRequest, schemas.UpdateAccountResponse), output: &UpdateAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

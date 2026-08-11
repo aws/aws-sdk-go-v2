@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type GetImpersonationRoleEffectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImpersonationRoleEffectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImpersonationRoleEffectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImpersonationRoleEffectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpersonationRoleId != nil {
+		s.WriteString(schemas.GetImpersonationRoleEffectRequest_ImpersonationRoleId, *v.ImpersonationRoleId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetImpersonationRoleEffectRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.TargetUser != nil {
+		s.WriteString(schemas.GetImpersonationRoleEffectRequest_TargetUser, *v.TargetUser)
+	}
+}
+
 type GetImpersonationRoleEffectOutput struct {
 
 	// Effect of the impersonation role on the target user based on its rules.
@@ -70,13 +90,49 @@ type GetImpersonationRoleEffectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImpersonationRoleEffectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImpersonationRoleEffectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImpersonationRoleEffectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Effect != "" {
+		s.WriteString(schemas.GetImpersonationRoleEffectResponse_Effect, string(v.Effect))
+	}
+	serializeImpersonationMatchedRuleList(s, schemas.GetImpersonationRoleEffectResponse_MatchedRules, v.MatchedRules)
+	if v.Type != "" {
+		s.WriteString(schemas.GetImpersonationRoleEffectResponse_Type, string(v.Type))
+	}
+}
+func (v *GetImpersonationRoleEffectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImpersonationRoleEffectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImpersonationRoleEffectResponse_Effect:
+			var ev string
+			if err := d.ReadString(schemas.GetImpersonationRoleEffectResponse_Effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = types.AccessEffect(ev)
+			return nil
+		case schemas.GetImpersonationRoleEffectResponse_MatchedRules:
+			return deserializeImpersonationMatchedRuleList(d, schemas.GetImpersonationRoleEffectResponse_MatchedRules, &v.MatchedRules)
+		case schemas.GetImpersonationRoleEffectResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.GetImpersonationRoleEffectResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ImpersonationRoleType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetImpersonationRoleEffectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetImpersonationRoleEffect{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImpersonationRoleEffect, schemas.GetImpersonationRoleEffectRequest, schemas.GetImpersonationRoleEffectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetImpersonationRoleEffect{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImpersonationRoleEffect, schemas.GetImpersonationRoleEffectRequest, schemas.GetImpersonationRoleEffectResponse), output: &GetImpersonationRoleEffectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

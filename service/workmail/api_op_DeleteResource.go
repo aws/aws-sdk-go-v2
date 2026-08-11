@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DeleteResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteResourceRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DeleteResourceRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type DeleteResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +70,26 @@ type DeleteResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResource, schemas.DeleteResourceRequest, schemas.DeleteResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResource, schemas.DeleteResourceRequest, schemas.DeleteResourceResponse), output: &DeleteResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

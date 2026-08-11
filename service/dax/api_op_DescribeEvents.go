@@ -4,7 +4,9 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -66,6 +68,36 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteInt32(schemas.DescribeEventsRequest_Duration, *v.Duration)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeEventsRequest_EndTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEventsRequest_NextToken, *v.NextToken)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.DescribeEventsRequest_SourceName, *v.SourceName)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.DescribeEventsRequest_SourceType, string(v.SourceType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeEventsRequest_StartTime, *v.StartTime)
+	}
+}
+
 type DescribeEventsOutput struct {
 
 	// An array of events. Each element in the array represents one event.
@@ -80,13 +112,35 @@ type DescribeEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventList(s, schemas.DescribeEventsResponse_Events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEventsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventsResponse_Events:
+			return deserializeEventList(d, schemas.DescribeEventsResponse_Events, &v.Events)
+		case schemas.DescribeEventsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEventsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvents, schemas.DescribeEventsRequest, schemas.DescribeEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvents, schemas.DescribeEventsRequest, schemas.DescribeEventsResponse), output: &DescribeEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,32 @@ type ListNetworkMigrationCodeGenerationSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationCodeGenerationSegmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationCodeGenerationSegmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationCodeGenerationSegmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListNetworkMigrationCodeGenerationSegmentsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNetworkMigrationCodeGenerationSegmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationCodeGenerationSegmentsRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationCodeGenerationSegmentsRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationCodeGenerationSegmentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListNetworkMigrationCodeGenerationSegmentsOutput struct {
 
 	// A list of network migration code generation segments.
@@ -65,13 +93,35 @@ type ListNetworkMigrationCodeGenerationSegmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationCodeGenerationSegmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationCodeGenerationSegmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationCodeGenerationSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkMigrationCodeGenerationSegmentsList(s, schemas.ListNetworkMigrationCodeGenerationSegmentsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationCodeGenerationSegmentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworkMigrationCodeGenerationSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkMigrationCodeGenerationSegmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkMigrationCodeGenerationSegmentsResponse_items:
+			return deserializeNetworkMigrationCodeGenerationSegmentsList(d, schemas.ListNetworkMigrationCodeGenerationSegmentsResponse_items, &v.Items)
+		case schemas.ListNetworkMigrationCodeGenerationSegmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworkMigrationCodeGenerationSegmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkMigrationCodeGenerationSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworkMigrationCodeGenerationSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationCodeGenerationSegments, schemas.ListNetworkMigrationCodeGenerationSegmentsRequest, schemas.ListNetworkMigrationCodeGenerationSegmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworkMigrationCodeGenerationSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationCodeGenerationSegments, schemas.ListNetworkMigrationCodeGenerationSegmentsRequest, schemas.ListNetworkMigrationCodeGenerationSegmentsResponse), output: &ListNetworkMigrationCodeGenerationSegmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

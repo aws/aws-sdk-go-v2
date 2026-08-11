@@ -4,7 +4,9 @@ package codestarconnections
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,39 @@ type CreateSyncConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSyncConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSyncConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSyncConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_Branch, *v.Branch)
+	}
+	if v.ConfigFile != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_ConfigFile, *v.ConfigFile)
+	}
+	if v.PublishDeploymentStatus != "" {
+		s.WriteString(schemas.CreateSyncConfigurationInput_PublishDeploymentStatus, string(v.PublishDeploymentStatus))
+	}
+	if v.RepositoryLinkId != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_RepositoryLinkId, *v.RepositoryLinkId)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_ResourceName, *v.ResourceName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_RoleArn, *v.RoleArn)
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.CreateSyncConfigurationInput_SyncType, string(v.SyncType))
+	}
+	if v.TriggerResourceUpdateOn != "" {
+		s.WriteString(schemas.CreateSyncConfigurationInput_TriggerResourceUpdateOn, string(v.TriggerResourceUpdateOn))
+	}
+}
+
 type CreateSyncConfigurationOutput struct {
 
 	// The created sync configuration for the connection. A sync configuration allows
@@ -90,13 +125,34 @@ type CreateSyncConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSyncConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSyncConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSyncConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SyncConfiguration != nil {
+		s.WriteStruct(schemas.CreateSyncConfigurationOutput_SyncConfiguration)
+		v.SyncConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSyncConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSyncConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSyncConfigurationOutput_SyncConfiguration:
+			v.SyncConfiguration = &types.SyncConfiguration{}
+			return v.SyncConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSyncConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateSyncConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncConfiguration, schemas.CreateSyncConfigurationInput, schemas.CreateSyncConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateSyncConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncConfiguration, schemas.CreateSyncConfigurationInput, schemas.CreateSyncConfigurationOutput), output: &CreateSyncConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

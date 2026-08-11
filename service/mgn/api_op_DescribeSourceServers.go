@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,48 @@ type DescribeSourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSourceServersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSourceServersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSourceServersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.DescribeSourceServersRequest_accountID, *v.AccountID)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeSourceServersRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSourceServersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSourceServersRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeSourceServersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSourceServersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSourceServersRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.DescribeSourceServersRequest_accountID, v.AccountID)
+		case schemas.DescribeSourceServersRequest_filters:
+			v.Filters = &types.DescribeSourceServersRequestFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.DescribeSourceServersRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.DescribeSourceServersRequest_maxResults, v.MaxResults)
+		case schemas.DescribeSourceServersRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSourceServersRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeSourceServersOutput struct {
 
 	// Request to filter Source Servers list by item.
@@ -56,13 +100,35 @@ type DescribeSourceServersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSourceServersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSourceServersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSourceServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSourceServersList(s, schemas.DescribeSourceServersResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSourceServersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeSourceServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSourceServersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSourceServersResponse_items:
+			return deserializeSourceServersList(d, schemas.DescribeSourceServersResponse_items, &v.Items)
+		case schemas.DescribeSourceServersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSourceServersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSourceServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSourceServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSourceServers, schemas.DescribeSourceServersRequest, schemas.DescribeSourceServersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSourceServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSourceServers, schemas.DescribeSourceServersRequest, schemas.DescribeSourceServersResponse), output: &DescribeSourceServersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

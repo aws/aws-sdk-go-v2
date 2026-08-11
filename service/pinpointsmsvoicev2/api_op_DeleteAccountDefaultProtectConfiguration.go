@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ type DeleteAccountDefaultProtectConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountDefaultProtectConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountDefaultProtectConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountDefaultProtectConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeleteAccountDefaultProtectConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the account default protect configuration.
@@ -45,13 +56,38 @@ type DeleteAccountDefaultProtectConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountDefaultProtectConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountDefaultProtectConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountDefaultProtectConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultProtectConfigurationArn != nil {
+		s.WriteString(schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationArn, *v.DefaultProtectConfigurationArn)
+	}
+	if v.DefaultProtectConfigurationId != nil {
+		s.WriteString(schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationId, *v.DefaultProtectConfigurationId)
+	}
+}
+func (v *DeleteAccountDefaultProtectConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccountDefaultProtectConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationArn:
+			v.DefaultProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationArn, v.DefaultProtectConfigurationArn)
+		case schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationId:
+			v.DefaultProtectConfigurationId = new(string)
+			return d.ReadString(schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationId, v.DefaultProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccountDefaultProtectConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteAccountDefaultProtectConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountDefaultProtectConfiguration, schemas.DeleteAccountDefaultProtectConfigurationRequest, schemas.DeleteAccountDefaultProtectConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteAccountDefaultProtectConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountDefaultProtectConfiguration, schemas.DeleteAccountDefaultProtectConfigurationRequest, schemas.DeleteAccountDefaultProtectConfigurationResult), output: &DeleteAccountDefaultProtectConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

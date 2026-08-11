@@ -4,6 +4,8 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataflowEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataflowEndpointGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataflowEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataflowEndpointGroupId != nil {
+		s.WriteString(schemas.DeleteDataflowEndpointGroupRequest_dataflowEndpointGroupId, *v.DataflowEndpointGroupId)
+	}
+}
+
 // Response containing the ID of a dataflow endpoint group.
 type DeleteDataflowEndpointGroupOutput struct {
 
@@ -46,13 +60,32 @@ type DeleteDataflowEndpointGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataflowEndpointGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataflowEndpointGroupIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataflowEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataflowEndpointGroupId != nil {
+		s.WriteString(schemas.DataflowEndpointGroupIdResponse_dataflowEndpointGroupId, *v.DataflowEndpointGroupId)
+	}
+}
+func (v *DeleteDataflowEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataflowEndpointGroupIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataflowEndpointGroupIdResponse_dataflowEndpointGroupId:
+			v.DataflowEndpointGroupId = new(string)
+			return d.ReadString(schemas.DataflowEndpointGroupIdResponse_dataflowEndpointGroupId, v.DataflowEndpointGroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataflowEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataflowEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataflowEndpointGroup, schemas.DeleteDataflowEndpointGroupRequest, schemas.DataflowEndpointGroupIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataflowEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataflowEndpointGroup, schemas.DeleteDataflowEndpointGroupRequest, schemas.DataflowEndpointGroupIdResponse), output: &DeleteDataflowEndpointGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

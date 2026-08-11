@@ -4,6 +4,8 @@ package ssmquicksetup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteConfigurationManagerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationManagerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigurationManagerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.DeleteConfigurationManagerInput_ManagerArn, *v.ManagerArn)
+	}
+}
+
 type DeleteConfigurationManagerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteConfigurationManagerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationManagerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConfigurationManagerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfigurationManagerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfigurationManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationManager, schemas.DeleteConfigurationManagerInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConfigurationManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationManager, schemas.DeleteConfigurationManagerInput, nil), output: &DeleteConfigurationManagerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

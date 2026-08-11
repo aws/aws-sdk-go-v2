@@ -4,6 +4,8 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteWhatIfForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatIfForecastInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWhatIfForecastRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWhatIfForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WhatIfForecastArn != nil {
+		s.WriteString(schemas.DeleteWhatIfForecastRequest_WhatIfForecastArn, *v.WhatIfForecastArn)
+	}
+}
+
 type DeleteWhatIfForecastOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteWhatIfForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatIfForecastOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWhatIfForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWhatIfForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWhatIfForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWhatIfForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatIfForecast, schemas.DeleteWhatIfForecastRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWhatIfForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatIfForecast, schemas.DeleteWhatIfForecastRequest, nil), output: &DeleteWhatIfForecastOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

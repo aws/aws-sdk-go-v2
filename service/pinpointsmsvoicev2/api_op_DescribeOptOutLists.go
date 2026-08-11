@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,25 @@ type DescribeOptOutListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOptOutListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOptOutListsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOptOutListsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeOptOutListsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOptOutListsRequest_NextToken, *v.NextToken)
+	}
+	serializeOptOutListNameList(s, schemas.DescribeOptOutListsRequest_OptOutListNames, v.OptOutListNames)
+	if v.Owner != "" {
+		s.WriteString(schemas.DescribeOptOutListsRequest_Owner, string(v.Owner))
+	}
+}
+
 type DescribeOptOutListsOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -72,13 +93,35 @@ type DescribeOptOutListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOptOutListsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOptOutListsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOptOutListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOptOutListsResult_NextToken, *v.NextToken)
+	}
+	serializeOptOutListInformationList(s, schemas.DescribeOptOutListsResult_OptOutLists, v.OptOutLists)
+}
+func (v *DescribeOptOutListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOptOutListsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOptOutListsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeOptOutListsResult_NextToken, v.NextToken)
+		case schemas.DescribeOptOutListsResult_OptOutLists:
+			return deserializeOptOutListInformationList(d, schemas.DescribeOptOutListsResult_OptOutLists, &v.OptOutLists)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOptOutListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeOptOutLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOptOutLists, schemas.DescribeOptOutListsRequest, schemas.DescribeOptOutListsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeOptOutLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOptOutLists, schemas.DescribeOptOutListsRequest, schemas.DescribeOptOutListsResult), output: &DescribeOptOutListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

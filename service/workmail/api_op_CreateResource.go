@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type CreateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateResourceRequest_Description, *v.Description)
+	}
+	if v.HiddenFromGlobalAddressList != false {
+		s.WriteBool(schemas.CreateResourceRequest_HiddenFromGlobalAddressList, v.HiddenFromGlobalAddressList)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateResourceRequest_Name, *v.Name)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.CreateResourceRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateResourceRequest_Type, string(v.Type))
+	}
+}
+
 type CreateResourceOutput struct {
 
 	// The identifier of the new resource.
@@ -62,13 +88,32 @@ type CreateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateResourceResponse_ResourceId, *v.ResourceId)
+	}
+}
+func (v *CreateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceResponse_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.CreateResourceResponse_ResourceId, v.ResourceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResource, schemas.CreateResourceRequest, schemas.CreateResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResource, schemas.CreateResourceRequest, schemas.CreateResourceResponse), output: &CreateResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

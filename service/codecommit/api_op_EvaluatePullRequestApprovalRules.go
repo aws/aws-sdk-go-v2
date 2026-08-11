@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type EvaluatePullRequestApprovalRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluatePullRequestApprovalRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluatePullRequestApprovalRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluatePullRequestApprovalRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.EvaluatePullRequestApprovalRulesInput_pullRequestId, *v.PullRequestId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.EvaluatePullRequestApprovalRulesInput_revisionId, *v.RevisionId)
+	}
+}
+
 type EvaluatePullRequestApprovalRulesOutput struct {
 
 	// The result of the evaluation, including the names of the rules whose conditions
@@ -57,13 +74,34 @@ type EvaluatePullRequestApprovalRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluatePullRequestApprovalRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluatePullRequestApprovalRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluatePullRequestApprovalRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Evaluation != nil {
+		s.WriteStruct(schemas.EvaluatePullRequestApprovalRulesOutput_evaluation)
+		v.Evaluation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EvaluatePullRequestApprovalRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluatePullRequestApprovalRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluatePullRequestApprovalRulesOutput_evaluation:
+			v.Evaluation = &types.Evaluation{}
+			return v.Evaluation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEvaluatePullRequestApprovalRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEvaluatePullRequestApprovalRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluatePullRequestApprovalRules, schemas.EvaluatePullRequestApprovalRulesInput, schemas.EvaluatePullRequestApprovalRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEvaluatePullRequestApprovalRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluatePullRequestApprovalRules, schemas.EvaluatePullRequestApprovalRulesInput, schemas.EvaluatePullRequestApprovalRulesOutput), output: &EvaluatePullRequestApprovalRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

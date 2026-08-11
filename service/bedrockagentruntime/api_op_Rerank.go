@@ -5,7 +5,9 @@ package bedrockagentruntime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,25 @@ type RerankInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RerankInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RerankRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RerankInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.RerankRequest_nextToken, *v.NextToken)
+	}
+	serializeRerankQueriesList(s, schemas.RerankRequest_queries, v.Queries)
+	if v.RerankingConfiguration != nil {
+		s.WriteStruct(schemas.RerankRequest_rerankingConfiguration)
+		v.RerankingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRerankSourcesList(s, schemas.RerankRequest_sources, v.Sources)
+}
+
 type RerankOutput struct {
 
 	// An array of objects, each of which contains information about the results of
@@ -73,13 +94,35 @@ type RerankOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RerankOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RerankResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RerankOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.RerankResponse_nextToken, *v.NextToken)
+	}
+	serializeRerankResultsList(s, schemas.RerankResponse_results, v.Results)
+}
+func (v *RerankOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RerankResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RerankResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.RerankResponse_nextToken, v.NextToken)
+		case schemas.RerankResponse_results:
+			return deserializeRerankResultsList(d, schemas.RerankResponse_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRerankMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRerank{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Rerank, schemas.RerankRequest, schemas.RerankResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRerank{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Rerank, schemas.RerankRequest, schemas.RerankResponse), output: &RerankOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

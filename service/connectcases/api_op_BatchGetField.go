@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,31 @@ type BatchGetFieldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFieldInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFieldRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFieldInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.BatchGetFieldRequest_domainId, *v.DomainId)
+	}
+	serializeBatchGetFieldIdentifierList(s, schemas.BatchGetFieldRequest_fields, v.Fields)
+}
+func (v *BatchGetFieldInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFieldRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFieldRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.BatchGetFieldRequest_domainId, v.DomainId)
+		case schemas.BatchGetFieldRequest_fields:
+			return deserializeBatchGetFieldIdentifierList(d, schemas.BatchGetFieldRequest_fields, &v.Fields)
+		}
+		return nil
+	})
+}
+
 type BatchGetFieldOutput struct {
 
 	// A list of field errors.
@@ -57,13 +84,32 @@ type BatchGetFieldOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFieldOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFieldResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFieldOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetFieldErrorList(s, schemas.BatchGetFieldResponse_errors, v.Errors)
+	serializeBatchGetFieldList(s, schemas.BatchGetFieldResponse_fields, v.Fields)
+}
+func (v *BatchGetFieldOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFieldResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFieldResponse_errors:
+			return deserializeBatchGetFieldErrorList(d, schemas.BatchGetFieldResponse_errors, &v.Errors)
+		case schemas.BatchGetFieldResponse_fields:
+			return deserializeBatchGetFieldList(d, schemas.BatchGetFieldResponse_fields, &v.Fields)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetField{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetField, schemas.BatchGetFieldRequest, schemas.BatchGetFieldResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetField{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetField, schemas.BatchGetFieldRequest, schemas.BatchGetFieldResponse), output: &BatchGetFieldOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

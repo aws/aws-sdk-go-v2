@@ -4,7 +4,9 @@ package cloud9
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -122,6 +124,46 @@ type CreateEnvironmentEC2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentEC2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentEC2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentEC2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomaticStopTimeMinutes != nil {
+		s.WriteInt32(schemas.CreateEnvironmentEC2Request_automaticStopTimeMinutes, *v.AutomaticStopTimeMinutes)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateEnvironmentEC2Request_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.CreateEnvironmentEC2Request_connectionType, string(v.ConnectionType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEnvironmentEC2Request_description, *v.Description)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.CreateEnvironmentEC2Request_dryRun, *v.DryRun)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.CreateEnvironmentEC2Request_imageId, *v.ImageId)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CreateEnvironmentEC2Request_instanceType, *v.InstanceType)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEnvironmentEC2Request_name, *v.Name)
+	}
+	if v.OwnerArn != nil {
+		s.WriteString(schemas.CreateEnvironmentEC2Request_ownerArn, *v.OwnerArn)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.CreateEnvironmentEC2Request_subnetId, *v.SubnetId)
+	}
+	serializeTagList(s, schemas.CreateEnvironmentEC2Request_tags, v.Tags)
+}
+
 type CreateEnvironmentEC2Output struct {
 
 	// The ID of the environment that was created.
@@ -133,13 +175,32 @@ type CreateEnvironmentEC2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentEC2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentEC2Result)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentEC2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateEnvironmentEC2Result_environmentId, *v.EnvironmentId)
+	}
+}
+func (v *CreateEnvironmentEC2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentEC2Result, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentEC2Result_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentEC2Result_environmentId, v.EnvironmentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentEC2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEnvironmentEC2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentEC2, schemas.CreateEnvironmentEC2Request, schemas.CreateEnvironmentEC2Result)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEnvironmentEC2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentEC2, schemas.CreateEnvironmentEC2Request, schemas.CreateEnvironmentEC2Result), output: &CreateEnvironmentEC2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

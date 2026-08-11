@@ -5,7 +5,9 @@ package securitylake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type GetDataLakeSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountList(s, schemas.GetDataLakeSourcesRequest_accounts, v.Accounts)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDataLakeSourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDataLakeSourcesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetDataLakeSourcesOutput struct {
 
 	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For
@@ -74,13 +92,41 @@ type GetDataLakeSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataLakeArn != nil {
+		s.WriteString(schemas.GetDataLakeSourcesResponse_dataLakeArn, *v.DataLakeArn)
+	}
+	serializeDataLakeSourceList(s, schemas.GetDataLakeSourcesResponse_dataLakeSources, v.DataLakeSources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDataLakeSourcesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetDataLakeSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataLakeSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataLakeSourcesResponse_dataLakeArn:
+			v.DataLakeArn = new(string)
+			return d.ReadString(schemas.GetDataLakeSourcesResponse_dataLakeArn, v.DataLakeArn)
+		case schemas.GetDataLakeSourcesResponse_dataLakeSources:
+			return deserializeDataLakeSourceList(d, schemas.GetDataLakeSourcesResponse_dataLakeSources, &v.DataLakeSources)
+		case schemas.GetDataLakeSourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDataLakeSourcesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataLakeSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataLakeSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeSources, schemas.GetDataLakeSourcesRequest, schemas.GetDataLakeSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataLakeSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeSources, schemas.GetDataLakeSourcesRequest, schemas.GetDataLakeSourcesResponse), output: &GetDataLakeSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

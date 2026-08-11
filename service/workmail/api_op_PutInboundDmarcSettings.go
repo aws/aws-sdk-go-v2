@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type PutInboundDmarcSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInboundDmarcSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInboundDmarcSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInboundDmarcSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enforced != nil {
+		s.WriteBool(schemas.PutInboundDmarcSettingsRequest_Enforced, *v.Enforced)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.PutInboundDmarcSettingsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type PutInboundDmarcSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type PutInboundDmarcSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInboundDmarcSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInboundDmarcSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInboundDmarcSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutInboundDmarcSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutInboundDmarcSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutInboundDmarcSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutInboundDmarcSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInboundDmarcSettings, schemas.PutInboundDmarcSettingsRequest, schemas.PutInboundDmarcSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutInboundDmarcSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInboundDmarcSettings, schemas.PutInboundDmarcSettingsRequest, schemas.PutInboundDmarcSettingsResponse), output: &PutInboundDmarcSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

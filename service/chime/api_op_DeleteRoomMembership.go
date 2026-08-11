@@ -4,6 +4,8 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DeleteRoomMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoomMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRoomMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoomMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DeleteRoomMembershipRequest_AccountId, *v.AccountId)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.DeleteRoomMembershipRequest_MemberId, *v.MemberId)
+	}
+	if v.RoomId != nil {
+		s.WriteString(schemas.DeleteRoomMembershipRequest_RoomId, *v.RoomId)
+	}
+}
+
 type DeleteRoomMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type DeleteRoomMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoomMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoomMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRoomMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRoomMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRoomMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoomMembership, schemas.DeleteRoomMembershipRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRoomMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoomMembership, schemas.DeleteRoomMembershipRequest, nil), output: &DeleteRoomMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

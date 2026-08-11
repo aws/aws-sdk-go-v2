@@ -5,7 +5,9 @@ package securitylake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListLogSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountList(s, schemas.ListLogSourcesRequest_accounts, v.Accounts)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLogSourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogSourcesRequest_nextToken, *v.NextToken)
+	}
+	serializeRegionList(s, schemas.ListLogSourcesRequest_regions, v.Regions)
+	serializeLogSourceResourceList(s, schemas.ListLogSourcesRequest_sources, v.Sources)
+}
+
 type ListLogSourcesOutput struct {
 
 	// If nextToken is returned, there are more results available. You can repeat the
@@ -61,13 +81,35 @@ type ListLogSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogSourcesResponse_nextToken, *v.NextToken)
+	}
+	serializeLogSourceList(s, schemas.ListLogSourcesResponse_sources, v.Sources)
+}
+func (v *ListLogSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLogSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLogSourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLogSourcesResponse_nextToken, v.NextToken)
+		case schemas.ListLogSourcesResponse_sources:
+			return deserializeLogSourceList(d, schemas.ListLogSourcesResponse_sources, &v.Sources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLogSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLogSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogSources, schemas.ListLogSourcesRequest, schemas.ListLogSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLogSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogSources, schemas.ListLogSourcesRequest, schemas.ListLogSourcesResponse), output: &ListLogSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

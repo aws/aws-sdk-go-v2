@@ -5,7 +5,9 @@ package memorydb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DescribeACLsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeACLsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeACLsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeACLsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACLName != nil {
+		s.WriteString(schemas.DescribeACLsRequest_ACLName, *v.ACLName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeACLsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeACLsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeACLsOutput struct {
 
 	// The list of ACLs.
@@ -62,13 +82,35 @@ type DescribeACLsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeACLsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeACLsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeACLsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeACLList(s, schemas.DescribeACLsResponse_ACLs, v.ACLs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeACLsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeACLsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeACLsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeACLsResponse_ACLs:
+			return deserializeACLList(d, schemas.DescribeACLsResponse_ACLs, &v.ACLs)
+		case schemas.DescribeACLsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeACLsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeACLsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeACLs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeACLs, schemas.DescribeACLsRequest, schemas.DescribeACLsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeACLs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeACLs, schemas.DescribeACLsRequest, schemas.DescribeACLsResponse), output: &DescribeACLsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

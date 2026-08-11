@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,54 @@ type UpdateVirtualGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualGatewayInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateVirtualGatewayInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.UpdateVirtualGatewayInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.UpdateVirtualGatewayInput_meshOwner, *v.MeshOwner)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.UpdateVirtualGatewayInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.UpdateVirtualGatewayInput_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *UpdateVirtualGatewayInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVirtualGatewayInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVirtualGatewayInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateVirtualGatewayInput_clientToken, v.ClientToken)
+		case schemas.UpdateVirtualGatewayInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.UpdateVirtualGatewayInput_meshName, v.MeshName)
+		case schemas.UpdateVirtualGatewayInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.UpdateVirtualGatewayInput_meshOwner, v.MeshOwner)
+		case schemas.UpdateVirtualGatewayInput_spec:
+			v.Spec = &types.VirtualGatewaySpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.UpdateVirtualGatewayInput_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.UpdateVirtualGatewayInput_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 type UpdateVirtualGatewayOutput struct {
 
 	// A full description of the virtual gateway that was updated.
@@ -70,13 +120,34 @@ type UpdateVirtualGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualGatewayOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualGateway != nil {
+		s.WriteStruct(schemas.UpdateVirtualGatewayOutput_virtualGateway)
+		v.VirtualGateway.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateVirtualGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVirtualGatewayOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVirtualGatewayOutput_virtualGateway:
+			v.VirtualGateway = &types.VirtualGatewayData{}
+			return v.VirtualGateway.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVirtualGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVirtualGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualGateway, schemas.UpdateVirtualGatewayInput, schemas.UpdateVirtualGatewayOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVirtualGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualGateway, schemas.UpdateVirtualGatewayInput, schemas.UpdateVirtualGatewayOutput), output: &UpdateVirtualGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

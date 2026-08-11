@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,31 @@ type CreateOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.CreateOrganizationRequest_Alias, *v.Alias)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateOrganizationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateOrganizationRequest_DirectoryId, *v.DirectoryId)
+	}
+	serializeDomains(s, schemas.CreateOrganizationRequest_Domains, v.Domains)
+	if v.EnableInteroperability != false {
+		s.WriteBool(schemas.CreateOrganizationRequest_EnableInteroperability, v.EnableInteroperability)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateOrganizationRequest_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+
 type CreateOrganizationOutput struct {
 
 	// The organization ID.
@@ -80,13 +107,32 @@ type CreateOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.CreateOrganizationResponse_OrganizationId, *v.OrganizationId)
+	}
+}
+func (v *CreateOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOrganizationResponse_OrganizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.CreateOrganizationResponse_OrganizationId, v.OrganizationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganization, schemas.CreateOrganizationRequest, schemas.CreateOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganization, schemas.CreateOrganizationRequest, schemas.CreateOrganizationResponse), output: &CreateOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

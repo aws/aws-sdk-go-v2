@@ -5,7 +5,9 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListStateTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStateTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStateTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStateTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListResponseScope != "" {
+		s.WriteString(schemas.ListStateTemplatesRequest_listResponseScope, string(v.ListResponseScope))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStateTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStateTemplatesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListStateTemplatesOutput struct {
 
 	//  The token to retrieve the next set of results, or null if there are no more
@@ -63,13 +83,35 @@ type ListStateTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStateTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStateTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStateTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStateTemplatesResponse_nextToken, *v.NextToken)
+	}
+	serializeStateTemplateSummaries(s, schemas.ListStateTemplatesResponse_summaries, v.Summaries)
+}
+func (v *ListStateTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStateTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStateTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStateTemplatesResponse_nextToken, v.NextToken)
+		case schemas.ListStateTemplatesResponse_summaries:
+			return deserializeStateTemplateSummaries(d, schemas.ListStateTemplatesResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStateTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListStateTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStateTemplates, schemas.ListStateTemplatesRequest, schemas.ListStateTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListStateTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStateTemplates, schemas.ListStateTemplatesRequest, schemas.ListStateTemplatesResponse), output: &ListStateTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

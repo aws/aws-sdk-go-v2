@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,58 @@ type CreateServiceTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceTemplateVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceTemplateVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceTemplateVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateServiceTemplateVersionInput_clientToken, *v.ClientToken)
+	}
+	serializeCompatibleEnvironmentTemplateInputList(s, schemas.CreateServiceTemplateVersionInput_compatibleEnvironmentTemplates, v.CompatibleEnvironmentTemplates)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateServiceTemplateVersionInput_description, *v.Description)
+	}
+	if v.MajorVersion != nil {
+		s.WriteString(schemas.CreateServiceTemplateVersionInput_majorVersion, *v.MajorVersion)
+	}
+	serializeTemplateVersionSourceInput(s, schemas.CreateServiceTemplateVersionInput_source, v.Source)
+	serializeServiceTemplateSupportedComponentSourceInputList(s, schemas.CreateServiceTemplateVersionInput_supportedComponentSources, v.SupportedComponentSources)
+	serializeTagList(s, schemas.CreateServiceTemplateVersionInput_tags, v.Tags)
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateServiceTemplateVersionInput_templateName, *v.TemplateName)
+	}
+}
+func (v *CreateServiceTemplateVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceTemplateVersionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceTemplateVersionInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateServiceTemplateVersionInput_clientToken, v.ClientToken)
+		case schemas.CreateServiceTemplateVersionInput_compatibleEnvironmentTemplates:
+			return deserializeCompatibleEnvironmentTemplateInputList(d, schemas.CreateServiceTemplateVersionInput_compatibleEnvironmentTemplates, &v.CompatibleEnvironmentTemplates)
+		case schemas.CreateServiceTemplateVersionInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateServiceTemplateVersionInput_description, v.Description)
+		case schemas.CreateServiceTemplateVersionInput_majorVersion:
+			v.MajorVersion = new(string)
+			return d.ReadString(schemas.CreateServiceTemplateVersionInput_majorVersion, v.MajorVersion)
+		case schemas.CreateServiceTemplateVersionInput_source:
+			return deserializeTemplateVersionSourceInput(d, schemas.CreateServiceTemplateVersionInput_source, &v.Source)
+		case schemas.CreateServiceTemplateVersionInput_supportedComponentSources:
+			return deserializeServiceTemplateSupportedComponentSourceInputList(d, schemas.CreateServiceTemplateVersionInput_supportedComponentSources, &v.SupportedComponentSources)
+		case schemas.CreateServiceTemplateVersionInput_tags:
+			return deserializeTagList(d, schemas.CreateServiceTemplateVersionInput_tags, &v.Tags)
+		case schemas.CreateServiceTemplateVersionInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.CreateServiceTemplateVersionInput_templateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 type CreateServiceTemplateVersionOutput struct {
 
 	// The service template version summary of detail data that's returned by Proton.
@@ -95,13 +149,34 @@ type CreateServiceTemplateVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceTemplateVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceTemplateVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceTemplateVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceTemplateVersion != nil {
+		s.WriteStruct(schemas.CreateServiceTemplateVersionOutput_serviceTemplateVersion)
+		v.ServiceTemplateVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceTemplateVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceTemplateVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceTemplateVersionOutput_serviceTemplateVersion:
+			v.ServiceTemplateVersion = &types.ServiceTemplateVersion{}
+			return v.ServiceTemplateVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateServiceTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceTemplateVersion, schemas.CreateServiceTemplateVersionInput, schemas.CreateServiceTemplateVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateServiceTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceTemplateVersion, schemas.CreateServiceTemplateVersionInput, schemas.CreateServiceTemplateVersionOutput), output: &CreateServiceTemplateVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

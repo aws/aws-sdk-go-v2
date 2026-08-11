@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type GetResourcesSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetResourcesSummaryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcesSummaryInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetResourcesSummaryOutput struct {
 
 	// Summary counts of each Proton resource type.
@@ -62,13 +80,34 @@ type GetResourcesSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Counts != nil {
+		s.WriteStruct(schemas.GetResourcesSummaryOutput_counts)
+		v.Counts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetResourcesSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcesSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcesSummaryOutput_counts:
+			v.Counts = &types.CountsSummary{}
+			return v.Counts.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcesSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetResourcesSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesSummary, schemas.GetResourcesSummaryInput, schemas.GetResourcesSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetResourcesSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesSummary, schemas.GetResourcesSummaryInput, schemas.GetResourcesSummaryOutput), output: &GetResourcesSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DisassociateManagedNotificationAdditionalChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateManagedNotificationAdditionalChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateManagedNotificationAdditionalChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateManagedNotificationAdditionalChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DisassociateManagedNotificationAdditionalChannelRequest_channelArn, *v.ChannelArn)
+	}
+	if v.ManagedNotificationConfigurationArn != nil {
+		s.WriteString(schemas.DisassociateManagedNotificationAdditionalChannelRequest_managedNotificationConfigurationArn, *v.ManagedNotificationConfigurationArn)
+	}
+}
+
 type DisassociateManagedNotificationAdditionalChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type DisassociateManagedNotificationAdditionalChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateManagedNotificationAdditionalChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateManagedNotificationAdditionalChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateManagedNotificationAdditionalChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateManagedNotificationAdditionalChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateManagedNotificationAdditionalChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateManagedNotificationAdditionalChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateManagedNotificationAdditionalChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateManagedNotificationAdditionalChannel, schemas.DisassociateManagedNotificationAdditionalChannelRequest, schemas.DisassociateManagedNotificationAdditionalChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateManagedNotificationAdditionalChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateManagedNotificationAdditionalChannel, schemas.DisassociateManagedNotificationAdditionalChannelRequest, schemas.DisassociateManagedNotificationAdditionalChannelResponse), output: &DisassociateManagedNotificationAdditionalChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

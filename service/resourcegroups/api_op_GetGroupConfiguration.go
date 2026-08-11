@@ -4,7 +4,9 @@ package resourcegroups
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type GetGroupConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteString(schemas.GetGroupConfigurationInput_Group, *v.Group)
+	}
+}
+
 type GetGroupConfigurationOutput struct {
 
 	// A structure that describes the service configuration attached with the
@@ -56,13 +70,34 @@ type GetGroupConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.GetGroupConfigurationOutput_GroupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetGroupConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupConfigurationOutput_GroupConfiguration:
+			v.GroupConfiguration = &types.GroupConfiguration{}
+			return v.GroupConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGroupConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroupConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupConfiguration, schemas.GetGroupConfigurationInput, schemas.GetGroupConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGroupConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupConfiguration, schemas.GetGroupConfigurationInput, schemas.GetGroupConfigurationOutput), output: &GetGroupConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package dlm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dlm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetLifecyclePolicyRequest_PolicyId, *v.PolicyId)
+	}
+}
+
 type GetLifecyclePolicyOutput struct {
 
 	// Detailed information about the lifecycle policy.
@@ -45,13 +59,34 @@ type GetLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.GetLifecyclePolicyResponse_Policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLifecyclePolicyResponse_Policy:
+			v.Policy = &types.LifecyclePolicy{}
+			return v.Policy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLifecyclePolicy, schemas.GetLifecyclePolicyRequest, schemas.GetLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLifecyclePolicy, schemas.GetLifecyclePolicyRequest, schemas.GetLifecyclePolicyResponse), output: &GetLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type UpdateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.UpdateDataSourceInput_DataSourceId, *v.DataSourceId)
+	}
+	if v.DataSourceName != nil {
+		s.WriteString(schemas.UpdateDataSourceInput_DataSourceName, *v.DataSourceName)
+	}
+}
+
 // Represents the output of an UpdateDataSource operation.
 //
 // You can see the updated content by using the GetBatchPrediction operation.
@@ -57,13 +74,32 @@ type UpdateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.UpdateDataSourceOutput_DataSourceId, *v.DataSourceId)
+	}
+}
+func (v *UpdateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSourceOutput_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.UpdateDataSourceOutput_DataSourceId, v.DataSourceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceInput, schemas.UpdateDataSourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSource, schemas.UpdateDataSourceInput, schemas.UpdateDataSourceOutput), output: &UpdateDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

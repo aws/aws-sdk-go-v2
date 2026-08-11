@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -17,6 +19,28 @@ type CallInstructionsMessageType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CallInstructionsMessageType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallInstructionsMessageType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallInstructionsMessageType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.CallInstructionsMessageType_Text, *v.Text)
+	}
+}
+func (v *CallInstructionsMessageType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallInstructionsMessageType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallInstructionsMessageType_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.CallInstructionsMessageType_Text, v.Text)
+		}
+		return nil
+	})
+}
+
 // An object that contains information about an event destination that sends data
 // to Amazon CloudWatch Logs.
 type CloudWatchLogsDestination struct {
@@ -29,6 +53,34 @@ type CloudWatchLogsDestination struct {
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLogsDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLogsDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLogsDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CloudWatchLogsDestination_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.CloudWatchLogsDestination_LogGroupArn, *v.LogGroupArn)
+	}
+}
+func (v *CloudWatchLogsDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLogsDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLogsDestination_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.CloudWatchLogsDestination_IamRoleArn, v.IamRoleArn)
+		case schemas.CloudWatchLogsDestination_LogGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.CloudWatchLogsDestination_LogGroupArn, v.LogGroupArn)
+		}
+		return nil
+	})
 }
 
 // An object that defines an event destination.
@@ -61,6 +113,61 @@ type EventDestination struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsDestination != nil {
+		s.WriteStruct(schemas.EventDestination_CloudWatchLogsDestination)
+		v.CloudWatchLogsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.EventDestination_Enabled, *v.Enabled)
+	}
+	if v.KinesisFirehoseDestination != nil {
+		s.WriteStruct(schemas.EventDestination_KinesisFirehoseDestination)
+		v.KinesisFirehoseDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEventTypes(s, schemas.EventDestination_MatchingEventTypes, v.MatchingEventTypes)
+	if v.Name != nil {
+		s.WriteString(schemas.EventDestination_Name, *v.Name)
+	}
+	if v.SnsDestination != nil {
+		s.WriteStruct(schemas.EventDestination_SnsDestination)
+		v.SnsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EventDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDestination_CloudWatchLogsDestination:
+			v.CloudWatchLogsDestination = &CloudWatchLogsDestination{}
+			return v.CloudWatchLogsDestination.Deserialize(d)
+		case schemas.EventDestination_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.EventDestination_Enabled, v.Enabled)
+		case schemas.EventDestination_KinesisFirehoseDestination:
+			v.KinesisFirehoseDestination = &KinesisFirehoseDestination{}
+			return v.KinesisFirehoseDestination.Deserialize(d)
+		case schemas.EventDestination_MatchingEventTypes:
+			return deserializeEventTypes(d, schemas.EventDestination_MatchingEventTypes, &v.MatchingEventTypes)
+		case schemas.EventDestination_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EventDestination_Name, v.Name)
+		case schemas.EventDestination_SnsDestination:
+			v.SnsDestination = &SnsDestination{}
+			return v.SnsDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that defines a single event destination.
 type EventDestinationDefinition struct {
 
@@ -88,6 +195,55 @@ type EventDestinationDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventDestinationDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDestinationDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventDestinationDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsDestination != nil {
+		s.WriteStruct(schemas.EventDestinationDefinition_CloudWatchLogsDestination)
+		v.CloudWatchLogsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.EventDestinationDefinition_Enabled, *v.Enabled)
+	}
+	if v.KinesisFirehoseDestination != nil {
+		s.WriteStruct(schemas.EventDestinationDefinition_KinesisFirehoseDestination)
+		v.KinesisFirehoseDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEventTypes(s, schemas.EventDestinationDefinition_MatchingEventTypes, v.MatchingEventTypes)
+	if v.SnsDestination != nil {
+		s.WriteStruct(schemas.EventDestinationDefinition_SnsDestination)
+		v.SnsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EventDestinationDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDestinationDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDestinationDefinition_CloudWatchLogsDestination:
+			v.CloudWatchLogsDestination = &CloudWatchLogsDestination{}
+			return v.CloudWatchLogsDestination.Deserialize(d)
+		case schemas.EventDestinationDefinition_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.EventDestinationDefinition_Enabled, v.Enabled)
+		case schemas.EventDestinationDefinition_KinesisFirehoseDestination:
+			v.KinesisFirehoseDestination = &KinesisFirehoseDestination{}
+			return v.KinesisFirehoseDestination.Deserialize(d)
+		case schemas.EventDestinationDefinition_MatchingEventTypes:
+			return deserializeEventTypes(d, schemas.EventDestinationDefinition_MatchingEventTypes, &v.MatchingEventTypes)
+		case schemas.EventDestinationDefinition_SnsDestination:
+			v.SnsDestination = &SnsDestination{}
+			return v.SnsDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that contains information about an event destination that sends data
 // to Amazon Kinesis Data Firehose.
 type KinesisFirehoseDestination struct {
@@ -101,6 +257,34 @@ type KinesisFirehoseDestination struct {
 	IamRoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisFirehoseDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamArn != nil {
+		s.WriteString(schemas.KinesisFirehoseDestination_DeliveryStreamArn, *v.DeliveryStreamArn)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.KinesisFirehoseDestination_IamRoleArn, *v.IamRoleArn)
+	}
+}
+func (v *KinesisFirehoseDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseDestination_DeliveryStreamArn:
+			v.DeliveryStreamArn = new(string)
+			return d.ReadString(schemas.KinesisFirehoseDestination_DeliveryStreamArn, v.DeliveryStreamArn)
+		case schemas.KinesisFirehoseDestination_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.KinesisFirehoseDestination_IamRoleArn, v.IamRoleArn)
+		}
+		return nil
+	})
 }
 
 // An object that defines a message that contains unformatted text.
@@ -120,6 +304,40 @@ type PlainTextMessageType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlainTextMessageType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlainTextMessageType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlainTextMessageType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.PlainTextMessageType_LanguageCode, *v.LanguageCode)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.PlainTextMessageType_Text, *v.Text)
+	}
+	if v.VoiceId != nil {
+		s.WriteString(schemas.PlainTextMessageType_VoiceId, *v.VoiceId)
+	}
+}
+func (v *PlainTextMessageType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlainTextMessageType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlainTextMessageType_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.PlainTextMessageType_LanguageCode, v.LanguageCode)
+		case schemas.PlainTextMessageType_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.PlainTextMessageType_Text, v.Text)
+		case schemas.PlainTextMessageType_VoiceId:
+			v.VoiceId = new(string)
+			return d.ReadString(schemas.PlainTextMessageType_VoiceId, v.VoiceId)
+		}
+		return nil
+	})
+}
+
 // An object that contains information about an event destination that sends data
 // to Amazon SNS.
 type SnsDestination struct {
@@ -129,6 +347,28 @@ type SnsDestination struct {
 	TopicArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnsDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnsDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnsDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TopicArn != nil {
+		s.WriteString(schemas.SnsDestination_TopicArn, *v.TopicArn)
+	}
+}
+func (v *SnsDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnsDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnsDestination_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.SnsDestination_TopicArn, v.TopicArn)
+		}
+		return nil
+	})
 }
 
 // An object that defines a message that contains SSML-formatted text.
@@ -148,6 +388,40 @@ type SSMLMessageType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SSMLMessageType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SSMLMessageType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SSMLMessageType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.SSMLMessageType_LanguageCode, *v.LanguageCode)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.SSMLMessageType_Text, *v.Text)
+	}
+	if v.VoiceId != nil {
+		s.WriteString(schemas.SSMLMessageType_VoiceId, *v.VoiceId)
+	}
+}
+func (v *SSMLMessageType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SSMLMessageType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SSMLMessageType_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.SSMLMessageType_LanguageCode, v.LanguageCode)
+		case schemas.SSMLMessageType_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.SSMLMessageType_Text, v.Text)
+		case schemas.SSMLMessageType_VoiceId:
+			v.VoiceId = new(string)
+			return d.ReadString(schemas.SSMLMessageType_VoiceId, v.VoiceId)
+		}
+		return nil
+	})
+}
+
 // An object that contains a voice message and information about the recipient
 // that you want to send it to.
 type VoiceMessageContent struct {
@@ -163,6 +437,46 @@ type VoiceMessageContent struct {
 	SSMLMessage *SSMLMessageType
 
 	noSmithyDocumentSerde
+}
+
+func (v *VoiceMessageContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceMessageContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceMessageContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallInstructionsMessage != nil {
+		s.WriteStruct(schemas.VoiceMessageContent_CallInstructionsMessage)
+		v.CallInstructionsMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlainTextMessage != nil {
+		s.WriteStruct(schemas.VoiceMessageContent_PlainTextMessage)
+		v.PlainTextMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SSMLMessage != nil {
+		s.WriteStruct(schemas.VoiceMessageContent_SSMLMessage)
+		v.SSMLMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VoiceMessageContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceMessageContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceMessageContent_CallInstructionsMessage:
+			v.CallInstructionsMessage = &CallInstructionsMessageType{}
+			return v.CallInstructionsMessage.Deserialize(d)
+		case schemas.VoiceMessageContent_PlainTextMessage:
+			v.PlainTextMessage = &PlainTextMessageType{}
+			return v.PlainTextMessage.Deserialize(d)
+		case schemas.VoiceMessageContent_SSMLMessage:
+			v.SSMLMessage = &SSMLMessageType{}
+			return v.SSMLMessage.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

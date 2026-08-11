@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,26 @@ type DescribeKeywordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKeywordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKeywordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKeywordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeywordFilterList(s, schemas.DescribeKeywordsRequest_Filters, v.Filters)
+	serializeKeywordList(s, schemas.DescribeKeywordsRequest_Keywords, v.Keywords)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeKeywordsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeKeywordsRequest_NextToken, *v.NextToken)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.DescribeKeywordsRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+}
+
 type DescribeKeywordsOutput struct {
 
 	// An array of KeywordInformation objects that contain the results.
@@ -83,13 +105,47 @@ type DescribeKeywordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKeywordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKeywordsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKeywordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeywordInformationList(s, schemas.DescribeKeywordsResult_Keywords, v.Keywords)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeKeywordsResult_NextToken, *v.NextToken)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.DescribeKeywordsResult_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.OriginationIdentityArn != nil {
+		s.WriteString(schemas.DescribeKeywordsResult_OriginationIdentityArn, *v.OriginationIdentityArn)
+	}
+}
+func (v *DescribeKeywordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeKeywordsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeKeywordsResult_Keywords:
+			return deserializeKeywordInformationList(d, schemas.DescribeKeywordsResult_Keywords, &v.Keywords)
+		case schemas.DescribeKeywordsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeKeywordsResult_NextToken, v.NextToken)
+		case schemas.DescribeKeywordsResult_OriginationIdentity:
+			v.OriginationIdentity = new(string)
+			return d.ReadString(schemas.DescribeKeywordsResult_OriginationIdentity, v.OriginationIdentity)
+		case schemas.DescribeKeywordsResult_OriginationIdentityArn:
+			v.OriginationIdentityArn = new(string)
+			return d.ReadString(schemas.DescribeKeywordsResult_OriginationIdentityArn, v.OriginationIdentityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeKeywordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeKeywords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKeywords, schemas.DescribeKeywordsRequest, schemas.DescribeKeywordsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeKeywords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKeywords, schemas.DescribeKeywordsRequest, schemas.DescribeKeywordsResult), output: &DescribeKeywordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

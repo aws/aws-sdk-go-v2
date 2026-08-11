@@ -4,7 +4,9 @@ package marketplacecommerceanalytics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -166,6 +168,34 @@ type GenerateDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomerDefinedValues(s, schemas.GenerateDataSetRequest_customerDefinedValues, v.CustomerDefinedValues)
+	if v.DataSetPublicationDate != nil {
+		s.WriteTime(schemas.GenerateDataSetRequest_dataSetPublicationDate, *v.DataSetPublicationDate)
+	}
+	if v.DataSetType != "" {
+		s.WriteString(schemas.GenerateDataSetRequest_dataSetType, string(v.DataSetType))
+	}
+	if v.DestinationS3BucketName != nil {
+		s.WriteString(schemas.GenerateDataSetRequest_destinationS3BucketName, *v.DestinationS3BucketName)
+	}
+	if v.DestinationS3Prefix != nil {
+		s.WriteString(schemas.GenerateDataSetRequest_destinationS3Prefix, *v.DestinationS3Prefix)
+	}
+	if v.RoleNameArn != nil {
+		s.WriteString(schemas.GenerateDataSetRequest_roleNameArn, *v.RoleNameArn)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.GenerateDataSetRequest_snsTopicArn, *v.SnsTopicArn)
+	}
+}
+
 // Container for the result of the GenerateDataSet operation.
 type GenerateDataSetOutput struct {
 
@@ -180,13 +210,32 @@ type GenerateDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateDataSetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetRequestId != nil {
+		s.WriteString(schemas.GenerateDataSetResult_dataSetRequestId, *v.DataSetRequestId)
+	}
+}
+func (v *GenerateDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateDataSetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateDataSetResult_dataSetRequestId:
+			v.DataSetRequestId = new(string)
+			return d.ReadString(schemas.GenerateDataSetResult_dataSetRequestId, v.DataSetRequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateDataSet, schemas.GenerateDataSetRequest, schemas.GenerateDataSetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGenerateDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateDataSet, schemas.GenerateDataSetRequest, schemas.GenerateDataSetResult), output: &GenerateDataSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

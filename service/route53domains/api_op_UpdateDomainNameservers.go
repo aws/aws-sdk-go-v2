@@ -4,7 +4,9 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,22 @@ type UpdateDomainNameserversInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainNameserversInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainNameserversRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainNameserversInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainNameserversRequest_DomainName, *v.DomainName)
+	}
+	if v.FIAuthKey != nil {
+		s.WriteString(schemas.UpdateDomainNameserversRequest_FIAuthKey, *v.FIAuthKey)
+	}
+	serializeNameserverList(s, schemas.UpdateDomainNameserversRequest_Nameservers, v.Nameservers)
+}
+
 // The UpdateDomainNameservers response includes the following element.
 type UpdateDomainNameserversOutput struct {
 
@@ -73,13 +91,32 @@ type UpdateDomainNameserversOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainNameserversOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainNameserversResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainNameserversOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdateDomainNameserversResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *UpdateDomainNameserversOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainNameserversResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainNameserversResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdateDomainNameserversResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainNameserversMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDomainNameservers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainNameservers, schemas.UpdateDomainNameserversRequest, schemas.UpdateDomainNameserversResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDomainNameservers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainNameservers, schemas.UpdateDomainNameserversRequest, schemas.UpdateDomainNameserversResponse), output: &UpdateDomainNameserversOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

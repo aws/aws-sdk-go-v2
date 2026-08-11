@@ -4,6 +4,8 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type CreateApplicationSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.CreateApplicationSnapshotRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.CreateApplicationSnapshotRequest_SnapshotName, *v.SnapshotName)
+	}
+}
+
 type CreateApplicationSnapshotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type CreateApplicationSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateApplicationSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApplicationSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationSnapshot, schemas.CreateApplicationSnapshotRequest, schemas.CreateApplicationSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateApplicationSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationSnapshot, schemas.CreateApplicationSnapshotRequest, schemas.CreateApplicationSnapshotResponse), output: &CreateApplicationSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,46 @@ type ListVirtualServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualServicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualServicesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListVirtualServicesInput_limit, *v.Limit)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.ListVirtualServicesInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.ListVirtualServicesInput_meshOwner, *v.MeshOwner)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualServicesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListVirtualServicesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualServicesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualServicesInput_limit:
+			v.Limit = new(int32)
+			return d.ReadInt32(schemas.ListVirtualServicesInput_limit, v.Limit)
+		case schemas.ListVirtualServicesInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.ListVirtualServicesInput_meshName, v.MeshName)
+		case schemas.ListVirtualServicesInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.ListVirtualServicesInput_meshOwner, v.MeshOwner)
+		case schemas.ListVirtualServicesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualServicesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListVirtualServicesOutput struct {
 
 	// The list of existing virtual services for the specified service mesh.
@@ -76,13 +118,35 @@ type ListVirtualServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualServicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualServicesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualServicesOutput_nextToken, *v.NextToken)
+	}
+	serializeVirtualServiceList(s, schemas.ListVirtualServicesOutput_virtualServices, v.VirtualServices)
+}
+func (v *ListVirtualServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualServicesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualServicesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualServicesOutput_nextToken, v.NextToken)
+		case schemas.ListVirtualServicesOutput_virtualServices:
+			return deserializeVirtualServiceList(d, schemas.ListVirtualServicesOutput_virtualServices, &v.VirtualServices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVirtualServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVirtualServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualServices, schemas.ListVirtualServicesInput, schemas.ListVirtualServicesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVirtualServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualServices, schemas.ListVirtualServicesInput, schemas.ListVirtualServicesOutput), output: &ListVirtualServicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

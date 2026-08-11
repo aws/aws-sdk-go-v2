@@ -5,7 +5,9 @@ package forecast
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,25 @@ type ListMonitorEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitorEvaluationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitorEvaluationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitorEvaluationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListMonitorEvaluationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMonitorEvaluationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.ListMonitorEvaluationsRequest_MonitorArn, *v.MonitorArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitorEvaluationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMonitorEvaluationsOutput struct {
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve
@@ -91,13 +112,35 @@ type ListMonitorEvaluationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitorEvaluationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitorEvaluationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitorEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitorEvaluationsResponse_NextToken, *v.NextToken)
+	}
+	serializePredictorMonitorEvaluations(s, schemas.ListMonitorEvaluationsResponse_PredictorMonitorEvaluations, v.PredictorMonitorEvaluations)
+}
+func (v *ListMonitorEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMonitorEvaluationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMonitorEvaluationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMonitorEvaluationsResponse_NextToken, v.NextToken)
+		case schemas.ListMonitorEvaluationsResponse_PredictorMonitorEvaluations:
+			return deserializePredictorMonitorEvaluations(d, schemas.ListMonitorEvaluationsResponse_PredictorMonitorEvaluations, &v.PredictorMonitorEvaluations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMonitorEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMonitorEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitorEvaluations, schemas.ListMonitorEvaluationsRequest, schemas.ListMonitorEvaluationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMonitorEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitorEvaluations, schemas.ListMonitorEvaluationsRequest, schemas.ListMonitorEvaluationsResponse), output: &ListMonitorEvaluationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

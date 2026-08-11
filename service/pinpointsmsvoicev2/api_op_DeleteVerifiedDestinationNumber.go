@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -32,6 +34,18 @@ type DeleteVerifiedDestinationNumberInput struct {
 	VerifiedDestinationNumberId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteVerifiedDestinationNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVerifiedDestinationNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVerifiedDestinationNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VerifiedDestinationNumberId != nil {
+		s.WriteString(schemas.DeleteVerifiedDestinationNumberRequest_VerifiedDestinationNumberId, *v.VerifiedDestinationNumberId)
+	}
 }
 
 type DeleteVerifiedDestinationNumberOutput struct {
@@ -64,13 +78,50 @@ type DeleteVerifiedDestinationNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVerifiedDestinationNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVerifiedDestinationNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVerifiedDestinationNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteVerifiedDestinationNumberResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.DeleteVerifiedDestinationNumberResult_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.VerifiedDestinationNumberArn != nil {
+		s.WriteString(schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberArn, *v.VerifiedDestinationNumberArn)
+	}
+	if v.VerifiedDestinationNumberId != nil {
+		s.WriteString(schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberId, *v.VerifiedDestinationNumberId)
+	}
+}
+func (v *DeleteVerifiedDestinationNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVerifiedDestinationNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVerifiedDestinationNumberResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteVerifiedDestinationNumberResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteVerifiedDestinationNumberResult_DestinationPhoneNumber:
+			v.DestinationPhoneNumber = new(string)
+			return d.ReadString(schemas.DeleteVerifiedDestinationNumberResult_DestinationPhoneNumber, v.DestinationPhoneNumber)
+		case schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberArn:
+			v.VerifiedDestinationNumberArn = new(string)
+			return d.ReadString(schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberArn, v.VerifiedDestinationNumberArn)
+		case schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberId:
+			v.VerifiedDestinationNumberId = new(string)
+			return d.ReadString(schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberId, v.VerifiedDestinationNumberId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVerifiedDestinationNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteVerifiedDestinationNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVerifiedDestinationNumber, schemas.DeleteVerifiedDestinationNumberRequest, schemas.DeleteVerifiedDestinationNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteVerifiedDestinationNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVerifiedDestinationNumber, schemas.DeleteVerifiedDestinationNumberRequest, schemas.DeleteVerifiedDestinationNumberResult), output: &DeleteVerifiedDestinationNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

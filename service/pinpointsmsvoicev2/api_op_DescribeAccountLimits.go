@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DescribeAccountLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAccountLimitsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountLimitsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAccountLimitsOutput struct {
 
 	// An array of AccountLimit objects that show the current spend limits.
@@ -61,13 +78,35 @@ type DescribeAccountLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountLimitsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountLimitList(s, schemas.DescribeAccountLimitsResult_AccountLimits, v.AccountLimits)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountLimitsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAccountLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountLimitsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountLimitsResult_AccountLimits:
+			return deserializeAccountLimitList(d, schemas.DescribeAccountLimitsResult_AccountLimits, &v.AccountLimits)
+		case schemas.DescribeAccountLimitsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAccountLimitsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeAccountLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountLimits, schemas.DescribeAccountLimitsRequest, schemas.DescribeAccountLimitsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeAccountLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountLimits, schemas.DescribeAccountLimitsRequest, schemas.DescribeAccountLimitsResult), output: &DescribeAccountLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

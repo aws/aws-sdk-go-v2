@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,52 @@ type ListGatewayRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewayRoutesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewayRoutesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewayRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListGatewayRoutesInput_limit, *v.Limit)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.ListGatewayRoutesInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.ListGatewayRoutesInput_meshOwner, *v.MeshOwner)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewayRoutesInput_nextToken, *v.NextToken)
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.ListGatewayRoutesInput_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *ListGatewayRoutesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewayRoutesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewayRoutesInput_limit:
+			v.Limit = new(int32)
+			return d.ReadInt32(schemas.ListGatewayRoutesInput_limit, v.Limit)
+		case schemas.ListGatewayRoutesInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesInput_meshName, v.MeshName)
+		case schemas.ListGatewayRoutesInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesInput_meshOwner, v.MeshOwner)
+		case schemas.ListGatewayRoutesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesInput_nextToken, v.NextToken)
+		case schemas.ListGatewayRoutesInput_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesInput_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 type ListGatewayRoutesOutput struct {
 
 	// The list of existing gateway routes for the specified service mesh and virtual
@@ -83,13 +131,35 @@ type ListGatewayRoutesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewayRoutesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewayRoutesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewayRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGatewayRouteList(s, schemas.ListGatewayRoutesOutput_gatewayRoutes, v.GatewayRoutes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewayRoutesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGatewayRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewayRoutesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewayRoutesOutput_gatewayRoutes:
+			return deserializeGatewayRouteList(d, schemas.ListGatewayRoutesOutput_gatewayRoutes, &v.GatewayRoutes)
+		case schemas.ListGatewayRoutesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGatewayRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayRoutes, schemas.ListGatewayRoutesInput, schemas.ListGatewayRoutesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGatewayRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayRoutes, schemas.ListGatewayRoutesInput, schemas.ListGatewayRoutesOutput), output: &ListGatewayRoutesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type BatchGetCommitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCommitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCommitsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCommitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommitIdsInputList(s, schemas.BatchGetCommitsInput_commitIds, v.CommitIds)
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.BatchGetCommitsInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 type BatchGetCommitsOutput struct {
 
 	// An array of commit data type objects, each of which contains information about
@@ -59,13 +74,32 @@ type BatchGetCommitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCommitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCommitsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCommitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommitObjectsList(s, schemas.BatchGetCommitsOutput_commits, v.Commits)
+	serializeBatchGetCommitsErrorsList(s, schemas.BatchGetCommitsOutput_errors, v.Errors)
+}
+func (v *BatchGetCommitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCommitsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCommitsOutput_commits:
+			return deserializeCommitObjectsList(d, schemas.BatchGetCommitsOutput_commits, &v.Commits)
+		case schemas.BatchGetCommitsOutput_errors:
+			return deserializeBatchGetCommitsErrorsList(d, schemas.BatchGetCommitsOutput_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCommitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetCommits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCommits, schemas.BatchGetCommitsInput, schemas.BatchGetCommitsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetCommits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCommits, schemas.BatchGetCommitsInput, schemas.BatchGetCommitsOutput), output: &BatchGetCommitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

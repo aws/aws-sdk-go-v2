@@ -4,6 +4,8 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type DeleteDataLakeExceptionSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataLakeExceptionSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataLakeExceptionSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataLakeExceptionSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeleteDataLakeExceptionSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -35,13 +46,26 @@ type DeleteDataLakeExceptionSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataLakeExceptionSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataLakeExceptionSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataLakeExceptionSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDataLakeExceptionSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataLakeExceptionSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataLakeExceptionSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataLakeExceptionSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLakeExceptionSubscription, schemas.DeleteDataLakeExceptionSubscriptionRequest, schemas.DeleteDataLakeExceptionSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataLakeExceptionSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLakeExceptionSubscription, schemas.DeleteDataLakeExceptionSubscriptionRequest, schemas.DeleteDataLakeExceptionSubscriptionResponse), output: &DeleteDataLakeExceptionSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

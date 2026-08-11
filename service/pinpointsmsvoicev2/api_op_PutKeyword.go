@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,27 @@ type PutKeywordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutKeywordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutKeywordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutKeywordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Keyword != nil {
+		s.WriteString(schemas.PutKeywordRequest_Keyword, *v.Keyword)
+	}
+	if v.KeywordAction != "" {
+		s.WriteString(schemas.PutKeywordRequest_KeywordAction, string(v.KeywordAction))
+	}
+	if v.KeywordMessage != nil {
+		s.WriteString(schemas.PutKeywordRequest_KeywordMessage, *v.KeywordMessage)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.PutKeywordRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+}
+
 type PutKeywordOutput struct {
 
 	// The keyword that was added.
@@ -90,13 +113,60 @@ type PutKeywordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutKeywordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutKeywordResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutKeywordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Keyword != nil {
+		s.WriteString(schemas.PutKeywordResult_Keyword, *v.Keyword)
+	}
+	if v.KeywordAction != "" {
+		s.WriteString(schemas.PutKeywordResult_KeywordAction, string(v.KeywordAction))
+	}
+	if v.KeywordMessage != nil {
+		s.WriteString(schemas.PutKeywordResult_KeywordMessage, *v.KeywordMessage)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.PutKeywordResult_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.OriginationIdentityArn != nil {
+		s.WriteString(schemas.PutKeywordResult_OriginationIdentityArn, *v.OriginationIdentityArn)
+	}
+}
+func (v *PutKeywordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutKeywordResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutKeywordResult_Keyword:
+			v.Keyword = new(string)
+			return d.ReadString(schemas.PutKeywordResult_Keyword, v.Keyword)
+		case schemas.PutKeywordResult_KeywordAction:
+			var ev string
+			if err := d.ReadString(schemas.PutKeywordResult_KeywordAction, &ev); err != nil {
+				return err
+			}
+			v.KeywordAction = types.KeywordAction(ev)
+			return nil
+		case schemas.PutKeywordResult_KeywordMessage:
+			v.KeywordMessage = new(string)
+			return d.ReadString(schemas.PutKeywordResult_KeywordMessage, v.KeywordMessage)
+		case schemas.PutKeywordResult_OriginationIdentity:
+			v.OriginationIdentity = new(string)
+			return d.ReadString(schemas.PutKeywordResult_OriginationIdentity, v.OriginationIdentity)
+		case schemas.PutKeywordResult_OriginationIdentityArn:
+			v.OriginationIdentityArn = new(string)
+			return d.ReadString(schemas.PutKeywordResult_OriginationIdentityArn, v.OriginationIdentityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutKeywordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutKeyword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKeyword, schemas.PutKeywordRequest, schemas.PutKeywordResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutKeyword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKeyword, schemas.PutKeywordRequest, schemas.PutKeywordResult), output: &PutKeywordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

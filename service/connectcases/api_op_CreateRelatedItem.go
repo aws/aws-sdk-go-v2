@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,50 @@ type CreateRelatedItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelatedItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelatedItemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelatedItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.CreateRelatedItemRequest_caseId, *v.CaseId)
+	}
+	serializeRelatedItemInputContent(s, schemas.CreateRelatedItemRequest_content, v.Content)
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateRelatedItemRequest_domainId, *v.DomainId)
+	}
+	serializeUserUnion(s, schemas.CreateRelatedItemRequest_performedBy, v.PerformedBy)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateRelatedItemRequest_type, string(v.Type))
+	}
+}
+func (v *CreateRelatedItemInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRelatedItemRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRelatedItemRequest_caseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.CreateRelatedItemRequest_caseId, v.CaseId)
+		case schemas.CreateRelatedItemRequest_content:
+			return deserializeRelatedItemInputContent(d, schemas.CreateRelatedItemRequest_content, &v.Content)
+		case schemas.CreateRelatedItemRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateRelatedItemRequest_domainId, v.DomainId)
+		case schemas.CreateRelatedItemRequest_performedBy:
+			return deserializeUserUnion(d, schemas.CreateRelatedItemRequest_performedBy, &v.PerformedBy)
+		case schemas.CreateRelatedItemRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateRelatedItemRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.RelatedItemType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateRelatedItemOutput struct {
 
 	// The Amazon Resource Name (ARN) of the related item.
@@ -115,13 +161,38 @@ type CreateRelatedItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelatedItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelatedItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelatedItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelatedItemArn != nil {
+		s.WriteString(schemas.CreateRelatedItemResponse_relatedItemArn, *v.RelatedItemArn)
+	}
+	if v.RelatedItemId != nil {
+		s.WriteString(schemas.CreateRelatedItemResponse_relatedItemId, *v.RelatedItemId)
+	}
+}
+func (v *CreateRelatedItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRelatedItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRelatedItemResponse_relatedItemArn:
+			v.RelatedItemArn = new(string)
+			return d.ReadString(schemas.CreateRelatedItemResponse_relatedItemArn, v.RelatedItemArn)
+		case schemas.CreateRelatedItemResponse_relatedItemId:
+			v.RelatedItemId = new(string)
+			return d.ReadString(schemas.CreateRelatedItemResponse_relatedItemId, v.RelatedItemId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRelatedItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelatedItem, schemas.CreateRelatedItemRequest, schemas.CreateRelatedItemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRelatedItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelatedItem, schemas.CreateRelatedItemRequest, schemas.CreateRelatedItemResponse), output: &CreateRelatedItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

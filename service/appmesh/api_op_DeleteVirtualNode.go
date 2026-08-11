@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,40 @@ type DeleteVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVirtualNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DeleteVirtualNodeInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DeleteVirtualNodeInput_meshOwner, *v.MeshOwner)
+	}
+	if v.VirtualNodeName != nil {
+		s.WriteString(schemas.DeleteVirtualNodeInput_virtualNodeName, *v.VirtualNodeName)
+	}
+}
+func (v *DeleteVirtualNodeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVirtualNodeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVirtualNodeInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DeleteVirtualNodeInput_meshName, v.MeshName)
+		case schemas.DeleteVirtualNodeInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DeleteVirtualNodeInput_meshOwner, v.MeshOwner)
+		case schemas.DeleteVirtualNodeInput_virtualNodeName:
+			v.VirtualNodeName = new(string)
+			return d.ReadString(schemas.DeleteVirtualNodeInput_virtualNodeName, v.VirtualNodeName)
+		}
+		return nil
+	})
+}
+
 type DeleteVirtualNodeOutput struct {
 
 	// The virtual node that was deleted.
@@ -63,13 +99,34 @@ type DeleteVirtualNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVirtualNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualNode != nil {
+		s.WriteStruct(schemas.DeleteVirtualNodeOutput_virtualNode)
+		v.VirtualNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteVirtualNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVirtualNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVirtualNodeOutput_virtualNode:
+			v.VirtualNode = &types.VirtualNodeData{}
+			return v.VirtualNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVirtualNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualNode, schemas.DeleteVirtualNodeInput, schemas.DeleteVirtualNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVirtualNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualNode, schemas.DeleteVirtualNodeInput, schemas.DeleteVirtualNodeOutput), output: &DeleteVirtualNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

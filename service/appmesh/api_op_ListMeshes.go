@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,34 @@ type ListMeshesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMeshesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMeshesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMeshesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListMeshesInput_limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMeshesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMeshesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMeshesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMeshesInput_limit:
+			v.Limit = new(int32)
+			return d.ReadInt32(schemas.ListMeshesInput_limit, v.Limit)
+		case schemas.ListMeshesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMeshesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListMeshesOutput struct {
 
 	// The list of existing service meshes.
@@ -67,13 +97,35 @@ type ListMeshesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMeshesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMeshesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMeshesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMeshList(s, schemas.ListMeshesOutput_meshes, v.Meshes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMeshesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMeshesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMeshesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMeshesOutput_meshes:
+			return deserializeMeshList(d, schemas.ListMeshesOutput_meshes, &v.Meshes)
+		case schemas.ListMeshesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMeshesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMeshesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMeshes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMeshes, schemas.ListMeshesInput, schemas.ListMeshesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMeshes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMeshes, schemas.ListMeshesInput, schemas.ListMeshesOutput), output: &ListMeshesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type UpdateDefaultBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDefaultBranchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDefaultBranchInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDefaultBranchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultBranchName != nil {
+		s.WriteString(schemas.UpdateDefaultBranchInput_defaultBranchName, *v.DefaultBranchName)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.UpdateDefaultBranchInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 type UpdateDefaultBranchOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type UpdateDefaultBranchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDefaultBranchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDefaultBranchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDefaultBranchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDefaultBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDefaultBranch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDefaultBranch, schemas.UpdateDefaultBranchInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDefaultBranch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDefaultBranch, schemas.UpdateDefaultBranchInput, nil), output: &UpdateDefaultBranchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

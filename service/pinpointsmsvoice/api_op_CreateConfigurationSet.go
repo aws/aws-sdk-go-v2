@@ -4,6 +4,8 @@ package pinpointsmsvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type CreateConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.CreateConfigurationSetRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+}
+
 // An empty object that indicates that the configuration set was successfully
 // created.
 type CreateConfigurationSetOutput struct {
@@ -42,13 +56,26 @@ type CreateConfigurationSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateConfigurationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfigurationSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfigurationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationSet, schemas.CreateConfigurationSetRequest, schemas.CreateConfigurationSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfigurationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationSet, schemas.CreateConfigurationSetRequest, schemas.CreateConfigurationSetResponse), output: &CreateConfigurationSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

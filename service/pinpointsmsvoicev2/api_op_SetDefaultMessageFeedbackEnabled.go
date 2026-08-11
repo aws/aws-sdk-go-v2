@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type SetDefaultMessageFeedbackEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultMessageFeedbackEnabledInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetDefaultMessageFeedbackEnabledRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDefaultMessageFeedbackEnabledInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SetDefaultMessageFeedbackEnabledRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.MessageFeedbackEnabled != nil {
+		s.WriteBool(schemas.SetDefaultMessageFeedbackEnabledRequest_MessageFeedbackEnabled, *v.MessageFeedbackEnabled)
+	}
+}
+
 type SetDefaultMessageFeedbackEnabledOutput struct {
 
 	// The arn of the configuration set.
@@ -56,13 +73,44 @@ type SetDefaultMessageFeedbackEnabledOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultMessageFeedbackEnabledOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetDefaultMessageFeedbackEnabledResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDefaultMessageFeedbackEnabledOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetArn != nil {
+		s.WriteString(schemas.SetDefaultMessageFeedbackEnabledResult_ConfigurationSetArn, *v.ConfigurationSetArn)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SetDefaultMessageFeedbackEnabledResult_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.MessageFeedbackEnabled != nil {
+		s.WriteBool(schemas.SetDefaultMessageFeedbackEnabledResult_MessageFeedbackEnabled, *v.MessageFeedbackEnabled)
+	}
+}
+func (v *SetDefaultMessageFeedbackEnabledOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetDefaultMessageFeedbackEnabledResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetDefaultMessageFeedbackEnabledResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.SetDefaultMessageFeedbackEnabledResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.SetDefaultMessageFeedbackEnabledResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.SetDefaultMessageFeedbackEnabledResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.SetDefaultMessageFeedbackEnabledResult_MessageFeedbackEnabled:
+			v.MessageFeedbackEnabled = new(bool)
+			return d.ReadBool(schemas.SetDefaultMessageFeedbackEnabledResult_MessageFeedbackEnabled, v.MessageFeedbackEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetDefaultMessageFeedbackEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSetDefaultMessageFeedbackEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultMessageFeedbackEnabled, schemas.SetDefaultMessageFeedbackEnabledRequest, schemas.SetDefaultMessageFeedbackEnabledResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSetDefaultMessageFeedbackEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultMessageFeedbackEnabled, schemas.SetDefaultMessageFeedbackEnabledRequest, schemas.SetDefaultMessageFeedbackEnabledResult), output: &SetDefaultMessageFeedbackEnabledOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

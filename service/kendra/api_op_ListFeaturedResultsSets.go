@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListFeaturedResultsSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFeaturedResultsSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFeaturedResultsSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFeaturedResultsSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListFeaturedResultsSetsRequest_IndexId, *v.IndexId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFeaturedResultsSetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFeaturedResultsSetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFeaturedResultsSetsOutput struct {
 
 	// An array of summary information for one or more featured results sets.
@@ -59,13 +79,35 @@ type ListFeaturedResultsSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFeaturedResultsSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFeaturedResultsSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFeaturedResultsSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeaturedResultsSetSummaryItems(s, schemas.ListFeaturedResultsSetsResponse_FeaturedResultsSetSummaryItems, v.FeaturedResultsSetSummaryItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFeaturedResultsSetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFeaturedResultsSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFeaturedResultsSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFeaturedResultsSetsResponse_FeaturedResultsSetSummaryItems:
+			return deserializeFeaturedResultsSetSummaryItems(d, schemas.ListFeaturedResultsSetsResponse_FeaturedResultsSetSummaryItems, &v.FeaturedResultsSetSummaryItems)
+		case schemas.ListFeaturedResultsSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFeaturedResultsSetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFeaturedResultsSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFeaturedResultsSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFeaturedResultsSets, schemas.ListFeaturedResultsSetsRequest, schemas.ListFeaturedResultsSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFeaturedResultsSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFeaturedResultsSets, schemas.ListFeaturedResultsSetsRequest, schemas.ListFeaturedResultsSetsResponse), output: &ListFeaturedResultsSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

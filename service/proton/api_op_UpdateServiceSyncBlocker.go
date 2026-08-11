@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type UpdateServiceSyncBlockerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSyncBlockerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSyncBlockerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSyncBlockerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateServiceSyncBlockerInput_id, *v.Id)
+	}
+	if v.ResolvedReason != nil {
+		s.WriteString(schemas.UpdateServiceSyncBlockerInput_resolvedReason, *v.ResolvedReason)
+	}
+}
+func (v *UpdateServiceSyncBlockerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceSyncBlockerInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceSyncBlockerInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncBlockerInput_id, v.Id)
+		case schemas.UpdateServiceSyncBlockerInput_resolvedReason:
+			v.ResolvedReason = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncBlockerInput_resolvedReason, v.ResolvedReason)
+		}
+		return nil
+	})
+}
+
 type UpdateServiceSyncBlockerOutput struct {
 
 	// The name of the service that you want to update the service sync blocker for.
@@ -63,13 +93,46 @@ type UpdateServiceSyncBlockerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSyncBlockerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSyncBlockerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSyncBlockerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.UpdateServiceSyncBlockerOutput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.UpdateServiceSyncBlockerOutput_serviceName, *v.ServiceName)
+	}
+	if v.ServiceSyncBlocker != nil {
+		s.WriteStruct(schemas.UpdateServiceSyncBlockerOutput_serviceSyncBlocker)
+		v.ServiceSyncBlocker.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceSyncBlockerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceSyncBlockerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceSyncBlockerOutput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncBlockerOutput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.UpdateServiceSyncBlockerOutput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncBlockerOutput_serviceName, v.ServiceName)
+		case schemas.UpdateServiceSyncBlockerOutput_serviceSyncBlocker:
+			v.ServiceSyncBlocker = &types.SyncBlocker{}
+			return v.ServiceSyncBlocker.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceSyncBlockerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateServiceSyncBlocker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSyncBlocker, schemas.UpdateServiceSyncBlockerInput, schemas.UpdateServiceSyncBlockerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateServiceSyncBlocker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSyncBlocker, schemas.UpdateServiceSyncBlockerInput, schemas.UpdateServiceSyncBlockerOutput), output: &UpdateServiceSyncBlockerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package chimesdkmediapipelines
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type CreateMediaLiveConnectorPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMediaLiveConnectorPipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMediaLiveConnectorPipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMediaLiveConnectorPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateMediaLiveConnectorPipelineRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	serializeLiveConnectorSinkList(s, schemas.CreateMediaLiveConnectorPipelineRequest_Sinks, v.Sinks)
+	serializeLiveConnectorSourceList(s, schemas.CreateMediaLiveConnectorPipelineRequest_Sources, v.Sources)
+	serializeTagList(s, schemas.CreateMediaLiveConnectorPipelineRequest_Tags, v.Tags)
+}
+
 type CreateMediaLiveConnectorPipelineOutput struct {
 
 	// The new media live connector pipeline.
@@ -57,13 +74,34 @@ type CreateMediaLiveConnectorPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMediaLiveConnectorPipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMediaLiveConnectorPipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMediaLiveConnectorPipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaLiveConnectorPipeline != nil {
+		s.WriteStruct(schemas.CreateMediaLiveConnectorPipelineResponse_MediaLiveConnectorPipeline)
+		v.MediaLiveConnectorPipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMediaLiveConnectorPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMediaLiveConnectorPipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMediaLiveConnectorPipelineResponse_MediaLiveConnectorPipeline:
+			v.MediaLiveConnectorPipeline = &types.MediaLiveConnectorPipeline{}
+			return v.MediaLiveConnectorPipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMediaLiveConnectorPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMediaLiveConnectorPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaLiveConnectorPipeline, schemas.CreateMediaLiveConnectorPipelineRequest, schemas.CreateMediaLiveConnectorPipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMediaLiveConnectorPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaLiveConnectorPipeline, schemas.CreateMediaLiveConnectorPipelineRequest, schemas.CreateMediaLiveConnectorPipelineResponse), output: &CreateMediaLiveConnectorPipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

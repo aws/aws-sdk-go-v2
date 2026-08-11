@@ -5,7 +5,9 @@ package fms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPoliciesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoliciesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPoliciesOutput struct {
 
 	// If you have more PolicySummary objects than the number that you specified for
@@ -62,13 +79,35 @@ type ListPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoliciesResponse_NextToken, *v.NextToken)
+	}
+	serializePolicySummaryList(s, schemas.ListPoliciesResponse_PolicyList, v.PolicyList)
+}
+func (v *ListPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPoliciesResponse_NextToken, v.NextToken)
+		case schemas.ListPoliciesResponse_PolicyList:
+			return deserializePolicySummaryList(d, schemas.ListPoliciesResponse_PolicyList, &v.PolicyList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicies, schemas.ListPoliciesRequest, schemas.ListPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicies, schemas.ListPoliciesRequest, schemas.ListPoliciesResponse), output: &ListPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

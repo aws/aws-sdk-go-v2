@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,30 @@ type CreateVoiceProfileDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVoiceProfileDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceProfileDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceProfileDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateVoiceProfileDomainRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateVoiceProfileDomainRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVoiceProfileDomainRequest_Name, *v.Name)
+	}
+	if v.ServerSideEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateVoiceProfileDomainRequest_ServerSideEncryptionConfiguration)
+		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateVoiceProfileDomainRequest_Tags, v.Tags)
+}
+
 type CreateVoiceProfileDomainOutput struct {
 
 	// The requested voice profile domain.
@@ -71,13 +97,34 @@ type CreateVoiceProfileDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVoiceProfileDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceProfileDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceProfileDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceProfileDomain != nil {
+		s.WriteStruct(schemas.CreateVoiceProfileDomainResponse_VoiceProfileDomain)
+		v.VoiceProfileDomain.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVoiceProfileDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVoiceProfileDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVoiceProfileDomainResponse_VoiceProfileDomain:
+			v.VoiceProfileDomain = &types.VoiceProfileDomain{}
+			return v.VoiceProfileDomain.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVoiceProfileDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVoiceProfileDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceProfileDomain, schemas.CreateVoiceProfileDomainRequest, schemas.CreateVoiceProfileDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVoiceProfileDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceProfileDomain, schemas.CreateVoiceProfileDomainRequest, schemas.CreateVoiceProfileDomainResponse), output: &CreateVoiceProfileDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,35 @@ type ListNetworkMigrationMapperSegmentConstructsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationMapperSegmentConstructsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationMapperSegmentConstructsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationMapperSegmentConstructsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_nextToken, *v.NextToken)
+	}
+	if v.SegmentID != nil {
+		s.WriteString(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_segmentID, *v.SegmentID)
+	}
+}
+
 type ListNetworkMigrationMapperSegmentConstructsOutput struct {
 
 	// A list of mapper segment constructs.
@@ -70,13 +101,35 @@ type ListNetworkMigrationMapperSegmentConstructsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationMapperSegmentConstructsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationMapperSegmentConstructsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationMapperSegmentConstructsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkMigrationMapperSegmentConstructs(s, schemas.ListNetworkMigrationMapperSegmentConstructsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationMapperSegmentConstructsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworkMigrationMapperSegmentConstructsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkMigrationMapperSegmentConstructsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkMigrationMapperSegmentConstructsResponse_items:
+			return deserializeNetworkMigrationMapperSegmentConstructs(d, schemas.ListNetworkMigrationMapperSegmentConstructsResponse_items, &v.Items)
+		case schemas.ListNetworkMigrationMapperSegmentConstructsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworkMigrationMapperSegmentConstructsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkMigrationMapperSegmentConstructsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworkMigrationMapperSegmentConstructs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationMapperSegmentConstructs, schemas.ListNetworkMigrationMapperSegmentConstructsRequest, schemas.ListNetworkMigrationMapperSegmentConstructsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworkMigrationMapperSegmentConstructs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationMapperSegmentConstructs, schemas.ListNetworkMigrationMapperSegmentConstructsRequest, schemas.ListNetworkMigrationMapperSegmentConstructsResponse), output: &ListNetworkMigrationMapperSegmentConstructsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

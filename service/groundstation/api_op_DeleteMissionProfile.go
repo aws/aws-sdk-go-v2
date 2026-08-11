@@ -4,6 +4,8 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMissionProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMissionProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMissionProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MissionProfileId != nil {
+		s.WriteString(schemas.DeleteMissionProfileRequest_missionProfileId, *v.MissionProfileId)
+	}
+}
+
 // Response containing the ID of a mission profile.
 type DeleteMissionProfileOutput struct {
 
@@ -46,13 +60,32 @@ type DeleteMissionProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMissionProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissionProfileIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMissionProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MissionProfileId != nil {
+		s.WriteString(schemas.MissionProfileIdResponse_missionProfileId, *v.MissionProfileId)
+	}
+}
+func (v *DeleteMissionProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissionProfileIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissionProfileIdResponse_missionProfileId:
+			v.MissionProfileId = new(string)
+			return d.ReadString(schemas.MissionProfileIdResponse_missionProfileId, v.MissionProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMissionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMissionProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMissionProfile, schemas.DeleteMissionProfileRequest, schemas.MissionProfileIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMissionProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMissionProfile, schemas.DeleteMissionProfileRequest, schemas.MissionProfileIdResponse), output: &DeleteMissionProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

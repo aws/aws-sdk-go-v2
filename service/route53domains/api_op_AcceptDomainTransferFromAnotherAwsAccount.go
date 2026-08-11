@@ -4,6 +4,8 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,21 @@ type AcceptDomainTransferFromAnotherAwsAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptDomainTransferFromAnotherAwsAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptDomainTransferFromAnotherAwsAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptDomainTransferFromAnotherAwsAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.AcceptDomainTransferFromAnotherAwsAccountRequest_DomainName, *v.DomainName)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.AcceptDomainTransferFromAnotherAwsAccountRequest_Password, *v.Password)
+	}
+}
+
 // The AcceptDomainTransferFromAnotherAwsAccount response includes the following
 // element.
 type AcceptDomainTransferFromAnotherAwsAccountOutput struct {
@@ -76,13 +93,32 @@ type AcceptDomainTransferFromAnotherAwsAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptDomainTransferFromAnotherAwsAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptDomainTransferFromAnotherAwsAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptDomainTransferFromAnotherAwsAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.AcceptDomainTransferFromAnotherAwsAccountResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *AcceptDomainTransferFromAnotherAwsAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptDomainTransferFromAnotherAwsAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptDomainTransferFromAnotherAwsAccountResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.AcceptDomainTransferFromAnotherAwsAccountResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptDomainTransferFromAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptDomainTransferFromAnotherAwsAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptDomainTransferFromAnotherAwsAccount, schemas.AcceptDomainTransferFromAnotherAwsAccountRequest, schemas.AcceptDomainTransferFromAnotherAwsAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAcceptDomainTransferFromAnotherAwsAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptDomainTransferFromAnotherAwsAccount, schemas.AcceptDomainTransferFromAnotherAwsAccountRequest, schemas.AcceptDomainTransferFromAnotherAwsAccountResponse), output: &AcceptDomainTransferFromAnotherAwsAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

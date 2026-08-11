@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -114,6 +116,39 @@ type StartLendingAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartLendingAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartLendingAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartLendingAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartLendingAnalysisRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DocumentLocation != nil {
+		s.WriteStruct(schemas.StartLendingAnalysisRequest_DocumentLocation)
+		v.DocumentLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartLendingAnalysisRequest_JobTag, *v.JobTag)
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.StartLendingAnalysisRequest_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartLendingAnalysisRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.StartLendingAnalysisRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartLendingAnalysisOutput struct {
 
 	// A unique identifier for the lending or text-detection job. The JobId is
@@ -126,13 +161,32 @@ type StartLendingAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartLendingAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartLendingAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartLendingAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartLendingAnalysisResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartLendingAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartLendingAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartLendingAnalysisResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartLendingAnalysisResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartLendingAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartLendingAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLendingAnalysis, schemas.StartLendingAnalysisRequest, schemas.StartLendingAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartLendingAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLendingAnalysis, schemas.StartLendingAnalysisRequest, schemas.StartLendingAnalysisResponse), output: &StartLendingAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

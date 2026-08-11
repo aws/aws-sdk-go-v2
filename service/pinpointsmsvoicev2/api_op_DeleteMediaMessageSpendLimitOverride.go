@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,15 @@ type DeleteMediaMessageSpendLimitOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMediaMessageSpendLimitOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMediaMessageSpendLimitOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMediaMessageSpendLimitOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeleteMediaMessageSpendLimitOverrideOutput struct {
 
 	// The current monthly limit, in US dollars.
@@ -44,13 +55,32 @@ type DeleteMediaMessageSpendLimitOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMediaMessageSpendLimitOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMediaMessageSpendLimitOverrideResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMediaMessageSpendLimitOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonthlyLimit != nil {
+		s.WriteInt64(schemas.DeleteMediaMessageSpendLimitOverrideResult_MonthlyLimit, *v.MonthlyLimit)
+	}
+}
+func (v *DeleteMediaMessageSpendLimitOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMediaMessageSpendLimitOverrideResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMediaMessageSpendLimitOverrideResult_MonthlyLimit:
+			v.MonthlyLimit = new(int64)
+			return d.ReadInt64(schemas.DeleteMediaMessageSpendLimitOverrideResult_MonthlyLimit, v.MonthlyLimit)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMediaMessageSpendLimitOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteMediaMessageSpendLimitOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMediaMessageSpendLimitOverride, schemas.DeleteMediaMessageSpendLimitOverrideRequest, schemas.DeleteMediaMessageSpendLimitOverrideResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteMediaMessageSpendLimitOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMediaMessageSpendLimitOverride, schemas.DeleteMediaMessageSpendLimitOverrideRequest, schemas.DeleteMediaMessageSpendLimitOverrideResult), output: &DeleteMediaMessageSpendLimitOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

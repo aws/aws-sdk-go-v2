@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type StartDataCollectionByAgentIdsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataCollectionByAgentIdsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataCollectionByAgentIdsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataCollectionByAgentIdsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentIds(s, schemas.StartDataCollectionByAgentIdsRequest_agentIds, v.AgentIds)
+}
+
 type StartDataCollectionByAgentIdsOutput struct {
 
 	// Information about agents that were instructed to start collecting data.
@@ -53,13 +65,29 @@ type StartDataCollectionByAgentIdsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataCollectionByAgentIdsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataCollectionByAgentIdsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataCollectionByAgentIdsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentConfigurationStatusList(s, schemas.StartDataCollectionByAgentIdsResponse_agentsConfigurationStatus, v.AgentsConfigurationStatus)
+}
+func (v *StartDataCollectionByAgentIdsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataCollectionByAgentIdsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataCollectionByAgentIdsResponse_agentsConfigurationStatus:
+			return deserializeAgentConfigurationStatusList(d, schemas.StartDataCollectionByAgentIdsResponse_agentsConfigurationStatus, &v.AgentsConfigurationStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataCollectionByAgentIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDataCollectionByAgentIds{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataCollectionByAgentIds, schemas.StartDataCollectionByAgentIdsRequest, schemas.StartDataCollectionByAgentIdsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDataCollectionByAgentIds{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataCollectionByAgentIds, schemas.StartDataCollectionByAgentIdsRequest, schemas.StartDataCollectionByAgentIdsResponse), output: &StartDataCollectionByAgentIdsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

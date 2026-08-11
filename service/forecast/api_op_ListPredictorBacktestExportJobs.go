@@ -5,7 +5,9 @@ package forecast
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,22 @@ type ListPredictorBacktestExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPredictorBacktestExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPredictorBacktestExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPredictorBacktestExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListPredictorBacktestExportJobsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPredictorBacktestExportJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPredictorBacktestExportJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPredictorBacktestExportJobsOutput struct {
 
 	// Returns this token if the response is truncated. To retrieve the next set of
@@ -76,13 +94,35 @@ type ListPredictorBacktestExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPredictorBacktestExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPredictorBacktestExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPredictorBacktestExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPredictorBacktestExportJobsResponse_NextToken, *v.NextToken)
+	}
+	serializePredictorBacktestExportJobs(s, schemas.ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs, v.PredictorBacktestExportJobs)
+}
+func (v *ListPredictorBacktestExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPredictorBacktestExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPredictorBacktestExportJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPredictorBacktestExportJobsResponse_NextToken, v.NextToken)
+		case schemas.ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs:
+			return deserializePredictorBacktestExportJobs(d, schemas.ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs, &v.PredictorBacktestExportJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPredictorBacktestExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPredictorBacktestExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPredictorBacktestExportJobs, schemas.ListPredictorBacktestExportJobsRequest, schemas.ListPredictorBacktestExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPredictorBacktestExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPredictorBacktestExportJobs, schemas.ListPredictorBacktestExportJobsRequest, schemas.ListPredictorBacktestExportJobsResponse), output: &ListPredictorBacktestExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

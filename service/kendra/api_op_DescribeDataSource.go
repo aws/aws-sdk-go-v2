@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type DescribeDataSourceInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeDataSourceRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeDataSourceRequest_IndexId, *v.IndexId)
+	}
 }
 
 type DescribeDataSourceOutput struct {
@@ -113,13 +130,130 @@ type DescribeDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.DescribeDataSourceResponse_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeDataSourceResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.CustomDocumentEnrichmentConfiguration != nil {
+		s.WriteStruct(schemas.DescribeDataSourceResponse_CustomDocumentEnrichmentConfiguration)
+		v.CustomDocumentEnrichmentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeDataSourceResponse_Description, *v.Description)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeDataSourceResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeDataSourceResponse_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeDataSourceResponse_IndexId, *v.IndexId)
+	}
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.DescribeDataSourceResponse_LanguageCode, *v.LanguageCode)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeDataSourceResponse_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeDataSourceResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Schedule != nil {
+		s.WriteString(schemas.DescribeDataSourceResponse_Schedule, *v.Schedule)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeDataSourceResponse_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeDataSourceResponse_Type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeDataSourceResponse_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.DescribeDataSourceResponse_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSourceResponse_Configuration:
+			v.Configuration = &types.DataSourceConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.DescribeDataSourceResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeDataSourceResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeDataSourceResponse_CustomDocumentEnrichmentConfiguration:
+			v.CustomDocumentEnrichmentConfiguration = &types.CustomDocumentEnrichmentConfiguration{}
+			return v.CustomDocumentEnrichmentConfiguration.Deserialize(d)
+		case schemas.DescribeDataSourceResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeDataSourceResponse_Description, v.Description)
+		case schemas.DescribeDataSourceResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeDataSourceResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeDataSourceResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeDataSourceResponse_Id, v.Id)
+		case schemas.DescribeDataSourceResponse_IndexId:
+			v.IndexId = new(string)
+			return d.ReadString(schemas.DescribeDataSourceResponse_IndexId, v.IndexId)
+		case schemas.DescribeDataSourceResponse_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.DescribeDataSourceResponse_LanguageCode, v.LanguageCode)
+		case schemas.DescribeDataSourceResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeDataSourceResponse_Name, v.Name)
+		case schemas.DescribeDataSourceResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeDataSourceResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeDataSourceResponse_Schedule:
+			v.Schedule = new(string)
+			return d.ReadString(schemas.DescribeDataSourceResponse_Schedule, v.Schedule)
+		case schemas.DescribeDataSourceResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDataSourceResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSourceStatus(ev)
+			return nil
+		case schemas.DescribeDataSourceResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDataSourceResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.DataSourceType(ev)
+			return nil
+		case schemas.DescribeDataSourceResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeDataSourceResponse_UpdatedAt, v.UpdatedAt)
+		case schemas.DescribeDataSourceResponse_VpcConfiguration:
+			v.VpcConfiguration = &types.DataSourceVpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSource, schemas.DescribeDataSourceRequest, schemas.DescribeDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSource, schemas.DescribeDataSourceRequest, schemas.DescribeDataSourceResponse), output: &DescribeDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

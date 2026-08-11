@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,46 @@ type ListVirtualRoutersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualRoutersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualRoutersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualRoutersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListVirtualRoutersInput_limit, *v.Limit)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.ListVirtualRoutersInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.ListVirtualRoutersInput_meshOwner, *v.MeshOwner)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualRoutersInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListVirtualRoutersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualRoutersInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualRoutersInput_limit:
+			v.Limit = new(int32)
+			return d.ReadInt32(schemas.ListVirtualRoutersInput_limit, v.Limit)
+		case schemas.ListVirtualRoutersInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.ListVirtualRoutersInput_meshName, v.MeshName)
+		case schemas.ListVirtualRoutersInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.ListVirtualRoutersInput_meshOwner, v.MeshOwner)
+		case schemas.ListVirtualRoutersInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualRoutersInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListVirtualRoutersOutput struct {
 
 	// The list of existing virtual routers for the specified service mesh.
@@ -76,13 +118,35 @@ type ListVirtualRoutersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualRoutersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualRoutersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualRoutersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualRoutersOutput_nextToken, *v.NextToken)
+	}
+	serializeVirtualRouterList(s, schemas.ListVirtualRoutersOutput_virtualRouters, v.VirtualRouters)
+}
+func (v *ListVirtualRoutersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualRoutersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualRoutersOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualRoutersOutput_nextToken, v.NextToken)
+		case schemas.ListVirtualRoutersOutput_virtualRouters:
+			return deserializeVirtualRouterList(d, schemas.ListVirtualRoutersOutput_virtualRouters, &v.VirtualRouters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVirtualRoutersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVirtualRouters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualRouters, schemas.ListVirtualRoutersInput, schemas.ListVirtualRoutersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVirtualRouters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualRouters, schemas.ListVirtualRoutersInput, schemas.ListVirtualRoutersOutput), output: &ListVirtualRoutersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

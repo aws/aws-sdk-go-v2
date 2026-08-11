@@ -4,6 +4,8 @@ package migrationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type DisassociateSourceResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSourceResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateSourceResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSourceResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != false {
+		s.WriteBool(schemas.DisassociateSourceResourceRequest_DryRun, v.DryRun)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.DisassociateSourceResourceRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.DisassociateSourceResourceRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+	if v.SourceResourceName != nil {
+		s.WriteString(schemas.DisassociateSourceResourceRequest_SourceResourceName, *v.SourceResourceName)
+	}
+}
+
 type DisassociateSourceResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +84,26 @@ type DisassociateSourceResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSourceResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateSourceResourceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSourceResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateSourceResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateSourceResourceResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateSourceResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateSourceResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSourceResource, schemas.DisassociateSourceResourceRequest, schemas.DisassociateSourceResourceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateSourceResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSourceResource, schemas.DisassociateSourceResourceRequest, schemas.DisassociateSourceResourceResult), output: &DisassociateSourceResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,25 @@ type BatchUpdateVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateVehicleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateVehicleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeupdateVehicleRequestItems(s, schemas.BatchUpdateVehicleRequest_vehicles, v.Vehicles)
+}
+func (v *BatchUpdateVehicleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateVehicleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateVehicleRequest_vehicles:
+			return deserializeupdateVehicleRequestItems(d, schemas.BatchUpdateVehicleRequest_vehicles, &v.Vehicles)
+		}
+		return nil
+	})
+}
+
 type BatchUpdateVehicleOutput struct {
 
 	// A list of information about errors returned while updating a batch of vehicles,
@@ -60,13 +81,32 @@ type BatchUpdateVehicleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateVehicleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateVehicleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeupdateVehicleErrors(s, schemas.BatchUpdateVehicleResponse_errors, v.Errors)
+	serializeupdateVehicleResponseItems(s, schemas.BatchUpdateVehicleResponse_vehicles, v.Vehicles)
+}
+func (v *BatchUpdateVehicleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateVehicleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateVehicleResponse_errors:
+			return deserializeupdateVehicleErrors(d, schemas.BatchUpdateVehicleResponse_errors, &v.Errors)
+		case schemas.BatchUpdateVehicleResponse_vehicles:
+			return deserializeupdateVehicleResponseItems(d, schemas.BatchUpdateVehicleResponse_vehicles, &v.Vehicles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateVehicleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchUpdateVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateVehicle, schemas.BatchUpdateVehicleRequest, schemas.BatchUpdateVehicleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchUpdateVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateVehicle, schemas.BatchUpdateVehicleRequest, schemas.BatchUpdateVehicleResponse), output: &BatchUpdateVehicleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

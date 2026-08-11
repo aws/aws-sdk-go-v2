@@ -4,7 +4,9 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,23 @@ type UpdateApplicationMaintenanceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationMaintenanceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationMaintenanceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationMaintenanceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationMaintenanceConfigurationUpdate != nil {
+		s.WriteStruct(schemas.UpdateApplicationMaintenanceConfigurationRequest_ApplicationMaintenanceConfigurationUpdate)
+		v.ApplicationMaintenanceConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.UpdateApplicationMaintenanceConfigurationRequest_ApplicationName, *v.ApplicationName)
+	}
+}
+
 type UpdateApplicationMaintenanceConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application.
@@ -75,13 +94,40 @@ type UpdateApplicationMaintenanceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationMaintenanceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationMaintenanceConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationMaintenanceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.UpdateApplicationMaintenanceConfigurationResponse_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationMaintenanceConfigurationDescription != nil {
+		s.WriteStruct(schemas.UpdateApplicationMaintenanceConfigurationResponse_ApplicationMaintenanceConfigurationDescription)
+		v.ApplicationMaintenanceConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateApplicationMaintenanceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationMaintenanceConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationMaintenanceConfigurationResponse_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.UpdateApplicationMaintenanceConfigurationResponse_ApplicationARN, v.ApplicationARN)
+		case schemas.UpdateApplicationMaintenanceConfigurationResponse_ApplicationMaintenanceConfigurationDescription:
+			v.ApplicationMaintenanceConfigurationDescription = &types.ApplicationMaintenanceConfigurationDescription{}
+			return v.ApplicationMaintenanceConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationMaintenanceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateApplicationMaintenanceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationMaintenanceConfiguration, schemas.UpdateApplicationMaintenanceConfigurationRequest, schemas.UpdateApplicationMaintenanceConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateApplicationMaintenanceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationMaintenanceConfiguration, schemas.UpdateApplicationMaintenanceConfigurationRequest, schemas.UpdateApplicationMaintenanceConfigurationResponse), output: &UpdateApplicationMaintenanceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceName != nil {
+		s.WriteString(schemas.TagResourceRequest_ResourceName, *v.ResourceName)
+	}
+	serializeTagList(s, schemas.TagResourceRequest_Tags, v.Tags)
+}
+
 type TagResourceOutput struct {
 
 	// The list of tags that are associated with the DAX resource.
@@ -51,13 +66,29 @@ type TagResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagList(s, schemas.TagResourceResponse_Tags, v.Tags)
+}
+func (v *TagResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagResourceResponse_Tags:
+			return deserializeTagList(d, schemas.TagResourceResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceRequest, schemas.TagResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceRequest, schemas.TagResourceResponse), output: &TagResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

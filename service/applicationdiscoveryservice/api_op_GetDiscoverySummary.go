@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ func (c *Client) GetDiscoverySummary(ctx context.Context, params *GetDiscoverySu
 
 type GetDiscoverySummaryInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetDiscoverySummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDiscoverySummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDiscoverySummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetDiscoverySummaryOutput struct {
@@ -64,13 +75,78 @@ type GetDiscoverySummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDiscoverySummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDiscoverySummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDiscoverySummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSummary != nil {
+		s.WriteStruct(schemas.GetDiscoverySummaryResponse_agentSummary)
+		v.AgentSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AgentlessCollectorSummary != nil {
+		s.WriteStruct(schemas.GetDiscoverySummaryResponse_agentlessCollectorSummary)
+		v.AgentlessCollectorSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Applications != 0 {
+		s.WriteInt64(schemas.GetDiscoverySummaryResponse_applications, v.Applications)
+	}
+	if v.ConnectorSummary != nil {
+		s.WriteStruct(schemas.GetDiscoverySummaryResponse_connectorSummary)
+		v.ConnectorSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MeCollectorSummary != nil {
+		s.WriteStruct(schemas.GetDiscoverySummaryResponse_meCollectorSummary)
+		v.MeCollectorSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Servers != 0 {
+		s.WriteInt64(schemas.GetDiscoverySummaryResponse_servers, v.Servers)
+	}
+	if v.ServersMappedToApplications != 0 {
+		s.WriteInt64(schemas.GetDiscoverySummaryResponse_serversMappedToApplications, v.ServersMappedToApplications)
+	}
+	if v.ServersMappedtoTags != 0 {
+		s.WriteInt64(schemas.GetDiscoverySummaryResponse_serversMappedtoTags, v.ServersMappedtoTags)
+	}
+}
+func (v *GetDiscoverySummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDiscoverySummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDiscoverySummaryResponse_agentSummary:
+			v.AgentSummary = &types.CustomerAgentInfo{}
+			return v.AgentSummary.Deserialize(d)
+		case schemas.GetDiscoverySummaryResponse_agentlessCollectorSummary:
+			v.AgentlessCollectorSummary = &types.CustomerAgentlessCollectorInfo{}
+			return v.AgentlessCollectorSummary.Deserialize(d)
+		case schemas.GetDiscoverySummaryResponse_applications:
+			return d.ReadInt64(schemas.GetDiscoverySummaryResponse_applications, &v.Applications)
+		case schemas.GetDiscoverySummaryResponse_connectorSummary:
+			v.ConnectorSummary = &types.CustomerConnectorInfo{}
+			return v.ConnectorSummary.Deserialize(d)
+		case schemas.GetDiscoverySummaryResponse_meCollectorSummary:
+			v.MeCollectorSummary = &types.CustomerMeCollectorInfo{}
+			return v.MeCollectorSummary.Deserialize(d)
+		case schemas.GetDiscoverySummaryResponse_servers:
+			return d.ReadInt64(schemas.GetDiscoverySummaryResponse_servers, &v.Servers)
+		case schemas.GetDiscoverySummaryResponse_serversMappedToApplications:
+			return d.ReadInt64(schemas.GetDiscoverySummaryResponse_serversMappedToApplications, &v.ServersMappedToApplications)
+		case schemas.GetDiscoverySummaryResponse_serversMappedtoTags:
+			return d.ReadInt64(schemas.GetDiscoverySummaryResponse_serversMappedtoTags, &v.ServersMappedtoTags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDiscoverySummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDiscoverySummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDiscoverySummary, schemas.GetDiscoverySummaryRequest, schemas.GetDiscoverySummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDiscoverySummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDiscoverySummary, schemas.GetDiscoverySummaryRequest, schemas.GetDiscoverySummaryResponse), output: &GetDiscoverySummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

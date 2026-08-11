@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StartNetworkMigrationAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationAnalysisRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationAnalysisRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+}
+
 type StartNetworkMigrationAnalysisOutput struct {
 
 	// The unique identifier of the analysis job that was started.
@@ -50,13 +67,32 @@ type StartNetworkMigrationAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobID != nil {
+		s.WriteString(schemas.StartNetworkMigrationAnalysisResponse_jobID, *v.JobID)
+	}
+}
+func (v *StartNetworkMigrationAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNetworkMigrationAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNetworkMigrationAnalysisResponse_jobID:
+			v.JobID = new(string)
+			return d.ReadString(schemas.StartNetworkMigrationAnalysisResponse_jobID, v.JobID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNetworkMigrationAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNetworkMigrationAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationAnalysis, schemas.StartNetworkMigrationAnalysisRequest, schemas.StartNetworkMigrationAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNetworkMigrationAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationAnalysis, schemas.StartNetworkMigrationAnalysisRequest, schemas.StartNetworkMigrationAnalysisResponse), output: &StartNetworkMigrationAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

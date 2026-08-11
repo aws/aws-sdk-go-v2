@@ -5,7 +5,9 @@ package securitylake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListSubscribersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscribersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubscribersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubscribersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSubscribersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubscribersRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSubscribersOutput struct {
 
 	// If nextToken is returned, there are more results available. You can repeat the
@@ -54,13 +71,35 @@ type ListSubscribersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscribersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubscribersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubscribersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubscribersResponse_nextToken, *v.NextToken)
+	}
+	serializeSubscriberResourceList(s, schemas.ListSubscribersResponse_subscribers, v.Subscribers)
+}
+func (v *ListSubscribersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSubscribersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSubscribersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSubscribersResponse_nextToken, v.NextToken)
+		case schemas.ListSubscribersResponse_subscribers:
+			return deserializeSubscriberResourceList(d, schemas.ListSubscribersResponse_subscribers, &v.Subscribers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSubscribersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubscribers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscribers, schemas.ListSubscribersRequest, schemas.ListSubscribersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubscribers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscribers, schemas.ListSubscribersRequest, schemas.ListSubscribersResponse), output: &ListSubscribersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

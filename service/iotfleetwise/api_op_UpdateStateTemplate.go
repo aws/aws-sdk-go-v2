@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,25 @@ type UpdateStateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.UpdateStateTemplateRequest_dataExtraDimensions, v.DataExtraDimensions)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStateTemplateRequest_description, *v.Description)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateStateTemplateRequest_identifier, *v.Identifier)
+	}
+	serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.UpdateStateTemplateRequest_metadataExtraDimensions, v.MetadataExtraDimensions)
+	serializeStateTemplateProperties(s, schemas.UpdateStateTemplateRequest_stateTemplatePropertiesToAdd, v.StateTemplatePropertiesToAdd)
+	serializeStateTemplateProperties(s, schemas.UpdateStateTemplateRequest_stateTemplatePropertiesToRemove, v.StateTemplatePropertiesToRemove)
+}
+
 type UpdateStateTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the state template.
@@ -85,13 +106,44 @@ type UpdateStateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateStateTemplateResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateStateTemplateResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateStateTemplateResponse_name, *v.Name)
+	}
+}
+func (v *UpdateStateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStateTemplateResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateStateTemplateResponse_arn, v.Arn)
+		case schemas.UpdateStateTemplateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateStateTemplateResponse_id, v.Id)
+		case schemas.UpdateStateTemplateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateStateTemplateResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateStateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStateTemplate, schemas.UpdateStateTemplateRequest, schemas.UpdateStateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateStateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStateTemplate, schemas.UpdateStateTemplateRequest, schemas.UpdateStateTemplateResponse), output: &UpdateStateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

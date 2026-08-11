@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -117,6 +119,28 @@ type CreateForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateForecastInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateForecastRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastName != nil {
+		s.WriteString(schemas.CreateForecastRequest_ForecastName, *v.ForecastName)
+	}
+	serializeForecastTypes(s, schemas.CreateForecastRequest_ForecastTypes, v.ForecastTypes)
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.CreateForecastRequest_PredictorArn, *v.PredictorArn)
+	}
+	serializeTags(s, schemas.CreateForecastRequest_Tags, v.Tags)
+	if v.TimeSeriesSelector != nil {
+		s.WriteStruct(schemas.CreateForecastRequest_TimeSeriesSelector)
+		v.TimeSeriesSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateForecastOutput struct {
 
 	// The Amazon Resource Name (ARN) of the forecast.
@@ -128,13 +152,32 @@ type CreateForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateForecastOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateForecastResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.CreateForecastResponse_ForecastArn, *v.ForecastArn)
+	}
+}
+func (v *CreateForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateForecastResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateForecastResponse_ForecastArn:
+			v.ForecastArn = new(string)
+			return d.ReadString(schemas.CreateForecastResponse_ForecastArn, v.ForecastArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateForecast, schemas.CreateForecastRequest, schemas.CreateForecastResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateForecast, schemas.CreateForecastRequest, schemas.CreateForecastResponse), output: &CreateForecastOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

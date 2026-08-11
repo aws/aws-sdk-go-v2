@@ -4,6 +4,8 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteThesaurusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThesaurusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThesaurusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThesaurusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteThesaurusRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DeleteThesaurusRequest_IndexId, *v.IndexId)
+	}
+}
+
 type DeleteThesaurusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteThesaurusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThesaurusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThesaurusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteThesaurusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteThesaurus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThesaurus, schemas.DeleteThesaurusRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteThesaurus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThesaurus, schemas.DeleteThesaurusRequest, nil), output: &DeleteThesaurusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

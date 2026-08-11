@@ -4,7 +4,9 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,21 @@ type ListIdentityPoolUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityPoolUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityPoolUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityPoolUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentityPoolUsageRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityPoolUsageRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Returned for a successful ListIdentityPoolUsage request.
 type ListIdentityPoolUsageOutput struct {
 
@@ -85,13 +102,45 @@ type ListIdentityPoolUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityPoolUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityPoolUsageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityPoolUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != 0 {
+		s.WriteInt32(schemas.ListIdentityPoolUsageResponse_Count, v.Count)
+	}
+	serializeIdentityPoolUsageList(s, schemas.ListIdentityPoolUsageResponse_IdentityPoolUsages, v.IdentityPoolUsages)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListIdentityPoolUsageResponse_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityPoolUsageResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIdentityPoolUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentityPoolUsageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentityPoolUsageResponse_Count:
+			return d.ReadInt32(schemas.ListIdentityPoolUsageResponse_Count, &v.Count)
+		case schemas.ListIdentityPoolUsageResponse_IdentityPoolUsages:
+			return deserializeIdentityPoolUsageList(d, schemas.ListIdentityPoolUsageResponse_IdentityPoolUsages, &v.IdentityPoolUsages)
+		case schemas.ListIdentityPoolUsageResponse_MaxResults:
+			return d.ReadInt32(schemas.ListIdentityPoolUsageResponse_MaxResults, &v.MaxResults)
+		case schemas.ListIdentityPoolUsageResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentityPoolUsageResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentityPoolUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdentityPoolUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityPoolUsage, schemas.ListIdentityPoolUsageRequest, schemas.ListIdentityPoolUsageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdentityPoolUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityPoolUsage, schemas.ListIdentityPoolUsageRequest, schemas.ListIdentityPoolUsageResponse), output: &ListIdentityPoolUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

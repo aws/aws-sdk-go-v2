@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,19 @@ type UpdateDataLakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataLakeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataLakeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataLakeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataLakeConfigurationList(s, schemas.UpdateDataLakeRequest_configurations, v.Configurations)
+	if v.MetaStoreManagerRoleArn != nil {
+		s.WriteString(schemas.UpdateDataLakeRequest_metaStoreManagerRoleArn, *v.MetaStoreManagerRoleArn)
+	}
+}
+
 type UpdateDataLakeOutput struct {
 
 	// The created Security Lake configuration object.
@@ -71,13 +86,29 @@ type UpdateDataLakeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataLakeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataLakeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataLakeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataLakeResourceList(s, schemas.UpdateDataLakeResponse_dataLakes, v.DataLakes)
+}
+func (v *UpdateDataLakeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataLakeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataLakeResponse_dataLakes:
+			return deserializeDataLakeResourceList(d, schemas.UpdateDataLakeResponse_dataLakes, &v.DataLakes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataLakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataLake{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataLake, schemas.UpdateDataLakeRequest, schemas.UpdateDataLakeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataLake{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataLake, schemas.UpdateDataLakeRequest, schemas.UpdateDataLakeResponse), output: &UpdateDataLakeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

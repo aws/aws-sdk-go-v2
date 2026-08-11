@@ -4,6 +4,8 @@ package cloud9
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DeleteEnvironmentRequest_environmentId, *v.EnvironmentId)
+	}
+}
+
 type DeleteEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +60,26 @@ type DeleteEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironment, schemas.DeleteEnvironmentRequest, schemas.DeleteEnvironmentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironment, schemas.DeleteEnvironmentRequest, schemas.DeleteEnvironmentResult), output: &DeleteEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

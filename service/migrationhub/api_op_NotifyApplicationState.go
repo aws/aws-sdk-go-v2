@@ -4,7 +4,9 @@ package migrationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,27 @@ type NotifyApplicationStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyApplicationStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyApplicationStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyApplicationStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.NotifyApplicationStateRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.NotifyApplicationStateRequest_DryRun, v.DryRun)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NotifyApplicationStateRequest_Status, string(v.Status))
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.NotifyApplicationStateRequest_UpdateDateTime, *v.UpdateDateTime)
+	}
+}
+
 type NotifyApplicationStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +80,26 @@ type NotifyApplicationStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyApplicationStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyApplicationStateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyApplicationStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *NotifyApplicationStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyApplicationStateResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNotifyApplicationStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyApplicationState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyApplicationState, schemas.NotifyApplicationStateRequest, schemas.NotifyApplicationStateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpNotifyApplicationState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyApplicationState, schemas.NotifyApplicationStateRequest, schemas.NotifyApplicationStateResult), output: &NotifyApplicationStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

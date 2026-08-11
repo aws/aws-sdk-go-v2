@@ -4,7 +4,9 @@ package kinesisanalytics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -140,6 +142,28 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationCode != nil {
+		s.WriteString(schemas.CreateApplicationRequest_ApplicationCode, *v.ApplicationCode)
+	}
+	if v.ApplicationDescription != nil {
+		s.WriteString(schemas.CreateApplicationRequest_ApplicationDescription, *v.ApplicationDescription)
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.CreateApplicationRequest_ApplicationName, *v.ApplicationName)
+	}
+	serializeCloudWatchLoggingOptions(s, schemas.CreateApplicationRequest_CloudWatchLoggingOptions, v.CloudWatchLoggingOptions)
+	serializeInputs(s, schemas.CreateApplicationRequest_Inputs, v.Inputs)
+	serializeOutputs(s, schemas.CreateApplicationRequest_Outputs, v.Outputs)
+	serializeTags(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+}
+
 // TBD
 type CreateApplicationOutput struct {
 
@@ -156,13 +180,34 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationSummary != nil {
+		s.WriteStruct(schemas.CreateApplicationResponse_ApplicationSummary)
+		v.ApplicationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationResponse_ApplicationSummary:
+			v.ApplicationSummary = &types.ApplicationSummary{}
+			return v.ApplicationSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

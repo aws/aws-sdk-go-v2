@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,25 @@ type PurchaseReservedNodesOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedNodesOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedNodesOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedNodesOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NodeCount != nil {
+		s.WriteInt32(schemas.PurchaseReservedNodesOfferingRequest_NodeCount, *v.NodeCount)
+	}
+	if v.ReservationId != nil {
+		s.WriteString(schemas.PurchaseReservedNodesOfferingRequest_ReservationId, *v.ReservationId)
+	}
+	if v.ReservedNodesOfferingId != nil {
+		s.WriteString(schemas.PurchaseReservedNodesOfferingRequest_ReservedNodesOfferingId, *v.ReservedNodesOfferingId)
+	}
+	serializeTagList(s, schemas.PurchaseReservedNodesOfferingRequest_Tags, v.Tags)
+}
+
 type PurchaseReservedNodesOfferingOutput struct {
 
 	// Represents the output of a PurchaseReservedNodesOffering operation.
@@ -56,13 +77,34 @@ type PurchaseReservedNodesOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedNodesOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedNodesOfferingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedNodesOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservedNode != nil {
+		s.WriteStruct(schemas.PurchaseReservedNodesOfferingResponse_ReservedNode)
+		v.ReservedNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PurchaseReservedNodesOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseReservedNodesOfferingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseReservedNodesOfferingResponse_ReservedNode:
+			v.ReservedNode = &types.ReservedNode{}
+			return v.ReservedNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurchaseReservedNodesOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPurchaseReservedNodesOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedNodesOffering, schemas.PurchaseReservedNodesOfferingRequest, schemas.PurchaseReservedNodesOfferingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPurchaseReservedNodesOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedNodesOffering, schemas.PurchaseReservedNodesOfferingRequest, schemas.PurchaseReservedNodesOfferingResponse), output: &PurchaseReservedNodesOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

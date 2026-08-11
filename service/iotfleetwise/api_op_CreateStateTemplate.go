@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,28 @@ type CreateStateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.CreateStateTemplateRequest_dataExtraDimensions, v.DataExtraDimensions)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStateTemplateRequest_description, *v.Description)
+	}
+	serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.CreateStateTemplateRequest_metadataExtraDimensions, v.MetadataExtraDimensions)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateStateTemplateRequest_name, *v.Name)
+	}
+	if v.SignalCatalogArn != nil {
+		s.WriteString(schemas.CreateStateTemplateRequest_signalCatalogArn, *v.SignalCatalogArn)
+	}
+	serializeStateTemplateProperties(s, schemas.CreateStateTemplateRequest_stateTemplateProperties, v.StateTemplateProperties)
+	serializeTagList(s, schemas.CreateStateTemplateRequest_tags, v.Tags)
+}
+
 type CreateStateTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the state template.
@@ -96,13 +120,44 @@ type CreateStateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateStateTemplateResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateStateTemplateResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateStateTemplateResponse_name, *v.Name)
+	}
+}
+func (v *CreateStateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStateTemplateResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateStateTemplateResponse_arn, v.Arn)
+		case schemas.CreateStateTemplateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateStateTemplateResponse_id, v.Id)
+		case schemas.CreateStateTemplateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateStateTemplateResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateStateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStateTemplate, schemas.CreateStateTemplateRequest, schemas.CreateStateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateStateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStateTemplate, schemas.CreateStateTemplateRequest, schemas.CreateStateTemplateResponse), output: &CreateStateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

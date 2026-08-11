@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListManagedAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedAccountsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedAccountsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // List managed accounts response.
 type ListManagedAccountsOutput struct {
 
@@ -54,13 +71,35 @@ type ListManagedAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedAccountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedAccounts(s, schemas.ListManagedAccountsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedAccountsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedAccountsResponse_items:
+			return deserializeManagedAccounts(d, schemas.ListManagedAccountsResponse_items, &v.Items)
+		case schemas.ListManagedAccountsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedAccountsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedAccounts, schemas.ListManagedAccountsRequest, schemas.ListManagedAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedAccounts, schemas.ListManagedAccountsRequest, schemas.ListManagedAccountsResponse), output: &ListManagedAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

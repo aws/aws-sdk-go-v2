@@ -4,7 +4,9 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,43 @@ type UpdateDomainContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminContact != nil {
+		s.WriteStruct(schemas.UpdateDomainContactRequest_AdminContact)
+		v.AdminContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BillingContact != nil {
+		s.WriteStruct(schemas.UpdateDomainContactRequest_BillingContact)
+		v.BillingContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Consent != nil {
+		s.WriteStruct(schemas.UpdateDomainContactRequest_Consent)
+		v.Consent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainContactRequest_DomainName, *v.DomainName)
+	}
+	if v.RegistrantContact != nil {
+		s.WriteStruct(schemas.UpdateDomainContactRequest_RegistrantContact)
+		v.RegistrantContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TechContact != nil {
+		s.WriteStruct(schemas.UpdateDomainContactRequest_TechContact)
+		v.TechContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The UpdateDomainContact response includes the following element.
 type UpdateDomainContactOutput struct {
 
@@ -72,13 +111,32 @@ type UpdateDomainContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdateDomainContactResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *UpdateDomainContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainContactResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdateDomainContactResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDomainContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainContact, schemas.UpdateDomainContactRequest, schemas.UpdateDomainContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDomainContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainContact, schemas.UpdateDomainContactRequest, schemas.UpdateDomainContactResponse), output: &UpdateDomainContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

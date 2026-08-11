@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,34 @@ type DescribeVcenterClientsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVcenterClientsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVcenterClientsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVcenterClientsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeVcenterClientsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeVcenterClientsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeVcenterClientsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVcenterClientsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVcenterClientsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.DescribeVcenterClientsRequest_maxResults, v.MaxResults)
+		case schemas.DescribeVcenterClientsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeVcenterClientsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeVcenterClientsOutput struct {
 
 	// List of items returned by DescribeVcenterClients.
@@ -50,13 +80,35 @@ type DescribeVcenterClientsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVcenterClientsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVcenterClientsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVcenterClientsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVcenterClientList(s, schemas.DescribeVcenterClientsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeVcenterClientsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeVcenterClientsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVcenterClientsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVcenterClientsResponse_items:
+			return deserializeVcenterClientList(d, schemas.DescribeVcenterClientsResponse_items, &v.Items)
+		case schemas.DescribeVcenterClientsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeVcenterClientsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVcenterClientsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVcenterClients{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVcenterClients, schemas.DescribeVcenterClientsRequest, schemas.DescribeVcenterClientsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVcenterClients{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVcenterClients, schemas.DescribeVcenterClientsRequest, schemas.DescribeVcenterClientsResponse), output: &DescribeVcenterClientsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

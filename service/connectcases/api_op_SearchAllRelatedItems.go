@@ -5,7 +5,9 @@ package connectcases
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,26 @@ type SearchAllRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAllRelatedItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAllRelatedItemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAllRelatedItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.SearchAllRelatedItemsRequest_domainId, *v.DomainId)
+	}
+	serializeRelatedItemFilterList(s, schemas.SearchAllRelatedItemsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchAllRelatedItemsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAllRelatedItemsRequest_nextToken, *v.NextToken)
+	}
+	serializeSearchAllRelatedItemsSortList(s, schemas.SearchAllRelatedItemsRequest_sorts, v.Sorts)
+}
+
 type SearchAllRelatedItemsOutput struct {
 
 	// A list of items related to a case.
@@ -103,13 +125,35 @@ type SearchAllRelatedItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAllRelatedItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAllRelatedItemsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAllRelatedItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAllRelatedItemsResponse_nextToken, *v.NextToken)
+	}
+	serializeSearchAllRelatedItemsResponseItemList(s, schemas.SearchAllRelatedItemsResponse_relatedItems, v.RelatedItems)
+}
+func (v *SearchAllRelatedItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchAllRelatedItemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchAllRelatedItemsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchAllRelatedItemsResponse_nextToken, v.NextToken)
+		case schemas.SearchAllRelatedItemsResponse_relatedItems:
+			return deserializeSearchAllRelatedItemsResponseItemList(d, schemas.SearchAllRelatedItemsResponse_relatedItems, &v.RelatedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchAllRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchAllRelatedItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAllRelatedItems, schemas.SearchAllRelatedItemsRequest, schemas.SearchAllRelatedItemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchAllRelatedItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAllRelatedItems, schemas.SearchAllRelatedItemsRequest, schemas.SearchAllRelatedItemsResponse), output: &SearchAllRelatedItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

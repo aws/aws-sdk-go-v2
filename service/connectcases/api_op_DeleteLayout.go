@@ -4,6 +4,8 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type DeleteLayoutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLayoutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLayoutRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLayoutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteLayoutRequest_domainId, *v.DomainId)
+	}
+	if v.LayoutId != nil {
+		s.WriteString(schemas.DeleteLayoutRequest_layoutId, *v.LayoutId)
+	}
+}
+
 type DeleteLayoutOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +72,26 @@ type DeleteLayoutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLayoutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLayoutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLayoutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLayoutResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLayoutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLayout, schemas.DeleteLayoutRequest, schemas.DeleteLayoutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLayout, schemas.DeleteLayoutRequest, schemas.DeleteLayoutResponse), output: &DeleteLayoutOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type CreateApplicationPresignedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationPresignedUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationPresignedUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationPresignedUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.CreateApplicationPresignedUrlRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.SessionExpirationDurationInSeconds != nil {
+		s.WriteInt64(schemas.CreateApplicationPresignedUrlRequest_SessionExpirationDurationInSeconds, *v.SessionExpirationDurationInSeconds)
+	}
+	if v.UrlType != "" {
+		s.WriteString(schemas.CreateApplicationPresignedUrlRequest_UrlType, string(v.UrlType))
+	}
+}
+
 type CreateApplicationPresignedUrlOutput struct {
 
 	// The URL of the extension.
@@ -68,13 +88,32 @@ type CreateApplicationPresignedUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationPresignedUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationPresignedUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationPresignedUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizedUrl != nil {
+		s.WriteString(schemas.CreateApplicationPresignedUrlResponse_AuthorizedUrl, *v.AuthorizedUrl)
+	}
+}
+func (v *CreateApplicationPresignedUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationPresignedUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationPresignedUrlResponse_AuthorizedUrl:
+			v.AuthorizedUrl = new(string)
+			return d.ReadString(schemas.CreateApplicationPresignedUrlResponse_AuthorizedUrl, v.AuthorizedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationPresignedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApplicationPresignedUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationPresignedUrl, schemas.CreateApplicationPresignedUrlRequest, schemas.CreateApplicationPresignedUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateApplicationPresignedUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationPresignedUrl, schemas.CreateApplicationPresignedUrlRequest, schemas.CreateApplicationPresignedUrlResponse), output: &CreateApplicationPresignedUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

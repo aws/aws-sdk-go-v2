@@ -4,7 +4,9 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type ListTagsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListTagsForDomainRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The ListTagsForDomain response includes the following elements.
 type ListTagsForDomainOutput struct {
 
@@ -51,13 +65,29 @@ type ListTagsForDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagList(s, schemas.ListTagsForDomainResponse_TagList, v.TagList)
+}
+func (v *ListTagsForDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForDomainResponse_TagList:
+			return deserializeTagList(d, schemas.ListTagsForDomainResponse_TagList, &v.TagList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForDomain, schemas.ListTagsForDomainRequest, schemas.ListTagsForDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTagsForDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForDomain, schemas.ListTagsForDomainRequest, schemas.ListTagsForDomainResponse), output: &ListTagsForDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

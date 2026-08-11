@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type UpdatePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallingName != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_CallingName, *v.CallingName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_Name, *v.Name)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_PhoneNumberId, *v.PhoneNumberId)
+	}
+	if v.ProductType != "" {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_ProductType, string(v.ProductType))
+	}
+}
+
 type UpdatePhoneNumberOutput struct {
 
 	// The updated phone number details.
@@ -64,13 +87,34 @@ type UpdatePhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePhoneNumberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumber != nil {
+		s.WriteStruct(schemas.UpdatePhoneNumberResponse_PhoneNumber)
+		v.PhoneNumber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePhoneNumberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePhoneNumberResponse_PhoneNumber:
+			v.PhoneNumber = &types.PhoneNumber{}
+			return v.PhoneNumber.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePhoneNumber, schemas.UpdatePhoneNumberRequest, schemas.UpdatePhoneNumberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePhoneNumber, schemas.UpdatePhoneNumberRequest, schemas.UpdatePhoneNumberResponse), output: &UpdatePhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

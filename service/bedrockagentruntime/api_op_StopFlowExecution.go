@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type StopFlowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopFlowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopFlowExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopFlowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionIdentifier != nil {
+		s.WriteString(schemas.StopFlowExecutionRequest_executionIdentifier, *v.ExecutionIdentifier)
+	}
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.StopFlowExecutionRequest_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.StopFlowExecutionRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+}
+
 type StopFlowExecutionOutput struct {
 
 	// The updated status of the flow execution after the stop request. This will
@@ -63,13 +83,42 @@ type StopFlowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopFlowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopFlowExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopFlowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.StopFlowExecutionResponse_executionArn, *v.ExecutionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StopFlowExecutionResponse_status, string(v.Status))
+	}
+}
+func (v *StopFlowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopFlowExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopFlowExecutionResponse_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.StopFlowExecutionResponse_executionArn, v.ExecutionArn)
+		case schemas.StopFlowExecutionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StopFlowExecutionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FlowExecutionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopFlowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopFlowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopFlowExecution, schemas.StopFlowExecutionRequest, schemas.StopFlowExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopFlowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopFlowExecution, schemas.StopFlowExecutionRequest, schemas.StopFlowExecutionResponse), output: &StopFlowExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

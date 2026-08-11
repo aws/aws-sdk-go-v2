@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DeleteRcsAgentInput struct {
 	RcsAgentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteRcsAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRcsAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRcsAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RcsAgentId != nil {
+		s.WriteString(schemas.DeleteRcsAgentRequest_RcsAgentId, *v.RcsAgentId)
+	}
 }
 
 type DeleteRcsAgentOutput struct {
@@ -100,13 +114,84 @@ type DeleteRcsAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRcsAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRcsAgentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRcsAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteRcsAgentResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	s.WriteBool(schemas.DeleteRcsAgentResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.DeleteRcsAgentResult_OptOutListName, *v.OptOutListName)
+	}
+	if v.RcsAgentArn != nil {
+		s.WriteString(schemas.DeleteRcsAgentResult_RcsAgentArn, *v.RcsAgentArn)
+	}
+	if v.RcsAgentId != nil {
+		s.WriteString(schemas.DeleteRcsAgentResult_RcsAgentId, *v.RcsAgentId)
+	}
+	s.WriteBool(schemas.DeleteRcsAgentResult_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteRcsAgentResult_Status, string(v.Status))
+	}
+	if v.TwoWayChannelArn != nil {
+		s.WriteString(schemas.DeleteRcsAgentResult_TwoWayChannelArn, *v.TwoWayChannelArn)
+	}
+	if v.TwoWayChannelRole != nil {
+		s.WriteString(schemas.DeleteRcsAgentResult_TwoWayChannelRole, *v.TwoWayChannelRole)
+	}
+	s.WriteBool(schemas.DeleteRcsAgentResult_TwoWayEnabled, v.TwoWayEnabled)
+	serializeRcsEventTypeList(s, schemas.DeleteRcsAgentResult_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+}
+func (v *DeleteRcsAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRcsAgentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRcsAgentResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteRcsAgentResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteRcsAgentResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.DeleteRcsAgentResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.DeleteRcsAgentResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.DeleteRcsAgentResult_OptOutListName, v.OptOutListName)
+		case schemas.DeleteRcsAgentResult_RcsAgentArn:
+			v.RcsAgentArn = new(string)
+			return d.ReadString(schemas.DeleteRcsAgentResult_RcsAgentArn, v.RcsAgentArn)
+		case schemas.DeleteRcsAgentResult_RcsAgentId:
+			v.RcsAgentId = new(string)
+			return d.ReadString(schemas.DeleteRcsAgentResult_RcsAgentId, v.RcsAgentId)
+		case schemas.DeleteRcsAgentResult_SelfManagedOptOutsEnabled:
+			return d.ReadBool(schemas.DeleteRcsAgentResult_SelfManagedOptOutsEnabled, &v.SelfManagedOptOutsEnabled)
+		case schemas.DeleteRcsAgentResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRcsAgentResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RcsAgentStatus(ev)
+			return nil
+		case schemas.DeleteRcsAgentResult_TwoWayChannelArn:
+			v.TwoWayChannelArn = new(string)
+			return d.ReadString(schemas.DeleteRcsAgentResult_TwoWayChannelArn, v.TwoWayChannelArn)
+		case schemas.DeleteRcsAgentResult_TwoWayChannelRole:
+			v.TwoWayChannelRole = new(string)
+			return d.ReadString(schemas.DeleteRcsAgentResult_TwoWayChannelRole, v.TwoWayChannelRole)
+		case schemas.DeleteRcsAgentResult_TwoWayEnabled:
+			return d.ReadBool(schemas.DeleteRcsAgentResult_TwoWayEnabled, &v.TwoWayEnabled)
+		case schemas.DeleteRcsAgentResult_TwoWayRcsEventsEnabled:
+			return deserializeRcsEventTypeList(d, schemas.DeleteRcsAgentResult_TwoWayRcsEventsEnabled, &v.TwoWayRcsEventsEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRcsAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRcsAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRcsAgent, schemas.DeleteRcsAgentRequest, schemas.DeleteRcsAgentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRcsAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRcsAgent, schemas.DeleteRcsAgentRequest, schemas.DeleteRcsAgentResult), output: &DeleteRcsAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

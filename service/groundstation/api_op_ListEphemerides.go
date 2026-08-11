@@ -5,7 +5,9 @@ package groundstation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,34 @@ type ListEphemeridesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEphemeridesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEphemeridesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEphemeridesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListEphemeridesRequest_endTime, *v.EndTime)
+	}
+	if v.EphemerisType != "" {
+		s.WriteString(schemas.ListEphemeridesRequest_ephemerisType, string(v.EphemerisType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEphemeridesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEphemeridesRequest_nextToken, *v.NextToken)
+	}
+	if v.SatelliteId != nil {
+		s.WriteString(schemas.ListEphemeridesRequest_satelliteId, *v.SatelliteId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListEphemeridesRequest_startTime, *v.StartTime)
+	}
+	serializeEphemerisStatusList(s, schemas.ListEphemeridesRequest_statusList, v.StatusList)
+}
+
 type ListEphemeridesOutput struct {
 
 	// List of ephemerides.
@@ -73,13 +103,35 @@ type ListEphemeridesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEphemeridesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEphemeridesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEphemeridesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEphemeridesList(s, schemas.ListEphemeridesResponse_ephemerides, v.Ephemerides)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEphemeridesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEphemeridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEphemeridesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEphemeridesResponse_ephemerides:
+			return deserializeEphemeridesList(d, schemas.ListEphemeridesResponse_ephemerides, &v.Ephemerides)
+		case schemas.ListEphemeridesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEphemeridesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEphemeridesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEphemerides{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEphemerides, schemas.ListEphemeridesRequest, schemas.ListEphemeridesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEphemerides{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEphemerides, schemas.ListEphemeridesRequest, schemas.ListEphemeridesResponse), output: &ListEphemeridesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

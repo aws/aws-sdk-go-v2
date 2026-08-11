@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,30 @@ type PutProtectConfigurationRuleSetNumberOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProtectConfigurationRuleSetNumberOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProtectConfigurationRuleSetNumberOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProtectConfigurationRuleSetNumberOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideRequest_Action, string(v.Action))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.ExpirationTimestamp != nil {
+		s.WriteTime(schemas.PutProtectConfigurationRuleSetNumberOverrideRequest_ExpirationTimestamp, *v.ExpirationTimestamp)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+
 type PutProtectConfigurationRuleSetNumberOverrideOutput struct {
 
 	// The action for the rule to take.
@@ -98,13 +124,72 @@ type PutProtectConfigurationRuleSetNumberOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProtectConfigurationRuleSetNumberOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProtectConfigurationRuleSetNumberOverrideResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProtectConfigurationRuleSetNumberOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_Action, string(v.Action))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.ExpirationTimestamp != nil {
+		s.WriteTime(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp, *v.ExpirationTimestamp)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.ProtectConfigurationArn != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn, *v.ProtectConfigurationArn)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+func (v *PutProtectConfigurationRuleSetNumberOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutProtectConfigurationRuleSetNumberOverrideResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutProtectConfigurationRuleSetNumberOverrideResult_Action:
+			var ev string
+			if err := d.ReadString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.ProtectConfigurationRuleOverrideAction(ev)
+			return nil
+		case schemas.PutProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.PutProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber:
+			v.DestinationPhoneNumber = new(string)
+			return d.ReadString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber, v.DestinationPhoneNumber)
+		case schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp:
+			v.ExpirationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp, v.ExpirationTimestamp)
+		case schemas.PutProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn:
+			v.ProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn, v.ProtectConfigurationArn)
+		case schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId:
+			v.ProtectConfigurationId = new(string)
+			return d.ReadString(schemas.PutProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId, v.ProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutProtectConfigurationRuleSetNumberOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutProtectConfigurationRuleSetNumberOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProtectConfigurationRuleSetNumberOverride, schemas.PutProtectConfigurationRuleSetNumberOverrideRequest, schemas.PutProtectConfigurationRuleSetNumberOverrideResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutProtectConfigurationRuleSetNumberOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProtectConfigurationRuleSetNumberOverride, schemas.PutProtectConfigurationRuleSetNumberOverrideRequest, schemas.PutProtectConfigurationRuleSetNumberOverrideResult), output: &PutProtectConfigurationRuleSetNumberOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

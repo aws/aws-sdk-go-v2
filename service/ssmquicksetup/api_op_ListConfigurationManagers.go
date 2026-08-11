@@ -5,7 +5,9 @@ package ssmquicksetup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type ListConfigurationManagersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationManagersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationManagersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationManagersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFiltersList(s, schemas.ListConfigurationManagersInput_Filters, v.Filters)
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListConfigurationManagersInput_MaxItems, *v.MaxItems)
+	}
+	if v.StartingToken != nil {
+		s.WriteString(schemas.ListConfigurationManagersInput_StartingToken, *v.StartingToken)
+	}
+}
+
 type ListConfigurationManagersOutput struct {
 
 	// The configuration managers returned by the request.
@@ -55,13 +73,35 @@ type ListConfigurationManagersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationManagersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationManagersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationManagersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationManagerList(s, schemas.ListConfigurationManagersOutput_ConfigurationManagersList, v.ConfigurationManagersList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationManagersOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigurationManagersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationManagersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationManagersOutput_ConfigurationManagersList:
+			return deserializeConfigurationManagerList(d, schemas.ListConfigurationManagersOutput_ConfigurationManagersList, &v.ConfigurationManagersList)
+		case schemas.ListConfigurationManagersOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationManagersOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationManagersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigurationManagers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationManagers, schemas.ListConfigurationManagersInput, schemas.ListConfigurationManagersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigurationManagers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationManagers, schemas.ListConfigurationManagersInput, schemas.ListConfigurationManagersOutput), output: &ListConfigurationManagersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

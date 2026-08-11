@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -40,6 +42,28 @@ type GetEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetEnvironmentInput_name, *v.Name)
+	}
+}
+func (v *GetEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetEnvironmentInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type GetEnvironmentOutput struct {
 
 	// The detailed data of the requested environment.
@@ -53,13 +77,34 @@ type GetEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteStruct(schemas.GetEnvironmentOutput_environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentOutput_environment:
+			v.Environment = &types.Environment{}
+			return v.Environment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentInput, schemas.GetEnvironmentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentInput, schemas.GetEnvironmentOutput), output: &GetEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

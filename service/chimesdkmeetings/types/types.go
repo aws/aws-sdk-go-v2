@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -73,6 +75,48 @@ type Attendee struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Attendee) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Attendee)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Attendee) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttendeeId != nil {
+		s.WriteString(schemas.Attendee_AttendeeId, *v.AttendeeId)
+	}
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.Attendee_Capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExternalUserId != nil {
+		s.WriteString(schemas.Attendee_ExternalUserId, *v.ExternalUserId)
+	}
+	if v.JoinToken != nil {
+		s.WriteString(schemas.Attendee_JoinToken, *v.JoinToken)
+	}
+}
+func (v *Attendee) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Attendee, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Attendee_AttendeeId:
+			v.AttendeeId = new(string)
+			return d.ReadString(schemas.Attendee_AttendeeId, v.AttendeeId)
+		case schemas.Attendee_Capabilities:
+			v.Capabilities = &AttendeeCapabilities{}
+			return v.Capabilities.Deserialize(d)
+		case schemas.Attendee_ExternalUserId:
+			v.ExternalUserId = new(string)
+			return d.ReadString(schemas.Attendee_ExternalUserId, v.ExternalUserId)
+		case schemas.Attendee_JoinToken:
+			v.JoinToken = new(string)
+			return d.ReadString(schemas.Attendee_JoinToken, v.JoinToken)
+		}
+		return nil
+	})
+}
+
 // The media capabilities of an attendee: audio, video, or content.
 //
 // You use the capabilities with a set of values that control what the
@@ -130,6 +174,52 @@ type AttendeeCapabilities struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttendeeCapabilities) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttendeeCapabilities)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttendeeCapabilities) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Audio != "" {
+		s.WriteString(schemas.AttendeeCapabilities_Audio, string(v.Audio))
+	}
+	if v.Content != "" {
+		s.WriteString(schemas.AttendeeCapabilities_Content, string(v.Content))
+	}
+	if v.Video != "" {
+		s.WriteString(schemas.AttendeeCapabilities_Video, string(v.Video))
+	}
+}
+func (v *AttendeeCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttendeeCapabilities, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttendeeCapabilities_Audio:
+			var ev string
+			if err := d.ReadString(schemas.AttendeeCapabilities_Audio, &ev); err != nil {
+				return err
+			}
+			v.Audio = MediaCapabilities(ev)
+			return nil
+		case schemas.AttendeeCapabilities_Content:
+			var ev string
+			if err := d.ReadString(schemas.AttendeeCapabilities_Content, &ev); err != nil {
+				return err
+			}
+			v.Content = MediaCapabilities(ev)
+			return nil
+		case schemas.AttendeeCapabilities_Video:
+			var ev string
+			if err := d.ReadString(schemas.AttendeeCapabilities_Video, &ev); err != nil {
+				return err
+			}
+			v.Video = MediaCapabilities(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Lists the maximum number of attendees allowed into the meeting.
 //
 // If you specify FHD for MeetingFeatures:Video:MaxResolution , or if you specify
@@ -143,6 +233,28 @@ type AttendeeFeatures struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttendeeFeatures) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttendeeFeatures)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttendeeFeatures) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCount != nil {
+		s.WriteInt32(schemas.AttendeeFeatures_MaxCount, *v.MaxCount)
+	}
+}
+func (v *AttendeeFeatures) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttendeeFeatures, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttendeeFeatures_MaxCount:
+			v.MaxCount = new(int32)
+			return d.ReadInt32(schemas.AttendeeFeatures_MaxCount, v.MaxCount)
+		}
+		return nil
+	})
+}
+
 // A structure that contains one or more attendee IDs.
 type AttendeeIdItem struct {
 
@@ -154,6 +266,28 @@ type AttendeeIdItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttendeeIdItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttendeeIdItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttendeeIdItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttendeeId != nil {
+		s.WriteString(schemas.AttendeeIdItem_AttendeeId, *v.AttendeeId)
+	}
+}
+func (v *AttendeeIdItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttendeeIdItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttendeeIdItem_AttendeeId:
+			v.AttendeeId = new(string)
+			return d.ReadString(schemas.AttendeeIdItem_AttendeeId, v.AttendeeId)
+		}
+		return nil
+	})
+}
+
 // An optional category of meeting features that contains audio-specific
 // configurations, such as operating parameters for Amazon Voice Focus.
 type AudioFeatures struct {
@@ -162,6 +296,32 @@ type AudioFeatures struct {
 	EchoReduction MeetingFeatureStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *AudioFeatures) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioFeatures)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioFeatures) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EchoReduction != "" {
+		s.WriteString(schemas.AudioFeatures_EchoReduction, string(v.EchoReduction))
+	}
+}
+func (v *AudioFeatures) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioFeatures, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioFeatures_EchoReduction:
+			var ev string
+			if err := d.ReadString(schemas.AudioFeatures_EchoReduction, &ev); err != nil {
+				return err
+			}
+			v.EchoReduction = MeetingFeatureStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Lists the content (screen share) features for the meeting. Applies to all
@@ -180,6 +340,32 @@ type ContentFeatures struct {
 	MaxResolution ContentResolution
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContentFeatures) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentFeatures)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentFeatures) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResolution != "" {
+		s.WriteString(schemas.ContentFeatures_MaxResolution, string(v.MaxResolution))
+	}
+}
+func (v *ContentFeatures) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContentFeatures, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContentFeatures_MaxResolution:
+			var ev string
+			if err := d.ReadString(schemas.ContentFeatures_MaxResolution, &ev); err != nil {
+				return err
+			}
+			v.MaxResolution = ContentResolution(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The list of errors returned when errors are encountered during the
@@ -205,6 +391,40 @@ type CreateAttendeeError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAttendeeError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAttendeeError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAttendeeError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.CreateAttendeeError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.CreateAttendeeError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ExternalUserId != nil {
+		s.WriteString(schemas.CreateAttendeeError_ExternalUserId, *v.ExternalUserId)
+	}
+}
+func (v *CreateAttendeeError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAttendeeError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAttendeeError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.CreateAttendeeError_ErrorCode, v.ErrorCode)
+		case schemas.CreateAttendeeError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.CreateAttendeeError_ErrorMessage, v.ErrorMessage)
+		case schemas.CreateAttendeeError_ExternalUserId:
+			v.ExternalUserId = new(string)
+			return d.ReadString(schemas.CreateAttendeeError_ExternalUserId, v.ExternalUserId)
+		}
+		return nil
+	})
+}
+
 // The Amazon Chime SDK attendee fields to create, used with the
 // BatchCreateAttendee action.
 type CreateAttendeeRequestItem struct {
@@ -224,6 +444,36 @@ type CreateAttendeeRequestItem struct {
 	Capabilities *AttendeeCapabilities
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateAttendeeRequestItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAttendeeRequestItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAttendeeRequestItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.CreateAttendeeRequestItem_Capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExternalUserId != nil {
+		s.WriteString(schemas.CreateAttendeeRequestItem_ExternalUserId, *v.ExternalUserId)
+	}
+}
+func (v *CreateAttendeeRequestItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAttendeeRequestItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAttendeeRequestItem_Capabilities:
+			v.Capabilities = &AttendeeCapabilities{}
+			return v.Capabilities.Deserialize(d)
+		case schemas.CreateAttendeeRequestItem_ExternalUserId:
+			v.ExternalUserId = new(string)
+			return d.ReadString(schemas.CreateAttendeeRequestItem_ExternalUserId, v.ExternalUserId)
+		}
+		return nil
+	})
 }
 
 // Settings specific to the Amazon Transcribe Medical engine.
@@ -256,6 +506,78 @@ type EngineTranscribeMedicalSettings struct {
 	VocabularyName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EngineTranscribeMedicalSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngineTranscribeMedicalSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngineTranscribeMedicalSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.EngineTranscribeMedicalSettings_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.EngineTranscribeMedicalSettings_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Region != "" {
+		s.WriteString(schemas.EngineTranscribeMedicalSettings_Region, string(v.Region))
+	}
+	if v.Specialty != "" {
+		s.WriteString(schemas.EngineTranscribeMedicalSettings_Specialty, string(v.Specialty))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EngineTranscribeMedicalSettings_Type, string(v.Type))
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.EngineTranscribeMedicalSettings_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *EngineTranscribeMedicalSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngineTranscribeMedicalSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngineTranscribeMedicalSettings_ContentIdentificationType:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeMedicalSettings_ContentIdentificationType, &ev); err != nil {
+				return err
+			}
+			v.ContentIdentificationType = TranscribeMedicalContentIdentificationType(ev)
+			return nil
+		case schemas.EngineTranscribeMedicalSettings_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeMedicalSettings_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = TranscribeMedicalLanguageCode(ev)
+			return nil
+		case schemas.EngineTranscribeMedicalSettings_Region:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeMedicalSettings_Region, &ev); err != nil {
+				return err
+			}
+			v.Region = TranscribeMedicalRegion(ev)
+			return nil
+		case schemas.EngineTranscribeMedicalSettings_Specialty:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeMedicalSettings_Specialty, &ev); err != nil {
+				return err
+			}
+			v.Specialty = TranscribeMedicalSpecialty(ev)
+			return nil
+		case schemas.EngineTranscribeMedicalSettings_Type:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeMedicalSettings_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = TranscribeMedicalType(ev)
+			return nil
+		case schemas.EngineTranscribeMedicalSettings_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.EngineTranscribeMedicalSettings_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
 }
 
 // Settings specific for Amazon Transcribe as the live transcription engine.
@@ -425,6 +747,144 @@ type EngineTranscribeSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EngineTranscribeSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngineTranscribeSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngineTranscribeSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.EngineTranscribeSettings_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.ContentRedactionType != "" {
+		s.WriteString(schemas.EngineTranscribeSettings_ContentRedactionType, string(v.ContentRedactionType))
+	}
+	if v.EnablePartialResultsStabilization != false {
+		s.WriteBool(schemas.EngineTranscribeSettings_EnablePartialResultsStabilization, v.EnablePartialResultsStabilization)
+	}
+	if v.IdentifyLanguage != false {
+		s.WriteBool(schemas.EngineTranscribeSettings_IdentifyLanguage, v.IdentifyLanguage)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.EngineTranscribeSettings_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageModelName != nil {
+		s.WriteString(schemas.EngineTranscribeSettings_LanguageModelName, *v.LanguageModelName)
+	}
+	if v.LanguageOptions != nil {
+		s.WriteString(schemas.EngineTranscribeSettings_LanguageOptions, *v.LanguageOptions)
+	}
+	if v.PartialResultsStability != "" {
+		s.WriteString(schemas.EngineTranscribeSettings_PartialResultsStability, string(v.PartialResultsStability))
+	}
+	if v.PiiEntityTypes != nil {
+		s.WriteString(schemas.EngineTranscribeSettings_PiiEntityTypes, *v.PiiEntityTypes)
+	}
+	if v.PreferredLanguage != "" {
+		s.WriteString(schemas.EngineTranscribeSettings_PreferredLanguage, string(v.PreferredLanguage))
+	}
+	if v.Region != "" {
+		s.WriteString(schemas.EngineTranscribeSettings_Region, string(v.Region))
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.EngineTranscribeSettings_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.EngineTranscribeSettings_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyFilterNames != nil {
+		s.WriteString(schemas.EngineTranscribeSettings_VocabularyFilterNames, *v.VocabularyFilterNames)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.EngineTranscribeSettings_VocabularyName, *v.VocabularyName)
+	}
+	if v.VocabularyNames != nil {
+		s.WriteString(schemas.EngineTranscribeSettings_VocabularyNames, *v.VocabularyNames)
+	}
+}
+func (v *EngineTranscribeSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngineTranscribeSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngineTranscribeSettings_ContentIdentificationType:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeSettings_ContentIdentificationType, &ev); err != nil {
+				return err
+			}
+			v.ContentIdentificationType = TranscribeContentIdentificationType(ev)
+			return nil
+		case schemas.EngineTranscribeSettings_ContentRedactionType:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeSettings_ContentRedactionType, &ev); err != nil {
+				return err
+			}
+			v.ContentRedactionType = TranscribeContentRedactionType(ev)
+			return nil
+		case schemas.EngineTranscribeSettings_EnablePartialResultsStabilization:
+			return d.ReadBool(schemas.EngineTranscribeSettings_EnablePartialResultsStabilization, &v.EnablePartialResultsStabilization)
+		case schemas.EngineTranscribeSettings_IdentifyLanguage:
+			return d.ReadBool(schemas.EngineTranscribeSettings_IdentifyLanguage, &v.IdentifyLanguage)
+		case schemas.EngineTranscribeSettings_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeSettings_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = TranscribeLanguageCode(ev)
+			return nil
+		case schemas.EngineTranscribeSettings_LanguageModelName:
+			v.LanguageModelName = new(string)
+			return d.ReadString(schemas.EngineTranscribeSettings_LanguageModelName, v.LanguageModelName)
+		case schemas.EngineTranscribeSettings_LanguageOptions:
+			v.LanguageOptions = new(string)
+			return d.ReadString(schemas.EngineTranscribeSettings_LanguageOptions, v.LanguageOptions)
+		case schemas.EngineTranscribeSettings_PartialResultsStability:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeSettings_PartialResultsStability, &ev); err != nil {
+				return err
+			}
+			v.PartialResultsStability = TranscribePartialResultsStability(ev)
+			return nil
+		case schemas.EngineTranscribeSettings_PiiEntityTypes:
+			v.PiiEntityTypes = new(string)
+			return d.ReadString(schemas.EngineTranscribeSettings_PiiEntityTypes, v.PiiEntityTypes)
+		case schemas.EngineTranscribeSettings_PreferredLanguage:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeSettings_PreferredLanguage, &ev); err != nil {
+				return err
+			}
+			v.PreferredLanguage = TranscribeLanguageCode(ev)
+			return nil
+		case schemas.EngineTranscribeSettings_Region:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeSettings_Region, &ev); err != nil {
+				return err
+			}
+			v.Region = TranscribeRegion(ev)
+			return nil
+		case schemas.EngineTranscribeSettings_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.EngineTranscribeSettings_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = TranscribeVocabularyFilterMethod(ev)
+			return nil
+		case schemas.EngineTranscribeSettings_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.EngineTranscribeSettings_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.EngineTranscribeSettings_VocabularyFilterNames:
+			v.VocabularyFilterNames = new(string)
+			return d.ReadString(schemas.EngineTranscribeSettings_VocabularyFilterNames, v.VocabularyFilterNames)
+		case schemas.EngineTranscribeSettings_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.EngineTranscribeSettings_VocabularyName, v.VocabularyName)
+		case schemas.EngineTranscribeSettings_VocabularyNames:
+			v.VocabularyNames = new(string)
+			return d.ReadString(schemas.EngineTranscribeSettings_VocabularyNames, v.VocabularyNames)
+		}
+		return nil
+	})
+}
+
 // A set of endpoints used by clients to connect to the media service group for an
 // Amazon Chime SDK meeting.
 type MediaPlacement struct {
@@ -462,6 +922,70 @@ type MediaPlacement struct {
 	TurnControlUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaPlacement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaPlacement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaPlacement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioFallbackUrl != nil {
+		s.WriteString(schemas.MediaPlacement_AudioFallbackUrl, *v.AudioFallbackUrl)
+	}
+	if v.AudioHostUrl != nil {
+		s.WriteString(schemas.MediaPlacement_AudioHostUrl, *v.AudioHostUrl)
+	}
+	if v.EventIngestionUrl != nil {
+		s.WriteString(schemas.MediaPlacement_EventIngestionUrl, *v.EventIngestionUrl)
+	}
+	if v.ScreenDataUrl != nil {
+		s.WriteString(schemas.MediaPlacement_ScreenDataUrl, *v.ScreenDataUrl)
+	}
+	if v.ScreenSharingUrl != nil {
+		s.WriteString(schemas.MediaPlacement_ScreenSharingUrl, *v.ScreenSharingUrl)
+	}
+	if v.ScreenViewingUrl != nil {
+		s.WriteString(schemas.MediaPlacement_ScreenViewingUrl, *v.ScreenViewingUrl)
+	}
+	if v.SignalingUrl != nil {
+		s.WriteString(schemas.MediaPlacement_SignalingUrl, *v.SignalingUrl)
+	}
+	if v.TurnControlUrl != nil {
+		s.WriteString(schemas.MediaPlacement_TurnControlUrl, *v.TurnControlUrl)
+	}
+}
+func (v *MediaPlacement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaPlacement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaPlacement_AudioFallbackUrl:
+			v.AudioFallbackUrl = new(string)
+			return d.ReadString(schemas.MediaPlacement_AudioFallbackUrl, v.AudioFallbackUrl)
+		case schemas.MediaPlacement_AudioHostUrl:
+			v.AudioHostUrl = new(string)
+			return d.ReadString(schemas.MediaPlacement_AudioHostUrl, v.AudioHostUrl)
+		case schemas.MediaPlacement_EventIngestionUrl:
+			v.EventIngestionUrl = new(string)
+			return d.ReadString(schemas.MediaPlacement_EventIngestionUrl, v.EventIngestionUrl)
+		case schemas.MediaPlacement_ScreenDataUrl:
+			v.ScreenDataUrl = new(string)
+			return d.ReadString(schemas.MediaPlacement_ScreenDataUrl, v.ScreenDataUrl)
+		case schemas.MediaPlacement_ScreenSharingUrl:
+			v.ScreenSharingUrl = new(string)
+			return d.ReadString(schemas.MediaPlacement_ScreenSharingUrl, v.ScreenSharingUrl)
+		case schemas.MediaPlacement_ScreenViewingUrl:
+			v.ScreenViewingUrl = new(string)
+			return d.ReadString(schemas.MediaPlacement_ScreenViewingUrl, v.ScreenViewingUrl)
+		case schemas.MediaPlacement_SignalingUrl:
+			v.SignalingUrl = new(string)
+			return d.ReadString(schemas.MediaPlacement_SignalingUrl, v.SignalingUrl)
+		case schemas.MediaPlacement_TurnControlUrl:
+			v.TurnControlUrl = new(string)
+			return d.ReadString(schemas.MediaPlacement_TurnControlUrl, v.TurnControlUrl)
+		}
+		return nil
+	})
 }
 
 // A meeting created using the Amazon Chime SDK.
@@ -508,6 +1032,77 @@ type Meeting struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Meeting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Meeting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Meeting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalMeetingId != nil {
+		s.WriteString(schemas.Meeting_ExternalMeetingId, *v.ExternalMeetingId)
+	}
+	if v.MediaPlacement != nil {
+		s.WriteStruct(schemas.Meeting_MediaPlacement)
+		v.MediaPlacement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaRegion != nil {
+		s.WriteString(schemas.Meeting_MediaRegion, *v.MediaRegion)
+	}
+	if v.MeetingArn != nil {
+		s.WriteString(schemas.Meeting_MeetingArn, *v.MeetingArn)
+	}
+	if v.MeetingFeatures != nil {
+		s.WriteStruct(schemas.Meeting_MeetingFeatures)
+		v.MeetingFeatures.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MeetingHostId != nil {
+		s.WriteString(schemas.Meeting_MeetingHostId, *v.MeetingHostId)
+	}
+	if v.MeetingId != nil {
+		s.WriteString(schemas.Meeting_MeetingId, *v.MeetingId)
+	}
+	if v.PrimaryMeetingId != nil {
+		s.WriteString(schemas.Meeting_PrimaryMeetingId, *v.PrimaryMeetingId)
+	}
+	serializeTenantIdList(s, schemas.Meeting_TenantIds, v.TenantIds)
+}
+func (v *Meeting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Meeting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Meeting_ExternalMeetingId:
+			v.ExternalMeetingId = new(string)
+			return d.ReadString(schemas.Meeting_ExternalMeetingId, v.ExternalMeetingId)
+		case schemas.Meeting_MediaPlacement:
+			v.MediaPlacement = &MediaPlacement{}
+			return v.MediaPlacement.Deserialize(d)
+		case schemas.Meeting_MediaRegion:
+			v.MediaRegion = new(string)
+			return d.ReadString(schemas.Meeting_MediaRegion, v.MediaRegion)
+		case schemas.Meeting_MeetingArn:
+			v.MeetingArn = new(string)
+			return d.ReadString(schemas.Meeting_MeetingArn, v.MeetingArn)
+		case schemas.Meeting_MeetingFeatures:
+			v.MeetingFeatures = &MeetingFeaturesConfiguration{}
+			return v.MeetingFeatures.Deserialize(d)
+		case schemas.Meeting_MeetingHostId:
+			v.MeetingHostId = new(string)
+			return d.ReadString(schemas.Meeting_MeetingHostId, v.MeetingHostId)
+		case schemas.Meeting_MeetingId:
+			v.MeetingId = new(string)
+			return d.ReadString(schemas.Meeting_MeetingId, v.MeetingId)
+		case schemas.Meeting_PrimaryMeetingId:
+			v.PrimaryMeetingId = new(string)
+			return d.ReadString(schemas.Meeting_PrimaryMeetingId, v.PrimaryMeetingId)
+		case schemas.Meeting_TenantIds:
+			return deserializeTenantIdList(d, schemas.Meeting_TenantIds, &v.TenantIds)
+		}
+		return nil
+	})
+}
+
 // The configuration settings of the features available to a meeting.
 type MeetingFeaturesConfiguration struct {
 
@@ -524,6 +1119,54 @@ type MeetingFeaturesConfiguration struct {
 	Video *VideoFeatures
 
 	noSmithyDocumentSerde
+}
+
+func (v *MeetingFeaturesConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeetingFeaturesConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeetingFeaturesConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attendee != nil {
+		s.WriteStruct(schemas.MeetingFeaturesConfiguration_Attendee)
+		v.Attendee.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Audio != nil {
+		s.WriteStruct(schemas.MeetingFeaturesConfiguration_Audio)
+		v.Audio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.MeetingFeaturesConfiguration_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Video != nil {
+		s.WriteStruct(schemas.MeetingFeaturesConfiguration_Video)
+		v.Video.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MeetingFeaturesConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MeetingFeaturesConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MeetingFeaturesConfiguration_Attendee:
+			v.Attendee = &AttendeeFeatures{}
+			return v.Attendee.Deserialize(d)
+		case schemas.MeetingFeaturesConfiguration_Audio:
+			v.Audio = &AudioFeatures{}
+			return v.Audio.Deserialize(d)
+		case schemas.MeetingFeaturesConfiguration_Content:
+			v.Content = &ContentFeatures{}
+			return v.Content.Deserialize(d)
+		case schemas.MeetingFeaturesConfiguration_Video:
+			v.Video = &VideoFeatures{}
+			return v.Video.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration for resource targets to receive notifications when meeting
@@ -543,6 +1186,40 @@ type NotificationsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotificationsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaFunctionArn != nil {
+		s.WriteString(schemas.NotificationsConfiguration_LambdaFunctionArn, *v.LambdaFunctionArn)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.NotificationsConfiguration_SnsTopicArn, *v.SnsTopicArn)
+	}
+	if v.SqsQueueArn != nil {
+		s.WriteString(schemas.NotificationsConfiguration_SqsQueueArn, *v.SqsQueueArn)
+	}
+}
+func (v *NotificationsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationsConfiguration_LambdaFunctionArn:
+			v.LambdaFunctionArn = new(string)
+			return d.ReadString(schemas.NotificationsConfiguration_LambdaFunctionArn, v.LambdaFunctionArn)
+		case schemas.NotificationsConfiguration_SnsTopicArn:
+			v.SnsTopicArn = new(string)
+			return d.ReadString(schemas.NotificationsConfiguration_SnsTopicArn, v.SnsTopicArn)
+		case schemas.NotificationsConfiguration_SqsQueueArn:
+			v.SqsQueueArn = new(string)
+			return d.ReadString(schemas.NotificationsConfiguration_SqsQueueArn, v.SqsQueueArn)
+		}
+		return nil
+	})
+}
+
 // A key-value pair that you define.
 type Tag struct {
 
@@ -559,6 +1236,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The configuration for the current transcription operation. Must contain
 // EngineTranscribeSettings or EngineTranscribeMedicalSettings .
 type TranscriptionConfiguration struct {
@@ -570,6 +1275,38 @@ type TranscriptionConfiguration struct {
 	EngineTranscribeSettings *EngineTranscribeSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *TranscriptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscriptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscriptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineTranscribeMedicalSettings != nil {
+		s.WriteStruct(schemas.TranscriptionConfiguration_EngineTranscribeMedicalSettings)
+		v.EngineTranscribeMedicalSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngineTranscribeSettings != nil {
+		s.WriteStruct(schemas.TranscriptionConfiguration_EngineTranscribeSettings)
+		v.EngineTranscribeSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TranscriptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscriptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscriptionConfiguration_EngineTranscribeMedicalSettings:
+			v.EngineTranscribeMedicalSettings = &EngineTranscribeMedicalSettings{}
+			return v.EngineTranscribeMedicalSettings.Deserialize(d)
+		case schemas.TranscriptionConfiguration_EngineTranscribeSettings:
+			v.EngineTranscribeSettings = &EngineTranscribeSettings{}
+			return v.EngineTranscribeSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The video features set for the meeting. Applies to all attendees.
@@ -587,6 +1324,32 @@ type VideoFeatures struct {
 	MaxResolution VideoResolution
 
 	noSmithyDocumentSerde
+}
+
+func (v *VideoFeatures) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoFeatures)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoFeatures) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResolution != "" {
+		s.WriteString(schemas.VideoFeatures_MaxResolution, string(v.MaxResolution))
+	}
+}
+func (v *VideoFeatures) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoFeatures, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoFeatures_MaxResolution:
+			var ev string
+			if err := d.ReadString(schemas.VideoFeatures_MaxResolution, &ev); err != nil {
+				return err
+			}
+			v.MaxResolution = VideoResolution(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

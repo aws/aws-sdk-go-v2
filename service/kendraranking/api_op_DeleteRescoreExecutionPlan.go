@@ -4,6 +4,8 @@ package kendraranking
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendraranking/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteRescoreExecutionPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRescoreExecutionPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRescoreExecutionPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRescoreExecutionPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteRescoreExecutionPlanRequest_Id, *v.Id)
+	}
+}
+
 type DeleteRescoreExecutionPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteRescoreExecutionPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRescoreExecutionPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRescoreExecutionPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRescoreExecutionPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRescoreExecutionPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteRescoreExecutionPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRescoreExecutionPlan, schemas.DeleteRescoreExecutionPlanRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteRescoreExecutionPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRescoreExecutionPlan, schemas.DeleteRescoreExecutionPlanRequest, nil), output: &DeleteRescoreExecutionPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

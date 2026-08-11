@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type ListDataLakesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataLakesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataLakesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataLakesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionList(s, schemas.ListDataLakesRequest_regions, v.Regions)
+}
+
 type ListDataLakesOutput struct {
 
 	// Retrieves the Security Lake configuration object.
@@ -45,13 +57,29 @@ type ListDataLakesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataLakesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataLakesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataLakesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataLakeResourceList(s, schemas.ListDataLakesResponse_dataLakes, v.DataLakes)
+}
+func (v *ListDataLakesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataLakesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataLakesResponse_dataLakes:
+			return deserializeDataLakeResourceList(d, schemas.ListDataLakesResponse_dataLakes, &v.DataLakes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataLakesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataLakes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakes, schemas.ListDataLakesRequest, schemas.ListDataLakesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataLakes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakes, schemas.ListDataLakesRequest, schemas.ListDataLakesResponse), output: &ListDataLakesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

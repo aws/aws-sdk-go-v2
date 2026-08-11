@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type BatchCreateRoomMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateRoomMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateRoomMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateRoomMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BatchCreateRoomMembershipRequest_AccountId, *v.AccountId)
+	}
+	serializeMembershipItemList(s, schemas.BatchCreateRoomMembershipRequest_MembershipItemList, v.MembershipItemList)
+	if v.RoomId != nil {
+		s.WriteString(schemas.BatchCreateRoomMembershipRequest_RoomId, *v.RoomId)
+	}
+}
+
 type BatchCreateRoomMembershipOutput struct {
 
 	// If the action fails for one or more of the member IDs in the request, a list of
@@ -58,13 +76,29 @@ type BatchCreateRoomMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateRoomMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateRoomMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateRoomMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberErrorList(s, schemas.BatchCreateRoomMembershipResponse_Errors, v.Errors)
+}
+func (v *BatchCreateRoomMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateRoomMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateRoomMembershipResponse_Errors:
+			return deserializeMemberErrorList(d, schemas.BatchCreateRoomMembershipResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateRoomMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateRoomMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateRoomMembership, schemas.BatchCreateRoomMembershipRequest, schemas.BatchCreateRoomMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateRoomMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateRoomMembership, schemas.BatchCreateRoomMembershipRequest, schemas.BatchCreateRoomMembershipResponse), output: &BatchCreateRoomMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

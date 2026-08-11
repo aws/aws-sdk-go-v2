@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,27 @@ type CreateEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEvaluationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationDataSourceId != nil {
+		s.WriteString(schemas.CreateEvaluationInput_EvaluationDataSourceId, *v.EvaluationDataSourceId)
+	}
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.CreateEvaluationInput_EvaluationId, *v.EvaluationId)
+	}
+	if v.EvaluationName != nil {
+		s.WriteString(schemas.CreateEvaluationInput_EvaluationName, *v.EvaluationName)
+	}
+	if v.MLModelId != nil {
+		s.WriteString(schemas.CreateEvaluationInput_MLModelId, *v.MLModelId)
+	}
+}
+
 //	Represents the output of a CreateEvaluation operation, and is an
 //
 // acknowledgement that Amazon ML received the request.
@@ -83,13 +106,32 @@ type CreateEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEvaluationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.CreateEvaluationOutput_EvaluationId, *v.EvaluationId)
+	}
+}
+func (v *CreateEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEvaluationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEvaluationOutput_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.CreateEvaluationOutput_EvaluationId, v.EvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvaluation, schemas.CreateEvaluationInput, schemas.CreateEvaluationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvaluation, schemas.CreateEvaluationInput, schemas.CreateEvaluationOutput), output: &CreateEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

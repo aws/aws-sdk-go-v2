@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteModelManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteModelManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteModelManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteModelManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteModelManifestRequest_name, *v.Name)
+	}
+}
+func (v *DeleteModelManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteModelManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteModelManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteModelManifestRequest_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeleteModelManifestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted model manifest.
@@ -51,13 +75,38 @@ type DeleteModelManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteModelManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteModelManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteModelManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteModelManifestResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteModelManifestResponse_name, *v.Name)
+	}
+}
+func (v *DeleteModelManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteModelManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteModelManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteModelManifestResponse_arn, v.Arn)
+		case schemas.DeleteModelManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteModelManifestResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteModelManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteModelManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteModelManifest, schemas.DeleteModelManifestRequest, schemas.DeleteModelManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteModelManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteModelManifest, schemas.DeleteModelManifestRequest, schemas.DeleteModelManifestResponse), output: &DeleteModelManifestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

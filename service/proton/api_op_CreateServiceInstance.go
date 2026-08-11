@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,61 @@ type CreateServiceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateServiceInstanceInput_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceInstanceInput_name, *v.Name)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.CreateServiceInstanceInput_serviceName, *v.ServiceName)
+	}
+	if v.Spec != nil {
+		s.WriteString(schemas.CreateServiceInstanceInput_spec, *v.Spec)
+	}
+	serializeTagList(s, schemas.CreateServiceInstanceInput_tags, v.Tags)
+	if v.TemplateMajorVersion != nil {
+		s.WriteString(schemas.CreateServiceInstanceInput_templateMajorVersion, *v.TemplateMajorVersion)
+	}
+	if v.TemplateMinorVersion != nil {
+		s.WriteString(schemas.CreateServiceInstanceInput_templateMinorVersion, *v.TemplateMinorVersion)
+	}
+}
+func (v *CreateServiceInstanceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceInstanceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceInstanceInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateServiceInstanceInput_clientToken, v.ClientToken)
+		case schemas.CreateServiceInstanceInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateServiceInstanceInput_name, v.Name)
+		case schemas.CreateServiceInstanceInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.CreateServiceInstanceInput_serviceName, v.ServiceName)
+		case schemas.CreateServiceInstanceInput_spec:
+			v.Spec = new(string)
+			return d.ReadString(schemas.CreateServiceInstanceInput_spec, v.Spec)
+		case schemas.CreateServiceInstanceInput_tags:
+			return deserializeTagList(d, schemas.CreateServiceInstanceInput_tags, &v.Tags)
+		case schemas.CreateServiceInstanceInput_templateMajorVersion:
+			v.TemplateMajorVersion = new(string)
+			return d.ReadString(schemas.CreateServiceInstanceInput_templateMajorVersion, v.TemplateMajorVersion)
+		case schemas.CreateServiceInstanceInput_templateMinorVersion:
+			v.TemplateMinorVersion = new(string)
+			return d.ReadString(schemas.CreateServiceInstanceInput_templateMinorVersion, v.TemplateMinorVersion)
+		}
+		return nil
+	})
+}
+
 type CreateServiceInstanceOutput struct {
 
 	// The detailed data of the service instance being created.
@@ -80,13 +137,34 @@ type CreateServiceInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceInstanceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstance != nil {
+		s.WriteStruct(schemas.CreateServiceInstanceOutput_serviceInstance)
+		v.ServiceInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceInstanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceInstanceOutput_serviceInstance:
+			v.ServiceInstance = &types.ServiceInstance{}
+			return v.ServiceInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateServiceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceInstance, schemas.CreateServiceInstanceInput, schemas.CreateServiceInstanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateServiceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceInstance, schemas.CreateServiceInstanceInput, schemas.CreateServiceInstanceOutput), output: &CreateServiceInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

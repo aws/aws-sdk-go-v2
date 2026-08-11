@@ -4,6 +4,8 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteAccessControlConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessControlConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessControlConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessControlConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteAccessControlConfigurationRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DeleteAccessControlConfigurationRequest_IndexId, *v.IndexId)
+	}
+}
+
 type DeleteAccessControlConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeleteAccessControlConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessControlConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessControlConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessControlConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAccessControlConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccessControlConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccessControlConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAccessControlConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessControlConfiguration, schemas.DeleteAccessControlConfigurationRequest, schemas.DeleteAccessControlConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAccessControlConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessControlConfiguration, schemas.DeleteAccessControlConfigurationRequest, schemas.DeleteAccessControlConfigurationResponse), output: &DeleteAccessControlConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

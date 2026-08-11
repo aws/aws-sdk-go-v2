@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeBatchDeleteConfigurationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchDeleteConfigurationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchDeleteConfigurationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchDeleteConfigurationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.DescribeBatchDeleteConfigurationTaskRequest_taskId, *v.TaskId)
+	}
+}
+
 type DescribeBatchDeleteConfigurationTaskOutput struct {
 
 	//  The BatchDeleteConfigurationTask that represents the deletion task being
@@ -48,13 +62,34 @@ type DescribeBatchDeleteConfigurationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchDeleteConfigurationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchDeleteConfigurationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchDeleteConfigurationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Task != nil {
+		s.WriteStruct(schemas.DescribeBatchDeleteConfigurationTaskResponse_task)
+		v.Task.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeBatchDeleteConfigurationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBatchDeleteConfigurationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBatchDeleteConfigurationTaskResponse_task:
+			v.Task = &types.BatchDeleteConfigurationTask{}
+			return v.Task.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBatchDeleteConfigurationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBatchDeleteConfigurationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchDeleteConfigurationTask, schemas.DescribeBatchDeleteConfigurationTaskRequest, schemas.DescribeBatchDeleteConfigurationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBatchDeleteConfigurationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchDeleteConfigurationTask, schemas.DescribeBatchDeleteConfigurationTaskRequest, schemas.DescribeBatchDeleteConfigurationTaskResponse), output: &DescribeBatchDeleteConfigurationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

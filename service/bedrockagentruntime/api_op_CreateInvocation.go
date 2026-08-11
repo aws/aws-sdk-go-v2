@@ -4,6 +4,8 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,24 @@ type CreateInvocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInvocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInvocationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInvocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateInvocationRequest_description, *v.Description)
+	}
+	if v.InvocationId != nil {
+		s.WriteString(schemas.CreateInvocationRequest_invocationId, *v.InvocationId)
+	}
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.CreateInvocationRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+}
+
 type CreateInvocationOutput struct {
 
 	// The timestamp for when the invocation was created.
@@ -80,13 +100,44 @@ type CreateInvocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInvocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInvocationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInvocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateInvocationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.InvocationId != nil {
+		s.WriteString(schemas.CreateInvocationResponse_invocationId, *v.InvocationId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.CreateInvocationResponse_sessionId, *v.SessionId)
+	}
+}
+func (v *CreateInvocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInvocationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInvocationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateInvocationResponse_createdAt, v.CreatedAt)
+		case schemas.CreateInvocationResponse_invocationId:
+			v.InvocationId = new(string)
+			return d.ReadString(schemas.CreateInvocationResponse_invocationId, v.InvocationId)
+		case schemas.CreateInvocationResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.CreateInvocationResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInvocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInvocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvocation, schemas.CreateInvocationRequest, schemas.CreateInvocationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInvocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvocation, schemas.CreateInvocationRequest, schemas.CreateInvocationResponse), output: &CreateInvocationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

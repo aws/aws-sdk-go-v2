@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,63 @@ type ListServiceInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListServiceInstancesFilterList(s, schemas.ListServiceInstancesInput_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceInstancesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceInstancesInput_nextToken, *v.NextToken)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.ListServiceInstancesInput_serviceName, *v.ServiceName)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListServiceInstancesInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListServiceInstancesInput_sortOrder, string(v.SortOrder))
+	}
+}
+func (v *ListServiceInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceInstancesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceInstancesInput_filters:
+			return deserializeListServiceInstancesFilterList(d, schemas.ListServiceInstancesInput_filters, &v.Filters)
+		case schemas.ListServiceInstancesInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListServiceInstancesInput_maxResults, v.MaxResults)
+		case schemas.ListServiceInstancesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceInstancesInput_nextToken, v.NextToken)
+		case schemas.ListServiceInstancesInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.ListServiceInstancesInput_serviceName, v.ServiceName)
+		case schemas.ListServiceInstancesInput_sortBy:
+			var ev string
+			if err := d.ReadString(schemas.ListServiceInstancesInput_sortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = types.ListServiceInstancesSortBy(ev)
+			return nil
+		case schemas.ListServiceInstancesInput_sortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ListServiceInstancesInput_sortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = types.SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListServiceInstancesOutput struct {
 
 	// An array of service instances with summary data.
@@ -77,13 +136,35 @@ type ListServiceInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceInstancesOutput_nextToken, *v.NextToken)
+	}
+	serializeServiceInstanceSummaryList(s, schemas.ListServiceInstancesOutput_serviceInstances, v.ServiceInstances)
+}
+func (v *ListServiceInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceInstancesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceInstancesOutput_nextToken, v.NextToken)
+		case schemas.ListServiceInstancesOutput_serviceInstances:
+			return deserializeServiceInstanceSummaryList(d, schemas.ListServiceInstancesOutput_serviceInstances, &v.ServiceInstances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListServiceInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceInstances, schemas.ListServiceInstancesInput, schemas.ListServiceInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListServiceInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceInstances, schemas.ListServiceInstancesInput, schemas.ListServiceInstancesOutput), output: &ListServiceInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

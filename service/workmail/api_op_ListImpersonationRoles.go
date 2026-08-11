@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListImpersonationRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImpersonationRolesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImpersonationRolesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImpersonationRolesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImpersonationRolesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImpersonationRolesRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListImpersonationRolesRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListImpersonationRolesOutput struct {
 
 	// The token to retrieve the next page of results. The value is null when there
@@ -57,13 +77,35 @@ type ListImpersonationRolesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImpersonationRolesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImpersonationRolesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImpersonationRolesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImpersonationRolesResponse_NextToken, *v.NextToken)
+	}
+	serializeImpersonationRoleList(s, schemas.ListImpersonationRolesResponse_Roles, v.Roles)
+}
+func (v *ListImpersonationRolesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImpersonationRolesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImpersonationRolesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImpersonationRolesResponse_NextToken, v.NextToken)
+		case schemas.ListImpersonationRolesResponse_Roles:
+			return deserializeImpersonationRoleList(d, schemas.ListImpersonationRolesResponse_Roles, &v.Roles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImpersonationRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListImpersonationRoles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImpersonationRoles, schemas.ListImpersonationRolesRequest, schemas.ListImpersonationRolesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListImpersonationRoles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImpersonationRoles, schemas.ListImpersonationRolesRequest, schemas.ListImpersonationRolesResponse), output: &ListImpersonationRolesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

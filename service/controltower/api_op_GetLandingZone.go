@@ -4,7 +4,9 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetLandingZoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLandingZoneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLandingZoneInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLandingZoneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LandingZoneIdentifier != nil {
+		s.WriteString(schemas.GetLandingZoneInput_landingZoneIdentifier, *v.LandingZoneIdentifier)
+	}
+}
+
 type GetLandingZoneOutput struct {
 
 	// Information about the landing zone.
@@ -47,13 +61,34 @@ type GetLandingZoneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLandingZoneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLandingZoneOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLandingZoneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LandingZone != nil {
+		s.WriteStruct(schemas.GetLandingZoneOutput_landingZone)
+		v.LandingZone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLandingZoneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLandingZoneOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLandingZoneOutput_landingZone:
+			v.LandingZone = &types.LandingZoneDetail{}
+			return v.LandingZone.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLandingZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLandingZone{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLandingZone, schemas.GetLandingZoneInput, schemas.GetLandingZoneOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLandingZone{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLandingZone, schemas.GetLandingZoneInput, schemas.GetLandingZoneOutput), output: &GetLandingZoneOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

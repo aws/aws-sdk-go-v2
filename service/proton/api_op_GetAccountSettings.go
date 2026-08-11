@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,22 @@ type GetAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetAccountSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountSettingsInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetAccountSettingsOutput struct {
 
 	// The Proton pipeline service role detail data that's returned by Proton.
@@ -41,13 +59,34 @@ type GetAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountSettings != nil {
+		s.WriteStruct(schemas.GetAccountSettingsOutput_accountSettings)
+		v.AccountSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountSettingsOutput_accountSettings:
+			v.AccountSettings = &types.AccountSettings{}
+			return v.AccountSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountSettings, schemas.GetAccountSettingsInput, schemas.GetAccountSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountSettings, schemas.GetAccountSettingsInput, schemas.GetAccountSettingsOutput), output: &GetAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

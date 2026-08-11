@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type ListRegistrationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegistrationAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegistrationAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegistrationAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegistrationAssociationFilterList(s, schemas.ListRegistrationAssociationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRegistrationAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegistrationAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.ListRegistrationAssociationsRequest_RegistrationId, *v.RegistrationId)
+	}
+}
+
 type ListRegistrationAssociationsOutput struct {
 
 	// The Amazon Resource Name (ARN) for the registration.
@@ -80,13 +101,53 @@ type ListRegistrationAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegistrationAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegistrationAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegistrationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegistrationAssociationsResult_NextToken, *v.NextToken)
+	}
+	if v.RegistrationArn != nil {
+		s.WriteString(schemas.ListRegistrationAssociationsResult_RegistrationArn, *v.RegistrationArn)
+	}
+	serializeRegistrationAssociationMetadataList(s, schemas.ListRegistrationAssociationsResult_RegistrationAssociations, v.RegistrationAssociations)
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.ListRegistrationAssociationsResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.RegistrationType != nil {
+		s.WriteString(schemas.ListRegistrationAssociationsResult_RegistrationType, *v.RegistrationType)
+	}
+}
+func (v *ListRegistrationAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRegistrationAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRegistrationAssociationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRegistrationAssociationsResult_NextToken, v.NextToken)
+		case schemas.ListRegistrationAssociationsResult_RegistrationArn:
+			v.RegistrationArn = new(string)
+			return d.ReadString(schemas.ListRegistrationAssociationsResult_RegistrationArn, v.RegistrationArn)
+		case schemas.ListRegistrationAssociationsResult_RegistrationAssociations:
+			return deserializeRegistrationAssociationMetadataList(d, schemas.ListRegistrationAssociationsResult_RegistrationAssociations, &v.RegistrationAssociations)
+		case schemas.ListRegistrationAssociationsResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.ListRegistrationAssociationsResult_RegistrationId, v.RegistrationId)
+		case schemas.ListRegistrationAssociationsResult_RegistrationType:
+			v.RegistrationType = new(string)
+			return d.ReadString(schemas.ListRegistrationAssociationsResult_RegistrationType, v.RegistrationType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRegistrationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRegistrationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistrationAssociations, schemas.ListRegistrationAssociationsRequest, schemas.ListRegistrationAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRegistrationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistrationAssociations, schemas.ListRegistrationAssociationsRequest, schemas.ListRegistrationAssociationsResult), output: &ListRegistrationAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

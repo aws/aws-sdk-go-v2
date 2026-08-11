@@ -4,7 +4,9 @@ package resourcegroups
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,19 @@ type GroupResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteString(schemas.GroupResourcesInput_Group, *v.Group)
+	}
+	serializeResourceArnList(s, schemas.GroupResourcesInput_ResourceArns, v.ResourceArns)
+}
+
 type GroupResourcesOutput struct {
 
 	// A list of Amazon resource names (ARNs) of any resources that this operation
@@ -81,13 +96,35 @@ type GroupResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedResourceList(s, schemas.GroupResourcesOutput_Failed, v.Failed)
+	serializePendingResourceList(s, schemas.GroupResourcesOutput_Pending, v.Pending)
+	serializeResourceArnList(s, schemas.GroupResourcesOutput_Succeeded, v.Succeeded)
+}
+func (v *GroupResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupResourcesOutput_Failed:
+			return deserializeFailedResourceList(d, schemas.GroupResourcesOutput_Failed, &v.Failed)
+		case schemas.GroupResourcesOutput_Pending:
+			return deserializePendingResourceList(d, schemas.GroupResourcesOutput_Pending, &v.Pending)
+		case schemas.GroupResourcesOutput_Succeeded:
+			return deserializeResourceArnList(d, schemas.GroupResourcesOutput_Succeeded, &v.Succeeded)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGroupResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGroupResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GroupResources, schemas.GroupResourcesInput, schemas.GroupResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGroupResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GroupResources, schemas.GroupResourcesInput, schemas.GroupResourcesOutput), output: &GroupResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

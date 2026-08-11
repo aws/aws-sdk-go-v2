@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type DeleteReplicationConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationConfigurationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicationConfigurationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationConfigurationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationConfigurationTemplateID != nil {
+		s.WriteString(schemas.DeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID, *v.ReplicationConfigurationTemplateID)
+	}
+}
+func (v *DeleteReplicationConfigurationTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReplicationConfigurationTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID:
+			v.ReplicationConfigurationTemplateID = new(string)
+			return d.ReadString(schemas.DeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID, v.ReplicationConfigurationTemplateID)
+		}
+		return nil
+	})
+}
+
 type DeleteReplicationConfigurationTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +65,26 @@ type DeleteReplicationConfigurationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationConfigurationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicationConfigurationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationConfigurationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteReplicationConfigurationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReplicationConfigurationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReplicationConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteReplicationConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationConfigurationTemplate, schemas.DeleteReplicationConfigurationTemplateRequest, schemas.DeleteReplicationConfigurationTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteReplicationConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationConfigurationTemplate, schemas.DeleteReplicationConfigurationTemplateRequest, schemas.DeleteReplicationConfigurationTemplateResponse), output: &DeleteReplicationConfigurationTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

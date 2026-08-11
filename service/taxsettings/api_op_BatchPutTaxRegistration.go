@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -242,6 +244,21 @@ type BatchPutTaxRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutTaxRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.BatchPutTaxRegistrationRequest_accountIds, v.AccountIds)
+	if v.TaxRegistrationEntry != nil {
+		s.WriteStruct(schemas.BatchPutTaxRegistrationRequest_taxRegistrationEntry)
+		v.TaxRegistrationEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type BatchPutTaxRegistrationOutput struct {
 
 	// List of errors for the accounts the TRN information could not be added or
@@ -261,13 +278,39 @@ type BatchPutTaxRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutTaxRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchPutTaxRegistrationErrors(s, schemas.BatchPutTaxRegistrationResponse_errors, v.Errors)
+	if v.Status != "" {
+		s.WriteString(schemas.BatchPutTaxRegistrationResponse_status, string(v.Status))
+	}
+}
+func (v *BatchPutTaxRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutTaxRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutTaxRegistrationResponse_errors:
+			return deserializeBatchPutTaxRegistrationErrors(d, schemas.BatchPutTaxRegistrationResponse_errors, &v.Errors)
+		case schemas.BatchPutTaxRegistrationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.BatchPutTaxRegistrationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaxRegistrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutTaxRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutTaxRegistration, schemas.BatchPutTaxRegistrationRequest, schemas.BatchPutTaxRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutTaxRegistration, schemas.BatchPutTaxRegistrationRequest, schemas.BatchPutTaxRegistrationResponse), output: &BatchPutTaxRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package codecommit
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,42 @@ type DescribeMergeConflictsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMergeConflictsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMergeConflictsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMergeConflictsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConflictDetailLevel != "" {
+		s.WriteString(schemas.DescribeMergeConflictsInput_conflictDetailLevel, string(v.ConflictDetailLevel))
+	}
+	if v.ConflictResolutionStrategy != "" {
+		s.WriteString(schemas.DescribeMergeConflictsInput_conflictResolutionStrategy, string(v.ConflictResolutionStrategy))
+	}
+	if v.DestinationCommitSpecifier != nil {
+		s.WriteString(schemas.DescribeMergeConflictsInput_destinationCommitSpecifier, *v.DestinationCommitSpecifier)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.DescribeMergeConflictsInput_filePath, *v.FilePath)
+	}
+	if v.MaxMergeHunks != nil {
+		s.WriteInt32(schemas.DescribeMergeConflictsInput_maxMergeHunks, *v.MaxMergeHunks)
+	}
+	if v.MergeOption != "" {
+		s.WriteString(schemas.DescribeMergeConflictsInput_mergeOption, string(v.MergeOption))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMergeConflictsInput_nextToken, *v.NextToken)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DescribeMergeConflictsInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitSpecifier != nil {
+		s.WriteString(schemas.DescribeMergeConflictsInput_sourceCommitSpecifier, *v.SourceCommitSpecifier)
+	}
+}
+
 type DescribeMergeConflictsOutput struct {
 
 	// Contains metadata about the conflicts found in the merge.
@@ -117,13 +155,61 @@ type DescribeMergeConflictsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMergeConflictsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMergeConflictsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMergeConflictsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseCommitId != nil {
+		s.WriteString(schemas.DescribeMergeConflictsOutput_baseCommitId, *v.BaseCommitId)
+	}
+	if v.ConflictMetadata != nil {
+		s.WriteStruct(schemas.DescribeMergeConflictsOutput_conflictMetadata)
+		v.ConflictMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationCommitId != nil {
+		s.WriteString(schemas.DescribeMergeConflictsOutput_destinationCommitId, *v.DestinationCommitId)
+	}
+	serializeMergeHunks(s, schemas.DescribeMergeConflictsOutput_mergeHunks, v.MergeHunks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMergeConflictsOutput_nextToken, *v.NextToken)
+	}
+	if v.SourceCommitId != nil {
+		s.WriteString(schemas.DescribeMergeConflictsOutput_sourceCommitId, *v.SourceCommitId)
+	}
+}
+func (v *DescribeMergeConflictsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMergeConflictsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMergeConflictsOutput_baseCommitId:
+			v.BaseCommitId = new(string)
+			return d.ReadString(schemas.DescribeMergeConflictsOutput_baseCommitId, v.BaseCommitId)
+		case schemas.DescribeMergeConflictsOutput_conflictMetadata:
+			v.ConflictMetadata = &types.ConflictMetadata{}
+			return v.ConflictMetadata.Deserialize(d)
+		case schemas.DescribeMergeConflictsOutput_destinationCommitId:
+			v.DestinationCommitId = new(string)
+			return d.ReadString(schemas.DescribeMergeConflictsOutput_destinationCommitId, v.DestinationCommitId)
+		case schemas.DescribeMergeConflictsOutput_mergeHunks:
+			return deserializeMergeHunks(d, schemas.DescribeMergeConflictsOutput_mergeHunks, &v.MergeHunks)
+		case schemas.DescribeMergeConflictsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeMergeConflictsOutput_nextToken, v.NextToken)
+		case schemas.DescribeMergeConflictsOutput_sourceCommitId:
+			v.SourceCommitId = new(string)
+			return d.ReadString(schemas.DescribeMergeConflictsOutput_sourceCommitId, v.SourceCommitId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMergeConflictsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMergeConflicts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMergeConflicts, schemas.DescribeMergeConflictsInput, schemas.DescribeMergeConflictsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMergeConflicts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMergeConflicts, schemas.DescribeMergeConflictsInput, schemas.DescribeMergeConflictsOutput), output: &DescribeMergeConflictsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

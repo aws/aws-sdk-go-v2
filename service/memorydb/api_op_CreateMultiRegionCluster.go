@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,40 @@ type CreateMultiRegionClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiRegionClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiRegionClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiRegionClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.MultiRegionClusterNameSuffix != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_MultiRegionClusterNameSuffix, *v.MultiRegionClusterNameSuffix)
+	}
+	if v.MultiRegionParameterGroupName != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_MultiRegionParameterGroupName, *v.MultiRegionParameterGroupName)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_NodeType, *v.NodeType)
+	}
+	if v.NumShards != nil {
+		s.WriteInt32(schemas.CreateMultiRegionClusterRequest_NumShards, *v.NumShards)
+	}
+	if v.TLSEnabled != nil {
+		s.WriteBool(schemas.CreateMultiRegionClusterRequest_TLSEnabled, *v.TLSEnabled)
+	}
+	serializeTagList(s, schemas.CreateMultiRegionClusterRequest_Tags, v.Tags)
+}
+
 type CreateMultiRegionClusterOutput struct {
 
 	// Details about the newly created multi-Region cluster.
@@ -76,13 +112,34 @@ type CreateMultiRegionClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiRegionClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiRegionClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiRegionClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiRegionCluster != nil {
+		s.WriteStruct(schemas.CreateMultiRegionClusterResponse_MultiRegionCluster)
+		v.MultiRegionCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMultiRegionClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMultiRegionClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMultiRegionClusterResponse_MultiRegionCluster:
+			v.MultiRegionCluster = &types.MultiRegionCluster{}
+			return v.MultiRegionCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMultiRegionClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMultiRegionCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiRegionCluster, schemas.CreateMultiRegionClusterRequest, schemas.CreateMultiRegionClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMultiRegionCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiRegionCluster, schemas.CreateMultiRegionClusterRequest, schemas.CreateMultiRegionClusterResponse), output: &CreateMultiRegionClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

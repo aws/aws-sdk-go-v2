@@ -4,6 +4,8 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type GetExecutionFlowSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExecutionFlowSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExecutionFlowSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExecutionFlowSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionIdentifier != nil {
+		s.WriteString(schemas.GetExecutionFlowSnapshotRequest_executionIdentifier, *v.ExecutionIdentifier)
+	}
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.GetExecutionFlowSnapshotRequest_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.GetExecutionFlowSnapshotRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+}
+
 type GetExecutionFlowSnapshotOutput struct {
 
 	// The flow definition used for the flow execution, including the nodes,
@@ -92,13 +112,62 @@ type GetExecutionFlowSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExecutionFlowSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExecutionFlowSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExecutionFlowSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerEncryptionKeyArn != nil {
+		s.WriteString(schemas.GetExecutionFlowSnapshotResponse_customerEncryptionKeyArn, *v.CustomerEncryptionKeyArn)
+	}
+	if v.Definition != nil {
+		s.WriteString(schemas.GetExecutionFlowSnapshotResponse_definition, *v.Definition)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetExecutionFlowSnapshotResponse_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.GetExecutionFlowSnapshotResponse_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.GetExecutionFlowSnapshotResponse_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.FlowVersion != nil {
+		s.WriteString(schemas.GetExecutionFlowSnapshotResponse_flowVersion, *v.FlowVersion)
+	}
+}
+func (v *GetExecutionFlowSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExecutionFlowSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExecutionFlowSnapshotResponse_customerEncryptionKeyArn:
+			v.CustomerEncryptionKeyArn = new(string)
+			return d.ReadString(schemas.GetExecutionFlowSnapshotResponse_customerEncryptionKeyArn, v.CustomerEncryptionKeyArn)
+		case schemas.GetExecutionFlowSnapshotResponse_definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.GetExecutionFlowSnapshotResponse_definition, v.Definition)
+		case schemas.GetExecutionFlowSnapshotResponse_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.GetExecutionFlowSnapshotResponse_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.GetExecutionFlowSnapshotResponse_flowAliasIdentifier:
+			v.FlowAliasIdentifier = new(string)
+			return d.ReadString(schemas.GetExecutionFlowSnapshotResponse_flowAliasIdentifier, v.FlowAliasIdentifier)
+		case schemas.GetExecutionFlowSnapshotResponse_flowIdentifier:
+			v.FlowIdentifier = new(string)
+			return d.ReadString(schemas.GetExecutionFlowSnapshotResponse_flowIdentifier, v.FlowIdentifier)
+		case schemas.GetExecutionFlowSnapshotResponse_flowVersion:
+			v.FlowVersion = new(string)
+			return d.ReadString(schemas.GetExecutionFlowSnapshotResponse_flowVersion, v.FlowVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExecutionFlowSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExecutionFlowSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExecutionFlowSnapshot, schemas.GetExecutionFlowSnapshotRequest, schemas.GetExecutionFlowSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExecutionFlowSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExecutionFlowSnapshot, schemas.GetExecutionFlowSnapshotRequest, schemas.GetExecutionFlowSnapshotResponse), output: &GetExecutionFlowSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

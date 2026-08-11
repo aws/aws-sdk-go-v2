@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,34 @@ type DeleteWaveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWaveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWaveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWaveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.DeleteWaveRequest_accountID, *v.AccountID)
+	}
+	if v.WaveID != nil {
+		s.WriteString(schemas.DeleteWaveRequest_waveID, *v.WaveID)
+	}
+}
+func (v *DeleteWaveInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWaveRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWaveRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.DeleteWaveRequest_accountID, v.AccountID)
+		case schemas.DeleteWaveRequest_waveID:
+			v.WaveID = new(string)
+			return d.ReadString(schemas.DeleteWaveRequest_waveID, v.WaveID)
+		}
+		return nil
+	})
+}
+
 type DeleteWaveOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +73,26 @@ type DeleteWaveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWaveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWaveResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWaveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWaveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWaveResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWaveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWave{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWave, schemas.DeleteWaveRequest, schemas.DeleteWaveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWave{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWave, schemas.DeleteWaveRequest, schemas.DeleteWaveResponse), output: &DeleteWaveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

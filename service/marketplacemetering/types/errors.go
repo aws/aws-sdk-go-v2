@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *CustomerNotEntitledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CustomerNotEntitledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CustomerNotEntitledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerNotEntitledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerNotEntitledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CustomerNotEntitledException_message, *v.Message)
+	}
+}
+func (v *CustomerNotEntitledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerNotEntitledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerNotEntitledException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CustomerNotEntitledException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The API is disabled in the Region.
 type DisabledApiException struct {
@@ -59,6 +81,27 @@ func (e *DisabledApiException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DisabledApiException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DisabledApiException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisabledApiException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisabledApiException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DisabledApiException_message, *v.Message)
+	}
+}
+func (v *DisabledApiException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisabledApiException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisabledApiException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DisabledApiException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A metering record has already been emitted by the same EC2 instance, ECS task,
 // or EKS pod for the given { usageDimension , timestamp } with a different
@@ -87,6 +130,27 @@ func (e *DuplicateRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateRequestException_message, *v.Message)
+	}
+}
+func (v *DuplicateRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The submitted registration token has expired. This can happen if the buyer's
 // browser takes too long to redirect to your page, the buyer has resubmitted the
@@ -117,6 +181,27 @@ func (e *ExpiredTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ExpiredTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpiredTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpiredTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ExpiredTokenException_message, *v.Message)
+	}
+}
+func (v *ExpiredTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpiredTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpiredTokenException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ExpiredTokenException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The ClientToken is being used for multiple requests.
 type IdempotencyConflictException struct {
@@ -143,6 +228,27 @@ func (e *IdempotencyConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IdempotencyConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *IdempotencyConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdempotencyConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdempotencyConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.IdempotencyConflictException_message, *v.Message)
+	}
+}
+func (v *IdempotencyConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdempotencyConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdempotencyConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IdempotencyConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An internal error has occurred. Retry your request. If the problem persists,
 // post a message with details on the Amazon Web Services forums.
@@ -170,6 +276,27 @@ func (e *InternalServiceErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServiceErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServiceErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServiceErrorException_message, *v.Message)
+	}
+}
+func (v *InternalServiceErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServiceErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServiceErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServiceErrorException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have metered usage for a CustomerIdentifier that does not exist.
 type InvalidCustomerIdentifierException struct {
@@ -197,6 +324,27 @@ func (e *InvalidCustomerIdentifierException) ErrorCode() string {
 }
 func (e *InvalidCustomerIdentifierException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *InvalidCustomerIdentifierException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidCustomerIdentifierException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidCustomerIdentifierException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidCustomerIdentifierException_message, *v.Message)
+	}
+}
+func (v *InvalidCustomerIdentifierException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidCustomerIdentifierException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidCustomerIdentifierException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidCustomerIdentifierException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The endpoint being called is in a Amazon Web Services Region different from
@@ -226,6 +374,27 @@ func (e *InvalidEndpointRegionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidEndpointRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidEndpointRegionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidEndpointRegionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidEndpointRegionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidEndpointRegionException_message, *v.Message)
+	}
+}
+func (v *InvalidEndpointRegionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidEndpointRegionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidEndpointRegionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidEndpointRegionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Ensure the LicenseArn is valid, matches the customer, and usage is within the
 // license activation period.
@@ -253,6 +422,27 @@ func (e *InvalidLicenseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidLicenseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidLicenseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidLicenseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidLicenseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidLicenseException_message, *v.Message)
+	}
+}
+func (v *InvalidLicenseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidLicenseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidLicenseException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidLicenseException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The product code passed does not match the product code used for publishing the
 // product.
@@ -280,6 +470,27 @@ func (e *InvalidProductCodeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidProductCodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidProductCodeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidProductCodeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidProductCodeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidProductCodeException_message, *v.Message)
+	}
+}
+func (v *InvalidProductCodeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidProductCodeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidProductCodeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidProductCodeException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Public Key version is invalid.
 type InvalidPublicKeyVersionException struct {
@@ -306,6 +517,27 @@ func (e *InvalidPublicKeyVersionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPublicKeyVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidPublicKeyVersionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidPublicKeyVersionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidPublicKeyVersionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidPublicKeyVersionException_message, *v.Message)
+	}
+}
+func (v *InvalidPublicKeyVersionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidPublicKeyVersionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidPublicKeyVersionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidPublicKeyVersionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // RegisterUsage must be called in the same Amazon Web Services Region the ECS
 // task was launched in. This prevents a container from hardcoding a Region (e.g.
@@ -334,6 +566,27 @@ func (e *InvalidRegionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRegionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRegionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRegionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRegionException_message, *v.Message)
+	}
+}
+func (v *InvalidRegionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRegionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRegionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRegionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The tag is invalid, or the number of tags is greater than 5.
 type InvalidTagException struct {
@@ -360,6 +613,27 @@ func (e *InvalidTagException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidTagException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidTagException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidTagException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidTagException_message, *v.Message)
+	}
+}
+func (v *InvalidTagException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidTagException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidTagException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidTagException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Registration token is invalid.
 type InvalidTokenException struct {
@@ -386,6 +660,27 @@ func (e *InvalidTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidTokenException_message, *v.Message)
+	}
+}
+func (v *InvalidTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidTokenException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidTokenException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Sum of allocated usage quantities is not equal to the usage quantity.
 type InvalidUsageAllocationsException struct {
@@ -412,6 +707,27 @@ func (e *InvalidUsageAllocationsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidUsageAllocationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidUsageAllocationsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidUsageAllocationsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidUsageAllocationsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidUsageAllocationsException_message, *v.Message)
+	}
+}
+func (v *InvalidUsageAllocationsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidUsageAllocationsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidUsageAllocationsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidUsageAllocationsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The usage dimension does not match one of the UsageDimensions associated with
 // products.
@@ -439,6 +755,27 @@ func (e *InvalidUsageDimensionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidUsageDimensionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidUsageDimensionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidUsageDimensionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidUsageDimensionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidUsageDimensionException_message, *v.Message)
+	}
+}
+func (v *InvalidUsageDimensionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidUsageDimensionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidUsageDimensionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidUsageDimensionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Web Services Marketplace does not support metering usage from the
 // underlying platform. Currently, Amazon ECS, Amazon EKS, and Fargate are
@@ -467,6 +804,27 @@ func (e *PlatformNotSupportedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PlatformNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PlatformNotSupportedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlatformNotSupportedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlatformNotSupportedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PlatformNotSupportedException_message, *v.Message)
+	}
+}
+func (v *PlatformNotSupportedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlatformNotSupportedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlatformNotSupportedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PlatformNotSupportedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The calls to the API are throttled.
 type ThrottlingException struct {
@@ -493,6 +851,27 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_message, *v.Message)
+	}
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The timestamp value passed in the UsageRecord is out of allowed range.
 //
@@ -523,3 +902,24 @@ func (e *TimestampOutOfBoundsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TimestampOutOfBoundsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TimestampOutOfBoundsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestampOutOfBoundsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestampOutOfBoundsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TimestampOutOfBoundsException_message, *v.Message)
+	}
+}
+func (v *TimestampOutOfBoundsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestampOutOfBoundsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestampOutOfBoundsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TimestampOutOfBoundsException_message, v.Message)
+		}
+		return nil
+	})
+}

@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type UpdatePullRequestTitleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePullRequestTitleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePullRequestTitleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePullRequestTitleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.UpdatePullRequestTitleInput_pullRequestId, *v.PullRequestId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdatePullRequestTitleInput_title, *v.Title)
+	}
+}
+
 type UpdatePullRequestTitleOutput struct {
 
 	// Information about the updated pull request.
@@ -52,13 +69,34 @@ type UpdatePullRequestTitleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePullRequestTitleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePullRequestTitleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePullRequestTitleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PullRequest != nil {
+		s.WriteStruct(schemas.UpdatePullRequestTitleOutput_pullRequest)
+		v.PullRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePullRequestTitleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePullRequestTitleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePullRequestTitleOutput_pullRequest:
+			v.PullRequest = &types.PullRequest{}
+			return v.PullRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePullRequestTitleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePullRequestTitle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePullRequestTitle, schemas.UpdatePullRequestTitleInput, schemas.UpdatePullRequestTitleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePullRequestTitle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePullRequestTitle, schemas.UpdatePullRequestTitleInput, schemas.UpdatePullRequestTitleOutput), output: &UpdatePullRequestTitleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

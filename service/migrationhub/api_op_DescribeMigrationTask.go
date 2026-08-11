@@ -4,7 +4,9 @@ package migrationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeMigrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMigrationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMigrationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMigrationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.DescribeMigrationTaskRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.DescribeMigrationTaskRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type DescribeMigrationTaskOutput struct {
 
 	// Object encapsulating information about the migration task.
@@ -51,13 +68,34 @@ type DescribeMigrationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMigrationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMigrationTaskResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMigrationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationTask != nil {
+		s.WriteStruct(schemas.DescribeMigrationTaskResult_MigrationTask)
+		v.MigrationTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeMigrationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMigrationTaskResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMigrationTaskResult_MigrationTask:
+			v.MigrationTask = &types.MigrationTask{}
+			return v.MigrationTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMigrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMigrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMigrationTask, schemas.DescribeMigrationTaskRequest, schemas.DescribeMigrationTaskResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMigrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMigrationTask, schemas.DescribeMigrationTaskRequest, schemas.DescribeMigrationTaskResult), output: &DescribeMigrationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

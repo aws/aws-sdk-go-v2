@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,32 @@ type CreateDataSourceFromRedshiftInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceFromRedshiftInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceFromRedshiftInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceFromRedshiftInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeStatistics != false {
+		s.WriteBool(schemas.CreateDataSourceFromRedshiftInput_ComputeStatistics, v.ComputeStatistics)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceFromRedshiftInput_DataSourceId, *v.DataSourceId)
+	}
+	if v.DataSourceName != nil {
+		s.WriteString(schemas.CreateDataSourceFromRedshiftInput_DataSourceName, *v.DataSourceName)
+	}
+	if v.DataSpec != nil {
+		s.WriteStruct(schemas.CreateDataSourceFromRedshiftInput_DataSpec)
+		v.DataSpec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CreateDataSourceFromRedshiftInput_RoleARN, *v.RoleARN)
+	}
+}
+
 //	Represents the output of a CreateDataSourceFromRedshift operation, and is an
 //
 // acknowledgement that Amazon ML received the request.
@@ -137,13 +165,32 @@ type CreateDataSourceFromRedshiftOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceFromRedshiftOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceFromRedshiftOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceFromRedshiftOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceFromRedshiftOutput_DataSourceId, *v.DataSourceId)
+	}
+}
+func (v *CreateDataSourceFromRedshiftOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSourceFromRedshiftOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSourceFromRedshiftOutput_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.CreateDataSourceFromRedshiftOutput_DataSourceId, v.DataSourceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSourceFromRedshiftMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataSourceFromRedshift{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSourceFromRedshift, schemas.CreateDataSourceFromRedshiftInput, schemas.CreateDataSourceFromRedshiftOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataSourceFromRedshift{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSourceFromRedshift, schemas.CreateDataSourceFromRedshiftInput, schemas.CreateDataSourceFromRedshiftOutput), output: &CreateDataSourceFromRedshiftOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

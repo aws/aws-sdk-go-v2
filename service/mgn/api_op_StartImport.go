@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,39 @@ type StartImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartImportRequest_clientToken, *v.ClientToken)
+	}
+	if v.S3BucketSource != nil {
+		s.WriteStruct(schemas.StartImportRequest_s3BucketSource)
+		v.S3BucketSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.StartImportRequest_tags, v.Tags)
+}
+func (v *StartImportInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartImportRequest_clientToken, v.ClientToken)
+		case schemas.StartImportRequest_s3BucketSource:
+			v.S3BucketSource = &types.S3BucketSource{}
+			return v.S3BucketSource.Deserialize(d)
+		case schemas.StartImportRequest_tags:
+			return deserializeTagsMap(d, schemas.StartImportRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Start import response.
 type StartImportOutput struct {
 
@@ -54,13 +89,34 @@ type StartImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportTask != nil {
+		s.WriteStruct(schemas.StartImportResponse_importTask)
+		v.ImportTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportResponse_importTask:
+			v.ImportTask = &types.ImportTask{}
+			return v.ImportTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse), output: &StartImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

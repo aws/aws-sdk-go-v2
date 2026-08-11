@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -37,6 +39,60 @@ type ACL struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ACL) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ACL)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ACL) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.ACL_ARN, *v.ARN)
+	}
+	serializeACLClusterNameList(s, schemas.ACL_Clusters, v.Clusters)
+	if v.MinimumEngineVersion != nil {
+		s.WriteString(schemas.ACL_MinimumEngineVersion, *v.MinimumEngineVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ACL_Name, *v.Name)
+	}
+	if v.PendingChanges != nil {
+		s.WriteStruct(schemas.ACL_PendingChanges)
+		v.PendingChanges.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ACL_Status, *v.Status)
+	}
+	serializeUserNameList(s, schemas.ACL_UserNames, v.UserNames)
+}
+func (v *ACL) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ACL, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ACL_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.ACL_ARN, v.ARN)
+		case schemas.ACL_Clusters:
+			return deserializeACLClusterNameList(d, schemas.ACL_Clusters, &v.Clusters)
+		case schemas.ACL_MinimumEngineVersion:
+			v.MinimumEngineVersion = new(string)
+			return d.ReadString(schemas.ACL_MinimumEngineVersion, v.MinimumEngineVersion)
+		case schemas.ACL_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ACL_Name, v.Name)
+		case schemas.ACL_PendingChanges:
+			v.PendingChanges = &ACLPendingChanges{}
+			return v.PendingChanges.Deserialize(d)
+		case schemas.ACL_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ACL_Status, v.Status)
+		case schemas.ACL_UserNames:
+			return deserializeUserNameList(d, schemas.ACL_UserNames, &v.UserNames)
+		}
+		return nil
+	})
+}
+
 // Returns the updates being applied to the ACL.
 type ACLPendingChanges struct {
 
@@ -49,6 +105,28 @@ type ACLPendingChanges struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ACLPendingChanges) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ACLPendingChanges)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ACLPendingChanges) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserNameList(s, schemas.ACLPendingChanges_UserNamesToAdd, v.UserNamesToAdd)
+	serializeUserNameList(s, schemas.ACLPendingChanges_UserNamesToRemove, v.UserNamesToRemove)
+}
+func (v *ACLPendingChanges) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ACLPendingChanges, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ACLPendingChanges_UserNamesToAdd:
+			return deserializeUserNameList(d, schemas.ACLPendingChanges_UserNamesToAdd, &v.UserNamesToAdd)
+		case schemas.ACLPendingChanges_UserNamesToRemove:
+			return deserializeUserNameList(d, schemas.ACLPendingChanges_UserNamesToRemove, &v.UserNamesToRemove)
+		}
+		return nil
+	})
+}
+
 // The status of the ACL update
 type ACLsUpdateStatus struct {
 
@@ -56,6 +134,28 @@ type ACLsUpdateStatus struct {
 	ACLToApply *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ACLsUpdateStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ACLsUpdateStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ACLsUpdateStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACLToApply != nil {
+		s.WriteString(schemas.ACLsUpdateStatus_ACLToApply, *v.ACLToApply)
+	}
+}
+func (v *ACLsUpdateStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ACLsUpdateStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ACLsUpdateStatus_ACLToApply:
+			v.ACLToApply = new(string)
+			return d.ReadString(schemas.ACLsUpdateStatus_ACLToApply, v.ACLToApply)
+		}
+		return nil
+	})
 }
 
 // Denotes the user's authentication properties, such as whether it requires a
@@ -69,6 +169,38 @@ type Authentication struct {
 	Type AuthenticationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Authentication) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Authentication)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Authentication) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PasswordCount != nil {
+		s.WriteInt32(schemas.Authentication_PasswordCount, *v.PasswordCount)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Authentication_Type, string(v.Type))
+	}
+}
+func (v *Authentication) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Authentication, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Authentication_PasswordCount:
+			v.PasswordCount = new(int32)
+			return d.ReadInt32(schemas.Authentication_PasswordCount, v.PasswordCount)
+		case schemas.Authentication_Type:
+			var ev string
+			if err := d.ReadString(schemas.Authentication_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = AuthenticationType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Denotes the user's authentication properties, such as whether it requires a
@@ -85,6 +217,35 @@ type AuthenticationMode struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthenticationMode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthenticationMode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthenticationMode) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePasswordListInput(s, schemas.AuthenticationMode_Passwords, v.Passwords)
+	if v.Type != "" {
+		s.WriteString(schemas.AuthenticationMode_Type, string(v.Type))
+	}
+}
+func (v *AuthenticationMode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthenticationMode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthenticationMode_Passwords:
+			return deserializePasswordListInput(d, schemas.AuthenticationMode_Passwords, &v.Passwords)
+		case schemas.AuthenticationMode_Type:
+			var ev string
+			if err := d.ReadString(schemas.AuthenticationMode_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = InputAuthenticationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Indicates if the cluster has a Multi-AZ configuration (multiaz) or not
 // (singleaz).
 type AvailabilityZone struct {
@@ -93,6 +254,28 @@ type AvailabilityZone struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AvailabilityZone) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailabilityZone)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailabilityZone) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AvailabilityZone_Name, *v.Name)
+	}
+}
+func (v *AvailabilityZone) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailabilityZone, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailabilityZone_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AvailabilityZone_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Contains all of the attributes of a specific cluster.
@@ -213,6 +396,216 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Cluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Cluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACLName != nil {
+		s.WriteString(schemas.Cluster_ACLName, *v.ACLName)
+	}
+	if v.ARN != nil {
+		s.WriteString(schemas.Cluster_ARN, *v.ARN)
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.Cluster_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.AvailabilityMode != "" {
+		s.WriteString(schemas.Cluster_AvailabilityMode, string(v.AvailabilityMode))
+	}
+	if v.ClusterEndpoint != nil {
+		s.WriteStruct(schemas.Cluster_ClusterEndpoint)
+		v.ClusterEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataTiering != "" {
+		s.WriteString(schemas.Cluster_DataTiering, string(v.DataTiering))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Cluster_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.Cluster_Engine, *v.Engine)
+	}
+	if v.EnginePatchVersion != nil {
+		s.WriteString(schemas.Cluster_EnginePatchVersion, *v.EnginePatchVersion)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.Cluster_EngineVersion, *v.EngineVersion)
+	}
+	if v.IpDiscovery != "" {
+		s.WriteString(schemas.Cluster_IpDiscovery, string(v.IpDiscovery))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.Cluster_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MaintenanceWindow != nil {
+		s.WriteString(schemas.Cluster_MaintenanceWindow, *v.MaintenanceWindow)
+	}
+	if v.MultiRegionClusterName != nil {
+		s.WriteString(schemas.Cluster_MultiRegionClusterName, *v.MultiRegionClusterName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Cluster_Name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.Cluster_NetworkType, string(v.NetworkType))
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.Cluster_NodeType, *v.NodeType)
+	}
+	if v.NumberOfShards != nil {
+		s.WriteInt32(schemas.Cluster_NumberOfShards, *v.NumberOfShards)
+	}
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.Cluster_ParameterGroupName, *v.ParameterGroupName)
+	}
+	if v.ParameterGroupStatus != nil {
+		s.WriteString(schemas.Cluster_ParameterGroupStatus, *v.ParameterGroupStatus)
+	}
+	if v.PendingUpdates != nil {
+		s.WriteStruct(schemas.Cluster_PendingUpdates)
+		v.PendingUpdates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSecurityGroupMembershipList(s, schemas.Cluster_SecurityGroups, v.SecurityGroups)
+	serializeShardList(s, schemas.Cluster_Shards, v.Shards)
+	if v.SnapshotRetentionLimit != nil {
+		s.WriteInt32(schemas.Cluster_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
+	}
+	if v.SnapshotWindow != nil {
+		s.WriteString(schemas.Cluster_SnapshotWindow, *v.SnapshotWindow)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.Cluster_SnsTopicArn, *v.SnsTopicArn)
+	}
+	if v.SnsTopicStatus != nil {
+		s.WriteString(schemas.Cluster_SnsTopicStatus, *v.SnsTopicStatus)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.Cluster_Status, *v.Status)
+	}
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.Cluster_SubnetGroupName, *v.SubnetGroupName)
+	}
+	if v.TLSEnabled != nil {
+		s.WriteBool(schemas.Cluster_TLSEnabled, *v.TLSEnabled)
+	}
+}
+func (v *Cluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Cluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Cluster_ACLName:
+			v.ACLName = new(string)
+			return d.ReadString(schemas.Cluster_ACLName, v.ACLName)
+		case schemas.Cluster_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.Cluster_ARN, v.ARN)
+		case schemas.Cluster_AutoMinorVersionUpgrade:
+			v.AutoMinorVersionUpgrade = new(bool)
+			return d.ReadBool(schemas.Cluster_AutoMinorVersionUpgrade, v.AutoMinorVersionUpgrade)
+		case schemas.Cluster_AvailabilityMode:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_AvailabilityMode, &ev); err != nil {
+				return err
+			}
+			v.AvailabilityMode = AZStatus(ev)
+			return nil
+		case schemas.Cluster_ClusterEndpoint:
+			v.ClusterEndpoint = &Endpoint{}
+			return v.ClusterEndpoint.Deserialize(d)
+		case schemas.Cluster_DataTiering:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_DataTiering, &ev); err != nil {
+				return err
+			}
+			v.DataTiering = DataTieringStatus(ev)
+			return nil
+		case schemas.Cluster_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Cluster_Description, v.Description)
+		case schemas.Cluster_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.Cluster_Engine, v.Engine)
+		case schemas.Cluster_EnginePatchVersion:
+			v.EnginePatchVersion = new(string)
+			return d.ReadString(schemas.Cluster_EnginePatchVersion, v.EnginePatchVersion)
+		case schemas.Cluster_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.Cluster_EngineVersion, v.EngineVersion)
+		case schemas.Cluster_IpDiscovery:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_IpDiscovery, &ev); err != nil {
+				return err
+			}
+			v.IpDiscovery = IpDiscovery(ev)
+			return nil
+		case schemas.Cluster_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.Cluster_KmsKeyId, v.KmsKeyId)
+		case schemas.Cluster_MaintenanceWindow:
+			v.MaintenanceWindow = new(string)
+			return d.ReadString(schemas.Cluster_MaintenanceWindow, v.MaintenanceWindow)
+		case schemas.Cluster_MultiRegionClusterName:
+			v.MultiRegionClusterName = new(string)
+			return d.ReadString(schemas.Cluster_MultiRegionClusterName, v.MultiRegionClusterName)
+		case schemas.Cluster_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Cluster_Name, v.Name)
+		case schemas.Cluster_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.Cluster_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.Cluster_NodeType, v.NodeType)
+		case schemas.Cluster_NumberOfShards:
+			v.NumberOfShards = new(int32)
+			return d.ReadInt32(schemas.Cluster_NumberOfShards, v.NumberOfShards)
+		case schemas.Cluster_ParameterGroupName:
+			v.ParameterGroupName = new(string)
+			return d.ReadString(schemas.Cluster_ParameterGroupName, v.ParameterGroupName)
+		case schemas.Cluster_ParameterGroupStatus:
+			v.ParameterGroupStatus = new(string)
+			return d.ReadString(schemas.Cluster_ParameterGroupStatus, v.ParameterGroupStatus)
+		case schemas.Cluster_PendingUpdates:
+			v.PendingUpdates = &ClusterPendingUpdates{}
+			return v.PendingUpdates.Deserialize(d)
+		case schemas.Cluster_SecurityGroups:
+			return deserializeSecurityGroupMembershipList(d, schemas.Cluster_SecurityGroups, &v.SecurityGroups)
+		case schemas.Cluster_Shards:
+			return deserializeShardList(d, schemas.Cluster_Shards, &v.Shards)
+		case schemas.Cluster_SnapshotRetentionLimit:
+			v.SnapshotRetentionLimit = new(int32)
+			return d.ReadInt32(schemas.Cluster_SnapshotRetentionLimit, v.SnapshotRetentionLimit)
+		case schemas.Cluster_SnapshotWindow:
+			v.SnapshotWindow = new(string)
+			return d.ReadString(schemas.Cluster_SnapshotWindow, v.SnapshotWindow)
+		case schemas.Cluster_SnsTopicArn:
+			v.SnsTopicArn = new(string)
+			return d.ReadString(schemas.Cluster_SnsTopicArn, v.SnsTopicArn)
+		case schemas.Cluster_SnsTopicStatus:
+			v.SnsTopicStatus = new(string)
+			return d.ReadString(schemas.Cluster_SnsTopicStatus, v.SnsTopicStatus)
+		case schemas.Cluster_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.Cluster_Status, v.Status)
+		case schemas.Cluster_SubnetGroupName:
+			v.SubnetGroupName = new(string)
+			return d.ReadString(schemas.Cluster_SubnetGroupName, v.SubnetGroupName)
+		case schemas.Cluster_TLSEnabled:
+			v.TLSEnabled = new(bool)
+			return d.ReadBool(schemas.Cluster_TLSEnabled, v.TLSEnabled)
+		}
+		return nil
+	})
+}
+
 // A list of cluster configuration options.
 type ClusterConfiguration struct {
 
@@ -271,6 +664,121 @@ type ClusterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClusterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ClusterConfiguration_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.ClusterConfiguration_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.ClusterConfiguration_EngineVersion, *v.EngineVersion)
+	}
+	if v.MaintenanceWindow != nil {
+		s.WriteString(schemas.ClusterConfiguration_MaintenanceWindow, *v.MaintenanceWindow)
+	}
+	if v.MultiRegionClusterName != nil {
+		s.WriteString(schemas.ClusterConfiguration_MultiRegionClusterName, *v.MultiRegionClusterName)
+	}
+	if v.MultiRegionParameterGroupName != nil {
+		s.WriteString(schemas.ClusterConfiguration_MultiRegionParameterGroupName, *v.MultiRegionParameterGroupName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ClusterConfiguration_Name, *v.Name)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.ClusterConfiguration_NodeType, *v.NodeType)
+	}
+	if v.NumShards != nil {
+		s.WriteInt32(schemas.ClusterConfiguration_NumShards, *v.NumShards)
+	}
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.ClusterConfiguration_ParameterGroupName, *v.ParameterGroupName)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.ClusterConfiguration_Port, *v.Port)
+	}
+	serializeShardDetails(s, schemas.ClusterConfiguration_Shards, v.Shards)
+	if v.SnapshotRetentionLimit != nil {
+		s.WriteInt32(schemas.ClusterConfiguration_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
+	}
+	if v.SnapshotWindow != nil {
+		s.WriteString(schemas.ClusterConfiguration_SnapshotWindow, *v.SnapshotWindow)
+	}
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.ClusterConfiguration_SubnetGroupName, *v.SubnetGroupName)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.ClusterConfiguration_TopicArn, *v.TopicArn)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.ClusterConfiguration_VpcId, *v.VpcId)
+	}
+}
+func (v *ClusterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterConfiguration_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_Description, v.Description)
+		case schemas.ClusterConfiguration_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_Engine, v.Engine)
+		case schemas.ClusterConfiguration_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_EngineVersion, v.EngineVersion)
+		case schemas.ClusterConfiguration_MaintenanceWindow:
+			v.MaintenanceWindow = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_MaintenanceWindow, v.MaintenanceWindow)
+		case schemas.ClusterConfiguration_MultiRegionClusterName:
+			v.MultiRegionClusterName = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_MultiRegionClusterName, v.MultiRegionClusterName)
+		case schemas.ClusterConfiguration_MultiRegionParameterGroupName:
+			v.MultiRegionParameterGroupName = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_MultiRegionParameterGroupName, v.MultiRegionParameterGroupName)
+		case schemas.ClusterConfiguration_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_Name, v.Name)
+		case schemas.ClusterConfiguration_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_NodeType, v.NodeType)
+		case schemas.ClusterConfiguration_NumShards:
+			v.NumShards = new(int32)
+			return d.ReadInt32(schemas.ClusterConfiguration_NumShards, v.NumShards)
+		case schemas.ClusterConfiguration_ParameterGroupName:
+			v.ParameterGroupName = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_ParameterGroupName, v.ParameterGroupName)
+		case schemas.ClusterConfiguration_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.ClusterConfiguration_Port, v.Port)
+		case schemas.ClusterConfiguration_Shards:
+			return deserializeShardDetails(d, schemas.ClusterConfiguration_Shards, &v.Shards)
+		case schemas.ClusterConfiguration_SnapshotRetentionLimit:
+			v.SnapshotRetentionLimit = new(int32)
+			return d.ReadInt32(schemas.ClusterConfiguration_SnapshotRetentionLimit, v.SnapshotRetentionLimit)
+		case schemas.ClusterConfiguration_SnapshotWindow:
+			v.SnapshotWindow = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_SnapshotWindow, v.SnapshotWindow)
+		case schemas.ClusterConfiguration_SubnetGroupName:
+			v.SubnetGroupName = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_SubnetGroupName, v.SubnetGroupName)
+		case schemas.ClusterConfiguration_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_TopicArn, v.TopicArn)
+		case schemas.ClusterConfiguration_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.ClusterConfiguration_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // A list of updates being applied to the cluster
 type ClusterPendingUpdates struct {
 
@@ -286,6 +794,41 @@ type ClusterPendingUpdates struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClusterPendingUpdates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterPendingUpdates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterPendingUpdates) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACLs != nil {
+		s.WriteStruct(schemas.ClusterPendingUpdates_ACLs)
+		v.ACLs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resharding != nil {
+		s.WriteStruct(schemas.ClusterPendingUpdates_Resharding)
+		v.Resharding.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePendingModifiedServiceUpdateList(s, schemas.ClusterPendingUpdates_ServiceUpdates, v.ServiceUpdates)
+}
+func (v *ClusterPendingUpdates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterPendingUpdates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterPendingUpdates_ACLs:
+			v.ACLs = &ACLsUpdateStatus{}
+			return v.ACLs.Deserialize(d)
+		case schemas.ClusterPendingUpdates_Resharding:
+			v.Resharding = &ReshardingStatus{}
+			return v.Resharding.Deserialize(d)
+		case schemas.ClusterPendingUpdates_ServiceUpdates:
+			return deserializePendingModifiedServiceUpdateList(d, schemas.ClusterPendingUpdates_ServiceUpdates, &v.ServiceUpdates)
+		}
+		return nil
+	})
+}
+
 // Represents the information required for client programs to connect to the
 // cluster and its nodes.
 type Endpoint struct {
@@ -297,6 +840,33 @@ type Endpoint struct {
 	Port int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Endpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.Endpoint_Address, *v.Address)
+	}
+	if v.Port != 0 {
+		s.WriteInt32(schemas.Endpoint_Port, v.Port)
+	}
+}
+func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Endpoint_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.Endpoint_Address, v.Address)
+		case schemas.Endpoint_Port:
+			return d.ReadInt32(schemas.Endpoint_Port, &v.Port)
+		}
+		return nil
+	})
 }
 
 // Provides details of the Redis OSS engine version
@@ -316,6 +886,46 @@ type EngineVersionInfo struct {
 	ParameterGroupFamily *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EngineVersionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngineVersionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngineVersionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != nil {
+		s.WriteString(schemas.EngineVersionInfo_Engine, *v.Engine)
+	}
+	if v.EnginePatchVersion != nil {
+		s.WriteString(schemas.EngineVersionInfo_EnginePatchVersion, *v.EnginePatchVersion)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.EngineVersionInfo_EngineVersion, *v.EngineVersion)
+	}
+	if v.ParameterGroupFamily != nil {
+		s.WriteString(schemas.EngineVersionInfo_ParameterGroupFamily, *v.ParameterGroupFamily)
+	}
+}
+func (v *EngineVersionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngineVersionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngineVersionInfo_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.EngineVersionInfo_Engine, v.Engine)
+		case schemas.EngineVersionInfo_EnginePatchVersion:
+			v.EnginePatchVersion = new(string)
+			return d.ReadString(schemas.EngineVersionInfo_EnginePatchVersion, v.EnginePatchVersion)
+		case schemas.EngineVersionInfo_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.EngineVersionInfo_EngineVersion, v.EngineVersion)
+		case schemas.EngineVersionInfo_ParameterGroupFamily:
+			v.ParameterGroupFamily = new(string)
+			return d.ReadString(schemas.EngineVersionInfo_ParameterGroupFamily, v.ParameterGroupFamily)
+		}
+		return nil
+	})
 }
 
 // Represents a single occurrence of something interesting within the system. Some
@@ -339,6 +949,50 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Event) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Event)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Date != nil {
+		s.WriteTime(schemas.Event_Date, *v.Date)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.Event_Message, *v.Message)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.Event_SourceName, *v.SourceName)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.Event_SourceType, string(v.SourceType))
+	}
+}
+func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Event, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Event_Date:
+			v.Date = new(time.Time)
+			return d.ReadTime(schemas.Event_Date, v.Date)
+		case schemas.Event_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.Event_Message, v.Message)
+		case schemas.Event_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.Event_SourceName, v.SourceName)
+		case schemas.Event_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.Event_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Used to streamline results of a search based on the property being filtered.
 type Filter struct {
 
@@ -353,6 +1007,31 @@ type Filter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Filter_Name, *v.Name)
+	}
+	serializeFilterValueList(s, schemas.Filter_Values, v.Values)
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Filter_Name, v.Name)
+		case schemas.Filter_Values:
+			return deserializeFilterValueList(d, schemas.Filter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Represents a multi-Region cluster.
@@ -394,6 +1073,85 @@ type MultiRegionCluster struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MultiRegionCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiRegionCluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiRegionCluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.MultiRegionCluster_ARN, *v.ARN)
+	}
+	serializeRegionalClusterList(s, schemas.MultiRegionCluster_Clusters, v.Clusters)
+	if v.Description != nil {
+		s.WriteString(schemas.MultiRegionCluster_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.MultiRegionCluster_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.MultiRegionCluster_EngineVersion, *v.EngineVersion)
+	}
+	if v.MultiRegionClusterName != nil {
+		s.WriteString(schemas.MultiRegionCluster_MultiRegionClusterName, *v.MultiRegionClusterName)
+	}
+	if v.MultiRegionParameterGroupName != nil {
+		s.WriteString(schemas.MultiRegionCluster_MultiRegionParameterGroupName, *v.MultiRegionParameterGroupName)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.MultiRegionCluster_NodeType, *v.NodeType)
+	}
+	if v.NumberOfShards != nil {
+		s.WriteInt32(schemas.MultiRegionCluster_NumberOfShards, *v.NumberOfShards)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.MultiRegionCluster_Status, *v.Status)
+	}
+	if v.TLSEnabled != nil {
+		s.WriteBool(schemas.MultiRegionCluster_TLSEnabled, *v.TLSEnabled)
+	}
+}
+func (v *MultiRegionCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiRegionCluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiRegionCluster_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.MultiRegionCluster_ARN, v.ARN)
+		case schemas.MultiRegionCluster_Clusters:
+			return deserializeRegionalClusterList(d, schemas.MultiRegionCluster_Clusters, &v.Clusters)
+		case schemas.MultiRegionCluster_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MultiRegionCluster_Description, v.Description)
+		case schemas.MultiRegionCluster_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.MultiRegionCluster_Engine, v.Engine)
+		case schemas.MultiRegionCluster_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.MultiRegionCluster_EngineVersion, v.EngineVersion)
+		case schemas.MultiRegionCluster_MultiRegionClusterName:
+			v.MultiRegionClusterName = new(string)
+			return d.ReadString(schemas.MultiRegionCluster_MultiRegionClusterName, v.MultiRegionClusterName)
+		case schemas.MultiRegionCluster_MultiRegionParameterGroupName:
+			v.MultiRegionParameterGroupName = new(string)
+			return d.ReadString(schemas.MultiRegionCluster_MultiRegionParameterGroupName, v.MultiRegionParameterGroupName)
+		case schemas.MultiRegionCluster_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.MultiRegionCluster_NodeType, v.NodeType)
+		case schemas.MultiRegionCluster_NumberOfShards:
+			v.NumberOfShards = new(int32)
+			return d.ReadInt32(schemas.MultiRegionCluster_NumberOfShards, v.NumberOfShards)
+		case schemas.MultiRegionCluster_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.MultiRegionCluster_Status, v.Status)
+		case schemas.MultiRegionCluster_TLSEnabled:
+			v.TLSEnabled = new(bool)
+			return d.ReadBool(schemas.MultiRegionCluster_TLSEnabled, v.TLSEnabled)
+		}
+		return nil
+	})
+}
+
 // Describes an individual setting that controls some aspect of MemoryDB behavior
 // across multiple regions.
 type MultiRegionParameter struct {
@@ -423,6 +1181,64 @@ type MultiRegionParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MultiRegionParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiRegionParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiRegionParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedValues != nil {
+		s.WriteString(schemas.MultiRegionParameter_AllowedValues, *v.AllowedValues)
+	}
+	if v.DataType != nil {
+		s.WriteString(schemas.MultiRegionParameter_DataType, *v.DataType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.MultiRegionParameter_Description, *v.Description)
+	}
+	if v.MinimumEngineVersion != nil {
+		s.WriteString(schemas.MultiRegionParameter_MinimumEngineVersion, *v.MinimumEngineVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MultiRegionParameter_Name, *v.Name)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.MultiRegionParameter_Source, *v.Source)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.MultiRegionParameter_Value, *v.Value)
+	}
+}
+func (v *MultiRegionParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiRegionParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiRegionParameter_AllowedValues:
+			v.AllowedValues = new(string)
+			return d.ReadString(schemas.MultiRegionParameter_AllowedValues, v.AllowedValues)
+		case schemas.MultiRegionParameter_DataType:
+			v.DataType = new(string)
+			return d.ReadString(schemas.MultiRegionParameter_DataType, v.DataType)
+		case schemas.MultiRegionParameter_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MultiRegionParameter_Description, v.Description)
+		case schemas.MultiRegionParameter_MinimumEngineVersion:
+			v.MinimumEngineVersion = new(string)
+			return d.ReadString(schemas.MultiRegionParameter_MinimumEngineVersion, v.MinimumEngineVersion)
+		case schemas.MultiRegionParameter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MultiRegionParameter_Name, v.Name)
+		case schemas.MultiRegionParameter_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.MultiRegionParameter_Source, v.Source)
+		case schemas.MultiRegionParameter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.MultiRegionParameter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a CreateMultiRegionParameterGroup operation. A
 // multi-region parameter group represents a collection of parameters that can be
 // applied to clusters across multiple regions.
@@ -442,6 +1258,46 @@ type MultiRegionParameterGroup struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MultiRegionParameterGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiRegionParameterGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiRegionParameterGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.MultiRegionParameterGroup_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.MultiRegionParameterGroup_Description, *v.Description)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.MultiRegionParameterGroup_Family, *v.Family)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MultiRegionParameterGroup_Name, *v.Name)
+	}
+}
+func (v *MultiRegionParameterGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiRegionParameterGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiRegionParameterGroup_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.MultiRegionParameterGroup_ARN, v.ARN)
+		case schemas.MultiRegionParameterGroup_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MultiRegionParameterGroup_Description, v.Description)
+		case schemas.MultiRegionParameterGroup_Family:
+			v.Family = new(string)
+			return d.ReadString(schemas.MultiRegionParameterGroup_Family, v.Family)
+		case schemas.MultiRegionParameterGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MultiRegionParameterGroup_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Represents an individual node within a cluster. Each node runs its own instance
@@ -468,6 +1324,54 @@ type Node struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Node) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Node)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Node) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.Node_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.Node_CreateTime, *v.CreateTime)
+	}
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.Node_Endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Node_Name, *v.Name)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.Node_Status, *v.Status)
+	}
+}
+func (v *Node) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Node, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Node_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.Node_AvailabilityZone, v.AvailabilityZone)
+		case schemas.Node_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.Node_CreateTime, v.CreateTime)
+		case schemas.Node_Endpoint:
+			v.Endpoint = &Endpoint{}
+			return v.Endpoint.Deserialize(d)
+		case schemas.Node_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Node_Name, v.Name)
+		case schemas.Node_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.Node_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Describes an individual setting that controls some aspect of MemoryDB behavior.
 type Parameter struct {
 
@@ -492,6 +1396,58 @@ type Parameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Parameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Parameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Parameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedValues != nil {
+		s.WriteString(schemas.Parameter_AllowedValues, *v.AllowedValues)
+	}
+	if v.DataType != nil {
+		s.WriteString(schemas.Parameter_DataType, *v.DataType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Parameter_Description, *v.Description)
+	}
+	if v.MinimumEngineVersion != nil {
+		s.WriteString(schemas.Parameter_MinimumEngineVersion, *v.MinimumEngineVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Parameter_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Parameter_Value, *v.Value)
+	}
+}
+func (v *Parameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Parameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Parameter_AllowedValues:
+			v.AllowedValues = new(string)
+			return d.ReadString(schemas.Parameter_AllowedValues, v.AllowedValues)
+		case schemas.Parameter_DataType:
+			v.DataType = new(string)
+			return d.ReadString(schemas.Parameter_DataType, v.DataType)
+		case schemas.Parameter_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Parameter_Description, v.Description)
+		case schemas.Parameter_MinimumEngineVersion:
+			v.MinimumEngineVersion = new(string)
+			return d.ReadString(schemas.Parameter_MinimumEngineVersion, v.MinimumEngineVersion)
+		case schemas.Parameter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Parameter_Name, v.Name)
+		case schemas.Parameter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Parameter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a CreateParameterGroup operation. A parameter group
 // represents a combination of specific values for the parameters that are passed
 // to the engine software during startup.
@@ -513,6 +1469,46 @@ type ParameterGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParameterGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.ParameterGroup_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ParameterGroup_Description, *v.Description)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.ParameterGroup_Family, *v.Family)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ParameterGroup_Name, *v.Name)
+	}
+}
+func (v *ParameterGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterGroup_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.ParameterGroup_ARN, v.ARN)
+		case schemas.ParameterGroup_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ParameterGroup_Description, v.Description)
+		case schemas.ParameterGroup_Family:
+			v.Family = new(string)
+			return d.ReadString(schemas.ParameterGroup_Family, v.Family)
+		case schemas.ParameterGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ParameterGroup_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Describes a name-value pair that is used to update the value of a parameter.
 type ParameterNameValue struct {
 
@@ -523,6 +1519,34 @@ type ParameterNameValue struct {
 	ParameterValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParameterNameValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterNameValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterNameValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterName != nil {
+		s.WriteString(schemas.ParameterNameValue_ParameterName, *v.ParameterName)
+	}
+	if v.ParameterValue != nil {
+		s.WriteString(schemas.ParameterNameValue_ParameterValue, *v.ParameterValue)
+	}
+}
+func (v *ParameterNameValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterNameValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterNameValue_ParameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.ParameterNameValue_ParameterName, v.ParameterName)
+		case schemas.ParameterNameValue_ParameterValue:
+			v.ParameterValue = new(string)
+			return d.ReadString(schemas.ParameterNameValue_ParameterValue, v.ParameterValue)
+		}
+		return nil
+	})
 }
 
 // Update action that has yet to be processed for the corresponding apply/stop
@@ -538,6 +1562,38 @@ type PendingModifiedServiceUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PendingModifiedServiceUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PendingModifiedServiceUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PendingModifiedServiceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceUpdateName != nil {
+		s.WriteString(schemas.PendingModifiedServiceUpdate_ServiceUpdateName, *v.ServiceUpdateName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PendingModifiedServiceUpdate_Status, string(v.Status))
+	}
+}
+func (v *PendingModifiedServiceUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PendingModifiedServiceUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PendingModifiedServiceUpdate_ServiceUpdateName:
+			v.ServiceUpdateName = new(string)
+			return d.ReadString(schemas.PendingModifiedServiceUpdate_ServiceUpdateName, v.ServiceUpdateName)
+		case schemas.PendingModifiedServiceUpdate_Status:
+			var ev string
+			if err := d.ReadString(schemas.PendingModifiedServiceUpdate_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ServiceUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The recurring charge to run this reserved node.
 type RecurringCharge struct {
 
@@ -548,6 +1604,33 @@ type RecurringCharge struct {
 	RecurringChargeFrequency *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecurringCharge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecurringCharge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecurringCharge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecurringChargeAmount != 0 {
+		s.WriteFloat64(schemas.RecurringCharge_RecurringChargeAmount, v.RecurringChargeAmount)
+	}
+	if v.RecurringChargeFrequency != nil {
+		s.WriteString(schemas.RecurringCharge_RecurringChargeFrequency, *v.RecurringChargeFrequency)
+	}
+}
+func (v *RecurringCharge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecurringCharge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecurringCharge_RecurringChargeAmount:
+			return d.ReadFloat64(schemas.RecurringCharge_RecurringChargeAmount, &v.RecurringChargeAmount)
+		case schemas.RecurringCharge_RecurringChargeFrequency:
+			v.RecurringChargeFrequency = new(string)
+			return d.ReadString(schemas.RecurringCharge_RecurringChargeFrequency, v.RecurringChargeFrequency)
+		}
+		return nil
+	})
 }
 
 // Represents a Regional cluster
@@ -568,6 +1651,46 @@ type RegionalCluster struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegionalCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionalCluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionalCluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RegionalCluster_ARN, *v.ARN)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.RegionalCluster_ClusterName, *v.ClusterName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RegionalCluster_Region, *v.Region)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.RegionalCluster_Status, *v.Status)
+	}
+}
+func (v *RegionalCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionalCluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionalCluster_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RegionalCluster_ARN, v.ARN)
+		case schemas.RegionalCluster_ClusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.RegionalCluster_ClusterName, v.ClusterName)
+		case schemas.RegionalCluster_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RegionalCluster_Region, v.Region)
+		case schemas.RegionalCluster_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.RegionalCluster_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // A request to configure the number of replicas in a shard
 type ReplicaConfigurationRequest struct {
 
@@ -575,6 +1698,27 @@ type ReplicaConfigurationRequest struct {
 	ReplicaCount int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReplicaConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicaConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicaConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicaCount != 0 {
+		s.WriteInt32(schemas.ReplicaConfigurationRequest_ReplicaCount, v.ReplicaCount)
+	}
+}
+func (v *ReplicaConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicaConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicaConfigurationRequest_ReplicaCount:
+			return d.ReadInt32(schemas.ReplicaConfigurationRequest_ReplicaCount, &v.ReplicaCount)
+		}
+		return nil
+	})
 }
 
 // Represents the output of a PurchaseReservedNodesOffering operation.
@@ -616,6 +1760,82 @@ type ReservedNode struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservedNode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservedNode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservedNode) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.ReservedNode_ARN, *v.ARN)
+	}
+	if v.Duration != 0 {
+		s.WriteInt32(schemas.ReservedNode_Duration, v.Duration)
+	}
+	if v.FixedPrice != 0 {
+		s.WriteFloat64(schemas.ReservedNode_FixedPrice, v.FixedPrice)
+	}
+	if v.NodeCount != 0 {
+		s.WriteInt32(schemas.ReservedNode_NodeCount, v.NodeCount)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.ReservedNode_NodeType, *v.NodeType)
+	}
+	if v.OfferingType != nil {
+		s.WriteString(schemas.ReservedNode_OfferingType, *v.OfferingType)
+	}
+	serializeRecurringChargeList(s, schemas.ReservedNode_RecurringCharges, v.RecurringCharges)
+	if v.ReservationId != nil {
+		s.WriteString(schemas.ReservedNode_ReservationId, *v.ReservationId)
+	}
+	if v.ReservedNodesOfferingId != nil {
+		s.WriteString(schemas.ReservedNode_ReservedNodesOfferingId, *v.ReservedNodesOfferingId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ReservedNode_StartTime, *v.StartTime)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.ReservedNode_State, *v.State)
+	}
+}
+func (v *ReservedNode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservedNode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservedNode_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.ReservedNode_ARN, v.ARN)
+		case schemas.ReservedNode_Duration:
+			return d.ReadInt32(schemas.ReservedNode_Duration, &v.Duration)
+		case schemas.ReservedNode_FixedPrice:
+			return d.ReadFloat64(schemas.ReservedNode_FixedPrice, &v.FixedPrice)
+		case schemas.ReservedNode_NodeCount:
+			return d.ReadInt32(schemas.ReservedNode_NodeCount, &v.NodeCount)
+		case schemas.ReservedNode_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.ReservedNode_NodeType, v.NodeType)
+		case schemas.ReservedNode_OfferingType:
+			v.OfferingType = new(string)
+			return d.ReadString(schemas.ReservedNode_OfferingType, v.OfferingType)
+		case schemas.ReservedNode_RecurringCharges:
+			return deserializeRecurringChargeList(d, schemas.ReservedNode_RecurringCharges, &v.RecurringCharges)
+		case schemas.ReservedNode_ReservationId:
+			v.ReservationId = new(string)
+			return d.ReadString(schemas.ReservedNode_ReservationId, v.ReservationId)
+		case schemas.ReservedNode_ReservedNodesOfferingId:
+			v.ReservedNodesOfferingId = new(string)
+			return d.ReadString(schemas.ReservedNode_ReservedNodesOfferingId, v.ReservedNodesOfferingId)
+		case schemas.ReservedNode_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ReservedNode_StartTime, v.StartTime)
+		case schemas.ReservedNode_State:
+			v.State = new(string)
+			return d.ReadString(schemas.ReservedNode_State, v.State)
+		}
+		return nil
+	})
+}
+
 // The offering type of this node.
 type ReservedNodesOffering struct {
 
@@ -642,6 +1862,53 @@ type ReservedNodesOffering struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservedNodesOffering) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservedNodesOffering)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservedNodesOffering) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != 0 {
+		s.WriteInt32(schemas.ReservedNodesOffering_Duration, v.Duration)
+	}
+	if v.FixedPrice != 0 {
+		s.WriteFloat64(schemas.ReservedNodesOffering_FixedPrice, v.FixedPrice)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.ReservedNodesOffering_NodeType, *v.NodeType)
+	}
+	if v.OfferingType != nil {
+		s.WriteString(schemas.ReservedNodesOffering_OfferingType, *v.OfferingType)
+	}
+	serializeRecurringChargeList(s, schemas.ReservedNodesOffering_RecurringCharges, v.RecurringCharges)
+	if v.ReservedNodesOfferingId != nil {
+		s.WriteString(schemas.ReservedNodesOffering_ReservedNodesOfferingId, *v.ReservedNodesOfferingId)
+	}
+}
+func (v *ReservedNodesOffering) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservedNodesOffering, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservedNodesOffering_Duration:
+			return d.ReadInt32(schemas.ReservedNodesOffering_Duration, &v.Duration)
+		case schemas.ReservedNodesOffering_FixedPrice:
+			return d.ReadFloat64(schemas.ReservedNodesOffering_FixedPrice, &v.FixedPrice)
+		case schemas.ReservedNodesOffering_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.ReservedNodesOffering_NodeType, v.NodeType)
+		case schemas.ReservedNodesOffering_OfferingType:
+			v.OfferingType = new(string)
+			return d.ReadString(schemas.ReservedNodesOffering_OfferingType, v.OfferingType)
+		case schemas.ReservedNodesOffering_RecurringCharges:
+			return deserializeRecurringChargeList(d, schemas.ReservedNodesOffering_RecurringCharges, &v.RecurringCharges)
+		case schemas.ReservedNodesOffering_ReservedNodesOfferingId:
+			v.ReservedNodesOfferingId = new(string)
+			return d.ReadString(schemas.ReservedNodesOffering_ReservedNodesOfferingId, v.ReservedNodesOfferingId)
+		}
+		return nil
+	})
+}
+
 // The status of the online resharding
 type ReshardingStatus struct {
 
@@ -649,6 +1916,30 @@ type ReshardingStatus struct {
 	SlotMigration *SlotMigration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReshardingStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReshardingStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReshardingStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SlotMigration != nil {
+		s.WriteStruct(schemas.ReshardingStatus_SlotMigration)
+		v.SlotMigration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReshardingStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReshardingStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReshardingStatus_SlotMigration:
+			v.SlotMigration = &SlotMigration{}
+			return v.SlotMigration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Represents a single security group and its status.
@@ -663,6 +1954,34 @@ type SecurityGroupMembership struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityGroupMembership) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityGroupMembership)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityGroupMembership) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityGroupId != nil {
+		s.WriteString(schemas.SecurityGroupMembership_SecurityGroupId, *v.SecurityGroupId)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.SecurityGroupMembership_Status, *v.Status)
+	}
+}
+func (v *SecurityGroupMembership) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityGroupMembership, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityGroupMembership_SecurityGroupId:
+			v.SecurityGroupId = new(string)
+			return d.ReadString(schemas.SecurityGroupMembership_SecurityGroupId, v.SecurityGroupId)
+		case schemas.SecurityGroupMembership_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.SecurityGroupMembership_Status, v.Status)
+		}
+		return nil
+	})
 }
 
 // An update that you can apply to your MemoryDB clusters.
@@ -698,6 +2017,84 @@ type ServiceUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoUpdateStartDate != nil {
+		s.WriteTime(schemas.ServiceUpdate_AutoUpdateStartDate, *v.AutoUpdateStartDate)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ServiceUpdate_ClusterName, *v.ClusterName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ServiceUpdate_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.ServiceUpdate_Engine, *v.Engine)
+	}
+	if v.NodesUpdated != nil {
+		s.WriteString(schemas.ServiceUpdate_NodesUpdated, *v.NodesUpdated)
+	}
+	if v.ReleaseDate != nil {
+		s.WriteTime(schemas.ServiceUpdate_ReleaseDate, *v.ReleaseDate)
+	}
+	if v.ServiceUpdateName != nil {
+		s.WriteString(schemas.ServiceUpdate_ServiceUpdateName, *v.ServiceUpdateName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ServiceUpdate_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ServiceUpdate_Type, string(v.Type))
+	}
+}
+func (v *ServiceUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUpdate_AutoUpdateStartDate:
+			v.AutoUpdateStartDate = new(time.Time)
+			return d.ReadTime(schemas.ServiceUpdate_AutoUpdateStartDate, v.AutoUpdateStartDate)
+		case schemas.ServiceUpdate_ClusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ServiceUpdate_ClusterName, v.ClusterName)
+		case schemas.ServiceUpdate_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ServiceUpdate_Description, v.Description)
+		case schemas.ServiceUpdate_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.ServiceUpdate_Engine, v.Engine)
+		case schemas.ServiceUpdate_NodesUpdated:
+			v.NodesUpdated = new(string)
+			return d.ReadString(schemas.ServiceUpdate_NodesUpdated, v.NodesUpdated)
+		case schemas.ServiceUpdate_ReleaseDate:
+			v.ReleaseDate = new(time.Time)
+			return d.ReadTime(schemas.ServiceUpdate_ReleaseDate, v.ReleaseDate)
+		case schemas.ServiceUpdate_ServiceUpdateName:
+			v.ServiceUpdateName = new(string)
+			return d.ReadString(schemas.ServiceUpdate_ServiceUpdateName, v.ServiceUpdateName)
+		case schemas.ServiceUpdate_Status:
+			var ev string
+			if err := d.ReadString(schemas.ServiceUpdate_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ServiceUpdateStatus(ev)
+			return nil
+		case schemas.ServiceUpdate_Type:
+			var ev string
+			if err := d.ReadString(schemas.ServiceUpdate_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ServiceUpdateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A request to apply a service update
 type ServiceUpdateRequest struct {
 
@@ -705,6 +2102,28 @@ type ServiceUpdateRequest struct {
 	ServiceUpdateNameToApply *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceUpdateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUpdateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceUpdateNameToApply != nil {
+		s.WriteString(schemas.ServiceUpdateRequest_ServiceUpdateNameToApply, *v.ServiceUpdateNameToApply)
+	}
+}
+func (v *ServiceUpdateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUpdateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUpdateRequest_ServiceUpdateNameToApply:
+			v.ServiceUpdateNameToApply = new(string)
+			return d.ReadString(schemas.ServiceUpdateRequest_ServiceUpdateNameToApply, v.ServiceUpdateNameToApply)
+		}
+		return nil
+	})
 }
 
 // Represents a collection of nodes in a cluster. One node in the node group is
@@ -730,6 +2149,49 @@ type Shard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Shard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Shard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Shard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Shard_Name, *v.Name)
+	}
+	serializeNodeList(s, schemas.Shard_Nodes, v.Nodes)
+	if v.NumberOfNodes != nil {
+		s.WriteInt32(schemas.Shard_NumberOfNodes, *v.NumberOfNodes)
+	}
+	if v.Slots != nil {
+		s.WriteString(schemas.Shard_Slots, *v.Slots)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.Shard_Status, *v.Status)
+	}
+}
+func (v *Shard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Shard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Shard_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Shard_Name, v.Name)
+		case schemas.Shard_Nodes:
+			return deserializeNodeList(d, schemas.Shard_Nodes, &v.Nodes)
+		case schemas.Shard_NumberOfNodes:
+			v.NumberOfNodes = new(int32)
+			return d.ReadInt32(schemas.Shard_NumberOfNodes, v.NumberOfNodes)
+		case schemas.Shard_Slots:
+			v.Slots = new(string)
+			return d.ReadString(schemas.Shard_Slots, v.Slots)
+		case schemas.Shard_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.Shard_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Shard configuration options. Each shard configuration has the following: Slots
 // and ReplicaCount.
 type ShardConfiguration struct {
@@ -744,6 +2206,34 @@ type ShardConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShardConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShardConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShardConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicaCount != nil {
+		s.WriteInt32(schemas.ShardConfiguration_ReplicaCount, *v.ReplicaCount)
+	}
+	if v.Slots != nil {
+		s.WriteString(schemas.ShardConfiguration_Slots, *v.Slots)
+	}
+}
+func (v *ShardConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShardConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShardConfiguration_ReplicaCount:
+			v.ReplicaCount = new(int32)
+			return d.ReadInt32(schemas.ShardConfiguration_ReplicaCount, v.ReplicaCount)
+		case schemas.ShardConfiguration_Slots:
+			v.Slots = new(string)
+			return d.ReadString(schemas.ShardConfiguration_Slots, v.Slots)
+		}
+		return nil
+	})
+}
+
 // A request to configure the sharding properties of a cluster
 type ShardConfigurationRequest struct {
 
@@ -751,6 +2241,27 @@ type ShardConfigurationRequest struct {
 	ShardCount int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ShardConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShardConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShardConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShardCount != 0 {
+		s.WriteInt32(schemas.ShardConfigurationRequest_ShardCount, v.ShardCount)
+	}
+}
+func (v *ShardConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShardConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShardConfigurationRequest_ShardCount:
+			return d.ReadInt32(schemas.ShardConfigurationRequest_ShardCount, &v.ShardCount)
+		}
+		return nil
+	})
 }
 
 // Provides details of a shard in a snapshot
@@ -771,6 +2282,48 @@ type ShardDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShardDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShardDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShardDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.ShardDetail_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ShardDetail_Name, *v.Name)
+	}
+	if v.Size != nil {
+		s.WriteString(schemas.ShardDetail_Size, *v.Size)
+	}
+	if v.SnapshotCreationTime != nil {
+		s.WriteTime(schemas.ShardDetail_SnapshotCreationTime, *v.SnapshotCreationTime)
+	}
+}
+func (v *ShardDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShardDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShardDetail_Configuration:
+			v.Configuration = &ShardConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.ShardDetail_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ShardDetail_Name, v.Name)
+		case schemas.ShardDetail_Size:
+			v.Size = new(string)
+			return d.ReadString(schemas.ShardDetail_Size, v.Size)
+		case schemas.ShardDetail_SnapshotCreationTime:
+			v.SnapshotCreationTime = new(time.Time)
+			return d.ReadTime(schemas.ShardDetail_SnapshotCreationTime, v.SnapshotCreationTime)
+		}
+		return nil
+	})
+}
+
 // Represents the progress of an online resharding operation.
 type SlotMigration struct {
 
@@ -778,6 +2331,27 @@ type SlotMigration struct {
 	ProgressPercentage float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SlotMigration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlotMigration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlotMigration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProgressPercentage != 0 {
+		s.WriteFloat64(schemas.SlotMigration_ProgressPercentage, v.ProgressPercentage)
+	}
+}
+func (v *SlotMigration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlotMigration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlotMigration_ProgressPercentage:
+			return d.ReadFloat64(schemas.SlotMigration_ProgressPercentage, &v.ProgressPercentage)
+		}
+		return nil
+	})
 }
 
 // Represents a copy of an entire cluster as of the time when the snapshot was
@@ -814,6 +2388,70 @@ type Snapshot struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Snapshot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Snapshot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Snapshot) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.Snapshot_ARN, *v.ARN)
+	}
+	if v.ClusterConfiguration != nil {
+		s.WriteStruct(schemas.Snapshot_ClusterConfiguration)
+		v.ClusterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataTiering != "" {
+		s.WriteString(schemas.Snapshot_DataTiering, string(v.DataTiering))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.Snapshot_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Snapshot_Name, *v.Name)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.Snapshot_Source, *v.Source)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.Snapshot_Status, *v.Status)
+	}
+}
+func (v *Snapshot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Snapshot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Snapshot_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.Snapshot_ARN, v.ARN)
+		case schemas.Snapshot_ClusterConfiguration:
+			v.ClusterConfiguration = &ClusterConfiguration{}
+			return v.ClusterConfiguration.Deserialize(d)
+		case schemas.Snapshot_DataTiering:
+			var ev string
+			if err := d.ReadString(schemas.Snapshot_DataTiering, &ev); err != nil {
+				return err
+			}
+			v.DataTiering = DataTieringStatus(ev)
+			return nil
+		case schemas.Snapshot_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.Snapshot_KmsKeyId, v.KmsKeyId)
+		case schemas.Snapshot_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Snapshot_Name, v.Name)
+		case schemas.Snapshot_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.Snapshot_Source, v.Source)
+		case schemas.Snapshot_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.Snapshot_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Represents the subnet associated with a cluster. This parameter refers to
 // subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with
 // MemoryDB.
@@ -831,6 +2469,39 @@ type Subnet struct {
 	SupportedNetworkTypes []NetworkType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Subnet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subnet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subnet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteStruct(schemas.Subnet_AvailabilityZone)
+		v.AvailabilityZone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.Subnet_Identifier, *v.Identifier)
+	}
+	serializeNetworkTypeList(s, schemas.Subnet_SupportedNetworkTypes, v.SupportedNetworkTypes)
+}
+func (v *Subnet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subnet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subnet_AvailabilityZone:
+			v.AvailabilityZone = &AvailabilityZone{}
+			return v.AvailabilityZone.Deserialize(d)
+		case schemas.Subnet_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.Subnet_Identifier, v.Identifier)
+		case schemas.Subnet_SupportedNetworkTypes:
+			return deserializeNetworkTypeList(d, schemas.Subnet_SupportedNetworkTypes, &v.SupportedNetworkTypes)
+		}
+		return nil
+	})
 }
 
 // Represents the output of one of the following operations:
@@ -867,6 +2538,52 @@ type SubnetGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubnetGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubnetGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubnetGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.SubnetGroup_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SubnetGroup_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SubnetGroup_Name, *v.Name)
+	}
+	serializeSubnetList(s, schemas.SubnetGroup_Subnets, v.Subnets)
+	serializeNetworkTypeList(s, schemas.SubnetGroup_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	if v.VpcId != nil {
+		s.WriteString(schemas.SubnetGroup_VpcId, *v.VpcId)
+	}
+}
+func (v *SubnetGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubnetGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubnetGroup_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.SubnetGroup_ARN, v.ARN)
+		case schemas.SubnetGroup_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SubnetGroup_Description, v.Description)
+		case schemas.SubnetGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SubnetGroup_Name, v.Name)
+		case schemas.SubnetGroup_Subnets:
+			return deserializeSubnetList(d, schemas.SubnetGroup_Subnets, &v.Subnets)
+		case schemas.SubnetGroup_SupportedNetworkTypes:
+			return deserializeNetworkTypeList(d, schemas.SubnetGroup_SupportedNetworkTypes, &v.SupportedNetworkTypes)
+		case schemas.SubnetGroup_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.SubnetGroup_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // A tag that can be added to an MemoryDB resource. Tags are composed of a
 // Key/Value pair. You can use tags to categorize and track all your MemoryDB
 // resources. When you add or remove tags on clusters, those actions will be
@@ -885,6 +2602,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // A cluster whose updates have failed
 type UnprocessedCluster struct {
 
@@ -898,6 +2643,40 @@ type UnprocessedCluster struct {
 	ErrorType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UnprocessedCluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnprocessedCluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnprocessedCluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UnprocessedCluster_ClusterName, *v.ClusterName)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.UnprocessedCluster_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ErrorType != nil {
+		s.WriteString(schemas.UnprocessedCluster_ErrorType, *v.ErrorType)
+	}
+}
+func (v *UnprocessedCluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessedCluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessedCluster_ClusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.UnprocessedCluster_ClusterName, v.ClusterName)
+		case schemas.UnprocessedCluster_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.UnprocessedCluster_ErrorMessage, v.ErrorMessage)
+		case schemas.UnprocessedCluster_ErrorType:
+			v.ErrorType = new(string)
+			return d.ReadString(schemas.UnprocessedCluster_ErrorType, v.ErrorType)
+		}
+		return nil
+	})
 }
 
 // You create users and assign them specific permissions by using an access
@@ -928,6 +2707,63 @@ type User struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeACLNameList(s, schemas.User_ACLNames, v.ACLNames)
+	if v.ARN != nil {
+		s.WriteString(schemas.User_ARN, *v.ARN)
+	}
+	if v.AccessString != nil {
+		s.WriteString(schemas.User_AccessString, *v.AccessString)
+	}
+	if v.Authentication != nil {
+		s.WriteStruct(schemas.User_Authentication)
+		v.Authentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinimumEngineVersion != nil {
+		s.WriteString(schemas.User_MinimumEngineVersion, *v.MinimumEngineVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.User_Name, *v.Name)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.User_Status, *v.Status)
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_ACLNames:
+			return deserializeACLNameList(d, schemas.User_ACLNames, &v.ACLNames)
+		case schemas.User_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.User_ARN, v.ARN)
+		case schemas.User_AccessString:
+			v.AccessString = new(string)
+			return d.ReadString(schemas.User_AccessString, v.AccessString)
+		case schemas.User_Authentication:
+			v.Authentication = &Authentication{}
+			return v.Authentication.Deserialize(d)
+		case schemas.User_MinimumEngineVersion:
+			v.MinimumEngineVersion = new(string)
+			return d.ReadString(schemas.User_MinimumEngineVersion, v.MinimumEngineVersion)
+		case schemas.User_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.User_Name, v.Name)
+		case schemas.User_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.User_Status, v.Status)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

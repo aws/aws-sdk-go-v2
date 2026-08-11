@@ -4,6 +4,8 @@ package chimesdkmediapipelines
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StopSpeakerSearchTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSpeakerSearchTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSpeakerSearchTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSpeakerSearchTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.StopSpeakerSearchTaskRequest_Identifier, *v.Identifier)
+	}
+	if v.SpeakerSearchTaskId != nil {
+		s.WriteString(schemas.StopSpeakerSearchTaskRequest_SpeakerSearchTaskId, *v.SpeakerSearchTaskId)
+	}
+}
+
 type StopSpeakerSearchTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type StopSpeakerSearchTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSpeakerSearchTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSpeakerSearchTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopSpeakerSearchTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopSpeakerSearchTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopSpeakerSearchTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSpeakerSearchTask, schemas.StopSpeakerSearchTaskRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopSpeakerSearchTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSpeakerSearchTask, schemas.StopSpeakerSearchTaskRequest, nil), output: &StopSpeakerSearchTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

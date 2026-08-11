@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,30 @@ type ListMobileDeviceAccessOverridesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMobileDeviceAccessOverridesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMobileDeviceAccessOverridesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMobileDeviceAccessOverridesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesRequest_DeviceId, *v.DeviceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMobileDeviceAccessOverridesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesRequest_UserId, *v.UserId)
+	}
+}
+
 type ListMobileDeviceAccessOverridesOutput struct {
 
 	// The token to use to retrieve the next page of results. The value is “null” when
@@ -73,13 +99,35 @@ type ListMobileDeviceAccessOverridesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMobileDeviceAccessOverridesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMobileDeviceAccessOverridesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMobileDeviceAccessOverridesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesResponse_NextToken, *v.NextToken)
+	}
+	serializeMobileDeviceAccessOverridesList(s, schemas.ListMobileDeviceAccessOverridesResponse_Overrides, v.Overrides)
+}
+func (v *ListMobileDeviceAccessOverridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMobileDeviceAccessOverridesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMobileDeviceAccessOverridesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMobileDeviceAccessOverridesResponse_NextToken, v.NextToken)
+		case schemas.ListMobileDeviceAccessOverridesResponse_Overrides:
+			return deserializeMobileDeviceAccessOverridesList(d, schemas.ListMobileDeviceAccessOverridesResponse_Overrides, &v.Overrides)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMobileDeviceAccessOverridesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMobileDeviceAccessOverrides{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMobileDeviceAccessOverrides, schemas.ListMobileDeviceAccessOverridesRequest, schemas.ListMobileDeviceAccessOverridesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMobileDeviceAccessOverrides{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMobileDeviceAccessOverrides, schemas.ListMobileDeviceAccessOverridesRequest, schemas.ListMobileDeviceAccessOverridesResponse), output: &ListMobileDeviceAccessOverridesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

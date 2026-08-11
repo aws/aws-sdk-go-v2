@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -27,6 +29,15 @@ func (c *Client) StartContinuousExport(ctx context.Context, params *StartContinu
 
 type StartContinuousExportInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *StartContinuousExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContinuousExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContinuousExportInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type StartContinuousExportOutput struct {
@@ -55,13 +66,57 @@ type StartContinuousExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContinuousExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContinuousExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContinuousExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != "" {
+		s.WriteString(schemas.StartContinuousExportResponse_dataSource, string(v.DataSource))
+	}
+	if v.ExportId != nil {
+		s.WriteString(schemas.StartContinuousExportResponse_exportId, *v.ExportId)
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.StartContinuousExportResponse_s3Bucket, *v.S3Bucket)
+	}
+	serializeSchemaStorageConfig(s, schemas.StartContinuousExportResponse_schemaStorageConfig, v.SchemaStorageConfig)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartContinuousExportResponse_startTime, *v.StartTime)
+	}
+}
+func (v *StartContinuousExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContinuousExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContinuousExportResponse_dataSource:
+			var ev string
+			if err := d.ReadString(schemas.StartContinuousExportResponse_dataSource, &ev); err != nil {
+				return err
+			}
+			v.DataSource = types.DataSource(ev)
+			return nil
+		case schemas.StartContinuousExportResponse_exportId:
+			v.ExportId = new(string)
+			return d.ReadString(schemas.StartContinuousExportResponse_exportId, v.ExportId)
+		case schemas.StartContinuousExportResponse_s3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.StartContinuousExportResponse_s3Bucket, v.S3Bucket)
+		case schemas.StartContinuousExportResponse_schemaStorageConfig:
+			return deserializeSchemaStorageConfig(d, schemas.StartContinuousExportResponse_schemaStorageConfig, &v.SchemaStorageConfig)
+		case schemas.StartContinuousExportResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.StartContinuousExportResponse_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContinuousExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartContinuousExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContinuousExport, schemas.StartContinuousExportRequest, schemas.StartContinuousExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartContinuousExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContinuousExport, schemas.StartContinuousExportRequest, schemas.StartContinuousExportResponse), output: &StartContinuousExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

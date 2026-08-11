@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,39 @@ type CreateCommitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCommitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCommitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCommitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorName != nil {
+		s.WriteString(schemas.CreateCommitInput_authorName, *v.AuthorName)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.CreateCommitInput_branchName, *v.BranchName)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.CreateCommitInput_commitMessage, *v.CommitMessage)
+	}
+	serializeDeleteFileEntries(s, schemas.CreateCommitInput_deleteFiles, v.DeleteFiles)
+	if v.Email != nil {
+		s.WriteString(schemas.CreateCommitInput_email, *v.Email)
+	}
+	if v.KeepEmptyFolders != false {
+		s.WriteBool(schemas.CreateCommitInput_keepEmptyFolders, v.KeepEmptyFolders)
+	}
+	if v.ParentCommitId != nil {
+		s.WriteString(schemas.CreateCommitInput_parentCommitId, *v.ParentCommitId)
+	}
+	serializePutFileEntries(s, schemas.CreateCommitInput_putFiles, v.PutFiles)
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CreateCommitInput_repositoryName, *v.RepositoryName)
+	}
+	serializeSetFileModeEntries(s, schemas.CreateCommitInput_setFileModes, v.SetFileModes)
+}
+
 type CreateCommitOutput struct {
 
 	// The full commit ID of the commit that contains your committed file changes.
@@ -92,13 +127,47 @@ type CreateCommitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCommitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCommitOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCommitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitId != nil {
+		s.WriteString(schemas.CreateCommitOutput_commitId, *v.CommitId)
+	}
+	serializeFilesMetadata(s, schemas.CreateCommitOutput_filesAdded, v.FilesAdded)
+	serializeFilesMetadata(s, schemas.CreateCommitOutput_filesDeleted, v.FilesDeleted)
+	serializeFilesMetadata(s, schemas.CreateCommitOutput_filesUpdated, v.FilesUpdated)
+	if v.TreeId != nil {
+		s.WriteString(schemas.CreateCommitOutput_treeId, *v.TreeId)
+	}
+}
+func (v *CreateCommitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCommitOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCommitOutput_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.CreateCommitOutput_commitId, v.CommitId)
+		case schemas.CreateCommitOutput_filesAdded:
+			return deserializeFilesMetadata(d, schemas.CreateCommitOutput_filesAdded, &v.FilesAdded)
+		case schemas.CreateCommitOutput_filesDeleted:
+			return deserializeFilesMetadata(d, schemas.CreateCommitOutput_filesDeleted, &v.FilesDeleted)
+		case schemas.CreateCommitOutput_filesUpdated:
+			return deserializeFilesMetadata(d, schemas.CreateCommitOutput_filesUpdated, &v.FilesUpdated)
+		case schemas.CreateCommitOutput_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.CreateCommitOutput_treeId, v.TreeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCommit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCommit, schemas.CreateCommitInput, schemas.CreateCommitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCommit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCommit, schemas.CreateCommitInput, schemas.CreateCommitOutput), output: &CreateCommitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

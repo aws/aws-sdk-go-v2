@@ -5,7 +5,9 @@ package codeguruprofiler
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -75,6 +77,58 @@ type ListFindingsReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingsReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingsReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DailyReportsOnly != nil {
+		s.WriteBool(schemas.ListFindingsReportsRequest_dailyReportsOnly, *v.DailyReportsOnly)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListFindingsReportsRequest_endTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFindingsReportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingsReportsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.ListFindingsReportsRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListFindingsReportsRequest_startTime, *v.StartTime)
+	}
+}
+func (v *ListFindingsReportsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingsReportsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingsReportsRequest_dailyReportsOnly:
+			v.DailyReportsOnly = new(bool)
+			return d.ReadBool(schemas.ListFindingsReportsRequest_dailyReportsOnly, v.DailyReportsOnly)
+		case schemas.ListFindingsReportsRequest_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ListFindingsReportsRequest_endTime, v.EndTime)
+		case schemas.ListFindingsReportsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFindingsReportsRequest_maxResults, v.MaxResults)
+		case schemas.ListFindingsReportsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingsReportsRequest_nextToken, v.NextToken)
+		case schemas.ListFindingsReportsRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.ListFindingsReportsRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.ListFindingsReportsRequest_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListFindingsReportsRequest_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // The structure representing the ListFindingsReportsResponse.
 type ListFindingsReportsOutput struct {
 
@@ -95,13 +149,35 @@ type ListFindingsReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingsReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingsReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingsReportSummaries(s, schemas.ListFindingsReportsResponse_findingsReportSummaries, v.FindingsReportSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingsReportsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFindingsReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingsReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingsReportsResponse_findingsReportSummaries:
+			return deserializeFindingsReportSummaries(d, schemas.ListFindingsReportsResponse_findingsReportSummaries, &v.FindingsReportSummaries)
+		case schemas.ListFindingsReportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingsReportsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFindingsReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingsReports, schemas.ListFindingsReportsRequest, schemas.ListFindingsReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFindingsReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingsReports, schemas.ListFindingsReportsRequest, schemas.ListFindingsReportsResponse), output: &ListFindingsReportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

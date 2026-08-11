@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,47 @@ type MergePullRequestBySquashInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergePullRequestBySquashInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergePullRequestBySquashInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergePullRequestBySquashInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorName != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_authorName, *v.AuthorName)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_commitMessage, *v.CommitMessage)
+	}
+	if v.ConflictDetailLevel != "" {
+		s.WriteString(schemas.MergePullRequestBySquashInput_conflictDetailLevel, string(v.ConflictDetailLevel))
+	}
+	if v.ConflictResolution != nil {
+		s.WriteStruct(schemas.MergePullRequestBySquashInput_conflictResolution)
+		v.ConflictResolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConflictResolutionStrategy != "" {
+		s.WriteString(schemas.MergePullRequestBySquashInput_conflictResolutionStrategy, string(v.ConflictResolutionStrategy))
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_email, *v.Email)
+	}
+	if v.KeepEmptyFolders != false {
+		s.WriteBool(schemas.MergePullRequestBySquashInput_keepEmptyFolders, v.KeepEmptyFolders)
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_pullRequestId, *v.PullRequestId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitId != nil {
+		s.WriteString(schemas.MergePullRequestBySquashInput_sourceCommitId, *v.SourceCommitId)
+	}
+}
+
 type MergePullRequestBySquashOutput struct {
 
 	// Returns information about a pull request.
@@ -89,13 +132,34 @@ type MergePullRequestBySquashOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergePullRequestBySquashOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergePullRequestBySquashOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergePullRequestBySquashOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PullRequest != nil {
+		s.WriteStruct(schemas.MergePullRequestBySquashOutput_pullRequest)
+		v.PullRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MergePullRequestBySquashOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergePullRequestBySquashOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergePullRequestBySquashOutput_pullRequest:
+			v.PullRequest = &types.PullRequest{}
+			return v.PullRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergePullRequestBySquashMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergePullRequestBySquash{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergePullRequestBySquash, schemas.MergePullRequestBySquashInput, schemas.MergePullRequestBySquashOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergePullRequestBySquash{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergePullRequestBySquash, schemas.MergePullRequestBySquashInput, schemas.MergePullRequestBySquashOutput), output: &MergePullRequestBySquashOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -54,6 +56,80 @@ type AccessControlRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccessControlRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessControlRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessControlRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionsList(s, schemas.AccessControlRule_Actions, v.Actions)
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.AccessControlRule_DateCreated, *v.DateCreated)
+	}
+	if v.DateModified != nil {
+		s.WriteTime(schemas.AccessControlRule_DateModified, *v.DateModified)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AccessControlRule_Description, *v.Description)
+	}
+	if v.Effect != "" {
+		s.WriteString(schemas.AccessControlRule_Effect, string(v.Effect))
+	}
+	serializeImpersonationRoleIdList(s, schemas.AccessControlRule_ImpersonationRoleIds, v.ImpersonationRoleIds)
+	serializeIpRangeList(s, schemas.AccessControlRule_IpRanges, v.IpRanges)
+	if v.Name != nil {
+		s.WriteString(schemas.AccessControlRule_Name, *v.Name)
+	}
+	serializeActionsList(s, schemas.AccessControlRule_NotActions, v.NotActions)
+	serializeImpersonationRoleIdList(s, schemas.AccessControlRule_NotImpersonationRoleIds, v.NotImpersonationRoleIds)
+	serializeIpRangeList(s, schemas.AccessControlRule_NotIpRanges, v.NotIpRanges)
+	serializeUserIdList(s, schemas.AccessControlRule_NotUserIds, v.NotUserIds)
+	serializeUserIdList(s, schemas.AccessControlRule_UserIds, v.UserIds)
+}
+func (v *AccessControlRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessControlRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessControlRule_Actions:
+			return deserializeActionsList(d, schemas.AccessControlRule_Actions, &v.Actions)
+		case schemas.AccessControlRule_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.AccessControlRule_DateCreated, v.DateCreated)
+		case schemas.AccessControlRule_DateModified:
+			v.DateModified = new(time.Time)
+			return d.ReadTime(schemas.AccessControlRule_DateModified, v.DateModified)
+		case schemas.AccessControlRule_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AccessControlRule_Description, v.Description)
+		case schemas.AccessControlRule_Effect:
+			var ev string
+			if err := d.ReadString(schemas.AccessControlRule_Effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = AccessControlRuleEffect(ev)
+			return nil
+		case schemas.AccessControlRule_ImpersonationRoleIds:
+			return deserializeImpersonationRoleIdList(d, schemas.AccessControlRule_ImpersonationRoleIds, &v.ImpersonationRoleIds)
+		case schemas.AccessControlRule_IpRanges:
+			return deserializeIpRangeList(d, schemas.AccessControlRule_IpRanges, &v.IpRanges)
+		case schemas.AccessControlRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AccessControlRule_Name, v.Name)
+		case schemas.AccessControlRule_NotActions:
+			return deserializeActionsList(d, schemas.AccessControlRule_NotActions, &v.NotActions)
+		case schemas.AccessControlRule_NotImpersonationRoleIds:
+			return deserializeImpersonationRoleIdList(d, schemas.AccessControlRule_NotImpersonationRoleIds, &v.NotImpersonationRoleIds)
+		case schemas.AccessControlRule_NotIpRanges:
+			return deserializeIpRangeList(d, schemas.AccessControlRule_NotIpRanges, &v.NotIpRanges)
+		case schemas.AccessControlRule_NotUserIds:
+			return deserializeUserIdList(d, schemas.AccessControlRule_NotUserIds, &v.NotUserIds)
+		case schemas.AccessControlRule_UserIds:
+			return deserializeUserIdList(d, schemas.AccessControlRule_UserIds, &v.UserIds)
+		}
+		return nil
+	})
+}
+
 // List all the AvailabilityConfiguration 's for the given WorkMail organization.
 type AvailabilityConfiguration struct {
 
@@ -80,6 +156,66 @@ type AvailabilityConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AvailabilityConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailabilityConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailabilityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.AvailabilityConfiguration_DateCreated, *v.DateCreated)
+	}
+	if v.DateModified != nil {
+		s.WriteTime(schemas.AvailabilityConfiguration_DateModified, *v.DateModified)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.AvailabilityConfiguration_DomainName, *v.DomainName)
+	}
+	if v.EwsProvider != nil {
+		s.WriteStruct(schemas.AvailabilityConfiguration_EwsProvider)
+		v.EwsProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaProvider != nil {
+		s.WriteStruct(schemas.AvailabilityConfiguration_LambdaProvider)
+		v.LambdaProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.AvailabilityConfiguration_ProviderType, string(v.ProviderType))
+	}
+}
+func (v *AvailabilityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailabilityConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailabilityConfiguration_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.AvailabilityConfiguration_DateCreated, v.DateCreated)
+		case schemas.AvailabilityConfiguration_DateModified:
+			v.DateModified = new(time.Time)
+			return d.ReadTime(schemas.AvailabilityConfiguration_DateModified, v.DateModified)
+		case schemas.AvailabilityConfiguration_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.AvailabilityConfiguration_DomainName, v.DomainName)
+		case schemas.AvailabilityConfiguration_EwsProvider:
+			v.EwsProvider = &RedactedEwsAvailabilityProvider{}
+			return v.EwsProvider.Deserialize(d)
+		case schemas.AvailabilityConfiguration_LambdaProvider:
+			v.LambdaProvider = &LambdaAvailabilityProvider{}
+			return v.LambdaProvider.Deserialize(d)
+		case schemas.AvailabilityConfiguration_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.AvailabilityConfiguration_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = AvailabilityProviderType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // At least one delegate must be associated to the resource to disable automatic
 // replies from the resource.
 type BookingOptions struct {
@@ -95,6 +231,37 @@ type BookingOptions struct {
 	AutoDeclineRecurringRequests bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *BookingOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BookingOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BookingOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoAcceptRequests != false {
+		s.WriteBool(schemas.BookingOptions_AutoAcceptRequests, v.AutoAcceptRequests)
+	}
+	if v.AutoDeclineConflictingRequests != false {
+		s.WriteBool(schemas.BookingOptions_AutoDeclineConflictingRequests, v.AutoDeclineConflictingRequests)
+	}
+	if v.AutoDeclineRecurringRequests != false {
+		s.WriteBool(schemas.BookingOptions_AutoDeclineRecurringRequests, v.AutoDeclineRecurringRequests)
+	}
+}
+func (v *BookingOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BookingOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BookingOptions_AutoAcceptRequests:
+			return d.ReadBool(schemas.BookingOptions_AutoAcceptRequests, &v.AutoAcceptRequests)
+		case schemas.BookingOptions_AutoDeclineConflictingRequests:
+			return d.ReadBool(schemas.BookingOptions_AutoDeclineConflictingRequests, &v.AutoDeclineConflictingRequests)
+		case schemas.BookingOptions_AutoDeclineRecurringRequests:
+			return d.ReadBool(schemas.BookingOptions_AutoDeclineRecurringRequests, &v.AutoDeclineRecurringRequests)
+		}
+		return nil
+	})
 }
 
 // The name of the attribute, which is one of the values defined in the
@@ -114,6 +281,38 @@ type Delegate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Delegate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Delegate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Delegate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.Delegate_Id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Delegate_Type, string(v.Type))
+	}
+}
+func (v *Delegate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Delegate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Delegate_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Delegate_Id, v.Id)
+		case schemas.Delegate_Type:
+			var ev string
+			if err := d.ReadString(schemas.Delegate_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = MemberType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A DNS record uploaded to your DNS provider.
 type DnsRecord struct {
 
@@ -127,6 +326,40 @@ type DnsRecord struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DnsRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hostname != nil {
+		s.WriteString(schemas.DnsRecord_Hostname, *v.Hostname)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.DnsRecord_Type, *v.Type)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.DnsRecord_Value, *v.Value)
+	}
+}
+func (v *DnsRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsRecord_Hostname:
+			v.Hostname = new(string)
+			return d.ReadString(schemas.DnsRecord_Hostname, v.Hostname)
+		case schemas.DnsRecord_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.DnsRecord_Type, v.Type)
+		case schemas.DnsRecord_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DnsRecord_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The domain to associate with an WorkMail organization.
@@ -148,6 +381,34 @@ type Domain struct {
 	HostedZoneId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Domain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Domain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Domain) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.Domain_DomainName, *v.DomainName)
+	}
+	if v.HostedZoneId != nil {
+		s.WriteString(schemas.Domain_HostedZoneId, *v.HostedZoneId)
+	}
+}
+func (v *Domain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Domain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Domain_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.Domain_DomainName, v.DomainName)
+		case schemas.Domain_HostedZoneId:
+			v.HostedZoneId = new(string)
+			return d.ReadString(schemas.Domain_HostedZoneId, v.HostedZoneId)
+		}
+		return nil
+	})
 }
 
 // Describes an EWS based availability provider. This is only used as input to the
@@ -172,6 +433,40 @@ type EwsAvailabilityProvider struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EwsAvailabilityProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EwsAvailabilityProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EwsAvailabilityProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EwsEndpoint != nil {
+		s.WriteString(schemas.EwsAvailabilityProvider_EwsEndpoint, *v.EwsEndpoint)
+	}
+	if v.EwsPassword != nil {
+		s.WriteString(schemas.EwsAvailabilityProvider_EwsPassword, *v.EwsPassword)
+	}
+	if v.EwsUsername != nil {
+		s.WriteString(schemas.EwsAvailabilityProvider_EwsUsername, *v.EwsUsername)
+	}
+}
+func (v *EwsAvailabilityProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EwsAvailabilityProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EwsAvailabilityProvider_EwsEndpoint:
+			v.EwsEndpoint = new(string)
+			return d.ReadString(schemas.EwsAvailabilityProvider_EwsEndpoint, v.EwsEndpoint)
+		case schemas.EwsAvailabilityProvider_EwsPassword:
+			v.EwsPassword = new(string)
+			return d.ReadString(schemas.EwsAvailabilityProvider_EwsPassword, v.EwsPassword)
+		case schemas.EwsAvailabilityProvider_EwsUsername:
+			v.EwsUsername = new(string)
+			return d.ReadString(schemas.EwsAvailabilityProvider_EwsUsername, v.EwsUsername)
+		}
+		return nil
+	})
+}
+
 // The configuration applied to an organization's folders by its retention policy.
 type FolderConfiguration struct {
 
@@ -190,6 +485,48 @@ type FolderConfiguration struct {
 	Period *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *FolderConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FolderConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FolderConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.FolderConfiguration_Action, string(v.Action))
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.FolderConfiguration_Name, string(v.Name))
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.FolderConfiguration_Period, *v.Period)
+	}
+}
+func (v *FolderConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FolderConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FolderConfiguration_Action:
+			var ev string
+			if err := d.ReadString(schemas.FolderConfiguration_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = RetentionAction(ev)
+			return nil
+		case schemas.FolderConfiguration_Name:
+			var ev string
+			if err := d.ReadString(schemas.FolderConfiguration_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = FolderName(ev)
+			return nil
+		case schemas.FolderConfiguration_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.FolderConfiguration_Period, v.Period)
+		}
+		return nil
+	})
 }
 
 // The representation of an WorkMail group.
@@ -216,6 +553,62 @@ type Group struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Group) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Group)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisabledDate != nil {
+		s.WriteTime(schemas.Group_DisabledDate, *v.DisabledDate)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.Group_Email, *v.Email)
+	}
+	if v.EnabledDate != nil {
+		s.WriteTime(schemas.Group_EnabledDate, *v.EnabledDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Group_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Group_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Group_State, string(v.State))
+	}
+}
+func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Group, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Group_DisabledDate:
+			v.DisabledDate = new(time.Time)
+			return d.ReadTime(schemas.Group_DisabledDate, v.DisabledDate)
+		case schemas.Group_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.Group_Email, v.Email)
+		case schemas.Group_EnabledDate:
+			v.EnabledDate = new(time.Time)
+			return d.ReadTime(schemas.Group_EnabledDate, v.EnabledDate)
+		case schemas.Group_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Group_Id, v.Id)
+		case schemas.Group_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Group_Name, v.Name)
+		case schemas.Group_State:
+			var ev string
+			if err := d.ReadString(schemas.Group_State, &ev); err != nil {
+				return err
+			}
+			v.State = EntityState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The identifier that contains the Group ID and name of a group.
 type GroupIdentifier struct {
 
@@ -226,6 +619,34 @@ type GroupIdentifier struct {
 	GroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.GroupIdentifier_GroupId, *v.GroupId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GroupIdentifier_GroupName, *v.GroupName)
+	}
+}
+func (v *GroupIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupIdentifier_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.GroupIdentifier_GroupId, v.GroupId)
+		case schemas.GroupIdentifier_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.GroupIdentifier_GroupName, v.GroupName)
+		}
+		return nil
+	})
 }
 
 // The IAM Identity Center configuration.
@@ -246,6 +667,34 @@ type IdentityCenterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdentityCenterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityCenterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityCenterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.IdentityCenterConfiguration_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.IdentityCenterConfiguration_InstanceArn, *v.InstanceArn)
+	}
+}
+func (v *IdentityCenterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityCenterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityCenterConfiguration_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.IdentityCenterConfiguration_ApplicationArn, v.ApplicationArn)
+		case schemas.IdentityCenterConfiguration_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.IdentityCenterConfiguration_InstanceArn, v.InstanceArn)
+		}
+		return nil
+	})
+}
+
 // The impersonation rule that matched the input.
 type ImpersonationMatchedRule struct {
 
@@ -256,6 +705,34 @@ type ImpersonationMatchedRule struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImpersonationMatchedRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImpersonationMatchedRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImpersonationMatchedRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpersonationRuleId != nil {
+		s.WriteString(schemas.ImpersonationMatchedRule_ImpersonationRuleId, *v.ImpersonationRuleId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImpersonationMatchedRule_Name, *v.Name)
+	}
+}
+func (v *ImpersonationMatchedRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImpersonationMatchedRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImpersonationMatchedRule_ImpersonationRuleId:
+			v.ImpersonationRuleId = new(string)
+			return d.ReadString(schemas.ImpersonationMatchedRule_ImpersonationRuleId, v.ImpersonationRuleId)
+		case schemas.ImpersonationMatchedRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImpersonationMatchedRule_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // An impersonation role for the given WorkMail organization.
@@ -277,6 +754,56 @@ type ImpersonationRole struct {
 	Type ImpersonationRoleType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImpersonationRole) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImpersonationRole)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImpersonationRole) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.ImpersonationRole_DateCreated, *v.DateCreated)
+	}
+	if v.DateModified != nil {
+		s.WriteTime(schemas.ImpersonationRole_DateModified, *v.DateModified)
+	}
+	if v.ImpersonationRoleId != nil {
+		s.WriteString(schemas.ImpersonationRole_ImpersonationRoleId, *v.ImpersonationRoleId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImpersonationRole_Name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ImpersonationRole_Type, string(v.Type))
+	}
+}
+func (v *ImpersonationRole) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImpersonationRole, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImpersonationRole_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.ImpersonationRole_DateCreated, v.DateCreated)
+		case schemas.ImpersonationRole_DateModified:
+			v.DateModified = new(time.Time)
+			return d.ReadTime(schemas.ImpersonationRole_DateModified, v.DateModified)
+		case schemas.ImpersonationRole_ImpersonationRoleId:
+			v.ImpersonationRoleId = new(string)
+			return d.ReadString(schemas.ImpersonationRole_ImpersonationRoleId, v.ImpersonationRoleId)
+		case schemas.ImpersonationRole_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImpersonationRole_Name, v.Name)
+		case schemas.ImpersonationRole_Type:
+			var ev string
+			if err := d.ReadString(schemas.ImpersonationRole_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ImpersonationRoleType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The rules for the given impersonation role.
@@ -308,6 +835,56 @@ type ImpersonationRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImpersonationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImpersonationRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImpersonationRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ImpersonationRule_Description, *v.Description)
+	}
+	if v.Effect != "" {
+		s.WriteString(schemas.ImpersonationRule_Effect, string(v.Effect))
+	}
+	if v.ImpersonationRuleId != nil {
+		s.WriteString(schemas.ImpersonationRule_ImpersonationRuleId, *v.ImpersonationRuleId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImpersonationRule_Name, *v.Name)
+	}
+	serializeTargetUsers(s, schemas.ImpersonationRule_NotTargetUsers, v.NotTargetUsers)
+	serializeTargetUsers(s, schemas.ImpersonationRule_TargetUsers, v.TargetUsers)
+}
+func (v *ImpersonationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImpersonationRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImpersonationRule_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ImpersonationRule_Description, v.Description)
+		case schemas.ImpersonationRule_Effect:
+			var ev string
+			if err := d.ReadString(schemas.ImpersonationRule_Effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = AccessEffect(ev)
+			return nil
+		case schemas.ImpersonationRule_ImpersonationRuleId:
+			v.ImpersonationRuleId = new(string)
+			return d.ReadString(schemas.ImpersonationRule_ImpersonationRuleId, v.ImpersonationRuleId)
+		case schemas.ImpersonationRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImpersonationRule_Name, v.Name)
+		case schemas.ImpersonationRule_NotTargetUsers:
+			return deserializeTargetUsers(d, schemas.ImpersonationRule_NotTargetUsers, &v.NotTargetUsers)
+		case schemas.ImpersonationRule_TargetUsers:
+			return deserializeTargetUsers(d, schemas.ImpersonationRule_TargetUsers, &v.TargetUsers)
+		}
+		return nil
+	})
+}
+
 // Describes a Lambda based availability provider.
 type LambdaAvailabilityProvider struct {
 
@@ -318,6 +895,28 @@ type LambdaAvailabilityProvider struct {
 	LambdaArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaAvailabilityProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaAvailabilityProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaAvailabilityProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaArn != nil {
+		s.WriteString(schemas.LambdaAvailabilityProvider_LambdaArn, *v.LambdaArn)
+	}
+}
+func (v *LambdaAvailabilityProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaAvailabilityProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaAvailabilityProvider_LambdaArn:
+			v.LambdaArn = new(string)
+			return d.ReadString(schemas.LambdaAvailabilityProvider_LambdaArn, v.LambdaArn)
+		}
+		return nil
+	})
 }
 
 //	Filtering options for ListGroups operation. This is only used as input to
@@ -337,6 +936,44 @@ type ListGroupsFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListGroupsFilters_NamePrefix, *v.NamePrefix)
+	}
+	if v.PrimaryEmailPrefix != nil {
+		s.WriteString(schemas.ListGroupsFilters_PrimaryEmailPrefix, *v.PrimaryEmailPrefix)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListGroupsFilters_State, string(v.State))
+	}
+}
+func (v *ListGroupsFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupsFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupsFilters_NamePrefix:
+			v.NamePrefix = new(string)
+			return d.ReadString(schemas.ListGroupsFilters_NamePrefix, v.NamePrefix)
+		case schemas.ListGroupsFilters_PrimaryEmailPrefix:
+			v.PrimaryEmailPrefix = new(string)
+			return d.ReadString(schemas.ListGroupsFilters_PrimaryEmailPrefix, v.PrimaryEmailPrefix)
+		case schemas.ListGroupsFilters_State:
+			var ev string
+			if err := d.ReadString(schemas.ListGroupsFilters_State, &ev); err != nil {
+				return err
+			}
+			v.State = EntityState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Filtering options for ListGroupsForEntity operation. This is only used as
 //
 // input to Operation.
@@ -346,6 +983,28 @@ type ListGroupsForEntityFilters struct {
 	GroupNamePrefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListGroupsForEntityFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsForEntityFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsForEntityFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupNamePrefix != nil {
+		s.WriteString(schemas.ListGroupsForEntityFilters_GroupNamePrefix, *v.GroupNamePrefix)
+	}
+}
+func (v *ListGroupsForEntityFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupsForEntityFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupsForEntityFilters_GroupNamePrefix:
+			v.GroupNamePrefix = new(string)
+			return d.ReadString(schemas.ListGroupsForEntityFilters_GroupNamePrefix, v.GroupNamePrefix)
+		}
+		return nil
+	})
 }
 
 // Filtering options for ListResources operation. This is only used as input to
@@ -362,6 +1021,44 @@ type ListResourcesFilters struct {
 	State EntityState
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListResourcesFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListResourcesFilters_NamePrefix, *v.NamePrefix)
+	}
+	if v.PrimaryEmailPrefix != nil {
+		s.WriteString(schemas.ListResourcesFilters_PrimaryEmailPrefix, *v.PrimaryEmailPrefix)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListResourcesFilters_State, string(v.State))
+	}
+}
+func (v *ListResourcesFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourcesFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourcesFilters_NamePrefix:
+			v.NamePrefix = new(string)
+			return d.ReadString(schemas.ListResourcesFilters_NamePrefix, v.NamePrefix)
+		case schemas.ListResourcesFilters_PrimaryEmailPrefix:
+			v.PrimaryEmailPrefix = new(string)
+			return d.ReadString(schemas.ListResourcesFilters_PrimaryEmailPrefix, v.PrimaryEmailPrefix)
+		case schemas.ListResourcesFilters_State:
+			var ev string
+			if err := d.ReadString(schemas.ListResourcesFilters_State, &ev); err != nil {
+				return err
+			}
+			v.State = EntityState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Filtering options for ListUsers operation. This is only used as input to
@@ -385,6 +1082,56 @@ type ListUsersFilters struct {
 	UsernamePrefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListUsersFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayNamePrefix != nil {
+		s.WriteString(schemas.ListUsersFilters_DisplayNamePrefix, *v.DisplayNamePrefix)
+	}
+	if v.IdentityProviderUserIdPrefix != nil {
+		s.WriteString(schemas.ListUsersFilters_IdentityProviderUserIdPrefix, *v.IdentityProviderUserIdPrefix)
+	}
+	if v.PrimaryEmailPrefix != nil {
+		s.WriteString(schemas.ListUsersFilters_PrimaryEmailPrefix, *v.PrimaryEmailPrefix)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListUsersFilters_State, string(v.State))
+	}
+	if v.UsernamePrefix != nil {
+		s.WriteString(schemas.ListUsersFilters_UsernamePrefix, *v.UsernamePrefix)
+	}
+}
+func (v *ListUsersFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsersFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsersFilters_DisplayNamePrefix:
+			v.DisplayNamePrefix = new(string)
+			return d.ReadString(schemas.ListUsersFilters_DisplayNamePrefix, v.DisplayNamePrefix)
+		case schemas.ListUsersFilters_IdentityProviderUserIdPrefix:
+			v.IdentityProviderUserIdPrefix = new(string)
+			return d.ReadString(schemas.ListUsersFilters_IdentityProviderUserIdPrefix, v.IdentityProviderUserIdPrefix)
+		case schemas.ListUsersFilters_PrimaryEmailPrefix:
+			v.PrimaryEmailPrefix = new(string)
+			return d.ReadString(schemas.ListUsersFilters_PrimaryEmailPrefix, v.PrimaryEmailPrefix)
+		case schemas.ListUsersFilters_State:
+			var ev string
+			if err := d.ReadString(schemas.ListUsersFilters_State, &ev); err != nil {
+				return err
+			}
+			v.State = EntityState(ev)
+			return nil
+		case schemas.ListUsersFilters_UsernamePrefix:
+			v.UsernamePrefix = new(string)
+			return d.ReadString(schemas.ListUsersFilters_UsernamePrefix, v.UsernamePrefix)
+		}
+		return nil
+	})
 }
 
 // The details of a mailbox export job, including the user or resource ID
@@ -422,6 +1169,79 @@ type MailboxExportJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MailboxExportJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MailboxExportJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MailboxExportJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.MailboxExportJob_Description, *v.Description)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.MailboxExportJob_EndTime, *v.EndTime)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.MailboxExportJob_EntityId, *v.EntityId)
+	}
+	if v.EstimatedProgress != 0 {
+		s.WriteInt32(schemas.MailboxExportJob_EstimatedProgress, v.EstimatedProgress)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.MailboxExportJob_JobId, *v.JobId)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.MailboxExportJob_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3Path != nil {
+		s.WriteString(schemas.MailboxExportJob_S3Path, *v.S3Path)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.MailboxExportJob_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.MailboxExportJob_State, string(v.State))
+	}
+}
+func (v *MailboxExportJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MailboxExportJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MailboxExportJob_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MailboxExportJob_Description, v.Description)
+		case schemas.MailboxExportJob_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.MailboxExportJob_EndTime, v.EndTime)
+		case schemas.MailboxExportJob_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.MailboxExportJob_EntityId, v.EntityId)
+		case schemas.MailboxExportJob_EstimatedProgress:
+			return d.ReadInt32(schemas.MailboxExportJob_EstimatedProgress, &v.EstimatedProgress)
+		case schemas.MailboxExportJob_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.MailboxExportJob_JobId, v.JobId)
+		case schemas.MailboxExportJob_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.MailboxExportJob_S3BucketName, v.S3BucketName)
+		case schemas.MailboxExportJob_S3Path:
+			v.S3Path = new(string)
+			return d.ReadString(schemas.MailboxExportJob_S3Path, v.S3Path)
+		case schemas.MailboxExportJob_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.MailboxExportJob_StartTime, v.StartTime)
+		case schemas.MailboxExportJob_State:
+			var ev string
+			if err := d.ReadString(schemas.MailboxExportJob_State, &ev); err != nil {
+				return err
+			}
+			v.State = MailboxExportJobState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The data for a given domain.
 type MailDomainSummary struct {
 
@@ -432,6 +1252,33 @@ type MailDomainSummary struct {
 	DomainName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MailDomainSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MailDomainSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MailDomainSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultDomain != false {
+		s.WriteBool(schemas.MailDomainSummary_DefaultDomain, v.DefaultDomain)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.MailDomainSummary_DomainName, *v.DomainName)
+	}
+}
+func (v *MailDomainSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MailDomainSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MailDomainSummary_DefaultDomain:
+			return d.ReadBool(schemas.MailDomainSummary_DefaultDomain, &v.DefaultDomain)
+		case schemas.MailDomainSummary_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.MailDomainSummary_DomainName, v.DomainName)
+		}
+		return nil
+	})
 }
 
 // The representation of a user or group.
@@ -458,6 +1305,66 @@ type Member struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Member) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Member)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Member) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisabledDate != nil {
+		s.WriteTime(schemas.Member_DisabledDate, *v.DisabledDate)
+	}
+	if v.EnabledDate != nil {
+		s.WriteTime(schemas.Member_EnabledDate, *v.EnabledDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Member_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Member_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Member_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Member_Type, string(v.Type))
+	}
+}
+func (v *Member) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Member, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Member_DisabledDate:
+			v.DisabledDate = new(time.Time)
+			return d.ReadTime(schemas.Member_DisabledDate, v.DisabledDate)
+		case schemas.Member_EnabledDate:
+			v.EnabledDate = new(time.Time)
+			return d.ReadTime(schemas.Member_EnabledDate, v.EnabledDate)
+		case schemas.Member_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Member_Id, v.Id)
+		case schemas.Member_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Member_Name, v.Name)
+		case schemas.Member_State:
+			var ev string
+			if err := d.ReadString(schemas.Member_State, &ev); err != nil {
+				return err
+			}
+			v.State = EntityState(ev)
+			return nil
+		case schemas.Member_Type:
+			var ev string
+			if err := d.ReadString(schemas.Member_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = MemberType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The rule that a simulated user matches.
 type MobileDeviceAccessMatchedRule struct {
 
@@ -468,6 +1375,34 @@ type MobileDeviceAccessMatchedRule struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MobileDeviceAccessMatchedRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MobileDeviceAccessMatchedRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MobileDeviceAccessMatchedRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MobileDeviceAccessRuleId != nil {
+		s.WriteString(schemas.MobileDeviceAccessMatchedRule_MobileDeviceAccessRuleId, *v.MobileDeviceAccessRuleId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MobileDeviceAccessMatchedRule_Name, *v.Name)
+	}
+}
+func (v *MobileDeviceAccessMatchedRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MobileDeviceAccessMatchedRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MobileDeviceAccessMatchedRule_MobileDeviceAccessRuleId:
+			v.MobileDeviceAccessRuleId = new(string)
+			return d.ReadString(schemas.MobileDeviceAccessMatchedRule_MobileDeviceAccessRuleId, v.MobileDeviceAccessRuleId)
+		case schemas.MobileDeviceAccessMatchedRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MobileDeviceAccessMatchedRule_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The override object.
@@ -492,6 +1427,62 @@ type MobileDeviceAccessOverride struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MobileDeviceAccessOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MobileDeviceAccessOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MobileDeviceAccessOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.MobileDeviceAccessOverride_DateCreated, *v.DateCreated)
+	}
+	if v.DateModified != nil {
+		s.WriteTime(schemas.MobileDeviceAccessOverride_DateModified, *v.DateModified)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.MobileDeviceAccessOverride_Description, *v.Description)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.MobileDeviceAccessOverride_DeviceId, *v.DeviceId)
+	}
+	if v.Effect != "" {
+		s.WriteString(schemas.MobileDeviceAccessOverride_Effect, string(v.Effect))
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.MobileDeviceAccessOverride_UserId, *v.UserId)
+	}
+}
+func (v *MobileDeviceAccessOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MobileDeviceAccessOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MobileDeviceAccessOverride_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.MobileDeviceAccessOverride_DateCreated, v.DateCreated)
+		case schemas.MobileDeviceAccessOverride_DateModified:
+			v.DateModified = new(time.Time)
+			return d.ReadTime(schemas.MobileDeviceAccessOverride_DateModified, v.DateModified)
+		case schemas.MobileDeviceAccessOverride_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MobileDeviceAccessOverride_Description, v.Description)
+		case schemas.MobileDeviceAccessOverride_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.MobileDeviceAccessOverride_DeviceId, v.DeviceId)
+		case schemas.MobileDeviceAccessOverride_Effect:
+			var ev string
+			if err := d.ReadString(schemas.MobileDeviceAccessOverride_Effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = MobileDeviceAccessRuleEffect(ev)
+			return nil
+		case schemas.MobileDeviceAccessOverride_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.MobileDeviceAccessOverride_UserId, v.UserId)
+		}
+		return nil
+	})
 }
 
 // A rule that controls access to mobile devices for an WorkMail group.
@@ -544,6 +1535,86 @@ type MobileDeviceAccessRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MobileDeviceAccessRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MobileDeviceAccessRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MobileDeviceAccessRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.MobileDeviceAccessRule_DateCreated, *v.DateCreated)
+	}
+	if v.DateModified != nil {
+		s.WriteTime(schemas.MobileDeviceAccessRule_DateModified, *v.DateModified)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.MobileDeviceAccessRule_Description, *v.Description)
+	}
+	serializeDeviceModelList(s, schemas.MobileDeviceAccessRule_DeviceModels, v.DeviceModels)
+	serializeDeviceOperatingSystemList(s, schemas.MobileDeviceAccessRule_DeviceOperatingSystems, v.DeviceOperatingSystems)
+	serializeDeviceTypeList(s, schemas.MobileDeviceAccessRule_DeviceTypes, v.DeviceTypes)
+	serializeDeviceUserAgentList(s, schemas.MobileDeviceAccessRule_DeviceUserAgents, v.DeviceUserAgents)
+	if v.Effect != "" {
+		s.WriteString(schemas.MobileDeviceAccessRule_Effect, string(v.Effect))
+	}
+	if v.MobileDeviceAccessRuleId != nil {
+		s.WriteString(schemas.MobileDeviceAccessRule_MobileDeviceAccessRuleId, *v.MobileDeviceAccessRuleId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MobileDeviceAccessRule_Name, *v.Name)
+	}
+	serializeDeviceModelList(s, schemas.MobileDeviceAccessRule_NotDeviceModels, v.NotDeviceModels)
+	serializeDeviceOperatingSystemList(s, schemas.MobileDeviceAccessRule_NotDeviceOperatingSystems, v.NotDeviceOperatingSystems)
+	serializeDeviceTypeList(s, schemas.MobileDeviceAccessRule_NotDeviceTypes, v.NotDeviceTypes)
+	serializeDeviceUserAgentList(s, schemas.MobileDeviceAccessRule_NotDeviceUserAgents, v.NotDeviceUserAgents)
+}
+func (v *MobileDeviceAccessRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MobileDeviceAccessRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MobileDeviceAccessRule_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.MobileDeviceAccessRule_DateCreated, v.DateCreated)
+		case schemas.MobileDeviceAccessRule_DateModified:
+			v.DateModified = new(time.Time)
+			return d.ReadTime(schemas.MobileDeviceAccessRule_DateModified, v.DateModified)
+		case schemas.MobileDeviceAccessRule_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MobileDeviceAccessRule_Description, v.Description)
+		case schemas.MobileDeviceAccessRule_DeviceModels:
+			return deserializeDeviceModelList(d, schemas.MobileDeviceAccessRule_DeviceModels, &v.DeviceModels)
+		case schemas.MobileDeviceAccessRule_DeviceOperatingSystems:
+			return deserializeDeviceOperatingSystemList(d, schemas.MobileDeviceAccessRule_DeviceOperatingSystems, &v.DeviceOperatingSystems)
+		case schemas.MobileDeviceAccessRule_DeviceTypes:
+			return deserializeDeviceTypeList(d, schemas.MobileDeviceAccessRule_DeviceTypes, &v.DeviceTypes)
+		case schemas.MobileDeviceAccessRule_DeviceUserAgents:
+			return deserializeDeviceUserAgentList(d, schemas.MobileDeviceAccessRule_DeviceUserAgents, &v.DeviceUserAgents)
+		case schemas.MobileDeviceAccessRule_Effect:
+			var ev string
+			if err := d.ReadString(schemas.MobileDeviceAccessRule_Effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = MobileDeviceAccessRuleEffect(ev)
+			return nil
+		case schemas.MobileDeviceAccessRule_MobileDeviceAccessRuleId:
+			v.MobileDeviceAccessRuleId = new(string)
+			return d.ReadString(schemas.MobileDeviceAccessRule_MobileDeviceAccessRuleId, v.MobileDeviceAccessRuleId)
+		case schemas.MobileDeviceAccessRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MobileDeviceAccessRule_Name, v.Name)
+		case schemas.MobileDeviceAccessRule_NotDeviceModels:
+			return deserializeDeviceModelList(d, schemas.MobileDeviceAccessRule_NotDeviceModels, &v.NotDeviceModels)
+		case schemas.MobileDeviceAccessRule_NotDeviceOperatingSystems:
+			return deserializeDeviceOperatingSystemList(d, schemas.MobileDeviceAccessRule_NotDeviceOperatingSystems, &v.NotDeviceOperatingSystems)
+		case schemas.MobileDeviceAccessRule_NotDeviceTypes:
+			return deserializeDeviceTypeList(d, schemas.MobileDeviceAccessRule_NotDeviceTypes, &v.NotDeviceTypes)
+		case schemas.MobileDeviceAccessRule_NotDeviceUserAgents:
+			return deserializeDeviceUserAgentList(d, schemas.MobileDeviceAccessRule_NotDeviceUserAgents, &v.NotDeviceUserAgents)
+		}
+		return nil
+	})
+}
+
 // The representation of an organization.
 type OrganizationSummary struct {
 
@@ -565,6 +1636,52 @@ type OrganizationSummary struct {
 	State *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrganizationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.OrganizationSummary_Alias, *v.Alias)
+	}
+	if v.DefaultMailDomain != nil {
+		s.WriteString(schemas.OrganizationSummary_DefaultMailDomain, *v.DefaultMailDomain)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.OrganizationSummary_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.OrganizationSummary_OrganizationId, *v.OrganizationId)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.OrganizationSummary_State, *v.State)
+	}
+}
+func (v *OrganizationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationSummary_Alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.OrganizationSummary_Alias, v.Alias)
+		case schemas.OrganizationSummary_DefaultMailDomain:
+			v.DefaultMailDomain = new(string)
+			return d.ReadString(schemas.OrganizationSummary_DefaultMailDomain, v.DefaultMailDomain)
+		case schemas.OrganizationSummary_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.OrganizationSummary_ErrorMessage, v.ErrorMessage)
+		case schemas.OrganizationSummary_OrganizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.OrganizationSummary_OrganizationId, v.OrganizationId)
+		case schemas.OrganizationSummary_State:
+			v.State = new(string)
+			return d.ReadString(schemas.OrganizationSummary_State, v.State)
+		}
+		return nil
+	})
 }
 
 // Permission granted to a user, group, or resource to access a certain aspect of
@@ -595,6 +1712,41 @@ type Permission struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Permission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Permission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Permission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GranteeId != nil {
+		s.WriteString(schemas.Permission_GranteeId, *v.GranteeId)
+	}
+	if v.GranteeType != "" {
+		s.WriteString(schemas.Permission_GranteeType, string(v.GranteeType))
+	}
+	serializePermissionValues(s, schemas.Permission_PermissionValues, v.PermissionValues)
+}
+func (v *Permission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Permission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Permission_GranteeId:
+			v.GranteeId = new(string)
+			return d.ReadString(schemas.Permission_GranteeId, v.GranteeId)
+		case schemas.Permission_GranteeType:
+			var ev string
+			if err := d.ReadString(schemas.Permission_GranteeType, &ev); err != nil {
+				return err
+			}
+			v.GranteeType = MemberType(ev)
+			return nil
+		case schemas.Permission_PermissionValues:
+			return deserializePermissionValues(d, schemas.Permission_PermissionValues, &v.PermissionValues)
+		}
+		return nil
+	})
+}
+
 // Displays the Personal Access Token status.
 type PersonalAccessTokenConfiguration struct {
 
@@ -616,6 +1768,38 @@ type PersonalAccessTokenConfiguration struct {
 	LifetimeInDays *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PersonalAccessTokenConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PersonalAccessTokenConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PersonalAccessTokenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifetimeInDays != nil {
+		s.WriteInt32(schemas.PersonalAccessTokenConfiguration_LifetimeInDays, *v.LifetimeInDays)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PersonalAccessTokenConfiguration_Status, string(v.Status))
+	}
+}
+func (v *PersonalAccessTokenConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PersonalAccessTokenConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PersonalAccessTokenConfiguration_LifetimeInDays:
+			v.LifetimeInDays = new(int32)
+			return d.ReadInt32(schemas.PersonalAccessTokenConfiguration_LifetimeInDays, v.LifetimeInDays)
+		case schemas.PersonalAccessTokenConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.PersonalAccessTokenConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = PersonalAccessTokenConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The summary of the Personal Access Token.
@@ -645,6 +1829,61 @@ type PersonalAccessTokenSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PersonalAccessTokenSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PersonalAccessTokenSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PersonalAccessTokenSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.PersonalAccessTokenSummary_DateCreated, *v.DateCreated)
+	}
+	if v.DateLastUsed != nil {
+		s.WriteTime(schemas.PersonalAccessTokenSummary_DateLastUsed, *v.DateLastUsed)
+	}
+	if v.ExpiresTime != nil {
+		s.WriteTime(schemas.PersonalAccessTokenSummary_ExpiresTime, *v.ExpiresTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PersonalAccessTokenSummary_Name, *v.Name)
+	}
+	if v.PersonalAccessTokenId != nil {
+		s.WriteString(schemas.PersonalAccessTokenSummary_PersonalAccessTokenId, *v.PersonalAccessTokenId)
+	}
+	serializePersonalAccessTokenScopeList(s, schemas.PersonalAccessTokenSummary_Scopes, v.Scopes)
+	if v.UserId != nil {
+		s.WriteString(schemas.PersonalAccessTokenSummary_UserId, *v.UserId)
+	}
+}
+func (v *PersonalAccessTokenSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PersonalAccessTokenSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PersonalAccessTokenSummary_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.PersonalAccessTokenSummary_DateCreated, v.DateCreated)
+		case schemas.PersonalAccessTokenSummary_DateLastUsed:
+			v.DateLastUsed = new(time.Time)
+			return d.ReadTime(schemas.PersonalAccessTokenSummary_DateLastUsed, v.DateLastUsed)
+		case schemas.PersonalAccessTokenSummary_ExpiresTime:
+			v.ExpiresTime = new(time.Time)
+			return d.ReadTime(schemas.PersonalAccessTokenSummary_ExpiresTime, v.ExpiresTime)
+		case schemas.PersonalAccessTokenSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PersonalAccessTokenSummary_Name, v.Name)
+		case schemas.PersonalAccessTokenSummary_PersonalAccessTokenId:
+			v.PersonalAccessTokenId = new(string)
+			return d.ReadString(schemas.PersonalAccessTokenSummary_PersonalAccessTokenId, v.PersonalAccessTokenId)
+		case schemas.PersonalAccessTokenSummary_Scopes:
+			return deserializePersonalAccessTokenScopeList(d, schemas.PersonalAccessTokenSummary_Scopes, &v.Scopes)
+		case schemas.PersonalAccessTokenSummary_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.PersonalAccessTokenSummary_UserId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // Describes an EWS based availability provider when returned from the service. It
 // does not contain the password of the endpoint.
 type RedactedEwsAvailabilityProvider struct {
@@ -656,6 +1895,34 @@ type RedactedEwsAvailabilityProvider struct {
 	EwsUsername *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RedactedEwsAvailabilityProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactedEwsAvailabilityProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactedEwsAvailabilityProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EwsEndpoint != nil {
+		s.WriteString(schemas.RedactedEwsAvailabilityProvider_EwsEndpoint, *v.EwsEndpoint)
+	}
+	if v.EwsUsername != nil {
+		s.WriteString(schemas.RedactedEwsAvailabilityProvider_EwsUsername, *v.EwsUsername)
+	}
+}
+func (v *RedactedEwsAvailabilityProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedactedEwsAvailabilityProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedactedEwsAvailabilityProvider_EwsEndpoint:
+			v.EwsEndpoint = new(string)
+			return d.ReadString(schemas.RedactedEwsAvailabilityProvider_EwsEndpoint, v.EwsEndpoint)
+		case schemas.RedactedEwsAvailabilityProvider_EwsUsername:
+			v.EwsUsername = new(string)
+			return d.ReadString(schemas.RedactedEwsAvailabilityProvider_EwsUsername, v.EwsUsername)
+		}
+		return nil
+	})
 }
 
 // The representation of a resource.
@@ -688,6 +1955,78 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.Resource_Description, *v.Description)
+	}
+	if v.DisabledDate != nil {
+		s.WriteTime(schemas.Resource_DisabledDate, *v.DisabledDate)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.Resource_Email, *v.Email)
+	}
+	if v.EnabledDate != nil {
+		s.WriteTime(schemas.Resource_EnabledDate, *v.EnabledDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Resource_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Resource_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Resource_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Resource_Type, string(v.Type))
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Resource_Description, v.Description)
+		case schemas.Resource_DisabledDate:
+			v.DisabledDate = new(time.Time)
+			return d.ReadTime(schemas.Resource_DisabledDate, v.DisabledDate)
+		case schemas.Resource_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.Resource_Email, v.Email)
+		case schemas.Resource_EnabledDate:
+			v.EnabledDate = new(time.Time)
+			return d.ReadTime(schemas.Resource_EnabledDate, v.EnabledDate)
+		case schemas.Resource_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Resource_Id, v.Id)
+		case schemas.Resource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Resource_Name, v.Name)
+		case schemas.Resource_State:
+			var ev string
+			if err := d.ReadString(schemas.Resource_State, &ev); err != nil {
+				return err
+			}
+			v.State = EntityState(ev)
+			return nil
+		case schemas.Resource_Type:
+			var ev string
+			if err := d.ReadString(schemas.Resource_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a tag applied to a resource.
 type Tag struct {
 
@@ -702,6 +2041,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The representation of an WorkMail user.
@@ -742,6 +2109,90 @@ type User struct {
 	UserRole UserRole
 
 	noSmithyDocumentSerde
+}
+
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisabledDate != nil {
+		s.WriteTime(schemas.User_DisabledDate, *v.DisabledDate)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.User_DisplayName, *v.DisplayName)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.User_Email, *v.Email)
+	}
+	if v.EnabledDate != nil {
+		s.WriteTime(schemas.User_EnabledDate, *v.EnabledDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.User_Id, *v.Id)
+	}
+	if v.IdentityProviderIdentityStoreId != nil {
+		s.WriteString(schemas.User_IdentityProviderIdentityStoreId, *v.IdentityProviderIdentityStoreId)
+	}
+	if v.IdentityProviderUserId != nil {
+		s.WriteString(schemas.User_IdentityProviderUserId, *v.IdentityProviderUserId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.User_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.User_State, string(v.State))
+	}
+	if v.UserRole != "" {
+		s.WriteString(schemas.User_UserRole, string(v.UserRole))
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_DisabledDate:
+			v.DisabledDate = new(time.Time)
+			return d.ReadTime(schemas.User_DisabledDate, v.DisabledDate)
+		case schemas.User_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.User_DisplayName, v.DisplayName)
+		case schemas.User_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.User_Email, v.Email)
+		case schemas.User_EnabledDate:
+			v.EnabledDate = new(time.Time)
+			return d.ReadTime(schemas.User_EnabledDate, v.EnabledDate)
+		case schemas.User_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.User_Id, v.Id)
+		case schemas.User_IdentityProviderIdentityStoreId:
+			v.IdentityProviderIdentityStoreId = new(string)
+			return d.ReadString(schemas.User_IdentityProviderIdentityStoreId, v.IdentityProviderIdentityStoreId)
+		case schemas.User_IdentityProviderUserId:
+			v.IdentityProviderUserId = new(string)
+			return d.ReadString(schemas.User_IdentityProviderUserId, v.IdentityProviderUserId)
+		case schemas.User_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.User_Name, v.Name)
+		case schemas.User_State:
+			var ev string
+			if err := d.ReadString(schemas.User_State, &ev); err != nil {
+				return err
+			}
+			v.State = EntityState(ev)
+			return nil
+		case schemas.User_UserRole:
+			var ev string
+			if err := d.ReadString(schemas.User_UserRole, &ev); err != nil {
+				return err
+			}
+			v.UserRole = UserRole(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

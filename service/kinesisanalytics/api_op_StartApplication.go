@@ -4,7 +4,9 @@ package kinesisanalytics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,19 @@ type StartApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.StartApplicationRequest_ApplicationName, *v.ApplicationName)
+	}
+	serializeInputConfigurations(s, schemas.StartApplicationRequest_InputConfigurations, v.InputConfigurations)
+}
+
 type StartApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +84,26 @@ type StartApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartApplication, schemas.StartApplicationRequest, schemas.StartApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartApplication, schemas.StartApplicationRequest, schemas.StartApplicationResponse), output: &StartApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

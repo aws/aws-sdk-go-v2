@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type UpdatePullRequestApprovalStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePullRequestApprovalStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePullRequestApprovalStateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePullRequestApprovalStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalState != "" {
+		s.WriteString(schemas.UpdatePullRequestApprovalStateInput_approvalState, string(v.ApprovalState))
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.UpdatePullRequestApprovalStateInput_pullRequestId, *v.PullRequestId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.UpdatePullRequestApprovalStateInput_revisionId, *v.RevisionId)
+	}
+}
+
 type UpdatePullRequestApprovalStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +72,26 @@ type UpdatePullRequestApprovalStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePullRequestApprovalStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePullRequestApprovalStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdatePullRequestApprovalStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePullRequestApprovalStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePullRequestApprovalState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePullRequestApprovalState, schemas.UpdatePullRequestApprovalStateInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePullRequestApprovalState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePullRequestApprovalState, schemas.UpdatePullRequestApprovalStateInput, nil), output: &UpdatePullRequestApprovalStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

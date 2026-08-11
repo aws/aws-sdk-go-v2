@@ -4,7 +4,9 @@ package cloud9
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,16 @@ type DescribeEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBoundedEnvironmentIdList(s, schemas.DescribeEnvironmentsRequest_environmentIds, v.EnvironmentIds)
+}
+
 type DescribeEnvironmentsOutput struct {
 
 	// Information about the environments that are returned.
@@ -50,13 +62,29 @@ type DescribeEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentList(s, schemas.DescribeEnvironmentsResult_environments, v.Environments)
+}
+func (v *DescribeEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEnvironmentsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEnvironmentsResult_environments:
+			return deserializeEnvironmentList(d, schemas.DescribeEnvironmentsResult_environments, &v.Environments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironments, schemas.DescribeEnvironmentsRequest, schemas.DescribeEnvironmentsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironments, schemas.DescribeEnvironmentsRequest, schemas.DescribeEnvironmentsResult), output: &DescribeEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

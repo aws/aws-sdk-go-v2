@@ -5,7 +5,9 @@ package marketplacemetering
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -140,6 +142,34 @@ type MeterUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MeterUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeterUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeterUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.MeterUsageRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.MeterUsageRequest_DryRun, *v.DryRun)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.MeterUsageRequest_ProductCode, *v.ProductCode)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.MeterUsageRequest_Timestamp, *v.Timestamp)
+	}
+	serializeUsageAllocations(s, schemas.MeterUsageRequest_UsageAllocations, v.UsageAllocations)
+	if v.UsageDimension != nil {
+		s.WriteString(schemas.MeterUsageRequest_UsageDimension, *v.UsageDimension)
+	}
+	if v.UsageQuantity != nil {
+		s.WriteInt32(schemas.MeterUsageRequest_UsageQuantity, *v.UsageQuantity)
+	}
+}
+
 type MeterUsageOutput struct {
 
 	// Metering record id.
@@ -151,13 +181,32 @@ type MeterUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MeterUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MeterUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MeterUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeteringRecordId != nil {
+		s.WriteString(schemas.MeterUsageResult_MeteringRecordId, *v.MeteringRecordId)
+	}
+}
+func (v *MeterUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MeterUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MeterUsageResult_MeteringRecordId:
+			v.MeteringRecordId = new(string)
+			return d.ReadString(schemas.MeterUsageResult_MeteringRecordId, v.MeteringRecordId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMeterUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MeterUsage, schemas.MeterUsageRequest, schemas.MeterUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMeterUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MeterUsage, schemas.MeterUsageRequest, schemas.MeterUsageResult), output: &MeterUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

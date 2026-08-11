@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteDeploymentInput_id, *v.Id)
+	}
+}
+
 type DeleteDeploymentOutput struct {
 
 	// The detailed data of the deployment being deleted.
@@ -47,13 +61,34 @@ type DeleteDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deployment != nil {
+		s.WriteStruct(schemas.DeleteDeploymentOutput_deployment)
+		v.Deployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDeploymentOutput_deployment:
+			v.Deployment = &types.Deployment{}
+			return v.Deployment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeployment, schemas.DeleteDeploymentInput, schemas.DeleteDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeployment, schemas.DeleteDeploymentInput, schemas.DeleteDeploymentOutput), output: &DeleteDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

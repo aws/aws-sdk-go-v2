@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,37 @@ type CreateLayoutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLayoutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLayoutRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLayoutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLayoutContent(s, schemas.CreateLayoutRequest_content, v.Content)
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateLayoutRequest_domainId, *v.DomainId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateLayoutRequest_name, *v.Name)
+	}
+}
+func (v *CreateLayoutInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLayoutRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLayoutRequest_content:
+			return deserializeLayoutContent(d, schemas.CreateLayoutRequest_content, &v.Content)
+		case schemas.CreateLayoutRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateLayoutRequest_domainId, v.DomainId)
+		case schemas.CreateLayoutRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateLayoutRequest_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type CreateLayoutOutput struct {
 
 	// The Amazon Resource Name (ARN) of the newly created layout.
@@ -71,13 +104,38 @@ type CreateLayoutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLayoutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLayoutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LayoutArn != nil {
+		s.WriteString(schemas.CreateLayoutResponse_layoutArn, *v.LayoutArn)
+	}
+	if v.LayoutId != nil {
+		s.WriteString(schemas.CreateLayoutResponse_layoutId, *v.LayoutId)
+	}
+}
+func (v *CreateLayoutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLayoutResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLayoutResponse_layoutArn:
+			v.LayoutArn = new(string)
+			return d.ReadString(schemas.CreateLayoutResponse_layoutArn, v.LayoutArn)
+		case schemas.CreateLayoutResponse_layoutId:
+			v.LayoutId = new(string)
+			return d.ReadString(schemas.CreateLayoutResponse_layoutId, v.LayoutId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLayoutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLayout, schemas.CreateLayoutRequest, schemas.CreateLayoutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLayout, schemas.CreateLayoutRequest, schemas.CreateLayoutResponse), output: &CreateLayoutOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

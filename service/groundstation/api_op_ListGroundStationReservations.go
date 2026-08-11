@@ -5,7 +5,9 @@ package groundstation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -56,6 +58,31 @@ type ListGroundStationReservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroundStationReservationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroundStationReservationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroundStationReservationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListGroundStationReservationsRequest_endTime, *v.EndTime)
+	}
+	if v.GroundStationId != nil {
+		s.WriteString(schemas.ListGroundStationReservationsRequest_groundStationId, *v.GroundStationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroundStationReservationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroundStationReservationsRequest_nextToken, *v.NextToken)
+	}
+	serializeReservationTypeFilterList(s, schemas.ListGroundStationReservationsRequest_reservationTypes, v.ReservationTypes)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListGroundStationReservationsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListGroundStationReservationsOutput struct {
 
 	// List of ground station reservations.
@@ -73,13 +100,35 @@ type ListGroundStationReservationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroundStationReservationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroundStationReservationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroundStationReservationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroundStationReservationsResponse_nextToken, *v.NextToken)
+	}
+	serializeGroundStationReservationList(s, schemas.ListGroundStationReservationsResponse_reservationList, v.ReservationList)
+}
+func (v *ListGroundStationReservationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroundStationReservationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroundStationReservationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroundStationReservationsResponse_nextToken, v.NextToken)
+		case schemas.ListGroundStationReservationsResponse_reservationList:
+			return deserializeGroundStationReservationList(d, schemas.ListGroundStationReservationsResponse_reservationList, &v.ReservationList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroundStationReservationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroundStationReservations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroundStationReservations, schemas.ListGroundStationReservationsRequest, schemas.ListGroundStationReservationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroundStationReservations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroundStationReservations, schemas.ListGroundStationReservationsRequest, schemas.ListGroundStationReservationsResponse), output: &ListGroundStationReservationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,30 @@ type CreatePredictorBacktestExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePredictorBacktestExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePredictorBacktestExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePredictorBacktestExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.CreatePredictorBacktestExportJobRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.CreatePredictorBacktestExportJobRequest_Format, *v.Format)
+	}
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.CreatePredictorBacktestExportJobRequest_PredictorArn, *v.PredictorArn)
+	}
+	if v.PredictorBacktestExportJobName != nil {
+		s.WriteString(schemas.CreatePredictorBacktestExportJobRequest_PredictorBacktestExportJobName, *v.PredictorBacktestExportJobName)
+	}
+	serializeTags(s, schemas.CreatePredictorBacktestExportJobRequest_Tags, v.Tags)
+}
+
 type CreatePredictorBacktestExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the predictor backtest export job that you
@@ -103,13 +129,32 @@ type CreatePredictorBacktestExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePredictorBacktestExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePredictorBacktestExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePredictorBacktestExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredictorBacktestExportJobArn != nil {
+		s.WriteString(schemas.CreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn, *v.PredictorBacktestExportJobArn)
+	}
+}
+func (v *CreatePredictorBacktestExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePredictorBacktestExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn:
+			v.PredictorBacktestExportJobArn = new(string)
+			return d.ReadString(schemas.CreatePredictorBacktestExportJobResponse_PredictorBacktestExportJobArn, v.PredictorBacktestExportJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePredictorBacktestExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePredictorBacktestExportJob, schemas.CreatePredictorBacktestExportJobRequest, schemas.CreatePredictorBacktestExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePredictorBacktestExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePredictorBacktestExportJob, schemas.CreatePredictorBacktestExportJobRequest, schemas.CreatePredictorBacktestExportJobResponse), output: &CreatePredictorBacktestExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

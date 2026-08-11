@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,40 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTagsForResourceInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTagsForResourceInput_nextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListTagsForResourceInput_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *ListTagsForResourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForResourceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForResourceInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListTagsForResourceInput_maxResults, v.MaxResults)
+		case schemas.ListTagsForResourceInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTagsForResourceInput_nextToken, v.NextToken)
+		case schemas.ListTagsForResourceInput_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ListTagsForResourceInput_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
 type ListTagsForResourceOutput struct {
 
 	// A list of resource tags with detail data.
@@ -63,13 +99,35 @@ type ListTagsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTagsForResourceOutput_nextToken, *v.NextToken)
+	}
+	serializeTagList(s, schemas.ListTagsForResourceOutput_tags, v.Tags)
+}
+func (v *ListTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForResourceOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTagsForResourceOutput_nextToken, v.NextToken)
+		case schemas.ListTagsForResourceOutput_tags:
+			return deserializeTagList(d, schemas.ListTagsForResourceOutput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceInput, schemas.ListTagsForResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceInput, schemas.ListTagsForResourceOutput), output: &ListTagsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

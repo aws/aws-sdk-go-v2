@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type PutRepositoryTriggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRepositoryTriggersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRepositoryTriggersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRepositoryTriggersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PutRepositoryTriggersInput_repositoryName, *v.RepositoryName)
+	}
+	serializeRepositoryTriggersList(s, schemas.PutRepositoryTriggersInput_triggers, v.Triggers)
+}
+
 // Represents the output of a put repository triggers operation.
 type PutRepositoryTriggersOutput struct {
 
@@ -52,13 +67,32 @@ type PutRepositoryTriggersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRepositoryTriggersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRepositoryTriggersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRepositoryTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationId != nil {
+		s.WriteString(schemas.PutRepositoryTriggersOutput_configurationId, *v.ConfigurationId)
+	}
+}
+func (v *PutRepositoryTriggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRepositoryTriggersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRepositoryTriggersOutput_configurationId:
+			v.ConfigurationId = new(string)
+			return d.ReadString(schemas.PutRepositoryTriggersOutput_configurationId, v.ConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRepositoryTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRepositoryTriggers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRepositoryTriggers, schemas.PutRepositoryTriggersInput, schemas.PutRepositoryTriggersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRepositoryTriggers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRepositoryTriggers, schemas.PutRepositoryTriggersInput, schemas.PutRepositoryTriggersOutput), output: &PutRepositoryTriggersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package route53domains
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -66,6 +68,32 @@ type ListOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListOperationsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListOperationsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListOperationsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListOperationsRequest_SortOrder, string(v.SortOrder))
+	}
+	serializeOperationStatusList(s, schemas.ListOperationsRequest_Status, v.Status)
+	if v.SubmittedSince != nil {
+		s.WriteTime(schemas.ListOperationsRequest_SubmittedSince, *v.SubmittedSince)
+	}
+	serializeOperationTypeList(s, schemas.ListOperationsRequest_Type, v.Type)
+}
+
 // The ListOperations response includes the following elements.
 type ListOperationsOutput struct {
 
@@ -83,13 +111,35 @@ type ListOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageMarker != nil {
+		s.WriteString(schemas.ListOperationsResponse_NextPageMarker, *v.NextPageMarker)
+	}
+	serializeOperationSummaryList(s, schemas.ListOperationsResponse_Operations, v.Operations)
+}
+func (v *ListOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOperationsResponse_NextPageMarker:
+			v.NextPageMarker = new(string)
+			return d.ReadString(schemas.ListOperationsResponse_NextPageMarker, v.NextPageMarker)
+		case schemas.ListOperationsResponse_Operations:
+			return deserializeOperationSummaryList(d, schemas.ListOperationsResponse_Operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOperations, schemas.ListOperationsRequest, schemas.ListOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOperations, schemas.ListOperationsRequest, schemas.ListOperationsResponse), output: &ListOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

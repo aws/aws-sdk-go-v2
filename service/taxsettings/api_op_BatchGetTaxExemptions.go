@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type BatchGetTaxExemptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTaxExemptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTaxExemptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTaxExemptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.BatchGetTaxExemptionsRequest_accountIds, v.AccountIds)
+}
+
 type BatchGetTaxExemptionsOutput struct {
 
 	// The list of accounts that failed to get tax exemptions.
@@ -49,13 +61,32 @@ type BatchGetTaxExemptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTaxExemptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTaxExemptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTaxExemptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.BatchGetTaxExemptionsResponse_failedAccounts, v.FailedAccounts)
+	serializeTaxExemptionDetailsMap(s, schemas.BatchGetTaxExemptionsResponse_taxExemptionDetailsMap, v.TaxExemptionDetailsMap)
+}
+func (v *BatchGetTaxExemptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetTaxExemptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetTaxExemptionsResponse_failedAccounts:
+			return deserializeAccountIds(d, schemas.BatchGetTaxExemptionsResponse_failedAccounts, &v.FailedAccounts)
+		case schemas.BatchGetTaxExemptionsResponse_taxExemptionDetailsMap:
+			return deserializeTaxExemptionDetailsMap(d, schemas.BatchGetTaxExemptionsResponse_taxExemptionDetailsMap, &v.TaxExemptionDetailsMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetTaxExemptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetTaxExemptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTaxExemptions, schemas.BatchGetTaxExemptionsRequest, schemas.BatchGetTaxExemptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetTaxExemptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTaxExemptions, schemas.BatchGetTaxExemptionsRequest, schemas.BatchGetTaxExemptionsResponse), output: &BatchGetTaxExemptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

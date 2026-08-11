@@ -5,6 +5,8 @@ package codeguruprofiler
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,45 @@ type PostAgentProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostAgentProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostAgentProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostAgentProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentProfile != nil {
+		s.WriteBlob(schemas.PostAgentProfileRequest_agentProfile, v.AgentProfile)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.PostAgentProfileRequest_contentType, *v.ContentType)
+	}
+	if v.ProfileToken != nil {
+		s.WriteString(schemas.PostAgentProfileRequest_profileToken, *v.ProfileToken)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.PostAgentProfileRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *PostAgentProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostAgentProfileRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostAgentProfileRequest_agentProfile:
+			return d.ReadBlob(schemas.PostAgentProfileRequest_agentProfile, &v.AgentProfile)
+		case schemas.PostAgentProfileRequest_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.PostAgentProfileRequest_contentType, v.ContentType)
+		case schemas.PostAgentProfileRequest_profileToken:
+			v.ProfileToken = new(string)
+			return d.ReadString(schemas.PostAgentProfileRequest_profileToken, v.ProfileToken)
+		case schemas.PostAgentProfileRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.PostAgentProfileRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the postAgentProfileResponse.
 type PostAgentProfileOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -72,13 +113,26 @@ type PostAgentProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostAgentProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostAgentProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PostAgentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostAgentProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPostAgentProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostAgentProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostAgentProfile, schemas.PostAgentProfileRequest, schemas.PostAgentProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPostAgentProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostAgentProfile, schemas.PostAgentProfileRequest, schemas.PostAgentProfileResponse), output: &PostAgentProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,25 @@ type BatchCreateVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateVehicleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateVehicleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializecreateVehicleRequestItems(s, schemas.BatchCreateVehicleRequest_vehicles, v.Vehicles)
+}
+func (v *BatchCreateVehicleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateVehicleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateVehicleRequest_vehicles:
+			return deserializecreateVehicleRequestItems(d, schemas.BatchCreateVehicleRequest_vehicles, &v.Vehicles)
+		}
+		return nil
+	})
+}
+
 type BatchCreateVehicleOutput struct {
 
 	// A list of information about creation errors, or an empty list if there aren't
@@ -59,13 +80,32 @@ type BatchCreateVehicleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateVehicleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateVehicleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializecreateVehicleErrors(s, schemas.BatchCreateVehicleResponse_errors, v.Errors)
+	serializecreateVehicleResponses(s, schemas.BatchCreateVehicleResponse_vehicles, v.Vehicles)
+}
+func (v *BatchCreateVehicleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateVehicleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateVehicleResponse_errors:
+			return deserializecreateVehicleErrors(d, schemas.BatchCreateVehicleResponse_errors, &v.Errors)
+		case schemas.BatchCreateVehicleResponse_vehicles:
+			return deserializecreateVehicleResponses(d, schemas.BatchCreateVehicleResponse_vehicles, &v.Vehicles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateVehicleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchCreateVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateVehicle, schemas.BatchCreateVehicleRequest, schemas.BatchCreateVehicleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchCreateVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateVehicle, schemas.BatchCreateVehicleRequest, schemas.BatchCreateVehicleResponse), output: &BatchCreateVehicleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

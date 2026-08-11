@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,44 @@ type SendMediaMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendMediaMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendMediaMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendMediaMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendMediaMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeContextMap(s, schemas.SendMediaMessageRequest_Context, v.Context)
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.SendMediaMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.SendMediaMessageRequest_DryRun, v.DryRun)
+	}
+	if v.MaxPrice != nil {
+		s.WriteString(schemas.SendMediaMessageRequest_MaxPrice, *v.MaxPrice)
+	}
+	serializeMediaUrlList(s, schemas.SendMediaMessageRequest_MediaUrls, v.MediaUrls)
+	if v.MessageBody != nil {
+		s.WriteString(schemas.SendMediaMessageRequest_MessageBody, *v.MessageBody)
+	}
+	if v.MessageFeedbackEnabled != nil {
+		s.WriteBool(schemas.SendMediaMessageRequest_MessageFeedbackEnabled, *v.MessageFeedbackEnabled)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.SendMediaMessageRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.SendMediaMessageRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.SendMediaMessageRequest_TimeToLive, *v.TimeToLive)
+	}
+}
+
 type SendMediaMessageOutput struct {
 
 	// The unique identifier for the message.
@@ -95,13 +135,32 @@ type SendMediaMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendMediaMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendMediaMessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendMediaMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendMediaMessageResult_MessageId, *v.MessageId)
+	}
+}
+func (v *SendMediaMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendMediaMessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendMediaMessageResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendMediaMessageResult_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendMediaMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendMediaMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMediaMessage, schemas.SendMediaMessageRequest, schemas.SendMediaMessageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendMediaMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMediaMessage, schemas.SendMediaMessageRequest, schemas.SendMediaMessageResult), output: &SendMediaMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

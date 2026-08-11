@@ -4,6 +4,8 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type CancelContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.CancelContactRequest_contactId, *v.ContactId)
+	}
+}
+
 // Response containing the ID of a contact.
 type CancelContactOutput struct {
 
@@ -58,13 +72,38 @@ type CancelContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.ContactIdResponse_contactId, *v.ContactId)
+	}
+	if v.VersionId != nil {
+		s.WriteInt32(schemas.ContactIdResponse_versionId, *v.VersionId)
+	}
+}
+func (v *CancelContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactIdResponse_contactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.ContactIdResponse_contactId, v.ContactId)
+		case schemas.ContactIdResponse_versionId:
+			v.VersionId = new(int32)
+			return d.ReadInt32(schemas.ContactIdResponse_versionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelContact, schemas.CancelContactRequest, schemas.ContactIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelContact, schemas.CancelContactRequest, schemas.ContactIdResponse), output: &CancelContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

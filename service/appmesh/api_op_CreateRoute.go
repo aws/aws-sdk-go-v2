@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,63 @@ type CreateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRouteInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.CreateRouteInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.CreateRouteInput_meshOwner, *v.MeshOwner)
+	}
+	if v.RouteName != nil {
+		s.WriteString(schemas.CreateRouteInput_routeName, *v.RouteName)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.CreateRouteInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateRouteInput_tags, v.Tags)
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.CreateRouteInput_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *CreateRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRouteInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRouteInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateRouteInput_clientToken, v.ClientToken)
+		case schemas.CreateRouteInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.CreateRouteInput_meshName, v.MeshName)
+		case schemas.CreateRouteInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.CreateRouteInput_meshOwner, v.MeshOwner)
+		case schemas.CreateRouteInput_routeName:
+			v.RouteName = new(string)
+			return d.ReadString(schemas.CreateRouteInput_routeName, v.RouteName)
+		case schemas.CreateRouteInput_spec:
+			v.Spec = &types.RouteSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.CreateRouteInput_tags:
+			return deserializeTagList(d, schemas.CreateRouteInput_tags, &v.Tags)
+		case schemas.CreateRouteInput_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.CreateRouteInput_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
+}
+
 type CreateRouteOutput struct {
 
 	// The full description of your mesh following the create call.
@@ -90,13 +149,34 @@ type CreateRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Route != nil {
+		s.WriteStruct(schemas.CreateRouteOutput_route)
+		v.Route.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRouteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRouteOutput_route:
+			v.Route = &types.RouteData{}
+			return v.Route.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoute, schemas.CreateRouteInput, schemas.CreateRouteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoute, schemas.CreateRouteInput, schemas.CreateRouteOutput), output: &CreateRouteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

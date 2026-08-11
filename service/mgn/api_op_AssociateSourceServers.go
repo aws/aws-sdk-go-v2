@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,37 @@ type AssociateSourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceServersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceServersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceServersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.AssociateSourceServersRequest_accountID, *v.AccountID)
+	}
+	if v.ApplicationID != nil {
+		s.WriteString(schemas.AssociateSourceServersRequest_applicationID, *v.ApplicationID)
+	}
+	serializeAssociateSourceServersRequestSourceServerIDs(s, schemas.AssociateSourceServersRequest_sourceServerIDs, v.SourceServerIDs)
+}
+func (v *AssociateSourceServersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSourceServersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSourceServersRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.AssociateSourceServersRequest_accountID, v.AccountID)
+		case schemas.AssociateSourceServersRequest_applicationID:
+			v.ApplicationID = new(string)
+			return d.ReadString(schemas.AssociateSourceServersRequest_applicationID, v.ApplicationID)
+		case schemas.AssociateSourceServersRequest_sourceServerIDs:
+			return deserializeAssociateSourceServersRequestSourceServerIDs(d, schemas.AssociateSourceServersRequest_sourceServerIDs, &v.SourceServerIDs)
+		}
+		return nil
+	})
+}
+
 type AssociateSourceServersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +81,26 @@ type AssociateSourceServersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceServersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceServersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateSourceServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSourceServersResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSourceServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSourceServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceServers, schemas.AssociateSourceServersRequest, schemas.AssociateSourceServersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSourceServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceServers, schemas.AssociateSourceServersRequest, schemas.AssociateSourceServersResponse), output: &AssociateSourceServersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

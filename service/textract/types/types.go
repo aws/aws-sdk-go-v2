@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -42,6 +44,37 @@ type Adapter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Adapter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Adapter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Adapter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.Adapter_AdapterId, *v.AdapterId)
+	}
+	serializeAdapterPages(s, schemas.Adapter_Pages, v.Pages)
+	if v.Version != nil {
+		s.WriteString(schemas.Adapter_Version, *v.Version)
+	}
+}
+func (v *Adapter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Adapter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Adapter_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.Adapter_AdapterId, v.AdapterId)
+		case schemas.Adapter_Pages:
+			return deserializeAdapterPages(d, schemas.Adapter_Pages, &v.Pages)
+		case schemas.Adapter_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Adapter_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Contains information on the adapter, including the adapter ID, Name, Creation
 // time, and feature types.
 type AdapterOverview struct {
@@ -61,6 +94,43 @@ type AdapterOverview struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdapterOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdapterOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdapterOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.AdapterOverview_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterName != nil {
+		s.WriteString(schemas.AdapterOverview_AdapterName, *v.AdapterName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AdapterOverview_CreationTime, *v.CreationTime)
+	}
+	serializeFeatureTypes(s, schemas.AdapterOverview_FeatureTypes, v.FeatureTypes)
+}
+func (v *AdapterOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdapterOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdapterOverview_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.AdapterOverview_AdapterId, v.AdapterId)
+		case schemas.AdapterOverview_AdapterName:
+			v.AdapterName = new(string)
+			return d.ReadString(schemas.AdapterOverview_AdapterName, v.AdapterName)
+		case schemas.AdapterOverview_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AdapterOverview_CreationTime, v.CreationTime)
+		case schemas.AdapterOverview_FeatureTypes:
+			return deserializeFeatureTypes(d, schemas.AdapterOverview_FeatureTypes, &v.FeatureTypes)
+		}
+		return nil
+	})
+}
+
 // Contains information about adapters used when analyzing a document, with each
 // adapter specified using an AdapterId and version
 type AdaptersConfig struct {
@@ -71,6 +141,25 @@ type AdaptersConfig struct {
 	Adapters []Adapter
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdaptersConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdaptersConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdaptersConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdapters(s, schemas.AdaptersConfig_Adapters, v.Adapters)
+}
+func (v *AdaptersConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdaptersConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdaptersConfig_Adapters:
+			return deserializeAdapters(d, schemas.AdaptersConfig_Adapters, &v.Adapters)
+		}
+		return nil
+	})
 }
 
 // The dataset configuration options for a given version of an adapter. Can
@@ -89,6 +178,30 @@ type AdapterVersionDatasetConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdapterVersionDatasetConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdapterVersionDatasetConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdapterVersionDatasetConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestS3Object != nil {
+		s.WriteStruct(schemas.AdapterVersionDatasetConfig_ManifestS3Object)
+		v.ManifestS3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdapterVersionDatasetConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdapterVersionDatasetConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdapterVersionDatasetConfig_ManifestS3Object:
+			v.ManifestS3Object = &S3Object{}
+			return v.ManifestS3Object.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains information on the metrics used to evalute the peformance of a given
 // adapter version. Includes data for baseline model performance and individual
 // adapter version perfromance.
@@ -104,6 +217,48 @@ type AdapterVersionEvaluationMetric struct {
 	FeatureType FeatureType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdapterVersionEvaluationMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdapterVersionEvaluationMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdapterVersionEvaluationMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterVersion != nil {
+		s.WriteStruct(schemas.AdapterVersionEvaluationMetric_AdapterVersion)
+		v.AdapterVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Baseline != nil {
+		s.WriteStruct(schemas.AdapterVersionEvaluationMetric_Baseline)
+		v.Baseline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FeatureType != "" {
+		s.WriteString(schemas.AdapterVersionEvaluationMetric_FeatureType, string(v.FeatureType))
+	}
+}
+func (v *AdapterVersionEvaluationMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdapterVersionEvaluationMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdapterVersionEvaluationMetric_AdapterVersion:
+			v.AdapterVersion = &EvaluationMetric{}
+			return v.AdapterVersion.Deserialize(d)
+		case schemas.AdapterVersionEvaluationMetric_Baseline:
+			v.Baseline = &EvaluationMetric{}
+			return v.Baseline.Deserialize(d)
+		case schemas.AdapterVersionEvaluationMetric_FeatureType:
+			var ev string
+			if err := d.ReadString(schemas.AdapterVersionEvaluationMetric_FeatureType, &ev); err != nil {
+				return err
+			}
+			v.FeatureType = FeatureType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Summary info for an adapter version. Contains information on the AdapterId,
@@ -131,6 +286,59 @@ type AdapterVersionOverview struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdapterVersionOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdapterVersionOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdapterVersionOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.AdapterVersionOverview_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterVersion != nil {
+		s.WriteString(schemas.AdapterVersionOverview_AdapterVersion, *v.AdapterVersion)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AdapterVersionOverview_CreationTime, *v.CreationTime)
+	}
+	serializeFeatureTypes(s, schemas.AdapterVersionOverview_FeatureTypes, v.FeatureTypes)
+	if v.Status != "" {
+		s.WriteString(schemas.AdapterVersionOverview_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.AdapterVersionOverview_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *AdapterVersionOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdapterVersionOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdapterVersionOverview_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.AdapterVersionOverview_AdapterId, v.AdapterId)
+		case schemas.AdapterVersionOverview_AdapterVersion:
+			v.AdapterVersion = new(string)
+			return d.ReadString(schemas.AdapterVersionOverview_AdapterVersion, v.AdapterVersion)
+		case schemas.AdapterVersionOverview_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AdapterVersionOverview_CreationTime, v.CreationTime)
+		case schemas.AdapterVersionOverview_FeatureTypes:
+			return deserializeFeatureTypes(d, schemas.AdapterVersionOverview_FeatureTypes, &v.FeatureTypes)
+		case schemas.AdapterVersionOverview_Status:
+			var ev string
+			if err := d.ReadString(schemas.AdapterVersionOverview_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AdapterVersionStatus(ev)
+			return nil
+		case schemas.AdapterVersionOverview_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.AdapterVersionOverview_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Used to contain the information detected by an AnalyzeID operation.
 type AnalyzeIDDetections struct {
 
@@ -147,6 +355,42 @@ type AnalyzeIDDetections struct {
 	NormalizedValue *NormalizedValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnalyzeIDDetections) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyzeIDDetections)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyzeIDDetections) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.AnalyzeIDDetections_Confidence, *v.Confidence)
+	}
+	if v.NormalizedValue != nil {
+		s.WriteStruct(schemas.AnalyzeIDDetections_NormalizedValue)
+		v.NormalizedValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.AnalyzeIDDetections_Text, *v.Text)
+	}
+}
+func (v *AnalyzeIDDetections) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyzeIDDetections, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyzeIDDetections_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.AnalyzeIDDetections_Confidence, v.Confidence)
+		case schemas.AnalyzeIDDetections_NormalizedValue:
+			v.NormalizedValue = &NormalizedValue{}
+			return v.NormalizedValue.Deserialize(d)
+		case schemas.AnalyzeIDDetections_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.AnalyzeIDDetections_Text, v.Text)
+		}
+		return nil
+	})
 }
 
 // A Block represents items that are recognized in a document within a group of
@@ -341,6 +585,122 @@ type Block struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Block) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Block)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Block) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockType != "" {
+		s.WriteString(schemas.Block_BlockType, string(v.BlockType))
+	}
+	if v.ColumnIndex != nil {
+		s.WriteInt32(schemas.Block_ColumnIndex, *v.ColumnIndex)
+	}
+	if v.ColumnSpan != nil {
+		s.WriteInt32(schemas.Block_ColumnSpan, *v.ColumnSpan)
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Block_Confidence, *v.Confidence)
+	}
+	serializeEntityTypes(s, schemas.Block_EntityTypes, v.EntityTypes)
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.Block_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Block_Id, *v.Id)
+	}
+	if v.Page != nil {
+		s.WriteInt32(schemas.Block_Page, *v.Page)
+	}
+	if v.Query != nil {
+		s.WriteStruct(schemas.Block_Query)
+		v.Query.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRelationshipList(s, schemas.Block_Relationships, v.Relationships)
+	if v.RowIndex != nil {
+		s.WriteInt32(schemas.Block_RowIndex, *v.RowIndex)
+	}
+	if v.RowSpan != nil {
+		s.WriteInt32(schemas.Block_RowSpan, *v.RowSpan)
+	}
+	if v.SelectionStatus != "" {
+		s.WriteString(schemas.Block_SelectionStatus, string(v.SelectionStatus))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.Block_Text, *v.Text)
+	}
+	if v.TextType != "" {
+		s.WriteString(schemas.Block_TextType, string(v.TextType))
+	}
+}
+func (v *Block) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Block, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Block_BlockType:
+			var ev string
+			if err := d.ReadString(schemas.Block_BlockType, &ev); err != nil {
+				return err
+			}
+			v.BlockType = BlockType(ev)
+			return nil
+		case schemas.Block_ColumnIndex:
+			v.ColumnIndex = new(int32)
+			return d.ReadInt32(schemas.Block_ColumnIndex, v.ColumnIndex)
+		case schemas.Block_ColumnSpan:
+			v.ColumnSpan = new(int32)
+			return d.ReadInt32(schemas.Block_ColumnSpan, v.ColumnSpan)
+		case schemas.Block_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Block_Confidence, v.Confidence)
+		case schemas.Block_EntityTypes:
+			return deserializeEntityTypes(d, schemas.Block_EntityTypes, &v.EntityTypes)
+		case schemas.Block_Geometry:
+			v.Geometry = &Geometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.Block_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Block_Id, v.Id)
+		case schemas.Block_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.Block_Page, v.Page)
+		case schemas.Block_Query:
+			v.Query = &Query{}
+			return v.Query.Deserialize(d)
+		case schemas.Block_Relationships:
+			return deserializeRelationshipList(d, schemas.Block_Relationships, &v.Relationships)
+		case schemas.Block_RowIndex:
+			v.RowIndex = new(int32)
+			return d.ReadInt32(schemas.Block_RowIndex, v.RowIndex)
+		case schemas.Block_RowSpan:
+			v.RowSpan = new(int32)
+			return d.ReadInt32(schemas.Block_RowSpan, v.RowSpan)
+		case schemas.Block_SelectionStatus:
+			var ev string
+			if err := d.ReadString(schemas.Block_SelectionStatus, &ev); err != nil {
+				return err
+			}
+			v.SelectionStatus = SelectionStatus(ev)
+			return nil
+		case schemas.Block_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.Block_Text, v.Text)
+		case schemas.Block_TextType:
+			var ev string
+			if err := d.ReadString(schemas.Block_TextType, &ev); err != nil {
+				return err
+			}
+			v.TextType = TextType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The bounding box around the detected page, text, key-value pair, table, table
 // cell, or selection element on a document page. The left (x-coordinate) and top
 // (y-coordinate) are coordinates that represent the top and left sides of the
@@ -374,6 +734,42 @@ type BoundingBox struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BoundingBox) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BoundingBox)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BoundingBox) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != 0 {
+		s.WriteFloat32(schemas.BoundingBox_Height, v.Height)
+	}
+	if v.Left != 0 {
+		s.WriteFloat32(schemas.BoundingBox_Left, v.Left)
+	}
+	if v.Top != 0 {
+		s.WriteFloat32(schemas.BoundingBox_Top, v.Top)
+	}
+	if v.Width != 0 {
+		s.WriteFloat32(schemas.BoundingBox_Width, v.Width)
+	}
+}
+func (v *BoundingBox) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BoundingBox, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BoundingBox_Height:
+			return d.ReadFloat32(schemas.BoundingBox_Height, &v.Height)
+		case schemas.BoundingBox_Left:
+			return d.ReadFloat32(schemas.BoundingBox_Left, &v.Left)
+		case schemas.BoundingBox_Top:
+			return d.ReadFloat32(schemas.BoundingBox_Top, &v.Top)
+		case schemas.BoundingBox_Width:
+			return d.ReadFloat32(schemas.BoundingBox_Width, &v.Width)
+		}
+		return nil
+	})
+}
+
 // A structure that holds information regarding a detected signature on a page.
 type DetectedSignature struct {
 
@@ -381,6 +777,28 @@ type DetectedSignature struct {
 	Page *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DetectedSignature) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectedSignature)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectedSignature) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Page != nil {
+		s.WriteInt32(schemas.DetectedSignature_Page, *v.Page)
+	}
+}
+func (v *DetectedSignature) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectedSignature, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectedSignature_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.DetectedSignature_Page, v.Page)
+		}
+		return nil
+	})
 }
 
 // The input document, either as bytes or as an S3 object.
@@ -421,6 +839,35 @@ type Document struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Document) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Document)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Document) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.Document_Bytes, v.Bytes)
+	}
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.Document_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Document) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Document, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Document_Bytes:
+			return d.ReadBlob(schemas.Document_Bytes, &v.Bytes)
+		case schemas.Document_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Summary information about documents grouped by the same document type.
 type DocumentGroup struct {
 
@@ -443,6 +890,37 @@ type DocumentGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectedSignatureList(s, schemas.DocumentGroup_DetectedSignatures, v.DetectedSignatures)
+	serializeSplitDocumentList(s, schemas.DocumentGroup_SplitDocuments, v.SplitDocuments)
+	if v.Type != nil {
+		s.WriteString(schemas.DocumentGroup_Type, *v.Type)
+	}
+	serializeUndetectedSignatureList(s, schemas.DocumentGroup_UndetectedSignatures, v.UndetectedSignatures)
+}
+func (v *DocumentGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentGroup_DetectedSignatures:
+			return deserializeDetectedSignatureList(d, schemas.DocumentGroup_DetectedSignatures, &v.DetectedSignatures)
+		case schemas.DocumentGroup_SplitDocuments:
+			return deserializeSplitDocumentList(d, schemas.DocumentGroup_SplitDocuments, &v.SplitDocuments)
+		case schemas.DocumentGroup_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.DocumentGroup_Type, v.Type)
+		case schemas.DocumentGroup_UndetectedSignatures:
+			return deserializeUndetectedSignatureList(d, schemas.DocumentGroup_UndetectedSignatures, &v.UndetectedSignatures)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 bucket that contains the document to be processed. It's used by
 // asynchronous operations.
 //
@@ -456,6 +934,30 @@ type DocumentLocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Object != nil {
+		s.WriteStruct(schemas.DocumentLocation_S3Object)
+		v.S3Object.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DocumentLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentLocation_S3Object:
+			v.S3Object = &S3Object{}
+			return v.S3Object.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about the input document.
 type DocumentMetadata struct {
 
@@ -463,6 +965,28 @@ type DocumentMetadata struct {
 	Pages *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pages != nil {
+		s.WriteInt32(schemas.DocumentMetadata_Pages, *v.Pages)
+	}
+}
+func (v *DocumentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentMetadata_Pages:
+			v.Pages = new(int32)
+			return d.ReadInt32(schemas.DocumentMetadata_Pages, v.Pages)
+		}
+		return nil
+	})
 }
 
 // The evaluation metrics (F1 score, Precision, and Recall) for an adapter version.
@@ -478,6 +1002,37 @@ type EvaluationMetric struct {
 	Recall float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.F1Score != 0 {
+		s.WriteFloat32(schemas.EvaluationMetric_F1Score, v.F1Score)
+	}
+	if v.Precision != 0 {
+		s.WriteFloat32(schemas.EvaluationMetric_Precision, v.Precision)
+	}
+	if v.Recall != 0 {
+		s.WriteFloat32(schemas.EvaluationMetric_Recall, v.Recall)
+	}
+}
+func (v *EvaluationMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationMetric_F1Score:
+			return d.ReadFloat32(schemas.EvaluationMetric_F1Score, &v.F1Score)
+		case schemas.EvaluationMetric_Precision:
+			return d.ReadFloat32(schemas.EvaluationMetric_Precision, &v.Precision)
+		case schemas.EvaluationMetric_Recall:
+			return d.ReadFloat32(schemas.EvaluationMetric_Recall, &v.Recall)
+		}
+		return nil
+	})
 }
 
 // Returns the kind of currency detected.
@@ -516,6 +1071,34 @@ type ExpenseCurrency struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExpenseCurrency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpenseCurrency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpenseCurrency) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ExpenseCurrency_Code, *v.Code)
+	}
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ExpenseCurrency_Confidence, *v.Confidence)
+	}
+}
+func (v *ExpenseCurrency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpenseCurrency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpenseCurrency_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ExpenseCurrency_Code, v.Code)
+		case schemas.ExpenseCurrency_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ExpenseCurrency_Confidence, v.Confidence)
+		}
+		return nil
+	})
+}
+
 // An object used to store information about the Value or Label detected by Amazon
 // Textract.
 type ExpenseDetection struct {
@@ -532,6 +1115,42 @@ type ExpenseDetection struct {
 	Text *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExpenseDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpenseDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpenseDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ExpenseDetection_Confidence, *v.Confidence)
+	}
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.ExpenseDetection_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.ExpenseDetection_Text, *v.Text)
+	}
+}
+func (v *ExpenseDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpenseDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpenseDetection_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ExpenseDetection_Confidence, v.Confidence)
+		case schemas.ExpenseDetection_Geometry:
+			v.Geometry = &Geometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.ExpenseDetection_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.ExpenseDetection_Text, v.Text)
+		}
+		return nil
+	})
 }
 
 // The structure holding all the information returned by AnalyzeExpense
@@ -552,6 +1171,37 @@ type ExpenseDocument struct {
 	SummaryFields []ExpenseField
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExpenseDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpenseDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpenseDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlockList(s, schemas.ExpenseDocument_Blocks, v.Blocks)
+	if v.ExpenseIndex != nil {
+		s.WriteInt32(schemas.ExpenseDocument_ExpenseIndex, *v.ExpenseIndex)
+	}
+	serializeLineItemGroupList(s, schemas.ExpenseDocument_LineItemGroups, v.LineItemGroups)
+	serializeExpenseFieldList(s, schemas.ExpenseDocument_SummaryFields, v.SummaryFields)
+}
+func (v *ExpenseDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpenseDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpenseDocument_Blocks:
+			return deserializeBlockList(d, schemas.ExpenseDocument_Blocks, &v.Blocks)
+		case schemas.ExpenseDocument_ExpenseIndex:
+			v.ExpenseIndex = new(int32)
+			return d.ReadInt32(schemas.ExpenseDocument_ExpenseIndex, v.ExpenseIndex)
+		case schemas.ExpenseDocument_LineItemGroups:
+			return deserializeLineItemGroupList(d, schemas.ExpenseDocument_LineItemGroups, &v.LineItemGroups)
+		case schemas.ExpenseDocument_SummaryFields:
+			return deserializeExpenseFieldList(d, schemas.ExpenseDocument_SummaryFields, &v.SummaryFields)
+		}
+		return nil
+	})
 }
 
 // Breakdown of detected information, seperated into the catagories Type,
@@ -582,6 +1232,63 @@ type ExpenseField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExpenseField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpenseField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpenseField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != nil {
+		s.WriteStruct(schemas.ExpenseField_Currency)
+		v.Currency.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpenseGroupPropertyList(s, schemas.ExpenseField_GroupProperties, v.GroupProperties)
+	if v.LabelDetection != nil {
+		s.WriteStruct(schemas.ExpenseField_LabelDetection)
+		v.LabelDetection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PageNumber != nil {
+		s.WriteInt32(schemas.ExpenseField_PageNumber, *v.PageNumber)
+	}
+	if v.Type != nil {
+		s.WriteStruct(schemas.ExpenseField_Type)
+		v.Type.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValueDetection != nil {
+		s.WriteStruct(schemas.ExpenseField_ValueDetection)
+		v.ValueDetection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExpenseField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpenseField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpenseField_Currency:
+			v.Currency = &ExpenseCurrency{}
+			return v.Currency.Deserialize(d)
+		case schemas.ExpenseField_GroupProperties:
+			return deserializeExpenseGroupPropertyList(d, schemas.ExpenseField_GroupProperties, &v.GroupProperties)
+		case schemas.ExpenseField_LabelDetection:
+			v.LabelDetection = &ExpenseDetection{}
+			return v.LabelDetection.Deserialize(d)
+		case schemas.ExpenseField_PageNumber:
+			v.PageNumber = new(int32)
+			return d.ReadInt32(schemas.ExpenseField_PageNumber, v.PageNumber)
+		case schemas.ExpenseField_Type:
+			v.Type = &ExpenseType{}
+			return v.Type.Deserialize(d)
+		case schemas.ExpenseField_ValueDetection:
+			v.ValueDetection = &ExpenseDetection{}
+			return v.ValueDetection.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Shows the group that a certain key belongs to. This helps differentiate between
 // names and addresses for different organizations, that can be hard to determine
 // via JSON response.
@@ -596,6 +1303,31 @@ type ExpenseGroupProperty struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExpenseGroupProperty) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpenseGroupProperty)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpenseGroupProperty) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ExpenseGroupProperty_Id, *v.Id)
+	}
+	serializeStringList(s, schemas.ExpenseGroupProperty_Types, v.Types)
+}
+func (v *ExpenseGroupProperty) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpenseGroupProperty, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpenseGroupProperty_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExpenseGroupProperty_Id, v.Id)
+		case schemas.ExpenseGroupProperty_Types:
+			return deserializeStringList(d, schemas.ExpenseGroupProperty_Types, &v.Types)
+		}
+		return nil
+	})
+}
+
 // An object used to store information about the Type detected by Amazon Textract.
 type ExpenseType struct {
 
@@ -606,6 +1338,34 @@ type ExpenseType struct {
 	Text *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExpenseType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpenseType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpenseType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.ExpenseType_Confidence, *v.Confidence)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.ExpenseType_Text, *v.Text)
+	}
+}
+func (v *ExpenseType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpenseType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpenseType_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.ExpenseType_Confidence, v.Confidence)
+		case schemas.ExpenseType_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.ExpenseType_Text, v.Text)
+		}
+		return nil
+	})
 }
 
 // Contains information extracted by an analysis operation after using
@@ -622,6 +1382,46 @@ type Extraction struct {
 	LendingDocument *LendingDocument
 
 	noSmithyDocumentSerde
+}
+
+func (v *Extraction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Extraction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Extraction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpenseDocument != nil {
+		s.WriteStruct(schemas.Extraction_ExpenseDocument)
+		v.ExpenseDocument.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityDocument != nil {
+		s.WriteStruct(schemas.Extraction_IdentityDocument)
+		v.IdentityDocument.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LendingDocument != nil {
+		s.WriteStruct(schemas.Extraction_LendingDocument)
+		v.LendingDocument.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Extraction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Extraction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Extraction_ExpenseDocument:
+			v.ExpenseDocument = &ExpenseDocument{}
+			return v.ExpenseDocument.Deserialize(d)
+		case schemas.Extraction_IdentityDocument:
+			v.IdentityDocument = &IdentityDocument{}
+			return v.IdentityDocument.Deserialize(d)
+		case schemas.Extraction_LendingDocument:
+			v.LendingDocument = &LendingDocument{}
+			return v.LendingDocument.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about where the following items are located on a document page:
@@ -642,6 +1442,39 @@ type Geometry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Geometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Geometry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Geometry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.Geometry_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePolygon(s, schemas.Geometry_Polygon, v.Polygon)
+	if v.RotationAngle != nil {
+		s.WriteFloat32(schemas.Geometry_RotationAngle, *v.RotationAngle)
+	}
+}
+func (v *Geometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Geometry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Geometry_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.Geometry_Polygon:
+			return deserializePolygon(d, schemas.Geometry_Polygon, &v.Polygon)
+		case schemas.Geometry_RotationAngle:
+			v.RotationAngle = new(float32)
+			return d.ReadFloat32(schemas.Geometry_RotationAngle, v.RotationAngle)
+		}
+		return nil
+	})
+}
+
 // Shows the results of the human in the loop evaluation. If there is no
 // HumanLoopArn, the input did not trigger human review.
 type HumanLoopActivationOutput struct {
@@ -659,6 +1492,37 @@ type HumanLoopActivationOutput struct {
 	HumanLoopArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HumanLoopActivationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanLoopActivationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanLoopActivationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanLoopActivationConditionsEvaluationResults != nil {
+		s.WriteString(schemas.HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults, *v.HumanLoopActivationConditionsEvaluationResults)
+	}
+	serializeHumanLoopActivationReasons(s, schemas.HumanLoopActivationOutput_HumanLoopActivationReasons, v.HumanLoopActivationReasons)
+	if v.HumanLoopArn != nil {
+		s.WriteString(schemas.HumanLoopActivationOutput_HumanLoopArn, *v.HumanLoopArn)
+	}
+}
+func (v *HumanLoopActivationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanLoopActivationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults:
+			v.HumanLoopActivationConditionsEvaluationResults = new(string)
+			return d.ReadString(schemas.HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults, v.HumanLoopActivationConditionsEvaluationResults)
+		case schemas.HumanLoopActivationOutput_HumanLoopActivationReasons:
+			return deserializeHumanLoopActivationReasons(d, schemas.HumanLoopActivationOutput_HumanLoopActivationReasons, &v.HumanLoopActivationReasons)
+		case schemas.HumanLoopActivationOutput_HumanLoopArn:
+			v.HumanLoopArn = new(string)
+			return d.ReadString(schemas.HumanLoopActivationOutput_HumanLoopArn, v.HumanLoopArn)
+		}
+		return nil
+	})
 }
 
 // Sets up the human review workflow the document will be sent to if one of the
@@ -683,6 +1547,42 @@ type HumanLoopConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HumanLoopConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanLoopConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanLoopConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAttributes != nil {
+		s.WriteStruct(schemas.HumanLoopConfig_DataAttributes)
+		v.DataAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlowDefinitionArn != nil {
+		s.WriteString(schemas.HumanLoopConfig_FlowDefinitionArn, *v.FlowDefinitionArn)
+	}
+	if v.HumanLoopName != nil {
+		s.WriteString(schemas.HumanLoopConfig_HumanLoopName, *v.HumanLoopName)
+	}
+}
+func (v *HumanLoopConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanLoopConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanLoopConfig_DataAttributes:
+			v.DataAttributes = &HumanLoopDataAttributes{}
+			return v.DataAttributes.Deserialize(d)
+		case schemas.HumanLoopConfig_FlowDefinitionArn:
+			v.FlowDefinitionArn = new(string)
+			return d.ReadString(schemas.HumanLoopConfig_FlowDefinitionArn, v.FlowDefinitionArn)
+		case schemas.HumanLoopConfig_HumanLoopName:
+			v.HumanLoopName = new(string)
+			return d.ReadString(schemas.HumanLoopConfig_HumanLoopName, v.HumanLoopName)
+		}
+		return nil
+	})
+}
+
 // Allows you to set attributes of the image. Currently, you can declare an image
 // as free of personally identifiable information and adult content.
 type HumanLoopDataAttributes struct {
@@ -692,6 +1592,25 @@ type HumanLoopDataAttributes struct {
 	ContentClassifiers []ContentClassifier
 
 	noSmithyDocumentSerde
+}
+
+func (v *HumanLoopDataAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanLoopDataAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanLoopDataAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContentClassifiers(s, schemas.HumanLoopDataAttributes_ContentClassifiers, v.ContentClassifiers)
+}
+func (v *HumanLoopDataAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanLoopDataAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanLoopDataAttributes_ContentClassifiers:
+			return deserializeContentClassifiers(d, schemas.HumanLoopDataAttributes_ContentClassifiers, &v.ContentClassifiers)
+		}
+		return nil
+	})
 }
 
 // The structure that lists each document processed in an AnalyzeID operation.
@@ -711,6 +1630,34 @@ type IdentityDocument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdentityDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlockList(s, schemas.IdentityDocument_Blocks, v.Blocks)
+	if v.DocumentIndex != nil {
+		s.WriteInt32(schemas.IdentityDocument_DocumentIndex, *v.DocumentIndex)
+	}
+	serializeIdentityDocumentFieldList(s, schemas.IdentityDocument_IdentityDocumentFields, v.IdentityDocumentFields)
+}
+func (v *IdentityDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityDocument_Blocks:
+			return deserializeBlockList(d, schemas.IdentityDocument_Blocks, &v.Blocks)
+		case schemas.IdentityDocument_DocumentIndex:
+			v.DocumentIndex = new(int32)
+			return d.ReadInt32(schemas.IdentityDocument_DocumentIndex, v.DocumentIndex)
+		case schemas.IdentityDocument_IdentityDocumentFields:
+			return deserializeIdentityDocumentFieldList(d, schemas.IdentityDocument_IdentityDocumentFields, &v.IdentityDocumentFields)
+		}
+		return nil
+	})
+}
+
 // Structure containing both the normalized type of the extracted information and
 // the text associated with it. These are extracted as Type and Value respectively.
 type IdentityDocumentField struct {
@@ -722,6 +1669,38 @@ type IdentityDocumentField struct {
 	ValueDetection *AnalyzeIDDetections
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdentityDocumentField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityDocumentField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityDocumentField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteStruct(schemas.IdentityDocumentField_Type)
+		v.Type.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValueDetection != nil {
+		s.WriteStruct(schemas.IdentityDocumentField_ValueDetection)
+		v.ValueDetection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IdentityDocumentField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityDocumentField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityDocumentField_Type:
+			v.Type = &AnalyzeIDDetections{}
+			return v.Type.Deserialize(d)
+		case schemas.IdentityDocumentField_ValueDetection:
+			v.ValueDetection = &AnalyzeIDDetections{}
+			return v.ValueDetection.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The results extracted for a lending document.
@@ -745,6 +1724,52 @@ type LendingDetection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LendingDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LendingDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LendingDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.LendingDetection_Confidence, *v.Confidence)
+	}
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.LendingDetection_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelectionStatus != "" {
+		s.WriteString(schemas.LendingDetection_SelectionStatus, string(v.SelectionStatus))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.LendingDetection_Text, *v.Text)
+	}
+}
+func (v *LendingDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LendingDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LendingDetection_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.LendingDetection_Confidence, v.Confidence)
+		case schemas.LendingDetection_Geometry:
+			v.Geometry = &Geometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.LendingDetection_SelectionStatus:
+			var ev string
+			if err := d.ReadString(schemas.LendingDetection_SelectionStatus, &ev); err != nil {
+				return err
+			}
+			v.SelectionStatus = SelectionStatus(ev)
+			return nil
+		case schemas.LendingDetection_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.LendingDetection_Text, v.Text)
+		}
+		return nil
+	})
+}
+
 // Holds the structured data returned by AnalyzeDocument for lending documents.
 type LendingDocument struct {
 
@@ -755,6 +1780,28 @@ type LendingDocument struct {
 	SignatureDetections []SignatureDetection
 
 	noSmithyDocumentSerde
+}
+
+func (v *LendingDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LendingDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LendingDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLendingFieldList(s, schemas.LendingDocument_LendingFields, v.LendingFields)
+	serializeSignatureDetectionList(s, schemas.LendingDocument_SignatureDetections, v.SignatureDetections)
+}
+func (v *LendingDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LendingDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LendingDocument_LendingFields:
+			return deserializeLendingFieldList(d, schemas.LendingDocument_LendingFields, &v.LendingFields)
+		case schemas.LendingDocument_SignatureDetections:
+			return deserializeSignatureDetectionList(d, schemas.LendingDocument_SignatureDetections, &v.SignatureDetections)
+		}
+		return nil
+	})
 }
 
 // Holds the normalized key-value pairs returned by AnalyzeDocument, including the
@@ -773,6 +1820,39 @@ type LendingField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LendingField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LendingField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LendingField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyDetection != nil {
+		s.WriteStruct(schemas.LendingField_KeyDetection)
+		v.KeyDetection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.LendingField_Type, *v.Type)
+	}
+	serializeLendingDetectionList(s, schemas.LendingField_ValueDetections, v.ValueDetections)
+}
+func (v *LendingField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LendingField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LendingField_KeyDetection:
+			v.KeyDetection = &LendingDetection{}
+			return v.KeyDetection.Deserialize(d)
+		case schemas.LendingField_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.LendingField_Type, v.Type)
+		case schemas.LendingField_ValueDetections:
+			return deserializeLendingDetectionList(d, schemas.LendingField_ValueDetections, &v.ValueDetections)
+		}
+		return nil
+	})
+}
+
 // Contains the detections for each page analyzed through the Analyze Lending API.
 type LendingResult struct {
 
@@ -789,6 +1869,39 @@ type LendingResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LendingResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LendingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LendingResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExtractionList(s, schemas.LendingResult_Extractions, v.Extractions)
+	if v.Page != nil {
+		s.WriteInt32(schemas.LendingResult_Page, *v.Page)
+	}
+	if v.PageClassification != nil {
+		s.WriteStruct(schemas.LendingResult_PageClassification)
+		v.PageClassification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LendingResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LendingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LendingResult_Extractions:
+			return deserializeExtractionList(d, schemas.LendingResult_Extractions, &v.Extractions)
+		case schemas.LendingResult_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.LendingResult_Page, v.Page)
+		case schemas.LendingResult_PageClassification:
+			v.PageClassification = &PageClassification{}
+			return v.PageClassification.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains information regarding DocumentGroups and UndetectedDocumentTypes.
 type LendingSummary struct {
 
@@ -801,6 +1914,28 @@ type LendingSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LendingSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LendingSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LendingSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentGroupList(s, schemas.LendingSummary_DocumentGroups, v.DocumentGroups)
+	serializeUndetectedDocumentTypeList(s, schemas.LendingSummary_UndetectedDocumentTypes, v.UndetectedDocumentTypes)
+}
+func (v *LendingSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LendingSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LendingSummary_DocumentGroups:
+			return deserializeDocumentGroupList(d, schemas.LendingSummary_DocumentGroups, &v.DocumentGroups)
+		case schemas.LendingSummary_UndetectedDocumentTypes:
+			return deserializeUndetectedDocumentTypeList(d, schemas.LendingSummary_UndetectedDocumentTypes, &v.UndetectedDocumentTypes)
+		}
+		return nil
+	})
+}
+
 // A structure that holds information about the different lines found in a
 // document's tables.
 type LineItemFields struct {
@@ -809,6 +1944,25 @@ type LineItemFields struct {
 	LineItemExpenseFields []ExpenseField
 
 	noSmithyDocumentSerde
+}
+
+func (v *LineItemFields) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LineItemFields)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LineItemFields) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpenseFieldList(s, schemas.LineItemFields_LineItemExpenseFields, v.LineItemExpenseFields)
+}
+func (v *LineItemFields) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LineItemFields, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LineItemFields_LineItemExpenseFields:
+			return deserializeExpenseFieldList(d, schemas.LineItemFields_LineItemExpenseFields, &v.LineItemExpenseFields)
+		}
+		return nil
+	})
 }
 
 // A grouping of tables which contain LineItems, with each table identified by the
@@ -825,6 +1979,31 @@ type LineItemGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LineItemGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LineItemGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LineItemGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LineItemGroupIndex != nil {
+		s.WriteInt32(schemas.LineItemGroup_LineItemGroupIndex, *v.LineItemGroupIndex)
+	}
+	serializeLineItemList(s, schemas.LineItemGroup_LineItems, v.LineItems)
+}
+func (v *LineItemGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LineItemGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LineItemGroup_LineItemGroupIndex:
+			v.LineItemGroupIndex = new(int32)
+			return d.ReadInt32(schemas.LineItemGroup_LineItemGroupIndex, v.LineItemGroupIndex)
+		case schemas.LineItemGroup_LineItems:
+			return deserializeLineItemList(d, schemas.LineItemGroup_LineItems, &v.LineItems)
+		}
+		return nil
+	})
+}
+
 // Contains information relating to dates in a document, including the type of
 // value, and the value.
 type NormalizedValue struct {
@@ -836,6 +2015,38 @@ type NormalizedValue struct {
 	ValueType ValueType
 
 	noSmithyDocumentSerde
+}
+
+func (v *NormalizedValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NormalizedValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NormalizedValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.NormalizedValue_Value, *v.Value)
+	}
+	if v.ValueType != "" {
+		s.WriteString(schemas.NormalizedValue_ValueType, string(v.ValueType))
+	}
+}
+func (v *NormalizedValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NormalizedValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NormalizedValue_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.NormalizedValue_Value, v.Value)
+		case schemas.NormalizedValue_ValueType:
+			var ev string
+			if err := d.ReadString(schemas.NormalizedValue_ValueType, &ev); err != nil {
+				return err
+			}
+			v.ValueType = ValueType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon
@@ -854,6 +2065,34 @@ type NotificationChannel struct {
 	SNSTopicArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationChannel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationChannel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationChannel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.NotificationChannel_RoleArn, *v.RoleArn)
+	}
+	if v.SNSTopicArn != nil {
+		s.WriteString(schemas.NotificationChannel_SNSTopicArn, *v.SNSTopicArn)
+	}
+}
+func (v *NotificationChannel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationChannel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationChannel_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.NotificationChannel_RoleArn, v.RoleArn)
+		case schemas.NotificationChannel_SNSTopicArn:
+			v.SNSTopicArn = new(string)
+			return d.ReadString(schemas.NotificationChannel_SNSTopicArn, v.SNSTopicArn)
+		}
+		return nil
+	})
 }
 
 // Sets whether or not your output will go to a user created bucket. Used to set
@@ -893,6 +2132,34 @@ type OutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.OutputConfig_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3Prefix != nil {
+		s.WriteString(schemas.OutputConfig_S3Prefix, *v.S3Prefix)
+	}
+}
+func (v *OutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputConfig_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.OutputConfig_S3Bucket, v.S3Bucket)
+		case schemas.OutputConfig_S3Prefix:
+			v.S3Prefix = new(string)
+			return d.ReadString(schemas.OutputConfig_S3Prefix, v.S3Prefix)
+		}
+		return nil
+	})
+}
+
 // The class assigned to a Page object detected in an input document. Contains
 // information regarding the predicted type/class of a document's page and the page
 // number that the Page object was detected on.
@@ -911,6 +2178,28 @@ type PageClassification struct {
 	PageType []Prediction
 
 	noSmithyDocumentSerde
+}
+
+func (v *PageClassification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PageClassification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PageClassification) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePredictionList(s, schemas.PageClassification_PageNumber, v.PageNumber)
+	serializePredictionList(s, schemas.PageClassification_PageType, v.PageType)
+}
+func (v *PageClassification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PageClassification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PageClassification_PageNumber:
+			return deserializePredictionList(d, schemas.PageClassification_PageNumber, &v.PageNumber)
+		case schemas.PageClassification_PageType:
+			return deserializePredictionList(d, schemas.PageClassification_PageType, &v.PageType)
+		}
+		return nil
+	})
 }
 
 // The X and Y coordinates of a point on a document page. The X and Y values that
@@ -932,6 +2221,32 @@ type Point struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Point) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Point)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Point) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.X != 0 {
+		s.WriteFloat32(schemas.Point_X, v.X)
+	}
+	if v.Y != 0 {
+		s.WriteFloat32(schemas.Point_Y, v.Y)
+	}
+}
+func (v *Point) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Point, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Point_X:
+			return d.ReadFloat32(schemas.Point_X, &v.X)
+		case schemas.Point_Y:
+			return d.ReadFloat32(schemas.Point_Y, &v.Y)
+		}
+		return nil
+	})
+}
+
 // Contains information regarding predicted values returned by Amazon Textract
 // operations, including the predicted value and the confidence in the predicted
 // value.
@@ -946,6 +2261,34 @@ type Prediction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Prediction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Prediction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Prediction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.Prediction_Confidence, *v.Confidence)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Prediction_Value, *v.Value)
+	}
+}
+func (v *Prediction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Prediction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Prediction_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.Prediction_Confidence, v.Confidence)
+		case schemas.Prediction_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Prediction_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 type QueriesConfig struct {
 
 	//
@@ -954,6 +2297,25 @@ type QueriesConfig struct {
 	Queries []Query
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueriesConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueriesConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueriesConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQueries(s, schemas.QueriesConfig_Queries, v.Queries)
+}
+func (v *QueriesConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueriesConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueriesConfig_Queries:
+			return deserializeQueries(d, schemas.QueriesConfig_Queries, &v.Queries)
+		}
+		return nil
+	})
 }
 
 // Each query contains the question you want to ask in the Text and the alias you
@@ -987,6 +2349,37 @@ type Query struct {
 	Pages []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Query) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Query)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Query) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.Query_Alias, *v.Alias)
+	}
+	serializeQueryPages(s, schemas.Query_Pages, v.Pages)
+	if v.Text != nil {
+		s.WriteString(schemas.Query_Text, *v.Text)
+	}
+}
+func (v *Query) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Query, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Query_Alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.Query_Alias, v.Alias)
+		case schemas.Query_Pages:
+			return deserializeQueryPages(d, schemas.Query_Pages, &v.Pages)
+		case schemas.Query_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.Query_Text, v.Text)
+		}
+		return nil
+	})
 }
 
 // Information about how blocks are related to each other. A Block object contains
@@ -1029,6 +2422,35 @@ type Relationship struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Relationship) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Relationship)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Relationship) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdList(s, schemas.Relationship_Ids, v.Ids)
+	if v.Type != "" {
+		s.WriteString(schemas.Relationship_Type, string(v.Type))
+	}
+}
+func (v *Relationship) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Relationship, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Relationship_Ids:
+			return deserializeIdList(d, schemas.Relationship_Ids, &v.Ids)
+		case schemas.Relationship_Type:
+			var ev string
+			if err := d.ReadString(schemas.Relationship_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RelationshipType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The S3 bucket name and file name that identifies the document.
 //
 // The AWS Region for the S3 bucket that contains the document must match the
@@ -1052,6 +2474,40 @@ type S3Object struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Object) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Object)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Object) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3Object_Bucket, *v.Bucket)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.S3Object_Name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.S3Object_Version, *v.Version)
+	}
+}
+func (v *S3Object) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Object, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Object_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3Object_Bucket, v.Bucket)
+		case schemas.S3Object_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.S3Object_Name, v.Name)
+		case schemas.S3Object_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.S3Object_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Information regarding a detected signature on a page.
 type SignatureDetection struct {
 
@@ -1064,6 +2520,36 @@ type SignatureDetection struct {
 	Geometry *Geometry
 
 	noSmithyDocumentSerde
+}
+
+func (v *SignatureDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignatureDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignatureDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Confidence != nil {
+		s.WriteFloat32(schemas.SignatureDetection_Confidence, *v.Confidence)
+	}
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.SignatureDetection_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SignatureDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignatureDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignatureDetection_Confidence:
+			v.Confidence = new(float32)
+			return d.ReadFloat32(schemas.SignatureDetection_Confidence, v.Confidence)
+		case schemas.SignatureDetection_Geometry:
+			v.Geometry = &Geometry{}
+			return v.Geometry.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains information about the pages of a document, defined by logical boundary.
@@ -1079,6 +2565,31 @@ type SplitDocument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SplitDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SplitDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplitDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteInt32(schemas.SplitDocument_Index, *v.Index)
+	}
+	serializePageList(s, schemas.SplitDocument_Pages, v.Pages)
+}
+func (v *SplitDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SplitDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SplitDocument_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.SplitDocument_Index, v.Index)
+		case schemas.SplitDocument_Pages:
+			return deserializePageList(d, schemas.SplitDocument_Pages, &v.Pages)
+		}
+		return nil
+	})
+}
+
 // A structure containing information about an undetected signature on a page
 // where it was expected but not found.
 type UndetectedSignature struct {
@@ -1087,6 +2598,28 @@ type UndetectedSignature struct {
 	Page *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UndetectedSignature) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UndetectedSignature)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UndetectedSignature) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Page != nil {
+		s.WriteInt32(schemas.UndetectedSignature_Page, *v.Page)
+	}
+}
+func (v *UndetectedSignature) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UndetectedSignature, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UndetectedSignature_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.UndetectedSignature_Page, v.Page)
+		}
+		return nil
+	})
 }
 
 // A warning about an issue that occurred during asynchronous text analysis (StartDocumentAnalysis ) or
@@ -1100,6 +2633,31 @@ type Warning struct {
 	Pages []int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Warning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Warning)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Warning) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.Warning_ErrorCode, *v.ErrorCode)
+	}
+	serializePages(s, schemas.Warning_Pages, v.Pages)
+}
+func (v *Warning) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Warning, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Warning_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.Warning_ErrorCode, v.ErrorCode)
+		case schemas.Warning_Pages:
+			return deserializePages(d, schemas.Warning_Pages, &v.Pages)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

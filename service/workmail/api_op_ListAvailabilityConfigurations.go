@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListAvailabilityConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailabilityConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailabilityConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailabilityConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAvailabilityConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailabilityConfigurationsRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListAvailabilityConfigurationsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListAvailabilityConfigurationsOutput struct {
 
 	// The list of AvailabilityConfiguration 's that exist for the specified WorkMail
@@ -59,13 +79,35 @@ type ListAvailabilityConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailabilityConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailabilityConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailabilityConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityConfigurationList(s, schemas.ListAvailabilityConfigurationsResponse_AvailabilityConfigurations, v.AvailabilityConfigurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailabilityConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAvailabilityConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailabilityConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailabilityConfigurationsResponse_AvailabilityConfigurations:
+			return deserializeAvailabilityConfigurationList(d, schemas.ListAvailabilityConfigurationsResponse_AvailabilityConfigurations, &v.AvailabilityConfigurations)
+		case schemas.ListAvailabilityConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAvailabilityConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailabilityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailabilityConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailabilityConfigurations, schemas.ListAvailabilityConfigurationsRequest, schemas.ListAvailabilityConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailabilityConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailabilityConfigurations, schemas.ListAvailabilityConfigurationsRequest, schemas.ListAvailabilityConfigurationsResponse), output: &ListAvailabilityConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

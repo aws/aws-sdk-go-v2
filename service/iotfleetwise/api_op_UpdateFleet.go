@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,34 @@ type UpdateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFleetRequest_description, *v.Description)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateFleetRequest_fleetId, *v.FleetId)
+	}
+}
+func (v *UpdateFleetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFleetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFleetRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateFleetRequest_description, v.Description)
+		case schemas.UpdateFleetRequest_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.UpdateFleetRequest_fleetId, v.FleetId)
+		}
+		return nil
+	})
+}
+
 type UpdateFleetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated fleet.
@@ -50,13 +80,38 @@ type UpdateFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateFleetResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateFleetResponse_id, *v.Id)
+	}
+}
+func (v *UpdateFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFleetResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateFleetResponse_arn, v.Arn)
+		case schemas.UpdateFleetResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateFleetResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleet, schemas.UpdateFleetRequest, schemas.UpdateFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleet, schemas.UpdateFleetRequest, schemas.UpdateFleetResponse), output: &UpdateFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

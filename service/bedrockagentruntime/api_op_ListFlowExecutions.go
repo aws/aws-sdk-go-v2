@@ -5,7 +5,9 @@ package bedrockagentruntime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type ListFlowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.ListFlowExecutionsRequest_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.ListFlowExecutionsRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlowExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowExecutionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListFlowExecutionsOutput struct {
 
 	// A list of flow execution summaries. Each summary includes the execution ARN,
@@ -70,13 +93,35 @@ type ListFlowExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowExecutionSummaries(s, schemas.ListFlowExecutionsResponse_flowExecutionSummaries, v.FlowExecutionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowExecutionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFlowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlowExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlowExecutionsResponse_flowExecutionSummaries:
+			return deserializeFlowExecutionSummaries(d, schemas.ListFlowExecutionsResponse_flowExecutionSummaries, &v.FlowExecutionSummaries)
+		case schemas.ListFlowExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlowExecutionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFlowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowExecutions, schemas.ListFlowExecutionsRequest, schemas.ListFlowExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFlowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowExecutions, schemas.ListFlowExecutionsRequest, schemas.ListFlowExecutionsResponse), output: &ListFlowExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

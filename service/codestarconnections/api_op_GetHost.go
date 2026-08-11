@@ -4,7 +4,9 @@ package codestarconnections
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostArn != nil {
+		s.WriteString(schemas.GetHostInput_HostArn, *v.HostArn)
+	}
+}
+
 type GetHostOutput struct {
 
 	// The name of the requested host.
@@ -58,13 +72,62 @@ type GetHostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHostOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHostOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHostOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetHostOutput_Name, *v.Name)
+	}
+	if v.ProviderEndpoint != nil {
+		s.WriteString(schemas.GetHostOutput_ProviderEndpoint, *v.ProviderEndpoint)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.GetHostOutput_ProviderType, string(v.ProviderType))
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetHostOutput_Status, *v.Status)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.GetHostOutput_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetHostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHostOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHostOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetHostOutput_Name, v.Name)
+		case schemas.GetHostOutput_ProviderEndpoint:
+			v.ProviderEndpoint = new(string)
+			return d.ReadString(schemas.GetHostOutput_ProviderEndpoint, v.ProviderEndpoint)
+		case schemas.GetHostOutput_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.GetHostOutput_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = types.ProviderType(ev)
+			return nil
+		case schemas.GetHostOutput_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetHostOutput_Status, v.Status)
+		case schemas.GetHostOutput_VpcConfiguration:
+			v.VpcConfiguration = &types.VpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHost, schemas.GetHostInput, schemas.GetHostOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHost, schemas.GetHostInput, schemas.GetHostOutput), output: &GetHostOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

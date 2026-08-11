@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,34 @@ type ListEnvironmentProvisionedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentProvisionedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentProvisionedResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentProvisionedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ListEnvironmentProvisionedResourcesInput_environmentName, *v.EnvironmentName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentProvisionedResourcesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnvironmentProvisionedResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentProvisionedResourcesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentProvisionedResourcesInput_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.ListEnvironmentProvisionedResourcesInput_environmentName, v.EnvironmentName)
+		case schemas.ListEnvironmentProvisionedResourcesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentProvisionedResourcesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListEnvironmentProvisionedResourcesOutput struct {
 
 	// An array of environment provisioned resources.
@@ -60,13 +90,35 @@ type ListEnvironmentProvisionedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentProvisionedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentProvisionedResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentProvisionedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentProvisionedResourcesOutput_nextToken, *v.NextToken)
+	}
+	serializeProvisionedResourceList(s, schemas.ListEnvironmentProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+}
+func (v *ListEnvironmentProvisionedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentProvisionedResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentProvisionedResourcesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentProvisionedResourcesOutput_nextToken, v.NextToken)
+		case schemas.ListEnvironmentProvisionedResourcesOutput_provisionedResources:
+			return deserializeProvisionedResourceList(d, schemas.ListEnvironmentProvisionedResourcesOutput_provisionedResources, &v.ProvisionedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentProvisionedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnvironmentProvisionedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentProvisionedResources, schemas.ListEnvironmentProvisionedResourcesInput, schemas.ListEnvironmentProvisionedResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnvironmentProvisionedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentProvisionedResources, schemas.ListEnvironmentProvisionedResourcesInput, schemas.ListEnvironmentProvisionedResourcesOutput), output: &ListEnvironmentProvisionedResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

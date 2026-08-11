@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,21 @@ type GetMLModelInput struct {
 	Verbose bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMLModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLModelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.GetMLModelInput_MLModelId, *v.MLModelId)
+	}
+	if v.Verbose != false {
+		s.WriteBool(schemas.GetMLModelInput_Verbose, v.Verbose)
+	}
 }
 
 // Represents the output of a GetMLModel operation, and provides detailed
@@ -196,13 +213,159 @@ type GetMLModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLModelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeTime != nil {
+		s.WriteInt64(schemas.GetMLModelOutput_ComputeTime, *v.ComputeTime)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetMLModelOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedByIamUser != nil {
+		s.WriteString(schemas.GetMLModelOutput_CreatedByIamUser, *v.CreatedByIamUser)
+	}
+	if v.EndpointInfo != nil {
+		s.WriteStruct(schemas.GetMLModelOutput_EndpointInfo)
+		v.EndpointInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FinishedAt != nil {
+		s.WriteTime(schemas.GetMLModelOutput_FinishedAt, *v.FinishedAt)
+	}
+	if v.InputDataLocationS3 != nil {
+		s.WriteString(schemas.GetMLModelOutput_InputDataLocationS3, *v.InputDataLocationS3)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetMLModelOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.GetMLModelOutput_LogUri, *v.LogUri)
+	}
+	if v.MLModelId != nil {
+		s.WriteString(schemas.GetMLModelOutput_MLModelId, *v.MLModelId)
+	}
+	if v.MLModelType != "" {
+		s.WriteString(schemas.GetMLModelOutput_MLModelType, string(v.MLModelType))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetMLModelOutput_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetMLModelOutput_Name, *v.Name)
+	}
+	if v.Recipe != nil {
+		s.WriteString(schemas.GetMLModelOutput_Recipe, *v.Recipe)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.GetMLModelOutput_Schema, *v.Schema)
+	}
+	if v.ScoreThreshold != nil {
+		s.WriteFloat32(schemas.GetMLModelOutput_ScoreThreshold, *v.ScoreThreshold)
+	}
+	if v.ScoreThresholdLastUpdatedAt != nil {
+		s.WriteTime(schemas.GetMLModelOutput_ScoreThresholdLastUpdatedAt, *v.ScoreThresholdLastUpdatedAt)
+	}
+	if v.SizeInBytes != nil {
+		s.WriteInt64(schemas.GetMLModelOutput_SizeInBytes, *v.SizeInBytes)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetMLModelOutput_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetMLModelOutput_Status, string(v.Status))
+	}
+	if v.TrainingDataSourceId != nil {
+		s.WriteString(schemas.GetMLModelOutput_TrainingDataSourceId, *v.TrainingDataSourceId)
+	}
+	serializeTrainingParameters(s, schemas.GetMLModelOutput_TrainingParameters, v.TrainingParameters)
+}
+func (v *GetMLModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMLModelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMLModelOutput_ComputeTime:
+			v.ComputeTime = new(int64)
+			return d.ReadInt64(schemas.GetMLModelOutput_ComputeTime, v.ComputeTime)
+		case schemas.GetMLModelOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMLModelOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetMLModelOutput_CreatedByIamUser:
+			v.CreatedByIamUser = new(string)
+			return d.ReadString(schemas.GetMLModelOutput_CreatedByIamUser, v.CreatedByIamUser)
+		case schemas.GetMLModelOutput_EndpointInfo:
+			v.EndpointInfo = &types.RealtimeEndpointInfo{}
+			return v.EndpointInfo.Deserialize(d)
+		case schemas.GetMLModelOutput_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMLModelOutput_FinishedAt, v.FinishedAt)
+		case schemas.GetMLModelOutput_InputDataLocationS3:
+			v.InputDataLocationS3 = new(string)
+			return d.ReadString(schemas.GetMLModelOutput_InputDataLocationS3, v.InputDataLocationS3)
+		case schemas.GetMLModelOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMLModelOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetMLModelOutput_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.GetMLModelOutput_LogUri, v.LogUri)
+		case schemas.GetMLModelOutput_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.GetMLModelOutput_MLModelId, v.MLModelId)
+		case schemas.GetMLModelOutput_MLModelType:
+			var ev string
+			if err := d.ReadString(schemas.GetMLModelOutput_MLModelType, &ev); err != nil {
+				return err
+			}
+			v.MLModelType = types.MLModelType(ev)
+			return nil
+		case schemas.GetMLModelOutput_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetMLModelOutput_Message, v.Message)
+		case schemas.GetMLModelOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetMLModelOutput_Name, v.Name)
+		case schemas.GetMLModelOutput_Recipe:
+			v.Recipe = new(string)
+			return d.ReadString(schemas.GetMLModelOutput_Recipe, v.Recipe)
+		case schemas.GetMLModelOutput_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.GetMLModelOutput_Schema, v.Schema)
+		case schemas.GetMLModelOutput_ScoreThreshold:
+			v.ScoreThreshold = new(float32)
+			return d.ReadFloat32(schemas.GetMLModelOutput_ScoreThreshold, v.ScoreThreshold)
+		case schemas.GetMLModelOutput_ScoreThresholdLastUpdatedAt:
+			v.ScoreThresholdLastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMLModelOutput_ScoreThresholdLastUpdatedAt, v.ScoreThresholdLastUpdatedAt)
+		case schemas.GetMLModelOutput_SizeInBytes:
+			v.SizeInBytes = new(int64)
+			return d.ReadInt64(schemas.GetMLModelOutput_SizeInBytes, v.SizeInBytes)
+		case schemas.GetMLModelOutput_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMLModelOutput_StartedAt, v.StartedAt)
+		case schemas.GetMLModelOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetMLModelOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EntityStatus(ev)
+			return nil
+		case schemas.GetMLModelOutput_TrainingDataSourceId:
+			v.TrainingDataSourceId = new(string)
+			return d.ReadString(schemas.GetMLModelOutput_TrainingDataSourceId, v.TrainingDataSourceId)
+		case schemas.GetMLModelOutput_TrainingParameters:
+			return deserializeTrainingParameters(d, schemas.GetMLModelOutput_TrainingParameters, &v.TrainingParameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMLModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLModel, schemas.GetMLModelInput, schemas.GetMLModelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMLModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLModel, schemas.GetMLModelInput, schemas.GetMLModelOutput), output: &GetMLModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

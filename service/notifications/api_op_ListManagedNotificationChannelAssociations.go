@@ -5,7 +5,9 @@ package notifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListManagedNotificationChannelAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationChannelAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationChannelAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationChannelAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedNotificationConfigurationArn != nil {
+		s.WriteString(schemas.ListManagedNotificationChannelAssociationsRequest_managedNotificationConfigurationArn, *v.ManagedNotificationConfigurationArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedNotificationChannelAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationChannelAssociationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListManagedNotificationChannelAssociationsOutput struct {
 
 	// A list that contains the following information about a channel association.
@@ -60,13 +80,35 @@ type ListManagedNotificationChannelAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationChannelAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationChannelAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationChannelAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedNotificationChannelAssociations(s, schemas.ListManagedNotificationChannelAssociationsResponse_channelAssociations, v.ChannelAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationChannelAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedNotificationChannelAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedNotificationChannelAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedNotificationChannelAssociationsResponse_channelAssociations:
+			return deserializeManagedNotificationChannelAssociations(d, schemas.ListManagedNotificationChannelAssociationsResponse_channelAssociations, &v.ChannelAssociations)
+		case schemas.ListManagedNotificationChannelAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedNotificationChannelAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedNotificationChannelAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedNotificationChannelAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationChannelAssociations, schemas.ListManagedNotificationChannelAssociationsRequest, schemas.ListManagedNotificationChannelAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedNotificationChannelAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationChannelAssociations, schemas.ListManagedNotificationChannelAssociationsRequest, schemas.ListManagedNotificationChannelAssociationsResponse), output: &ListManagedNotificationChannelAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

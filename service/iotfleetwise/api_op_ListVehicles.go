@@ -5,7 +5,9 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,56 @@ type ListVehiclesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVehiclesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVehiclesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVehiclesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeattributeNamesList(s, schemas.ListVehiclesRequest_attributeNames, v.AttributeNames)
+	serializeattributeValuesList(s, schemas.ListVehiclesRequest_attributeValues, v.AttributeValues)
+	if v.ListResponseScope != "" {
+		s.WriteString(schemas.ListVehiclesRequest_listResponseScope, string(v.ListResponseScope))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVehiclesRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelManifestArn != nil {
+		s.WriteString(schemas.ListVehiclesRequest_modelManifestArn, *v.ModelManifestArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVehiclesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListVehiclesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVehiclesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVehiclesRequest_attributeNames:
+			return deserializeattributeNamesList(d, schemas.ListVehiclesRequest_attributeNames, &v.AttributeNames)
+		case schemas.ListVehiclesRequest_attributeValues:
+			return deserializeattributeValuesList(d, schemas.ListVehiclesRequest_attributeValues, &v.AttributeValues)
+		case schemas.ListVehiclesRequest_listResponseScope:
+			var ev string
+			if err := d.ReadString(schemas.ListVehiclesRequest_listResponseScope, &ev); err != nil {
+				return err
+			}
+			v.ListResponseScope = types.ListResponseScope(ev)
+			return nil
+		case schemas.ListVehiclesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListVehiclesRequest_maxResults, v.MaxResults)
+		case schemas.ListVehiclesRequest_modelManifestArn:
+			v.ModelManifestArn = new(string)
+			return d.ReadString(schemas.ListVehiclesRequest_modelManifestArn, v.ModelManifestArn)
+		case schemas.ListVehiclesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVehiclesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListVehiclesOutput struct {
 
 	//  The token to retrieve the next set of results, or null if there are no more
@@ -94,13 +146,35 @@ type ListVehiclesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVehiclesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVehiclesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVehiclesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVehiclesResponse_nextToken, *v.NextToken)
+	}
+	serializevehicleSummaries(s, schemas.ListVehiclesResponse_vehicleSummaries, v.VehicleSummaries)
+}
+func (v *ListVehiclesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVehiclesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVehiclesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVehiclesResponse_nextToken, v.NextToken)
+		case schemas.ListVehiclesResponse_vehicleSummaries:
+			return deserializevehicleSummaries(d, schemas.ListVehiclesResponse_vehicleSummaries, &v.VehicleSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVehiclesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListVehicles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVehicles, schemas.ListVehiclesRequest, schemas.ListVehiclesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListVehicles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVehicles, schemas.ListVehiclesRequest, schemas.ListVehiclesResponse), output: &ListVehiclesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

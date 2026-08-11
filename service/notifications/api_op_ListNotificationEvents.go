@@ -5,7 +5,9 @@ package notifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -78,6 +80,42 @@ type ListNotificationEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateNotificationEventArn != nil {
+		s.WriteString(schemas.ListNotificationEventsRequest_aggregateNotificationEventArn, *v.AggregateNotificationEventArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListNotificationEventsRequest_endTime, *v.EndTime)
+	}
+	if v.IncludeChildEvents != nil {
+		s.WriteBool(schemas.ListNotificationEventsRequest_includeChildEvents, *v.IncludeChildEvents)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.ListNotificationEventsRequest_locale, string(v.Locale))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNotificationEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.ListNotificationEventsRequest_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.ListNotificationEventsRequest_source, *v.Source)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListNotificationEventsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListNotificationEventsOutput struct {
 
 	// The list of notification events.
@@ -95,13 +133,35 @@ type ListNotificationEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationEventsResponse_nextToken, *v.NextToken)
+	}
+	serializeNotificationEvents(s, schemas.ListNotificationEventsResponse_notificationEvents, v.NotificationEvents)
+}
+func (v *ListNotificationEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotificationEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotificationEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNotificationEventsResponse_nextToken, v.NextToken)
+		case schemas.ListNotificationEventsResponse_notificationEvents:
+			return deserializeNotificationEvents(d, schemas.ListNotificationEventsResponse_notificationEvents, &v.NotificationEvents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotificationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNotificationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationEvents, schemas.ListNotificationEventsRequest, schemas.ListNotificationEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNotificationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationEvents, schemas.ListNotificationEventsRequest, schemas.ListNotificationEventsResponse), output: &ListNotificationEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

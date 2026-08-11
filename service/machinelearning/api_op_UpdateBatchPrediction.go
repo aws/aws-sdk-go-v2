@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type UpdateBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBatchPredictionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBatchPredictionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBatchPredictionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.UpdateBatchPredictionInput_BatchPredictionId, *v.BatchPredictionId)
+	}
+	if v.BatchPredictionName != nil {
+		s.WriteString(schemas.UpdateBatchPredictionInput_BatchPredictionName, *v.BatchPredictionName)
+	}
+}
+
 // Represents the output of an UpdateBatchPrediction operation.
 //
 // You can see the updated content by using the GetBatchPrediction operation.
@@ -56,13 +73,32 @@ type UpdateBatchPredictionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBatchPredictionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBatchPredictionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBatchPredictionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.UpdateBatchPredictionOutput_BatchPredictionId, *v.BatchPredictionId)
+	}
+}
+func (v *UpdateBatchPredictionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBatchPredictionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBatchPredictionOutput_BatchPredictionId:
+			v.BatchPredictionId = new(string)
+			return d.ReadString(schemas.UpdateBatchPredictionOutput_BatchPredictionId, v.BatchPredictionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBatchPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBatchPrediction, schemas.UpdateBatchPredictionInput, schemas.UpdateBatchPredictionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateBatchPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBatchPrediction, schemas.UpdateBatchPredictionInput, schemas.UpdateBatchPredictionOutput), output: &UpdateBatchPredictionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

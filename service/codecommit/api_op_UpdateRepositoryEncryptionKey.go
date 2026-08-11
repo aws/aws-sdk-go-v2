@@ -4,6 +4,8 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type UpdateRepositoryEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRepositoryEncryptionKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRepositoryEncryptionKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRepositoryEncryptionKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateRepositoryEncryptionKeyInput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.UpdateRepositoryEncryptionKeyInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 type UpdateRepositoryEncryptionKeyOutput struct {
 
 	// The ID of the encryption key.
@@ -63,13 +80,44 @@ type UpdateRepositoryEncryptionKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRepositoryEncryptionKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRepositoryEncryptionKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRepositoryEncryptionKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateRepositoryEncryptionKeyOutput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.OriginalKmsKeyId != nil {
+		s.WriteString(schemas.UpdateRepositoryEncryptionKeyOutput_originalKmsKeyId, *v.OriginalKmsKeyId)
+	}
+	if v.RepositoryId != nil {
+		s.WriteString(schemas.UpdateRepositoryEncryptionKeyOutput_repositoryId, *v.RepositoryId)
+	}
+}
+func (v *UpdateRepositoryEncryptionKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRepositoryEncryptionKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRepositoryEncryptionKeyOutput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.UpdateRepositoryEncryptionKeyOutput_kmsKeyId, v.KmsKeyId)
+		case schemas.UpdateRepositoryEncryptionKeyOutput_originalKmsKeyId:
+			v.OriginalKmsKeyId = new(string)
+			return d.ReadString(schemas.UpdateRepositoryEncryptionKeyOutput_originalKmsKeyId, v.OriginalKmsKeyId)
+		case schemas.UpdateRepositoryEncryptionKeyOutput_repositoryId:
+			v.RepositoryId = new(string)
+			return d.ReadString(schemas.UpdateRepositoryEncryptionKeyOutput_repositoryId, v.RepositoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRepositoryEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRepositoryEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRepositoryEncryptionKey, schemas.UpdateRepositoryEncryptionKeyInput, schemas.UpdateRepositoryEncryptionKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRepositoryEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRepositoryEncryptionKey, schemas.UpdateRepositoryEncryptionKeyInput, schemas.UpdateRepositoryEncryptionKeyOutput), output: &UpdateRepositoryEncryptionKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,21 @@ type GetDataSourceInput struct {
 	Verbose bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetDataSourceInput_DataSourceId, *v.DataSourceId)
+	}
+	if v.Verbose != false {
+		s.WriteBool(schemas.GetDataSourceInput_Verbose, v.Verbose)
+	}
 }
 
 // Represents the output of a GetDataSource operation and describes a DataSource .
@@ -147,13 +164,153 @@ type GetDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeStatistics != false {
+		s.WriteBool(schemas.GetDataSourceOutput_ComputeStatistics, v.ComputeStatistics)
+	}
+	if v.ComputeTime != nil {
+		s.WriteInt64(schemas.GetDataSourceOutput_ComputeTime, *v.ComputeTime)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetDataSourceOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedByIamUser != nil {
+		s.WriteString(schemas.GetDataSourceOutput_CreatedByIamUser, *v.CreatedByIamUser)
+	}
+	if v.DataLocationS3 != nil {
+		s.WriteString(schemas.GetDataSourceOutput_DataLocationS3, *v.DataLocationS3)
+	}
+	if v.DataRearrangement != nil {
+		s.WriteString(schemas.GetDataSourceOutput_DataRearrangement, *v.DataRearrangement)
+	}
+	if v.DataSizeInBytes != nil {
+		s.WriteInt64(schemas.GetDataSourceOutput_DataSizeInBytes, *v.DataSizeInBytes)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetDataSourceOutput_DataSourceId, *v.DataSourceId)
+	}
+	if v.DataSourceSchema != nil {
+		s.WriteString(schemas.GetDataSourceOutput_DataSourceSchema, *v.DataSourceSchema)
+	}
+	if v.FinishedAt != nil {
+		s.WriteTime(schemas.GetDataSourceOutput_FinishedAt, *v.FinishedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetDataSourceOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.GetDataSourceOutput_LogUri, *v.LogUri)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetDataSourceOutput_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDataSourceOutput_Name, *v.Name)
+	}
+	if v.NumberOfFiles != nil {
+		s.WriteInt64(schemas.GetDataSourceOutput_NumberOfFiles, *v.NumberOfFiles)
+	}
+	if v.RDSMetadata != nil {
+		s.WriteStruct(schemas.GetDataSourceOutput_RDSMetadata)
+		v.RDSMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftMetadata != nil {
+		s.WriteStruct(schemas.GetDataSourceOutput_RedshiftMetadata)
+		v.RedshiftMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.GetDataSourceOutput_RoleARN, *v.RoleARN)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetDataSourceOutput_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDataSourceOutput_Status, string(v.Status))
+	}
+}
+func (v *GetDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataSourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataSourceOutput_ComputeStatistics:
+			return d.ReadBool(schemas.GetDataSourceOutput_ComputeStatistics, &v.ComputeStatistics)
+		case schemas.GetDataSourceOutput_ComputeTime:
+			v.ComputeTime = new(int64)
+			return d.ReadInt64(schemas.GetDataSourceOutput_ComputeTime, v.ComputeTime)
+		case schemas.GetDataSourceOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataSourceOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetDataSourceOutput_CreatedByIamUser:
+			v.CreatedByIamUser = new(string)
+			return d.ReadString(schemas.GetDataSourceOutput_CreatedByIamUser, v.CreatedByIamUser)
+		case schemas.GetDataSourceOutput_DataLocationS3:
+			v.DataLocationS3 = new(string)
+			return d.ReadString(schemas.GetDataSourceOutput_DataLocationS3, v.DataLocationS3)
+		case schemas.GetDataSourceOutput_DataRearrangement:
+			v.DataRearrangement = new(string)
+			return d.ReadString(schemas.GetDataSourceOutput_DataRearrangement, v.DataRearrangement)
+		case schemas.GetDataSourceOutput_DataSizeInBytes:
+			v.DataSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.GetDataSourceOutput_DataSizeInBytes, v.DataSizeInBytes)
+		case schemas.GetDataSourceOutput_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.GetDataSourceOutput_DataSourceId, v.DataSourceId)
+		case schemas.GetDataSourceOutput_DataSourceSchema:
+			v.DataSourceSchema = new(string)
+			return d.ReadString(schemas.GetDataSourceOutput_DataSourceSchema, v.DataSourceSchema)
+		case schemas.GetDataSourceOutput_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataSourceOutput_FinishedAt, v.FinishedAt)
+		case schemas.GetDataSourceOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataSourceOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetDataSourceOutput_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.GetDataSourceOutput_LogUri, v.LogUri)
+		case schemas.GetDataSourceOutput_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetDataSourceOutput_Message, v.Message)
+		case schemas.GetDataSourceOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDataSourceOutput_Name, v.Name)
+		case schemas.GetDataSourceOutput_NumberOfFiles:
+			v.NumberOfFiles = new(int64)
+			return d.ReadInt64(schemas.GetDataSourceOutput_NumberOfFiles, v.NumberOfFiles)
+		case schemas.GetDataSourceOutput_RDSMetadata:
+			v.RDSMetadata = &types.RDSMetadata{}
+			return v.RDSMetadata.Deserialize(d)
+		case schemas.GetDataSourceOutput_RedshiftMetadata:
+			v.RedshiftMetadata = &types.RedshiftMetadata{}
+			return v.RedshiftMetadata.Deserialize(d)
+		case schemas.GetDataSourceOutput_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.GetDataSourceOutput_RoleARN, v.RoleARN)
+		case schemas.GetDataSourceOutput_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataSourceOutput_StartedAt, v.StartedAt)
+		case schemas.GetDataSourceOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDataSourceOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EntityStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSource, schemas.GetDataSourceInput, schemas.GetDataSourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSource, schemas.GetDataSourceInput, schemas.GetDataSourceOutput), output: &GetDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

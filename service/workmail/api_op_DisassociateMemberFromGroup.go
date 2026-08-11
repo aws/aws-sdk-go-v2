@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type DisassociateMemberFromGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberFromGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberFromGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberFromGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.DisassociateMemberFromGroupRequest_GroupId, *v.GroupId)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.DisassociateMemberFromGroupRequest_MemberId, *v.MemberId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DisassociateMemberFromGroupRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DisassociateMemberFromGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +89,26 @@ type DisassociateMemberFromGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberFromGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberFromGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberFromGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateMemberFromGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateMemberFromGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateMemberFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateMemberFromGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMemberFromGroup, schemas.DisassociateMemberFromGroupRequest, schemas.DisassociateMemberFromGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateMemberFromGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMemberFromGroup, schemas.DisassociateMemberFromGroupRequest, schemas.DisassociateMemberFromGroupResponse), output: &DisassociateMemberFromGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

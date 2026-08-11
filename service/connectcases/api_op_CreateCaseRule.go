@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type CreateCaseRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCaseRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCaseRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCaseRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCaseRuleRequest_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateCaseRuleRequest_domainId, *v.DomainId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCaseRuleRequest_name, *v.Name)
+	}
+	serializeCaseRuleDetails(s, schemas.CreateCaseRuleRequest_rule, v.Rule)
+}
+
 type CreateCaseRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of a case rule.
@@ -69,13 +90,38 @@ type CreateCaseRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCaseRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCaseRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCaseRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseRuleArn != nil {
+		s.WriteString(schemas.CreateCaseRuleResponse_caseRuleArn, *v.CaseRuleArn)
+	}
+	if v.CaseRuleId != nil {
+		s.WriteString(schemas.CreateCaseRuleResponse_caseRuleId, *v.CaseRuleId)
+	}
+}
+func (v *CreateCaseRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCaseRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCaseRuleResponse_caseRuleArn:
+			v.CaseRuleArn = new(string)
+			return d.ReadString(schemas.CreateCaseRuleResponse_caseRuleArn, v.CaseRuleArn)
+		case schemas.CreateCaseRuleResponse_caseRuleId:
+			v.CaseRuleId = new(string)
+			return d.ReadString(schemas.CreateCaseRuleResponse_caseRuleId, v.CaseRuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCaseRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCaseRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCaseRule, schemas.CreateCaseRuleRequest, schemas.CreateCaseRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCaseRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCaseRule, schemas.CreateCaseRuleRequest, schemas.CreateCaseRuleResponse), output: &CreateCaseRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

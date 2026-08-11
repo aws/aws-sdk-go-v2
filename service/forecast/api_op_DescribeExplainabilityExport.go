@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeExplainabilityExportInput struct {
 	ExplainabilityExportArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeExplainabilityExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExplainabilityExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExplainabilityExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplainabilityExportArn != nil {
+		s.WriteString(schemas.DescribeExplainabilityExportRequest_ExplainabilityExportArn, *v.ExplainabilityExportArn)
+	}
 }
 
 type DescribeExplainabilityExportOutput struct {
@@ -91,13 +105,82 @@ type DescribeExplainabilityExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExplainabilityExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExplainabilityExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExplainabilityExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeExplainabilityExportResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.DescribeExplainabilityExportResponse_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExplainabilityArn != nil {
+		s.WriteString(schemas.DescribeExplainabilityExportResponse_ExplainabilityArn, *v.ExplainabilityArn)
+	}
+	if v.ExplainabilityExportArn != nil {
+		s.WriteString(schemas.DescribeExplainabilityExportResponse_ExplainabilityExportArn, *v.ExplainabilityExportArn)
+	}
+	if v.ExplainabilityExportName != nil {
+		s.WriteString(schemas.DescribeExplainabilityExportResponse_ExplainabilityExportName, *v.ExplainabilityExportName)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.DescribeExplainabilityExportResponse_Format, *v.Format)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeExplainabilityExportResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeExplainabilityExportResponse_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeExplainabilityExportResponse_Status, *v.Status)
+	}
+}
+func (v *DescribeExplainabilityExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExplainabilityExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExplainabilityExportResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeExplainabilityExportResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeExplainabilityExportResponse_Destination:
+			v.Destination = &types.DataDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.DescribeExplainabilityExportResponse_ExplainabilityArn:
+			v.ExplainabilityArn = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityExportResponse_ExplainabilityArn, v.ExplainabilityArn)
+		case schemas.DescribeExplainabilityExportResponse_ExplainabilityExportArn:
+			v.ExplainabilityExportArn = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityExportResponse_ExplainabilityExportArn, v.ExplainabilityExportArn)
+		case schemas.DescribeExplainabilityExportResponse_ExplainabilityExportName:
+			v.ExplainabilityExportName = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityExportResponse_ExplainabilityExportName, v.ExplainabilityExportName)
+		case schemas.DescribeExplainabilityExportResponse_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityExportResponse_Format, v.Format)
+		case schemas.DescribeExplainabilityExportResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeExplainabilityExportResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeExplainabilityExportResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityExportResponse_Message, v.Message)
+		case schemas.DescribeExplainabilityExportResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityExportResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExplainabilityExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExplainabilityExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExplainabilityExport, schemas.DescribeExplainabilityExportRequest, schemas.DescribeExplainabilityExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExplainabilityExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExplainabilityExport, schemas.DescribeExplainabilityExportRequest, schemas.DescribeExplainabilityExportResponse), output: &DescribeExplainabilityExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

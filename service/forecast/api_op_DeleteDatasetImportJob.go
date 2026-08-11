@@ -4,6 +4,8 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteDatasetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDatasetImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDatasetImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDatasetImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetImportJobArn != nil {
+		s.WriteString(schemas.DeleteDatasetImportJobRequest_DatasetImportJobArn, *v.DatasetImportJobArn)
+	}
+}
+
 type DeleteDatasetImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteDatasetImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDatasetImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDatasetImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDatasetImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDatasetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDatasetImportJob, schemas.DeleteDatasetImportJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDatasetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDatasetImportJob, schemas.DeleteDatasetImportJobRequest, nil), output: &DeleteDatasetImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

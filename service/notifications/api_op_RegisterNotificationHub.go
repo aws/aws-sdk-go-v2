@@ -4,7 +4,9 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type RegisterNotificationHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterNotificationHubInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterNotificationHubRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterNotificationHubInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationHubRegion != nil {
+		s.WriteString(schemas.RegisterNotificationHubRequest_notificationHubRegion, *v.NotificationHubRegion)
+	}
+}
+
 type RegisterNotificationHubOutput struct {
 
 	// The date the resource was created.
@@ -65,13 +79,52 @@ type RegisterNotificationHubOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterNotificationHubOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterNotificationHubResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterNotificationHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.RegisterNotificationHubResponse_creationTime, *v.CreationTime)
+	}
+	if v.LastActivationTime != nil {
+		s.WriteTime(schemas.RegisterNotificationHubResponse_lastActivationTime, *v.LastActivationTime)
+	}
+	if v.NotificationHubRegion != nil {
+		s.WriteString(schemas.RegisterNotificationHubResponse_notificationHubRegion, *v.NotificationHubRegion)
+	}
+	if v.StatusSummary != nil {
+		s.WriteStruct(schemas.RegisterNotificationHubResponse_statusSummary)
+		v.StatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterNotificationHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterNotificationHubResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterNotificationHubResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.RegisterNotificationHubResponse_creationTime, v.CreationTime)
+		case schemas.RegisterNotificationHubResponse_lastActivationTime:
+			v.LastActivationTime = new(time.Time)
+			return d.ReadTime(schemas.RegisterNotificationHubResponse_lastActivationTime, v.LastActivationTime)
+		case schemas.RegisterNotificationHubResponse_notificationHubRegion:
+			v.NotificationHubRegion = new(string)
+			return d.ReadString(schemas.RegisterNotificationHubResponse_notificationHubRegion, v.NotificationHubRegion)
+		case schemas.RegisterNotificationHubResponse_statusSummary:
+			v.StatusSummary = &types.NotificationHubStatusSummary{}
+			return v.StatusSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterNotificationHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterNotificationHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterNotificationHub, schemas.RegisterNotificationHubRequest, schemas.RegisterNotificationHubResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterNotificationHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterNotificationHub, schemas.RegisterNotificationHubRequest, schemas.RegisterNotificationHubResponse), output: &RegisterNotificationHubOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

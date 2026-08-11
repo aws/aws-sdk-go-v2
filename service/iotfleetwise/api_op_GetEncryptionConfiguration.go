@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -28,6 +30,15 @@ func (c *Client) GetEncryptionConfiguration(ctx context.Context, params *GetEncr
 
 type GetEncryptionConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetEncryptionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEncryptionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEncryptionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetEncryptionConfigurationOutput struct {
@@ -66,13 +77,70 @@ type GetEncryptionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEncryptionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEncryptionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEncryptionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetEncryptionConfigurationResponse_creationTime, *v.CreationTime)
+	}
+	if v.EncryptionStatus != "" {
+		s.WriteString(schemas.GetEncryptionConfigurationResponse_encryptionStatus, string(v.EncryptionStatus))
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.GetEncryptionConfigurationResponse_encryptionType, string(v.EncryptionType))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetEncryptionConfigurationResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.GetEncryptionConfigurationResponse_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetEncryptionConfigurationResponse_lastModificationTime, *v.LastModificationTime)
+	}
+}
+func (v *GetEncryptionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEncryptionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEncryptionConfigurationResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetEncryptionConfigurationResponse_creationTime, v.CreationTime)
+		case schemas.GetEncryptionConfigurationResponse_encryptionStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetEncryptionConfigurationResponse_encryptionStatus, &ev); err != nil {
+				return err
+			}
+			v.EncryptionStatus = types.EncryptionStatus(ev)
+			return nil
+		case schemas.GetEncryptionConfigurationResponse_encryptionType:
+			var ev string
+			if err := d.ReadString(schemas.GetEncryptionConfigurationResponse_encryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = types.EncryptionType(ev)
+			return nil
+		case schemas.GetEncryptionConfigurationResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetEncryptionConfigurationResponse_errorMessage, v.ErrorMessage)
+		case schemas.GetEncryptionConfigurationResponse_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.GetEncryptionConfigurationResponse_kmsKeyId, v.KmsKeyId)
+		case schemas.GetEncryptionConfigurationResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetEncryptionConfigurationResponse_lastModificationTime, v.LastModificationTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEncryptionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEncryptionConfiguration, schemas.GetEncryptionConfigurationRequest, schemas.GetEncryptionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetEncryptionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEncryptionConfiguration, schemas.GetEncryptionConfigurationRequest, schemas.GetEncryptionConfigurationResponse), output: &GetEncryptionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

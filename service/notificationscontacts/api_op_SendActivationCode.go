@@ -4,6 +4,8 @@ package notificationscontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notificationscontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type SendActivationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendActivationCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendActivationCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendActivationCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SendActivationCodeRequest_arn, *v.Arn)
+	}
+}
+
 type SendActivationCodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type SendActivationCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendActivationCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendActivationCodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendActivationCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendActivationCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendActivationCodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendActivationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendActivationCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendActivationCode, schemas.SendActivationCodeRequest, schemas.SendActivationCodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendActivationCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendActivationCode, schemas.SendActivationCodeRequest, schemas.SendActivationCodeResponse), output: &SendActivationCodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

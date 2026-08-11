@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,19 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UntagResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+	serializeKeyList(s, schemas.UntagResourceRequest_TagKeys, v.TagKeys)
+}
+
 type UntagResourceOutput struct {
 
 	// The list of tags removed.
@@ -69,13 +84,29 @@ type UntagResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagList(s, schemas.UntagResourceResponse_TagList, v.TagList)
+}
+func (v *UntagResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UntagResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UntagResourceResponse_TagList:
+			return deserializeTagList(d, schemas.UntagResourceResponse_TagList, &v.TagList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUntagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceRequest, schemas.UntagResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUntagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceRequest, schemas.UntagResourceResponse), output: &UntagResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

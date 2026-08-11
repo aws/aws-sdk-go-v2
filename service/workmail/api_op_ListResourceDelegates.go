@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type ListResourceDelegatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceDelegatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceDelegatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceDelegatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceDelegatesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceDelegatesRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListResourceDelegatesRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ListResourceDelegatesRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type ListResourceDelegatesOutput struct {
 
 	// One page of the resource's delegates.
@@ -73,13 +96,35 @@ type ListResourceDelegatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceDelegatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceDelegatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceDelegatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceDelegates(s, schemas.ListResourceDelegatesResponse_Delegates, v.Delegates)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceDelegatesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListResourceDelegatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceDelegatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceDelegatesResponse_Delegates:
+			return deserializeResourceDelegates(d, schemas.ListResourceDelegatesResponse_Delegates, &v.Delegates)
+		case schemas.ListResourceDelegatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceDelegatesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceDelegatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceDelegates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceDelegates, schemas.ListResourceDelegatesRequest, schemas.ListResourceDelegatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourceDelegates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceDelegates, schemas.ListResourceDelegatesRequest, schemas.ListResourceDelegatesResponse), output: &ListResourceDelegatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

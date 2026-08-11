@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,28 @@ type DeleteMeshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMeshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMeshInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMeshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DeleteMeshInput_meshName, *v.MeshName)
+	}
+}
+func (v *DeleteMeshInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMeshInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMeshInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DeleteMeshInput_meshName, v.MeshName)
+		}
+		return nil
+	})
+}
+
 type DeleteMeshOutput struct {
 
 	// The service mesh that was deleted.
@@ -50,13 +74,34 @@ type DeleteMeshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMeshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMeshOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMeshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mesh != nil {
+		s.WriteStruct(schemas.DeleteMeshOutput_mesh)
+		v.Mesh.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteMeshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMeshOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMeshOutput_mesh:
+			v.Mesh = &types.MeshData{}
+			return v.Mesh.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMesh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMesh, schemas.DeleteMeshInput, schemas.DeleteMeshOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMesh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMesh, schemas.DeleteMeshInput, schemas.DeleteMeshOutput), output: &DeleteMeshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

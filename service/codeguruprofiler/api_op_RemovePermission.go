@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,44 @@ type RemovePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemovePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemovePermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemovePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionGroup != "" {
+		s.WriteString(schemas.RemovePermissionRequest_actionGroup, string(v.ActionGroup))
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.RemovePermissionRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.RemovePermissionRequest_revisionId, *v.RevisionId)
+	}
+}
+func (v *RemovePermissionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemovePermissionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemovePermissionRequest_actionGroup:
+			var ev string
+			if err := d.ReadString(schemas.RemovePermissionRequest_actionGroup, &ev); err != nil {
+				return err
+			}
+			v.ActionGroup = types.ActionGroup(ev)
+			return nil
+		case schemas.RemovePermissionRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.RemovePermissionRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.RemovePermissionRequest_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.RemovePermissionRequest_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 // The structure representing the removePermissionResponse .
 type RemovePermissionOutput struct {
 
@@ -80,13 +120,38 @@ type RemovePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemovePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemovePermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemovePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.RemovePermissionResponse_policy, *v.Policy)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.RemovePermissionResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *RemovePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemovePermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemovePermissionResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.RemovePermissionResponse_policy, v.Policy)
+		case schemas.RemovePermissionResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.RemovePermissionResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemovePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemovePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemovePermission, schemas.RemovePermissionRequest, schemas.RemovePermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemovePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemovePermission, schemas.RemovePermissionRequest, schemas.RemovePermissionResponse), output: &RemovePermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

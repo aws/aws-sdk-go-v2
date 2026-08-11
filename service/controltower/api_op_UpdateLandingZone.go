@@ -5,7 +5,10 @@ package controltower
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/document"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +57,25 @@ type UpdateLandingZoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLandingZoneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLandingZoneInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLandingZoneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LandingZoneIdentifier != nil {
+		s.WriteString(schemas.UpdateLandingZoneInput_landingZoneIdentifier, *v.LandingZoneIdentifier)
+	}
+	if v.Manifest != nil {
+		s.WriteDocument(schemas.UpdateLandingZoneInput_manifest, &smithydocument.Opaque{Value: v.Manifest})
+	}
+	serializeRemediationTypes(s, schemas.UpdateLandingZoneInput_remediationTypes, v.RemediationTypes)
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateLandingZoneInput_version, *v.Version)
+	}
+}
+
 type UpdateLandingZoneOutput struct {
 
 	// A unique identifier assigned to a UpdateLandingZone operation. You can use this
@@ -69,13 +91,32 @@ type UpdateLandingZoneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLandingZoneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLandingZoneOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLandingZoneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.UpdateLandingZoneOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *UpdateLandingZoneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLandingZoneOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLandingZoneOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.UpdateLandingZoneOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLandingZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLandingZone{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLandingZone, schemas.UpdateLandingZoneInput, schemas.UpdateLandingZoneOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLandingZone{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLandingZone, schemas.UpdateLandingZoneInput, schemas.UpdateLandingZoneOutput), output: &UpdateLandingZoneOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,16 @@ type DeleteApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationIdsList(s, schemas.DeleteApplicationsRequest_configurationIds, v.ConfigurationIds)
+}
+
 type DeleteApplicationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +52,26 @@ type DeleteApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApplicationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplications, schemas.DeleteApplicationsRequest, schemas.DeleteApplicationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplications, schemas.DeleteApplicationsRequest, schemas.DeleteApplicationsResponse), output: &DeleteApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

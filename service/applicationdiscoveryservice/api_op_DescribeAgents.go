@@ -5,7 +5,9 @@ package applicationdiscoveryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,23 @@ type DescribeAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentIds(s, schemas.DescribeAgentsRequest_agentIds, v.AgentIds)
+	serializeFilters(s, schemas.DescribeAgentsRequest_filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeAgentsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAgentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeAgentsOutput struct {
 
 	// Lists agents or the collector by ID or lists all agents/collectors associated
@@ -74,13 +93,35 @@ type DescribeAgentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentsInfo(s, schemas.DescribeAgentsResponse_agentsInfo, v.AgentsInfo)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAgentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAgentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAgentsResponse_agentsInfo:
+			return deserializeAgentsInfo(d, schemas.DescribeAgentsResponse_agentsInfo, &v.AgentsInfo)
+		case schemas.DescribeAgentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAgentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgents, schemas.DescribeAgentsRequest, schemas.DescribeAgentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgents, schemas.DescribeAgentsRequest, schemas.DescribeAgentsResponse), output: &DescribeAgentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

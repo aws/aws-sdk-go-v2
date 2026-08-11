@@ -4,6 +4,8 @@ package ssmsap
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type DeregisterApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeregisterApplicationInput_ApplicationId, *v.ApplicationId)
+	}
+}
+func (v *DeregisterApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterApplicationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterApplicationInput_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.DeregisterApplicationInput_ApplicationId, v.ApplicationId)
+		}
+		return nil
+	})
+}
+
 type DeregisterApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +65,26 @@ type DeregisterApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterApplicationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterApplication, schemas.DeregisterApplicationInput, schemas.DeregisterApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterApplication, schemas.DeregisterApplicationInput, schemas.DeregisterApplicationOutput), output: &DeregisterApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

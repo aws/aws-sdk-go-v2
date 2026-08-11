@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,18 @@ type DeletePoolInput struct {
 	PoolId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeletePoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolId != nil {
+		s.WriteString(schemas.DeletePoolRequest_PoolId, *v.PoolId)
+	}
 }
 
 type DeletePoolOutput struct {
@@ -104,13 +118,97 @@ type DeletePoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePoolResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeletePoolResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.DeletePoolResult_MessageType, string(v.MessageType))
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.DeletePoolResult_OptOutListName, *v.OptOutListName)
+	}
+	if v.PoolArn != nil {
+		s.WriteString(schemas.DeletePoolResult_PoolArn, *v.PoolArn)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.DeletePoolResult_PoolId, *v.PoolId)
+	}
+	if v.SelfManagedOptOutsEnabled != false {
+		s.WriteBool(schemas.DeletePoolResult_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
+	}
+	if v.SharedRoutesEnabled != false {
+		s.WriteBool(schemas.DeletePoolResult_SharedRoutesEnabled, v.SharedRoutesEnabled)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeletePoolResult_Status, string(v.Status))
+	}
+	if v.TwoWayChannelArn != nil {
+		s.WriteString(schemas.DeletePoolResult_TwoWayChannelArn, *v.TwoWayChannelArn)
+	}
+	if v.TwoWayChannelRole != nil {
+		s.WriteString(schemas.DeletePoolResult_TwoWayChannelRole, *v.TwoWayChannelRole)
+	}
+	if v.TwoWayEnabled != false {
+		s.WriteBool(schemas.DeletePoolResult_TwoWayEnabled, v.TwoWayEnabled)
+	}
+}
+func (v *DeletePoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePoolResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePoolResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeletePoolResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeletePoolResult_MessageType:
+			var ev string
+			if err := d.ReadString(schemas.DeletePoolResult_MessageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = types.MessageType(ev)
+			return nil
+		case schemas.DeletePoolResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.DeletePoolResult_OptOutListName, v.OptOutListName)
+		case schemas.DeletePoolResult_PoolArn:
+			v.PoolArn = new(string)
+			return d.ReadString(schemas.DeletePoolResult_PoolArn, v.PoolArn)
+		case schemas.DeletePoolResult_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.DeletePoolResult_PoolId, v.PoolId)
+		case schemas.DeletePoolResult_SelfManagedOptOutsEnabled:
+			return d.ReadBool(schemas.DeletePoolResult_SelfManagedOptOutsEnabled, &v.SelfManagedOptOutsEnabled)
+		case schemas.DeletePoolResult_SharedRoutesEnabled:
+			return d.ReadBool(schemas.DeletePoolResult_SharedRoutesEnabled, &v.SharedRoutesEnabled)
+		case schemas.DeletePoolResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeletePoolResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PoolStatus(ev)
+			return nil
+		case schemas.DeletePoolResult_TwoWayChannelArn:
+			v.TwoWayChannelArn = new(string)
+			return d.ReadString(schemas.DeletePoolResult_TwoWayChannelArn, v.TwoWayChannelArn)
+		case schemas.DeletePoolResult_TwoWayChannelRole:
+			v.TwoWayChannelRole = new(string)
+			return d.ReadString(schemas.DeletePoolResult_TwoWayChannelRole, v.TwoWayChannelRole)
+		case schemas.DeletePoolResult_TwoWayEnabled:
+			return d.ReadBool(schemas.DeletePoolResult_TwoWayEnabled, &v.TwoWayEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeletePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePool, schemas.DeletePoolRequest, schemas.DeletePoolResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeletePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePool, schemas.DeletePoolRequest, schemas.DeletePoolResult), output: &DeletePoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

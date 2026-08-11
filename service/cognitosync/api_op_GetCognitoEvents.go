@@ -4,6 +4,8 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetCognitoEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCognitoEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCognitoEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCognitoEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetCognitoEventsRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 // The response from the GetCognitoEvents request
 type GetCognitoEventsOutput struct {
 
@@ -50,13 +64,29 @@ type GetCognitoEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCognitoEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCognitoEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCognitoEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvents(s, schemas.GetCognitoEventsResponse_Events, v.Events)
+}
+func (v *GetCognitoEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCognitoEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCognitoEventsResponse_Events:
+			return deserializeEvents(d, schemas.GetCognitoEventsResponse_Events, &v.Events)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCognitoEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCognitoEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCognitoEvents, schemas.GetCognitoEventsRequest, schemas.GetCognitoEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCognitoEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCognitoEvents, schemas.GetCognitoEventsRequest, schemas.GetCognitoEventsResponse), output: &GetCognitoEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

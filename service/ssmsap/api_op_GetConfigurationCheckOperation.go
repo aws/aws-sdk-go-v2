@@ -4,7 +4,9 @@ package ssmsap
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetConfigurationCheckOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationCheckOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationCheckOperationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationCheckOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.GetConfigurationCheckOperationInput_OperationId, *v.OperationId)
+	}
+}
+
 type GetConfigurationCheckOperationOutput struct {
 
 	// Returns the details of a configuration check operation.
@@ -46,13 +60,34 @@ type GetConfigurationCheckOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationCheckOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationCheckOperationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationCheckOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationCheckOperation != nil {
+		s.WriteStruct(schemas.GetConfigurationCheckOperationOutput_ConfigurationCheckOperation)
+		v.ConfigurationCheckOperation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConfigurationCheckOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationCheckOperationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationCheckOperationOutput_ConfigurationCheckOperation:
+			v.ConfigurationCheckOperation = &types.ConfigurationCheckOperation{}
+			return v.ConfigurationCheckOperation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationCheckOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationCheckOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationCheckOperation, schemas.GetConfigurationCheckOperationInput, schemas.GetConfigurationCheckOperationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfigurationCheckOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationCheckOperation, schemas.GetConfigurationCheckOperationInput, schemas.GetConfigurationCheckOperationOutput), output: &GetConfigurationCheckOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

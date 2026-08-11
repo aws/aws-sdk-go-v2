@@ -4,7 +4,9 @@ package resourcegroups
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,33 @@ type UpdateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Criticality != nil {
+		s.WriteInt32(schemas.UpdateGroupInput_Criticality, *v.Criticality)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateGroupInput_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateGroupInput_DisplayName, *v.DisplayName)
+	}
+	if v.Group != nil {
+		s.WriteString(schemas.UpdateGroupInput_Group, *v.Group)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.UpdateGroupInput_GroupName, *v.GroupName)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.UpdateGroupInput_Owner, *v.Owner)
+	}
+}
+
 type UpdateGroupOutput struct {
 
 	// The update description of the resource group.
@@ -71,13 +100,34 @@ type UpdateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteStruct(schemas.UpdateGroupOutput_Group)
+		v.Group.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGroupOutput_Group:
+			v.Group = &types.Group{}
+			return v.Group.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupInput, schemas.UpdateGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupInput, schemas.UpdateGroupOutput), output: &UpdateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

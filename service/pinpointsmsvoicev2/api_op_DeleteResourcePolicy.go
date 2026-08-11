@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,18 @@ type DeleteResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePolicyRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type DeleteResourcePolicyOutput struct {
 
 	// The time when the resource-based policy was created, in [UNIX epoch time] format.
@@ -57,13 +71,44 @@ type DeleteResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteResourcePolicyResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.DeleteResourcePolicyResult_Policy, *v.Policy)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePolicyResult_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *DeleteResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePolicyResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourcePolicyResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteResourcePolicyResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteResourcePolicyResult_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.DeleteResourcePolicyResult_Policy, v.Policy)
+		case schemas.DeleteResourcePolicyResult_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DeleteResourcePolicyResult_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyRequest, schemas.DeleteResourcePolicyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyRequest, schemas.DeleteResourcePolicyResult), output: &DeleteResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

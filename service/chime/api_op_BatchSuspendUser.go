@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,19 @@ type BatchSuspendUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchSuspendUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchSuspendUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchSuspendUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BatchSuspendUserRequest_AccountId, *v.AccountId)
+	}
+	serializeUserIdList(s, schemas.BatchSuspendUserRequest_UserIdList, v.UserIdList)
+}
+
 type BatchSuspendUserOutput struct {
 
 	// If the BatchSuspendUser action fails for one or more of the user IDs in the request, a list of
@@ -66,13 +81,29 @@ type BatchSuspendUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchSuspendUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchSuspendUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchSuspendUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserErrorList(s, schemas.BatchSuspendUserResponse_UserErrors, v.UserErrors)
+}
+func (v *BatchSuspendUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchSuspendUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchSuspendUserResponse_UserErrors:
+			return deserializeUserErrorList(d, schemas.BatchSuspendUserResponse_UserErrors, &v.UserErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchSuspendUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchSuspendUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchSuspendUser, schemas.BatchSuspendUserRequest, schemas.BatchSuspendUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchSuspendUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchSuspendUser, schemas.BatchSuspendUserRequest, schemas.BatchSuspendUserResponse), output: &BatchSuspendUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

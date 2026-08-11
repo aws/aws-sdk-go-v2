@@ -5,7 +5,9 @@ package cloud9
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,28 @@ type DescribeEnvironmentMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentMembershipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentMembershipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DescribeEnvironmentMembershipsRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeEnvironmentMembershipsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEnvironmentMembershipsRequest_nextToken, *v.NextToken)
+	}
+	serializePermissionsList(s, schemas.DescribeEnvironmentMembershipsRequest_permissions, v.Permissions)
+	if v.UserArn != nil {
+		s.WriteString(schemas.DescribeEnvironmentMembershipsRequest_userArn, *v.UserArn)
+	}
+}
+
 type DescribeEnvironmentMembershipsOutput struct {
 
 	// Information about the environment members for the environment.
@@ -85,13 +109,35 @@ type DescribeEnvironmentMembershipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentMembershipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentMembershipsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentMembersList(s, schemas.DescribeEnvironmentMembershipsResult_memberships, v.Memberships)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEnvironmentMembershipsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEnvironmentMembershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEnvironmentMembershipsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEnvironmentMembershipsResult_memberships:
+			return deserializeEnvironmentMembersList(d, schemas.DescribeEnvironmentMembershipsResult_memberships, &v.Memberships)
+		case schemas.DescribeEnvironmentMembershipsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEnvironmentMembershipsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEnvironmentMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEnvironmentMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentMemberships, schemas.DescribeEnvironmentMembershipsRequest, schemas.DescribeEnvironmentMembershipsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEnvironmentMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentMemberships, schemas.DescribeEnvironmentMembershipsRequest, schemas.DescribeEnvironmentMembershipsResult), output: &DescribeEnvironmentMembershipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

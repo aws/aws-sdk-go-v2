@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,32 @@ type ListNetworkMigrationDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListNetworkMigrationDeploymentsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNetworkMigrationDeploymentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationDeploymentsRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationDeploymentsRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationDeploymentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListNetworkMigrationDeploymentsOutput struct {
 
 	// A list of deployer job details.
@@ -64,13 +92,35 @@ type ListNetworkMigrationDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationDeployerJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkMigrationDeployerJobList(s, schemas.ListNetworkMigrationDeployerJobResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationDeployerJobResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworkMigrationDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkMigrationDeployerJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkMigrationDeployerJobResponse_items:
+			return deserializeNetworkMigrationDeployerJobList(d, schemas.ListNetworkMigrationDeployerJobResponse_items, &v.Items)
+		case schemas.ListNetworkMigrationDeployerJobResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworkMigrationDeployerJobResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkMigrationDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworkMigrationDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationDeployments, schemas.ListNetworkMigrationDeploymentsRequest, schemas.ListNetworkMigrationDeployerJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworkMigrationDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationDeployments, schemas.ListNetworkMigrationDeploymentsRequest, schemas.ListNetworkMigrationDeployerJobResponse), output: &ListNetworkMigrationDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

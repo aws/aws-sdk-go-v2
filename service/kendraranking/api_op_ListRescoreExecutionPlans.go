@@ -5,7 +5,9 @@ package kendraranking
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kendraranking/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendraranking/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListRescoreExecutionPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRescoreExecutionPlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRescoreExecutionPlansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRescoreExecutionPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRescoreExecutionPlansRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRescoreExecutionPlansRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRescoreExecutionPlansOutput struct {
 
 	// If the response is truncated, Amazon Kendra Intelligent Ranking returns a
@@ -54,13 +71,35 @@ type ListRescoreExecutionPlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRescoreExecutionPlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRescoreExecutionPlansResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRescoreExecutionPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRescoreExecutionPlansResponse_NextToken, *v.NextToken)
+	}
+	serializeRescoreExecutionPlanSummaryList(s, schemas.ListRescoreExecutionPlansResponse_SummaryItems, v.SummaryItems)
+}
+func (v *ListRescoreExecutionPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRescoreExecutionPlansResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRescoreExecutionPlansResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRescoreExecutionPlansResponse_NextToken, v.NextToken)
+		case schemas.ListRescoreExecutionPlansResponse_SummaryItems:
+			return deserializeRescoreExecutionPlanSummaryList(d, schemas.ListRescoreExecutionPlansResponse_SummaryItems, &v.SummaryItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRescoreExecutionPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListRescoreExecutionPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRescoreExecutionPlans, schemas.ListRescoreExecutionPlansRequest, schemas.ListRescoreExecutionPlansResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListRescoreExecutionPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRescoreExecutionPlans, schemas.ListRescoreExecutionPlansRequest, schemas.ListRescoreExecutionPlansResponse), output: &ListRescoreExecutionPlansOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

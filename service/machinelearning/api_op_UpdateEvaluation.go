@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type UpdateEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEvaluationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.UpdateEvaluationInput_EvaluationId, *v.EvaluationId)
+	}
+	if v.EvaluationName != nil {
+		s.WriteString(schemas.UpdateEvaluationInput_EvaluationName, *v.EvaluationName)
+	}
+}
+
 // Represents the output of an UpdateEvaluation operation.
 //
 // You can see the updated content by using the GetEvaluation operation.
@@ -57,13 +74,32 @@ type UpdateEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEvaluationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.UpdateEvaluationOutput_EvaluationId, *v.EvaluationId)
+	}
+}
+func (v *UpdateEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEvaluationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEvaluationOutput_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.UpdateEvaluationOutput_EvaluationId, v.EvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEvaluation, schemas.UpdateEvaluationInput, schemas.UpdateEvaluationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEvaluation, schemas.UpdateEvaluationInput, schemas.UpdateEvaluationOutput), output: &UpdateEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

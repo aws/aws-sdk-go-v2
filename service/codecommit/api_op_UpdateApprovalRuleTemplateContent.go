@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type UpdateApprovalRuleTemplateContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApprovalRuleTemplateContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApprovalRuleTemplateContentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApprovalRuleTemplateContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleTemplateName != nil {
+		s.WriteString(schemas.UpdateApprovalRuleTemplateContentInput_approvalRuleTemplateName, *v.ApprovalRuleTemplateName)
+	}
+	if v.ExistingRuleContentSha256 != nil {
+		s.WriteString(schemas.UpdateApprovalRuleTemplateContentInput_existingRuleContentSha256, *v.ExistingRuleContentSha256)
+	}
+	if v.NewRuleContent != nil {
+		s.WriteString(schemas.UpdateApprovalRuleTemplateContentInput_newRuleContent, *v.NewRuleContent)
+	}
+}
+
 type UpdateApprovalRuleTemplateContentOutput struct {
 
 	// Returns information about an approval rule template.
@@ -60,13 +80,34 @@ type UpdateApprovalRuleTemplateContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApprovalRuleTemplateContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApprovalRuleTemplateContentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApprovalRuleTemplateContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleTemplate != nil {
+		s.WriteStruct(schemas.UpdateApprovalRuleTemplateContentOutput_approvalRuleTemplate)
+		v.ApprovalRuleTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateApprovalRuleTemplateContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApprovalRuleTemplateContentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApprovalRuleTemplateContentOutput_approvalRuleTemplate:
+			v.ApprovalRuleTemplate = &types.ApprovalRuleTemplate{}
+			return v.ApprovalRuleTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApprovalRuleTemplateContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateApprovalRuleTemplateContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApprovalRuleTemplateContent, schemas.UpdateApprovalRuleTemplateContentInput, schemas.UpdateApprovalRuleTemplateContentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateApprovalRuleTemplateContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApprovalRuleTemplateContent, schemas.UpdateApprovalRuleTemplateContentInput, schemas.UpdateApprovalRuleTemplateContentOutput), output: &UpdateApprovalRuleTemplateContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

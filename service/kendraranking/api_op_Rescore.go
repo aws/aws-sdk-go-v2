@@ -4,7 +4,9 @@ package kendraranking
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendraranking/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendraranking/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type RescoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RescoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RescoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RescoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentList(s, schemas.RescoreRequest_Documents, v.Documents)
+	if v.RescoreExecutionPlanId != nil {
+		s.WriteString(schemas.RescoreRequest_RescoreExecutionPlanId, *v.RescoreExecutionPlanId)
+	}
+	if v.SearchQuery != nil {
+		s.WriteString(schemas.RescoreRequest_SearchQuery, *v.SearchQuery)
+	}
+}
+
 type RescoreOutput struct {
 
 	// The identifier associated with the scores that Amazon Kendra Intelligent
@@ -66,13 +84,35 @@ type RescoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RescoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RescoreResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RescoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RescoreId != nil {
+		s.WriteString(schemas.RescoreResult_RescoreId, *v.RescoreId)
+	}
+	serializeRescoreResultItemList(s, schemas.RescoreResult_ResultItems, v.ResultItems)
+}
+func (v *RescoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RescoreResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RescoreResult_RescoreId:
+			v.RescoreId = new(string)
+			return d.ReadString(schemas.RescoreResult_RescoreId, v.RescoreId)
+		case schemas.RescoreResult_ResultItems:
+			return deserializeRescoreResultItemList(d, schemas.RescoreResult_ResultItems, &v.ResultItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRescoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRescore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Rescore, schemas.RescoreRequest, schemas.RescoreResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRescore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Rescore, schemas.RescoreRequest, schemas.RescoreResult), output: &RescoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

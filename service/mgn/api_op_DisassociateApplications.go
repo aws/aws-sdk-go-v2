@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,37 @@ type DisassociateApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.DisassociateApplicationsRequest_accountID, *v.AccountID)
+	}
+	serializeApplicationIDs(s, schemas.DisassociateApplicationsRequest_applicationIDs, v.ApplicationIDs)
+	if v.WaveID != nil {
+		s.WriteString(schemas.DisassociateApplicationsRequest_waveID, *v.WaveID)
+	}
+}
+func (v *DisassociateApplicationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateApplicationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateApplicationsRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.DisassociateApplicationsRequest_accountID, v.AccountID)
+		case schemas.DisassociateApplicationsRequest_applicationIDs:
+			return deserializeApplicationIDs(d, schemas.DisassociateApplicationsRequest_applicationIDs, &v.ApplicationIDs)
+		case schemas.DisassociateApplicationsRequest_waveID:
+			v.WaveID = new(string)
+			return d.ReadString(schemas.DisassociateApplicationsRequest_waveID, v.WaveID)
+		}
+		return nil
+	})
+}
+
 type DisassociateApplicationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +81,26 @@ type DisassociateApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateApplicationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateApplicationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateApplications, schemas.DisassociateApplicationsRequest, schemas.DisassociateApplicationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateApplications, schemas.DisassociateApplicationsRequest, schemas.DisassociateApplicationsResponse), output: &DisassociateApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

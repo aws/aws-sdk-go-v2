@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,26 @@ type DescribePhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePhoneNumbersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePhoneNumbersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePhoneNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePhoneNumberFilterList(s, schemas.DescribePhoneNumbersRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribePhoneNumbersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePhoneNumbersRequest_NextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.DescribePhoneNumbersRequest_Owner, string(v.Owner))
+	}
+	serializePhoneNumberIdList(s, schemas.DescribePhoneNumbersRequest_PhoneNumberIds, v.PhoneNumberIds)
+}
+
 type DescribePhoneNumbersOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -77,13 +99,35 @@ type DescribePhoneNumbersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePhoneNumbersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePhoneNumbersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePhoneNumbersResult_NextToken, *v.NextToken)
+	}
+	serializePhoneNumberInformationList(s, schemas.DescribePhoneNumbersResult_PhoneNumbers, v.PhoneNumbers)
+}
+func (v *DescribePhoneNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePhoneNumbersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePhoneNumbersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribePhoneNumbersResult_NextToken, v.NextToken)
+		case schemas.DescribePhoneNumbersResult_PhoneNumbers:
+			return deserializePhoneNumberInformationList(d, schemas.DescribePhoneNumbersResult_PhoneNumbers, &v.PhoneNumbers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribePhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePhoneNumbers, schemas.DescribePhoneNumbersRequest, schemas.DescribePhoneNumbersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribePhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePhoneNumbers, schemas.DescribePhoneNumbersRequest, schemas.DescribePhoneNumbersResult), output: &DescribePhoneNumbersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

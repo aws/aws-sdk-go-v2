@@ -4,6 +4,8 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type MergeBranchesByFastForwardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeBranchesByFastForwardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeBranchesByFastForwardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeBranchesByFastForwardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationCommitSpecifier != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardInput_destinationCommitSpecifier, *v.DestinationCommitSpecifier)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitSpecifier != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardInput_sourceCommitSpecifier, *v.SourceCommitSpecifier)
+	}
+	if v.TargetBranch != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardInput_targetBranch, *v.TargetBranch)
+	}
+}
+
 type MergeBranchesByFastForwardOutput struct {
 
 	// The commit ID of the merge in the destination or target branch.
@@ -62,13 +85,38 @@ type MergeBranchesByFastForwardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeBranchesByFastForwardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeBranchesByFastForwardOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeBranchesByFastForwardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitId != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardOutput_commitId, *v.CommitId)
+	}
+	if v.TreeId != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardOutput_treeId, *v.TreeId)
+	}
+}
+func (v *MergeBranchesByFastForwardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeBranchesByFastForwardOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeBranchesByFastForwardOutput_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.MergeBranchesByFastForwardOutput_commitId, v.CommitId)
+		case schemas.MergeBranchesByFastForwardOutput_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.MergeBranchesByFastForwardOutput_treeId, v.TreeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergeBranchesByFastForwardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeBranchesByFastForward{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeBranchesByFastForward, schemas.MergeBranchesByFastForwardInput, schemas.MergeBranchesByFastForwardOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergeBranchesByFastForward{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeBranchesByFastForward, schemas.MergeBranchesByFastForwardInput, schemas.MergeBranchesByFastForwardOutput), output: &MergeBranchesByFastForwardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

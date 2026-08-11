@@ -5,7 +5,9 @@ package textract
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,30 @@ type ListAdapterVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdapterVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdapterVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdapterVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.ListAdapterVersionsRequest_AdapterId, *v.AdapterId)
+	}
+	if v.AfterCreationTime != nil {
+		s.WriteTime(schemas.ListAdapterVersionsRequest_AfterCreationTime, *v.AfterCreationTime)
+	}
+	if v.BeforeCreationTime != nil {
+		s.WriteTime(schemas.ListAdapterVersionsRequest_BeforeCreationTime, *v.BeforeCreationTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdapterVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdapterVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAdapterVersionsOutput struct {
 
 	// Adapter versions that match the filtering criteria specified when calling
@@ -66,13 +92,35 @@ type ListAdapterVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdapterVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdapterVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdapterVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdapterVersionList(s, schemas.ListAdapterVersionsResponse_AdapterVersions, v.AdapterVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdapterVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAdapterVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdapterVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdapterVersionsResponse_AdapterVersions:
+			return deserializeAdapterVersionList(d, schemas.ListAdapterVersionsResponse_AdapterVersions, &v.AdapterVersions)
+		case schemas.ListAdapterVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdapterVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdapterVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAdapterVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdapterVersions, schemas.ListAdapterVersionsRequest, schemas.ListAdapterVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAdapterVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdapterVersions, schemas.ListAdapterVersionsRequest, schemas.ListAdapterVersionsResponse), output: &ListAdapterVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

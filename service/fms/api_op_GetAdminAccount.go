@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type GetAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdminAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdminAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdminAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAdminAccountOutput struct {
 
 	// The account that is set as the Firewall Manager default administrator.
@@ -44,13 +55,42 @@ type GetAdminAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdminAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdminAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdminAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminAccount != nil {
+		s.WriteString(schemas.GetAdminAccountResponse_AdminAccount, *v.AdminAccount)
+	}
+	if v.RoleStatus != "" {
+		s.WriteString(schemas.GetAdminAccountResponse_RoleStatus, string(v.RoleStatus))
+	}
+}
+func (v *GetAdminAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAdminAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAdminAccountResponse_AdminAccount:
+			v.AdminAccount = new(string)
+			return d.ReadString(schemas.GetAdminAccountResponse_AdminAccount, v.AdminAccount)
+		case schemas.GetAdminAccountResponse_RoleStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAdminAccountResponse_RoleStatus, &ev); err != nil {
+				return err
+			}
+			v.RoleStatus = types.AccountRoleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdminAccount, schemas.GetAdminAccountRequest, schemas.GetAdminAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdminAccount, schemas.GetAdminAccountRequest, schemas.GetAdminAccountResponse), output: &GetAdminAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

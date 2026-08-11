@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,46 @@ type ListVirtualGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualGatewaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualGatewaysInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListVirtualGatewaysInput_limit, *v.Limit)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.ListVirtualGatewaysInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.ListVirtualGatewaysInput_meshOwner, *v.MeshOwner)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualGatewaysInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListVirtualGatewaysInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualGatewaysInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualGatewaysInput_limit:
+			v.Limit = new(int32)
+			return d.ReadInt32(schemas.ListVirtualGatewaysInput_limit, v.Limit)
+		case schemas.ListVirtualGatewaysInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.ListVirtualGatewaysInput_meshName, v.MeshName)
+		case schemas.ListVirtualGatewaysInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.ListVirtualGatewaysInput_meshOwner, v.MeshOwner)
+		case schemas.ListVirtualGatewaysInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualGatewaysInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListVirtualGatewaysOutput struct {
 
 	// The list of existing virtual gateways for the specified service mesh.
@@ -76,13 +118,35 @@ type ListVirtualGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualGatewaysOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualGatewaysOutput_nextToken, *v.NextToken)
+	}
+	serializeVirtualGatewayList(s, schemas.ListVirtualGatewaysOutput_virtualGateways, v.VirtualGateways)
+}
+func (v *ListVirtualGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualGatewaysOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualGatewaysOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualGatewaysOutput_nextToken, v.NextToken)
+		case schemas.ListVirtualGatewaysOutput_virtualGateways:
+			return deserializeVirtualGatewayList(d, schemas.ListVirtualGatewaysOutput_virtualGateways, &v.VirtualGateways)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVirtualGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVirtualGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualGateways, schemas.ListVirtualGatewaysInput, schemas.ListVirtualGatewaysOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVirtualGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualGateways, schemas.ListVirtualGatewaysInput, schemas.ListVirtualGatewaysOutput), output: &ListVirtualGatewaysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

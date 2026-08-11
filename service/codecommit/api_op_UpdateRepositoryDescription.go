@@ -4,6 +4,8 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type UpdateRepositoryDescriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRepositoryDescriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRepositoryDescriptionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRepositoryDescriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryDescription != nil {
+		s.WriteString(schemas.UpdateRepositoryDescriptionInput_repositoryDescription, *v.RepositoryDescription)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.UpdateRepositoryDescriptionInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 type UpdateRepositoryDescriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type UpdateRepositoryDescriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRepositoryDescriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRepositoryDescriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRepositoryDescriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRepositoryDescriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRepositoryDescription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRepositoryDescription, schemas.UpdateRepositoryDescriptionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRepositoryDescription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRepositoryDescription, schemas.UpdateRepositoryDescriptionInput, nil), output: &UpdateRepositoryDescriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

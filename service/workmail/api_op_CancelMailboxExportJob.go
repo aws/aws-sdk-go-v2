@@ -5,6 +5,8 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type CancelMailboxExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMailboxExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMailboxExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMailboxExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelMailboxExportJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelMailboxExportJobRequest_JobId, *v.JobId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.CancelMailboxExportJobRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type CancelMailboxExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type CancelMailboxExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMailboxExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMailboxExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMailboxExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelMailboxExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMailboxExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMailboxExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelMailboxExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMailboxExportJob, schemas.CancelMailboxExportJobRequest, schemas.CancelMailboxExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelMailboxExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMailboxExportJob, schemas.CancelMailboxExportJobRequest, schemas.CancelMailboxExportJobResponse), output: &CancelMailboxExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

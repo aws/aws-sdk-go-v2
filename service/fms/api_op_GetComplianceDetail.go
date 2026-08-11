@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type GetComplianceDetailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberAccount != nil {
+		s.WriteString(schemas.GetComplianceDetailRequest_MemberAccount, *v.MemberAccount)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetComplianceDetailRequest_PolicyId, *v.PolicyId)
+	}
+}
+
 type GetComplianceDetailOutput struct {
 
 	// Information about the resources and the policy that you specified in the
@@ -58,13 +75,34 @@ type GetComplianceDetailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyComplianceDetail != nil {
+		s.WriteStruct(schemas.GetComplianceDetailResponse_PolicyComplianceDetail)
+		v.PolicyComplianceDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetComplianceDetailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceDetailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceDetailResponse_PolicyComplianceDetail:
+			v.PolicyComplianceDetail = &types.PolicyComplianceDetail{}
+			return v.PolicyComplianceDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceDetailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetail, schemas.GetComplianceDetailRequest, schemas.GetComplianceDetailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceDetail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetail, schemas.GetComplianceDetailRequest, schemas.GetComplianceDetailResponse), output: &GetComplianceDetailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

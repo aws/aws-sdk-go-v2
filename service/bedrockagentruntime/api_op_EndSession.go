@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type EndSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.EndSessionRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+}
+
 type EndSessionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the session you ended.
@@ -62,13 +76,48 @@ type EndSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionArn != nil {
+		s.WriteString(schemas.EndSessionResponse_sessionArn, *v.SessionArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.EndSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.SessionStatus != "" {
+		s.WriteString(schemas.EndSessionResponse_sessionStatus, string(v.SessionStatus))
+	}
+}
+func (v *EndSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndSessionResponse_sessionArn:
+			v.SessionArn = new(string)
+			return d.ReadString(schemas.EndSessionResponse_sessionArn, v.SessionArn)
+		case schemas.EndSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.EndSessionResponse_sessionId, v.SessionId)
+		case schemas.EndSessionResponse_sessionStatus:
+			var ev string
+			if err := d.ReadString(schemas.EndSessionResponse_sessionStatus, &ev); err != nil {
+				return err
+			}
+			v.SessionStatus = types.SessionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEndSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEndSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndSession, schemas.EndSessionRequest, schemas.EndSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEndSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndSession, schemas.EndSessionRequest, schemas.EndSessionResponse), output: &EndSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

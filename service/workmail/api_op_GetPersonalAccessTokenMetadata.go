@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,21 @@ type GetPersonalAccessTokenMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersonalAccessTokenMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersonalAccessTokenMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersonalAccessTokenMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetPersonalAccessTokenMetadataRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.PersonalAccessTokenId != nil {
+		s.WriteString(schemas.GetPersonalAccessTokenMetadataRequest_PersonalAccessTokenId, *v.PersonalAccessTokenId)
+	}
+}
+
 type GetPersonalAccessTokenMetadataOutput struct {
 
 	//  The date when the Personal Access Token ID was created.
@@ -70,13 +87,65 @@ type GetPersonalAccessTokenMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersonalAccessTokenMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersonalAccessTokenMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersonalAccessTokenMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.GetPersonalAccessTokenMetadataResponse_DateCreated, *v.DateCreated)
+	}
+	if v.DateLastUsed != nil {
+		s.WriteTime(schemas.GetPersonalAccessTokenMetadataResponse_DateLastUsed, *v.DateLastUsed)
+	}
+	if v.ExpiresTime != nil {
+		s.WriteTime(schemas.GetPersonalAccessTokenMetadataResponse_ExpiresTime, *v.ExpiresTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetPersonalAccessTokenMetadataResponse_Name, *v.Name)
+	}
+	if v.PersonalAccessTokenId != nil {
+		s.WriteString(schemas.GetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId, *v.PersonalAccessTokenId)
+	}
+	serializePersonalAccessTokenScopeList(s, schemas.GetPersonalAccessTokenMetadataResponse_Scopes, v.Scopes)
+	if v.UserId != nil {
+		s.WriteString(schemas.GetPersonalAccessTokenMetadataResponse_UserId, *v.UserId)
+	}
+}
+func (v *GetPersonalAccessTokenMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPersonalAccessTokenMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPersonalAccessTokenMetadataResponse_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.GetPersonalAccessTokenMetadataResponse_DateCreated, v.DateCreated)
+		case schemas.GetPersonalAccessTokenMetadataResponse_DateLastUsed:
+			v.DateLastUsed = new(time.Time)
+			return d.ReadTime(schemas.GetPersonalAccessTokenMetadataResponse_DateLastUsed, v.DateLastUsed)
+		case schemas.GetPersonalAccessTokenMetadataResponse_ExpiresTime:
+			v.ExpiresTime = new(time.Time)
+			return d.ReadTime(schemas.GetPersonalAccessTokenMetadataResponse_ExpiresTime, v.ExpiresTime)
+		case schemas.GetPersonalAccessTokenMetadataResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPersonalAccessTokenMetadataResponse_Name, v.Name)
+		case schemas.GetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId:
+			v.PersonalAccessTokenId = new(string)
+			return d.ReadString(schemas.GetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId, v.PersonalAccessTokenId)
+		case schemas.GetPersonalAccessTokenMetadataResponse_Scopes:
+			return deserializePersonalAccessTokenScopeList(d, schemas.GetPersonalAccessTokenMetadataResponse_Scopes, &v.Scopes)
+		case schemas.GetPersonalAccessTokenMetadataResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.GetPersonalAccessTokenMetadataResponse_UserId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPersonalAccessTokenMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPersonalAccessTokenMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersonalAccessTokenMetadata, schemas.GetPersonalAccessTokenMetadataRequest, schemas.GetPersonalAccessTokenMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPersonalAccessTokenMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersonalAccessTokenMetadata, schemas.GetPersonalAccessTokenMetadataRequest, schemas.GetPersonalAccessTokenMetadataResponse), output: &GetPersonalAccessTokenMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

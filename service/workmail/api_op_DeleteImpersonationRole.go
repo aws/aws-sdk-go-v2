@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteImpersonationRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImpersonationRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImpersonationRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImpersonationRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpersonationRoleId != nil {
+		s.WriteString(schemas.DeleteImpersonationRoleRequest_ImpersonationRoleId, *v.ImpersonationRoleId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteImpersonationRoleRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeleteImpersonationRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteImpersonationRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImpersonationRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImpersonationRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImpersonationRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteImpersonationRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteImpersonationRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteImpersonationRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteImpersonationRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImpersonationRole, schemas.DeleteImpersonationRoleRequest, schemas.DeleteImpersonationRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteImpersonationRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImpersonationRole, schemas.DeleteImpersonationRoleRequest, schemas.DeleteImpersonationRoleResponse), output: &DeleteImpersonationRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

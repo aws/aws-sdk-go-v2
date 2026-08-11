@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteAccessControlRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessControlRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessControlRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessControlRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteAccessControlRuleRequest_Name, *v.Name)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteAccessControlRuleRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeleteAccessControlRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteAccessControlRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessControlRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessControlRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessControlRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAccessControlRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccessControlRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccessControlRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAccessControlRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessControlRule, schemas.DeleteAccessControlRuleRequest, schemas.DeleteAccessControlRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAccessControlRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessControlRule, schemas.DeleteAccessControlRuleRequest, schemas.DeleteAccessControlRuleResponse), output: &DeleteAccessControlRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetEnabledBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnabledBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnabledBaselineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnabledBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledBaselineIdentifier != nil {
+		s.WriteString(schemas.GetEnabledBaselineInput_enabledBaselineIdentifier, *v.EnabledBaselineIdentifier)
+	}
+}
+
 type GetEnabledBaselineOutput struct {
 
 	// Details of the EnabledBaseline resource.
@@ -45,13 +59,34 @@ type GetEnabledBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnabledBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnabledBaselineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnabledBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledBaselineDetails != nil {
+		s.WriteStruct(schemas.GetEnabledBaselineOutput_enabledBaselineDetails)
+		v.EnabledBaselineDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEnabledBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnabledBaselineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnabledBaselineOutput_enabledBaselineDetails:
+			v.EnabledBaselineDetails = &types.EnabledBaselineDetails{}
+			return v.EnabledBaselineDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnabledBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnabledBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnabledBaseline, schemas.GetEnabledBaselineInput, schemas.GetEnabledBaselineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnabledBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnabledBaseline, schemas.GetEnabledBaselineInput, schemas.GetEnabledBaselineOutput), output: &GetEnabledBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

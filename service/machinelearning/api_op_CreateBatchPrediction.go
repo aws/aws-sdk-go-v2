@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,30 @@ type CreateBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchPredictionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchPredictionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchPredictionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionDataSourceId != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_BatchPredictionDataSourceId, *v.BatchPredictionDataSourceId)
+	}
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_BatchPredictionId, *v.BatchPredictionId)
+	}
+	if v.BatchPredictionName != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_BatchPredictionName, *v.BatchPredictionName)
+	}
+	if v.MLModelId != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_MLModelId, *v.MLModelId)
+	}
+	if v.OutputUri != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_OutputUri, *v.OutputUri)
+	}
+}
+
 //	Represents the output of a CreateBatchPrediction operation, and is an
 //
 // acknowledgement that Amazon ML received the request.
@@ -92,13 +118,32 @@ type CreateBatchPredictionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchPredictionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchPredictionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchPredictionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.CreateBatchPredictionOutput_BatchPredictionId, *v.BatchPredictionId)
+	}
+}
+func (v *CreateBatchPredictionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBatchPredictionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBatchPredictionOutput_BatchPredictionId:
+			v.BatchPredictionId = new(string)
+			return d.ReadString(schemas.CreateBatchPredictionOutput_BatchPredictionId, v.BatchPredictionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBatchPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchPrediction, schemas.CreateBatchPredictionInput, schemas.CreateBatchPredictionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBatchPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchPrediction, schemas.CreateBatchPredictionInput, schemas.CreateBatchPredictionOutput), output: &CreateBatchPredictionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

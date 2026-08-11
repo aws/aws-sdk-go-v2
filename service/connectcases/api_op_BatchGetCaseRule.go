@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type BatchGetCaseRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCaseRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCaseRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCaseRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCaseRuleIdentifierList(s, schemas.BatchGetCaseRuleRequest_caseRules, v.CaseRules)
+	if v.DomainId != nil {
+		s.WriteString(schemas.BatchGetCaseRuleRequest_domainId, *v.DomainId)
+	}
+}
+
 type BatchGetCaseRuleOutput struct {
 
 	// A list of detailed case rule information.
@@ -64,13 +79,35 @@ type BatchGetCaseRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCaseRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCaseRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCaseRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetCaseRuleList(s, schemas.BatchGetCaseRuleResponse_caseRules, v.CaseRules)
+	serializeBatchGetCaseRuleErrorList(s, schemas.BatchGetCaseRuleResponse_errors, v.Errors)
+	serializeBatchGetCaseRuleUnprocessedList(s, schemas.BatchGetCaseRuleResponse_unprocessedCaseRules, v.UnprocessedCaseRules)
+}
+func (v *BatchGetCaseRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCaseRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCaseRuleResponse_caseRules:
+			return deserializeBatchGetCaseRuleList(d, schemas.BatchGetCaseRuleResponse_caseRules, &v.CaseRules)
+		case schemas.BatchGetCaseRuleResponse_errors:
+			return deserializeBatchGetCaseRuleErrorList(d, schemas.BatchGetCaseRuleResponse_errors, &v.Errors)
+		case schemas.BatchGetCaseRuleResponse_unprocessedCaseRules:
+			return deserializeBatchGetCaseRuleUnprocessedList(d, schemas.BatchGetCaseRuleResponse_unprocessedCaseRules, &v.UnprocessedCaseRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCaseRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCaseRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCaseRule, schemas.BatchGetCaseRuleRequest, schemas.BatchGetCaseRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetCaseRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCaseRule, schemas.BatchGetCaseRuleRequest, schemas.BatchGetCaseRuleResponse), output: &BatchGetCaseRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

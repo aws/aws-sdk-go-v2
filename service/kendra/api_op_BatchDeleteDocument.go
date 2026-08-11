@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type BatchDeleteDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceSyncJobMetricTarget != nil {
+		s.WriteStruct(schemas.BatchDeleteDocumentRequest_DataSourceSyncJobMetricTarget)
+		v.DataSourceSyncJobMetricTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDocumentIdList(s, schemas.BatchDeleteDocumentRequest_DocumentIdList, v.DocumentIdList)
+	if v.IndexId != nil {
+		s.WriteString(schemas.BatchDeleteDocumentRequest_IndexId, *v.IndexId)
+	}
+}
+
 type BatchDeleteDocumentOutput struct {
 
 	// A list of documents that could not be removed from the index. Each entry
@@ -65,13 +85,29 @@ type BatchDeleteDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDocumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteDocumentResponseFailedDocuments(s, schemas.BatchDeleteDocumentResponse_FailedDocuments, v.FailedDocuments)
+}
+func (v *BatchDeleteDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteDocumentResponse_FailedDocuments:
+			return deserializeBatchDeleteDocumentResponseFailedDocuments(d, schemas.BatchDeleteDocumentResponse_FailedDocuments, &v.FailedDocuments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDocument, schemas.BatchDeleteDocumentRequest, schemas.BatchDeleteDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDocument, schemas.BatchDeleteDocumentRequest, schemas.BatchDeleteDocumentResponse), output: &BatchDeleteDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

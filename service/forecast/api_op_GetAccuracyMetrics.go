@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,18 @@ type GetAccuracyMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccuracyMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccuracyMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccuracyMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.GetAccuracyMetricsRequest_PredictorArn, *v.PredictorArn)
+	}
+}
+
 type GetAccuracyMetricsOutput struct {
 
 	//  The LatencyOptimized AutoML override strategy is only available in private
@@ -78,13 +92,55 @@ type GetAccuracyMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccuracyMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccuracyMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccuracyMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLOverrideStrategy != "" {
+		s.WriteString(schemas.GetAccuracyMetricsResponse_AutoMLOverrideStrategy, string(v.AutoMLOverrideStrategy))
+	}
+	if v.IsAutoPredictor != nil {
+		s.WriteBool(schemas.GetAccuracyMetricsResponse_IsAutoPredictor, *v.IsAutoPredictor)
+	}
+	if v.OptimizationMetric != "" {
+		s.WriteString(schemas.GetAccuracyMetricsResponse_OptimizationMetric, string(v.OptimizationMetric))
+	}
+	serializePredictorEvaluationResults(s, schemas.GetAccuracyMetricsResponse_PredictorEvaluationResults, v.PredictorEvaluationResults)
+}
+func (v *GetAccuracyMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccuracyMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccuracyMetricsResponse_AutoMLOverrideStrategy:
+			var ev string
+			if err := d.ReadString(schemas.GetAccuracyMetricsResponse_AutoMLOverrideStrategy, &ev); err != nil {
+				return err
+			}
+			v.AutoMLOverrideStrategy = types.AutoMLOverrideStrategy(ev)
+			return nil
+		case schemas.GetAccuracyMetricsResponse_IsAutoPredictor:
+			v.IsAutoPredictor = new(bool)
+			return d.ReadBool(schemas.GetAccuracyMetricsResponse_IsAutoPredictor, v.IsAutoPredictor)
+		case schemas.GetAccuracyMetricsResponse_OptimizationMetric:
+			var ev string
+			if err := d.ReadString(schemas.GetAccuracyMetricsResponse_OptimizationMetric, &ev); err != nil {
+				return err
+			}
+			v.OptimizationMetric = types.OptimizationMetric(ev)
+			return nil
+		case schemas.GetAccuracyMetricsResponse_PredictorEvaluationResults:
+			return deserializePredictorEvaluationResults(d, schemas.GetAccuracyMetricsResponse_PredictorEvaluationResults, &v.PredictorEvaluationResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccuracyMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccuracyMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccuracyMetrics, schemas.GetAccuracyMetricsRequest, schemas.GetAccuracyMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAccuracyMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccuracyMetrics, schemas.GetAccuracyMetricsRequest, schemas.GetAccuracyMetricsResponse), output: &GetAccuracyMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

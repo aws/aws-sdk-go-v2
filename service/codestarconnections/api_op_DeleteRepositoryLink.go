@@ -4,6 +4,8 @@ package codestarconnections
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteRepositoryLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryLinkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryLinkId != nil {
+		s.WriteString(schemas.DeleteRepositoryLinkInput_RepositoryLinkId, *v.RepositoryLinkId)
+	}
+}
+
 type DeleteRepositoryLinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteRepositoryLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryLinkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRepositoryLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRepositoryLinkOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRepositoryLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRepositoryLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryLink, schemas.DeleteRepositoryLinkInput, schemas.DeleteRepositoryLinkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRepositoryLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryLink, schemas.DeleteRepositoryLinkInput, schemas.DeleteRepositoryLinkOutput), output: &DeleteRepositoryLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

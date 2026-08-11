@@ -4,6 +4,8 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type ResetEnabledControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetEnabledControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetEnabledControlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetEnabledControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledControlIdentifier != nil {
+		s.WriteString(schemas.ResetEnabledControlInput_enabledControlIdentifier, *v.EnabledControlIdentifier)
+	}
+}
+
 type ResetEnabledControlOutput struct {
 
 	//  The operation identifier for this ResetEnabledControl operation.
@@ -46,13 +60,32 @@ type ResetEnabledControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetEnabledControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetEnabledControlOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetEnabledControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.ResetEnabledControlOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *ResetEnabledControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetEnabledControlOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetEnabledControlOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.ResetEnabledControlOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetEnabledControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetEnabledControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetEnabledControl, schemas.ResetEnabledControlInput, schemas.ResetEnabledControlOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetEnabledControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetEnabledControl, schemas.ResetEnabledControlInput, schemas.ResetEnabledControlOutput), output: &ResetEnabledControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

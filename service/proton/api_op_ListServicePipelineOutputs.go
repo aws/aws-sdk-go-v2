@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,40 @@ type ListServicePipelineOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicePipelineOutputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServicePipelineOutputsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServicePipelineOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.ListServicePipelineOutputsInput_deploymentId, *v.DeploymentId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServicePipelineOutputsInput_nextToken, *v.NextToken)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.ListServicePipelineOutputsInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *ListServicePipelineOutputsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServicePipelineOutputsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServicePipelineOutputsInput_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.ListServicePipelineOutputsInput_deploymentId, v.DeploymentId)
+		case schemas.ListServicePipelineOutputsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServicePipelineOutputsInput_nextToken, v.NextToken)
+		case schemas.ListServicePipelineOutputsInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.ListServicePipelineOutputsInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type ListServicePipelineOutputsOutput struct {
 
 	// An array of service pipeline Infrastructure as Code (IaC) outputs.
@@ -61,13 +97,35 @@ type ListServicePipelineOutputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicePipelineOutputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServicePipelineOutputsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServicePipelineOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServicePipelineOutputsOutput_nextToken, *v.NextToken)
+	}
+	serializeOutputsList(s, schemas.ListServicePipelineOutputsOutput_outputs, v.Outputs)
+}
+func (v *ListServicePipelineOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServicePipelineOutputsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServicePipelineOutputsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServicePipelineOutputsOutput_nextToken, v.NextToken)
+		case schemas.ListServicePipelineOutputsOutput_outputs:
+			return deserializeOutputsList(d, schemas.ListServicePipelineOutputsOutput_outputs, &v.Outputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServicePipelineOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListServicePipelineOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServicePipelineOutputs, schemas.ListServicePipelineOutputsInput, schemas.ListServicePipelineOutputsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListServicePipelineOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServicePipelineOutputs, schemas.ListServicePipelineOutputsInput, schemas.ListServicePipelineOutputsOutput), output: &ListServicePipelineOutputsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

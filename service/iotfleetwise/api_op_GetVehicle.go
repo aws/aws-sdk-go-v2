@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetVehicleInput struct {
 	VehicleName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetVehicleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVehicleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VehicleName != nil {
+		s.WriteString(schemas.GetVehicleRequest_vehicleName, *v.VehicleName)
+	}
+}
+func (v *GetVehicleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVehicleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVehicleRequest_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.GetVehicleRequest_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
 }
 
 type GetVehicleOutput struct {
@@ -71,13 +95,68 @@ type GetVehicleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVehicleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVehicleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetVehicleResponse_arn, *v.Arn)
+	}
+	serializeattributesMap(s, schemas.GetVehicleResponse_attributes, v.Attributes)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetVehicleResponse_creationTime, *v.CreationTime)
+	}
+	if v.DecoderManifestArn != nil {
+		s.WriteString(schemas.GetVehicleResponse_decoderManifestArn, *v.DecoderManifestArn)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetVehicleResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	if v.ModelManifestArn != nil {
+		s.WriteString(schemas.GetVehicleResponse_modelManifestArn, *v.ModelManifestArn)
+	}
+	serializeStateTemplateAssociations(s, schemas.GetVehicleResponse_stateTemplates, v.StateTemplates)
+	if v.VehicleName != nil {
+		s.WriteString(schemas.GetVehicleResponse_vehicleName, *v.VehicleName)
+	}
+}
+func (v *GetVehicleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVehicleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVehicleResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetVehicleResponse_arn, v.Arn)
+		case schemas.GetVehicleResponse_attributes:
+			return deserializeattributesMap(d, schemas.GetVehicleResponse_attributes, &v.Attributes)
+		case schemas.GetVehicleResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetVehicleResponse_creationTime, v.CreationTime)
+		case schemas.GetVehicleResponse_decoderManifestArn:
+			v.DecoderManifestArn = new(string)
+			return d.ReadString(schemas.GetVehicleResponse_decoderManifestArn, v.DecoderManifestArn)
+		case schemas.GetVehicleResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetVehicleResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.GetVehicleResponse_modelManifestArn:
+			v.ModelManifestArn = new(string)
+			return d.ReadString(schemas.GetVehicleResponse_modelManifestArn, v.ModelManifestArn)
+		case schemas.GetVehicleResponse_stateTemplates:
+			return deserializeStateTemplateAssociations(d, schemas.GetVehicleResponse_stateTemplates, &v.StateTemplates)
+		case schemas.GetVehicleResponse_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.GetVehicleResponse_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVehicleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVehicle, schemas.GetVehicleRequest, schemas.GetVehicleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVehicle, schemas.GetVehicleRequest, schemas.GetVehicleResponse), output: &GetVehicleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

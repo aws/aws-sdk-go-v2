@@ -5,7 +5,9 @@ package fms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type ListAdminAccountsForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdminAccountsForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdminAccountsForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdminAccountsForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdminAccountsForOrganizationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdminAccountsForOrganizationRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAdminAccountsForOrganizationOutput struct {
 
 	// A list of Firewall Manager administrator accounts within the organization that
@@ -65,13 +82,35 @@ type ListAdminAccountsForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdminAccountsForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdminAccountsForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdminAccountsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdminAccountSummaryList(s, schemas.ListAdminAccountsForOrganizationResponse_AdminAccounts, v.AdminAccounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdminAccountsForOrganizationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAdminAccountsForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdminAccountsForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdminAccountsForOrganizationResponse_AdminAccounts:
+			return deserializeAdminAccountSummaryList(d, schemas.ListAdminAccountsForOrganizationResponse_AdminAccounts, &v.AdminAccounts)
+		case schemas.ListAdminAccountsForOrganizationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdminAccountsForOrganizationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdminAccountsForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAdminAccountsForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdminAccountsForOrganization, schemas.ListAdminAccountsForOrganizationRequest, schemas.ListAdminAccountsForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAdminAccountsForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdminAccountsForOrganization, schemas.ListAdminAccountsForOrganizationRequest, schemas.ListAdminAccountsForOrganizationResponse), output: &ListAdminAccountsForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

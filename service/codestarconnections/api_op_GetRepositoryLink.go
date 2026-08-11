@@ -4,7 +4,9 @@ package codestarconnections
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetRepositoryLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositoryLinkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositoryLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryLinkId != nil {
+		s.WriteString(schemas.GetRepositoryLinkInput_RepositoryLinkId, *v.RepositoryLinkId)
+	}
+}
+
 type GetRepositoryLinkOutput struct {
 
 	// The information returned for a specified repository link.
@@ -48,13 +62,34 @@ type GetRepositoryLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositoryLinkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositoryLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryLinkInfo != nil {
+		s.WriteStruct(schemas.GetRepositoryLinkOutput_RepositoryLinkInfo)
+		v.RepositoryLinkInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRepositoryLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRepositoryLinkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRepositoryLinkOutput_RepositoryLinkInfo:
+			v.RepositoryLinkInfo = &types.RepositoryLinkInfo{}
+			return v.RepositoryLinkInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRepositoryLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRepositoryLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryLink, schemas.GetRepositoryLinkInput, schemas.GetRepositoryLinkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRepositoryLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryLink, schemas.GetRepositoryLinkInput, schemas.GetRepositoryLinkOutput), output: &GetRepositoryLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

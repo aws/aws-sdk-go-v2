@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type ListProtectConfigurationRuleSetNumberOverridesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectConfigurationRuleSetNumberOverridesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectConfigurationRuleSetNumberOverridesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectConfigurationRuleSetNumberOverridesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListProtectConfigurationRuleSetNumberOverrideFilter(s, schemas.ListProtectConfigurationRuleSetNumberOverridesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtectConfigurationRuleSetNumberOverridesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectConfigurationRuleSetNumberOverridesRequest_NextToken, *v.NextToken)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.ListProtectConfigurationRuleSetNumberOverridesRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+
 type ListProtectConfigurationRuleSetNumberOverridesOutput struct {
 
 	// The Amazon Resource Name (ARN) of the protect configuration.
@@ -72,13 +93,47 @@ type ListProtectConfigurationRuleSetNumberOverridesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectConfigurationRuleSetNumberOverridesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectConfigurationRuleSetNumberOverridesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectConfigurationRuleSetNumberOverridesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectConfigurationRuleSetNumberOverridesResult_NextToken, *v.NextToken)
+	}
+	if v.ProtectConfigurationArn != nil {
+		s.WriteString(schemas.ListProtectConfigurationRuleSetNumberOverridesResult_ProtectConfigurationArn, *v.ProtectConfigurationArn)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.ListProtectConfigurationRuleSetNumberOverridesResult_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+	serializeProtectConfigurationRuleSetNumberOverrideList(s, schemas.ListProtectConfigurationRuleSetNumberOverridesResult_RuleSetNumberOverrides, v.RuleSetNumberOverrides)
+}
+func (v *ListProtectConfigurationRuleSetNumberOverridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectConfigurationRuleSetNumberOverridesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectConfigurationRuleSetNumberOverridesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectConfigurationRuleSetNumberOverridesResult_NextToken, v.NextToken)
+		case schemas.ListProtectConfigurationRuleSetNumberOverridesResult_ProtectConfigurationArn:
+			v.ProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.ListProtectConfigurationRuleSetNumberOverridesResult_ProtectConfigurationArn, v.ProtectConfigurationArn)
+		case schemas.ListProtectConfigurationRuleSetNumberOverridesResult_ProtectConfigurationId:
+			v.ProtectConfigurationId = new(string)
+			return d.ReadString(schemas.ListProtectConfigurationRuleSetNumberOverridesResult_ProtectConfigurationId, v.ProtectConfigurationId)
+		case schemas.ListProtectConfigurationRuleSetNumberOverridesResult_RuleSetNumberOverrides:
+			return deserializeProtectConfigurationRuleSetNumberOverrideList(d, schemas.ListProtectConfigurationRuleSetNumberOverridesResult_RuleSetNumberOverrides, &v.RuleSetNumberOverrides)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtectConfigurationRuleSetNumberOverridesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListProtectConfigurationRuleSetNumberOverrides{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectConfigurationRuleSetNumberOverrides, schemas.ListProtectConfigurationRuleSetNumberOverridesRequest, schemas.ListProtectConfigurationRuleSetNumberOverridesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListProtectConfigurationRuleSetNumberOverrides{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectConfigurationRuleSetNumberOverrides, schemas.ListProtectConfigurationRuleSetNumberOverridesRequest, schemas.ListProtectConfigurationRuleSetNumberOverridesResult), output: &ListProtectConfigurationRuleSetNumberOverridesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

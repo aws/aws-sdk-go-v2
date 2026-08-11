@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,59 @@ type CreateEnvironmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEnvironmentTemplateInput_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateEnvironmentTemplateInput_displayName, *v.DisplayName)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.CreateEnvironmentTemplateInput_encryptionKey, *v.EncryptionKey)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEnvironmentTemplateInput_name, *v.Name)
+	}
+	if v.Provisioning != "" {
+		s.WriteString(schemas.CreateEnvironmentTemplateInput_provisioning, string(v.Provisioning))
+	}
+	serializeTagList(s, schemas.CreateEnvironmentTemplateInput_tags, v.Tags)
+}
+func (v *CreateEnvironmentTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentTemplateInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateEnvironmentTemplateInput_description, v.Description)
+		case schemas.CreateEnvironmentTemplateInput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateEnvironmentTemplateInput_displayName, v.DisplayName)
+		case schemas.CreateEnvironmentTemplateInput_encryptionKey:
+			v.EncryptionKey = new(string)
+			return d.ReadString(schemas.CreateEnvironmentTemplateInput_encryptionKey, v.EncryptionKey)
+		case schemas.CreateEnvironmentTemplateInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateEnvironmentTemplateInput_name, v.Name)
+		case schemas.CreateEnvironmentTemplateInput_provisioning:
+			var ev string
+			if err := d.ReadString(schemas.CreateEnvironmentTemplateInput_provisioning, &ev); err != nil {
+				return err
+			}
+			v.Provisioning = types.Provisioning(ev)
+			return nil
+		case schemas.CreateEnvironmentTemplateInput_tags:
+			return deserializeTagList(d, schemas.CreateEnvironmentTemplateInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateEnvironmentTemplateOutput struct {
 
 	// The environment template detail data that's returned by Proton.
@@ -86,13 +141,34 @@ type CreateEnvironmentTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentTemplate != nil {
+		s.WriteStruct(schemas.CreateEnvironmentTemplateOutput_environmentTemplate)
+		v.EnvironmentTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEnvironmentTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentTemplateOutput_environmentTemplate:
+			v.EnvironmentTemplate = &types.EnvironmentTemplate{}
+			return v.EnvironmentTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEnvironmentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentTemplate, schemas.CreateEnvironmentTemplateInput, schemas.CreateEnvironmentTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEnvironmentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentTemplate, schemas.CreateEnvironmentTemplateInput, schemas.CreateEnvironmentTemplateOutput), output: &CreateEnvironmentTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

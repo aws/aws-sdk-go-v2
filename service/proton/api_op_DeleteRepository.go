@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,38 @@ type DeleteRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteRepositoryInput_name, *v.Name)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.DeleteRepositoryInput_provider, string(v.Provider))
+	}
+}
+func (v *DeleteRepositoryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRepositoryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRepositoryInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteRepositoryInput_name, v.Name)
+		case schemas.DeleteRepositoryInput_provider:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRepositoryInput_provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = types.RepositoryProvider(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type DeleteRepositoryOutput struct {
 
 	// The deleted repository link's detail data that's returned by Proton.
@@ -52,13 +86,34 @@ type DeleteRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Repository != nil {
+		s.WriteStruct(schemas.DeleteRepositoryOutput_repository)
+		v.Repository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRepositoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRepositoryOutput_repository:
+			v.Repository = &types.Repository{}
+			return v.Repository.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepository, schemas.DeleteRepositoryInput, schemas.DeleteRepositoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepository, schemas.DeleteRepositoryInput, schemas.DeleteRepositoryOutput), output: &DeleteRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

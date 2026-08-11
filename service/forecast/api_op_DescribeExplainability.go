@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeExplainabilityInput struct {
 	ExplainabilityArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeExplainabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExplainabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExplainabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplainabilityArn != nil {
+		s.WriteString(schemas.DescribeExplainabilityRequest_ExplainabilityArn, *v.ExplainabilityArn)
+	}
 }
 
 type DescribeExplainabilityOutput struct {
@@ -110,13 +124,116 @@ type DescribeExplainabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExplainabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExplainabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExplainabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeExplainabilityResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.DescribeExplainabilityResponse_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableVisualization != nil {
+		s.WriteBool(schemas.DescribeExplainabilityResponse_EnableVisualization, *v.EnableVisualization)
+	}
+	if v.EndDateTime != nil {
+		s.WriteString(schemas.DescribeExplainabilityResponse_EndDateTime, *v.EndDateTime)
+	}
+	if v.EstimatedTimeRemainingInMinutes != nil {
+		s.WriteInt64(schemas.DescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes, *v.EstimatedTimeRemainingInMinutes)
+	}
+	if v.ExplainabilityArn != nil {
+		s.WriteString(schemas.DescribeExplainabilityResponse_ExplainabilityArn, *v.ExplainabilityArn)
+	}
+	if v.ExplainabilityConfig != nil {
+		s.WriteStruct(schemas.DescribeExplainabilityResponse_ExplainabilityConfig)
+		v.ExplainabilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExplainabilityName != nil {
+		s.WriteString(schemas.DescribeExplainabilityResponse_ExplainabilityName, *v.ExplainabilityName)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeExplainabilityResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeExplainabilityResponse_Message, *v.Message)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeExplainabilityResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.Schema != nil {
+		s.WriteStruct(schemas.DescribeExplainabilityResponse_Schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartDateTime != nil {
+		s.WriteString(schemas.DescribeExplainabilityResponse_StartDateTime, *v.StartDateTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeExplainabilityResponse_Status, *v.Status)
+	}
+}
+func (v *DescribeExplainabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExplainabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExplainabilityResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeExplainabilityResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeExplainabilityResponse_DataSource:
+			v.DataSource = &types.DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.DescribeExplainabilityResponse_EnableVisualization:
+			v.EnableVisualization = new(bool)
+			return d.ReadBool(schemas.DescribeExplainabilityResponse_EnableVisualization, v.EnableVisualization)
+		case schemas.DescribeExplainabilityResponse_EndDateTime:
+			v.EndDateTime = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityResponse_EndDateTime, v.EndDateTime)
+		case schemas.DescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes:
+			v.EstimatedTimeRemainingInMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeExplainabilityResponse_EstimatedTimeRemainingInMinutes, v.EstimatedTimeRemainingInMinutes)
+		case schemas.DescribeExplainabilityResponse_ExplainabilityArn:
+			v.ExplainabilityArn = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityResponse_ExplainabilityArn, v.ExplainabilityArn)
+		case schemas.DescribeExplainabilityResponse_ExplainabilityConfig:
+			v.ExplainabilityConfig = &types.ExplainabilityConfig{}
+			return v.ExplainabilityConfig.Deserialize(d)
+		case schemas.DescribeExplainabilityResponse_ExplainabilityName:
+			v.ExplainabilityName = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityResponse_ExplainabilityName, v.ExplainabilityName)
+		case schemas.DescribeExplainabilityResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeExplainabilityResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeExplainabilityResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityResponse_Message, v.Message)
+		case schemas.DescribeExplainabilityResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityResponse_ResourceArn, v.ResourceArn)
+		case schemas.DescribeExplainabilityResponse_Schema:
+			v.Schema = &types.Schema{}
+			return v.Schema.Deserialize(d)
+		case schemas.DescribeExplainabilityResponse_StartDateTime:
+			v.StartDateTime = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityResponse_StartDateTime, v.StartDateTime)
+		case schemas.DescribeExplainabilityResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeExplainabilityResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExplainabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExplainability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExplainability, schemas.DescribeExplainabilityRequest, schemas.DescribeExplainabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExplainability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExplainability, schemas.DescribeExplainabilityRequest, schemas.DescribeExplainabilityResponse), output: &DescribeExplainabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

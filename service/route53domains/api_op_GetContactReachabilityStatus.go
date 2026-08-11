@@ -4,7 +4,9 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetContactReachabilityStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactReachabilityStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactReachabilityStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactReachabilityStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetContactReachabilityStatusRequest_domainName, *v.DomainName)
+	}
+}
+
 type GetContactReachabilityStatusOutput struct {
 
 	// The domain name for which you requested the reachability status.
@@ -58,13 +72,42 @@ type GetContactReachabilityStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactReachabilityStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactReachabilityStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactReachabilityStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetContactReachabilityStatusResponse_domainName, *v.DomainName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetContactReachabilityStatusResponse_status, string(v.Status))
+	}
+}
+func (v *GetContactReachabilityStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContactReachabilityStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContactReachabilityStatusResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetContactReachabilityStatusResponse_domainName, v.DomainName)
+		case schemas.GetContactReachabilityStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetContactReachabilityStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReachabilityStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContactReachabilityStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContactReachabilityStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactReachabilityStatus, schemas.GetContactReachabilityStatusRequest, schemas.GetContactReachabilityStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetContactReachabilityStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactReachabilityStatus, schemas.GetContactReachabilityStatusRequest, schemas.GetContactReachabilityStatusResponse), output: &GetContactReachabilityStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

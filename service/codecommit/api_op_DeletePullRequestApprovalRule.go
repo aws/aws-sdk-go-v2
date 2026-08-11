@@ -4,6 +4,8 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DeletePullRequestApprovalRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePullRequestApprovalRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePullRequestApprovalRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePullRequestApprovalRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleName != nil {
+		s.WriteString(schemas.DeletePullRequestApprovalRuleInput_approvalRuleName, *v.ApprovalRuleName)
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.DeletePullRequestApprovalRuleInput_pullRequestId, *v.PullRequestId)
+	}
+}
+
 type DeletePullRequestApprovalRuleOutput struct {
 
 	// The ID of the deleted approval rule.
@@ -60,13 +77,32 @@ type DeletePullRequestApprovalRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePullRequestApprovalRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePullRequestApprovalRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePullRequestApprovalRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleId != nil {
+		s.WriteString(schemas.DeletePullRequestApprovalRuleOutput_approvalRuleId, *v.ApprovalRuleId)
+	}
+}
+func (v *DeletePullRequestApprovalRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePullRequestApprovalRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePullRequestApprovalRuleOutput_approvalRuleId:
+			v.ApprovalRuleId = new(string)
+			return d.ReadString(schemas.DeletePullRequestApprovalRuleOutput_approvalRuleId, v.ApprovalRuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePullRequestApprovalRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePullRequestApprovalRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePullRequestApprovalRule, schemas.DeletePullRequestApprovalRuleInput, schemas.DeletePullRequestApprovalRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePullRequestApprovalRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePullRequestApprovalRule, schemas.DeletePullRequestApprovalRuleInput, schemas.DeletePullRequestApprovalRuleOutput), output: &DeletePullRequestApprovalRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

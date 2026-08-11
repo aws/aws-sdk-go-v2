@@ -4,7 +4,9 @@ package chimesdkmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type DescribeChannelMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DescribeChannelMembershipRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.DescribeChannelMembershipRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.MemberArn != nil {
+		s.WriteString(schemas.DescribeChannelMembershipRequest_MemberArn, *v.MemberArn)
+	}
+	if v.SubChannelId != nil {
+		s.WriteString(schemas.DescribeChannelMembershipRequest_SubChannelId, *v.SubChannelId)
+	}
+}
+
 type DescribeChannelMembershipOutput struct {
 
 	// The details of the membership.
@@ -65,13 +88,34 @@ type DescribeChannelMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelMembership != nil {
+		s.WriteStruct(schemas.DescribeChannelMembershipResponse_ChannelMembership)
+		v.ChannelMembership.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeChannelMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChannelMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChannelMembershipResponse_ChannelMembership:
+			v.ChannelMembership = &types.ChannelMembership{}
+			return v.ChannelMembership.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannelMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelMembership, schemas.DescribeChannelMembershipRequest, schemas.DescribeChannelMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeChannelMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelMembership, schemas.DescribeChannelMembershipRequest, schemas.DescribeChannelMembershipResponse), output: &DescribeChannelMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

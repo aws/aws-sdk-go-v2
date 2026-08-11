@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeAutoPredictorInput struct {
 	PredictorArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAutoPredictorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutoPredictorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoPredictorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.DescribeAutoPredictorRequest_PredictorArn, *v.PredictorArn)
+	}
 }
 
 type DescribeAutoPredictorOutput struct {
@@ -132,13 +146,147 @@ type DescribeAutoPredictorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoPredictorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutoPredictorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoPredictorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeAutoPredictorResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DataConfig != nil {
+		s.WriteStruct(schemas.DescribeAutoPredictorResponse_DataConfig)
+		v.DataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeArnList(s, schemas.DescribeAutoPredictorResponse_DatasetImportJobArns, v.DatasetImportJobArns)
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.DescribeAutoPredictorResponse_EncryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EstimatedTimeRemainingInMinutes != nil {
+		s.WriteInt64(schemas.DescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes, *v.EstimatedTimeRemainingInMinutes)
+	}
+	if v.ExplainabilityInfo != nil {
+		s.WriteStruct(schemas.DescribeAutoPredictorResponse_ExplainabilityInfo)
+		v.ExplainabilityInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeForecastDimensions(s, schemas.DescribeAutoPredictorResponse_ForecastDimensions, v.ForecastDimensions)
+	if v.ForecastFrequency != nil {
+		s.WriteString(schemas.DescribeAutoPredictorResponse_ForecastFrequency, *v.ForecastFrequency)
+	}
+	if v.ForecastHorizon != nil {
+		s.WriteInt32(schemas.DescribeAutoPredictorResponse_ForecastHorizon, *v.ForecastHorizon)
+	}
+	serializeForecastTypes(s, schemas.DescribeAutoPredictorResponse_ForecastTypes, v.ForecastTypes)
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeAutoPredictorResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeAutoPredictorResponse_Message, *v.Message)
+	}
+	if v.MonitorInfo != nil {
+		s.WriteStruct(schemas.DescribeAutoPredictorResponse_MonitorInfo)
+		v.MonitorInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OptimizationMetric != "" {
+		s.WriteString(schemas.DescribeAutoPredictorResponse_OptimizationMetric, string(v.OptimizationMetric))
+	}
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.DescribeAutoPredictorResponse_PredictorArn, *v.PredictorArn)
+	}
+	if v.PredictorName != nil {
+		s.WriteString(schemas.DescribeAutoPredictorResponse_PredictorName, *v.PredictorName)
+	}
+	if v.ReferencePredictorSummary != nil {
+		s.WriteStruct(schemas.DescribeAutoPredictorResponse_ReferencePredictorSummary)
+		v.ReferencePredictorSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeAutoPredictorResponse_Status, *v.Status)
+	}
+	if v.TimeAlignmentBoundary != nil {
+		s.WriteStruct(schemas.DescribeAutoPredictorResponse_TimeAlignmentBoundary)
+		v.TimeAlignmentBoundary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAutoPredictorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAutoPredictorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAutoPredictorResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAutoPredictorResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeAutoPredictorResponse_DataConfig:
+			v.DataConfig = &types.DataConfig{}
+			return v.DataConfig.Deserialize(d)
+		case schemas.DescribeAutoPredictorResponse_DatasetImportJobArns:
+			return deserializeArnList(d, schemas.DescribeAutoPredictorResponse_DatasetImportJobArns, &v.DatasetImportJobArns)
+		case schemas.DescribeAutoPredictorResponse_EncryptionConfig:
+			v.EncryptionConfig = &types.EncryptionConfig{}
+			return v.EncryptionConfig.Deserialize(d)
+		case schemas.DescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes:
+			v.EstimatedTimeRemainingInMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeAutoPredictorResponse_EstimatedTimeRemainingInMinutes, v.EstimatedTimeRemainingInMinutes)
+		case schemas.DescribeAutoPredictorResponse_ExplainabilityInfo:
+			v.ExplainabilityInfo = &types.ExplainabilityInfo{}
+			return v.ExplainabilityInfo.Deserialize(d)
+		case schemas.DescribeAutoPredictorResponse_ForecastDimensions:
+			return deserializeForecastDimensions(d, schemas.DescribeAutoPredictorResponse_ForecastDimensions, &v.ForecastDimensions)
+		case schemas.DescribeAutoPredictorResponse_ForecastFrequency:
+			v.ForecastFrequency = new(string)
+			return d.ReadString(schemas.DescribeAutoPredictorResponse_ForecastFrequency, v.ForecastFrequency)
+		case schemas.DescribeAutoPredictorResponse_ForecastHorizon:
+			v.ForecastHorizon = new(int32)
+			return d.ReadInt32(schemas.DescribeAutoPredictorResponse_ForecastHorizon, v.ForecastHorizon)
+		case schemas.DescribeAutoPredictorResponse_ForecastTypes:
+			return deserializeForecastTypes(d, schemas.DescribeAutoPredictorResponse_ForecastTypes, &v.ForecastTypes)
+		case schemas.DescribeAutoPredictorResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAutoPredictorResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeAutoPredictorResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeAutoPredictorResponse_Message, v.Message)
+		case schemas.DescribeAutoPredictorResponse_MonitorInfo:
+			v.MonitorInfo = &types.MonitorInfo{}
+			return v.MonitorInfo.Deserialize(d)
+		case schemas.DescribeAutoPredictorResponse_OptimizationMetric:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAutoPredictorResponse_OptimizationMetric, &ev); err != nil {
+				return err
+			}
+			v.OptimizationMetric = types.OptimizationMetric(ev)
+			return nil
+		case schemas.DescribeAutoPredictorResponse_PredictorArn:
+			v.PredictorArn = new(string)
+			return d.ReadString(schemas.DescribeAutoPredictorResponse_PredictorArn, v.PredictorArn)
+		case schemas.DescribeAutoPredictorResponse_PredictorName:
+			v.PredictorName = new(string)
+			return d.ReadString(schemas.DescribeAutoPredictorResponse_PredictorName, v.PredictorName)
+		case schemas.DescribeAutoPredictorResponse_ReferencePredictorSummary:
+			v.ReferencePredictorSummary = &types.ReferencePredictorSummary{}
+			return v.ReferencePredictorSummary.Deserialize(d)
+		case schemas.DescribeAutoPredictorResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeAutoPredictorResponse_Status, v.Status)
+		case schemas.DescribeAutoPredictorResponse_TimeAlignmentBoundary:
+			v.TimeAlignmentBoundary = &types.TimeAlignmentBoundary{}
+			return v.TimeAlignmentBoundary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutoPredictorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAutoPredictor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoPredictor, schemas.DescribeAutoPredictorRequest, schemas.DescribeAutoPredictorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAutoPredictor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoPredictor, schemas.DescribeAutoPredictorRequest, schemas.DescribeAutoPredictorResponse), output: &DescribeAutoPredictorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

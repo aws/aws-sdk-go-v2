@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,31 @@ type UpdateAvailabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAvailabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAvailabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAvailabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateAvailabilityConfigurationRequest_DomainName, *v.DomainName)
+	}
+	if v.EwsProvider != nil {
+		s.WriteStruct(schemas.UpdateAvailabilityConfigurationRequest_EwsProvider)
+		v.EwsProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaProvider != nil {
+		s.WriteStruct(schemas.UpdateAvailabilityConfigurationRequest_LambdaProvider)
+		v.LambdaProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.UpdateAvailabilityConfigurationRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type UpdateAvailabilityConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +85,26 @@ type UpdateAvailabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAvailabilityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAvailabilityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAvailabilityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAvailabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAvailabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAvailabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAvailabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAvailabilityConfiguration, schemas.UpdateAvailabilityConfigurationRequest, schemas.UpdateAvailabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAvailabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAvailabilityConfiguration, schemas.UpdateAvailabilityConfigurationRequest, schemas.UpdateAvailabilityConfigurationResponse), output: &UpdateAvailabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type GetAccessControlEffectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessControlEffectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessControlEffectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessControlEffectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.GetAccessControlEffectRequest_Action, *v.Action)
+	}
+	if v.ImpersonationRoleId != nil {
+		s.WriteString(schemas.GetAccessControlEffectRequest_ImpersonationRoleId, *v.ImpersonationRoleId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.GetAccessControlEffectRequest_IpAddress, *v.IpAddress)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetAccessControlEffectRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetAccessControlEffectRequest_UserId, *v.UserId)
+	}
+}
+
 type GetAccessControlEffectOutput struct {
 
 	// The rule effect.
@@ -68,13 +94,39 @@ type GetAccessControlEffectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessControlEffectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessControlEffectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessControlEffectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Effect != "" {
+		s.WriteString(schemas.GetAccessControlEffectResponse_Effect, string(v.Effect))
+	}
+	serializeAccessControlRuleNameList(s, schemas.GetAccessControlEffectResponse_MatchedRules, v.MatchedRules)
+}
+func (v *GetAccessControlEffectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessControlEffectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessControlEffectResponse_Effect:
+			var ev string
+			if err := d.ReadString(schemas.GetAccessControlEffectResponse_Effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = types.AccessControlRuleEffect(ev)
+			return nil
+		case schemas.GetAccessControlEffectResponse_MatchedRules:
+			return deserializeAccessControlRuleNameList(d, schemas.GetAccessControlEffectResponse_MatchedRules, &v.MatchedRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccessControlEffectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccessControlEffect{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessControlEffect, schemas.GetAccessControlEffectRequest, schemas.GetAccessControlEffectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAccessControlEffect{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessControlEffect, schemas.GetAccessControlEffectRequest, schemas.GetAccessControlEffectResponse), output: &GetAccessControlEffectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

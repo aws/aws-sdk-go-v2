@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type ListPersonalAccessTokensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPersonalAccessTokensInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPersonalAccessTokensRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPersonalAccessTokensInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPersonalAccessTokensRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPersonalAccessTokensRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListPersonalAccessTokensRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListPersonalAccessTokensRequest_UserId, *v.UserId)
+	}
+}
+
 type ListPersonalAccessTokensOutput struct {
 
 	//  The token from the previous response to query the next page.
@@ -59,13 +82,35 @@ type ListPersonalAccessTokensOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPersonalAccessTokensOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPersonalAccessTokensResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPersonalAccessTokensOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPersonalAccessTokensResponse_NextToken, *v.NextToken)
+	}
+	serializePersonalAccessTokenSummaryList(s, schemas.ListPersonalAccessTokensResponse_PersonalAccessTokenSummaries, v.PersonalAccessTokenSummaries)
+}
+func (v *ListPersonalAccessTokensOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPersonalAccessTokensResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPersonalAccessTokensResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPersonalAccessTokensResponse_NextToken, v.NextToken)
+		case schemas.ListPersonalAccessTokensResponse_PersonalAccessTokenSummaries:
+			return deserializePersonalAccessTokenSummaryList(d, schemas.ListPersonalAccessTokensResponse_PersonalAccessTokenSummaries, &v.PersonalAccessTokenSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPersonalAccessTokensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPersonalAccessTokens{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPersonalAccessTokens, schemas.ListPersonalAccessTokensRequest, schemas.ListPersonalAccessTokensResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPersonalAccessTokens{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPersonalAccessTokens, schemas.ListPersonalAccessTokensRequest, schemas.ListPersonalAccessTokensResponse), output: &ListPersonalAccessTokensOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package groundstation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListMissionProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMissionProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMissionProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMissionProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMissionProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMissionProfilesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Output for the ListMissionProfiles operation.
 type ListMissionProfilesOutput struct {
 
@@ -54,13 +71,35 @@ type ListMissionProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMissionProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMissionProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMissionProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMissionProfileList(s, schemas.ListMissionProfilesResponse_missionProfileList, v.MissionProfileList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMissionProfilesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMissionProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMissionProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMissionProfilesResponse_missionProfileList:
+			return deserializeMissionProfileList(d, schemas.ListMissionProfilesResponse_missionProfileList, &v.MissionProfileList)
+		case schemas.ListMissionProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMissionProfilesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMissionProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMissionProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMissionProfiles, schemas.ListMissionProfilesRequest, schemas.ListMissionProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMissionProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMissionProfiles, schemas.ListMissionProfilesRequest, schemas.ListMissionProfilesResponse), output: &ListMissionProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,34 @@ type ListComponentProvisionedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentProvisionedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentProvisionedResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentProvisionedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.ListComponentProvisionedResourcesInput_componentName, *v.ComponentName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentProvisionedResourcesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListComponentProvisionedResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComponentProvisionedResourcesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComponentProvisionedResourcesInput_componentName:
+			v.ComponentName = new(string)
+			return d.ReadString(schemas.ListComponentProvisionedResourcesInput_componentName, v.ComponentName)
+		case schemas.ListComponentProvisionedResourcesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComponentProvisionedResourcesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListComponentProvisionedResourcesOutput struct {
 
 	// An array of provisioned resources for a component.
@@ -64,13 +94,35 @@ type ListComponentProvisionedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentProvisionedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentProvisionedResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentProvisionedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentProvisionedResourcesOutput_nextToken, *v.NextToken)
+	}
+	serializeProvisionedResourceList(s, schemas.ListComponentProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+}
+func (v *ListComponentProvisionedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComponentProvisionedResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComponentProvisionedResourcesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComponentProvisionedResourcesOutput_nextToken, v.NextToken)
+		case schemas.ListComponentProvisionedResourcesOutput_provisionedResources:
+			return deserializeProvisionedResourceList(d, schemas.ListComponentProvisionedResourcesOutput_provisionedResources, &v.ProvisionedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComponentProvisionedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListComponentProvisionedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentProvisionedResources, schemas.ListComponentProvisionedResourcesInput, schemas.ListComponentProvisionedResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListComponentProvisionedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentProvisionedResources, schemas.ListComponentProvisionedResourcesInput, schemas.ListComponentProvisionedResourcesOutput), output: &ListComponentProvisionedResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

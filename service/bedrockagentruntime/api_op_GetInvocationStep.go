@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type GetInvocationStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvocationStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvocationStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvocationStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationIdentifier != nil {
+		s.WriteString(schemas.GetInvocationStepRequest_invocationIdentifier, *v.InvocationIdentifier)
+	}
+	if v.InvocationStepId != nil {
+		s.WriteString(schemas.GetInvocationStepRequest_invocationStepId, *v.InvocationStepId)
+	}
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.GetInvocationStepRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+}
+
 type GetInvocationStepOutput struct {
 
 	// The complete details of the requested invocation step.
@@ -62,13 +82,34 @@ type GetInvocationStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvocationStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvocationStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvocationStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationStep != nil {
+		s.WriteStruct(schemas.GetInvocationStepResponse_invocationStep)
+		v.InvocationStep.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInvocationStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInvocationStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInvocationStepResponse_invocationStep:
+			v.InvocationStep = &types.InvocationStep{}
+			return v.InvocationStep.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInvocationStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInvocationStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvocationStep, schemas.GetInvocationStepRequest, schemas.GetInvocationStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInvocationStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvocationStep, schemas.GetInvocationStepRequest, schemas.GetInvocationStepResponse), output: &GetInvocationStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

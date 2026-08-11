@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type DeleteDataLakeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataLakeOrganizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataLakeOrganizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataLakeOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataLakeAutoEnableNewAccountConfigurationList(s, schemas.DeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount, v.AutoEnableNewAccount)
+}
+
 type DeleteDataLakeOrganizationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +56,26 @@ type DeleteDataLakeOrganizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataLakeOrganizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataLakeOrganizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataLakeOrganizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDataLakeOrganizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataLakeOrganizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataLakeOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataLakeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLakeOrganizationConfiguration, schemas.DeleteDataLakeOrganizationConfigurationRequest, schemas.DeleteDataLakeOrganizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataLakeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLakeOrganizationConfiguration, schemas.DeleteDataLakeOrganizationConfigurationRequest, schemas.DeleteDataLakeOrganizationConfigurationResponse), output: &DeleteDataLakeOrganizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

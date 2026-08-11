@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,29 @@ type PutTaxExemptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxExemptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxExemptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxExemptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.PutTaxExemptionRequest_accountIds, v.AccountIds)
+	if v.Authority != nil {
+		s.WriteStruct(schemas.PutTaxExemptionRequest_authority)
+		v.Authority.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExemptionCertificate != nil {
+		s.WriteStruct(schemas.PutTaxExemptionRequest_exemptionCertificate)
+		v.ExemptionCertificate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExemptionType != nil {
+		s.WriteString(schemas.PutTaxExemptionRequest_exemptionType, *v.ExemptionType)
+	}
+}
+
 type PutTaxExemptionOutput struct {
 
 	// The customer support case ID.
@@ -61,13 +86,32 @@ type PutTaxExemptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxExemptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxExemptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxExemptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.PutTaxExemptionResponse_caseId, *v.CaseId)
+	}
+}
+func (v *PutTaxExemptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTaxExemptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutTaxExemptionResponse_caseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.PutTaxExemptionResponse_caseId, v.CaseId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTaxExemptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTaxExemption{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxExemption, schemas.PutTaxExemptionRequest, schemas.PutTaxExemptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTaxExemption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxExemption, schemas.PutTaxExemptionRequest, schemas.PutTaxExemptionResponse), output: &PutTaxExemptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

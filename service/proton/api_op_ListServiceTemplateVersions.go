@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,46 @@ type ListServiceTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceTemplateVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceTemplateVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceTemplateVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MajorVersion != nil {
+		s.WriteString(schemas.ListServiceTemplateVersionsInput_majorVersion, *v.MajorVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceTemplateVersionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceTemplateVersionsInput_nextToken, *v.NextToken)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.ListServiceTemplateVersionsInput_templateName, *v.TemplateName)
+	}
+}
+func (v *ListServiceTemplateVersionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceTemplateVersionsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceTemplateVersionsInput_majorVersion:
+			v.MajorVersion = new(string)
+			return d.ReadString(schemas.ListServiceTemplateVersionsInput_majorVersion, v.MajorVersion)
+		case schemas.ListServiceTemplateVersionsInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListServiceTemplateVersionsInput_maxResults, v.MaxResults)
+		case schemas.ListServiceTemplateVersionsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceTemplateVersionsInput_nextToken, v.NextToken)
+		case schemas.ListServiceTemplateVersionsInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.ListServiceTemplateVersionsInput_templateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 type ListServiceTemplateVersionsOutput struct {
 
 	// An array of major or minor versions of a service template with detail data.
@@ -69,13 +111,35 @@ type ListServiceTemplateVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceTemplateVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceTemplateVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceTemplateVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceTemplateVersionsOutput_nextToken, *v.NextToken)
+	}
+	serializeServiceTemplateVersionSummaryList(s, schemas.ListServiceTemplateVersionsOutput_templateVersions, v.TemplateVersions)
+}
+func (v *ListServiceTemplateVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceTemplateVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceTemplateVersionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceTemplateVersionsOutput_nextToken, v.NextToken)
+		case schemas.ListServiceTemplateVersionsOutput_templateVersions:
+			return deserializeServiceTemplateVersionSummaryList(d, schemas.ListServiceTemplateVersionsOutput_templateVersions, &v.TemplateVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListServiceTemplateVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceTemplateVersions, schemas.ListServiceTemplateVersionsInput, schemas.ListServiceTemplateVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListServiceTemplateVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceTemplateVersions, schemas.ListServiceTemplateVersionsInput, schemas.ListServiceTemplateVersionsOutput), output: &ListServiceTemplateVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

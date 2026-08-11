@@ -4,6 +4,8 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type DisableNotificationsAccessForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableNotificationsAccessForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableNotificationsAccessForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableNotificationsAccessForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DisableNotificationsAccessForOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -35,13 +46,26 @@ type DisableNotificationsAccessForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableNotificationsAccessForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableNotificationsAccessForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableNotificationsAccessForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableNotificationsAccessForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableNotificationsAccessForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableNotificationsAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableNotificationsAccessForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableNotificationsAccessForOrganization, schemas.DisableNotificationsAccessForOrganizationRequest, schemas.DisableNotificationsAccessForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableNotificationsAccessForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableNotificationsAccessForOrganization, schemas.DisableNotificationsAccessForOrganizationRequest, schemas.DisableNotificationsAccessForOrganizationResponse), output: &DisableNotificationsAccessForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

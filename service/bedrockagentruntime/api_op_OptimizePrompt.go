@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -45,6 +47,19 @@ type OptimizePromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OptimizePromptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptimizePromptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OptimizePromptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInputPrompt(s, schemas.OptimizePromptRequest_input, v.Input)
+	if v.TargetModelId != nil {
+		s.WriteString(schemas.OptimizePromptRequest_targetModelId, *v.TargetModelId)
+	}
+}
+
 type OptimizePromptOutput struct {
 	eventStream *OptimizePromptEventStream
 
@@ -54,24 +69,38 @@ type OptimizePromptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OptimizePromptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptimizePromptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OptimizePromptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *OptimizePromptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OptimizePromptResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *OptimizePromptOutput) GetStream() *OptimizePromptEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationOptimizePromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpOptimizePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptimizePrompt, schemas.OptimizePromptRequest, schemas.OptimizePromptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpOptimizePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptimizePrompt, schemas.OptimizePromptRequest, schemas.OptimizePromptResponse), output: &OptimizePromptOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamOptimizePrompt{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamOptimizePromptMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}

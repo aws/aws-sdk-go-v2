@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type BatchDisassociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentifierList(s, schemas.BatchDisassociateResourceRequest_Items, v.Items)
+	if v.ResourceSetIdentifier != nil {
+		s.WriteString(schemas.BatchDisassociateResourceRequest_ResourceSetIdentifier, *v.ResourceSetIdentifier)
+	}
+}
+
 type BatchDisassociateResourceOutput struct {
 
 	// The resources that failed to disassociate from the resource set.
@@ -61,13 +76,35 @@ type BatchDisassociateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedItemList(s, schemas.BatchDisassociateResourceResponse_FailedItems, v.FailedItems)
+	if v.ResourceSetIdentifier != nil {
+		s.WriteString(schemas.BatchDisassociateResourceResponse_ResourceSetIdentifier, *v.ResourceSetIdentifier)
+	}
+}
+func (v *BatchDisassociateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateResourceResponse_FailedItems:
+			return deserializeFailedItemList(d, schemas.BatchDisassociateResourceResponse_FailedItems, &v.FailedItems)
+		case schemas.BatchDisassociateResourceResponse_ResourceSetIdentifier:
+			v.ResourceSetIdentifier = new(string)
+			return d.ReadString(schemas.BatchDisassociateResourceResponse_ResourceSetIdentifier, v.ResourceSetIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDisassociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateResource, schemas.BatchDisassociateResourceRequest, schemas.BatchDisassociateResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDisassociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateResource, schemas.BatchDisassociateResourceRequest, schemas.BatchDisassociateResourceResponse), output: &BatchDisassociateResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

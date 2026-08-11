@@ -4,6 +4,8 @@ package migrationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type CreateProgressUpdateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProgressUpdateStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProgressUpdateStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProgressUpdateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateProgressUpdateStreamRequest_DryRun, v.DryRun)
+	}
+	if v.ProgressUpdateStreamName != nil {
+		s.WriteString(schemas.CreateProgressUpdateStreamRequest_ProgressUpdateStreamName, *v.ProgressUpdateStreamName)
+	}
+}
+
 type CreateProgressUpdateStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type CreateProgressUpdateStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProgressUpdateStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProgressUpdateStreamResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProgressUpdateStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateProgressUpdateStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProgressUpdateStreamResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProgressUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProgressUpdateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProgressUpdateStream, schemas.CreateProgressUpdateStreamRequest, schemas.CreateProgressUpdateStreamResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProgressUpdateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProgressUpdateStream, schemas.CreateProgressUpdateStreamRequest, schemas.CreateProgressUpdateStreamResult), output: &CreateProgressUpdateStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

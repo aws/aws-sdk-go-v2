@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,59 @@ type CreateDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDecoderManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDecoderManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDecoderManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultForUnmappedSignals != "" {
+		s.WriteString(schemas.CreateDecoderManifestRequest_defaultForUnmappedSignals, string(v.DefaultForUnmappedSignals))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDecoderManifestRequest_description, *v.Description)
+	}
+	if v.ModelManifestArn != nil {
+		s.WriteString(schemas.CreateDecoderManifestRequest_modelManifestArn, *v.ModelManifestArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDecoderManifestRequest_name, *v.Name)
+	}
+	serializeNetworkInterfaces(s, schemas.CreateDecoderManifestRequest_networkInterfaces, v.NetworkInterfaces)
+	serializeSignalDecoders(s, schemas.CreateDecoderManifestRequest_signalDecoders, v.SignalDecoders)
+	serializeTagList(s, schemas.CreateDecoderManifestRequest_tags, v.Tags)
+}
+func (v *CreateDecoderManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDecoderManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDecoderManifestRequest_defaultForUnmappedSignals:
+			var ev string
+			if err := d.ReadString(schemas.CreateDecoderManifestRequest_defaultForUnmappedSignals, &ev); err != nil {
+				return err
+			}
+			v.DefaultForUnmappedSignals = types.DefaultForUnmappedSignalsType(ev)
+			return nil
+		case schemas.CreateDecoderManifestRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateDecoderManifestRequest_description, v.Description)
+		case schemas.CreateDecoderManifestRequest_modelManifestArn:
+			v.ModelManifestArn = new(string)
+			return d.ReadString(schemas.CreateDecoderManifestRequest_modelManifestArn, v.ModelManifestArn)
+		case schemas.CreateDecoderManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDecoderManifestRequest_name, v.Name)
+		case schemas.CreateDecoderManifestRequest_networkInterfaces:
+			return deserializeNetworkInterfaces(d, schemas.CreateDecoderManifestRequest_networkInterfaces, &v.NetworkInterfaces)
+		case schemas.CreateDecoderManifestRequest_signalDecoders:
+			return deserializeSignalDecoders(d, schemas.CreateDecoderManifestRequest_signalDecoders, &v.SignalDecoders)
+		case schemas.CreateDecoderManifestRequest_tags:
+			return deserializeTagList(d, schemas.CreateDecoderManifestRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateDecoderManifestOutput struct {
 
 	//  The ARN of the created decoder manifest.
@@ -88,13 +143,38 @@ type CreateDecoderManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDecoderManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDecoderManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDecoderManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDecoderManifestResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDecoderManifestResponse_name, *v.Name)
+	}
+}
+func (v *CreateDecoderManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDecoderManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDecoderManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDecoderManifestResponse_arn, v.Arn)
+		case schemas.CreateDecoderManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDecoderManifestResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDecoderManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDecoderManifest, schemas.CreateDecoderManifestRequest, schemas.CreateDecoderManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDecoderManifest, schemas.CreateDecoderManifestRequest, schemas.CreateDecoderManifestResponse), output: &CreateDecoderManifestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

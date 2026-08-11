@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type ListServiceTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceTemplatesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceTemplatesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceTemplatesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServiceTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceTemplatesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceTemplatesInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListServiceTemplatesInput_maxResults, v.MaxResults)
+		case schemas.ListServiceTemplatesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceTemplatesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListServiceTemplatesOutput struct {
 
 	// An array of service templates with detail data.
@@ -56,13 +86,35 @@ type ListServiceTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceTemplatesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceTemplatesOutput_nextToken, *v.NextToken)
+	}
+	serializeServiceTemplateSummaryList(s, schemas.ListServiceTemplatesOutput_templates, v.Templates)
+}
+func (v *ListServiceTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceTemplatesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceTemplatesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceTemplatesOutput_nextToken, v.NextToken)
+		case schemas.ListServiceTemplatesOutput_templates:
+			return deserializeServiceTemplateSummaryList(d, schemas.ListServiceTemplatesOutput_templates, &v.Templates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListServiceTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceTemplates, schemas.ListServiceTemplatesInput, schemas.ListServiceTemplatesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListServiceTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceTemplates, schemas.ListServiceTemplatesInput, schemas.ListServiceTemplatesOutput), output: &ListServiceTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

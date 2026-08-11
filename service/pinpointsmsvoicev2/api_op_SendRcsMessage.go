@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,53 @@ type SendRcsMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendRcsMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendRcsMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendRcsMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendRcsMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeContextMap(s, schemas.SendRcsMessageRequest_Context, v.Context)
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.SendRcsMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.SendRcsMessageRequest_DryRun, v.DryRun)
+	}
+	if v.FallbackConfiguration != nil {
+		s.WriteStruct(schemas.SendRcsMessageRequest_FallbackConfiguration)
+		v.FallbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxPrice != nil {
+		s.WriteString(schemas.SendRcsMessageRequest_MaxPrice, *v.MaxPrice)
+	}
+	if v.MessageFeedbackEnabled != nil {
+		s.WriteBool(schemas.SendRcsMessageRequest_MessageFeedbackEnabled, *v.MessageFeedbackEnabled)
+	}
+	if v.MessageTrafficType != nil {
+		s.WriteString(schemas.SendRcsMessageRequest_MessageTrafficType, *v.MessageTrafficType)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.SendRcsMessageRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.SendRcsMessageRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+	if v.RcsMessageContent != nil {
+		s.WriteStruct(schemas.SendRcsMessageRequest_RcsMessageContent)
+		v.RcsMessageContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.SendRcsMessageRequest_TimeToLive, *v.TimeToLive)
+	}
+}
+
 type SendRcsMessageOutput struct {
 
 	// The unique identifier for the message.
@@ -96,13 +145,32 @@ type SendRcsMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendRcsMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendRcsMessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendRcsMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendRcsMessageResult_MessageId, *v.MessageId)
+	}
+}
+func (v *SendRcsMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendRcsMessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendRcsMessageResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendRcsMessageResult_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendRcsMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendRcsMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendRcsMessage, schemas.SendRcsMessageRequest, schemas.SendRcsMessageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendRcsMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendRcsMessage, schemas.SendRcsMessageRequest, schemas.SendRcsMessageResult), output: &SendRcsMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

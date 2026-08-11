@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,42 @@ type ListImportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListImportsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListImportsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportsRequest_filters:
+			v.Filters = &types.ListImportsRequestFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListImportsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListImportsRequest_maxResults, v.MaxResults)
+		case schemas.ListImportsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 // List import response.
 type ListImportsOutput struct {
 
@@ -55,13 +93,35 @@ type ListImportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportList(s, schemas.ListImportsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListImportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportsResponse_items:
+			return deserializeImportList(d, schemas.ListImportsResponse_items, &v.Items)
+		case schemas.ListImportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImports, schemas.ListImportsRequest, schemas.ListImportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImports, schemas.ListImportsRequest, schemas.ListImportsResponse), output: &ListImportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

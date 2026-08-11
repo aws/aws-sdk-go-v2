@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,54 @@ type ListSourceServerActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceServerActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceServerActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceServerActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.ListSourceServerActionsRequest_accountID, *v.AccountID)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListSourceServerActionsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSourceServerActionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceServerActionsRequest_nextToken, *v.NextToken)
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.ListSourceServerActionsRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *ListSourceServerActionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceServerActionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceServerActionsRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.ListSourceServerActionsRequest_accountID, v.AccountID)
+		case schemas.ListSourceServerActionsRequest_filters:
+			v.Filters = &types.SourceServerActionsRequestFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListSourceServerActionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSourceServerActionsRequest_maxResults, v.MaxResults)
+		case schemas.ListSourceServerActionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceServerActionsRequest_nextToken, v.NextToken)
+		case schemas.ListSourceServerActionsRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.ListSourceServerActionsRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
+}
+
 type ListSourceServerActionsOutput struct {
 
 	// List of source server post migration custom actions.
@@ -62,13 +112,35 @@ type ListSourceServerActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceServerActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceServerActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceServerActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSourceServerActionDocuments(s, schemas.ListSourceServerActionsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceServerActionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSourceServerActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceServerActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceServerActionsResponse_items:
+			return deserializeSourceServerActionDocuments(d, schemas.ListSourceServerActionsResponse_items, &v.Items)
+		case schemas.ListSourceServerActionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceServerActionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSourceServerActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSourceServerActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceServerActions, schemas.ListSourceServerActionsRequest, schemas.ListSourceServerActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSourceServerActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceServerActions, schemas.ListSourceServerActionsRequest, schemas.ListSourceServerActionsResponse), output: &ListSourceServerActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

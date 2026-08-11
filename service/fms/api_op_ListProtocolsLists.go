@@ -5,7 +5,9 @@ package fms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type ListProtocolsListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtocolsListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtocolsListsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtocolsListsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultLists != false {
+		s.WriteBool(schemas.ListProtocolsListsRequest_DefaultLists, v.DefaultLists)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtocolsListsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtocolsListsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListProtocolsListsOutput struct {
 
 	// If you specify a value for MaxResults in your list request, and you have more
@@ -67,13 +87,35 @@ type ListProtocolsListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtocolsListsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtocolsListsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtocolsListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtocolsListsResponse_NextToken, *v.NextToken)
+	}
+	serializeProtocolsListsData(s, schemas.ListProtocolsListsResponse_ProtocolsLists, v.ProtocolsLists)
+}
+func (v *ListProtocolsListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtocolsListsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtocolsListsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtocolsListsResponse_NextToken, v.NextToken)
+		case schemas.ListProtocolsListsResponse_ProtocolsLists:
+			return deserializeProtocolsListsData(d, schemas.ListProtocolsListsResponse_ProtocolsLists, &v.ProtocolsLists)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtocolsListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProtocolsLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtocolsLists, schemas.ListProtocolsListsRequest, schemas.ListProtocolsListsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProtocolsLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtocolsLists, schemas.ListProtocolsListsRequest, schemas.ListProtocolsListsResponse), output: &ListProtocolsListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

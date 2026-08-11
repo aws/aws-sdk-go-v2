@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type GetProxySessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProxySessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProxySessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProxySessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxySessionId != nil {
+		s.WriteString(schemas.GetProxySessionRequest_ProxySessionId, *v.ProxySessionId)
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.GetProxySessionRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type GetProxySessionOutput struct {
 
 	// The proxy session details.
@@ -58,13 +75,34 @@ type GetProxySessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProxySessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProxySessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProxySessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxySession != nil {
+		s.WriteStruct(schemas.GetProxySessionResponse_ProxySession)
+		v.ProxySession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetProxySessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProxySessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProxySessionResponse_ProxySession:
+			v.ProxySession = &types.ProxySession{}
+			return v.ProxySession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProxySession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProxySession, schemas.GetProxySessionRequest, schemas.GetProxySessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProxySession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProxySession, schemas.GetProxySessionRequest, schemas.GetProxySessionResponse), output: &GetProxySessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

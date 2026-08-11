@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Email != nil {
+		s.WriteString(schemas.DescribeEntityRequest_Email, *v.Email)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeEntityRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DescribeEntityOutput struct {
 
 	// The entity ID under which the entity exists.
@@ -56,13 +73,48 @@ type DescribeEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.DescribeEntityResponse_EntityId, *v.EntityId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeEntityResponse_Name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeEntityResponse_Type, string(v.Type))
+	}
+}
+func (v *DescribeEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEntityResponse_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.DescribeEntityResponse_EntityId, v.EntityId)
+		case schemas.DescribeEntityResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeEntityResponse_Name, v.Name)
+		case schemas.DescribeEntityResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeEntityResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.EntityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntity, schemas.DescribeEntityRequest, schemas.DescribeEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntity, schemas.DescribeEntityRequest, schemas.DescribeEntityResponse), output: &DescribeEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

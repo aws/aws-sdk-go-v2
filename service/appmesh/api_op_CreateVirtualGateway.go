@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,57 @@ type CreateVirtualGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualGatewayInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVirtualGatewayInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.CreateVirtualGatewayInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.CreateVirtualGatewayInput_meshOwner, *v.MeshOwner)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.CreateVirtualGatewayInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateVirtualGatewayInput_tags, v.Tags)
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.CreateVirtualGatewayInput_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *CreateVirtualGatewayInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVirtualGatewayInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVirtualGatewayInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateVirtualGatewayInput_clientToken, v.ClientToken)
+		case schemas.CreateVirtualGatewayInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.CreateVirtualGatewayInput_meshName, v.MeshName)
+		case schemas.CreateVirtualGatewayInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.CreateVirtualGatewayInput_meshOwner, v.MeshOwner)
+		case schemas.CreateVirtualGatewayInput_spec:
+			v.Spec = &types.VirtualGatewaySpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.CreateVirtualGatewayInput_tags:
+			return deserializeTagList(d, schemas.CreateVirtualGatewayInput_tags, &v.Tags)
+		case schemas.CreateVirtualGatewayInput_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.CreateVirtualGatewayInput_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 type CreateVirtualGatewayOutput struct {
 
 	// The full description of your virtual gateway following the create call.
@@ -86,13 +139,34 @@ type CreateVirtualGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualGatewayOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualGateway != nil {
+		s.WriteStruct(schemas.CreateVirtualGatewayOutput_virtualGateway)
+		v.VirtualGateway.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVirtualGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVirtualGatewayOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVirtualGatewayOutput_virtualGateway:
+			v.VirtualGateway = &types.VirtualGatewayData{}
+			return v.VirtualGateway.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVirtualGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVirtualGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualGateway, schemas.CreateVirtualGatewayInput, schemas.CreateVirtualGatewayOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVirtualGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualGateway, schemas.CreateVirtualGatewayInput, schemas.CreateVirtualGatewayOutput), output: &CreateVirtualGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

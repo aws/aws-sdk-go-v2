@@ -5,7 +5,9 @@ package resourcegroupstaggingapi
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -189,6 +191,33 @@ type GetResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExcludeCompliantResources != nil {
+		s.WriteBool(schemas.GetResourcesInput_ExcludeCompliantResources, *v.ExcludeCompliantResources)
+	}
+	if v.IncludeComplianceDetails != nil {
+		s.WriteBool(schemas.GetResourcesInput_IncludeComplianceDetails, *v.IncludeComplianceDetails)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetResourcesInput_PaginationToken, *v.PaginationToken)
+	}
+	serializeResourceARNListForGet(s, schemas.GetResourcesInput_ResourceARNList, v.ResourceARNList)
+	serializeResourceTypeFilterList(s, schemas.GetResourcesInput_ResourceTypeFilters, v.ResourceTypeFilters)
+	if v.ResourcesPerPage != nil {
+		s.WriteInt32(schemas.GetResourcesInput_ResourcesPerPage, *v.ResourcesPerPage)
+	}
+	serializeTagFilterList(s, schemas.GetResourcesInput_TagFilters, v.TagFilters)
+	if v.TagsPerPage != nil {
+		s.WriteInt32(schemas.GetResourcesInput_TagsPerPage, *v.TagsPerPage)
+	}
+}
+
 type GetResourcesOutput struct {
 
 	// A string that indicates that there is more data available than this response
@@ -205,13 +234,35 @@ type GetResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetResourcesOutput_PaginationToken, *v.PaginationToken)
+	}
+	serializeResourceTagMappingList(s, schemas.GetResourcesOutput_ResourceTagMappingList, v.ResourceTagMappingList)
+}
+func (v *GetResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcesOutput_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.GetResourcesOutput_PaginationToken, v.PaginationToken)
+		case schemas.GetResourcesOutput_ResourceTagMappingList:
+			return deserializeResourceTagMappingList(d, schemas.GetResourcesOutput_ResourceTagMappingList, &v.ResourceTagMappingList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResources, schemas.GetResourcesInput, schemas.GetResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResources, schemas.GetResourcesInput, schemas.GetResourcesOutput), output: &GetResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

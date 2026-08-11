@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,31 @@ type UpdateImpersonationRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImpersonationRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImpersonationRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImpersonationRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateImpersonationRoleRequest_Description, *v.Description)
+	}
+	if v.ImpersonationRoleId != nil {
+		s.WriteString(schemas.UpdateImpersonationRoleRequest_ImpersonationRoleId, *v.ImpersonationRoleId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateImpersonationRoleRequest_Name, *v.Name)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.UpdateImpersonationRoleRequest_OrganizationId, *v.OrganizationId)
+	}
+	serializeImpersonationRuleList(s, schemas.UpdateImpersonationRoleRequest_Rules, v.Rules)
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateImpersonationRoleRequest_Type, string(v.Type))
+	}
+}
+
 type UpdateImpersonationRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +91,26 @@ type UpdateImpersonationRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImpersonationRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImpersonationRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImpersonationRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateImpersonationRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateImpersonationRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateImpersonationRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateImpersonationRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImpersonationRole, schemas.UpdateImpersonationRoleRequest, schemas.UpdateImpersonationRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateImpersonationRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImpersonationRole, schemas.UpdateImpersonationRoleRequest, schemas.UpdateImpersonationRoleResponse), output: &UpdateImpersonationRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteMultiRegionClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMultiRegionClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiRegionClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiRegionClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiRegionClusterName != nil {
+		s.WriteString(schemas.DeleteMultiRegionClusterRequest_MultiRegionClusterName, *v.MultiRegionClusterName)
+	}
+}
+
 type DeleteMultiRegionClusterOutput struct {
 
 	// Details about the deleted multi-Region cluster.
@@ -45,13 +59,34 @@ type DeleteMultiRegionClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMultiRegionClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMultiRegionClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMultiRegionClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiRegionCluster != nil {
+		s.WriteStruct(schemas.DeleteMultiRegionClusterResponse_MultiRegionCluster)
+		v.MultiRegionCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteMultiRegionClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMultiRegionClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMultiRegionClusterResponse_MultiRegionCluster:
+			v.MultiRegionCluster = &types.MultiRegionCluster{}
+			return v.MultiRegionCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMultiRegionClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMultiRegionCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiRegionCluster, schemas.DeleteMultiRegionClusterRequest, schemas.DeleteMultiRegionClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMultiRegionCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMultiRegionCluster, schemas.DeleteMultiRegionClusterRequest, schemas.DeleteMultiRegionClusterResponse), output: &DeleteMultiRegionClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

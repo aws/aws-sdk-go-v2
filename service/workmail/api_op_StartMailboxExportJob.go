@@ -5,6 +5,8 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,39 @@ type StartMailboxExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMailboxExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMailboxExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMailboxExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_Description, *v.Description)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_EntityId, *v.EntityId)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3Prefix != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_S3Prefix, *v.S3Prefix)
+	}
+}
+
 type StartMailboxExportJobOutput struct {
 
 	// The job ID.
@@ -96,13 +131,32 @@ type StartMailboxExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMailboxExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMailboxExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMailboxExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartMailboxExportJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartMailboxExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMailboxExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMailboxExportJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartMailboxExportJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMailboxExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMailboxExportJob, schemas.StartMailboxExportJobRequest, schemas.StartMailboxExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMailboxExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMailboxExportJob, schemas.StartMailboxExportJobRequest, schemas.StartMailboxExportJobResponse), output: &StartMailboxExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

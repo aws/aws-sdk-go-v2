@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetSignalCatalogInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSignalCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSignalCatalogRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSignalCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetSignalCatalogRequest_name, *v.Name)
+	}
+}
+func (v *GetSignalCatalogInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSignalCatalogRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSignalCatalogRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSignalCatalogRequest_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type GetSignalCatalogOutput struct {
@@ -70,13 +94,64 @@ type GetSignalCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSignalCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSignalCatalogResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSignalCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetSignalCatalogResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetSignalCatalogResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetSignalCatalogResponse_description, *v.Description)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetSignalCatalogResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSignalCatalogResponse_name, *v.Name)
+	}
+	if v.NodeCounts != nil {
+		s.WriteStruct(schemas.GetSignalCatalogResponse_nodeCounts)
+		v.NodeCounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSignalCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSignalCatalogResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSignalCatalogResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetSignalCatalogResponse_arn, v.Arn)
+		case schemas.GetSignalCatalogResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetSignalCatalogResponse_creationTime, v.CreationTime)
+		case schemas.GetSignalCatalogResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSignalCatalogResponse_description, v.Description)
+		case schemas.GetSignalCatalogResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetSignalCatalogResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.GetSignalCatalogResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSignalCatalogResponse_name, v.Name)
+		case schemas.GetSignalCatalogResponse_nodeCounts:
+			v.NodeCounts = &types.NodeCounts{}
+			return v.NodeCounts.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSignalCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetSignalCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSignalCatalog, schemas.GetSignalCatalogRequest, schemas.GetSignalCatalogResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetSignalCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSignalCatalog, schemas.GetSignalCatalogRequest, schemas.GetSignalCatalogResponse), output: &GetSignalCatalogOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package chimesdkmeetings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DeleteAttendeeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttendeeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttendeeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttendeeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttendeeId != nil {
+		s.WriteString(schemas.DeleteAttendeeRequest_AttendeeId, *v.AttendeeId)
+	}
+	if v.MeetingId != nil {
+		s.WriteString(schemas.DeleteAttendeeRequest_MeetingId, *v.MeetingId)
+	}
+}
+
 type DeleteAttendeeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type DeleteAttendeeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttendeeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttendeeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAttendeeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAttendee{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttendee, schemas.DeleteAttendeeRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAttendee{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttendee, schemas.DeleteAttendeeRequest, nil), output: &DeleteAttendeeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

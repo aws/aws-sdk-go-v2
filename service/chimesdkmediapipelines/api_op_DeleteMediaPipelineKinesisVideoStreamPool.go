@@ -4,6 +4,8 @@ package chimesdkmediapipelines
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteMediaPipelineKinesisVideoStreamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMediaPipelineKinesisVideoStreamPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMediaPipelineKinesisVideoStreamPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMediaPipelineKinesisVideoStreamPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteMediaPipelineKinesisVideoStreamPoolRequest_Identifier, *v.Identifier)
+	}
+}
+
 type DeleteMediaPipelineKinesisVideoStreamPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteMediaPipelineKinesisVideoStreamPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMediaPipelineKinesisVideoStreamPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMediaPipelineKinesisVideoStreamPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMediaPipelineKinesisVideoStreamPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMediaPipelineKinesisVideoStreamPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMediaPipelineKinesisVideoStreamPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMediaPipelineKinesisVideoStreamPool, schemas.DeleteMediaPipelineKinesisVideoStreamPoolRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMediaPipelineKinesisVideoStreamPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMediaPipelineKinesisVideoStreamPool, schemas.DeleteMediaPipelineKinesisVideoStreamPoolRequest, nil), output: &DeleteMediaPipelineKinesisVideoStreamPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

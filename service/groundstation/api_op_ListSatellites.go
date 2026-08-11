@@ -5,7 +5,9 @@ package groundstation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListSatellitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSatellitesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSatellitesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSatellitesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSatellitesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSatellitesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Output for the ListSatellites operation.
 type ListSatellitesOutput struct {
 
@@ -54,13 +71,35 @@ type ListSatellitesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSatellitesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSatellitesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSatellitesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSatellitesResponse_nextToken, *v.NextToken)
+	}
+	serializeSatelliteList(s, schemas.ListSatellitesResponse_satellites, v.Satellites)
+}
+func (v *ListSatellitesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSatellitesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSatellitesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSatellitesResponse_nextToken, v.NextToken)
+		case schemas.ListSatellitesResponse_satellites:
+			return deserializeSatelliteList(d, schemas.ListSatellitesResponse_satellites, &v.Satellites)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSatellitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSatellites{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSatellites, schemas.ListSatellitesRequest, schemas.ListSatellitesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSatellites{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSatellites, schemas.ListSatellitesRequest, schemas.ListSatellitesResponse), output: &ListSatellitesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

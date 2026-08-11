@@ -4,7 +4,9 @@ package chimesdkmediapipelines
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetMediaInsightsPipelineConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaInsightsPipelineConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaInsightsPipelineConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaInsightsPipelineConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetMediaInsightsPipelineConfigurationRequest_Identifier, *v.Identifier)
+	}
+}
+
 type GetMediaInsightsPipelineConfigurationOutput struct {
 
 	// The requested media insights pipeline configuration.
@@ -46,13 +60,34 @@ type GetMediaInsightsPipelineConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaInsightsPipelineConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaInsightsPipelineConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaInsightsPipelineConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaInsightsPipelineConfiguration != nil {
+		s.WriteStruct(schemas.GetMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration)
+		v.MediaInsightsPipelineConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMediaInsightsPipelineConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMediaInsightsPipelineConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration:
+			v.MediaInsightsPipelineConfiguration = &types.MediaInsightsPipelineConfiguration{}
+			return v.MediaInsightsPipelineConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMediaInsightsPipelineConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMediaInsightsPipelineConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaInsightsPipelineConfiguration, schemas.GetMediaInsightsPipelineConfigurationRequest, schemas.GetMediaInsightsPipelineConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMediaInsightsPipelineConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaInsightsPipelineConfiguration, schemas.GetMediaInsightsPipelineConfigurationRequest, schemas.GetMediaInsightsPipelineConfigurationResponse), output: &GetMediaInsightsPipelineConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

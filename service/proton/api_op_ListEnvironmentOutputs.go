@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,40 @@ type ListEnvironmentOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentOutputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentOutputsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.ListEnvironmentOutputsInput_deploymentId, *v.DeploymentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ListEnvironmentOutputsInput_environmentName, *v.EnvironmentName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentOutputsInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnvironmentOutputsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentOutputsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentOutputsInput_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.ListEnvironmentOutputsInput_deploymentId, v.DeploymentId)
+		case schemas.ListEnvironmentOutputsInput_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.ListEnvironmentOutputsInput_environmentName, v.EnvironmentName)
+		case schemas.ListEnvironmentOutputsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentOutputsInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListEnvironmentOutputsOutput struct {
 
 	// An array of environment outputs with detail data.
@@ -62,13 +98,35 @@ type ListEnvironmentOutputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentOutputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentOutputsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentOutputsOutput_nextToken, *v.NextToken)
+	}
+	serializeOutputsList(s, schemas.ListEnvironmentOutputsOutput_outputs, v.Outputs)
+}
+func (v *ListEnvironmentOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentOutputsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentOutputsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentOutputsOutput_nextToken, v.NextToken)
+		case schemas.ListEnvironmentOutputsOutput_outputs:
+			return deserializeOutputsList(d, schemas.ListEnvironmentOutputsOutput_outputs, &v.Outputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnvironmentOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentOutputs, schemas.ListEnvironmentOutputsInput, schemas.ListEnvironmentOutputsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnvironmentOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentOutputs, schemas.ListEnvironmentOutputsInput, schemas.ListEnvironmentOutputsOutput), output: &ListEnvironmentOutputsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,40 @@ type ImportSignalCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSignalCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSignalCatalogRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSignalCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ImportSignalCatalogRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportSignalCatalogRequest_name, *v.Name)
+	}
+	serializeTagList(s, schemas.ImportSignalCatalogRequest_tags, v.Tags)
+	serializeFormattedVss(s, schemas.ImportSignalCatalogRequest_vss, v.Vss)
+}
+func (v *ImportSignalCatalogInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportSignalCatalogRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportSignalCatalogRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ImportSignalCatalogRequest_description, v.Description)
+		case schemas.ImportSignalCatalogRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImportSignalCatalogRequest_name, v.Name)
+		case schemas.ImportSignalCatalogRequest_tags:
+			return deserializeTagList(d, schemas.ImportSignalCatalogRequest_tags, &v.Tags)
+		case schemas.ImportSignalCatalogRequest_vss:
+			return deserializeFormattedVss(d, schemas.ImportSignalCatalogRequest_vss, &v.Vss)
+		}
+		return nil
+	})
+}
+
 type ImportSignalCatalogOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the imported signal catalog.
@@ -64,13 +100,38 @@ type ImportSignalCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSignalCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSignalCatalogResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSignalCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ImportSignalCatalogResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportSignalCatalogResponse_name, *v.Name)
+	}
+}
+func (v *ImportSignalCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportSignalCatalogResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportSignalCatalogResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ImportSignalCatalogResponse_arn, v.Arn)
+		case schemas.ImportSignalCatalogResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImportSignalCatalogResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportSignalCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpImportSignalCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSignalCatalog, schemas.ImportSignalCatalogRequest, schemas.ImportSignalCatalogResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpImportSignalCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSignalCatalog, schemas.ImportSignalCatalogRequest, schemas.ImportSignalCatalogResponse), output: &ImportSignalCatalogOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

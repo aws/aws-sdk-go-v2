@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type InviteUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteUsersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteUsersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.InviteUsersRequest_AccountId, *v.AccountId)
+	}
+	serializeUserEmailList(s, schemas.InviteUsersRequest_UserEmailList, v.UserEmailList)
+	if v.UserType != "" {
+		s.WriteString(schemas.InviteUsersRequest_UserType, string(v.UserType))
+	}
+}
+
 type InviteUsersOutput struct {
 
 	// The email invitation details.
@@ -55,13 +73,29 @@ type InviteUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteUsersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteUsersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInviteList(s, schemas.InviteUsersResponse_Invites, v.Invites)
+}
+func (v *InviteUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InviteUsersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InviteUsersResponse_Invites:
+			return deserializeInviteList(d, schemas.InviteUsersResponse_Invites, &v.Invites)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInviteUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInviteUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteUsers, schemas.InviteUsersRequest, schemas.InviteUsersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInviteUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteUsers, schemas.InviteUsersRequest, schemas.InviteUsersResponse), output: &InviteUsersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

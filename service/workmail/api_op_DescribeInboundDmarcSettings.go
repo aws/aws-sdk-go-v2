@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DescribeInboundDmarcSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInboundDmarcSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInboundDmarcSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInboundDmarcSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeInboundDmarcSettingsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DescribeInboundDmarcSettingsOutput struct {
 
 	// Lists the enforcement setting of the applied policy.
@@ -44,13 +58,31 @@ type DescribeInboundDmarcSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInboundDmarcSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInboundDmarcSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInboundDmarcSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enforced != false {
+		s.WriteBool(schemas.DescribeInboundDmarcSettingsResponse_Enforced, v.Enforced)
+	}
+}
+func (v *DescribeInboundDmarcSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInboundDmarcSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInboundDmarcSettingsResponse_Enforced:
+			return d.ReadBool(schemas.DescribeInboundDmarcSettingsResponse_Enforced, &v.Enforced)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInboundDmarcSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInboundDmarcSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInboundDmarcSettings, schemas.DescribeInboundDmarcSettingsRequest, schemas.DescribeInboundDmarcSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInboundDmarcSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInboundDmarcSettings, schemas.DescribeInboundDmarcSettingsRequest, schemas.DescribeInboundDmarcSettingsResponse), output: &DescribeInboundDmarcSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,56 @@ type UpdateEnvironmentTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentTemplateVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentTemplateVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentTemplateVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEnvironmentTemplateVersionInput_description, *v.Description)
+	}
+	if v.MajorVersion != nil {
+		s.WriteString(schemas.UpdateEnvironmentTemplateVersionInput_majorVersion, *v.MajorVersion)
+	}
+	if v.MinorVersion != nil {
+		s.WriteString(schemas.UpdateEnvironmentTemplateVersionInput_minorVersion, *v.MinorVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateEnvironmentTemplateVersionInput_status, string(v.Status))
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.UpdateEnvironmentTemplateVersionInput_templateName, *v.TemplateName)
+	}
+}
+func (v *UpdateEnvironmentTemplateVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentTemplateVersionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentTemplateVersionInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentTemplateVersionInput_description, v.Description)
+		case schemas.UpdateEnvironmentTemplateVersionInput_majorVersion:
+			v.MajorVersion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentTemplateVersionInput_majorVersion, v.MajorVersion)
+		case schemas.UpdateEnvironmentTemplateVersionInput_minorVersion:
+			v.MinorVersion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentTemplateVersionInput_minorVersion, v.MinorVersion)
+		case schemas.UpdateEnvironmentTemplateVersionInput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEnvironmentTemplateVersionInput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TemplateVersionStatus(ev)
+			return nil
+		case schemas.UpdateEnvironmentTemplateVersionInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentTemplateVersionInput_templateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 type UpdateEnvironmentTemplateVersionOutput struct {
 
 	// The environment template version detail data that's returned by Proton.
@@ -65,13 +117,34 @@ type UpdateEnvironmentTemplateVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentTemplateVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentTemplateVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentTemplateVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentTemplateVersion != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentTemplateVersionOutput_environmentTemplateVersion)
+		v.EnvironmentTemplateVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEnvironmentTemplateVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentTemplateVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentTemplateVersionOutput_environmentTemplateVersion:
+			v.EnvironmentTemplateVersion = &types.EnvironmentTemplateVersion{}
+			return v.EnvironmentTemplateVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEnvironmentTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentTemplateVersion, schemas.UpdateEnvironmentTemplateVersionInput, schemas.UpdateEnvironmentTemplateVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateEnvironmentTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentTemplateVersion, schemas.UpdateEnvironmentTemplateVersionInput, schemas.UpdateEnvironmentTemplateVersionOutput), output: &UpdateEnvironmentTemplateVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

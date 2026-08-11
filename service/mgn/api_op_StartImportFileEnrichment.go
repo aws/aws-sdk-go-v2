@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,31 @@ type StartImportFileEnrichmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportFileEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportFileEnrichmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportFileEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartImportFileEnrichmentRequest_clientToken, *v.ClientToken)
+	}
+	if v.IpAssignmentStrategy != "" {
+		s.WriteString(schemas.StartImportFileEnrichmentRequest_ipAssignmentStrategy, string(v.IpAssignmentStrategy))
+	}
+	if v.S3BucketSource != nil {
+		s.WriteStruct(schemas.StartImportFileEnrichmentRequest_s3BucketSource)
+		v.S3BucketSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BucketTarget != nil {
+		s.WriteStruct(schemas.StartImportFileEnrichmentRequest_s3BucketTarget)
+		v.S3BucketTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartImportFileEnrichmentOutput struct {
 
 	// The unique identifier of the import file enrichment job that was started.
@@ -62,13 +89,32 @@ type StartImportFileEnrichmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportFileEnrichmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportFileEnrichmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportFileEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobID != nil {
+		s.WriteString(schemas.StartImportFileEnrichmentResponse_jobID, *v.JobID)
+	}
+}
+func (v *StartImportFileEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportFileEnrichmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportFileEnrichmentResponse_jobID:
+			v.JobID = new(string)
+			return d.ReadString(schemas.StartImportFileEnrichmentResponse_jobID, v.JobID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportFileEnrichmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImportFileEnrichment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportFileEnrichment, schemas.StartImportFileEnrichmentRequest, schemas.StartImportFileEnrichmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartImportFileEnrichment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportFileEnrichment, schemas.StartImportFileEnrichmentRequest, schemas.StartImportFileEnrichmentResponse), output: &StartImportFileEnrichmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

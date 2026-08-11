@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,18 @@ type DescribeForecastExportJobInput struct {
 	ForecastExportJobArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeForecastExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeForecastExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeForecastExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastExportJobArn != nil {
+		s.WriteString(schemas.DescribeForecastExportJobRequest_ForecastExportJobArn, *v.ForecastExportJobArn)
+	}
 }
 
 type DescribeForecastExportJobOutput struct {
@@ -104,13 +118,82 @@ type DescribeForecastExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeForecastExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeForecastExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeForecastExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeForecastExportJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.DescribeForecastExportJobResponse_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.DescribeForecastExportJobResponse_ForecastArn, *v.ForecastArn)
+	}
+	if v.ForecastExportJobArn != nil {
+		s.WriteString(schemas.DescribeForecastExportJobResponse_ForecastExportJobArn, *v.ForecastExportJobArn)
+	}
+	if v.ForecastExportJobName != nil {
+		s.WriteString(schemas.DescribeForecastExportJobResponse_ForecastExportJobName, *v.ForecastExportJobName)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.DescribeForecastExportJobResponse_Format, *v.Format)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeForecastExportJobResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeForecastExportJobResponse_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeForecastExportJobResponse_Status, *v.Status)
+	}
+}
+func (v *DescribeForecastExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeForecastExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeForecastExportJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeForecastExportJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeForecastExportJobResponse_Destination:
+			v.Destination = &types.DataDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.DescribeForecastExportJobResponse_ForecastArn:
+			v.ForecastArn = new(string)
+			return d.ReadString(schemas.DescribeForecastExportJobResponse_ForecastArn, v.ForecastArn)
+		case schemas.DescribeForecastExportJobResponse_ForecastExportJobArn:
+			v.ForecastExportJobArn = new(string)
+			return d.ReadString(schemas.DescribeForecastExportJobResponse_ForecastExportJobArn, v.ForecastExportJobArn)
+		case schemas.DescribeForecastExportJobResponse_ForecastExportJobName:
+			v.ForecastExportJobName = new(string)
+			return d.ReadString(schemas.DescribeForecastExportJobResponse_ForecastExportJobName, v.ForecastExportJobName)
+		case schemas.DescribeForecastExportJobResponse_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.DescribeForecastExportJobResponse_Format, v.Format)
+		case schemas.DescribeForecastExportJobResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeForecastExportJobResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeForecastExportJobResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeForecastExportJobResponse_Message, v.Message)
+		case schemas.DescribeForecastExportJobResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeForecastExportJobResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeForecastExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeForecastExportJob, schemas.DescribeForecastExportJobRequest, schemas.DescribeForecastExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeForecastExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeForecastExportJob, schemas.DescribeForecastExportJobRequest, schemas.DescribeForecastExportJobResponse), output: &DescribeForecastExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

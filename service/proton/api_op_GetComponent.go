@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -45,6 +47,28 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetComponentInput_name, *v.Name)
+	}
+}
+func (v *GetComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetComponentInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type GetComponentOutput struct {
 
 	// The detailed data of the requested component.
@@ -56,13 +80,34 @@ type GetComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != nil {
+		s.WriteStruct(schemas.GetComponentOutput_component)
+		v.Component.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentOutput_component:
+			v.Component = &types.Component{}
+			return v.Component.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentInput, schemas.GetComponentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentInput, schemas.GetComponentOutput), output: &GetComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

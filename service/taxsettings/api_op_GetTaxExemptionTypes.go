@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetTaxExemptionTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxExemptionTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxExemptionTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxExemptionTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetTaxExemptionTypesOutput struct {
 
 	// The supported types of tax exemptions.
@@ -39,13 +50,29 @@ type GetTaxExemptionTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxExemptionTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxExemptionTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxExemptionTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTaxExemptionTypes(s, schemas.GetTaxExemptionTypesResponse_taxExemptionTypes, v.TaxExemptionTypes)
+}
+func (v *GetTaxExemptionTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTaxExemptionTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTaxExemptionTypesResponse_taxExemptionTypes:
+			return deserializeTaxExemptionTypes(d, schemas.GetTaxExemptionTypesResponse_taxExemptionTypes, &v.TaxExemptionTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTaxExemptionTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTaxExemptionTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxExemptionTypes, schemas.GetTaxExemptionTypesRequest, schemas.GetTaxExemptionTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTaxExemptionTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxExemptionTypes, schemas.GetTaxExemptionTypesRequest, schemas.GetTaxExemptionTypesResponse), output: &GetTaxExemptionTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

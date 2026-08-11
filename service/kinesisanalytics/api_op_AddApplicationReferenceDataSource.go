@@ -4,7 +4,9 @@ package kinesisanalytics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,26 @@ type AddApplicationReferenceDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationReferenceDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationReferenceDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationReferenceDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.AddApplicationReferenceDataSourceRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.AddApplicationReferenceDataSourceRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+	if v.ReferenceDataSource != nil {
+		s.WriteStruct(schemas.AddApplicationReferenceDataSourceRequest_ReferenceDataSource)
+		v.ReferenceDataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AddApplicationReferenceDataSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,13 +103,26 @@ type AddApplicationReferenceDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationReferenceDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationReferenceDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationReferenceDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddApplicationReferenceDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddApplicationReferenceDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddApplicationReferenceDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationReferenceDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationReferenceDataSource, schemas.AddApplicationReferenceDataSourceRequest, schemas.AddApplicationReferenceDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddApplicationReferenceDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationReferenceDataSource, schemas.AddApplicationReferenceDataSourceRequest, schemas.AddApplicationReferenceDataSourceResponse), output: &AddApplicationReferenceDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

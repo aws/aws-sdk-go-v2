@@ -5,7 +5,9 @@ package chime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListRoomMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoomMembershipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoomMembershipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoomMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListRoomMembershipsRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoomMembershipsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoomMembershipsRequest_NextToken, *v.NextToken)
+	}
+	if v.RoomId != nil {
+		s.WriteString(schemas.ListRoomMembershipsRequest_RoomId, *v.RoomId)
+	}
+}
+
 type ListRoomMembershipsOutput struct {
 
 	// The token to use to retrieve the next page of results.
@@ -61,13 +84,35 @@ type ListRoomMembershipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoomMembershipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoomMembershipsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoomMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoomMembershipsResponse_NextToken, *v.NextToken)
+	}
+	serializeRoomMembershipList(s, schemas.ListRoomMembershipsResponse_RoomMemberships, v.RoomMemberships)
+}
+func (v *ListRoomMembershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoomMembershipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoomMembershipsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoomMembershipsResponse_NextToken, v.NextToken)
+		case schemas.ListRoomMembershipsResponse_RoomMemberships:
+			return deserializeRoomMembershipList(d, schemas.ListRoomMembershipsResponse_RoomMemberships, &v.RoomMemberships)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoomMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoomMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoomMemberships, schemas.ListRoomMembershipsRequest, schemas.ListRoomMembershipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRoomMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoomMemberships, schemas.ListRoomMembershipsRequest, schemas.ListRoomMembershipsResponse), output: &ListRoomMembershipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

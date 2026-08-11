@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,22 @@ type CreateConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConfigurationSetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.CreateConfigurationSetRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeTagList(s, schemas.CreateConfigurationSetRequest_Tags, v.Tags)
+}
+
 type CreateConfigurationSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the newly created configuration set.
@@ -74,13 +92,47 @@ type CreateConfigurationSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationSetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetArn != nil {
+		s.WriteString(schemas.CreateConfigurationSetResult_ConfigurationSetArn, *v.ConfigurationSetArn)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.CreateConfigurationSetResult_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CreateConfigurationSetResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	serializeTagList(s, schemas.CreateConfigurationSetResult_Tags, v.Tags)
+}
+func (v *CreateConfigurationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfigurationSetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfigurationSetResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.CreateConfigurationSetResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.CreateConfigurationSetResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.CreateConfigurationSetResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.CreateConfigurationSetResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateConfigurationSetResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateConfigurationSetResult_Tags:
+			return deserializeTagList(d, schemas.CreateConfigurationSetResult_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateConfigurationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationSet, schemas.CreateConfigurationSetRequest, schemas.CreateConfigurationSetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateConfigurationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationSet, schemas.CreateConfigurationSetRequest, schemas.CreateConfigurationSetResult), output: &CreateConfigurationSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

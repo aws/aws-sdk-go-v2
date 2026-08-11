@@ -4,6 +4,8 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type ListAllowedMultiRegionClusterUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAllowedMultiRegionClusterUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAllowedMultiRegionClusterUpdatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAllowedMultiRegionClusterUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiRegionClusterName != nil {
+		s.WriteString(schemas.ListAllowedMultiRegionClusterUpdatesRequest_MultiRegionClusterName, *v.MultiRegionClusterName)
+	}
+}
+
 type ListAllowedMultiRegionClusterUpdatesOutput struct {
 
 	// The node types that the cluster can be scaled down to.
@@ -47,13 +61,32 @@ type ListAllowedMultiRegionClusterUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAllowedMultiRegionClusterUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAllowedMultiRegionClusterUpdatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAllowedMultiRegionClusterUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNodeTypeList(s, schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleDownNodeTypes, v.ScaleDownNodeTypes)
+	serializeNodeTypeList(s, schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleUpNodeTypes, v.ScaleUpNodeTypes)
+}
+func (v *ListAllowedMultiRegionClusterUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAllowedMultiRegionClusterUpdatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleDownNodeTypes:
+			return deserializeNodeTypeList(d, schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleDownNodeTypes, &v.ScaleDownNodeTypes)
+		case schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleUpNodeTypes:
+			return deserializeNodeTypeList(d, schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleUpNodeTypes, &v.ScaleUpNodeTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAllowedMultiRegionClusterUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAllowedMultiRegionClusterUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowedMultiRegionClusterUpdates, schemas.ListAllowedMultiRegionClusterUpdatesRequest, schemas.ListAllowedMultiRegionClusterUpdatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAllowedMultiRegionClusterUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowedMultiRegionClusterUpdates, schemas.ListAllowedMultiRegionClusterUpdatesRequest, schemas.ListAllowedMultiRegionClusterUpdatesResponse), output: &ListAllowedMultiRegionClusterUpdatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

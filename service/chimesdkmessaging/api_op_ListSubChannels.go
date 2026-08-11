@@ -5,7 +5,9 @@ package chimesdkmessaging
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListSubChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubChannelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubChannelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.ListSubChannelsRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.ListSubChannelsRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSubChannelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubChannelsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListSubChannelsOutput struct {
 
 	// The ARN of elastic channel.
@@ -67,13 +90,41 @@ type ListSubChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubChannelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubChannelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.ListSubChannelsResponse_ChannelArn, *v.ChannelArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubChannelsResponse_NextToken, *v.NextToken)
+	}
+	serializeSubChannelSummaryList(s, schemas.ListSubChannelsResponse_SubChannels, v.SubChannels)
+}
+func (v *ListSubChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSubChannelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSubChannelsResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.ListSubChannelsResponse_ChannelArn, v.ChannelArn)
+		case schemas.ListSubChannelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSubChannelsResponse_NextToken, v.NextToken)
+		case schemas.ListSubChannelsResponse_SubChannels:
+			return deserializeSubChannelSummaryList(d, schemas.ListSubChannelsResponse_SubChannels, &v.SubChannels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSubChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubChannels, schemas.ListSubChannelsRequest, schemas.ListSubChannelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubChannels, schemas.ListSubChannelsRequest, schemas.ListSubChannelsResponse), output: &ListSubChannelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

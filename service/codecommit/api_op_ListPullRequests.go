@@ -5,7 +5,9 @@ package codecommit
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type ListPullRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPullRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPullRequestsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPullRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorArn != nil {
+		s.WriteString(schemas.ListPullRequestsInput_authorArn, *v.AuthorArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPullRequestsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPullRequestsInput_nextToken, *v.NextToken)
+	}
+	if v.PullRequestStatus != "" {
+		s.WriteString(schemas.ListPullRequestsInput_pullRequestStatus, string(v.PullRequestStatus))
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.ListPullRequestsInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 type ListPullRequestsOutput struct {
 
 	// The system-generated IDs of the pull requests.
@@ -69,13 +95,35 @@ type ListPullRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPullRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPullRequestsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPullRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPullRequestsOutput_nextToken, *v.NextToken)
+	}
+	serializePullRequestIdList(s, schemas.ListPullRequestsOutput_pullRequestIds, v.PullRequestIds)
+}
+func (v *ListPullRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPullRequestsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPullRequestsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPullRequestsOutput_nextToken, v.NextToken)
+		case schemas.ListPullRequestsOutput_pullRequestIds:
+			return deserializePullRequestIdList(d, schemas.ListPullRequestsOutput_pullRequestIds, &v.PullRequestIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPullRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPullRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPullRequests, schemas.ListPullRequestsInput, schemas.ListPullRequestsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPullRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPullRequests, schemas.ListPullRequestsInput, schemas.ListPullRequestsOutput), output: &ListPullRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

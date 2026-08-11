@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,32 @@ type ListGroupsForEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsForEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsForEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsForEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.ListGroupsForEntityRequest_EntityId, *v.EntityId)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListGroupsForEntityRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroupsForEntityRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupsForEntityRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListGroupsForEntityRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListGroupsForEntityOutput struct {
 
 	// The overview of groups in an organization.
@@ -74,13 +102,35 @@ type ListGroupsForEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsForEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsForEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsForEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupIdentifiers(s, schemas.ListGroupsForEntityResponse_Groups, v.Groups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupsForEntityResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGroupsForEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupsForEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupsForEntityResponse_Groups:
+			return deserializeGroupIdentifiers(d, schemas.ListGroupsForEntityResponse_Groups, &v.Groups)
+		case schemas.ListGroupsForEntityResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupsForEntityResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupsForEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGroupsForEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupsForEntity, schemas.ListGroupsForEntityRequest, schemas.ListGroupsForEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListGroupsForEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupsForEntity, schemas.ListGroupsForEntityRequest, schemas.ListGroupsForEntityResponse), output: &ListGroupsForEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

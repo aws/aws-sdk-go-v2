@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type DescribeMeshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMeshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMeshInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMeshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DescribeMeshInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DescribeMeshInput_meshOwner, *v.MeshOwner)
+	}
+}
+func (v *DescribeMeshInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMeshInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMeshInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DescribeMeshInput_meshName, v.MeshName)
+		case schemas.DescribeMeshInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DescribeMeshInput_meshOwner, v.MeshOwner)
+		}
+		return nil
+	})
+}
+
 type DescribeMeshOutput struct {
 
 	// The full description of your service mesh.
@@ -54,13 +84,34 @@ type DescribeMeshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMeshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMeshOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMeshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mesh != nil {
+		s.WriteStruct(schemas.DescribeMeshOutput_mesh)
+		v.Mesh.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeMeshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMeshOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMeshOutput_mesh:
+			v.Mesh = &types.MeshData{}
+			return v.Mesh.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMesh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMesh, schemas.DescribeMeshInput, schemas.DescribeMeshOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeMesh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMesh, schemas.DescribeMeshInput, schemas.DescribeMeshOutput), output: &DescribeMeshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package kendra
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,36 @@ type CreateQuerySuggestionsBlockListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQuerySuggestionsBlockListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQuerySuggestionsBlockListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQuerySuggestionsBlockListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateQuerySuggestionsBlockListRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateQuerySuggestionsBlockListRequest_Description, *v.Description)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.CreateQuerySuggestionsBlockListRequest_IndexId, *v.IndexId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateQuerySuggestionsBlockListRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateQuerySuggestionsBlockListRequest_RoleArn, *v.RoleArn)
+	}
+	if v.SourceS3Path != nil {
+		s.WriteStruct(schemas.CreateQuerySuggestionsBlockListRequest_SourceS3Path)
+		v.SourceS3Path.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateQuerySuggestionsBlockListRequest_Tags, v.Tags)
+}
+
 type CreateQuerySuggestionsBlockListOutput struct {
 
 	// The identifier of the block list.
@@ -106,13 +138,32 @@ type CreateQuerySuggestionsBlockListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQuerySuggestionsBlockListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQuerySuggestionsBlockListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQuerySuggestionsBlockListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateQuerySuggestionsBlockListResponse_Id, *v.Id)
+	}
+}
+func (v *CreateQuerySuggestionsBlockListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateQuerySuggestionsBlockListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateQuerySuggestionsBlockListResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateQuerySuggestionsBlockListResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateQuerySuggestionsBlockList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuerySuggestionsBlockList, schemas.CreateQuerySuggestionsBlockListRequest, schemas.CreateQuerySuggestionsBlockListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateQuerySuggestionsBlockList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuerySuggestionsBlockList, schemas.CreateQuerySuggestionsBlockListRequest, schemas.CreateQuerySuggestionsBlockListResponse), output: &CreateQuerySuggestionsBlockListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

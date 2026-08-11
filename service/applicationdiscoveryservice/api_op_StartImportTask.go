@@ -5,7 +5,9 @@ package applicationdiscoveryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,24 @@ type StartImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartImportTaskRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ImportUrl != nil {
+		s.WriteString(schemas.StartImportTaskRequest_importUrl, *v.ImportUrl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartImportTaskRequest_name, *v.Name)
+	}
+}
+
 type StartImportTaskOutput struct {
 
 	// An array of information related to the import task request including status
@@ -98,13 +118,34 @@ type StartImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Task != nil {
+		s.WriteStruct(schemas.StartImportTaskResponse_task)
+		v.Task.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportTaskResponse_task:
+			v.Task = &types.ImportTask{}
+			return v.Task.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportTask, schemas.StartImportTaskRequest, schemas.StartImportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportTask, schemas.StartImportTaskRequest, schemas.StartImportTaskResponse), output: &StartImportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

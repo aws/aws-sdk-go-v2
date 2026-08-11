@@ -4,7 +4,9 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type CheckDomainAvailabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckDomainAvailabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckDomainAvailabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckDomainAvailabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.CheckDomainAvailabilityRequest_DomainName, *v.DomainName)
+	}
+	if v.IdnLangCode != nil {
+		s.WriteString(schemas.CheckDomainAvailabilityRequest_IdnLangCode, *v.IdnLangCode)
+	}
+}
+
 // The CheckDomainAvailability response includes the following elements.
 type CheckDomainAvailabilityOutput struct {
 
@@ -100,13 +117,36 @@ type CheckDomainAvailabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckDomainAvailabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckDomainAvailabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckDomainAvailabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Availability != "" {
+		s.WriteString(schemas.CheckDomainAvailabilityResponse_Availability, string(v.Availability))
+	}
+}
+func (v *CheckDomainAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckDomainAvailabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckDomainAvailabilityResponse_Availability:
+			var ev string
+			if err := d.ReadString(schemas.CheckDomainAvailabilityResponse_Availability, &ev); err != nil {
+				return err
+			}
+			v.Availability = types.DomainAvailability(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckDomainAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckDomainAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDomainAvailability, schemas.CheckDomainAvailabilityRequest, schemas.CheckDomainAvailabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCheckDomainAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDomainAvailability, schemas.CheckDomainAvailabilityRequest, schemas.CheckDomainAvailabilityResponse), output: &CheckDomainAvailabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

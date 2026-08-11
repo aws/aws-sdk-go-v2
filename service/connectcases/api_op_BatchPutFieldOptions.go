@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,37 @@ type BatchPutFieldOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutFieldOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutFieldOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutFieldOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.BatchPutFieldOptionsRequest_domainId, *v.DomainId)
+	}
+	if v.FieldId != nil {
+		s.WriteString(schemas.BatchPutFieldOptionsRequest_fieldId, *v.FieldId)
+	}
+	serializeFieldOptionsList(s, schemas.BatchPutFieldOptionsRequest_options, v.Options)
+}
+func (v *BatchPutFieldOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutFieldOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutFieldOptionsRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.BatchPutFieldOptionsRequest_domainId, v.DomainId)
+		case schemas.BatchPutFieldOptionsRequest_fieldId:
+			v.FieldId = new(string)
+			return d.ReadString(schemas.BatchPutFieldOptionsRequest_fieldId, v.FieldId)
+		case schemas.BatchPutFieldOptionsRequest_options:
+			return deserializeFieldOptionsList(d, schemas.BatchPutFieldOptionsRequest_options, &v.Options)
+		}
+		return nil
+	})
+}
+
 type BatchPutFieldOptionsOutput struct {
 
 	// A list of field errors.
@@ -56,13 +89,29 @@ type BatchPutFieldOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutFieldOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutFieldOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutFieldOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldOptionErrorList(s, schemas.BatchPutFieldOptionsResponse_errors, v.Errors)
+}
+func (v *BatchPutFieldOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutFieldOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutFieldOptionsResponse_errors:
+			return deserializeFieldOptionErrorList(d, schemas.BatchPutFieldOptionsResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutFieldOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutFieldOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutFieldOptions, schemas.BatchPutFieldOptionsRequest, schemas.BatchPutFieldOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutFieldOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutFieldOptions, schemas.BatchPutFieldOptionsRequest, schemas.BatchPutFieldOptionsResponse), output: &BatchPutFieldOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

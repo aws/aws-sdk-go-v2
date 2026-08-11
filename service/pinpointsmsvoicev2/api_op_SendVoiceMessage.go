@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,49 @@ type SendVoiceMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendVoiceMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendVoiceMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendVoiceMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeContextMap(s, schemas.SendVoiceMessageRequest_Context, v.Context)
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.SendVoiceMessageRequest_DryRun, v.DryRun)
+	}
+	if v.MaxPricePerMinute != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_MaxPricePerMinute, *v.MaxPricePerMinute)
+	}
+	if v.MessageBody != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_MessageBody, *v.MessageBody)
+	}
+	if v.MessageBodyTextType != "" {
+		s.WriteString(schemas.SendVoiceMessageRequest_MessageBodyTextType, string(v.MessageBodyTextType))
+	}
+	if v.MessageFeedbackEnabled != nil {
+		s.WriteBool(schemas.SendVoiceMessageRequest_MessageFeedbackEnabled, *v.MessageFeedbackEnabled)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.SendVoiceMessageRequest_TimeToLive, *v.TimeToLive)
+	}
+	if v.VoiceId != "" {
+		s.WriteString(schemas.SendVoiceMessageRequest_VoiceId, string(v.VoiceId))
+	}
+}
+
 type SendVoiceMessageOutput struct {
 
 	// The unique identifier for the message.
@@ -100,13 +145,32 @@ type SendVoiceMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendVoiceMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendVoiceMessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendVoiceMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendVoiceMessageResult_MessageId, *v.MessageId)
+	}
+}
+func (v *SendVoiceMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendVoiceMessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendVoiceMessageResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendVoiceMessageResult_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendVoiceMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendVoiceMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendVoiceMessage, schemas.SendVoiceMessageRequest, schemas.SendVoiceMessageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendVoiceMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendVoiceMessage, schemas.SendVoiceMessageRequest, schemas.SendVoiceMessageResult), output: &SendVoiceMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

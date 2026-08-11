@@ -4,6 +4,8 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,27 @@ type SubscribeToDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscribeToDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscribeToDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscribeToDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetName != nil {
+		s.WriteString(schemas.SubscribeToDatasetRequest_DatasetName, *v.DatasetName)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.SubscribeToDatasetRequest_DeviceId, *v.DeviceId)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.SubscribeToDatasetRequest_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.SubscribeToDatasetRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 // Response to a SubscribeToDataset request.
 type SubscribeToDatasetOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -82,13 +105,26 @@ type SubscribeToDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscribeToDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscribeToDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscribeToDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SubscribeToDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscribeToDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubscribeToDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubscribeToDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubscribeToDataset, schemas.SubscribeToDatasetRequest, schemas.SubscribeToDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSubscribeToDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubscribeToDataset, schemas.SubscribeToDatasetRequest, schemas.SubscribeToDatasetResponse), output: &SubscribeToDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

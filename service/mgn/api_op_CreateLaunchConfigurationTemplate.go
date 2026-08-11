@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,134 @@ type CreateLaunchConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLaunchConfigurationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLaunchConfigurationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLaunchConfigurationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatePublicIpAddress != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationTemplateRequest_associatePublicIpAddress, *v.AssociatePublicIpAddress)
+	}
+	if v.BootMode != "" {
+		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_bootMode, string(v.BootMode))
+	}
+	if v.CopyPrivateIp != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationTemplateRequest_copyPrivateIp, *v.CopyPrivateIp)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationTemplateRequest_copyTags, *v.CopyTags)
+	}
+	if v.EnableMapAutoTagging != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationTemplateRequest_enableMapAutoTagging, *v.EnableMapAutoTagging)
+	}
+	if v.EnableParametersEncryption != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationTemplateRequest_enableParametersEncryption, *v.EnableParametersEncryption)
+	}
+	if v.LargeVolumeConf != nil {
+		s.WriteStruct(schemas.CreateLaunchConfigurationTemplateRequest_largeVolumeConf)
+		v.LargeVolumeConf.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LaunchDisposition != "" {
+		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_launchDisposition, string(v.LaunchDisposition))
+	}
+	if v.Licensing != nil {
+		s.WriteStruct(schemas.CreateLaunchConfigurationTemplateRequest_licensing)
+		v.Licensing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapAutoTaggingMpeID != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_mapAutoTaggingMpeID, *v.MapAutoTaggingMpeID)
+	}
+	if v.ParametersEncryptionKey != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_parametersEncryptionKey, *v.ParametersEncryptionKey)
+	}
+	if v.PostLaunchActions != nil {
+		s.WriteStruct(schemas.CreateLaunchConfigurationTemplateRequest_postLaunchActions)
+		v.PostLaunchActions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SmallVolumeConf != nil {
+		s.WriteStruct(schemas.CreateLaunchConfigurationTemplateRequest_smallVolumeConf)
+		v.SmallVolumeConf.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SmallVolumeMaxSize != 0 {
+		s.WriteInt64(schemas.CreateLaunchConfigurationTemplateRequest_smallVolumeMaxSize, v.SmallVolumeMaxSize)
+	}
+	serializeTagsMap(s, schemas.CreateLaunchConfigurationTemplateRequest_tags, v.Tags)
+	if v.TargetInstanceTypeRightSizingMethod != "" {
+		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, string(v.TargetInstanceTypeRightSizingMethod))
+	}
+}
+func (v *CreateLaunchConfigurationTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLaunchConfigurationTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLaunchConfigurationTemplateRequest_associatePublicIpAddress:
+			v.AssociatePublicIpAddress = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationTemplateRequest_associatePublicIpAddress, v.AssociatePublicIpAddress)
+		case schemas.CreateLaunchConfigurationTemplateRequest_bootMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateLaunchConfigurationTemplateRequest_bootMode, &ev); err != nil {
+				return err
+			}
+			v.BootMode = types.BootMode(ev)
+			return nil
+		case schemas.CreateLaunchConfigurationTemplateRequest_copyPrivateIp:
+			v.CopyPrivateIp = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationTemplateRequest_copyPrivateIp, v.CopyPrivateIp)
+		case schemas.CreateLaunchConfigurationTemplateRequest_copyTags:
+			v.CopyTags = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationTemplateRequest_copyTags, v.CopyTags)
+		case schemas.CreateLaunchConfigurationTemplateRequest_enableMapAutoTagging:
+			v.EnableMapAutoTagging = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationTemplateRequest_enableMapAutoTagging, v.EnableMapAutoTagging)
+		case schemas.CreateLaunchConfigurationTemplateRequest_enableParametersEncryption:
+			v.EnableParametersEncryption = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationTemplateRequest_enableParametersEncryption, v.EnableParametersEncryption)
+		case schemas.CreateLaunchConfigurationTemplateRequest_largeVolumeConf:
+			v.LargeVolumeConf = &types.LaunchTemplateDiskConf{}
+			return v.LargeVolumeConf.Deserialize(d)
+		case schemas.CreateLaunchConfigurationTemplateRequest_launchDisposition:
+			var ev string
+			if err := d.ReadString(schemas.CreateLaunchConfigurationTemplateRequest_launchDisposition, &ev); err != nil {
+				return err
+			}
+			v.LaunchDisposition = types.LaunchDisposition(ev)
+			return nil
+		case schemas.CreateLaunchConfigurationTemplateRequest_licensing:
+			v.Licensing = &types.Licensing{}
+			return v.Licensing.Deserialize(d)
+		case schemas.CreateLaunchConfigurationTemplateRequest_mapAutoTaggingMpeID:
+			v.MapAutoTaggingMpeID = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationTemplateRequest_mapAutoTaggingMpeID, v.MapAutoTaggingMpeID)
+		case schemas.CreateLaunchConfigurationTemplateRequest_parametersEncryptionKey:
+			v.ParametersEncryptionKey = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationTemplateRequest_parametersEncryptionKey, v.ParametersEncryptionKey)
+		case schemas.CreateLaunchConfigurationTemplateRequest_postLaunchActions:
+			v.PostLaunchActions = &types.PostLaunchActions{}
+			return v.PostLaunchActions.Deserialize(d)
+		case schemas.CreateLaunchConfigurationTemplateRequest_smallVolumeConf:
+			v.SmallVolumeConf = &types.LaunchTemplateDiskConf{}
+			return v.SmallVolumeConf.Deserialize(d)
+		case schemas.CreateLaunchConfigurationTemplateRequest_smallVolumeMaxSize:
+			return d.ReadInt64(schemas.CreateLaunchConfigurationTemplateRequest_smallVolumeMaxSize, &v.SmallVolumeMaxSize)
+		case schemas.CreateLaunchConfigurationTemplateRequest_tags:
+			return deserializeTagsMap(d, schemas.CreateLaunchConfigurationTemplateRequest_tags, &v.Tags)
+		case schemas.CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod:
+			var ev string
+			if err := d.ReadString(schemas.CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, &ev); err != nil {
+				return err
+			}
+			v.TargetInstanceTypeRightSizingMethod = types.TargetInstanceTypeRightSizingMethod(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateLaunchConfigurationTemplateOutput struct {
 
 	// ID of the Launch Configuration Template.
@@ -144,13 +274,156 @@ type CreateLaunchConfigurationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLaunchConfigurationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchConfigurationTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLaunchConfigurationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.LaunchConfigurationTemplate_arn, *v.Arn)
+	}
+	if v.AssociatePublicIpAddress != nil {
+		s.WriteBool(schemas.LaunchConfigurationTemplate_associatePublicIpAddress, *v.AssociatePublicIpAddress)
+	}
+	if v.BootMode != "" {
+		s.WriteString(schemas.LaunchConfigurationTemplate_bootMode, string(v.BootMode))
+	}
+	if v.CopyPrivateIp != nil {
+		s.WriteBool(schemas.LaunchConfigurationTemplate_copyPrivateIp, *v.CopyPrivateIp)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.LaunchConfigurationTemplate_copyTags, *v.CopyTags)
+	}
+	if v.Ec2LaunchTemplateID != nil {
+		s.WriteString(schemas.LaunchConfigurationTemplate_ec2LaunchTemplateID, *v.Ec2LaunchTemplateID)
+	}
+	if v.EnableMapAutoTagging != nil {
+		s.WriteBool(schemas.LaunchConfigurationTemplate_enableMapAutoTagging, *v.EnableMapAutoTagging)
+	}
+	if v.EnableParametersEncryption != nil {
+		s.WriteBool(schemas.LaunchConfigurationTemplate_enableParametersEncryption, *v.EnableParametersEncryption)
+	}
+	if v.LargeVolumeConf != nil {
+		s.WriteStruct(schemas.LaunchConfigurationTemplate_largeVolumeConf)
+		v.LargeVolumeConf.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LaunchConfigurationTemplateID != nil {
+		s.WriteString(schemas.LaunchConfigurationTemplate_launchConfigurationTemplateID, *v.LaunchConfigurationTemplateID)
+	}
+	if v.LaunchDisposition != "" {
+		s.WriteString(schemas.LaunchConfigurationTemplate_launchDisposition, string(v.LaunchDisposition))
+	}
+	if v.Licensing != nil {
+		s.WriteStruct(schemas.LaunchConfigurationTemplate_licensing)
+		v.Licensing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapAutoTaggingMpeID != nil {
+		s.WriteString(schemas.LaunchConfigurationTemplate_mapAutoTaggingMpeID, *v.MapAutoTaggingMpeID)
+	}
+	if v.ParametersEncryptionKey != nil {
+		s.WriteString(schemas.LaunchConfigurationTemplate_parametersEncryptionKey, *v.ParametersEncryptionKey)
+	}
+	if v.PostLaunchActions != nil {
+		s.WriteStruct(schemas.LaunchConfigurationTemplate_postLaunchActions)
+		v.PostLaunchActions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SmallVolumeConf != nil {
+		s.WriteStruct(schemas.LaunchConfigurationTemplate_smallVolumeConf)
+		v.SmallVolumeConf.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SmallVolumeMaxSize != 0 {
+		s.WriteInt64(schemas.LaunchConfigurationTemplate_smallVolumeMaxSize, v.SmallVolumeMaxSize)
+	}
+	serializeTagsMap(s, schemas.LaunchConfigurationTemplate_tags, v.Tags)
+	if v.TargetInstanceTypeRightSizingMethod != "" {
+		s.WriteString(schemas.LaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod, string(v.TargetInstanceTypeRightSizingMethod))
+	}
+}
+func (v *CreateLaunchConfigurationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchConfigurationTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchConfigurationTemplate_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.LaunchConfigurationTemplate_arn, v.Arn)
+		case schemas.LaunchConfigurationTemplate_associatePublicIpAddress:
+			v.AssociatePublicIpAddress = new(bool)
+			return d.ReadBool(schemas.LaunchConfigurationTemplate_associatePublicIpAddress, v.AssociatePublicIpAddress)
+		case schemas.LaunchConfigurationTemplate_bootMode:
+			var ev string
+			if err := d.ReadString(schemas.LaunchConfigurationTemplate_bootMode, &ev); err != nil {
+				return err
+			}
+			v.BootMode = types.BootMode(ev)
+			return nil
+		case schemas.LaunchConfigurationTemplate_copyPrivateIp:
+			v.CopyPrivateIp = new(bool)
+			return d.ReadBool(schemas.LaunchConfigurationTemplate_copyPrivateIp, v.CopyPrivateIp)
+		case schemas.LaunchConfigurationTemplate_copyTags:
+			v.CopyTags = new(bool)
+			return d.ReadBool(schemas.LaunchConfigurationTemplate_copyTags, v.CopyTags)
+		case schemas.LaunchConfigurationTemplate_ec2LaunchTemplateID:
+			v.Ec2LaunchTemplateID = new(string)
+			return d.ReadString(schemas.LaunchConfigurationTemplate_ec2LaunchTemplateID, v.Ec2LaunchTemplateID)
+		case schemas.LaunchConfigurationTemplate_enableMapAutoTagging:
+			v.EnableMapAutoTagging = new(bool)
+			return d.ReadBool(schemas.LaunchConfigurationTemplate_enableMapAutoTagging, v.EnableMapAutoTagging)
+		case schemas.LaunchConfigurationTemplate_enableParametersEncryption:
+			v.EnableParametersEncryption = new(bool)
+			return d.ReadBool(schemas.LaunchConfigurationTemplate_enableParametersEncryption, v.EnableParametersEncryption)
+		case schemas.LaunchConfigurationTemplate_largeVolumeConf:
+			v.LargeVolumeConf = &types.LaunchTemplateDiskConf{}
+			return v.LargeVolumeConf.Deserialize(d)
+		case schemas.LaunchConfigurationTemplate_launchConfigurationTemplateID:
+			v.LaunchConfigurationTemplateID = new(string)
+			return d.ReadString(schemas.LaunchConfigurationTemplate_launchConfigurationTemplateID, v.LaunchConfigurationTemplateID)
+		case schemas.LaunchConfigurationTemplate_launchDisposition:
+			var ev string
+			if err := d.ReadString(schemas.LaunchConfigurationTemplate_launchDisposition, &ev); err != nil {
+				return err
+			}
+			v.LaunchDisposition = types.LaunchDisposition(ev)
+			return nil
+		case schemas.LaunchConfigurationTemplate_licensing:
+			v.Licensing = &types.Licensing{}
+			return v.Licensing.Deserialize(d)
+		case schemas.LaunchConfigurationTemplate_mapAutoTaggingMpeID:
+			v.MapAutoTaggingMpeID = new(string)
+			return d.ReadString(schemas.LaunchConfigurationTemplate_mapAutoTaggingMpeID, v.MapAutoTaggingMpeID)
+		case schemas.LaunchConfigurationTemplate_parametersEncryptionKey:
+			v.ParametersEncryptionKey = new(string)
+			return d.ReadString(schemas.LaunchConfigurationTemplate_parametersEncryptionKey, v.ParametersEncryptionKey)
+		case schemas.LaunchConfigurationTemplate_postLaunchActions:
+			v.PostLaunchActions = &types.PostLaunchActions{}
+			return v.PostLaunchActions.Deserialize(d)
+		case schemas.LaunchConfigurationTemplate_smallVolumeConf:
+			v.SmallVolumeConf = &types.LaunchTemplateDiskConf{}
+			return v.SmallVolumeConf.Deserialize(d)
+		case schemas.LaunchConfigurationTemplate_smallVolumeMaxSize:
+			return d.ReadInt64(schemas.LaunchConfigurationTemplate_smallVolumeMaxSize, &v.SmallVolumeMaxSize)
+		case schemas.LaunchConfigurationTemplate_tags:
+			return deserializeTagsMap(d, schemas.LaunchConfigurationTemplate_tags, &v.Tags)
+		case schemas.LaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod:
+			var ev string
+			if err := d.ReadString(schemas.LaunchConfigurationTemplate_targetInstanceTypeRightSizingMethod, &ev); err != nil {
+				return err
+			}
+			v.TargetInstanceTypeRightSizingMethod = types.TargetInstanceTypeRightSizingMethod(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLaunchConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLaunchConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLaunchConfigurationTemplate, schemas.CreateLaunchConfigurationTemplateRequest, schemas.LaunchConfigurationTemplate)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLaunchConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLaunchConfigurationTemplate, schemas.CreateLaunchConfigurationTemplateRequest, schemas.LaunchConfigurationTemplate), output: &CreateLaunchConfigurationTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

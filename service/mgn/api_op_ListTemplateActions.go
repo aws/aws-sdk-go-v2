@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,48 @@ type ListTemplateActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListTemplateActionsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LaunchConfigurationTemplateID != nil {
+		s.WriteString(schemas.ListTemplateActionsRequest_launchConfigurationTemplateID, *v.LaunchConfigurationTemplateID)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTemplateActionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateActionsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTemplateActionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplateActionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplateActionsRequest_filters:
+			v.Filters = &types.TemplateActionsRequestFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListTemplateActionsRequest_launchConfigurationTemplateID:
+			v.LaunchConfigurationTemplateID = new(string)
+			return d.ReadString(schemas.ListTemplateActionsRequest_launchConfigurationTemplateID, v.LaunchConfigurationTemplateID)
+		case schemas.ListTemplateActionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListTemplateActionsRequest_maxResults, v.MaxResults)
+		case schemas.ListTemplateActionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplateActionsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListTemplateActionsOutput struct {
 
 	// List of template post migration custom actions.
@@ -59,13 +103,35 @@ type ListTemplateActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTemplateActionDocuments(s, schemas.ListTemplateActionsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateActionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTemplateActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplateActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplateActionsResponse_items:
+			return deserializeTemplateActionDocuments(d, schemas.ListTemplateActionsResponse_items, &v.Items)
+		case schemas.ListTemplateActionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplateActionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplateActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplateActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateActions, schemas.ListTemplateActionsRequest, schemas.ListTemplateActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTemplateActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateActions, schemas.ListTemplateActionsRequest, schemas.ListTemplateActionsResponse), output: &ListTemplateActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

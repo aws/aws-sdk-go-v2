@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,18 @@ type DescribeWhatIfForecastExportInput struct {
 	WhatIfForecastExportArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeWhatIfForecastExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWhatIfForecastExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWhatIfForecastExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WhatIfForecastExportArn != nil {
+		s.WriteString(schemas.DescribeWhatIfForecastExportRequest_WhatIfForecastExportArn, *v.WhatIfForecastExportArn)
+	}
 }
 
 type DescribeWhatIfForecastExportOutput struct {
@@ -111,13 +125,85 @@ type DescribeWhatIfForecastExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWhatIfForecastExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWhatIfForecastExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWhatIfForecastExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeWhatIfForecastExportResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.DescribeWhatIfForecastExportResponse_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EstimatedTimeRemainingInMinutes != nil {
+		s.WriteInt64(schemas.DescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes, *v.EstimatedTimeRemainingInMinutes)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.DescribeWhatIfForecastExportResponse_Format, *v.Format)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeWhatIfForecastExportResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeWhatIfForecastExportResponse_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeWhatIfForecastExportResponse_Status, *v.Status)
+	}
+	serializeLongArnList(s, schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastArns, v.WhatIfForecastArns)
+	if v.WhatIfForecastExportArn != nil {
+		s.WriteString(schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastExportArn, *v.WhatIfForecastExportArn)
+	}
+	if v.WhatIfForecastExportName != nil {
+		s.WriteString(schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastExportName, *v.WhatIfForecastExportName)
+	}
+}
+func (v *DescribeWhatIfForecastExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWhatIfForecastExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWhatIfForecastExportResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeWhatIfForecastExportResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeWhatIfForecastExportResponse_Destination:
+			v.Destination = &types.DataDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.DescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes:
+			v.EstimatedTimeRemainingInMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeWhatIfForecastExportResponse_EstimatedTimeRemainingInMinutes, v.EstimatedTimeRemainingInMinutes)
+		case schemas.DescribeWhatIfForecastExportResponse_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.DescribeWhatIfForecastExportResponse_Format, v.Format)
+		case schemas.DescribeWhatIfForecastExportResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeWhatIfForecastExportResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeWhatIfForecastExportResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeWhatIfForecastExportResponse_Message, v.Message)
+		case schemas.DescribeWhatIfForecastExportResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeWhatIfForecastExportResponse_Status, v.Status)
+		case schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastArns:
+			return deserializeLongArnList(d, schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastArns, &v.WhatIfForecastArns)
+		case schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastExportArn:
+			v.WhatIfForecastExportArn = new(string)
+			return d.ReadString(schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastExportArn, v.WhatIfForecastExportArn)
+		case schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastExportName:
+			v.WhatIfForecastExportName = new(string)
+			return d.ReadString(schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastExportName, v.WhatIfForecastExportName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWhatIfForecastExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWhatIfForecastExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWhatIfForecastExport, schemas.DescribeWhatIfForecastExportRequest, schemas.DescribeWhatIfForecastExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWhatIfForecastExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWhatIfForecastExport, schemas.DescribeWhatIfForecastExportRequest, schemas.DescribeWhatIfForecastExportResponse), output: &DescribeWhatIfForecastExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

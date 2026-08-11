@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -50,6 +52,82 @@ type Account struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Account) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Account)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Account) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Account_AccountId, *v.AccountId)
+	}
+	if v.AccountStatus != "" {
+		s.WriteString(schemas.Account_AccountStatus, string(v.AccountStatus))
+	}
+	if v.AccountType != "" {
+		s.WriteString(schemas.Account_AccountType, string(v.AccountType))
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.Account_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.Account_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DefaultLicense != "" {
+		s.WriteString(schemas.Account_DefaultLicense, string(v.DefaultLicense))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Account_Name, *v.Name)
+	}
+	serializeSigninDelegateGroupList(s, schemas.Account_SigninDelegateGroups, v.SigninDelegateGroups)
+	serializeLicenseList(s, schemas.Account_SupportedLicenses, v.SupportedLicenses)
+}
+func (v *Account) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Account, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Account_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Account_AccountId, v.AccountId)
+		case schemas.Account_AccountStatus:
+			var ev string
+			if err := d.ReadString(schemas.Account_AccountStatus, &ev); err != nil {
+				return err
+			}
+			v.AccountStatus = AccountStatus(ev)
+			return nil
+		case schemas.Account_AccountType:
+			var ev string
+			if err := d.ReadString(schemas.Account_AccountType, &ev); err != nil {
+				return err
+			}
+			v.AccountType = AccountType(ev)
+			return nil
+		case schemas.Account_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.Account_AwsAccountId, v.AwsAccountId)
+		case schemas.Account_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Account_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.Account_DefaultLicense:
+			var ev string
+			if err := d.ReadString(schemas.Account_DefaultLicense, &ev); err != nil {
+				return err
+			}
+			v.DefaultLicense = License(ev)
+			return nil
+		case schemas.Account_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Account_Name, v.Name)
+		case schemas.Account_SigninDelegateGroups:
+			return deserializeSigninDelegateGroupList(d, schemas.Account_SigninDelegateGroups, &v.SigninDelegateGroups)
+		case schemas.Account_SupportedLicenses:
+			return deserializeLicenseList(d, schemas.Account_SupportedLicenses, &v.SupportedLicenses)
+		}
+		return nil
+	})
+}
+
 // Settings related to the Amazon Chime account. This includes settings that start
 // or stop remote control of shared screens, or start or stop the dial-out option
 // in the Amazon Chime web application. For more information about these settings,
@@ -70,6 +148,34 @@ type AccountSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisableRemoteControl != nil {
+		s.WriteBool(schemas.AccountSettings_DisableRemoteControl, *v.DisableRemoteControl)
+	}
+	if v.EnableDialOut != nil {
+		s.WriteBool(schemas.AccountSettings_EnableDialOut, *v.EnableDialOut)
+	}
+}
+func (v *AccountSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSettings_DisableRemoteControl:
+			v.DisableRemoteControl = new(bool)
+			return d.ReadBool(schemas.AccountSettings_DisableRemoteControl, v.DisableRemoteControl)
+		case schemas.AccountSettings_EnableDialOut:
+			v.EnableDialOut = new(bool)
+			return d.ReadBool(schemas.AccountSettings_EnableDialOut, v.EnableDialOut)
+		}
+		return nil
+	})
+}
+
 // The Alexa for Business metadata associated with an Amazon Chime user, used to
 // integrate Alexa for Business with a device.
 type AlexaForBusinessMetadata struct {
@@ -81,6 +187,34 @@ type AlexaForBusinessMetadata struct {
 	IsAlexaForBusinessEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *AlexaForBusinessMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlexaForBusinessMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlexaForBusinessMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlexaForBusinessRoomArn != nil {
+		s.WriteString(schemas.AlexaForBusinessMetadata_AlexaForBusinessRoomArn, *v.AlexaForBusinessRoomArn)
+	}
+	if v.IsAlexaForBusinessEnabled != nil {
+		s.WriteBool(schemas.AlexaForBusinessMetadata_IsAlexaForBusinessEnabled, *v.IsAlexaForBusinessEnabled)
+	}
+}
+func (v *AlexaForBusinessMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlexaForBusinessMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlexaForBusinessMetadata_AlexaForBusinessRoomArn:
+			v.AlexaForBusinessRoomArn = new(string)
+			return d.ReadString(schemas.AlexaForBusinessMetadata_AlexaForBusinessRoomArn, v.AlexaForBusinessRoomArn)
+		case schemas.AlexaForBusinessMetadata_IsAlexaForBusinessEnabled:
+			v.IsAlexaForBusinessEnabled = new(bool)
+			return d.ReadBool(schemas.AlexaForBusinessMetadata_IsAlexaForBusinessEnabled, v.IsAlexaForBusinessEnabled)
+		}
+		return nil
+	})
 }
 
 // A resource that allows Enterprise account administrators to configure an
@@ -118,6 +252,80 @@ type Bot struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Bot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Bot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Bot) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotEmail != nil {
+		s.WriteString(schemas.Bot_BotEmail, *v.BotEmail)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.Bot_BotId, *v.BotId)
+	}
+	if v.BotType != "" {
+		s.WriteString(schemas.Bot_BotType, string(v.BotType))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.Bot_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.Disabled != nil {
+		s.WriteBool(schemas.Bot_Disabled, *v.Disabled)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.Bot_DisplayName, *v.DisplayName)
+	}
+	if v.SecurityToken != nil {
+		s.WriteString(schemas.Bot_SecurityToken, *v.SecurityToken)
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.Bot_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.Bot_UserId, *v.UserId)
+	}
+}
+func (v *Bot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Bot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Bot_BotEmail:
+			v.BotEmail = new(string)
+			return d.ReadString(schemas.Bot_BotEmail, v.BotEmail)
+		case schemas.Bot_BotId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.Bot_BotId, v.BotId)
+		case schemas.Bot_BotType:
+			var ev string
+			if err := d.ReadString(schemas.Bot_BotType, &ev); err != nil {
+				return err
+			}
+			v.BotType = BotType(ev)
+			return nil
+		case schemas.Bot_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Bot_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.Bot_Disabled:
+			v.Disabled = new(bool)
+			return d.ReadBool(schemas.Bot_Disabled, v.Disabled)
+		case schemas.Bot_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.Bot_DisplayName, v.DisplayName)
+		case schemas.Bot_SecurityToken:
+			v.SecurityToken = new(string)
+			return d.ReadString(schemas.Bot_SecurityToken, v.SecurityToken)
+		case schemas.Bot_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Bot_UpdatedTimestamp, v.UpdatedTimestamp)
+		case schemas.Bot_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.Bot_UserId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // The Amazon Chime Business Calling settings for the administrator's AWS account.
 // Includes any Amazon S3 buckets designated for storing call detail records.
 type BusinessCallingSettings struct {
@@ -128,6 +336,28 @@ type BusinessCallingSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BusinessCallingSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BusinessCallingSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BusinessCallingSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CdrBucket != nil {
+		s.WriteString(schemas.BusinessCallingSettings_CdrBucket, *v.CdrBucket)
+	}
+}
+func (v *BusinessCallingSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BusinessCallingSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BusinessCallingSettings_CdrBucket:
+			v.CdrBucket = new(string)
+			return d.ReadString(schemas.BusinessCallingSettings_CdrBucket, v.CdrBucket)
+		}
+		return nil
+	})
+}
+
 // The retention settings that determine how long to retain conversation messages
 // for an Amazon Chime Enterprise account.
 type ConversationRetentionSettings struct {
@@ -136,6 +366,28 @@ type ConversationRetentionSettings struct {
 	RetentionDays *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConversationRetentionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConversationRetentionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConversationRetentionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.ConversationRetentionSettings_RetentionDays, *v.RetentionDays)
+	}
+}
+func (v *ConversationRetentionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConversationRetentionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConversationRetentionSettings_RetentionDays:
+			v.RetentionDays = new(int32)
+			return d.ReadInt32(schemas.ConversationRetentionSettings_RetentionDays, v.RetentionDays)
+		}
+		return nil
+	})
 }
 
 // The configuration that allows a bot to receive outgoing events. Can be either
@@ -152,6 +404,40 @@ type EventsConfiguration struct {
 	OutboundEventsHTTPSEndpoint *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.EventsConfiguration_BotId, *v.BotId)
+	}
+	if v.LambdaFunctionArn != nil {
+		s.WriteString(schemas.EventsConfiguration_LambdaFunctionArn, *v.LambdaFunctionArn)
+	}
+	if v.OutboundEventsHTTPSEndpoint != nil {
+		s.WriteString(schemas.EventsConfiguration_OutboundEventsHTTPSEndpoint, *v.OutboundEventsHTTPSEndpoint)
+	}
+}
+func (v *EventsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventsConfiguration_BotId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.EventsConfiguration_BotId, v.BotId)
+		case schemas.EventsConfiguration_LambdaFunctionArn:
+			v.LambdaFunctionArn = new(string)
+			return d.ReadString(schemas.EventsConfiguration_LambdaFunctionArn, v.LambdaFunctionArn)
+		case schemas.EventsConfiguration_OutboundEventsHTTPSEndpoint:
+			v.OutboundEventsHTTPSEndpoint = new(string)
+			return d.ReadString(schemas.EventsConfiguration_OutboundEventsHTTPSEndpoint, v.OutboundEventsHTTPSEndpoint)
+		}
+		return nil
+	})
 }
 
 // Invitation object returned after emailing users to invite them to join the
@@ -171,6 +457,54 @@ type Invite struct {
 	Status InviteStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *Invite) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Invite)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Invite) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.Invite_EmailAddress, *v.EmailAddress)
+	}
+	if v.EmailStatus != "" {
+		s.WriteString(schemas.Invite_EmailStatus, string(v.EmailStatus))
+	}
+	if v.InviteId != nil {
+		s.WriteString(schemas.Invite_InviteId, *v.InviteId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Invite_Status, string(v.Status))
+	}
+}
+func (v *Invite) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Invite, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Invite_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.Invite_EmailAddress, v.EmailAddress)
+		case schemas.Invite_EmailStatus:
+			var ev string
+			if err := d.ReadString(schemas.Invite_EmailStatus, &ev); err != nil {
+				return err
+			}
+			v.EmailStatus = EmailStatus(ev)
+			return nil
+		case schemas.Invite_InviteId:
+			v.InviteId = new(string)
+			return d.ReadString(schemas.Invite_InviteId, v.InviteId)
+		case schemas.Invite_Status:
+			var ev string
+			if err := d.ReadString(schemas.Invite_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InviteStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The member details, such as email address, name, member ID, and member type.
@@ -194,6 +528,56 @@ type Member struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Member) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Member)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Member) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Member_AccountId, *v.AccountId)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.Member_Email, *v.Email)
+	}
+	if v.FullName != nil {
+		s.WriteString(schemas.Member_FullName, *v.FullName)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.Member_MemberId, *v.MemberId)
+	}
+	if v.MemberType != "" {
+		s.WriteString(schemas.Member_MemberType, string(v.MemberType))
+	}
+}
+func (v *Member) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Member, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Member_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Member_AccountId, v.AccountId)
+		case schemas.Member_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.Member_Email, v.Email)
+		case schemas.Member_FullName:
+			v.FullName = new(string)
+			return d.ReadString(schemas.Member_FullName, v.FullName)
+		case schemas.Member_MemberId:
+			v.MemberId = new(string)
+			return d.ReadString(schemas.Member_MemberId, v.MemberId)
+		case schemas.Member_MemberType:
+			var ev string
+			if err := d.ReadString(schemas.Member_MemberType, &ev); err != nil {
+				return err
+			}
+			v.MemberType = MemberType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The list of errors returned when a member action results in an error.
 type MemberError struct {
 
@@ -209,6 +593,44 @@ type MemberError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemberError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.MemberError_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.MemberError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.MemberError_MemberId, *v.MemberId)
+	}
+}
+func (v *MemberError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberError_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.MemberError_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = ErrorCode(ev)
+			return nil
+		case schemas.MemberError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.MemberError_ErrorMessage, v.ErrorMessage)
+		case schemas.MemberError_MemberId:
+			v.MemberId = new(string)
+			return d.ReadString(schemas.MemberError_MemberId, v.MemberId)
+		}
+		return nil
+	})
+}
+
 // Membership details, such as member ID and member role.
 type MembershipItem struct {
 
@@ -221,6 +643,38 @@ type MembershipItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MembershipItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MembershipItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MembershipItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberId != nil {
+		s.WriteString(schemas.MembershipItem_MemberId, *v.MemberId)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.MembershipItem_Role, string(v.Role))
+	}
+}
+func (v *MembershipItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MembershipItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MembershipItem_MemberId:
+			v.MemberId = new(string)
+			return d.ReadString(schemas.MembershipItem_MemberId, v.MemberId)
+		case schemas.MembershipItem_Role:
+			var ev string
+			if err := d.ReadString(schemas.MembershipItem_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = RoomMembershipRole(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A phone number for which an order has been placed.
 type OrderedPhoneNumber struct {
 
@@ -231,6 +685,38 @@ type OrderedPhoneNumber struct {
 	Status OrderedPhoneNumberStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrderedPhoneNumber) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrderedPhoneNumber)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrderedPhoneNumber) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.E164PhoneNumber != nil {
+		s.WriteString(schemas.OrderedPhoneNumber_E164PhoneNumber, *v.E164PhoneNumber)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OrderedPhoneNumber_Status, string(v.Status))
+	}
+}
+func (v *OrderedPhoneNumber) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrderedPhoneNumber, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrderedPhoneNumber_E164PhoneNumber:
+			v.E164PhoneNumber = new(string)
+			return d.ReadString(schemas.OrderedPhoneNumber_E164PhoneNumber, v.E164PhoneNumber)
+		case schemas.OrderedPhoneNumber_Status:
+			var ev string
+			if err := d.ReadString(schemas.OrderedPhoneNumber_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OrderedPhoneNumberStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A phone number used for Amazon Chime Business Calling or an Amazon Chime Voice
@@ -279,6 +765,115 @@ type PhoneNumber struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PhoneNumber) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumber)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumber) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePhoneNumberAssociationList(s, schemas.PhoneNumber_Associations, v.Associations)
+	if v.CallingName != nil {
+		s.WriteString(schemas.PhoneNumber_CallingName, *v.CallingName)
+	}
+	if v.CallingNameStatus != "" {
+		s.WriteString(schemas.PhoneNumber_CallingNameStatus, string(v.CallingNameStatus))
+	}
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.PhoneNumber_Capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.PhoneNumber_Country, *v.Country)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.PhoneNumber_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DeletionTimestamp != nil {
+		s.WriteTime(schemas.PhoneNumber_DeletionTimestamp, *v.DeletionTimestamp)
+	}
+	if v.E164PhoneNumber != nil {
+		s.WriteString(schemas.PhoneNumber_E164PhoneNumber, *v.E164PhoneNumber)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.PhoneNumber_PhoneNumberId, *v.PhoneNumberId)
+	}
+	if v.ProductType != "" {
+		s.WriteString(schemas.PhoneNumber_ProductType, string(v.ProductType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PhoneNumber_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PhoneNumber_Type, string(v.Type))
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.PhoneNumber_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *PhoneNumber) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumber, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumber_Associations:
+			return deserializePhoneNumberAssociationList(d, schemas.PhoneNumber_Associations, &v.Associations)
+		case schemas.PhoneNumber_CallingName:
+			v.CallingName = new(string)
+			return d.ReadString(schemas.PhoneNumber_CallingName, v.CallingName)
+		case schemas.PhoneNumber_CallingNameStatus:
+			var ev string
+			if err := d.ReadString(schemas.PhoneNumber_CallingNameStatus, &ev); err != nil {
+				return err
+			}
+			v.CallingNameStatus = CallingNameStatus(ev)
+			return nil
+		case schemas.PhoneNumber_Capabilities:
+			v.Capabilities = &PhoneNumberCapabilities{}
+			return v.Capabilities.Deserialize(d)
+		case schemas.PhoneNumber_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.PhoneNumber_Country, v.Country)
+		case schemas.PhoneNumber_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PhoneNumber_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.PhoneNumber_DeletionTimestamp:
+			v.DeletionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PhoneNumber_DeletionTimestamp, v.DeletionTimestamp)
+		case schemas.PhoneNumber_E164PhoneNumber:
+			v.E164PhoneNumber = new(string)
+			return d.ReadString(schemas.PhoneNumber_E164PhoneNumber, v.E164PhoneNumber)
+		case schemas.PhoneNumber_PhoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.PhoneNumber_PhoneNumberId, v.PhoneNumberId)
+		case schemas.PhoneNumber_ProductType:
+			var ev string
+			if err := d.ReadString(schemas.PhoneNumber_ProductType, &ev); err != nil {
+				return err
+			}
+			v.ProductType = PhoneNumberProductType(ev)
+			return nil
+		case schemas.PhoneNumber_Status:
+			var ev string
+			if err := d.ReadString(schemas.PhoneNumber_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = PhoneNumberStatus(ev)
+			return nil
+		case schemas.PhoneNumber_Type:
+			var ev string
+			if err := d.ReadString(schemas.PhoneNumber_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = PhoneNumberType(ev)
+			return nil
+		case schemas.PhoneNumber_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PhoneNumber_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
+
 // The phone number associations, such as Amazon Chime account ID, Amazon Chime
 // user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group
 // ID.
@@ -295,6 +890,44 @@ type PhoneNumberAssociation struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PhoneNumberAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumberAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumberAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedTimestamp != nil {
+		s.WriteTime(schemas.PhoneNumberAssociation_AssociatedTimestamp, *v.AssociatedTimestamp)
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.PhoneNumberAssociation_Name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.PhoneNumberAssociation_Value, *v.Value)
+	}
+}
+func (v *PhoneNumberAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumberAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumberAssociation_AssociatedTimestamp:
+			v.AssociatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PhoneNumberAssociation_AssociatedTimestamp, v.AssociatedTimestamp)
+		case schemas.PhoneNumberAssociation_Name:
+			var ev string
+			if err := d.ReadString(schemas.PhoneNumberAssociation_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = PhoneNumberAssociationName(ev)
+			return nil
+		case schemas.PhoneNumberAssociation_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.PhoneNumberAssociation_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The phone number capabilities for Amazon Chime Business Calling phone numbers,
@@ -322,6 +955,58 @@ type PhoneNumberCapabilities struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PhoneNumberCapabilities) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumberCapabilities)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumberCapabilities) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InboundCall != nil {
+		s.WriteBool(schemas.PhoneNumberCapabilities_InboundCall, *v.InboundCall)
+	}
+	if v.InboundMMS != nil {
+		s.WriteBool(schemas.PhoneNumberCapabilities_InboundMMS, *v.InboundMMS)
+	}
+	if v.InboundSMS != nil {
+		s.WriteBool(schemas.PhoneNumberCapabilities_InboundSMS, *v.InboundSMS)
+	}
+	if v.OutboundCall != nil {
+		s.WriteBool(schemas.PhoneNumberCapabilities_OutboundCall, *v.OutboundCall)
+	}
+	if v.OutboundMMS != nil {
+		s.WriteBool(schemas.PhoneNumberCapabilities_OutboundMMS, *v.OutboundMMS)
+	}
+	if v.OutboundSMS != nil {
+		s.WriteBool(schemas.PhoneNumberCapabilities_OutboundSMS, *v.OutboundSMS)
+	}
+}
+func (v *PhoneNumberCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumberCapabilities, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumberCapabilities_InboundCall:
+			v.InboundCall = new(bool)
+			return d.ReadBool(schemas.PhoneNumberCapabilities_InboundCall, v.InboundCall)
+		case schemas.PhoneNumberCapabilities_InboundMMS:
+			v.InboundMMS = new(bool)
+			return d.ReadBool(schemas.PhoneNumberCapabilities_InboundMMS, v.InboundMMS)
+		case schemas.PhoneNumberCapabilities_InboundSMS:
+			v.InboundSMS = new(bool)
+			return d.ReadBool(schemas.PhoneNumberCapabilities_InboundSMS, v.InboundSMS)
+		case schemas.PhoneNumberCapabilities_OutboundCall:
+			v.OutboundCall = new(bool)
+			return d.ReadBool(schemas.PhoneNumberCapabilities_OutboundCall, v.OutboundCall)
+		case schemas.PhoneNumberCapabilities_OutboundMMS:
+			v.OutboundMMS = new(bool)
+			return d.ReadBool(schemas.PhoneNumberCapabilities_OutboundMMS, v.OutboundMMS)
+		case schemas.PhoneNumberCapabilities_OutboundSMS:
+			v.OutboundSMS = new(bool)
+			return d.ReadBool(schemas.PhoneNumberCapabilities_OutboundSMS, v.OutboundSMS)
+		}
+		return nil
+	})
+}
+
 // The phone number country.
 type PhoneNumberCountry struct {
 
@@ -332,6 +1017,31 @@ type PhoneNumberCountry struct {
 	SupportedPhoneNumberTypes []PhoneNumberType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PhoneNumberCountry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumberCountry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumberCountry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CountryCode != nil {
+		s.WriteString(schemas.PhoneNumberCountry_CountryCode, *v.CountryCode)
+	}
+	serializePhoneNumberTypeList(s, schemas.PhoneNumberCountry_SupportedPhoneNumberTypes, v.SupportedPhoneNumberTypes)
+}
+func (v *PhoneNumberCountry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumberCountry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumberCountry_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.PhoneNumberCountry_CountryCode, v.CountryCode)
+		case schemas.PhoneNumberCountry_SupportedPhoneNumberTypes:
+			return deserializePhoneNumberTypeList(d, schemas.PhoneNumberCountry_SupportedPhoneNumberTypes, &v.SupportedPhoneNumberTypes)
+		}
+		return nil
+	})
 }
 
 // If the phone number action fails for one or more of the phone numbers in the
@@ -349,6 +1059,44 @@ type PhoneNumberError struct {
 	PhoneNumberId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PhoneNumberError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumberError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumberError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.PhoneNumberError_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.PhoneNumberError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.PhoneNumberError_PhoneNumberId, *v.PhoneNumberId)
+	}
+}
+func (v *PhoneNumberError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumberError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumberError_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.PhoneNumberError_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = ErrorCode(ev)
+			return nil
+		case schemas.PhoneNumberError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.PhoneNumberError_ErrorMessage, v.ErrorMessage)
+		case schemas.PhoneNumberError_PhoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.PhoneNumberError_PhoneNumberId, v.PhoneNumberId)
+		}
+		return nil
+	})
 }
 
 // The details of a phone number order created for Amazon Chime.
@@ -376,6 +1124,63 @@ type PhoneNumberOrder struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PhoneNumberOrder) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumberOrder)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumberOrder) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.PhoneNumberOrder_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	serializeOrderedPhoneNumberList(s, schemas.PhoneNumberOrder_OrderedPhoneNumbers, v.OrderedPhoneNumbers)
+	if v.PhoneNumberOrderId != nil {
+		s.WriteString(schemas.PhoneNumberOrder_PhoneNumberOrderId, *v.PhoneNumberOrderId)
+	}
+	if v.ProductType != "" {
+		s.WriteString(schemas.PhoneNumberOrder_ProductType, string(v.ProductType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PhoneNumberOrder_Status, string(v.Status))
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.PhoneNumberOrder_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *PhoneNumberOrder) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumberOrder, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumberOrder_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PhoneNumberOrder_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.PhoneNumberOrder_OrderedPhoneNumbers:
+			return deserializeOrderedPhoneNumberList(d, schemas.PhoneNumberOrder_OrderedPhoneNumbers, &v.OrderedPhoneNumbers)
+		case schemas.PhoneNumberOrder_PhoneNumberOrderId:
+			v.PhoneNumberOrderId = new(string)
+			return d.ReadString(schemas.PhoneNumberOrder_PhoneNumberOrderId, v.PhoneNumberOrderId)
+		case schemas.PhoneNumberOrder_ProductType:
+			var ev string
+			if err := d.ReadString(schemas.PhoneNumberOrder_ProductType, &ev); err != nil {
+				return err
+			}
+			v.ProductType = PhoneNumberProductType(ev)
+			return nil
+		case schemas.PhoneNumberOrder_Status:
+			var ev string
+			if err := d.ReadString(schemas.PhoneNumberOrder_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = PhoneNumberOrderStatus(ev)
+			return nil
+		case schemas.PhoneNumberOrder_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PhoneNumberOrder_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
+
 // The retention settings for an Amazon Chime Enterprise account that determine
 // how long to retain items such as chat-room messages and chat-conversation
 // messages.
@@ -388,6 +1193,38 @@ type RetentionSettings struct {
 	RoomRetentionSettings *RoomRetentionSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetentionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetentionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetentionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConversationRetentionSettings != nil {
+		s.WriteStruct(schemas.RetentionSettings_ConversationRetentionSettings)
+		v.ConversationRetentionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoomRetentionSettings != nil {
+		s.WriteStruct(schemas.RetentionSettings_RoomRetentionSettings)
+		v.RoomRetentionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RetentionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetentionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetentionSettings_ConversationRetentionSettings:
+			v.ConversationRetentionSettings = &ConversationRetentionSettings{}
+			return v.ConversationRetentionSettings.Deserialize(d)
+		case schemas.RetentionSettings_RoomRetentionSettings:
+			v.RoomRetentionSettings = &RoomRetentionSettings{}
+			return v.RoomRetentionSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The Amazon Chime chat room details.
@@ -414,6 +1251,58 @@ type Room struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Room) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Room)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Room) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Room_AccountId, *v.AccountId)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.Room_CreatedBy, *v.CreatedBy)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.Room_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Room_Name, *v.Name)
+	}
+	if v.RoomId != nil {
+		s.WriteString(schemas.Room_RoomId, *v.RoomId)
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.Room_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *Room) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Room, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Room_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Room_AccountId, v.AccountId)
+		case schemas.Room_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.Room_CreatedBy, v.CreatedBy)
+		case schemas.Room_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Room_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.Room_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Room_Name, v.Name)
+		case schemas.Room_RoomId:
+			v.RoomId = new(string)
+			return d.ReadString(schemas.Room_RoomId, v.RoomId)
+		case schemas.Room_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Room_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
+
 // The room membership details.
 type RoomMembership struct {
 
@@ -435,6 +1324,58 @@ type RoomMembership struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RoomMembership) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoomMembership)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoomMembership) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvitedBy != nil {
+		s.WriteString(schemas.RoomMembership_InvitedBy, *v.InvitedBy)
+	}
+	if v.Member != nil {
+		s.WriteStruct(schemas.RoomMembership_Member)
+		v.Member.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.RoomMembership_Role, string(v.Role))
+	}
+	if v.RoomId != nil {
+		s.WriteString(schemas.RoomMembership_RoomId, *v.RoomId)
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.RoomMembership_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *RoomMembership) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoomMembership, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoomMembership_InvitedBy:
+			v.InvitedBy = new(string)
+			return d.ReadString(schemas.RoomMembership_InvitedBy, v.InvitedBy)
+		case schemas.RoomMembership_Member:
+			v.Member = &Member{}
+			return v.Member.Deserialize(d)
+		case schemas.RoomMembership_Role:
+			var ev string
+			if err := d.ReadString(schemas.RoomMembership_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = RoomMembershipRole(ev)
+			return nil
+		case schemas.RoomMembership_RoomId:
+			v.RoomId = new(string)
+			return d.ReadString(schemas.RoomMembership_RoomId, v.RoomId)
+		case schemas.RoomMembership_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RoomMembership_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
+
 // The retention settings that determine how long to retain chat-room messages for
 // an Amazon Chime Enterprise account.
 type RoomRetentionSettings struct {
@@ -445,6 +1386,28 @@ type RoomRetentionSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RoomRetentionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoomRetentionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoomRetentionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.RoomRetentionSettings_RetentionDays, *v.RetentionDays)
+	}
+}
+func (v *RoomRetentionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoomRetentionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoomRetentionSettings_RetentionDays:
+			v.RetentionDays = new(int32)
+			return d.ReadInt32(schemas.RoomRetentionSettings_RetentionDays, v.RetentionDays)
+		}
+		return nil
+	})
+}
+
 // An Active Directory (AD) group whose members are granted permission to act as
 // delegates.
 type SigninDelegateGroup struct {
@@ -453,6 +1416,28 @@ type SigninDelegateGroup struct {
 	GroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SigninDelegateGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SigninDelegateGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SigninDelegateGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupName != nil {
+		s.WriteString(schemas.SigninDelegateGroup_GroupName, *v.GroupName)
+	}
+}
+func (v *SigninDelegateGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SigninDelegateGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SigninDelegateGroup_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.SigninDelegateGroup_GroupName, v.GroupName)
+		}
+		return nil
+	})
 }
 
 // Settings that allow management of telephony permissions for an Amazon Chime
@@ -477,6 +1462,40 @@ type TelephonySettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TelephonySettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TelephonySettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TelephonySettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InboundCalling != nil {
+		s.WriteBool(schemas.TelephonySettings_InboundCalling, *v.InboundCalling)
+	}
+	if v.OutboundCalling != nil {
+		s.WriteBool(schemas.TelephonySettings_OutboundCalling, *v.OutboundCalling)
+	}
+	if v.SMS != nil {
+		s.WriteBool(schemas.TelephonySettings_SMS, *v.SMS)
+	}
+}
+func (v *TelephonySettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TelephonySettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TelephonySettings_InboundCalling:
+			v.InboundCalling = new(bool)
+			return d.ReadBool(schemas.TelephonySettings_InboundCalling, v.InboundCalling)
+		case schemas.TelephonySettings_OutboundCalling:
+			v.OutboundCalling = new(bool)
+			return d.ReadBool(schemas.TelephonySettings_OutboundCalling, v.OutboundCalling)
+		case schemas.TelephonySettings_SMS:
+			v.SMS = new(bool)
+			return d.ReadBool(schemas.TelephonySettings_SMS, v.SMS)
+		}
+		return nil
+	})
+}
+
 // The phone number ID, product type, or calling name fields to update, used with
 // the BatchUpdatePhoneNumberand UpdatePhoneNumber actions.
 type UpdatePhoneNumberRequestItem struct {
@@ -493,6 +1512,44 @@ type UpdatePhoneNumberRequestItem struct {
 	ProductType PhoneNumberProductType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdatePhoneNumberRequestItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePhoneNumberRequestItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePhoneNumberRequestItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallingName != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequestItem_CallingName, *v.CallingName)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequestItem_PhoneNumberId, *v.PhoneNumberId)
+	}
+	if v.ProductType != "" {
+		s.WriteString(schemas.UpdatePhoneNumberRequestItem_ProductType, string(v.ProductType))
+	}
+}
+func (v *UpdatePhoneNumberRequestItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePhoneNumberRequestItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePhoneNumberRequestItem_CallingName:
+			v.CallingName = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberRequestItem_CallingName, v.CallingName)
+		case schemas.UpdatePhoneNumberRequestItem_PhoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberRequestItem_PhoneNumberId, v.PhoneNumberId)
+		case schemas.UpdatePhoneNumberRequestItem_ProductType:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePhoneNumberRequestItem_ProductType, &ev); err != nil {
+				return err
+			}
+			v.ProductType = PhoneNumberProductType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The user ID and user fields to update, used with the BatchUpdateUser action.
@@ -513,6 +1570,56 @@ type UpdateUserRequestItem struct {
 	UserType UserType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateUserRequestItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserRequestItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserRequestItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlexaForBusinessMetadata != nil {
+		s.WriteStruct(schemas.UpdateUserRequestItem_AlexaForBusinessMetadata)
+		v.AlexaForBusinessMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LicenseType != "" {
+		s.WriteString(schemas.UpdateUserRequestItem_LicenseType, string(v.LicenseType))
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.UpdateUserRequestItem_UserId, *v.UserId)
+	}
+	if v.UserType != "" {
+		s.WriteString(schemas.UpdateUserRequestItem_UserType, string(v.UserType))
+	}
+}
+func (v *UpdateUserRequestItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserRequestItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUserRequestItem_AlexaForBusinessMetadata:
+			v.AlexaForBusinessMetadata = &AlexaForBusinessMetadata{}
+			return v.AlexaForBusinessMetadata.Deserialize(d)
+		case schemas.UpdateUserRequestItem_LicenseType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateUserRequestItem_LicenseType, &ev); err != nil {
+				return err
+			}
+			v.LicenseType = License(ev)
+			return nil
+		case schemas.UpdateUserRequestItem_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.UpdateUserRequestItem_UserId, v.UserId)
+		case schemas.UpdateUserRequestItem_UserType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateUserRequestItem_UserType, &ev); err != nil {
+				return err
+			}
+			v.UserType = UserType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The user on the Amazon Chime account.
@@ -563,6 +1670,118 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.User_AccountId, *v.AccountId)
+	}
+	if v.AlexaForBusinessMetadata != nil {
+		s.WriteStruct(schemas.User_AlexaForBusinessMetadata)
+		v.AlexaForBusinessMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.User_DisplayName, *v.DisplayName)
+	}
+	if v.InvitedOn != nil {
+		s.WriteTime(schemas.User_InvitedOn, *v.InvitedOn)
+	}
+	if v.LicenseType != "" {
+		s.WriteString(schemas.User_LicenseType, string(v.LicenseType))
+	}
+	if v.PersonalPIN != nil {
+		s.WriteString(schemas.User_PersonalPIN, *v.PersonalPIN)
+	}
+	if v.PrimaryEmail != nil {
+		s.WriteString(schemas.User_PrimaryEmail, *v.PrimaryEmail)
+	}
+	if v.PrimaryProvisionedNumber != nil {
+		s.WriteString(schemas.User_PrimaryProvisionedNumber, *v.PrimaryProvisionedNumber)
+	}
+	if v.RegisteredOn != nil {
+		s.WriteTime(schemas.User_RegisteredOn, *v.RegisteredOn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.User_UserId, *v.UserId)
+	}
+	if v.UserInvitationStatus != "" {
+		s.WriteString(schemas.User_UserInvitationStatus, string(v.UserInvitationStatus))
+	}
+	if v.UserRegistrationStatus != "" {
+		s.WriteString(schemas.User_UserRegistrationStatus, string(v.UserRegistrationStatus))
+	}
+	if v.UserType != "" {
+		s.WriteString(schemas.User_UserType, string(v.UserType))
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.User_AccountId, v.AccountId)
+		case schemas.User_AlexaForBusinessMetadata:
+			v.AlexaForBusinessMetadata = &AlexaForBusinessMetadata{}
+			return v.AlexaForBusinessMetadata.Deserialize(d)
+		case schemas.User_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.User_DisplayName, v.DisplayName)
+		case schemas.User_InvitedOn:
+			v.InvitedOn = new(time.Time)
+			return d.ReadTime(schemas.User_InvitedOn, v.InvitedOn)
+		case schemas.User_LicenseType:
+			var ev string
+			if err := d.ReadString(schemas.User_LicenseType, &ev); err != nil {
+				return err
+			}
+			v.LicenseType = License(ev)
+			return nil
+		case schemas.User_PersonalPIN:
+			v.PersonalPIN = new(string)
+			return d.ReadString(schemas.User_PersonalPIN, v.PersonalPIN)
+		case schemas.User_PrimaryEmail:
+			v.PrimaryEmail = new(string)
+			return d.ReadString(schemas.User_PrimaryEmail, v.PrimaryEmail)
+		case schemas.User_PrimaryProvisionedNumber:
+			v.PrimaryProvisionedNumber = new(string)
+			return d.ReadString(schemas.User_PrimaryProvisionedNumber, v.PrimaryProvisionedNumber)
+		case schemas.User_RegisteredOn:
+			v.RegisteredOn = new(time.Time)
+			return d.ReadTime(schemas.User_RegisteredOn, v.RegisteredOn)
+		case schemas.User_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.User_UserId, v.UserId)
+		case schemas.User_UserInvitationStatus:
+			var ev string
+			if err := d.ReadString(schemas.User_UserInvitationStatus, &ev); err != nil {
+				return err
+			}
+			v.UserInvitationStatus = InviteStatus(ev)
+			return nil
+		case schemas.User_UserRegistrationStatus:
+			var ev string
+			if err := d.ReadString(schemas.User_UserRegistrationStatus, &ev); err != nil {
+				return err
+			}
+			v.UserRegistrationStatus = RegistrationStatus(ev)
+			return nil
+		case schemas.User_UserType:
+			var ev string
+			if err := d.ReadString(schemas.User_UserType, &ev); err != nil {
+				return err
+			}
+			v.UserType = UserType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The list of errors returned when errors are encountered during the BatchSuspendUser, BatchUnsuspendUser, or BatchUpdateUser
 // actions. This includes user IDs, error codes, and error messages.
 type UserError struct {
@@ -579,6 +1798,44 @@ type UserError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.UserError_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.UserError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.UserError_UserId, *v.UserId)
+	}
+}
+func (v *UserError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserError_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.UserError_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = ErrorCode(ev)
+			return nil
+		case schemas.UserError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.UserError_ErrorMessage, v.ErrorMessage)
+		case schemas.UserError_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.UserError_UserId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // Settings associated with an Amazon Chime user, including inbound and outbound
 // calling and text messaging.
 type UserSettings struct {
@@ -591,6 +1848,30 @@ type UserSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Telephony != nil {
+		s.WriteStruct(schemas.UserSettings_Telephony)
+		v.Telephony.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UserSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserSettings_Telephony:
+			v.Telephony = &TelephonySettings{}
+			return v.Telephony.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets
 // designated for storing call detail records.
 type VoiceConnectorSettings struct {
@@ -599,6 +1880,28 @@ type VoiceConnectorSettings struct {
 	CdrBucket *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VoiceConnectorSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceConnectorSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceConnectorSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CdrBucket != nil {
+		s.WriteString(schemas.VoiceConnectorSettings_CdrBucket, *v.CdrBucket)
+	}
+}
+func (v *VoiceConnectorSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceConnectorSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceConnectorSettings_CdrBucket:
+			v.CdrBucket = new(string)
+			return d.ReadString(schemas.VoiceConnectorSettings_CdrBucket, v.CdrBucket)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

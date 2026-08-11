@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type UpdateSipMediaApplicationCallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSipMediaApplicationCallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSipMediaApplicationCallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSipMediaApplicationCallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSMAUpdateCallArgumentsMap(s, schemas.UpdateSipMediaApplicationCallRequest_Arguments, v.Arguments)
+	if v.SipMediaApplicationId != nil {
+		s.WriteString(schemas.UpdateSipMediaApplicationCallRequest_SipMediaApplicationId, *v.SipMediaApplicationId)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.UpdateSipMediaApplicationCallRequest_TransactionId, *v.TransactionId)
+	}
+}
+
 type UpdateSipMediaApplicationCallOutput struct {
 
 	// A Call instance for a SIP media application.
@@ -58,13 +76,34 @@ type UpdateSipMediaApplicationCallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSipMediaApplicationCallOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSipMediaApplicationCallResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSipMediaApplicationCallOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SipMediaApplicationCall != nil {
+		s.WriteStruct(schemas.UpdateSipMediaApplicationCallResponse_SipMediaApplicationCall)
+		v.SipMediaApplicationCall.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSipMediaApplicationCallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSipMediaApplicationCallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSipMediaApplicationCallResponse_SipMediaApplicationCall:
+			v.SipMediaApplicationCall = &types.SipMediaApplicationCall{}
+			return v.SipMediaApplicationCall.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSipMediaApplicationCallMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSipMediaApplicationCall{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSipMediaApplicationCall, schemas.UpdateSipMediaApplicationCallRequest, schemas.UpdateSipMediaApplicationCallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSipMediaApplicationCall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSipMediaApplicationCall, schemas.UpdateSipMediaApplicationCallRequest, schemas.UpdateSipMediaApplicationCallResponse), output: &UpdateSipMediaApplicationCallOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

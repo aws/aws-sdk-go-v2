@@ -5,7 +5,9 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,34 @@ type ListSignalCatalogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSignalCatalogsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSignalCatalogsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSignalCatalogsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSignalCatalogsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSignalCatalogsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSignalCatalogsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSignalCatalogsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSignalCatalogsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSignalCatalogsRequest_maxResults, v.MaxResults)
+		case schemas.ListSignalCatalogsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSignalCatalogsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListSignalCatalogsOutput struct {
 
 	//  The token to retrieve the next set of results, or null if there are no more
@@ -63,13 +93,35 @@ type ListSignalCatalogsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSignalCatalogsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSignalCatalogsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSignalCatalogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSignalCatalogsResponse_nextToken, *v.NextToken)
+	}
+	serializesignalCatalogSummaries(s, schemas.ListSignalCatalogsResponse_summaries, v.Summaries)
+}
+func (v *ListSignalCatalogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSignalCatalogsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSignalCatalogsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSignalCatalogsResponse_nextToken, v.NextToken)
+		case schemas.ListSignalCatalogsResponse_summaries:
+			return deserializesignalCatalogSummaries(d, schemas.ListSignalCatalogsResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSignalCatalogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSignalCatalogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSignalCatalogs, schemas.ListSignalCatalogsRequest, schemas.ListSignalCatalogsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSignalCatalogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSignalCatalogs, schemas.ListSignalCatalogsRequest, schemas.ListSignalCatalogsResponse), output: &ListSignalCatalogsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

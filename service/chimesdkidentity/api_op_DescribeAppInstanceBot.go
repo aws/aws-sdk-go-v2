@@ -4,7 +4,9 @@ package chimesdkidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeAppInstanceBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppInstanceBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppInstanceBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppInstanceBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceBotArn != nil {
+		s.WriteString(schemas.DescribeAppInstanceBotRequest_AppInstanceBotArn, *v.AppInstanceBotArn)
+	}
+}
+
 type DescribeAppInstanceBotOutput struct {
 
 	// The detials of the AppInstanceBot .
@@ -45,13 +59,34 @@ type DescribeAppInstanceBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppInstanceBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppInstanceBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppInstanceBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceBot != nil {
+		s.WriteStruct(schemas.DescribeAppInstanceBotResponse_AppInstanceBot)
+		v.AppInstanceBot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAppInstanceBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppInstanceBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppInstanceBotResponse_AppInstanceBot:
+			v.AppInstanceBot = &types.AppInstanceBot{}
+			return v.AppInstanceBot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppInstanceBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppInstanceBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstanceBot, schemas.DescribeAppInstanceBotRequest, schemas.DescribeAppInstanceBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppInstanceBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstanceBot, schemas.DescribeAppInstanceBotRequest, schemas.DescribeAppInstanceBotResponse), output: &DescribeAppInstanceBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

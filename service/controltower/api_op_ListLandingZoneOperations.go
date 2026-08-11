@@ -5,7 +5,9 @@ package controltower
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,26 @@ type ListLandingZoneOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLandingZoneOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLandingZoneOperationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLandingZoneOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListLandingZoneOperationsInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLandingZoneOperationsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLandingZoneOperationsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListLandingZoneOperationsOutput struct {
 
 	// Lists landing zone operations.
@@ -59,13 +81,35 @@ type ListLandingZoneOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLandingZoneOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLandingZoneOperationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLandingZoneOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLandingZoneOperations(s, schemas.ListLandingZoneOperationsOutput_landingZoneOperations, v.LandingZoneOperations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLandingZoneOperationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLandingZoneOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLandingZoneOperationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLandingZoneOperationsOutput_landingZoneOperations:
+			return deserializeLandingZoneOperations(d, schemas.ListLandingZoneOperationsOutput_landingZoneOperations, &v.LandingZoneOperations)
+		case schemas.ListLandingZoneOperationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLandingZoneOperationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLandingZoneOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLandingZoneOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLandingZoneOperations, schemas.ListLandingZoneOperationsInput, schemas.ListLandingZoneOperationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLandingZoneOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLandingZoneOperations, schemas.ListLandingZoneOperationsInput, schemas.ListLandingZoneOperationsOutput), output: &ListLandingZoneOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

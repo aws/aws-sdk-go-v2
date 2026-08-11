@@ -4,6 +4,8 @@ package migrationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,27 @@ type DisassociateCreatedArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCreatedArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCreatedArtifactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCreatedArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedArtifactName != nil {
+		s.WriteString(schemas.DisassociateCreatedArtifactRequest_CreatedArtifactName, *v.CreatedArtifactName)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.DisassociateCreatedArtifactRequest_DryRun, v.DryRun)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.DisassociateCreatedArtifactRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.DisassociateCreatedArtifactRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type DisassociateCreatedArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +91,26 @@ type DisassociateCreatedArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCreatedArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCreatedArtifactResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCreatedArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateCreatedArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateCreatedArtifactResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateCreatedArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateCreatedArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCreatedArtifact, schemas.DisassociateCreatedArtifactRequest, schemas.DisassociateCreatedArtifactResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateCreatedArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCreatedArtifact, schemas.DisassociateCreatedArtifactRequest, schemas.DisassociateCreatedArtifactResult), output: &DisassociateCreatedArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

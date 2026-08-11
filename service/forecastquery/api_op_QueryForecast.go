@@ -4,7 +4,9 @@ package forecastquery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecastquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecastquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,28 @@ type QueryForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryForecastInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryForecastRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.QueryForecastRequest_EndDate, *v.EndDate)
+	}
+	serializeFilters(s, schemas.QueryForecastRequest_Filters, v.Filters)
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.QueryForecastRequest_ForecastArn, *v.ForecastArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.QueryForecastRequest_NextToken, *v.NextToken)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.QueryForecastRequest_StartDate, *v.StartDate)
+	}
+}
+
 type QueryForecastOutput struct {
 
 	// The forecast.
@@ -85,13 +109,34 @@ type QueryForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryForecastOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryForecastResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Forecast != nil {
+		s.WriteStruct(schemas.QueryForecastResponse_Forecast)
+		v.Forecast.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *QueryForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryForecastResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryForecastResponse_Forecast:
+			v.Forecast = &types.Forecast{}
+			return v.Forecast.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQueryForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryForecast, schemas.QueryForecastRequest, schemas.QueryForecastResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpQueryForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryForecast, schemas.QueryForecastRequest, schemas.QueryForecastResponse), output: &QueryForecastOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

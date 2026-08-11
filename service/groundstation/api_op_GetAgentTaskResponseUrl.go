@@ -4,6 +4,8 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetAgentTaskResponseUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentTaskResponseUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentTaskResponseUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentTaskResponseUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentTaskResponseUrlRequest_agentId, *v.AgentId)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetAgentTaskResponseUrlRequest_taskId, *v.TaskId)
+	}
+}
+
 type GetAgentTaskResponseUrlOutput struct {
 
 	// UUID of the agent.
@@ -63,13 +80,44 @@ type GetAgentTaskResponseUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentTaskResponseUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentTaskResponseUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentTaskResponseUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentTaskResponseUrlResponse_agentId, *v.AgentId)
+	}
+	if v.PresignedLogUrl != nil {
+		s.WriteString(schemas.GetAgentTaskResponseUrlResponse_presignedLogUrl, *v.PresignedLogUrl)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetAgentTaskResponseUrlResponse_taskId, *v.TaskId)
+	}
+}
+func (v *GetAgentTaskResponseUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentTaskResponseUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentTaskResponseUrlResponse_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.GetAgentTaskResponseUrlResponse_agentId, v.AgentId)
+		case schemas.GetAgentTaskResponseUrlResponse_presignedLogUrl:
+			v.PresignedLogUrl = new(string)
+			return d.ReadString(schemas.GetAgentTaskResponseUrlResponse_presignedLogUrl, v.PresignedLogUrl)
+		case schemas.GetAgentTaskResponseUrlResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetAgentTaskResponseUrlResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentTaskResponseUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentTaskResponseUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentTaskResponseUrl, schemas.GetAgentTaskResponseUrlRequest, schemas.GetAgentTaskResponseUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentTaskResponseUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentTaskResponseUrl, schemas.GetAgentTaskResponseUrlRequest, schemas.GetAgentTaskResponseUrlResponse), output: &GetAgentTaskResponseUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

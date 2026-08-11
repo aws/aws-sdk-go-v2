@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListResourceSetResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceSetResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceSetResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceSetResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.ListResourceSetResourcesRequest_Identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceSetResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceSetResourcesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResourceSetResourcesOutput struct {
 
 	// An array of the associated resources' uniform resource identifiers (URI).
@@ -68,13 +88,35 @@ type ListResourceSetResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceSetResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceSetResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceSetResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceList(s, schemas.ListResourceSetResourcesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceSetResourcesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListResourceSetResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceSetResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceSetResourcesResponse_Items:
+			return deserializeResourceList(d, schemas.ListResourceSetResourcesResponse_Items, &v.Items)
+		case schemas.ListResourceSetResourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceSetResourcesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceSetResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceSetResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceSetResources, schemas.ListResourceSetResourcesRequest, schemas.ListResourceSetResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourceSetResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceSetResources, schemas.ListResourceSetResourcesRequest, schemas.ListResourceSetResourcesResponse), output: &ListResourceSetResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

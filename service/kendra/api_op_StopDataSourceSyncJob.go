@@ -4,6 +4,8 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type StopDataSourceSyncJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDataSourceSyncJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDataSourceSyncJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDataSourceSyncJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StopDataSourceSyncJobRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.StopDataSourceSyncJobRequest_IndexId, *v.IndexId)
+	}
+}
+
 type StopDataSourceSyncJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type StopDataSourceSyncJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDataSourceSyncJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDataSourceSyncJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopDataSourceSyncJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDataSourceSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDataSourceSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDataSourceSyncJob, schemas.StopDataSourceSyncJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopDataSourceSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDataSourceSyncJob, schemas.StopDataSourceSyncJobRequest, nil), output: &StopDataSourceSyncJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

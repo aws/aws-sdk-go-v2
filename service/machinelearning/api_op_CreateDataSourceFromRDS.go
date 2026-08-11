@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -112,6 +114,32 @@ type CreateDataSourceFromRDSInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceFromRDSInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceFromRDSInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceFromRDSInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeStatistics != false {
+		s.WriteBool(schemas.CreateDataSourceFromRDSInput_ComputeStatistics, v.ComputeStatistics)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceFromRDSInput_DataSourceId, *v.DataSourceId)
+	}
+	if v.DataSourceName != nil {
+		s.WriteString(schemas.CreateDataSourceFromRDSInput_DataSourceName, *v.DataSourceName)
+	}
+	if v.RDSData != nil {
+		s.WriteStruct(schemas.CreateDataSourceFromRDSInput_RDSData)
+		v.RDSData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CreateDataSourceFromRDSInput_RoleARN, *v.RoleARN)
+	}
+}
+
 //	Represents the output of a CreateDataSourceFromRDS operation, and is an
 //
 // acknowledgement that Amazon ML received the request.
@@ -134,13 +162,32 @@ type CreateDataSourceFromRDSOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceFromRDSOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceFromRDSOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceFromRDSOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceFromRDSOutput_DataSourceId, *v.DataSourceId)
+	}
+}
+func (v *CreateDataSourceFromRDSOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSourceFromRDSOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSourceFromRDSOutput_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.CreateDataSourceFromRDSOutput_DataSourceId, v.DataSourceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSourceFromRDSMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataSourceFromRDS{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSourceFromRDS, schemas.CreateDataSourceFromRDSInput, schemas.CreateDataSourceFromRDSOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataSourceFromRDS{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSourceFromRDS, schemas.CreateDataSourceFromRDSInput, schemas.CreateDataSourceFromRDSOutput), output: &CreateDataSourceFromRDSOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

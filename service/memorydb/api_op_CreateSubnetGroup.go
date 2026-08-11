@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,23 @@ type CreateSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubnetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubnetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubnetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSubnetGroupRequest_Description, *v.Description)
+	}
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.CreateSubnetGroupRequest_SubnetGroupName, *v.SubnetGroupName)
+	}
+	serializeSubnetIdentifierList(s, schemas.CreateSubnetGroupRequest_SubnetIds, v.SubnetIds)
+	serializeTagList(s, schemas.CreateSubnetGroupRequest_Tags, v.Tags)
+}
+
 type CreateSubnetGroupOutput struct {
 
 	// The newly-created subnet group.
@@ -65,13 +84,34 @@ type CreateSubnetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubnetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubnetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubnetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubnetGroup != nil {
+		s.WriteStruct(schemas.CreateSubnetGroupResponse_SubnetGroup)
+		v.SubnetGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSubnetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSubnetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSubnetGroupResponse_SubnetGroup:
+			v.SubnetGroup = &types.SubnetGroup{}
+			return v.SubnetGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.CreateSubnetGroupRequest, schemas.CreateSubnetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.CreateSubnetGroupRequest, schemas.CreateSubnetGroupResponse), output: &CreateSubnetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

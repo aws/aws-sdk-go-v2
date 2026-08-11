@@ -4,7 +4,9 @@ package resourcegroups
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,37 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupConfigurationList(s, schemas.CreateGroupInput_Configuration, v.Configuration)
+	if v.Criticality != nil {
+		s.WriteInt32(schemas.CreateGroupInput_Criticality, *v.Criticality)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGroupInput_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateGroupInput_DisplayName, *v.DisplayName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGroupInput_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.CreateGroupInput_Owner, *v.Owner)
+	}
+	if v.ResourceQuery != nil {
+		s.WriteStruct(schemas.CreateGroupInput_ResourceQuery)
+		v.ResourceQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateGroupInput_Tags, v.Tags)
+}
+
 type CreateGroupOutput struct {
 
 	// The description of the resource group.
@@ -116,13 +149,53 @@ type CreateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteStruct(schemas.CreateGroupOutput_Group)
+		v.Group.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupConfiguration != nil {
+		s.WriteStruct(schemas.CreateGroupOutput_GroupConfiguration)
+		v.GroupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceQuery != nil {
+		s.WriteStruct(schemas.CreateGroupOutput_ResourceQuery)
+		v.ResourceQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateGroupOutput_Tags, v.Tags)
+}
+func (v *CreateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGroupOutput_Group:
+			v.Group = &types.Group{}
+			return v.Group.Deserialize(d)
+		case schemas.CreateGroupOutput_GroupConfiguration:
+			v.GroupConfiguration = &types.GroupConfiguration{}
+			return v.GroupConfiguration.Deserialize(d)
+		case schemas.CreateGroupOutput_ResourceQuery:
+			v.ResourceQuery = &types.ResourceQuery{}
+			return v.ResourceQuery.Deserialize(d)
+		case schemas.CreateGroupOutput_Tags:
+			return deserializeTags(d, schemas.CreateGroupOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupInput, schemas.CreateGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupInput, schemas.CreateGroupOutput), output: &CreateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

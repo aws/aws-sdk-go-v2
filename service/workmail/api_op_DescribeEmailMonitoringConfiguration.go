@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeEmailMonitoringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEmailMonitoringConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEmailMonitoringConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEmailMonitoringConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeEmailMonitoringConfigurationRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DescribeEmailMonitoringConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the
@@ -51,13 +65,38 @@ type DescribeEmailMonitoringConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEmailMonitoringConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEmailMonitoringConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEmailMonitoringConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.DescribeEmailMonitoringConfigurationResponse_LogGroupArn, *v.LogGroupArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeEmailMonitoringConfigurationResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *DescribeEmailMonitoringConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEmailMonitoringConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEmailMonitoringConfigurationResponse_LogGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.DescribeEmailMonitoringConfigurationResponse_LogGroupArn, v.LogGroupArn)
+		case schemas.DescribeEmailMonitoringConfigurationResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeEmailMonitoringConfigurationResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEmailMonitoringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEmailMonitoringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEmailMonitoringConfiguration, schemas.DescribeEmailMonitoringConfigurationRequest, schemas.DescribeEmailMonitoringConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEmailMonitoringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEmailMonitoringConfiguration, schemas.DescribeEmailMonitoringConfigurationRequest, schemas.DescribeEmailMonitoringConfigurationResponse), output: &DescribeEmailMonitoringConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

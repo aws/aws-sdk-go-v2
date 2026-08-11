@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetCaseEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseEventConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetCaseEventConfigurationRequest_domainId, *v.DomainId)
+	}
+}
+func (v *GetCaseEventConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCaseEventConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCaseEventConfigurationRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetCaseEventConfigurationRequest_domainId, v.DomainId)
+		}
+		return nil
+	})
+}
+
 type GetCaseEventConfigurationOutput struct {
 
 	// Configuration to enable EventBridge case event delivery and determine what data
@@ -48,13 +72,34 @@ type GetCaseEventConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseEventConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBridge != nil {
+		s.WriteStruct(schemas.GetCaseEventConfigurationResponse_eventBridge)
+		v.EventBridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCaseEventConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCaseEventConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCaseEventConfigurationResponse_eventBridge:
+			v.EventBridge = &types.EventBridgeConfiguration{}
+			return v.EventBridge.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCaseEventConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCaseEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseEventConfiguration, schemas.GetCaseEventConfigurationRequest, schemas.GetCaseEventConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCaseEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseEventConfiguration, schemas.GetCaseEventConfigurationRequest, schemas.GetCaseEventConfigurationResponse), output: &GetCaseEventConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

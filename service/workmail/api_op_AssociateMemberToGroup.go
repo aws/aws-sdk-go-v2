@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type AssociateMemberToGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberToGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.AssociateMemberToGroupRequest_GroupId, *v.GroupId)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.AssociateMemberToGroupRequest_MemberId, *v.MemberId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.AssociateMemberToGroupRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type AssociateMemberToGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +89,26 @@ type AssociateMemberToGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberToGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateMemberToGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateMemberToGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateMemberToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateMemberToGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToGroup, schemas.AssociateMemberToGroupRequest, schemas.AssociateMemberToGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateMemberToGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToGroup, schemas.AssociateMemberToGroupRequest, schemas.AssociateMemberToGroupResponse), output: &AssociateMemberToGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

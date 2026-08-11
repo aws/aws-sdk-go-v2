@@ -5,6 +5,8 @@ package fms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type ListMemberAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMemberAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMemberAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMemberAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMemberAccountsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMemberAccountsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMemberAccountsOutput struct {
 
 	// An array of account IDs.
@@ -64,13 +81,35 @@ type ListMemberAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMemberAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMemberAccountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMemberAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberAccounts(s, schemas.ListMemberAccountsResponse_MemberAccounts, v.MemberAccounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMemberAccountsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMemberAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMemberAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMemberAccountsResponse_MemberAccounts:
+			return deserializeMemberAccounts(d, schemas.ListMemberAccountsResponse_MemberAccounts, &v.MemberAccounts)
+		case schemas.ListMemberAccountsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMemberAccountsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMemberAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMemberAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemberAccounts, schemas.ListMemberAccountsRequest, schemas.ListMemberAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMemberAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemberAccounts, schemas.ListMemberAccountsRequest, schemas.ListMemberAccountsResponse), output: &ListMemberAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

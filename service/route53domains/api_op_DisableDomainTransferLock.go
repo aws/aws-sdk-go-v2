@@ -4,6 +4,8 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DisableDomainTransferLockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDomainTransferLockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDomainTransferLockRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDomainTransferLockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DisableDomainTransferLockRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The DisableDomainTransferLock response includes the following element.
 type DisableDomainTransferLockOutput struct {
 
@@ -54,13 +68,32 @@ type DisableDomainTransferLockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDomainTransferLockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDomainTransferLockResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDomainTransferLockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.DisableDomainTransferLockResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *DisableDomainTransferLockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableDomainTransferLockResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableDomainTransferLockResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.DisableDomainTransferLockResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableDomainTransferLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableDomainTransferLock{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDomainTransferLock, schemas.DisableDomainTransferLockRequest, schemas.DisableDomainTransferLockResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableDomainTransferLock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDomainTransferLock, schemas.DisableDomainTransferLockRequest, schemas.DisableDomainTransferLockResponse), output: &DisableDomainTransferLockOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

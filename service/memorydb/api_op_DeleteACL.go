@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACLName != nil {
+		s.WriteString(schemas.DeleteACLRequest_ACLName, *v.ACLName)
+	}
+}
+
 type DeleteACLOutput struct {
 
 	// The Access Control List object that has been deleted.
@@ -48,13 +62,34 @@ type DeleteACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteACLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteACLResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACL != nil {
+		s.WriteStruct(schemas.DeleteACLResponse_ACL)
+		v.ACL.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteACLResponse_ACL:
+			v.ACL = &types.ACL{}
+			return v.ACL.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteACL, schemas.DeleteACLRequest, schemas.DeleteACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteACL, schemas.DeleteACLRequest, schemas.DeleteACLResponse), output: &DeleteACLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

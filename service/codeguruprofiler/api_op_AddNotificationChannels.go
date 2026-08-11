@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,31 @@ type AddNotificationChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddNotificationChannelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddNotificationChannelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddNotificationChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannels(s, schemas.AddNotificationChannelsRequest_channels, v.Channels)
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.AddNotificationChannelsRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *AddNotificationChannelsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddNotificationChannelsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddNotificationChannelsRequest_channels:
+			return deserializeChannels(d, schemas.AddNotificationChannelsRequest_channels, &v.Channels)
+		case schemas.AddNotificationChannelsRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.AddNotificationChannelsRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the AddNotificationChannelsResponse.
 type AddNotificationChannelsOutput struct {
 
@@ -52,13 +79,34 @@ type AddNotificationChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddNotificationChannelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddNotificationChannelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddNotificationChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.AddNotificationChannelsResponse_notificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AddNotificationChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddNotificationChannelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddNotificationChannelsResponse_notificationConfiguration:
+			v.NotificationConfiguration = &types.NotificationConfiguration{}
+			return v.NotificationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddNotificationChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddNotificationChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddNotificationChannels, schemas.AddNotificationChannelsRequest, schemas.AddNotificationChannelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddNotificationChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddNotificationChannels, schemas.AddNotificationChannelsRequest, schemas.AddNotificationChannelsResponse), output: &AddNotificationChannelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

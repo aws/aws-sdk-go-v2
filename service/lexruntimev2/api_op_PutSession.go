@@ -4,7 +4,9 @@ package lexruntimev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"io"
 )
@@ -77,6 +79,37 @@ type PutSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.PutSessionRequest_botAliasId, *v.BotAliasId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.PutSessionRequest_botId, *v.BotId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.PutSessionRequest_localeId, *v.LocaleId)
+	}
+	serializeMessages(s, schemas.PutSessionRequest_messages, v.Messages)
+	serializeStringMap(s, schemas.PutSessionRequest_requestAttributes, v.RequestAttributes)
+	if v.ResponseContentType != nil {
+		s.WriteString(schemas.PutSessionRequest_responseContentType, *v.ResponseContentType)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.PutSessionRequest_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteStruct(schemas.PutSessionRequest_sessionState)
+		v.SessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutSessionOutput struct {
 
 	// If the requested content type was audio, the audio version of the message to
@@ -111,13 +144,64 @@ type PutSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.PutSessionResponse_contentType, *v.ContentType)
+	}
+	if v.Messages != nil {
+		s.WriteString(schemas.PutSessionResponse_messages, *v.Messages)
+	}
+	if v.RequestAttributes != nil {
+		s.WriteString(schemas.PutSessionResponse_requestAttributes, *v.RequestAttributes)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.PutSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteString(schemas.PutSessionResponse_sessionState, *v.SessionState)
+	}
+}
+func (v *PutSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSessionResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.PutSessionResponse_contentType, v.ContentType)
+		case schemas.PutSessionResponse_messages:
+			v.Messages = new(string)
+			return d.ReadString(schemas.PutSessionResponse_messages, v.Messages)
+		case schemas.PutSessionResponse_requestAttributes:
+			v.RequestAttributes = new(string)
+			return d.ReadString(schemas.PutSessionResponse_requestAttributes, v.RequestAttributes)
+		case schemas.PutSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.PutSessionResponse_sessionId, v.SessionId)
+		case schemas.PutSessionResponse_sessionState:
+			v.SessionState = new(string)
+			return d.ReadString(schemas.PutSessionResponse_sessionState, v.SessionState)
+		}
+		return nil
+	})
+}
+func (v *PutSessionOutput) GetPayloadStream() io.Reader { return v.AudioStream }
+
+var _ smithy.StreamingInput = (*PutSessionOutput)(nil)
+
+func (v *PutSessionOutput) SetPayloadStream(r io.ReadCloser) { v.AudioStream = r }
+
+var _ smithy.StreamingOutput = (*PutSessionOutput)(nil)
+
 func (c *Client) addOperationPutSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSession, schemas.PutSessionRequest, schemas.PutSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSession, schemas.PutSessionRequest, schemas.PutSessionResponse), output: &PutSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

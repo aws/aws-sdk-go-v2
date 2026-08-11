@@ -5,7 +5,9 @@ package controltower
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,29 @@ type ListEnabledBaselinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnabledBaselinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledBaselinesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledBaselinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListEnabledBaselinesInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeChildren != false {
+		s.WriteBool(schemas.ListEnabledBaselinesInput_includeChildren, v.IncludeChildren)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnabledBaselinesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledBaselinesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnabledBaselinesOutput struct {
 
 	// Retuens a list of summaries of EnabledBaseline resources.
@@ -65,13 +90,35 @@ type ListEnabledBaselinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnabledBaselinesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledBaselinesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledBaselinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnabledBaselines(s, schemas.ListEnabledBaselinesOutput_enabledBaselines, v.EnabledBaselines)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledBaselinesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnabledBaselinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnabledBaselinesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnabledBaselinesOutput_enabledBaselines:
+			return deserializeEnabledBaselines(d, schemas.ListEnabledBaselinesOutput_enabledBaselines, &v.EnabledBaselines)
+		case schemas.ListEnabledBaselinesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnabledBaselinesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnabledBaselinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnabledBaselines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledBaselines, schemas.ListEnabledBaselinesInput, schemas.ListEnabledBaselinesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnabledBaselines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledBaselines, schemas.ListEnabledBaselinesInput, schemas.ListEnabledBaselinesOutput), output: &ListEnabledBaselinesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

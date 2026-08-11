@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -166,6 +168,87 @@ type InvokeInlineAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeInlineAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeInlineAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeInlineAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentActionGroups(s, schemas.InvokeInlineAgentRequest_actionGroups, v.ActionGroups)
+	if v.AgentCollaboration != "" {
+		s.WriteString(schemas.InvokeInlineAgentRequest_agentCollaboration, string(v.AgentCollaboration))
+	}
+	if v.AgentName != nil {
+		s.WriteString(schemas.InvokeInlineAgentRequest_agentName, *v.AgentName)
+	}
+	if v.BedrockModelConfigurations != nil {
+		s.WriteStruct(schemas.InvokeInlineAgentRequest_bedrockModelConfigurations)
+		v.BedrockModelConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCollaboratorConfigurations(s, schemas.InvokeInlineAgentRequest_collaboratorConfigurations, v.CollaboratorConfigurations)
+	serializeCollaborators(s, schemas.InvokeInlineAgentRequest_collaborators, v.Collaborators)
+	if v.CustomOrchestration != nil {
+		s.WriteStruct(schemas.InvokeInlineAgentRequest_customOrchestration)
+		v.CustomOrchestration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomerEncryptionKeyArn != nil {
+		s.WriteString(schemas.InvokeInlineAgentRequest_customerEncryptionKeyArn, *v.CustomerEncryptionKeyArn)
+	}
+	if v.EnableTrace != nil {
+		s.WriteBool(schemas.InvokeInlineAgentRequest_enableTrace, *v.EnableTrace)
+	}
+	if v.EndSession != nil {
+		s.WriteBool(schemas.InvokeInlineAgentRequest_endSession, *v.EndSession)
+	}
+	if v.FoundationModel != nil {
+		s.WriteString(schemas.InvokeInlineAgentRequest_foundationModel, *v.FoundationModel)
+	}
+	if v.GuardrailConfiguration != nil {
+		s.WriteStruct(schemas.InvokeInlineAgentRequest_guardrailConfiguration)
+		v.GuardrailConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdleSessionTTLInSeconds != nil {
+		s.WriteInt32(schemas.InvokeInlineAgentRequest_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
+	}
+	if v.InlineSessionState != nil {
+		s.WriteStruct(schemas.InvokeInlineAgentRequest_inlineSessionState)
+		v.InlineSessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputText != nil {
+		s.WriteString(schemas.InvokeInlineAgentRequest_inputText, *v.InputText)
+	}
+	if v.Instruction != nil {
+		s.WriteString(schemas.InvokeInlineAgentRequest_instruction, *v.Instruction)
+	}
+	serializeKnowledgeBases(s, schemas.InvokeInlineAgentRequest_knowledgeBases, v.KnowledgeBases)
+	if v.OrchestrationType != "" {
+		s.WriteString(schemas.InvokeInlineAgentRequest_orchestrationType, string(v.OrchestrationType))
+	}
+	if v.PromptCreationConfigurations != nil {
+		s.WriteStruct(schemas.InvokeInlineAgentRequest_promptCreationConfigurations)
+		v.PromptCreationConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PromptOverrideConfiguration != nil {
+		s.WriteStruct(schemas.InvokeInlineAgentRequest_promptOverrideConfiguration)
+		v.PromptOverrideConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeInlineAgentRequest_sessionId, *v.SessionId)
+	}
+	if v.StreamingConfigurations != nil {
+		s.WriteStruct(schemas.InvokeInlineAgentRequest_streamingConfigurations)
+		v.StreamingConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type InvokeInlineAgentOutput struct {
 
 	//  The MIME type of the input data in the request. The default value is
@@ -187,24 +270,50 @@ type InvokeInlineAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeInlineAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeInlineAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeInlineAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeInlineAgentResponse_contentType, *v.ContentType)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeInlineAgentResponse_sessionId, *v.SessionId)
+	}
+}
+func (v *InvokeInlineAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeInlineAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeInlineAgentResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeInlineAgentResponse_contentType, v.ContentType)
+		case schemas.InvokeInlineAgentResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.InvokeInlineAgentResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeInlineAgentOutput) GetStream() *InvokeInlineAgentEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeInlineAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeInlineAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeInlineAgent, schemas.InvokeInlineAgentRequest, schemas.InvokeInlineAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeInlineAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeInlineAgent, schemas.InvokeInlineAgentRequest, schemas.InvokeInlineAgentResponse), output: &InvokeInlineAgentOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeInlineAgent{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamInvokeInlineAgentMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}

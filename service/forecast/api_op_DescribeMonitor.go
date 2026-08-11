@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,18 @@ type DescribeMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMonitorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.DescribeMonitorRequest_MonitorArn, *v.MonitorArn)
+	}
+}
+
 type DescribeMonitorOutput struct {
 
 	// Metrics you can use as a baseline for comparison purposes. Use these values you
@@ -93,13 +107,94 @@ type DescribeMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMonitorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Baseline != nil {
+		s.WriteStruct(schemas.DescribeMonitorResponse_Baseline)
+		v.Baseline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeMonitorResponse_CreationTime, *v.CreationTime)
+	}
+	if v.EstimatedEvaluationTimeRemainingInMinutes != nil {
+		s.WriteInt64(schemas.DescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes, *v.EstimatedEvaluationTimeRemainingInMinutes)
+	}
+	if v.LastEvaluationState != nil {
+		s.WriteString(schemas.DescribeMonitorResponse_LastEvaluationState, *v.LastEvaluationState)
+	}
+	if v.LastEvaluationTime != nil {
+		s.WriteTime(schemas.DescribeMonitorResponse_LastEvaluationTime, *v.LastEvaluationTime)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeMonitorResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeMonitorResponse_Message, *v.Message)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.DescribeMonitorResponse_MonitorArn, *v.MonitorArn)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.DescribeMonitorResponse_MonitorName, *v.MonitorName)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeMonitorResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeMonitorResponse_Status, *v.Status)
+	}
+}
+func (v *DescribeMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMonitorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMonitorResponse_Baseline:
+			v.Baseline = &types.Baseline{}
+			return v.Baseline.Deserialize(d)
+		case schemas.DescribeMonitorResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMonitorResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes:
+			v.EstimatedEvaluationTimeRemainingInMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeMonitorResponse_EstimatedEvaluationTimeRemainingInMinutes, v.EstimatedEvaluationTimeRemainingInMinutes)
+		case schemas.DescribeMonitorResponse_LastEvaluationState:
+			v.LastEvaluationState = new(string)
+			return d.ReadString(schemas.DescribeMonitorResponse_LastEvaluationState, v.LastEvaluationState)
+		case schemas.DescribeMonitorResponse_LastEvaluationTime:
+			v.LastEvaluationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMonitorResponse_LastEvaluationTime, v.LastEvaluationTime)
+		case schemas.DescribeMonitorResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMonitorResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeMonitorResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeMonitorResponse_Message, v.Message)
+		case schemas.DescribeMonitorResponse_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.DescribeMonitorResponse_MonitorArn, v.MonitorArn)
+		case schemas.DescribeMonitorResponse_MonitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.DescribeMonitorResponse_MonitorName, v.MonitorName)
+		case schemas.DescribeMonitorResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeMonitorResponse_ResourceArn, v.ResourceArn)
+		case schemas.DescribeMonitorResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeMonitorResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMonitor, schemas.DescribeMonitorRequest, schemas.DescribeMonitorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMonitor, schemas.DescribeMonitorRequest, schemas.DescribeMonitorResponse), output: &DescribeMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

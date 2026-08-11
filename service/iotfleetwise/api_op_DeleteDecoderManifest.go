@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DeleteDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDecoderManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDecoderManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDecoderManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteDecoderManifestRequest_name, *v.Name)
+	}
+}
+func (v *DeleteDecoderManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDecoderManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDecoderManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteDecoderManifestRequest_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeleteDecoderManifestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted decoder manifest.
@@ -53,13 +77,38 @@ type DeleteDecoderManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDecoderManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDecoderManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDecoderManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteDecoderManifestResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteDecoderManifestResponse_name, *v.Name)
+	}
+}
+func (v *DeleteDecoderManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDecoderManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDecoderManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteDecoderManifestResponse_arn, v.Arn)
+		case schemas.DeleteDecoderManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteDecoderManifestResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDecoderManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDecoderManifest, schemas.DeleteDecoderManifestRequest, schemas.DeleteDecoderManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDecoderManifest, schemas.DeleteDecoderManifestRequest, schemas.DeleteDecoderManifestResponse), output: &DeleteDecoderManifestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

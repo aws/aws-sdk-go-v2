@@ -5,6 +5,8 @@ package resourcegroupstaggingapi
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type GetTagKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagKeysInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetTagKeysInput_PaginationToken, *v.PaginationToken)
+	}
+}
+
 type GetTagKeysOutput struct {
 
 	// A string that indicates that there is more data available than this response
@@ -58,13 +72,35 @@ type GetTagKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagKeysOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.GetTagKeysOutput_PaginationToken, *v.PaginationToken)
+	}
+	serializeTagKeyList(s, schemas.GetTagKeysOutput_TagKeys, v.TagKeys)
+}
+func (v *GetTagKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTagKeysOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTagKeysOutput_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.GetTagKeysOutput_PaginationToken, v.PaginationToken)
+		case schemas.GetTagKeysOutput_TagKeys:
+			return deserializeTagKeyList(d, schemas.GetTagKeysOutput_TagKeys, &v.TagKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTagKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTagKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTagKeys, schemas.GetTagKeysInput, schemas.GetTagKeysOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTagKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTagKeys, schemas.GetTagKeysInput, schemas.GetTagKeysOutput), output: &GetTagKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

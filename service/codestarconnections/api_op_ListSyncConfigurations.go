@@ -5,7 +5,9 @@ package codestarconnections
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListSyncConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSyncConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSyncConfigurationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSyncConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListSyncConfigurationsInput_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSyncConfigurationsInput_NextToken, *v.NextToken)
+	}
+	if v.RepositoryLinkId != nil {
+		s.WriteString(schemas.ListSyncConfigurationsInput_RepositoryLinkId, *v.RepositoryLinkId)
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.ListSyncConfigurationsInput_SyncType, string(v.SyncType))
+	}
+}
+
 type ListSyncConfigurationsOutput struct {
 
 	// The list of repository sync definitions returned by the request.
@@ -64,13 +87,35 @@ type ListSyncConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSyncConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSyncConfigurationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSyncConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSyncConfigurationsOutput_NextToken, *v.NextToken)
+	}
+	serializeSyncConfigurationList(s, schemas.ListSyncConfigurationsOutput_SyncConfigurations, v.SyncConfigurations)
+}
+func (v *ListSyncConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSyncConfigurationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSyncConfigurationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSyncConfigurationsOutput_NextToken, v.NextToken)
+		case schemas.ListSyncConfigurationsOutput_SyncConfigurations:
+			return deserializeSyncConfigurationList(d, schemas.ListSyncConfigurationsOutput_SyncConfigurations, &v.SyncConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSyncConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSyncConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSyncConfigurations, schemas.ListSyncConfigurationsInput, schemas.ListSyncConfigurationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSyncConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSyncConfigurations, schemas.ListSyncConfigurationsInput, schemas.ListSyncConfigurationsOutput), output: &ListSyncConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

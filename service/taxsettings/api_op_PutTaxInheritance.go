@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type PutTaxInheritanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxInheritanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxInheritanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxInheritanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeritageStatus != "" {
+		s.WriteString(schemas.PutTaxInheritanceRequest_heritageStatus, string(v.HeritageStatus))
+	}
+}
+
 type PutTaxInheritanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -39,13 +53,26 @@ type PutTaxInheritanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxInheritanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxInheritanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxInheritanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutTaxInheritanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTaxInheritanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTaxInheritanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTaxInheritance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxInheritance, schemas.PutTaxInheritanceRequest, schemas.PutTaxInheritanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTaxInheritance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxInheritance, schemas.PutTaxInheritanceRequest, schemas.PutTaxInheritanceResponse), output: &PutTaxInheritanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

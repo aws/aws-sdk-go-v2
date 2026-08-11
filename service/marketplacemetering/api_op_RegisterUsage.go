@@ -4,6 +4,8 @@ package marketplacemetering
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -85,6 +87,24 @@ type RegisterUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nonce != nil {
+		s.WriteString(schemas.RegisterUsageRequest_Nonce, *v.Nonce)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.RegisterUsageRequest_ProductCode, *v.ProductCode)
+	}
+	if v.PublicKeyVersion != nil {
+		s.WriteInt32(schemas.RegisterUsageRequest_PublicKeyVersion, *v.PublicKeyVersion)
+	}
+}
+
 type RegisterUsageOutput struct {
 
 	// (Optional) Only included when public key version has expired
@@ -99,13 +119,38 @@ type RegisterUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublicKeyRotationTimestamp != nil {
+		s.WriteTime(schemas.RegisterUsageResult_PublicKeyRotationTimestamp, *v.PublicKeyRotationTimestamp)
+	}
+	if v.Signature != nil {
+		s.WriteString(schemas.RegisterUsageResult_Signature, *v.Signature)
+	}
+}
+func (v *RegisterUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterUsageResult_PublicKeyRotationTimestamp:
+			v.PublicKeyRotationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RegisterUsageResult_PublicKeyRotationTimestamp, v.PublicKeyRotationTimestamp)
+		case schemas.RegisterUsageResult_Signature:
+			v.Signature = new(string)
+			return d.ReadString(schemas.RegisterUsageResult_Signature, v.Signature)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterUsage, schemas.RegisterUsageRequest, schemas.RegisterUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterUsage, schemas.RegisterUsageRequest, schemas.RegisterUsageResult), output: &RegisterUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

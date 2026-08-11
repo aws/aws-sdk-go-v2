@@ -4,6 +4,8 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteForecastExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteForecastExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteForecastExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteForecastExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastExportJobArn != nil {
+		s.WriteString(schemas.DeleteForecastExportJobRequest_ForecastExportJobArn, *v.ForecastExportJobArn)
+	}
+}
+
 type DeleteForecastExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteForecastExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteForecastExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteForecastExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteForecastExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteForecastExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteForecastExportJob, schemas.DeleteForecastExportJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteForecastExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteForecastExportJob, schemas.DeleteForecastExportJobRequest, nil), output: &DeleteForecastExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

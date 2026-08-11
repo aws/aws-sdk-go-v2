@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteIdentityCenterApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdentityCenterApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdentityCenterApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdentityCenterApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.DeleteIdentityCenterApplicationRequest_ApplicationArn, *v.ApplicationArn)
+	}
+}
+
 type DeleteIdentityCenterApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteIdentityCenterApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdentityCenterApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdentityCenterApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdentityCenterApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIdentityCenterApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIdentityCenterApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIdentityCenterApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteIdentityCenterApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentityCenterApplication, schemas.DeleteIdentityCenterApplicationRequest, schemas.DeleteIdentityCenterApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteIdentityCenterApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentityCenterApplication, schemas.DeleteIdentityCenterApplicationRequest, schemas.DeleteIdentityCenterApplicationResponse), output: &DeleteIdentityCenterApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

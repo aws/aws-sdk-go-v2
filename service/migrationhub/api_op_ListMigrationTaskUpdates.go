@@ -5,7 +5,9 @@ package migrationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type ListMigrationTaskUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMigrationTaskUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMigrationTaskUpdatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMigrationTaskUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMigrationTaskUpdatesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.ListMigrationTaskUpdatesRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMigrationTaskUpdatesRequest_NextToken, *v.NextToken)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.ListMigrationTaskUpdatesRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type ListMigrationTaskUpdatesOutput struct {
 
 	// The list of migration-task updates.
@@ -78,13 +101,35 @@ type ListMigrationTaskUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMigrationTaskUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMigrationTaskUpdatesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMigrationTaskUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMigrationTaskUpdateList(s, schemas.ListMigrationTaskUpdatesResult_MigrationTaskUpdateList, v.MigrationTaskUpdateList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMigrationTaskUpdatesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMigrationTaskUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMigrationTaskUpdatesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMigrationTaskUpdatesResult_MigrationTaskUpdateList:
+			return deserializeMigrationTaskUpdateList(d, schemas.ListMigrationTaskUpdatesResult_MigrationTaskUpdateList, &v.MigrationTaskUpdateList)
+		case schemas.ListMigrationTaskUpdatesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMigrationTaskUpdatesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMigrationTaskUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMigrationTaskUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMigrationTaskUpdates, schemas.ListMigrationTaskUpdatesRequest, schemas.ListMigrationTaskUpdatesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMigrationTaskUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMigrationTaskUpdates, schemas.ListMigrationTaskUpdatesRequest, schemas.ListMigrationTaskUpdatesResult), output: &ListMigrationTaskUpdatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

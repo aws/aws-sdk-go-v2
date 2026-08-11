@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,25 @@ type GenerateQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryGenerationInput != nil {
+		s.WriteStruct(schemas.GenerateQueryRequest_queryGenerationInput)
+		v.QueryGenerationInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformationConfiguration != nil {
+		s.WriteStruct(schemas.GenerateQueryRequest_transformationConfiguration)
+		v.TransformationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GenerateQueryOutput struct {
 
 	// A list of objects, each of which defines a generated query that can correspond
@@ -54,13 +75,29 @@ type GenerateQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGeneratedQueries(s, schemas.GenerateQueryResponse_queries, v.Queries)
+}
+func (v *GenerateQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateQueryResponse_queries:
+			return deserializeGeneratedQueries(d, schemas.GenerateQueryResponse_queries, &v.Queries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateQuery, schemas.GenerateQueryRequest, schemas.GenerateQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateQuery, schemas.GenerateQueryRequest, schemas.GenerateQueryResponse), output: &GenerateQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,54 @@ type GetRepositorySyncStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositorySyncStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositorySyncStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositorySyncStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteString(schemas.GetRepositorySyncStatusInput_branch, *v.Branch)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.GetRepositorySyncStatusInput_repositoryName, *v.RepositoryName)
+	}
+	if v.RepositoryProvider != "" {
+		s.WriteString(schemas.GetRepositorySyncStatusInput_repositoryProvider, string(v.RepositoryProvider))
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.GetRepositorySyncStatusInput_syncType, string(v.SyncType))
+	}
+}
+func (v *GetRepositorySyncStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRepositorySyncStatusInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRepositorySyncStatusInput_branch:
+			v.Branch = new(string)
+			return d.ReadString(schemas.GetRepositorySyncStatusInput_branch, v.Branch)
+		case schemas.GetRepositorySyncStatusInput_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.GetRepositorySyncStatusInput_repositoryName, v.RepositoryName)
+		case schemas.GetRepositorySyncStatusInput_repositoryProvider:
+			var ev string
+			if err := d.ReadString(schemas.GetRepositorySyncStatusInput_repositoryProvider, &ev); err != nil {
+				return err
+			}
+			v.RepositoryProvider = types.RepositoryProvider(ev)
+			return nil
+		case schemas.GetRepositorySyncStatusInput_syncType:
+			var ev string
+			if err := d.ReadString(schemas.GetRepositorySyncStatusInput_syncType, &ev); err != nil {
+				return err
+			}
+			v.SyncType = types.SyncType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type GetRepositorySyncStatusOutput struct {
 
 	// The repository sync status detail data that's returned by Proton.
@@ -72,13 +122,34 @@ type GetRepositorySyncStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositorySyncStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositorySyncStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositorySyncStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestSync != nil {
+		s.WriteStruct(schemas.GetRepositorySyncStatusOutput_latestSync)
+		v.LatestSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRepositorySyncStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRepositorySyncStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRepositorySyncStatusOutput_latestSync:
+			v.LatestSync = &types.RepositorySyncAttempt{}
+			return v.LatestSync.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRepositorySyncStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRepositorySyncStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositorySyncStatus, schemas.GetRepositorySyncStatusInput, schemas.GetRepositorySyncStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRepositorySyncStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositorySyncStatus, schemas.GetRepositorySyncStatusInput, schemas.GetRepositorySyncStatusOutput), output: &GetRepositorySyncStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

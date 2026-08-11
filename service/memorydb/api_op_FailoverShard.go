@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type FailoverShardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailoverShardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverShardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverShardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.FailoverShardRequest_ClusterName, *v.ClusterName)
+	}
+	if v.ShardName != nil {
+		s.WriteString(schemas.FailoverShardRequest_ShardName, *v.ShardName)
+	}
+}
+
 type FailoverShardOutput struct {
 
 	// The cluster being failed over.
@@ -54,13 +71,34 @@ type FailoverShardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailoverShardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverShardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverShardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.FailoverShardResponse_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FailoverShardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverShardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverShardResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFailoverShardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpFailoverShard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverShard, schemas.FailoverShardRequest, schemas.FailoverShardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpFailoverShard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverShard, schemas.FailoverShardRequest, schemas.FailoverShardResponse), output: &FailoverShardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

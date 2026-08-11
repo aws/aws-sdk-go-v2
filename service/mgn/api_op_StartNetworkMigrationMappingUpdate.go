@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,23 @@ type StartNetworkMigrationMappingUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationMappingUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationMappingUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationMappingUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStartNetworkMigrationMappingUpdateConstructs(s, schemas.StartNetworkMigrationMappingUpdateRequest_constructs, v.Constructs)
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationMappingUpdateRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationMappingUpdateRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	serializeStartNetworkMigrationMappingUpdateSegments(s, schemas.StartNetworkMigrationMappingUpdateRequest_segments, v.Segments)
+}
+
 type StartNetworkMigrationMappingUpdateOutput struct {
 
 	// The unique identifier of the mapping update job that was started.
@@ -57,13 +76,32 @@ type StartNetworkMigrationMappingUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationMappingUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationMappingUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationMappingUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobID != nil {
+		s.WriteString(schemas.StartNetworkMigrationMappingUpdateResponse_jobID, *v.JobID)
+	}
+}
+func (v *StartNetworkMigrationMappingUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNetworkMigrationMappingUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNetworkMigrationMappingUpdateResponse_jobID:
+			v.JobID = new(string)
+			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateResponse_jobID, v.JobID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNetworkMigrationMappingUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNetworkMigrationMappingUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationMappingUpdate, schemas.StartNetworkMigrationMappingUpdateRequest, schemas.StartNetworkMigrationMappingUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNetworkMigrationMappingUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationMappingUpdate, schemas.StartNetworkMigrationMappingUpdateRequest, schemas.StartNetworkMigrationMappingUpdateResponse), output: &StartNetworkMigrationMappingUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

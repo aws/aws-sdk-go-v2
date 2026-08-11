@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,28 @@ type DeleteFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DeleteFleetRequest_fleetId, *v.FleetId)
+	}
+}
+func (v *DeleteFleetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFleetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFleetRequest_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.DeleteFleetRequest_fleetId, v.FleetId)
+		}
+		return nil
+	})
+}
+
 type DeleteFleetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted fleet.
@@ -52,13 +76,38 @@ type DeleteFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteFleetResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteFleetResponse_id, *v.Id)
+	}
+}
+func (v *DeleteFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFleetResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteFleetResponse_arn, v.Arn)
+		case schemas.DeleteFleetResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteFleetResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFleet, schemas.DeleteFleetRequest, schemas.DeleteFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFleet, schemas.DeleteFleetRequest, schemas.DeleteFleetResponse), output: &DeleteFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

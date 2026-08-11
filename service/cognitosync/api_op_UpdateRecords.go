@@ -4,7 +4,9 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,34 @@ type UpdateRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientContext != nil {
+		s.WriteString(schemas.UpdateRecordsRequest_ClientContext, *v.ClientContext)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.UpdateRecordsRequest_DatasetName, *v.DatasetName)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.UpdateRecordsRequest_DeviceId, *v.DeviceId)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.UpdateRecordsRequest_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.UpdateRecordsRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+	serializeRecordPatchList(s, schemas.UpdateRecordsRequest_RecordPatches, v.RecordPatches)
+	if v.SyncSessionToken != nil {
+		s.WriteString(schemas.UpdateRecordsRequest_SyncSessionToken, *v.SyncSessionToken)
+	}
+}
+
 // Returned for a successful UpdateRecordsRequest.
 type UpdateRecordsOutput struct {
 
@@ -94,13 +124,29 @@ type UpdateRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecordList(s, schemas.UpdateRecordsResponse_Records, v.Records)
+}
+func (v *UpdateRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecordsResponse_Records:
+			return deserializeRecordList(d, schemas.UpdateRecordsResponse_Records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecords, schemas.UpdateRecordsRequest, schemas.UpdateRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecords, schemas.UpdateRecordsRequest, schemas.UpdateRecordsResponse), output: &UpdateRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

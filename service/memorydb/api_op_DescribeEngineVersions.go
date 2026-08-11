@@ -5,7 +5,9 @@ package memorydb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,33 @@ type DescribeEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEngineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngineVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultOnly != false {
+		s.WriteBool(schemas.DescribeEngineVersionsRequest_DefaultOnly, v.DefaultOnly)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.DescribeEngineVersionsRequest_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.DescribeEngineVersionsRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeEngineVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEngineVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ParameterGroupFamily != nil {
+		s.WriteString(schemas.DescribeEngineVersionsRequest_ParameterGroupFamily, *v.ParameterGroupFamily)
+	}
+}
+
 type DescribeEngineVersionsOutput struct {
 
 	// A list of engine version details. Each element in the list contains detailed
@@ -74,13 +103,35 @@ type DescribeEngineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngineVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEngineVersionInfoList(s, schemas.DescribeEngineVersionsResponse_EngineVersions, v.EngineVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEngineVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEngineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEngineVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEngineVersionsResponse_EngineVersions:
+			return deserializeEngineVersionInfoList(d, schemas.DescribeEngineVersionsResponse_EngineVersions, &v.EngineVersions)
+		case schemas.DescribeEngineVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEngineVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngineVersions, schemas.DescribeEngineVersionsRequest, schemas.DescribeEngineVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngineVersions, schemas.DescribeEngineVersionsRequest, schemas.DescribeEngineVersionsResponse), output: &DescribeEngineVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

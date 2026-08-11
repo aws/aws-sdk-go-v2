@@ -4,6 +4,8 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type DisableControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableControlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlIdentifier != nil {
+		s.WriteString(schemas.DisableControlInput_controlIdentifier, *v.ControlIdentifier)
+	}
+	if v.EnabledControlIdentifier != nil {
+		s.WriteString(schemas.DisableControlInput_enabledControlIdentifier, *v.EnabledControlIdentifier)
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.DisableControlInput_targetIdentifier, *v.TargetIdentifier)
+	}
+}
+
 type DisableControlOutput struct {
 
 	// The ID of the asynchronous operation, which is used to track status. The
@@ -64,13 +84,32 @@ type DisableControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableControlOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.DisableControlOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *DisableControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableControlOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableControlOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.DisableControlOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableControl, schemas.DisableControlInput, schemas.DisableControlOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableControl, schemas.DisableControlInput, schemas.DisableControlOutput), output: &DisableControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

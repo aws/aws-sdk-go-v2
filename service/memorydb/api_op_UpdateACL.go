@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,20 @@ type UpdateACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACLName != nil {
+		s.WriteString(schemas.UpdateACLRequest_ACLName, *v.ACLName)
+	}
+	serializeUserNameListInput(s, schemas.UpdateACLRequest_UserNamesToAdd, v.UserNamesToAdd)
+	serializeUserNameListInput(s, schemas.UpdateACLRequest_UserNamesToRemove, v.UserNamesToRemove)
+}
+
 type UpdateACLOutput struct {
 
 	// The updated Access Control List.
@@ -51,13 +67,34 @@ type UpdateACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateACLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateACLResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACL != nil {
+		s.WriteStruct(schemas.UpdateACLResponse_ACL)
+		v.ACL.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateACLResponse_ACL:
+			v.ACL = &types.ACL{}
+			return v.ACL.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateACL, schemas.UpdateACLRequest, schemas.UpdateACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateACL, schemas.UpdateACLRequest, schemas.UpdateACLResponse), output: &UpdateACLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type DeleteRcsMessageSpendLimitOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRcsMessageSpendLimitOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRcsMessageSpendLimitOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRcsMessageSpendLimitOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeleteRcsMessageSpendLimitOverrideOutput struct {
 
 	// The current monthly limit to enforce on RCS message spending.
@@ -40,13 +51,32 @@ type DeleteRcsMessageSpendLimitOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRcsMessageSpendLimitOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRcsMessageSpendLimitOverrideResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRcsMessageSpendLimitOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonthlyLimit != nil {
+		s.WriteInt64(schemas.DeleteRcsMessageSpendLimitOverrideResult_MonthlyLimit, *v.MonthlyLimit)
+	}
+}
+func (v *DeleteRcsMessageSpendLimitOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRcsMessageSpendLimitOverrideResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRcsMessageSpendLimitOverrideResult_MonthlyLimit:
+			v.MonthlyLimit = new(int64)
+			return d.ReadInt64(schemas.DeleteRcsMessageSpendLimitOverrideResult_MonthlyLimit, v.MonthlyLimit)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRcsMessageSpendLimitOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRcsMessageSpendLimitOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRcsMessageSpendLimitOverride, schemas.DeleteRcsMessageSpendLimitOverrideRequest, schemas.DeleteRcsMessageSpendLimitOverrideResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRcsMessageSpendLimitOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRcsMessageSpendLimitOverride, schemas.DeleteRcsMessageSpendLimitOverrideRequest, schemas.DeleteRcsMessageSpendLimitOverrideResult), output: &DeleteRcsMessageSpendLimitOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

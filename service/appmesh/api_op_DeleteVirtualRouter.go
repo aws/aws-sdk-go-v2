@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,40 @@ type DeleteVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVirtualRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualRouterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DeleteVirtualRouterInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DeleteVirtualRouterInput_meshOwner, *v.MeshOwner)
+	}
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.DeleteVirtualRouterInput_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *DeleteVirtualRouterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVirtualRouterInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVirtualRouterInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DeleteVirtualRouterInput_meshName, v.MeshName)
+		case schemas.DeleteVirtualRouterInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DeleteVirtualRouterInput_meshOwner, v.MeshOwner)
+		case schemas.DeleteVirtualRouterInput_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.DeleteVirtualRouterInput_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
+}
+
 type DeleteVirtualRouterOutput struct {
 
 	// The virtual router that was deleted.
@@ -62,13 +98,34 @@ type DeleteVirtualRouterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVirtualRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualRouterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualRouter != nil {
+		s.WriteStruct(schemas.DeleteVirtualRouterOutput_virtualRouter)
+		v.VirtualRouter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteVirtualRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVirtualRouterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVirtualRouterOutput_virtualRouter:
+			v.VirtualRouter = &types.VirtualRouterData{}
+			return v.VirtualRouter.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVirtualRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVirtualRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualRouter, schemas.DeleteVirtualRouterInput, schemas.DeleteVirtualRouterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVirtualRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualRouter, schemas.DeleteVirtualRouterInput, schemas.DeleteVirtualRouterOutput), output: &DeleteVirtualRouterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

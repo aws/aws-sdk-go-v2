@@ -4,7 +4,9 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,34 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ClusterName, *v.ClusterName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateClusterRequest_Description, *v.Description)
+	}
+	if v.NotificationTopicArn != nil {
+		s.WriteString(schemas.UpdateClusterRequest_NotificationTopicArn, *v.NotificationTopicArn)
+	}
+	if v.NotificationTopicStatus != nil {
+		s.WriteString(schemas.UpdateClusterRequest_NotificationTopicStatus, *v.NotificationTopicStatus)
+	}
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ParameterGroupName, *v.ParameterGroupName)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.UpdateClusterRequest_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	serializeSecurityGroupIdentifierList(s, schemas.UpdateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+}
+
 type UpdateClusterOutput struct {
 
 	// A description of the DAX cluster, after it has been modified.
@@ -71,13 +101,34 @@ type UpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.UpdateClusterResponse_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse), output: &UpdateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

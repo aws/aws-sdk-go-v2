@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetBatchPredictionInput struct {
 	BatchPredictionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBatchPredictionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchPredictionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchPredictionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.GetBatchPredictionInput_BatchPredictionId, *v.BatchPredictionId)
+	}
 }
 
 // Represents the output of a GetBatchPrediction operation and describes a
@@ -126,13 +140,132 @@ type GetBatchPredictionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBatchPredictionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchPredictionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchPredictionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionDataSourceId != nil {
+		s.WriteString(schemas.GetBatchPredictionOutput_BatchPredictionDataSourceId, *v.BatchPredictionDataSourceId)
+	}
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.GetBatchPredictionOutput_BatchPredictionId, *v.BatchPredictionId)
+	}
+	if v.ComputeTime != nil {
+		s.WriteInt64(schemas.GetBatchPredictionOutput_ComputeTime, *v.ComputeTime)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetBatchPredictionOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedByIamUser != nil {
+		s.WriteString(schemas.GetBatchPredictionOutput_CreatedByIamUser, *v.CreatedByIamUser)
+	}
+	if v.FinishedAt != nil {
+		s.WriteTime(schemas.GetBatchPredictionOutput_FinishedAt, *v.FinishedAt)
+	}
+	if v.InputDataLocationS3 != nil {
+		s.WriteString(schemas.GetBatchPredictionOutput_InputDataLocationS3, *v.InputDataLocationS3)
+	}
+	if v.InvalidRecordCount != nil {
+		s.WriteInt64(schemas.GetBatchPredictionOutput_InvalidRecordCount, *v.InvalidRecordCount)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetBatchPredictionOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.GetBatchPredictionOutput_LogUri, *v.LogUri)
+	}
+	if v.MLModelId != nil {
+		s.WriteString(schemas.GetBatchPredictionOutput_MLModelId, *v.MLModelId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetBatchPredictionOutput_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBatchPredictionOutput_Name, *v.Name)
+	}
+	if v.OutputUri != nil {
+		s.WriteString(schemas.GetBatchPredictionOutput_OutputUri, *v.OutputUri)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetBatchPredictionOutput_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBatchPredictionOutput_Status, string(v.Status))
+	}
+	if v.TotalRecordCount != nil {
+		s.WriteInt64(schemas.GetBatchPredictionOutput_TotalRecordCount, *v.TotalRecordCount)
+	}
+}
+func (v *GetBatchPredictionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBatchPredictionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBatchPredictionOutput_BatchPredictionDataSourceId:
+			v.BatchPredictionDataSourceId = new(string)
+			return d.ReadString(schemas.GetBatchPredictionOutput_BatchPredictionDataSourceId, v.BatchPredictionDataSourceId)
+		case schemas.GetBatchPredictionOutput_BatchPredictionId:
+			v.BatchPredictionId = new(string)
+			return d.ReadString(schemas.GetBatchPredictionOutput_BatchPredictionId, v.BatchPredictionId)
+		case schemas.GetBatchPredictionOutput_ComputeTime:
+			v.ComputeTime = new(int64)
+			return d.ReadInt64(schemas.GetBatchPredictionOutput_ComputeTime, v.ComputeTime)
+		case schemas.GetBatchPredictionOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBatchPredictionOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetBatchPredictionOutput_CreatedByIamUser:
+			v.CreatedByIamUser = new(string)
+			return d.ReadString(schemas.GetBatchPredictionOutput_CreatedByIamUser, v.CreatedByIamUser)
+		case schemas.GetBatchPredictionOutput_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBatchPredictionOutput_FinishedAt, v.FinishedAt)
+		case schemas.GetBatchPredictionOutput_InputDataLocationS3:
+			v.InputDataLocationS3 = new(string)
+			return d.ReadString(schemas.GetBatchPredictionOutput_InputDataLocationS3, v.InputDataLocationS3)
+		case schemas.GetBatchPredictionOutput_InvalidRecordCount:
+			v.InvalidRecordCount = new(int64)
+			return d.ReadInt64(schemas.GetBatchPredictionOutput_InvalidRecordCount, v.InvalidRecordCount)
+		case schemas.GetBatchPredictionOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBatchPredictionOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetBatchPredictionOutput_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.GetBatchPredictionOutput_LogUri, v.LogUri)
+		case schemas.GetBatchPredictionOutput_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.GetBatchPredictionOutput_MLModelId, v.MLModelId)
+		case schemas.GetBatchPredictionOutput_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetBatchPredictionOutput_Message, v.Message)
+		case schemas.GetBatchPredictionOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBatchPredictionOutput_Name, v.Name)
+		case schemas.GetBatchPredictionOutput_OutputUri:
+			v.OutputUri = new(string)
+			return d.ReadString(schemas.GetBatchPredictionOutput_OutputUri, v.OutputUri)
+		case schemas.GetBatchPredictionOutput_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBatchPredictionOutput_StartedAt, v.StartedAt)
+		case schemas.GetBatchPredictionOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetBatchPredictionOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EntityStatus(ev)
+			return nil
+		case schemas.GetBatchPredictionOutput_TotalRecordCount:
+			v.TotalRecordCount = new(int64)
+			return d.ReadInt64(schemas.GetBatchPredictionOutput_TotalRecordCount, v.TotalRecordCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBatchPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchPrediction, schemas.GetBatchPredictionInput, schemas.GetBatchPredictionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBatchPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchPrediction, schemas.GetBatchPredictionInput, schemas.GetBatchPredictionOutput), output: &GetBatchPredictionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

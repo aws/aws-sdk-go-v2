@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,72 @@ type UpdateDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDecoderManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDecoderManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDecoderManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultForUnmappedSignals != "" {
+		s.WriteString(schemas.UpdateDecoderManifestRequest_defaultForUnmappedSignals, string(v.DefaultForUnmappedSignals))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDecoderManifestRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDecoderManifestRequest_name, *v.Name)
+	}
+	serializeNetworkInterfaces(s, schemas.UpdateDecoderManifestRequest_networkInterfacesToAdd, v.NetworkInterfacesToAdd)
+	serializeInterfaceIds(s, schemas.UpdateDecoderManifestRequest_networkInterfacesToRemove, v.NetworkInterfacesToRemove)
+	serializeNetworkInterfaces(s, schemas.UpdateDecoderManifestRequest_networkInterfacesToUpdate, v.NetworkInterfacesToUpdate)
+	serializeSignalDecoders(s, schemas.UpdateDecoderManifestRequest_signalDecodersToAdd, v.SignalDecodersToAdd)
+	serializeFqns(s, schemas.UpdateDecoderManifestRequest_signalDecodersToRemove, v.SignalDecodersToRemove)
+	serializeSignalDecoders(s, schemas.UpdateDecoderManifestRequest_signalDecodersToUpdate, v.SignalDecodersToUpdate)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateDecoderManifestRequest_status, string(v.Status))
+	}
+}
+func (v *UpdateDecoderManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDecoderManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDecoderManifestRequest_defaultForUnmappedSignals:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDecoderManifestRequest_defaultForUnmappedSignals, &ev); err != nil {
+				return err
+			}
+			v.DefaultForUnmappedSignals = types.DefaultForUnmappedSignalsType(ev)
+			return nil
+		case schemas.UpdateDecoderManifestRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateDecoderManifestRequest_description, v.Description)
+		case schemas.UpdateDecoderManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDecoderManifestRequest_name, v.Name)
+		case schemas.UpdateDecoderManifestRequest_networkInterfacesToAdd:
+			return deserializeNetworkInterfaces(d, schemas.UpdateDecoderManifestRequest_networkInterfacesToAdd, &v.NetworkInterfacesToAdd)
+		case schemas.UpdateDecoderManifestRequest_networkInterfacesToRemove:
+			return deserializeInterfaceIds(d, schemas.UpdateDecoderManifestRequest_networkInterfacesToRemove, &v.NetworkInterfacesToRemove)
+		case schemas.UpdateDecoderManifestRequest_networkInterfacesToUpdate:
+			return deserializeNetworkInterfaces(d, schemas.UpdateDecoderManifestRequest_networkInterfacesToUpdate, &v.NetworkInterfacesToUpdate)
+		case schemas.UpdateDecoderManifestRequest_signalDecodersToAdd:
+			return deserializeSignalDecoders(d, schemas.UpdateDecoderManifestRequest_signalDecodersToAdd, &v.SignalDecodersToAdd)
+		case schemas.UpdateDecoderManifestRequest_signalDecodersToRemove:
+			return deserializeFqns(d, schemas.UpdateDecoderManifestRequest_signalDecodersToRemove, &v.SignalDecodersToRemove)
+		case schemas.UpdateDecoderManifestRequest_signalDecodersToUpdate:
+			return deserializeSignalDecoders(d, schemas.UpdateDecoderManifestRequest_signalDecodersToUpdate, &v.SignalDecodersToUpdate)
+		case schemas.UpdateDecoderManifestRequest_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDecoderManifestRequest_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ManifestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateDecoderManifestOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the updated decoder manifest.
@@ -95,13 +163,38 @@ type UpdateDecoderManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDecoderManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDecoderManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDecoderManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDecoderManifestResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDecoderManifestResponse_name, *v.Name)
+	}
+}
+func (v *UpdateDecoderManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDecoderManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDecoderManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDecoderManifestResponse_arn, v.Arn)
+		case schemas.UpdateDecoderManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDecoderManifestResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDecoderManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDecoderManifest, schemas.UpdateDecoderManifestRequest, schemas.UpdateDecoderManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDecoderManifest, schemas.UpdateDecoderManifestRequest, schemas.UpdateDecoderManifestResponse), output: &UpdateDecoderManifestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

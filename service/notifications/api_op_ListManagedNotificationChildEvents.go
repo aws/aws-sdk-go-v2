@@ -5,7 +5,9 @@ package notifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -64,6 +66,39 @@ type ListManagedNotificationChildEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationChildEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationChildEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationChildEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateManagedNotificationEventArn != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn, *v.AggregateManagedNotificationEventArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListManagedNotificationChildEventsRequest_endTime, *v.EndTime)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_locale, string(v.Locale))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedNotificationChildEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.RelatedAccount != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_relatedAccount, *v.RelatedAccount)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListManagedNotificationChildEventsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListManagedNotificationChildEventsOutput struct {
 
 	// A pagination token. If a non-null pagination token is returned in a result,
@@ -82,13 +117,35 @@ type ListManagedNotificationChildEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationChildEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationChildEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationChildEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedNotificationChildEvents(s, schemas.ListManagedNotificationChildEventsResponse_managedNotificationChildEvents, v.ManagedNotificationChildEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedNotificationChildEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedNotificationChildEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedNotificationChildEventsResponse_managedNotificationChildEvents:
+			return deserializeManagedNotificationChildEvents(d, schemas.ListManagedNotificationChildEventsResponse_managedNotificationChildEvents, &v.ManagedNotificationChildEvents)
+		case schemas.ListManagedNotificationChildEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedNotificationChildEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedNotificationChildEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedNotificationChildEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationChildEvents, schemas.ListManagedNotificationChildEventsRequest, schemas.ListManagedNotificationChildEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedNotificationChildEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationChildEvents, schemas.ListManagedNotificationChildEventsRequest, schemas.ListManagedNotificationChildEventsResponse), output: &ListManagedNotificationChildEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

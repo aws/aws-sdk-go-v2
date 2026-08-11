@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type UpdateMLModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMLModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMLModelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMLModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.UpdateMLModelInput_MLModelId, *v.MLModelId)
+	}
+	if v.MLModelName != nil {
+		s.WriteString(schemas.UpdateMLModelInput_MLModelName, *v.MLModelName)
+	}
+	if v.ScoreThreshold != nil {
+		s.WriteFloat32(schemas.UpdateMLModelInput_ScoreThreshold, *v.ScoreThreshold)
+	}
+}
+
 // Represents the output of an UpdateMLModel operation.
 //
 // You can see the updated content by using the GetMLModel operation.
@@ -62,13 +82,32 @@ type UpdateMLModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMLModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMLModelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMLModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.UpdateMLModelOutput_MLModelId, *v.MLModelId)
+	}
+}
+func (v *UpdateMLModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMLModelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMLModelOutput_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.UpdateMLModelOutput_MLModelId, v.MLModelId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMLModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMLModel, schemas.UpdateMLModelInput, schemas.UpdateMLModelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMLModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMLModel, schemas.UpdateMLModelInput, schemas.UpdateMLModelOutput), output: &UpdateMLModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

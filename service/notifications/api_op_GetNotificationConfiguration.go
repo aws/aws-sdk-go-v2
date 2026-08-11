@@ -4,7 +4,9 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetNotificationConfigurationInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetNotificationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetNotificationConfigurationRequest_arn, *v.Arn)
+	}
 }
 
 type GetNotificationConfigurationOutput struct {
@@ -88,13 +102,80 @@ type GetNotificationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationDuration != "" {
+		s.WriteString(schemas.GetNotificationConfigurationResponse_aggregationDuration, string(v.AggregationDuration))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetNotificationConfigurationResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetNotificationConfigurationResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetNotificationConfigurationResponse_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetNotificationConfigurationResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetNotificationConfigurationResponse_status, string(v.Status))
+	}
+	if v.Subtype != "" {
+		s.WriteString(schemas.GetNotificationConfigurationResponse_subtype, string(v.Subtype))
+	}
+}
+func (v *GetNotificationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotificationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotificationConfigurationResponse_aggregationDuration:
+			var ev string
+			if err := d.ReadString(schemas.GetNotificationConfigurationResponse_aggregationDuration, &ev); err != nil {
+				return err
+			}
+			v.AggregationDuration = types.AggregationDuration(ev)
+			return nil
+		case schemas.GetNotificationConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetNotificationConfigurationResponse_arn, v.Arn)
+		case schemas.GetNotificationConfigurationResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetNotificationConfigurationResponse_creationTime, v.CreationTime)
+		case schemas.GetNotificationConfigurationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetNotificationConfigurationResponse_description, v.Description)
+		case schemas.GetNotificationConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetNotificationConfigurationResponse_name, v.Name)
+		case schemas.GetNotificationConfigurationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetNotificationConfigurationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotificationConfigurationStatus(ev)
+			return nil
+		case schemas.GetNotificationConfigurationResponse_subtype:
+			var ev string
+			if err := d.ReadString(schemas.GetNotificationConfigurationResponse_subtype, &ev); err != nil {
+				return err
+			}
+			v.Subtype = types.NotificationConfigurationSubtype(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationConfiguration, schemas.GetNotificationConfigurationRequest, schemas.GetNotificationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationConfiguration, schemas.GetNotificationConfigurationRequest, schemas.GetNotificationConfigurationResponse), output: &GetNotificationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

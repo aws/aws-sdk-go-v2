@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type OverridePullRequestApprovalRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OverridePullRequestApprovalRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OverridePullRequestApprovalRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OverridePullRequestApprovalRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OverrideStatus != "" {
+		s.WriteString(schemas.OverridePullRequestApprovalRulesInput_overrideStatus, string(v.OverrideStatus))
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.OverridePullRequestApprovalRulesInput_pullRequestId, *v.PullRequestId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.OverridePullRequestApprovalRulesInput_revisionId, *v.RevisionId)
+	}
+}
+
 type OverridePullRequestApprovalRulesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +77,26 @@ type OverridePullRequestApprovalRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OverridePullRequestApprovalRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OverridePullRequestApprovalRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *OverridePullRequestApprovalRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOverridePullRequestApprovalRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOverridePullRequestApprovalRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OverridePullRequestApprovalRules, schemas.OverridePullRequestApprovalRulesInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpOverridePullRequestApprovalRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OverridePullRequestApprovalRules, schemas.OverridePullRequestApprovalRulesInput, nil), output: &OverridePullRequestApprovalRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

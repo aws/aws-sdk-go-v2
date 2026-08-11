@@ -5,6 +5,8 @@ package fms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListAdminsManagingAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdminsManagingAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdminsManagingAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdminsManagingAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdminsManagingAccountRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdminsManagingAccountRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAdminsManagingAccountOutput struct {
 
 	// The list of accounts who manage member accounts within their AdminScope.
@@ -63,13 +80,35 @@ type ListAdminsManagingAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdminsManagingAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdminsManagingAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdminsManagingAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.ListAdminsManagingAccountResponse_AdminAccounts, v.AdminAccounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdminsManagingAccountResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAdminsManagingAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdminsManagingAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdminsManagingAccountResponse_AdminAccounts:
+			return deserializeAccountIdList(d, schemas.ListAdminsManagingAccountResponse_AdminAccounts, &v.AdminAccounts)
+		case schemas.ListAdminsManagingAccountResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdminsManagingAccountResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdminsManagingAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAdminsManagingAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdminsManagingAccount, schemas.ListAdminsManagingAccountRequest, schemas.ListAdminsManagingAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAdminsManagingAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdminsManagingAccount, schemas.ListAdminsManagingAccountRequest, schemas.ListAdminsManagingAccountResponse), output: &ListAdminsManagingAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

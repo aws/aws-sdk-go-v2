@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,34 @@ type AwsIdentity struct {
 	Principal *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsIdentity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsIdentity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsIdentity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalId != nil {
+		s.WriteString(schemas.AwsIdentity_externalId, *v.ExternalId)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.AwsIdentity_principal, *v.Principal)
+	}
+}
+func (v *AwsIdentity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsIdentity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsIdentity_externalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.AwsIdentity_externalId, v.ExternalId)
+		case schemas.AwsIdentity_principal:
+			v.Principal = new(string)
+			return d.ReadString(schemas.AwsIdentity_principal, v.Principal)
+		}
+		return nil
+	})
 }
 
 // To add a natively-supported Amazon Web Services service as a log source, use
@@ -48,6 +78,44 @@ type AwsLogSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsLogSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsLogSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsLogSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountList(s, schemas.AwsLogSourceConfiguration_accounts, v.Accounts)
+	serializeRegionList(s, schemas.AwsLogSourceConfiguration_regions, v.Regions)
+	if v.SourceName != "" {
+		s.WriteString(schemas.AwsLogSourceConfiguration_sourceName, string(v.SourceName))
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.AwsLogSourceConfiguration_sourceVersion, *v.SourceVersion)
+	}
+}
+func (v *AwsLogSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsLogSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsLogSourceConfiguration_accounts:
+			return deserializeAccountList(d, schemas.AwsLogSourceConfiguration_accounts, &v.Accounts)
+		case schemas.AwsLogSourceConfiguration_regions:
+			return deserializeRegionList(d, schemas.AwsLogSourceConfiguration_regions, &v.Regions)
+		case schemas.AwsLogSourceConfiguration_sourceName:
+			var ev string
+			if err := d.ReadString(schemas.AwsLogSourceConfiguration_sourceName, &ev); err != nil {
+				return err
+			}
+			v.SourceName = AwsLogSourceName(ev)
+			return nil
+		case schemas.AwsLogSourceConfiguration_sourceVersion:
+			v.SourceVersion = new(string)
+			return d.ReadString(schemas.AwsLogSourceConfiguration_sourceVersion, v.SourceVersion)
+		}
+		return nil
+	})
+}
+
 // Amazon Security Lake can collect logs and events from natively-supported Amazon
 // Web Services services.
 type AwsLogSourceResource struct {
@@ -61,6 +129,38 @@ type AwsLogSourceResource struct {
 	SourceVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsLogSourceResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsLogSourceResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsLogSourceResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceName != "" {
+		s.WriteString(schemas.AwsLogSourceResource_sourceName, string(v.SourceName))
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.AwsLogSourceResource_sourceVersion, *v.SourceVersion)
+	}
+}
+func (v *AwsLogSourceResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsLogSourceResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsLogSourceResource_sourceName:
+			var ev string
+			if err := d.ReadString(schemas.AwsLogSourceResource_sourceName, &ev); err != nil {
+				return err
+			}
+			v.SourceName = AwsLogSourceName(ev)
+			return nil
+		case schemas.AwsLogSourceResource_sourceVersion:
+			v.SourceVersion = new(string)
+			return d.ReadString(schemas.AwsLogSourceResource_sourceVersion, v.SourceVersion)
+		}
+		return nil
+	})
 }
 
 // The attributes of a third-party custom source.
@@ -79,6 +179,40 @@ type CustomLogSourceAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomLogSourceAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLogSourceAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLogSourceAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrawlerArn != nil {
+		s.WriteString(schemas.CustomLogSourceAttributes_crawlerArn, *v.CrawlerArn)
+	}
+	if v.DatabaseArn != nil {
+		s.WriteString(schemas.CustomLogSourceAttributes_databaseArn, *v.DatabaseArn)
+	}
+	if v.TableArn != nil {
+		s.WriteString(schemas.CustomLogSourceAttributes_tableArn, *v.TableArn)
+	}
+}
+func (v *CustomLogSourceAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLogSourceAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLogSourceAttributes_crawlerArn:
+			v.CrawlerArn = new(string)
+			return d.ReadString(schemas.CustomLogSourceAttributes_crawlerArn, v.CrawlerArn)
+		case schemas.CustomLogSourceAttributes_databaseArn:
+			v.DatabaseArn = new(string)
+			return d.ReadString(schemas.CustomLogSourceAttributes_databaseArn, v.DatabaseArn)
+		case schemas.CustomLogSourceAttributes_tableArn:
+			v.TableArn = new(string)
+			return d.ReadString(schemas.CustomLogSourceAttributes_tableArn, v.TableArn)
+		}
+		return nil
+	})
+}
+
 // The configuration used for the third-party custom source.
 type CustomLogSourceConfiguration struct {
 
@@ -93,6 +227,38 @@ type CustomLogSourceConfiguration struct {
 	ProviderIdentity *AwsIdentity
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomLogSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLogSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLogSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrawlerConfiguration != nil {
+		s.WriteStruct(schemas.CustomLogSourceConfiguration_crawlerConfiguration)
+		v.CrawlerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProviderIdentity != nil {
+		s.WriteStruct(schemas.CustomLogSourceConfiguration_providerIdentity)
+		v.ProviderIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CustomLogSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLogSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLogSourceConfiguration_crawlerConfiguration:
+			v.CrawlerConfiguration = &CustomLogSourceCrawlerConfiguration{}
+			return v.CrawlerConfiguration.Deserialize(d)
+		case schemas.CustomLogSourceConfiguration_providerIdentity:
+			v.ProviderIdentity = &AwsIdentity{}
+			return v.ProviderIdentity.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration used for the Glue Crawler for a third-party custom source.
@@ -111,6 +277,28 @@ type CustomLogSourceCrawlerConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomLogSourceCrawlerConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLogSourceCrawlerConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLogSourceCrawlerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CustomLogSourceCrawlerConfiguration_roleArn, *v.RoleArn)
+	}
+}
+func (v *CustomLogSourceCrawlerConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLogSourceCrawlerConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLogSourceCrawlerConfiguration_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CustomLogSourceCrawlerConfiguration_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 // The details of the log provider for a third-party custom source.
 type CustomLogSourceProvider struct {
 
@@ -125,6 +313,34 @@ type CustomLogSourceProvider struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomLogSourceProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLogSourceProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLogSourceProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteString(schemas.CustomLogSourceProvider_location, *v.Location)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CustomLogSourceProvider_roleArn, *v.RoleArn)
+	}
+}
+func (v *CustomLogSourceProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLogSourceProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLogSourceProvider_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.CustomLogSourceProvider_location, v.Location)
+		case schemas.CustomLogSourceProvider_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CustomLogSourceProvider_roleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // Amazon Security Lake can collect logs and events from third-party custom
@@ -148,6 +364,50 @@ type CustomLogSourceResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomLogSourceResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLogSourceResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLogSourceResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		s.WriteStruct(schemas.CustomLogSourceResource_attributes)
+		v.Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Provider != nil {
+		s.WriteStruct(schemas.CustomLogSourceResource_provider)
+		v.Provider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.CustomLogSourceResource_sourceName, *v.SourceName)
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.CustomLogSourceResource_sourceVersion, *v.SourceVersion)
+	}
+}
+func (v *CustomLogSourceResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLogSourceResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLogSourceResource_attributes:
+			v.Attributes = &CustomLogSourceAttributes{}
+			return v.Attributes.Deserialize(d)
+		case schemas.CustomLogSourceResource_provider:
+			v.Provider = &CustomLogSourceProvider{}
+			return v.Provider.Deserialize(d)
+		case schemas.CustomLogSourceResource_sourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.CustomLogSourceResource_sourceName, v.SourceName)
+		case schemas.CustomLogSourceResource_sourceVersion:
+			v.SourceVersion = new(string)
+			return d.ReadString(schemas.CustomLogSourceResource_sourceVersion, v.SourceVersion)
+		}
+		return nil
+	})
+}
+
 // Automatically enable new organization accounts as member accounts from an
 // Amazon Security Lake administrator account.
 type DataLakeAutoEnableNewAccountConfiguration struct {
@@ -163,6 +423,31 @@ type DataLakeAutoEnableNewAccountConfiguration struct {
 	Sources []AwsLogSourceResource
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLakeAutoEnableNewAccountConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeAutoEnableNewAccountConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeAutoEnableNewAccountConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.DataLakeAutoEnableNewAccountConfiguration_region, *v.Region)
+	}
+	serializeAwsLogSourceResourceList(s, schemas.DataLakeAutoEnableNewAccountConfiguration_sources, v.Sources)
+}
+func (v *DataLakeAutoEnableNewAccountConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeAutoEnableNewAccountConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeAutoEnableNewAccountConfiguration_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DataLakeAutoEnableNewAccountConfiguration_region, v.Region)
+		case schemas.DataLakeAutoEnableNewAccountConfiguration_sources:
+			return deserializeAwsLogSourceResourceList(d, schemas.DataLakeAutoEnableNewAccountConfiguration_sources, &v.Sources)
+		}
+		return nil
+	})
 }
 
 // Provides details of Amazon Security Lake object.
@@ -185,6 +470,52 @@ type DataLakeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataLakeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DataLakeConfiguration_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifecycleConfiguration != nil {
+		s.WriteStruct(schemas.DataLakeConfiguration_lifecycleConfiguration)
+		v.LifecycleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DataLakeConfiguration_region, *v.Region)
+	}
+	if v.ReplicationConfiguration != nil {
+		s.WriteStruct(schemas.DataLakeConfiguration_replicationConfiguration)
+		v.ReplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataLakeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeConfiguration_encryptionConfiguration:
+			v.EncryptionConfiguration = &DataLakeEncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.DataLakeConfiguration_lifecycleConfiguration:
+			v.LifecycleConfiguration = &DataLakeLifecycleConfiguration{}
+			return v.LifecycleConfiguration.Deserialize(d)
+		case schemas.DataLakeConfiguration_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DataLakeConfiguration_region, v.Region)
+		case schemas.DataLakeConfiguration_replicationConfiguration:
+			v.ReplicationConfiguration = &DataLakeReplicationConfiguration{}
+			return v.ReplicationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides encryption details of Amazon Security Lake object.
 type DataLakeEncryptionConfiguration struct {
 
@@ -193,6 +524,28 @@ type DataLakeEncryptionConfiguration struct {
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLakeEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DataLakeEncryptionConfiguration_kmsKeyId, *v.KmsKeyId)
+	}
+}
+func (v *DataLakeEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeEncryptionConfiguration_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DataLakeEncryptionConfiguration_kmsKeyId, v.KmsKeyId)
+		}
+		return nil
+	})
 }
 
 // The details for an Amazon Security Lake exception.
@@ -214,6 +567,46 @@ type DataLakeException struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataLakeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Exception != nil {
+		s.WriteString(schemas.DataLakeException_exception, *v.Exception)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DataLakeException_region, *v.Region)
+	}
+	if v.Remediation != nil {
+		s.WriteString(schemas.DataLakeException_remediation, *v.Remediation)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.DataLakeException_timestamp, *v.Timestamp)
+	}
+}
+func (v *DataLakeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeException_exception:
+			v.Exception = new(string)
+			return d.ReadString(schemas.DataLakeException_exception, v.Exception)
+		case schemas.DataLakeException_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DataLakeException_region, v.Region)
+		case schemas.DataLakeException_remediation:
+			v.Remediation = new(string)
+			return d.ReadString(schemas.DataLakeException_remediation, v.Remediation)
+		case schemas.DataLakeException_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.DataLakeException_timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Provides lifecycle details of Amazon Security Lake object.
 type DataLakeLifecycleConfiguration struct {
 
@@ -226,6 +619,33 @@ type DataLakeLifecycleConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataLakeLifecycleConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeLifecycleConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeLifecycleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expiration != nil {
+		s.WriteStruct(schemas.DataLakeLifecycleConfiguration_expiration)
+		v.Expiration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDataLakeLifecycleTransitionList(s, schemas.DataLakeLifecycleConfiguration_transitions, v.Transitions)
+}
+func (v *DataLakeLifecycleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeLifecycleConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeLifecycleConfiguration_expiration:
+			v.Expiration = &DataLakeLifecycleExpiration{}
+			return v.Expiration.Deserialize(d)
+		case schemas.DataLakeLifecycleConfiguration_transitions:
+			return deserializeDataLakeLifecycleTransitionList(d, schemas.DataLakeLifecycleConfiguration_transitions, &v.Transitions)
+		}
+		return nil
+	})
+}
+
 // Provide expiration lifecycle details of Amazon Security Lake object.
 type DataLakeLifecycleExpiration struct {
 
@@ -233,6 +653,28 @@ type DataLakeLifecycleExpiration struct {
 	Days *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLakeLifecycleExpiration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeLifecycleExpiration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeLifecycleExpiration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Days != nil {
+		s.WriteInt32(schemas.DataLakeLifecycleExpiration_days, *v.Days)
+	}
+}
+func (v *DataLakeLifecycleExpiration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeLifecycleExpiration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeLifecycleExpiration_days:
+			v.Days = new(int32)
+			return d.ReadInt32(schemas.DataLakeLifecycleExpiration_days, v.Days)
+		}
+		return nil
+	})
 }
 
 // Provide transition lifecycle details of Amazon Security Lake object.
@@ -247,6 +689,34 @@ type DataLakeLifecycleTransition struct {
 	StorageClass *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLakeLifecycleTransition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeLifecycleTransition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeLifecycleTransition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Days != nil {
+		s.WriteInt32(schemas.DataLakeLifecycleTransition_days, *v.Days)
+	}
+	if v.StorageClass != nil {
+		s.WriteString(schemas.DataLakeLifecycleTransition_storageClass, *v.StorageClass)
+	}
+}
+func (v *DataLakeLifecycleTransition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeLifecycleTransition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeLifecycleTransition_days:
+			v.Days = new(int32)
+			return d.ReadInt32(schemas.DataLakeLifecycleTransition_days, v.Days)
+		case schemas.DataLakeLifecycleTransition_storageClass:
+			v.StorageClass = new(string)
+			return d.ReadString(schemas.DataLakeLifecycleTransition_storageClass, v.StorageClass)
+		}
+		return nil
+	})
 }
 
 // Provides replication details for objects stored in the Amazon Security Lake
@@ -275,6 +745,31 @@ type DataLakeReplicationConfiguration struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLakeReplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeReplicationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeReplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionList(s, schemas.DataLakeReplicationConfiguration_regions, v.Regions)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DataLakeReplicationConfiguration_roleArn, *v.RoleArn)
+	}
+}
+func (v *DataLakeReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeReplicationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeReplicationConfiguration_regions:
+			return deserializeRegionList(d, schemas.DataLakeReplicationConfiguration_regions, &v.Regions)
+		case schemas.DataLakeReplicationConfiguration_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DataLakeReplicationConfiguration_roleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // Provides details of Amazon Security Lake object.
@@ -315,6 +810,82 @@ type DataLakeResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataLakeResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateStatus != "" {
+		s.WriteString(schemas.DataLakeResource_createStatus, string(v.CreateStatus))
+	}
+	if v.DataLakeArn != nil {
+		s.WriteString(schemas.DataLakeResource_dataLakeArn, *v.DataLakeArn)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DataLakeResource_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifecycleConfiguration != nil {
+		s.WriteStruct(schemas.DataLakeResource_lifecycleConfiguration)
+		v.LifecycleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DataLakeResource_region, *v.Region)
+	}
+	if v.ReplicationConfiguration != nil {
+		s.WriteStruct(schemas.DataLakeResource_replicationConfiguration)
+		v.ReplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.DataLakeResource_s3BucketArn, *v.S3BucketArn)
+	}
+	if v.UpdateStatus != nil {
+		s.WriteStruct(schemas.DataLakeResource_updateStatus)
+		v.UpdateStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataLakeResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeResource_createStatus:
+			var ev string
+			if err := d.ReadString(schemas.DataLakeResource_createStatus, &ev); err != nil {
+				return err
+			}
+			v.CreateStatus = DataLakeStatus(ev)
+			return nil
+		case schemas.DataLakeResource_dataLakeArn:
+			v.DataLakeArn = new(string)
+			return d.ReadString(schemas.DataLakeResource_dataLakeArn, v.DataLakeArn)
+		case schemas.DataLakeResource_encryptionConfiguration:
+			v.EncryptionConfiguration = &DataLakeEncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.DataLakeResource_lifecycleConfiguration:
+			v.LifecycleConfiguration = &DataLakeLifecycleConfiguration{}
+			return v.LifecycleConfiguration.Deserialize(d)
+		case schemas.DataLakeResource_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DataLakeResource_region, v.Region)
+		case schemas.DataLakeResource_replicationConfiguration:
+			v.ReplicationConfiguration = &DataLakeReplicationConfiguration{}
+			return v.ReplicationConfiguration.Deserialize(d)
+		case schemas.DataLakeResource_s3BucketArn:
+			v.S3BucketArn = new(string)
+			return d.ReadString(schemas.DataLakeResource_s3BucketArn, v.S3BucketArn)
+		case schemas.DataLakeResource_updateStatus:
+			v.UpdateStatus = &DataLakeUpdateStatus{}
+			return v.UpdateStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Amazon Security Lake collects logs and events from supported Amazon Web
 // Services services and custom sources. For the list of supported Amazon Web
 // Services services, see the [Amazon Security Lake User Guide].
@@ -343,6 +914,40 @@ type DataLakeSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataLakeSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteString(schemas.DataLakeSource_account, *v.Account)
+	}
+	serializeOcsfEventClassList(s, schemas.DataLakeSource_eventClasses, v.EventClasses)
+	if v.SourceName != nil {
+		s.WriteString(schemas.DataLakeSource_sourceName, *v.SourceName)
+	}
+	serializeDataLakeSourceStatusList(s, schemas.DataLakeSource_sourceStatuses, v.SourceStatuses)
+}
+func (v *DataLakeSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeSource_account:
+			v.Account = new(string)
+			return d.ReadString(schemas.DataLakeSource_account, v.Account)
+		case schemas.DataLakeSource_eventClasses:
+			return deserializeOcsfEventClassList(d, schemas.DataLakeSource_eventClasses, &v.EventClasses)
+		case schemas.DataLakeSource_sourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.DataLakeSource_sourceName, v.SourceName)
+		case schemas.DataLakeSource_sourceStatuses:
+			return deserializeDataLakeSourceStatusList(d, schemas.DataLakeSource_sourceStatuses, &v.SourceStatuses)
+		}
+		return nil
+	})
+}
+
 // Retrieves the Logs status for the Amazon Security Lake account.
 type DataLakeSourceStatus struct {
 
@@ -354,6 +959,38 @@ type DataLakeSourceStatus struct {
 	Status SourceCollectionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLakeSourceStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeSourceStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeSourceStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Resource != nil {
+		s.WriteString(schemas.DataLakeSourceStatus_resource, *v.Resource)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DataLakeSourceStatus_status, string(v.Status))
+	}
+}
+func (v *DataLakeSourceStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeSourceStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeSourceStatus_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.DataLakeSourceStatus_resource, v.Resource)
+		case schemas.DataLakeSourceStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.DataLakeSourceStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SourceCollectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The details of the last UpdateDataLake or DeleteDataLake API request which
@@ -369,6 +1006,34 @@ type DataLakeUpdateException struct {
 	Reason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLakeUpdateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeUpdateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeUpdateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.DataLakeUpdateException_code, *v.Code)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.DataLakeUpdateException_reason, *v.Reason)
+	}
+}
+func (v *DataLakeUpdateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeUpdateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeUpdateException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.DataLakeUpdateException_code, v.Code)
+		case schemas.DataLakeUpdateException_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.DataLakeUpdateException_reason, v.Reason)
+		}
+		return nil
+	})
 }
 
 // The status of the last UpdateDataLake or DeleteDataLake API request. This is
@@ -388,6 +1053,46 @@ type DataLakeUpdateStatus struct {
 	Status DataLakeStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLakeUpdateStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeUpdateStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeUpdateStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Exception != nil {
+		s.WriteStruct(schemas.DataLakeUpdateStatus_exception)
+		v.Exception.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DataLakeUpdateStatus_requestId, *v.RequestId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DataLakeUpdateStatus_status, string(v.Status))
+	}
+}
+func (v *DataLakeUpdateStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeUpdateStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeUpdateStatus_exception:
+			v.Exception = &DataLakeUpdateException{}
+			return v.Exception.Deserialize(d)
+		case schemas.DataLakeUpdateStatus_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DataLakeUpdateStatus_requestId, v.RequestId)
+		case schemas.DataLakeUpdateStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.DataLakeUpdateStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DataLakeStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configurations used for HTTPS subscriber notification.
@@ -421,6 +1126,56 @@ type HttpsNotificationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpsNotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpsNotificationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpsNotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationApiKeyName != nil {
+		s.WriteString(schemas.HttpsNotificationConfiguration_authorizationApiKeyName, *v.AuthorizationApiKeyName)
+	}
+	if v.AuthorizationApiKeyValue != nil {
+		s.WriteString(schemas.HttpsNotificationConfiguration_authorizationApiKeyValue, *v.AuthorizationApiKeyValue)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.HttpsNotificationConfiguration_endpoint, *v.Endpoint)
+	}
+	if v.HttpMethod != "" {
+		s.WriteString(schemas.HttpsNotificationConfiguration_httpMethod, string(v.HttpMethod))
+	}
+	if v.TargetRoleArn != nil {
+		s.WriteString(schemas.HttpsNotificationConfiguration_targetRoleArn, *v.TargetRoleArn)
+	}
+}
+func (v *HttpsNotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpsNotificationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpsNotificationConfiguration_authorizationApiKeyName:
+			v.AuthorizationApiKeyName = new(string)
+			return d.ReadString(schemas.HttpsNotificationConfiguration_authorizationApiKeyName, v.AuthorizationApiKeyName)
+		case schemas.HttpsNotificationConfiguration_authorizationApiKeyValue:
+			v.AuthorizationApiKeyValue = new(string)
+			return d.ReadString(schemas.HttpsNotificationConfiguration_authorizationApiKeyValue, v.AuthorizationApiKeyValue)
+		case schemas.HttpsNotificationConfiguration_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.HttpsNotificationConfiguration_endpoint, v.Endpoint)
+		case schemas.HttpsNotificationConfiguration_httpMethod:
+			var ev string
+			if err := d.ReadString(schemas.HttpsNotificationConfiguration_httpMethod, &ev); err != nil {
+				return err
+			}
+			v.HttpMethod = HttpMethod(ev)
+			return nil
+		case schemas.HttpsNotificationConfiguration_targetRoleArn:
+			v.TargetRoleArn = new(string)
+			return d.ReadString(schemas.HttpsNotificationConfiguration_targetRoleArn, v.TargetRoleArn)
+		}
+		return nil
+	})
+}
+
 // Amazon Security Lake can collect logs and events from natively-supported Amazon
 // Web Services services and custom sources.
 type LogSource struct {
@@ -435,6 +1190,37 @@ type LogSource struct {
 	Sources []LogSourceResource
 
 	noSmithyDocumentSerde
+}
+
+func (v *LogSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteString(schemas.LogSource_account, *v.Account)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.LogSource_region, *v.Region)
+	}
+	serializeLogSourceResourceList(s, schemas.LogSource_sources, v.Sources)
+}
+func (v *LogSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogSource_account:
+			v.Account = new(string)
+			return d.ReadString(schemas.LogSource_account, v.Account)
+		case schemas.LogSource_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.LogSource_region, v.Region)
+		case schemas.LogSource_sources:
+			return deserializeLogSourceResourceList(d, schemas.LogSource_sources, &v.Sources)
+		}
+		return nil
+	})
 }
 
 // The supported source types from which logs and events are collected in Amazon
@@ -461,6 +1247,14 @@ type LogSourceResourceMemberAwsLogSource struct {
 }
 
 func (*LogSourceResourceMemberAwsLogSource) isLogSourceResource() {}
+func (v *LogSourceResourceMemberAwsLogSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogSourceResource_awsLogSource)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *LogSourceResourceMemberAwsLogSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Amazon Security Lake supports custom source types. For more information, see
 // the [Amazon Security Lake User Guide].
@@ -473,6 +1267,14 @@ type LogSourceResourceMemberCustomLogSource struct {
 }
 
 func (*LogSourceResourceMemberCustomLogSource) isLogSourceResource() {}
+func (v *LogSourceResourceMemberCustomLogSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogSourceResource_customLogSource)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *LogSourceResourceMemberCustomLogSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specify the configurations you want to use for subscriber notification to
 // notify the subscriber when new data is written to the data lake for sources that
@@ -494,6 +1296,14 @@ type NotificationConfigurationMemberHttpsNotificationConfiguration struct {
 }
 
 func (*NotificationConfigurationMemberHttpsNotificationConfiguration) isNotificationConfiguration() {}
+func (v *NotificationConfigurationMemberHttpsNotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationConfiguration_httpsNotificationConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *NotificationConfigurationMemberHttpsNotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The configurations for SQS subscriber notification.
 type NotificationConfigurationMemberSqsNotificationConfiguration struct {
@@ -503,10 +1313,34 @@ type NotificationConfigurationMemberSqsNotificationConfiguration struct {
 }
 
 func (*NotificationConfigurationMemberSqsNotificationConfiguration) isNotificationConfiguration() {}
+func (v *NotificationConfigurationMemberSqsNotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationConfiguration_sqsNotificationConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *NotificationConfigurationMemberSqsNotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The configurations used for EventBridge subscriber notification.
 type SqsNotificationConfiguration struct {
 	noSmithyDocumentSerde
+}
+
+func (v *SqsNotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqsNotificationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqsNotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SqsNotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqsNotificationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Provides details about the Amazon Security Lake account subscription.
@@ -587,6 +1421,112 @@ type SubscriberResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscriberResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscriberResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscriberResource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessTypeList(s, schemas.SubscriberResource_accessTypes, v.AccessTypes)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SubscriberResource_createdAt, *v.CreatedAt)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.SubscriberResource_resourceShareArn, *v.ResourceShareArn)
+	}
+	if v.ResourceShareName != nil {
+		s.WriteString(schemas.SubscriberResource_resourceShareName, *v.ResourceShareName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.SubscriberResource_roleArn, *v.RoleArn)
+	}
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.SubscriberResource_s3BucketArn, *v.S3BucketArn)
+	}
+	serializeLogSourceResourceList(s, schemas.SubscriberResource_sources, v.Sources)
+	if v.SubscriberArn != nil {
+		s.WriteString(schemas.SubscriberResource_subscriberArn, *v.SubscriberArn)
+	}
+	if v.SubscriberDescription != nil {
+		s.WriteString(schemas.SubscriberResource_subscriberDescription, *v.SubscriberDescription)
+	}
+	if v.SubscriberEndpoint != nil {
+		s.WriteString(schemas.SubscriberResource_subscriberEndpoint, *v.SubscriberEndpoint)
+	}
+	if v.SubscriberId != nil {
+		s.WriteString(schemas.SubscriberResource_subscriberId, *v.SubscriberId)
+	}
+	if v.SubscriberIdentity != nil {
+		s.WriteStruct(schemas.SubscriberResource_subscriberIdentity)
+		v.SubscriberIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubscriberName != nil {
+		s.WriteString(schemas.SubscriberResource_subscriberName, *v.SubscriberName)
+	}
+	if v.SubscriberStatus != "" {
+		s.WriteString(schemas.SubscriberResource_subscriberStatus, string(v.SubscriberStatus))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.SubscriberResource_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *SubscriberResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscriberResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubscriberResource_accessTypes:
+			return deserializeAccessTypeList(d, schemas.SubscriberResource_accessTypes, &v.AccessTypes)
+		case schemas.SubscriberResource_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SubscriberResource_createdAt, v.CreatedAt)
+		case schemas.SubscriberResource_resourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.SubscriberResource_resourceShareArn, v.ResourceShareArn)
+		case schemas.SubscriberResource_resourceShareName:
+			v.ResourceShareName = new(string)
+			return d.ReadString(schemas.SubscriberResource_resourceShareName, v.ResourceShareName)
+		case schemas.SubscriberResource_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.SubscriberResource_roleArn, v.RoleArn)
+		case schemas.SubscriberResource_s3BucketArn:
+			v.S3BucketArn = new(string)
+			return d.ReadString(schemas.SubscriberResource_s3BucketArn, v.S3BucketArn)
+		case schemas.SubscriberResource_sources:
+			return deserializeLogSourceResourceList(d, schemas.SubscriberResource_sources, &v.Sources)
+		case schemas.SubscriberResource_subscriberArn:
+			v.SubscriberArn = new(string)
+			return d.ReadString(schemas.SubscriberResource_subscriberArn, v.SubscriberArn)
+		case schemas.SubscriberResource_subscriberDescription:
+			v.SubscriberDescription = new(string)
+			return d.ReadString(schemas.SubscriberResource_subscriberDescription, v.SubscriberDescription)
+		case schemas.SubscriberResource_subscriberEndpoint:
+			v.SubscriberEndpoint = new(string)
+			return d.ReadString(schemas.SubscriberResource_subscriberEndpoint, v.SubscriberEndpoint)
+		case schemas.SubscriberResource_subscriberId:
+			v.SubscriberId = new(string)
+			return d.ReadString(schemas.SubscriberResource_subscriberId, v.SubscriberId)
+		case schemas.SubscriberResource_subscriberIdentity:
+			v.SubscriberIdentity = &AwsIdentity{}
+			return v.SubscriberIdentity.Deserialize(d)
+		case schemas.SubscriberResource_subscriberName:
+			v.SubscriberName = new(string)
+			return d.ReadString(schemas.SubscriberResource_subscriberName, v.SubscriberName)
+		case schemas.SubscriberResource_subscriberStatus:
+			var ev string
+			if err := d.ReadString(schemas.SubscriberResource_subscriberStatus, &ev); err != nil {
+				return err
+			}
+			v.SubscriberStatus = SubscriberStatus(ev)
+			return nil
+		case schemas.SubscriberResource_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.SubscriberResource_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // A tag is a label that you can define and associate with Amazon Web Services
 // resources, including certain types of Amazon Security Lake resources. Tags can
 // help you identify, categorize, and manage resources in different ways, such as
@@ -621,6 +1561,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

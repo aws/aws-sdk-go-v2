@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type GetStateTemplateInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetStateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetStateTemplateRequest_identifier, *v.Identifier)
+	}
 }
 
 type GetStateTemplateOutput struct {
@@ -87,13 +101,77 @@ type GetStateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetStateTemplateResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetStateTemplateResponse_creationTime, *v.CreationTime)
+	}
+	serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.GetStateTemplateResponse_dataExtraDimensions, v.DataExtraDimensions)
+	if v.Description != nil {
+		s.WriteString(schemas.GetStateTemplateResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetStateTemplateResponse_id, *v.Id)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetStateTemplateResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.GetStateTemplateResponse_metadataExtraDimensions, v.MetadataExtraDimensions)
+	if v.Name != nil {
+		s.WriteString(schemas.GetStateTemplateResponse_name, *v.Name)
+	}
+	if v.SignalCatalogArn != nil {
+		s.WriteString(schemas.GetStateTemplateResponse_signalCatalogArn, *v.SignalCatalogArn)
+	}
+	serializeStateTemplateProperties(s, schemas.GetStateTemplateResponse_stateTemplateProperties, v.StateTemplateProperties)
+}
+func (v *GetStateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStateTemplateResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetStateTemplateResponse_arn, v.Arn)
+		case schemas.GetStateTemplateResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetStateTemplateResponse_creationTime, v.CreationTime)
+		case schemas.GetStateTemplateResponse_dataExtraDimensions:
+			return deserializeStateTemplateDataExtraDimensionNodePathList(d, schemas.GetStateTemplateResponse_dataExtraDimensions, &v.DataExtraDimensions)
+		case schemas.GetStateTemplateResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetStateTemplateResponse_description, v.Description)
+		case schemas.GetStateTemplateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetStateTemplateResponse_id, v.Id)
+		case schemas.GetStateTemplateResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetStateTemplateResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.GetStateTemplateResponse_metadataExtraDimensions:
+			return deserializeStateTemplateMetadataExtraDimensionNodePathList(d, schemas.GetStateTemplateResponse_metadataExtraDimensions, &v.MetadataExtraDimensions)
+		case schemas.GetStateTemplateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetStateTemplateResponse_name, v.Name)
+		case schemas.GetStateTemplateResponse_signalCatalogArn:
+			v.SignalCatalogArn = new(string)
+			return d.ReadString(schemas.GetStateTemplateResponse_signalCatalogArn, v.SignalCatalogArn)
+		case schemas.GetStateTemplateResponse_stateTemplateProperties:
+			return deserializeStateTemplateProperties(d, schemas.GetStateTemplateResponse_stateTemplateProperties, &v.StateTemplateProperties)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetStateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStateTemplate, schemas.GetStateTemplateRequest, schemas.GetStateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetStateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStateTemplate, schemas.GetStateTemplateRequest, schemas.GetStateTemplateResponse), output: &GetStateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

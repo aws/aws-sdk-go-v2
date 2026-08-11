@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,50 @@ type CreateUnreferencedMergeCommitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUnreferencedMergeCommitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUnreferencedMergeCommitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUnreferencedMergeCommitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorName != nil {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitInput_authorName, *v.AuthorName)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitInput_commitMessage, *v.CommitMessage)
+	}
+	if v.ConflictDetailLevel != "" {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitInput_conflictDetailLevel, string(v.ConflictDetailLevel))
+	}
+	if v.ConflictResolution != nil {
+		s.WriteStruct(schemas.CreateUnreferencedMergeCommitInput_conflictResolution)
+		v.ConflictResolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConflictResolutionStrategy != "" {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitInput_conflictResolutionStrategy, string(v.ConflictResolutionStrategy))
+	}
+	if v.DestinationCommitSpecifier != nil {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitInput_destinationCommitSpecifier, *v.DestinationCommitSpecifier)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitInput_email, *v.Email)
+	}
+	if v.KeepEmptyFolders != false {
+		s.WriteBool(schemas.CreateUnreferencedMergeCommitInput_keepEmptyFolders, v.KeepEmptyFolders)
+	}
+	if v.MergeOption != "" {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitInput_mergeOption, string(v.MergeOption))
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitSpecifier != nil {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitInput_sourceCommitSpecifier, *v.SourceCommitSpecifier)
+	}
+}
+
 type CreateUnreferencedMergeCommitOutput struct {
 
 	// The full commit ID of the commit that contains your merge results.
@@ -105,13 +151,38 @@ type CreateUnreferencedMergeCommitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUnreferencedMergeCommitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUnreferencedMergeCommitOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUnreferencedMergeCommitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitId != nil {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitOutput_commitId, *v.CommitId)
+	}
+	if v.TreeId != nil {
+		s.WriteString(schemas.CreateUnreferencedMergeCommitOutput_treeId, *v.TreeId)
+	}
+}
+func (v *CreateUnreferencedMergeCommitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUnreferencedMergeCommitOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUnreferencedMergeCommitOutput_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.CreateUnreferencedMergeCommitOutput_commitId, v.CommitId)
+		case schemas.CreateUnreferencedMergeCommitOutput_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.CreateUnreferencedMergeCommitOutput_treeId, v.TreeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUnreferencedMergeCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUnreferencedMergeCommit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUnreferencedMergeCommit, schemas.CreateUnreferencedMergeCommitInput, schemas.CreateUnreferencedMergeCommitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUnreferencedMergeCommit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUnreferencedMergeCommit, schemas.CreateUnreferencedMergeCommitInput, schemas.CreateUnreferencedMergeCommitOutput), output: &CreateUnreferencedMergeCommitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

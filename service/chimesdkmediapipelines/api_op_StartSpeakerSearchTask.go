@@ -5,7 +5,9 @@ package chimesdkmediapipelines
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,29 @@ type StartSpeakerSearchTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSpeakerSearchTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeakerSearchTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSpeakerSearchTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartSpeakerSearchTaskRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.StartSpeakerSearchTaskRequest_Identifier, *v.Identifier)
+	}
+	if v.KinesisVideoStreamSourceTaskConfiguration != nil {
+		s.WriteStruct(schemas.StartSpeakerSearchTaskRequest_KinesisVideoStreamSourceTaskConfiguration)
+		v.KinesisVideoStreamSourceTaskConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceProfileDomainArn != nil {
+		s.WriteString(schemas.StartSpeakerSearchTaskRequest_VoiceProfileDomainArn, *v.VoiceProfileDomainArn)
+	}
+}
+
 type StartSpeakerSearchTaskOutput struct {
 
 	// The details of the speaker search task.
@@ -66,13 +91,34 @@ type StartSpeakerSearchTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSpeakerSearchTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeakerSearchTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSpeakerSearchTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpeakerSearchTask != nil {
+		s.WriteStruct(schemas.StartSpeakerSearchTaskResponse_SpeakerSearchTask)
+		v.SpeakerSearchTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartSpeakerSearchTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSpeakerSearchTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSpeakerSearchTaskResponse_SpeakerSearchTask:
+			v.SpeakerSearchTask = &types.SpeakerSearchTask{}
+			return v.SpeakerSearchTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSpeakerSearchTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSpeakerSearchTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeakerSearchTask, schemas.StartSpeakerSearchTaskRequest, schemas.StartSpeakerSearchTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSpeakerSearchTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeakerSearchTask, schemas.StartSpeakerSearchTaskRequest, schemas.StartSpeakerSearchTaskResponse), output: &StartSpeakerSearchTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

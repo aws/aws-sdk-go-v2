@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,18 @@ type DescribeDatasetInput struct {
 	DatasetArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DescribeDatasetRequest_DatasetArn, *v.DatasetArn)
+	}
 }
 
 type DescribeDatasetOutput struct {
@@ -113,13 +127,98 @@ type DescribeDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DataFrequency != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_DataFrequency, *v.DataFrequency)
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_DatasetName, *v.DatasetName)
+	}
+	if v.DatasetType != "" {
+		s.WriteString(schemas.DescribeDatasetResponse_DatasetType, string(v.DatasetType))
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.DescribeDatasetResponse_Domain, string(v.Domain))
+	}
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_EncryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Schema != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_Schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_Status, *v.Status)
+	}
+}
+func (v *DescribeDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeDatasetResponse_DataFrequency:
+			v.DataFrequency = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_DataFrequency, v.DataFrequency)
+		case schemas.DescribeDatasetResponse_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_DatasetArn, v.DatasetArn)
+		case schemas.DescribeDatasetResponse_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_DatasetName, v.DatasetName)
+		case schemas.DescribeDatasetResponse_DatasetType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetResponse_DatasetType, &ev); err != nil {
+				return err
+			}
+			v.DatasetType = types.DatasetType(ev)
+			return nil
+		case schemas.DescribeDatasetResponse_Domain:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetResponse_Domain, &ev); err != nil {
+				return err
+			}
+			v.Domain = types.Domain(ev)
+			return nil
+		case schemas.DescribeDatasetResponse_EncryptionConfig:
+			v.EncryptionConfig = &types.EncryptionConfig{}
+			return v.EncryptionConfig.Deserialize(d)
+		case schemas.DescribeDatasetResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeDatasetResponse_Schema:
+			v.Schema = &types.Schema{}
+			return v.Schema.Deserialize(d)
+		case schemas.DescribeDatasetResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse), output: &DescribeDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

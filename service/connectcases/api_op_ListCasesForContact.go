@@ -5,7 +5,9 @@ package connectcases
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,46 @@ type ListCasesForContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCasesForContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCasesForContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCasesForContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactArn != nil {
+		s.WriteString(schemas.ListCasesForContactRequest_contactArn, *v.ContactArn)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListCasesForContactRequest_domainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCasesForContactRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCasesForContactRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCasesForContactInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCasesForContactRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCasesForContactRequest_contactArn:
+			v.ContactArn = new(string)
+			return d.ReadString(schemas.ListCasesForContactRequest_contactArn, v.ContactArn)
+		case schemas.ListCasesForContactRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListCasesForContactRequest_domainId, v.DomainId)
+		case schemas.ListCasesForContactRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListCasesForContactRequest_maxResults, v.MaxResults)
+		case schemas.ListCasesForContactRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCasesForContactRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListCasesForContactOutput struct {
 
 	// A list of Case summary information.
@@ -64,13 +106,35 @@ type ListCasesForContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCasesForContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCasesForContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCasesForContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCaseSummaryList(s, schemas.ListCasesForContactResponse_cases, v.Cases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCasesForContactResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCasesForContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCasesForContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCasesForContactResponse_cases:
+			return deserializeCaseSummaryList(d, schemas.ListCasesForContactResponse_cases, &v.Cases)
+		case schemas.ListCasesForContactResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCasesForContactResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCasesForContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCasesForContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCasesForContact, schemas.ListCasesForContactRequest, schemas.ListCasesForContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCasesForContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCasesForContact, schemas.ListCasesForContactRequest, schemas.ListCasesForContactResponse), output: &ListCasesForContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

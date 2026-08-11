@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,25 @@ type CreateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRepositoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateRepositoryInput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.RepositoryDescription != nil {
+		s.WriteString(schemas.CreateRepositoryInput_repositoryDescription, *v.RepositoryDescription)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CreateRepositoryInput_repositoryName, *v.RepositoryName)
+	}
+	serializeTagsMap(s, schemas.CreateRepositoryInput_tags, v.Tags)
+}
+
 // Represents the output of a create repository operation.
 type CreateRepositoryOutput struct {
 
@@ -78,13 +99,34 @@ type CreateRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRepositoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryMetadata != nil {
+		s.WriteStruct(schemas.CreateRepositoryOutput_repositoryMetadata)
+		v.RepositoryMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRepositoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRepositoryOutput_repositoryMetadata:
+			v.RepositoryMetadata = &types.RepositoryMetadata{}
+			return v.RepositoryMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepository, schemas.CreateRepositoryInput, schemas.CreateRepositoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepository, schemas.CreateRepositoryInput, schemas.CreateRepositoryOutput), output: &CreateRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

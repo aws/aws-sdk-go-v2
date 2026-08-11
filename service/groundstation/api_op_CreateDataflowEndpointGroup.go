@@ -4,7 +4,9 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,23 @@ type CreateDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataflowEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataflowEndpointGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataflowEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactPostPassDurationSeconds != nil {
+		s.WriteInt32(schemas.CreateDataflowEndpointGroupRequest_contactPostPassDurationSeconds, *v.ContactPostPassDurationSeconds)
+	}
+	if v.ContactPrePassDurationSeconds != nil {
+		s.WriteInt32(schemas.CreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds, *v.ContactPrePassDurationSeconds)
+	}
+	serializeEndpointDetailsList(s, schemas.CreateDataflowEndpointGroupRequest_endpointDetails, v.EndpointDetails)
+	serializeTagsMap(s, schemas.CreateDataflowEndpointGroupRequest_tags, v.Tags)
+}
+
 // Response containing the ID of a dataflow endpoint group.
 type CreateDataflowEndpointGroupOutput struct {
 
@@ -77,13 +96,32 @@ type CreateDataflowEndpointGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataflowEndpointGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataflowEndpointGroupIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataflowEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataflowEndpointGroupId != nil {
+		s.WriteString(schemas.DataflowEndpointGroupIdResponse_dataflowEndpointGroupId, *v.DataflowEndpointGroupId)
+	}
+}
+func (v *CreateDataflowEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataflowEndpointGroupIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataflowEndpointGroupIdResponse_dataflowEndpointGroupId:
+			v.DataflowEndpointGroupId = new(string)
+			return d.ReadString(schemas.DataflowEndpointGroupIdResponse_dataflowEndpointGroupId, v.DataflowEndpointGroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataflowEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataflowEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataflowEndpointGroup, schemas.CreateDataflowEndpointGroupRequest, schemas.DataflowEndpointGroupIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataflowEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataflowEndpointGroup, schemas.CreateDataflowEndpointGroupRequest, schemas.DataflowEndpointGroupIdResponse), output: &CreateDataflowEndpointGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

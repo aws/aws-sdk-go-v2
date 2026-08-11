@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,22 @@ type InitializeServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitializeServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitializeServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitializeServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *InitializeServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitializeServiceRequest, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type InitializeServiceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -34,13 +52,26 @@ type InitializeServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitializeServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitializeServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitializeServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *InitializeServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitializeServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInitializeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitializeService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitializeService, schemas.InitializeServiceRequest, schemas.InitializeServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInitializeService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitializeService, schemas.InitializeServiceRequest, schemas.InitializeServiceResponse), output: &InitializeServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,26 @@ type DescribeRcsAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRcsAgentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRcsAgentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRcsAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRcsAgentFilterList(s, schemas.DescribeRcsAgentsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRcsAgentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRcsAgentsRequest_NextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.DescribeRcsAgentsRequest_Owner, string(v.Owner))
+	}
+	serializeRcsAgentIdList(s, schemas.DescribeRcsAgentsRequest_RcsAgentIds, v.RcsAgentIds)
+}
+
 type DescribeRcsAgentsOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -71,13 +93,35 @@ type DescribeRcsAgentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRcsAgentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRcsAgentsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRcsAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRcsAgentsResult_NextToken, *v.NextToken)
+	}
+	serializeRcsAgentInformationList(s, schemas.DescribeRcsAgentsResult_RcsAgents, v.RcsAgents)
+}
+func (v *DescribeRcsAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRcsAgentsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRcsAgentsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRcsAgentsResult_NextToken, v.NextToken)
+		case schemas.DescribeRcsAgentsResult_RcsAgents:
+			return deserializeRcsAgentInformationList(d, schemas.DescribeRcsAgentsResult_RcsAgents, &v.RcsAgents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRcsAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRcsAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRcsAgents, schemas.DescribeRcsAgentsRequest, schemas.DescribeRcsAgentsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRcsAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRcsAgents, schemas.DescribeRcsAgentsRequest, schemas.DescribeRcsAgentsResult), output: &DescribeRcsAgentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

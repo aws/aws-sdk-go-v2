@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,46 @@ type DescribeGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGatewayRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayRouteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayRouteName != nil {
+		s.WriteString(schemas.DescribeGatewayRouteInput_gatewayRouteName, *v.GatewayRouteName)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.DescribeGatewayRouteInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DescribeGatewayRouteInput_meshOwner, *v.MeshOwner)
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.DescribeGatewayRouteInput_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *DescribeGatewayRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGatewayRouteInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGatewayRouteInput_gatewayRouteName:
+			v.GatewayRouteName = new(string)
+			return d.ReadString(schemas.DescribeGatewayRouteInput_gatewayRouteName, v.GatewayRouteName)
+		case schemas.DescribeGatewayRouteInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DescribeGatewayRouteInput_meshName, v.MeshName)
+		case schemas.DescribeGatewayRouteInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DescribeGatewayRouteInput_meshOwner, v.MeshOwner)
+		case schemas.DescribeGatewayRouteInput_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.DescribeGatewayRouteInput_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 type DescribeGatewayRouteOutput struct {
 
 	// The full description of your gateway route.
@@ -64,13 +106,34 @@ type DescribeGatewayRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGatewayRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayRouteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayRoute != nil {
+		s.WriteStruct(schemas.DescribeGatewayRouteOutput_gatewayRoute)
+		v.GatewayRoute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeGatewayRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGatewayRouteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGatewayRouteOutput_gatewayRoute:
+			v.GatewayRoute = &types.GatewayRouteData{}
+			return v.GatewayRoute.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGatewayRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGatewayRoute, schemas.DescribeGatewayRouteInput, schemas.DescribeGatewayRouteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGatewayRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGatewayRoute, schemas.DescribeGatewayRouteInput, schemas.DescribeGatewayRouteOutput), output: &DescribeGatewayRouteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

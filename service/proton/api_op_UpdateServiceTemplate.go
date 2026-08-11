@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,40 @@ type UpdateServiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateServiceTemplateInput_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateServiceTemplateInput_displayName, *v.DisplayName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateServiceTemplateInput_name, *v.Name)
+	}
+}
+func (v *UpdateServiceTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceTemplateInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateServiceTemplateInput_description, v.Description)
+		case schemas.UpdateServiceTemplateInput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdateServiceTemplateInput_displayName, v.DisplayName)
+		case schemas.UpdateServiceTemplateInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateServiceTemplateInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type UpdateServiceTemplateOutput struct {
 
 	// The service template detail data that's returned by Proton.
@@ -56,13 +92,34 @@ type UpdateServiceTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceTemplate != nil {
+		s.WriteStruct(schemas.UpdateServiceTemplateOutput_serviceTemplate)
+		v.ServiceTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceTemplateOutput_serviceTemplate:
+			v.ServiceTemplate = &types.ServiceTemplate{}
+			return v.ServiceTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateServiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceTemplate, schemas.UpdateServiceTemplateInput, schemas.UpdateServiceTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateServiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceTemplate, schemas.UpdateServiceTemplateInput, schemas.UpdateServiceTemplateOutput), output: &UpdateServiceTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

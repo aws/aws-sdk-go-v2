@@ -4,7 +4,9 @@ package cloud9
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_description, *v.Description)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.ManagedCredentialsAction != "" {
+		s.WriteString(schemas.UpdateEnvironmentRequest_managedCredentialsAction, string(v.ManagedCredentialsAction))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_name, *v.Name)
+	}
+}
+
 type UpdateEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +89,26 @@ type UpdateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentRequest, schemas.UpdateEnvironmentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentRequest, schemas.UpdateEnvironmentResult), output: &UpdateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

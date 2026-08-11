@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,28 @@ type CreateWhatIfForecastInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatIfForecastInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatIfForecastRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatIfForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTags(s, schemas.CreateWhatIfForecastRequest_Tags, v.Tags)
+	if v.TimeSeriesReplacementsDataSource != nil {
+		s.WriteStruct(schemas.CreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource)
+		v.TimeSeriesReplacementsDataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTimeSeriesTransformations(s, schemas.CreateWhatIfForecastRequest_TimeSeriesTransformations, v.TimeSeriesTransformations)
+	if v.WhatIfAnalysisArn != nil {
+		s.WriteString(schemas.CreateWhatIfForecastRequest_WhatIfAnalysisArn, *v.WhatIfAnalysisArn)
+	}
+	if v.WhatIfForecastName != nil {
+		s.WriteString(schemas.CreateWhatIfForecastRequest_WhatIfForecastName, *v.WhatIfForecastName)
+	}
+}
+
 type CreateWhatIfForecastOutput struct {
 
 	// The Amazon Resource Name (ARN) of the what-if forecast.
@@ -82,13 +106,32 @@ type CreateWhatIfForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatIfForecastOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatIfForecastResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatIfForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WhatIfForecastArn != nil {
+		s.WriteString(schemas.CreateWhatIfForecastResponse_WhatIfForecastArn, *v.WhatIfForecastArn)
+	}
+}
+func (v *CreateWhatIfForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWhatIfForecastResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWhatIfForecastResponse_WhatIfForecastArn:
+			v.WhatIfForecastArn = new(string)
+			return d.ReadString(schemas.CreateWhatIfForecastResponse_WhatIfForecastArn, v.WhatIfForecastArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWhatIfForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWhatIfForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatIfForecast, schemas.CreateWhatIfForecastRequest, schemas.CreateWhatIfForecastResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWhatIfForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatIfForecast, schemas.CreateWhatIfForecastRequest, schemas.CreateWhatIfForecastResponse), output: &CreateWhatIfForecastOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

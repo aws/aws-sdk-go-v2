@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,23 @@ type PutAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAdminAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAdminAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAdminAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminAccount != nil {
+		s.WriteString(schemas.PutAdminAccountRequest_AdminAccount, *v.AdminAccount)
+	}
+	if v.AdminScope != nil {
+		s.WriteStruct(schemas.PutAdminAccountRequest_AdminScope)
+		v.AdminScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +80,26 @@ type PutAdminAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAdminAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAdminAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAdminAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAdminAccount, schemas.PutAdminAccountRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAdminAccount, schemas.PutAdminAccountRequest, nil), output: &PutAdminAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

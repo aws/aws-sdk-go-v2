@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,42 @@ type UpdateMeshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMeshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMeshInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMeshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateMeshInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.UpdateMeshInput_meshName, *v.MeshName)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.UpdateMeshInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateMeshInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMeshInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMeshInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateMeshInput_clientToken, v.ClientToken)
+		case schemas.UpdateMeshInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.UpdateMeshInput_meshName, v.MeshName)
+		case schemas.UpdateMeshInput_spec:
+			v.Spec = &types.MeshSpec{}
+			return v.Spec.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type UpdateMeshOutput struct {
 
 	// An object that represents a service mesh returned by a describe operation.
@@ -55,13 +93,34 @@ type UpdateMeshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMeshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMeshOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMeshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mesh != nil {
+		s.WriteStruct(schemas.UpdateMeshOutput_mesh)
+		v.Mesh.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateMeshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMeshOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMeshOutput_mesh:
+			v.Mesh = &types.MeshData{}
+			return v.Mesh.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMesh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMesh, schemas.UpdateMeshInput, schemas.UpdateMeshOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMesh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMesh, schemas.UpdateMeshInput, schemas.UpdateMeshOutput), output: &UpdateMeshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

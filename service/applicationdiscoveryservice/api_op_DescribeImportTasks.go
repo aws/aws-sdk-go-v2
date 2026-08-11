@@ -5,7 +5,9 @@ package applicationdiscoveryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type DescribeImportTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImportTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImportTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImportTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDescribeImportTasksFilterList(s, schemas.DescribeImportTasksRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeImportTasksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImportTasksRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeImportTasksOutput struct {
 
 	// The token to request the next page of results.
@@ -57,13 +75,35 @@ type DescribeImportTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImportTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImportTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImportTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImportTasksResponse_nextToken, *v.NextToken)
+	}
+	serializeImportTaskList(s, schemas.DescribeImportTasksResponse_tasks, v.Tasks)
+}
+func (v *DescribeImportTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImportTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImportTasksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeImportTasksResponse_nextToken, v.NextToken)
+		case schemas.DescribeImportTasksResponse_tasks:
+			return deserializeImportTaskList(d, schemas.DescribeImportTasksResponse_tasks, &v.Tasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImportTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImportTasks, schemas.DescribeImportTasksRequest, schemas.DescribeImportTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImportTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImportTasks, schemas.DescribeImportTasksRequest, schemas.DescribeImportTasksResponse), output: &DescribeImportTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

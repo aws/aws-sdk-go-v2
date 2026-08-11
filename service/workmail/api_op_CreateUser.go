@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,42 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateUserRequest_DisplayName, *v.DisplayName)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.CreateUserRequest_FirstName, *v.FirstName)
+	}
+	if v.HiddenFromGlobalAddressList != false {
+		s.WriteBool(schemas.CreateUserRequest_HiddenFromGlobalAddressList, v.HiddenFromGlobalAddressList)
+	}
+	if v.IdentityProviderUserId != nil {
+		s.WriteString(schemas.CreateUserRequest_IdentityProviderUserId, *v.IdentityProviderUserId)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.CreateUserRequest_LastName, *v.LastName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateUserRequest_Name, *v.Name)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.CreateUserRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.CreateUserRequest_Password, *v.Password)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.CreateUserRequest_Role, string(v.Role))
+	}
+}
+
 type CreateUserOutput struct {
 
 	// The identifier for the new user.
@@ -79,13 +117,32 @@ type CreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateUserResponse_UserId, *v.UserId)
+	}
+}
+func (v *CreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.CreateUserResponse_UserId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse), output: &CreateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

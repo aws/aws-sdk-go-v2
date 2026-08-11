@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type CreateRegistrationAssociationInput struct {
 	ResourceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateRegistrationAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistrationAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistrationAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationRequest_RegistrationId, *v.RegistrationId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationRequest_ResourceId, *v.ResourceId)
+	}
 }
 
 type CreateRegistrationAssociationOutput struct {
@@ -87,13 +104,74 @@ type CreateRegistrationAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistrationAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistrationAssociationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistrationAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.RegistrationArn != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_RegistrationArn, *v.RegistrationArn)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.RegistrationType != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_RegistrationType, *v.RegistrationType)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.CreateRegistrationAssociationResult_ResourceType, *v.ResourceType)
+	}
+}
+func (v *CreateRegistrationAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRegistrationAssociationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRegistrationAssociationResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.CreateRegistrationAssociationResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.CreateRegistrationAssociationResult_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.CreateRegistrationAssociationResult_PhoneNumber, v.PhoneNumber)
+		case schemas.CreateRegistrationAssociationResult_RegistrationArn:
+			v.RegistrationArn = new(string)
+			return d.ReadString(schemas.CreateRegistrationAssociationResult_RegistrationArn, v.RegistrationArn)
+		case schemas.CreateRegistrationAssociationResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.CreateRegistrationAssociationResult_RegistrationId, v.RegistrationId)
+		case schemas.CreateRegistrationAssociationResult_RegistrationType:
+			v.RegistrationType = new(string)
+			return d.ReadString(schemas.CreateRegistrationAssociationResult_RegistrationType, v.RegistrationType)
+		case schemas.CreateRegistrationAssociationResult_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.CreateRegistrationAssociationResult_ResourceArn, v.ResourceArn)
+		case schemas.CreateRegistrationAssociationResult_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.CreateRegistrationAssociationResult_ResourceId, v.ResourceId)
+		case schemas.CreateRegistrationAssociationResult_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.CreateRegistrationAssociationResult_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRegistrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRegistrationAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistrationAssociation, schemas.CreateRegistrationAssociationRequest, schemas.CreateRegistrationAssociationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRegistrationAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistrationAssociation, schemas.CreateRegistrationAssociationRequest, schemas.CreateRegistrationAssociationResult), output: &CreateRegistrationAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package forecast
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,22 @@ type ListWhatIfAnalysesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWhatIfAnalysesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWhatIfAnalysesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWhatIfAnalysesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListWhatIfAnalysesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWhatIfAnalysesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWhatIfAnalysesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListWhatIfAnalysesOutput struct {
 
 	// If the response is truncated, Forecast returns this token. To retrieve the next
@@ -79,13 +97,35 @@ type ListWhatIfAnalysesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWhatIfAnalysesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWhatIfAnalysesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWhatIfAnalysesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWhatIfAnalysesResponse_NextToken, *v.NextToken)
+	}
+	serializeWhatIfAnalyses(s, schemas.ListWhatIfAnalysesResponse_WhatIfAnalyses, v.WhatIfAnalyses)
+}
+func (v *ListWhatIfAnalysesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWhatIfAnalysesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWhatIfAnalysesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWhatIfAnalysesResponse_NextToken, v.NextToken)
+		case schemas.ListWhatIfAnalysesResponse_WhatIfAnalyses:
+			return deserializeWhatIfAnalyses(d, schemas.ListWhatIfAnalysesResponse_WhatIfAnalyses, &v.WhatIfAnalyses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWhatIfAnalysesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWhatIfAnalyses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWhatIfAnalyses, schemas.ListWhatIfAnalysesRequest, schemas.ListWhatIfAnalysesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListWhatIfAnalyses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWhatIfAnalyses, schemas.ListWhatIfAnalysesRequest, schemas.ListWhatIfAnalysesResponse), output: &ListWhatIfAnalysesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

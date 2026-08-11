@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,30 @@ type StartFlowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlowExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.StartFlowExecutionRequest_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowExecutionName != nil {
+		s.WriteString(schemas.StartFlowExecutionRequest_flowExecutionName, *v.FlowExecutionName)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.StartFlowExecutionRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	serializeFlowInputs(s, schemas.StartFlowExecutionRequest_inputs, v.Inputs)
+	if v.ModelPerformanceConfiguration != nil {
+		s.WriteStruct(schemas.StartFlowExecutionRequest_modelPerformanceConfiguration)
+		v.ModelPerformanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartFlowExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the flow execution.
@@ -72,13 +98,32 @@ type StartFlowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlowExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.StartFlowExecutionResponse_executionArn, *v.ExecutionArn)
+	}
+}
+func (v *StartFlowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFlowExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFlowExecutionResponse_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.StartFlowExecutionResponse_executionArn, v.ExecutionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFlowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartFlowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlowExecution, schemas.StartFlowExecutionRequest, schemas.StartFlowExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartFlowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlowExecution, schemas.StartFlowExecutionRequest, schemas.StartFlowExecutionResponse), output: &StartFlowExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

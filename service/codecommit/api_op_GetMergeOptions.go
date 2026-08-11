@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,30 @@ type GetMergeOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMergeOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMergeOptionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMergeOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConflictDetailLevel != "" {
+		s.WriteString(schemas.GetMergeOptionsInput_conflictDetailLevel, string(v.ConflictDetailLevel))
+	}
+	if v.ConflictResolutionStrategy != "" {
+		s.WriteString(schemas.GetMergeOptionsInput_conflictResolutionStrategy, string(v.ConflictResolutionStrategy))
+	}
+	if v.DestinationCommitSpecifier != nil {
+		s.WriteString(schemas.GetMergeOptionsInput_destinationCommitSpecifier, *v.DestinationCommitSpecifier)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.GetMergeOptionsInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitSpecifier != nil {
+		s.WriteString(schemas.GetMergeOptionsInput_sourceCommitSpecifier, *v.SourceCommitSpecifier)
+	}
+}
+
 type GetMergeOptionsOutput struct {
 
 	// The commit ID of the merge base.
@@ -91,13 +117,47 @@ type GetMergeOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMergeOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMergeOptionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMergeOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseCommitId != nil {
+		s.WriteString(schemas.GetMergeOptionsOutput_baseCommitId, *v.BaseCommitId)
+	}
+	if v.DestinationCommitId != nil {
+		s.WriteString(schemas.GetMergeOptionsOutput_destinationCommitId, *v.DestinationCommitId)
+	}
+	serializeMergeOptions(s, schemas.GetMergeOptionsOutput_mergeOptions, v.MergeOptions)
+	if v.SourceCommitId != nil {
+		s.WriteString(schemas.GetMergeOptionsOutput_sourceCommitId, *v.SourceCommitId)
+	}
+}
+func (v *GetMergeOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMergeOptionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMergeOptionsOutput_baseCommitId:
+			v.BaseCommitId = new(string)
+			return d.ReadString(schemas.GetMergeOptionsOutput_baseCommitId, v.BaseCommitId)
+		case schemas.GetMergeOptionsOutput_destinationCommitId:
+			v.DestinationCommitId = new(string)
+			return d.ReadString(schemas.GetMergeOptionsOutput_destinationCommitId, v.DestinationCommitId)
+		case schemas.GetMergeOptionsOutput_mergeOptions:
+			return deserializeMergeOptions(d, schemas.GetMergeOptionsOutput_mergeOptions, &v.MergeOptions)
+		case schemas.GetMergeOptionsOutput_sourceCommitId:
+			v.SourceCommitId = new(string)
+			return d.ReadString(schemas.GetMergeOptionsOutput_sourceCommitId, v.SourceCommitId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMergeOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMergeOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMergeOptions, schemas.GetMergeOptionsInput, schemas.GetMergeOptionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMergeOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMergeOptions, schemas.GetMergeOptionsInput, schemas.GetMergeOptionsOutput), output: &GetMergeOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,59 @@ type BatchGetFrameMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFrameMetricDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFrameMetricDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFrameMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.BatchGetFrameMetricDataRequest_endTime, *v.EndTime)
+	}
+	serializeFrameMetrics(s, schemas.BatchGetFrameMetricDataRequest_frameMetrics, v.FrameMetrics)
+	if v.Period != nil {
+		s.WriteString(schemas.BatchGetFrameMetricDataRequest_period, *v.Period)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.BatchGetFrameMetricDataRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.BatchGetFrameMetricDataRequest_startTime, *v.StartTime)
+	}
+	if v.TargetResolution != "" {
+		s.WriteString(schemas.BatchGetFrameMetricDataRequest_targetResolution, string(v.TargetResolution))
+	}
+}
+func (v *BatchGetFrameMetricDataInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFrameMetricDataRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFrameMetricDataRequest_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.BatchGetFrameMetricDataRequest_endTime, v.EndTime)
+		case schemas.BatchGetFrameMetricDataRequest_frameMetrics:
+			return deserializeFrameMetrics(d, schemas.BatchGetFrameMetricDataRequest_frameMetrics, &v.FrameMetrics)
+		case schemas.BatchGetFrameMetricDataRequest_period:
+			v.Period = new(string)
+			return d.ReadString(schemas.BatchGetFrameMetricDataRequest_period, v.Period)
+		case schemas.BatchGetFrameMetricDataRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.BatchGetFrameMetricDataRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.BatchGetFrameMetricDataRequest_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.BatchGetFrameMetricDataRequest_startTime, v.StartTime)
+		case schemas.BatchGetFrameMetricDataRequest_targetResolution:
+			var ev string
+			if err := d.ReadString(schemas.BatchGetFrameMetricDataRequest_targetResolution, &ev); err != nil {
+				return err
+			}
+			v.TargetResolution = types.AggregationPeriod(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The structure representing the BatchGetFrameMetricDataResponse.
 type BatchGetFrameMetricDataOutput struct {
 
@@ -130,13 +185,57 @@ type BatchGetFrameMetricDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFrameMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFrameMetricDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFrameMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.BatchGetFrameMetricDataResponse_endTime, *v.EndTime)
+	}
+	serializeListOfTimestamps(s, schemas.BatchGetFrameMetricDataResponse_endTimes, v.EndTimes)
+	serializeFrameMetricData(s, schemas.BatchGetFrameMetricDataResponse_frameMetricData, v.FrameMetricData)
+	if v.Resolution != "" {
+		s.WriteString(schemas.BatchGetFrameMetricDataResponse_resolution, string(v.Resolution))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.BatchGetFrameMetricDataResponse_startTime, *v.StartTime)
+	}
+	serializeUnprocessedEndTimeMap(s, schemas.BatchGetFrameMetricDataResponse_unprocessedEndTimes, v.UnprocessedEndTimes)
+}
+func (v *BatchGetFrameMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFrameMetricDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFrameMetricDataResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.BatchGetFrameMetricDataResponse_endTime, v.EndTime)
+		case schemas.BatchGetFrameMetricDataResponse_endTimes:
+			return deserializeListOfTimestamps(d, schemas.BatchGetFrameMetricDataResponse_endTimes, &v.EndTimes)
+		case schemas.BatchGetFrameMetricDataResponse_frameMetricData:
+			return deserializeFrameMetricData(d, schemas.BatchGetFrameMetricDataResponse_frameMetricData, &v.FrameMetricData)
+		case schemas.BatchGetFrameMetricDataResponse_resolution:
+			var ev string
+			if err := d.ReadString(schemas.BatchGetFrameMetricDataResponse_resolution, &ev); err != nil {
+				return err
+			}
+			v.Resolution = types.AggregationPeriod(ev)
+			return nil
+		case schemas.BatchGetFrameMetricDataResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.BatchGetFrameMetricDataResponse_startTime, v.StartTime)
+		case schemas.BatchGetFrameMetricDataResponse_unprocessedEndTimes:
+			return deserializeUnprocessedEndTimeMap(d, schemas.BatchGetFrameMetricDataResponse_unprocessedEndTimes, &v.UnprocessedEndTimes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetFrameMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetFrameMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFrameMetricData, schemas.BatchGetFrameMetricDataRequest, schemas.BatchGetFrameMetricDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetFrameMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFrameMetricData, schemas.BatchGetFrameMetricDataRequest, schemas.BatchGetFrameMetricDataResponse), output: &BatchGetFrameMetricDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

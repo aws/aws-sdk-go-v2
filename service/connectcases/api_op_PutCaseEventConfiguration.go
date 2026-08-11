@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,36 @@ type PutCaseEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCaseEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCaseEventConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCaseEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.PutCaseEventConfigurationRequest_domainId, *v.DomainId)
+	}
+	if v.EventBridge != nil {
+		s.WriteStruct(schemas.PutCaseEventConfigurationRequest_eventBridge)
+		v.EventBridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutCaseEventConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutCaseEventConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutCaseEventConfigurationRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.PutCaseEventConfigurationRequest_domainId, v.DomainId)
+		case schemas.PutCaseEventConfigurationRequest_eventBridge:
+			v.EventBridge = &types.EventBridgeConfiguration{}
+			return v.EventBridge.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type PutCaseEventConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +82,26 @@ type PutCaseEventConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCaseEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCaseEventConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCaseEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutCaseEventConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutCaseEventConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutCaseEventConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutCaseEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCaseEventConfiguration, schemas.PutCaseEventConfigurationRequest, schemas.PutCaseEventConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutCaseEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCaseEventConfiguration, schemas.PutCaseEventConfigurationRequest, schemas.PutCaseEventConfigurationResponse), output: &PutCaseEventConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

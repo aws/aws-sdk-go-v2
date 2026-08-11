@@ -4,7 +4,9 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,37 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfiguration != nil {
+		s.WriteStruct(schemas.CreateApplicationRequest_ApplicationConfiguration)
+		v.ApplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationDescription != nil {
+		s.WriteString(schemas.CreateApplicationRequest_ApplicationDescription, *v.ApplicationDescription)
+	}
+	if v.ApplicationMode != "" {
+		s.WriteString(schemas.CreateApplicationRequest_ApplicationMode, string(v.ApplicationMode))
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.CreateApplicationRequest_ApplicationName, *v.ApplicationName)
+	}
+	serializeCloudWatchLoggingOptions(s, schemas.CreateApplicationRequest_CloudWatchLoggingOptions, v.CloudWatchLoggingOptions)
+	if v.RuntimeEnvironment != "" {
+		s.WriteString(schemas.CreateApplicationRequest_RuntimeEnvironment, string(v.RuntimeEnvironment))
+	}
+	if v.ServiceExecutionRole != nil {
+		s.WriteString(schemas.CreateApplicationRequest_ServiceExecutionRole, *v.ServiceExecutionRole)
+	}
+	serializeTags(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+}
+
 type CreateApplicationOutput struct {
 
 	// In response to your CreateApplication request, Managed Service for Apache Flink
@@ -85,13 +118,34 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationDetail != nil {
+		s.WriteStruct(schemas.CreateApplicationResponse_ApplicationDetail)
+		v.ApplicationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationResponse_ApplicationDetail:
+			v.ApplicationDetail = &types.ApplicationDetail{}
+			return v.ApplicationDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

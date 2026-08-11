@@ -5,7 +5,9 @@ package codecommit
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type GetCommentReactionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCommentReactionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommentReactionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommentReactionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommentId != nil {
+		s.WriteString(schemas.GetCommentReactionsInput_commentId, *v.CommentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCommentReactionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCommentReactionsInput_nextToken, *v.NextToken)
+	}
+	if v.ReactionUserArn != nil {
+		s.WriteString(schemas.GetCommentReactionsInput_reactionUserArn, *v.ReactionUserArn)
+	}
+}
+
 type GetCommentReactionsOutput struct {
 
 	// An array of reactions to the specified comment.
@@ -65,13 +88,35 @@ type GetCommentReactionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCommentReactionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommentReactionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommentReactionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCommentReactionsOutput_nextToken, *v.NextToken)
+	}
+	serializeReactionsForCommentList(s, schemas.GetCommentReactionsOutput_reactionsForComment, v.ReactionsForComment)
+}
+func (v *GetCommentReactionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCommentReactionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCommentReactionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCommentReactionsOutput_nextToken, v.NextToken)
+		case schemas.GetCommentReactionsOutput_reactionsForComment:
+			return deserializeReactionsForCommentList(d, schemas.GetCommentReactionsOutput_reactionsForComment, &v.ReactionsForComment)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCommentReactionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCommentReactions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCommentReactions, schemas.GetCommentReactionsInput, schemas.GetCommentReactionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCommentReactions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCommentReactions, schemas.GetCommentReactionsInput, schemas.GetCommentReactionsOutput), output: &GetCommentReactionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,34 @@ type GetLayoutInput struct {
 	LayoutId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLayoutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLayoutRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLayoutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetLayoutRequest_domainId, *v.DomainId)
+	}
+	if v.LayoutId != nil {
+		s.WriteString(schemas.GetLayoutRequest_layoutId, *v.LayoutId)
+	}
+}
+func (v *GetLayoutInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLayoutRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLayoutRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetLayoutRequest_domainId, v.DomainId)
+		case schemas.GetLayoutRequest_layoutId:
+			v.LayoutId = new(string)
+			return d.ReadString(schemas.GetLayoutRequest_layoutId, v.LayoutId)
+		}
+		return nil
+	})
 }
 
 type GetLayoutOutput struct {
@@ -82,13 +112,67 @@ type GetLayoutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLayoutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLayoutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLayoutContent(s, schemas.GetLayoutResponse_content, v.Content)
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.GetLayoutResponse_createdTime, *v.CreatedTime)
+	}
+	if v.Deleted != false {
+		s.WriteBool(schemas.GetLayoutResponse_deleted, v.Deleted)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetLayoutResponse_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LayoutArn != nil {
+		s.WriteString(schemas.GetLayoutResponse_layoutArn, *v.LayoutArn)
+	}
+	if v.LayoutId != nil {
+		s.WriteString(schemas.GetLayoutResponse_layoutId, *v.LayoutId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetLayoutResponse_name, *v.Name)
+	}
+	serializeTags(s, schemas.GetLayoutResponse_tags, v.Tags)
+}
+func (v *GetLayoutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLayoutResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLayoutResponse_content:
+			return deserializeLayoutContent(d, schemas.GetLayoutResponse_content, &v.Content)
+		case schemas.GetLayoutResponse_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetLayoutResponse_createdTime, v.CreatedTime)
+		case schemas.GetLayoutResponse_deleted:
+			return d.ReadBool(schemas.GetLayoutResponse_deleted, &v.Deleted)
+		case schemas.GetLayoutResponse_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetLayoutResponse_lastModifiedTime, v.LastModifiedTime)
+		case schemas.GetLayoutResponse_layoutArn:
+			v.LayoutArn = new(string)
+			return d.ReadString(schemas.GetLayoutResponse_layoutArn, v.LayoutArn)
+		case schemas.GetLayoutResponse_layoutId:
+			v.LayoutId = new(string)
+			return d.ReadString(schemas.GetLayoutResponse_layoutId, v.LayoutId)
+		case schemas.GetLayoutResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetLayoutResponse_name, v.Name)
+		case schemas.GetLayoutResponse_tags:
+			return deserializeTags(d, schemas.GetLayoutResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLayoutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLayout, schemas.GetLayoutRequest, schemas.GetLayoutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLayout{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLayout, schemas.GetLayoutRequest, schemas.GetLayoutResponse), output: &GetLayoutOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,44 @@ type GetTemplateSyncStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateSyncStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateSyncStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateSyncStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetTemplateSyncStatusInput_templateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.GetTemplateSyncStatusInput_templateType, string(v.TemplateType))
+	}
+	if v.TemplateVersion != nil {
+		s.WriteString(schemas.GetTemplateSyncStatusInput_templateVersion, *v.TemplateVersion)
+	}
+}
+func (v *GetTemplateSyncStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemplateSyncStatusInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemplateSyncStatusInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.GetTemplateSyncStatusInput_templateName, v.TemplateName)
+		case schemas.GetTemplateSyncStatusInput_templateType:
+			var ev string
+			if err := d.ReadString(schemas.GetTemplateSyncStatusInput_templateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = types.TemplateType(ev)
+			return nil
+		case schemas.GetTemplateSyncStatusInput_templateVersion:
+			v.TemplateVersion = new(string)
+			return d.ReadString(schemas.GetTemplateSyncStatusInput_templateVersion, v.TemplateVersion)
+		}
+		return nil
+	})
+}
+
 type GetTemplateSyncStatusOutput struct {
 
 	// The template sync desired state that's returned by Proton.
@@ -63,13 +103,50 @@ type GetTemplateSyncStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateSyncStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateSyncStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateSyncStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredState != nil {
+		s.WriteStruct(schemas.GetTemplateSyncStatusOutput_desiredState)
+		v.DesiredState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestSuccessfulSync != nil {
+		s.WriteStruct(schemas.GetTemplateSyncStatusOutput_latestSuccessfulSync)
+		v.LatestSuccessfulSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestSync != nil {
+		s.WriteStruct(schemas.GetTemplateSyncStatusOutput_latestSync)
+		v.LatestSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTemplateSyncStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemplateSyncStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemplateSyncStatusOutput_desiredState:
+			v.DesiredState = &types.Revision{}
+			return v.DesiredState.Deserialize(d)
+		case schemas.GetTemplateSyncStatusOutput_latestSuccessfulSync:
+			v.LatestSuccessfulSync = &types.ResourceSyncAttempt{}
+			return v.LatestSuccessfulSync.Deserialize(d)
+		case schemas.GetTemplateSyncStatusOutput_latestSync:
+			v.LatestSync = &types.ResourceSyncAttempt{}
+			return v.LatestSync.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemplateSyncStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetTemplateSyncStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplateSyncStatus, schemas.GetTemplateSyncStatusInput, schemas.GetTemplateSyncStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetTemplateSyncStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplateSyncStatus, schemas.GetTemplateSyncStatusInput, schemas.GetTemplateSyncStatusOutput), output: &GetTemplateSyncStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

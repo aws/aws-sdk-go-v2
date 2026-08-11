@@ -4,7 +4,9 @@ package codestarconnections
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type UpdateSyncBlockerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSyncBlockerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSyncBlockerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSyncBlockerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateSyncBlockerInput_Id, *v.Id)
+	}
+	if v.ResolvedReason != nil {
+		s.WriteString(schemas.UpdateSyncBlockerInput_ResolvedReason, *v.ResolvedReason)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.UpdateSyncBlockerInput_ResourceName, *v.ResourceName)
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.UpdateSyncBlockerInput_SyncType, string(v.SyncType))
+	}
+}
+
 type UpdateSyncBlockerOutput struct {
 
 	// The resource name for the sync blocker.
@@ -71,13 +94,46 @@ type UpdateSyncBlockerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSyncBlockerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSyncBlockerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSyncBlockerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParentResourceName != nil {
+		s.WriteString(schemas.UpdateSyncBlockerOutput_ParentResourceName, *v.ParentResourceName)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.UpdateSyncBlockerOutput_ResourceName, *v.ResourceName)
+	}
+	if v.SyncBlocker != nil {
+		s.WriteStruct(schemas.UpdateSyncBlockerOutput_SyncBlocker)
+		v.SyncBlocker.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSyncBlockerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSyncBlockerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSyncBlockerOutput_ParentResourceName:
+			v.ParentResourceName = new(string)
+			return d.ReadString(schemas.UpdateSyncBlockerOutput_ParentResourceName, v.ParentResourceName)
+		case schemas.UpdateSyncBlockerOutput_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.UpdateSyncBlockerOutput_ResourceName, v.ResourceName)
+		case schemas.UpdateSyncBlockerOutput_SyncBlocker:
+			v.SyncBlocker = &types.SyncBlocker{}
+			return v.SyncBlocker.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSyncBlockerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateSyncBlocker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSyncBlocker, schemas.UpdateSyncBlockerInput, schemas.UpdateSyncBlockerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateSyncBlocker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSyncBlocker, schemas.UpdateSyncBlockerInput, schemas.UpdateSyncBlockerOutput), output: &UpdateSyncBlockerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

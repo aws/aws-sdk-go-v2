@@ -4,7 +4,9 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type UpdateNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotificationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotificationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationDuration != "" {
+		s.WriteString(schemas.UpdateNotificationConfigurationRequest_aggregationDuration, string(v.AggregationDuration))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateNotificationConfigurationRequest_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateNotificationConfigurationRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateNotificationConfigurationRequest_name, *v.Name)
+	}
+}
+
 type UpdateNotificationConfigurationOutput struct {
 
 	// The ARN used to update the NotificationConfiguration .
@@ -70,13 +93,32 @@ type UpdateNotificationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotificationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotificationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotificationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateNotificationConfigurationResponse_arn, *v.Arn)
+	}
+}
+func (v *UpdateNotificationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNotificationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNotificationConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateNotificationConfigurationResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotificationConfiguration, schemas.UpdateNotificationConfigurationRequest, schemas.UpdateNotificationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotificationConfiguration, schemas.UpdateNotificationConfigurationRequest, schemas.UpdateNotificationConfigurationResponse), output: &UpdateNotificationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

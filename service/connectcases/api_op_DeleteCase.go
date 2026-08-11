@@ -4,6 +4,8 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type DeleteCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.DeleteCaseRequest_caseId, *v.CaseId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteCaseRequest_domainId, *v.DomainId)
+	}
+}
+
 type DeleteCaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +73,26 @@ type DeleteCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCase, schemas.DeleteCaseRequest, schemas.DeleteCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCase, schemas.DeleteCaseRequest, schemas.DeleteCaseResponse), output: &DeleteCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

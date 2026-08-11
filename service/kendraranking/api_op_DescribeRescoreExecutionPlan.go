@@ -4,7 +4,9 @@ package kendraranking
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendraranking/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendraranking/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeRescoreExecutionPlanInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeRescoreExecutionPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRescoreExecutionPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRescoreExecutionPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeRescoreExecutionPlanRequest_Id, *v.Id)
+	}
 }
 
 type DescribeRescoreExecutionPlanOutput struct {
@@ -80,13 +94,86 @@ type DescribeRescoreExecutionPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRescoreExecutionPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRescoreExecutionPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRescoreExecutionPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeRescoreExecutionPlanResponse_Arn, *v.Arn)
+	}
+	if v.CapacityUnits != nil {
+		s.WriteStruct(schemas.DescribeRescoreExecutionPlanResponse_CapacityUnits)
+		v.CapacityUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeRescoreExecutionPlanResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeRescoreExecutionPlanResponse_Description, *v.Description)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeRescoreExecutionPlanResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeRescoreExecutionPlanResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeRescoreExecutionPlanResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeRescoreExecutionPlanResponse_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeRescoreExecutionPlanResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DescribeRescoreExecutionPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRescoreExecutionPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRescoreExecutionPlanResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeRescoreExecutionPlanResponse_Arn, v.Arn)
+		case schemas.DescribeRescoreExecutionPlanResponse_CapacityUnits:
+			v.CapacityUnits = &types.CapacityUnitsConfiguration{}
+			return v.CapacityUnits.Deserialize(d)
+		case schemas.DescribeRescoreExecutionPlanResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeRescoreExecutionPlanResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeRescoreExecutionPlanResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeRescoreExecutionPlanResponse_Description, v.Description)
+		case schemas.DescribeRescoreExecutionPlanResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeRescoreExecutionPlanResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeRescoreExecutionPlanResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeRescoreExecutionPlanResponse_Id, v.Id)
+		case schemas.DescribeRescoreExecutionPlanResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeRescoreExecutionPlanResponse_Name, v.Name)
+		case schemas.DescribeRescoreExecutionPlanResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRescoreExecutionPlanResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RescoreExecutionPlanStatus(ev)
+			return nil
+		case schemas.DescribeRescoreExecutionPlanResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeRescoreExecutionPlanResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRescoreExecutionPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeRescoreExecutionPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRescoreExecutionPlan, schemas.DescribeRescoreExecutionPlanRequest, schemas.DescribeRescoreExecutionPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeRescoreExecutionPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRescoreExecutionPlan, schemas.DescribeRescoreExecutionPlanRequest, schemas.DescribeRescoreExecutionPlanResponse), output: &DescribeRescoreExecutionPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

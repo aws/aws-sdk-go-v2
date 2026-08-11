@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,39 @@ type UpdateNetworkMigrationDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkMigrationDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkMigrationDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkMigrationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateNetworkMigrationDefinitionRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateNetworkMigrationDefinitionRequest_name, *v.Name)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.UpdateNetworkMigrationDefinitionRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	serializeScopeTagsMap(s, schemas.UpdateNetworkMigrationDefinitionRequest_scopeTags, v.ScopeTags)
+	serializeSourceConfigurationList(s, schemas.UpdateNetworkMigrationDefinitionRequest_sourceConfigurations, v.SourceConfigurations)
+	if v.TargetDeployment != "" {
+		s.WriteString(schemas.UpdateNetworkMigrationDefinitionRequest_targetDeployment, string(v.TargetDeployment))
+	}
+	if v.TargetNetwork != nil {
+		s.WriteStruct(schemas.UpdateNetworkMigrationDefinitionRequest_targetNetwork)
+		v.TargetNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetS3Configuration != nil {
+		s.WriteStruct(schemas.UpdateNetworkMigrationDefinitionRequest_targetS3Configuration)
+		v.TargetS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateNetworkMigrationDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the network migration definition.
@@ -101,13 +136,97 @@ type UpdateNetworkMigrationDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkMigrationDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkMigrationDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkMigrationDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NetworkMigrationDefinition_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.NetworkMigrationDefinition_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.NetworkMigrationDefinition_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.NetworkMigrationDefinition_name, *v.Name)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.NetworkMigrationDefinition_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	serializeScopeTagsMap(s, schemas.NetworkMigrationDefinition_scopeTags, v.ScopeTags)
+	serializeSourceConfigurationList(s, schemas.NetworkMigrationDefinition_sourceConfigurations, v.SourceConfigurations)
+	serializeTagsMap(s, schemas.NetworkMigrationDefinition_tags, v.Tags)
+	if v.TargetDeployment != "" {
+		s.WriteString(schemas.NetworkMigrationDefinition_targetDeployment, string(v.TargetDeployment))
+	}
+	if v.TargetNetwork != nil {
+		s.WriteStruct(schemas.NetworkMigrationDefinition_targetNetwork)
+		v.TargetNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetS3Configuration != nil {
+		s.WriteStruct(schemas.NetworkMigrationDefinition_targetS3Configuration)
+		v.TargetS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.NetworkMigrationDefinition_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateNetworkMigrationDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkMigrationDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkMigrationDefinition_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NetworkMigrationDefinition_arn, v.Arn)
+		case schemas.NetworkMigrationDefinition_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.NetworkMigrationDefinition_createdAt, v.CreatedAt)
+		case schemas.NetworkMigrationDefinition_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.NetworkMigrationDefinition_description, v.Description)
+		case schemas.NetworkMigrationDefinition_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NetworkMigrationDefinition_name, v.Name)
+		case schemas.NetworkMigrationDefinition_networkMigrationDefinitionID:
+			v.NetworkMigrationDefinitionID = new(string)
+			return d.ReadString(schemas.NetworkMigrationDefinition_networkMigrationDefinitionID, v.NetworkMigrationDefinitionID)
+		case schemas.NetworkMigrationDefinition_scopeTags:
+			return deserializeScopeTagsMap(d, schemas.NetworkMigrationDefinition_scopeTags, &v.ScopeTags)
+		case schemas.NetworkMigrationDefinition_sourceConfigurations:
+			return deserializeSourceConfigurationList(d, schemas.NetworkMigrationDefinition_sourceConfigurations, &v.SourceConfigurations)
+		case schemas.NetworkMigrationDefinition_tags:
+			return deserializeTagsMap(d, schemas.NetworkMigrationDefinition_tags, &v.Tags)
+		case schemas.NetworkMigrationDefinition_targetDeployment:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationDefinition_targetDeployment, &ev); err != nil {
+				return err
+			}
+			v.TargetDeployment = types.TargetDeployment(ev)
+			return nil
+		case schemas.NetworkMigrationDefinition_targetNetwork:
+			v.TargetNetwork = &types.TargetNetwork{}
+			return v.TargetNetwork.Deserialize(d)
+		case schemas.NetworkMigrationDefinition_targetS3Configuration:
+			v.TargetS3Configuration = &types.TargetS3Configuration{}
+			return v.TargetS3Configuration.Deserialize(d)
+		case schemas.NetworkMigrationDefinition_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.NetworkMigrationDefinition_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNetworkMigrationDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNetworkMigrationDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkMigrationDefinition, schemas.UpdateNetworkMigrationDefinitionRequest, schemas.NetworkMigrationDefinition)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNetworkMigrationDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkMigrationDefinition, schemas.UpdateNetworkMigrationDefinitionRequest, schemas.NetworkMigrationDefinition), output: &UpdateNetworkMigrationDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

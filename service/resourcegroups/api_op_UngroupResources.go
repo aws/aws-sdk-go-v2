@@ -4,7 +4,9 @@ package resourcegroups
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,19 @@ type UngroupResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UngroupResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UngroupResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UngroupResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteString(schemas.UngroupResourcesInput_Group, *v.Group)
+	}
+	serializeResourceArnList(s, schemas.UngroupResourcesInput_ResourceArns, v.ResourceArns)
+}
+
 type UngroupResourcesOutput struct {
 
 	// A list of any resources that failed to be removed from the group by this
@@ -71,13 +86,35 @@ type UngroupResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UngroupResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UngroupResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UngroupResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedResourceList(s, schemas.UngroupResourcesOutput_Failed, v.Failed)
+	serializePendingResourceList(s, schemas.UngroupResourcesOutput_Pending, v.Pending)
+	serializeResourceArnList(s, schemas.UngroupResourcesOutput_Succeeded, v.Succeeded)
+}
+func (v *UngroupResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UngroupResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UngroupResourcesOutput_Failed:
+			return deserializeFailedResourceList(d, schemas.UngroupResourcesOutput_Failed, &v.Failed)
+		case schemas.UngroupResourcesOutput_Pending:
+			return deserializePendingResourceList(d, schemas.UngroupResourcesOutput_Pending, &v.Pending)
+		case schemas.UngroupResourcesOutput_Succeeded:
+			return deserializeResourceArnList(d, schemas.UngroupResourcesOutput_Succeeded, &v.Succeeded)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUngroupResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUngroupResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UngroupResources, schemas.UngroupResourcesInput, schemas.UngroupResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUngroupResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UngroupResources, schemas.UngroupResourcesInput, schemas.UngroupResourcesOutput), output: &UngroupResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

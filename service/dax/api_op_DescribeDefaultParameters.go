@@ -4,7 +4,9 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeDefaultParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDefaultParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDefaultParametersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDefaultParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDefaultParametersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDefaultParametersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeDefaultParametersOutput struct {
 
 	// Provides an identifier to allow retrieval of paginated results.
@@ -55,13 +72,35 @@ type DescribeDefaultParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDefaultParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDefaultParametersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDefaultParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDefaultParametersResponse_NextToken, *v.NextToken)
+	}
+	serializeParameterList(s, schemas.DescribeDefaultParametersResponse_Parameters, v.Parameters)
+}
+func (v *DescribeDefaultParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDefaultParametersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDefaultParametersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDefaultParametersResponse_NextToken, v.NextToken)
+		case schemas.DescribeDefaultParametersResponse_Parameters:
+			return deserializeParameterList(d, schemas.DescribeDefaultParametersResponse_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDefaultParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDefaultParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultParameters, schemas.DescribeDefaultParametersRequest, schemas.DescribeDefaultParametersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDefaultParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultParameters, schemas.DescribeDefaultParametersRequest, schemas.DescribeDefaultParametersResponse), output: &DescribeDefaultParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

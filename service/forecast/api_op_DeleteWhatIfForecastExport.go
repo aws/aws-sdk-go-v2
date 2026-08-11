@@ -4,6 +4,8 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteWhatIfForecastExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatIfForecastExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWhatIfForecastExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWhatIfForecastExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WhatIfForecastExportArn != nil {
+		s.WriteString(schemas.DeleteWhatIfForecastExportRequest_WhatIfForecastExportArn, *v.WhatIfForecastExportArn)
+	}
+}
+
 type DeleteWhatIfForecastExportOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteWhatIfForecastExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatIfForecastExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWhatIfForecastExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWhatIfForecastExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWhatIfForecastExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWhatIfForecastExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatIfForecastExport, schemas.DeleteWhatIfForecastExportRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWhatIfForecastExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatIfForecastExport, schemas.DeleteWhatIfForecastExportRequest, nil), output: &DeleteWhatIfForecastExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

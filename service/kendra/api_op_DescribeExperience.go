@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type DescribeExperienceInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeExperienceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExperienceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeExperienceRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeExperienceRequest_IndexId, *v.IndexId)
+	}
 }
 
 type DescribeExperienceOutput struct {
@@ -93,13 +110,95 @@ type DescribeExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExperienceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExperienceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExperienceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.DescribeExperienceResponse_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeExperienceResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeExperienceResponse_Description, *v.Description)
+	}
+	serializeExperienceEndpoints(s, schemas.DescribeExperienceResponse_Endpoints, v.Endpoints)
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeExperienceResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeExperienceResponse_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeExperienceResponse_IndexId, *v.IndexId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeExperienceResponse_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeExperienceResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeExperienceResponse_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeExperienceResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DescribeExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExperienceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExperienceResponse_Configuration:
+			v.Configuration = &types.ExperienceConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.DescribeExperienceResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeExperienceResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeExperienceResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_Description, v.Description)
+		case schemas.DescribeExperienceResponse_Endpoints:
+			return deserializeExperienceEndpoints(d, schemas.DescribeExperienceResponse_Endpoints, &v.Endpoints)
+		case schemas.DescribeExperienceResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeExperienceResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_Id, v.Id)
+		case schemas.DescribeExperienceResponse_IndexId:
+			v.IndexId = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_IndexId, v.IndexId)
+		case schemas.DescribeExperienceResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_Name, v.Name)
+		case schemas.DescribeExperienceResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeExperienceResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeExperienceResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeExperienceResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExperienceStatus(ev)
+			return nil
+		case schemas.DescribeExperienceResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeExperienceResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExperience, schemas.DescribeExperienceRequest, schemas.DescribeExperienceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExperience, schemas.DescribeExperienceRequest, schemas.DescribeExperienceResponse), output: &DescribeExperienceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

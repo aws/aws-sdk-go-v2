@@ -4,6 +4,8 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,16 @@ type DeleteDataLakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataLakeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataLakeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataLakeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionList(s, schemas.DeleteDataLakeRequest_regions, v.Regions)
+}
+
 type DeleteDataLakeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +63,26 @@ type DeleteDataLakeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataLakeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataLakeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataLakeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDataLakeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataLakeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataLakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataLake{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLake, schemas.DeleteDataLakeRequest, schemas.DeleteDataLakeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataLake{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLake, schemas.DeleteDataLakeRequest, schemas.DeleteDataLakeResponse), output: &DeleteDataLakeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

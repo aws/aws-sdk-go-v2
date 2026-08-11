@@ -4,7 +4,9 @@ package pinpointsmsvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,26 @@ type UpdateConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetEventDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationSetEventDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetEventDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.UpdateConfigurationSetEventDestinationRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestination != nil {
+		s.WriteStruct(schemas.UpdateConfigurationSetEventDestinationRequest_EventDestination)
+		v.EventDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.UpdateConfigurationSetEventDestinationRequest_EventDestinationName, *v.EventDestinationName)
+	}
+}
+
 // An empty object that indicates that the event destination was updated
 // successfully.
 type UpdateConfigurationSetEventDestinationOutput struct {
@@ -54,13 +76,26 @@ type UpdateConfigurationSetEventDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetEventDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationSetEventDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetEventDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationSetEventDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfigurationSetEventDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfigurationSetEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetEventDestination, schemas.UpdateConfigurationSetEventDestinationRequest, schemas.UpdateConfigurationSetEventDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfigurationSetEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetEventDestination, schemas.UpdateConfigurationSetEventDestinationRequest, schemas.UpdateConfigurationSetEventDestinationResponse), output: &UpdateConfigurationSetEventDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

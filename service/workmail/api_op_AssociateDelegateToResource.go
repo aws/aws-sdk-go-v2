@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,24 @@ type AssociateDelegateToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDelegateToResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDelegateToResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDelegateToResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.AssociateDelegateToResourceRequest_EntityId, *v.EntityId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.AssociateDelegateToResourceRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.AssociateDelegateToResourceRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type AssociateDelegateToResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +88,26 @@ type AssociateDelegateToResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDelegateToResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDelegateToResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDelegateToResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateDelegateToResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateDelegateToResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateDelegateToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateDelegateToResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDelegateToResource, schemas.AssociateDelegateToResourceRequest, schemas.AssociateDelegateToResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateDelegateToResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDelegateToResource, schemas.AssociateDelegateToResourceRequest, schemas.AssociateDelegateToResourceResponse), output: &AssociateDelegateToResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

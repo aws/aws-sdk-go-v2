@@ -4,6 +4,8 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteEphemerisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEphemerisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEphemerisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEphemerisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EphemerisId != nil {
+		s.WriteString(schemas.DeleteEphemerisRequest_ephemerisId, *v.EphemerisId)
+	}
+}
+
 type DeleteEphemerisOutput struct {
 
 	// The AWS Ground Station ephemeris ID.
@@ -44,13 +58,32 @@ type DeleteEphemerisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEphemerisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EphemerisIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEphemerisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EphemerisId != nil {
+		s.WriteString(schemas.EphemerisIdResponse_ephemerisId, *v.EphemerisId)
+	}
+}
+func (v *DeleteEphemerisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EphemerisIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EphemerisIdResponse_ephemerisId:
+			v.EphemerisId = new(string)
+			return d.ReadString(schemas.EphemerisIdResponse_ephemerisId, v.EphemerisId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEphemerisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEphemeris{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEphemeris, schemas.DeleteEphemerisRequest, schemas.EphemerisIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEphemeris{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEphemeris, schemas.DeleteEphemerisRequest, schemas.EphemerisIdResponse), output: &DeleteEphemerisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
