@@ -2741,6 +2741,7 @@
                         "mediaconnect:TagResource",
                         "medialive:UpdateChannel",
                         "ec2:CreateNetworkInterface",
+                        "ec2:CreateTags",
                         "iam:PassRole"
                     ]
                 },
@@ -3040,6 +3041,7 @@
                         "mediaconnect:TagResource",
                         "medialive:UpdateInput",
                         "ec2:CreateNetworkInterface",
+                        "ec2:CreateTags",
                         "iam:PassRole"
                     ]
                 },
@@ -3126,6 +3128,13 @@
                         "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to tag this router output.</p>",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "FabricConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#FabricConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fabric configuration settings for the router output.</p>",
+                        "smithy.api#jsonName": "fabricConfiguration"
                     }
                 },
                 "ClientToken": {
@@ -5062,6 +5071,39 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediaconnect#FabricConfiguration": {
+            "type": "structure",
+            "members": {
+                "RecoveryLatencyMode": {
+                    "target": "com.amazonaws.mediaconnect#FabricLatencyMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recovery latency mode for the router fabric connection. Valid values include the following:</p> <ul> <li> <p> <code>BALANCED</code> (default) – Optimizes for stream quality.</p> </li> <li> <p> <code>LOW_LATENCY</code> – Reduces latency at the potential cost of stream quality under adverse network conditions.</p> </li> </ul>",
+                        "smithy.api#jsonName": "recoveryLatencyMode",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The fabric configuration settings for the router output.</p>"
+            }
+        },
+        "com.amazonaws.mediaconnect#FabricLatencyMode": {
+            "type": "enum",
+            "members": {
+                "BALANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BALANCED"
+                    }
+                },
+                "LOW_LATENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW_LATENCY"
                     }
                 }
             }
@@ -14570,6 +14612,15 @@
                         "smithy.api#documentation": "<p>The current maintenance schedule details for this router output.</p>",
                         "smithy.api#jsonName": "maintenanceSchedule"
                     }
+                },
+                "FabricConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#FabricConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The fabric configuration settings for the router output.</p>",
+                        "smithy.api#jsonName": "fabricConfiguration",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
@@ -19024,6 +19075,7 @@
                         "mediaconnect:UpdateFlowOutput",
                         "medialive:UpdateChannel",
                         "ec2:CreateNetworkInterface",
+                        "ec2:CreateTags",
                         "iam:PassRole"
                     ]
                 },
@@ -19270,6 +19322,7 @@
                         "mediaconnect:UpdateFlowSource",
                         "medialive:UpdateInput",
                         "ec2:CreateNetworkInterface",
+                        "ec2:CreateTags",
                         "iam:PassRole"
                     ]
                 },
@@ -19337,6 +19390,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated maintenance configuration settings for the router output, including any changes to preferred maintenance windows and schedules.</p>",
                         "smithy.api#jsonName": "maintenanceConfiguration"
+                    }
+                },
+                "FabricConfiguration": {
+                    "target": "com.amazonaws.mediaconnect#FabricConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated fabric configuration settings for the router output. You cannot update the fabric configuration while the output has an active route. You must unroute the output before updating the fabric configuration.</p>",
+                        "smithy.api#jsonName": "fabricConfiguration"
                     }
                 }
             },

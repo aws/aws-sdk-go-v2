@@ -252,6 +252,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.odb#AssociateVirtualMachinesToExadbVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#AssociateVirtualMachinesToExadbVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#AssociateVirtualMachinesToExadbVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds virtual machines to the specified Exascale VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#AssociateVirtualMachinesToExadbVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster to add virtual machines to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "desiredNodeCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired number of nodes in the Exascale VM cluster after the association.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#AssociateVirtualMachinesToExadbVmClusterOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "exadbVmClusterId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.odb#AutonomousDatabase": {
             "type": "structure",
             "members": {
@@ -4049,7 +4142,7 @@
                 "scanDnsName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.</p>"
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.</p>"
                     }
                 },
                 "scanDnsRecordId": {
@@ -4345,7 +4438,7 @@
                 "scanDnsName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.</p>"
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.</p>"
                     }
                 },
                 "scanDnsRecordId": {
@@ -5628,7 +5721,7 @@
                 "dbNodeStorageSizeInGBs": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of local node storage, in gigabytes (GBs), to allocate for the VM cluster.</p>"
+                        "smithy.api#documentation": "<p>The amount of local node storage, in gigabytes (GB), to allocate for the VM cluster.</p>"
                     }
                 },
                 "dbServers": {
@@ -5664,7 +5757,7 @@
                 "memorySizeInGBs": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of memory, in gigabytes (GBs), to allocate for the VM cluster.</p>"
+                        "smithy.api#documentation": "<p>The amount of memory, in gigabytes (GB), to allocate for the VM cluster.</p>"
                     }
                 },
                 "systemVersion": {
@@ -5746,6 +5839,449 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#CreateExadbVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#CreateExadbVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#CreateExadbVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Creates an Exascale VM cluster.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.odb#CreateExadbVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-friendly name for the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabledEcpuCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of ECPUs to enable for the Exascale VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault for this Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "gridImageId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Grid Infrastructure software image ID for the Exascale VM cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "hostname": {
+                    "target": "com.amazonaws.odb#Hostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host name for the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nodeCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of nodes in the Exascale VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "odbNetworkId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the ODB network for the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shape": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shape of the Exascale VM cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "sshPublicKeys": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key portion of one or more key pairs used for SSH access to the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalEcpuCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of ECPUs for the Exascale VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 2
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "vmFileSystemStorageTotalSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount of file system storage, in gigabytes (GB), for the Exascale VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterName": {
+                    "target": "com.amazonaws.odb#ClusterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the Grid Infrastructure cluster. The name isn't case sensitive.</p>"
+                    }
+                },
+                "dataCollectionOptions": {
+                    "target": "com.amazonaws.odb#DataCollectionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of preferences for the various diagnostic collection options for the Exascale VM cluster.</p>"
+                    }
+                },
+                "licenseModel": {
+                    "target": "com.amazonaws.odb#LicenseModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle license model to apply to the Exascale VM cluster.</p>"
+                    }
+                },
+                "scanListenerPortTcp": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number for TCP connections to the single client access name (SCAN) listener.</p>",
+                        "smithy.api#range": {
+                            "min": 1024,
+                            "max": 8999
+                        }
+                    }
+                },
+                "scanListenerPortTcpSsl": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number for TCP connections with SSL to the single client access name (SCAN) listener.</p>",
+                        "smithy.api#range": {
+                            "min": 1024,
+                            "max": 8999
+                        }
+                    }
+                },
+                "shapeAttribute": {
+                    "target": "com.amazonaws.odb#ShapeAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shape attribute for the Exascale VM cluster.</p>"
+                    }
+                },
+                "systemVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the operating system of the image for the Exascale VM cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.odb#RequestTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource tags to apply to the Exascale VM cluster.</p>"
+                    }
+                },
+                "timeZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone for the Exascale VM cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.odb#GeneralInputString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, the Amazon Web Services SDK automatically generates one and uses it for the request to ensure idempotency. The client token is valid for up to 24 hours after it's first used.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 8,
+                            "max": 64
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.odb#ExascaleDbStorageVaultResource"
+                    },
+                    {
+                        "resource": "com.amazonaws.odb#OdbNetworkResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.odb#CreateExadbVmClusterOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "exadbVmClusterId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#CreateExascaleDbStorageVault": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#CreateExascaleDbStorageVaultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#CreateExascaleDbStorageVaultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Creates an Exascale storage vault.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.odb#CreateExascaleDbStorageVaultInput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-friendly name for the Exascale storage vault.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "highCapacityDatabaseStorageTotalSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size of the high-capacity database storage, in gigabytes (GB), for the Exascale storage vault.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalFlashCacheInPercent": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional flash cache percentage for the Exascale storage vault.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "autoscaleLimitInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The autoscale limit in gigabytes (GB) for the Exascale storage vault.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone ID for the Exascale storage vault.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone for the Exascale storage vault.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the Exascale storage vault.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 400
+                        }
+                    }
+                },
+                "isAutoscaleEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether autoscaling is enabled for the Exascale storage vault.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.odb#RequestTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource tags to apply to the Exascale storage vault.</p>"
+                    }
+                },
+                "timeZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone for the Exascale storage vault.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.odb#GeneralInputString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, the Amazon Web Services SDK automatically generates one and uses it for the request to ensure idempotency. The client token is valid for up to 24 hours after it's first used.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 8,
+                            "max": 64
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#CreateExascaleDbStorageVaultOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale storage vault.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale storage vault.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale storage vault.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6782,7 +7318,7 @@
                 "dbNodeStorageSizeInGBs": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of local node storage, in gigabytes (GBs), that's allocated on the DB node.</p>"
+                        "smithy.api#documentation": "<p>The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.</p>"
                     }
                 },
                 "dbServerId": {
@@ -7630,6 +8166,12 @@
                         "smithy.api#documentation": "<p>The shape type. This property is determined by the CPU hardware.</p>"
                     }
                 },
+                "shapeAttributes": {
+                    "target": "com.amazonaws.odb#ShapeAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided and applicable, return DB System shape parameters based on the shape attribute provided.</p>"
+                    }
+                },
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -7956,6 +8498,116 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.odb#DeleteExadbVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#DeleteExadbVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#DeleteExadbVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified Exascale VM cluster.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.odb#DeleteExadbVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#DeleteExadbVmClusterOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#DeleteExascaleDbStorageVault": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#DeleteExascaleDbStorageVaultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#DeleteExascaleDbStorageVaultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified Exascale storage vault.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.odb#DeleteExascaleDbStorageVaultInput": {
+            "type": "structure",
+            "members": {
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#DeleteExascaleDbStorageVaultOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.odb#DeleteOdbNetwork": {
             "type": "operation",
             "input": {
@@ -8154,6 +8806,93 @@
         "com.amazonaws.odb#DisassociateIamRoleFromResourceOutput": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#DisassociateVirtualMachinesFromExadbVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#DisassociateVirtualMachinesFromExadbVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#DisassociateVirtualMachinesFromExadbVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes virtual machines from the specified Exascale VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#DisassociateVirtualMachinesFromExadbVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster to remove virtual machines from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dbNodeIds": {
+                    "target": "com.amazonaws.odb#ResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of DB node IDs to remove from the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#DisassociateVirtualMachinesFromExadbVmClusterOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "exadbVmClusterId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }
@@ -8363,6 +9102,286 @@
                 "smithy.api#documentation": "<p>The IORM settings of the Exadata DB system.</p>"
             }
         },
+        "com.amazonaws.odb#ExadbVmCluster": {
+            "type": "structure",
+            "members": {
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterName": {
+                    "target": "com.amazonaws.odb#ClusterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Grid Infrastructure (GI) cluster.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Exascale VM cluster was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "dataCollectionOptions": {
+                    "target": "com.amazonaws.odb#DataCollectionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of diagnostic collection options enabled for the Exascale VM cluster.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale VM cluster.</p>"
+                    }
+                },
+                "domain": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of the Exascale VM cluster.</p>"
+                    }
+                },
+                "enabledEcpuCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of elastic compute processing units (ECPUs) enabled on the Exascale VM cluster.</p>"
+                    }
+                },
+                "exadbVmClusterArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exascale VM cluster.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exascale storage vault associated with this Exascale VM cluster.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault associated with this Exascale VM cluster.</p>"
+                    }
+                },
+                "giVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The software version of the Oracle Grid Infrastructure (GI) for the Exascale VM cluster.</p>"
+                    }
+                },
+                "gridImageId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Grid Infrastructure software image ID for the Exascale VM cluster.</p>"
+                    }
+                },
+                "gridImageType": {
+                    "target": "com.amazonaws.odb#GridImageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Grid Infrastructure image for the Exascale VM cluster.</p>"
+                    }
+                },
+                "hostname": {
+                    "target": "com.amazonaws.odb#Hostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host name for the Exascale VM cluster.</p>"
+                    }
+                },
+                "iamRoles": {
+                    "target": "com.amazonaws.odb#IamRoleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the Exascale VM cluster.</p>"
+                    }
+                },
+                "iormConfigCache": {
+                    "target": "com.amazonaws.odb#ExadataIormConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The I/O Resource Management (IORM) configuration cache details for the Exascale VM cluster.</p>"
+                    }
+                },
+                "lastUpdateHistoryEntryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle Cloud ID (OCID) of the last maintenance update history entry.</p>"
+                    }
+                },
+                "licenseModel": {
+                    "target": "com.amazonaws.odb#LicenseModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle license model applied to the Exascale VM cluster.</p>"
+                    }
+                },
+                "listenerPort": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number configured for the listener on the Exascale VM cluster.</p>"
+                    }
+                },
+                "memorySizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory, in gigabytes (GB), that's allocated for the Exascale VM cluster.</p>"
+                    }
+                },
+                "nodeCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of nodes in the Exascale VM cluster.</p>"
+                    }
+                },
+                "ocid": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OCID of the Exascale VM cluster.</p>"
+                    }
+                },
+                "ociResourceAnchorName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OCI resource anchor for the Exascale VM cluster.</p>"
+                    }
+                },
+                "ociUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS link to the Exascale VM cluster in Oracle Cloud Infrastructure (OCI).</p>"
+                    }
+                },
+                "odbNetworkArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ODB network associated with this Exascale VM cluster.</p>"
+                    }
+                },
+                "odbNetworkId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the ODB network for the Exascale VM cluster.</p>"
+                    }
+                },
+                "percentProgress": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of progress made on the current operation on the Exascale VM cluster, expressed as a percentage.</p>"
+                    }
+                },
+                "scanDnsName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the Exascale VM cluster.</p>"
+                    }
+                },
+                "scanDnsRecordId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OCID of the DNS record for the SCAN IP addresses that are associated with the Exascale VM cluster.</p>"
+                    }
+                },
+                "scanIpIds": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OCID of the SCAN IP addresses that are associated with the Exascale VM cluster.</p>"
+                    }
+                },
+                "scanListenerPortTcp": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number for TCP connections to the single client access name (SCAN) listener for the Exascale VM cluster.</p>"
+                    }
+                },
+                "scanListenerPortTcpSsl": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number for TCP connections with SSL to the single client access name (SCAN) listener for the Exascale VM cluster.</p>"
+                    }
+                },
+                "shape": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hardware model name of the Exadata infrastructure that's running the Exascale VM cluster.</p>"
+                    }
+                },
+                "shapeAttribute": {
+                    "target": "com.amazonaws.odb#ShapeAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shape attribute for the Exascale VM cluster.</p>"
+                    }
+                },
+                "snapshotFileSystemStorage": {
+                    "target": "com.amazonaws.odb#ExadbVmClusterStorageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The snapshot file system storage details for the Exascale VM cluster.</p>"
+                    }
+                },
+                "sshPublicKeys": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key portion of one or more key pairs used for SSH access to the Exascale VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "systemVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system version of the image chosen for the Exascale VM cluster.</p>"
+                    }
+                },
+                "timeZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone of the Exascale VM cluster.</p>"
+                    }
+                },
+                "totalEcpuCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of ECPUs for the Exascale VM cluster.</p>"
+                    }
+                },
+                "totalFileSystemStorage": {
+                    "target": "com.amazonaws.odb#ExadbVmClusterStorageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total file system storage details for the Exascale VM cluster.</p>"
+                    }
+                },
+                "vipIds": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The virtual IP (VIP) addresses associated with the Exascale VM cluster. One VIP address is assigned per node to support failover. If a node fails, its VIP is reassigned to another active node in the cluster.</p>"
+                    }
+                },
+                "vmFileSystemStorage": {
+                    "target": "com.amazonaws.odb#ExadbVmClusterStorageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VM file system storage details for the Exascale VM cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Exascale VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#ExadbVmClusterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#ExadbVmClusterSummary"
+            }
+        },
         "com.amazonaws.odb#ExadbVmClusterResource": {
             "type": "resource",
             "identifiers": {
@@ -8370,6 +9389,29 @@
                     "target": "com.amazonaws.odb#ResourceIdOrArn"
                 }
             },
+            "create": {
+                "target": "com.amazonaws.odb#CreateExadbVmCluster"
+            },
+            "read": {
+                "target": "com.amazonaws.odb#GetExadbVmCluster"
+            },
+            "update": {
+                "target": "com.amazonaws.odb#UpdateExadbVmCluster"
+            },
+            "delete": {
+                "target": "com.amazonaws.odb#DeleteExadbVmCluster"
+            },
+            "list": {
+                "target": "com.amazonaws.odb#ListExadbVmClusters"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.odb#AssociateVirtualMachinesToExadbVmCluster"
+                },
+                {
+                    "target": "com.amazonaws.odb#DisassociateVirtualMachinesFromExadbVmCluster"
+                }
+            ],
             "traits": {
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag/${TagKey}"
@@ -8379,12 +9421,483 @@
                 }
             }
         },
+        "com.amazonaws.odb#ExadbVmClusterStorageDetails": {
+            "type": "structure",
+            "members": {
+                "totalSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total storage size, in gigabytes (GB).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Storage details for an Exascale VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#ExadbVmClusterSummary": {
+            "type": "structure",
+            "members": {
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterName": {
+                    "target": "com.amazonaws.odb#ClusterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Grid Infrastructure (GI) cluster.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Exascale VM cluster was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "dataCollectionOptions": {
+                    "target": "com.amazonaws.odb#DataCollectionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of diagnostic collection options enabled for the Exascale VM cluster.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale VM cluster.</p>"
+                    }
+                },
+                "domain": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of the Exascale VM cluster.</p>"
+                    }
+                },
+                "enabledEcpuCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of elastic compute processing units (ECPUs) enabled on the Exascale VM cluster.</p>"
+                    }
+                },
+                "exadbVmClusterArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exascale VM cluster.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exascale storage vault associated with this Exascale VM cluster.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault associated with this Exascale VM cluster.</p>"
+                    }
+                },
+                "giVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The software version of the Oracle Grid Infrastructure (GI) for the Exascale VM cluster.</p>"
+                    }
+                },
+                "gridImageId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Grid Infrastructure software image ID for the Exascale VM cluster.</p>"
+                    }
+                },
+                "gridImageType": {
+                    "target": "com.amazonaws.odb#GridImageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Grid Infrastructure image for the Exascale VM cluster.</p>"
+                    }
+                },
+                "hostname": {
+                    "target": "com.amazonaws.odb#Hostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host name for the Exascale VM cluster.</p>"
+                    }
+                },
+                "iamRoles": {
+                    "target": "com.amazonaws.odb#IamRoleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) service roles associated with the Exascale VM cluster.</p>"
+                    }
+                },
+                "iormConfigCache": {
+                    "target": "com.amazonaws.odb#ExadataIormConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The I/O Resource Management (IORM) configuration cache details for the Exascale VM cluster.</p>"
+                    }
+                },
+                "lastUpdateHistoryEntryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle Cloud ID (OCID) of the last maintenance update history entry.</p>"
+                    }
+                },
+                "licenseModel": {
+                    "target": "com.amazonaws.odb#LicenseModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle license model applied to the Exascale VM cluster.</p>"
+                    }
+                },
+                "listenerPort": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number configured for the listener on the Exascale VM cluster.</p>"
+                    }
+                },
+                "memorySizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory, in gigabytes (GB), that's allocated for the Exascale VM cluster.</p>"
+                    }
+                },
+                "nodeCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of nodes in the Exascale VM cluster.</p>"
+                    }
+                },
+                "ocid": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OCID of the Exascale VM cluster.</p>"
+                    }
+                },
+                "ociResourceAnchorName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OCI resource anchor for the Exascale VM cluster.</p>"
+                    }
+                },
+                "ociUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS link to the Exascale VM cluster in Oracle Cloud Infrastructure (OCI).</p>"
+                    }
+                },
+                "odbNetworkArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ODB network associated with this Exascale VM cluster.</p>"
+                    }
+                },
+                "odbNetworkId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the ODB network for the Exascale VM cluster.</p>"
+                    }
+                },
+                "percentProgress": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of progress made on the current operation on the Exascale VM cluster, expressed as a percentage.</p>"
+                    }
+                },
+                "scanDnsName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified domain name (FQDN) of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the Exascale VM cluster.</p>"
+                    }
+                },
+                "scanDnsRecordId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OCID of the DNS record for the SCAN IP addresses that are associated with the Exascale VM cluster.</p>"
+                    }
+                },
+                "scanIpIds": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OCID of the SCAN IP addresses that are associated with the Exascale VM cluster.</p>"
+                    }
+                },
+                "scanListenerPortTcp": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number for TCP connections to the single client access name (SCAN) listener for the Exascale VM cluster.</p>"
+                    }
+                },
+                "scanListenerPortTcpSsl": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number for TCP connections with SSL to the single client access name (SCAN) listener for the Exascale VM cluster.</p>"
+                    }
+                },
+                "shape": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hardware model name of the Exadata infrastructure that's running the Exascale VM cluster.</p>"
+                    }
+                },
+                "shapeAttribute": {
+                    "target": "com.amazonaws.odb#ShapeAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shape attribute for the Exascale VM cluster.</p>"
+                    }
+                },
+                "snapshotFileSystemStorage": {
+                    "target": "com.amazonaws.odb#ExadbVmClusterStorageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The snapshot file system storage details for the Exascale VM cluster.</p>"
+                    }
+                },
+                "sshPublicKeys": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key portion of one or more key pairs used for SSH access to the Exascale VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "systemVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system version of the image chosen for the Exascale VM cluster.</p>"
+                    }
+                },
+                "timeZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone of the Exascale VM cluster.</p>"
+                    }
+                },
+                "totalEcpuCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of ECPUs for the Exascale VM cluster.</p>"
+                    }
+                },
+                "totalFileSystemStorage": {
+                    "target": "com.amazonaws.odb#ExadbVmClusterStorageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total file system storage details for the Exascale VM cluster.</p>"
+                    }
+                },
+                "vipIds": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The virtual IP (VIP) addresses associated with the Exascale VM cluster. One VIP address is assigned per node to support failover. If a node fails, its VIP is reassigned to another active node in the cluster.</p>"
+                    }
+                },
+                "vmFileSystemStorage": {
+                    "target": "com.amazonaws.odb#ExadbVmClusterStorageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VM file system storage details for the Exascale VM cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an Exascale VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#ExascaleDbStorageDetails": {
+            "type": "structure",
+            "members": {
+                "availableSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The available storage size, in gigabytes (GB).</p>"
+                    }
+                },
+                "totalSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total storage size, in gigabytes (GB).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The storage details for an Exascale storage vault.</p>"
+            }
+        },
+        "com.amazonaws.odb#ExascaleDbStorageVault": {
+            "type": "structure",
+            "members": {
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalFlashCacheInPercent": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional flash cache percentage for the Exascale storage vault.</p>"
+                    }
+                },
+                "attachedShapeAttributes": {
+                    "target": "com.amazonaws.odb#ShapeAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of shape attributes attached to the Exascale storage vault.</p>"
+                    }
+                },
+                "autoscaleLimitInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The autoscale limit in gigabytes (GB) for the Exascale storage vault.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone for the Exascale storage vault.</p>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone ID for the Exascale storage vault.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Exascale storage vault was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the Exascale storage vault.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale storage vault.</p>"
+                    }
+                },
+                "vmClusterArns": {
+                    "target": "com.amazonaws.odb#ResourceArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Resource Names (ARNs) of the VM clusters associated with this Exascale storage vault.</p>"
+                    }
+                },
+                "vmClusterCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of VM clusters associated with this Exascale storage vault.</p>"
+                    }
+                },
+                "vmClusterIds": {
+                    "target": "com.amazonaws.odb#ResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of unique identifiers of the VM clusters associated with this Exascale storage vault.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exascale storage vault.</p>"
+                    }
+                },
+                "highCapacityDatabaseStorage": {
+                    "target": "com.amazonaws.odb#ExascaleDbStorageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The high-capacity database storage details for the Exascale storage vault.</p>"
+                    }
+                },
+                "isAutoscaleEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether autoscaling is enabled for the Exascale storage vault.</p>"
+                    }
+                },
+                "ocid": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OCID of the Exascale storage vault.</p>"
+                    }
+                },
+                "ociResourceAnchorName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OCI resource anchor for the Exascale storage vault.</p>"
+                    }
+                },
+                "ociUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS link to the Exascale storage vault in Oracle Cloud Infrastructure (OCI).</p>"
+                    }
+                },
+                "percentProgress": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of progress made on the current operation on the Exascale storage vault, expressed as a percentage.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale storage vault.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale storage vault.</p>"
+                    }
+                },
+                "timeZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone of the Exascale storage vault.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Exascale storage vault.</p>"
+            }
+        },
+        "com.amazonaws.odb#ExascaleDbStorageVaultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#ExascaleDbStorageVaultSummary"
+            }
+        },
         "com.amazonaws.odb#ExascaleDbStorageVaultResource": {
             "type": "resource",
             "identifiers": {
                 "exascaleDbStorageVaultId": {
                     "target": "com.amazonaws.odb#ResourceIdOrArn"
                 }
+            },
+            "create": {
+                "target": "com.amazonaws.odb#CreateExascaleDbStorageVault"
+            },
+            "read": {
+                "target": "com.amazonaws.odb#GetExascaleDbStorageVault"
+            },
+            "update": {
+                "target": "com.amazonaws.odb#UpdateExascaleDbStorageVault"
+            },
+            "delete": {
+                "target": "com.amazonaws.odb#DeleteExascaleDbStorageVault"
+            },
+            "list": {
+                "target": "com.amazonaws.odb#ListExascaleDbStorageVaults"
             },
             "traits": {
                 "aws.iam#conditionKeys": [
@@ -8393,6 +9906,148 @@
                 "aws.iam#iamResource": {
                     "name": "exascale-db-storage-vault"
                 }
+            }
+        },
+        "com.amazonaws.odb#ExascaleDbStorageVaultSummary": {
+            "type": "structure",
+            "members": {
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalFlashCacheInPercent": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional flash cache percentage for the Exascale storage vault.</p>"
+                    }
+                },
+                "attachedShapeAttributes": {
+                    "target": "com.amazonaws.odb#ShapeAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of shape attributes attached to the Exascale storage vault.</p>"
+                    }
+                },
+                "autoscaleLimitInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The autoscale limit in gigabytes (GB) for the Exascale storage vault.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone for the Exascale storage vault.</p>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone ID for the Exascale storage vault.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Exascale storage vault was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the Exascale storage vault.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale storage vault.</p>"
+                    }
+                },
+                "vmClusterArns": {
+                    "target": "com.amazonaws.odb#ResourceArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Resource Names (ARNs) of the VM clusters associated with this Exascale storage vault.</p>"
+                    }
+                },
+                "vmClusterCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of VM clusters associated with this Exascale storage vault.</p>"
+                    }
+                },
+                "vmClusterIds": {
+                    "target": "com.amazonaws.odb#ResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of unique identifiers of the VM clusters associated with this Exascale storage vault.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exascale storage vault.</p>"
+                    }
+                },
+                "highCapacityDatabaseStorage": {
+                    "target": "com.amazonaws.odb#ExascaleDbStorageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The high-capacity database storage details for the Exascale storage vault.</p>"
+                    }
+                },
+                "isAutoscaleEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether autoscaling is enabled for the Exascale storage vault.</p>"
+                    }
+                },
+                "ocid": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OCID of the Exascale storage vault.</p>"
+                    }
+                },
+                "ociResourceAnchorName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OCI resource anchor for the Exascale storage vault.</p>"
+                    }
+                },
+                "ociUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS link to the Exascale storage vault in Oracle Cloud Infrastructure (OCI).</p>"
+                    }
+                },
+                "percentProgress": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of progress made on the current operation on the Exascale storage vault, expressed as a percentage.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale storage vault.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale storage vault.</p>"
+                    }
+                },
+                "timeZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone of the Exascale storage vault.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an Exascale storage vault.</p>"
             }
         },
         "com.amazonaws.odb#ExternalIdType": {
@@ -8995,9 +10650,13 @@
                 "cloudVmClusterId": {
                     "target": "com.amazonaws.odb#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster that contains the DB node.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster that contains the DB node. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>"
+                    }
+                },
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster that contains the DB node. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>"
                     }
                 },
                 "dbNodeId": {
@@ -9014,6 +10673,9 @@
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.odb#CloudVmClusterResource"
+                    },
+                    {
+                        "resource": "com.amazonaws.odb#ExadbVmClusterResource"
                     }
                 ]
             }
@@ -9095,6 +10757,126 @@
                     "target": "com.amazonaws.odb#DbServer",
                     "traits": {
                         "smithy.api#documentation": "<p>The details of the requested database server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#GetExadbVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#GetExadbVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#GetExadbVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the specified Exascale VM cluster.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.odb#GetExadbVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#GetExadbVmClusterOutput": {
+            "type": "structure",
+            "members": {
+                "exadbVmCluster": {
+                    "target": "com.amazonaws.odb#ExadbVmCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#GetExascaleDbStorageVault": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#GetExascaleDbStorageVaultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#GetExascaleDbStorageVaultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the specified Exascale storage vault.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.odb#GetExascaleDbStorageVaultInput": {
+            "type": "structure",
+            "members": {
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#GetExascaleDbStorageVaultOutput": {
+            "type": "structure",
+            "members": {
+                "exascaleDbStorageVault": {
+                    "target": "com.amazonaws.odb#ExascaleDbStorageVault",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Exascale storage vault.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -9306,6 +11088,33 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.odb#GiMinorVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#GiMinorVersionSummary"
+            }
+        },
+        "com.amazonaws.odb#GiMinorVersionSummary": {
+            "type": "structure",
+            "members": {
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GI minor version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "gridImageId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Grid Infrastructure software image ID for this minor version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an Oracle Grid Infrastructure (GI) minor version.</p>"
+            }
+        },
         "com.amazonaws.odb#GiVersionList": {
             "type": "list",
             "member": {
@@ -9324,6 +11133,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a specific version of Oracle Grid Infrastructure (GI) software that can be installed on a VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#GridImageType": {
+            "type": "enum",
+            "members": {
+                "RELEASE_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A release update grid image.</p>",
+                        "smithy.api#enumValue": "RELEASE_UPDATE"
+                    }
+                },
+                "CUSTOM_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom grid image.</p>",
+                        "smithy.api#enumValue": "CUSTOM_IMAGE"
+                    }
+                }
             }
         },
         "com.amazonaws.odb#Hostname": {
@@ -10611,9 +12439,13 @@
                 "cloudVmClusterId": {
                     "target": "com.amazonaws.odb#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>"
+                    }
+                },
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>"
                     }
                 }
             },
@@ -10622,6 +12454,9 @@
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.odb#CloudVmClusterResource"
+                    },
+                    {
+                        "resource": "com.amazonaws.odb#ExadbVmClusterResource"
                     }
                 ]
             }
@@ -10824,6 +12659,16 @@
                             "max": 255
                         }
                     }
+                },
+                "shapeFamily": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shape family to filter results by.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
                 }
             },
             "traits": {
@@ -10843,6 +12688,312 @@
                     "target": "com.amazonaws.odb#DbSystemShapeList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of shapes and their properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#ListExadbVmClusters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#ListExadbVmClustersInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#ListExadbVmClustersOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the Exascale VM clusters owned by your Amazon Web Services account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "exadbVmClusters"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.odb#ListExadbVmClustersInput": {
+            "type": "structure",
+            "members": {
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault to list the associated Exascale VM clusters.</p>",
+                        "smithy.api#httpQuery": "exascaleDbStorageVaultId"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 8192
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.odb#ExascaleDbStorageVaultResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.odb#ListExadbVmClustersOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>"
+                    }
+                },
+                "exadbVmClusters": {
+                    "target": "com.amazonaws.odb#ExadbVmClusterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Exascale VM clusters.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#ListExascaleDbStorageVaults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#ListExascaleDbStorageVaultsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#ListExascaleDbStorageVaultsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the Exascale storage vaults owned by your Amazon Web Services account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "exascaleDbStorageVaults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.odb#ListExascaleDbStorageVaultsInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 8192
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#ListExascaleDbStorageVaultsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>"
+                    }
+                },
+                "exascaleDbStorageVaults": {
+                    "target": "com.amazonaws.odb#ExascaleDbStorageVaultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Exascale storage vaults.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#ListGiMinorVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#ListGiMinorVersionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#ListGiMinorVersionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the Oracle Grid Infrastructure (GI) minor versions for the specified major version.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "giMinorVersions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.odb#ListGiMinorVersionsInput": {
+            "type": "structure",
+            "members": {
+                "giVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle Grid Infrastructure (GI) major version.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 8192
+                        }
+                    }
+                },
+                "shapeFamily": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shape family for the GI minor version.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone to filter GI minor versions.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone ID to filter GI minor versions.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#ListGiMinorVersionsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>"
+                    }
+                },
+                "giMinorVersions": {
+                    "target": "com.amazonaws.odb#GiMinorVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of GI minor versions.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12036,6 +14187,9 @@
                 },
                 {
                     "target": "com.amazonaws.odb#ListDbSystemShapes"
+                },
+                {
+                    "target": "com.amazonaws.odb#ListGiMinorVersions"
                 },
                 {
                     "target": "com.amazonaws.odb#ListGiVersions"
@@ -13859,9 +16013,13 @@
                 "cloudVmClusterId": {
                     "target": "com.amazonaws.odb#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster that contains the DB node to reboot.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster that contains the DB node to reboot. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>"
+                    }
+                },
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster that contains the DB node to reboot. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>"
                     }
                 },
                 "dbNodeId": {
@@ -13878,6 +16036,9 @@
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.odb#CloudVmClusterResource"
+                    },
+                    {
+                        "resource": "com.amazonaws.odb#ExadbVmClusterResource"
                     }
                 ]
             }
@@ -13995,6 +16156,12 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-z0-9-_]{6,64}$"
+            }
+        },
+        "com.amazonaws.odb#ResourceArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#ResourceArn"
             }
         },
         "com.amazonaws.odb#ResourceDisplayName": {
@@ -14443,6 +16610,31 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.odb#ShapeAttribute": {
+            "type": "enum",
+            "members": {
+                "SMART_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Smart storage shape attribute.</p>",
+                        "smithy.api#enumValue": "SMART_STORAGE"
+                    }
+                },
+                "BLOCK_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Block storage shape attribute.</p>",
+                        "smithy.api#enumValue": "BLOCK_STORAGE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.odb#ShapeAttributeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#ShapeAttribute"
+            }
+        },
         "com.amazonaws.odb#ShapeType": {
             "type": "enum",
             "members": {
@@ -14791,9 +16983,13 @@
                 "cloudVmClusterId": {
                     "target": "com.amazonaws.odb#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster that contains the DB node to start.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster that contains the DB node to start. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>"
+                    }
+                },
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster that contains the DB node to start. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>"
                     }
                 },
                 "dbNodeId": {
@@ -14810,6 +17006,9 @@
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.odb#CloudVmClusterResource"
+                    },
+                    {
+                        "resource": "com.amazonaws.odb#ExadbVmClusterResource"
                     }
                 ]
             }
@@ -14961,9 +17160,13 @@
                 "cloudVmClusterId": {
                     "target": "com.amazonaws.odb#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster that contains the DB node to stop.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the VM cluster that contains the DB node to stop. You must specify either this parameter or <code>exadbVmClusterId</code>.</p>"
+                    }
+                },
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster that contains the DB node to stop. You must specify either this parameter or <code>cloudVmClusterId</code>.</p>"
                     }
                 },
                 "dbNodeId": {
@@ -14980,6 +17183,9 @@
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.odb#CloudVmClusterResource"
+                    },
+                    {
+                        "resource": "com.amazonaws.odb#ExadbVmClusterResource"
                     }
                 ]
             }
@@ -15506,6 +17712,35 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateAction": {
+            "type": "enum",
+            "members": {
+                "ROLLING_APPLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLING_APPLY"
+                    }
+                },
+                "NON_ROLLING_APPLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_ROLLING_APPLY"
+                    }
+                },
+                "PRECHECK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRECHECK"
+                    }
+                },
+                "ROLLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK"
+                    }
+                }
             }
         },
         "com.amazonaws.odb#UpdateAutonomousDatabase": {
@@ -16067,6 +18302,292 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the updated Exadata infrastructure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateExadbVmCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#UpdateExadbVmClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#UpdateExadbVmClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified Exascale VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#UpdateExadbVmClusterInput": {
+            "type": "structure",
+            "members": {
+                "exadbVmClusterId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataCollectionOptions": {
+                    "target": "com.amazonaws.odb#DataCollectionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of preferences for the various diagnostic collection options for the Exascale VM cluster.</p>"
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new user-friendly name for the Exascale VM cluster.</p>"
+                    }
+                },
+                "enabledEcpuCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of ECPUs to enable for the Exascale VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "gridImageId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Grid Infrastructure software image ID for the Exascale VM cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "licenseModel": {
+                    "target": "com.amazonaws.odb#LicenseModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle license model to apply to the Exascale VM cluster.</p>"
+                    }
+                },
+                "sshPublicKeys": {
+                    "target": "com.amazonaws.odb#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key portion of one or more key pairs used for SSH access to the Exascale VM cluster.</p>"
+                    }
+                },
+                "systemVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the operating system of the image for the Exascale VM cluster.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 255
+                        }
+                    }
+                },
+                "totalEcpuCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of ECPUs for the Exascale VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 2
+                        }
+                    }
+                },
+                "updateAction": {
+                    "target": "com.amazonaws.odb#UpdateAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The update action to perform on the Exascale VM cluster.</p>"
+                    }
+                },
+                "vmFileSystemStorageTotalSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount of file system storage, in gigabytes (GB), for the Exascale VM cluster.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateExadbVmClusterOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale VM cluster.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale VM cluster.</p>"
+                    }
+                },
+                "exadbVmClusterId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale VM cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateExascaleDbStorageVault": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#UpdateExascaleDbStorageVaultInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#UpdateExascaleDbStorageVaultOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified Exascale storage vault.</p>"
+            }
+        },
+        "com.amazonaws.odb#UpdateExascaleDbStorageVaultInput": {
+            "type": "structure",
+            "members": {
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalFlashCacheInPercent": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional flash cache percentage for the Exascale storage vault.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "autoscaleLimitInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The autoscale limit in gigabytes (GB) for the Exascale storage vault.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the Exascale storage vault.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 400
+                        }
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.odb#ResourceDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new user-friendly name for the Exascale storage vault.</p>"
+                    }
+                },
+                "highCapacityDatabaseStorageTotalSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size of the high-capacity database storage, in gigabytes (GB), for the Exascale storage vault.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "isAutoscaleEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether autoscaling is enabled for the Exascale storage vault.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateExascaleDbStorageVaultOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name for the Exascale storage vault.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exascale storage vault.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exascale storage vault.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault.</p>",
                         "smithy.api#required": {}
                     }
                 }

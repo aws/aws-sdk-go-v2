@@ -22563,6 +22563,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>The asset metadata returned by the <code>GetAsset</code> operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -24206,6 +24207,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>The export configuration returned by the <code>GetDataCatalogExportConfiguration</code> operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -36297,7 +36299,7 @@
                 "TableName": {
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the table for which statistics is generated.</p>"
+                        "smithy.api#documentation": "<p>The name of the materialized view.</p>"
                     }
                 },
                 "MaxResults": {
@@ -37617,7 +37619,10 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.glue#MessageString"
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>"
+                    }
                 }
             },
             "traits": {
@@ -37649,7 +37654,7 @@
                 "TableName": {
                     "target": "com.amazonaws.glue#TableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the table for which statistics is generated.</p>"
+                        "smithy.api#documentation": "<p>The name of the materialized view.</p>"
                     }
                 },
                 "CatalogId": {
@@ -37661,7 +37666,7 @@
                 "Role": {
                     "target": "com.amazonaws.glue#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that the service assumes to generate statistics.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that the service assumes to run the materialized view refresh task.</p>"
                     }
                 },
                 "Status": {
@@ -37728,7 +37733,10 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.glue#MessageString"
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>"
+                    }
                 }
             },
             "traits": {
@@ -37746,7 +37754,10 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.glue#MessageString"
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>"
+                    }
                 }
             },
             "traits": {
@@ -40985,6 +40996,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>The export configuration returned by the <code>PutDataCatalogExportConfiguration</code> operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -45039,6 +45051,7 @@
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>The search results returned by the <code>SearchAssets</code> operation.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -47676,7 +47689,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a materialized view refresh task run, for a specified table and columns.</p>"
+                "smithy.api#documentation": "<p>Starts a materialized view refresh task run for a specified materialized view.</p>"
             }
         },
         "com.amazonaws.glue#StartMaterializedViewRefreshTaskRunRequest": {
@@ -47699,7 +47712,7 @@
                 "TableName": {
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the table to generate run the materialized view refresh task.</p>",
+                        "smithy.api#documentation": "<p>The name of the materialized view to run the refresh task for.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -48531,7 +48544,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops a materialized view refresh task run, for a specified table and columns.</p>"
+                "smithy.api#documentation": "<p>Stops a materialized view refresh task run for a specified materialized view.</p>"
             }
         },
         "com.amazonaws.glue#StopMaterializedViewRefreshTaskRunRequest": {
@@ -48554,7 +48567,7 @@
                 "TableName": {
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the table to generate statistics.</p>",
+                        "smithy.api#documentation": "<p>The name of the materialized view.</p>",
                         "smithy.api#required": {}
                     }
                 }

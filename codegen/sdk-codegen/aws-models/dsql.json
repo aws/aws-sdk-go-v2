@@ -1861,7 +1861,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+$"
+                "smithy.api#pattern": "^arn:aws[a-zA-Z\\-]*:kinesis:[a-zA-Z0-9\\-]*:\\d{12}:stream/[a-zA-Z0-9+=,.@_/\\-]+$"
             }
         },
         "com.amazonaws.dsql#KinesisTargetDefinition": {
