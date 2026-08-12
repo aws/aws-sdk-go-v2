@@ -26,15 +26,18 @@ func (c *Client) StopDbNode(ctx context.Context, params *StopDbNodeInput, optFns
 
 type StopDbNodeInput struct {
 
-	// The unique identifier of the VM cluster that contains the DB node to stop.
-	//
-	// This member is required.
-	CloudVmClusterId *string
-
 	// The unique identifier of the DB node to stop.
 	//
 	// This member is required.
 	DbNodeId *string
+
+	// The unique identifier of the VM cluster that contains the DB node to stop. You
+	// must specify either this parameter or exadbVmClusterId .
+	CloudVmClusterId *string
+
+	// The unique identifier of the Exascale VM cluster that contains the DB node to
+	// stop. You must specify either this parameter or cloudVmClusterId .
+	ExadbVmClusterId *string
 
 	noSmithyDocumentSerde
 }

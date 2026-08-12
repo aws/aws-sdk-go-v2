@@ -716,6 +716,23 @@ type GroupDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Contains an inline policy template that the service embeds in roles that you
+// create from a role template.
+type InlinePolicy struct {
+
+	// The inline policy document.
+	//
+	// This member is required.
+	PolicyDocument *string
+
+	// The name of the inline policy.
+	//
+	// This member is required.
+	PolicyName *string
+
+	noSmithyDocumentSerde
+}
+
 // Identifies one or more inline policies that are embedded in IAM users, groups,
 // or roles, by the name of the policy together with the type and name of the
 // entity that it is attached to. Wildcard characters in the entity name can match
@@ -1013,6 +1030,43 @@ type OrganizationsDecisionDetail struct {
 	// Specifies whether the simulated operation is allowed by the Organizations
 	// service control policies that impact the simulated user's account.
 	AllowedByOrganizations bool
+
+	noSmithyDocumentSerde
+}
+
+// Defines a parameter that a role template accepts. You supply values for these
+// parameters when you create a role with [AcquireRole].
+//
+// [AcquireRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+type ParameterDefinition struct {
+
+	// The name of the parameter.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of the parameter. Valid values are String , StringList , Number ,
+	// NumberList , Arn , and ArnList .
+	//
+	// This member is required.
+	Type ParameterTypeType
+
+	// The value that the service uses for the parameter when you do not supply one.
+	DefaultValue *string
+
+	// A description of the parameter.
+	Description *string
+
+	// Specifies whether you can change the parameter value after you create the role.
+	Immutable bool
+
+	// Specifies whether you must supply a value for the parameter when you create a
+	// role from the template.
+	IsRequired bool
+
+	// An optional subtype that further constrains the values that are allowed for the
+	// parameter.
+	SubType *string
 
 	noSmithyDocumentSerde
 }
@@ -1445,6 +1499,18 @@ type Position struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the list of replacement values for a single template parameter used
+// when creating a role from a role template.
+type ReplacementValueEntry struct {
+
+	// The list of replacement values for the template parameter.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the result of the simulation of a single API operation call on a
 // single resource.
 //
@@ -1564,6 +1630,12 @@ type Role struct {
 	// [Regions where data is tracked]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
 	RoleLastUsed *RoleLastUsed
 
+	// Contains information about the role template that this role was created from.
+	// This member is present only for roles created with [AcquireRole].
+	//
+	// [AcquireRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+	SourceRoleTemplate *SourceRoleTemplate
+
 	// A list of tags that are attached to the role. For more information about
 	// tagging, see [Tagging IAM resources]in the IAM User Guide.
 	//
@@ -1675,6 +1747,118 @@ type RoleLastUsed struct {
 
 	// The name of the Amazon Web Services Region in which the role was last used.
 	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a version of an IAM role template, including the
+// configuration that is used to create roles with [AcquireRole]. This structure is returned as
+// a response element by the [GetRoleTemplateVersion]operation.
+//
+// [GetRoleTemplateVersion]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRoleTemplateVersion.html
+// [AcquireRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+type RoleTemplateVersion struct {
+
+	// The trust policy template that grants an entity permission to assume roles that
+	// you create from this template.
+	AssumeRolePolicyDocumentTemplate *string
+
+	// The date and time, in [ISO 8601 date-time format], when the role template version was created.
+	//
+	// [ISO 8601 date-time format]: http://www.iso.org/iso/iso8601
+	CreateTimestamp *time.Time
+
+	// The minor version that the service uses by default when you create a role from
+	// this template without specifying a minor version.
+	DefaultMinorVersion *int32
+
+	// The description of the role template.
+	Description *string
+
+	// Specifies whether the role template is enabled. When a template is disabled,
+	// you cannot create roles from it.
+	Enabled bool
+
+	// A list of inline policy templates that the service embeds in roles that you
+	// create from this template.
+	InlinePolicyTemplates []InlinePolicy
+
+	// The major version number of the role template.
+	MajorVersion *int32
+
+	// Indicates that the role template is managed by an Amazon Web Services service.
+	ManagedByType ManagedByTypeType
+
+	// The identifier of the Amazon Web Services service that manages the role
+	// template.
+	ManagedByValue *string
+
+	// A list of the ARNs of the managed policies that the service attaches to roles
+	// that you create from this template.
+	ManagedPolicyArns []string
+
+	// The maximum session duration (in seconds) for roles that are created from this
+	// template.
+	MaxSessionDuration *int32
+
+	// The minor version number of this role template version.
+	MinorVersion *int32
+
+	// A list of the parameters that are defined for this role template version. You
+	// supply values for these parameters when you create a role with [AcquireRole].
+	//
+	// [AcquireRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+	ParametersDefinition []ParameterDefinition
+
+	// The ARN of the policy that sets the permissions boundary for roles that you
+	// create from this template.
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)] in the Amazon Web Services General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	PermissionBoundaryArn *string
+
+	// The pattern that is used to generate the description of a role that is created
+	// from this template.
+	RoleDescriptionPattern *string
+
+	// The pattern that is used to generate the name of a role that is created from
+	// this template. The pattern can include @{parameter} placeholders that are
+	// replaced with the values you supply in the ReplacementValues parameter of [AcquireRole].
+	//
+	// [AcquireRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html
+	RoleNamePattern *string
+
+	// The pattern that is used to generate the path of a role that is created from
+	// this template.
+	RolePathPattern *string
+
+	// A list of tag templates that are applied to roles that are created from this
+	// template.
+	RoleTagsTemplate []TagTemplate
+
+	// The Amazon Resource Name (ARN) that identifies the role template.
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)] in the Amazon Web Services General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	TemplateArn *string
+
+	// The friendly name that identifies the role template.
+	TemplateName *string
+
+	// The identifier of the role template version.
+	TemplateVersionId *string
+
+	// The date and time, in [ISO 8601 date-time format], when the role template version was last updated.
+	//
+	// [ISO 8601 date-time format]: http://www.iso.org/iso/iso8601
+	UpdateTimestamp *time.Time
+
+	// Specifies whether this specific minor version of the role template is enabled.
+	VersionEnabled bool
 
 	noSmithyDocumentSerde
 }
@@ -2027,6 +2211,23 @@ type SigningCertificate struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the role template that a role was created from.
+type SourceRoleTemplate struct {
+
+	// The Amazon Resource Name (ARN) of the role template that the role was created
+	// from.
+	//
+	// This member is required.
+	TemplateArn *string
+
+	// The minor version of the role template that was used to create the role.
+	//
+	// This member is required.
+	TemplateMinorVersion *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an SSH public key.
 //
 // This data type is used as a response element in the [GetSSHPublicKey] and [UploadSSHPublicKey] operations.
@@ -2145,6 +2346,24 @@ type Tag struct {
 	// . Tags with a key name of Cost Center might have values that consist of the
 	// number associated with the different cost centers in your company. Typically,
 	// many resources have tags with the same key name but with different values.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a tag that is applied to roles that are created from a role
+// template. The key and value can include @{parameter} placeholders that are
+// replaced with template parameter values when the role is created.
+type TagTemplate struct {
+
+	// The key name of the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The value associated with the tag key.
 	//
 	// This member is required.
 	Value *string

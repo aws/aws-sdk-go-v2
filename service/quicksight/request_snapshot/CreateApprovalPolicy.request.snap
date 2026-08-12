@@ -1,0 +1,5 @@
+POST /governance/approvalworkflows/policies
+
+Content-Type: application/json
+
+{"Actions":["SHARE","SHARE"],"ApplicableTo":{"GroupArns":["__Member__","__Member__"],"Type":"GROUP"},"ApprovalGroups":["__Member__","__Member__"],"AssetTypes":["AGENT","AGENT"],"Description":"__Description__","Name":"__Name__","PolicyId":"__PolicyId__"}

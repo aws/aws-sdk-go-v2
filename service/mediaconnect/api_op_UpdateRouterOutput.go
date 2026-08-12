@@ -36,6 +36,11 @@ type UpdateRouterOutputInput struct {
 	// the configuration is not supported.
 	Configuration types.RouterOutputConfiguration
 
+	// The updated fabric configuration settings for the router output. You cannot
+	// update the fabric configuration while the output has an active route. You must
+	// unroute the output before updating the fabric configuration.
+	FabricConfiguration *types.FabricConfiguration
+
 	// The updated maintenance configuration settings for the router output, including
 	// any changes to preferred maintenance windows and schedules.
 	MaintenanceConfiguration types.MaintenanceConfiguration

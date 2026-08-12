@@ -151,6 +151,33 @@ func TestCheckResponseSnapshot_AssociateIamRoleToResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AssociateVirtualMachinesToExadbVmCluster(t *testing.T) {
+	want := &AssociateVirtualMachinesToExadbVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AssociateVirtualMachinesToExadbVmCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateVirtualMachinesToExadbVmCluster(context.Background(), &AssociateVirtualMachinesToExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DesiredNodeCount: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateVirtualMachinesToExadbVmCluster.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateAutonomousDatabase(t *testing.T) {
 	want := &CreateAutonomousDatabaseOutput{
 		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
@@ -565,6 +592,99 @@ func TestCheckResponseSnapshot_CreateCloudVmCluster(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateExadbVmCluster(t *testing.T) {
+	want := &CreateExadbVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateExadbVmCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateExadbVmCluster(context.Background(), &CreateExadbVmClusterInput{
+		DisplayName:              ptr.String("__DisplayName__"),
+		EnabledEcpuCount:         ptr.Int32(1),
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+		GridImageId:              ptr.String("__GridImageId__"),
+		Hostname:                 ptr.String("__Hostname__"),
+		NodeCount:                ptr.Int32(1),
+		OdbNetworkId:             ptr.String("__OdbNetworkId__"),
+		Shape:                    ptr.String("__Shape__"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TotalEcpuCount:                    ptr.Int32(1),
+		VmFileSystemStorageTotalSizeInGBs: ptr.Int32(1),
+		ClusterName:                       ptr.String("__ClusterName__"),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		LicenseModel:           types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		ScanListenerPortTcp:    ptr.Int32(1),
+		ScanListenerPortTcpSsl: ptr.Int32(1),
+		ShapeAttribute:         types.ShapeAttribute("SMART_STORAGE"),
+		SystemVersion:          ptr.String("__SystemVersion__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TimeZone:    ptr.String("__TimeZone__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateExadbVmCluster.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateExascaleDbStorageVault(t *testing.T) {
+	want := &CreateExascaleDbStorageVaultOutput{
+		DisplayName:              ptr.String("__DisplayName__"),
+		Status:                   types.ResourceStatus("AVAILABLE"),
+		StatusReason:             ptr.String("__StatusReason__"),
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateExascaleDbStorageVault.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateExascaleDbStorageVault(context.Background(), &CreateExascaleDbStorageVaultInput{
+		DisplayName: ptr.String("__DisplayName__"),
+		HighCapacityDatabaseStorageTotalSizeInGBs: ptr.Int32(1),
+		AdditionalFlashCacheInPercent:             ptr.Int32(1),
+		AutoscaleLimitInGBs:                       ptr.Int32(1),
+		AvailabilityZoneId:                        ptr.String("__AvailabilityZoneId__"),
+		AvailabilityZone:                          ptr.String("__AvailabilityZone__"),
+		Description:                               ptr.String("__Description__"),
+		IsAutoscaleEnabled:                        ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TimeZone:    ptr.String("__TimeZone__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateExascaleDbStorageVault.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateOdbNetwork(t *testing.T) {
 	want := &CreateOdbNetworkOutput{
 		DisplayName:  ptr.String("__DisplayName__"),
@@ -757,6 +877,48 @@ func TestCheckResponseSnapshot_DeleteCloudVmCluster(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteExadbVmCluster(t *testing.T) {
+	want := &DeleteExadbVmClusterOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteExadbVmCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteExadbVmCluster(context.Background(), &DeleteExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteExadbVmCluster.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteExascaleDbStorageVault(t *testing.T) {
+	want := &DeleteExascaleDbStorageVaultOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteExascaleDbStorageVault.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteExascaleDbStorageVault(context.Background(), &DeleteExascaleDbStorageVaultInput{
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteExascaleDbStorageVault.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteOdbNetwork(t *testing.T) {
 	want := &DeleteOdbNetworkOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteOdbNetwork.response")
@@ -820,6 +982,36 @@ func TestCheckResponseSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateIamRoleFromResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DisassociateVirtualMachinesFromExadbVmCluster(t *testing.T) {
+	want := &DisassociateVirtualMachinesFromExadbVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateVirtualMachinesFromExadbVmCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateVirtualMachinesFromExadbVmCluster(context.Background(), &DisassociateVirtualMachinesFromExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DbNodeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateVirtualMachinesFromExadbVmCluster.response", err)
 	}
 }
 
@@ -1628,6 +1820,7 @@ func TestCheckResponseSnapshot_GetDbNode(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetDbNode(context.Background(), &GetDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	})
 	if err != nil {
@@ -1694,6 +1887,180 @@ func TestCheckResponseSnapshot_GetDbServer(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetDbServer.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetExadbVmCluster(t *testing.T) {
+	want := &GetExadbVmClusterOutput{
+		ExadbVmCluster: &types.ExadbVmCluster{
+			ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+			ClusterName:      ptr.String("__ClusterName__"),
+			CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DataCollectionOptions: &types.DataCollectionOptions{
+				IsDiagnosticsEventsEnabled: ptr.Bool(true),
+				IsHealthMonitoringEnabled:  ptr.Bool(true),
+				IsIncidentLogsEnabled:      ptr.Bool(true),
+			},
+			DisplayName:               ptr.String("__DisplayName__"),
+			Domain:                    ptr.String("__Domain__"),
+			EnabledEcpuCount:          ptr.Int32(1),
+			ExadbVmClusterArn:         ptr.String("__ExadbVmClusterArn__"),
+			ExascaleDbStorageVaultArn: ptr.String("__ExascaleDbStorageVaultArn__"),
+			ExascaleDbStorageVaultId:  ptr.String("__ExascaleDbStorageVaultId__"),
+			GiVersion:                 ptr.String("__GiVersion__"),
+			GridImageId:               ptr.String("__GridImageId__"),
+			GridImageType:             types.GridImageType("RELEASE_UPDATE"),
+			Hostname:                  ptr.String("__Hostname__"),
+			IamRoles: []types.IamRole{
+				{
+					IamRoleArn:     ptr.String("__IamRoleArn__"),
+					Status:         types.IamRoleStatus("ASSOCIATING"),
+					StatusReason:   ptr.String("__StatusReason__"),
+					AwsIntegration: types.SupportedAwsIntegration("KmsTde"),
+				},
+				{
+					IamRoleArn:     ptr.String("__IamRoleArn__"),
+					Status:         types.IamRoleStatus("ASSOCIATING"),
+					StatusReason:   ptr.String("__StatusReason__"),
+					AwsIntegration: types.SupportedAwsIntegration("KmsTde"),
+				},
+			},
+			IormConfigCache: &types.ExadataIormConfig{
+				DbPlans: []types.DbIormConfig{
+					{
+						DbName:          ptr.String("__DbName__"),
+						FlashCacheLimit: ptr.String("__FlashCacheLimit__"),
+						Share:           ptr.Int32(1),
+					},
+					{
+						DbName:          ptr.String("__DbName__"),
+						FlashCacheLimit: ptr.String("__FlashCacheLimit__"),
+						Share:           ptr.Int32(1),
+					},
+				},
+				LifecycleDetails: ptr.String("__LifecycleDetails__"),
+				LifecycleState:   types.IormLifecycleState("BOOTSTRAPPING"),
+				Objective:        types.Objective("AUTO"),
+			},
+			LastUpdateHistoryEntryId: ptr.String("__LastUpdateHistoryEntryId__"),
+			LicenseModel:             types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+			ListenerPort:             ptr.Int32(1),
+			MemorySizeInGBs:          ptr.Int32(1),
+			NodeCount:                ptr.Int32(1),
+			Ocid:                     ptr.String("__Ocid__"),
+			OciResourceAnchorName:    ptr.String("__OciResourceAnchorName__"),
+			OciUrl:                   ptr.String("__OciUrl__"),
+			OdbNetworkArn:            ptr.String("__OdbNetworkArn__"),
+			OdbNetworkId:             ptr.String("__OdbNetworkId__"),
+			PercentProgress:          ptr.Float32(1.0),
+			ScanDnsName:              ptr.String("__ScanDnsName__"),
+			ScanDnsRecordId:          ptr.String("__ScanDnsRecordId__"),
+			ScanIpIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ScanListenerPortTcp:    ptr.Int32(1),
+			ScanListenerPortTcpSsl: ptr.Int32(1),
+			Shape:                  ptr.String("__Shape__"),
+			ShapeAttribute:         types.ShapeAttribute("SMART_STORAGE"),
+			SnapshotFileSystemStorage: &types.ExadbVmClusterStorageDetails{
+				TotalSizeInGBs: ptr.Int32(1),
+			},
+			SshPublicKeys: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Status:         types.ResourceStatus("AVAILABLE"),
+			StatusReason:   ptr.String("__StatusReason__"),
+			SystemVersion:  ptr.String("__SystemVersion__"),
+			TimeZone:       ptr.String("__TimeZone__"),
+			TotalEcpuCount: ptr.Int32(1),
+			TotalFileSystemStorage: &types.ExadbVmClusterStorageDetails{
+				TotalSizeInGBs: ptr.Int32(1),
+			},
+			VipIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VmFileSystemStorage: &types.ExadbVmClusterStorageDetails{
+				TotalSizeInGBs: ptr.Int32(1),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetExadbVmCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetExadbVmCluster(context.Background(), &GetExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetExadbVmCluster.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetExascaleDbStorageVault(t *testing.T) {
+	want := &GetExascaleDbStorageVaultOutput{
+		ExascaleDbStorageVault: &types.ExascaleDbStorageVault{
+			ExascaleDbStorageVaultId:      ptr.String("__ExascaleDbStorageVaultId__"),
+			AdditionalFlashCacheInPercent: ptr.Int32(1),
+			AttachedShapeAttributes: []types.ShapeAttribute{
+				types.ShapeAttribute("SMART_STORAGE"),
+				types.ShapeAttribute("SMART_STORAGE"),
+			},
+			AutoscaleLimitInGBs: ptr.Int32(1),
+			AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+			CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Description:         ptr.String("__Description__"),
+			DisplayName:         ptr.String("__DisplayName__"),
+			VmClusterArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VmClusterCount: ptr.Int32(1),
+			VmClusterIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExascaleDbStorageVaultArn: ptr.String("__ExascaleDbStorageVaultArn__"),
+			HighCapacityDatabaseStorage: &types.ExascaleDbStorageDetails{
+				AvailableSizeInGBs: ptr.Int32(1),
+				TotalSizeInGBs:     ptr.Int32(1),
+			},
+			IsAutoscaleEnabled:    ptr.Bool(true),
+			Ocid:                  ptr.String("__Ocid__"),
+			OciResourceAnchorName: ptr.String("__OciResourceAnchorName__"),
+			OciUrl:                ptr.String("__OciUrl__"),
+			PercentProgress:       ptr.Float32(1.0),
+			Status:                types.ResourceStatus("AVAILABLE"),
+			StatusReason:          ptr.String("__StatusReason__"),
+			TimeZone:              ptr.String("__TimeZone__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetExascaleDbStorageVault.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetExascaleDbStorageVault(context.Background(), &GetExascaleDbStorageVaultInput{
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetExascaleDbStorageVault.response", err)
 	}
 }
 
@@ -3950,6 +4317,7 @@ func TestCheckResponseSnapshot_ListDbNodes(t *testing.T) {
 		MaxResults:       ptr.Int32(1),
 		NextToken:        ptr.String("__NextToken__"),
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4084,9 +4452,13 @@ func TestCheckResponseSnapshot_ListDbSystemShapes(t *testing.T) {
 				RuntimeMinimumCoreCount:            ptr.Int32(1),
 				ShapeFamily:                        ptr.String("__ShapeFamily__"),
 				ShapeType:                          types.ShapeType("AMD"),
-				Name:                               ptr.String("__Name__"),
-				ComputeModel:                       types.ComputeModel("ECPU"),
-				AreServerTypesSupported:            ptr.Bool(true),
+				ShapeAttributes: []types.ShapeAttribute{
+					types.ShapeAttribute("SMART_STORAGE"),
+					types.ShapeAttribute("SMART_STORAGE"),
+				},
+				Name:                    ptr.String("__Name__"),
+				ComputeModel:            types.ComputeModel("ECPU"),
+				AreServerTypesSupported: ptr.Bool(true),
 			},
 			{
 				AvailableCoreCount:                 ptr.Int32(1),
@@ -4110,9 +4482,13 @@ func TestCheckResponseSnapshot_ListDbSystemShapes(t *testing.T) {
 				RuntimeMinimumCoreCount:            ptr.Int32(1),
 				ShapeFamily:                        ptr.String("__ShapeFamily__"),
 				ShapeType:                          types.ShapeType("AMD"),
-				Name:                               ptr.String("__Name__"),
-				ComputeModel:                       types.ComputeModel("ECPU"),
-				AreServerTypesSupported:            ptr.Bool(true),
+				ShapeAttributes: []types.ShapeAttribute{
+					types.ShapeAttribute("SMART_STORAGE"),
+					types.ShapeAttribute("SMART_STORAGE"),
+				},
+				Name:                    ptr.String("__Name__"),
+				ComputeModel:            types.ComputeModel("ECPU"),
+				AreServerTypesSupported: ptr.Bool(true),
 			},
 		},
 	}
@@ -4129,12 +4505,364 @@ func TestCheckResponseSnapshot_ListDbSystemShapes(t *testing.T) {
 		NextToken:          ptr.String("__NextToken__"),
 		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
 		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+		ShapeFamily:        ptr.String("__ShapeFamily__"),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListDbSystemShapes.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListExadbVmClusters(t *testing.T) {
+	want := &ListExadbVmClustersOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ExadbVmClusters: []types.ExadbVmClusterSummary{
+			{
+				ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+				ClusterName:      ptr.String("__ClusterName__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DataCollectionOptions: &types.DataCollectionOptions{
+					IsDiagnosticsEventsEnabled: ptr.Bool(true),
+					IsHealthMonitoringEnabled:  ptr.Bool(true),
+					IsIncidentLogsEnabled:      ptr.Bool(true),
+				},
+				DisplayName:               ptr.String("__DisplayName__"),
+				Domain:                    ptr.String("__Domain__"),
+				EnabledEcpuCount:          ptr.Int32(1),
+				ExadbVmClusterArn:         ptr.String("__ExadbVmClusterArn__"),
+				ExascaleDbStorageVaultArn: ptr.String("__ExascaleDbStorageVaultArn__"),
+				ExascaleDbStorageVaultId:  ptr.String("__ExascaleDbStorageVaultId__"),
+				GiVersion:                 ptr.String("__GiVersion__"),
+				GridImageId:               ptr.String("__GridImageId__"),
+				GridImageType:             types.GridImageType("RELEASE_UPDATE"),
+				Hostname:                  ptr.String("__Hostname__"),
+				IamRoles: []types.IamRole{
+					{
+						IamRoleArn:     ptr.String("__IamRoleArn__"),
+						Status:         types.IamRoleStatus("ASSOCIATING"),
+						StatusReason:   ptr.String("__StatusReason__"),
+						AwsIntegration: types.SupportedAwsIntegration("KmsTde"),
+					},
+					{
+						IamRoleArn:     ptr.String("__IamRoleArn__"),
+						Status:         types.IamRoleStatus("ASSOCIATING"),
+						StatusReason:   ptr.String("__StatusReason__"),
+						AwsIntegration: types.SupportedAwsIntegration("KmsTde"),
+					},
+				},
+				IormConfigCache: &types.ExadataIormConfig{
+					DbPlans: []types.DbIormConfig{
+						{
+							DbName:          ptr.String("__DbName__"),
+							FlashCacheLimit: ptr.String("__FlashCacheLimit__"),
+							Share:           ptr.Int32(1),
+						},
+						{
+							DbName:          ptr.String("__DbName__"),
+							FlashCacheLimit: ptr.String("__FlashCacheLimit__"),
+							Share:           ptr.Int32(1),
+						},
+					},
+					LifecycleDetails: ptr.String("__LifecycleDetails__"),
+					LifecycleState:   types.IormLifecycleState("BOOTSTRAPPING"),
+					Objective:        types.Objective("AUTO"),
+				},
+				LastUpdateHistoryEntryId: ptr.String("__LastUpdateHistoryEntryId__"),
+				LicenseModel:             types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+				ListenerPort:             ptr.Int32(1),
+				MemorySizeInGBs:          ptr.Int32(1),
+				NodeCount:                ptr.Int32(1),
+				Ocid:                     ptr.String("__Ocid__"),
+				OciResourceAnchorName:    ptr.String("__OciResourceAnchorName__"),
+				OciUrl:                   ptr.String("__OciUrl__"),
+				OdbNetworkArn:            ptr.String("__OdbNetworkArn__"),
+				OdbNetworkId:             ptr.String("__OdbNetworkId__"),
+				PercentProgress:          ptr.Float32(1.0),
+				ScanDnsName:              ptr.String("__ScanDnsName__"),
+				ScanDnsRecordId:          ptr.String("__ScanDnsRecordId__"),
+				ScanIpIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ScanListenerPortTcp:    ptr.Int32(1),
+				ScanListenerPortTcpSsl: ptr.Int32(1),
+				Shape:                  ptr.String("__Shape__"),
+				ShapeAttribute:         types.ShapeAttribute("SMART_STORAGE"),
+				SnapshotFileSystemStorage: &types.ExadbVmClusterStorageDetails{
+					TotalSizeInGBs: ptr.Int32(1),
+				},
+				SshPublicKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status:         types.ResourceStatus("AVAILABLE"),
+				StatusReason:   ptr.String("__StatusReason__"),
+				SystemVersion:  ptr.String("__SystemVersion__"),
+				TimeZone:       ptr.String("__TimeZone__"),
+				TotalEcpuCount: ptr.Int32(1),
+				TotalFileSystemStorage: &types.ExadbVmClusterStorageDetails{
+					TotalSizeInGBs: ptr.Int32(1),
+				},
+				VipIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VmFileSystemStorage: &types.ExadbVmClusterStorageDetails{
+					TotalSizeInGBs: ptr.Int32(1),
+				},
+			},
+			{
+				ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+				ClusterName:      ptr.String("__ClusterName__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DataCollectionOptions: &types.DataCollectionOptions{
+					IsDiagnosticsEventsEnabled: ptr.Bool(true),
+					IsHealthMonitoringEnabled:  ptr.Bool(true),
+					IsIncidentLogsEnabled:      ptr.Bool(true),
+				},
+				DisplayName:               ptr.String("__DisplayName__"),
+				Domain:                    ptr.String("__Domain__"),
+				EnabledEcpuCount:          ptr.Int32(1),
+				ExadbVmClusterArn:         ptr.String("__ExadbVmClusterArn__"),
+				ExascaleDbStorageVaultArn: ptr.String("__ExascaleDbStorageVaultArn__"),
+				ExascaleDbStorageVaultId:  ptr.String("__ExascaleDbStorageVaultId__"),
+				GiVersion:                 ptr.String("__GiVersion__"),
+				GridImageId:               ptr.String("__GridImageId__"),
+				GridImageType:             types.GridImageType("RELEASE_UPDATE"),
+				Hostname:                  ptr.String("__Hostname__"),
+				IamRoles: []types.IamRole{
+					{
+						IamRoleArn:     ptr.String("__IamRoleArn__"),
+						Status:         types.IamRoleStatus("ASSOCIATING"),
+						StatusReason:   ptr.String("__StatusReason__"),
+						AwsIntegration: types.SupportedAwsIntegration("KmsTde"),
+					},
+					{
+						IamRoleArn:     ptr.String("__IamRoleArn__"),
+						Status:         types.IamRoleStatus("ASSOCIATING"),
+						StatusReason:   ptr.String("__StatusReason__"),
+						AwsIntegration: types.SupportedAwsIntegration("KmsTde"),
+					},
+				},
+				IormConfigCache: &types.ExadataIormConfig{
+					DbPlans: []types.DbIormConfig{
+						{
+							DbName:          ptr.String("__DbName__"),
+							FlashCacheLimit: ptr.String("__FlashCacheLimit__"),
+							Share:           ptr.Int32(1),
+						},
+						{
+							DbName:          ptr.String("__DbName__"),
+							FlashCacheLimit: ptr.String("__FlashCacheLimit__"),
+							Share:           ptr.Int32(1),
+						},
+					},
+					LifecycleDetails: ptr.String("__LifecycleDetails__"),
+					LifecycleState:   types.IormLifecycleState("BOOTSTRAPPING"),
+					Objective:        types.Objective("AUTO"),
+				},
+				LastUpdateHistoryEntryId: ptr.String("__LastUpdateHistoryEntryId__"),
+				LicenseModel:             types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+				ListenerPort:             ptr.Int32(1),
+				MemorySizeInGBs:          ptr.Int32(1),
+				NodeCount:                ptr.Int32(1),
+				Ocid:                     ptr.String("__Ocid__"),
+				OciResourceAnchorName:    ptr.String("__OciResourceAnchorName__"),
+				OciUrl:                   ptr.String("__OciUrl__"),
+				OdbNetworkArn:            ptr.String("__OdbNetworkArn__"),
+				OdbNetworkId:             ptr.String("__OdbNetworkId__"),
+				PercentProgress:          ptr.Float32(1.0),
+				ScanDnsName:              ptr.String("__ScanDnsName__"),
+				ScanDnsRecordId:          ptr.String("__ScanDnsRecordId__"),
+				ScanIpIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ScanListenerPortTcp:    ptr.Int32(1),
+				ScanListenerPortTcpSsl: ptr.Int32(1),
+				Shape:                  ptr.String("__Shape__"),
+				ShapeAttribute:         types.ShapeAttribute("SMART_STORAGE"),
+				SnapshotFileSystemStorage: &types.ExadbVmClusterStorageDetails{
+					TotalSizeInGBs: ptr.Int32(1),
+				},
+				SshPublicKeys: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status:         types.ResourceStatus("AVAILABLE"),
+				StatusReason:   ptr.String("__StatusReason__"),
+				SystemVersion:  ptr.String("__SystemVersion__"),
+				TimeZone:       ptr.String("__TimeZone__"),
+				TotalEcpuCount: ptr.Int32(1),
+				TotalFileSystemStorage: &types.ExadbVmClusterStorageDetails{
+					TotalSizeInGBs: ptr.Int32(1),
+				},
+				VipIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VmFileSystemStorage: &types.ExadbVmClusterStorageDetails{
+					TotalSizeInGBs: ptr.Int32(1),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListExadbVmClusters.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListExadbVmClusters(context.Background(), &ListExadbVmClustersInput{
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListExadbVmClusters.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
+	want := &ListExascaleDbStorageVaultsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ExascaleDbStorageVaults: []types.ExascaleDbStorageVaultSummary{
+			{
+				ExascaleDbStorageVaultId:      ptr.String("__ExascaleDbStorageVaultId__"),
+				AdditionalFlashCacheInPercent: ptr.Int32(1),
+				AttachedShapeAttributes: []types.ShapeAttribute{
+					types.ShapeAttribute("SMART_STORAGE"),
+					types.ShapeAttribute("SMART_STORAGE"),
+				},
+				AutoscaleLimitInGBs: ptr.Int32(1),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:         ptr.String("__Description__"),
+				DisplayName:         ptr.String("__DisplayName__"),
+				VmClusterArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VmClusterCount: ptr.Int32(1),
+				VmClusterIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExascaleDbStorageVaultArn: ptr.String("__ExascaleDbStorageVaultArn__"),
+				HighCapacityDatabaseStorage: &types.ExascaleDbStorageDetails{
+					AvailableSizeInGBs: ptr.Int32(1),
+					TotalSizeInGBs:     ptr.Int32(1),
+				},
+				IsAutoscaleEnabled:    ptr.Bool(true),
+				Ocid:                  ptr.String("__Ocid__"),
+				OciResourceAnchorName: ptr.String("__OciResourceAnchorName__"),
+				OciUrl:                ptr.String("__OciUrl__"),
+				PercentProgress:       ptr.Float32(1.0),
+				Status:                types.ResourceStatus("AVAILABLE"),
+				StatusReason:          ptr.String("__StatusReason__"),
+				TimeZone:              ptr.String("__TimeZone__"),
+			},
+			{
+				ExascaleDbStorageVaultId:      ptr.String("__ExascaleDbStorageVaultId__"),
+				AdditionalFlashCacheInPercent: ptr.Int32(1),
+				AttachedShapeAttributes: []types.ShapeAttribute{
+					types.ShapeAttribute("SMART_STORAGE"),
+					types.ShapeAttribute("SMART_STORAGE"),
+				},
+				AutoscaleLimitInGBs: ptr.Int32(1),
+				AvailabilityZone:    ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:  ptr.String("__AvailabilityZoneId__"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:         ptr.String("__Description__"),
+				DisplayName:         ptr.String("__DisplayName__"),
+				VmClusterArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VmClusterCount: ptr.Int32(1),
+				VmClusterIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ExascaleDbStorageVaultArn: ptr.String("__ExascaleDbStorageVaultArn__"),
+				HighCapacityDatabaseStorage: &types.ExascaleDbStorageDetails{
+					AvailableSizeInGBs: ptr.Int32(1),
+					TotalSizeInGBs:     ptr.Int32(1),
+				},
+				IsAutoscaleEnabled:    ptr.Bool(true),
+				Ocid:                  ptr.String("__Ocid__"),
+				OciResourceAnchorName: ptr.String("__OciResourceAnchorName__"),
+				OciUrl:                ptr.String("__OciUrl__"),
+				PercentProgress:       ptr.Float32(1.0),
+				Status:                types.ResourceStatus("AVAILABLE"),
+				StatusReason:          ptr.String("__StatusReason__"),
+				TimeZone:              ptr.String("__TimeZone__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListExascaleDbStorageVaults.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListExascaleDbStorageVaults(context.Background(), &ListExascaleDbStorageVaultsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListExascaleDbStorageVaults.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListGiMinorVersions(t *testing.T) {
+	want := &ListGiMinorVersionsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		GiMinorVersions: []types.GiMinorVersionSummary{
+			{
+				Version:     ptr.String("__Version__"),
+				GridImageId: ptr.String("__GridImageId__"),
+			},
+			{
+				Version:     ptr.String("__Version__"),
+				GridImageId: ptr.String("__GridImageId__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListGiMinorVersions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListGiMinorVersions(context.Background(), &ListGiMinorVersionsInput{
+		GiVersion:          ptr.String("__GiVersion__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		ShapeFamily:        ptr.String("__ShapeFamily__"),
+		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListGiMinorVersions.response", err)
 	}
 }
 
@@ -4580,6 +5308,7 @@ func TestCheckResponseSnapshot_RebootDbNode(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.RebootDbNode(context.Background(), &RebootDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	})
 	if err != nil {
@@ -4685,6 +5414,7 @@ func TestCheckResponseSnapshot_StartDbNode(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.StartDbNode(context.Background(), &StartDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	})
 	if err != nil {
@@ -4737,6 +5467,7 @@ func TestCheckResponseSnapshot_StopDbNode(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.StopDbNode(context.Background(), &StopDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	})
 	if err != nil {
@@ -5043,6 +5774,81 @@ func TestCheckResponseSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateExadbVmCluster(t *testing.T) {
+	want := &UpdateExadbVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateExadbVmCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateExadbVmCluster(context.Background(), &UpdateExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		DisplayName:      ptr.String("__DisplayName__"),
+		EnabledEcpuCount: ptr.Int32(1),
+		GridImageId:      ptr.String("__GridImageId__"),
+		LicenseModel:     types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SystemVersion:                     ptr.String("__SystemVersion__"),
+		TotalEcpuCount:                    ptr.Int32(1),
+		UpdateAction:                      types.UpdateAction("ROLLING_APPLY"),
+		VmFileSystemStorageTotalSizeInGBs: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateExadbVmCluster.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateExascaleDbStorageVault(t *testing.T) {
+	want := &UpdateExascaleDbStorageVaultOutput{
+		DisplayName:              ptr.String("__DisplayName__"),
+		Status:                   types.ResourceStatus("AVAILABLE"),
+		StatusReason:             ptr.String("__StatusReason__"),
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateExascaleDbStorageVault.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateExascaleDbStorageVault(context.Background(), &UpdateExascaleDbStorageVaultInput{
+		ExascaleDbStorageVaultId:                  ptr.String("__ExascaleDbStorageVaultId__"),
+		AdditionalFlashCacheInPercent:             ptr.Int32(1),
+		AutoscaleLimitInGBs:                       ptr.Int32(1),
+		Description:                               ptr.String("__Description__"),
+		DisplayName:                               ptr.String("__DisplayName__"),
+		HighCapacityDatabaseStorageTotalSizeInGBs: ptr.Int32(1),
+		IsAutoscaleEnabled:                        ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateExascaleDbStorageVault.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateOdbNetwork(t *testing.T) {
 	want := &UpdateOdbNetworkOutput{
 		DisplayName:  ptr.String("__DisplayName__"),
@@ -5258,117 +6064,9 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutonomousDatabase(context.Background(), &CreateAutonomousDatabaseInput{
-		OdbNetworkId:                      ptr.String("__OdbNetworkId__"),
-		DisplayName:                       ptr.String("__DisplayName__"),
-		DbName:                            ptr.String("__DbName__"),
-		AdminPassword:                     ptr.String("__AdminPassword__"),
-		ComputeCount:                      ptr.Float64(1.0),
-		DataStorageSizeInTBs:              ptr.Int32(1),
-		DataStorageSizeInGBs:              ptr.Int32(1),
-		DbWorkload:                        types.DbWorkload("OLTP"),
-		IsAutoScalingEnabled:              ptr.Bool(true),
-		IsAutoScalingForStorageEnabled:    ptr.Bool(true),
-		LicenseModel:                      types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
-		CharacterSet:                      ptr.String("__CharacterSet__"),
-		NcharacterSet:                     ptr.String("__NcharacterSet__"),
-		DbVersion:                         ptr.String("__DbVersion__"),
-		DatabaseEdition:                   types.DatabaseEdition("STANDARD_EDITION"),
-		StandbyAllowlistedIpsSource:       types.StandbyAllowlistedIpsSource("PRIMARY"),
-		AutonomousMaintenanceScheduleType: types.AutonomousMaintenanceScheduleType("EARLY"),
-		BackupRetentionPeriodInDays:       ptr.Int32(1),
-		ByolComputeCountLimit:             ptr.Float64(1.0),
-		CpuCoreCount:                      ptr.Int32(1),
-		CustomerContactsToSendToOCI: []types.CustomerContact{
-			{
-				Email: ptr.String("__Email__"),
-			},
-			{
-				Email: ptr.String("__Email__"),
-			},
-		},
-		PrivateEndpointIp:    ptr.String("__PrivateEndpointIp__"),
-		PrivateEndpointLabel: ptr.String("__PrivateEndpointLabel__"),
-		ResourcePoolLeaderId: ptr.String("__ResourcePoolLeaderId__"),
-		ResourcePoolSummary: &types.ResourcePoolSummary{
-			IsDisabled:                    ptr.Bool(true),
-			PoolSize:                      ptr.Int32(1),
-			PoolStorageSizeInTBs:          ptr.Int32(1),
-			AvailableStorageCapacityInTBs: ptr.Float64(1.0),
-			TotalComputeCapacity:          ptr.Int32(1),
-			AvailableComputeCapacity:      ptr.Int32(1),
-		},
-		ScheduledOperations: []types.ScheduledOperationDetails{
-			{
-				DayOfWeek: &types.DayOfWeek{
-					Name: types.DayOfWeekName("MONDAY"),
-				},
-				ScheduledStartTime: ptr.String("__ScheduledStartTime__"),
-				ScheduledStopTime:  ptr.String("__ScheduledStopTime__"),
-			},
-			{
-				DayOfWeek: &types.DayOfWeek{
-					Name: types.DayOfWeekName("MONDAY"),
-				},
-				ScheduledStartTime: ptr.String("__ScheduledStartTime__"),
-				ScheduledStopTime:  ptr.String("__ScheduledStopTime__"),
-			},
-		},
-		StandbyAllowlistedIps: []string{
-			"__Member__",
-			"__Member__",
-		},
-		AllowlistedIps: []string{
-			"__Member__",
-			"__Member__",
-		},
-		TransportableTablespace: &types.TransportableTablespace{
-			TtsBundleUrl: ptr.String("__TtsBundleUrl__"),
-		},
-		IsBackupRetentionLocked:  ptr.Bool(true),
-		IsLocalDataGuardEnabled:  ptr.Bool(true),
-		IsMtlsConnectionRequired: ptr.Bool(true),
-		DbToolsDetails: []types.DatabaseTool{
-			{
-				IsEnabled:            ptr.Bool(true),
-				Name:                 ptr.String("__Name__"),
-				ComputeCount:         ptr.Float64(1.0),
-				MaxIdleTimeInMinutes: ptr.Int32(1),
-			},
-			{
-				IsEnabled:            ptr.Bool(true),
-				Name:                 ptr.String("__Name__"),
-				ComputeCount:         ptr.Float64(1.0),
-				MaxIdleTimeInMinutes: ptr.Int32(1),
-			},
-		},
-		Source: types.SourceType("NONE"),
-		SourceConfiguration: &types.SourceConfigurationMemberDatabaseClone{
-			Value: types.DatabaseCloneConfiguration{
-				SourceAutonomousDatabaseId: ptr.String("__SourceAutonomousDatabaseId__"),
-				CloneType:                  types.CloneType("FULL"),
-			},
-		},
-		EncryptionKeyProvider: types.EncryptionKeyProviderInput("ORACLE_MANAGED"),
-		EncryptionKeyConfiguration: &types.EncryptionKeyConfigurationInputMemberAwsEncryptionKey{
-			Value: types.AwsEncryptionKeyConfigurationInput{
-				IamRoleArn:     ptr.String("__IamRoleArn__"),
-				ExternalIdType: types.ExternalIdType("database_ocid"),
-				KmsKeyId:       ptr.String("__KmsKeyId__"),
-			},
-		},
-		AdminPasswordSource: types.AdminPasswordSource("CUSTOMER_MANAGED_AWS_SECRET"),
-		AdminPasswordSourceConfiguration: &types.AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret{
-			Value: types.CustomerManagedAwsSecretConfigurationInput{
-				SecretId:       ptr.String("__SecretId__"),
-				IamRoleArn:     ptr.String("__IamRoleArn__"),
-				ExternalIdType: types.ExternalIdType("database_ocid"),
-			},
-		},
-		ClientToken: ptr.String("__ClientToken__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
+	_, opErr := svc.AssociateVirtualMachinesToExadbVmCluster(context.Background(), &AssociateVirtualMachinesToExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DesiredNodeCount: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

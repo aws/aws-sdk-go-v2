@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -64,6 +65,327 @@ type AdditionalResources struct {
 	noSmithyDocumentSerde
 }
 
+// Summary of an optimization profile, including its configuration, metadata, and
+// audit information.
+type AgentProfileSummary struct {
+
+	// The aggregation configuration that defines which Amazon Web Services accounts
+	// and Regions to analyze.
+	//
+	// This member is required.
+	AggregationConfiguration []AggregationConfiguration
+
+	// The Amazon Resource Name (ARN) of the optimization profile.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when the profile was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created this profile.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The ARN of the IAM execution role used for recommendation actions.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
+	// The system name of the profile.
+	//
+	// This member is required.
+	Name *string
+
+	// The Well-Architected Tool Framework pillars associated with this profile.
+	//
+	// This member is required.
+	Pillars []Pillar
+
+	// The business overview for this profile.
+	BusinessOverview *string
+
+	// Indicates whether deletion protection is enabled for the profile.
+	DeletionProtection *bool
+
+	// A description of the profile.
+	Description *string
+
+	// The display name of the profile shown to users.
+	DisplayName *string
+
+	// Indicates whether the profile is valid for manual architecture generation.
+	EligibleForArchitectureGeneration *bool
+
+	// Indicates whether the profile is valid for scheduled recommendation generation.
+	EligibleForScheduledGeneration *bool
+
+	// A map of field paths to error messages for invalid or missing input fields.
+	FieldErrors map[string]string
+
+	// The timestamp when the profile was last modified.
+	LastModifiedAt *time.Time
+
+	// The identifier of the user or system that last modified this profile.
+	LastModifiedBy *string
+
+	// The tags associated with the profile.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a recommendation generation process initiated through the agent API.
+type AgentRecommendationGenerationSummary struct {
+
+	// The timestamp when the generation was started.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that started this generation.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The unique identifier of the recommendation generation.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the profile used for this generation.
+	//
+	// This member is required.
+	ProfileArn *string
+
+	// The current status of the recommendation generation.
+	//
+	// This member is required.
+	Status GenerationStatus
+
+	// The estimated time for the generation to complete.
+	EstimatedCompletionTime *time.Time
+
+	// The timestamp when the generation was last modified.
+	LastModifiedAt *time.Time
+
+	// The identifier of the user or system that last modified this generation.
+	LastModifiedBy *string
+
+	// The name of the recommendation generation.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of an agent recommendation item, representing an Amazon Web Services
+// resource or recommendation affected by the optimization recommendation.
+type AgentRecommendationItemSummary struct {
+
+	// The timestamp when the recommendation item was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created this recommendation item.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The unique identifier of the recommendation item.
+	//
+	// This member is required.
+	Id *string
+
+	// Metadata containing a snapshot of the resource or recommendation at the time of
+	// generation.
+	//
+	// This member is required.
+	Metadata document.Interface
+
+	// The Amazon Resource Name (ARN) of the associated recommendation.
+	//
+	// This member is required.
+	RecommendationArn *string
+
+	// The type of the recommendation item.
+	//
+	// This member is required.
+	Type RecommendationItemType
+
+	// The timestamp when the recommendation item was last modified.
+	LastModifiedAt *time.Time
+
+	// The identifier of the user or system that last modified this recommendation
+	// item.
+	LastModifiedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The core fields for a remediation.
+type AgentRecommendationRemediation struct {
+
+	// The timestamp when the remediation was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created this remediation.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The ARN of the recommendation that this remediation belongs to.
+	//
+	// This member is required.
+	RecommendationArn *string
+
+	// The procedural steps to perform the remediation.
+	//
+	// This member is required.
+	Steps []RemediationStep
+
+	// The remediation method.
+	//
+	// This member is required.
+	Type RemediationType
+
+	// The timestamp when the remediation was last modified.
+	LastModifiedAt *time.Time
+
+	// The identifier of the user or system that last modified this remediation.
+	LastModifiedBy *string
+
+	// External references associated with the steps.
+	ResourceLinks []ResourceLink
+
+	noSmithyDocumentSerde
+}
+
+// Summary of an agent optimization recommendation returned by list operations.
+type AgentRecommendationSummary struct {
+
+	// The timestamp when the recommendation was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created this recommendation.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// A description of the recommendation.
+	//
+	// This member is required.
+	Description *string
+
+	// The effort required to implement the recommendation.
+	//
+	// This member is required.
+	Effort Effort
+
+	// The severity of the recommendation's impact.
+	//
+	// This member is required.
+	Impact ImpactCategory
+
+	// The Well-Architected Tool Framework pillar that the recommendation addresses.
+	//
+	// This member is required.
+	Pillar Pillar
+
+	// The priority of the recommendation.
+	//
+	// This member is required.
+	Priority Priority
+
+	// The Amazon Resource Name (ARN) of the associated profile.
+	//
+	// This member is required.
+	ProfileArn *string
+
+	// The Amazon Resource Name (ARN) of the recommendation.
+	//
+	// This member is required.
+	RecommendationArn *string
+
+	// The return on investment estimate for the recommendation.
+	//
+	// This member is required.
+	Roi *Roi
+
+	// The current state of the recommendation.
+	//
+	// This member is required.
+	State RecommendationState
+
+	// The current status of the recommendation.
+	//
+	// This member is required.
+	Status RecommendationStatus
+
+	// The title of the recommendation.
+	//
+	// This member is required.
+	Title *string
+
+	// The type of the recommendation.
+	//
+	// This member is required.
+	Type RecommendationType
+
+	// The applications that the recommendation targets.
+	Applications []string
+
+	// The Amazon Web Services services that the recommendation applies to.
+	AwsServices []string
+
+	// The business units that own the affected resources.
+	BusinessUnits []string
+
+	// The timestamp when the recommendation was last modified.
+	LastModifiedAt *time.Time
+
+	// The identifier of the user or system that last modified this recommendation.
+	LastModifiedBy *string
+
+	// The number of Amazon Web Services resources this recommendation affects.
+	NumberOfResources *int32
+
+	// The free-text reason associated with the recommendation's most recent status
+	// update.
+	UpdateReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration settings that define the scope of Amazon Web Services resources
+// to analyze for optimization recommendations.
+type AggregationConfiguration struct {
+
+	// The ARN of an IAM role to assume for resource analysis in this account.
+	//
+	// This member is required.
+	AccessRoleArn *string
+
+	// The Amazon Web Services account ID to analyze.
+	//
+	// This member is required.
+	AccountId *string
+
+	// A list of Amazon Web Services Regions to include in the analysis.
+	//
+	// This member is required.
+	Regions []string
+
+	noSmithyDocumentSerde
+}
+
 // An answer of the question.
 type Answer struct {
 
@@ -91,8 +413,6 @@ type Answer struct {
 	// lenses.
 	//
 	// This value is only available if the question has been answered.
-	//
-	// This value does not apply to custom lenses.
 	ImprovementPlanUrl *string
 
 	// Defines whether this question is applicable to a lens review.
@@ -233,7 +553,7 @@ type CheckDetail struct {
 	// Status associated to the check.
 	Status CheckStatus
 
-	// The date and time recorded.
+	// The date and time when the check was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -274,7 +594,7 @@ type CheckSummary struct {
 	// Status associated to the check.
 	Status CheckStatus
 
-	// The date and time recorded.
+	// The date and time when the check summary was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -359,6 +679,8 @@ type ChoiceContent struct {
 }
 
 // The choice level improvement plan.
+//
+// This value is only applicable to custom lenses.
 type ChoiceImprovementPlan struct {
 
 	// The ID of a choice.
@@ -371,8 +693,6 @@ type ChoiceImprovementPlan struct {
 	// lenses.
 	//
 	// This value is only available if the question has been answered.
-	//
-	// This value does not apply to custom lenses.
 	ImprovementPlanUrl *string
 
 	noSmithyDocumentSerde
@@ -411,7 +731,7 @@ type ConsolidatedReportMetric struct {
 	// A map from risk names to the count of how many questions have that rating.
 	RiskCounts map[string]int32
 
-	// The date and time recorded.
+	// The date and time when the consolidated report metric was last updated.
 	UpdatedAt *time.Time
 
 	// The ARN for the workload.
@@ -430,6 +750,204 @@ type ConsolidatedReportMetric struct {
 	noSmithyDocumentSerde
 }
 
+// Typed content structure for a context. Contains application-specific fields
+// that describe the environment used during recommendation generation.
+type ContextContent struct {
+
+	// The Amazon Web Services account IDs associated with this application context.
+	AccountIds []string
+
+	// Additional context not captured by other fields.
+	AdditionalContext *string
+
+	// A free-form overview of the application.
+	ApplicationOverview *string
+
+	// The type of the application.
+	ApplicationType ApplicationType
+
+	// A free-form description of the application architecture.
+	ArchitectureOverview *string
+
+	// The Amazon Web Services services used by this application.
+	AwsServices []string
+
+	// The business criticality of the application.
+	Criticality Criticality
+
+	// The industry vertical for this application.
+	Industry *string
+
+	// The Amazon Web Services Regions where this application operates.
+	Regions []string
+
+	// Resource tags used to scope this application context.
+	ResourceTags []ContextResourceTag
+
+	// The Amazon Web Services resource types relevant to this application.
+	ResourceTypes []string
+
+	noSmithyDocumentSerde
+}
+
+// A key-value pair representing a resource tag used to scope context content.
+type ContextResourceTag struct {
+
+	// The tag key.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a context associated with a profile, representing application or
+// environment information used during recommendation generation.
+type ContextSummary struct {
+
+	// The typed content of the context, containing application-specific fields such
+	// as account IDs, Regions, services, and resource types.
+	//
+	// This member is required.
+	Content *ContextContent
+
+	// The type of the context.
+	//
+	// This member is required.
+	ContextType ContextType
+
+	// The timestamp when the context was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created this context.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The unique identifier of the context.
+	//
+	// This member is required.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the associated profile.
+	//
+	// This member is required.
+	ProfileArn *string
+
+	// The title of the context.
+	//
+	// This member is required.
+	Title *string
+
+	// The type of application described by this context.
+	ApplicationType ApplicationType
+
+	// The business criticality of the application described by this context.
+	Criticality Criticality
+
+	// The timestamp when the context was last modified.
+	LastModifiedAt *time.Time
+
+	// The identifier of the user or system that last modified this context.
+	LastModifiedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// A benefit on a different pillar from acting on the recommendation.
+type CrossPillarBenefit struct {
+
+	// A description of what changes and why it matters.
+	//
+	// This member is required.
+	Description *string
+
+	// The severity of the benefit.
+	//
+	// This member is required.
+	Impact ImpactCategory
+
+	// The pillar that would be positively impacted.
+	//
+	// This member is required.
+	Pillar Pillar
+
+	// A short phrase describing the outcome.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an error that occurred during recommendation generation.
+type ErrorDetails struct {
+
+	// The status code identifying the type of error.
+	//
+	// This member is required.
+	Code *string
+
+	// A human-readable description of the error.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of an optimization goal associated with a profile.
+type GoalSummary struct {
+
+	// The timestamp when the goal was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identifier of the user or system that created this goal.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The unique identifier of the goal.
+	//
+	// This member is required.
+	Id *string
+
+	// The Well-Architected Tool Framework pillars associated with this goal.
+	//
+	// This member is required.
+	Pillars []Pillar
+
+	// The Amazon Resource Name (ARN) of the associated profile.
+	//
+	// This member is required.
+	ProfileArn *string
+
+	// The title of the goal.
+	//
+	// This member is required.
+	Title *string
+
+	// A description of the goal.
+	Description *string
+
+	// The timestamp when the goal was last modified.
+	LastModifiedAt *time.Time
+
+	// The identifier of the user or system that last modified this goal.
+	LastModifiedBy *string
+
+	noSmithyDocumentSerde
+}
+
 // An improvement summary of a lens review in a workload.
 type ImprovementSummary struct {
 
@@ -437,11 +955,11 @@ type ImprovementSummary struct {
 	// lenses.
 	//
 	// This value is only available if the question has been answered.
-	//
-	// This value does not apply to custom lenses.
 	ImprovementPlanUrl *string
 
 	// The improvement plan details.
+	//
+	// This value is only applicable to custom lenses.
 	ImprovementPlans []ChoiceImprovementPlan
 
 	// Configuration of the Jira integration.
@@ -464,13 +982,27 @@ type ImprovementSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An insight describing a usage pattern and the signals detected.
+type Insight struct {
+
+	// A description of the usage pattern.
+	//
+	// This member is required.
+	UsagePattern *string
+
+	// A description of the signals detected.
+	SignalsDetected *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration of the Jira integration.
 type JiraConfiguration struct {
 
 	// The URL of the associated Jira issue.
 	JiraIssueUrl *string
 
-	// The date and time recorded.
+	// The date and time when the Jira configuration was last synced.
 	LastSyncedTime *time.Time
 
 	noSmithyDocumentSerde
@@ -581,7 +1113,7 @@ type LensReview struct {
 	// A map from risk names to the count of how many questions have that rating.
 	RiskCounts map[string]int32
 
-	// The date and time recorded.
+	// The date and time when the lens review was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -657,7 +1189,7 @@ type LensReviewSummary struct {
 	// A map from risk names to the count of how many questions have that rating.
 	RiskCounts map[string]int32
 
-	// The date and time recorded.
+	// The date and time when the lens review was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -685,7 +1217,7 @@ type LensShareSummary struct {
 // A lens summary of a lens.
 type LensSummary struct {
 
-	// The date and time recorded.
+	// The date and time when the lens was created.
 	CreatedAt *time.Time
 
 	// The description of the lens.
@@ -724,7 +1256,7 @@ type LensSummary struct {
 	// An Amazon Web Services account ID.
 	Owner *string
 
-	// The date and time recorded.
+	// The date and time when the lens was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -792,7 +1324,7 @@ type Milestone struct {
 	// A workload can have a maximum of 100 milestones.
 	MilestoneNumber *int32
 
-	// The date and time recorded.
+	// The date and time when the milestone was recorded.
 	RecordedAt *time.Time
 
 	// A workload return object.
@@ -814,7 +1346,7 @@ type MilestoneSummary struct {
 	// A workload can have a maximum of 100 milestones.
 	MilestoneNumber *int32
 
-	// The date and time recorded.
+	// The date and time when the milestone was recorded.
 	RecordedAt *time.Time
 
 	// A workload summary return object.
@@ -851,6 +1383,23 @@ type PillarDifference struct {
 
 	// List of question differences.
 	QuestionDifferences []QuestionDifference
+
+	noSmithyDocumentSerde
+}
+
+// Item configuration for a specific Well-Architected Tool Framework pillar.
+type PillarItem struct {
+
+	// A list of item IDs to process for this pillar, such as best practice IDs,
+	// Amazon Web Services service names, or resource ARNs.
+	//
+	// This member is required.
+	Ids []string
+
+	// The pillar this item configuration applies to.
+	//
+	// This member is required.
+	Pillar Pillar
 
 	noSmithyDocumentSerde
 }
@@ -901,7 +1450,7 @@ type PillarReviewSummary struct {
 // A profile.
 type Profile struct {
 
-	// The date and time recorded.
+	// The date and time when the profile was created.
 	CreatedAt *time.Time
 
 	// An Amazon Web Services account ID.
@@ -928,7 +1477,7 @@ type Profile struct {
 	// The tags assigned to the profile.
 	Tags map[string]string
 
-	// The date and time recorded.
+	// The date and time when the profile was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -1041,7 +1590,7 @@ type ProfileShareSummary struct {
 // Summary of a profile.
 type ProfileSummary struct {
 
-	// The date and time recorded.
+	// The date and time when the profile was created.
 	CreatedAt *time.Time
 
 	// An Amazon Web Services account ID.
@@ -1059,7 +1608,7 @@ type ProfileSummary struct {
 	// The profile version.
 	ProfileVersion *string
 
-	// The date and time recorded.
+	// The date and time when the profile was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -1068,7 +1617,7 @@ type ProfileSummary struct {
 // The profile template.
 type ProfileTemplate struct {
 
-	// The date and time recorded.
+	// The date and time when the profile template was created.
 	CreatedAt *time.Time
 
 	// The name of the profile template.
@@ -1077,7 +1626,7 @@ type ProfileTemplate struct {
 	// Profile template questions.
 	TemplateQuestions []ProfileTemplateQuestion
 
-	// The date and time recorded.
+	// The date and time when the profile template was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -1122,6 +1671,27 @@ type ProfileTemplateQuestion struct {
 	noSmithyDocumentSerde
 }
 
+// Progress information for a recommendation generation process.
+type Progress struct {
+
+	// The completion percentage of the generation process (0-100).
+	//
+	// This member is required.
+	CompletionPercentage *float64
+
+	// The number of generation steps that have been completed.
+	//
+	// This member is required.
+	StepsCompleted *int32
+
+	// The total number of steps in the generation process.
+	//
+	// This member is required.
+	TotalSteps *int32
+
+	noSmithyDocumentSerde
+}
+
 // A question difference return object.
 type QuestionDifference struct {
 
@@ -1149,6 +1719,62 @@ type QuestionMetric struct {
 
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a goal associated with a recommendation.
+type RecommendationGoal struct {
+
+	// The title of the goal associated with the recommendation.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// One step within a remediation procedure.
+type RemediationStep struct {
+
+	// The content describing the step, which can include code examples and
+	// verification checklists.
+	//
+	// This member is required.
+	Content *string
+
+	// An optional short label for the step.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// A high-level remediation summary returned in the detail response.
+type RemediationSummary struct {
+
+	// A short imperative statement of the recommended action.
+	//
+	// This member is required.
+	Recommendation *string
+
+	// High-level steps to implement the fix.
+	//
+	// This member is required.
+	Steps []string
+
+	noSmithyDocumentSerde
+}
+
+// An external reference associated with remediation steps.
+type ResourceLink struct {
+
+	// The URL of the external reference.
+	//
+	// This member is required.
+	Url *string
+
+	// An optional human-readable title for the link.
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -1190,7 +1816,7 @@ type ReviewTemplate struct {
 	// The latest status of a review template.
 	UpdateStatus ReviewTemplateUpdateStatus
 
-	// The date and time recorded.
+	// The date and time when the review template was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -1226,8 +1852,6 @@ type ReviewTemplateAnswer struct {
 	// lenses.
 	//
 	// This value is only available if the question has been answered.
-	//
-	// This value does not apply to custom lenses.
 	ImprovementPlanUrl *string
 
 	// Defines whether this question is applicable to a lens review.
@@ -1349,7 +1973,7 @@ type ReviewTemplateLensReview struct {
 	// A count of how many questions are answered and unanswered in the lens review.
 	QuestionCounts map[string]int32
 
-	// The date and time recorded.
+	// The date and time when the review template lens review was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -1400,8 +2024,40 @@ type ReviewTemplateSummary struct {
 	// The latest status of a review template.
 	UpdateStatus ReviewTemplateUpdateStatus
 
-	// The date and time recorded.
+	// The date and time when the review template was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A return-on-investment estimate with context.
+type Roi struct {
+
+	// A sentence providing context for the estimate.
+	//
+	// This member is required.
+	Detail *string
+
+	// A short statistic or key metric. Optional when there is no quantifiable figure.
+	Estimate *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the scope for recommendation generation, specifying which pillars and
+// goals to focus on.
+type Scope struct {
+
+	// The Well-Architected Tool Framework pillars to include in the generation scope.
+	//
+	// This member is required.
+	Pillars []Pillar
+
+	// Specific goal IDs to focus on during recommendation generation.
+	GoalIds []string
+
+	// Optional per-pillar item filtering configuration.
+	Items []PillarItem
 
 	noSmithyDocumentSerde
 }
@@ -1510,6 +2166,23 @@ type ShareInvitationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A key-value pair associated with a resource for cost allocation and access
+// control.
+type Tag struct {
+
+	// The key of the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the tag.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary of a review template share.
 type TemplateShareSummary struct {
 
@@ -1525,6 +2198,40 @@ type TemplateShareSummary struct {
 
 	// Review template share invitation status message.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A negative trade-off from acting on the recommendation.
+type TradeOff struct {
+
+	// A description of the specific risk and the condition that triggers it.
+	//
+	// This member is required.
+	Description *string
+
+	// A specific action to mitigate the trade-off and when to take it.
+	//
+	// This member is required.
+	Mitigation *string
+
+	// The pillar that could be negatively impacted.
+	//
+	// This member is required.
+	Pillar Pillar
+
+	// The risk rating for the trade-off.
+	//
+	// This member is required.
+	Risk RiskRating
+
+	// A short phrase describing what is lost or degraded.
+	//
+	// This member is required.
+	Title *string
+
+	// An optional explanation providing additional context for the risk rating.
+	RiskExplanation *string
 
 	noSmithyDocumentSerde
 }
@@ -1688,7 +2395,7 @@ type Workload struct {
 	// the primary group or individual that owns the workload review process.
 	ReviewOwner *string
 
-	// The date and time recorded.
+	// The review restriction date for the workload.
 	ReviewRestrictionDate *time.Time
 
 	// A map from risk names to the count of how many questions have that rating.
@@ -1700,7 +2407,7 @@ type Workload struct {
 	// The tags associated with the workload.
 	Tags map[string]string
 
-	// The date and time recorded.
+	// The date and time when the workload was last updated.
 	UpdatedAt *time.Time
 
 	// The ARN for the workload.
@@ -1857,7 +2564,7 @@ type WorkloadSummary struct {
 	// A map from risk names to the count of how many questions have that rating.
 	RiskCounts map[string]int32
 
-	// The date and time recorded.
+	// The date and time when the workload was last updated.
 	UpdatedAt *time.Time
 
 	// The ARN for the workload.

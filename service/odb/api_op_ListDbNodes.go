@@ -27,10 +27,13 @@ func (c *Client) ListDbNodes(ctx context.Context, params *ListDbNodesInput, optF
 
 type ListDbNodesInput struct {
 
-	// The unique identifier of the VM cluster.
-	//
-	// This member is required.
+	// The unique identifier of the VM cluster. You must specify either this parameter
+	// or exadbVmClusterId .
 	CloudVmClusterId *string
+
+	// The unique identifier of the Exascale VM cluster. You must specify either this
+	// parameter or cloudVmClusterId .
+	ExadbVmClusterId *string
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output.
@@ -85,9 +88,6 @@ func (c *Client) addOperationListDbNodesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListDbNodesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

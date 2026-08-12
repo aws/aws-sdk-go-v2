@@ -1528,6 +1528,13 @@ func awsRestjson1_serializeOpDocumentCreateRouterOutputInput(v *CreateRouterOutp
 		}
 	}
 
+	if v.FabricConfiguration != nil {
+		ok := object.Key("fabricConfiguration")
+		if err := awsRestjson1_serializeDocumentFabricConfiguration(v.FabricConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaintenanceConfiguration != nil {
 		ok := object.Key("maintenanceConfiguration")
 		if err := awsRestjson1_serializeDocumentMaintenanceConfiguration(v.MaintenanceConfiguration, ok); err != nil {
@@ -7330,6 +7337,13 @@ func awsRestjson1_serializeOpDocumentUpdateRouterOutputInput(v *UpdateRouterOutp
 		}
 	}
 
+	if v.FabricConfiguration != nil {
+		ok := object.Key("fabricConfiguration")
+		if err := awsRestjson1_serializeDocumentFabricConfiguration(v.FabricConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaintenanceConfiguration != nil {
 		ok := object.Key("maintenanceConfiguration")
 		if err := awsRestjson1_serializeDocumentMaintenanceConfiguration(v.MaintenanceConfiguration, ok); err != nil {
@@ -8146,6 +8160,18 @@ func awsRestjson1_serializeDocumentEncryption(v *types.Encryption, value smithyj
 	if v.Url != nil {
 		ok := object.Key("url")
 		ok.String(*v.Url)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFabricConfiguration(v *types.FabricConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RecoveryLatencyMode) > 0 {
+		ok := object.Key("recoveryLatencyMode")
+		ok.String(string(v.RecoveryLatencyMode))
 	}
 
 	return nil

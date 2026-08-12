@@ -1,0 +1,8 @@
+{
+    "id": "38b571d5-161f-4462-b683-fc5e01d7c3b2",
+    "type": "feature",
+    "description": "Introduced role manager, an IAM capability that automatically sets up the IAM roles your AWS services need. When you set up a supported service in the console, role manager creates a role for you or reuses an existing one from an AWS-managed template.",
+    "modules": [
+        "service/iam"
+    ]
+}

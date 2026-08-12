@@ -30,6 +30,8 @@ type GetDataCatalogExportConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+// The export configuration returned by the GetDataCatalogExportConfiguration
+// operation.
 type GetDataCatalogExportConfigurationOutput struct {
 
 	// The timestamp at which the export configuration was created.

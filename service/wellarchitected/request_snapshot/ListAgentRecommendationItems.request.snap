@@ -1,0 +1,3 @@
+GET /api/v1/agent-recommendations/__RecommendationArn__/items?maxResults=1&nextToken=__NextToken__&type=AWS_RESOURCE
+
+

@@ -70,6 +70,26 @@ func (m *validateOpBatchDeleteTopicReviewedAnswer) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDescribeUserLimits struct {
+}
+
+func (*validateOpBatchDescribeUserLimits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDescribeUserLimits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDescribeUserLimitsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDescribeUserLimitsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelIngestion struct {
 }
 
@@ -190,6 +210,26 @@ func (m *validateOpCreateAnalysis) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateApprovalPolicy struct {
+}
+
+func (*validateOpCreateApprovalPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateApprovalPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateApprovalPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateApprovalPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateBrand struct {
 }
 
@@ -285,6 +325,26 @@ func (m *validateOpCreateDataSource) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDlpSetting struct {
+}
+
+func (*validateOpCreateDlpSetting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDlpSetting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDlpSettingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDlpSettingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -445,6 +505,26 @@ func (m *validateOpCreateKnowledgeBase) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLimitsProfile struct {
+}
+
+func (*validateOpCreateLimitsProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLimitsProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLimitsProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLimitsProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -830,6 +910,26 @@ func (m *validateOpDeleteAnalysis) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteApprovalPolicy struct {
+}
+
+func (*validateOpDeleteApprovalPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApprovalPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApprovalPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApprovalPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBrandAssignment struct {
 }
 
@@ -990,6 +1090,26 @@ func (m *validateOpDeleteDefaultQBusinessApplication) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDlpSetting struct {
+}
+
+func (*validateOpDeleteDlpSetting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDlpSetting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDlpSettingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDlpSettingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFlow struct {
 }
 
@@ -1145,6 +1265,26 @@ func (m *validateOpDeleteKnowledgeBase) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLimitsProfile struct {
+}
+
+func (*validateOpDeleteLimitsProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLimitsProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLimitsProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLimitsProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1710,6 +1850,26 @@ func (m *validateOpDescribeAnalysisPermissions) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeApprovalPolicy struct {
+}
+
+func (*validateOpDescribeApprovalPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeApprovalPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeApprovalPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeApprovalPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAssetBundleExportJob struct {
 }
 
@@ -2090,6 +2250,26 @@ func (m *validateOpDescribeDefaultQBusinessApplication) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDlpSetting struct {
+}
+
+func (*validateOpDescribeDlpSetting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDlpSetting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDlpSettingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDlpSettingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFlow struct {
 }
 
@@ -2325,6 +2505,26 @@ func (m *validateOpDescribeKnowledgeBasePermissions) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeKnowledgeBasePermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeLimitsProfile struct {
+}
+
+func (*validateOpDescribeLimitsProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeLimitsProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeLimitsProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeLimitsProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3190,6 +3390,26 @@ func (m *validateOpListDataSources) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDlpSettings struct {
+}
+
+func (*validateOpListDlpSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDlpSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDlpSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDlpSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListFlows struct {
 }
 
@@ -3405,6 +3625,26 @@ func (m *validateOpListKnowledgeBases) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListKnowledgeBasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListLimitsProfiles struct {
+}
+
+func (*validateOpListLimitsProfiles) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLimitsProfiles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLimitsProfilesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLimitsProfilesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4530,6 +4770,26 @@ func (m *validateOpUpdateApplicationWithTokenExchangeGrant) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApprovalPolicy struct {
+}
+
+func (*validateOpUpdateApprovalPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApprovalPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApprovalPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApprovalPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateBrandAssignment struct {
 }
 
@@ -4810,6 +5070,26 @@ func (m *validateOpUpdateDefaultQBusinessApplication) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDlpSetting struct {
+}
+
+func (*validateOpUpdateDlpSetting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDlpSetting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDlpSettingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDlpSettingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFlow struct {
 }
 
@@ -5025,6 +5305,26 @@ func (m *validateOpUpdateKnowledgeBasePermissions) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateKnowledgeBasePermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLimitsProfile struct {
+}
+
+func (*validateOpUpdateLimitsProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLimitsProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLimitsProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLimitsProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5562,6 +5862,10 @@ func addOpBatchDeleteTopicReviewedAnswerValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpBatchDeleteTopicReviewedAnswer{}, middleware.After)
 }
 
+func addOpBatchDescribeUserLimitsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDescribeUserLimits{}, middleware.After)
+}
+
 func addOpCancelIngestionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelIngestion{}, middleware.After)
 }
@@ -5586,6 +5890,10 @@ func addOpCreateAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAnalysis{}, middleware.After)
 }
 
+func addOpCreateApprovalPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateApprovalPolicy{}, middleware.After)
+}
+
 func addOpCreateBrandValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBrand{}, middleware.After)
 }
@@ -5604,6 +5912,10 @@ func addOpCreateDataSetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSource{}, middleware.After)
+}
+
+func addOpCreateDlpSettingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDlpSetting{}, middleware.After)
 }
 
 func addOpCreateFlowValidationMiddleware(stack *middleware.Stack) error {
@@ -5636,6 +5948,10 @@ func addOpCreateIngestionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateKnowledgeBase{}, middleware.After)
+}
+
+func addOpCreateLimitsProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLimitsProfile{}, middleware.After)
 }
 
 func addOpCreateNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -5714,6 +6030,10 @@ func addOpDeleteAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAnalysis{}, middleware.After)
 }
 
+func addOpDeleteApprovalPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApprovalPolicy{}, middleware.After)
+}
+
 func addOpDeleteBrandAssignmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBrandAssignment{}, middleware.After)
 }
@@ -5746,6 +6066,10 @@ func addOpDeleteDefaultQBusinessApplicationValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpDeleteDefaultQBusinessApplication{}, middleware.After)
 }
 
+func addOpDeleteDlpSettingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDlpSetting{}, middleware.After)
+}
+
 func addOpDeleteFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFlow{}, middleware.After)
 }
@@ -5776,6 +6100,10 @@ func addOpDeleteIdentityPropagationConfigValidationMiddleware(stack *middleware.
 
 func addOpDeleteKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKnowledgeBase{}, middleware.After)
+}
+
+func addOpDeleteLimitsProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLimitsProfile{}, middleware.After)
 }
 
 func addOpDeleteNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -5890,6 +6218,10 @@ func addOpDescribeAnalysisPermissionsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDescribeAnalysisPermissions{}, middleware.After)
 }
 
+func addOpDescribeApprovalPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeApprovalPolicy{}, middleware.After)
+}
+
 func addOpDescribeAssetBundleExportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAssetBundleExportJob{}, middleware.After)
 }
@@ -5966,6 +6298,10 @@ func addOpDescribeDefaultQBusinessApplicationValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpDescribeDefaultQBusinessApplication{}, middleware.After)
 }
 
+func addOpDescribeDlpSettingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDlpSetting{}, middleware.After)
+}
+
 func addOpDescribeFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFlow{}, middleware.After)
 }
@@ -6012,6 +6348,10 @@ func addOpDescribeKnowledgeBaseValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeKnowledgeBasePermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeKnowledgeBasePermissions{}, middleware.After)
+}
+
+func addOpDescribeLimitsProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeLimitsProfile{}, middleware.After)
 }
 
 func addOpDescribeNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -6186,6 +6526,10 @@ func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataSources{}, middleware.After)
 }
 
+func addOpListDlpSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDlpSettings{}, middleware.After)
+}
+
 func addOpListFlowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFlows{}, middleware.After)
 }
@@ -6228,6 +6572,10 @@ func addOpListIngestionsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListKnowledgeBasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListKnowledgeBases{}, middleware.After)
+}
+
+func addOpListLimitsProfilesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLimitsProfiles{}, middleware.After)
 }
 
 func addOpListNamespacesValidationMiddleware(stack *middleware.Stack) error {
@@ -6454,6 +6802,10 @@ func addOpUpdateApplicationWithTokenExchangeGrantValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpUpdateApplicationWithTokenExchangeGrant{}, middleware.After)
 }
 
+func addOpUpdateApprovalPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApprovalPolicy{}, middleware.After)
+}
+
 func addOpUpdateBrandAssignmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBrandAssignment{}, middleware.After)
 }
@@ -6510,6 +6862,10 @@ func addOpUpdateDefaultQBusinessApplicationValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpUpdateDefaultQBusinessApplication{}, middleware.After)
 }
 
+func addOpUpdateDlpSettingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDlpSetting{}, middleware.After)
+}
+
 func addOpUpdateFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFlow{}, middleware.After)
 }
@@ -6552,6 +6908,10 @@ func addOpUpdateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateKnowledgeBasePermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKnowledgeBasePermissions{}, middleware.After)
+}
+
+func addOpUpdateLimitsProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLimitsProfile{}, middleware.After)
 }
 
 func addOpUpdateOAuthClientApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -7220,6 +7580,21 @@ func validateAppendOperation(v *types.AppendOperation) error {
 	}
 }
 
+func validateApplicableTo(v *types.ApplicableTo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplicableTo"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetBundleCloudFormationOverridePropertyConfiguration(v *types.AssetBundleCloudFormationOverridePropertyConfiguration) error {
 	if v == nil {
 		return nil
@@ -7263,6 +7638,11 @@ func validateAssetBundleCloudFormationOverridePropertyConfiguration(v *types.Ass
 	if v.Folders != nil {
 		if err := validateAssetBundleExportJobFolderOverridePropertiesList(v.Folders); err != nil {
 			invalidParams.AddNested("Folders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TopicsV2 != nil {
+		if err := validateAssetBundleExportJobTopicV2OverridePropertiesList(v.TopicsV2); err != nil {
+			invalidParams.AddNested("TopicsV2", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7507,6 +7887,41 @@ func validateAssetBundleExportJobThemeOverridePropertiesList(v []types.AssetBund
 	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobThemeOverridePropertiesList"}
 	for i := range v {
 		if err := validateAssetBundleExportJobThemeOverrideProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobTopicV2OverrideProperties(v *types.AssetBundleExportJobTopicV2OverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobTopicV2OverrideProperties"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobTopicV2OverridePropertiesList(v []types.AssetBundleExportJobTopicV2OverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobTopicV2OverridePropertiesList"}
+	for i := range v {
+		if err := validateAssetBundleExportJobTopicV2OverrideProperties(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -8203,6 +8618,11 @@ func validateAssetBundleImportJobOverrideParameters(v *types.AssetBundleImportJo
 			invalidParams.AddNested("Folders", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TopicsV2 != nil {
+		if err := validateAssetBundleImportJobTopicV2OverrideParametersList(v.TopicsV2); err != nil {
+			invalidParams.AddNested("TopicsV2", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8243,6 +8663,11 @@ func validateAssetBundleImportJobOverridePermissions(v *types.AssetBundleImportJ
 	if v.Folders != nil {
 		if err := validateAssetBundleImportJobFolderOverridePermissionsList(v.Folders); err != nil {
 			invalidParams.AddNested("Folders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TopicsV2 != nil {
+		if err := validateAssetBundleImportJobTopicV2OverridePermissionsList(v.TopicsV2); err != nil {
+			invalidParams.AddNested("TopicsV2", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8290,6 +8715,11 @@ func validateAssetBundleImportJobOverrideTags(v *types.AssetBundleImportJobOverr
 	if v.Folders != nil {
 		if err := validateAssetBundleImportJobFolderOverrideTagsList(v.Folders); err != nil {
 			invalidParams.AddNested("Folders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TopicsV2 != nil {
+		if err := validateAssetBundleImportJobTopicV2OverrideTagsList(v.TopicsV2); err != nil {
+			invalidParams.AddNested("TopicsV2", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8434,6 +8864,116 @@ func validateAssetBundleImportJobThemeOverrideTagsList(v []types.AssetBundleImpo
 	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobThemeOverrideTagsList"}
 	for i := range v {
 		if err := validateAssetBundleImportJobThemeOverrideTags(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobTopicV2OverrideParameters(v *types.AssetBundleImportJobTopicV2OverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobTopicV2OverrideParameters"}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobTopicV2OverrideParametersList(v []types.AssetBundleImportJobTopicV2OverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobTopicV2OverrideParametersList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobTopicV2OverrideParameters(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobTopicV2OverridePermissions(v *types.AssetBundleImportJobTopicV2OverridePermissions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobTopicV2OverridePermissions"}
+	if v.TopicIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicIds"))
+	}
+	if v.Permissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	} else if v.Permissions != nil {
+		if err := validateAssetBundleResourcePermissions(v.Permissions); err != nil {
+			invalidParams.AddNested("Permissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobTopicV2OverridePermissionsList(v []types.AssetBundleImportJobTopicV2OverridePermissions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobTopicV2OverridePermissionsList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobTopicV2OverridePermissions(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobTopicV2OverrideTags(v *types.AssetBundleImportJobTopicV2OverrideTags) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobTopicV2OverrideTags"}
+	if v.TopicIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicIds"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobTopicV2OverrideTagsList(v []types.AssetBundleImportJobTopicV2OverrideTags) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobTopicV2OverrideTagsList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobTopicV2OverrideTags(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -9047,6 +9587,23 @@ func validateBasicAuthConnectionMetadata(v *types.BasicAuthConnectionMetadata) e
 	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchDescribeUserLimitsRequestUsersList(v []types.UserLimitsEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDescribeUserLimitsRequestUsersList"}
+	for i := range v {
+		if err := validateUserLimitsEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10743,6 +11300,24 @@ func validateCreateColumnsOperation(v *types.CreateColumnsOperation) error {
 	} else if v.Columns != nil {
 		if err := validateCalculatedColumnList(v.Columns); err != nil {
 			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateLimitsProfileRequestResourceLimitsMap(v map[string]types.ProfileLimitValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLimitsProfileRequestResourceLimitsMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateProfileLimitValue(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -17051,6 +17626,44 @@ func validateKPIVisualStandardLayout(v *types.KPIVisualStandardLayout) error {
 	}
 }
 
+func validateLabelActionMapping(v *types.LabelActionMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LabelActionMapping"}
+	if v.LabelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelId"))
+	}
+	if v.LabelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelName"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLabelActionMappingList(v []types.LabelActionMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LabelActionMappingList"}
+	for i := range v {
+		if err := validateLabelActionMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLayerCustomAction(v *types.LayerCustomAction) error {
 	if v == nil {
 		return nil
@@ -17762,6 +18375,50 @@ func validateMetricComparisonComputation(v *types.MetricComparisonComputation) e
 		if err := validateMeasureField(v.TargetValue); err != nil {
 			invalidParams.AddNested("TargetValue", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMicrosoftPurviewCredentials(v *types.MicrosoftPurviewCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MicrosoftPurviewCredentials"}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMicrosoftPurviewProviderConfig(v *types.MicrosoftPurviewProviderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MicrosoftPurviewProviderConfig"}
+	if v.Credentials == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Credentials"))
+	} else if v.Credentials != nil {
+		if err := validateMicrosoftPurviewCredentials(v.Credentials); err != nil {
+			invalidParams.AddNested("Credentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LabelActionMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelActionMappings"))
+	} else if v.LabelActionMappings != nil {
+		if err := validateLabelActionMappingList(v.LabelActionMappings); err != nil {
+			invalidParams.AddNested("LabelActionMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.UnmappedAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UnmappedAction"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -19658,6 +20315,24 @@ func validatePrestoParameters(v *types.PrestoParameters) error {
 	}
 }
 
+func validateProfileLimitValue(v *types.ProfileLimitValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfileLimitValue"}
+	if v.MaxValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxValue"))
+	}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProjectOperation(v *types.ProjectOperation) error {
 	if v == nil {
 		return nil
@@ -19670,6 +20345,25 @@ func validateProjectOperation(v *types.ProjectOperation) error {
 	}
 	if v.ProjectedColumns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectedColumns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProviderConfig(v types.ProviderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProviderConfig"}
+	switch uv := v.(type) {
+	case *types.ProviderConfigMemberMicrosoftPurview:
+		if err := validateMicrosoftPurviewProviderConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[MicrosoftPurview]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20458,6 +21152,24 @@ func validateRenameColumnsOperation(v *types.RenameColumnsOperation) error {
 	} else if v.RenameColumnOperations != nil {
 		if err := validateRenameColumnOperationList(v.RenameColumnOperations); err != nil {
 			invalidParams.AddNested("RenameColumnOperations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceLimitsMap(v map[string]types.ProfileLimitValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceLimitsMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateProfileLimitValue(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -25086,6 +25798,24 @@ func validateUserIndexCapacityFilters(v []types.UserIndexCapacityFilter) error {
 	}
 }
 
+func validateUserLimitsEntry(v *types.UserLimitsEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserLimitsEntry"}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUserNameOrEmailFilter(v *types.UserNameOrEmailFilter) error {
 	if v == nil {
 		return nil
@@ -25911,6 +26641,26 @@ func validateOpBatchDeleteTopicReviewedAnswerInput(v *BatchDeleteTopicReviewedAn
 	}
 }
 
+func validateOpBatchDescribeUserLimitsInput(v *BatchDescribeUserLimitsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDescribeUserLimitsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Users != nil {
+		if err := validateBatchDescribeUserLimitsRequestUsersList(v.Users); err != nil {
+			invalidParams.AddNested("Users", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelIngestionInput(v *CancelIngestionInput) error {
 	if v == nil {
 		return nil
@@ -26089,6 +26839,40 @@ func validateOpCreateAnalysisInput(v *CreateAnalysisInput) error {
 		if err := validateValidationStrategy(v.ValidationStrategy); err != nil {
 			invalidParams.AddNested("ValidationStrategy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateApprovalPolicyInput(v *CreateApprovalPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateApprovalPolicyInput"}
+	if v.PolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	}
+	if v.AssetTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetTypes"))
+	}
+	if v.ApplicableTo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicableTo"))
+	} else if v.ApplicableTo != nil {
+		if err := validateApplicableTo(v.ApplicableTo); err != nil {
+			invalidParams.AddNested("ApplicableTo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ApprovalGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApprovalGroups"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -26334,6 +27118,45 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	}
 }
 
+func validateOpCreateDlpSettingInput(v *CreateDlpSettingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDlpSettingInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DlpSettingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DlpSettingId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.ProviderType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderType"))
+	}
+	if v.ProviderConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderConfig"))
+	} else if v.ProviderConfig != nil {
+		if err := validateProviderConfig(v.ProviderConfig); err != nil {
+			invalidParams.AddNested("ProviderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ProviderOutageAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderOutageAction"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFlowInput(v *CreateFlowInput) error {
 	if v == nil {
 		return nil
@@ -26536,6 +27359,34 @@ func validateOpCreateKnowledgeBaseInput(v *CreateKnowledgeBaseInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLimitsProfileInput(v *CreateLimitsProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLimitsProfileInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
+	}
+	if v.ResourceLimits == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceLimits"))
+	} else if v.ResourceLimits != nil {
+		if err := validateCreateLimitsProfileRequestResourceLimitsMap(v.ResourceLimits); err != nil {
+			invalidParams.AddNested("ResourceLimits", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -27043,6 +27894,21 @@ func validateOpDeleteAnalysisInput(v *DeleteAnalysisInput) error {
 	}
 }
 
+func validateOpDeleteApprovalPolicyInput(v *DeleteApprovalPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApprovalPolicyInput"}
+	if v.PolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBrandAssignmentInput(v *DeleteBrandAssignmentInput) error {
 	if v == nil {
 		return nil
@@ -27173,6 +28039,24 @@ func validateOpDeleteDefaultQBusinessApplicationInput(v *DeleteDefaultQBusinessA
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDefaultQBusinessApplicationInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDlpSettingInput(v *DeleteDlpSettingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDlpSettingInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DlpSettingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DlpSettingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -27335,6 +28219,24 @@ func validateOpDeleteKnowledgeBaseInput(v *DeleteKnowledgeBaseInput) error {
 	}
 	if v.KnowledgeBaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLimitsProfileInput(v *DeleteLimitsProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLimitsProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -27865,6 +28767,21 @@ func validateOpDescribeAnalysisPermissionsInput(v *DescribeAnalysisPermissionsIn
 	}
 }
 
+func validateOpDescribeApprovalPolicyInput(v *DescribeApprovalPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeApprovalPolicyInput"}
+	if v.PolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAssetBundleExportJobInput(v *DescribeAssetBundleExportJobInput) error {
 	if v == nil {
 		return nil
@@ -28210,6 +29127,24 @@ func validateOpDescribeDefaultQBusinessApplicationInput(v *DescribeDefaultQBusin
 	}
 }
 
+func validateOpDescribeDlpSettingInput(v *DescribeDlpSettingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDlpSettingInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DlpSettingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DlpSettingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeFlowInput(v *DescribeFlowInput) error {
 	if v == nil {
 		return nil
@@ -28430,6 +29365,24 @@ func validateOpDescribeKnowledgeBasePermissionsInput(v *DescribeKnowledgeBasePer
 	}
 	if v.KnowledgeBaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeLimitsProfileInput(v *DescribeLimitsProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeLimitsProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -29223,6 +30176,21 @@ func validateOpListDataSourcesInput(v *ListDataSourcesInput) error {
 	}
 }
 
+func validateOpListDlpSettingsInput(v *ListDlpSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDlpSettingsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListFlowsInput(v *ListFlowsInput) error {
 	if v == nil {
 		return nil
@@ -29407,6 +30375,21 @@ func validateOpListKnowledgeBasesInput(v *ListKnowledgeBasesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListKnowledgeBasesInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListLimitsProfilesInput(v *ListLimitsProfilesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLimitsProfilesInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -30596,6 +31579,26 @@ func validateOpUpdateApplicationWithTokenExchangeGrantInput(v *UpdateApplication
 	}
 }
 
+func validateOpUpdateApprovalPolicyInput(v *UpdateApprovalPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApprovalPolicyInput"}
+	if v.PolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
+	if v.ApplicableTo != nil {
+		if err := validateApplicableTo(v.ApplicableTo); err != nil {
+			invalidParams.AddNested("ApplicableTo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateBrandAssignmentInput(v *UpdateBrandAssignmentInput) error {
 	if v == nil {
 		return nil
@@ -30996,6 +31999,29 @@ func validateOpUpdateDefaultQBusinessApplicationInput(v *UpdateDefaultQBusinessA
 	}
 }
 
+func validateOpUpdateDlpSettingInput(v *UpdateDlpSettingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDlpSettingInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DlpSettingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DlpSettingId"))
+	}
+	if v.ProviderConfig != nil {
+		if err := validateProviderConfig(v.ProviderConfig); err != nil {
+			invalidParams.AddNested("ProviderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFlowInput(v *UpdateFlowInput) error {
 	if v == nil {
 		return nil
@@ -31226,6 +32252,29 @@ func validateOpUpdateKnowledgeBasePermissionsInput(v *UpdateKnowledgeBasePermiss
 	if v.RevokePermissions != nil {
 		if err := validateResourcePermissionList(v.RevokePermissions); err != nil {
 			invalidParams.AddNested("RevokePermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLimitsProfileInput(v *UpdateLimitsProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLimitsProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ResourceLimits != nil {
+		if err := validateResourceLimitsMap(v.ResourceLimits); err != nil {
+			invalidParams.AddNested("ResourceLimits", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1968,6 +1968,9 @@ func TestCheckRequestSnapshot_CreateRouterOutput(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		FabricConfiguration: &types.FabricConfiguration{
+			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -4317,6 +4320,9 @@ func TestCheckRequestSnapshot_UpdateRouterOutput(t *testing.T) {
 				Time: ptr.String("__Time__"),
 			},
 		},
+		FabricConfiguration: &types.FabricConfiguration{
+			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6102,6 +6108,9 @@ func TestUpdateRequestSnapshot_CreateRouterOutput(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		FabricConfiguration: &types.FabricConfiguration{
+			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -8451,6 +8460,9 @@ func TestUpdateRequestSnapshot_UpdateRouterOutput(t *testing.T) {
 				Day:  types.Day("MONDAY"),
 				Time: ptr.String("__Time__"),
 			},
+		},
+		FabricConfiguration: &types.FabricConfiguration{
+			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 		},
 	}
 	body := &bytes.Buffer{}

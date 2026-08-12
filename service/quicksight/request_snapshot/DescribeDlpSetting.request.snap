@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/data-loss-prevention/settings/__DlpSettingId__
+
+

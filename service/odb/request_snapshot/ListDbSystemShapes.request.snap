@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: Odb.ListDbSystemShapes
 
-{"availabilityZone":"__AvailabilityZone__","availabilityZoneId":"__AvailabilityZoneId__","maxResults":1,"nextToken":"__NextToken__"}
+{"availabilityZone":"__AvailabilityZone__","availabilityZoneId":"__AvailabilityZoneId__","maxResults":1,"nextToken":"__NextToken__","shapeFamily":"__ShapeFamily__"}

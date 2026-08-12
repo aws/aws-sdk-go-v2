@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/data-loss-prevention/settings/__DlpSettingId__
+
+Content-Type: application/json
+
+{"Enabled":true,"Name":"__Name__","ProviderConfig":{"MicrosoftPurview":{"Credentials":{"SecretArn":"__SecretArn__"},"LabelActionMappings":[{"Action":"ALLOW","LabelId":"__LabelId__","LabelName":"__LabelName__"},{"Action":"ALLOW","LabelId":"__LabelId__","LabelName":"__LabelName__"}],"UnmappedAction":"ALLOW"}},"ProviderOutageAction":"ALLOW","ProviderType":"MICROSOFT_PURVIEW"}

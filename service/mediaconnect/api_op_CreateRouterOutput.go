@@ -62,6 +62,9 @@ type CreateRouterOutputInput struct {
 	// A unique identifier for the request to ensure idempotency.
 	ClientToken *string
 
+	// The fabric configuration settings for the router output.
+	FabricConfiguration *types.FabricConfiguration
+
 	// The maintenance configuration settings for the router output, including
 	// preferred maintenance windows and schedules.
 	MaintenanceConfiguration types.MaintenanceConfiguration

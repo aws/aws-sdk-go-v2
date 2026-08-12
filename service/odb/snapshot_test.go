@@ -86,6 +86,18 @@ func TestCheckSnapshot_AssociateIamRoleToResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateVirtualMachinesToExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateVirtualMachinesToExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateVirtualMachinesToExadbVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAutonomousDatabase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAutonomousDatabase(context.Background(), nil, func(o *Options) {
@@ -151,6 +163,30 @@ func TestCheckSnapshot_CreateCloudVmCluster(t *testing.T) {
 	_, err := svc.CreateCloudVmCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateCloudVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateExadbVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateExascaleDbStorageVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExascaleDbStorageVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateExascaleDbStorageVault")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -242,6 +278,30 @@ func TestCheckSnapshot_DeleteCloudVmCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteExadbVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteExascaleDbStorageVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExascaleDbStorageVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteExascaleDbStorageVault")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteOdbNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteOdbNetwork(context.Background(), nil, func(o *Options) {
@@ -271,6 +331,18 @@ func TestCheckSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 	_, err := svc.DisassociateIamRoleFromResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateIamRoleFromResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateVirtualMachinesFromExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateVirtualMachinesFromExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateVirtualMachinesFromExadbVmCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -391,6 +463,30 @@ func TestCheckSnapshot_GetDbServer(t *testing.T) {
 	_, err := svc.GetDbServer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDbServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetExadbVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetExascaleDbStorageVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExascaleDbStorageVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetExascaleDbStorageVault")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -595,6 +691,42 @@ func TestCheckSnapshot_ListDbSystemShapes(t *testing.T) {
 	_, err := svc.ListDbSystemShapes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDbSystemShapes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListExadbVmClusters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExadbVmClusters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExadbVmClusters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExascaleDbStorageVaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExascaleDbStorageVaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGiMinorVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGiMinorVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGiMinorVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -830,6 +962,30 @@ func TestCheckSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateExadbVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateExascaleDbStorageVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExascaleDbStorageVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateExascaleDbStorageVault")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateOdbNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateOdbNetwork(context.Background(), nil, func(o *Options) {
@@ -870,6 +1026,18 @@ func TestUpdateSnapshot_AssociateIamRoleToResource(t *testing.T) {
 	_, err := svc.AssociateIamRoleToResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateIamRoleToResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateVirtualMachinesToExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateVirtualMachinesToExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateVirtualMachinesToExadbVmCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -942,6 +1110,30 @@ func TestUpdateSnapshot_CreateCloudVmCluster(t *testing.T) {
 	_, err := svc.CreateCloudVmCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCloudVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateExadbVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateExascaleDbStorageVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExascaleDbStorageVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateExascaleDbStorageVault")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1033,6 +1225,30 @@ func TestUpdateSnapshot_DeleteCloudVmCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteExadbVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteExascaleDbStorageVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExascaleDbStorageVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteExascaleDbStorageVault")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteOdbNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteOdbNetwork(context.Background(), nil, func(o *Options) {
@@ -1062,6 +1278,18 @@ func TestUpdateSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 	_, err := svc.DisassociateIamRoleFromResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateIamRoleFromResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateVirtualMachinesFromExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateVirtualMachinesFromExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateVirtualMachinesFromExadbVmCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1182,6 +1410,30 @@ func TestUpdateSnapshot_GetDbServer(t *testing.T) {
 	_, err := svc.GetDbServer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDbServer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetExadbVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetExascaleDbStorageVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExascaleDbStorageVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetExascaleDbStorageVault")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1386,6 +1638,42 @@ func TestUpdateSnapshot_ListDbSystemShapes(t *testing.T) {
 	_, err := svc.ListDbSystemShapes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDbSystemShapes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListExadbVmClusters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExadbVmClusters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExadbVmClusters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExascaleDbStorageVaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExascaleDbStorageVaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGiMinorVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGiMinorVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGiMinorVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1614,6 +1902,30 @@ func TestUpdateSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 	_, err := svc.UpdateCloudExadataInfrastructure(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCloudExadataInfrastructure")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateExadbVmCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExadbVmCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateExadbVmCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateExascaleDbStorageVault(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExascaleDbStorageVault(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateExascaleDbStorageVault")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

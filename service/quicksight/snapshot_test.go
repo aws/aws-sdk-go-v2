@@ -98,6 +98,18 @@ func TestCheckSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchDescribeUserLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDescribeUserLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDescribeUserLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelIngestion(context.Background(), nil, func(o *Options) {
@@ -170,6 +182,18 @@ func TestCheckSnapshot_CreateAnalysis(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateApprovalPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApprovalPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateApprovalPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateBrand(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBrand(context.Background(), nil, func(o *Options) {
@@ -223,6 +247,18 @@ func TestCheckSnapshot_CreateDataSource(t *testing.T) {
 	_, err := svc.CreateDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDlpSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDlpSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDlpSetting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -319,6 +355,18 @@ func TestCheckSnapshot_CreateKnowledgeBase(t *testing.T) {
 	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateLimitsProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLimitsProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateLimitsProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -554,6 +602,18 @@ func TestCheckSnapshot_DeleteAnalysis(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteApprovalPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApprovalPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteApprovalPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteBrand(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBrand(context.Background(), nil, func(o *Options) {
@@ -650,6 +710,18 @@ func TestCheckSnapshot_DeleteDefaultQBusinessApplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDlpSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDlpSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDlpSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteFlow(context.Background(), nil, func(o *Options) {
@@ -739,6 +811,18 @@ func TestCheckSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	_, err := svc.DeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteLimitsProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLimitsProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLimitsProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1082,6 +1166,18 @@ func TestCheckSnapshot_DescribeAnalysisPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeApprovalPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApprovalPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeApprovalPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeAssetBundleExportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAssetBundleExportJob(context.Background(), nil, func(o *Options) {
@@ -1310,6 +1406,18 @@ func TestCheckSnapshot_DescribeDefaultQBusinessApplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeDlpSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDlpSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDlpSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeFlow(context.Background(), nil, func(o *Options) {
@@ -1447,6 +1555,18 @@ func TestCheckSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 	_, err := svc.DescribeKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeLimitsProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeLimitsProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeLimitsProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1874,6 +1994,18 @@ func TestCheckSnapshot_ListAnalyses(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListApprovalPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApprovalPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListApprovalPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAssetBundleExportJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAssetBundleExportJobs(context.Background(), nil, func(o *Options) {
@@ -1963,6 +2095,18 @@ func TestCheckSnapshot_ListDataSources(t *testing.T) {
 	_, err := svc.ListDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDlpSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDlpSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDlpSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2095,6 +2239,18 @@ func TestCheckSnapshot_ListKnowledgeBases(t *testing.T) {
 	_, err := svc.ListKnowledgeBases(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListKnowledgeBases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListLimitsProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLimitsProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLimitsProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2774,6 +2930,18 @@ func TestCheckSnapshot_UpdateApplicationWithTokenExchangeGrant(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateApprovalPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateApprovalPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateApprovalPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateBrand(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateBrand(context.Background(), nil, func(o *Options) {
@@ -2942,6 +3110,18 @@ func TestCheckSnapshot_UpdateDefaultQBusinessApplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDlpSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDlpSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDlpSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateFlow(context.Background(), nil, func(o *Options) {
@@ -3067,6 +3247,18 @@ func TestCheckSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 	_, err := svc.UpdateKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateLimitsProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLimitsProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLimitsProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3421,6 +3613,18 @@ func TestUpdateSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchDescribeUserLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDescribeUserLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDescribeUserLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelIngestion(context.Background(), nil, func(o *Options) {
@@ -3493,6 +3697,18 @@ func TestUpdateSnapshot_CreateAnalysis(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateApprovalPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApprovalPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateApprovalPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateBrand(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBrand(context.Background(), nil, func(o *Options) {
@@ -3546,6 +3762,18 @@ func TestUpdateSnapshot_CreateDataSource(t *testing.T) {
 	_, err := svc.CreateDataSource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDlpSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDlpSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDlpSetting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3642,6 +3870,18 @@ func TestUpdateSnapshot_CreateKnowledgeBase(t *testing.T) {
 	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateLimitsProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLimitsProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateLimitsProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3877,6 +4117,18 @@ func TestUpdateSnapshot_DeleteAnalysis(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteApprovalPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApprovalPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteApprovalPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteBrand(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBrand(context.Background(), nil, func(o *Options) {
@@ -3973,6 +4225,18 @@ func TestUpdateSnapshot_DeleteDefaultQBusinessApplication(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteDlpSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDlpSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDlpSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteFlow(context.Background(), nil, func(o *Options) {
@@ -4062,6 +4326,18 @@ func TestUpdateSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	_, err := svc.DeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteLimitsProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLimitsProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLimitsProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4405,6 +4681,18 @@ func TestUpdateSnapshot_DescribeAnalysisPermissions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeApprovalPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApprovalPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeApprovalPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeAssetBundleExportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAssetBundleExportJob(context.Background(), nil, func(o *Options) {
@@ -4633,6 +4921,18 @@ func TestUpdateSnapshot_DescribeDefaultQBusinessApplication(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeDlpSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDlpSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDlpSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeFlow(context.Background(), nil, func(o *Options) {
@@ -4770,6 +5070,18 @@ func TestUpdateSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 	_, err := svc.DescribeKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeLimitsProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeLimitsProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeLimitsProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5197,6 +5509,18 @@ func TestUpdateSnapshot_ListAnalyses(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListApprovalPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApprovalPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListApprovalPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAssetBundleExportJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAssetBundleExportJobs(context.Background(), nil, func(o *Options) {
@@ -5286,6 +5610,18 @@ func TestUpdateSnapshot_ListDataSources(t *testing.T) {
 	_, err := svc.ListDataSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDataSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDlpSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDlpSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDlpSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5418,6 +5754,18 @@ func TestUpdateSnapshot_ListKnowledgeBases(t *testing.T) {
 	_, err := svc.ListKnowledgeBases(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListKnowledgeBases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListLimitsProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLimitsProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLimitsProfiles")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6097,6 +6445,18 @@ func TestUpdateSnapshot_UpdateApplicationWithTokenExchangeGrant(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateApprovalPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateApprovalPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateApprovalPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateBrand(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateBrand(context.Background(), nil, func(o *Options) {
@@ -6265,6 +6625,18 @@ func TestUpdateSnapshot_UpdateDefaultQBusinessApplication(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateDlpSetting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDlpSetting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDlpSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateFlow(context.Background(), nil, func(o *Options) {
@@ -6390,6 +6762,18 @@ func TestUpdateSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 	_, err := svc.UpdateKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLimitsProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLimitsProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLimitsProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

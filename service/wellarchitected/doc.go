@@ -3,13 +3,24 @@
 // Package wellarchitected provides the API client, operations, and parameter
 // types for AWS Well-Architected Tool.
 //
-// # Well-Architected Tool
+// # Amazon Web Services Well-Architected
 //
-// This is the Well-Architected Tool API Reference. The WA Tool API provides
-// programmatic access to the [Well-Architected Tool]in the [Amazon Web Services Management Console]. For information about the Well-Architected
-// Tool, see the [Well-Architected Tool User Guide].
+// Amazon Web Services Well-Architected helps you evaluate your architectures
+// against Amazon Web Services best practices across operational excellence,
+// security, reliability, performance efficiency, cost optimization, and
+// sustainability. The service includes the Amazon Web Services Well-Architected
+// Agent for AI-powered recommendations tailored to your specific environment, and
+// the [Well-Architected Tool]for conducting reviews and tracking improvements.
 //
-// [Well-Architected Tool User Guide]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html
+// This is the Amazon Web Services Well-Architected API Reference. Through this
+// API, you can programmatically access personalized recommendations and automation
+// scripts from the Amazon Web Services Well-Architected Agent, and create and
+// manage workloads, conduct lens reviews, track milestones, manage custom lenses,
+// share workloads across accounts, and manage profiles with the Well-Architected
+// Tool.
+//
+// For more information about the service, see the [Amazon Web Services Well-Architected User Guide].
+//
+// [Amazon Web Services Well-Architected User Guide]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html
 // [Well-Architected Tool]: http://aws.amazon.com/well-architected-tool
-// [Amazon Web Services Management Console]: https://console.aws.amazon.com/wellarchitected
 package wellarchitected

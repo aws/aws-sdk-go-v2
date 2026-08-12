@@ -3892,6 +3892,47 @@ func TestCheckRequestSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchDescribeUserLimits(t *testing.T) {
+	input := &BatchDescribeUserLimitsInput{
+		AccountId: ptr.String("__AccountId__"),
+		Users: []types.UserLimitsEntry{
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+			},
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+			},
+		},
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("INDEX_STORAGE"),
+			types.ResourceType("INDEX_STORAGE"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDescribeUserLimits(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDescribeUserLimits"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CancelIngestion(t *testing.T) {
 	input := &CancelIngestionInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -6144,6 +6185,54 @@ func TestCheckRequestSnapshot_CreateAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateApprovalPolicy(t *testing.T) {
+	input := &CreateApprovalPolicyInput{
+		PolicyId:    ptr.String("__PolicyId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Actions: []types.GovernedAction{
+			types.GovernedAction("SHARE"),
+			types.GovernedAction("SHARE"),
+		},
+		AssetTypes: []types.AssetType{
+			types.AssetType("AGENT"),
+			types.AssetType("AGENT"),
+		},
+		ApplicableTo: &types.ApplicableTo{
+			Type: types.ApplicableToType("GROUP"),
+			GroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApprovalGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateApprovalPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApprovalPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9783,6 +9872,68 @@ func TestCheckRequestSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateDlpSetting(t *testing.T) {
+	input := &CreateDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+		Name:         ptr.String("__Name__"),
+		ProviderType: types.DlpProviderType("MICROSOFT_PURVIEW"),
+		ProviderConfig: &types.ProviderConfigMemberMicrosoftPurview{
+			Value: types.MicrosoftPurviewProviderConfig{
+				Credentials: &types.MicrosoftPurviewCredentials{
+					SecretArn: ptr.String("__SecretArn__"),
+				},
+				LabelActionMappings: []types.LabelActionMapping{
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+				},
+				UnmappedAction: types.DlpAction("ALLOW"),
+			},
+		},
+		ProviderOutageAction: types.DlpAction("ALLOW"),
+		Enabled:              true,
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDlpSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDlpSetting"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 	input := &CreateFlowInput{
 		AwsAccountId:   ptr.String("__AwsAccountId__"),
@@ -10119,6 +10270,42 @@ func TestCheckRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateLimitsProfile(t *testing.T) {
+	input := &CreateLimitsProfileInput{
+		AccountId:   ptr.String("__AccountId__"),
+		ProfileName: ptr.String("__ProfileName__"),
+		Description: ptr.String("__Description__"),
+		ResourceLimits: map[string]types.ProfileLimitValue{
+			"key0": {
+				MaxValue: ptr.Int64(1),
+				Unit:     types.LimitUnit("MB"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateLimitsProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateLimitsProfile"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -14350,6 +14537,33 @@ func TestCheckRequestSnapshot_DeleteAnalysis(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteApprovalPolicy(t *testing.T) {
+	input := &DeleteApprovalPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteApprovalPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteApprovalPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteBrand(t *testing.T) {
 	input := &DeleteBrandInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -14570,6 +14784,34 @@ func TestCheckRequestSnapshot_DeleteDefaultQBusinessApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDefaultQBusinessApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteDlpSetting(t *testing.T) {
+	input := &DeleteDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDlpSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDlpSetting"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -14800,6 +15042,34 @@ func TestCheckRequestSnapshot_DeleteKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteLimitsProfile(t *testing.T) {
+	input := &DeleteLimitsProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		AccountId: ptr.String("__AccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteLimitsProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteLimitsProfile"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -15598,6 +15868,33 @@ func TestCheckRequestSnapshot_DescribeAnalysisPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeApprovalPolicy(t *testing.T) {
+	input := &DescribeApprovalPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApprovalPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApprovalPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeAssetBundleExportJob(t *testing.T) {
 	input := &DescribeAssetBundleExportJobInput{
 		AwsAccountId:           ptr.String("__AwsAccountId__"),
@@ -16139,6 +16436,34 @@ func TestCheckRequestSnapshot_DescribeDefaultQBusinessApplication(t *testing.T) 
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeDlpSetting(t *testing.T) {
+	input := &DescribeDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeDlpSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDlpSetting"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeFlow(t *testing.T) {
 	input := &DescribeFlowInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -16482,6 +16807,34 @@ func TestCheckRequestSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeKnowledgeBasePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeLimitsProfile(t *testing.T) {
+	input := &DescribeLimitsProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		AccountId: ptr.String("__AccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeLimitsProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeLimitsProfile"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -17726,6 +18079,34 @@ func TestCheckRequestSnapshot_ListAnalyses(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListApprovalPolicies(t *testing.T) {
+	input := &ListApprovalPoliciesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListApprovalPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApprovalPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListAssetBundleExportJobs(t *testing.T) {
 	input := &ListAssetBundleExportJobsInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -17955,6 +18336,35 @@ func TestCheckRequestSnapshot_ListDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDataSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListDlpSettings(t *testing.T) {
+	input := &ListDlpSettingsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDlpSettings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDlpSettings"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -18284,6 +18694,36 @@ func TestCheckRequestSnapshot_ListKnowledgeBases(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListKnowledgeBases"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListLimitsProfiles(t *testing.T) {
+	input := &ListLimitsProfilesInput{
+		AccountId:    ptr.String("__AccountId__"),
+		ResourceType: types.ResourceType("INDEX_STORAGE"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListLimitsProfiles(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListLimitsProfiles"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -19778,6 +20218,22 @@ func TestCheckRequestSnapshot_StartAssetBundleExportJob(t *testing.T) {
 					},
 				},
 			},
+			TopicsV2: []types.AssetBundleExportJobTopicV2OverrideProperties{
+				{
+					Arn: ptr.String("__Arn__"),
+					Properties: []types.AssetBundleExportJobTopicV2PropertyToOverride{
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+					},
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+					Properties: []types.AssetBundleExportJobTopicV2PropertyToOverride{
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+					},
+				},
+			},
 		},
 		IncludePermissions: true,
 		IncludeTags:        true,
@@ -20000,6 +20456,18 @@ func TestCheckRequestSnapshot_StartAssetBundleImportJob(t *testing.T) {
 					ParentFolderArn: ptr.String("__ParentFolderArn__"),
 				},
 			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverrideParameters{
+				{
+					TopicId:     ptr.String("__TopicId__"),
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+				},
+				{
+					TopicId:     ptr.String("__TopicId__"),
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+				},
+			},
 		},
 		FailureAction: types.AssetBundleImportFailureAction("DO_NOTHING"),
 		OverridePermissions: &types.AssetBundleImportJobOverridePermissions{
@@ -20216,6 +20684,40 @@ func TestCheckRequestSnapshot_StartAssetBundleImportJob(t *testing.T) {
 				},
 				{
 					FolderIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Permissions: &types.AssetBundleResourcePermissions{
+						Principals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Actions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverridePermissions{
+				{
+					TopicIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Permissions: &types.AssetBundleResourcePermissions{
+						Principals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Actions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TopicIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -20456,6 +20958,40 @@ func TestCheckRequestSnapshot_StartAssetBundleImportJob(t *testing.T) {
 				},
 				{
 					FolderIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverrideTags{
+				{
+					TopicIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				{
+					TopicIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -23229,6 +23765,54 @@ func TestCheckRequestSnapshot_UpdateApplicationWithTokenExchangeGrant(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApplicationWithTokenExchangeGrant"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateApprovalPolicy(t *testing.T) {
+	input := &UpdateApprovalPolicyInput{
+		PolicyId:    ptr.String("__PolicyId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Actions: []types.GovernedAction{
+			types.GovernedAction("SHARE"),
+			types.GovernedAction("SHARE"),
+		},
+		AssetTypes: []types.AssetType{
+			types.AssetType("AGENT"),
+			types.AssetType("AGENT"),
+		},
+		ApplicableTo: &types.ApplicableTo{
+			Type: types.ApplicableToType("GROUP"),
+			GroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApprovalGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateApprovalPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApprovalPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -27138,6 +27722,58 @@ func TestCheckRequestSnapshot_UpdateDefaultQBusinessApplication(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateDlpSetting(t *testing.T) {
+	input := &UpdateDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+		Name:         ptr.String("__Name__"),
+		ProviderType: types.DlpProviderType("MICROSOFT_PURVIEW"),
+		ProviderConfig: &types.ProviderConfigMemberMicrosoftPurview{
+			Value: types.MicrosoftPurviewProviderConfig{
+				Credentials: &types.MicrosoftPurviewCredentials{
+					SecretArn: ptr.String("__SecretArn__"),
+				},
+				LabelActionMappings: []types.LabelActionMapping{
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+				},
+				UnmappedAction: types.DlpAction("ALLOW"),
+			},
+		},
+		ProviderOutageAction: types.DlpAction("ALLOW"),
+		Enabled:              ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDlpSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDlpSetting"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateFlow(t *testing.T) {
 	input := &UpdateFlowInput{
 		AwsAccountId:   ptr.String("__AwsAccountId__"),
@@ -27599,6 +28235,42 @@ func TestCheckRequestSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateKnowledgeBasePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateLimitsProfile(t *testing.T) {
+	input := &UpdateLimitsProfileInput{
+		ProfileId:   ptr.String("__ProfileId__"),
+		AccountId:   ptr.String("__AccountId__"),
+		ProfileName: ptr.String("__ProfileName__"),
+		Description: ptr.String("__Description__"),
+		ResourceLimits: map[string]types.ProfileLimitValue{
+			"key0": {
+				MaxValue: ptr.Int64(1),
+				Unit:     types.LimitUnit("MB"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateLimitsProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLimitsProfile"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -35799,6 +36471,47 @@ func TestUpdateRequestSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_BatchDescribeUserLimits(t *testing.T) {
+	input := &BatchDescribeUserLimitsInput{
+		AccountId: ptr.String("__AccountId__"),
+		Users: []types.UserLimitsEntry{
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+			},
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+			},
+		},
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("INDEX_STORAGE"),
+			types.ResourceType("INDEX_STORAGE"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDescribeUserLimits(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDescribeUserLimits"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CancelIngestion(t *testing.T) {
 	input := &CancelIngestionInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -38051,6 +38764,54 @@ func TestUpdateRequestSnapshot_CreateAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateApprovalPolicy(t *testing.T) {
+	input := &CreateApprovalPolicyInput{
+		PolicyId:    ptr.String("__PolicyId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Actions: []types.GovernedAction{
+			types.GovernedAction("SHARE"),
+			types.GovernedAction("SHARE"),
+		},
+		AssetTypes: []types.AssetType{
+			types.AssetType("AGENT"),
+			types.AssetType("AGENT"),
+		},
+		ApplicableTo: &types.ApplicableTo{
+			Type: types.ApplicableToType("GROUP"),
+			GroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApprovalGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateApprovalPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApprovalPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -41690,6 +42451,68 @@ func TestUpdateRequestSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateDlpSetting(t *testing.T) {
+	input := &CreateDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+		Name:         ptr.String("__Name__"),
+		ProviderType: types.DlpProviderType("MICROSOFT_PURVIEW"),
+		ProviderConfig: &types.ProviderConfigMemberMicrosoftPurview{
+			Value: types.MicrosoftPurviewProviderConfig{
+				Credentials: &types.MicrosoftPurviewCredentials{
+					SecretArn: ptr.String("__SecretArn__"),
+				},
+				LabelActionMappings: []types.LabelActionMapping{
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+				},
+				UnmappedAction: types.DlpAction("ALLOW"),
+			},
+		},
+		ProviderOutageAction: types.DlpAction("ALLOW"),
+		Enabled:              true,
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDlpSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDlpSetting"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 	input := &CreateFlowInput{
 		AwsAccountId:   ptr.String("__AwsAccountId__"),
@@ -42026,6 +42849,42 @@ func TestUpdateRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateLimitsProfile(t *testing.T) {
+	input := &CreateLimitsProfileInput{
+		AccountId:   ptr.String("__AccountId__"),
+		ProfileName: ptr.String("__ProfileName__"),
+		Description: ptr.String("__Description__"),
+		ResourceLimits: map[string]types.ProfileLimitValue{
+			"key0": {
+				MaxValue: ptr.Int64(1),
+				Unit:     types.LimitUnit("MB"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateLimitsProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateLimitsProfile"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -46257,6 +47116,33 @@ func TestUpdateRequestSnapshot_DeleteAnalysis(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteApprovalPolicy(t *testing.T) {
+	input := &DeleteApprovalPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteApprovalPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteApprovalPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteBrand(t *testing.T) {
 	input := &DeleteBrandInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -46477,6 +47363,34 @@ func TestUpdateRequestSnapshot_DeleteDefaultQBusinessApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDefaultQBusinessApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteDlpSetting(t *testing.T) {
+	input := &DeleteDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDlpSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDlpSetting"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -46707,6 +47621,34 @@ func TestUpdateRequestSnapshot_DeleteKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteLimitsProfile(t *testing.T) {
+	input := &DeleteLimitsProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		AccountId: ptr.String("__AccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteLimitsProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteLimitsProfile"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -47505,6 +48447,33 @@ func TestUpdateRequestSnapshot_DescribeAnalysisPermissions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeApprovalPolicy(t *testing.T) {
+	input := &DescribeApprovalPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApprovalPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApprovalPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeAssetBundleExportJob(t *testing.T) {
 	input := &DescribeAssetBundleExportJobInput{
 		AwsAccountId:           ptr.String("__AwsAccountId__"),
@@ -48046,6 +49015,34 @@ func TestUpdateRequestSnapshot_DescribeDefaultQBusinessApplication(t *testing.T)
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeDlpSetting(t *testing.T) {
+	input := &DescribeDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeDlpSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDlpSetting"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeFlow(t *testing.T) {
 	input := &DescribeFlowInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -48389,6 +49386,34 @@ func TestUpdateRequestSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeKnowledgeBasePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeLimitsProfile(t *testing.T) {
+	input := &DescribeLimitsProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		AccountId: ptr.String("__AccountId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeLimitsProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeLimitsProfile"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -49633,6 +50658,34 @@ func TestUpdateRequestSnapshot_ListAnalyses(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListApprovalPolicies(t *testing.T) {
+	input := &ListApprovalPoliciesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListApprovalPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApprovalPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListAssetBundleExportJobs(t *testing.T) {
 	input := &ListAssetBundleExportJobsInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -49862,6 +50915,35 @@ func TestUpdateRequestSnapshot_ListDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDataSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListDlpSettings(t *testing.T) {
+	input := &ListDlpSettingsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDlpSettings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDlpSettings"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -50191,6 +51273,36 @@ func TestUpdateRequestSnapshot_ListKnowledgeBases(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListKnowledgeBases"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListLimitsProfiles(t *testing.T) {
+	input := &ListLimitsProfilesInput{
+		AccountId:    ptr.String("__AccountId__"),
+		ResourceType: types.ResourceType("INDEX_STORAGE"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListLimitsProfiles(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListLimitsProfiles"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -51685,6 +52797,22 @@ func TestUpdateRequestSnapshot_StartAssetBundleExportJob(t *testing.T) {
 					},
 				},
 			},
+			TopicsV2: []types.AssetBundleExportJobTopicV2OverrideProperties{
+				{
+					Arn: ptr.String("__Arn__"),
+					Properties: []types.AssetBundleExportJobTopicV2PropertyToOverride{
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+					},
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+					Properties: []types.AssetBundleExportJobTopicV2PropertyToOverride{
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+					},
+				},
+			},
 		},
 		IncludePermissions: true,
 		IncludeTags:        true,
@@ -51907,6 +53035,18 @@ func TestUpdateRequestSnapshot_StartAssetBundleImportJob(t *testing.T) {
 					ParentFolderArn: ptr.String("__ParentFolderArn__"),
 				},
 			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverrideParameters{
+				{
+					TopicId:     ptr.String("__TopicId__"),
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+				},
+				{
+					TopicId:     ptr.String("__TopicId__"),
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+				},
+			},
 		},
 		FailureAction: types.AssetBundleImportFailureAction("DO_NOTHING"),
 		OverridePermissions: &types.AssetBundleImportJobOverridePermissions{
@@ -52123,6 +53263,40 @@ func TestUpdateRequestSnapshot_StartAssetBundleImportJob(t *testing.T) {
 				},
 				{
 					FolderIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Permissions: &types.AssetBundleResourcePermissions{
+						Principals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Actions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverridePermissions{
+				{
+					TopicIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Permissions: &types.AssetBundleResourcePermissions{
+						Principals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Actions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TopicIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -52363,6 +53537,40 @@ func TestUpdateRequestSnapshot_StartAssetBundleImportJob(t *testing.T) {
 				},
 				{
 					FolderIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverrideTags{
+				{
+					TopicIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				{
+					TopicIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -55136,6 +56344,54 @@ func TestUpdateRequestSnapshot_UpdateApplicationWithTokenExchangeGrant(t *testin
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApplicationWithTokenExchangeGrant"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateApprovalPolicy(t *testing.T) {
+	input := &UpdateApprovalPolicyInput{
+		PolicyId:    ptr.String("__PolicyId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Actions: []types.GovernedAction{
+			types.GovernedAction("SHARE"),
+			types.GovernedAction("SHARE"),
+		},
+		AssetTypes: []types.AssetType{
+			types.AssetType("AGENT"),
+			types.AssetType("AGENT"),
+		},
+		ApplicableTo: &types.ApplicableTo{
+			Type: types.ApplicableToType("GROUP"),
+			GroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApprovalGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateApprovalPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApprovalPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -59045,6 +60301,58 @@ func TestUpdateRequestSnapshot_UpdateDefaultQBusinessApplication(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateDlpSetting(t *testing.T) {
+	input := &UpdateDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+		Name:         ptr.String("__Name__"),
+		ProviderType: types.DlpProviderType("MICROSOFT_PURVIEW"),
+		ProviderConfig: &types.ProviderConfigMemberMicrosoftPurview{
+			Value: types.MicrosoftPurviewProviderConfig{
+				Credentials: &types.MicrosoftPurviewCredentials{
+					SecretArn: ptr.String("__SecretArn__"),
+				},
+				LabelActionMappings: []types.LabelActionMapping{
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+				},
+				UnmappedAction: types.DlpAction("ALLOW"),
+			},
+		},
+		ProviderOutageAction: types.DlpAction("ALLOW"),
+		Enabled:              ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDlpSetting(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDlpSetting"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateFlow(t *testing.T) {
 	input := &UpdateFlowInput{
 		AwsAccountId:   ptr.String("__AwsAccountId__"),
@@ -59506,6 +60814,42 @@ func TestUpdateRequestSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateKnowledgeBasePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateLimitsProfile(t *testing.T) {
+	input := &UpdateLimitsProfileInput{
+		ProfileId:   ptr.String("__ProfileId__"),
+		AccountId:   ptr.String("__AccountId__"),
+		ProfileName: ptr.String("__ProfileName__"),
+		Description: ptr.String("__Description__"),
+		ResourceLimits: map[string]types.ProfileLimitValue{
+			"key0": {
+				MaxValue: ptr.Int64(1),
+				Unit:     types.LimitUnit("MB"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateLimitsProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLimitsProfile"); err != nil {
 		t.Fatal(err)
 	}
 }

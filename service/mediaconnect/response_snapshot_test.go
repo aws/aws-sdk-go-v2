@@ -1743,6 +1743,9 @@ func TestCheckResponseSnapshot_BatchGetRouterOutput(t *testing.T) {
 						ScheduledTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 				},
+				FabricConfiguration: &types.FabricConfiguration{
+					RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+				},
 			},
 			{
 				Name:       ptr.String("__Name__"),
@@ -1804,6 +1807,9 @@ func TestCheckResponseSnapshot_BatchGetRouterOutput(t *testing.T) {
 						End:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						ScheduledTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
+				},
+				FabricConfiguration: &types.FabricConfiguration{
+					RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 				},
 			},
 		},
@@ -3874,6 +3880,9 @@ func TestCheckResponseSnapshot_CreateRouterOutput(t *testing.T) {
 					ScheduledTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
+			FabricConfiguration: &types.FabricConfiguration{
+				RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateRouterOutput.response")
@@ -3911,6 +3920,9 @@ func TestCheckResponseSnapshot_CreateRouterOutput(t *testing.T) {
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		FabricConfiguration: &types.FabricConfiguration{
+			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	})
@@ -5769,6 +5781,9 @@ func TestCheckResponseSnapshot_GetRouterOutput(t *testing.T) {
 					End:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					ScheduledTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+			},
+			FabricConfiguration: &types.FabricConfiguration{
+				RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 			},
 		},
 	}
@@ -9112,6 +9127,9 @@ func TestCheckResponseSnapshot_UpdateRouterOutput(t *testing.T) {
 					ScheduledTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
+			FabricConfiguration: &types.FabricConfiguration{
+				RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateRouterOutput.response")
@@ -9145,6 +9163,9 @@ func TestCheckResponseSnapshot_UpdateRouterOutput(t *testing.T) {
 				Day:  types.Day("MONDAY"),
 				Time: ptr.String("__Time__"),
 			},
+		},
+		FabricConfiguration: &types.FabricConfiguration{
+			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 		},
 	})
 	if err != nil {
@@ -10707,6 +10728,9 @@ func TestCheckResponseSnapshot_Error_RouterOutputServiceQuotaExceededException(t
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		FabricConfiguration: &types.FabricConfiguration{
+			RecoveryLatencyMode: types.FabricLatencyMode("BALANCED"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	})

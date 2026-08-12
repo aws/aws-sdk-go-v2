@@ -66,6 +66,27 @@ func (AnswerReason) Values() []AnswerReason {
 	}
 }
 
+type ApplicationType string
+
+// Enum values for ApplicationType
+const (
+	ApplicationTypeSas                ApplicationType = "SAS"
+	ApplicationTypeDesktopApplication ApplicationType = "DESKTOP_APPLICATION"
+	ApplicationTypeOther              ApplicationType = "OTHER"
+)
+
+// Values returns all known values for ApplicationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationType) Values() []ApplicationType {
+	return []ApplicationType{
+		"SAS",
+		"DESKTOP_APPLICATION",
+		"OTHER",
+	}
+}
+
 type CheckFailureReason string
 
 // Enum values for CheckFailureReason
@@ -177,6 +198,46 @@ func (ChoiceStatus) Values() []ChoiceStatus {
 	}
 }
 
+type ContextType string
+
+// Enum values for ContextType
+const (
+	ContextTypeApplication ContextType = "APPLICATION"
+)
+
+// Values returns all known values for ContextType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextType) Values() []ContextType {
+	return []ContextType{
+		"APPLICATION",
+	}
+}
+
+type Criticality string
+
+// Enum values for Criticality
+const (
+	CriticalityMissionCritical  Criticality = "MISSION_CRITICAL"
+	CriticalityBusinessCritical Criticality = "BUSINESS_CRITICAL"
+	CriticalityNonCritical      Criticality = "NON_CRITICAL"
+	CriticalityTestDevelopment  Criticality = "TEST_DEVELOPMENT"
+)
+
+// Values returns all known values for Criticality. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Criticality) Values() []Criticality {
+	return []Criticality{
+		"MISSION_CRITICAL",
+		"BUSINESS_CRITICAL",
+		"NON_CRITICAL",
+		"TEST_DEVELOPMENT",
+	}
+}
+
 type DefinitionType string
 
 // Enum values for DefinitionType
@@ -233,6 +294,96 @@ func (DiscoveryIntegrationStatus) Values() []DiscoveryIntegrationStatus {
 	return []DiscoveryIntegrationStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type Effort string
+
+// Enum values for Effort
+const (
+	EffortLarge  Effort = "LARGE"
+	EffortMedium Effort = "MEDIUM"
+	EffortSmall  Effort = "SMALL"
+)
+
+// Values returns all known values for Effort. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Effort) Values() []Effort {
+	return []Effort{
+		"LARGE",
+		"MEDIUM",
+		"SMALL",
+	}
+}
+
+type FeedbackCategory string
+
+// Enum values for FeedbackCategory
+const (
+	FeedbackCategoryOther                     FeedbackCategory = "OTHER"
+	FeedbackCategoryRecommendationNotRelevant FeedbackCategory = "RECOMMENDATION_NOT_RELEVANT"
+	FeedbackCategoryResourceNotImportant      FeedbackCategory = "RESOURCE_NOT_IMPORTANT"
+	FeedbackCategoryResourceTypeNotImportant  FeedbackCategory = "RESOURCE_TYPE_NOT_IMPORTANT"
+	FeedbackCategoryRecommendationIncorrect   FeedbackCategory = "RECOMMENDATION_INCORRECT"
+)
+
+// Values returns all known values for FeedbackCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeedbackCategory) Values() []FeedbackCategory {
+	return []FeedbackCategory{
+		"OTHER",
+		"RECOMMENDATION_NOT_RELEVANT",
+		"RESOURCE_NOT_IMPORTANT",
+		"RESOURCE_TYPE_NOT_IMPORTANT",
+		"RECOMMENDATION_INCORRECT",
+	}
+}
+
+type GenerationStatus string
+
+// Enum values for GenerationStatus
+const (
+	GenerationStatusQueued     GenerationStatus = "QUEUED"
+	GenerationStatusInProgress GenerationStatus = "IN_PROGRESS"
+	GenerationStatusCompleted  GenerationStatus = "COMPLETED"
+	GenerationStatusError      GenerationStatus = "ERROR"
+)
+
+// Values returns all known values for GenerationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GenerationStatus) Values() []GenerationStatus {
+	return []GenerationStatus{
+		"QUEUED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"ERROR",
+	}
+}
+
+type ImpactCategory string
+
+// Enum values for ImpactCategory
+const (
+	ImpactCategoryHigh   ImpactCategory = "HIGH"
+	ImpactCategoryMedium ImpactCategory = "MEDIUM"
+	ImpactCategoryLow    ImpactCategory = "LOW"
+)
+
+// Values returns all known values for ImpactCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImpactCategory) Values() []ImpactCategory {
+	return []ImpactCategory{
+		"HIGH",
+		"MEDIUM",
+		"LOW",
 	}
 }
 
@@ -470,6 +621,52 @@ func (PermissionType) Values() []PermissionType {
 	}
 }
 
+type Pillar string
+
+// Enum values for Pillar
+const (
+	PillarCostOptimization      Pillar = "COST_OPTIMIZATION"
+	PillarSecurity              Pillar = "SECURITY"
+	PillarResilience            Pillar = "RESILIENCE"
+	PillarPerformance           Pillar = "PERFORMANCE"
+	PillarOperationalExcellence Pillar = "OPERATIONAL_EXCELLENCE"
+)
+
+// Values returns all known values for Pillar. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Pillar) Values() []Pillar {
+	return []Pillar{
+		"COST_OPTIMIZATION",
+		"SECURITY",
+		"RESILIENCE",
+		"PERFORMANCE",
+		"OPERATIONAL_EXCELLENCE",
+	}
+}
+
+type Priority string
+
+// Enum values for Priority
+const (
+	PriorityHigh   Priority = "HIGH"
+	PriorityMedium Priority = "MEDIUM"
+	PriorityLow    Priority = "LOW"
+)
+
+// Values returns all known values for Priority. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Priority) Values() []Priority {
+	return []Priority{
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
 type ProfileNotificationType string
 
 // Enum values for ProfileNotificationType
@@ -565,6 +762,159 @@ func (QuestionType) Values() []QuestionType {
 	}
 }
 
+type RecommendationFeedbackType string
+
+// Enum values for RecommendationFeedbackType
+const (
+	RecommendationFeedbackTypeUseful    RecommendationFeedbackType = "USEFUL"
+	RecommendationFeedbackTypeNotUseful RecommendationFeedbackType = "NOT_USEFUL"
+)
+
+// Values returns all known values for RecommendationFeedbackType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationFeedbackType) Values() []RecommendationFeedbackType {
+	return []RecommendationFeedbackType{
+		"USEFUL",
+		"NOT_USEFUL",
+	}
+}
+
+type RecommendationItemType string
+
+// Enum values for RecommendationItemType
+const (
+	RecommendationItemTypeAwsResource    RecommendationItemType = "AWS_RESOURCE"
+	RecommendationItemTypeRecommendation RecommendationItemType = "RECOMMENDATION"
+)
+
+// Values returns all known values for RecommendationItemType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationItemType) Values() []RecommendationItemType {
+	return []RecommendationItemType{
+		"AWS_RESOURCE",
+		"RECOMMENDATION",
+	}
+}
+
+type RecommendationSource string
+
+// Enum values for RecommendationSource
+const (
+	RecommendationSourceTrustedAdvisor       RecommendationSource = "TRUSTED_ADVISOR"
+	RecommendationSourceCostExplorer         RecommendationSource = "COST_EXPLORER"
+	RecommendationSourceCloudwatch           RecommendationSource = "CLOUDWATCH"
+	RecommendationSourceWellArchitectedTool  RecommendationSource = "WELL_ARCHITECTED_TOOL"
+	RecommendationSourceWellArchitectedAgent RecommendationSource = "WELL_ARCHITECTED_AGENT"
+	RecommendationSourceCustomerIac          RecommendationSource = "CUSTOMER_IAC"
+)
+
+// Values returns all known values for RecommendationSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationSource) Values() []RecommendationSource {
+	return []RecommendationSource{
+		"TRUSTED_ADVISOR",
+		"COST_EXPLORER",
+		"CLOUDWATCH",
+		"WELL_ARCHITECTED_TOOL",
+		"WELL_ARCHITECTED_AGENT",
+		"CUSTOMER_IAC",
+	}
+}
+
+type RecommendationState string
+
+// Enum values for RecommendationState
+const (
+	RecommendationStateOpen   RecommendationState = "OPEN"
+	RecommendationStateClosed RecommendationState = "CLOSED"
+)
+
+// Values returns all known values for RecommendationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationState) Values() []RecommendationState {
+	return []RecommendationState{
+		"OPEN",
+		"CLOSED",
+	}
+}
+
+type RecommendationStatus string
+
+// Enum values for RecommendationStatus
+const (
+	RecommendationStatusActive     RecommendationStatus = "ACTIVE"
+	RecommendationStatusSuppressed RecommendationStatus = "SUPPRESSED"
+	RecommendationStatusCompleted  RecommendationStatus = "COMPLETED"
+)
+
+// Values returns all known values for RecommendationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationStatus) Values() []RecommendationStatus {
+	return []RecommendationStatus{
+		"ACTIVE",
+		"SUPPRESSED",
+		"COMPLETED",
+	}
+}
+
+type RecommendationType string
+
+// Enum values for RecommendationType
+const (
+	RecommendationTypeResource     RecommendationType = "RESOURCE"
+	RecommendationTypeArchitecture RecommendationType = "ARCHITECTURE"
+	RecommendationTypeApplication  RecommendationType = "APPLICATION"
+)
+
+// Values returns all known values for RecommendationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationType) Values() []RecommendationType {
+	return []RecommendationType{
+		"RESOURCE",
+		"ARCHITECTURE",
+		"APPLICATION",
+	}
+}
+
+type RemediationType string
+
+// Enum values for RemediationType
+const (
+	RemediationTypeAutoRemediation RemediationType = "AUTO_REMEDIATION"
+	RemediationTypeConsole         RemediationType = "CONSOLE"
+	RemediationTypeCli             RemediationType = "CLI"
+	RemediationTypeSdk             RemediationType = "SDK"
+	RemediationTypeIac             RemediationType = "IAC"
+	RemediationTypeMcp             RemediationType = "MCP"
+)
+
+// Values returns all known values for RemediationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationType) Values() []RemediationType {
+	return []RemediationType{
+		"AUTO_REMEDIATION",
+		"CONSOLE",
+		"CLI",
+		"SDK",
+		"IAC",
+		"MCP",
+	}
+}
+
 type ReportFormat string
 
 // Enum values for ReportFormat
@@ -644,6 +994,27 @@ func (Risk) Values() []Risk {
 		"MEDIUM",
 		"NONE",
 		"NOT_APPLICABLE",
+	}
+}
+
+type RiskRating string
+
+// Enum values for RiskRating
+const (
+	RiskRatingLow    RiskRating = "LOW"
+	RiskRatingMedium RiskRating = "MEDIUM"
+	RiskRatingHigh   RiskRating = "HIGH"
+)
+
+// Values returns all known values for RiskRating. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RiskRating) Values() []RiskRating {
+	return []RiskRating{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
 	}
 }
 

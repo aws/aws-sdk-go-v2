@@ -248,6 +248,50 @@ func (JobStatusType) Values() []JobStatusType {
 	}
 }
 
+type ManagedByTypeType string
+
+// Enum values for ManagedByTypeType
+const (
+	ManagedByTypeTypeService ManagedByTypeType = "Service"
+)
+
+// Values returns all known values for ManagedByTypeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedByTypeType) Values() []ManagedByTypeType {
+	return []ManagedByTypeType{
+		"Service",
+	}
+}
+
+type ParameterTypeType string
+
+// Enum values for ParameterTypeType
+const (
+	ParameterTypeTypeString     ParameterTypeType = "String"
+	ParameterTypeTypeStringList ParameterTypeType = "StringList"
+	ParameterTypeTypeNumber     ParameterTypeType = "Number"
+	ParameterTypeTypeNumberList ParameterTypeType = "NumberList"
+	ParameterTypeTypeArn        ParameterTypeType = "Arn"
+	ParameterTypeTypeArnList    ParameterTypeType = "ArnList"
+)
+
+// Values returns all known values for ParameterTypeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterTypeType) Values() []ParameterTypeType {
+	return []ParameterTypeType{
+		"String",
+		"StringList",
+		"Number",
+		"NumberList",
+		"Arn",
+		"ArnList",
+	}
+}
+
 type PermissionCheckResultType string
 
 // Enum values for PermissionCheckResultType

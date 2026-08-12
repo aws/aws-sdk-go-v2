@@ -295,6 +295,25 @@ func (EntitlementStatus) Values() []EntitlementStatus {
 	}
 }
 
+type FabricLatencyMode string
+
+// Enum values for FabricLatencyMode
+const (
+	FabricLatencyModeBalanced   FabricLatencyMode = "BALANCED"
+	FabricLatencyModeLowLatency FabricLatencyMode = "LOW_LATENCY"
+)
+
+// Values returns all known values for FabricLatencyMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FabricLatencyMode) Values() []FabricLatencyMode {
+	return []FabricLatencyMode{
+		"BALANCED",
+		"LOW_LATENCY",
+	}
+}
+
 type FailoverInputSourcePriorityMode string
 
 // Enum values for FailoverInputSourcePriorityMode

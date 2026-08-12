@@ -3846,6 +3846,100 @@ func TestCheckResponseSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_BatchDescribeUserLimits(t *testing.T) {
+	want := &BatchDescribeUserLimitsOutput{
+		UserLimits: []types.UserLimits{
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+				EffectiveLimits: []types.EffectiveLimit{
+					{
+						ResourceType: types.ResourceType("INDEX_STORAGE"),
+						LimitValue:   ptr.Int64(1),
+						LimitUnit:    types.LimitUnit("MB"),
+						Source:       types.LimitSource("DIRECT_USER"),
+						ProfileId:    ptr.String("__ProfileId__"),
+					},
+					{
+						ResourceType: types.ResourceType("INDEX_STORAGE"),
+						LimitValue:   ptr.Int64(1),
+						LimitUnit:    types.LimitUnit("MB"),
+						Source:       types.LimitSource("DIRECT_USER"),
+						ProfileId:    ptr.String("__ProfileId__"),
+					},
+				},
+			},
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+				EffectiveLimits: []types.EffectiveLimit{
+					{
+						ResourceType: types.ResourceType("INDEX_STORAGE"),
+						LimitValue:   ptr.Int64(1),
+						LimitUnit:    types.LimitUnit("MB"),
+						Source:       types.LimitSource("DIRECT_USER"),
+						ProfileId:    ptr.String("__ProfileId__"),
+					},
+					{
+						ResourceType: types.ResourceType("INDEX_STORAGE"),
+						LimitValue:   ptr.Int64(1),
+						LimitUnit:    types.LimitUnit("MB"),
+						Source:       types.LimitSource("DIRECT_USER"),
+						ProfileId:    ptr.String("__ProfileId__"),
+					},
+				},
+			},
+		},
+		Errors: []types.BatchDescribeUserLimitsError{
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+				UserArn:   ptr.String("__UserArn__"),
+				ErrorCode: ptr.String("__ErrorCode__"),
+				Message:   ptr.String("__Message__"),
+			},
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+				UserArn:   ptr.String("__UserArn__"),
+				ErrorCode: ptr.String("__ErrorCode__"),
+				Message:   ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchDescribeUserLimits.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchDescribeUserLimits(context.Background(), &BatchDescribeUserLimitsInput{
+		AccountId: ptr.String("__AccountId__"),
+		Users: []types.UserLimitsEntry{
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+			},
+			{
+				UserName:  ptr.String("__UserName__"),
+				Namespace: ptr.String("__Namespace__"),
+			},
+		},
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("INDEX_STORAGE"),
+			types.ResourceType("INDEX_STORAGE"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchDescribeUserLimits.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CancelIngestion(t *testing.T) {
 	want := &CancelIngestionOutput{
 		Arn:         ptr.String("__Arn__"),
@@ -6105,6 +6199,76 @@ func TestCheckResponseSnapshot_CreateAnalysis(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateAnalysis.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateApprovalPolicy(t *testing.T) {
+	want := &CreateApprovalPolicyOutput{
+		Policy: &types.ApprovalPolicy{
+			PolicyId:    ptr.String("__PolicyId__"),
+			PolicyArn:   ptr.String("__PolicyArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			Actions: []types.GovernedAction{
+				types.GovernedAction("SHARE"),
+				types.GovernedAction("SHARE"),
+			},
+			AssetTypes: []types.AssetType{
+				types.AssetType("AGENT"),
+				types.AssetType("AGENT"),
+			},
+			ApplicableTo: &types.ApplicableTo{
+				Type: types.ApplicableToType("GROUP"),
+				GroupArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ApprovalGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateApprovalPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateApprovalPolicy(context.Background(), &CreateApprovalPolicyInput{
+		PolicyId:    ptr.String("__PolicyId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Actions: []types.GovernedAction{
+			types.GovernedAction("SHARE"),
+			types.GovernedAction("SHARE"),
+		},
+		AssetTypes: []types.AssetType{
+			types.AssetType("AGENT"),
+			types.AssetType("AGENT"),
+		},
+		ApplicableTo: &types.ApplicableTo{
+			Type: types.ApplicableToType("GROUP"),
+			GroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApprovalGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateApprovalPolicy.response", err)
 	}
 }
 
@@ -9890,6 +10054,66 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateDlpSetting(t *testing.T) {
+	want := &CreateDlpSettingOutput{
+		Arn:          ptr.String("__Arn__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+		RequestId:    ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateDlpSetting.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateDlpSetting(context.Background(), &CreateDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+		Name:         ptr.String("__Name__"),
+		ProviderType: types.DlpProviderType("MICROSOFT_PURVIEW"),
+		ProviderConfig: &types.ProviderConfigMemberMicrosoftPurview{
+			Value: types.MicrosoftPurviewProviderConfig{
+				Credentials: &types.MicrosoftPurviewCredentials{
+					SecretArn: ptr.String("__SecretArn__"),
+				},
+				LabelActionMappings: []types.LabelActionMapping{
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+				},
+				UnmappedAction: types.DlpAction("ALLOW"),
+			},
+		},
+		ProviderOutageAction: types.DlpAction("ALLOW"),
+		Enabled:              true,
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateDlpSetting.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateFlow(t *testing.T) {
 	want := &CreateFlowOutput{
 		Arn:       ptr.String("__Arn__"),
@@ -10237,6 +10461,39 @@ func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateKnowledgeBase.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateLimitsProfile(t *testing.T) {
+	want := &CreateLimitsProfileOutput{
+		Arn:       ptr.String("__Arn__"),
+		ProfileId: ptr.String("__ProfileId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateLimitsProfile.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateLimitsProfile(context.Background(), &CreateLimitsProfileInput{
+		AccountId:   ptr.String("__AccountId__"),
+		ProfileName: ptr.String("__ProfileName__"),
+		Description: ptr.String("__Description__"),
+		ResourceLimits: map[string]types.ProfileLimitValue{
+			"key0": {
+				MaxValue: ptr.Int64(1),
+				Unit:     types.LimitUnit("MB"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateLimitsProfile.response", err)
 	}
 }
 
@@ -14455,6 +14712,27 @@ func TestCheckResponseSnapshot_DeleteAnalysis(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteApprovalPolicy(t *testing.T) {
+	want := &DeleteApprovalPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteApprovalPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteApprovalPolicy(context.Background(), &DeleteApprovalPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteApprovalPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteBrand(t *testing.T) {
 	want := &DeleteBrandOutput{
 		RequestId: ptr.String("__RequestId__"),
@@ -14657,6 +14935,32 @@ func TestCheckResponseSnapshot_DeleteDefaultQBusinessApplication(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDefaultQBusinessApplication.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteDlpSetting(t *testing.T) {
+	want := &DeleteDlpSettingOutput{
+		Arn:          ptr.String("__Arn__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+		RequestId:    ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteDlpSetting.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteDlpSetting(context.Background(), &DeleteDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDlpSetting.response", err)
 	}
 }
 
@@ -14868,6 +15172,30 @@ func TestCheckResponseSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteKnowledgeBase.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteLimitsProfile(t *testing.T) {
+	want := &DeleteLimitsProfileOutput{
+		Arn: ptr.String("__Arn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteLimitsProfile.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteLimitsProfile(context.Background(), &DeleteLimitsProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		AccountId: ptr.String("__AccountId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteLimitsProfile.response", err)
 	}
 }
 
@@ -17754,6 +18082,55 @@ func TestCheckResponseSnapshot_DescribeAnalysisPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeApprovalPolicy(t *testing.T) {
+	want := &DescribeApprovalPolicyOutput{
+		Policy: &types.ApprovalPolicy{
+			PolicyId:    ptr.String("__PolicyId__"),
+			PolicyArn:   ptr.String("__PolicyArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			Actions: []types.GovernedAction{
+				types.GovernedAction("SHARE"),
+				types.GovernedAction("SHARE"),
+			},
+			AssetTypes: []types.AssetType{
+				types.AssetType("AGENT"),
+				types.AssetType("AGENT"),
+			},
+			ApplicableTo: &types.ApplicableTo{
+				Type: types.ApplicableToType("GROUP"),
+				GroupArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ApprovalGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeApprovalPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeApprovalPolicy(context.Background(), &DescribeApprovalPolicyInput{
+		PolicyId: ptr.String("__PolicyId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeApprovalPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeAssetBundleExportJob(t *testing.T) {
 	want := &DescribeAssetBundleExportJobOutput{
 		JobStatus:   types.AssetBundleExportJobStatus("QUEUED_FOR_IMMEDIATE_EXECUTION"),
@@ -17909,6 +18286,22 @@ func TestCheckResponseSnapshot_DescribeAssetBundleExportJob(t *testing.T) {
 					Properties: []types.AssetBundleExportJobFolderPropertyToOverride{
 						types.AssetBundleExportJobFolderPropertyToOverride("Name"),
 						types.AssetBundleExportJobFolderPropertyToOverride("Name"),
+					},
+				},
+			},
+			TopicsV2: []types.AssetBundleExportJobTopicV2OverrideProperties{
+				{
+					Arn: ptr.String("__Arn__"),
+					Properties: []types.AssetBundleExportJobTopicV2PropertyToOverride{
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+					},
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+					Properties: []types.AssetBundleExportJobTopicV2PropertyToOverride{
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
 					},
 				},
 			},
@@ -18170,6 +18563,18 @@ func TestCheckResponseSnapshot_DescribeAssetBundleImportJob(t *testing.T) {
 					ParentFolderArn: ptr.String("__ParentFolderArn__"),
 				},
 			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverrideParameters{
+				{
+					TopicId:     ptr.String("__TopicId__"),
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+				},
+				{
+					TopicId:     ptr.String("__TopicId__"),
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+				},
+			},
 		},
 		FailureAction: types.AssetBundleImportFailureAction("DO_NOTHING"),
 		RequestId:     ptr.String("__RequestId__"),
@@ -18388,6 +18793,40 @@ func TestCheckResponseSnapshot_DescribeAssetBundleImportJob(t *testing.T) {
 				},
 				{
 					FolderIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Permissions: &types.AssetBundleResourcePermissions{
+						Principals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Actions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverridePermissions{
+				{
+					TopicIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Permissions: &types.AssetBundleResourcePermissions{
+						Principals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Actions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TopicIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -18628,6 +19067,40 @@ func TestCheckResponseSnapshot_DescribeAssetBundleImportJob(t *testing.T) {
 				},
 				{
 					FolderIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverrideTags{
+				{
+					TopicIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				{
+					TopicIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -23768,6 +24241,60 @@ func TestCheckResponseSnapshot_DescribeDefaultQBusinessApplication(t *testing.T)
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeDlpSetting(t *testing.T) {
+	want := &DescribeDlpSettingOutput{
+		DlpSetting: &types.DlpSettingDetails{
+			DlpSettingId: ptr.String("__DlpSettingId__"),
+			Name:         ptr.String("__Name__"),
+			Arn:          ptr.String("__Arn__"),
+			Status:       types.DlpSettingStatus("ACTIVE"),
+			ProviderType: types.DlpProviderType("MICROSOFT_PURVIEW"),
+			ProviderConfig: &types.ProviderConfigMemberMicrosoftPurview{
+				Value: types.MicrosoftPurviewProviderConfig{
+					Credentials: &types.MicrosoftPurviewCredentials{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+					LabelActionMappings: []types.LabelActionMapping{
+						{
+							LabelId:   ptr.String("__LabelId__"),
+							LabelName: ptr.String("__LabelName__"),
+							Action:    types.DlpAction("ALLOW"),
+						},
+						{
+							LabelId:   ptr.String("__LabelId__"),
+							LabelName: ptr.String("__LabelName__"),
+							Action:    types.DlpAction("ALLOW"),
+						},
+					},
+					UnmappedAction: types.DlpAction("ALLOW"),
+				},
+			},
+			ProviderOutageAction: types.DlpAction("ALLOW"),
+			CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeDlpSetting.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeDlpSetting(context.Background(), &DescribeDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeDlpSetting.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeFlow(t *testing.T) {
 	want := &DescribeFlowOutput{
 		Flow: &types.FlowDetail{
@@ -24293,6 +24820,44 @@ func TestCheckResponseSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeKnowledgeBasePermissions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeLimitsProfile(t *testing.T) {
+	want := &DescribeLimitsProfileOutput{
+		Profile: &types.LimitsProfile{
+			ProfileId:   ptr.String("__ProfileId__"),
+			Arn:         ptr.String("__Arn__"),
+			AccountId:   ptr.String("__AccountId__"),
+			ProfileName: ptr.String("__ProfileName__"),
+			Description: ptr.String("__Description__"),
+			ResourceLimits: map[string]types.ProfileLimitValue{
+				"key0": {
+					MaxValue: ptr.Int64(1),
+					Unit:     types.LimitUnit("MB"),
+				},
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeLimitsProfile.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeLimitsProfile(context.Background(), &DescribeLimitsProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		AccountId: ptr.String("__AccountId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeLimitsProfile.response", err)
 	}
 }
 
@@ -29619,6 +30184,86 @@ func TestCheckResponseSnapshot_ListAnalyses(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListApprovalPolicies(t *testing.T) {
+	want := &ListApprovalPoliciesOutput{
+		Policies: []types.ApprovalPolicy{
+			{
+				PolicyId:    ptr.String("__PolicyId__"),
+				PolicyArn:   ptr.String("__PolicyArn__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Actions: []types.GovernedAction{
+					types.GovernedAction("SHARE"),
+					types.GovernedAction("SHARE"),
+				},
+				AssetTypes: []types.AssetType{
+					types.AssetType("AGENT"),
+					types.AssetType("AGENT"),
+				},
+				ApplicableTo: &types.ApplicableTo{
+					Type: types.ApplicableToType("GROUP"),
+					GroupArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ApprovalGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				PolicyId:    ptr.String("__PolicyId__"),
+				PolicyArn:   ptr.String("__PolicyArn__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Actions: []types.GovernedAction{
+					types.GovernedAction("SHARE"),
+					types.GovernedAction("SHARE"),
+				},
+				AssetTypes: []types.AssetType{
+					types.AssetType("AGENT"),
+					types.AssetType("AGENT"),
+				},
+				ApplicableTo: &types.ApplicableTo{
+					Type: types.ApplicableToType("GROUP"),
+					GroupArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ApprovalGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListApprovalPolicies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListApprovalPolicies(context.Background(), &ListApprovalPoliciesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListApprovalPolicies.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAssetBundleExportJobs(t *testing.T) {
 	want := &ListAssetBundleExportJobsOutput{
 		AssetBundleExportJobSummaryList: []types.AssetBundleExportJobSummary{
@@ -30648,6 +31293,52 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListDlpSettings(t *testing.T) {
+	want := &ListDlpSettingsOutput{
+		DlpSettingSummaries: []types.DlpSettingSummary{
+			{
+				DlpSettingId: ptr.String("__DlpSettingId__"),
+				Name:         ptr.String("__Name__"),
+				Arn:          ptr.String("__Arn__"),
+				Status:       types.DlpSettingStatus("ACTIVE"),
+				ProviderType: types.DlpProviderType("MICROSOFT_PURVIEW"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				DlpSettingId: ptr.String("__DlpSettingId__"),
+				Name:         ptr.String("__Name__"),
+				Arn:          ptr.String("__Arn__"),
+				Status:       types.DlpSettingStatus("ACTIVE"),
+				ProviderType: types.DlpProviderType("MICROSOFT_PURVIEW"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDlpSettings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDlpSettings(context.Background(), &ListDlpSettingsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDlpSettings.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListFlows(t *testing.T) {
 	want := &ListFlowsOutput{
 		FlowSummaryList: []types.FlowSummary{
@@ -31156,6 +31847,64 @@ func TestCheckResponseSnapshot_ListKnowledgeBases(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListKnowledgeBases.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListLimitsProfiles(t *testing.T) {
+	want := &ListLimitsProfilesOutput{
+		Profiles: []types.LimitsProfile{
+			{
+				ProfileId:   ptr.String("__ProfileId__"),
+				Arn:         ptr.String("__Arn__"),
+				AccountId:   ptr.String("__AccountId__"),
+				ProfileName: ptr.String("__ProfileName__"),
+				Description: ptr.String("__Description__"),
+				ResourceLimits: map[string]types.ProfileLimitValue{
+					"key0": {
+						MaxValue: ptr.Int64(1),
+						Unit:     types.LimitUnit("MB"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ProfileId:   ptr.String("__ProfileId__"),
+				Arn:         ptr.String("__Arn__"),
+				AccountId:   ptr.String("__AccountId__"),
+				ProfileName: ptr.String("__ProfileName__"),
+				Description: ptr.String("__Description__"),
+				ResourceLimits: map[string]types.ProfileLimitValue{
+					"key0": {
+						MaxValue: ptr.Int64(1),
+						Unit:     types.LimitUnit("MB"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListLimitsProfiles.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListLimitsProfiles(context.Background(), &ListLimitsProfilesInput{
+		AccountId:    ptr.String("__AccountId__"),
+		ResourceType: types.ResourceType("INDEX_STORAGE"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListLimitsProfiles.response", err)
 	}
 }
 
@@ -37032,6 +37781,22 @@ func TestCheckResponseSnapshot_StartAssetBundleExportJob(t *testing.T) {
 					},
 				},
 			},
+			TopicsV2: []types.AssetBundleExportJobTopicV2OverrideProperties{
+				{
+					Arn: ptr.String("__Arn__"),
+					Properties: []types.AssetBundleExportJobTopicV2PropertyToOverride{
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+					},
+				},
+				{
+					Arn: ptr.String("__Arn__"),
+					Properties: []types.AssetBundleExportJobTopicV2PropertyToOverride{
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+						types.AssetBundleExportJobTopicV2PropertyToOverride("Name"),
+					},
+				},
+			},
 		},
 		IncludePermissions: true,
 		IncludeTags:        true,
@@ -37253,6 +38018,18 @@ func TestCheckResponseSnapshot_StartAssetBundleImportJob(t *testing.T) {
 					ParentFolderArn: ptr.String("__ParentFolderArn__"),
 				},
 			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverrideParameters{
+				{
+					TopicId:     ptr.String("__TopicId__"),
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+				},
+				{
+					TopicId:     ptr.String("__TopicId__"),
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+				},
+			},
 		},
 		FailureAction: types.AssetBundleImportFailureAction("DO_NOTHING"),
 		OverridePermissions: &types.AssetBundleImportJobOverridePermissions{
@@ -37469,6 +38246,40 @@ func TestCheckResponseSnapshot_StartAssetBundleImportJob(t *testing.T) {
 				},
 				{
 					FolderIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Permissions: &types.AssetBundleResourcePermissions{
+						Principals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Actions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverridePermissions{
+				{
+					TopicIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Permissions: &types.AssetBundleResourcePermissions{
+						Principals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Actions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					TopicIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -37709,6 +38520,40 @@ func TestCheckResponseSnapshot_StartAssetBundleImportJob(t *testing.T) {
 				},
 				{
 					FolderIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			TopicsV2: []types.AssetBundleImportJobTopicV2OverrideTags{
+				{
+					TopicIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				{
+					TopicIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -40543,6 +41388,76 @@ func TestCheckResponseSnapshot_UpdateApplicationWithTokenExchangeGrant(t *testin
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateApplicationWithTokenExchangeGrant.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateApprovalPolicy(t *testing.T) {
+	want := &UpdateApprovalPolicyOutput{
+		Policy: &types.ApprovalPolicy{
+			PolicyId:    ptr.String("__PolicyId__"),
+			PolicyArn:   ptr.String("__PolicyArn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			Actions: []types.GovernedAction{
+				types.GovernedAction("SHARE"),
+				types.GovernedAction("SHARE"),
+			},
+			AssetTypes: []types.AssetType{
+				types.AssetType("AGENT"),
+				types.AssetType("AGENT"),
+			},
+			ApplicableTo: &types.ApplicableTo{
+				Type: types.ApplicableToType("GROUP"),
+				GroupArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ApprovalGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateApprovalPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateApprovalPolicy(context.Background(), &UpdateApprovalPolicyInput{
+		PolicyId:    ptr.String("__PolicyId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Actions: []types.GovernedAction{
+			types.GovernedAction("SHARE"),
+			types.GovernedAction("SHARE"),
+		},
+		AssetTypes: []types.AssetType{
+			types.AssetType("AGENT"),
+			types.AssetType("AGENT"),
+		},
+		ApplicableTo: &types.ApplicableTo{
+			Type: types.ApplicableToType("GROUP"),
+			GroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApprovalGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateApprovalPolicy.response", err)
 	}
 }
 
@@ -44619,6 +45534,56 @@ func TestCheckResponseSnapshot_UpdateDefaultQBusinessApplication(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateDlpSetting(t *testing.T) {
+	want := &UpdateDlpSettingOutput{
+		Arn:          ptr.String("__Arn__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+		RequestId:    ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateDlpSetting.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateDlpSetting(context.Background(), &UpdateDlpSettingInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		DlpSettingId: ptr.String("__DlpSettingId__"),
+		Name:         ptr.String("__Name__"),
+		ProviderType: types.DlpProviderType("MICROSOFT_PURVIEW"),
+		ProviderConfig: &types.ProviderConfigMemberMicrosoftPurview{
+			Value: types.MicrosoftPurviewProviderConfig{
+				Credentials: &types.MicrosoftPurviewCredentials{
+					SecretArn: ptr.String("__SecretArn__"),
+				},
+				LabelActionMappings: []types.LabelActionMapping{
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+					{
+						LabelId:   ptr.String("__LabelId__"),
+						LabelName: ptr.String("__LabelName__"),
+						Action:    types.DlpAction("ALLOW"),
+					},
+				},
+				UnmappedAction: types.DlpAction("ALLOW"),
+			},
+		},
+		ProviderOutageAction: types.DlpAction("ALLOW"),
+		Enabled:              ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateDlpSetting.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateFlow(t *testing.T) {
 	want := &UpdateFlowOutput{
 		Arn:       ptr.String("__Arn__"),
@@ -45148,6 +46113,38 @@ func TestCheckResponseSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateKnowledgeBasePermissions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateLimitsProfile(t *testing.T) {
+	want := &UpdateLimitsProfileOutput{
+		Arn: ptr.String("__Arn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateLimitsProfile.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateLimitsProfile(context.Background(), &UpdateLimitsProfileInput{
+		ProfileId:   ptr.String("__ProfileId__"),
+		AccountId:   ptr.String("__AccountId__"),
+		ProfileName: ptr.String("__ProfileName__"),
+		Description: ptr.String("__Description__"),
+		ResourceLimits: map[string]types.ProfileLimitValue{
+			"key0": {
+				MaxValue: ptr.Int64(1),
+				Unit:     types.LimitUnit("MB"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateLimitsProfile.response", err)
 	}
 }
 

@@ -7,7 +7,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Stops a materialized view refresh task run, for a specified table and columns.
+// Stops a materialized view refresh task run for a specified materialized view.
 func (c *Client) StopMaterializedViewRefreshTaskRun(ctx context.Context, params *StopMaterializedViewRefreshTaskRunInput, optFns ...func(*Options)) (*StopMaterializedViewRefreshTaskRunOutput, error) {
 	if params == nil {
 		params = &StopMaterializedViewRefreshTaskRunInput{}
@@ -36,7 +36,7 @@ type StopMaterializedViewRefreshTaskRunInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The name of the table to generate statistics.
+	// The name of the materialized view.
 	//
 	// This member is required.
 	TableName *string

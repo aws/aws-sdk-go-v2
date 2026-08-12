@@ -1,0 +1,8 @@
+{
+    "id": "fd60fa5b-267a-4890-8a66-8a44841620ed",
+    "type": "feature",
+    "description": "Improved validation of Kinesis stream ARN format to ensure only valid ARN characters are accepted",
+    "modules": [
+        "service/dsql"
+    ]
+}

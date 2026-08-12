@@ -49,6 +49,7 @@ type SearchAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+// The search results returned by the SearchAssets operation.
 type SearchAssetsOutput struct {
 
 	// The list of assets matching the search criteria.

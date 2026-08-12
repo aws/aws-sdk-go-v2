@@ -26,15 +26,18 @@ func (c *Client) GetDbNode(ctx context.Context, params *GetDbNodeInput, optFns .
 
 type GetDbNodeInput struct {
 
-	// The unique identifier of the VM cluster that contains the DB node.
-	//
-	// This member is required.
-	CloudVmClusterId *string
-
 	// The unique identifier of the DB node to retrieve information about.
 	//
 	// This member is required.
 	DbNodeId *string
+
+	// The unique identifier of the VM cluster that contains the DB node. You must
+	// specify either this parameter or exadbVmClusterId .
+	CloudVmClusterId *string
+
+	// The unique identifier of the Exascale VM cluster that contains the DB node. You
+	// must specify either this parameter or cloudVmClusterId .
+	ExadbVmClusterId *string
 
 	noSmithyDocumentSerde
 }

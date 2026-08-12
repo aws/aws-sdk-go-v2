@@ -128,6 +128,69 @@ func TestCheckResponseSnapshot_AcceptDelegationRequest(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AcquireRole(t *testing.T) {
+	want := &AcquireRoleOutput{
+		Role: &types.Role{
+			Path:                     ptr.String("__Path__"),
+			RoleName:                 ptr.String("__RoleName__"),
+			RoleId:                   ptr.String("__RoleId__"),
+			Arn:                      ptr.String("__Arn__"),
+			CreateDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
+			Description:              ptr.String("__Description__"),
+			MaxSessionDuration:       ptr.Int32(1),
+			PermissionsBoundary: &types.AttachedPermissionsBoundary{
+				PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
+				PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			RoleLastUsed: &types.RoleLastUsed{
+				LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Region:       ptr.String("__Region__"),
+			},
+			SourceRoleTemplate: &types.SourceRoleTemplate{
+				TemplateArn:          ptr.String("__TemplateArn__"),
+				TemplateMinorVersion: ptr.Int32(1),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("AcquireRole.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AcquireRole(context.Background(), &AcquireRoleInput{
+		TemplateArn:          ptr.String("__TemplateArn__"),
+		TemplateMinorVersion: ptr.Int32(1),
+		ReplacementValues: map[string]types.ReplacementValueEntry{
+			"key0": {
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AcquireRole.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AddClientIDToOpenIDConnectProvider(t *testing.T) {
 	want := &AddClientIDToOpenIDConnectProviderOutput{}
 	status, header, body, err := serdeRespReadSnapshot("AddClientIDToOpenIDConnectProvider.response")
@@ -471,6 +534,10 @@ func TestCheckResponseSnapshot_CreateInstanceProfile(t *testing.T) {
 						LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Region:       ptr.String("__Region__"),
 					},
+					SourceRoleTemplate: &types.SourceRoleTemplate{
+						TemplateArn:          ptr.String("__TemplateArn__"),
+						TemplateMinorVersion: ptr.Int32(1),
+					},
 				},
 				{
 					Path:                     ptr.String("__Path__"),
@@ -498,6 +565,10 @@ func TestCheckResponseSnapshot_CreateInstanceProfile(t *testing.T) {
 					RoleLastUsed: &types.RoleLastUsed{
 						LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Region:       ptr.String("__Region__"),
+					},
+					SourceRoleTemplate: &types.SourceRoleTemplate{
+						TemplateArn:          ptr.String("__TemplateArn__"),
+						TemplateMinorVersion: ptr.Int32(1),
 					},
 				},
 			},
@@ -740,6 +811,10 @@ func TestCheckResponseSnapshot_CreateRole(t *testing.T) {
 				LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Region:       ptr.String("__Region__"),
 			},
+			SourceRoleTemplate: &types.SourceRoleTemplate{
+				TemplateArn:          ptr.String("__TemplateArn__"),
+				TemplateMinorVersion: ptr.Int32(1),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateRole.response")
@@ -850,6 +925,10 @@ func TestCheckResponseSnapshot_CreateServiceLinkedRole(t *testing.T) {
 			RoleLastUsed: &types.RoleLastUsed{
 				LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Region:       ptr.String("__Region__"),
+			},
+			SourceRoleTemplate: &types.SourceRoleTemplate{
+				TemplateArn:          ptr.String("__TemplateArn__"),
+				TemplateMinorVersion: ptr.Int32(1),
 			},
 		},
 	}
@@ -2071,6 +2150,10 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 									LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 									Region:       ptr.String("__Region__"),
 								},
+								SourceRoleTemplate: &types.SourceRoleTemplate{
+									TemplateArn:          ptr.String("__TemplateArn__"),
+									TemplateMinorVersion: ptr.Int32(1),
+								},
 							},
 							{
 								Path:                     ptr.String("__Path__"),
@@ -2098,6 +2181,10 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								RoleLastUsed: &types.RoleLastUsed{
 									LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 									Region:       ptr.String("__Region__"),
+								},
+								SourceRoleTemplate: &types.SourceRoleTemplate{
+									TemplateArn:          ptr.String("__TemplateArn__"),
+									TemplateMinorVersion: ptr.Int32(1),
 								},
 							},
 						},
@@ -2146,6 +2233,10 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 									LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 									Region:       ptr.String("__Region__"),
 								},
+								SourceRoleTemplate: &types.SourceRoleTemplate{
+									TemplateArn:          ptr.String("__TemplateArn__"),
+									TemplateMinorVersion: ptr.Int32(1),
+								},
 							},
 							{
 								Path:                     ptr.String("__Path__"),
@@ -2173,6 +2264,10 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								RoleLastUsed: &types.RoleLastUsed{
 									LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 									Region:       ptr.String("__Region__"),
+								},
+								SourceRoleTemplate: &types.SourceRoleTemplate{
+									TemplateArn:          ptr.String("__TemplateArn__"),
+									TemplateMinorVersion: ptr.Int32(1),
 								},
 							},
 						},
@@ -2269,6 +2364,10 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 									LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 									Region:       ptr.String("__Region__"),
 								},
+								SourceRoleTemplate: &types.SourceRoleTemplate{
+									TemplateArn:          ptr.String("__TemplateArn__"),
+									TemplateMinorVersion: ptr.Int32(1),
+								},
 							},
 							{
 								Path:                     ptr.String("__Path__"),
@@ -2296,6 +2395,10 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								RoleLastUsed: &types.RoleLastUsed{
 									LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 									Region:       ptr.String("__Region__"),
+								},
+								SourceRoleTemplate: &types.SourceRoleTemplate{
+									TemplateArn:          ptr.String("__TemplateArn__"),
+									TemplateMinorVersion: ptr.Int32(1),
 								},
 							},
 						},
@@ -2344,6 +2447,10 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 									LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 									Region:       ptr.String("__Region__"),
 								},
+								SourceRoleTemplate: &types.SourceRoleTemplate{
+									TemplateArn:          ptr.String("__TemplateArn__"),
+									TemplateMinorVersion: ptr.Int32(1),
+								},
 							},
 							{
 								Path:                     ptr.String("__Path__"),
@@ -2371,6 +2478,10 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								RoleLastUsed: &types.RoleLastUsed{
 									LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 									Region:       ptr.String("__Region__"),
+								},
+								SourceRoleTemplate: &types.SourceRoleTemplate{
+									TemplateArn:          ptr.String("__TemplateArn__"),
+									TemplateMinorVersion: ptr.Int32(1),
 								},
 							},
 						},
@@ -2538,6 +2649,29 @@ func TestCheckResponseSnapshot_GetAccountPasswordPolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetAccountPasswordPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAccountProperties(t *testing.T) {
+	want := &GetAccountPropertiesOutput{
+		Properties: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAccountProperties.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAccountProperties(context.Background(), &GetAccountPropertiesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAccountProperties.response", err)
 	}
 }
 
@@ -2883,6 +3017,10 @@ func TestCheckResponseSnapshot_GetInstanceProfile(t *testing.T) {
 						LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Region:       ptr.String("__Region__"),
 					},
+					SourceRoleTemplate: &types.SourceRoleTemplate{
+						TemplateArn:          ptr.String("__TemplateArn__"),
+						TemplateMinorVersion: ptr.Int32(1),
+					},
 				},
 				{
 					Path:                     ptr.String("__Path__"),
@@ -2910,6 +3048,10 @@ func TestCheckResponseSnapshot_GetInstanceProfile(t *testing.T) {
 					RoleLastUsed: &types.RoleLastUsed{
 						LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Region:       ptr.String("__Region__"),
+					},
+					SourceRoleTemplate: &types.SourceRoleTemplate{
+						TemplateArn:          ptr.String("__TemplateArn__"),
+						TemplateMinorVersion: ptr.Int32(1),
 					},
 				},
 			},
@@ -3221,6 +3363,10 @@ func TestCheckResponseSnapshot_GetRole(t *testing.T) {
 				LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Region:       ptr.String("__Region__"),
 			},
+			SourceRoleTemplate: &types.SourceRoleTemplate{
+				TemplateArn:          ptr.String("__TemplateArn__"),
+				TemplateMinorVersion: ptr.Int32(1),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRole.response")
@@ -3265,6 +3411,94 @@ func TestCheckResponseSnapshot_GetRolePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetRolePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetRoleTemplateVersion(t *testing.T) {
+	want := &GetRoleTemplateVersionOutput{
+		RoleTemplateVersion: &types.RoleTemplateVersion{
+			TemplateArn:                      ptr.String("__TemplateArn__"),
+			TemplateName:                     ptr.String("__TemplateName__"),
+			TemplateVersionId:                ptr.String("__TemplateVersionId__"),
+			Description:                      ptr.String("__Description__"),
+			MajorVersion:                     ptr.Int32(1),
+			DefaultMinorVersion:              ptr.Int32(1),
+			ManagedByType:                    types.ManagedByTypeType("Service"),
+			ManagedByValue:                   ptr.String("__ManagedByValue__"),
+			Enabled:                          true,
+			MinorVersion:                     ptr.Int32(1),
+			RoleNamePattern:                  ptr.String("__RoleNamePattern__"),
+			RolePathPattern:                  ptr.String("__RolePathPattern__"),
+			RoleDescriptionPattern:           ptr.String("__RoleDescriptionPattern__"),
+			AssumeRolePolicyDocumentTemplate: ptr.String("__AssumeRolePolicyDocumentTemplate__"),
+			InlinePolicyTemplates: []types.InlinePolicy{
+				{
+					PolicyName:     ptr.String("__PolicyName__"),
+					PolicyDocument: ptr.String("__PolicyDocument__"),
+				},
+				{
+					PolicyName:     ptr.String("__PolicyName__"),
+					PolicyDocument: ptr.String("__PolicyDocument__"),
+				},
+			},
+			ManagedPolicyArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			PermissionBoundaryArn: ptr.String("__PermissionBoundaryArn__"),
+			ParametersDefinition: []types.ParameterDefinition{
+				{
+					Name:         ptr.String("__Name__"),
+					Type:         types.ParameterTypeType("String"),
+					SubType:      ptr.String("__SubType__"),
+					Description:  ptr.String("__Description__"),
+					IsRequired:   true,
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Immutable:    true,
+				},
+				{
+					Name:         ptr.String("__Name__"),
+					Type:         types.ParameterTypeType("String"),
+					SubType:      ptr.String("__SubType__"),
+					Description:  ptr.String("__Description__"),
+					IsRequired:   true,
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Immutable:    true,
+				},
+			},
+			RoleTagsTemplate: []types.TagTemplate{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			MaxSessionDuration: ptr.Int32(1),
+			VersionEnabled:     true,
+			CreateTimestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdateTimestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRoleTemplateVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRoleTemplateVersion(context.Background(), &GetRoleTemplateVersionInput{
+		TemplateArn:  ptr.String("__TemplateArn__"),
+		MinorVersion: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRoleTemplateVersion.response", err)
 	}
 }
 
@@ -4183,6 +4417,10 @@ func TestCheckResponseSnapshot_ListInstanceProfiles(t *testing.T) {
 							LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Region:       ptr.String("__Region__"),
 						},
+						SourceRoleTemplate: &types.SourceRoleTemplate{
+							TemplateArn:          ptr.String("__TemplateArn__"),
+							TemplateMinorVersion: ptr.Int32(1),
+						},
 					},
 					{
 						Path:                     ptr.String("__Path__"),
@@ -4210,6 +4448,10 @@ func TestCheckResponseSnapshot_ListInstanceProfiles(t *testing.T) {
 						RoleLastUsed: &types.RoleLastUsed{
 							LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Region:       ptr.String("__Region__"),
+						},
+						SourceRoleTemplate: &types.SourceRoleTemplate{
+							TemplateArn:          ptr.String("__TemplateArn__"),
+							TemplateMinorVersion: ptr.Int32(1),
 						},
 					},
 				},
@@ -4258,6 +4500,10 @@ func TestCheckResponseSnapshot_ListInstanceProfiles(t *testing.T) {
 							LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Region:       ptr.String("__Region__"),
 						},
+						SourceRoleTemplate: &types.SourceRoleTemplate{
+							TemplateArn:          ptr.String("__TemplateArn__"),
+							TemplateMinorVersion: ptr.Int32(1),
+						},
 					},
 					{
 						Path:                     ptr.String("__Path__"),
@@ -4285,6 +4531,10 @@ func TestCheckResponseSnapshot_ListInstanceProfiles(t *testing.T) {
 						RoleLastUsed: &types.RoleLastUsed{
 							LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Region:       ptr.String("__Region__"),
+						},
+						SourceRoleTemplate: &types.SourceRoleTemplate{
+							TemplateArn:          ptr.String("__TemplateArn__"),
+							TemplateMinorVersion: ptr.Int32(1),
 						},
 					},
 				},
@@ -4361,6 +4611,10 @@ func TestCheckResponseSnapshot_ListInstanceProfilesForRole(t *testing.T) {
 							LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Region:       ptr.String("__Region__"),
 						},
+						SourceRoleTemplate: &types.SourceRoleTemplate{
+							TemplateArn:          ptr.String("__TemplateArn__"),
+							TemplateMinorVersion: ptr.Int32(1),
+						},
 					},
 					{
 						Path:                     ptr.String("__Path__"),
@@ -4388,6 +4642,10 @@ func TestCheckResponseSnapshot_ListInstanceProfilesForRole(t *testing.T) {
 						RoleLastUsed: &types.RoleLastUsed{
 							LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Region:       ptr.String("__Region__"),
+						},
+						SourceRoleTemplate: &types.SourceRoleTemplate{
+							TemplateArn:          ptr.String("__TemplateArn__"),
+							TemplateMinorVersion: ptr.Int32(1),
 						},
 					},
 				},
@@ -4436,6 +4694,10 @@ func TestCheckResponseSnapshot_ListInstanceProfilesForRole(t *testing.T) {
 							LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Region:       ptr.String("__Region__"),
 						},
+						SourceRoleTemplate: &types.SourceRoleTemplate{
+							TemplateArn:          ptr.String("__TemplateArn__"),
+							TemplateMinorVersion: ptr.Int32(1),
+						},
 					},
 					{
 						Path:                     ptr.String("__Path__"),
@@ -4463,6 +4725,10 @@ func TestCheckResponseSnapshot_ListInstanceProfilesForRole(t *testing.T) {
 						RoleLastUsed: &types.RoleLastUsed{
 							LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Region:       ptr.String("__Region__"),
+						},
+						SourceRoleTemplate: &types.SourceRoleTemplate{
+							TemplateArn:          ptr.String("__TemplateArn__"),
+							TemplateMinorVersion: ptr.Int32(1),
 						},
 					},
 				},
@@ -4983,6 +5249,10 @@ func TestCheckResponseSnapshot_ListRoles(t *testing.T) {
 					LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Region:       ptr.String("__Region__"),
 				},
+				SourceRoleTemplate: &types.SourceRoleTemplate{
+					TemplateArn:          ptr.String("__TemplateArn__"),
+					TemplateMinorVersion: ptr.Int32(1),
+				},
 			},
 			{
 				Path:                     ptr.String("__Path__"),
@@ -5010,6 +5280,10 @@ func TestCheckResponseSnapshot_ListRoles(t *testing.T) {
 				RoleLastUsed: &types.RoleLastUsed{
 					LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Region:       ptr.String("__Region__"),
+				},
+				SourceRoleTemplate: &types.SourceRoleTemplate{
+					TemplateArn:          ptr.String("__TemplateArn__"),
+					TemplateMinorVersion: ptr.Int32(1),
 				},
 			},
 		},
@@ -5556,6 +5830,29 @@ func TestCheckResponseSnapshot_ListVirtualMFADevices(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListVirtualMFADevices.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutAccountProperties(t *testing.T) {
+	want := &PutAccountPropertiesOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutAccountProperties.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutAccountProperties(context.Background(), &PutAccountPropertiesInput{
+		Properties: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutAccountProperties.response", err)
 	}
 }
 
@@ -7207,6 +7504,10 @@ func TestCheckResponseSnapshot_UpdateRoleDescription(t *testing.T) {
 				LastUsedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Region:       ptr.String("__Region__"),
 			},
+			SourceRoleTemplate: &types.SourceRoleTemplate{
+				TemplateArn:          ptr.String("__TemplateArn__"),
+				TemplateMinorVersion: ptr.Int32(1),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateRoleDescription.response")
@@ -7733,9 +8034,17 @@ func TestCheckResponseSnapshot_Error_EntityAlreadyExistsException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRoleToInstanceProfile(context.Background(), &AddRoleToInstanceProfileInput{
-		InstanceProfileName: ptr.String("__InstanceProfileName__"),
-		RoleName:            ptr.String("__RoleName__"),
+	_, opErr := svc.AcquireRole(context.Background(), &AcquireRoleInput{
+		TemplateArn:          ptr.String("__TemplateArn__"),
+		TemplateMinorVersion: ptr.Int32(1),
+		ReplacementValues: map[string]types.ReplacementValueEntry{
+			"key0": {
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7897,9 +8206,17 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddClientIDToOpenIDConnectProvider(context.Background(), &AddClientIDToOpenIDConnectProviderInput{
-		OpenIDConnectProviderArn: ptr.String("__OpenIDConnectProviderArn__"),
-		ClientID:                 ptr.String("__ClientID__"),
+	_, opErr := svc.AcquireRole(context.Background(), &AcquireRoleInput{
+		TemplateArn:          ptr.String("__TemplateArn__"),
+		TemplateMinorVersion: ptr.Int32(1),
+		ReplacementValues: map[string]types.ReplacementValueEntry{
+			"key0": {
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8022,9 +8339,17 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddClientIDToOpenIDConnectProvider(context.Background(), &AddClientIDToOpenIDConnectProviderInput{
-		OpenIDConnectProviderArn: ptr.String("__OpenIDConnectProviderArn__"),
-		ClientID:                 ptr.String("__ClientID__"),
+	_, opErr := svc.AcquireRole(context.Background(), &AcquireRoleInput{
+		TemplateArn:          ptr.String("__TemplateArn__"),
+		TemplateMinorVersion: ptr.Int32(1),
+		ReplacementValues: map[string]types.ReplacementValueEntry{
+			"key0": {
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8091,19 +8416,15 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePolicy(context.Background(), &CreatePolicyInput{
-		PolicyName:     ptr.String("__PolicyName__"),
-		Path:           ptr.String("__Path__"),
-		PolicyDocument: ptr.String("__PolicyDocument__"),
-		Description:    ptr.String("__Description__"),
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
+	_, opErr := svc.AcquireRole(context.Background(), &AcquireRoleInput{
+		TemplateArn:          ptr.String("__TemplateArn__"),
+		TemplateMinorVersion: ptr.Int32(1),
+		ReplacementValues: map[string]types.ReplacementValueEntry{
+			"key0": {
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 	})
@@ -8116,6 +8437,42 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "MalformedPolicyDocumentException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_NameConflictException(t *testing.T) {
+	want := &types.NameConflictException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("NameConflictException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.AcquireRole(context.Background(), &AcquireRoleInput{
+		TemplateArn:          ptr.String("__TemplateArn__"),
+		TemplateMinorVersion: ptr.Int32(1),
+		ReplacementValues: map[string]types.ReplacementValueEntry{
+			"key0": {
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.NameConflictException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.NameConflictException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "NameConflictException.error", err)
 	}
 }
 
@@ -8402,6 +8759,78 @@ func TestCheckResponseSnapshot_Error_ReportGenerationLimitExceededException(t *t
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ReportGenerationLimitExceededException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_RoleModifiedException(t *testing.T) {
+	want := &types.RoleModifiedException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RoleModifiedException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.AcquireRole(context.Background(), &AcquireRoleInput{
+		TemplateArn:          ptr.String("__TemplateArn__"),
+		TemplateMinorVersion: ptr.Int32(1),
+		ReplacementValues: map[string]types.ReplacementValueEntry{
+			"key0": {
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.RoleModifiedException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.RoleModifiedException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "RoleModifiedException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_RoleTemplateDisabledException(t *testing.T) {
+	want := &types.RoleTemplateDisabledException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RoleTemplateDisabledException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.AcquireRole(context.Background(), &AcquireRoleInput{
+		TemplateArn:          ptr.String("__TemplateArn__"),
+		TemplateMinorVersion: ptr.Int32(1),
+		ReplacementValues: map[string]types.ReplacementValueEntry{
+			"key0": {
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.RoleTemplateDisabledException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.RoleTemplateDisabledException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "RoleTemplateDisabledException.error", err)
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "8aeb7d9f-e8a3-4929-9230-af63da9562b6",
+    "type": "feature",
+    "description": "This change releases the Well-Architected Agent, a generative AI service that analyzes a customer's AWS environment and delivers personalized, prioritized recommendations across cost, security, performance, and resilience.",
+    "modules": [
+        "service/wellarchitected"
+    ]
+}

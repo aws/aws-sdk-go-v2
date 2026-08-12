@@ -10,6 +10,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/document"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -263,6 +264,169 @@ func TestCheckRequestSnapshot_AssociateProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateProfiles"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateAgentContext(t *testing.T) {
+	input := &CreateAgentContextInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ProfileArn:  ptr.String("__ProfileArn__"),
+		Title:       ptr.String("__Title__"),
+		ContextType: types.ContextType("APPLICATION"),
+		Content: &types.ContextContent{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AwsServices: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTags: []types.ContextResourceTag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ApplicationOverview:  ptr.String("__ApplicationOverview__"),
+			Industry:             ptr.String("__Industry__"),
+			ApplicationType:      types.ApplicationType("SAS"),
+			Criticality:          types.Criticality("MISSION_CRITICAL"),
+			ArchitectureOverview: ptr.String("__ArchitectureOverview__"),
+			AdditionalContext:    ptr.String("__AdditionalContext__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAgentContext(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentContext"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateAgentGoal(t *testing.T) {
+	input := &CreateAgentGoalInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ProfileArn:  ptr.String("__ProfileArn__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAgentGoal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentGoal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateAgentProfile(t *testing.T) {
+	input := &CreateAgentProfileInput{
+		Name:             ptr.String("__Name__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+		ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
+		AggregationConfiguration: []types.AggregationConfiguration{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAgentProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentProfile"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -610,6 +774,89 @@ func TestCheckRequestSnapshot_CreateWorkloadShare(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteAgentContext(t *testing.T) {
+	input := &DeleteAgentContextInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Id:         ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAgentContext(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentContext"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteAgentGoal(t *testing.T) {
+	input := &DeleteAgentGoalInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Id:         ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAgentGoal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentGoal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteAgentProfile(t *testing.T) {
+	input := &DeleteAgentProfileInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAgentProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteLens(t *testing.T) {
 	input := &DeleteLensInput{
 		LensAlias:          ptr.String("__LensAlias__"),
@@ -925,6 +1172,145 @@ func TestCheckRequestSnapshot_ExportLens(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ExportLens"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAgentContext(t *testing.T) {
+	input := &GetAgentContextInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Id:         ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentContext(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentContext"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAgentGoal(t *testing.T) {
+	input := &GetAgentGoalInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Id:         ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentGoal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentGoal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAgentProfile(t *testing.T) {
+	input := &GetAgentProfileInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAgentRecommendation(t *testing.T) {
+	input := &GetAgentRecommendationInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		RemediationType:   types.RemediationType("AUTO_REMEDIATION"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentRecommendation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentRecommendation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
+	input := &GetAgentRecommendationGenerationInput{
+		ProfileArn:   ptr.String("__ProfileArn__"),
+		GenerationId: ptr.String("__GenerationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentRecommendationGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentRecommendationGeneration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1349,6 +1735,183 @@ func TestCheckRequestSnapshot_ImportLens(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ImportLens"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAgentContexts(t *testing.T) {
+	input := &ListAgentContextsInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentContexts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentContexts"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAgentGoals(t *testing.T) {
+	input := &ListAgentGoalsInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentGoals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentGoals"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAgentProfiles(t *testing.T) {
+	input := &ListAgentProfilesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentProfiles(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentProfiles"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAgentRecommendationGenerations(t *testing.T) {
+	input := &ListAgentRecommendationGenerationsInput{
+		ProfileArn:         ptr.String("__ProfileArn__"),
+		RecommendationType: types.RecommendationType("RESOURCE"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentRecommendationGenerations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRecommendationGenerations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAgentRecommendationItems(t *testing.T) {
+	input := &ListAgentRecommendationItemsInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		Type:              types.RecommendationItemType("AWS_RESOURCE"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentRecommendationItems(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRecommendationItems"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAgentRecommendations(t *testing.T) {
+	input := &ListAgentRecommendationsInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		State:      types.RecommendationState("OPEN"),
+		Pillar:     types.Pillar("COST_OPTIMIZATION"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentRecommendations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRecommendations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1936,6 +2499,95 @@ func TestCheckRequestSnapshot_ListWorkloadShares(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
+	input := &PutAgentRecommendationFeedbackInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		Type:              types.RecommendationFeedbackType("USEFUL"),
+		FeedbackCategory:  types.FeedbackCategory("OTHER"),
+		Comments:          ptr.String("__Comments__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutAgentRecommendationFeedback(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAgentRecommendationFeedback"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartAgentRecommendationGeneration(t *testing.T) {
+	input := &StartAgentRecommendationGenerationInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Types: []types.RecommendationType{
+			types.RecommendationType("RESOURCE"),
+			types.RecommendationType("RESOURCE"),
+		},
+		Name:              ptr.String("__Name__"),
+		AdditionalContext: document.NewLazyDocument("__Document__"),
+		Scope: &types.Scope{
+			Pillars: []types.Pillar{
+				types.Pillar("COST_OPTIMIZATION"),
+				types.Pillar("COST_OPTIMIZATION"),
+			},
+			GoalIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Items: []types.PillarItem{
+				{
+					Pillar: types.Pillar("COST_OPTIMIZATION"),
+					Ids: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Pillar: types.Pillar("COST_OPTIMIZATION"),
+					Ids: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAgentRecommendationGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAgentRecommendationGeneration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		WorkloadArn: ptr.String("__WorkloadArn__"),
@@ -1993,6 +2645,189 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateAgentContext(t *testing.T) {
+	input := &UpdateAgentContextInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ProfileArn:  ptr.String("__ProfileArn__"),
+		Id:          ptr.String("__Id__"),
+		Title:       ptr.String("__Title__"),
+		Content: &types.ContextContent{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AwsServices: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTags: []types.ContextResourceTag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ApplicationOverview:  ptr.String("__ApplicationOverview__"),
+			Industry:             ptr.String("__Industry__"),
+			ApplicationType:      types.ApplicationType("SAS"),
+			Criticality:          types.Criticality("MISSION_CRITICAL"),
+			ArchitectureOverview: ptr.String("__ArchitectureOverview__"),
+			AdditionalContext:    ptr.String("__AdditionalContext__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentContext(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentContext"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateAgentGoal(t *testing.T) {
+	input := &UpdateAgentGoalInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ProfileArn:  ptr.String("__ProfileArn__"),
+		Id:          ptr.String("__Id__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentGoal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentGoal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateAgentProfile(t *testing.T) {
+	input := &UpdateAgentProfileInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		ProfileArn:       ptr.String("__ProfileArn__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		AggregationConfiguration: []types.AggregationConfiguration{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+		},
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateAgentRecommendationStatus(t *testing.T) {
+	input := &UpdateAgentRecommendationStatusInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		Status:            types.RecommendationStatus("ACTIVE"),
+		UpdateReason:      ptr.String("__UpdateReason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentRecommendationStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentRecommendationStatus"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2586,6 +3421,169 @@ func TestUpdateRequestSnapshot_AssociateProfiles(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateAgentContext(t *testing.T) {
+	input := &CreateAgentContextInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ProfileArn:  ptr.String("__ProfileArn__"),
+		Title:       ptr.String("__Title__"),
+		ContextType: types.ContextType("APPLICATION"),
+		Content: &types.ContextContent{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AwsServices: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTags: []types.ContextResourceTag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ApplicationOverview:  ptr.String("__ApplicationOverview__"),
+			Industry:             ptr.String("__Industry__"),
+			ApplicationType:      types.ApplicationType("SAS"),
+			Criticality:          types.Criticality("MISSION_CRITICAL"),
+			ArchitectureOverview: ptr.String("__ArchitectureOverview__"),
+			AdditionalContext:    ptr.String("__AdditionalContext__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAgentContext(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentContext"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateAgentGoal(t *testing.T) {
+	input := &CreateAgentGoalInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ProfileArn:  ptr.String("__ProfileArn__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAgentGoal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentGoal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateAgentProfile(t *testing.T) {
+	input := &CreateAgentProfileInput{
+		Name:             ptr.String("__Name__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+		ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
+		AggregationConfiguration: []types.AggregationConfiguration{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAgentProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAgentProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateLensShare(t *testing.T) {
 	input := &CreateLensShareInput{
 		LensAlias:          ptr.String("__LensAlias__"),
@@ -2929,6 +3927,89 @@ func TestUpdateRequestSnapshot_CreateWorkloadShare(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteAgentContext(t *testing.T) {
+	input := &DeleteAgentContextInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Id:         ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAgentContext(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentContext"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteAgentGoal(t *testing.T) {
+	input := &DeleteAgentGoalInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Id:         ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAgentGoal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentGoal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteAgentProfile(t *testing.T) {
+	input := &DeleteAgentProfileInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAgentProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAgentProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteLens(t *testing.T) {
 	input := &DeleteLensInput{
 		LensAlias:          ptr.String("__LensAlias__"),
@@ -3244,6 +4325,145 @@ func TestUpdateRequestSnapshot_ExportLens(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ExportLens"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAgentContext(t *testing.T) {
+	input := &GetAgentContextInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Id:         ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentContext(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentContext"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAgentGoal(t *testing.T) {
+	input := &GetAgentGoalInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Id:         ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentGoal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentGoal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAgentProfile(t *testing.T) {
+	input := &GetAgentProfileInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAgentRecommendation(t *testing.T) {
+	input := &GetAgentRecommendationInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		RemediationType:   types.RemediationType("AUTO_REMEDIATION"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentRecommendation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentRecommendation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
+	input := &GetAgentRecommendationGenerationInput{
+		ProfileArn:   ptr.String("__ProfileArn__"),
+		GenerationId: ptr.String("__GenerationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentRecommendationGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentRecommendationGeneration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3668,6 +4888,183 @@ func TestUpdateRequestSnapshot_ImportLens(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ImportLens"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAgentContexts(t *testing.T) {
+	input := &ListAgentContextsInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentContexts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentContexts"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAgentGoals(t *testing.T) {
+	input := &ListAgentGoalsInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentGoals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentGoals"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAgentProfiles(t *testing.T) {
+	input := &ListAgentProfilesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentProfiles(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentProfiles"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAgentRecommendationGenerations(t *testing.T) {
+	input := &ListAgentRecommendationGenerationsInput{
+		ProfileArn:         ptr.String("__ProfileArn__"),
+		RecommendationType: types.RecommendationType("RESOURCE"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentRecommendationGenerations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRecommendationGenerations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAgentRecommendationItems(t *testing.T) {
+	input := &ListAgentRecommendationItemsInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		Type:              types.RecommendationItemType("AWS_RESOURCE"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentRecommendationItems(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRecommendationItems"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAgentRecommendations(t *testing.T) {
+	input := &ListAgentRecommendationsInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		State:      types.RecommendationState("OPEN"),
+		Pillar:     types.Pillar("COST_OPTIMIZATION"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentRecommendations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentRecommendations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4255,6 +5652,95 @@ func TestUpdateRequestSnapshot_ListWorkloadShares(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
+	input := &PutAgentRecommendationFeedbackInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		Type:              types.RecommendationFeedbackType("USEFUL"),
+		FeedbackCategory:  types.FeedbackCategory("OTHER"),
+		Comments:          ptr.String("__Comments__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutAgentRecommendationFeedback(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAgentRecommendationFeedback"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartAgentRecommendationGeneration(t *testing.T) {
+	input := &StartAgentRecommendationGenerationInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Types: []types.RecommendationType{
+			types.RecommendationType("RESOURCE"),
+			types.RecommendationType("RESOURCE"),
+		},
+		Name:              ptr.String("__Name__"),
+		AdditionalContext: document.NewLazyDocument("__Document__"),
+		Scope: &types.Scope{
+			Pillars: []types.Pillar{
+				types.Pillar("COST_OPTIMIZATION"),
+				types.Pillar("COST_OPTIMIZATION"),
+			},
+			GoalIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Items: []types.PillarItem{
+				{
+					Pillar: types.Pillar("COST_OPTIMIZATION"),
+					Ids: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Pillar: types.Pillar("COST_OPTIMIZATION"),
+					Ids: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAgentRecommendationGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAgentRecommendationGeneration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		WorkloadArn: ptr.String("__WorkloadArn__"),
@@ -4312,6 +5798,189 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateAgentContext(t *testing.T) {
+	input := &UpdateAgentContextInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ProfileArn:  ptr.String("__ProfileArn__"),
+		Id:          ptr.String("__Id__"),
+		Title:       ptr.String("__Title__"),
+		Content: &types.ContextContent{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Regions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AwsServices: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceTags: []types.ContextResourceTag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ApplicationOverview:  ptr.String("__ApplicationOverview__"),
+			Industry:             ptr.String("__Industry__"),
+			ApplicationType:      types.ApplicationType("SAS"),
+			Criticality:          types.Criticality("MISSION_CRITICAL"),
+			ArchitectureOverview: ptr.String("__ArchitectureOverview__"),
+			AdditionalContext:    ptr.String("__AdditionalContext__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentContext(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentContext"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateAgentGoal(t *testing.T) {
+	input := &UpdateAgentGoalInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ProfileArn:  ptr.String("__ProfileArn__"),
+		Id:          ptr.String("__Id__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentGoal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentGoal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateAgentProfile(t *testing.T) {
+	input := &UpdateAgentProfileInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		ProfileArn:       ptr.String("__ProfileArn__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		AggregationConfiguration: []types.AggregationConfiguration{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AccessRoleArn: ptr.String("__AccessRoleArn__"),
+			},
+		},
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentProfile(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateAgentRecommendationStatus(t *testing.T) {
+	input := &UpdateAgentRecommendationStatusInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		Status:            types.RecommendationStatus("ACTIVE"),
+		UpdateReason:      ptr.String("__UpdateReason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentRecommendationStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentRecommendationStatus"); err != nil {
 		t.Fatal(err)
 	}
 }

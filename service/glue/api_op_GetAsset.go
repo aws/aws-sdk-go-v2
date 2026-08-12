@@ -36,6 +36,7 @@ type GetAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+// The asset metadata returned by the GetAsset operation.
 type GetAssetOutput struct {
 
 	// The identifier of the asset type for this asset.

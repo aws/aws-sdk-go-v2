@@ -7,7 +7,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Starts a materialized view refresh task run, for a specified table and columns.
+// Starts a materialized view refresh task run for a specified materialized view.
 func (c *Client) StartMaterializedViewRefreshTaskRun(ctx context.Context, params *StartMaterializedViewRefreshTaskRunInput, optFns ...func(*Options)) (*StartMaterializedViewRefreshTaskRunOutput, error) {
 	if params == nil {
 		params = &StartMaterializedViewRefreshTaskRunInput{}
@@ -36,7 +36,7 @@ type StartMaterializedViewRefreshTaskRunInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The name of the table to generate run the materialized view refresh task.
+	// The name of the materialized view to run the refresh task for.
 	//
 	// This member is required.
 	TableName *string

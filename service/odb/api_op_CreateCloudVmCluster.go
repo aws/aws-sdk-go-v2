@@ -94,7 +94,7 @@ type CreateCloudVmClusterInput struct {
 	// cluster.
 	DataStorageSizeInTBs *float64
 
-	// The amount of local node storage, in gigabytes (GBs), to allocate for the VM
+	// The amount of local node storage, in gigabytes (GB), to allocate for the VM
 	// cluster.
 	DbNodeStorageSizeInGBs *int32
 
@@ -113,7 +113,7 @@ type CreateCloudVmClusterInput struct {
 	// Default: LICENSE_INCLUDED
 	LicenseModel types.LicenseModel
 
-	// The amount of memory, in gigabytes (GBs), to allocate for the VM cluster.
+	// The amount of memory, in gigabytes (GB), to allocate for the VM cluster.
 	MemorySizeInGBs *int32
 
 	// The port number for TCP connections to the single client access name (SCAN)

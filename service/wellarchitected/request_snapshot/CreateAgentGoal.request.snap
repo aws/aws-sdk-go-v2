@@ -1,0 +1,5 @@
+POST /api/v1/agent-profiles/__ProfileArn__/goals
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","pillars":["COST_OPTIMIZATION","COST_OPTIMIZATION"],"title":"__Title__"}

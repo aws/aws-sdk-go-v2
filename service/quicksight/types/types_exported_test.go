@@ -342,6 +342,24 @@ var _ *types.CustomSql
 var _ *types.RelationalTable
 var _ *types.SaaSTable
 
+func ExampleProviderConfig_outputUsage() {
+	var union types.ProviderConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProviderConfigMemberMicrosoftPurview:
+		_ = v.Value // Value is types.MicrosoftPurviewProviderConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MicrosoftPurviewProviderConfig
+
 func ExampleReadAuthenticationMetadata_outputUsage() {
 	var union types.ReadAuthenticationMetadata
 	// type switches can be used to check the union value

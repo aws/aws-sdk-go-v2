@@ -42,7 +42,7 @@ type ListMaterializedViewRefreshTaskRunsInput struct {
 	// A continuation token, if this is a continuation call.
 	NextToken *string
 
-	// The name of the table for which statistics is generated.
+	// The name of the materialized view.
 	TableName *string
 
 	noSmithyDocumentSerde

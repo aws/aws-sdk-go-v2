@@ -17736,6 +17736,46 @@ func awsRestjson1_deserializeDocumentEntitlement(v **types.Entitlement, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFabricConfiguration(v **types.FabricConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FabricConfiguration
+	if *v == nil {
+		sv = &types.FabricConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "recoveryLatencyMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FabricLatencyMode to be of type string, got %T instead", value)
+				}
+				sv.RecoveryLatencyMode = types.FabricLatencyMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFailoverConfig(v **types.FailoverConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23866,6 +23906,11 @@ func awsRestjson1_deserializeDocumentRouterOutput(v **types.RouterOutput, value 
 					return err
 				}
 				sv.CreatedAt = ptr.Time(t)
+			}
+
+		case "fabricConfiguration":
+			if err := awsRestjson1_deserializeDocumentFabricConfiguration(&sv.FabricConfiguration, value); err != nil {
+				return err
 			}
 
 		case "id":

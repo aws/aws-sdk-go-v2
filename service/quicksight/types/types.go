@@ -1030,6 +1030,25 @@ type AppendOperation struct {
 	noSmithyDocumentSerde
 }
 
+// The scoping configuration that determines which principals an approval policy
+// applies to.
+type ApplicableTo struct {
+
+	// The type of scoping that determines which principals the approval policy
+	// applies to. Valid values are defined as follows:
+	//
+	//   - GROUP : The policy applies only to principals in the groups specified by
+	//   GroupArns . When you use GROUP , you must also provide a value for GroupArns .
+	//
+	// This member is required.
+	Type ApplicableToType
+
+	// The list of group ARNs that the policy applies to. Required when type is GROUP.
+	GroupArns []string
+
+	noSmithyDocumentSerde
+}
+
 // The application theme.
 type ApplicationTheme struct {
 
@@ -1041,6 +1060,61 @@ type ApplicationTheme struct {
 
 	// The contextual accent palette.
 	ContextualAccentPalette *ContextualAccentPalette
+
+	noSmithyDocumentSerde
+}
+
+// A governance approval policy that specifies which principals and governed
+// actions require approval, and which assets the policy applies to.
+type ApprovalPolicy struct {
+
+	// The list of governed actions that trigger the approval workflow.
+	//
+	// This member is required.
+	Actions []GovernedAction
+
+	// The scoping configuration that determines who the approval policy applies to.
+	//
+	// This member is required.
+	ApplicableTo *ApplicableTo
+
+	// The list of group ARNs whose members can approve requests.
+	//
+	// This member is required.
+	ApprovalGroups []string
+
+	// The list of asset types that the approval policy applies to.
+	//
+	// This member is required.
+	AssetTypes []AssetType
+
+	// The date and time that the approval policy was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the approval policy.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the approval policy.
+	//
+	// This member is required.
+	PolicyArn *string
+
+	// The unique identifier of the approval policy.
+	//
+	// This member is required.
+	PolicyId *string
+
+	// The date and time that the approval policy was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A description of the approval policy.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -1125,6 +1199,10 @@ type AssetBundleCloudFormationOverridePropertyConfiguration struct {
 	// An optional list of structures that control how Theme resources are
 	// parameterized in the returned CloudFormation template.
 	Themes []AssetBundleExportJobThemeOverrideProperties
+
+	// An optional list of structures that controls how Topic resources are
+	// parameterized in the returned CloudFormation template.
+	TopicsV2 []AssetBundleExportJobTopicV2OverrideProperties
 
 	// An optional list of structures that control how VPCConnection resources are
 	// parameterized in the returned CloudFormation template.
@@ -1322,6 +1400,25 @@ type AssetBundleExportJobThemeOverrideProperties struct {
 	//
 	// This member is required.
 	Properties []AssetBundleExportJobThemePropertyToOverride
+
+	noSmithyDocumentSerde
+}
+
+// Controls how a specific Topic resource is parameterized in the returned
+// CloudFormation template.
+type AssetBundleExportJobTopicV2OverrideProperties struct {
+
+	// The ARN of the specific Topic resource whose override properties are configured
+	// in this structure.
+	//
+	// This member is required.
+	Arn *string
+
+	// A list of Topic resource properties to generate variables for in the returned
+	// CloudFormation template.
+	//
+	// This member is required.
+	Properties []AssetBundleExportJobTopicV2PropertyToOverride
 
 	noSmithyDocumentSerde
 }
@@ -1723,6 +1820,10 @@ type AssetBundleImportJobOverrideParameters struct {
 	// bundle that is imported.
 	Themes []AssetBundleImportJobThemeOverrideParameters
 
+	// A list of overrides for any Topic resources that are present in the asset
+	// bundle that is imported.
+	TopicsV2 []AssetBundleImportJobTopicV2OverrideParameters
+
 	// A list of overrides for any VPCConnection resources that are present in the
 	// asset bundle that is imported.
 	VPCConnections []AssetBundleImportJobVPCConnectionOverrideParameters
@@ -1757,6 +1858,9 @@ type AssetBundleImportJobOverridePermissions struct {
 	// asset bundle that is imported.
 	Themes []AssetBundleImportJobThemeOverridePermissions
 
+	// A list of permissions for the topics that you want to apply overrides to.
+	TopicsV2 []AssetBundleImportJobTopicV2OverridePermissions
+
 	noSmithyDocumentSerde
 }
 
@@ -1787,6 +1891,10 @@ type AssetBundleImportJobOverrideTags struct {
 	// A list of tag overrides for any Theme resources that are present in the asset
 	// bundle that is imported.
 	Themes []AssetBundleImportJobThemeOverrideTags
+
+	// A list of tag overrides for any Topic resources that are present in the asset
+	// bundle that is imported.
+	TopicsV2 []AssetBundleImportJobTopicV2OverrideTags
 
 	// A list of tag overrides for any VPCConnection resources that are present in the
 	// asset bundle that is imported.
@@ -1908,6 +2016,58 @@ type AssetBundleImportJobThemeOverrideTags struct {
 	//
 	// This member is required.
 	ThemeIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The override parameters for a single topic that is being imported.
+type AssetBundleImportJobTopicV2OverrideParameters struct {
+
+	// The ID of the topic that you want to apply overrides to.
+	//
+	// This member is required.
+	TopicId *string
+
+	// A new description for the topic.
+	Description *string
+
+	// A new name for the topic.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of permissions to be applied to a list of topic
+// IDs.
+type AssetBundleImportJobTopicV2OverridePermissions struct {
+
+	// A list of permissions for the topics that you want to apply overrides to.
+	//
+	// This member is required.
+	Permissions *AssetBundleResourcePermissions
+
+	// A list of topic IDs that you want to apply overrides to. You can use * to
+	// override all topics in this asset bundle.
+	//
+	// This member is required.
+	TopicIds []string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of tags to be assigned to a list of topic IDs.
+type AssetBundleImportJobTopicV2OverrideTags struct {
+
+	// A list of tags for the topics that you want to apply overrides to.
+	//
+	// This member is required.
+	Tags []Tag
+
+	// A list of topic IDs that you want to apply overrides to. You can use * to
+	// override all topics in this asset bundle.
+	//
+	// This member is required.
+	TopicIds []string
 
 	noSmithyDocumentSerde
 }
@@ -2778,6 +2938,32 @@ type BatchDeleteKnowledgeBaseSuccess struct {
 	//
 	// This member is required.
 	KnowledgeBaseId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a user whose limits could not be described in a batch
+// operation.
+type BatchDescribeUserLimitsError struct {
+
+	// The error code for the failure.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message for the failure.
+	//
+	// This member is required.
+	Message *string
+
+	// The namespace of the user that failed.
+	Namespace *string
+
+	// The ARN of the user that failed.
+	UserArn *string
+
+	// The name of the user that failed.
+	UserName *string
 
 	noSmithyDocumentSerde
 }
@@ -9070,6 +9256,101 @@ type DisplayFormatOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The full configuration details of a DLP setting.
+type DlpSettingDetails struct {
+
+	// The Amazon Resource Name (ARN) of the DLP setting.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the DLP setting was created, in ISO 8601 format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the DLP setting.
+	//
+	// This member is required.
+	DlpSettingId *string
+
+	// The display name of the DLP setting.
+	//
+	// This member is required.
+	Name *string
+
+	// The provider-specific configuration for the DLP integration.
+	//
+	// This member is required.
+	ProviderConfig ProviderConfig
+
+	// The behavior applied when the DLP provider is unreachable. Valid values are
+	// ALLOW , WARN , and BLOCK .
+	//
+	// This member is required.
+	ProviderOutageAction DlpAction
+
+	// The type of external DLP provider used for sensitivity label classification.
+	//
+	// This member is required.
+	ProviderType DlpProviderType
+
+	// The status of the DLP setting. Valid values are ACTIVE and INACTIVE .
+	//
+	// This member is required.
+	Status DlpSettingStatus
+
+	// The date and time that the DLP setting was most recently updated, in ISO 8601
+	// format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a DLP setting returned by list operations.
+type DlpSettingSummary struct {
+
+	// The Amazon Resource Name (ARN) of the DLP setting.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the DLP setting was created, in ISO 8601 format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the DLP setting.
+	//
+	// This member is required.
+	DlpSettingId *string
+
+	// The display name of the DLP setting.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of external DLP provider used for sensitivity label classification.
+	//
+	// This member is required.
+	ProviderType DlpProviderType
+
+	// The status of the DLP setting. Valid values are ACTIVE and INACTIVE .
+	//
+	// This member is required.
+	Status DlpSettingStatus
+
+	// The date and time that the DLP setting was most recently updated, in ISO 8601
+	// format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The label options of the label that is displayed in the center of a donut
 // chart. This option isn't available for pie charts.
 type DonutCenterOptions struct {
@@ -9150,6 +9431,49 @@ type DynamicDefaultValue struct {
 
 	// The column that contains the username.
 	UserNameColumn *ColumnIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// The effective limit for a resource type that applies to a user, considering all
+// applicable profile assignments and inheritance rules.
+type EffectiveLimit struct {
+
+	// The unit of measurement for the limit.
+	//
+	// This member is required.
+	LimitUnit LimitUnit
+
+	// The maximum allowed value for the resource.
+	//
+	// This member is required.
+	LimitValue *int64
+
+	// The identifier of the limits profile that defines this limit.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// The type of resource that the limit applies to.
+	//
+	// This member is required.
+	ResourceType ResourceType
+
+	// The source from which this limit was inherited. Possible values:
+	//
+	//   - DIRECT_USER – The limit comes from a profile directly assigned to the user.
+	//
+	//   - GROUP – The limit comes from a profile assigned to a group the user belongs
+	//   to.
+	//
+	//   - ROLE – The limit comes from a profile assigned to a role the user has.
+	//
+	//   - ACCOUNT – The limit comes from the account-level default profile.
+	//
+	//   - SYSTEM_DEFAULT – The limit comes from the built-in system default.
+	//
+	// This member is required.
+	Source LimitSource
 
 	noSmithyDocumentSerde
 }
@@ -12980,10 +13304,42 @@ type JoinOperation struct {
 	noSmithyDocumentSerde
 }
 
-// The template configuration for a knowledge base.
+// The template configuration for a knowledge base. This object contains
+// connector-specific configuration that defines how data is crawled and indexed.
 type KbTemplateConfiguration struct {
 
-	// The template document that defines the knowledge base behavior.
+	// The connector configuration for the knowledge base data source. The structure
+	// depends on the connector type of the data source referenced by DataSourceArn .
+	//
+	// The template must be a JSON object. The required fields vary by connector type:
+	//
+	//   - Amazon S3 ( S3V2 ) – Requires connectionConfiguration with bucketName .
+	//   Supports filterConfiguration for inclusion and exclusion prefixes and
+	//   patterns. Supports accessControlConfiguration and
+	//   deletionProtectionConfiguration .
+	//
+	//   - Google Drive ( GOOGLEDRIVEV3 ) – Requires connectionConfiguration with
+	//   authType set to SERVICE_ACCOUNT . Supports dataEntityConfiguration with
+	//   crawlMyDrive , crawlSharedWithMe , and crawlSharedDrives .
+	//
+	//   - OneDrive ( ONEDRIVEV3 ) – Requires authType at the template root level set
+	//   to TWO_LEGGED_OAUTH . Requires connectionConfiguration with tenantId in UUID
+	//   format. Supports dataEntityConfiguration with crawlPersonalDrives and
+	//   crawlSharedWithMe .
+	//
+	//   - SharePoint ( SHAREPOINTV3 ) – Requires connectionConfiguration with tenantId
+	//   in UUID format. Supports dataEntityConfiguration with siteUrls , crawlFiles ,
+	//   and crawlPages .
+	//
+	//   - Web Crawler ( WEBCRAWLERV3 ) – Requires connectionConfiguration with
+	//   seedUrls or siteMapUrls (mutually exclusive) and authType . Supports
+	//   crawlConfiguration for crawl depth, rate limits, and scope. Supports
+	//   filterConfiguration for file size limits and URL patterns. Valid values for
+	//   authType : NO_AUTH , BASIC_AUTH , FORM , SAML .
+	//
+	// The optional deletionProtectionConfiguration object is supported by all
+	// connector types. It contains enableDeletionProtection and
+	// deletionProtectionThreshold .
 	Template document.Interface
 
 	noSmithyDocumentSerde
@@ -13091,7 +13447,9 @@ type KnowledgeBase struct {
 // The configuration settings for a knowledge base.
 type KnowledgeBaseConfiguration struct {
 
-	// The template configuration for the knowledge base.
+	// The template configuration that defines how the data source connector crawls
+	// and indexes data for the knowledge base. The template structure varies by
+	// connector type. See KbTemplateConfiguration for connector-specific details.
 	TemplateConfiguration *KbTemplateConfiguration
 
 	noSmithyDocumentSerde
@@ -13437,6 +13795,28 @@ type KPIVisualStandardLayout struct {
 	noSmithyDocumentSerde
 }
 
+// Maps a sensitivity label from Microsoft Purview to an enforcement action.
+type LabelActionMapping struct {
+
+	// The enforcement action to apply when content with this sensitivity label is
+	// detected. Valid values are ALLOW , BLOCK , and WARN .
+	//
+	// This member is required.
+	Action DlpAction
+
+	// The identifier of the sensitivity label from the DLP provider.
+	//
+	// This member is required.
+	LabelId *string
+
+	// The display name of the sensitivity label from the DLP provider.
+	//
+	// This member is required.
+	LabelName *string
+
+	noSmithyDocumentSerde
+}
+
 // The share label options for the labels.
 type LabelOptions struct {
 
@@ -13622,6 +14002,52 @@ type LegendOptions struct {
 	// The width of the legend. If this value is omitted, a default width is used when
 	// rendering.
 	Width *string
+
+	noSmithyDocumentSerde
+}
+
+// A limits profile that defines resource usage limits for Amazon Quick Sight
+// users. Limits profiles can be assigned to users, groups, or roles to control
+// resource consumption.
+type LimitsProfile struct {
+
+	// The ID of the Amazon Web Services account that contains the limits profile.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Amazon Resource Name (ARN) of the limits profile.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the limits profile was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier for the limits profile.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// The display name of the limits profile.
+	//
+	// This member is required.
+	ProfileName *string
+
+	// A map of resource types to their limit values.
+	//
+	// This member is required.
+	ResourceLimits map[string]ProfileLimitValue
+
+	// The date and time that the limits profile was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description of the limits profile.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -14252,6 +14678,44 @@ type MetricComparisonComputation struct {
 
 	// The time field that is used in a computation.
 	Time *DimensionField
+
+	noSmithyDocumentSerde
+}
+
+// The credentials for Microsoft Purview DLP integration. The credentials are
+// stored in Amazon Web Services Secrets Manager and referenced by ARN.
+type MicrosoftPurviewCredentials struct {
+
+	// The ARN of the Amazon Web Services Secrets Manager secret that contains the
+	// Microsoft Purview OAuth credentials. The secret includes the Azure tenant ID,
+	// client ID, and client secret or certificate.
+	//
+	// This member is required.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The full configuration for Microsoft Purview DLP integration, including the
+// provider credentials and the label-action mappings that define the enforcement
+// policy.
+type MicrosoftPurviewProviderConfig struct {
+
+	// The credentials used to authenticate with Microsoft Purview.
+	//
+	// This member is required.
+	Credentials *MicrosoftPurviewCredentials
+
+	// The mappings from Microsoft Purview sensitivity labels to enforcement actions.
+	//
+	// This member is required.
+	LabelActionMappings []LabelActionMapping
+
+	// The default action to apply to content that has no sensitivity label or whose
+	// label is not mapped. Valid values are ALLOW , BLOCK , and WARN .
+	//
+	// This member is required.
+	UnmappedAction DlpAction
 
 	noSmithyDocumentSerde
 }
@@ -16457,6 +16921,23 @@ type PrestoParameters struct {
 	noSmithyDocumentSerde
 }
 
+// A value that defines a resource usage limit, consisting of a maximum value and
+// a unit of measurement.
+type ProfileLimitValue struct {
+
+	// The maximum allowed value for the resource.
+	//
+	// This member is required.
+	MaxValue *int64
+
+	// The unit of measurement for the limit value.
+	//
+	// This member is required.
+	Unit LimitUnit
+
+	noSmithyDocumentSerde
+}
+
 // The options that determine the presentation of the progress bar of a KPI visual.
 type ProgressBarOptions struct {
 
@@ -16483,6 +16964,26 @@ type ProjectOperation struct {
 
 	noSmithyDocumentSerde
 }
+
+// The provider-specific configuration for a DLP integration. This is a union type
+// structure. For this structure to be valid, only one of the attributes can be
+// defined.
+//
+// The following types satisfy this interface:
+//
+//	ProviderConfigMemberMicrosoftPurview
+type ProviderConfig interface {
+	isProviderConfig()
+}
+
+// The configuration for a Microsoft Purview DLP integration.
+type ProviderConfigMemberMicrosoftPurview struct {
+	Value MicrosoftPurviewProviderConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderConfigMemberMicrosoftPurview) isProviderConfig() {}
 
 // The QA result that is made from the DashboardVisual or GeneratedAnswer .
 type QAResult struct {
@@ -23362,6 +23863,43 @@ type UserIndexCapacityFilterMemberUserNameOrEmail struct {
 
 func (*UserIndexCapacityFilterMemberUserNameOrEmail) isUserIndexCapacityFilter() {}
 
+// The effective limits for an Amazon Quick Sight user.
+type UserLimits struct {
+
+	// A list of effective limits for the user.
+	//
+	// This member is required.
+	EffectiveLimits []EffectiveLimit
+
+	// The namespace of the user.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The name of the user.
+	//
+	// This member is required.
+	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies a user for the BatchDescribeUserLimits operation.
+type UserLimitsEntry struct {
+
+	// The namespace of the user.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The name of the user.
+	//
+	// This member is required.
+	UserName *string
+
+	noSmithyDocumentSerde
+}
+
 // A filter that matches users by username or email prefix.
 type UserNameOrEmailFilter struct {
 
@@ -24336,6 +24874,7 @@ func (*UnknownUnionMember) isDataSourceParameters()                         {}
 func (*UnknownUnionMember) isGeocodePreferenceValue()                       {}
 func (*UnknownUnionMember) isImageSource()                                  {}
 func (*UnknownUnionMember) isPhysicalTable()                                {}
+func (*UnknownUnionMember) isProviderConfig()                               {}
 func (*UnknownUnionMember) isReadAuthenticationMetadata()                   {}
 func (*UnknownUnionMember) isReadAuthorizationCodeGrantCredentialsDetails() {}
 func (*UnknownUnionMember) isReadClientCredentialsDetails()                 {}

@@ -1953,8 +1953,8 @@ type CloudVmCluster struct {
 	// expressed as a percentage.
 	PercentProgress *float32
 
-	// The FQDN of the DNS record for the Single Client Access Name (SCAN) IP
-	// addresses that are associated with the VM cluster.
+	// The fully qualified domain name (FQDN) of the DNS record for the Single Client
+	// Access Name (SCAN) IP addresses that are associated with the VM cluster.
 	ScanDnsName *string
 
 	// The OCID of the DNS record for the SCAN IP addresses that are associated with
@@ -2111,8 +2111,8 @@ type CloudVmClusterSummary struct {
 	// expressed as a percentage.
 	PercentProgress *float32
 
-	// The FQDN of the DNS record for the Single Client Access Name (SCAN) IP
-	// addresses that are associated with the VM cluster.
+	// The fully qualified domain name (FQDN) of the DNS record for the Single Client
+	// Access Name (SCAN) IP addresses that are associated with the VM cluster.
 	ScanDnsName *string
 
 	// The OCID of the DNS record for the SCAN IP addresses that are associated with
@@ -2436,8 +2436,8 @@ type DbNode struct {
 	// The unique identifier of the DB node.
 	DbNodeId *string
 
-	// The amount of local node storage, in gigabytes (GBs), that's allocated on the
-	// DB node.
+	// The amount of local node storage, in gigabytes (GB), that's allocated on the DB
+	// node.
 	DbNodeStorageSizeInGBs *int32
 
 	// The unique identifier of the Db server that is associated with the DB node.
@@ -2843,6 +2843,10 @@ type DbSystemShapeSummary struct {
 	// The runtime minimum number of CPU cores that can be enabled for the shape.
 	RuntimeMinimumCoreCount *int32
 
+	// If provided and applicable, return DB System shape parameters based on the
+	// shape attribute provided.
+	ShapeAttributes []ShapeAttribute
+
 	// The family of the shape.
 	ShapeFamily *string
 
@@ -2957,6 +2961,515 @@ type ExadataIormConfig struct {
 
 	// The current value for the IORM objective. The default is AUTO.
 	Objective Objective
+
+	noSmithyDocumentSerde
+}
+
+// Information about an Exascale VM cluster.
+type ExadbVmCluster struct {
+
+	// The unique identifier of the Exascale VM cluster.
+	//
+	// This member is required.
+	ExadbVmClusterId *string
+
+	// The name of the Grid Infrastructure (GI) cluster.
+	ClusterName *string
+
+	// The date and time when the Exascale VM cluster was created.
+	CreatedAt *time.Time
+
+	// The set of diagnostic collection options enabled for the Exascale VM cluster.
+	DataCollectionOptions *DataCollectionOptions
+
+	// The user-friendly name for the Exascale VM cluster.
+	DisplayName *string
+
+	// The domain of the Exascale VM cluster.
+	Domain *string
+
+	// The number of elastic compute processing units (ECPUs) enabled on the Exascale
+	// VM cluster.
+	EnabledEcpuCount *int32
+
+	// The Amazon Resource Name (ARN) of the Exascale VM cluster.
+	ExadbVmClusterArn *string
+
+	// The Amazon Resource Name (ARN) of the Exascale storage vault associated with
+	// this Exascale VM cluster.
+	ExascaleDbStorageVaultArn *string
+
+	// The unique identifier of the Exascale storage vault associated with this
+	// Exascale VM cluster.
+	ExascaleDbStorageVaultId *string
+
+	// The software version of the Oracle Grid Infrastructure (GI) for the Exascale VM
+	// cluster.
+	GiVersion *string
+
+	// The Grid Infrastructure software image ID for the Exascale VM cluster.
+	GridImageId *string
+
+	// The type of Grid Infrastructure image for the Exascale VM cluster.
+	GridImageType GridImageType
+
+	// The host name for the Exascale VM cluster.
+	Hostname *string
+
+	// The Amazon Web Services Identity and Access Management (IAM) service roles
+	// associated with the Exascale VM cluster.
+	IamRoles []IamRole
+
+	// The I/O Resource Management (IORM) configuration cache details for the Exascale
+	// VM cluster.
+	IormConfigCache *ExadataIormConfig
+
+	// The Oracle Cloud ID (OCID) of the last maintenance update history entry.
+	LastUpdateHistoryEntryId *string
+
+	// The Oracle license model applied to the Exascale VM cluster.
+	LicenseModel LicenseModel
+
+	// The port number configured for the listener on the Exascale VM cluster.
+	ListenerPort *int32
+
+	// The amount of memory, in gigabytes (GB), that's allocated for the Exascale VM
+	// cluster.
+	MemorySizeInGBs *int32
+
+	// The number of nodes in the Exascale VM cluster.
+	NodeCount *int32
+
+	// The name of the OCI resource anchor for the Exascale VM cluster.
+	OciResourceAnchorName *string
+
+	// The HTTPS link to the Exascale VM cluster in Oracle Cloud Infrastructure (OCI).
+	OciUrl *string
+
+	// The OCID of the Exascale VM cluster.
+	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with this Exascale
+	// VM cluster.
+	OdbNetworkArn *string
+
+	// The unique identifier of the ODB network for the Exascale VM cluster.
+	OdbNetworkId *string
+
+	// The amount of progress made on the current operation on the Exascale VM
+	// cluster, expressed as a percentage.
+	PercentProgress *float32
+
+	// The fully qualified domain name (FQDN) of the DNS record for the Single Client
+	// Access Name (SCAN) IP addresses that are associated with the Exascale VM
+	// cluster.
+	ScanDnsName *string
+
+	// The OCID of the DNS record for the SCAN IP addresses that are associated with
+	// the Exascale VM cluster.
+	ScanDnsRecordId *string
+
+	// The OCID of the SCAN IP addresses that are associated with the Exascale VM
+	// cluster.
+	ScanIpIds []string
+
+	// The port number for TCP connections to the single client access name (SCAN)
+	// listener for the Exascale VM cluster.
+	ScanListenerPortTcp *int32
+
+	// The port number for TCP connections with SSL to the single client access name
+	// (SCAN) listener for the Exascale VM cluster.
+	ScanListenerPortTcpSsl *int32
+
+	// The hardware model name of the Exadata infrastructure that's running the
+	// Exascale VM cluster.
+	Shape *string
+
+	// The shape attribute for the Exascale VM cluster.
+	ShapeAttribute ShapeAttribute
+
+	// The snapshot file system storage details for the Exascale VM cluster.
+	SnapshotFileSystemStorage *ExadbVmClusterStorageDetails
+
+	// The public key portion of one or more key pairs used for SSH access to the
+	// Exascale VM cluster.
+	SshPublicKeys []string
+
+	// The current status of the Exascale VM cluster.
+	Status ResourceStatus
+
+	// Additional information about the status of the Exascale VM cluster.
+	StatusReason *string
+
+	// The operating system version of the image chosen for the Exascale VM cluster.
+	SystemVersion *string
+
+	// The time zone of the Exascale VM cluster.
+	TimeZone *string
+
+	// The total number of ECPUs for the Exascale VM cluster.
+	TotalEcpuCount *int32
+
+	// The total file system storage details for the Exascale VM cluster.
+	TotalFileSystemStorage *ExadbVmClusterStorageDetails
+
+	// The virtual IP (VIP) addresses associated with the Exascale VM cluster. One VIP
+	// address is assigned per node to support failover. If a node fails, its VIP is
+	// reassigned to another active node in the cluster.
+	VipIds []string
+
+	// The VM file system storage details for the Exascale VM cluster.
+	VmFileSystemStorage *ExadbVmClusterStorageDetails
+
+	noSmithyDocumentSerde
+}
+
+// Storage details for an Exascale VM cluster.
+type ExadbVmClusterStorageDetails struct {
+
+	// The total storage size, in gigabytes (GB).
+	TotalSizeInGBs *int32
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an Exascale VM cluster.
+type ExadbVmClusterSummary struct {
+
+	// The unique identifier of the Exascale VM cluster.
+	//
+	// This member is required.
+	ExadbVmClusterId *string
+
+	// The name of the Grid Infrastructure (GI) cluster.
+	ClusterName *string
+
+	// The date and time when the Exascale VM cluster was created.
+	CreatedAt *time.Time
+
+	// The set of diagnostic collection options enabled for the Exascale VM cluster.
+	DataCollectionOptions *DataCollectionOptions
+
+	// The user-friendly name for the Exascale VM cluster.
+	DisplayName *string
+
+	// The domain of the Exascale VM cluster.
+	Domain *string
+
+	// The number of elastic compute processing units (ECPUs) enabled on the Exascale
+	// VM cluster.
+	EnabledEcpuCount *int32
+
+	// The Amazon Resource Name (ARN) of the Exascale VM cluster.
+	ExadbVmClusterArn *string
+
+	// The Amazon Resource Name (ARN) of the Exascale storage vault associated with
+	// this Exascale VM cluster.
+	ExascaleDbStorageVaultArn *string
+
+	// The unique identifier of the Exascale storage vault associated with this
+	// Exascale VM cluster.
+	ExascaleDbStorageVaultId *string
+
+	// The software version of the Oracle Grid Infrastructure (GI) for the Exascale VM
+	// cluster.
+	GiVersion *string
+
+	// The Grid Infrastructure software image ID for the Exascale VM cluster.
+	GridImageId *string
+
+	// The type of Grid Infrastructure image for the Exascale VM cluster.
+	GridImageType GridImageType
+
+	// The host name for the Exascale VM cluster.
+	Hostname *string
+
+	// The Amazon Web Services Identity and Access Management (IAM) service roles
+	// associated with the Exascale VM cluster.
+	IamRoles []IamRole
+
+	// The I/O Resource Management (IORM) configuration cache details for the Exascale
+	// VM cluster.
+	IormConfigCache *ExadataIormConfig
+
+	// The Oracle Cloud ID (OCID) of the last maintenance update history entry.
+	LastUpdateHistoryEntryId *string
+
+	// The Oracle license model applied to the Exascale VM cluster.
+	LicenseModel LicenseModel
+
+	// The port number configured for the listener on the Exascale VM cluster.
+	ListenerPort *int32
+
+	// The amount of memory, in gigabytes (GB), that's allocated for the Exascale VM
+	// cluster.
+	MemorySizeInGBs *int32
+
+	// The number of nodes in the Exascale VM cluster.
+	NodeCount *int32
+
+	// The name of the OCI resource anchor for the Exascale VM cluster.
+	OciResourceAnchorName *string
+
+	// The HTTPS link to the Exascale VM cluster in Oracle Cloud Infrastructure (OCI).
+	OciUrl *string
+
+	// The OCID of the Exascale VM cluster.
+	Ocid *string
+
+	// The Amazon Resource Name (ARN) of the ODB network associated with this Exascale
+	// VM cluster.
+	OdbNetworkArn *string
+
+	// The unique identifier of the ODB network for the Exascale VM cluster.
+	OdbNetworkId *string
+
+	// The amount of progress made on the current operation on the Exascale VM
+	// cluster, expressed as a percentage.
+	PercentProgress *float32
+
+	// The fully qualified domain name (FQDN) of the DNS record for the Single Client
+	// Access Name (SCAN) IP addresses that are associated with the Exascale VM
+	// cluster.
+	ScanDnsName *string
+
+	// The OCID of the DNS record for the SCAN IP addresses that are associated with
+	// the Exascale VM cluster.
+	ScanDnsRecordId *string
+
+	// The OCID of the SCAN IP addresses that are associated with the Exascale VM
+	// cluster.
+	ScanIpIds []string
+
+	// The port number for TCP connections to the single client access name (SCAN)
+	// listener for the Exascale VM cluster.
+	ScanListenerPortTcp *int32
+
+	// The port number for TCP connections with SSL to the single client access name
+	// (SCAN) listener for the Exascale VM cluster.
+	ScanListenerPortTcpSsl *int32
+
+	// The hardware model name of the Exadata infrastructure that's running the
+	// Exascale VM cluster.
+	Shape *string
+
+	// The shape attribute for the Exascale VM cluster.
+	ShapeAttribute ShapeAttribute
+
+	// The snapshot file system storage details for the Exascale VM cluster.
+	SnapshotFileSystemStorage *ExadbVmClusterStorageDetails
+
+	// The public key portion of one or more key pairs used for SSH access to the
+	// Exascale VM cluster.
+	SshPublicKeys []string
+
+	// The current status of the Exascale VM cluster.
+	Status ResourceStatus
+
+	// Additional information about the status of the Exascale VM cluster.
+	StatusReason *string
+
+	// The operating system version of the image chosen for the Exascale VM cluster.
+	SystemVersion *string
+
+	// The time zone of the Exascale VM cluster.
+	TimeZone *string
+
+	// The total number of ECPUs for the Exascale VM cluster.
+	TotalEcpuCount *int32
+
+	// The total file system storage details for the Exascale VM cluster.
+	TotalFileSystemStorage *ExadbVmClusterStorageDetails
+
+	// The virtual IP (VIP) addresses associated with the Exascale VM cluster. One VIP
+	// address is assigned per node to support failover. If a node fails, its VIP is
+	// reassigned to another active node in the cluster.
+	VipIds []string
+
+	// The VM file system storage details for the Exascale VM cluster.
+	VmFileSystemStorage *ExadbVmClusterStorageDetails
+
+	noSmithyDocumentSerde
+}
+
+// The storage details for an Exascale storage vault.
+type ExascaleDbStorageDetails struct {
+
+	// The available storage size, in gigabytes (GB).
+	AvailableSizeInGBs *int32
+
+	// The total storage size, in gigabytes (GB).
+	TotalSizeInGBs *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about an Exascale storage vault.
+type ExascaleDbStorageVault struct {
+
+	// The unique identifier of the Exascale storage vault.
+	//
+	// This member is required.
+	ExascaleDbStorageVaultId *string
+
+	// The additional flash cache percentage for the Exascale storage vault.
+	AdditionalFlashCacheInPercent *int32
+
+	// The list of shape attributes attached to the Exascale storage vault.
+	AttachedShapeAttributes []ShapeAttribute
+
+	// The autoscale limit in gigabytes (GB) for the Exascale storage vault.
+	AutoscaleLimitInGBs *int32
+
+	// The Availability Zone for the Exascale storage vault.
+	AvailabilityZone *string
+
+	// The Availability Zone ID for the Exascale storage vault.
+	AvailabilityZoneId *string
+
+	// The date and time when the Exascale storage vault was created.
+	CreatedAt *time.Time
+
+	// The description of the Exascale storage vault.
+	Description *string
+
+	// The user-friendly name for the Exascale storage vault.
+	DisplayName *string
+
+	// The Amazon Resource Name (ARN) of the Exascale storage vault.
+	ExascaleDbStorageVaultArn *string
+
+	// The high-capacity database storage details for the Exascale storage vault.
+	HighCapacityDatabaseStorage *ExascaleDbStorageDetails
+
+	// Specifies whether autoscaling is enabled for the Exascale storage vault.
+	IsAutoscaleEnabled *bool
+
+	// The name of the OCI resource anchor for the Exascale storage vault.
+	OciResourceAnchorName *string
+
+	// The HTTPS link to the Exascale storage vault in Oracle Cloud Infrastructure
+	// (OCI).
+	OciUrl *string
+
+	// The OCID of the Exascale storage vault.
+	Ocid *string
+
+	// The amount of progress made on the current operation on the Exascale storage
+	// vault, expressed as a percentage.
+	PercentProgress *float32
+
+	// The current status of the Exascale storage vault.
+	Status ResourceStatus
+
+	// Additional information about the status of the Exascale storage vault.
+	StatusReason *string
+
+	// The time zone of the Exascale storage vault.
+	TimeZone *string
+
+	// The list of Amazon Resource Names (ARNs) of the VM clusters associated with
+	// this Exascale storage vault.
+	VmClusterArns []string
+
+	// The number of VM clusters associated with this Exascale storage vault.
+	VmClusterCount *int32
+
+	// The list of unique identifiers of the VM clusters associated with this Exascale
+	// storage vault.
+	VmClusterIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an Exascale storage vault.
+type ExascaleDbStorageVaultSummary struct {
+
+	// The unique identifier of the Exascale storage vault.
+	//
+	// This member is required.
+	ExascaleDbStorageVaultId *string
+
+	// The additional flash cache percentage for the Exascale storage vault.
+	AdditionalFlashCacheInPercent *int32
+
+	// The list of shape attributes attached to the Exascale storage vault.
+	AttachedShapeAttributes []ShapeAttribute
+
+	// The autoscale limit in gigabytes (GB) for the Exascale storage vault.
+	AutoscaleLimitInGBs *int32
+
+	// The Availability Zone for the Exascale storage vault.
+	AvailabilityZone *string
+
+	// The Availability Zone ID for the Exascale storage vault.
+	AvailabilityZoneId *string
+
+	// The date and time when the Exascale storage vault was created.
+	CreatedAt *time.Time
+
+	// The description of the Exascale storage vault.
+	Description *string
+
+	// The user-friendly name for the Exascale storage vault.
+	DisplayName *string
+
+	// The Amazon Resource Name (ARN) of the Exascale storage vault.
+	ExascaleDbStorageVaultArn *string
+
+	// The high-capacity database storage details for the Exascale storage vault.
+	HighCapacityDatabaseStorage *ExascaleDbStorageDetails
+
+	// Specifies whether autoscaling is enabled for the Exascale storage vault.
+	IsAutoscaleEnabled *bool
+
+	// The name of the OCI resource anchor for the Exascale storage vault.
+	OciResourceAnchorName *string
+
+	// The HTTPS link to the Exascale storage vault in Oracle Cloud Infrastructure
+	// (OCI).
+	OciUrl *string
+
+	// The OCID of the Exascale storage vault.
+	Ocid *string
+
+	// The amount of progress made on the current operation on the Exascale storage
+	// vault, expressed as a percentage.
+	PercentProgress *float32
+
+	// The current status of the Exascale storage vault.
+	Status ResourceStatus
+
+	// Additional information about the status of the Exascale storage vault.
+	StatusReason *string
+
+	// The time zone of the Exascale storage vault.
+	TimeZone *string
+
+	// The list of Amazon Resource Names (ARNs) of the VM clusters associated with
+	// this Exascale storage vault.
+	VmClusterArns []string
+
+	// The number of VM clusters associated with this Exascale storage vault.
+	VmClusterCount *int32
+
+	// The list of unique identifiers of the VM clusters associated with this Exascale
+	// storage vault.
+	VmClusterIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an Oracle Grid Infrastructure (GI) minor version.
+type GiMinorVersionSummary struct {
+
+	// The GI minor version.
+	//
+	// This member is required.
+	Version *string
+
+	// The Grid Infrastructure software image ID for this minor version.
+	GridImageId *string
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,3 @@
+GET /api/v1/agent-profiles/__ProfileArn__/goals/__Id__
+
+

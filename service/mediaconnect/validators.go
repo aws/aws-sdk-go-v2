@@ -2275,6 +2275,21 @@ func validateEncryption(v *types.Encryption) error {
 	}
 }
 
+func validateFabricConfiguration(v *types.FabricConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FabricConfiguration"}
+	if len(v.RecoveryLatencyMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryLatencyMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFailoverRouterInputConfiguration(v *types.FailoverRouterInputConfiguration) error {
 	if v == nil {
 		return nil
@@ -3821,6 +3836,11 @@ func validateOpCreateRouterOutputInput(v *CreateRouterOutputInput) error {
 			invalidParams.AddNested("MaintenanceConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FabricConfiguration != nil {
+		if err := validateFabricConfiguration(v.FabricConfiguration); err != nil {
+			invalidParams.AddNested("FabricConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4801,6 +4821,11 @@ func validateOpUpdateRouterOutputInput(v *UpdateRouterOutputInput) error {
 	if v.MaintenanceConfiguration != nil {
 		if err := validateMaintenanceConfiguration(v.MaintenanceConfiguration); err != nil {
 			invalidParams.AddNested("MaintenanceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FabricConfiguration != nil {
+		if err := validateFabricConfiguration(v.FabricConfiguration); err != nil {
+			invalidParams.AddNested("FabricConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

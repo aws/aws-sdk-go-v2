@@ -50,6 +50,26 @@ func (m *validateOpAssociateIamRoleToResource) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateVirtualMachinesToExadbVmCluster struct {
+}
+
+func (*validateOpAssociateVirtualMachinesToExadbVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateVirtualMachinesToExadbVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateVirtualMachinesToExadbVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateVirtualMachinesToExadbVmClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAutonomousDatabaseBackup struct {
 }
 
@@ -165,6 +185,46 @@ func (m *validateOpCreateCloudVmCluster) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCloudVmClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateExadbVmCluster struct {
+}
+
+func (*validateOpCreateExadbVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExadbVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExadbVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExadbVmClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateExascaleDbStorageVault struct {
+}
+
+func (*validateOpCreateExascaleDbStorageVault) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExascaleDbStorageVault) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExascaleDbStorageVaultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExascaleDbStorageVaultInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +370,46 @@ func (m *validateOpDeleteCloudVmCluster) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteExadbVmCluster struct {
+}
+
+func (*validateOpDeleteExadbVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExadbVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExadbVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExadbVmClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteExascaleDbStorageVault struct {
+}
+
+func (*validateOpDeleteExascaleDbStorageVault) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExascaleDbStorageVault) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExascaleDbStorageVaultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExascaleDbStorageVaultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteOdbNetwork struct {
 }
 
@@ -365,6 +465,26 @@ func (m *validateOpDisassociateIamRoleFromResource) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateIamRoleFromResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateVirtualMachinesFromExadbVmCluster struct {
+}
+
+func (*validateOpDisassociateVirtualMachinesFromExadbVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateVirtualMachinesFromExadbVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateVirtualMachinesFromExadbVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateVirtualMachinesFromExadbVmClusterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +690,46 @@ func (m *validateOpGetDbServer) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetExadbVmCluster struct {
+}
+
+func (*validateOpGetExadbVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExadbVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExadbVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExadbVmClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetExascaleDbStorageVault struct {
+}
+
+func (*validateOpGetExascaleDbStorageVault) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExascaleDbStorageVault) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExascaleDbStorageVaultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExascaleDbStorageVaultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetOdbNetwork struct {
 }
 
@@ -690,26 +850,6 @@ func (m *validateOpListAutonomousVirtualMachines) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListDbNodes struct {
-}
-
-func (*validateOpListDbNodes) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListDbNodes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListDbNodesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListDbNodesInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpListDbServers struct {
 }
 
@@ -725,6 +865,26 @@ func (m *validateOpListDbServers) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDbServersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListGiMinorVersions struct {
+}
+
+func (*validateOpListGiMinorVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListGiMinorVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListGiMinorVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListGiMinorVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1050,6 +1210,46 @@ func (m *validateOpUpdateCloudExadataInfrastructure) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateExadbVmCluster struct {
+}
+
+func (*validateOpUpdateExadbVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateExadbVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateExadbVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateExadbVmClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateExascaleDbStorageVault struct {
+}
+
+func (*validateOpUpdateExascaleDbStorageVault) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateExascaleDbStorageVault) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateExascaleDbStorageVaultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateExascaleDbStorageVaultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateOdbNetwork struct {
 }
 
@@ -1098,6 +1298,10 @@ func addOpAssociateIamRoleToResourceValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpAssociateIamRoleToResource{}, middleware.After)
 }
 
+func addOpAssociateVirtualMachinesToExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateVirtualMachinesToExadbVmCluster{}, middleware.After)
+}
+
 func addOpCreateAutonomousDatabaseBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAutonomousDatabaseBackup{}, middleware.After)
 }
@@ -1120,6 +1324,14 @@ func addOpCreateCloudExadataInfrastructureValidationMiddleware(stack *middleware
 
 func addOpCreateCloudVmClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCloudVmCluster{}, middleware.After)
+}
+
+func addOpCreateExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExadbVmCluster{}, middleware.After)
+}
+
+func addOpCreateExascaleDbStorageVaultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExascaleDbStorageVault{}, middleware.After)
 }
 
 func addOpCreateOdbNetworkValidationMiddleware(stack *middleware.Stack) error {
@@ -1150,6 +1362,14 @@ func addOpDeleteCloudVmClusterValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteCloudVmCluster{}, middleware.After)
 }
 
+func addOpDeleteExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExadbVmCluster{}, middleware.After)
+}
+
+func addOpDeleteExascaleDbStorageVaultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExascaleDbStorageVault{}, middleware.After)
+}
+
 func addOpDeleteOdbNetworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteOdbNetwork{}, middleware.After)
 }
@@ -1160,6 +1380,10 @@ func addOpDeleteOdbPeeringConnectionValidationMiddleware(stack *middleware.Stack
 
 func addOpDisassociateIamRoleFromResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateIamRoleFromResource{}, middleware.After)
+}
+
+func addOpDisassociateVirtualMachinesFromExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateVirtualMachinesFromExadbVmCluster{}, middleware.After)
 }
 
 func addOpFailoverAutonomousDatabaseValidationMiddleware(stack *middleware.Stack) error {
@@ -1202,6 +1426,14 @@ func addOpGetDbServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDbServer{}, middleware.After)
 }
 
+func addOpGetExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExadbVmCluster{}, middleware.After)
+}
+
+func addOpGetExascaleDbStorageVaultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExascaleDbStorageVault{}, middleware.After)
+}
+
 func addOpGetOdbNetworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOdbNetwork{}, middleware.After)
 }
@@ -1226,12 +1458,12 @@ func addOpListAutonomousVirtualMachinesValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpListAutonomousVirtualMachines{}, middleware.After)
 }
 
-func addOpListDbNodesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListDbNodes{}, middleware.After)
-}
-
 func addOpListDbServersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDbServers{}, middleware.After)
+}
+
+func addOpListGiMinorVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListGiMinorVersions{}, middleware.After)
 }
 
 func addOpListSystemVersionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1296,6 +1528,14 @@ func addOpUpdateAutonomousDatabaseValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateCloudExadataInfrastructureValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCloudExadataInfrastructure{}, middleware.After)
+}
+
+func addOpUpdateExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateExadbVmCluster{}, middleware.After)
+}
+
+func addOpUpdateExascaleDbStorageVaultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateExascaleDbStorageVault{}, middleware.After)
 }
 
 func addOpUpdateOdbNetworkValidationMiddleware(stack *middleware.Stack) error {
@@ -1520,6 +1760,24 @@ func validateOpAssociateIamRoleToResourceInput(v *AssociateIamRoleToResourceInpu
 	}
 }
 
+func validateOpAssociateVirtualMachinesToExadbVmClusterInput(v *AssociateVirtualMachinesToExadbVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateVirtualMachinesToExadbVmClusterInput"}
+	if v.ExadbVmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExadbVmClusterId"))
+	}
+	if v.DesiredNodeCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DesiredNodeCount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAutonomousDatabaseBackupInput(v *CreateAutonomousDatabaseBackupInput) error {
 	if v == nil {
 		return nil
@@ -1662,6 +1920,69 @@ func validateOpCreateCloudVmClusterInput(v *CreateCloudVmClusterInput) error {
 	}
 }
 
+func validateOpCreateExadbVmClusterInput(v *CreateExadbVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExadbVmClusterInput"}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.EnabledEcpuCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledEcpuCount"))
+	}
+	if v.ExascaleDbStorageVaultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExascaleDbStorageVaultId"))
+	}
+	if v.GridImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GridImageId"))
+	}
+	if v.Hostname == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Hostname"))
+	}
+	if v.NodeCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeCount"))
+	}
+	if v.OdbNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OdbNetworkId"))
+	}
+	if v.Shape == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Shape"))
+	}
+	if v.SshPublicKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SshPublicKeys"))
+	}
+	if v.TotalEcpuCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TotalEcpuCount"))
+	}
+	if v.VmFileSystemStorageTotalSizeInGBs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VmFileSystemStorageTotalSizeInGBs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateExascaleDbStorageVaultInput(v *CreateExascaleDbStorageVaultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExascaleDbStorageVaultInput"}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if v.HighCapacityDatabaseStorageTotalSizeInGBs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HighCapacityDatabaseStorageTotalSizeInGBs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateOdbNetworkInput(v *CreateOdbNetworkInput) error {
 	if v == nil {
 		return nil
@@ -1773,6 +2094,36 @@ func validateOpDeleteCloudVmClusterInput(v *DeleteCloudVmClusterInput) error {
 	}
 }
 
+func validateOpDeleteExadbVmClusterInput(v *DeleteExadbVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExadbVmClusterInput"}
+	if v.ExadbVmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExadbVmClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteExascaleDbStorageVaultInput(v *DeleteExascaleDbStorageVaultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExascaleDbStorageVaultInput"}
+	if v.ExascaleDbStorageVaultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExascaleDbStorageVaultId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteOdbNetworkInput(v *DeleteOdbNetworkInput) error {
 	if v == nil {
 		return nil
@@ -1819,6 +2170,24 @@ func validateOpDisassociateIamRoleFromResourceInput(v *DisassociateIamRoleFromRe
 	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateVirtualMachinesFromExadbVmClusterInput(v *DisassociateVirtualMachinesFromExadbVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateVirtualMachinesFromExadbVmClusterInput"}
+	if v.ExadbVmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExadbVmClusterId"))
+	}
+	if v.DbNodeIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbNodeIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1952,9 +2321,6 @@ func validateOpGetDbNodeInput(v *GetDbNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDbNodeInput"}
-	if v.CloudVmClusterId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudVmClusterId"))
-	}
 	if v.DbNodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbNodeId"))
 	}
@@ -1975,6 +2341,36 @@ func validateOpGetDbServerInput(v *GetDbServerInput) error {
 	}
 	if v.DbServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbServerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetExadbVmClusterInput(v *GetExadbVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExadbVmClusterInput"}
+	if v.ExadbVmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExadbVmClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetExascaleDbStorageVaultInput(v *GetExascaleDbStorageVaultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExascaleDbStorageVaultInput"}
+	if v.ExascaleDbStorageVaultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExascaleDbStorageVaultId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2073,13 +2469,13 @@ func validateOpListAutonomousVirtualMachinesInput(v *ListAutonomousVirtualMachin
 	}
 }
 
-func validateOpListDbNodesInput(v *ListDbNodesInput) error {
+func validateOpListDbServersInput(v *ListDbServersInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListDbNodesInput"}
-	if v.CloudVmClusterId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudVmClusterId"))
+	invalidParams := smithy.InvalidParamsError{Context: "ListDbServersInput"}
+	if v.CloudExadataInfrastructureId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudExadataInfrastructureId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2088,13 +2484,13 @@ func validateOpListDbNodesInput(v *ListDbNodesInput) error {
 	}
 }
 
-func validateOpListDbServersInput(v *ListDbServersInput) error {
+func validateOpListGiMinorVersionsInput(v *ListGiMinorVersionsInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListDbServersInput"}
-	if v.CloudExadataInfrastructureId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudExadataInfrastructureId"))
+	invalidParams := smithy.InvalidParamsError{Context: "ListGiMinorVersionsInput"}
+	if v.GiVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GiVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2156,9 +2552,6 @@ func validateOpRebootDbNodeInput(v *RebootDbNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RebootDbNodeInput"}
-	if v.CloudVmClusterId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudVmClusterId"))
-	}
 	if v.DbNodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbNodeId"))
 	}
@@ -2222,9 +2615,6 @@ func validateOpStartDbNodeInput(v *StartDbNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartDbNodeInput"}
-	if v.CloudVmClusterId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudVmClusterId"))
-	}
 	if v.DbNodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbNodeId"))
 	}
@@ -2255,9 +2645,6 @@ func validateOpStopDbNodeInput(v *StopDbNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopDbNodeInput"}
-	if v.CloudVmClusterId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudVmClusterId"))
-	}
 	if v.DbNodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbNodeId"))
 	}
@@ -2361,6 +2748,36 @@ func validateOpUpdateCloudExadataInfrastructureInput(v *UpdateCloudExadataInfras
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloudExadataInfrastructureInput"}
 	if v.CloudExadataInfrastructureId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CloudExadataInfrastructureId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateExadbVmClusterInput(v *UpdateExadbVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExadbVmClusterInput"}
+	if v.ExadbVmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExadbVmClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateExascaleDbStorageVaultInput(v *UpdateExascaleDbStorageVaultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExascaleDbStorageVaultInput"}
+	if v.ExascaleDbStorageVaultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExascaleDbStorageVaultId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

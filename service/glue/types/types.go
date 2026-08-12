@@ -8134,7 +8134,7 @@ type MaterializedViewRefreshTaskRun struct {
 	// The type of the refresh task run. Either FULL or INCREMENTAL.
 	RefreshType MaterializedViewRefreshType
 
-	// The IAM role that the service assumes to generate statistics.
+	// The IAM role that the service assumes to run the materialized view refresh task.
 	Role *string
 
 	// The start time of the task.
@@ -8143,7 +8143,7 @@ type MaterializedViewRefreshTaskRun struct {
 	// The status of the task run.
 	Status MaterializedViewRefreshState
 
-	// The name of the table for which statistics is generated.
+	// The name of the materialized view.
 	TableName *string
 
 	noSmithyDocumentSerde

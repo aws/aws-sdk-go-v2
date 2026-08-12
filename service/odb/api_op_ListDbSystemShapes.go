@@ -46,6 +46,9 @@ type ListDbSystemShapesInput struct {
 	// the end of the items returned by the previous request.
 	NextToken *string
 
+	// The shape family to filter results by.
+	ShapeFamily *string
+
 	noSmithyDocumentSerde
 }
 

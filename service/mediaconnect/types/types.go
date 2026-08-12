@@ -887,6 +887,23 @@ type Entitlement struct {
 	noSmithyDocumentSerde
 }
 
+// The fabric configuration settings for the router output.
+type FabricConfiguration struct {
+
+	// The recovery latency mode for the router fabric connection. Valid values
+	// include the following:
+	//
+	//   - BALANCED (default) – Optimizes for stream quality.
+	//
+	//   - LOW_LATENCY – Reduces latency at the potential cost of stream quality under
+	//   adverse network conditions.
+	//
+	// This member is required.
+	RecoveryLatencyMode FabricLatencyMode
+
+	noSmithyDocumentSerde
+}
+
 // The settings for source failover.
 type FailoverConfig struct {
 
@@ -3545,6 +3562,11 @@ type RouterOutput struct {
 	//
 	// This member is required.
 	CreatedAt *time.Time
+
+	// The fabric configuration settings for the router output.
+	//
+	// This member is required.
+	FabricConfiguration *FabricConfiguration
 
 	// The unique identifier of the router output.
 	//

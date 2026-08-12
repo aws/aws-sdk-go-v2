@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: Odb.ListDbNodes
 
-{"cloudVmClusterId":"__CloudVmClusterId__","maxResults":1,"nextToken":"__NextToken__"}
+{"cloudVmClusterId":"__CloudVmClusterId__","exadbVmClusterId":"__ExadbVmClusterId__","maxResults":1,"nextToken":"__NextToken__"}

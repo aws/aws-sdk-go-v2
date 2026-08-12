@@ -373,6 +373,23 @@ func (AnonymousUserDashboardEmbeddingConfigurationEnabledFeature) Values() []Ano
 	}
 }
 
+type ApplicableToType string
+
+// Enum values for ApplicableToType
+const (
+	ApplicableToTypeGroup ApplicableToType = "GROUP"
+)
+
+// Values returns all known values for ApplicableToType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicableToType) Values() []ApplicableToType {
+	return []ApplicableToType{
+		"GROUP",
+	}
+}
+
 type ArcThickness string
 
 // Enum values for ArcThickness
@@ -623,6 +640,26 @@ func (AssetBundleExportJobThemePropertyToOverride) Values() []AssetBundleExportJ
 	}
 }
 
+type AssetBundleExportJobTopicV2PropertyToOverride string
+
+// Enum values for AssetBundleExportJobTopicV2PropertyToOverride
+const (
+	AssetBundleExportJobTopicV2PropertyToOverrideName        AssetBundleExportJobTopicV2PropertyToOverride = "Name"
+	AssetBundleExportJobTopicV2PropertyToOverrideDescription AssetBundleExportJobTopicV2PropertyToOverride = "Description"
+)
+
+// Values returns all known values for
+// AssetBundleExportJobTopicV2PropertyToOverride. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobTopicV2PropertyToOverride) Values() []AssetBundleExportJobTopicV2PropertyToOverride {
+	return []AssetBundleExportJobTopicV2PropertyToOverride{
+		"Name",
+		"Description",
+	}
+}
+
 type AssetBundleExportJobVPCConnectionPropertyToOverride string
 
 // Enum values for AssetBundleExportJobVPCConnectionPropertyToOverride
@@ -691,6 +728,27 @@ func (AssetBundleImportJobStatus) Values() []AssetBundleImportJobStatus {
 		"FAILED_ROLLBACK_IN_PROGRESS",
 		"FAILED_ROLLBACK_COMPLETED",
 		"FAILED_ROLLBACK_ERROR",
+	}
+}
+
+type AssetType string
+
+// Enum values for AssetType
+const (
+	AssetTypeAgent         AssetType = "AGENT"
+	AssetTypeSpace         AssetType = "SPACE"
+	AssetTypeKnowledgeBase AssetType = "KNOWLEDGE_BASE"
+)
+
+// Values returns all known values for AssetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssetType) Values() []AssetType {
+	return []AssetType{
+		"AGENT",
+		"SPACE",
+		"KNOWLEDGE_BASE",
 	}
 }
 
@@ -2505,6 +2563,63 @@ func (DisplayFormat) Values() []DisplayFormat {
 	}
 }
 
+type DlpAction string
+
+// Enum values for DlpAction
+const (
+	DlpActionAllow DlpAction = "ALLOW"
+	DlpActionWarn  DlpAction = "WARN"
+	DlpActionBlock DlpAction = "BLOCK"
+)
+
+// Values returns all known values for DlpAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DlpAction) Values() []DlpAction {
+	return []DlpAction{
+		"ALLOW",
+		"WARN",
+		"BLOCK",
+	}
+}
+
+type DlpProviderType string
+
+// Enum values for DlpProviderType
+const (
+	DlpProviderTypeMicrosoftPurview DlpProviderType = "MICROSOFT_PURVIEW"
+)
+
+// Values returns all known values for DlpProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DlpProviderType) Values() []DlpProviderType {
+	return []DlpProviderType{
+		"MICROSOFT_PURVIEW",
+	}
+}
+
+type DlpSettingStatus string
+
+// Enum values for DlpSettingStatus
+const (
+	DlpSettingStatusActive   DlpSettingStatus = "ACTIVE"
+	DlpSettingStatusInactive DlpSettingStatus = "INACTIVE"
+)
+
+// Values returns all known values for DlpSettingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DlpSettingStatus) Values() []DlpSettingStatus {
+	return []DlpSettingStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type Edition string
 
 // Enum values for Edition
@@ -3031,6 +3146,23 @@ func (GeospatialSelectedPointStyle) Values() []GeospatialSelectedPointStyle {
 		"POINT",
 		"CLUSTER",
 		"HEATMAP",
+	}
+}
+
+type GovernedAction string
+
+// Enum values for GovernedAction
+const (
+	GovernedActionShare GovernedAction = "SHARE"
+)
+
+// Values returns all known values for GovernedAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GovernedAction) Values() []GovernedAction {
+	return []GovernedAction{
+		"SHARE",
 	}
 }
 
@@ -3789,6 +3921,54 @@ func (LegendPosition) Values() []LegendPosition {
 		"RIGHT",
 		"BOTTOM",
 		"TOP",
+	}
+}
+
+type LimitSource string
+
+// Enum values for LimitSource
+const (
+	LimitSourceDirectUser    LimitSource = "DIRECT_USER"
+	LimitSourceGroup         LimitSource = "GROUP"
+	LimitSourceRole          LimitSource = "ROLE"
+	LimitSourceAccount       LimitSource = "ACCOUNT"
+	LimitSourceSystemDefault LimitSource = "SYSTEM_DEFAULT"
+)
+
+// Values returns all known values for LimitSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LimitSource) Values() []LimitSource {
+	return []LimitSource{
+		"DIRECT_USER",
+		"GROUP",
+		"ROLE",
+		"ACCOUNT",
+		"SYSTEM_DEFAULT",
+	}
+}
+
+type LimitUnit string
+
+// Enum values for LimitUnit
+const (
+	LimitUnitMb    LimitUnit = "MB"
+	LimitUnitGb    LimitUnit = "GB"
+	LimitUnitHours LimitUnit = "HOURS"
+	LimitUnitDays  LimitUnit = "DAYS"
+)
+
+// Values returns all known values for LimitUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LimitUnit) Values() []LimitUnit {
+	return []LimitUnit{
+		"MB",
+		"GB",
+		"HOURS",
+		"DAYS",
 	}
 }
 
@@ -5078,6 +5258,25 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"UPDATE_SUCCESSFUL",
 		"UPDATE_FAILED",
 		"DELETED",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeIndexStorage ResourceType = "INDEX_STORAGE"
+	ResourceTypeAgentHours   ResourceType = "AGENT_HOURS"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"INDEX_STORAGE",
+		"AGENT_HOURS",
 	}
 }
 

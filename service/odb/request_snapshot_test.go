@@ -262,6 +262,34 @@ func TestCheckRequestSnapshot_AssociateIamRoleToResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AssociateVirtualMachinesToExadbVmCluster(t *testing.T) {
+	input := &AssociateVirtualMachinesToExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DesiredNodeCount: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateVirtualMachinesToExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateVirtualMachinesToExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateAutonomousDatabase(t *testing.T) {
 	input := &CreateAutonomousDatabaseInput{
 		OdbNetworkId:                      ptr.String("__OdbNetworkId__"),
@@ -685,6 +713,101 @@ func TestCheckRequestSnapshot_CreateCloudVmCluster(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateExadbVmCluster(t *testing.T) {
+	input := &CreateExadbVmClusterInput{
+		DisplayName:              ptr.String("__DisplayName__"),
+		EnabledEcpuCount:         ptr.Int32(1),
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+		GridImageId:              ptr.String("__GridImageId__"),
+		Hostname:                 ptr.String("__Hostname__"),
+		NodeCount:                ptr.Int32(1),
+		OdbNetworkId:             ptr.String("__OdbNetworkId__"),
+		Shape:                    ptr.String("__Shape__"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TotalEcpuCount:                    ptr.Int32(1),
+		VmFileSystemStorageTotalSizeInGBs: ptr.Int32(1),
+		ClusterName:                       ptr.String("__ClusterName__"),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		LicenseModel:           types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		ScanListenerPortTcp:    ptr.Int32(1),
+		ScanListenerPortTcpSsl: ptr.Int32(1),
+		ShapeAttribute:         types.ShapeAttribute("SMART_STORAGE"),
+		SystemVersion:          ptr.String("__SystemVersion__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TimeZone:    ptr.String("__TimeZone__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateExascaleDbStorageVault(t *testing.T) {
+	input := &CreateExascaleDbStorageVaultInput{
+		DisplayName: ptr.String("__DisplayName__"),
+		HighCapacityDatabaseStorageTotalSizeInGBs: ptr.Int32(1),
+		AdditionalFlashCacheInPercent:             ptr.Int32(1),
+		AutoscaleLimitInGBs:                       ptr.Int32(1),
+		AvailabilityZoneId:                        ptr.String("__AvailabilityZoneId__"),
+		AvailabilityZone:                          ptr.String("__AvailabilityZone__"),
+		Description:                               ptr.String("__Description__"),
+		IsAutoscaleEnabled:                        ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TimeZone:    ptr.String("__TimeZone__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateExascaleDbStorageVault(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateExascaleDbStorageVault"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateOdbNetwork(t *testing.T) {
 	input := &CreateOdbNetworkInput{
 		DisplayName:        ptr.String("__DisplayName__"),
@@ -909,6 +1032,60 @@ func TestCheckRequestSnapshot_DeleteCloudVmCluster(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteExadbVmCluster(t *testing.T) {
+	input := &DeleteExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteExascaleDbStorageVault(t *testing.T) {
+	input := &DeleteExascaleDbStorageVaultInput{
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteExascaleDbStorageVault(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteExascaleDbStorageVault"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteOdbNetwork(t *testing.T) {
 	input := &DeleteOdbNetworkInput{
 		OdbNetworkId:              ptr.String("__OdbNetworkId__"),
@@ -989,6 +1166,37 @@ func TestCheckRequestSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateIamRoleFromResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisassociateVirtualMachinesFromExadbVmCluster(t *testing.T) {
+	input := &DisassociateVirtualMachinesFromExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DbNodeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateVirtualMachinesFromExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateVirtualMachinesFromExadbVmCluster"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1217,6 +1425,7 @@ func TestCheckRequestSnapshot_GetCloudVmCluster(t *testing.T) {
 func TestCheckRequestSnapshot_GetDbNode(t *testing.T) {
 	input := &GetDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	}
 	body := &bytes.Buffer{}
@@ -1266,6 +1475,60 @@ func TestCheckRequestSnapshot_GetDbServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDbServer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetExadbVmCluster(t *testing.T) {
+	input := &GetExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetExascaleDbStorageVault(t *testing.T) {
+	input := &GetExascaleDbStorageVaultInput{
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExascaleDbStorageVault(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExascaleDbStorageVault"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1672,6 +1935,7 @@ func TestCheckRequestSnapshot_ListDbNodes(t *testing.T) {
 		MaxResults:       ptr.Int32(1),
 		NextToken:        ptr.String("__NextToken__"),
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1731,6 +1995,7 @@ func TestCheckRequestSnapshot_ListDbSystemShapes(t *testing.T) {
 		NextToken:          ptr.String("__NextToken__"),
 		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
 		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+		ShapeFamily:        ptr.String("__ShapeFamily__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1751,6 +2016,95 @@ func TestCheckRequestSnapshot_ListDbSystemShapes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDbSystemShapes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListExadbVmClusters(t *testing.T) {
+	input := &ListExadbVmClustersInput{
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExadbVmClusters(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExadbVmClusters"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
+	input := &ListExascaleDbStorageVaultsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExascaleDbStorageVaults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExascaleDbStorageVaults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListGiMinorVersions(t *testing.T) {
+	input := &ListGiMinorVersionsInput{
+		GiVersion:          ptr.String("__GiVersion__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		ShapeFamily:        ptr.String("__ShapeFamily__"),
+		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGiMinorVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGiMinorVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1929,6 +2283,7 @@ func TestCheckRequestSnapshot_RebootAutonomousDatabase(t *testing.T) {
 func TestCheckRequestSnapshot_RebootDbNode(t *testing.T) {
 	input := &RebootDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	}
 	body := &bytes.Buffer{}
@@ -2039,6 +2394,7 @@ func TestCheckRequestSnapshot_StartAutonomousDatabase(t *testing.T) {
 func TestCheckRequestSnapshot_StartDbNode(t *testing.T) {
 	input := &StartDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	}
 	body := &bytes.Buffer{}
@@ -2094,6 +2450,7 @@ func TestCheckRequestSnapshot_StopAutonomousDatabase(t *testing.T) {
 func TestCheckRequestSnapshot_StopDbNode(t *testing.T) {
 	input := &StopDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	}
 	body := &bytes.Buffer{}
@@ -2431,6 +2788,83 @@ func TestCheckRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateExadbVmCluster(t *testing.T) {
+	input := &UpdateExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		DisplayName:      ptr.String("__DisplayName__"),
+		EnabledEcpuCount: ptr.Int32(1),
+		GridImageId:      ptr.String("__GridImageId__"),
+		LicenseModel:     types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SystemVersion:                     ptr.String("__SystemVersion__"),
+		TotalEcpuCount:                    ptr.Int32(1),
+		UpdateAction:                      types.UpdateAction("ROLLING_APPLY"),
+		VmFileSystemStorageTotalSizeInGBs: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateExascaleDbStorageVault(t *testing.T) {
+	input := &UpdateExascaleDbStorageVaultInput{
+		ExascaleDbStorageVaultId:                  ptr.String("__ExascaleDbStorageVaultId__"),
+		AdditionalFlashCacheInPercent:             ptr.Int32(1),
+		AutoscaleLimitInGBs:                       ptr.Int32(1),
+		Description:                               ptr.String("__Description__"),
+		DisplayName:                               ptr.String("__DisplayName__"),
+		HighCapacityDatabaseStorageTotalSizeInGBs: ptr.Int32(1),
+		IsAutoscaleEnabled:                        ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExascaleDbStorageVault(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExascaleDbStorageVault"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateOdbNetwork(t *testing.T) {
 	input := &UpdateOdbNetworkInput{
 		OdbNetworkId: ptr.String("__OdbNetworkId__"),
@@ -2569,6 +3003,34 @@ func TestUpdateRequestSnapshot_AssociateIamRoleToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateIamRoleToResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AssociateVirtualMachinesToExadbVmCluster(t *testing.T) {
+	input := &AssociateVirtualMachinesToExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DesiredNodeCount: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateVirtualMachinesToExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateVirtualMachinesToExadbVmCluster"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2996,6 +3458,101 @@ func TestUpdateRequestSnapshot_CreateCloudVmCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateExadbVmCluster(t *testing.T) {
+	input := &CreateExadbVmClusterInput{
+		DisplayName:              ptr.String("__DisplayName__"),
+		EnabledEcpuCount:         ptr.Int32(1),
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+		GridImageId:              ptr.String("__GridImageId__"),
+		Hostname:                 ptr.String("__Hostname__"),
+		NodeCount:                ptr.Int32(1),
+		OdbNetworkId:             ptr.String("__OdbNetworkId__"),
+		Shape:                    ptr.String("__Shape__"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TotalEcpuCount:                    ptr.Int32(1),
+		VmFileSystemStorageTotalSizeInGBs: ptr.Int32(1),
+		ClusterName:                       ptr.String("__ClusterName__"),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		LicenseModel:           types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		ScanListenerPortTcp:    ptr.Int32(1),
+		ScanListenerPortTcpSsl: ptr.Int32(1),
+		ShapeAttribute:         types.ShapeAttribute("SMART_STORAGE"),
+		SystemVersion:          ptr.String("__SystemVersion__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TimeZone:    ptr.String("__TimeZone__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateExascaleDbStorageVault(t *testing.T) {
+	input := &CreateExascaleDbStorageVaultInput{
+		DisplayName: ptr.String("__DisplayName__"),
+		HighCapacityDatabaseStorageTotalSizeInGBs: ptr.Int32(1),
+		AdditionalFlashCacheInPercent:             ptr.Int32(1),
+		AutoscaleLimitInGBs:                       ptr.Int32(1),
+		AvailabilityZoneId:                        ptr.String("__AvailabilityZoneId__"),
+		AvailabilityZone:                          ptr.String("__AvailabilityZone__"),
+		Description:                               ptr.String("__Description__"),
+		IsAutoscaleEnabled:                        ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TimeZone:    ptr.String("__TimeZone__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateExascaleDbStorageVault(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateExascaleDbStorageVault"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateOdbNetwork(t *testing.T) {
 	input := &CreateOdbNetworkInput{
 		DisplayName:        ptr.String("__DisplayName__"),
@@ -3220,6 +3777,60 @@ func TestUpdateRequestSnapshot_DeleteCloudVmCluster(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteExadbVmCluster(t *testing.T) {
+	input := &DeleteExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteExascaleDbStorageVault(t *testing.T) {
+	input := &DeleteExascaleDbStorageVaultInput{
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteExascaleDbStorageVault(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteExascaleDbStorageVault"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteOdbNetwork(t *testing.T) {
 	input := &DeleteOdbNetworkInput{
 		OdbNetworkId:              ptr.String("__OdbNetworkId__"),
@@ -3300,6 +3911,37 @@ func TestUpdateRequestSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateIamRoleFromResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DisassociateVirtualMachinesFromExadbVmCluster(t *testing.T) {
+	input := &DisassociateVirtualMachinesFromExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DbNodeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateVirtualMachinesFromExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateVirtualMachinesFromExadbVmCluster"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3528,6 +4170,7 @@ func TestUpdateRequestSnapshot_GetCloudVmCluster(t *testing.T) {
 func TestUpdateRequestSnapshot_GetDbNode(t *testing.T) {
 	input := &GetDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	}
 	body := &bytes.Buffer{}
@@ -3577,6 +4220,60 @@ func TestUpdateRequestSnapshot_GetDbServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDbServer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetExadbVmCluster(t *testing.T) {
+	input := &GetExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetExascaleDbStorageVault(t *testing.T) {
+	input := &GetExascaleDbStorageVaultInput{
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetExascaleDbStorageVault(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetExascaleDbStorageVault"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3983,6 +4680,7 @@ func TestUpdateRequestSnapshot_ListDbNodes(t *testing.T) {
 		MaxResults:       ptr.Int32(1),
 		NextToken:        ptr.String("__NextToken__"),
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4042,6 +4740,7 @@ func TestUpdateRequestSnapshot_ListDbSystemShapes(t *testing.T) {
 		NextToken:          ptr.String("__NextToken__"),
 		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
 		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+		ShapeFamily:        ptr.String("__ShapeFamily__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4062,6 +4761,95 @@ func TestUpdateRequestSnapshot_ListDbSystemShapes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDbSystemShapes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListExadbVmClusters(t *testing.T) {
+	input := &ListExadbVmClustersInput{
+		ExascaleDbStorageVaultId: ptr.String("__ExascaleDbStorageVaultId__"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExadbVmClusters(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExadbVmClusters"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
+	input := &ListExascaleDbStorageVaultsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListExascaleDbStorageVaults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListExascaleDbStorageVaults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListGiMinorVersions(t *testing.T) {
+	input := &ListGiMinorVersionsInput{
+		GiVersion:          ptr.String("__GiVersion__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		ShapeFamily:        ptr.String("__ShapeFamily__"),
+		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGiMinorVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGiMinorVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4240,6 +5028,7 @@ func TestUpdateRequestSnapshot_RebootAutonomousDatabase(t *testing.T) {
 func TestUpdateRequestSnapshot_RebootDbNode(t *testing.T) {
 	input := &RebootDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	}
 	body := &bytes.Buffer{}
@@ -4350,6 +5139,7 @@ func TestUpdateRequestSnapshot_StartAutonomousDatabase(t *testing.T) {
 func TestUpdateRequestSnapshot_StartDbNode(t *testing.T) {
 	input := &StartDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	}
 	body := &bytes.Buffer{}
@@ -4405,6 +5195,7 @@ func TestUpdateRequestSnapshot_StopAutonomousDatabase(t *testing.T) {
 func TestUpdateRequestSnapshot_StopDbNode(t *testing.T) {
 	input := &StopDbNodeInput{
 		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
 		DbNodeId:         ptr.String("__DbNodeId__"),
 	}
 	body := &bytes.Buffer{}
@@ -4738,6 +5529,83 @@ func TestUpdateRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCloudExadataInfrastructure"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateExadbVmCluster(t *testing.T) {
+	input := &UpdateExadbVmClusterInput{
+		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		DisplayName:      ptr.String("__DisplayName__"),
+		EnabledEcpuCount: ptr.Int32(1),
+		GridImageId:      ptr.String("__GridImageId__"),
+		LicenseModel:     types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SystemVersion:                     ptr.String("__SystemVersion__"),
+		TotalEcpuCount:                    ptr.Int32(1),
+		UpdateAction:                      types.UpdateAction("ROLLING_APPLY"),
+		VmFileSystemStorageTotalSizeInGBs: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExadbVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExadbVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateExascaleDbStorageVault(t *testing.T) {
+	input := &UpdateExascaleDbStorageVaultInput{
+		ExascaleDbStorageVaultId:                  ptr.String("__ExascaleDbStorageVaultId__"),
+		AdditionalFlashCacheInPercent:             ptr.Int32(1),
+		AutoscaleLimitInGBs:                       ptr.Int32(1),
+		Description:                               ptr.String("__Description__"),
+		DisplayName:                               ptr.String("__DisplayName__"),
+		HighCapacityDatabaseStorageTotalSizeInGBs: ptr.Int32(1),
+		IsAutoscaleEnabled:                        ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateExascaleDbStorageVault(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateExascaleDbStorageVault"); err != nil {
 		t.Fatal(err)
 	}
 }

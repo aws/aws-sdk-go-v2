@@ -46,6 +46,8 @@ type PutDataCatalogExportConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+// The export configuration returned by the PutDataCatalogExportConfiguration
+// operation.
 type PutDataCatalogExportConfigurationOutput struct {
 
 	// The encryption configuration for the exported data.

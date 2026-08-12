@@ -594,6 +594,27 @@ func (ExternalIdType) Values() []ExternalIdType {
 	}
 }
 
+type GridImageType string
+
+// Enum values for GridImageType
+const (
+	// A release update grid image.
+	GridImageTypeReleaseUpdate GridImageType = "RELEASE_UPDATE"
+	// A custom grid image.
+	GridImageTypeCustomImage GridImageType = "CUSTOM_IMAGE"
+)
+
+// Values returns all known values for GridImageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GridImageType) Values() []GridImageType {
+	return []GridImageType{
+		"RELEASE_UPDATE",
+		"CUSTOM_IMAGE",
+	}
+}
+
 type IamRoleStatus string
 
 // Enum values for IamRoleStatus
@@ -1049,6 +1070,27 @@ func (ResourceStatus) Values() []ResourceStatus {
 	}
 }
 
+type ShapeAttribute string
+
+// Enum values for ShapeAttribute
+const (
+	// Smart storage shape attribute.
+	ShapeAttributeSmartStorage ShapeAttribute = "SMART_STORAGE"
+	// Block storage shape attribute.
+	ShapeAttributeBlockStorage ShapeAttribute = "BLOCK_STORAGE"
+)
+
+// Values returns all known values for ShapeAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ShapeAttribute) Values() []ShapeAttribute {
+	return []ShapeAttribute{
+		"SMART_STORAGE",
+		"BLOCK_STORAGE",
+	}
+}
+
 type ShapeType string
 
 // Enum values for ShapeType
@@ -1136,6 +1178,29 @@ const (
 func (SupportedAwsIntegration) Values() []SupportedAwsIntegration {
 	return []SupportedAwsIntegration{
 		"KmsTde",
+	}
+}
+
+type UpdateAction string
+
+// Enum values for UpdateAction
+const (
+	UpdateActionRollingApply    UpdateAction = "ROLLING_APPLY"
+	UpdateActionNonRollingApply UpdateAction = "NON_ROLLING_APPLY"
+	UpdateActionPrecheck        UpdateAction = "PRECHECK"
+	UpdateActionRollback        UpdateAction = "ROLLBACK"
+)
+
+// Values returns all known values for UpdateAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateAction) Values() []UpdateAction {
+	return []UpdateAction{
+		"ROLLING_APPLY",
+		"NON_ROLLING_APPLY",
+		"PRECHECK",
+		"ROLLBACK",
 	}
 }
 
