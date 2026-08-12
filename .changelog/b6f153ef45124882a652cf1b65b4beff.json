@@ -1,8 +1,0 @@
-{
-    "id": "b6f153ef-4512-4882-a652-cf1b65b4beff",
-    "type": "documentation",
-    "description": "Documentation updates for materialized views APIs.",
-    "modules": [
-        "service/glue"
-    ]
-}

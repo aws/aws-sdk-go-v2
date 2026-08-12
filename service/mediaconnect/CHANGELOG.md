@@ -1,3 +1,7 @@
+# v1.54.0 (2026-08-12)
+
+* **Feature**: AWS MediaConnect now supports tuning the internal recovery latency between Router Inputs and Outputs to prioritize stream quality versus end-to-end latency.
+
 # v1.53.5 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

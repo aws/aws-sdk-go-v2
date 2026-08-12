@@ -1,3 +1,7 @@
+# v1.152.2 (2026-08-12)
+
+* **Documentation**: Documentation updates for materialized views APIs.
+
 # v1.152.1 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

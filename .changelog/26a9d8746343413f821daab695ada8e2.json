@@ -1,8 +1,0 @@
-{
-    "id": "26a9d874-6343-413f-821d-aab695ada8e2",
-    "type": "feature",
-    "description": "Adds support for Oracle Exadata on Exascale Infrastructure (ExaDB-XS) resources including storage vaults and VM clusters.",
-    "modules": [
-        "service/odb"
-    ]
-}

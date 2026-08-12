@@ -1,3 +1,19 @@
+# Release (2026-08-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.152.2](service/glue/CHANGELOG.md#v11522-2026-08-12)
+  * **Documentation**: Documentation updates for materialized views APIs.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.59.0](service/iam/CHANGELOG.md#v1590-2026-08-12)
+  * **Feature**: Introduced role manager, an IAM capability that automatically sets up the IAM roles your AWS services need. When you set up a supported service in the console, role manager creates a role for you or reuses an existing one from an AWS-managed template.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.54.0](service/mediaconnect/CHANGELOG.md#v1540-2026-08-12)
+  * **Feature**: AWS MediaConnect now supports tuning the internal recovery latency between Router Inputs and Outputs to prioritize stream quality versus end-to-end latency.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.16.0](service/odb/CHANGELOG.md#v1160-2026-08-12)
+  * **Feature**: Adds support for Oracle Exadata on Exascale Infrastructure (ExaDB-XS) resources including storage vaults and VM clusters.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.124.0](service/quicksight/CHANGELOG.md#v11240-2026-08-12)
+  * **Feature**: Added APIs for DLP with Microsoft Purview (manage configs with label enforcement across Spaces, Chat, Knowledge Bases), Approval Workflows (CRUD for policies on asset sharing for Agents, Knowledge Bases, Spaces), and Limits Management (limit profiles for index storage and agent hours per user).
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.43.0](service/wellarchitected/CHANGELOG.md#v1430-2026-08-12)
+  * **Feature**: This change releases the Well-Architected Agent, a generative AI service that analyzes a customer's AWS environment and delivers personalized, prioritized recommendations across cost, security, performance, and resilience.
+
 # Release (2026-08-11)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.16.0 (2026-08-12)
+
+* **Feature**: Adds support for Oracle Exadata on Exascale Infrastructure (ExaDB-XS) resources including storage vaults and VM clusters.
+
 # v1.15.6 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.
