@@ -288,10 +288,9 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 		err = d.failurePolicy.OnDownloadFailed(d.in, input, err)
 		if err != nil {
 			return fmt.Errorf("error when heading info of object %s: %v", data.key, err)
-		} else {
-			d.objectsFailed.Add(1)
-			return nil
 		}
+		d.objectsFailed.Add(1)
+		return nil
 	}
 
 	d.progressOnce.Do(func() {
@@ -323,10 +322,9 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 		err = d.failurePolicy.OnDownloadFailed(d.in, input, err)
 		if err != nil {
 			return fmt.Errorf("error when getting object and writing to local file %s: %v", data.path, err)
-		} else {
-			d.objectsFailed.Add(1)
-			return nil
 		}
+		d.objectsFailed.Add(1)
+		return nil
 	}
 
 	d.objectsDownloaded.Add(1)

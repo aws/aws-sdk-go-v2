@@ -410,11 +410,10 @@ func (u *directoryUploader) uploadSingleFile(ctx context.Context, data fileEntry
 		err = u.failurePolicy.OnUploadFailed(u.in, input, err)
 		if err != nil {
 			return fmt.Errorf("error when uploading file %s: %v", data.path, err)
-		} else {
-			// this failed object is ignored, just increase the failure count
-			u.filesFailed.Add(1)
-			return nil
 		}
+		// this failed object is ignored, just increase the failure count
+		u.filesFailed.Add(1)
+		return nil
 	}
 
 	u.progressOnce.Do(func() {
