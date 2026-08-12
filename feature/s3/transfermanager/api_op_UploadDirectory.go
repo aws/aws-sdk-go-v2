@@ -313,6 +313,11 @@ func (u *directoryUploader) traverseFolder(path string) ([]string, error) {
 	if err != nil {
 		return []string{}, err
 	}
+	defer func() {
+		if err := f.Close(); err != nil {
+			u.setErr(fmt.Errorf("error when closing folder %s: %v", path, err))
+		}
+	}()
 	subFiles, err := f.ReadDir(0)
 	if err != nil {
 		return []string{}, err
@@ -375,37 +380,49 @@ func (u *directoryUploader) uploadFile(ctx context.Context, ch chan fileEntry) {
 		if u.getErr() != nil {
 			continue
 		}
-		f, err := os.Open(data.path)
-		if err != nil {
-			u.setErr(fmt.Errorf("error when opening file %s: %v", data.path, err))
-			continue
-		}
-		input := &UploadObjectInput{
-			Bucket: u.in.Bucket,
-			Key:    aws.String(data.key),
-			Body:   f,
-		}
-		if u.in.Callback != nil {
-			u.in.Callback.UpdateRequest(input)
-		}
-		out, err := u.c.UploadObject(ctx, input)
-		if err != nil {
-			err = u.failurePolicy.OnUploadFailed(u.in, input, err)
-			if err != nil {
-				u.setErr(fmt.Errorf("error when uploading file %s: %v", data.path, err))
-			} else {
-				// this failed object is ignored, just increase the failure count
-				u.filesFailed.Add(1)
-			}
-			continue
-		}
 
-		u.progressOnce.Do(func() {
-			u.emitter.Start(ctx, u.in)
-		})
-		u.filesUploaded.Add(1)
-		u.emitter.ObjectsTransferred(ctx, aws.ToInt64(out.ContentLength))
+		if err := u.uploadSingleFile(ctx, data); err != nil {
+			u.setErr(err)
+		}
 	}
+}
+
+func (u *directoryUploader) uploadSingleFile(ctx context.Context, data fileEntry) error {
+	f, err := os.Open(data.path)
+	if err != nil {
+		return fmt.Errorf("error when opening file %s: %v", data.path, err)
+	}
+	defer func() {
+		if err := f.Close(); err != nil {
+			u.setErr(fmt.Errorf("error when closing file %s: %v", data.path, err))
+		}
+	}()
+	input := &UploadObjectInput{
+		Bucket: u.in.Bucket,
+		Key:    aws.String(data.key),
+		Body:   f,
+	}
+	if u.in.Callback != nil {
+		u.in.Callback.UpdateRequest(input)
+	}
+	out, err := u.c.UploadObject(ctx, input)
+	if err != nil {
+		err = u.failurePolicy.OnUploadFailed(u.in, input, err)
+		if err != nil {
+			return fmt.Errorf("error when uploading file %s: %v", data.path, err)
+		} else {
+			// this failed object is ignored, just increase the failure count
+			u.filesFailed.Add(1)
+			return nil
+		}
+	}
+
+	u.progressOnce.Do(func() {
+		u.emitter.Start(ctx, u.in)
+	})
+	u.filesUploaded.Add(1)
+	u.emitter.ObjectsTransferred(ctx, aws.ToInt64(out.ContentLength))
+	return nil
 }
 
 func (u *directoryUploader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
@@ -419,7 +436,9 @@ func (u *directoryUploader) setErr(err error) {
 	u.mu.Lock()
 	defer u.mu.Unlock()
 
-	u.err = err
+	if u.err == nil || (isCancellationError(u.err) && !isCancellationError(err)) {
+		u.err = err
+	}
 }
 
 func (u *directoryUploader) getErr() error {

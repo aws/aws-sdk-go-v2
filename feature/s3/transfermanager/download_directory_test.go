@@ -11,6 +11,7 @@ import (
 	"runtime"
 	"sort"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
@@ -698,5 +699,170 @@ func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
 
 	if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	}
+}
+
+// createdFileCapture records the *os.File handles that DownloadDirectory
+// creates via createFileFn, so a test can assert after the call returns that
+// each one was closed. A closed *os.File returns an error from Stat, so a nil
+// error means the handle leaked. It is safe for concurrent use by the download
+// workers.
+type createdFileCapture struct {
+	mu    sync.Mutex
+	files []*os.File
+}
+
+func (c *createdFileCapture) capture(f *os.File) {
+	c.mu.Lock()
+	c.files = append(c.files, f)
+	c.mu.Unlock()
+}
+
+func (c *createdFileCapture) count() int {
+	return len(c.files)
+}
+
+// stillOpen returns the names of captured files that are still open. A closed
+// *os.File returns an error from Stat, so a nil error means the handle leaked.
+func (c *createdFileCapture) stillOpen() []string {
+	var open []string
+	for _, f := range c.files {
+		if _, err := f.Stat(); err == nil {
+			open = append(open, f.Name())
+		}
+	}
+	sort.Strings(open)
+	return open
+}
+
+// TestDownloadDirectoryClosesCreatedFiles verifies that DownloadDirectory
+// closes every file handle it creates before returning - on the success path
+// and when individual object downloads fail and are ignored. Regression test
+// for a file-handle leak analogous to aws/aws-sdk-go-v2#3512.
+func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
+	_, filename, _, _ := runtime.Caller(0)
+	root := filepath.Join(filepath.Dir(filename), "testdata")
+
+	cases := map[string]struct {
+		destination        string
+		objectsLists       [][]s3types.Object
+		continuationTokens []string
+		getobjectFn        func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+		failurePolicy      DownloadDirectoryFailurePolicy
+		expectCreated      int
+		expectErr          string
+	}{
+		"single object": {
+			destination: "close-single-object",
+			objectsLists: [][]s3types.Object{
+				{{Key: aws.String("foo/bar")}},
+			},
+			expectCreated: 1,
+		},
+		"multiple objects with subdirs": {
+			destination: "close-multiple-objects",
+			objectsLists: [][]s3types.Object{
+				{
+					{Key: aws.String("foo/bar")},
+					{Key: aws.String("baz")},
+					{Key: aws.String("foo/zoo/bar")},
+					{Key: aws.String("foo/zoo/oii/bababoii")},
+				},
+			},
+			expectCreated: 4,
+		},
+		"multiple objects paginated": {
+			destination: "close-multiple-objects-paginated",
+			objectsLists: [][]s3types.Object{
+				{{Key: aws.String("foo/bar")}, {Key: aws.String("baz")}},
+				{{Key: aws.String("foo/zoo/bar")}, {Key: aws.String("foo/zoo/oii/bababoii")}},
+				{{Key: aws.String("foo/zoo/baz")}, {Key: aws.String("foo/zoo/oii/yee")}},
+			},
+			continuationTokens: []string{"token1", "token2"},
+			expectCreated:      6,
+		},
+		"created files are closed when some downloads fail and are ignored": {
+			destination: "close-error-ignored",
+			objectsLists: [][]s3types.Object{
+				{
+					{Key: aws.String("foo/bar")},
+					{Key: aws.String("baz")},
+					{Key: aws.String("foo/zoo/bar")},
+					{Key: aws.String("foo/zoo/oii/bababoii")},
+				},
+			},
+			getobjectFn: func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				if key := aws.ToString(in.Key); key == "foo/zoo/bar" || key == "baz" {
+					return nil, fmt.Errorf("mocking error")
+				}
+				return &s3.GetObjectOutput{
+					Body:          io.NopCloser(bytes.NewReader(c.Data)),
+					ContentLength: aws.Int64(int64(len(c.Data))),
+					PartsCount:    aws.Int32(c.PartsCount),
+					ETag:          aws.String(etag),
+				}, nil
+			},
+			failurePolicy: IgnoreDownloadFailurePolicy{},
+			// GetObject only performs a HeadObject up front and streams the
+			// body lazily, so os.Create runs for all four objects. foo/zoo/bar
+			// and baz then fail during io.Copy (body read), so their files are
+			// created, closed, and removed; the other two download normally.
+			// Every created file must be closed regardless of the outcome.
+			expectCreated: 4,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			capture := &createdFileCapture{}
+			prev := createFileFn
+			createFileFn = func(name string) (*os.File, error) {
+				f, err := prev(name)
+				if err == nil {
+					capture.capture(f)
+				}
+				return f, err
+			}
+			defer func() { createFileFn = prev }()
+
+			s3Client, _ := s3testing.NewDownloadDirectoryClient()
+			s3Client.ListObjectsData = c.objectsLists
+			s3Client.ContinuationTokens = c.continuationTokens
+			if c.getobjectFn == nil {
+				s3Client.GetObjectFn = s3testing.PartGetObjectFn
+			} else {
+				s3Client.GetObjectFn = c.getobjectFn
+			}
+			s3Client.Data = make([]byte, 0)
+			s3Client.PartsCount = 1
+			mgr := New(s3Client)
+
+			dstPath := filepath.Join(root, c.destination)
+			defer os.RemoveAll(dstPath)
+
+			req := &DownloadDirectoryInput{
+				Bucket:        aws.String("mock-bucket"),
+				Destination:   aws.String(dstPath),
+				FailurePolicy: c.failurePolicy,
+			}
+
+			_, err := mgr.DownloadDirectory(context.Background(), req)
+			if err != nil {
+				if c.expectErr == "" {
+					t.Fatalf("expect no error, got %v", err)
+				} else if !strings.Contains(err.Error(), c.expectErr) {
+					t.Fatalf("expect %s to be contained in %v", c.expectErr, err)
+				}
+			} else if c.expectErr != "" {
+				t.Fatalf("expect error %s, got none", c.expectErr)
+			}
+
+			if e, a := c.expectCreated, capture.count(); e != a {
+				t.Fatalf("expected DownloadDirectory to create %d file(s) under %s, captured %d", e, dstPath, a)
+			}
+			if open := capture.stillOpen(); len(open) != 0 {
+				t.Fatalf("expected all created files under %s to be closed after DownloadDirectory returned, but these remain open: %v", dstPath, open)
+			}
+		})
 	}
 }
