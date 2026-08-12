@@ -13,7 +13,6 @@ UpdateStorageLensGroup
 	Build stack step
 		stashOperationInput
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection

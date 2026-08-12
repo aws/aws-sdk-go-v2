@@ -1,0 +1,5 @@
+PUT /DocumentTypeAsPayload
+
+Content-Type: application/json
+
+"__Document__"

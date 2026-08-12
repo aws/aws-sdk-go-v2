@@ -1,0 +1,6 @@
+200
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿odenseBooleanMap¿dkey0õÿndenseNumberMap¿dkey0ÿkdenseSetMap¿dkey0Ÿj__Member__j__Member__ÿÿndenseStringMap¿dkey0i__Value__ÿndenseStructMap¿dkey0¿bhif__Hi__ÿÿÿ

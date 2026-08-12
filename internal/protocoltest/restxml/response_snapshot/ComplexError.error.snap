@@ -1,0 +1,5 @@
+403
+Content-Type: application/xml
+X-Header: __Header__
+
+<ErrorResponse><Error><Code>ComplexError</Code><Nested><Foo>__Foo__</Foo></Nested><TopLevel>__TopLevel__</TopLevel></Error></ErrorResponse>

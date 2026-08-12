@@ -1,0 +1,5 @@
+PUT /BodyWithXmlName
+
+Content-Type: application/xml
+
+<Ahoy><nested><name>__Name__</name></nested></Ahoy>

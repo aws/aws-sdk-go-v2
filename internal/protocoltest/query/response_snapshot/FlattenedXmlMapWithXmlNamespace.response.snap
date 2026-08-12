@@ -1,0 +1,4 @@
+200
+Content-Type: application/x-www-form-urlencoded
+
+Action=FlattenedXmlMapWithXmlNamespace&KVP.1.K=key0&KVP.1.V=__Value__&Version=2020-01-08

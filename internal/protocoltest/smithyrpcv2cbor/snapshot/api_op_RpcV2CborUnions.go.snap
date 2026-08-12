@@ -6,7 +6,6 @@ RpcV2CborUnions
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		UserAgent
 		RecursionDetection
 	Finalize stack step

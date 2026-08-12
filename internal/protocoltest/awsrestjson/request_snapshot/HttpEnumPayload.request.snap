@@ -1,0 +1,5 @@
+POST /EnumPayload
+
+Content-Type: text/plain
+
+enumvalue

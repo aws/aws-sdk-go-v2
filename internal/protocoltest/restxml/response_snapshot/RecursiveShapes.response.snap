@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<RecursiveShapesResponse><nested><foo>__Foo__</foo><nested><bar>__Bar__</bar></nested></nested></RecursiveShapesResponse>

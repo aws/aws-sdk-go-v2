@@ -1,0 +1,5 @@
+POST /JsonBlobs
+
+Content-Type: application/json
+
+{"data":"YmxvYg=="}

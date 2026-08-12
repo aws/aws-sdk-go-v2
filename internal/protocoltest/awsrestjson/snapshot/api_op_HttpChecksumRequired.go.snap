@@ -7,7 +7,6 @@ HttpChecksumRequired
 	Build stack step
 		ContentChecksum
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection

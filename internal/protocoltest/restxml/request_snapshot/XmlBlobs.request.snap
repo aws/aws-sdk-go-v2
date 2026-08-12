@@ -1,0 +1,5 @@
+POST /XmlBlobs
+
+Content-Type: application/xml
+
+<XmlBlobsRequest><data>YmxvYg==</data></XmlBlobsRequest>

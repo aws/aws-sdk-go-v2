@@ -172,9 +172,6 @@ func (c *Client) addOperationAgenticRetrieveStreamMiddlewares(stack *middleware.
 	if err = addEventStreamBuild_opAgenticRetrieveStreamMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

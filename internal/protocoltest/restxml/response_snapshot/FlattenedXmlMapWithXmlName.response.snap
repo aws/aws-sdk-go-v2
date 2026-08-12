@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<FlattenedXmlMapWithXmlNameResponse><KVP><K>key0</K><V>__Value__</V></KVP></FlattenedXmlMapWithXmlNameResponse>

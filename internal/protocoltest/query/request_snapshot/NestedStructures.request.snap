@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=NestedStructures&Nested.OtherArg=true&Nested.StringArg=__StringArg__&Version=2020-01-08
