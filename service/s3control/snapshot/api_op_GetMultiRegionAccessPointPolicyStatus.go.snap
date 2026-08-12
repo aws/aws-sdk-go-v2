@@ -14,7 +14,6 @@ GetMultiRegionAccessPointPolicyStatus
 		stashOperationInput
 		ContentChecksum
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection

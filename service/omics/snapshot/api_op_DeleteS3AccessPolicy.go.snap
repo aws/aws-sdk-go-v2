@@ -7,7 +7,6 @@ DeleteS3AccessPolicy
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection

@@ -1,0 +1,5 @@
+PUT /HttpPayloadWithXmlNamespaceAndPrefix
+
+Content-Type: application/xml
+
+<PayloadWithXmlNamespaceAndPrefix xmlns:baz="http://foo.com"><name>__Name__</name></PayloadWithXmlNamespaceAndPrefix>

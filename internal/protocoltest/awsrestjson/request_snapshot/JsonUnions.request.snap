@@ -1,0 +1,5 @@
+PUT /JsonUnions
+
+Content-Type: application/json
+
+{"contents":{"stringValue":"__MyUnionMemberStringValue__"}}

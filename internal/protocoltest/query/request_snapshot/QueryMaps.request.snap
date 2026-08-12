@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=QueryMaps&ComplexMapArg.entry.1.key=key0&ComplexMapArg.entry.1.value.hi=__Hi__&FlattenedMap.1.key=key0&FlattenedMap.1.value=__Value__&Foo.entry.1.key=key0&Foo.entry.1.value=__Value__&Hi.1.K=key0&Hi.1.V=__Value__&MapArg.entry.1.key=key0&MapArg.entry.1.value=__Value__&MapOfLists.entry.1.key=key0&MapOfLists.entry.1.value.member.1=__Member__&MapOfLists.entry.1.value.member.2=__Member__&MapWithXmlMemberName.entry.1.K=key0&MapWithXmlMemberName.entry.1.V=__Value__&NestedStructWithMap.MapArg.entry.1.key=key0&NestedStructWithMap.MapArg.entry.1.value=__Value__&Version=2020-01-08

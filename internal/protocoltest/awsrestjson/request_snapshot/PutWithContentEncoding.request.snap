@@ -1,0 +1,6 @@
+POST /requestcompression/putcontentwithencoding
+
+Content-Encoding: __Encoding__
+Content-Type: application/json
+
+{"data":"__Data__"}

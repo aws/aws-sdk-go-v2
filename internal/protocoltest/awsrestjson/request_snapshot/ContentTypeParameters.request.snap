@@ -1,0 +1,5 @@
+POST /ContentTypeParameters
+
+Content-Type: application/json
+
+{"value":1}

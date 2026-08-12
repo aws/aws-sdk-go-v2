@@ -1,0 +1,7 @@
+POST /service/RpcV2Protocol/operation/RecursiveShapes
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿fnested¿cfoog__Foo__fnested¿cbarg__Bar__ÿÿÿ

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<FlattenedXmlMapResponse><myMap><key>key0</key><value>Foo</value></myMap></FlattenedXmlMapResponse>

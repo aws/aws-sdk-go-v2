@@ -7,7 +7,6 @@ SubscribeEvents
 	Build stack step
 		EventStreamBuildMiddleware
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection

@@ -104,9 +104,6 @@ func (c *Client) addOperationOutputStreamMiddlewares(stack *middleware.Stack, op
 	if err = addEventStreamBuild_opOutputStreamMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -8,7 +8,6 @@ GetObject
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		AWSChecksum:ResponseMetricsTracking
 		SetCredentialSourceMiddleware
 		UserAgent

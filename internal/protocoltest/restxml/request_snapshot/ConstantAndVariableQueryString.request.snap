@@ -1,0 +1,3 @@
+GET /ConstantAndVariableQueryString?baz=__Baz__&foo=bar&maybeSet=__MaybeSet__
+
+

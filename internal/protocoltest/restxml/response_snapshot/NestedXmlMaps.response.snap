@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<NestedXmlMapsResponse><flatNestedMap><key>key0</key><value><entry><key>key0</key><value>Foo</value></entry></value></flatNestedMap><nestedMap><entry><key>key0</key><value><entry><key>key0</key><value>Foo</value></entry></value></entry></nestedMap></NestedXmlMapsResponse>
