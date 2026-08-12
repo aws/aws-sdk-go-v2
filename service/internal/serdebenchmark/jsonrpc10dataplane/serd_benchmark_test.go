@@ -6,13 +6,53 @@ package jsonrpc10dataplane
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"runtime"
 	"sync"
 	"testing"
 )
+
+// serdBenchmarkBody is a response body that is already in memory and hands the
+// protocol its bytes without copying them, and without being consumed -- so
+// deserialization skips buffering the body, which is transport work the serde
+// benchmarks are not meant to charge for, and one response can be deserialized
+// on every iteration rather than one being built per iteration.
+//
+// The protocol picks this up structurally, off the PayloadBytes method. That
+// name is a contract with smithy-go's protocol implementations; it is
+// deliberately not a published interface, because net/http never hands out a
+// body whose bytes are all in memory, so nothing outside a test can satisfy it.
+type serdBenchmarkBody struct {
+	payload []byte
+}
+
+func newSerdBenchmarkBody(payload []byte) io.ReadCloser {
+	return &serdBenchmarkBody{payload: payload}
+}
+
+// PayloadBytes returns the full body, without copying it.
+func (b *serdBenchmarkBody) PayloadBytes() []byte {
+	return b.payload
+}
+
+// Read always fails, by design. Nothing should be consuming this body. A
+// protocol that falls back to buffering it would both charge the measurement
+// for a body copy and drain the body, leaving every iteration after the first
+// to deserialize an empty payload -- which reports a number, just not for the
+// thing being benchmarked. Fail loudly instead.
+func (*serdBenchmarkBody) Read([]byte) (int, error) {
+	return 0, errors.New("serde benchmark body was read: this protocol did not " +
+		"take the in-memory payload path, so the measurement would include a body copy")
+}
+
+// Close does nothing.
+func (*serdBenchmarkBody) Close() error {
+	return nil
+}
 
 type serdBenchmarkResult struct {
 	ID     string  `json:"id"`

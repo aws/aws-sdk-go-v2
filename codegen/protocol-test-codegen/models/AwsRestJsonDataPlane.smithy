@@ -12,6 +12,9 @@ use aws.auth#sigv4
 @service(sdkId: "RestJsonDataPlane")
 service AwsRestJsonDataPlane {
     version: "1999-12-31"
-    operations: [Healthcheck]
+    // GetObjectStreaming is restJson1-only: it exists to contrast a @streaming
+    // payload against S3Object's buffered GetObject, so it hangs off the service
+    // rather than the resource shared with the restXml data plane.
+    operations: [Healthcheck, GetObjectStreaming]
     resources: [S3Object, CloudWatchMetric]
 }

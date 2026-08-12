@@ -29,6 +29,13 @@ var GetObject = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/{Bucket}/{Key}",
 	Code: 200})
 
+var GetObjectStreaming = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sdk.benchmark",
+	Name:      "GetObjectStreaming",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/streaming/{Bucket}/{Key}",
+	Code: 200})
+
 var HeadObject = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sdk.benchmark",
 	Name:      "HeadObject",
@@ -356,6 +363,11 @@ var StatusCode_PARTIAL_DATA *smithy.Schema
 
 var StatusCode_FORBIDDEN *smithy.Schema
 
+var _StreamingObjectBody = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sdk.benchmark",
+	Name:      "StreamingObjectBody",
+}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
+
 var _Timestamps = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sdk.benchmark",
 	Name:      "Timestamps",
@@ -645,6 +657,128 @@ var GetObjectOutput_ObjectLockMode *smithy.Schema
 var GetObjectOutput_ObjectLockRetainUntilDate *smithy.Schema
 
 var GetObjectOutput_ObjectLockLegalHoldStatus *smithy.Schema
+
+var GetObjectStreamingRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sdk.benchmark",
+	Name:      "GetObjectStreamingRequest",
+}, smithy.ShapeTypeStructure, 21)
+var GetObjectStreamingRequest_Bucket *smithy.Schema
+
+var GetObjectStreamingRequest_Key *smithy.Schema
+
+var GetObjectStreamingRequest_IfMatch *smithy.Schema
+
+var GetObjectStreamingRequest_IfModifiedSince *smithy.Schema
+
+var GetObjectStreamingRequest_IfNoneMatch *smithy.Schema
+
+var GetObjectStreamingRequest_IfUnmodifiedSince *smithy.Schema
+
+var GetObjectStreamingRequest_Range *smithy.Schema
+
+var GetObjectStreamingRequest_ResponseCacheControl *smithy.Schema
+
+var GetObjectStreamingRequest_ResponseContentDisposition *smithy.Schema
+
+var GetObjectStreamingRequest_ResponseContentEncoding *smithy.Schema
+
+var GetObjectStreamingRequest_ResponseContentLanguage *smithy.Schema
+
+var GetObjectStreamingRequest_ResponseContentType *smithy.Schema
+
+var GetObjectStreamingRequest_ResponseExpires *smithy.Schema
+
+var GetObjectStreamingRequest_VersionId *smithy.Schema
+
+var GetObjectStreamingRequest_SSECustomerAlgorithm *smithy.Schema
+
+var GetObjectStreamingRequest_SSECustomerKey *smithy.Schema
+
+var GetObjectStreamingRequest_SSECustomerKeyMD5 *smithy.Schema
+
+var GetObjectStreamingRequest_RequestPayer *smithy.Schema
+
+var GetObjectStreamingRequest_PartNumber *smithy.Schema
+
+var GetObjectStreamingRequest_ExpectedBucketOwner *smithy.Schema
+
+var GetObjectStreamingRequest_ChecksumMode *smithy.Schema
+
+var GetObjectStreamingOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sdk.benchmark",
+	Name:      "GetObjectStreamingOutput",
+}, smithy.ShapeTypeStructure, 36)
+var GetObjectStreamingOutput_Body *smithy.Schema
+
+var GetObjectStreamingOutput_DeleteMarker *smithy.Schema
+
+var GetObjectStreamingOutput_AcceptRanges *smithy.Schema
+
+var GetObjectStreamingOutput_Expiration *smithy.Schema
+
+var GetObjectStreamingOutput_Restore *smithy.Schema
+
+var GetObjectStreamingOutput_LastModified *smithy.Schema
+
+var GetObjectStreamingOutput_ContentLength *smithy.Schema
+
+var GetObjectStreamingOutput_ETag *smithy.Schema
+
+var GetObjectStreamingOutput_ChecksumCRC32 *smithy.Schema
+
+var GetObjectStreamingOutput_ChecksumCRC32C *smithy.Schema
+
+var GetObjectStreamingOutput_ChecksumCRC64NVME *smithy.Schema
+
+var GetObjectStreamingOutput_ChecksumSHA1 *smithy.Schema
+
+var GetObjectStreamingOutput_ChecksumSHA256 *smithy.Schema
+
+var GetObjectStreamingOutput_ChecksumType *smithy.Schema
+
+var GetObjectStreamingOutput_MissingMeta *smithy.Schema
+
+var GetObjectStreamingOutput_VersionId *smithy.Schema
+
+var GetObjectStreamingOutput_CacheControl *smithy.Schema
+
+var GetObjectStreamingOutput_ContentDisposition *smithy.Schema
+
+var GetObjectStreamingOutput_ContentEncoding *smithy.Schema
+
+var GetObjectStreamingOutput_ContentLanguage *smithy.Schema
+
+var GetObjectStreamingOutput_ContentType *smithy.Schema
+
+var GetObjectStreamingOutput_Expires *smithy.Schema
+
+var GetObjectStreamingOutput_WebsiteRedirectLocation *smithy.Schema
+
+var GetObjectStreamingOutput_ServerSideEncryption *smithy.Schema
+
+var GetObjectStreamingOutput_SSECustomerAlgorithm *smithy.Schema
+
+var GetObjectStreamingOutput_SSECustomerKeyMD5 *smithy.Schema
+
+var GetObjectStreamingOutput_SSEKMSKeyId *smithy.Schema
+
+var GetObjectStreamingOutput_BucketKeyEnabled *smithy.Schema
+
+var GetObjectStreamingOutput_StorageClass *smithy.Schema
+
+var GetObjectStreamingOutput_RequestCharged *smithy.Schema
+
+var GetObjectStreamingOutput_ReplicationStatus *smithy.Schema
+
+var GetObjectStreamingOutput_PartsCount *smithy.Schema
+
+var GetObjectStreamingOutput_TagCount *smithy.Schema
+
+var GetObjectStreamingOutput_ObjectLockMode *smithy.Schema
+
+var GetObjectStreamingOutput_ObjectLockRetainUntilDate *smithy.Schema
+
+var GetObjectStreamingOutput_ObjectLockLegalHoldStatus *smithy.Schema
 
 var HeadObjectRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sdk.benchmark",
@@ -1360,6 +1494,120 @@ func init() {
 	GetObjectOutput_ObjectLockRetainUntilDate = GetObjectOutput.AddMember("ObjectLockRetainUntilDate", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-retain-until-date"})
 
 	GetObjectOutput_ObjectLockLegalHoldStatus = GetObjectOutput.AddMember("ObjectLockLegalHoldStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-legal-hold"})
+
+	GetObjectStreamingRequest_Bucket = GetObjectStreamingRequest.AddMember("Bucket", smithyprelude.String, &smithytraits.HTTPLabel{})
+
+	GetObjectStreamingRequest_Key = GetObjectStreamingRequest.AddMember("Key", smithyprelude.String, &smithytraits.HTTPLabel{})
+
+	GetObjectStreamingRequest_IfMatch = GetObjectStreamingRequest.AddMember("IfMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
+
+	GetObjectStreamingRequest_IfModifiedSince = GetObjectStreamingRequest.AddMember("IfModifiedSince", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "If-Modified-Since"})
+
+	GetObjectStreamingRequest_IfNoneMatch = GetObjectStreamingRequest.AddMember("IfNoneMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-None-Match"})
+
+	GetObjectStreamingRequest_IfUnmodifiedSince = GetObjectStreamingRequest.AddMember("IfUnmodifiedSince", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "If-Unmodified-Since"})
+
+	GetObjectStreamingRequest_Range = GetObjectStreamingRequest.AddMember("Range", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Range"})
+
+	GetObjectStreamingRequest_ResponseCacheControl = GetObjectStreamingRequest.AddMember("ResponseCacheControl", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-cache-control"})
+
+	GetObjectStreamingRequest_ResponseContentDisposition = GetObjectStreamingRequest.AddMember("ResponseContentDisposition", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-disposition"})
+
+	GetObjectStreamingRequest_ResponseContentEncoding = GetObjectStreamingRequest.AddMember("ResponseContentEncoding", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-encoding"})
+
+	GetObjectStreamingRequest_ResponseContentLanguage = GetObjectStreamingRequest.AddMember("ResponseContentLanguage", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-language"})
+
+	GetObjectStreamingRequest_ResponseContentType = GetObjectStreamingRequest.AddMember("ResponseContentType", smithyprelude.String, &smithytraits.HTTPQuery{Name: "response-content-type"})
+
+	GetObjectStreamingRequest_ResponseExpires = GetObjectStreamingRequest.AddMember("ResponseExpires", smithyprelude.Timestamp, &smithytraits.HTTPQuery{Name: "response-expires"})
+
+	GetObjectStreamingRequest_VersionId = GetObjectStreamingRequest.AddMember("VersionId", smithyprelude.String, &smithytraits.HTTPQuery{Name: "versionId"})
+
+	GetObjectStreamingRequest_SSECustomerAlgorithm = GetObjectStreamingRequest.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
+
+	GetObjectStreamingRequest_SSECustomerKey = GetObjectStreamingRequest.AddMember("SSECustomerKey", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key"})
+
+	GetObjectStreamingRequest_SSECustomerKeyMD5 = GetObjectStreamingRequest.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
+
+	GetObjectStreamingRequest_RequestPayer = GetObjectStreamingRequest.AddMember("RequestPayer", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-payer"})
+
+	GetObjectStreamingRequest_PartNumber = GetObjectStreamingRequest.AddMember("PartNumber", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "partNumber"})
+
+	GetObjectStreamingRequest_ExpectedBucketOwner = GetObjectStreamingRequest.AddMember("ExpectedBucketOwner", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expected-bucket-owner"})
+
+	GetObjectStreamingRequest_ChecksumMode = GetObjectStreamingRequest.AddMember("ChecksumMode", ChecksumMode, &smithytraits.HTTPHeader{Name: "x-amz-checksum-mode"})
+
+	GetObjectStreamingOutput_Body = GetObjectStreamingOutput.AddMember("Body", _StreamingObjectBody, &smithytraits.HTTPPayload{})
+
+	GetObjectStreamingOutput_DeleteMarker = GetObjectStreamingOutput.AddMember("DeleteMarker", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-delete-marker"})
+
+	GetObjectStreamingOutput_AcceptRanges = GetObjectStreamingOutput.AddMember("AcceptRanges", smithyprelude.String, &smithytraits.HTTPHeader{Name: "accept-ranges"})
+
+	GetObjectStreamingOutput_Expiration = GetObjectStreamingOutput.AddMember("Expiration", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-expiration"})
+
+	GetObjectStreamingOutput_Restore = GetObjectStreamingOutput.AddMember("Restore", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-restore"})
+
+	GetObjectStreamingOutput_LastModified = GetObjectStreamingOutput.AddMember("LastModified", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "Last-Modified"})
+
+	GetObjectStreamingOutput_ContentLength = GetObjectStreamingOutput.AddMember("ContentLength", smithyprelude.Long, &smithytraits.HTTPHeader{Name: "Content-Length"})
+
+	GetObjectStreamingOutput_ETag = GetObjectStreamingOutput.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
+
+	GetObjectStreamingOutput_ChecksumCRC32 = GetObjectStreamingOutput.AddMember("ChecksumCRC32", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32"})
+
+	GetObjectStreamingOutput_ChecksumCRC32C = GetObjectStreamingOutput.AddMember("ChecksumCRC32C", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc32c"})
+
+	GetObjectStreamingOutput_ChecksumCRC64NVME = GetObjectStreamingOutput.AddMember("ChecksumCRC64NVME", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-crc64nvme"})
+
+	GetObjectStreamingOutput_ChecksumSHA1 = GetObjectStreamingOutput.AddMember("ChecksumSHA1", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha1"})
+
+	GetObjectStreamingOutput_ChecksumSHA256 = GetObjectStreamingOutput.AddMember("ChecksumSHA256", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-sha256"})
+
+	GetObjectStreamingOutput_ChecksumType = GetObjectStreamingOutput.AddMember("ChecksumType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-checksum-type"})
+
+	GetObjectStreamingOutput_MissingMeta = GetObjectStreamingOutput.AddMember("MissingMeta", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amz-missing-meta"})
+
+	GetObjectStreamingOutput_VersionId = GetObjectStreamingOutput.AddMember("VersionId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-version-id"})
+
+	GetObjectStreamingOutput_CacheControl = GetObjectStreamingOutput.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
+
+	GetObjectStreamingOutput_ContentDisposition = GetObjectStreamingOutput.AddMember("ContentDisposition", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Disposition"})
+
+	GetObjectStreamingOutput_ContentEncoding = GetObjectStreamingOutput.AddMember("ContentEncoding", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Encoding"})
+
+	GetObjectStreamingOutput_ContentLanguage = GetObjectStreamingOutput.AddMember("ContentLanguage", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Language"})
+
+	GetObjectStreamingOutput_ContentType = GetObjectStreamingOutput.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
+
+	GetObjectStreamingOutput_Expires = GetObjectStreamingOutput.AddMember("Expires", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "Expires"})
+
+	GetObjectStreamingOutput_WebsiteRedirectLocation = GetObjectStreamingOutput.AddMember("WebsiteRedirectLocation", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-website-redirect-location"})
+
+	GetObjectStreamingOutput_ServerSideEncryption = GetObjectStreamingOutput.AddMember("ServerSideEncryption", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption"})
+
+	GetObjectStreamingOutput_SSECustomerAlgorithm = GetObjectStreamingOutput.AddMember("SSECustomerAlgorithm", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-algorithm"})
+
+	GetObjectStreamingOutput_SSECustomerKeyMD5 = GetObjectStreamingOutput.AddMember("SSECustomerKeyMD5", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-customer-key-MD5"})
+
+	GetObjectStreamingOutput_SSEKMSKeyId = GetObjectStreamingOutput.AddMember("SSEKMSKeyId", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-aws-kms-key-id"})
+
+	GetObjectStreamingOutput_BucketKeyEnabled = GetObjectStreamingOutput.AddMember("BucketKeyEnabled", smithyprelude.Boolean, &smithytraits.HTTPHeader{Name: "x-amz-server-side-encryption-bucket-key-enabled"})
+
+	GetObjectStreamingOutput_StorageClass = GetObjectStreamingOutput.AddMember("StorageClass", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-storage-class"})
+
+	GetObjectStreamingOutput_RequestCharged = GetObjectStreamingOutput.AddMember("RequestCharged", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-request-charged"})
+
+	GetObjectStreamingOutput_ReplicationStatus = GetObjectStreamingOutput.AddMember("ReplicationStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-replication-status"})
+
+	GetObjectStreamingOutput_PartsCount = GetObjectStreamingOutput.AddMember("PartsCount", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amz-mp-parts-count"})
+
+	GetObjectStreamingOutput_TagCount = GetObjectStreamingOutput.AddMember("TagCount", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amz-tagging-count"})
+
+	GetObjectStreamingOutput_ObjectLockMode = GetObjectStreamingOutput.AddMember("ObjectLockMode", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-mode"})
+
+	GetObjectStreamingOutput_ObjectLockRetainUntilDate = GetObjectStreamingOutput.AddMember("ObjectLockRetainUntilDate", smithyprelude.Timestamp, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-retain-until-date"})
+
+	GetObjectStreamingOutput_ObjectLockLegalHoldStatus = GetObjectStreamingOutput.AddMember("ObjectLockLegalHoldStatus", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-object-lock-legal-hold"})
 
 	HeadObjectRequest_Bucket = HeadObjectRequest.AddMember("Bucket", smithyprelude.String, &smithytraits.HTTPLabel{})
 

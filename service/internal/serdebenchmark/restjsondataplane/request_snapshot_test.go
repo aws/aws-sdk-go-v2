@@ -411,6 +411,53 @@ func TestCheckRequestSnapshot_GetObject(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetObjectStreaming(t *testing.T) {
+	input := &GetObjectStreamingInput{
+		Bucket:                     ptr.String("__Bucket__"),
+		Key:                        ptr.String("__Key__"),
+		IfMatch:                    ptr.String("__IfMatch__"),
+		IfModifiedSince:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IfNoneMatch:                ptr.String("__IfNoneMatch__"),
+		IfUnmodifiedSince:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Range:                      ptr.String("__Range__"),
+		ResponseCacheControl:       ptr.String("__ResponseCacheControl__"),
+		ResponseContentDisposition: ptr.String("__ResponseContentDisposition__"),
+		ResponseContentEncoding:    ptr.String("__ResponseContentEncoding__"),
+		ResponseContentLanguage:    ptr.String("__ResponseContentLanguage__"),
+		ResponseContentType:        ptr.String("__ResponseContentType__"),
+		ResponseExpires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		VersionId:                  ptr.String("__VersionId__"),
+		SSECustomerAlgorithm:       ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:             ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:          ptr.String("__SSECustomerKeyMD5__"),
+		RequestPayer:               ptr.String("__RequestPayer__"),
+		PartNumber:                 ptr.Int32(1),
+		ExpectedBucketOwner:        ptr.String("__ExpectedBucketOwner__"),
+		ChecksumMode:               types.ChecksumMode("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetObjectStreaming(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetObjectStreaming"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_HeadObject(t *testing.T) {
 	input := &HeadObjectInput{
 		Bucket:                     ptr.String("__Bucket__"),
@@ -994,6 +1041,53 @@ func TestUpdateRequestSnapshot_GetObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetObject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetObjectStreaming(t *testing.T) {
+	input := &GetObjectStreamingInput{
+		Bucket:                     ptr.String("__Bucket__"),
+		Key:                        ptr.String("__Key__"),
+		IfMatch:                    ptr.String("__IfMatch__"),
+		IfModifiedSince:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IfNoneMatch:                ptr.String("__IfNoneMatch__"),
+		IfUnmodifiedSince:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Range:                      ptr.String("__Range__"),
+		ResponseCacheControl:       ptr.String("__ResponseCacheControl__"),
+		ResponseContentDisposition: ptr.String("__ResponseContentDisposition__"),
+		ResponseContentEncoding:    ptr.String("__ResponseContentEncoding__"),
+		ResponseContentLanguage:    ptr.String("__ResponseContentLanguage__"),
+		ResponseContentType:        ptr.String("__ResponseContentType__"),
+		ResponseExpires:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		VersionId:                  ptr.String("__VersionId__"),
+		SSECustomerAlgorithm:       ptr.String("__SSECustomerAlgorithm__"),
+		SSECustomerKey:             ptr.String("__SSECustomerKey__"),
+		SSECustomerKeyMD5:          ptr.String("__SSECustomerKeyMD5__"),
+		RequestPayer:               ptr.String("__RequestPayer__"),
+		PartNumber:                 ptr.Int32(1),
+		ExpectedBucketOwner:        ptr.String("__ExpectedBucketOwner__"),
+		ChecksumMode:               types.ChecksumMode("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetObjectStreaming(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetObjectStreaming"); err != nil {
 		t.Fatal(err)
 	}
 }
