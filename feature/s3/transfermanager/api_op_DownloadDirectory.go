@@ -269,13 +269,11 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 			continue
 		}
 
-		if err := d.downloadSingleObject(ctx, data); err != nil {
-			d.setErr(err)
-		}
+		d.downloadSingleObject(ctx, data)
 	}
 }
 
-func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data objectEntry) error {
+func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data objectEntry) {
 	input := &GetObjectInput{
 		Bucket: d.in.Bucket,
 		Key:    aws.String(data.key),
@@ -287,10 +285,11 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 	if err != nil {
 		err = d.failurePolicy.OnDownloadFailed(d.in, input, err)
 		if err != nil {
-			return fmt.Errorf("error when heading info of object %s: %v", data.key, err)
+			d.setErr(fmt.Errorf("error when heading info of object %s: %v", data.key, err))
+			return
 		}
 		d.objectsFailed.Add(1)
-		return nil
+		return
 	}
 
 	d.progressOnce.Do(func() {
@@ -299,12 +298,14 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 
 	err = os.MkdirAll(filepath.Dir(data.path), 0755)
 	if err != nil {
-		return fmt.Errorf("error when creating directory for file %s: %v", data.path, err)
+		d.setErr(fmt.Errorf("error when creating directory for file %s: %v", data.path, err))
+		return
 	}
 
 	file, err := createFileFn(data.path)
 	if err != nil {
-		return fmt.Errorf("error when creating file %s: %v", data.path, err)
+		d.setErr(fmt.Errorf("error when creating file %s: %v", data.path, err))
+		return
 	}
 	var fileCopyFail bool
 	defer func() {
@@ -321,15 +322,15 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 		// where s3.GetObject is really called, must be handled by failure policy
 		err = d.failurePolicy.OnDownloadFailed(d.in, input, err)
 		if err != nil {
-			return fmt.Errorf("error when getting object and writing to local file %s: %v", data.path, err)
+			d.setErr(fmt.Errorf("error when getting object and writing to local file %s: %v", data.path, err))
+			return
 		}
 		d.objectsFailed.Add(1)
-		return nil
+		return
 	}
 
 	d.objectsDownloaded.Add(1)
 	d.emitter.ObjectsTransferred(ctx, n)
-	return nil
 }
 
 func (d *directoryDownloader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
