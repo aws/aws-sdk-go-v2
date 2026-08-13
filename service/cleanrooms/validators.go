@@ -2524,6 +2524,52 @@ func validateAggregationConstraints(v []types.AggregationConstraint) error {
 	}
 }
 
+func validateAggregationThreshold(v *types.AggregationThreshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationThreshold"}
+	if v.IdentityColumns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityColumns"))
+	}
+	if v.MinimumIdentityCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumIdentityCount"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.OutputColumnThresholds != nil {
+		if err := validateOutputColumnThresholdList(v.OutputColumnThresholds); err != nil {
+			invalidParams.AddNested("OutputColumnThresholds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.AllowedAggregateExpressionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedAggregateExpressionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregationThresholdList(v []types.AggregationThreshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationThresholdList"}
+	for i := range v {
+		if err := validateAggregationThreshold(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAnalysisLogExportOutputConfiguration(v *types.AnalysisLogExportOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -2658,6 +2704,16 @@ func validateAnalysisRuleCustom(v *types.AnalysisRuleCustom) error {
 	if v.DifferentialPrivacy != nil {
 		if err := validateDifferentialPrivacyConfiguration(v.DifferentialPrivacy); err != nil {
 			invalidParams.AddNested("DifferentialPrivacy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AggregationThresholds != nil {
+		if err := validateAggregationThresholdList(v.AggregationThresholds); err != nil {
+			invalidParams.AddNested("AggregationThresholds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComparisonControls != nil {
+		if err := validateComparisonControls(v.ComparisonControls); err != nil {
+			invalidParams.AddNested("ComparisonControls", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2917,6 +2973,24 @@ func validateColumnMappingList(v []types.SyntheticDataColumnProperties) error {
 	}
 }
 
+func validateComparisonControls(v *types.ComparisonControls) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComparisonControls"}
+	if v.AllowedLiteralComparisonColumns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedLiteralComparisonColumns"))
+	}
+	if v.AllowedColumnComparisonColumns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedColumnComparisonColumns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConfiguredTableAnalysisRulePolicy(v types.ConfiguredTableAnalysisRulePolicy) error {
 	if v == nil {
 		return nil
@@ -3165,6 +3239,16 @@ func validateIntermediateTableAnalysisRuleCustom(v *types.IntermediateTableAnaly
 	if v.DifferentialPrivacy != nil {
 		if err := validateDifferentialPrivacyConfiguration(v.DifferentialPrivacy); err != nil {
 			invalidParams.AddNested("DifferentialPrivacy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AggregationThresholds != nil {
+		if err := validateAggregationThresholdList(v.AggregationThresholds); err != nil {
+			invalidParams.AddNested("AggregationThresholds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ComparisonControls != nil {
+		if err := validateComparisonControls(v.ComparisonControls); err != nil {
+			invalidParams.AddNested("ComparisonControls", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3658,6 +3742,41 @@ func validateModelTrainingPaymentConfig(v *types.ModelTrainingPaymentConfig) err
 	invalidParams := smithy.InvalidParamsError{Context: "ModelTrainingPaymentConfig"}
 	if v.IsResponsible == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IsResponsible"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputColumnThreshold(v *types.OutputColumnThreshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputColumnThreshold"}
+	if v.OutputColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputColumnName"))
+	}
+	if v.MinimumIdentityCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumIdentityCount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputColumnThresholdList(v []types.OutputColumnThreshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputColumnThresholdList"}
+	for i := range v {
+		if err := validateOutputColumnThreshold(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

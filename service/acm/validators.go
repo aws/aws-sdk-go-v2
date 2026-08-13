@@ -410,6 +410,26 @@ func (m *validateOpListAcmeExternalAccountBindings) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCertificateDomainValidations struct {
+}
+
+func (*validateOpListCertificateDomainValidations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCertificateDomainValidations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCertificateDomainValidationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCertificateDomainValidationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForCertificate struct {
 }
 
@@ -808,6 +828,10 @@ func addOpListAcmeDomainValidationsValidationMiddleware(stack *middleware.Stack)
 
 func addOpListAcmeExternalAccountBindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAcmeExternalAccountBindings{}, middleware.After)
+}
+
+func addOpListCertificateDomainValidationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCertificateDomainValidations{}, middleware.After)
 }
 
 func addOpListTagsForCertificateValidationMiddleware(stack *middleware.Stack) error {
@@ -1477,6 +1501,21 @@ func validateOpListAcmeExternalAccountBindingsInput(v *ListAcmeExternalAccountBi
 	invalidParams := smithy.InvalidParamsError{Context: "ListAcmeExternalAccountBindingsInput"}
 	if v.AcmeEndpointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AcmeEndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCertificateDomainValidationsInput(v *ListCertificateDomainValidationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCertificateDomainValidationsInput"}
+	if v.CertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "7e296168-96e7-43a8-b77c-9831dc6e266c",
+    "type": "feature",
+    "description": "Add support for setting a maximum task-hour budget cap on penetration tests and code reviews, and for revalidating previously reported findings via a new REVALIDATION job type.",
+    "modules": [
+        "service/securityagent"
+    ]
+}

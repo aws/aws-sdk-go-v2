@@ -49,7 +49,7 @@ type StartWebRTCContactInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The customer's details.
+	// The details of the participant, including their display name.
 	//
 	// This member is required.
 	ParticipantDetails *types.ParticipantDetails
@@ -89,6 +89,14 @@ type StartWebRTCContactInput struct {
 	// The unique identifier for an Connect Customer contact. This identifier is
 	// related to the contact starting.
 	RelatedContactId *string
+
+	// Use this map to specify system-defined attributes for the WebRTC contact
+	// segment. Use the connect:Subtype attribute to specify the channel subtype, such
+	// as connect:WebRTC .
+	//
+	// Attribute keys can contain only alphanumeric characters, hyphens, and
+	// underscores.
+	SegmentAttributes map[string]types.SegmentAttributeValue
 
 	noSmithyDocumentSerde
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAddArtifact struct {
@@ -2263,6 +2264,24 @@ func awsRestjson1_serializeOpDocumentCreateCodeReviewInput(v *CreateCodeReviewIn
 		}
 	}
 
+	if v.MaxTaskHours != nil {
+		ok := object.Key("maxTaskHours")
+		switch {
+		case math.IsNaN(*v.MaxTaskHours):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxTaskHours, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxTaskHours, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxTaskHours)
+
+		}
+	}
+
 	if v.ServiceRole != nil {
 		ok := object.Key("serviceRole")
 		ok.String(*v.ServiceRole)
@@ -2602,6 +2621,24 @@ func awsRestjson1_serializeOpDocumentCreatePentestInput(v *CreatePentestInput, v
 		ok := object.Key("logConfig")
 		if err := awsRestjson1_serializeDocumentCloudWatchLog(v.LogConfig, ok); err != nil {
 			return err
+		}
+	}
+
+	if v.MaxTaskHours != nil {
+		ok := object.Key("maxTaskHours")
+		switch {
+		case math.IsNaN(*v.MaxTaskHours):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxTaskHours, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxTaskHours, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxTaskHours)
+
 		}
 	}
 
@@ -6906,9 +6943,21 @@ func awsRestjson1_serializeOpDocumentStartPentestJobInput(v *StartPentestJobInpu
 		ok.String(*v.AgentSpaceId)
 	}
 
+	if len(v.JobType) > 0 {
+		ok := object.Key("jobType")
+		ok.String(string(v.JobType))
+	}
+
 	if v.PentestId != nil {
 		ok := object.Key("pentestId")
 		ok.String(*v.PentestId)
+	}
+
+	if v.SelectedFindingIds != nil {
+		ok := object.Key("selectedFindingIds")
+		if err := awsRestjson1_serializeDocumentStringList(v.SelectedFindingIds, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -7736,6 +7785,24 @@ func awsRestjson1_serializeOpDocumentUpdateCodeReviewInput(v *UpdateCodeReviewIn
 		}
 	}
 
+	if v.MaxTaskHours != nil {
+		ok := object.Key("maxTaskHours")
+		switch {
+		case math.IsNaN(*v.MaxTaskHours):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxTaskHours, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxTaskHours, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxTaskHours)
+
+		}
+	}
+
 	if v.ServiceRole != nil {
 		ok := object.Key("serviceRole")
 		ok.String(*v.ServiceRole)
@@ -8086,6 +8153,24 @@ func awsRestjson1_serializeOpDocumentUpdatePentestInput(v *UpdatePentestInput, v
 		ok := object.Key("logConfig")
 		if err := awsRestjson1_serializeDocumentCloudWatchLog(v.LogConfig, ok); err != nil {
 			return err
+		}
+	}
+
+	if v.MaxTaskHours != nil {
+		ok := object.Key("maxTaskHours")
+		switch {
+		case math.IsNaN(*v.MaxTaskHours):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxTaskHours, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxTaskHours, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxTaskHours)
+
 		}
 	}
 

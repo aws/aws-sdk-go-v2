@@ -2975,6 +2975,15 @@ type RefreshPreferences struct {
 	// If you do not specify this property, the default is 100 percent, or the
 	// percentage set in the instance maintenance policy for the Auto Scaling group, if
 	// defined.
+	//
+	// Explicitly setting MaxHealthyPercentage to 100 is not equivalent to omitting
+	// it. When MaxHealthyPercentage is explicitly set and it is mathematically
+	// impossible to replace instances while honoring both MinHealthyPercentage and
+	// MaxHealthyPercentage bounds simultaneously, Auto Scaling launches a new instance
+	// before terminating an old one (temporarily exceeding the desired capacity). When
+	// MaxHealthyPercentage is omitted, Auto Scaling terminates an instance and
+	// launches its replacement simultaneously. This behavioral difference can affect
+	// workflows that depend on instance replacement ordering.
 	MaxHealthyPercentage *int32
 
 	// Specifies the minimum percentage of the group to keep in service, healthy, and

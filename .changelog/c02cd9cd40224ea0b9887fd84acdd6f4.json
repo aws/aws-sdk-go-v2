@@ -1,0 +1,8 @@
+{
+    "id": "c02cd9cd-4022-4ea0-b988-7fd84acdd6f4",
+    "type": "feature",
+    "description": "This release adds support for minimum aggregation thresholds and comparison controls to the Custom analysis rule type.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

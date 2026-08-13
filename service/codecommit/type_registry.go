@@ -767,5 +767,9 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.TooManyTagsException,
 			New:    func() any { return &types.TooManyTagsException{} },
 		},
+		"com.amazonaws.codecommit#ValidationException": {
+			Schema: schemas.ValidationException,
+			New:    func() any { return &types.ValidationException{} },
+		},
 	},
 }

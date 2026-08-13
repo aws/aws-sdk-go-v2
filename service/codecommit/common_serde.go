@@ -255,7 +255,33 @@ func serializeDeleteFileEntries(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeDiffChangeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DiffChange) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDifferenceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Difference) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDiffHunkList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DiffHunk) {
 	if v == nil {
 		return
 	}
@@ -883,10 +909,36 @@ func deserializeDeleteFileEntries(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	})
 }
 
+func deserializeDiffChangeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DiffChange) error {
+	var vv types.DiffChange
+	return smithy.ReadList(d, s, func() error {
+		vv = types.DiffChange{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDifferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Difference) error {
 	var vv types.Difference
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Difference{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDiffHunkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DiffHunk) error {
+	var vv types.DiffHunk
+	return smithy.ReadList(d, s, func() error {
+		vv = types.DiffHunk{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

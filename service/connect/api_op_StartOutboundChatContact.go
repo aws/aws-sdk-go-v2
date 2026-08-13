@@ -115,7 +115,7 @@ type StartOutboundChatContactInput struct {
 	// Information about template message configuration.
 	InitialTemplatedSystemMessage *types.TemplatedMessageConfig
 
-	// The customer's details.
+	// The details of the participant, including their display name.
 	ParticipantDetails *types.ParticipantDetails
 
 	// The unique identifier for an Connect Customer contact. This identifier is

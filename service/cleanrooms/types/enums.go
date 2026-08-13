@@ -88,6 +88,23 @@ func (AggregateFunctionName) Values() []AggregateFunctionName {
 	}
 }
 
+type AggregationThresholdType string
+
+// Enum values for AggregationThresholdType
+const (
+	AggregationThresholdTypeCountDistinct AggregationThresholdType = "COUNT_DISTINCT"
+)
+
+// Values returns all known values for AggregationThresholdType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AggregationThresholdType) Values() []AggregationThresholdType {
+	return []AggregationThresholdType{
+		"COUNT_DISTINCT",
+	}
+}
+
 type AggregationType string
 
 // Enum values for AggregationType
@@ -102,6 +119,26 @@ const (
 func (AggregationType) Values() []AggregationType {
 	return []AggregationType{
 		"COUNT_DISTINCT",
+	}
+}
+
+type AllowedAggregateExpressionType string
+
+// Enum values for AllowedAggregateExpressionType
+const (
+	AllowedAggregateExpressionTypeColumnsOnly   AllowedAggregateExpressionType = "COLUMNS_ONLY"
+	AllowedAggregateExpressionTypeAnyExpression AllowedAggregateExpressionType = "ANY_EXPRESSION"
+)
+
+// Values returns all known values for AllowedAggregateExpressionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AllowedAggregateExpressionType) Values() []AllowedAggregateExpressionType {
+	return []AllowedAggregateExpressionType{
+		"COLUMNS_ONLY",
+		"ANY_EXPRESSION",
 	}
 }
 

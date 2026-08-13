@@ -897,6 +897,35 @@ func TestCheckRequestSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListCertificateDomainValidations(t *testing.T) {
+	input := &ListCertificateDomainValidationsInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxItems:       ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCertificateDomainValidations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCertificateDomainValidations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListCertificates(t *testing.T) {
 	input := &ListCertificatesInput{
 		CertificateStatuses: []types.CertificateStatus{
@@ -1121,6 +1150,7 @@ func TestCheckRequestSnapshot_RequestCertificate(t *testing.T) {
 		Options: &types.CertificateOptions{
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
 			Export:                                   types.CertificateExport("ENABLED"),
+			ValidationMethod:                         types.ValidationMethod("EMAIL"),
 		},
 		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
 		Tags: []types.Tag{
@@ -1463,6 +1493,7 @@ func TestCheckRequestSnapshot_UpdateCertificateOptions(t *testing.T) {
 		Options: &types.CertificateOptions{
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
 			Export:                                   types.CertificateExport("ENABLED"),
+			ValidationMethod:                         types.ValidationMethod("EMAIL"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2179,6 +2210,35 @@ func TestUpdateRequestSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListCertificateDomainValidations(t *testing.T) {
+	input := &ListCertificateDomainValidationsInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxItems:       ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCertificateDomainValidations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCertificateDomainValidations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListCertificates(t *testing.T) {
 	input := &ListCertificatesInput{
 		CertificateStatuses: []types.CertificateStatus{
@@ -2403,6 +2463,7 @@ func TestUpdateRequestSnapshot_RequestCertificate(t *testing.T) {
 		Options: &types.CertificateOptions{
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
 			Export:                                   types.CertificateExport("ENABLED"),
+			ValidationMethod:                         types.ValidationMethod("EMAIL"),
 		},
 		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
 		Tags: []types.Tag{
@@ -2745,6 +2806,7 @@ func TestUpdateRequestSnapshot_UpdateCertificateOptions(t *testing.T) {
 		Options: &types.CertificateOptions{
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
 			Export:                                   types.CertificateExport("ENABLED"),
+			ValidationMethod:                         types.ValidationMethod("EMAIL"),
 		},
 	}
 	body := &bytes.Buffer{}

@@ -1365,6 +1365,75 @@ func TestUpdateResponseSnapshot_GetBlob(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetBlobDifferences(t *testing.T) {
+	want := &GetBlobDifferencesOutput{
+		Hunks: []types.DiffHunk{
+			{
+				BeforeStartLine: ptr.Int32(1),
+				BeforeLineCount: ptr.Int32(1),
+				AfterStartLine:  ptr.Int32(1),
+				AfterLineCount:  ptr.Int32(1),
+				Changes: []types.DiffChange{
+					{
+						Type:             types.DiffChangeType("CONTEXT"),
+						BeforeLineNumber: ptr.Int32(1),
+						AfterLineNumber:  ptr.Int32(1),
+						Content:          ptr.String("__Content__"),
+					},
+					{
+						Type:             types.DiffChangeType("CONTEXT"),
+						BeforeLineNumber: ptr.Int32(1),
+						AfterLineNumber:  ptr.Int32(1),
+						Content:          ptr.String("__Content__"),
+					},
+				},
+			},
+			{
+				BeforeStartLine: ptr.Int32(1),
+				BeforeLineCount: ptr.Int32(1),
+				AfterStartLine:  ptr.Int32(1),
+				AfterLineCount:  ptr.Int32(1),
+				Changes: []types.DiffChange{
+					{
+						Type:             types.DiffChangeType("CONTEXT"),
+						BeforeLineNumber: ptr.Int32(1),
+						AfterLineNumber:  ptr.Int32(1),
+						Content:          ptr.String("__Content__"),
+					},
+					{
+						Type:             types.DiffChangeType("CONTEXT"),
+						BeforeLineNumber: ptr.Int32(1),
+						AfterLineNumber:  ptr.Int32(1),
+						Content:          ptr.String("__Content__"),
+					},
+				},
+			},
+		},
+		IsBinary:       ptr.Bool(true),
+		BeforeBlobSize: 1,
+		AfterBlobSize:  1,
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.CodeCommit_20150413)
+	opSchema := smithy.NewOperationSchema(schemas.GetBlobDifferences, schemas.GetBlobDifferencesOutput, schemas.GetBlobDifferencesOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetBlobDifferences.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetBranch(t *testing.T) {
 	want := &GetBranchOutput{
 		Branch: &types.BranchInfo{
@@ -8553,6 +8622,31 @@ func TestUpdateResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TooManyTagsException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := awsjson.New11(schemas.CodeCommit_20150413)
+	opSchema := smithy.NewOperationSchema(schemas.GetBlobDifferences, schemas.ValidationException, schemas.ValidationException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

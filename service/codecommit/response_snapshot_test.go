@@ -1470,6 +1470,80 @@ func TestCheckResponseSnapshot_GetBlob(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetBlobDifferences(t *testing.T) {
+	want := &GetBlobDifferencesOutput{
+		Hunks: []types.DiffHunk{
+			{
+				BeforeStartLine: ptr.Int32(1),
+				BeforeLineCount: ptr.Int32(1),
+				AfterStartLine:  ptr.Int32(1),
+				AfterLineCount:  ptr.Int32(1),
+				Changes: []types.DiffChange{
+					{
+						Type:             types.DiffChangeType("CONTEXT"),
+						BeforeLineNumber: ptr.Int32(1),
+						AfterLineNumber:  ptr.Int32(1),
+						Content:          ptr.String("__Content__"),
+					},
+					{
+						Type:             types.DiffChangeType("CONTEXT"),
+						BeforeLineNumber: ptr.Int32(1),
+						AfterLineNumber:  ptr.Int32(1),
+						Content:          ptr.String("__Content__"),
+					},
+				},
+			},
+			{
+				BeforeStartLine: ptr.Int32(1),
+				BeforeLineCount: ptr.Int32(1),
+				AfterStartLine:  ptr.Int32(1),
+				AfterLineCount:  ptr.Int32(1),
+				Changes: []types.DiffChange{
+					{
+						Type:             types.DiffChangeType("CONTEXT"),
+						BeforeLineNumber: ptr.Int32(1),
+						AfterLineNumber:  ptr.Int32(1),
+						Content:          ptr.String("__Content__"),
+					},
+					{
+						Type:             types.DiffChangeType("CONTEXT"),
+						BeforeLineNumber: ptr.Int32(1),
+						AfterLineNumber:  ptr.Int32(1),
+						Content:          ptr.String("__Content__"),
+					},
+				},
+			},
+		},
+		IsBinary:       ptr.Bool(true),
+		BeforeBlobSize: 1,
+		AfterBlobSize:  1,
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetBlobDifferences.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetBlobDifferences(context.Background(), &GetBlobDifferencesInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		AfterBlobId:      ptr.String("__AfterBlobId__"),
+		BeforeBlobId:     ptr.String("__BeforeBlobId__"),
+		ContextLines:     ptr.Int32(1),
+		IgnoreWhitespace: ptr.Bool(true),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetBlobDifferences.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetBranch(t *testing.T) {
 	want := &GetBranchOutput{
 		Branch: &types.BranchInfo{
@@ -12014,5 +12088,38 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "TooManyTagsException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.GetBlobDifferences(context.Background(), &GetBlobDifferencesInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		AfterBlobId:      ptr.String("__AfterBlobId__"),
+		BeforeBlobId:     ptr.String("__BeforeBlobId__"),
+		ContextLines:     ptr.Int32(1),
+		IgnoreWhitespace: ptr.Bool(true),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ValidationException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ValidationException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ValidationException.error", err)
 	}
 }

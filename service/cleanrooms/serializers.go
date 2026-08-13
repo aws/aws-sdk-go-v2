@@ -9644,6 +9644,55 @@ func awsRestjson1_serializeDocumentAggregationConstraints(v []types.AggregationC
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAggregationThreshold(v *types.AggregationThreshold, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AllowedAggregateExpressionType) > 0 {
+		ok := object.Key("allowedAggregateExpressionType")
+		ok.String(string(v.AllowedAggregateExpressionType))
+	}
+
+	if v.IdentityColumns != nil {
+		ok := object.Key("identityColumns")
+		if err := awsRestjson1_serializeDocumentAnalysisRuleColumnList(v.IdentityColumns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinimumIdentityCount != nil {
+		ok := object.Key("minimumIdentityCount")
+		ok.Integer(*v.MinimumIdentityCount)
+	}
+
+	if v.OutputColumnThresholds != nil {
+		ok := object.Key("outputColumnThresholds")
+		if err := awsRestjson1_serializeDocumentOutputColumnThresholdList(v.OutputColumnThresholds, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAggregationThresholdList(v []types.AggregationThreshold, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAggregationThreshold(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAllowedAdditionalAnalyses(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -9880,6 +9929,13 @@ func awsRestjson1_serializeDocumentAnalysisRuleCustom(v *types.AnalysisRuleCusto
 		ok.String(string(v.AdditionalAnalyses))
 	}
 
+	if v.AggregationThresholds != nil {
+		ok := object.Key("aggregationThresholds")
+		if err := awsRestjson1_serializeDocumentAggregationThresholdList(v.AggregationThresholds, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AllowedAdditionalAnalyses != nil {
 		ok := object.Key("allowedAdditionalAnalyses")
 		if err := awsRestjson1_serializeDocumentAllowedAdditionalAnalyses(v.AllowedAdditionalAnalyses, ok); err != nil {
@@ -9904,6 +9960,13 @@ func awsRestjson1_serializeDocumentAnalysisRuleCustom(v *types.AnalysisRuleCusto
 	if v.AllowedResultReceivers != nil {
 		ok := object.Key("allowedResultReceivers")
 		if err := awsRestjson1_serializeDocumentAllowedResultReceivers(v.AllowedResultReceivers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ComparisonControls != nil {
+		ok := object.Key("comparisonControls")
+		if err := awsRestjson1_serializeDocumentComparisonControls(v.ComparisonControls, ok); err != nil {
 			return err
 		}
 	}
@@ -10235,6 +10298,27 @@ func awsRestjson1_serializeDocumentColumnMappingList(v []types.SyntheticDataColu
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComparisonControls(v *types.ComparisonControls, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedColumnComparisonColumns != nil {
+		ok := object.Key("allowedColumnComparisonColumns")
+		if err := awsRestjson1_serializeDocumentAnalysisRuleColumnList(v.AllowedColumnComparisonColumns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedLiteralComparisonColumns != nil {
+		ok := object.Key("allowedLiteralComparisonColumns")
+		if err := awsRestjson1_serializeDocumentAnalysisRuleColumnList(v.AllowedLiteralComparisonColumns, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -10632,6 +10716,13 @@ func awsRestjson1_serializeDocumentIntermediateTableAnalysisRuleCustom(v *types.
 		ok.String(string(v.AdditionalAnalyses))
 	}
 
+	if v.AggregationThresholds != nil {
+		ok := object.Key("aggregationThresholds")
+		if err := awsRestjson1_serializeDocumentAggregationThresholdList(v.AggregationThresholds, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AllowedAdditionalAnalyses != nil {
 		ok := object.Key("allowedAdditionalAnalyses")
 		if err := awsRestjson1_serializeDocumentAllowedAdditionalAnalyses(v.AllowedAdditionalAnalyses, ok); err != nil {
@@ -10656,6 +10747,13 @@ func awsRestjson1_serializeDocumentIntermediateTableAnalysisRuleCustom(v *types.
 	if v.AllowedResultReceivers != nil {
 		ok := object.Key("allowedResultReceivers")
 		if err := awsRestjson1_serializeDocumentAllowedResultReceivers(v.AllowedResultReceivers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ComparisonControls != nil {
+		ok := object.Key("comparisonControls")
+		if err := awsRestjson1_serializeDocumentComparisonControls(v.ComparisonControls, ok); err != nil {
 			return err
 		}
 	}
@@ -11220,6 +11318,36 @@ func awsRestjson1_serializeDocumentModelTrainingPaymentConfig(v *types.ModelTrai
 		ok.Boolean(*v.IsResponsible)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutputColumnThreshold(v *types.OutputColumnThreshold, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MinimumIdentityCount != nil {
+		ok := object.Key("minimumIdentityCount")
+		ok.Integer(*v.MinimumIdentityCount)
+	}
+
+	if v.OutputColumnName != nil {
+		ok := object.Key("outputColumnName")
+		ok.String(*v.OutputColumnName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutputColumnThresholdList(v []types.OutputColumnThreshold, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentOutputColumnThreshold(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

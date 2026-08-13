@@ -380,8 +380,9 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MaxTaskHours: ptr.Float64(1.0),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				PentestId:    ptr.String("__PentestId__"),
@@ -515,8 +516,9 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MaxTaskHours: ptr.Float64(1.0),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		Failed: []types.DeletePentestFailure{
@@ -1003,6 +1005,7 @@ func TestCheckResponseSnapshot_BatchGetCodeReviewJobs(t *testing.T) {
 					},
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
+				MaxTaskHours:            ptr.Float64(1.0),
 				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -1086,6 +1089,7 @@ func TestCheckResponseSnapshot_BatchGetCodeReviewJobs(t *testing.T) {
 					},
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
+				MaxTaskHours:            ptr.Float64(1.0),
 				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -1210,6 +1214,7 @@ func TestCheckResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				ValidationMode:          types.ValidationMode("DISABLED"),
+				MaxTaskHours:            ptr.Float64(1.0),
 				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -1302,6 +1307,7 @@ func TestCheckResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				ValidationMode:          types.ValidationMode("DISABLED"),
+				MaxTaskHours:            ptr.Float64(1.0),
 				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -1403,8 +1409,13 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 					},
 				},
 				AlignmentRationale: ptr.String("__AlignmentRationale__"),
-				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RevalidationJobIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				OriginalFindingId: ptr.String("__OriginalFindingId__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				FindingId:        ptr.String("__FindingId__"),
@@ -1472,8 +1483,13 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 					},
 				},
 				AlignmentRationale: ptr.String("__AlignmentRationale__"),
-				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RevalidationJobIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				OriginalFindingId: ptr.String("__OriginalFindingId__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NotFound: []string{
@@ -1783,6 +1799,12 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
+				MaxTaskHours: ptr.Float64(1.0),
+				JobType:      types.JobType("FULL"),
+				SelectedFindingIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -1964,6 +1986,12 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
+				MaxTaskHours: ptr.Float64(1.0),
+				JobType:      types.JobType("FULL"),
+				SelectedFindingIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2131,8 +2159,9 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MaxTaskHours: ptr.Float64(1.0),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				PentestId:    ptr.String("__PentestId__"),
@@ -2266,8 +2295,9 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 					types.SkillType("FINDING_PERSONALIZATION"),
 					types.SkillType("FINDING_PERSONALIZATION"),
 				},
-				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MaxTaskHours: ptr.Float64(1.0),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NotFound: []string{
@@ -3360,6 +3390,7 @@ func TestCheckResponseSnapshot_CreateCodeReview(t *testing.T) {
 		AgentSpaceId:            ptr.String("__AgentSpaceId__"),
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
+		MaxTaskHours:            ptr.Float64(1.0),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateCodeReview.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3457,6 +3488,7 @@ func TestCheckResponseSnapshot_CreateCodeReview(t *testing.T) {
 		},
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
+		MaxTaskHours:            ptr.Float64(1.0),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3766,6 +3798,7 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
+		MaxTaskHours: ptr.Float64(1.0),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5828,6 +5861,11 @@ func TestCheckResponseSnapshot_StartPentestJob(t *testing.T) {
 	got, err := svc.StartPentestJob(context.Background(), &StartPentestJobInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		PentestId:    ptr.String("__PentestId__"),
+		JobType:      types.JobType("FULL"),
+		SelectedFindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6236,6 +6274,7 @@ func TestCheckResponseSnapshot_UpdateCodeReview(t *testing.T) {
 		AgentSpaceId:            ptr.String("__AgentSpaceId__"),
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
+		MaxTaskHours:            ptr.Float64(1.0),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateCodeReview.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6334,6 +6373,7 @@ func TestCheckResponseSnapshot_UpdateCodeReview(t *testing.T) {
 		},
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
+		MaxTaskHours:            ptr.Float64(1.0),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6660,6 +6700,7 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
+		MaxTaskHours: ptr.Float64(1.0),
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -1115,6 +1115,7 @@ func TestCheckRequestSnapshot_CreateCodeReview(t *testing.T) {
 		},
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
+		MaxTaskHours:            ptr.Float64(1.0),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1347,6 +1348,7 @@ func TestCheckRequestSnapshot_CreatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
+		MaxTaskHours: ptr.Float64(1.0),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2869,6 +2871,11 @@ func TestCheckRequestSnapshot_StartPentestJob(t *testing.T) {
 	input := &StartPentestJobInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		PentestId:    ptr.String("__PentestId__"),
+		JobType:      types.JobType("FULL"),
+		SelectedFindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3268,6 +3275,7 @@ func TestCheckRequestSnapshot_UpdateCodeReview(t *testing.T) {
 		},
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
+		MaxTaskHours:            ptr.Float64(1.0),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3519,6 +3527,7 @@ func TestCheckRequestSnapshot_UpdatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
+		MaxTaskHours: ptr.Float64(1.0),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4757,6 +4766,7 @@ func TestUpdateRequestSnapshot_CreateCodeReview(t *testing.T) {
 		},
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
+		MaxTaskHours:            ptr.Float64(1.0),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4989,6 +4999,7 @@ func TestUpdateRequestSnapshot_CreatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
+		MaxTaskHours: ptr.Float64(1.0),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6511,6 +6522,11 @@ func TestUpdateRequestSnapshot_StartPentestJob(t *testing.T) {
 	input := &StartPentestJobInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		PentestId:    ptr.String("__PentestId__"),
+		JobType:      types.JobType("FULL"),
+		SelectedFindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6910,6 +6926,7 @@ func TestUpdateRequestSnapshot_UpdateCodeReview(t *testing.T) {
 		},
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 		ValidationMode:          types.ValidationMode("DISABLED"),
+		MaxTaskHours:            ptr.Float64(1.0),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7161,6 +7178,7 @@ func TestUpdateRequestSnapshot_UpdatePentest(t *testing.T) {
 			types.SkillType("FINDING_PERSONALIZATION"),
 			types.SkillType("FINDING_PERSONALIZATION"),
 		},
+		MaxTaskHours: ptr.Float64(1.0),
 	}
 	body := &bytes.Buffer{}
 	method := ""

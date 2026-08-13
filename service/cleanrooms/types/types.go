@@ -179,6 +179,53 @@ type AggregationConstraint struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the minimum number of distinct identities that each query output
+// group must represent.
+type AggregationThreshold struct {
+
+	// Specifies whether a query can aggregate a transformed column. This applies to
+	// the arguments of both aggregate and window functions. Valid values are:
+	//
+	// COLUMNS_ONLY – A query can aggregate only a direct column reference, such as
+	// SUM(amount) , or a constant. Clean Rooms rejects a query that transforms a
+	// column and then aggregates it, such as SUM(amount * 2) or SUM(ROUND(amount)) .
+	//
+	// ANY_EXPRESSION – A query can aggregate any expression. This includes
+	// arithmetic, such as SUM(price * quantity) ; a cast, such as SUM(CAST(amount AS
+	// DECIMAL)) ; a nested function call, such as SUM(COALESCE(amount, 0)) ; and a
+	// conditional, such as SUM(CASE WHEN region = 'EU' THEN amount ELSE 0 END) .
+	//
+	// This member is required.
+	AllowedAggregateExpressionType AllowedAggregateExpressionType
+
+	// The identity column, such as user_id , whose distinct values Clean Rooms counts
+	// to enforce minimum aggregation thresholds. Currently, you can specify only one
+	// column, and its data type must be string, varchar, or char.
+	//
+	// This member is required.
+	IdentityColumns []string
+
+	// The minimum number of distinct identities that each query output group must
+	// represent. This threshold applies to all output columns in the table. To
+	// override this threshold for a specific column, use outputColumnThresholds .
+	//
+	// This member is required.
+	MinimumIdentityCount *int32
+
+	// The type of aggregation that the threshold enforces. Currently, the only
+	// supported value is COUNT_DISTINCT , which counts the distinct values in the
+	// identity column.
+	//
+	// This member is required.
+	Type AggregationThresholdType
+
+	// The per-column overrides of minimumIdentityCount . An output column without an
+	// override uses minimumIdentityCount .
+	OutputColumnThresholds []OutputColumnThreshold
+
+	noSmithyDocumentSerde
+}
+
 // An export of the redacted Apache Spark logs for a protected query.
 type AnalysisLogExport struct {
 
@@ -460,7 +507,8 @@ type AnalysisRuleAggregation struct {
 }
 
 // A type of analysis rule that enables the table owner to approve custom SQL
-// queries on their configured tables. It supports differential privacy.
+// queries on their configured tables. It supports differential privacy, minimum
+// aggregation thresholds, and comparison controls.
 type AnalysisRuleCustom struct {
 
 	// The ARN of the analysis templates that are allowed by the custom analysis rule.
@@ -472,6 +520,13 @@ type AnalysisRuleCustom struct {
 	// applied to the output of the direct query.
 	AdditionalAnalyses AdditionalAnalyses
 
+	// The aggregation thresholds that each query output group must satisfy. Clean
+	// Rooms filters out any group that represents fewer than the specified number of
+	// distinct identities. You can specify at most one threshold. You can't use
+	// aggregation thresholds with differential privacy, or when allowedAnalyses
+	// allows only jobs.
+	AggregationThresholds []AggregationThreshold
+
 	// The list of allowed additional analyses for the custom analysis rule.
 	AllowedAdditionalAnalyses []string
 
@@ -482,6 +537,11 @@ type AnalysisRuleCustom struct {
 	// The list of Amazon Web Services account IDs that are allowed to receive results
 	// from queries run on the configured table.
 	AllowedResultReceivers []string
+
+	// The controls that restrict how a query can compare the columns in the
+	// configured table. You can't use comparison controls with differential privacy,
+	// or when allowedAnalyses allows only jobs.
+	ComparisonControls *ComparisonControls
 
 	// The differential privacy configuration.
 	DifferentialPrivacy *DifferentialPrivacyConfiguration
@@ -2037,6 +2097,30 @@ type ColumnLineageEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies how a query can compare the columns in a table, including literal
+// comparisons and column-to-column comparisons.
+type ComparisonControls struct {
+
+	// The columns that a query can compare to another column, for example, in a join,
+	// a WHERE clause, a GROUP BY clause, or a window function. Clean Rooms rejects a
+	// query that uses any other column in a column-to-column comparison. Specify an
+	// empty list to block column-to-column comparison on every column.
+	//
+	// This member is required.
+	AllowedColumnComparisonColumns []string
+
+	// The columns that a query can compare to literal values, for example, in a WHERE
+	// clause. Clean Rooms rejects a query that compares any other column to a literal
+	// value. Specify an empty list to block literal comparison on every column. You
+	// can't specify a column that you also use as an identity column in an aggregation
+	// threshold.
+	//
+	// This member is required.
+	AllowedLiteralComparisonColumns []string
+
+	noSmithyDocumentSerde
+}
+
 //	The configuration of the compute resources for an analysis with the Spark
 //
 // analytics engine.
@@ -2357,7 +2441,8 @@ func (*ConfiguredTableAnalysisRulePolicyV1MemberAggregation) isConfiguredTableAn
 }
 
 // A type of analysis rule that enables the table owner to approve custom SQL
-// queries on their configured tables. It supports differential privacy.
+// queries on their configured tables. It supports differential privacy, minimum
+// aggregation thresholds, and comparison controls.
 type ConfiguredTableAnalysisRulePolicyV1MemberCustom struct {
 	Value AnalysisRuleCustom
 
@@ -2795,6 +2880,9 @@ type ConsolidatedPolicyCustom struct {
 	//  Additional analyses for the consolidated policy.
 	AdditionalAnalyses AdditionalAnalyses
 
+	//  The aggregation thresholds for the consolidated policy.
+	AggregationThresholds []AggregationThreshold
+
 	//  The additional analyses allowed by the consolidated policy.
 	AllowedAdditionalAnalyses []string
 
@@ -2803,6 +2891,9 @@ type ConsolidatedPolicyCustom struct {
 
 	//  The allowed result receivers.
 	AllowedResultReceivers []string
+
+	//  The comparison controls for the consolidated policy.
+	ComparisonControls *ComparisonControls
 
 	// Specifies the unique identifier for your users.
 	DifferentialPrivacy *DifferentialPrivacyConfiguration
@@ -3922,6 +4013,13 @@ type IntermediateTableAnalysisRuleCustom struct {
 	// intermediate table.
 	AdditionalAnalyses AdditionalAnalyses
 
+	// The aggregation thresholds that each query output group must satisfy. Clean
+	// Rooms filters out any group that represents fewer than the specified number of
+	// distinct identities. You can specify at most one threshold. You can't use
+	// aggregation thresholds with differential privacy, or when allowedAnalyses
+	// allows only jobs.
+	AggregationThresholds []AggregationThreshold
+
 	// The list of allowed additional analyses for the intermediate table.
 	AllowedAdditionalAnalyses []string
 
@@ -3934,6 +4032,11 @@ type IntermediateTableAnalysisRuleCustom struct {
 	// The list of Amazon Web Services account IDs that are allowed to receive results
 	// from queries run on the intermediate table.
 	AllowedResultReceivers []string
+
+	// The controls that restrict how a query can compare the columns in the
+	// intermediate table. You can't use comparison controls with differential privacy,
+	// or when allowedAnalyses allows only jobs.
+	ComparisonControls *ComparisonControls
 
 	// Specifies the unique identifier for your users.
 	DifferentialPrivacy *DifferentialPrivacyConfiguration
@@ -4851,6 +4954,27 @@ type ModelTrainingPaymentConfig struct {
 	//
 	// This member is required.
 	IsResponsible *bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the minimum number of distinct identities for an individual output
+// column. This value overrides the table-wide minimumIdentityCount that you set
+// in AggregationThreshold .
+type OutputColumnThreshold struct {
+
+	// The minimum number of distinct identities that each query output group must
+	// represent for this column. Specify 0 to exempt the column from the threshold, or
+	// a value of 2 or greater to enforce a threshold.
+	//
+	// This member is required.
+	MinimumIdentityCount *int32
+
+	// The name of the output column that the override applies to. You can specify
+	// each column only once.
+	//
+	// This member is required.
+	OutputColumnName *string
 
 	noSmithyDocumentSerde
 }

@@ -2915,9 +2915,6 @@ func validateOpTerminateInstanceInAutoScalingGroupInput(v *TerminateInstanceInAu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateInstanceInAutoScalingGroupInput"}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
 	if v.ShouldDecrementDesiredCapacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ShouldDecrementDesiredCapacity"))
 	}

@@ -357,6 +357,29 @@ func (JobStatus) Values() []JobStatus {
 	}
 }
 
+type JobType string
+
+// Enum values for JobType
+const (
+	// A full pentest job that executes all phases including scanning, managed
+	// execution, and guided exploration.
+	JobTypeFull JobType = "FULL"
+	// A targeted revalidation job that retests specific findings to determine whether
+	// they are still exploitable.
+	JobTypeRevalidation JobType = "REVALIDATION"
+)
+
+// Values returns all known values for JobType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobType) Values() []JobType {
+	return []JobType{
+		"FULL",
+		"REVALIDATION",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType

@@ -17254,6 +17254,112 @@ func awsRestjson1_deserializeDocumentAggregationConstraints(v *[]types.Aggregati
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAggregationThreshold(v **types.AggregationThreshold, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AggregationThreshold
+	if *v == nil {
+		sv = &types.AggregationThreshold{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedAggregateExpressionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AllowedAggregateExpressionType to be of type string, got %T instead", value)
+				}
+				sv.AllowedAggregateExpressionType = types.AllowedAggregateExpressionType(jtv)
+			}
+
+		case "identityColumns":
+			if err := awsRestjson1_deserializeDocumentAnalysisRuleColumnList(&sv.IdentityColumns, value); err != nil {
+				return err
+			}
+
+		case "minimumIdentityCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumIdentityCount = ptr.Int32(int32(i64))
+			}
+
+		case "outputColumnThresholds":
+			if err := awsRestjson1_deserializeDocumentOutputColumnThresholdList(&sv.OutputColumnThresholds, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AggregationThresholdType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AggregationThresholdType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAggregationThresholdList(v *[]types.AggregationThreshold, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AggregationThreshold
+	if *v == nil {
+		cv = []types.AggregationThreshold{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AggregationThreshold
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAggregationThreshold(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAllowedAdditionalAnalyses(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18254,6 +18360,11 @@ func awsRestjson1_deserializeDocumentAnalysisRuleCustom(v **types.AnalysisRuleCu
 				sv.AdditionalAnalyses = types.AdditionalAnalyses(jtv)
 			}
 
+		case "aggregationThresholds":
+			if err := awsRestjson1_deserializeDocumentAggregationThresholdList(&sv.AggregationThresholds, value); err != nil {
+				return err
+			}
+
 		case "allowedAdditionalAnalyses":
 			if err := awsRestjson1_deserializeDocumentAllowedAdditionalAnalyses(&sv.AllowedAdditionalAnalyses, value); err != nil {
 				return err
@@ -18271,6 +18382,11 @@ func awsRestjson1_deserializeDocumentAnalysisRuleCustom(v **types.AnalysisRuleCu
 
 		case "allowedResultReceivers":
 			if err := awsRestjson1_deserializeDocumentAllowedResultReceivers(&sv.AllowedResultReceivers, value); err != nil {
+				return err
+			}
+
+		case "comparisonControls":
+			if err := awsRestjson1_deserializeDocumentComparisonControls(&sv.ComparisonControls, value); err != nil {
 				return err
 			}
 
@@ -22692,6 +22808,47 @@ func awsRestjson1_deserializeDocumentColumnMappingList(v *[]types.SyntheticDataC
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentComparisonControls(v **types.ComparisonControls, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComparisonControls
+	if *v == nil {
+		sv = &types.ComparisonControls{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedColumnComparisonColumns":
+			if err := awsRestjson1_deserializeDocumentAnalysisRuleColumnList(&sv.AllowedColumnComparisonColumns, value); err != nil {
+				return err
+			}
+
+		case "allowedLiteralComparisonColumns":
+			if err := awsRestjson1_deserializeDocumentAnalysisRuleColumnList(&sv.AllowedLiteralComparisonColumns, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentComputeConfiguration(v *types.ComputeConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24539,6 +24696,11 @@ func awsRestjson1_deserializeDocumentConsolidatedPolicyCustom(v **types.Consolid
 				sv.AdditionalAnalyses = types.AdditionalAnalyses(jtv)
 			}
 
+		case "aggregationThresholds":
+			if err := awsRestjson1_deserializeDocumentAggregationThresholdList(&sv.AggregationThresholds, value); err != nil {
+				return err
+			}
+
 		case "allowedAdditionalAnalyses":
 			if err := awsRestjson1_deserializeDocumentAllowedAdditionalAnalyses(&sv.AllowedAdditionalAnalyses, value); err != nil {
 				return err
@@ -24556,6 +24718,11 @@ func awsRestjson1_deserializeDocumentConsolidatedPolicyCustom(v **types.Consolid
 
 		case "allowedResultReceivers":
 			if err := awsRestjson1_deserializeDocumentAllowedResultReceivers(&sv.AllowedResultReceivers, value); err != nil {
+				return err
+			}
+
+		case "comparisonControls":
+			if err := awsRestjson1_deserializeDocumentComparisonControls(&sv.ComparisonControls, value); err != nil {
 				return err
 			}
 
@@ -27682,6 +27849,11 @@ func awsRestjson1_deserializeDocumentIntermediateTableAnalysisRuleCustom(v **typ
 				sv.AdditionalAnalyses = types.AdditionalAnalyses(jtv)
 			}
 
+		case "aggregationThresholds":
+			if err := awsRestjson1_deserializeDocumentAggregationThresholdList(&sv.AggregationThresholds, value); err != nil {
+				return err
+			}
+
 		case "allowedAdditionalAnalyses":
 			if err := awsRestjson1_deserializeDocumentAllowedAdditionalAnalyses(&sv.AllowedAdditionalAnalyses, value); err != nil {
 				return err
@@ -27699,6 +27871,11 @@ func awsRestjson1_deserializeDocumentIntermediateTableAnalysisRuleCustom(v **typ
 
 		case "allowedResultReceivers":
 			if err := awsRestjson1_deserializeDocumentAllowedResultReceivers(&sv.AllowedResultReceivers, value); err != nil {
+				return err
+			}
+
+		case "comparisonControls":
+			if err := awsRestjson1_deserializeDocumentComparisonControls(&sv.ComparisonControls, value); err != nil {
 				return err
 			}
 
@@ -29948,6 +30125,93 @@ func awsRestjson1_deserializeDocumentModelTrainingPaymentConfig(v **types.ModelT
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOutputColumnThreshold(v **types.OutputColumnThreshold, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OutputColumnThreshold
+	if *v == nil {
+		sv = &types.OutputColumnThreshold{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "minimumIdentityCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumIdentityCount = ptr.Int32(int32(i64))
+			}
+
+		case "outputColumnName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnalysisRuleColumnName to be of type string, got %T instead", value)
+				}
+				sv.OutputColumnName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOutputColumnThresholdList(v *[]types.OutputColumnThreshold, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OutputColumnThreshold
+	if *v == nil {
+		cv = []types.OutputColumnThreshold{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OutputColumnThreshold
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOutputColumnThreshold(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

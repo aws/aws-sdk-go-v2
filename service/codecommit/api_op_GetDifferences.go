@@ -14,6 +14,9 @@ import (
 // Returns information about the differences in a valid commit specifier (such as
 // a branch, tag, HEAD, commit ID, or other fully qualified reference). Results can
 // be limited to a specified path.
+//
+// For line-level diff details, pass the beforeBlob.blobId and afterBlob.blobId
+// values from a Difference object to GetBlobDifferences.
 func (c *Client) GetDifferences(ctx context.Context, params *GetDifferencesInput, optFns ...func(*Options)) (*GetDifferencesOutput, error) {
 	if params == nil {
 		params = &GetDifferencesInput{}

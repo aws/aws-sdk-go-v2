@@ -621,6 +621,11 @@ type CertificateDetail struct {
 	// [managed renewal]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
 	Type CertificateType
 
+	// Contains information about the most recent update to the certificate. This
+	// field exists only when the certificate type is AMAZON_ISSUED and a certificate
+	// update has been requested.
+	UpdateSummary *UpdateSummary
+
 	noSmithyDocumentSerde
 }
 
@@ -732,11 +737,11 @@ type CertificateMetadataMemberAcmCertificateMetadata struct {
 func (*CertificateMetadataMemberAcmCertificateMetadata) isCertificateMetadata() {}
 
 // Structure that contains options for your certificate. You can use this
-// structure to specify whether to export your certificate.
+// structure to change the domain validation method or specify whether to export
+// your certificate.
 //
-// Certificate transparency logging opt-out is no longer available. All public
-// certificates are recorded in a certificate transparency log. For general
-// information, see [Certificate Transparency Logging].
+// All public certificates are recorded in a certificate transparency log. For
+// general information, see [Certificate Transparency Logging].
 //
 // You can export public ACM certificates to use with Amazon Web Services services
 // as well as outside Amazon Web Services Cloud. For more information, see [Certificate Manager exportable public certificate].
@@ -755,6 +760,10 @@ type CertificateOptions struct {
 	// You can opt in to allow the export of your certificates by specifying ENABLED .
 	// You cannot update the value of Export after the the certificate is created.
 	Export CertificateExport
+
+	// The domain validation method for the certificate. To migrate from email to DNS
+	// validation, specify DNS .
+	ValidationMethod ValidationMethod
 
 	noSmithyDocumentSerde
 }
@@ -1025,6 +1034,17 @@ type DnsPrevalidationOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the CNAME record that you must add to your DNS configuration to
+// validate domain ownership using DNS validation.
+type DnsValidationChallenge struct {
+
+	// The CNAME record that ACM creates for DNS validation. Add this record to your
+	// DNS configuration to prove that you own or control the domain.
+	ResourceRecord *ResourceRecord
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the scope of domain validation.
 type DomainScope struct {
 
@@ -1089,6 +1109,19 @@ type DomainValidation struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a domain validation method migration, including the
+// previous validation method and the target validation method.
+type DomainValidationMethodUpdateSummary struct {
+
+	// The validation method that the certificate was using before the update.
+	From ValidationMethod
+
+	// The target validation method for the update.
+	To ValidationMethod
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the domain names that you want ACM to use to send
 // you emails that enable you to validate domain ownership.
 type DomainValidationOption struct {
@@ -1117,6 +1150,43 @@ type DomainValidationOption struct {
 	//
 	// This member is required.
 	ValidationDomain *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains per-domain validation information for a certificate. This structure is
+// returned as a member of the ListCertificateDomainValidationsresponse.
+type DomainValidationSummary struct {
+
+	// The fully qualified domain name (FQDN) in the certificate for which this
+	// validation summary applies.
+	//
+	// This member is required.
+	DomainName *string
+
+	// The validation configuration currently in effect for this domain. This reflects
+	// the validation method that ACM is currently using to validate domain ownership
+	// (for example, email or DNS).
+	ActiveValidationConfiguration *ValidationConfiguration
+
+	// The validation configuration for a pending validation method migration. This
+	// field is present only when a migration is in progress (for example, from email
+	// to DNS validation). It contains the target validation method, the current
+	// validation status, and the validation challenge details (such as the CNAME
+	// record to add to your DNS configuration).
+	RequestedValidationConfiguration *ValidationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains the email addresses used for email-based domain validation.
+type EmailValidationChallenge struct {
+
+	// The domain name that ACM uses to send validation emails.
+	ValidationDomain *string
+
+	// A list of email addresses that ACM uses to send domain validation emails.
+	ValidationEmails []string
 
 	noSmithyDocumentSerde
 }
@@ -1528,6 +1598,103 @@ type TimestampRange struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the most recent certificate update, such as a domain
+// validation method migration. This structure is returned as part of the CertificateDetailresponse
+// from DescribeCertificate.
+type UpdateSummary struct {
+
+	// Contains information about a domain validation method migration, including the
+	// previous and target validation methods.
+	DomainValidationMethodUpdateSummary *DomainValidationMethodUpdateSummary
+
+	// The time at which the certificate update was requested.
+	RequestedAt *time.Time
+
+	// The status of the certificate update. The following are valid values:
+	//
+	//   - PENDING_DOMAIN_VALIDATION – The certificate update is waiting for domain
+	//   ownership validation to complete.
+	//
+	//   - SUCCESS – The certificate was updated successfully.
+	//
+	//   - FAILED – The certificate update failed.
+	Status UpdateStatus
+
+	// The type of update that was requested for the certificate. The following are
+	// valid values:
+	//
+	//   - DOMAIN_VALIDATION_METHOD – The update changes the domain validation method
+	//   for the certificate.
+	Type UpdateType
+
+	// The time at which the certificate update status was last changed.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains the challenge details that you use to prove domain ownership. Only one
+// member is set, depending on the validation method.
+//
+// The following types satisfy this interface:
+//
+//	ValidationChallengeMemberDnsValidationChallenge
+//	ValidationChallengeMemberEmailValidationChallenge
+type ValidationChallenge interface {
+	isValidationChallenge()
+}
+
+// Contains the CNAME record that you must add to your DNS configuration to
+// validate domain ownership using DNS validation.
+type ValidationChallengeMemberDnsValidationChallenge struct {
+	Value DnsValidationChallenge
+
+	noSmithyDocumentSerde
+}
+
+func (*ValidationChallengeMemberDnsValidationChallenge) isValidationChallenge() {}
+
+// Contains the email addresses used for email-based domain validation.
+type ValidationChallengeMemberEmailValidationChallenge struct {
+	Value EmailValidationChallenge
+
+	noSmithyDocumentSerde
+}
+
+func (*ValidationChallengeMemberEmailValidationChallenge) isValidationChallenge() {}
+
+// Contains the validation method, validation status, and validation challenge
+// details for a domain. This structure appears in DomainValidationSummaryas both the active and
+// requested validation configuration.
+type ValidationConfiguration struct {
+
+	// The validation challenge details for this configuration. The structure varies
+	// by validation method: for DNS validation, contains a DnsValidationChallenge
+	// with the CNAME record to add; for email validation, contains an
+	// EmailValidationChallenge with the validation email addresses.
+	ValidationChallenge ValidationChallenge
+
+	// The validation method for this configuration. Valid values:
+	//
+	//   - DNS – Validation using a CNAME record added to your DNS configuration.
+	//
+	//   - EMAIL – Validation using an approval email sent to domain contacts.
+	//
+	//   - HTTP – Validation using an HTTP resource placed on your web server.
+	ValidationMethod ValidationMethod
+
+	// The validation status for this domain. Valid values:
+	//
+	//   - PENDING_VALIDATION – The domain is waiting for validation to complete.
+	//
+	//   - SUCCESS – Validation completed successfully.
+	//
+	//   - FAILED – Validation failed.
+	ValidationStatus DomainStatus
+
+	noSmithyDocumentSerde
+}
+
 // Filters certificates by X.509 attributes.
 //
 // The following types satisfy this interface:
@@ -1679,4 +1846,5 @@ func (*UnknownUnionMember) isPrevalidationDetails()         {}
 func (*UnknownUnionMember) isPrevalidationOptions()         {}
 func (*UnknownUnionMember) isSubjectAlternativeNameFilter() {}
 func (*UnknownUnionMember) isSubjectFilter()                {}
+func (*UnknownUnionMember) isValidationChallenge()          {}
 func (*UnknownUnionMember) isX509AttributeFilter()          {}

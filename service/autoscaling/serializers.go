@@ -6597,6 +6597,16 @@ func awsAwsquery_serializeDocumentTargetTrackingMetricStat(v *types.TargetTracki
 	return nil
 }
 
+func awsAwsquery_serializeDocumentTerminationInstanceIds(v []string, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentTerminationPolicies(v []string, value query.Value) error {
 	array := value.Array("member")
 
@@ -8461,9 +8471,21 @@ func awsAwsquery_serializeOpDocumentTerminateInstanceInAutoScalingGroupInput(v *
 	object := value.Object()
 	_ = object
 
+	if v.AutoScalingGroupName != nil {
+		objectKey := object.Key("AutoScalingGroupName")
+		objectKey.String(*v.AutoScalingGroupName)
+	}
+
 	if v.InstanceId != nil {
 		objectKey := object.Key("InstanceId")
 		objectKey.String(*v.InstanceId)
+	}
+
+	if v.InstanceIds != nil {
+		objectKey := object.Key("InstanceIds")
+		if err := awsAwsquery_serializeDocumentTerminationInstanceIds(v.InstanceIds, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.ShouldDecrementDesiredCapacity != nil {

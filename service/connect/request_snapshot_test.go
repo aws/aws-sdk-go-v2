@@ -13054,6 +13054,52 @@ func TestCheckRequestSnapshot_SendOutboundWebNotification(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartAssistantContact(t *testing.T) {
+	input := &StartAssistantContactInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AiAgent: &types.AiAgentInput{
+			AiAgentId: ptr.String("__AiAgentId__"),
+		},
+		ParticipantDetails: &types.ParticipantDetails{
+			DisplayName: ptr.String("__DisplayName__"),
+		},
+		InitialMessage: &types.ChatMessage{
+			ContentType: ptr.String("__ContentType__"),
+			Content:     ptr.String("__Content__"),
+		},
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		PersistentChat: &types.PersistentChat{
+			RehydrationType: types.RehydrationType("ENTIRE_PAST_SESSION"),
+			SourceContactId: ptr.String("__SourceContactId__"),
+		},
+		RelatedContactId: ptr.String("__RelatedContactId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAssistantContact(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAssistantContact"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartAttachedFileUpload(t *testing.T) {
 	input := &StartAttachedFileUploadInput{
 		ClientToken:           ptr.String("__ClientToken__"),
@@ -13865,6 +13911,20 @@ func TestCheckRequestSnapshot_StartWebRTCContact(t *testing.T) {
 			},
 		},
 		Description: ptr.String("__Description__"),
+		SegmentAttributes: map[string]types.SegmentAttributeValue{
+			"key0": {
+				ValueString: ptr.String("__ValueString__"),
+				ValueMap: map[string]types.SegmentAttributeValue{
+					"key0": {},
+				},
+				ValueInteger: ptr.Int32(1),
+				ValueList: []types.SegmentAttributeValue{
+					{},
+					{},
+				},
+				ValueArn: ptr.String("__ValueArn__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -30806,6 +30866,52 @@ func TestUpdateRequestSnapshot_SendOutboundWebNotification(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_StartAssistantContact(t *testing.T) {
+	input := &StartAssistantContactInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AiAgent: &types.AiAgentInput{
+			AiAgentId: ptr.String("__AiAgentId__"),
+		},
+		ParticipantDetails: &types.ParticipantDetails{
+			DisplayName: ptr.String("__DisplayName__"),
+		},
+		InitialMessage: &types.ChatMessage{
+			ContentType: ptr.String("__ContentType__"),
+			Content:     ptr.String("__Content__"),
+		},
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		PersistentChat: &types.PersistentChat{
+			RehydrationType: types.RehydrationType("ENTIRE_PAST_SESSION"),
+			SourceContactId: ptr.String("__SourceContactId__"),
+		},
+		RelatedContactId: ptr.String("__RelatedContactId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAssistantContact(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAssistantContact"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartAttachedFileUpload(t *testing.T) {
 	input := &StartAttachedFileUploadInput{
 		ClientToken:           ptr.String("__ClientToken__"),
@@ -31617,6 +31723,20 @@ func TestUpdateRequestSnapshot_StartWebRTCContact(t *testing.T) {
 			},
 		},
 		Description: ptr.String("__Description__"),
+		SegmentAttributes: map[string]types.SegmentAttributeValue{
+			"key0": {
+				ValueString: ptr.String("__ValueString__"),
+				ValueMap: map[string]types.SegmentAttributeValue{
+					"key0": {},
+				},
+				ValueInteger: ptr.Int32(1),
+				ValueList: []types.SegmentAttributeValue{
+					{},
+					{},
+				},
+				ValueArn: ptr.String("__ValueArn__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

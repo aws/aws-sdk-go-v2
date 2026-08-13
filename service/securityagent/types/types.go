@@ -552,6 +552,11 @@ type CodeReview struct {
 	// The CloudWatch Logs configuration for the code review.
 	LogConfig *CloudWatchLog
 
+	// The maximum number of billable task hours allowed for jobs started from this
+	// code review. If a job reaches the configured limit, it is gracefully stopped. If
+	// not set, jobs run to completion with no budget cap.
+	MaxTaskHours *float64
+
 	// The IAM service role used for the code review.
 	ServiceRole *string
 
@@ -596,6 +601,10 @@ type CodeReviewJob struct {
 
 	// The CloudWatch Logs configuration for the code review job.
 	LogConfig *CloudWatchLog
+
+	// The maximum number of billable task hours allowed for this code review job. If
+	// the cumulative task hours reach this limit, the job is gracefully stopped.
+	MaxTaskHours *float64
 
 	// An overview of the code review job results.
 	Overview *string
@@ -1131,6 +1140,10 @@ type Finding struct {
 	// The name of the finding.
 	Name *string
 
+	// The identifier of the original finding that this revalidation finding was
+	// produced from.
+	OriginalFindingId *string
+
 	// The unique identifier of the pentest associated with the finding.
 	PentestId *string
 
@@ -1140,6 +1153,10 @@ type Finding struct {
 	// The reasoning behind the finding, explaining why it was identified as a
 	// vulnerability.
 	Reasoning *string
+
+	// The list of pentest job identifiers for revalidation jobs that retested this
+	// finding.
+	RevalidationJobIds []string
 
 	// The risk level of the finding. Valid values include UNKNOWN, INFORMATIONAL,
 	// LOW, MEDIUM, HIGH, and CRITICAL.
@@ -1854,6 +1871,11 @@ type Pentest struct {
 	// The CloudWatch Logs configuration for the pentest.
 	LogConfig *CloudWatchLog
 
+	// The maximum number of billable task hours allowed for jobs started from this
+	// pentest. If a job reaches the configured limit, it is gracefully stopped. If not
+	// set, jobs run to completion with no budget cap.
+	MaxTaskHours *float64
+
 	// The network traffic configuration for the pentest.
 	NetworkTrafficConfig *NetworkTrafficConfig
 
@@ -1914,8 +1936,15 @@ type PentestJob struct {
 	// The list of integrated repositories associated with the pentest job.
 	IntegratedRepositories []IntegratedRepository
 
+	// The type of the pentest job. Valid values are FULL and REVALIDATION.
+	JobType JobType
+
 	// The CloudWatch Logs configuration for the pentest job.
 	LogConfig *CloudWatchLog
+
+	// The maximum number of billable task hours allowed for this pentest job. If the
+	// cumulative task hours reach this limit, the job is gracefully stopped.
+	MaxTaskHours *float64
 
 	// The network traffic configuration for the pentest job.
 	NetworkTrafficConfig *NetworkTrafficConfig
@@ -1928,6 +1957,10 @@ type PentestJob struct {
 
 	// The unique identifier of the pentest job.
 	PentestJobId *string
+
+	// The list of finding identifiers selected for revalidation. Present only when
+	// jobType is REVALIDATION.
+	SelectedFindingIds []string
 
 	// The IAM service role used for the pentest job.
 	ServiceRole *string

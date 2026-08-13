@@ -1044,6 +1044,39 @@ func TestCheckRequestSnapshot_GetBlob(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetBlobDifferences(t *testing.T) {
+	input := &GetBlobDifferencesInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		AfterBlobId:      ptr.String("__AfterBlobId__"),
+		BeforeBlobId:     ptr.String("__BeforeBlobId__"),
+		ContextLines:     ptr.Int32(1),
+		IgnoreWhitespace: ptr.Bool(true),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetBlobDifferences(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBlobDifferences"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetBranch(t *testing.T) {
 	input := &GetBranchInput{
 		RepositoryName: ptr.String("__RepositoryName__"),
@@ -3681,6 +3714,39 @@ func TestUpdateRequestSnapshot_GetBlob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBlob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetBlobDifferences(t *testing.T) {
+	input := &GetBlobDifferencesInput{
+		RepositoryName:   ptr.String("__RepositoryName__"),
+		AfterBlobId:      ptr.String("__AfterBlobId__"),
+		BeforeBlobId:     ptr.String("__BeforeBlobId__"),
+		ContextLines:     ptr.Int32(1),
+		IgnoreWhitespace: ptr.Bool(true),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetBlobDifferences(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBlobDifferences"); err != nil {
 		t.Fatal(err)
 	}
 }

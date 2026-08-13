@@ -1,0 +1,8 @@
+{
+    "id": "7fa6fc94-ff1a-4aa3-8378-67930a5bf470",
+    "type": "feature",
+    "description": "Added the GetBlobDifferences API operation, which returns line-level diffs between two blob versions without requiring a local clone. Returns structured hunks with context, additions, and deletions. Supports pagination for large diffs.",
+    "modules": [
+        "service/codecommit"
+    ]
+}

@@ -33,6 +33,7 @@
         "api_op_EvaluatePullRequestApprovalRules.go",
         "api_op_GetApprovalRuleTemplate.go",
         "api_op_GetBlob.go",
+        "api_op_GetBlobDifferences.go",
         "api_op_GetBranch.go",
         "api_op_GetComment.go",
         "api_op_GetCommentReactions.go",

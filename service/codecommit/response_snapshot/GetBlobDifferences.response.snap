@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetBlobDifferences
+
+{"NextToken":"__NextToken__","afterBlobSize":1,"beforeBlobSize":1,"hunks":[{"afterLineCount":1,"afterStartLine":1,"beforeLineCount":1,"beforeStartLine":1,"changes":[{"afterLineNumber":1,"beforeLineNumber":1,"content":"__Content__","type":"CONTEXT"},{"afterLineNumber":1,"beforeLineNumber":1,"content":"__Content__","type":"CONTEXT"}]},{"afterLineCount":1,"afterStartLine":1,"beforeLineCount":1,"beforeStartLine":1,"changes":[{"afterLineNumber":1,"beforeLineNumber":1,"content":"__Content__","type":"CONTEXT"},{"afterLineNumber":1,"beforeLineNumber":1,"content":"__Content__","type":"CONTEXT"}]}],"isBinary":true}

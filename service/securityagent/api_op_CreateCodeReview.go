@@ -51,6 +51,11 @@ type CreateCodeReviewInput struct {
 	// The CloudWatch Logs configuration for the code review.
 	LogConfig *types.CloudWatchLog
 
+	// The maximum number of billable task hours allowed for jobs started from this
+	// code review. Must be a positive number. If not set, jobs run to completion with
+	// no budget cap.
+	MaxTaskHours *float64
+
 	// The IAM service role to use for the code review.
 	ServiceRole *string
 
@@ -83,6 +88,10 @@ type CreateCodeReviewOutput struct {
 
 	// The CloudWatch Logs configuration for the code review.
 	LogConfig *types.CloudWatchLog
+
+	// The maximum number of billable task hours configured for jobs started from this
+	// code review. Null if no budget cap is set.
+	MaxTaskHours *float64
 
 	// The IAM service role used for the code review.
 	ServiceRole *string

@@ -113,6 +113,27 @@ func (ConflictResolutionStrategyTypeEnum) Values() []ConflictResolutionStrategyT
 	}
 }
 
+type DiffChangeType string
+
+// Enum values for DiffChangeType
+const (
+	DiffChangeTypeContext DiffChangeType = "CONTEXT"
+	DiffChangeTypeAdd     DiffChangeType = "ADD"
+	DiffChangeTypeDelete  DiffChangeType = "DELETE"
+)
+
+// Values returns all known values for DiffChangeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DiffChangeType) Values() []DiffChangeType {
+	return []DiffChangeType{
+		"CONTEXT",
+		"ADD",
+		"DELETE",
+	}
+}
+
 type FileModeTypeEnum string
 
 // Enum values for FileModeTypeEnum

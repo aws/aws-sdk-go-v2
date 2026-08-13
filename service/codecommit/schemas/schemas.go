@@ -133,6 +133,11 @@ var GetBlob = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetBlob",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetBlobDifferences = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "GetBlobDifferences",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetBranch = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "GetBranch",
@@ -1203,6 +1208,39 @@ var _Description = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Description",
 }, smithy.ShapeTypeString, 0)
 
+var DiffChange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "DiffChange",
+}, smithy.ShapeTypeStructure, 4)
+var DiffChange_type *smithy.Schema
+
+var DiffChange_beforeLineNumber *smithy.Schema
+
+var DiffChange_afterLineNumber *smithy.Schema
+
+var DiffChange_content *smithy.Schema
+
+var _DiffChangeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "DiffChangeList",
+}, smithy.ShapeTypeList, 1)
+var _DiffChangeList_member *smithy.Schema
+
+var DiffChangeType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "DiffChangeType",
+}, smithy.ShapeTypeEnum, 3)
+var DiffChangeType_CONTEXT *smithy.Schema
+
+var DiffChangeType_ADD *smithy.Schema
+
+var DiffChangeType_DELETE *smithy.Schema
+
+var _DiffContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "DiffContext",
+}, smithy.ShapeTypeInteger, 0)
+
 var Difference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "Difference",
@@ -1218,6 +1256,26 @@ var _DifferenceList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DifferenceList",
 }, smithy.ShapeTypeList, 1)
 var _DifferenceList_member *smithy.Schema
+
+var DiffHunk = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "DiffHunk",
+}, smithy.ShapeTypeStructure, 5)
+var DiffHunk_beforeStartLine *smithy.Schema
+
+var DiffHunk_beforeLineCount *smithy.Schema
+
+var DiffHunk_afterStartLine *smithy.Schema
+
+var DiffHunk_afterLineCount *smithy.Schema
+
+var DiffHunk_changes *smithy.Schema
+
+var _DiffHunkList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "DiffHunkList",
+}, smithy.ShapeTypeList, 1)
+var _DiffHunkList_member *smithy.Schema
 
 var DirectoryNameConflictsWithFileNameException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
@@ -1494,6 +1552,11 @@ var IdempotencyParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "IdempotencyParameterMismatchException",
 }, smithy.ShapeTypeStructure, 1)
 var IdempotencyParameterMismatchException_message *smithy.Schema
+
+var _IgnoreWhiteSpaces = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "IgnoreWhiteSpaces",
+}, smithy.ShapeTypeBoolean, 0)
 
 var InvalidActorArnException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
@@ -1942,6 +2005,11 @@ var _Limit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "Limit",
 }, smithy.ShapeTypeInteger, 0)
+
+var _LineContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "LineContent",
+}, smithy.ShapeTypeString, 0)
 
 var _LineNumber = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
@@ -3118,6 +3186,12 @@ var UserInfo_email *smithy.Schema
 
 var UserInfo_date *smithy.Schema
 
+var ValidationException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "ValidationException",
+}, smithy.ShapeTypeStructure, 1)
+var ValidationException_message *smithy.Schema
+
 var AssociateApprovalRuleTemplateWithRepositoryInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
 	Name:      "AssociateApprovalRuleTemplateWithRepositoryInput",
@@ -3569,6 +3643,38 @@ var GetApprovalRuleTemplateOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetApprovalRuleTemplateOutput",
 }, smithy.ShapeTypeStructure, 1)
 var GetApprovalRuleTemplateOutput_approvalRuleTemplate *smithy.Schema
+
+var GetBlobDifferencesInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "GetBlobDifferencesInput",
+}, smithy.ShapeTypeStructure, 7)
+var GetBlobDifferencesInput_repositoryName *smithy.Schema
+
+var GetBlobDifferencesInput_afterBlobId *smithy.Schema
+
+var GetBlobDifferencesInput_beforeBlobId *smithy.Schema
+
+var GetBlobDifferencesInput_contextLines *smithy.Schema
+
+var GetBlobDifferencesInput_ignoreWhitespace *smithy.Schema
+
+var GetBlobDifferencesInput_MaxResults *smithy.Schema
+
+var GetBlobDifferencesInput_NextToken *smithy.Schema
+
+var GetBlobDifferencesOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.codecommit",
+	Name:      "GetBlobDifferencesOutput",
+}, smithy.ShapeTypeStructure, 5)
+var GetBlobDifferencesOutput_hunks *smithy.Schema
+
+var GetBlobDifferencesOutput_isBinary *smithy.Schema
+
+var GetBlobDifferencesOutput_beforeBlobSize *smithy.Schema
+
+var GetBlobDifferencesOutput_afterBlobSize *smithy.Schema
+
+var GetBlobDifferencesOutput_NextToken *smithy.Schema
 
 var GetBlobInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codecommit",
@@ -5041,6 +5147,22 @@ func init() {
 
 	DefaultBranchCannotBeDeletedException_message = DefaultBranchCannotBeDeletedException.AddMember("message", _Message)
 
+	DiffChangeType_CONTEXT = DiffChangeType.AddMember("CONTEXT", smithyprelude.Unit)
+
+	DiffChangeType_ADD = DiffChangeType.AddMember("ADD", smithyprelude.Unit)
+
+	DiffChangeType_DELETE = DiffChangeType.AddMember("DELETE", smithyprelude.Unit)
+
+	DiffChange_type = DiffChange.AddMember("type", DiffChangeType)
+
+	DiffChange_beforeLineNumber = DiffChange.AddMember("beforeLineNumber", _LineNumber)
+
+	DiffChange_afterLineNumber = DiffChange.AddMember("afterLineNumber", _LineNumber)
+
+	DiffChange_content = DiffChange.AddMember("content", _LineContent)
+
+	_DiffChangeList_member = _DiffChangeList.AddMember("member", DiffChange)
+
 	Difference_beforeBlob = Difference.AddMember("beforeBlob", BlobMetadata)
 
 	Difference_afterBlob = Difference.AddMember("afterBlob", BlobMetadata)
@@ -5048,6 +5170,18 @@ func init() {
 	Difference_changeType = Difference.AddMember("changeType", ChangeTypeEnum)
 
 	_DifferenceList_member = _DifferenceList.AddMember("member", Difference)
+
+	DiffHunk_beforeStartLine = DiffHunk.AddMember("beforeStartLine", _LineNumber)
+
+	DiffHunk_beforeLineCount = DiffHunk.AddMember("beforeLineCount", _Count)
+
+	DiffHunk_afterStartLine = DiffHunk.AddMember("afterStartLine", _LineNumber)
+
+	DiffHunk_afterLineCount = DiffHunk.AddMember("afterLineCount", _Count)
+
+	DiffHunk_changes = DiffHunk.AddMember("changes", _DiffChangeList)
+
+	_DiffHunkList_member = _DiffHunkList.AddMember("member", DiffHunk)
 
 	DirectoryNameConflictsWithFileNameException_message = DirectoryNameConflictsWithFileNameException.AddMember("message", _Message)
 
@@ -5661,6 +5795,8 @@ func init() {
 
 	TooManyTagsException_message = TooManyTagsException.AddMember("message", _Message)
 
+	ValidationException_message = ValidationException.AddMember("message", _Message)
+
 	AssociateApprovalRuleTemplateWithRepositoryInput_approvalRuleTemplateName = AssociateApprovalRuleTemplateWithRepositoryInput.AddMember("approvalRuleTemplateName", _ApprovalRuleTemplateName)
 
 	AssociateApprovalRuleTemplateWithRepositoryInput_repositoryName = AssociateApprovalRuleTemplateWithRepositoryInput.AddMember("repositoryName", _RepositoryName)
@@ -5932,6 +6068,30 @@ func init() {
 	GetApprovalRuleTemplateInput_approvalRuleTemplateName = GetApprovalRuleTemplateInput.AddMember("approvalRuleTemplateName", _ApprovalRuleTemplateName)
 
 	GetApprovalRuleTemplateOutput_approvalRuleTemplate = GetApprovalRuleTemplateOutput.AddMember("approvalRuleTemplate", ApprovalRuleTemplate)
+
+	GetBlobDifferencesInput_repositoryName = GetBlobDifferencesInput.AddMember("repositoryName", _RepositoryName)
+
+	GetBlobDifferencesInput_afterBlobId = GetBlobDifferencesInput.AddMember("afterBlobId", _ObjectId)
+
+	GetBlobDifferencesInput_beforeBlobId = GetBlobDifferencesInput.AddMember("beforeBlobId", _ObjectId)
+
+	GetBlobDifferencesInput_contextLines = GetBlobDifferencesInput.AddMember("contextLines", _DiffContext)
+
+	GetBlobDifferencesInput_ignoreWhitespace = GetBlobDifferencesInput.AddMember("ignoreWhitespace", _IgnoreWhiteSpaces)
+
+	GetBlobDifferencesInput_MaxResults = GetBlobDifferencesInput.AddMember("MaxResults", _Limit)
+
+	GetBlobDifferencesInput_NextToken = GetBlobDifferencesInput.AddMember("NextToken", _NextToken)
+
+	GetBlobDifferencesOutput_hunks = GetBlobDifferencesOutput.AddMember("hunks", _DiffHunkList)
+
+	GetBlobDifferencesOutput_isBinary = GetBlobDifferencesOutput.AddMember("isBinary", _CapitalBoolean)
+
+	GetBlobDifferencesOutput_beforeBlobSize = GetBlobDifferencesOutput.AddMember("beforeBlobSize", _ObjectSize)
+
+	GetBlobDifferencesOutput_afterBlobSize = GetBlobDifferencesOutput.AddMember("afterBlobSize", _ObjectSize)
+
+	GetBlobDifferencesOutput_NextToken = GetBlobDifferencesOutput.AddMember("NextToken", _NextToken)
 
 	GetBlobInput_repositoryName = GetBlobInput.AddMember("repositoryName", _RepositoryName)
 

@@ -1387,6 +1387,77 @@ func (v *DeleteFileEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A single line-level entry in a diff hunk. Each DiffChange describes one line
+// and its change type: unchanged context, an addition in the after blob, or a
+// deletion from the before blob.
+type DiffChange struct {
+
+	// The 1-based line number in the after blob. This field is omitted for DELETE
+	// lines.
+	AfterLineNumber *int32
+
+	// The 1-based line number in the before blob. This field is omitted for ADD lines.
+	BeforeLineNumber *int32
+
+	// The text content of the line, without the trailing newline.
+	Content *string
+
+	// The type of change for this line. Possible values:
+	//
+	//   - CONTEXT – Unchanged line included for surrounding context.
+	//
+	//   - ADD – Line added in the after blob.
+	//
+	//   - DELETE – Line removed from the before blob.
+	Type DiffChangeType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DiffChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiffChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiffChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterLineNumber != nil {
+		s.WriteInt32(schemas.DiffChange_afterLineNumber, *v.AfterLineNumber)
+	}
+	if v.BeforeLineNumber != nil {
+		s.WriteInt32(schemas.DiffChange_beforeLineNumber, *v.BeforeLineNumber)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.DiffChange_content, *v.Content)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DiffChange_type, string(v.Type))
+	}
+}
+func (v *DiffChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiffChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiffChange_afterLineNumber:
+			v.AfterLineNumber = new(int32)
+			return d.ReadInt32(schemas.DiffChange_afterLineNumber, v.AfterLineNumber)
+		case schemas.DiffChange_beforeLineNumber:
+			v.BeforeLineNumber = new(int32)
+			return d.ReadInt32(schemas.DiffChange_beforeLineNumber, v.BeforeLineNumber)
+		case schemas.DiffChange_content:
+			v.Content = new(string)
+			return d.ReadString(schemas.DiffChange_content, v.Content)
+		case schemas.DiffChange_type:
+			var ev string
+			if err := d.ReadString(schemas.DiffChange_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DiffChangeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Returns information about a set of differences for a commit specifier.
 type Difference struct {
 
@@ -1442,6 +1513,78 @@ func (v *Difference) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ChangeType = ChangeTypeEnum(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// A contiguous run of changed lines from a blob diff, together with any
+// surrounding unchanged context lines. Hunks are returned in order from the start
+// of the file to the end. Adjacent or overlapping hunks are merged into a single
+// hunk in the response.
+type DiffHunk struct {
+
+	// The number of lines from the after blob covered by this hunk, including any
+	// context lines.
+	AfterLineCount *int32
+
+	// The 1-based line number in the after blob where this hunk begins. When the hunk
+	// consists entirely of deletions, afterLineCount is 0 .
+	AfterStartLine *int32
+
+	// The number of lines from the before blob covered by this hunk, including any
+	// context lines.
+	BeforeLineCount *int32
+
+	// The 1-based line number in the before blob where this hunk begins. When the
+	// hunk consists entirely of additions, beforeLineCount is 0 .
+	BeforeStartLine *int32
+
+	// An ordered list of line-level changes that make up this hunk. Each entry
+	// indicates whether the line is unchanged context, an addition, or a deletion.
+	Changes []DiffChange
+
+	noSmithyDocumentSerde
+}
+
+func (v *DiffHunk) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiffHunk)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiffHunk) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterLineCount != nil {
+		s.WriteInt32(schemas.DiffHunk_afterLineCount, *v.AfterLineCount)
+	}
+	if v.AfterStartLine != nil {
+		s.WriteInt32(schemas.DiffHunk_afterStartLine, *v.AfterStartLine)
+	}
+	if v.BeforeLineCount != nil {
+		s.WriteInt32(schemas.DiffHunk_beforeLineCount, *v.BeforeLineCount)
+	}
+	if v.BeforeStartLine != nil {
+		s.WriteInt32(schemas.DiffHunk_beforeStartLine, *v.BeforeStartLine)
+	}
+	serializeDiffChangeList(s, schemas.DiffHunk_changes, v.Changes)
+}
+func (v *DiffHunk) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiffHunk, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiffHunk_afterLineCount:
+			v.AfterLineCount = new(int32)
+			return d.ReadInt32(schemas.DiffHunk_afterLineCount, v.AfterLineCount)
+		case schemas.DiffHunk_afterStartLine:
+			v.AfterStartLine = new(int32)
+			return d.ReadInt32(schemas.DiffHunk_afterStartLine, v.AfterStartLine)
+		case schemas.DiffHunk_beforeLineCount:
+			v.BeforeLineCount = new(int32)
+			return d.ReadInt32(schemas.DiffHunk_beforeLineCount, v.BeforeLineCount)
+		case schemas.DiffHunk_beforeStartLine:
+			v.BeforeStartLine = new(int32)
+			return d.ReadInt32(schemas.DiffHunk_beforeStartLine, v.BeforeStartLine)
+		case schemas.DiffHunk_changes:
+			return deserializeDiffChangeList(d, schemas.DiffHunk_changes, &v.Changes)
 		}
 		return nil
 	})

@@ -11,13 +11,17 @@ import (
 // Terminates the specified instance and optionally adjusts the desired group
 // size. This operation cannot be called on instances in a warm pool.
 //
-// This call simply makes a termination request. The instance is not terminated
+// This call simply makes a termination request. The instances are not terminated
 // immediately. When an instance is terminated, the instance status changes to
 // terminated . You can't connect to or start an instance after you've terminated
 // it.
 //
 // If you do not specify the option to decrement the desired capacity, Amazon EC2
 // Auto Scaling launches instances to replace the ones that are terminated.
+//
+// To terminate multiple instances in a single call, use the InstanceIds and
+// AutoScalingGroupName parameters instead of InstanceId . When terminating
+// multiple instances, the response populates Activities instead of Activity .
 //
 // By default, Amazon EC2 Auto Scaling balances instances across all Availability
 // Zones. If you decrement the desired capacity, your Auto Scaling group can become
@@ -43,21 +47,31 @@ func (c *Client) TerminateInstanceInAutoScalingGroup(ctx context.Context, params
 
 type TerminateInstanceInAutoScalingGroupInput struct {
 
-	// The ID of the instance.
-	//
-	// This member is required.
-	InstanceId *string
-
 	// Indicates whether terminating the instance also decrements the size of the Auto
 	// Scaling group.
 	//
 	// This member is required.
 	ShouldDecrementDesiredCapacity *bool
 
+	// The name of the Auto Scaling group. Required when using InstanceIds .
+	AutoScalingGroupName *string
+
+	// The ID of the instance.
+	InstanceId *string
+
+	// The IDs of the instances. You can specify up to 100 instances.
+	//
+	// This parameter requires that you also specify AutoScalingGroupName .
+	InstanceIds []string
+
 	noSmithyDocumentSerde
 }
 
 type TerminateInstanceInAutoScalingGroupOutput struct {
+
+	// The scaling activities related to terminating the instances from the Auto
+	// Scaling group.
+	Activities []types.Activity
 
 	// A scaling activity.
 	Activity *types.Activity

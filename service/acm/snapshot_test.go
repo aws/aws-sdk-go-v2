@@ -326,6 +326,18 @@ func TestCheckSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCertificateDomainValidations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCertificateDomainValidations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCertificateDomainValidations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCertificates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCertificates(context.Background(), nil, func(o *Options) {
@@ -786,6 +798,18 @@ func TestUpdateSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
 	_, err := svc.ListAcmeExternalAccountBindings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAcmeExternalAccountBindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCertificateDomainValidations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCertificateDomainValidations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCertificateDomainValidations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

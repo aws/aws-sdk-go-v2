@@ -372,6 +372,17 @@ type AiAgentInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The AI agent that participates in the contact, including its identifier.
+type AiAgentInput struct {
+
+	// The identifier of the AI agent that participates in the contact.
+	//
+	// This member is required.
+	AiAgentId *string
+
+	noSmithyDocumentSerde
+}
+
 // AI Agent search criteria definitions.
 type AiAgentsCriteria struct {
 
@@ -7268,7 +7279,7 @@ type NewSessionDetails struct {
 	// Attribute keys can include only alphanumeric, dash, and underscore characters.
 	Attributes map[string]string
 
-	// The customer's details.
+	// The details of the participant, including their display name.
 	ParticipantDetails *ParticipantDetails
 
 	// The streaming configuration, such as the Amazon SNS streaming endpoint.
@@ -7771,7 +7782,7 @@ type ParticipantConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The customer's details.
+// The details of the participant, including their display name.
 type ParticipantDetails struct {
 
 	// Display name of the participant.

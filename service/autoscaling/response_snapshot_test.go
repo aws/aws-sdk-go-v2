@@ -6139,6 +6139,36 @@ func TestCheckResponseSnapshot_TerminateInstanceInAutoScalingGroup(t *testing.T)
 			AutoScalingGroupState: ptr.String("__AutoScalingGroupState__"),
 			AutoScalingGroupARN:   ptr.String("__AutoScalingGroupARN__"),
 		},
+		Activities: []types.Activity{
+			{
+				ActivityId:            ptr.String("__ActivityId__"),
+				AutoScalingGroupName:  ptr.String("__AutoScalingGroupName__"),
+				Description:           ptr.String("__Description__"),
+				Cause:                 ptr.String("__Cause__"),
+				StartTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusCode:            types.ScalingActivityStatusCode("PendingSpotBidPlacement"),
+				StatusMessage:         ptr.String("__StatusMessage__"),
+				Progress:              ptr.Int32(1),
+				Details:               ptr.String("__Details__"),
+				AutoScalingGroupState: ptr.String("__AutoScalingGroupState__"),
+				AutoScalingGroupARN:   ptr.String("__AutoScalingGroupARN__"),
+			},
+			{
+				ActivityId:            ptr.String("__ActivityId__"),
+				AutoScalingGroupName:  ptr.String("__AutoScalingGroupName__"),
+				Description:           ptr.String("__Description__"),
+				Cause:                 ptr.String("__Cause__"),
+				StartTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusCode:            types.ScalingActivityStatusCode("PendingSpotBidPlacement"),
+				StatusMessage:         ptr.String("__StatusMessage__"),
+				Progress:              ptr.Int32(1),
+				Details:               ptr.String("__Details__"),
+				AutoScalingGroupState: ptr.String("__AutoScalingGroupState__"),
+				AutoScalingGroupARN:   ptr.String("__AutoScalingGroupARN__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("TerminateInstanceInAutoScalingGroup.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6149,7 +6179,12 @@ func TestCheckResponseSnapshot_TerminateInstanceInAutoScalingGroup(t *testing.T)
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.TerminateInstanceInAutoScalingGroup(context.Background(), &TerminateInstanceInAutoScalingGroupInput{
-		InstanceId:                     ptr.String("__InstanceId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName:           ptr.String("__AutoScalingGroupName__"),
 		ShouldDecrementDesiredCapacity: ptr.Bool(true),
 	})
 	if err != nil {
@@ -6536,6 +6571,48 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsFault(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "AlreadyExistsFault.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_IdempotentCallInProgressFault(t *testing.T) {
+	want := &types.IdempotentCallInProgressFault{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("IdempotentCallInProgressFault.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.LaunchInstances(context.Background(), &LaunchInstancesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		RequestedCapacity:    ptr.Int32(1),
+		ClientToken:          ptr.String("__ClientToken__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RetryStrategy: types.RetryStrategy("retry-with-group-configuration"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.IdempotentCallInProgressFault
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.IdempotentCallInProgressFault, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "IdempotentCallInProgressFault.error", err)
 	}
 }
 

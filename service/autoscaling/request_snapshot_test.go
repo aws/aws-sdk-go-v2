@@ -3308,7 +3308,12 @@ func TestCheckRequestSnapshot_SuspendProcesses(t *testing.T) {
 
 func TestCheckRequestSnapshot_TerminateInstanceInAutoScalingGroup(t *testing.T) {
 	input := &TerminateInstanceInAutoScalingGroupInput{
-		InstanceId:                     ptr.String("__InstanceId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName:           ptr.String("__AutoScalingGroupName__"),
 		ShouldDecrementDesiredCapacity: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
@@ -6766,7 +6771,12 @@ func TestUpdateRequestSnapshot_SuspendProcesses(t *testing.T) {
 
 func TestUpdateRequestSnapshot_TerminateInstanceInAutoScalingGroup(t *testing.T) {
 	input := &TerminateInstanceInAutoScalingGroupInput{
-		InstanceId:                     ptr.String("__InstanceId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName:           ptr.String("__AutoScalingGroupName__"),
 		ShouldDecrementDesiredCapacity: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}

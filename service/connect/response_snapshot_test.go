@@ -19563,6 +19563,51 @@ func TestCheckResponseSnapshot_SendOutboundWebNotification(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartAssistantContact(t *testing.T) {
+	want := &StartAssistantContactOutput{
+		ContactId:              ptr.String("__ContactId__"),
+		ParticipantId:          ptr.String("__ParticipantId__"),
+		ParticipantToken:       ptr.String("__ParticipantToken__"),
+		ContinuedFromContactId: ptr.String("__ContinuedFromContactId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartAssistantContact.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartAssistantContact(context.Background(), &StartAssistantContactInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		AiAgent: &types.AiAgentInput{
+			AiAgentId: ptr.String("__AiAgentId__"),
+		},
+		ParticipantDetails: &types.ParticipantDetails{
+			DisplayName: ptr.String("__DisplayName__"),
+		},
+		InitialMessage: &types.ChatMessage{
+			ContentType: ptr.String("__ContentType__"),
+			Content:     ptr.String("__Content__"),
+		},
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		PersistentChat: &types.PersistentChat{
+			RehydrationType: types.RehydrationType("ENTIRE_PAST_SESSION"),
+			SourceContactId: ptr.String("__SourceContactId__"),
+		},
+		RelatedContactId: ptr.String("__RelatedContactId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartAssistantContact.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartAttachedFileUpload(t *testing.T) {
 	want := &StartAttachedFileUploadOutput{
 		FileArn:      ptr.String("__FileArn__"),
@@ -20365,6 +20410,20 @@ func TestCheckResponseSnapshot_StartWebRTCContact(t *testing.T) {
 			},
 		},
 		Description: ptr.String("__Description__"),
+		SegmentAttributes: map[string]types.SegmentAttributeValue{
+			"key0": {
+				ValueString: ptr.String("__ValueString__"),
+				ValueMap: map[string]types.SegmentAttributeValue{
+					"key0": {},
+				},
+				ValueInteger: ptr.Int32(1),
+				ValueList: []types.SegmentAttributeValue{
+					{},
+					{},
+				},
+				ValueArn: ptr.String("__ValueArn__"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -4139,6 +4139,40 @@ func awsRestjson1_deserializeOpDocumentCreateCodeReviewOutput(v **CreateCodeRevi
 				return err
 			}
 
+		case "maxTaskHours":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "serviceRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14021,6 +14055,40 @@ func awsRestjson1_deserializeOpDocumentUpdateCodeReviewOutput(v **UpdateCodeRevi
 				return err
 			}
 
+		case "maxTaskHours":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "serviceRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18106,6 +18174,40 @@ func awsRestjson1_deserializeDocumentCodeReview(v **types.CodeReview, value inte
 				return err
 			}
 
+		case "maxTaskHours":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "serviceRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18276,6 +18378,40 @@ func awsRestjson1_deserializeDocumentCodeReviewJob(v **types.CodeReviewJob, valu
 		case "logConfig":
 			if err := awsRestjson1_deserializeDocumentCloudWatchLog(&sv.LogConfig, value); err != nil {
 				return err
+			}
+
+		case "maxTaskHours":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "overview":
@@ -20223,6 +20359,15 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "originalFindingId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OriginalFindingId = ptr.String(jtv)
+			}
+
 		case "pentestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20248,6 +20393,11 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Reasoning = ptr.String(jtv)
+			}
+
+		case "revalidationJobIds":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.RevalidationJobIds, value); err != nil {
+				return err
 			}
 
 		case "riskLevel":
@@ -21996,6 +22146,40 @@ func awsRestjson1_deserializeDocumentPentest(v **types.Pentest, value interface{
 				return err
 			}
 
+		case "maxTaskHours":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "networkTrafficConfig":
 			if err := awsRestjson1_deserializeDocumentNetworkTrafficConfig(&sv.NetworkTrafficConfig, value); err != nil {
 				return err
@@ -22194,9 +22378,52 @@ func awsRestjson1_deserializeDocumentPentestJob(v **types.PentestJob, value inte
 				return err
 			}
 
+		case "jobType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobType to be of type string, got %T instead", value)
+				}
+				sv.JobType = types.JobType(jtv)
+			}
+
 		case "logConfig":
 			if err := awsRestjson1_deserializeDocumentCloudWatchLog(&sv.LogConfig, value); err != nil {
 				return err
+			}
+
+		case "maxTaskHours":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaxTaskHours = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "networkTrafficConfig":
@@ -22229,6 +22456,11 @@ func awsRestjson1_deserializeDocumentPentestJob(v **types.PentestJob, value inte
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PentestJobId = ptr.String(jtv)
+			}
+
+		case "selectedFindingIds":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.SelectedFindingIds, value); err != nil {
+				return err
 			}
 
 		case "serviceRole":

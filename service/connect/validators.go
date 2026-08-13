@@ -5790,6 +5790,26 @@ func (m *validateOpSendOutboundWebNotification) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartAssistantContact struct {
+}
+
+func (*validateOpStartAssistantContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAssistantContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAssistantContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAssistantContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartAttachedFileUpload struct {
 }
 
@@ -8806,6 +8826,10 @@ func addOpSendOutboundWebNotificationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpSendOutboundWebNotification{}, middleware.After)
 }
 
+func addOpStartAssistantContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAssistantContact{}, middleware.After)
+}
+
 func addOpStartAttachedFileUploadValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAttachedFileUpload{}, middleware.After)
 }
@@ -9241,6 +9265,21 @@ func validateAgentFirst(v *types.AgentFirst) error {
 		if err := validatePreview(v.Preview); err != nil {
 			invalidParams.AddNested("Preview", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAiAgentInput(v *types.AiAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AiAgentInput"}
+	if v.AiAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -18660,6 +18699,40 @@ func validateOpSendOutboundWebNotificationInput(v *SendOutboundWebNotificationIn
 	} else if v.Content != nil {
 		if err := validateWebNotificationContent(v.Content); err != nil {
 			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAssistantContactInput(v *StartAssistantContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAssistantContactInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AiAgent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgent"))
+	} else if v.AiAgent != nil {
+		if err := validateAiAgentInput(v.AiAgent); err != nil {
+			invalidParams.AddNested("AiAgent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ParticipantDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantDetails"))
+	} else if v.ParticipantDetails != nil {
+		if err := validateParticipantDetails(v.ParticipantDetails); err != nil {
+			invalidParams.AddNested("ParticipantDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InitialMessage != nil {
+		if err := validateChatMessage(v.InitialMessage); err != nil {
+			invalidParams.AddNested("InitialMessage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

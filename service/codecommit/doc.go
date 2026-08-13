@@ -68,6 +68,10 @@
 //   - , which returns the base-64 encoded content of an individual Git blob
 //     object in a repository.
 //
+// GetBlobDifferences
+//   - , which returns a structured, line-level diff between two blob versions in
+//     a repository, with optional surrounding context lines.
+//
 // GetFile
 //   - , which returns the base-64 encoded content of a specified file.
 //

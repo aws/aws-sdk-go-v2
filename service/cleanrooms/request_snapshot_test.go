@@ -993,6 +993,56 @@ func TestCheckRequestSnapshot_CreateIntermediateTableAnalysisRule(t *testing.T) 
 						"__Member__",
 						"__Member__",
 					},
+					AggregationThresholds: []types.AggregationThreshold{
+						{
+							IdentityColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MinimumIdentityCount: ptr.Int32(1),
+							Type:                 types.AggregationThresholdType("COUNT_DISTINCT"),
+							OutputColumnThresholds: []types.OutputColumnThreshold{
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+							},
+							AllowedAggregateExpressionType: types.AllowedAggregateExpressionType("COLUMNS_ONLY"),
+						},
+						{
+							IdentityColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MinimumIdentityCount: ptr.Int32(1),
+							Type:                 types.AggregationThresholdType("COUNT_DISTINCT"),
+							OutputColumnThresholds: []types.OutputColumnThreshold{
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+							},
+							AllowedAggregateExpressionType: types.AllowedAggregateExpressionType("COLUMNS_ONLY"),
+						},
+					},
+					ComparisonControls: &types.ComparisonControls{
+						AllowedLiteralComparisonColumns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AllowedColumnComparisonColumns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -3636,6 +3686,56 @@ func TestCheckRequestSnapshot_UpdateIntermediateTableAnalysisRule(t *testing.T) 
 						"__Member__",
 						"__Member__",
 					},
+					AggregationThresholds: []types.AggregationThreshold{
+						{
+							IdentityColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MinimumIdentityCount: ptr.Int32(1),
+							Type:                 types.AggregationThresholdType("COUNT_DISTINCT"),
+							OutputColumnThresholds: []types.OutputColumnThreshold{
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+							},
+							AllowedAggregateExpressionType: types.AllowedAggregateExpressionType("COLUMNS_ONLY"),
+						},
+						{
+							IdentityColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MinimumIdentityCount: ptr.Int32(1),
+							Type:                 types.AggregationThresholdType("COUNT_DISTINCT"),
+							OutputColumnThresholds: []types.OutputColumnThreshold{
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+							},
+							AllowedAggregateExpressionType: types.AllowedAggregateExpressionType("COLUMNS_ONLY"),
+						},
+					},
+					ComparisonControls: &types.ComparisonControls{
+						AllowedLiteralComparisonColumns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AllowedColumnComparisonColumns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -4610,6 +4710,56 @@ func TestUpdateRequestSnapshot_CreateIntermediateTableAnalysisRule(t *testing.T)
 					DisallowedOutputColumns: []string{
 						"__Member__",
 						"__Member__",
+					},
+					AggregationThresholds: []types.AggregationThreshold{
+						{
+							IdentityColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MinimumIdentityCount: ptr.Int32(1),
+							Type:                 types.AggregationThresholdType("COUNT_DISTINCT"),
+							OutputColumnThresholds: []types.OutputColumnThreshold{
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+							},
+							AllowedAggregateExpressionType: types.AllowedAggregateExpressionType("COLUMNS_ONLY"),
+						},
+						{
+							IdentityColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MinimumIdentityCount: ptr.Int32(1),
+							Type:                 types.AggregationThresholdType("COUNT_DISTINCT"),
+							OutputColumnThresholds: []types.OutputColumnThreshold{
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+							},
+							AllowedAggregateExpressionType: types.AllowedAggregateExpressionType("COLUMNS_ONLY"),
+						},
+					},
+					ComparisonControls: &types.ComparisonControls{
+						AllowedLiteralComparisonColumns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AllowedColumnComparisonColumns: []string{
+							"__Member__",
+							"__Member__",
+						},
 					},
 				},
 			},
@@ -7253,6 +7403,56 @@ func TestUpdateRequestSnapshot_UpdateIntermediateTableAnalysisRule(t *testing.T)
 					DisallowedOutputColumns: []string{
 						"__Member__",
 						"__Member__",
+					},
+					AggregationThresholds: []types.AggregationThreshold{
+						{
+							IdentityColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MinimumIdentityCount: ptr.Int32(1),
+							Type:                 types.AggregationThresholdType("COUNT_DISTINCT"),
+							OutputColumnThresholds: []types.OutputColumnThreshold{
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+							},
+							AllowedAggregateExpressionType: types.AllowedAggregateExpressionType("COLUMNS_ONLY"),
+						},
+						{
+							IdentityColumns: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MinimumIdentityCount: ptr.Int32(1),
+							Type:                 types.AggregationThresholdType("COUNT_DISTINCT"),
+							OutputColumnThresholds: []types.OutputColumnThreshold{
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+								{
+									OutputColumnName:     ptr.String("__OutputColumnName__"),
+									MinimumIdentityCount: ptr.Int32(1),
+								},
+							},
+							AllowedAggregateExpressionType: types.AllowedAggregateExpressionType("COLUMNS_ONLY"),
+						},
+					},
+					ComparisonControls: &types.ComparisonControls{
+						AllowedLiteralComparisonColumns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						AllowedColumnComparisonColumns: []string{
+							"__Member__",
+							"__Member__",
+						},
 					},
 				},
 			},

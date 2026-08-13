@@ -671,6 +671,17 @@ func TestCheckResponseSnapshot_DescribeCertificate(t *testing.T) {
 			Options: &types.CertificateOptions{
 				CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
 				Export:                                   types.CertificateExport("ENABLED"),
+				ValidationMethod:                         types.ValidationMethod("EMAIL"),
+			},
+			UpdateSummary: &types.UpdateSummary{
+				Status: types.UpdateStatus("PENDING_DOMAIN_VALIDATION"),
+				Type:   types.UpdateType("DOMAIN_VALIDATION_METHOD"),
+				DomainValidationMethodUpdateSummary: &types.DomainValidationMethodUpdateSummary{
+					From: types.ValidationMethod("EMAIL"),
+					To:   types.ValidationMethod("EMAIL"),
+				},
+				RequestedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
 			AcmeEndpointArn:          ptr.String("__AcmeEndpointArn__"),
@@ -1090,6 +1101,91 @@ func TestCheckResponseSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListCertificateDomainValidations(t *testing.T) {
+	want := &ListCertificateDomainValidationsOutput{
+		DomainValidationSummaryList: []types.DomainValidationSummary{
+			{
+				DomainName: ptr.String("__DomainName__"),
+				ActiveValidationConfiguration: &types.ValidationConfiguration{
+					ValidationMethod: types.ValidationMethod("EMAIL"),
+					ValidationChallenge: &types.ValidationChallengeMemberEmailValidationChallenge{
+						Value: types.EmailValidationChallenge{
+							ValidationEmails: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ValidationDomain: ptr.String("__ValidationDomain__"),
+						},
+					},
+					ValidationStatus: types.DomainStatus("PENDING_VALIDATION"),
+				},
+				RequestedValidationConfiguration: &types.ValidationConfiguration{
+					ValidationMethod: types.ValidationMethod("EMAIL"),
+					ValidationChallenge: &types.ValidationChallengeMemberEmailValidationChallenge{
+						Value: types.EmailValidationChallenge{
+							ValidationEmails: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ValidationDomain: ptr.String("__ValidationDomain__"),
+						},
+					},
+					ValidationStatus: types.DomainStatus("PENDING_VALIDATION"),
+				},
+			},
+			{
+				DomainName: ptr.String("__DomainName__"),
+				ActiveValidationConfiguration: &types.ValidationConfiguration{
+					ValidationMethod: types.ValidationMethod("EMAIL"),
+					ValidationChallenge: &types.ValidationChallengeMemberEmailValidationChallenge{
+						Value: types.EmailValidationChallenge{
+							ValidationEmails: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ValidationDomain: ptr.String("__ValidationDomain__"),
+						},
+					},
+					ValidationStatus: types.DomainStatus("PENDING_VALIDATION"),
+				},
+				RequestedValidationConfiguration: &types.ValidationConfiguration{
+					ValidationMethod: types.ValidationMethod("EMAIL"),
+					ValidationChallenge: &types.ValidationChallengeMemberEmailValidationChallenge{
+						Value: types.EmailValidationChallenge{
+							ValidationEmails: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ValidationDomain: ptr.String("__ValidationDomain__"),
+						},
+					},
+					ValidationStatus: types.DomainStatus("PENDING_VALIDATION"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCertificateDomainValidations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCertificateDomainValidations(context.Background(), &ListCertificateDomainValidationsInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxItems:       ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCertificateDomainValidations.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListCertificates(t *testing.T) {
 	want := &ListCertificatesOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -1379,6 +1475,7 @@ func TestCheckResponseSnapshot_RequestCertificate(t *testing.T) {
 		Options: &types.CertificateOptions{
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
 			Export:                                   types.CertificateExport("ENABLED"),
+			ValidationMethod:                         types.ValidationMethod("EMAIL"),
 		},
 		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
 		Tags: []types.Tag{
@@ -1993,6 +2090,7 @@ func TestCheckResponseSnapshot_UpdateCertificateOptions(t *testing.T) {
 		Options: &types.CertificateOptions{
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
 			Export:                                   types.CertificateExport("ENABLED"),
+			ValidationMethod:                         types.ValidationMethod("EMAIL"),
 		},
 	})
 	if err != nil {
@@ -2162,35 +2260,10 @@ func TestCheckResponseSnapshot_Error_InvalidArgsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListCertificates(context.Background(), &ListCertificatesInput{
-		CertificateStatuses: []types.CertificateStatus{
-			types.CertificateStatus("PENDING_VALIDATION"),
-			types.CertificateStatus("PENDING_VALIDATION"),
-		},
-		CertificateKeyPairOrigins: []types.CertificateKeyPairOrigin{
-			types.CertificateKeyPairOrigin("AWS_MANAGED"),
-			types.CertificateKeyPairOrigin("AWS_MANAGED"),
-		},
-		Includes: &types.Filters{
-			ExtendedKeyUsage: []types.ExtendedKeyUsageName{
-				types.ExtendedKeyUsageName("TLS_WEB_SERVER_AUTHENTICATION"),
-				types.ExtendedKeyUsageName("TLS_WEB_SERVER_AUTHENTICATION"),
-			},
-			KeyUsage: []types.KeyUsageName{
-				types.KeyUsageName("DIGITAL_SIGNATURE"),
-				types.KeyUsageName("DIGITAL_SIGNATURE"),
-			},
-			KeyTypes: []types.KeyAlgorithm{
-				types.KeyAlgorithm("RSA_1024"),
-				types.KeyAlgorithm("RSA_1024"),
-			},
-			ExportOption: types.CertificateExport("ENABLED"),
-			ManagedBy:    types.CertificateManagedBy("CLOUDFRONT"),
-		},
-		NextToken: ptr.String("__NextToken__"),
-		MaxItems:  ptr.Int32(1),
-		SortBy:    types.SortBy("CREATED_AT"),
-		SortOrder: types.SortOrder("ASCENDING"),
+	_, opErr := svc.ListCertificateDomainValidations(context.Background(), &ListCertificateDomainValidationsInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxItems:       ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2274,6 +2347,7 @@ func TestCheckResponseSnapshot_Error_InvalidDomainValidationOptionsException(t *
 		Options: &types.CertificateOptions{
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
 			Export:                                   types.CertificateExport("ENABLED"),
+			ValidationMethod:                         types.ValidationMethod("EMAIL"),
 		},
 		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
 		Tags: []types.Tag{

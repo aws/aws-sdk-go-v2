@@ -30,6 +30,7 @@
         "api_op_ListAcmeDomainValidations.go",
         "api_op_ListAcmeEndpoints.go",
         "api_op_ListAcmeExternalAccountBindings.go",
+        "api_op_ListCertificateDomainValidations.go",
         "api_op_ListCertificates.go",
         "api_op_ListTagsForCertificate.go",
         "api_op_ListTagsForResource.go",

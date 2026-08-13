@@ -3566,6 +3566,18 @@ func TestCheckSnapshot_SendOutboundWebNotification(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartAssistantContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAssistantContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAssistantContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartAttachedFileUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAttachedFileUpload(context.Background(), nil, func(o *Options) {
@@ -8202,6 +8214,18 @@ func TestUpdateSnapshot_SendOutboundWebNotification(t *testing.T) {
 	_, err := svc.SendOutboundWebNotification(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SendOutboundWebNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAssistantContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAssistantContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAssistantContact")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

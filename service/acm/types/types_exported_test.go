@@ -265,6 +265,28 @@ func ExampleSubjectFilter_outputUsage() {
 
 var _ *types.CommonNameFilter
 
+func ExampleValidationChallenge_outputUsage() {
+	var union types.ValidationChallenge
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ValidationChallengeMemberDnsValidationChallenge:
+		_ = v.Value // Value is types.DnsValidationChallenge
+
+	case *types.ValidationChallengeMemberEmailValidationChallenge:
+		_ = v.Value // Value is types.EmailValidationChallenge
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EmailValidationChallenge
+var _ *types.DnsValidationChallenge
+
 func ExampleX509AttributeFilter_outputUsage() {
 	var union types.X509AttributeFilter
 	// type switches can be used to check the union value

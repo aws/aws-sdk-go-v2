@@ -746,6 +746,44 @@ func (TimeType) Values() []TimeType {
 	}
 }
 
+type UpdateStatus string
+
+// Enum values for UpdateStatus
+const (
+	UpdateStatusPendingDomainValidation UpdateStatus = "PENDING_DOMAIN_VALIDATION"
+	UpdateStatusSuccess                 UpdateStatus = "SUCCESS"
+	UpdateStatusFailed                  UpdateStatus = "FAILED"
+)
+
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateStatus) Values() []UpdateStatus {
+	return []UpdateStatus{
+		"PENDING_DOMAIN_VALIDATION",
+		"SUCCESS",
+		"FAILED",
+	}
+}
+
+type UpdateType string
+
+// Enum values for UpdateType
+const (
+	UpdateTypeDomainValidationMethod UpdateType = "DOMAIN_VALIDATION_METHOD"
+)
+
+// Values returns all known values for UpdateType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateType) Values() []UpdateType {
+	return []UpdateType{
+		"DOMAIN_VALIDATION_METHOD",
+	}
+}
+
 type ValidationMethod string
 
 // Enum values for ValidationMethod
