@@ -332,6 +332,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A scaling activity.</p>"
                     }
+                },
+                "Activities": {
+                    "target": "com.amazonaws.autoscaling#Activities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling activities related to terminating the instances from the Auto Scaling group.</p>"
+                    }
                 }
             }
         },
@@ -6788,6 +6794,23 @@
         "com.amazonaws.autoscaling#HonorCooldown": {
             "type": "boolean"
         },
+        "com.amazonaws.autoscaling#IdempotentCallInProgressFault": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IdempotentCallInProgress",
+                    "httpResponseCode": 500
+                },
+                "smithy.api#documentation": "<p>\n            The service is currently processing another request with the same client token. Retry\n            the request with the same client token—the in-flight operation will complete and return\n            its result.\n        </p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
         "com.amazonaws.autoscaling#IdempotentParameterMismatchError": {
             "type": "structure",
             "members": {
@@ -7880,6 +7903,9 @@
                 "target": "com.amazonaws.autoscaling#LaunchInstancesResult"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.autoscaling#IdempotentCallInProgressFault"
+                },
                 {
                     "target": "com.amazonaws.autoscaling#IdempotentParameterMismatchError"
                 },
@@ -10294,7 +10320,7 @@
                 "MaxHealthyPercentage": {
                     "target": "com.amazonaws.autoscaling#IntPercent100To200",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the maximum percentage of the group that can be in service and healthy, or\n            pending, to support your workload when replacing instances. The value is expressed as a\n            percentage of the desired capacity of the Auto Scaling group. Value range is 100 to 200.</p>\n         <p>If you specify <code>MaxHealthyPercentage</code>, you must also specify\n                <code>MinHealthyPercentage</code>, and the difference between them cannot be greater\n            than 100. A larger range increases the number of instances that can be replaced at the\n            same time.</p>\n         <p>If you do not specify this property, the default is 100 percent, or the percentage set\n            in the instance maintenance policy for the Auto Scaling group, if defined.</p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum percentage of the group that can be in service and healthy, or\n            pending, to support your workload when replacing instances. The value is expressed as a\n            percentage of the desired capacity of the Auto Scaling group. Value range is 100 to 200.</p>\n         <p>If you specify <code>MaxHealthyPercentage</code>, you must also specify\n                <code>MinHealthyPercentage</code>, and the difference between them cannot be greater\n            than 100. A larger range increases the number of instances that can be replaced at the\n            same time.</p>\n         <p>If you do not specify this property, the default is 100 percent, or the percentage set\n            in the instance maintenance policy for the Auto Scaling group, if defined.</p>\n         <important>\n            <p>Explicitly setting <code>MaxHealthyPercentage</code> to 100 is not equivalent to\n            omitting it. When <code>MaxHealthyPercentage</code> is explicitly set and it is\n            mathematically impossible to replace instances while honoring both\n            <code>MinHealthyPercentage</code> and <code>MaxHealthyPercentage</code> bounds\n            simultaneously, Auto Scaling launches a new instance before terminating an old one\n            (temporarily exceeding the desired capacity). When <code>MaxHealthyPercentage</code>\n            is omitted, Auto Scaling terminates an instance and launches its replacement\n            simultaneously. This behavioral difference can affect workflows that depend on\n            instance replacement ordering.</p>\n         </important>"
                     }
                 },
                 "BakeTime": {
@@ -11732,7 +11758,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size. This\n            operation cannot be called on instances in a warm pool.</p>\n         <p>This call simply makes a termination request. The instance is not terminated\n            immediately. When an instance is terminated, the instance status changes to\n                <code>terminated</code>. You can't connect to or start an instance after you've\n            terminated it.</p>\n         <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches\n            instances to replace the ones that are terminated. </p>\n         <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you\n            decrement the desired capacity, your Auto Scaling group can become unbalanced between\n            Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might\n            terminate instances in other zones. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html\">Manual\n                scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size. This\n            operation cannot be called on instances in a warm pool.</p>\n         <p>This call simply makes a termination request. The instances are not terminated\n            immediately. When an instance is terminated, the instance status changes to\n                <code>terminated</code>. You can't connect to or start an instance after you've\n            terminated it.</p>\n         <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches\n            instances to replace the ones that are terminated. </p>\n         <p>To terminate multiple instances in a single call, use the <code>InstanceIds</code>\n            and <code>AutoScalingGroupName</code> parameters instead of <code>InstanceId</code>.\n            When terminating multiple instances, the response populates\n            <code>Activities</code> instead of <code>Activity</code>.</p>\n         <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you\n            decrement the desired capacity, your Auto Scaling group can become unbalanced between\n            Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might\n            terminate instances in other zones. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html\">Manual\n                scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To terminate an instance in an Auto Scaling group",
@@ -11740,6 +11766,40 @@
                         "input": {
                             "InstanceId": "i-93633f9b",
                             "ShouldDecrementDesiredCapacity": false
+                        }
+                    },
+                    {
+                        "title": "To terminate multiple instances in an Auto Scaling group",
+                        "documentation": "This example terminates multiple instances from the specified Auto Scaling group without updating the size of the group. Auto Scaling launches replacement instances after the specified instances terminate.",
+                        "input": {
+                            "InstanceIds": [
+                                "i-93633f9b",
+                                "i-ab4d5e6f7"
+                            ],
+                            "AutoScalingGroupName": "my-asg",
+                            "ShouldDecrementDesiredCapacity": false
+                        },
+                        "output": {
+                            "Activities": [
+                                {
+                                    "ActivityId": "12345678-1234-1234-1234-123456789012",
+                                    "AutoScalingGroupName": "my-asg",
+                                    "Description": "Terminating EC2 instance: i-93633f9b",
+                                    "Cause": "At 2024-03-14T00:07:30Z instance i-93633f9b was taken out of service in response to a user request.",
+                                    "StartTime": "2024-03-14T00:07:30.280Z",
+                                    "StatusCode": "InProgress",
+                                    "Progress": 0
+                                },
+                                {
+                                    "ActivityId": "12345678-1234-1234-1234-123456789013",
+                                    "AutoScalingGroupName": "my-asg",
+                                    "Description": "Terminating EC2 instance: i-ab4d5e6f7",
+                                    "Cause": "At 2024-03-14T00:07:30Z instance i-ab4d5e6f7 was taken out of service in response to a user request.",
+                                    "StartTime": "2024-03-14T00:07:30.280Z",
+                                    "StatusCode": "InProgress",
+                                    "Progress": 0
+                                }
+                            ]
                         }
                     }
                 ]
@@ -11751,9 +11811,19 @@
                 "InstanceId": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen19",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the instance.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the instance.</p>"
+                    }
+                },
+                "InstanceIds": {
+                    "target": "com.amazonaws.autoscaling#TerminationInstanceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the instances. You can specify up to 100 instances.</p>\n         <p>This parameter requires that you also specify <code>AutoScalingGroupName</code>.</p>"
+                    }
+                },
+                "AutoScalingGroupName": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Auto Scaling group. Required when using <code>InstanceIds</code>.</p>"
                     }
                 },
                 "ShouldDecrementDesiredCapacity": {
@@ -11763,6 +11833,18 @@
                         "smithy.api#documentation": "<p>Indicates whether terminating the instance also decrements the size of the Auto Scaling\n            group.</p>",
                         "smithy.api#required": {}
                     }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#TerminationInstanceIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#XmlStringMaxLen19"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },

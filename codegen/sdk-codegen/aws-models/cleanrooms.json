@@ -1253,6 +1253,79 @@
                 }
             }
         },
+        "com.amazonaws.cleanrooms#AggregationThreshold": {
+            "type": "structure",
+            "members": {
+                "identityColumns": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisRuleColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity column, such as <code>user_id</code>, whose distinct values Clean Rooms counts to enforce minimum aggregation thresholds. Currently, you can specify only one column, and its data type must be string, varchar, or char.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "minimumIdentityCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of distinct identities that each query output group must represent. This threshold applies to all output columns in the table. To override this threshold for a specific column, use <code>outputColumnThresholds</code>.</p>",
+                        "smithy.api#range": {
+                            "min": 2,
+                            "max": 100000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.cleanrooms#AggregationThresholdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of aggregation that the threshold enforces. Currently, the only supported value is <code>COUNT_DISTINCT</code>, which counts the distinct values in the identity column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputColumnThresholds": {
+                    "target": "com.amazonaws.cleanrooms#OutputColumnThresholdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The per-column overrides of <code>minimumIdentityCount</code>. An output column without an override uses <code>minimumIdentityCount</code>.</p>"
+                    }
+                },
+                "allowedAggregateExpressionType": {
+                    "target": "com.amazonaws.cleanrooms#AllowedAggregateExpressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a query can aggregate a transformed column. This applies to the arguments of both aggregate and window functions. Valid values are:</p> <p> <code>COLUMNS_ONLY</code> – A query can aggregate only a direct column reference, such as <code>SUM(amount)</code>, or a constant. Clean Rooms rejects a query that transforms a column and then aggregates it, such as <code>SUM(amount * 2)</code> or <code>SUM(ROUND(amount))</code>.</p> <p> <code>ANY_EXPRESSION</code> – A query can aggregate any expression. This includes arithmetic, such as <code>SUM(price * quantity)</code>; a cast, such as <code>SUM(CAST(amount AS DECIMAL))</code>; a nested function call, such as <code>SUM(COALESCE(amount, 0))</code>; and a conditional, such as <code>SUM(CASE WHEN region = 'EU' THEN amount ELSE 0 END)</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum number of distinct identities that each query output group must represent.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AggregationThresholdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#AggregationThreshold"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#AggregationThresholdType": {
+            "type": "enum",
+            "members": {
+                "COUNT_DISTINCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT_DISTINCT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cleanrooms#AggregationType": {
             "type": "string",
             "traits": {
@@ -1273,6 +1346,23 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 25
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#AllowedAggregateExpressionType": {
+            "type": "enum",
+            "members": {
+                "COLUMNS_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMNS_ONLY"
+                    }
+                },
+                "ANY_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY_EXPRESSION"
+                    }
                 }
             }
         },
@@ -1821,6 +1911,18 @@
                         "smithy.api#documentation": "<p>The differential privacy configuration.</p>"
                     }
                 },
+                "aggregationThresholds": {
+                    "target": "com.amazonaws.cleanrooms#AggregationThresholdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation thresholds that each query output group must satisfy. Clean Rooms filters out any group that represents fewer than the specified number of distinct identities. You can specify at most one threshold. You can't use aggregation thresholds with differential privacy, or when <code>allowedAnalyses</code> allows only jobs.</p>"
+                    }
+                },
+                "comparisonControls": {
+                    "target": "com.amazonaws.cleanrooms#ComparisonControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The controls that restrict how a query can compare the columns in the configured table. You can't use comparison controls with differential privacy, or when <code>allowedAnalyses</code> allows only jobs.</p>"
+                    }
+                },
                 "allowedResultReceivers": {
                     "target": "com.amazonaws.cleanrooms#AllowedResultReceivers",
                     "traits": {
@@ -1835,7 +1937,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A type of analysis rule that enables the table owner to approve custom SQL queries on their configured tables. It supports differential privacy.</p>"
+                "smithy.api#documentation": "<p>A type of analysis rule that enables the table owner to approve custom SQL queries on their configured tables. It supports differential privacy, minimum aggregation thresholds, and comparison controls.</p>"
             }
         },
         "com.amazonaws.cleanrooms#AnalysisRuleIdMappingTable": {
@@ -5226,6 +5328,28 @@
                 }
             }
         },
+        "com.amazonaws.cleanrooms#ComparisonControls": {
+            "type": "structure",
+            "members": {
+                "allowedLiteralComparisonColumns": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisRuleColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The columns that a query can compare to literal values, for example, in a WHERE clause. Clean Rooms rejects a query that compares any other column to a literal value. Specify an empty list to block literal comparison on every column. You can't specify a column that you also use as an identity column in an aggregation threshold.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "allowedColumnComparisonColumns": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisRuleColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The columns that a query can compare to another column, for example, in a join, a WHERE clause, a GROUP BY clause, or a window function. Clean Rooms rejects a query that uses any other column in a column-to-column comparison. Specify an empty list to block column-to-column comparison on every column.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how a query can compare the columns in a table, including literal comparisons and column-to-column comparisons.</p>"
+            }
+        },
         "com.amazonaws.cleanrooms#ComputeConfiguration": {
             "type": "union",
             "members": {
@@ -6478,6 +6602,18 @@
                 },
                 "differentialPrivacy": {
                     "target": "com.amazonaws.cleanrooms#DifferentialPrivacyConfiguration"
+                },
+                "aggregationThresholds": {
+                    "target": "com.amazonaws.cleanrooms#AggregationThresholdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The aggregation thresholds for the consolidated policy.</p>"
+                    }
+                },
+                "comparisonControls": {
+                    "target": "com.amazonaws.cleanrooms#ComparisonControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The comparison controls for the consolidated policy.</p>"
+                    }
                 },
                 "allowedResultReceivers": {
                     "target": "com.amazonaws.cleanrooms#AllowedResultReceivers",
@@ -12551,6 +12687,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of columns that are not allowed in the query output.</p>"
                     }
+                },
+                "aggregationThresholds": {
+                    "target": "com.amazonaws.cleanrooms#AggregationThresholdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation thresholds that each query output group must satisfy. Clean Rooms filters out any group that represents fewer than the specified number of distinct identities. You can specify at most one threshold. You can't use aggregation thresholds with differential privacy, or when <code>allowedAnalyses</code> allows only jobs.</p>"
+                    }
+                },
+                "comparisonControls": {
+                    "target": "com.amazonaws.cleanrooms#ComparisonControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The controls that restrict how a query can compare the columns in the intermediate table. You can't use comparison controls with differential privacy, or when <code>allowedAnalyses</code> allows only jobs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16378,6 +16526,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object representing the collaboration member's model training payment responsibilities set by the collaboration creator.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#OutputColumnThreshold": {
+            "type": "structure",
+            "members": {
+                "outputColumnName": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisRuleColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the output column that the override applies to. You can specify each column only once.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "minimumIdentityCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of distinct identities that each query output group must represent for this column. Specify 0 to exempt the column from the threshold, or a value of 2 or greater to enforce a threshold.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 100000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum number of distinct identities for an individual output column. This value overrides the table-wide <code>minimumIdentityCount</code> that you set in <code>AggregationThreshold</code>.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#OutputColumnThresholdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#OutputColumnThreshold"
             }
         },
         "com.amazonaws.cleanrooms#PaginationToken": {
