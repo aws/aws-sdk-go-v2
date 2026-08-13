@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.GetAnalysisReportResults
-
-{"AnalysisReportResults":[{"Domain":"__Domain__","FirstAccessed":946684800,"Hits":{"Count":1},"LastAccessed":946684800,"Protocol":"__Protocol__","UniqueSources":{"Count":1}},{"Domain":"__Domain__","FirstAccessed":946684800,"Hits":{"Count":1},"LastAccessed":946684800,"Protocol":"__Protocol__","UniqueSources":{"Count":1}}],"AnalysisType":"TLS_SNI","EndTime":946684800,"NextToken":"__NextToken__","ReportTime":946684800,"StartTime":946684800,"Status":"__Status__"}

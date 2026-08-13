@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"app":{"appArn":"__AppArn__","assessmentSchedule":"Disabled","awsApplicationArn":"__AwsApplicationArn__","complianceStatus":"PolicyBreached","creationTime":946684800,"description":"__Description__","driftStatus":"NotChecked","eventSubscriptions":[{"eventType":"ScheduledAssessmentFailure","name":"__Name__","snsTopicArn":"__SnsTopicArn__"},{"eventType":"ScheduledAssessmentFailure","name":"__Name__","snsTopicArn":"__SnsTopicArn__"}],"lastAppComplianceEvaluationTime":946684800,"lastDriftEvaluationTime":946684800,"lastResiliencyScoreEvaluationTime":946684800,"name":"__Name__","permissionModel":{"crossAccountRoleArns":["__Member__","__Member__"],"invokerRoleName":"__InvokerRoleName__","type":"LegacyIAMUser"},"policyArn":"__PolicyArn__","resiliencyScore":1,"rpoInSecs":1,"rtoInSecs":1,"status":"Active","tags":{"key0":"__Value__"}}}

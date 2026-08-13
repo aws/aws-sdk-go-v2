@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ResourceTypes":[{"CFNResourceTypes":["__Member__","__Member__"],"ResourceType":"__ResourceType__","Service":"__Service__"},{"CFNResourceTypes":["__Member__","__Member__"],"ResourceType":"__ResourceType__","Service":"__Service__"}]}

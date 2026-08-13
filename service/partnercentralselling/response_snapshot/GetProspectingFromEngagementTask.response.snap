@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSPartnerCentralSelling.GetProspectingFromEngagementTask
-
-{"EndTime":"2000-01-01T00:00:00Z","Engagements":[{"EngagementContextId":"__EngagementContextId__","EngagementIdentifier":"__EngagementIdentifier__","Message":"__Message__","ReasonCode":"__ReasonCode__","Status":"PENDING"},{"EngagementContextId":"__EngagementContextId__","EngagementIdentifier":"__EngagementIdentifier__","Message":"__Message__","ReasonCode":"__ReasonCode__","Status":"PENDING"}],"StartTime":"2000-01-01T00:00:00Z","TaskArn":"__TaskArn__","TaskId":"__TaskId__","TaskName":"__TaskName__"}

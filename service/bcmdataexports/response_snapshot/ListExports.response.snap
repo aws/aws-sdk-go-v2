@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSBillingAndCostManagementDataExports.ListExports
-
-{"Exports":[{"ExportArn":"__ExportArn__","ExportName":"__ExportName__","ExportStatus":{"CreatedAt":"2000-01-01T00:00:00Z","LastRefreshedAt":"2000-01-01T00:00:00Z","LastUpdatedAt":"2000-01-01T00:00:00Z","StatusCode":"HEALTHY","StatusReason":"INSUFFICIENT_PERMISSION"}},{"ExportArn":"__ExportArn__","ExportName":"__ExportName__","ExportStatus":{"CreatedAt":"2000-01-01T00:00:00Z","LastRefreshedAt":"2000-01-01T00:00:00Z","LastUpdatedAt":"2000-01-01T00:00:00Z","StatusCode":"HEALTHY","StatusReason":"INSUFFICIENT_PERMISSION"}}],"NextToken":"__NextToken__"}

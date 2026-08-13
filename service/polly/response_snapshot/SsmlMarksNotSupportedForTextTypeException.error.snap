@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"SsmlMarksNotSupportedForTextTypeException","message":"__Message__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","webExperiences":[{"createdAt":946684800,"defaultEndpoint":"__DefaultEndpoint__","status":"CREATING","updatedAt":946684800,"webExperienceId":"__WebExperienceId__"},{"createdAt":946684800,"defaultEndpoint":"__DefaultEndpoint__","status":"CREATING","updatedAt":946684800,"webExperienceId":"__WebExperienceId__"}]}

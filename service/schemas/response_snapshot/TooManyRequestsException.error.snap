@@ -1,4 +1,0 @@
-429
-Content-Type: application/json
-
-{"__type":"TooManyRequestsException","Code":"TooManyRequestsException","Message":"__Message__"}

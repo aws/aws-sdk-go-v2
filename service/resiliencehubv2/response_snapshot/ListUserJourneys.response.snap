@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","userJourneySummaries":[{"createdAt":946684800,"name":"__Name__","updatedAt":946684800,"userJourneyId":"__UserJourneyId__"},{"createdAt":946684800,"name":"__Name__","updatedAt":946684800,"userJourneyId":"__UserJourneyId__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"creationDate":946684800,"failureCount":1,"inputFileBucket":"__InputFileBucket__","inputFileKey":"__InputFileKey__","lastModifiedDate":946684800,"message":"__Message__","percentageProgress":1,"roleArn":"__RoleArn__","status":"InProgress","successCount":1,"taskId":"__TaskId__","templateBody":"__TemplateBody__"}

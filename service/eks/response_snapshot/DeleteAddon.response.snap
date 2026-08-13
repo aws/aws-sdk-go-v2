@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"addon":{"addonArn":"__AddonArn__","addonName":"__AddonName__","addonVersion":"__AddonVersion__","clusterName":"__ClusterName__","configurationValues":"__ConfigurationValues__","createdAt":946684800,"health":{"issues":[{"code":"AccessDenied","message":"__Message__","resourceIds":["__Member__","__Member__"]},{"code":"AccessDenied","message":"__Message__","resourceIds":["__Member__","__Member__"]}]},"marketplaceInformation":{"productId":"__ProductId__","productUrl":"__ProductUrl__"},"modifiedAt":946684800,"namespaceConfig":{"namespace":"__Namespace__"},"owner":"__Owner__","podIdentityAssociations":["__Member__","__Member__"],"publisher":"__Publisher__","serviceAccountRoleArn":"__ServiceAccountRoleArn__","status":"CREATING","tags":{"key0":"__Value__"}}}

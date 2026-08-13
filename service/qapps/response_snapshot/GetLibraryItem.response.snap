@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appId":"__AppId__","appVersion":1,"categories":[{"appCount":1,"color":"__Color__","id":"__Id__","title":"__Title__"},{"appCount":1,"color":"__Color__","id":"__Id__","title":"__Title__"}],"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","isRatedByUser":true,"isVerified":true,"libraryItemId":"__LibraryItemId__","ratingCount":1,"status":"__Status__","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__","userCount":1}

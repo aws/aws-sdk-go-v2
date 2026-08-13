@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"EventIntegrationAssociations":[{"ClientAssociationMetadata":{"key0":"__Value__"},"ClientId":"__ClientId__","EventBridgeRuleName":"__EventBridgeRuleName__","EventIntegrationAssociationArn":"__EventIntegrationAssociationArn__","EventIntegrationAssociationId":"__EventIntegrationAssociationId__","EventIntegrationName":"__EventIntegrationName__"},{"ClientAssociationMetadata":{"key0":"__Value__"},"ClientId":"__ClientId__","EventBridgeRuleName":"__EventBridgeRuleName__","EventIntegrationAssociationArn":"__EventIntegrationAssociationArn__","EventIntegrationAssociationId":"__EventIntegrationAssociationId__","EventIntegrationName":"__EventIntegrationName__"}],"NextToken":"__NextToken__"}

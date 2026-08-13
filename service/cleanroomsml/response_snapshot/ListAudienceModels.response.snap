@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"audienceModels":[{"audienceModelArn":"__AudienceModelArn__","createTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","status":"CREATE_PENDING","trainingDatasetArn":"__TrainingDatasetArn__","updateTime":"2000-01-01T00:00:00Z"},{"audienceModelArn":"__AudienceModelArn__","createTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","status":"CREATE_PENDING","trainingDatasetArn":"__TrainingDatasetArn__","updateTime":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

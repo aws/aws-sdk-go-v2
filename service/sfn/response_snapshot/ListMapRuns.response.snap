@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSStepFunctions.ListMapRuns
-
-{"mapRuns":[{"executionArn":"__ExecutionArn__","mapRunArn":"__MapRunArn__","startDate":946684800,"stateMachineArn":"__StateMachineArn__","stopDate":946684800},{"executionArn":"__ExecutionArn__","mapRunArn":"__MapRunArn__","startDate":946684800,"stateMachineArn":"__StateMachineArn__","stopDate":946684800}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"format":"CSV","graphId":"__GraphId__","parquetType":"COLUMNAR","roleArn":"__RoleArn__","source":"__Source__","status":"INITIALIZING","taskId":"__TaskId__"}

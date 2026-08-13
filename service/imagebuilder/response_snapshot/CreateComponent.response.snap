@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"clientToken":"__ClientToken__","componentBuildVersionArn":"__ComponentBuildVersionArn__","latestVersionReferences":{"latestMajorVersionArn":"__LatestMajorVersionArn__","latestMinorVersionArn":"__LatestMinorVersionArn__","latestPatchVersionArn":"__LatestPatchVersionArn__","latestVersionArn":"__LatestVersionArn__"},"requestId":"__RequestId__"}

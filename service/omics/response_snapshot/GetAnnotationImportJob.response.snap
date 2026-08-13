@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"annotationFields":{"key0":"__Value__"},"completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","destinationName":"__DestinationName__","formatOptions":{"tsvOptions":{"readOptions":{"comment":"__Comment__","encoding":"__Encoding__","escape":"__Escape__","escapeQuotes":true,"header":true,"lineSep":"__LineSep__","quote":"__Quote__","quoteAll":true,"sep":"__Sep__"}}},"id":"__Id__","items":[{"jobStatus":"SUBMITTED","source":"__Source__"},{"jobStatus":"SUBMITTED","source":"__Source__"}],"roleArn":"__RoleArn__","runLeftNormalization":true,"status":"SUBMITTED","statusMessage":"__StatusMessage__","updateTime":"2000-01-01T00:00:00Z","versionName":"__VersionName__"}

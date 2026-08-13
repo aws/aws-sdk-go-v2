@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","topics":[{"outOfSyncReplicaCount":1,"partitionCount":1,"replicationFactor":1,"topicArn":"__TopicArn__","topicName":"__TopicName__"},{"outOfSyncReplicaCount":1,"partitionCount":1,"replicationFactor":1,"topicArn":"__TopicArn__","topicName":"__TopicName__"}]}

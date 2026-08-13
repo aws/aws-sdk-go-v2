@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CoreNetworkPolicy":{"Alias":"LIVE","ChangeSetState":"PENDING_GENERATION","CoreNetworkId":"__CoreNetworkId__","CreatedAt":946684800,"Description":"__Description__","PolicyDocument":"__PolicyDocument__","PolicyErrors":[{"ErrorCode":"__ErrorCode__","Message":"__Message__","Path":"__Path__"},{"ErrorCode":"__ErrorCode__","Message":"__Message__","Path":"__Path__"}],"PolicyVersionId":1}}

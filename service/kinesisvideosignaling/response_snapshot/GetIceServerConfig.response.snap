@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"IceServerList":[{"Password":"__Password__","Ttl":1,"Uris":["__Member__","__Member__"],"Username":"__Username__"},{"Password":"__Password__","Ttl":1,"Uris":["__Member__","__Member__"],"Username":"__Username__"}]}

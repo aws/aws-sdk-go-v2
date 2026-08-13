@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBCMDashboardsService.ListDashboards
-
-{"dashboards":[{"arn":"__Arn__","createdAt":946684800,"description":"__Description__","name":"__Name__","type":"CUSTOM","updatedAt":946684800},{"arn":"__Arn__","createdAt":946684800,"description":"__Description__","name":"__Name__","type":"CUSTOM","updatedAt":946684800}],"nextToken":"__NextToken__"}

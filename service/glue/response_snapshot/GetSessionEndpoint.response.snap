@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.GetSessionEndpoint
-
-{"SparkConnect":{"AuthToken":"__AuthToken__","AuthTokenExpirationTime":946684800,"Url":"__Url__"}}

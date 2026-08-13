@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.ListServers
-
-{"NextToken":"__NextToken__","Servers":[{"Arn":"__Arn__","Domain":"S3","EndpointType":"PUBLIC","IdentityProviderType":"SERVICE_MANAGED","LoggingRole":"__LoggingRole__","ServerId":"__ServerId__","State":"OFFLINE","UserCount":1},{"Arn":"__Arn__","Domain":"S3","EndpointType":"PUBLIC","IdentityProviderType":"SERVICE_MANAGED","LoggingRole":"__LoggingRole__","ServerId":"__ServerId__","State":"OFFLINE","UserCount":1}]}

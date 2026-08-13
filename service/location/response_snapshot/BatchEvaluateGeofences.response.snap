@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Errors":[{"DeviceId":"__DeviceId__","Error":{"Code":"AccessDeniedError","Message":"__Message__"},"SampleTime":"2000-01-01T00:00:00Z"},{"DeviceId":"__DeviceId__","Error":{"Code":"AccessDeniedError","Message":"__Message__"},"SampleTime":"2000-01-01T00:00:00Z"}]}

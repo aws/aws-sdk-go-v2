@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"AppflowIntegration":{"BatchRecordsEndTime":"__BatchRecordsEndTime__","BatchRecordsStartTime":"__BatchRecordsStartTime__","CreatedAt":946684800,"ExecutionMessage":"__ExecutionMessage__","FlowName":"__FlowName__","LastUpdatedAt":946684800,"RecordsProcessed":1,"Status":"NOT_STARTED"}},{"AppflowIntegration":{"BatchRecordsEndTime":"__BatchRecordsEndTime__","BatchRecordsStartTime":"__BatchRecordsStartTime__","CreatedAt":946684800,"ExecutionMessage":"__ExecutionMessage__","FlowName":"__FlowName__","LastUpdatedAt":946684800,"RecordsProcessed":1,"Status":"NOT_STARTED"}}],"NextToken":"__NextToken__","WorkflowId":"__WorkflowId__","WorkflowType":"APPFLOW_INTEGRATION"}

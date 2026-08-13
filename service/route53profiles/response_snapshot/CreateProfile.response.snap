@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Profile":{"Arn":"__Arn__","ClientToken":"__ClientToken__","CreationTime":946684800,"Id":"__Id__","ModificationTime":946684800,"Name":"__Name__","OwnerId":"__OwnerId__","ShareStatus":"NOT_SHARED","Status":"COMPLETE","StatusMessage":"__StatusMessage__"}}

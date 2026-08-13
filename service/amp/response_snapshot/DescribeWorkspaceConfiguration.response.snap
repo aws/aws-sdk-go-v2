@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"workspaceConfiguration":{"limitsPerLabelSet":[{"labelSet":{"key0":"__Value__"},"limits":{"maxSeries":1}},{"labelSet":{"key0":"__Value__"},"limits":{"maxSeries":1}}],"outOfOrderTimeWindowInSeconds":1,"retentionPeriodInDays":1,"ruleQueryOffsetInSeconds":1,"status":{"statusCode":"ACTIVE","statusReason":"__StatusReason__"}}}

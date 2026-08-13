@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"EventLogLevel":"DEBUG","Id":"__Id__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}

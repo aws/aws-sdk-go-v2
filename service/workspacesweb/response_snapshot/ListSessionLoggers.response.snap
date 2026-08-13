@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","sessionLoggers":[{"creationDate":946684800,"displayName":"__DisplayName__","logConfiguration":{"s3":{"bucket":"__Bucket__","bucketOwner":"__BucketOwner__","folderStructure":"Flat","keyPrefix":"__KeyPrefix__","logFileFormat":"JSONLines"}},"sessionLoggerArn":"__SessionLoggerArn__"},{"creationDate":946684800,"displayName":"__DisplayName__","logConfiguration":{"s3":{"bucket":"__Bucket__","bucketOwner":"__BucketOwner__","folderStructure":"Flat","keyPrefix":"__KeyPrefix__","logFileFormat":"JSONLines"}},"sessionLoggerArn":"__SessionLoggerArn__"}]}

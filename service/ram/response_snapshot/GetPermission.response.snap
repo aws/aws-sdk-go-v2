@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"permission":{"arn":"__Arn__","creationTime":946684800,"defaultVersion":true,"featureSet":"CREATED_FROM_POLICY","isResourceTypeDefault":true,"lastUpdatedTime":946684800,"name":"__Name__","permission":"__Permission__","permissionType":"CUSTOMER_MANAGED","resourceType":"__ResourceType__","status":"ATTACHABLE","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"version":"__Version__"}}

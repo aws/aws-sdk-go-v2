@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.DescribeComplianceByConfigRule
-
-{"ComplianceByConfigRules":[{"Compliance":{"ComplianceContributorCount":{"CapExceeded":true,"CappedCount":1},"ComplianceType":"COMPLIANT"},"ConfigRuleName":"__ConfigRuleName__"},{"Compliance":{"ComplianceContributorCount":{"CapExceeded":true,"CappedCount":1},"ComplianceType":"COMPLIANT"},"ConfigRuleName":"__ConfigRuleName__"}],"NextToken":"__NextToken__"}

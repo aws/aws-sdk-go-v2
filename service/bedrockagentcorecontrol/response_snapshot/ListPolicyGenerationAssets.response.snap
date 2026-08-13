@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","policyGenerationAssets":[{"definition":{"cedar":{"statement":"__Statement__"}},"findings":[{"description":"__Description__","type":"VALID"},{"description":"__Description__","type":"VALID"}],"policyGenerationAssetId":"__PolicyGenerationAssetId__","rawTextFragment":"__RawTextFragment__"},{"definition":{"cedar":{"statement":"__Statement__"}},"findings":[{"description":"__Description__","type":"VALID"},{"description":"__Description__","type":"VALID"}],"policyGenerationAssetId":"__PolicyGenerationAssetId__","rawTextFragment":"__RawTextFragment__"}]}

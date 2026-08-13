@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.ListDataQualityRulesets
-
-{"NextToken":"__NextToken__","Rulesets":[{"CreatedOn":946684800,"Description":"__Description__","LastModifiedOn":946684800,"Name":"__Name__","RecommendationRunId":"__RecommendationRunId__","RuleCount":1,"TargetTable":{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","TableName":"__TableName__"}},{"CreatedOn":946684800,"Description":"__Description__","LastModifiedOn":946684800,"Name":"__Name__","RecommendationRunId":"__RecommendationRunId__","RuleCount":1,"TargetTable":{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","TableName":"__TableName__"}}]}

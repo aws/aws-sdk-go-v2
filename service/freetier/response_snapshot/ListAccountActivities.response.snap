@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSFreeTierService.ListAccountActivities
-
-{"activities":[{"activityId":"__ActivityId__","reward":{"credit":{"amount":1,"unit":"USD"}},"status":"NOT_STARTED","title":"__Title__"},{"activityId":"__ActivityId__","reward":{"credit":{"amount":1,"unit":"USD"}},"status":"NOT_STARTED","title":"__Title__"}],"nextToken":"__NextToken__"}

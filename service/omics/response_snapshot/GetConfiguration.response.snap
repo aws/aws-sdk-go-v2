@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","runConfigurations":{"vpcConfig":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}},"status":"CREATING","tags":{"key0":"__Value__"},"uuid":"__Uuid__"}

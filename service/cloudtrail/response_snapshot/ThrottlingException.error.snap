@@ -1,5 +1,0 @@
-429
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.CreateEventDataStore
-
-{"__type":"ThrottlingException","Message":"__Message__"}

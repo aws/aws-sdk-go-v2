@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralBenefitsService.CreateBenefitApplication
-
-{"Arn":"__Arn__","Id":"__Id__","Revision":"__Revision__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"UnprocessedTraceSegments":[{"ErrorCode":"__ErrorCode__","Id":"__Id__","Message":"__Message__"},{"ErrorCode":"__ErrorCode__","Id":"__Id__","Message":"__Message__"}]}

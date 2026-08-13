@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Logs_20140328.StartQuery
-
-{"__type":"MalformedQueryException","message":"__Message__","queryCompileError":{"location":{"endCharOffset":1,"startCharOffset":1},"message":"__Message__"}}

@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSPartnerCentralSelling.AcceptEngagementInvitation
-
-{"__type":"ValidationException","ErrorList":[{"Code":"REQUIRED_FIELD_MISSING","FieldName":"__FieldName__","Message":"__Message__"},{"Code":"REQUIRED_FIELD_MISSING","FieldName":"__FieldName__","Message":"__Message__"}],"Message":"__Message__","Reason":"REQUEST_VALIDATION_FAILED"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSInsightsIndexService.GetSavingsPlansCoverage
-
-{"NextToken":"__NextToken__","SavingsPlansCoverages":[{"Attributes":{"key0":"__Value__"},"Coverage":{"CoveragePercentage":"__CoveragePercentage__","OnDemandCost":"__OnDemandCost__","SpendCoveredBySavingsPlans":"__SpendCoveredBySavingsPlans__","TotalCost":"__TotalCost__"},"TimePeriod":{"End":"__End__","Start":"__Start__"}},{"Attributes":{"key0":"__Value__"},"Coverage":{"CoveragePercentage":"__CoveragePercentage__","OnDemandCost":"__OnDemandCost__","SpendCoveredBySavingsPlans":"__SpendCoveredBySavingsPlans__","TotalCost":"__TotalCost__"},"TimePeriod":{"End":"__End__","Start":"__Start__"}}]}

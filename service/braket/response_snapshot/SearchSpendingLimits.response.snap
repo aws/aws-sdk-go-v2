@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","spendingLimits":[{"createdAt":"2000-01-01T00:00:00Z","deviceArn":"__DeviceArn__","queuedSpend":"__QueuedSpend__","spendingLimit":"__SpendingLimit__","spendingLimitArn":"__SpendingLimitArn__","tags":{"key0":"__Value__"},"timePeriod":{"endAt":946684800,"startAt":946684800},"totalSpend":"__TotalSpend__","updatedAt":"2000-01-01T00:00:00Z"},{"createdAt":"2000-01-01T00:00:00Z","deviceArn":"__DeviceArn__","queuedSpend":"__QueuedSpend__","spendingLimit":"__SpendingLimit__","spendingLimitArn":"__SpendingLimitArn__","tags":{"key0":"__Value__"},"timePeriod":{"endAt":946684800,"startAt":946684800},"totalSpend":"__TotalSpend__","updatedAt":"2000-01-01T00:00:00Z"}]}

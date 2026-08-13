@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SpencerFrontendService.DescribeRegistries
-
-{"nextToken":"__NextToken__","registries":[{"aliases":[{"defaultRegistryAlias":true,"name":"__Name__","primaryRegistryAlias":true,"status":"ACTIVE"},{"defaultRegistryAlias":true,"name":"__Name__","primaryRegistryAlias":true,"status":"ACTIVE"}],"registryArn":"__RegistryArn__","registryId":"__RegistryId__","registryUri":"__RegistryUri__","verified":true},{"aliases":[{"defaultRegistryAlias":true,"name":"__Name__","primaryRegistryAlias":true,"status":"ACTIVE"},{"defaultRegistryAlias":true,"name":"__Name__","primaryRegistryAlias":true,"status":"ACTIVE"}],"registryArn":"__RegistryArn__","registryId":"__RegistryId__","registryUri":"__RegistryUri__","verified":true}]}

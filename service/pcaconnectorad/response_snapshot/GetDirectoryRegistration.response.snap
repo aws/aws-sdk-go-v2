@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DirectoryRegistration":{"Arn":"__Arn__","CreatedAt":946684800,"DirectoryId":"__DirectoryId__","Status":"CREATING","StatusReason":"DIRECTORY_ACCESS_DENIED","UpdatedAt":946684800}}

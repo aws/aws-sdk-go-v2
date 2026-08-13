@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSStepFunctions.ListStateMachines
-
-{"nextToken":"__NextToken__","stateMachines":[{"creationDate":946684800,"name":"__Name__","stateMachineArn":"__StateMachineArn__","type":"STANDARD"},{"creationDate":946684800,"name":"__Name__","stateMachineArn":"__StateMachineArn__","type":"STANDARD"}]}

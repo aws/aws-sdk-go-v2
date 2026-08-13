@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"NextToken":"__NextToken__","UserProficiencyList":[{"AttributeName":"__AttributeName__","AttributeValue":"__AttributeValue__","Level":1},{"AttributeName":"__AttributeName__","AttributeValue":"__AttributeValue__","Level":1}]}

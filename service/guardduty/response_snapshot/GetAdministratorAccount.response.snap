@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"administrator":{"accountId":"__AccountId__","invitationId":"__InvitationId__","invitedAt":"__InvitedAt__","relationshipStatus":"__RelationshipStatus__"}}

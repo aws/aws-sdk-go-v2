@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","domainName":"__DomainName__","id":"__Id__","lastVerifiedTime":"2000-01-01T00:00:00Z","status":"VERIFIED","tags":{"key0":"__Value__"},"txtMethodConfig":{"name":"__Name__","value":"__Value__"}},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","domainName":"__DomainName__","id":"__Id__","lastVerifiedTime":"2000-01-01T00:00:00Z","status":"VERIFIED","tags":{"key0":"__Value__"},"txtMethodConfig":{"name":"__Name__","value":"__Value__"}}],"nextToken":"__NextToken__"}

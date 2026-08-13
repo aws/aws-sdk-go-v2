@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","botVersion":"__BotVersion__","localeId":"__LocaleId__","nextToken":"__NextToken__","slotTypeSummaries":[{"description":"__Description__","lastUpdatedDateTime":946684800,"parentSlotTypeSignature":"__ParentSlotTypeSignature__","slotTypeCategory":"Custom","slotTypeId":"__SlotTypeId__","slotTypeName":"__SlotTypeName__"},{"description":"__Description__","lastUpdatedDateTime":946684800,"parentSlotTypeSignature":"__ParentSlotTypeSignature__","slotTypeCategory":"Custom","slotTypeId":"__SlotTypeId__","slotTypeName":"__SlotTypeName__"}]}

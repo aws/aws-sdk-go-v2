@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"apps":[{"appArn":"__AppArn__","appId":"__AppId__","canEdit":true,"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","isVerified":true,"status":"__Status__","title":"__Title__"},{"appArn":"__AppArn__","appId":"__AppId__","canEdit":true,"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","isVerified":true,"status":"__Status__","title":"__Title__"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"billingGroupArn":"__BillingGroupArn__","billingGroupId":"__BillingGroupId__","billingGroupName":"__BillingGroupName__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesStreams.ListStreams
-
-{"nextToken":"__NextToken__","streams":[{"keyspaceName":"__KeyspaceName__","streamArn":"__StreamArn__","streamLabel":"__StreamLabel__","tableName":"__TableName__"},{"keyspaceName":"__KeyspaceName__","streamArn":"__StreamArn__","streamLabel":"__StreamLabel__","tableName":"__TableName__"}]}

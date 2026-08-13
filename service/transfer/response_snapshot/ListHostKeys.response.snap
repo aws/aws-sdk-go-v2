@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.ListHostKeys
-
-{"HostKeys":[{"Arn":"__Arn__","DateImported":946684800,"Description":"__Description__","Fingerprint":"__Fingerprint__","HostKeyId":"__HostKeyId__","Type":"__Type__"},{"Arn":"__Arn__","DateImported":946684800,"Description":"__Description__","Fingerprint":"__Fingerprint__","HostKeyId":"__HostKeyId__","Type":"__Type__"}],"NextToken":"__NextToken__","ServerId":"__ServerId__"}

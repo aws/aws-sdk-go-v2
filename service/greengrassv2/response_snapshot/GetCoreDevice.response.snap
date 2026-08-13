@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"architecture":"__Architecture__","coreDeviceThingName":"__CoreDeviceThingName__","coreVersion":"__CoreVersion__","lastStatusUpdateTimestamp":946684800,"platform":"__Platform__","runtime":"__Runtime__","status":"HEALTHY","tags":{"key0":"__Value__"}}

@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"ValidationException","message":"__Message__","reason":"INVALID_PAGINATION_TOKEN"}

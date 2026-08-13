@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"datastoreId":"__DatastoreId__","jobId":"__JobId__","jobStatus":"SUBMITTED","submittedAt":946684800}

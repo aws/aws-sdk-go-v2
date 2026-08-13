@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AccountId":"__AccountId__","BackupVaultArn":"__BackupVaultArn__","BackupVaultName":"__BackupVaultName__","CompletionDate":946684800,"ContinuousScanEndTime":946684800,"ContinuousScanStartTime":946684800,"CreatedBy":{"BackupPlanArn":"__BackupPlanArn__","BackupPlanId":"__BackupPlanId__","BackupPlanVersion":"__BackupPlanVersion__","BackupRuleId":"__BackupRuleId__"},"CreationDate":946684800,"IamRoleArn":"__IamRoleArn__","MalwareScanner":"GUARDDUTY","RecoveryPointArn":"__RecoveryPointArn__","ResourceArn":"__ResourceArn__","ResourceName":"__ResourceName__","ResourceType":"EBS","ScanBaseRecoveryPointArn":"__ScanBaseRecoveryPointArn__","ScanId":"__ScanId__","ScanJobId":"__ScanJobId__","ScanMode":"FULL_SCAN","ScanResult":{"ScanResultStatus":"NO_THREATS_FOUND"},"ScannerRoleArn":"__ScannerRoleArn__","State":"CANCELED","StatusMessage":"__StatusMessage__"}

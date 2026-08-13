@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botExists":true,"botName":"__BotName__","isBotActive":true,"isDataRetentionBotRegistered":true,"isDataRetentionServiceEnabled":true,"isPubkeyMsgAcked":true}

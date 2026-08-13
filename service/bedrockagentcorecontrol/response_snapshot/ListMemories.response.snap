@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"memories":[{"arn":"__Arn__","createdAt":946684800,"id":"__Id__","managedByResourceArn":"__ManagedByResourceArn__","status":"CREATING","updatedAt":946684800},{"arn":"__Arn__","createdAt":946684800,"id":"__Id__","managedByResourceArn":"__ManagedByResourceArn__","status":"CREATING","updatedAt":946684800}],"nextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.PutConfigurationAggregator
-
-{"ConfigurationAggregator":{"AccountAggregationSources":[{"AccountIds":["__Member__","__Member__"],"AllAwsRegions":true,"AwsRegions":["__Member__","__Member__"]},{"AccountIds":["__Member__","__Member__"],"AllAwsRegions":true,"AwsRegions":["__Member__","__Member__"]}],"AggregatorFilters":{"ResourceType":{"Type":"INCLUDE","Value":["__Member__","__Member__"]},"ServicePrincipal":{"Type":"INCLUDE","Value":["__Member__","__Member__"]}},"ConfigurationAggregatorArn":"__ConfigurationAggregatorArn__","ConfigurationAggregatorName":"__ConfigurationAggregatorName__","CreatedBy":"__CreatedBy__","CreationTime":946684800,"LastUpdatedTime":946684800,"OrganizationAggregationSource":{"AllAwsRegions":true,"AwsRegions":["__Member__","__Member__"],"RoleArn":"__RoleArn__"}}}

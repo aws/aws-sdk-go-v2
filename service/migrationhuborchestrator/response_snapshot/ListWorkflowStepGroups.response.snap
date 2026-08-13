@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","workflowStepGroupsSummary":[{"id":"__Id__","name":"__Name__","next":["__Member__","__Member__"],"owner":"AWS_MANAGED","previous":["__Member__","__Member__"],"status":"AWAITING_DEPENDENCIES"},{"id":"__Id__","name":"__Name__","next":["__Member__","__Member__"],"owner":"AWS_MANAGED","previous":["__Member__","__Member__"],"status":"AWAITING_DEPENDENCIES"}]}

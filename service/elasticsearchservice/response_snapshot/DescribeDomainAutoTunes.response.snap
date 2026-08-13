@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AutoTunes":[{"AutoTuneDetails":{"ScheduledAutoTuneDetails":{"Action":"__Action__","ActionType":"JVM_HEAP_SIZE_TUNING","Date":946684800,"Severity":"LOW"}},"AutoTuneType":"SCHEDULED_ACTION"},{"AutoTuneDetails":{"ScheduledAutoTuneDetails":{"Action":"__Action__","ActionType":"JVM_HEAP_SIZE_TUNING","Date":946684800,"Severity":"LOW"}},"AutoTuneType":"SCHEDULED_ACTION"}],"NextToken":"__NextToken__"}

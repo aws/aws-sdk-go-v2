@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TrentService.GetPublicKey
-
-{"CustomerMasterKeySpec":"RSA_2048","EncryptionAlgorithms":["SYMMETRIC_DEFAULT","SYMMETRIC_DEFAULT"],"KeyAgreementAlgorithms":["ECDH","ECDH"],"KeyId":"__KeyId__","KeySpec":"RSA_2048","KeyUsage":"SIGN_VERIFY","PublicKey":"YmxvYg==","SigningAlgorithms":["RSASSA_PSS_SHA_256","RSASSA_PSS_SHA_256"]}

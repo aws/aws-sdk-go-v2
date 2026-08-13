@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"browserSettings":{"additionalEncryptionContext":{"key0":"__Value__"},"associatedPortalArns":["__Member__","__Member__"],"browserPolicy":"__BrowserPolicy__","browserSettingsArn":"__BrowserSettingsArn__","customerManagedKey":"__CustomerManagedKey__","webContentFilteringPolicy":{"allowedUrls":["__Member__","__Member__"],"blockedCategories":["Cults","Cults"],"blockedUrls":["__Member__","__Member__"]}}}

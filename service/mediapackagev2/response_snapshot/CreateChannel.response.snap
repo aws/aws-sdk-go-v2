@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","ChannelGroupName":"__ChannelGroupName__","ChannelName":"__ChannelName__","CreatedAt":946684800,"Description":"__Description__","ETag":"__ETag__","IngestEndpoints":[{"Id":"__Id__","Url":"__Url__"},{"Id":"__Id__","Url":"__Url__"}],"InputSwitchConfiguration":{"MQCSInputSwitching":true,"PreferredInput":1},"InputType":"HLS","ModifiedAt":946684800,"OutputHeaderConfiguration":{"PublishMQCS":true},"OutputLockingMode":"EPOCH_LOCKED","Tags":{"key0":"__Value__"}}

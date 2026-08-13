@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: GlobalAccelerator_V20180706.DescribeAccelerator
-
-{"Accelerator":{"AcceleratorArn":"__AcceleratorArn__","CreatedTime":946684800,"DnsName":"__DnsName__","DualStackDnsName":"__DualStackDnsName__","Enabled":true,"Events":[{"Message":"__Message__","Timestamp":946684800},{"Message":"__Message__","Timestamp":946684800}],"IpAddressType":"IPV4","IpSets":[{"IpAddressFamily":"IPv4","IpAddresses":["__Member__","__Member__"],"IpFamily":"__IpFamily__"},{"IpAddressFamily":"IPv4","IpAddresses":["__Member__","__Member__"],"IpFamily":"__IpFamily__"}],"LastModifiedTime":946684800,"Name":"__Name__","Status":"DEPLOYED"}}

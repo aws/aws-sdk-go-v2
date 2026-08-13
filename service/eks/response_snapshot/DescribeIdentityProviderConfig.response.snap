@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"identityProviderConfig":{"oidc":{"clientId":"__ClientId__","clusterName":"__ClusterName__","groupsClaim":"__GroupsClaim__","groupsPrefix":"__GroupsPrefix__","identityProviderConfigArn":"__IdentityProviderConfigArn__","identityProviderConfigName":"__IdentityProviderConfigName__","issuerUrl":"__IssuerUrl__","requiredClaims":{"key0":"__Value__"},"status":"CREATING","tags":{"key0":"__Value__"},"usernameClaim":"__UsernameClaim__","usernamePrefix":"__UsernamePrefix__"}}}

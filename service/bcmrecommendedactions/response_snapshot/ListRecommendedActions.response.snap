@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBillingAndCostManagementRecommendedActions.ListRecommendedActions
-
-{"nextToken":"__NextToken__","recommendedActions":[{"accountId":"__AccountId__","context":{"key0":"__Value__"},"feature":"ACCOUNT","id":"__Id__","lastUpdatedTimeStamp":"__LastUpdatedTimeStamp__","nextSteps":["__Member__","__Member__"],"severity":"INFO","type":"ADD_ALTERNATE_BILLING_CONTACT"},{"accountId":"__AccountId__","context":{"key0":"__Value__"},"feature":"ACCOUNT","id":"__Id__","lastUpdatedTimeStamp":"__LastUpdatedTimeStamp__","nextSteps":["__Member__","__Member__"],"severity":"INFO","type":"ADD_ALTERNATE_BILLING_CONTACT"}]}

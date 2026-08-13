@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Outpost":{"AvailabilityZone":"__AvailabilityZone__","AvailabilityZoneId":"__AvailabilityZoneId__","Description":"__Description__","LifeCycleStatus":"__LifeCycleStatus__","Name":"__Name__","OutpostArn":"__OutpostArn__","OutpostId":"__OutpostId__","OwnerId":"__OwnerId__","SiteArn":"__SiteArn__","SiteId":"__SiteId__","SupportedHardwareType":"RACK","Tags":{"key0":"__Value__"}}}

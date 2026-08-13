@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.AcceptNetworkFirewallTransitGatewayAttachment
-
-{"__type":"ResourceNotFoundException","Message":"__Message__"}

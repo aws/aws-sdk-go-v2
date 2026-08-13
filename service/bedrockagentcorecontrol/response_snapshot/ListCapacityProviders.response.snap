@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"capacityProviders":[{"capacityProviderArn":"__CapacityProviderArn__","capacityProviderId":"__CapacityProviderId__","lastUpdatedAt":946684800,"name":"__Name__","status":"CREATING"},{"capacityProviderArn":"__CapacityProviderArn__","capacityProviderId":"__CapacityProviderId__","lastUpdatedAt":946684800,"name":"__Name__","status":"CREATING"}],"nextToken":"__NextToken__"}

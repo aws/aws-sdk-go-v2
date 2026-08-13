@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Discoverers":[{"CrossAccount":true,"DiscovererArn":"__DiscovererArn__","DiscovererId":"__DiscovererId__","SourceArn":"__SourceArn__","State":"STARTED","tags":{"key0":"__Value__"}},{"CrossAccount":true,"DiscovererArn":"__DiscovererArn__","DiscovererId":"__DiscovererId__","SourceArn":"__SourceArn__","State":"STARTED","tags":{"key0":"__Value__"}}],"NextToken":"__NextToken__"}

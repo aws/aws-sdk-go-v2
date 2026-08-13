@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"networks":[{"arn":"__Arn__","associatedClusterIds":["__Member__","__Member__"],"id":"__Id__","ipPools":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"name":"__Name__","routes":[{"cidr":"__Cidr__","gateway":"__Gateway__"},{"cidr":"__Cidr__","gateway":"__Gateway__"}],"state":"CREATING"},{"arn":"__Arn__","associatedClusterIds":["__Member__","__Member__"],"id":"__Id__","ipPools":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"name":"__Name__","routes":[{"cidr":"__Cidr__","gateway":"__Gateway__"},{"cidr":"__Cidr__","gateway":"__Gateway__"}],"state":"CREATING"}],"nextToken":"__NextToken__"}

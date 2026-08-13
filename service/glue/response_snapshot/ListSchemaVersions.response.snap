@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.ListSchemaVersions
-
-{"NextToken":"__NextToken__","Schemas":[{"CreatedTime":"__CreatedTime__","SchemaArn":"__SchemaArn__","SchemaVersionId":"__SchemaVersionId__","Status":"AVAILABLE","VersionNumber":1},{"CreatedTime":"__CreatedTime__","SchemaArn":"__SchemaArn__","SchemaVersionId":"__SchemaVersionId__","Status":"AVAILABLE","VersionNumber":1}]}

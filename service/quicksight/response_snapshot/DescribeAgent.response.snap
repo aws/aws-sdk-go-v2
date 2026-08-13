@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Agent":{"ActionConnectors":["__Member__","__Member__"],"AgentId":"__AgentId__","AgentLifecycle":"PREVIEW","AgentStatus":"ACTIVE","Arn":"__Arn__","CreatedAt":946684800,"Creator":"__Creator__","CustomPromptInterface":{"CustomInstructions":"__CustomInstructions__","Identity":"__Identity__","ModelProfileId":"__ModelProfileId__","OutputStyle":"__OutputStyle__","QbsAwsAccountId":"__QbsAwsAccountId__","ResponseLength":"__ResponseLength__","SubscriptionId":"__SubscriptionId__","Tone":"__Tone__","promptSummary":"__PromptSummary__"},"Description":"__Description__","ErrorMessage":"__ErrorMessage__","IconId":"__IconId__","Name":"__Name__","Spaces":["__Member__","__Member__"],"StarterPrompts":["__Member__","__Member__"],"UpdatedAt":946684800,"WelcomeMessage":"__WelcomeMessage__"},"RequestId":"__RequestId__"}

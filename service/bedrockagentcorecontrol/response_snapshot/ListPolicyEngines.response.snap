@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","policyEngines":[{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","encryptionKeyArn":"__EncryptionKeyArn__","name":"__Name__","policyEngineArn":"__PolicyEngineArn__","policyEngineId":"__PolicyEngineId__","status":"CREATING","statusReasons":["__Member__","__Member__"],"updatedAt":"2000-01-01T00:00:00Z"},{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","encryptionKeyArn":"__EncryptionKeyArn__","name":"__Name__","policyEngineArn":"__PolicyEngineArn__","policyEngineId":"__PolicyEngineId__","status":"CREATING","statusReasons":["__Member__","__Member__"],"updatedAt":"2000-01-01T00:00:00Z"}]}

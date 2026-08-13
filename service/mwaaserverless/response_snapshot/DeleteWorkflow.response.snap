@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonMWAAServerless.DeleteWorkflow
-
-{"WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"}

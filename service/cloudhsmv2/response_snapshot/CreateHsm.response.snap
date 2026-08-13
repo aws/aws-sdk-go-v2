@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.CreateHsm
-
-{"Hsm":{"AvailabilityZone":"__AvailabilityZone__","ClusterId":"__ClusterId__","EniId":"__EniId__","EniIp":"__EniIp__","EniIpV6":"__EniIpV6__","HsmId":"__HsmId__","HsmType":"__HsmType__","State":"CREATE_IN_PROGRESS","StateMessage":"__StateMessage__","SubnetId":"__SubnetId__"}}

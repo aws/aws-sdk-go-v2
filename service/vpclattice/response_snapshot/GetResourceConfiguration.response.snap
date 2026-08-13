@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"allowAssociationToShareableServiceNetwork":true,"amazonManaged":true,"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","customDomainName":"__CustomDomainName__","domainVerificationArn":"__DomainVerificationArn__","domainVerificationId":"__DomainVerificationId__","domainVerificationStatus":"VERIFIED","failureReason":"__FailureReason__","groupDomain":"__GroupDomain__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","portRanges":["__Member__","__Member__"],"protocol":"TCP","resourceConfigurationDefinition":{"dnsResource":{"domainName":"__DomainName__","ipAddressType":"IPV4"}},"resourceConfigurationGroupId":"__ResourceConfigurationGroupId__","resourceGatewayId":"__ResourceGatewayId__","status":"ACTIVE","type":"GROUP"}

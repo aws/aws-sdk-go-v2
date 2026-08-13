@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"RollbackServiceSoftwareOptions":{"CurrentVersion":"__CurrentVersion__","Description":"__Description__","NewVersion":"__NewVersion__","RollbackAvailable":true}}

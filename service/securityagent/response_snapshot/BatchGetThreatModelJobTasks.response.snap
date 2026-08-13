@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"notFound":["__Member__","__Member__"],"threatModelJobTasks":[{"agentSpaceId":"__AgentSpaceId__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","executionStatus":"IN_PROGRESS","logsLocation":{"cloudWatchLog":{"logGroup":"__LogGroup__","logStream":"__LogStream__"},"logType":"CLOUDWATCH"},"taskId":"__TaskId__","threatModelId":"__ThreatModelId__","threatModelJobId":"__ThreatModelJobId__","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z"},{"agentSpaceId":"__AgentSpaceId__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","executionStatus":"IN_PROGRESS","logsLocation":{"cloudWatchLog":{"logGroup":"__LogGroup__","logStream":"__LogStream__"},"logType":"CLOUDWATCH"},"taskId":"__TaskId__","threatModelId":"__ThreatModelId__","threatModelJobId":"__ThreatModelJobId__","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z"}]}

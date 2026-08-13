@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: VerifiedPermissions.TagResource
-
-{"__type":"TooManyTagsException","message":"__Message__","resourceName":"__ResourceName__"}

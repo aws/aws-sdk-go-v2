@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.ListDiscoveredResources
-
-{"nextToken":"__NextToken__","resourceIdentifiers":[{"resourceDeletionTime":946684800,"resourceId":"__ResourceId__","resourceName":"__ResourceName__","resourceType":"AWS::EC2::CustomerGateway"},{"resourceDeletionTime":946684800,"resourceId":"__ResourceId__","resourceName":"__ResourceName__","resourceType":"AWS::EC2::CustomerGateway"}]}

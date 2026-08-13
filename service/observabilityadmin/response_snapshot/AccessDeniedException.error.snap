@@ -1,5 +1,0 @@
-400
-Content-Type: application/json
-X-Amzn-Errortype: AccessDeniedException
-
-{"__type":"AccessDeniedException","Message":"__Message__"}

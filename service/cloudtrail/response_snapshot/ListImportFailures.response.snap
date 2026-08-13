@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.ListImportFailures
-
-{"Failures":[{"ErrorMessage":"__ErrorMessage__","ErrorType":"__ErrorType__","LastUpdatedTime":946684800,"Location":"__Location__","Status":"FAILED"},{"ErrorMessage":"__ErrorMessage__","ErrorType":"__ErrorType__","LastUpdatedTime":946684800,"Location":"__Location__","Status":"FAILED"}],"NextToken":"__NextToken__"}

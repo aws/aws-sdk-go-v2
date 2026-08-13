@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SSMContacts.GetRotationOverride
-
-{"CreateTime":946684800,"EndTime":946684800,"NewContactIds":["__Member__","__Member__"],"RotationArn":"__RotationArn__","RotationOverrideId":"__RotationOverrideId__","StartTime":946684800}

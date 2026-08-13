@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"findingsSummary":[{"description":"__Description__","failureCategory":"SHARED_FATE","findingId":"__FindingId__","name":"__Name__","policyComponent":"AVAILABILITY_SLO","serviceArn":"__ServiceArn__","severity":"LOW","status":"OPEN","updatedAt":946684800},{"description":"__Description__","failureCategory":"SHARED_FATE","findingId":"__FindingId__","name":"__Name__","policyComponent":"AVAILABILITY_SLO","serviceArn":"__ServiceArn__","severity":"LOW","status":"OPEN","updatedAt":946684800}],"nextToken":"__NextToken__"}

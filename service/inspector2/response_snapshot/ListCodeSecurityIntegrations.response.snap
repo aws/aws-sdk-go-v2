@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"integrations":[{"createdOn":946684800,"integrationArn":"__IntegrationArn__","lastUpdateOn":946684800,"name":"__Name__","status":"PENDING","statusReason":"__StatusReason__","type":"GITLAB_SELF_MANAGED"},{"createdOn":946684800,"integrationArn":"__IntegrationArn__","lastUpdateOn":946684800,"name":"__Name__","status":"PENDING","statusReason":"__StatusReason__","type":"GITLAB_SELF_MANAGED"}],"nextToken":"__NextToken__"}

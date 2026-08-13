@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LinkAssociations":[{"DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkAssociationState":"PENDING","LinkId":"__LinkId__"},{"DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkAssociationState":"PENDING","LinkId":"__LinkId__"}],"NextToken":"__NextToken__"}

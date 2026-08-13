@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: B2BI.GetProfile
-
-{"businessName":"__BusinessName__","createdAt":"2000-01-01T00:00:00Z","email":"__Email__","logGroupName":"__LogGroupName__","logging":"ENABLED","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","phone":"__Phone__","profileArn":"__ProfileArn__","profileId":"__ProfileId__"}

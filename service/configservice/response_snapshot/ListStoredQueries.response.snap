@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.ListStoredQueries
-
-{"NextToken":"__NextToken__","StoredQueryMetadata":[{"Description":"__Description__","QueryArn":"__QueryArn__","QueryId":"__QueryId__","QueryName":"__QueryName__"},{"Description":"__Description__","QueryArn":"__QueryArn__","QueryId":"__QueryId__","QueryName":"__QueryName__"}]}

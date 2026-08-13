@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"DiscoveryType":"ZWAVE","Id":"__Id__","Status":"RUNNING"},{"DiscoveryType":"ZWAVE","Id":"__Id__","Status":"RUNNING"}],"NextToken":"__NextToken__"}

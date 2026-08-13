@@ -1,5 +1,0 @@
-200
-Content-Type: application/json
-X-Amz-Geo-Pricing-Bucket: __PricingBucket__
-
-{"Notices":[{"Code":"TracePointsHeadingIgnored","Title":"__Title__","TracePointIndexes":[1,1]},{"Code":"TracePointsHeadingIgnored","Title":"__Title__","TracePointIndexes":[1,1]}],"SnappedGeometry":{"LineString":[[1,1],[1,1]],"Polyline":"__Polyline__"},"SnappedGeometryFormat":"FlexiblePolyline","SnappedTracePoints":[{"Confidence":1,"OriginalPosition":[1,1],"SnappedPosition":[1,1]},{"Confidence":1,"OriginalPosition":[1,1],"SnappedPosition":[1,1]}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Failed":[{"Code":1,"Id":"__Id__","Message":"__Message__"},{"Code":1,"Id":"__Id__","Message":"__Message__"}],"Successful":[{"Id":"__Id__","ProfileObjectUniqueKey":"__ProfileObjectUniqueKey__"},{"Id":"__Id__","ProfileObjectUniqueKey":"__ProfileObjectUniqueKey__"}]}

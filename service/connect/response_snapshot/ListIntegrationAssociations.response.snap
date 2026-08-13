@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"IntegrationAssociationSummaryList":[{"InstanceId":"__InstanceId__","IntegrationArn":"__IntegrationArn__","IntegrationAssociationArn":"__IntegrationAssociationArn__","IntegrationAssociationId":"__IntegrationAssociationId__","IntegrationType":"EVENT","SourceApplicationName":"__SourceApplicationName__","SourceApplicationUrl":"__SourceApplicationUrl__","SourceType":"SALESFORCE"},{"InstanceId":"__InstanceId__","IntegrationArn":"__IntegrationArn__","IntegrationAssociationArn":"__IntegrationAssociationArn__","IntegrationAssociationId":"__IntegrationAssociationId__","IntegrationType":"EVENT","SourceApplicationName":"__SourceApplicationName__","SourceApplicationUrl":"__SourceApplicationUrl__","SourceType":"SALESFORCE"}],"NextToken":"__NextToken__"}

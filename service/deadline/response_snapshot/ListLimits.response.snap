@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"limits":[{"amountRequirementName":"__AmountRequirementName__","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","currentCount":1,"displayName":"__DisplayName__","farmId":"__FarmId__","limitId":"__LimitId__","maxCount":1,"updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"},{"amountRequirementName":"__AmountRequirementName__","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","currentCount":1,"displayName":"__DisplayName__","farmId":"__FarmId__","limitId":"__LimitId__","maxCount":1,"updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"}],"nextToken":"__NextToken__"}

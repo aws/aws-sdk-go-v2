@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.BatchCheckLayerAvailability
-
-{"failures":[{"failureCode":"InvalidLayerDigest","failureReason":"__FailureReason__","layerDigest":"__LayerDigest__"},{"failureCode":"InvalidLayerDigest","failureReason":"__FailureReason__","layerDigest":"__LayerDigest__"}],"layers":[{"layerAvailability":"AVAILABLE","layerDigest":"__LayerDigest__","layerSize":1,"mediaType":"__MediaType__"},{"layerAvailability":"AVAILABLE","layerDigest":"__LayerDigest__","layerSize":1,"mediaType":"__MediaType__"}]}

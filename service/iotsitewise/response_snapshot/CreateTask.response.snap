@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"taskArn":"__TaskArn__","taskName":"__TaskName__","version":"__Version__"}

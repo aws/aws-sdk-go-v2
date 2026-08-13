@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.CreateWorkspaceBundle
-
-{"WorkspaceBundle":{"BundleId":"__BundleId__","BundleType":"REGULAR","ComputeType":{"Name":"VALUE"},"CreationTime":946684800,"Description":"__Description__","ImageId":"__ImageId__","LastUpdatedTime":946684800,"Name":"__Name__","Owner":"__Owner__","RootStorage":{"Capacity":"__Capacity__"},"State":"AVAILABLE","UserStorage":{"Capacity":"__Capacity__"}}}

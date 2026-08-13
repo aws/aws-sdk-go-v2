@@ -1,5 +1,0 @@
-409
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.DeleteNamespace
-
-{"__type":"ResourceInUse","Message":"__Message__"}

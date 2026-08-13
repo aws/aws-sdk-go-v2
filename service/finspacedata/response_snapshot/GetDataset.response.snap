@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"alias":"__Alias__","createTime":1,"datasetArn":"__DatasetArn__","datasetDescription":"__DatasetDescription__","datasetId":"__DatasetId__","datasetTitle":"__DatasetTitle__","kind":"TABULAR","lastModifiedTime":1,"schemaDefinition":{"tabularSchemaConfig":{"columns":[{"columnDescription":"__ColumnDescription__","columnName":"__ColumnName__","dataType":"STRING"},{"columnDescription":"__ColumnDescription__","columnName":"__ColumnName__","dataType":"STRING"}],"primaryKeyColumns":["__Member__","__Member__"]}},"status":"PENDING"}

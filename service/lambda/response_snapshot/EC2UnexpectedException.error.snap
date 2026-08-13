@@ -1,4 +1,0 @@
-502
-Content-Type: application/json
-
-{"__type":"EC2UnexpectedException","EC2ErrorCode":"__EC2ErrorCode__","Message":"__Message__","Type":"__Type__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applicationArn":"__ApplicationArn__","applicationId":"__ApplicationId__","creationTime":946684800,"deployedVersion":{"applicationVersion":1,"status":"Deploying","statusReason":"__StatusReason__"},"description":"__Description__","engineType":"microfocus","environmentId":"__EnvironmentId__","kmsKeyId":"__KmsKeyId__","lastStartTime":946684800,"latestVersion":{"applicationVersion":1,"creationTime":946684800,"status":"Creating","statusReason":"__StatusReason__"},"listenerArns":["__Member__","__Member__"],"listenerPorts":[1,1],"loadBalancerDnsName":"__LoadBalancerDnsName__","logGroups":[{"logGroupName":"__LogGroupName__","logType":"__LogType__"},{"logGroupName":"__LogGroupName__","logType":"__LogType__"}],"name":"__Name__","roleArn":"__RoleArn__","status":"Creating","statusReason":"__StatusReason__","tags":{"key0":"__Value__"},"targetGroupArns":["__Member__","__Member__"]}

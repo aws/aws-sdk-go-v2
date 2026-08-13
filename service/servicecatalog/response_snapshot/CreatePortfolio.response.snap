@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.CreatePortfolio
-
-{"PortfolioDetail":{"ARN":"__ARN__","CreatedTime":946684800,"Description":"__Description__","DisplayName":"__DisplayName__","Id":"__Id__","ProviderName":"__ProviderName__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

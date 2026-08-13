@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ChangeEvents":[{"AccountId":"__AccountId__","ChangeEventType":"DEPLOYMENT","Entity":{"key0":"__Value__"},"EventId":"__EventId__","EventName":"__EventName__","Region":"__Region__","Timestamp":946684800,"UserName":"__UserName__"},{"AccountId":"__AccountId__","ChangeEventType":"DEPLOYMENT","Entity":{"key0":"__Value__"},"EventId":"__EventId__","EventName":"__EventName__","Region":"__Region__","Timestamp":946684800,"UserName":"__UserName__"}],"EndTime":946684800,"NextToken":"__NextToken__","StartTime":946684800}

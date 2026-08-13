@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RekognitionService.SearchUsers
-
-{"FaceModelVersion":"__FaceModelVersion__","SearchedFace":{"FaceId":"__FaceId__"},"SearchedUser":{"UserId":"__UserId__"},"UserMatches":[{"Similarity":1,"User":{"UserId":"__UserId__","UserStatus":"ACTIVE"}},{"Similarity":1,"User":{"UserId":"__UserId__","UserStatus":"ACTIVE"}}]}

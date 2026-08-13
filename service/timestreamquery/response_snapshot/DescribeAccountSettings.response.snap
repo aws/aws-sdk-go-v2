@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Timestream_20181101.DescribeAccountSettings
-
-{"MaxQueryTCU":1,"QueryCompute":{"ComputeMode":"ON_DEMAND","ProvisionedCapacity":{"ActiveQueryTCU":1,"LastUpdate":{"Status":"PENDING","StatusMessage":"__StatusMessage__","TargetQueryTCU":1},"NotificationConfiguration":{"RoleArn":"__RoleArn__","SnsConfiguration":{"TopicArn":"__TopicArn__"}}}},"QueryPricingModel":"BYTES_SCANNED"}

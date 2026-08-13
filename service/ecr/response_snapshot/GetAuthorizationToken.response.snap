@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.GetAuthorizationToken
-
-{"authorizationData":[{"authorizationToken":"__AuthorizationToken__","expiresAt":946684800,"proxyEndpoint":"__ProxyEndpoint__"},{"authorizationToken":"__AuthorizationToken__","expiresAt":946684800,"proxyEndpoint":"__ProxyEndpoint__"}]}

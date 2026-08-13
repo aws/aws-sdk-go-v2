@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.PutAsset
-
-{"CreatedAt":946684800,"Description":"__Description__","Forms":{"key0":{"Content":"__Content__","FormTypeId":"__FormTypeId__"}},"Id":"__Id__","Name":"__Name__"}

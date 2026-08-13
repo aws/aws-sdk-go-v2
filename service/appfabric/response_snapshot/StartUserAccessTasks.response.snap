@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"userAccessTasksList":[{"app":"__App__","error":{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},"taskId":"__TaskId__","tenantId":"__TenantId__"},{"app":"__App__","error":{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},"taskId":"__TaskId__","tenantId":"__TenantId__"}]}

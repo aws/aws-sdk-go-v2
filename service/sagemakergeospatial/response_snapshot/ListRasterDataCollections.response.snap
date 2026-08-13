@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","RasterDataCollectionSummaries":[{"Arn":"__Arn__","Description":"__Description__","DescriptionPageUrl":"__DescriptionPageUrl__","Name":"__Name__","SupportedFilters":[{"Maximum":1,"Minimum":1,"Name":"__Name__","Type":"__Type__"},{"Maximum":1,"Minimum":1,"Name":"__Name__","Type":"__Type__"}],"Tags":{"key0":"__Value__"},"Type":"PUBLIC"},{"Arn":"__Arn__","Description":"__Description__","DescriptionPageUrl":"__DescriptionPageUrl__","Name":"__Name__","SupportedFilters":[{"Maximum":1,"Minimum":1,"Name":"__Name__","Type":"__Type__"},{"Maximum":1,"Minimum":1,"Name":"__Name__","Type":"__Type__"}],"Tags":{"key0":"__Value__"},"Type":"PUBLIC"}]}

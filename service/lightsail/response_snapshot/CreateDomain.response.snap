@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.CreateDomain
-
-{"operation":{"createdAt":946684800,"errorCode":"__ErrorCode__","errorDetails":"__ErrorDetails__","id":"__Id__","isTerminal":true,"location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"operationDetails":"__OperationDetails__","operationType":"DeleteKnownHostKeys","resourceName":"__ResourceName__","resourceType":"ContainerService","status":"NotStarted","statusChangedAt":946684800}}

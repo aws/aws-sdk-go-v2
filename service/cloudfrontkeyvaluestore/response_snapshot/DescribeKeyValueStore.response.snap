@@ -1,5 +1,0 @@
-200
-Content-Type: application/json
-Etag: __ETag__
-
-{"Created":946684800,"FailureReason":"__FailureReason__","ItemCount":1,"KvsARN":"__KvsARN__","LastModified":946684800,"Status":"__Status__","TotalSizeInBytes":1}

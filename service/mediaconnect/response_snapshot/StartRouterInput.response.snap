@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","maintenanceSchedule":{"window":{"end":"2000-01-01T00:00:00Z","scheduledTime":"2000-01-01T00:00:00Z","start":"2000-01-01T00:00:00Z"}},"maintenanceScheduleType":"WINDOW","name":"__Name__","state":"CREATING"}

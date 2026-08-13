@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"integratedResourceSummaries":[{"capabilities":{"github":{"leaveComments":true,"remediateCode":true}},"integrationId":"__IntegrationId__","resource":{"githubRepository":{"accessType":"PRIVATE","name":"__Name__","owner":"__Owner__","providerResourceId":"__ProviderResourceId__"}}},{"capabilities":{"github":{"leaveComments":true,"remediateCode":true}},"integrationId":"__IntegrationId__","resource":{"githubRepository":{"accessType":"PRIVATE","name":"__Name__","owner":"__Owner__","providerResourceId":"__ProviderResourceId__"}}}],"nextToken":"__NextToken__"}

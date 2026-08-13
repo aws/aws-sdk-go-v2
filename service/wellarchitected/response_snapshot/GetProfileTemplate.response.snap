@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ProfileTemplate":{"CreatedAt":946684800,"TemplateName":"__TemplateName__","TemplateQuestions":[{"MaxSelectedChoices":1,"MinSelectedChoices":1,"QuestionChoices":[{"ChoiceDescription":"__ChoiceDescription__","ChoiceId":"__ChoiceId__","ChoiceTitle":"__ChoiceTitle__"},{"ChoiceDescription":"__ChoiceDescription__","ChoiceId":"__ChoiceId__","ChoiceTitle":"__ChoiceTitle__"}],"QuestionDescription":"__QuestionDescription__","QuestionId":"__QuestionId__","QuestionTitle":"__QuestionTitle__"},{"MaxSelectedChoices":1,"MinSelectedChoices":1,"QuestionChoices":[{"ChoiceDescription":"__ChoiceDescription__","ChoiceId":"__ChoiceId__","ChoiceTitle":"__ChoiceTitle__"},{"ChoiceDescription":"__ChoiceDescription__","ChoiceId":"__ChoiceId__","ChoiceTitle":"__ChoiceTitle__"}],"QuestionDescription":"__QuestionDescription__","QuestionId":"__QuestionId__","QuestionTitle":"__QuestionTitle__"}],"UpdatedAt":946684800}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralAccount.GetConnection
-
-{"Arn":"__Arn__","Catalog":"__Catalog__","ConnectionTypes":{"key0":{"CanceledAt":"2000-01-01T00:00:00Z","CanceledBy":"__CanceledBy__","CreatedAt":"2000-01-01T00:00:00Z","InviterEmail":"__InviterEmail__","InviterName":"__InviterName__","OtherParticipant":{"PartnerProfile":{"Id":"__Id__","Name":"__Name__"}},"Status":"ACTIVE"}},"Id":"__Id__","OtherParticipantAccountId":"__OtherParticipantAccountId__","UpdatedAt":"2000-01-01T00:00:00Z"}

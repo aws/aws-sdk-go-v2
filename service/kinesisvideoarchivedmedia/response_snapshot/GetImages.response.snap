@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Images":[{"Error":"NO_MEDIA","ImageContent":"__ImageContent__","TimeStamp":946684800},{"Error":"NO_MEDIA","ImageContent":"__ImageContent__","TimeStamp":946684800}],"NextToken":"__NextToken__"}

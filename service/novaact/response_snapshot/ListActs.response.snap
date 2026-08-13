@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"actSummaries":[{"actId":"__ActId__","endedAt":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","startedAt":"2000-01-01T00:00:00Z","status":"RUNNING","traceLocation":{"location":"__Location__","locationType":"S3"},"workflowRunId":"__WorkflowRunId__"},{"actId":"__ActId__","endedAt":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","startedAt":"2000-01-01T00:00:00Z","status":"RUNNING","traceLocation":{"location":"__Location__","locationType":"S3"},"workflowRunId":"__WorkflowRunId__"}],"nextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDB_20120810.ExecuteTransaction
-
-{"__type":"TransactionCanceledException","CancellationReasons":[{"Code":"__Code__","Item":{"key0":{"S":"__AttributeValueMemberS__"}},"Message":"__Message__"},{"Code":"__Code__","Item":{"key0":{"S":"__AttributeValueMemberS__"}},"Message":"__Message__"}],"Message":"__Message__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","targetResourceAggregations":[{"accountId":"__AccountId__","platform":"__Platform__","scanArn":"__ScanArn__","statusCounts":{"failed":1,"passed":1,"skipped":1},"targetResourceId":"__TargetResourceId__","targetResourceTags":{"key0":["__Member__","__Member__"]},"targetStatus":"TIMED_OUT","targetStatusReason":"SCAN_IN_PROGRESS"},{"accountId":"__AccountId__","platform":"__Platform__","scanArn":"__ScanArn__","statusCounts":{"failed":1,"passed":1,"skipped":1},"targetResourceId":"__TargetResourceId__","targetResourceTags":{"key0":["__Member__","__Member__"]},"targetStatus":"TIMED_OUT","targetStatusReason":"SCAN_IN_PROGRESS"}]}

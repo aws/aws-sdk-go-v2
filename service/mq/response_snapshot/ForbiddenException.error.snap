@@ -1,4 +1,0 @@
-403
-Content-Type: application/json
-
-{"__type":"ForbiddenException","errorAttribute":"__ErrorAttribute__","message":"__Message__","resourceShareErrors":[{"errorCode":"__ErrorCode__","resourceShareArn":"__ResourceShareArn__","status":"__Status__"},{"errorCode":"__ErrorCode__","resourceShareArn":"__ResourceShareArn__","status":"__Status__"}]}

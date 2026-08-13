@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"certificateDescription":{"autoRegistrationStatus":"ENABLE","certificateArn":"__CertificateArn__","certificateId":"__CertificateId__","certificateMode":"DEFAULT","certificatePem":"__CertificatePem__","creationDate":946684800,"customerVersion":1,"generationId":"__GenerationId__","lastModifiedDate":946684800,"ownedBy":"__OwnedBy__","status":"ACTIVE","validity":{"notAfter":946684800,"notBefore":946684800}},"registrationConfig":{"roleArn":"__RoleArn__","templateBody":"__TemplateBody__","templateName":"__TemplateName__"}}

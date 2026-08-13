@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","createdAt":"__CreatedAt__","egressEndpoints":[{"packagingConfigurationId":"__PackagingConfigurationId__","status":"__Status__","url":"__Url__"},{"packagingConfigurationId":"__PackagingConfigurationId__","status":"__Status__","url":"__Url__"}],"id":"__Id__","packagingGroupId":"__PackagingGroupId__","resourceId":"__ResourceId__","sourceArn":"__SourceArn__","sourceRoleArn":"__SourceRoleArn__","tags":{"key0":"__Value__"}}

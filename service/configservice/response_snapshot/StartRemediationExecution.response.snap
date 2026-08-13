@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.StartRemediationExecution
-
-{"FailedItems":[{"resourceId":"__ResourceId__","resourceType":"AWS::EC2::CustomerGateway"},{"resourceId":"__ResourceId__","resourceType":"AWS::EC2::CustomerGateway"}],"FailureMessage":"__FailureMessage__"}

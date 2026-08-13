@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.CreateInferenceScheduler
-
-{"InferenceSchedulerArn":"__InferenceSchedulerArn__","InferenceSchedulerName":"__InferenceSchedulerName__","ModelQuality":"QUALITY_THRESHOLD_MET","Status":"PENDING"}

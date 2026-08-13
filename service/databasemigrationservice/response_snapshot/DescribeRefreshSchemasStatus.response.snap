@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonDMSv20160101.DescribeRefreshSchemasStatus
-
-{"RefreshSchemasStatus":{"EndpointArn":"__EndpointArn__","LastFailureMessage":"__LastFailureMessage__","LastRefreshDate":946684800,"ReplicationInstanceArn":"__ReplicationInstanceArn__","Status":"successful"}}

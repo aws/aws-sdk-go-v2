@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"actionType":"__ActionType__","executionDetails":{"key0":"__Value__"},"executionEndTime":946684800,"executionEntityVersion":"__ExecutionEntityVersion__","executionId":"__ExecutionId__","executionResult":{"key0":"__Value__"},"executionStartTime":946684800,"executionStatus":{"state":"RUNNING"},"resolveTo":{"assetId":"__AssetId__"},"targetResource":{"assetId":"__AssetId__","computationModelId":"__ComputationModelId__"},"targetResourceVersion":"__TargetResourceVersion__"}

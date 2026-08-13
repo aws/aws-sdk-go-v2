@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.GetComplianceDetailsByResource
-
-{"EvaluationResults":[{"Annotation":"__Annotation__","ComplianceType":"COMPLIANT","ConfigRuleInvokedTime":946684800,"EvaluationResultIdentifier":{"EvaluationResultQualifier":{"ConfigRuleName":"__ConfigRuleName__","EvaluationMode":"DETECTIVE","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},"OrderingTimestamp":946684800,"ResourceEvaluationId":"__ResourceEvaluationId__"},"ResultRecordedTime":946684800,"ResultToken":"__ResultToken__"},{"Annotation":"__Annotation__","ComplianceType":"COMPLIANT","ConfigRuleInvokedTime":946684800,"EvaluationResultIdentifier":{"EvaluationResultQualifier":{"ConfigRuleName":"__ConfigRuleName__","EvaluationMode":"DETECTIVE","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},"OrderingTimestamp":946684800,"ResourceEvaluationId":"__ResourceEvaluationId__"},"ResultRecordedTime":946684800,"ResultToken":"__ResultToken__"}],"NextToken":"__NextToken__"}

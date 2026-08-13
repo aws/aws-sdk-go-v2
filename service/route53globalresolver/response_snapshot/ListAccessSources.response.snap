@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accessSources":[{"arn":"__Arn__","cidr":"__Cidr__","createdAt":"2000-01-01T00:00:00Z","dnsViewId":"__DnsViewId__","id":"__Id__","ipAddressType":"IPV4","name":"__Name__","protocol":"DO53","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"},{"arn":"__Arn__","cidr":"__Cidr__","createdAt":"2000-01-01T00:00:00Z","dnsViewId":"__DnsViewId__","id":"__Id__","ipAddressType":"IPV4","name":"__Name__","protocol":"DO53","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

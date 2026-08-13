@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"LexiconSizeExceededException","message":"__Message__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","createdBy":"__CreatedBy__","dnsOptions":{"privateDnsPreference":"VERIFIED_DOMAINS_ONLY","privateDnsSpecifiedDomains":["__Member__","__Member__"]},"id":"__Id__","privateDnsEnabled":true,"securityGroupIds":["__Member__","__Member__"],"status":"CREATE_IN_PROGRESS"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","customModelDeploymentArn":"__CustomModelDeploymentArn__","description":"__Description__","failureMessage":"__FailureMessage__","lastUpdatedAt":"2000-01-01T00:00:00Z","modelArn":"__ModelArn__","modelDeploymentName":"__ModelDeploymentName__","status":"Creating","updateDetails":{"modelArn":"__ModelArn__","updateStatus":"Updating"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RedshiftServerless.CreateReservation
-
-{"reservation":{"capacity":1,"endDate":"2000-01-01T00:00:00Z","offering":{"currencyCode":"__CurrencyCode__","duration":1,"hourlyCharge":1,"offeringId":"__OfferingId__","offeringType":"ALL_UPFRONT","upfrontCharge":1},"reservationArn":"__ReservationArn__","reservationId":"__ReservationId__","startDate":"2000-01-01T00:00:00Z","status":"__Status__"}}

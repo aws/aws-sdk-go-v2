@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DirectoryId":"__DirectoryId__","SAMAccountName":"__SAMAccountName__","SID":"__SID__"}

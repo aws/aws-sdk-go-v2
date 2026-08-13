@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","eventTargets":[{"arn":"__Arn__"},{"arn":"__Arn__"}],"eventType":"MEDIALIVE_MULTIPLEX_ALERT","groupId":"__GroupId__","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","tags":{"key0":"__Value__"}}

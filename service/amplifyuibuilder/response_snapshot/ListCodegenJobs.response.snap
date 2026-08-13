@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"entities":[{"appId":"__AppId__","createdAt":"2000-01-01T00:00:00Z","environmentName":"__EnvironmentName__","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z"},{"appId":"__AppId__","createdAt":"2000-01-01T00:00:00Z","environmentName":"__EnvironmentName__","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

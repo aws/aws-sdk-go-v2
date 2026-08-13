@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","snapshots":[{"clusterArn":"__ClusterArn__","snapshotArn":"__SnapshotArn__","snapshotCreationTime":"__SnapshotCreationTime__","snapshotName":"__SnapshotName__","status":"CREATING"},{"clusterArn":"__ClusterArn__","snapshotArn":"__SnapshotArn__","snapshotCreationTime":"__SnapshotCreationTime__","snapshotName":"__SnapshotName__","status":"CREATING"}]}

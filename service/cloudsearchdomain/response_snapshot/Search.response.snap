@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"facets":{"key0":{"buckets":[{"count":1,"value":"__Value__"},{"count":1,"value":"__Value__"}]}},"hits":{"cursor":"__Cursor__","found":1,"hit":[{"exprs":{"key0":"__Value__"},"fields":{"key0":["__Member__","__Member__"]},"highlights":{"key0":"__Value__"},"id":"__Id__"},{"exprs":{"key0":"__Value__"},"fields":{"key0":["__Member__","__Member__"]},"highlights":{"key0":"__Value__"},"id":"__Id__"}],"start":1},"stats":{"key0":{"count":1,"max":"__Max__","mean":"__Mean__","min":"__Min__","missing":1,"stddev":1,"sum":1,"sumOfSquares":1}},"status":{"rid":"__Rid__","timems":1}}

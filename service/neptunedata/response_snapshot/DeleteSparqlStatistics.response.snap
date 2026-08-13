@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"payload":{"active":true,"statisticsId":"__StatisticsId__"},"status":"__Status__","statusCode":200}

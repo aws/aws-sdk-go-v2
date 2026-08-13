@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetBucketAccessKeys
-
-{"accessKeys":[{"accessKeyId":"__AccessKeyId__","createdAt":946684800,"lastUsed":{"lastUsedDate":946684800,"region":"__Region__","serviceName":"__ServiceName__"},"secretAccessKey":"__SecretAccessKey__","status":"Active"},{"accessKeyId":"__AccessKeyId__","createdAt":946684800,"lastUsed":{"lastUsedDate":946684800,"region":"__Region__","serviceName":"__ServiceName__"},"secretAccessKey":"__SecretAccessKey__","status":"Active"}]}

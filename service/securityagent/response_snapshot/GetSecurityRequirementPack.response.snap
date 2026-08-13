@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","importStatus":"PENDING","kmsKeyId":"__KmsKeyId__","managementType":"AWS_MANAGED","name":"__Name__","packId":"__PackId__","status":"ENABLED","updatedAt":"2000-01-01T00:00:00Z","vendorName":"__VendorName__"}

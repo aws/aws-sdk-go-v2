@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","replicas":[{"destinationSessionId":"__DestinationSessionId__","destinationStageArn":"__DestinationStageArn__","participantId":"__ParticipantId__","replicationState":"ACTIVE","sourceSessionId":"__SourceSessionId__","sourceStageArn":"__SourceStageArn__"},{"destinationSessionId":"__DestinationSessionId__","destinationStageArn":"__DestinationStageArn__","participantId":"__ParticipantId__","replicationState":"ACTIVE","sourceSessionId":"__SourceSessionId__","sourceStageArn":"__SourceStageArn__"}]}

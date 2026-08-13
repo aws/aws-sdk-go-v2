@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.TestConnection
-
-{"ConnectorId":"__ConnectorId__","SftpConnectionDetails":{"HostKey":"__HostKey__"},"Status":"__Status__","StatusMessage":"__StatusMessage__"}

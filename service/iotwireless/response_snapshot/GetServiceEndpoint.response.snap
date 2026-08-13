@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ServerTrust":"__ServerTrust__","ServiceEndpoint":"__ServiceEndpoint__","ServiceType":"CUPS"}

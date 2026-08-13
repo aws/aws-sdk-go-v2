@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AutoMerging":{"ConflictResolution":{"ConflictResolvingModel":"RECENCY","SourceName":"__SourceName__"},"Consolidation":{"MatchingAttributesList":[["__Member__","__Member__"],["__Member__","__Member__"]]},"Enabled":true,"MinAllowedConfidenceScoreForMerging":1},"DomainName":"__DomainName__","ExportingLocation":{"S3Exporting":{"S3BucketName":"__S3BucketName__","S3KeyName":"__S3KeyName__"}},"JobEndTime":946684800,"JobExpirationTime":946684800,"JobId":"__JobId__","JobStartTime":946684800,"JobStats":{"NumberOfMatchesFound":1,"NumberOfMergesDone":1,"NumberOfProfilesReviewed":1},"LastUpdatedAt":946684800,"Message":"__Message__","Status":"PENDING"}

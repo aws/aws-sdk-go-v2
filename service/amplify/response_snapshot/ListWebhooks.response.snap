@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","webhooks":[{"appId":"__AppId__","branchName":"__BranchName__","createTime":946684800,"description":"__Description__","updateTime":946684800,"webhookArn":"__WebhookArn__","webhookId":"__WebhookId__","webhookUrl":"__WebhookUrl__"},{"appId":"__AppId__","branchName":"__BranchName__","createTime":946684800,"description":"__Description__","updateTime":946684800,"webhookArn":"__WebhookArn__","webhookId":"__WebhookId__","webhookUrl":"__WebhookUrl__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"apiGatewayManaged":true,"connectionId":"__ConnectionId__","connectionType":"INTERNET","contentHandlingStrategy":"CONVERT_TO_BINARY","credentialsArn":"__CredentialsArn__","description":"__Description__","integrationId":"__IntegrationId__","integrationMethod":"__IntegrationMethod__","integrationResponseSelectionExpression":"__IntegrationResponseSelectionExpression__","integrationSubtype":"__IntegrationSubtype__","integrationType":"AWS","integrationUri":"__IntegrationUri__","passthroughBehavior":"WHEN_NO_MATCH","payloadFormatVersion":"__PayloadFormatVersion__","requestParameters":{"key0":"__Value__"},"requestTemplates":{"key0":"__Value__"},"responseParameters":{"key0":{"key0":"__Value__"}},"templateSelectionExpression":"__TemplateSelectionExpression__","timeoutInMillis":1,"tlsConfig":{"serverNameToVerify":"__ServerNameToVerify__"}}

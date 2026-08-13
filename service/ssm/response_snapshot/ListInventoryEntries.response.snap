@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.ListInventoryEntries
-
-{"CaptureTime":"__CaptureTime__","Entries":[{"key0":"__Value__"},{"key0":"__Value__"}],"InstanceId":"__InstanceId__","NextToken":"__NextToken__","SchemaVersion":"__SchemaVersion__","TypeName":"__TypeName__"}

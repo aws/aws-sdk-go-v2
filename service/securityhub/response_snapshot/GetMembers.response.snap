@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Members":[{"AccountId":"__AccountId__","AdministratorId":"__AdministratorId__","Email":"__Email__","InvitedAt":"2000-01-01T00:00:00Z","MasterId":"__MasterId__","MemberStatus":"__MemberStatus__","UpdatedAt":"2000-01-01T00:00:00Z"},{"AccountId":"__AccountId__","AdministratorId":"__AdministratorId__","Email":"__Email__","InvitedAt":"2000-01-01T00:00:00Z","MasterId":"__MasterId__","MemberStatus":"__MemberStatus__","UpdatedAt":"2000-01-01T00:00:00Z"}],"UnprocessedAccounts":[{"AccountId":"__AccountId__","ProcessingResult":"__ProcessingResult__"},{"AccountId":"__AccountId__","ProcessingResult":"__ProcessingResult__"}]}

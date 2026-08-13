@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonPersonalize.ListDatasetGroups
-
-{"datasetGroups":[{"creationDateTime":946684800,"datasetGroupArn":"__DatasetGroupArn__","domain":"ECOMMERCE","failureReason":"__FailureReason__","lastUpdatedDateTime":946684800,"name":"__Name__","status":"__Status__"},{"creationDateTime":946684800,"datasetGroupArn":"__DatasetGroupArn__","domain":"ECOMMERCE","failureReason":"__FailureReason__","lastUpdatedDateTime":946684800,"name":"__Name__","status":"__Status__"}],"nextToken":"__NextToken__"}

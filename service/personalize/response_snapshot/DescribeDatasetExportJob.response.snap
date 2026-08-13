@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonPersonalize.DescribeDatasetExportJob
-
-{"datasetExportJob":{"creationDateTime":946684800,"datasetArn":"__DatasetArn__","datasetExportJobArn":"__DatasetExportJobArn__","failureReason":"__FailureReason__","ingestionMode":"BULK","jobName":"__JobName__","jobOutput":{"s3DataDestination":{"kmsKeyArn":"__KmsKeyArn__","path":"__Path__"}},"lastUpdatedDateTime":946684800,"roleArn":"__RoleArn__","status":"__Status__"}}

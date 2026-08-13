@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"clientRequestToken":"__ClientRequestToken__","endTime":"2000-01-01T00:00:00Z","errorRecordCount":1,"inputDataConfig":{"s3InputDataConfig":{"s3BucketOwner":"__S3BucketOwner__","s3InputFormat":"JSONL","s3Uri":"__S3Uri__"}},"jobArn":"__JobArn__","jobExpirationTime":"2000-01-01T00:00:00Z","jobName":"__JobName__","lastModifiedTime":"2000-01-01T00:00:00Z","message":"__Message__","modelId":"__ModelId__","modelInvocationType":"InvokeModel","outputDataConfig":{"s3OutputDataConfig":{"s3BucketOwner":"__S3BucketOwner__","s3EncryptionKeyId":"__S3EncryptionKeyId__","s3Uri":"__S3Uri__"}},"processedRecordCount":1,"roleArn":"__RoleArn__","status":"Submitted","submitTime":"2000-01-01T00:00:00Z","successRecordCount":1,"timeoutDurationInHours":1,"totalRecordCount":1,"vpcConfig":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Logs_20140328.TestTransformer
-
-{"transformedLogs":[{"eventMessage":"__EventMessage__","eventNumber":1,"transformedEventMessage":"__TransformedEventMessage__"},{"eventMessage":"__EventMessage__","eventNumber":1,"transformedEventMessage":"__TransformedEventMessage__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonDMSv20160101.TestConnection
-
-{"Connection":{"EndpointArn":"__EndpointArn__","EndpointIdentifier":"__EndpointIdentifier__","LastFailureMessage":"__LastFailureMessage__","ReplicationInstanceArn":"__ReplicationInstanceArn__","ReplicationInstanceIdentifier":"__ReplicationInstanceIdentifier__","Status":"__Status__"}}

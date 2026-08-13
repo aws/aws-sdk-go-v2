@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configuredAudienceModelArn":"__ConfiguredAudienceModelArn__","configuredAudienceModelPolicy":"__ConfiguredAudienceModelPolicy__","policyHash":"__PolicyHash__"}

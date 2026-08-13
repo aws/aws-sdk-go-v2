@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","SchemaVersions":[{"SchemaArn":"__SchemaArn__","SchemaName":"__SchemaName__","SchemaVersion":"__SchemaVersion__","Type":"OpenApi3"},{"SchemaArn":"__SchemaArn__","SchemaName":"__SchemaName__","SchemaVersion":"__SchemaVersion__","Type":"OpenApi3"}]}

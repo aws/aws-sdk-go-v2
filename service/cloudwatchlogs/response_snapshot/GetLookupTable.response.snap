@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Logs_20140328.GetLookupTable
-
-{"description":"__Description__","kmsKeyId":"__KmsKeyId__","lastUpdatedTime":1,"lookupTableArn":"__LookupTableArn__","lookupTableName":"__LookupTableName__","sizeBytes":1,"tableBody":"__TableBody__"}

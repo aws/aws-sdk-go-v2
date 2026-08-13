@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"credentialProviderConfigurations":[{"coinbaseCDP":{"credentialProviderArn":"__CredentialProviderArn__"}},{"coinbaseCDP":{"credentialProviderArn":"__CredentialProviderArn__"}}],"lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","paymentConnectorId":"__PaymentConnectorId__","paymentManagerId":"__PaymentManagerId__","status":"CREATING","type":"CoinbaseCDP"}

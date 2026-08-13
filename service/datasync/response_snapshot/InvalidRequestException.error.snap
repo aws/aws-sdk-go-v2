@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.CancelTaskExecution
-
-{"__type":"InvalidRequestException","datasyncErrorCode":"__DatasyncErrorCode__","errorCode":"__ErrorCode___","message":"__Message__"}

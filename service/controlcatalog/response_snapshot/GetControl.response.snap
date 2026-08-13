@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Aliases":["__Member__","__Member__"],"Arn":"__Arn__","Behavior":"PREVENTIVE","CreateTime":946684800,"Description":"__Description__","GovernedProviders":["__Member__","__Member__"],"GovernedResources":["__Member__","__Member__"],"Implementation":{"Identifier":"__Identifier__","Type":"__Type__"},"Name":"__Name__","ParameterRequirementSummary":"REQUIRED","Parameters":[{"Name":"__Name__","Requirement":"REQUIRED"},{"Name":"__Name__","Requirement":"REQUIRED"}],"RegionConfiguration":{"DeployableRegions":["__Member__","__Member__"],"Scope":"GLOBAL"},"Severity":"LOW"}

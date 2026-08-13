@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.ListLanguages
-
-{"DisplayLanguageCode":"de","Languages":[{"LanguageCode":"__LanguageCode__","LanguageName":"__LanguageName__"},{"LanguageCode":"__LanguageCode__","LanguageName":"__LanguageName__"}],"NextToken":"__NextToken__"}

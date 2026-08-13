@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"environments":[{"name":"__Name__","priority":1,"queueEnvironmentId":"__QueueEnvironmentId__"},{"name":"__Name__","priority":1,"queueEnvironmentId":"__QueueEnvironmentId__"}],"nextToken":"__NextToken__"}

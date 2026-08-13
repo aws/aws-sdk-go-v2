@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Created":[{"DataSetId":"__DataSetId__","ResourceShareArn":"__ResourceShareArn__","ResourceShareId":"__ResourceShareId__","ResourceShareStatus":"__ResourceShareStatus__","TargetAccountId":"__TargetAccountId__"},{"DataSetId":"__DataSetId__","ResourceShareArn":"__ResourceShareArn__","ResourceShareId":"__ResourceShareId__","ResourceShareStatus":"__ResourceShareStatus__","TargetAccountId":"__TargetAccountId__"}],"Errors":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}]}

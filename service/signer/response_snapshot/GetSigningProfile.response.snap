@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","overrides":{"signingConfiguration":{"encryptionAlgorithm":"RSA","hashAlgorithm":"SHA1"},"signingImageFormat":"JSON"},"platformDisplayName":"__PlatformDisplayName__","platformId":"__PlatformId__","profileName":"__ProfileName__","profileVersion":"__ProfileVersion__","profileVersionArn":"__ProfileVersionArn__","revocationRecord":{"revocationEffectiveFrom":946684800,"revokedAt":946684800,"revokedBy":"__RevokedBy__"},"signatureValidityPeriod":{"type":"DAYS","value":1},"signingMaterial":{"certificateArn":"__CertificateArn__"},"signingParameters":{"key0":"__Value__"},"status":"Active","statusReason":"__StatusReason__","tags":{"key0":"__Value__"}}

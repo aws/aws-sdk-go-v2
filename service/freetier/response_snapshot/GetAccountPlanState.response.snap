@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSFreeTierService.GetAccountPlanState
-
-{"accountId":"__AccountId__","accountPlanExpirationDate":"2000-01-01T00:00:00Z","accountPlanRemainingCredits":{"amount":1,"unit":"USD"},"accountPlanStatus":"NOT_STARTED","accountPlanType":"FREE"}

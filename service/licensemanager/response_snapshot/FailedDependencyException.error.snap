@@ -1,5 +1,0 @@
-424
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.ListResourceInventory
-
-{"__type":"FailedDependencyException","ErrorCode":"__ErrorCode___","Message":"__Message__"}

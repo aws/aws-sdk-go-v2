@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobSummary":{"commitId":"__CommitId__","commitMessage":"__CommitMessage__","commitTime":946684800,"endTime":946684800,"jobArn":"__JobArn__","jobId":"__JobId__","jobType":"RELEASE","sourceUrl":"__SourceUrl__","sourceUrlType":"ZIP","startTime":946684800,"status":"CREATED"}}

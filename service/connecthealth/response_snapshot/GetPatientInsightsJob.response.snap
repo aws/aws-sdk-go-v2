@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"creationTime":"2000-01-01T00:00:00Z","encounterContext":{"encounterReason":"__EncounterReason__"},"inputDataConfig":{"fhirServer":{"fhirEndpoint":"__FhirEndpoint__","oauthToken":"__OauthToken__"},"s3Sources":[{"uri":"__Uri__"},{"uri":"__Uri__"}]},"insightsContext":{"insightsType":"PRE_VISIT"},"insightsOutput":{"uri":"__Uri__"},"jobArn":"__JobArn__","jobId":"__JobId__","jobStatus":"SUBMITTED","outputDataConfig":{"s3OutputPath":"__S3OutputPath__"},"patientContext":{"dateOfBirth":"__DateOfBirth__","patientId":"__PatientId__","pronouns":"HE_HIM"},"statusDetails":"__StatusDetails__","updatedTime":"2000-01-01T00:00:00Z","userContext":{"role":"CLINICIAN","specialty":"PRIMARY_CARE","userId":"__UserId__"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSPartnerCentralSelling.GetEngagement
-
-{"Arn":"__Arn__","Contexts":[{"Id":"__Id__","Payload":{"CustomerProject":{"Customer":{"CompanyName":"__CompanyName__","CountryCode":"US","Industry":"Aerospace","WebsiteUrl":"__WebsiteUrl__"},"Project":{"BusinessProblem":"__BusinessProblem__","TargetCompletionDate":"__TargetCompletionDate__","Title":"__Title__"}}},"Type":"CustomerProject"},{"Id":"__Id__","Payload":{"CustomerProject":{"Customer":{"CompanyName":"__CompanyName__","CountryCode":"US","Industry":"Aerospace","WebsiteUrl":"__WebsiteUrl__"},"Project":{"BusinessProblem":"__BusinessProblem__","TargetCompletionDate":"__TargetCompletionDate__","Title":"__Title__"}}},"Type":"CustomerProject"}],"CreatedAt":"2000-01-01T00:00:00Z","CreatedBy":"__CreatedBy__","Description":"__Description__","Id":"__Id__","MemberCount":1,"ModifiedAt":"2000-01-01T00:00:00Z","ModifiedBy":"__ModifiedBy__","Title":"__Title__"}

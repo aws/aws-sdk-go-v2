@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DeviceFarm_20150623.ListTestGridSessionArtifacts
-
-{"artifacts":[{"filename":"__Filename__","type":"UNKNOWN","url":"__Url__"},{"filename":"__Filename__","type":"UNKNOWN","url":"__Url__"}],"nextToken":"__NextToken__"}

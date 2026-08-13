@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationId":"__ApplicationId__","ConfigurationSet":"__ConfigurationSet__","CreationDate":"__CreationDate__","Enabled":true,"FromAddress":"__FromAddress__","HasCredential":true,"Id":"__Id__","Identity":"__Identity__","IsArchived":true,"LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":"__LastModifiedDate__","MessagesPerSecond":1,"OrchestrationSendingRoleArn":"__OrchestrationSendingRoleArn__","Platform":"__Platform__","RoleArn":"__RoleArn__","Version":1}

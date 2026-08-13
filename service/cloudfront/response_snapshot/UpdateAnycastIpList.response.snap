@@ -1,5 +1,0 @@
-200
-Content-Type: application/xml
-Etag: __ETag__
-
-<AnycastIpList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><AnycastIps><AnycastIp>__Member__</AnycastIp><AnycastIp>__Member__</AnycastIp></AnycastIps><Arn>__Arn__</Arn><Id>__Id__</Id><IpAddressType>ipv4</IpAddressType><IpCount>1</IpCount><IpamConfig><IpamCidrConfigs><IpamCidrConfig><AnycastIp>__AnycastIp__</AnycastIp><Cidr>__Cidr__</Cidr><IpamPoolArn>__IpamPoolArn__</IpamPoolArn><Status>provisioned</Status></IpamCidrConfig><IpamCidrConfig><AnycastIp>__AnycastIp__</AnycastIp><Cidr>__Cidr__</Cidr><IpamPoolArn>__IpamPoolArn__</IpamPoolArn><Status>provisioned</Status></IpamCidrConfig></IpamCidrConfigs><Quantity>1</Quantity></IpamConfig><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><Status>__Status__</Status></AnycastIpList>

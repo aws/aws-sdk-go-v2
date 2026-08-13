@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudHsmFrontendService.DescribeLunaClient
-
-{"Certificate":"__Certificate__","CertificateFingerprint":"__CertificateFingerprint__","ClientArn":"__ClientArn__","Label":"__Label__","LastModifiedTimestamp":"__LastModifiedTimestamp__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.ListPermissions
-
-{"NextToken":"__NextToken__","Permissions":[{"Actions":["IssueCertificate","IssueCertificate"],"CertificateAuthorityArn":"__CertificateAuthorityArn__","CreatedAt":946684800,"Policy":"__Policy__","Principal":"__Principal__","SourceAccount":"__SourceAccount__"},{"Actions":["IssueCertificate","IssueCertificate"],"CertificateAuthorityArn":"__CertificateAuthorityArn__","CreatedAt":946684800,"Policy":"__Policy__","Principal":"__Principal__","SourceAccount":"__SourceAccount__"}]}

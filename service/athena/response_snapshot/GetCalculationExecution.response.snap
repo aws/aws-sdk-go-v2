@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonAthena.GetCalculationExecution
-
-{"CalculationExecutionId":"__CalculationExecutionId__","Description":"__Description__","Result":{"ResultS3Uri":"__ResultS3Uri__","ResultType":"__ResultType__","StdErrorS3Uri":"__StdErrorS3Uri__","StdOutS3Uri":"__StdOutS3Uri__"},"SessionId":"__SessionId__","Statistics":{"DpuExecutionInMillis":1,"Progress":"__Progress__"},"Status":{"CompletionDateTime":946684800,"State":"CREATING","StateChangeReason":"__StateChangeReason__","SubmissionDateTime":946684800},"WorkingDirectory":"__WorkingDirectory__"}

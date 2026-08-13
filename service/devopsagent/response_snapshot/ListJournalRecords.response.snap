@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","records":[{"agentSpaceId":"__AgentSpaceId__","content":"__Document__","createdAt":946684800,"executionId":"__ExecutionId__","recordId":"__RecordId__","recordType":"__RecordType__","userReference":{"userId":"__UserId__","userType":"IAM"}},{"agentSpaceId":"__AgentSpaceId__","content":"__Document__","createdAt":946684800,"executionId":"__ExecutionId__","recordId":"__RecordId__","recordType":"__RecordType__","userReference":{"userId":"__UserId__","userType":"IAM"}}]}

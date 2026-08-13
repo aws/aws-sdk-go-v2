@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","pipelineExecutionSummaries":[{"endTime":946684800,"executionPriority":1,"pipelineExecutionId":"__PipelineExecutionId__","pipelineVersion":"__PipelineVersion__","startTime":946684800,"status":{"state":"NOT_STARTED","stateDetails":{"code":"VALIDATION_ERROR","details":[{"code":"VALIDATION_ERROR","message":"__Message__"},{"code":"VALIDATION_ERROR","message":"__Message__"}],"message":"__Message__"}}},{"endTime":946684800,"executionPriority":1,"pipelineExecutionId":"__PipelineExecutionId__","pipelineVersion":"__PipelineVersion__","startTime":946684800,"status":{"state":"NOT_STARTED","stateDetails":{"code":"VALIDATION_ERROR","details":[{"code":"VALIDATION_ERROR","message":"__Message__"},{"code":"VALIDATION_ERROR","message":"__Message__"}],"message":"__Message__"}}}]}

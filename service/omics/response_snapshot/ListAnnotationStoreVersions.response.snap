@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"annotationStoreVersions":[{"creationTime":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","name":"__Name__","status":"CREATING","statusMessage":"__StatusMessage__","storeId":"__StoreId__","updateTime":"2000-01-01T00:00:00Z","versionArn":"__VersionArn__","versionName":"__VersionName__","versionSizeBytes":1},{"creationTime":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","name":"__Name__","status":"CREATING","statusMessage":"__StatusMessage__","storeId":"__StoreId__","updateTime":"2000-01-01T00:00:00Z","versionArn":"__VersionArn__","versionName":"__VersionName__","versionSizeBytes":1}],"nextToken":"__NextToken__"}

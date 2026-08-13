@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"flowArn":"__FlowArn__","vpcInterfaces":[{"name":"__Name__","networkInterfaceIds":["__Member__","__Member__"],"networkInterfaceType":"ena","roleArn":"__RoleArn__","securityGroupIds":["__Member__","__Member__"],"subnetId":"__SubnetId__"},{"name":"__Name__","networkInterfaceIds":["__Member__","__Member__"],"networkInterfaceType":"ena","roleArn":"__RoleArn__","securityGroupIds":["__Member__","__Member__"],"subnetId":"__SubnetId__"}]}

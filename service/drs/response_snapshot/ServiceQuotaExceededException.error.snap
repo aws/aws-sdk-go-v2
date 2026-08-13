@@ -1,4 +1,0 @@
-402
-Content-Type: application/json
-
-{"__type":"ServiceQuotaExceededException","code":"ServiceQuotaExceededException","message":"__Message__","quotaCode":"__QuotaCode__","resourceId":"__ResourceId__","resourceType":"__ResourceType__","serviceCode":"__ServiceCode__"}

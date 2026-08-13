@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: GlobalAccelerator_V20180706.CreateCustomRoutingEndpointGroup
-
-{"EndpointGroup":{"DestinationDescriptions":[{"FromPort":1,"Protocols":["TCP","TCP"],"ToPort":1},{"FromPort":1,"Protocols":["TCP","TCP"],"ToPort":1}],"EndpointDescriptions":[{"EndpointId":"__EndpointId__"},{"EndpointId":"__EndpointId__"}],"EndpointGroupArn":"__EndpointGroupArn__","EndpointGroupRegion":"__EndpointGroupRegion__"}}

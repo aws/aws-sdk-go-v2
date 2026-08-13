@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","PhoneNumberSummaryList":[{"Arn":"__Arn__","Id":"__Id__","PhoneNumber":"__PhoneNumber__","PhoneNumberCountryCode":"AF","PhoneNumberType":"TOLL_FREE"},{"Arn":"__Arn__","Id":"__Id__","PhoneNumber":"__PhoneNumber__","PhoneNumberCountryCode":"AF","PhoneNumberType":"TOLL_FREE"}]}

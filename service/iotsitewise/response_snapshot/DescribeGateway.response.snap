@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"creationDate":946684800,"gatewayArn":"__GatewayArn__","gatewayCapabilitySummaries":[{"capabilityNamespace":"__CapabilityNamespace__","capabilitySyncStatus":"IN_SYNC"},{"capabilityNamespace":"__CapabilityNamespace__","capabilitySyncStatus":"IN_SYNC"}],"gatewayId":"__GatewayId__","gatewayName":"__GatewayName__","gatewayPlatform":{"greengrass":{"groupArn":"__GroupArn__"},"greengrassV2":{"coreDeviceOperatingSystem":"LINUX_AARCH64","coreDeviceThingName":"__CoreDeviceThingName__"},"siemensIE":{"iotCoreThingName":"__IotCoreThingName__"}},"gatewayVersion":"__GatewayVersion__","lastUpdateDate":946684800}

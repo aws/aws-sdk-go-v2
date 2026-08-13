@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RedshiftServerless.DeleteSnapshot
-
-{"snapshot":{"accountsWithProvisionedRestoreAccess":["__Member__","__Member__"],"accountsWithRestoreAccess":["__Member__","__Member__"],"actualIncrementalBackupSizeInMegaBytes":1,"adminPasswordSecretArn":"__AdminPasswordSecretArn__","adminPasswordSecretKmsKeyId":"__AdminPasswordSecretKmsKeyId__","adminUsername":"__AdminUsername__","backupProgressInMegaBytes":1,"currentBackupRateInMegaBytesPerSecond":1,"elapsedTimeInSeconds":1,"estimatedSecondsToCompletion":1,"kmsKeyId":"__KmsKeyId__","namespaceArn":"__NamespaceArn__","namespaceName":"__NamespaceName__","ownerAccount":"__OwnerAccount__","snapshotArn":"__SnapshotArn__","snapshotCreateTime":"2000-01-01T00:00:00Z","snapshotName":"__SnapshotName__","snapshotRemainingDays":1,"snapshotRetentionPeriod":1,"snapshotRetentionStartTime":"2000-01-01T00:00:00Z","status":"AVAILABLE","totalBackupSizeInMegaBytes":1}}

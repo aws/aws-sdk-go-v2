@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"members":[{"accountId":"__AccountId__","administratorId":"__AdministratorId__","detectorId":"__DetectorId__","email":"__Email__","invitedAt":"__InvitedAt__","masterId":"__MasterId__","relationshipStatus":"__RelationshipStatus__","updatedAt":"__UpdatedAt__"},{"accountId":"__AccountId__","administratorId":"__AdministratorId__","detectorId":"__DetectorId__","email":"__Email__","invitedAt":"__InvitedAt__","masterId":"__MasterId__","relationshipStatus":"__RelationshipStatus__","updatedAt":"__UpdatedAt__"}],"unprocessedAccounts":[{"accountId":"__AccountId__","result":"__Result__"},{"accountId":"__AccountId__","result":"__Result__"}]}

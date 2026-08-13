@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","id":"__Id__","sequenceStoreId":"__SequenceStoreId__","sources":[{"readSetId":"__ReadSetId__","status":"NOT_STARTED","statusMessage":"__StatusMessage__"},{"readSetId":"__ReadSetId__","status":"NOT_STARTED","statusMessage":"__StatusMessage__"}],"status":"SUBMITTED","statusMessage":"__StatusMessage__"}

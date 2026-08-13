@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ruleGroupsNamespace":{"arn":"__Arn__","createdAt":946684800,"data":"YmxvYg==","modifiedAt":946684800,"name":"__Name__","status":{"statusCode":"CREATING","statusReason":"__StatusReason__"},"tags":{"key0":"__Value__"}}}

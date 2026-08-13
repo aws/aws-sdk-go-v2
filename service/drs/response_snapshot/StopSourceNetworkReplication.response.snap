@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"sourceNetwork":{"arn":"__Arn__","cfnStackName":"__CfnStackName__","lastRecovery":{"apiCallDateTime":"2000-01-01T00:00:00Z","jobID":"__JobID__","lastRecoveryResult":"NOT_STARTED"},"launchedVpcID":"__LaunchedVpcID__","replicationStatus":"STOPPED","replicationStatusDetails":"__ReplicationStatusDetails__","sourceAccountID":"__SourceAccountID__","sourceNetworkID":"__SourceNetworkID__","sourceRegion":"__SourceRegion__","sourceVpcID":"__SourceVpcID__","tags":{"key0":"__Value__"}}}

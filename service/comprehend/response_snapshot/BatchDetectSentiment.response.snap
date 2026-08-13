@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.BatchDetectSentiment
-
-{"ErrorList":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","Index":1},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","Index":1}],"ResultList":[{"Index":1,"Sentiment":"POSITIVE","SentimentScore":{"Mixed":1,"Negative":1,"Neutral":1,"Positive":1}},{"Index":1,"Sentiment":"POSITIVE","SentimentScore":{"Mixed":1,"Negative":1,"Neutral":1,"Positive":1}}]}

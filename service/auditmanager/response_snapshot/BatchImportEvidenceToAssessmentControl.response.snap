@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"errors":[{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","manualEvidence":{"evidenceFileName":"__EvidenceFileName__","s3ResourcePath":"__S3ResourcePath__","textResponse":"__TextResponse__"}},{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","manualEvidence":{"evidenceFileName":"__EvidenceFileName__","s3ResourcePath":"__S3ResourcePath__","textResponse":"__TextResponse__"}}]}

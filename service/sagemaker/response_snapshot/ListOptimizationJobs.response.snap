@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListOptimizationJobs
-
-{"NextToken":"__NextToken__","OptimizationJobSummaries":[{"CreationTime":946684800,"DeploymentInstanceType":"ml.p4d.24xlarge","LastModifiedTime":946684800,"MaxInstanceCount":1,"OptimizationEndTime":946684800,"OptimizationJobArn":"__OptimizationJobArn__","OptimizationJobName":"__OptimizationJobName__","OptimizationJobStatus":"INPROGRESS","OptimizationStartTime":946684800,"OptimizationTypes":["__Member__","__Member__"]},{"CreationTime":946684800,"DeploymentInstanceType":"ml.p4d.24xlarge","LastModifiedTime":946684800,"MaxInstanceCount":1,"OptimizationEndTime":946684800,"OptimizationJobArn":"__OptimizationJobArn__","OptimizationJobName":"__OptimizationJobName__","OptimizationJobStatus":"INPROGRESS","OptimizationStartTime":946684800,"OptimizationTypes":["__Member__","__Member__"]}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Proposals":[{"Arn":"__Arn__","CreationDate":"2000-01-01T00:00:00Z","Description":"__Description__","ExpirationDate":"2000-01-01T00:00:00Z","ProposalId":"__ProposalId__","ProposedByMemberId":"__ProposedByMemberId__","ProposedByMemberName":"__ProposedByMemberName__","Status":"IN_PROGRESS"},{"Arn":"__Arn__","CreationDate":"2000-01-01T00:00:00Z","Description":"__Description__","ExpirationDate":"2000-01-01T00:00:00Z","ProposalId":"__ProposalId__","ProposedByMemberId":"__ProposedByMemberId__","ProposedByMemberName":"__ProposedByMemberName__","Status":"IN_PROGRESS"}]}

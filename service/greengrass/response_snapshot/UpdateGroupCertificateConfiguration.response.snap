@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CertificateAuthorityExpiryInMilliseconds":"__CertificateAuthorityExpiryInMilliseconds__","CertificateExpiryInMilliseconds":"__CertificateExpiryInMilliseconds__","GroupId":"__GroupId__"}

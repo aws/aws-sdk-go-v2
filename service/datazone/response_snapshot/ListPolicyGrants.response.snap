@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"grantList":[{"createdAt":946684800,"createdBy":"__CreatedBy__","detail":{"createDomainUnit":{"includeChildDomainUnits":true}},"grantId":"__GrantId__","principal":{"user":{"userIdentifier":"__UserPolicyGrantPrincipalMemberUserIdentifier__"}}},{"createdAt":946684800,"createdBy":"__CreatedBy__","detail":{"createDomainUnit":{"includeChildDomainUnits":true}},"grantId":"__GrantId__","principal":{"user":{"userIdentifier":"__UserPolicyGrantPrincipalMemberUserIdentifier__"}}}],"nextToken":"__NextToken__"}

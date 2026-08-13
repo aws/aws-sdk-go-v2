@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.ListDashboards
-
-{"Dashboards":[{"DashboardArn":"__DashboardArn__","Type":"MANAGED"},{"DashboardArn":"__DashboardArn__","Type":"MANAGED"}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","deploymentProperties":{"endTimeoutMinutes":1,"startTimeoutMinutes":1},"description":"__Description__","glossaryTerms":["__Member__","__Member__"],"id":"__Id__","name":"__Name__","provider":"__Provider__","provisioningProperties":{"cloudFormation":{"templateUrl":"__TemplateUrl__"}},"updatedAt":"2000-01-01T00:00:00Z","userParameters":[{"defaultValue":"__DefaultValue__","description":"__Description__","fieldType":"__FieldType__","isEditable":true,"isOptional":true,"isUpdateSupported":true,"keyName":"__KeyName__"},{"defaultValue":"__DefaultValue__","description":"__Description__","fieldType":"__FieldType__","isEditable":true,"isOptional":true,"isUpdateSupported":true,"keyName":"__KeyName__"}]}

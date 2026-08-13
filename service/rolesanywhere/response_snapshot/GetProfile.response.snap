@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"profile":{"acceptRoleSessionName":true,"attributeMappings":[{"certificateField":"x509Subject","mappingRules":[{"specifier":"__Specifier__"},{"specifier":"__Specifier__"}]},{"certificateField":"x509Subject","mappingRules":[{"specifier":"__Specifier__"},{"specifier":"__Specifier__"}]}],"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","durationSeconds":1,"enabled":true,"managedPolicyArns":["__Member__","__Member__"],"name":"__Name__","profileArn":"__ProfileArn__","profileId":"__ProfileId__","requireInstanceProperties":true,"roleArns":["__Member__","__Member__"],"sessionPolicy":"__SessionPolicy__","updatedAt":"2000-01-01T00:00:00Z"}}

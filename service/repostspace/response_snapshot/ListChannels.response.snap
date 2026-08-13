@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"channels":[{"channelDescription":"__ChannelDescription__","channelId":"__ChannelId__","channelName":"__ChannelName__","channelStatus":"CREATED","createDateTime":"2000-01-01T00:00:00Z","deleteDateTime":"2000-01-01T00:00:00Z","groupCount":1,"spaceId":"__SpaceId__","userCount":1},{"channelDescription":"__ChannelDescription__","channelId":"__ChannelId__","channelName":"__ChannelName__","channelStatus":"CREATED","createDateTime":"2000-01-01T00:00:00Z","deleteDateTime":"2000-01-01T00:00:00Z","groupCount":1,"spaceId":"__SpaceId__","userCount":1}],"nextToken":"__NextToken__"}

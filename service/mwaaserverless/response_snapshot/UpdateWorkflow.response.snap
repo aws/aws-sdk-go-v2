@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonMWAAServerless.UpdateWorkflow
-
-{"ModifiedAt":"2000-01-01T00:00:00Z","Warnings":["__Member__","__Member__"],"WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"}

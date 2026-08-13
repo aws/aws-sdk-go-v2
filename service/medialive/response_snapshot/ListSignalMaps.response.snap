@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","signalMaps":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z","monitorDeploymentStatus":"NOT_DEPLOYED","name":"__Name__","status":"CREATE_IN_PROGRESS","tags":{"key0":"__Value__"}},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z","monitorDeploymentStatus":"NOT_DEPLOYED","name":"__Name__","status":"CREATE_IN_PROGRESS","tags":{"key0":"__Value__"}}]}

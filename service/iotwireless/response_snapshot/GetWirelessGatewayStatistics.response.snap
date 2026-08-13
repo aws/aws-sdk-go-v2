@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ConnectionStatus":"Connected","LastUplinkReceivedAt":"__LastUplinkReceivedAt__","WirelessGatewayId":"__WirelessGatewayId__"}

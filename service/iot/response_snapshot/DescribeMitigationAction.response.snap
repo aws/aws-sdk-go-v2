@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"actionArn":"__ActionArn__","actionId":"__ActionId__","actionName":"__ActionName__","actionParams":{"addThingsToThingGroupParams":{"overrideDynamicGroups":true,"thingGroupNames":["__Member__","__Member__"]},"enableIoTLoggingParams":{"logLevel":"DEBUG","roleArnForLogging":"__RoleArnForLogging__"},"publishFindingToSnsParams":{"topicArn":"__TopicArn__"},"replaceDefaultPolicyVersionParams":{"templateName":"BLANK_POLICY"},"updateCACertificateParams":{"action":"DEACTIVATE"},"updateDeviceCertificateParams":{"action":"DEACTIVATE"}},"actionType":"UPDATE_DEVICE_CERTIFICATE","creationDate":946684800,"lastModifiedDate":946684800,"roleArn":"__RoleArn__"}

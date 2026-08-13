@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ElasticMapReduce.GetBlockPublicAccessConfiguration
-
-{"BlockPublicAccessConfiguration":{"BlockPublicSecurityGroupRules":true,"Classification":"__Classification__","Configurations":[{"Classification":"__Classification__","Configurations":[{},{}],"Properties":{"key0":"__Value__"}},{"Classification":"__Classification__","Configurations":[{},{}],"Properties":{"key0":"__Value__"}}],"PermittedPublicSecurityGroupRuleRanges":[{"MaxRange":1,"MinRange":1},{"MaxRange":1,"MinRange":1}],"Properties":{"key0":"__Value__"}},"BlockPublicAccessConfigurationMetadata":{"CreatedByArn":"__CreatedByArn__","CreationDateTime":946684800}}

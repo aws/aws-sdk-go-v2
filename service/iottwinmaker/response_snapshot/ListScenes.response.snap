@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","sceneSummaries":[{"arn":"__Arn__","contentLocation":"__ContentLocation__","creationDateTime":946684800,"description":"__Description__","sceneId":"__SceneId__","updateDateTime":946684800},{"arn":"__Arn__","contentLocation":"__ContentLocation__","creationDateTime":946684800,"description":"__Description__","sceneId":"__SceneId__","updateDateTime":946684800}]}

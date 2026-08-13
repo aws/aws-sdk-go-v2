@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBCMPricingCalculator.ListBillEstimateInputCommitmentModifications
-
-{"items":[{"commitmentAction":{"addReservedInstanceAction":{"instanceCount":1,"reservedInstancesOfferingId":"__ReservedInstancesOfferingId__"}},"group":"__Group__","id":"__Id__","usageAccountId":"__UsageAccountId__"},{"commitmentAction":{"addReservedInstanceAction":{"instanceCount":1,"reservedInstancesOfferingId":"__ReservedInstancesOfferingId__"}},"group":"__Group__","id":"__Id__","usageAccountId":"__UsageAccountId__"}],"nextToken":"__NextToken__"}

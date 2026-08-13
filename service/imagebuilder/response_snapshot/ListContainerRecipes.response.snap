@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"containerRecipeSummaryList":[{"arn":"__Arn__","containerType":"DOCKER","dateCreated":"__DateCreated__","instanceImage":"__InstanceImage__","name":"__Name__","owner":"__Owner__","parentImage":"__ParentImage__","platform":"Windows","tags":{"key0":"__Value__"}},{"arn":"__Arn__","containerType":"DOCKER","dateCreated":"__DateCreated__","instanceImage":"__InstanceImage__","name":"__Name__","owner":"__Owner__","parentImage":"__ParentImage__","platform":"Windows","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__","requestId":"__RequestId__"}

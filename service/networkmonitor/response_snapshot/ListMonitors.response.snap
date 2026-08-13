@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"monitors":[{"aggregationPeriod":1,"monitorArn":"__MonitorArn__","monitorName":"__MonitorName__","state":"PENDING","tags":{"key0":"__Value__"}},{"aggregationPeriod":1,"monitorArn":"__MonitorArn__","monitorName":"__MonitorName__","state":"PENDING","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

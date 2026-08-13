@@ -1,5 +1,0 @@
-404
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSOrganizationsV20161128.AcceptHandshake
-
-{"__type":"HandshakeNotFoundException","Message":"__Message__"}

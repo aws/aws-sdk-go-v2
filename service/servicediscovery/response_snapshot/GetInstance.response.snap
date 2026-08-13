@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.GetInstance
-
-{"Instance":{"Attributes":{"key0":"__Value__"},"CreatedByAccount":"__CreatedByAccount__","CreatorRequestId":"__CreatorRequestId__","Id":"__Id__"},"ResourceOwner":"__ResourceOwner__"}

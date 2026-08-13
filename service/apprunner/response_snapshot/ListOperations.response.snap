@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AppRunner.ListOperations
-
-{"NextToken":"__NextToken__","OperationSummaryList":[{"EndedAt":946684800,"Id":"__Id__","StartedAt":946684800,"Status":"PENDING","TargetArn":"__TargetArn__","Type":"START_DEPLOYMENT","UpdatedAt":946684800},{"EndedAt":946684800,"Id":"__Id__","StartedAt":946684800,"Status":"PENDING","TargetArn":"__TargetArn__","Type":"START_DEPLOYMENT","UpdatedAt":946684800}]}

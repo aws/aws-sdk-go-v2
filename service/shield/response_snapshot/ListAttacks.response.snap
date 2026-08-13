@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.ListAttacks
-
-{"AttackSummaries":[{"AttackId":"__AttackId__","AttackVectors":[{"VectorType":"__VectorType__"},{"VectorType":"__VectorType__"}],"EndTime":946684800,"ResourceArn":"__ResourceArn__","StartTime":946684800},{"AttackId":"__AttackId__","AttackVectors":[{"VectorType":"__VectorType__"},{"VectorType":"__VectorType__"}],"EndTime":946684800,"ResourceArn":"__ResourceArn__","StartTime":946684800}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"apiKeySource":"HEADER","apiStatus":"UPDATING","apiStatusMessage":"__ApiStatusMessage__","binaryMediaTypes":["__Member__","__Member__"],"createdDate":946684800,"description":"__Description__","disableExecuteApiEndpoint":true,"endpointAccessMode":"BASIC","endpointConfiguration":{"ipAddressType":"ipv4","types":["REGIONAL","REGIONAL"],"vpcEndpointIds":["__Member__","__Member__"]},"id":"__Id__","minimumCompressionSize":1,"name":"__Name__","policy":"__Policy__","rootResourceId":"__RootResourceId__","securityPolicy":"TLS_1_0","tags":{"key0":"__Value__"},"version":"__Version__","warnings":["__Member__","__Member__"]}

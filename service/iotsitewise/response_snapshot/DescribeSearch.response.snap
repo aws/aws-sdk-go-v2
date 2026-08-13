@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"groupId":"__GroupId__","queryStatement":"__QueryStatement__","searchId":"__SearchId__","searchType":"DEEP","startedAt":946684800,"status":"QUEUED","statusReason":"__StatusReason__","workspaceName":"__WorkspaceName__"}

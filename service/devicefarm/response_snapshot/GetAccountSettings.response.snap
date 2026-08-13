@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DeviceFarm_20150623.GetAccountSettings
-
-{"accountSettings":{"awsAccountNumber":"__AwsAccountNumber__","defaultJobTimeoutMinutes":1,"maxJobTimeoutMinutes":1,"maxSlots":{"key0":1},"skipAppResign":true,"trialMinutes":{"remaining":1,"total":1},"unmeteredDevices":{"key0":1},"unmeteredRemoteAccessDevices":{"key0":1}}}

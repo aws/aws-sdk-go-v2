@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configuration":{"role":"__Role__","rules":[{"destinations":[{"destinationTableBucketARN":"__DestinationTableBucketARN__"},{"destinationTableBucketARN":"__DestinationTableBucketARN__"}]},{"destinations":[{"destinationTableBucketARN":"__DestinationTableBucketARN__"},{"destinationTableBucketARN":"__DestinationTableBucketARN__"}]}]},"versionToken":"__VersionToken__"}

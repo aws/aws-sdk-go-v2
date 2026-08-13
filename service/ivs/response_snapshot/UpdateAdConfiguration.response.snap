@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"adConfiguration":{"arn":"__Arn__","mediaTailorPlaybackConfigurations":[{"playbackConfigurationArn":"__PlaybackConfigurationArn__"},{"playbackConfigurationArn":"__PlaybackConfigurationArn__"}],"name":"__Name__","postRollConfiguration":{"durationSeconds":1,"enabled":true},"tags":{"key0":"__Value__"}}}

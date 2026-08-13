@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configurations":[{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","kafkaVersions":["__Member__","__Member__"],"latestRevision":{"creationTime":"2000-01-01T00:00:00Z","description":"__Description__","revision":1},"name":"__Name__","state":"ACTIVE"},{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","kafkaVersions":["__Member__","__Member__"],"latestRevision":{"creationTime":"2000-01-01T00:00:00Z","description":"__Description__","revision":1},"name":"__Name__","state":"ACTIVE"}],"nextToken":"__NextToken__"}

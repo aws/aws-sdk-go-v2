@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AccountAssociationId":"__AccountAssociationId__","DeviceDiscoveryId":"__DeviceDiscoveryId__","ManagedThingId":"__ManagedThingId__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"InvalidAnswers":[{"AnswerId":"__AnswerId__","Error":"INTERNAL_ERROR"},{"AnswerId":"__AnswerId__","Error":"INTERNAL_ERROR"}],"RequestId":"__RequestId__","Status":200,"SucceededAnswers":[{"AnswerId":"__AnswerId__"},{"AnswerId":"__AnswerId__"}],"TopicArn":"__TopicArn__","TopicId":"__TopicId__"}

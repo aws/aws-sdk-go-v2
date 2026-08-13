@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","searchResults":[{"currency":"CNY","description":"__Description__","durationSeconds":1,"offeringId":"__OfferingId__","operation":"__Operation__","paymentOption":"All Upfront","planType":"Compute","productTypes":["EC2","EC2"],"properties":[{"name":"region","value":"__Value__"},{"name":"region","value":"__Value__"}],"serviceCode":"__ServiceCode__","usageType":"__UsageType__"},{"currency":"CNY","description":"__Description__","durationSeconds":1,"offeringId":"__OfferingId__","operation":"__Operation__","paymentOption":"All Upfront","planType":"Compute","productTypes":["EC2","EC2"],"properties":[{"name":"region","value":"__Value__"},{"name":"region","value":"__Value__"}],"serviceCode":"__ServiceCode__","usageType":"__UsageType__"}]}

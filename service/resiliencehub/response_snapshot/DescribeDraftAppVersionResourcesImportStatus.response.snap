@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appArn":"__AppArn__","appVersion":"__AppVersion__","errorDetails":[{"errorMessage":"__ErrorMessage__"},{"errorMessage":"__ErrorMessage__"}],"errorMessage":"__ErrorMessage__","status":"Pending","statusChangeTime":946684800}

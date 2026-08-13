@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configurationStatus":{"error":{"code":"__Code__","message":"__Message__"},"state":"ENABLED"},"encryptionType":"MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION","kmsKeyArn":"__KmsKeyArn__"}

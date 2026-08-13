@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","relatedItems":[{"generatedId":"__GeneratedId__","identifier":{"type":"ANALYSIS","value":{"arn":"__ItemValueMemberArn__"}},"title":"__Title__"},{"generatedId":"__GeneratedId__","identifier":{"type":"ANALYSIS","value":{"arn":"__ItemValueMemberArn__"}},"title":"__Title__"}]}

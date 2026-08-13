@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"sessionLogger":{"additionalEncryptionContext":{"key0":"__Value__"},"associatedPortalArns":["__Member__","__Member__"],"creationDate":946684800,"customerManagedKey":"__CustomerManagedKey__","displayName":"__DisplayName__","eventFilter":{"all":{}},"logConfiguration":{"s3":{"bucket":"__Bucket__","bucketOwner":"__BucketOwner__","folderStructure":"Flat","keyPrefix":"__KeyPrefix__","logFileFormat":"JSONLines"}},"sessionLoggerArn":"__SessionLoggerArn__"}}

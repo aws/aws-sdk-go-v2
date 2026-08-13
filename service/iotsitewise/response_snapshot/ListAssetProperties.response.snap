@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"assetPropertySummaries":[{"alias":"__Alias__","assetCompositeModelId":"__AssetCompositeModelId__","externalId":"__ExternalId__","id":"__Id__","notification":{"state":"ENABLED","topic":"__Topic__"},"path":[{"id":"__Id__","name":"__Name__"},{"id":"__Id__","name":"__Name__"}],"unit":"__Unit__"},{"alias":"__Alias__","assetCompositeModelId":"__AssetCompositeModelId__","externalId":"__ExternalId__","id":"__Id__","notification":{"state":"ENABLED","topic":"__Topic__"},"path":[{"id":"__Id__","name":"__Name__"},{"id":"__Id__","name":"__Name__"}],"unit":"__Unit__"}],"nextToken":"__NextToken__"}

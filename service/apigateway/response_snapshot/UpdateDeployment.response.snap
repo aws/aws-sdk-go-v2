@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"apiSummary":{"key0":{"key0":{"apiKeyRequired":true,"authorizationType":"__AuthorizationType__"}}},"createdDate":946684800,"description":"__Description__","id":"__Id__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.GetParameterHistory
-
-{"NextToken":"__NextToken__","Parameters":[{"AllowedPattern":"__AllowedPattern__","DataType":"__DataType__","Description":"__Description__","KeyId":"__KeyId__","Labels":["__Member__","__Member__"],"LastModifiedDate":946684800,"LastModifiedUser":"__LastModifiedUser__","Name":"__Name__","Policies":[{"PolicyStatus":"__PolicyStatus__","PolicyText":"__PolicyText__","PolicyType":"__PolicyType__"},{"PolicyStatus":"__PolicyStatus__","PolicyText":"__PolicyText__","PolicyType":"__PolicyType__"}],"Tier":"Standard","Type":"String","Value":"__Value__","Version":1},{"AllowedPattern":"__AllowedPattern__","DataType":"__DataType__","Description":"__Description__","KeyId":"__KeyId__","Labels":["__Member__","__Member__"],"LastModifiedDate":946684800,"LastModifiedUser":"__LastModifiedUser__","Name":"__Name__","Policies":[{"PolicyStatus":"__PolicyStatus__","PolicyText":"__PolicyText__","PolicyType":"__PolicyType__"},{"PolicyStatus":"__PolicyStatus__","PolicyText":"__PolicyText__","PolicyType":"__PolicyType__"}],"Tier":"Standard","Type":"String","Value":"__Value__","Version":1}]}

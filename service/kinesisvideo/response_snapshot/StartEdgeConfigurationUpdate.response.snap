@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CreationTime":946684800,"EdgeConfig":{"DeletionConfig":{"DeleteAfterUpload":true,"EdgeRetentionInHours":1,"LocalSizeConfig":{"MaxLocalMediaSizeInMB":1,"StrategyOnFullSize":"DELETE_OLDEST_MEDIA"}},"HubDeviceArn":"__HubDeviceArn__","RecorderConfig":{"MediaSourceConfig":{"MediaUriSecretArn":"__MediaUriSecretArn__","MediaUriType":"RTSP_URI"},"ScheduleConfig":{"DurationInSeconds":1,"ScheduleExpression":"__ScheduleExpression__"}},"UploaderConfig":{"ScheduleConfig":{"DurationInSeconds":1,"ScheduleExpression":"__ScheduleExpression__"}}},"FailedStatusDetails":"__FailedStatusDetails__","LastUpdatedTime":946684800,"StreamARN":"__StreamARN__","StreamName":"__StreamName__","SyncStatus":"SYNCING"}

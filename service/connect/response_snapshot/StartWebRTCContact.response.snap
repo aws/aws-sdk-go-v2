@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ConnectionData":{"Attendee":{"AttendeeId":"__AttendeeId__","JoinToken":"__JoinToken__"},"Meeting":{"MediaPlacement":{"AudioFallbackUrl":"__AudioFallbackUrl__","AudioHostUrl":"__AudioHostUrl__","EventIngestionUrl":"__EventIngestionUrl__","SignalingUrl":"__SignalingUrl__","TurnControlUrl":"__TurnControlUrl__"},"MediaRegion":"__MediaRegion__","MeetingFeatures":{"Audio":{"EchoReduction":"AVAILABLE"}},"MeetingId":"__MeetingId__"}},"ContactId":"__ContactId__","ParticipantId":"__ParticipantId__","ParticipantToken":"__ParticipantToken__"}

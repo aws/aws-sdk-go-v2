@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DomainName":"__DomainName__","EstimateId":"__EstimateId__","StatusCode":200}

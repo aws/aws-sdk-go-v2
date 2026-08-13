@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","definition":{"cedar":{"statement":"__Statement__"}},"description":"__Description__","enforcementMode":"ACTIVE","name":"__Name__","policyArn":"__PolicyArn__","policyEngineId":"__PolicyEngineId__","policyId":"__PolicyId__","status":"CREATING","statusReasons":["__Member__","__Member__"],"updatedAt":"2000-01-01T00:00:00Z"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"dataSourceId":"__DataSourceId__","knowledgeBaseId":"__KnowledgeBaseId__","status":"AVAILABLE"}

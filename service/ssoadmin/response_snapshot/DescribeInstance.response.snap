@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SWBExternalService.DescribeInstance
-
-{"CreatedDate":946684800,"EncryptionConfigurationDetails":{"EncryptionStatus":"UPDATING","EncryptionStatusReason":"__EncryptionStatusReason__","KeyType":"AWS_OWNED_KMS_KEY","KmsKeyArn":"__KmsKeyArn__"},"IdentityStoreId":"__IdentityStoreId__","InstanceArn":"__InstanceArn__","Name":"__Name__","OwnerAccountId":"__OwnerAccountId__","PermissionSetsEnabled":true,"Status":"CREATE_IN_PROGRESS","StatusReason":"__StatusReason__"}

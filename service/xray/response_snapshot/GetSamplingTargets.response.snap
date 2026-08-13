@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LastRuleModification":946684800,"SamplingTargetDocuments":[{"FixedRate":1,"Interval":1,"ReservoirQuota":1,"ReservoirQuotaTTL":946684800,"RuleName":"__RuleName__","SamplingBoost":{"BoostRate":1,"BoostRateTTL":946684800}},{"FixedRate":1,"Interval":1,"ReservoirQuota":1,"ReservoirQuotaTTL":946684800,"RuleName":"__RuleName__","SamplingBoost":{"BoostRate":1,"BoostRateTTL":946684800}}],"UnprocessedBoostStatistics":[{"ErrorCode":"__ErrorCode__","Message":"__Message__","RuleName":"__RuleName__"},{"ErrorCode":"__ErrorCode__","Message":"__Message__","RuleName":"__RuleName__"}],"UnprocessedStatistics":[{"ErrorCode":"__ErrorCode__","Message":"__Message__","RuleName":"__RuleName__"},{"ErrorCode":"__ErrorCode__","Message":"__Message__","RuleName":"__RuleName__"}]}

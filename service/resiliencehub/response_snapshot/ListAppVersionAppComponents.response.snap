@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appArn":"__AppArn__","appComponents":[{"additionalInfo":{"key0":["__Member__","__Member__"]},"id":"__Id__","name":"__Name__","type":"__Type__"},{"additionalInfo":{"key0":["__Member__","__Member__"]},"id":"__Id__","name":"__Name__","type":"__Type__"}],"appVersion":"__AppVersion__","nextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.ListModelVersions
-
-{"ModelVersionSummaries":[{"CreatedAt":946684800,"ModelArn":"__ModelArn__","ModelName":"__ModelName__","ModelQuality":"QUALITY_THRESHOLD_MET","ModelVersion":1,"ModelVersionArn":"__ModelVersionArn__","SourceType":"TRAINING","Status":"IN_PROGRESS"},{"CreatedAt":946684800,"ModelArn":"__ModelArn__","ModelName":"__ModelName__","ModelQuality":"QUALITY_THRESHOLD_MET","ModelVersion":1,"ModelVersionArn":"__ModelVersionArn__","SourceType":"TRAINING","Status":"IN_PROGRESS"}],"NextToken":"__NextToken__"}

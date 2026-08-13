@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHealth_20160804.DescribeEntityAggregates
-
-{"entityAggregates":[{"count":1,"eventArn":"__EventArn__","statuses":{"key0":1}},{"count":1,"eventArn":"__EventArn__","statuses":{"key0":1}}]}

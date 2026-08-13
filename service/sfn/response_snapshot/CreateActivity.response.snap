@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSStepFunctions.CreateActivity
-
-{"activityArn":"__ActivityArn__","creationDate":946684800}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StorageGateway_20130630.DescribeCache
-
-{"CacheAllocatedInBytes":1,"CacheDirtyPercentage":1,"CacheHitPercentage":1,"CacheMissPercentage":1,"CacheUsedPercentage":1,"DiskIds":["__Member__","__Member__"],"GatewayARN":"__GatewayARN__"}

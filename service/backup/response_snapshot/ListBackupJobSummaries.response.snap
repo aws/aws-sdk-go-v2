@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AggregationPeriod":"__AggregationPeriod__","BackupJobSummaries":[{"AccountId":"__AccountId__","Count":1,"EndTime":946684800,"MessageCategory":"__MessageCategory__","Region":"__Region__","ResourceType":"__ResourceType__","StartTime":946684800,"State":"CREATED"},{"AccountId":"__AccountId__","Count":1,"EndTime":946684800,"MessageCategory":"__MessageCategory__","Region":"__Region__","ResourceType":"__ResourceType__","StartTime":946684800,"State":"CREATED"}],"NextToken":"__NextToken__"}

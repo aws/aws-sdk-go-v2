@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"failedRecords":[{"errorMessage":"__ErrorMessage__","inputSourceARN":"__InputSourceARN__","uniqueId":"__UniqueId__"},{"errorMessage":"__ErrorMessage__","inputSourceARN":"__InputSourceARN__","uniqueId":"__UniqueId__"}],"matchGroups":[{"matchId":"__MatchId__","matchRule":"__MatchRule__","records":[{"inputSourceARN":"__InputSourceARN__","recordId":"__RecordId__"},{"inputSourceARN":"__InputSourceARN__","recordId":"__RecordId__"}]},{"matchId":"__MatchId__","matchRule":"__MatchRule__","records":[{"inputSourceARN":"__InputSourceARN__","recordId":"__RecordId__"},{"inputSourceARN":"__InputSourceARN__","recordId":"__RecordId__"}]}]}

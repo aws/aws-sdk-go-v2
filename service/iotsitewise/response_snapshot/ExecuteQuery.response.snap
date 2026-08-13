@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"columns":[{"name":"__Name__","type":{"scalarType":"BOOLEAN"}},{"name":"__Name__","type":{"scalarType":"BOOLEAN"}}],"nextToken":"__NextToken__","rows":[{"data":[{"arrayValue":[{},{}],"nullValue":true,"scalarValue":"__ScalarValue__"},{"arrayValue":[{},{}],"nullValue":true,"scalarValue":"__ScalarValue__"}]},{"data":[{"arrayValue":[{},{}],"nullValue":true,"scalarValue":"__ScalarValue__"},{"arrayValue":[{},{}],"nullValue":true,"scalarValue":"__ScalarValue__"}]}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.DescribeProtectionGroup
-
-{"ProtectionGroup":{"Aggregation":"SUM","Members":["__Member__","__Member__"],"Pattern":"ALL","ProtectionGroupArn":"__ProtectionGroupArn__","ProtectionGroupId":"__ProtectionGroupId__","ResourceType":"CLOUDFRONT_DISTRIBUTION"}}

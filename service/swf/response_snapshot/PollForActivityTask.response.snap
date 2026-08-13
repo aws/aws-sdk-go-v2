@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: SimpleWorkflowService.PollForActivityTask
-
-{"activityId":"__ActivityId__","activityType":{"name":"__Name__","version":"__Version__"},"input":"__Input__","startedEventId":1,"taskToken":"__TaskToken__","workflowExecution":{"runId":"__RunId__","workflowId":"__WorkflowId__"}}

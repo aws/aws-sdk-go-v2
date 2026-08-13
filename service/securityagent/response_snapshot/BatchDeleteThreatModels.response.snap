@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"deleted":["__Member__","__Member__"],"failed":[{"reason":"__Reason__","threatModelId":"__ThreatModelId__"},{"reason":"__Reason__","threatModelId":"__ThreatModelId__"}]}

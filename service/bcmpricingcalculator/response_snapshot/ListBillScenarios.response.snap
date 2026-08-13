@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBCMPricingCalculator.ListBillScenarios
-
-{"items":[{"billInterval":{"end":946684800,"start":946684800},"costCategoryGroupSharingPreferenceArn":"__CostCategoryGroupSharingPreferenceArn__","createdAt":946684800,"expiresAt":946684800,"failureMessage":"__FailureMessage__","groupSharingPreference":"OPEN","id":"__Id__","name":"__Name__","status":"READY"},{"billInterval":{"end":946684800,"start":946684800},"costCategoryGroupSharingPreferenceArn":"__CostCategoryGroupSharingPreferenceArn__","createdAt":946684800,"expiresAt":946684800,"failureMessage":"__FailureMessage__","groupSharingPreference":"OPEN","id":"__Id__","name":"__Name__","status":"READY"}],"nextToken":"__NextToken__"}

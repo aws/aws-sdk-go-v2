@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"loggingDestination":{"cloudWatchLogs":{"logGroupArn":"__LogGroupArn__"}},"modifiedAt":946684800,"scraperComponents":[{"config":{"options":{"key0":"__Value__"}},"type":"SERVICE_DISCOVERY"},{"config":{"options":{"key0":"__Value__"}},"type":"SERVICE_DISCOVERY"}],"scraperId":"__ScraperId__","status":{"statusCode":"CREATING","statusReason":"__StatusReason__"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.GetProvisionedProductOutputs
-
-{"NextPageToken":"__NextPageToken__","Outputs":[{"Description":"__Description__","OutputKey":"__OutputKey__","OutputValue":"__OutputValue__"},{"Description":"__Description__","OutputKey":"__OutputKey__","OutputValue":"__OutputValue__"}]}

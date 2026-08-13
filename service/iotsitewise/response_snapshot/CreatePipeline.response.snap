@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"pipelineArn":"__PipelineArn__","pipelineName":"__PipelineName__","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"version":"__Version__"}

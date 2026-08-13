@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.GetAccountLink
-
-{"AccountLink":{"AccountLinkId":"__AccountLinkId__","AccountLinkStatus":"LINKED","SourceAccountId":"__SourceAccountId__","TargetAccountId":"__TargetAccountId__"}}

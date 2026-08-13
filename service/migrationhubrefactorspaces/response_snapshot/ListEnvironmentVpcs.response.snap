@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"EnvironmentVpcList":[{"AccountId":"__AccountId__","CidrBlocks":["__Member__","__Member__"],"CreatedTime":946684800,"EnvironmentId":"__EnvironmentId__","LastUpdatedTime":946684800,"VpcId":"__VpcId__","VpcName":"__VpcName__"},{"AccountId":"__AccountId__","CidrBlocks":["__Member__","__Member__"],"CreatedTime":946684800,"EnvironmentId":"__EnvironmentId__","LastUpdatedTime":946684800,"VpcId":"__VpcId__","VpcName":"__VpcName__"}],"NextToken":"__NextToken__"}

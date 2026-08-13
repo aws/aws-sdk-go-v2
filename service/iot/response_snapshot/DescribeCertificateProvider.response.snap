@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accountDefaultForOperations":["CreateCertificateFromCsr","CreateCertificateFromCsr"],"certificateProviderArn":"__CertificateProviderArn__","certificateProviderName":"__CertificateProviderName__","creationDate":946684800,"lambdaFunctionArn":"__LambdaFunctionArn__","lastModifiedDate":946684800}

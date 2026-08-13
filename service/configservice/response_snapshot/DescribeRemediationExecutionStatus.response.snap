@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.DescribeRemediationExecutionStatus
-
-{"NextToken":"__NextToken__","RemediationExecutionStatuses":[{"InvocationTime":946684800,"LastUpdatedTime":946684800,"ResourceKey":{"resourceId":"__ResourceId__","resourceType":"AWS::EC2::CustomerGateway"},"State":"QUEUED","StepDetails":[{"ErrorMessage":"__ErrorMessage__","Name":"__Name__","StartTime":946684800,"State":"SUCCEEDED","StopTime":946684800},{"ErrorMessage":"__ErrorMessage__","Name":"__Name__","StartTime":946684800,"State":"SUCCEEDED","StopTime":946684800}]},{"InvocationTime":946684800,"LastUpdatedTime":946684800,"ResourceKey":{"resourceId":"__ResourceId__","resourceType":"AWS::EC2::CustomerGateway"},"State":"QUEUED","StepDetails":[{"ErrorMessage":"__ErrorMessage__","Name":"__Name__","StartTime":946684800,"State":"SUCCEEDED","StopTime":946684800},{"ErrorMessage":"__ErrorMessage__","Name":"__Name__","StartTime":946684800,"State":"SUCCEEDED","StopTime":946684800}]}]}

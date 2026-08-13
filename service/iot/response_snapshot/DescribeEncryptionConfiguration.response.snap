@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configurationDetails":{"configurationStatus":"HEALTHY","errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},"encryptionType":"CUSTOMER_MANAGED_KMS_KEY","kmsAccessRoleArn":"__KmsAccessRoleArn__","kmsKeyArn":"__KmsKeyArn__","lastModifiedDate":946684800}

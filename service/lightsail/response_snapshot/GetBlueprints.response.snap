@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetBlueprints
-
-{"blueprints":[{"appCategory":"LfR","blueprintId":"__BlueprintId__","description":"__Description__","group":"__Group__","isActive":true,"licenseUrl":"__LicenseUrl__","minPower":1,"name":"__Name__","platform":"LINUX_UNIX","productUrl":"__ProductUrl__","type":"os","version":"__Version__","versionCode":"__VersionCode__"},{"appCategory":"LfR","blueprintId":"__BlueprintId__","description":"__Description__","group":"__Group__","isActive":true,"licenseUrl":"__LicenseUrl__","minPower":1,"name":"__Name__","platform":"LINUX_UNIX","productUrl":"__ProductUrl__","type":"os","version":"__Version__","versionCode":"__VersionCode__"}],"nextPageToken":"__NextPageToken__"}

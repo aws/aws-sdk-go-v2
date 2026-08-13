@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"imageSetPropertiesList":[{"ImageSetWorkflowStatus":"CREATED","createdAt":946684800,"deletedAt":946684800,"imageSetId":"__ImageSetId__","imageSetState":"ACTIVE","isPrimary":true,"message":"__Message__","overrides":{"forced":true},"updatedAt":946684800,"versionId":"__VersionId__"},{"ImageSetWorkflowStatus":"CREATED","createdAt":946684800,"deletedAt":946684800,"imageSetId":"__ImageSetId__","imageSetState":"ACTIVE","isPrimary":true,"message":"__Message__","overrides":{"forced":true},"updatedAt":946684800,"versionId":"__VersionId__"}],"nextToken":"__NextToken__"}

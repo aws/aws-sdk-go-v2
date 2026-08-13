@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.ListOpsItemRelatedItems
-
-{"NextToken":"__NextToken__","Summaries":[{"AssociationId":"__AssociationId__","AssociationType":"__AssociationType__","CreatedBy":{"Arn":"__Arn__"},"CreatedTime":946684800,"LastModifiedBy":{"Arn":"__Arn__"},"LastModifiedTime":946684800,"OpsItemId":"__OpsItemId__","ResourceType":"__ResourceType__","ResourceUri":"__ResourceUri__"},{"AssociationId":"__AssociationId__","AssociationType":"__AssociationType__","CreatedBy":{"Arn":"__Arn__"},"CreatedTime":946684800,"LastModifiedBy":{"Arn":"__Arn__"},"LastModifiedTime":946684800,"OpsItemId":"__OpsItemId__","ResourceType":"__ResourceType__","ResourceUri":"__ResourceUri__"}]}

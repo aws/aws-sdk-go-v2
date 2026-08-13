@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"subject":{"createdAt":"2000-01-01T00:00:00Z","credentials":[{"enabled":true,"failed":true,"issuer":"__Issuer__","seenAt":"2000-01-01T00:00:00Z","serialNumber":"__SerialNumber__","x509CertificateData":"__X509CertificateData__"},{"enabled":true,"failed":true,"issuer":"__Issuer__","seenAt":"2000-01-01T00:00:00Z","serialNumber":"__SerialNumber__","x509CertificateData":"__X509CertificateData__"}],"enabled":true,"instanceProperties":[{"failed":true,"properties":{"key0":"__Value__"},"seenAt":"2000-01-01T00:00:00Z"},{"failed":true,"properties":{"key0":"__Value__"},"seenAt":"2000-01-01T00:00:00Z"}],"lastSeenAt":"2000-01-01T00:00:00Z","subjectArn":"__SubjectArn__","subjectId":"__SubjectId__","updatedAt":"2000-01-01T00:00:00Z","x509Subject":"__X509Subject__"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.UpdateMonitoringAlert
-
-{"MonitoringAlertName":"__MonitoringAlertName__","MonitoringScheduleArn":"__MonitoringScheduleArn__"}

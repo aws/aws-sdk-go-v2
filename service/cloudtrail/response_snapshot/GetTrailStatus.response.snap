@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.GetTrailStatus
-
-{"IsLogging":true,"LatestCloudWatchLogsDeliveryError":"__LatestCloudWatchLogsDeliveryError__","LatestCloudWatchLogsDeliveryTime":946684800,"LatestDeliveryAttemptSucceeded":"__LatestDeliveryAttemptSucceeded__","LatestDeliveryAttemptTime":"__LatestDeliveryAttemptTime__","LatestDeliveryError":"__LatestDeliveryError__","LatestDeliveryTime":946684800,"LatestDigestDeliveryError":"__LatestDigestDeliveryError__","LatestDigestDeliveryTime":946684800,"LatestNotificationAttemptSucceeded":"__LatestNotificationAttemptSucceeded__","LatestNotificationAttemptTime":"__LatestNotificationAttemptTime__","LatestNotificationError":"__LatestNotificationError__","LatestNotificationTime":946684800,"StartLoggingTime":946684800,"StopLoggingTime":946684800,"TimeLoggingStarted":"__TimeLoggingStarted__","TimeLoggingStopped":"__TimeLoggingStopped__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDB_20120810.DescribeTimeToLive
-
-{"TimeToLiveDescription":{"AttributeName":"__AttributeName__","TimeToLiveStatus":"ENABLING"}}

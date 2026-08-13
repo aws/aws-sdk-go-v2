@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"description":"__Description__","domainId":"__DomainId__","environmentId":"__EnvironmentId__","id":"__Id__","name":"__Name__","parameters":{"awsConsoleLink":{"uri":"__Uri__"}}},{"description":"__Description__","domainId":"__DomainId__","environmentId":"__EnvironmentId__","id":"__Id__","name":"__Name__","parameters":{"awsConsoleLink":{"uri":"__Uri__"}}}],"nextToken":"__NextToken__"}

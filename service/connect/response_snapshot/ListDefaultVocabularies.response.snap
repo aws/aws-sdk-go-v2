@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DefaultVocabularyList":[{"InstanceId":"__InstanceId__","LanguageCode":"ar-AE","VocabularyId":"__VocabularyId__","VocabularyName":"__VocabularyName__"},{"InstanceId":"__InstanceId__","LanguageCode":"ar-AE","VocabularyId":"__VocabularyId__","VocabularyName":"__VocabularyName__"}],"NextToken":"__NextToken__"}

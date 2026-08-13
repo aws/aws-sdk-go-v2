@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botAliasSummaries":[{"botAliasId":"__BotAliasId__","botAliasName":"__BotAliasName__","botAliasStatus":"Creating","botVersion":"__BotVersion__","creationDateTime":946684800,"description":"__Description__","lastUpdatedDateTime":946684800},{"botAliasId":"__BotAliasId__","botAliasName":"__BotAliasName__","botAliasStatus":"Creating","botVersion":"__BotVersion__","creationDateTime":946684800,"description":"__Description__","lastUpdatedDateTime":946684800}],"botId":"__BotId__","nextToken":"__NextToken__"}

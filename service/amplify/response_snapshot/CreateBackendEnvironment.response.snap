@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"backendEnvironment":{"backendEnvironmentArn":"__BackendEnvironmentArn__","createTime":946684800,"deploymentArtifacts":"__DeploymentArtifacts__","environmentName":"__EnvironmentName__","stackName":"__StackName__","updateTime":946684800}}

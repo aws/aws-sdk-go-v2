@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"events":[{"attributes":{"key0":"__Value__"},"eventId":"__EventId__","eventType":"__EventType__","message":"__Message__","timestamp":946684800},{"attributes":{"key0":"__Value__"},"eventId":"__EventId__","eventType":"__EventType__","message":"__Message__","timestamp":946684800}],"nextToken":"__NextToken__"}

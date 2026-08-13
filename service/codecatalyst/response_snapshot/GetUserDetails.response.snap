@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"displayName":"__DisplayName__","primaryEmail":{"email":"__Email__","verified":true},"userId":"__UserId__","userName":"__UserName__","version":"__Version__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"ApplicationArn":"__ApplicationArn__","Arn":"__Arn__","CreatedAt":946684800,"Description":"__Description__","ExpiresAt":946684800,"RemainingUses":1,"SessionLengthSeconds":1,"Status":"ACTIVE","StatusReason":"userRevoked","StreamGroupArn":"__StreamGroupArn__","StreamUrl":"__StreamUrl__","StreamUrlId":"__StreamUrlId__","UsageLimit":1},{"ApplicationArn":"__ApplicationArn__","Arn":"__Arn__","CreatedAt":946684800,"Description":"__Description__","ExpiresAt":946684800,"RemainingUses":1,"SessionLengthSeconds":1,"Status":"ACTIVE","StatusReason":"userRevoked","StreamGroupArn":"__StreamGroupArn__","StreamUrl":"__StreamUrl__","StreamUrlId":"__StreamUrlId__","UsageLimit":1}],"NextToken":"__NextToken__"}

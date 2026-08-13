@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSOrganizationsV20161128.ListEffectivePolicyValidationErrors
-
-{"AccountId":"__AccountId__","EffectivePolicyValidationErrors":[{"ContributingPolicies":["__Member__","__Member__"],"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","PathToError":"__PathToError__"},{"ContributingPolicies":["__Member__","__Member__"],"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","PathToError":"__PathToError__"}],"EvaluationTimestamp":946684800,"NextToken":"__NextToken__","Path":"__Path__","PolicyType":"TAG_POLICY"}

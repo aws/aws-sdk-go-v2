@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","quantumTasks":[{"createdAt":"2000-01-01T00:00:00Z","deviceArn":"__DeviceArn__","endedAt":"2000-01-01T00:00:00Z","outputS3Bucket":"__OutputS3Bucket__","outputS3Directory":"__OutputS3Directory__","quantumTaskArn":"__QuantumTaskArn__","shots":1,"status":"CREATED","tags":{"key0":"__Value__"}},{"createdAt":"2000-01-01T00:00:00Z","deviceArn":"__DeviceArn__","endedAt":"2000-01-01T00:00:00Z","outputS3Bucket":"__OutputS3Bucket__","outputS3Directory":"__OutputS3Directory__","quantumTaskArn":"__QuantumTaskArn__","shots":1,"status":"CREATED","tags":{"key0":"__Value__"}}]}

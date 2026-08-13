@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.SelectAggregateResourceConfig
-
-{"NextToken":"__NextToken__","QueryInfo":{"SelectFields":[{"Name":"__Name__"},{"Name":"__Name__"}]},"Results":["__Member__","__Member__"]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Notification":{"Arn":"__Arn__","Content":{"key0":"__Value__"},"CreatedAt":946684800,"ExpiresAt":946684800,"Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Priority":"URGENT","Recipients":["__Member__","__Member__"],"Tags":{"key0":"__Value__"}}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeDirectConnectGateways
-
-{"directConnectGateways":[{"amazonSideAsn":1,"directConnectGatewayId":"__DirectConnectGatewayId__","directConnectGatewayName":"__DirectConnectGatewayName__","directConnectGatewayState":"pending","ownerAccount":"__OwnerAccount__","stateChangeError":"__StateChangeError__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]},{"amazonSideAsn":1,"directConnectGatewayId":"__DirectConnectGatewayId__","directConnectGatewayName":"__DirectConnectGatewayName__","directConnectGatewayState":"pending","ownerAccount":"__OwnerAccount__","stateChangeError":"__StateChangeError__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}],"nextToken":"__NextToken__"}

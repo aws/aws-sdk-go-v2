@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"AlreadyExistsException","Arn":"__Arn__","Code":"AlreadyExistsException","Context":"__Context__","CreatorRequestId":"__CreatorRequestId__","Message":"__Message__","Type":"__Type__"}

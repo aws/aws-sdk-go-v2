@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"TimeSeriesSummaries":[{"alias":"__Alias__","assetId":"__AssetId__","dataType":"STRING","dataTypeSpec":"__DataTypeSpec__","propertyId":"__PropertyId__","timeSeriesArn":"__TimeSeriesArn__","timeSeriesCreationDate":946684800,"timeSeriesId":"__TimeSeriesId__","timeSeriesLastUpdateDate":946684800},{"alias":"__Alias__","assetId":"__AssetId__","dataType":"STRING","dataTypeSpec":"__DataTypeSpec__","propertyId":"__PropertyId__","timeSeriesArn":"__TimeSeriesArn__","timeSeriesCreationDate":946684800,"timeSeriesId":"__TimeSeriesId__","timeSeriesLastUpdateDate":946684800}],"nextToken":"__NextToken__","workspaceName":"__WorkspaceName__"}

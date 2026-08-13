@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"thingArn":"__ThingArn__","thingId":"__ThingId__","thingName":"__ThingName__"}

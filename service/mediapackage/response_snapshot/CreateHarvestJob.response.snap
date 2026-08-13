@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","channelId":"__ChannelId__","createdAt":"__CreatedAt__","endTime":"__EndTime__","id":"__Id__","originEndpointId":"__OriginEndpointId__","s3Destination":{"bucketName":"__BucketName__","manifestKey":"__ManifestKey__","roleArn":"__RoleArn__"},"startTime":"__StartTime__","status":"IN_PROGRESS"}

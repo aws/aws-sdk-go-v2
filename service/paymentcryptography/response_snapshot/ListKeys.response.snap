@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PaymentCryptographyControlPlane.ListKeys
-
-{"Keys":[{"Enabled":true,"Exportable":true,"KeyArn":"__KeyArn__","KeyAttributes":{"KeyAlgorithm":"TDES_2KEY","KeyClass":"SYMMETRIC_KEY","KeyModesOfUse":{"Decrypt":true,"DeriveKey":true,"Encrypt":true,"Generate":true,"NoRestrictions":true,"Sign":true,"Unwrap":true,"Verify":true,"Wrap":true},"KeyUsage":"TR31_B0_BASE_DERIVATION_KEY"},"KeyCheckValue":"__KeyCheckValue__","KeyState":"CREATE_IN_PROGRESS","MultiRegionKeyType":"PRIMARY","PrimaryRegion":"__PrimaryRegion__"},{"Enabled":true,"Exportable":true,"KeyArn":"__KeyArn__","KeyAttributes":{"KeyAlgorithm":"TDES_2KEY","KeyClass":"SYMMETRIC_KEY","KeyModesOfUse":{"Decrypt":true,"DeriveKey":true,"Encrypt":true,"Generate":true,"NoRestrictions":true,"Sign":true,"Unwrap":true,"Verify":true,"Wrap":true},"KeyUsage":"TR31_B0_BASE_DERIVATION_KEY"},"KeyCheckValue":"__KeyCheckValue__","KeyState":"CREATE_IN_PROGRESS","MultiRegionKeyType":"PRIMARY","PrimaryRegion":"__PrimaryRegion__"}],"NextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.GetAgreementEntitlements
-
-{"agreementEntitlements":[{"licenseArn":"__LicenseArn__","registrationToken":"__RegistrationToken__","resource":{"id":"__Id__","type":"__Type__"},"status":"PROVISIONED","statusReasonCode":"PROVISIONING_IN_PROGRESS","type":"__Type__"},{"licenseArn":"__LicenseArn__","registrationToken":"__RegistrationToken__","resource":{"id":"__Id__","type":"__Type__"},"status":"PROVISIONED","statusReasonCode":"PROVISIONING_IN_PROGRESS","type":"__Type__"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","offerTerms":[{"byolPricingTerm":{"id":"__Id__","type":"ByolPricingTerm"}},{"byolPricingTerm":{"id":"__Id__","type":"ByolPricingTerm"}}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"failedDocuments":[{"dataSourceId":"__DataSourceId__","error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"id":"__Id__"},{"dataSourceId":"__DataSourceId__","error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"id":"__Id__"}]}

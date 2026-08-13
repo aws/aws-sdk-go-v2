@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"item":[{"configurationProperties":[{"defaultValue":"__DefaultValue__","description":"__Description__","friendlyName":"__FriendlyName__","name":"__Name__","required":true},{"defaultValue":"__DefaultValue__","description":"__Description__","friendlyName":"__FriendlyName__","name":"__Name__","required":true}],"description":"__Description__","friendlyName":"__FriendlyName__","id":"__Id__"},{"configurationProperties":[{"defaultValue":"__DefaultValue__","description":"__Description__","friendlyName":"__FriendlyName__","name":"__Name__","required":true},{"defaultValue":"__DefaultValue__","description":"__Description__","friendlyName":"__FriendlyName__","name":"__Name__","required":true}],"description":"__Description__","friendlyName":"__FriendlyName__","id":"__Id__"}]}

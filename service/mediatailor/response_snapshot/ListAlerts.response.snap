@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"AlertCode":"__AlertCode__","AlertMessage":"__AlertMessage__","Category":"SCHEDULING_ERROR","LastModifiedTime":946684800,"RelatedResourceArns":["__Member__","__Member__"],"ResourceArn":"__ResourceArn__"},{"AlertCode":"__AlertCode__","AlertMessage":"__AlertMessage__","Category":"SCHEDULING_ERROR","LastModifiedTime":946684800,"RelatedResourceArns":["__Member__","__Member__"],"ResourceArn":"__ResourceArn__"}],"NextToken":"__NextToken__"}

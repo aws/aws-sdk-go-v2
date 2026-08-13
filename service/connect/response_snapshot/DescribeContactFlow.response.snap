@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ContactFlow":{"Arn":"__Arn__","Content":"__Content__","Description":"__Description__","FlowContentSha256":"__FlowContentSha256__","Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","State":"ACTIVE","Status":"PUBLISHED","Tags":{"key0":"__Value__"},"Type":"CONTACT_FLOW","Version":1,"VersionDescription":"__VersionDescription__"}}

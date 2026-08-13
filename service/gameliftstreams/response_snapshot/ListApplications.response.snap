@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"Arn":"__Arn__","CreatedAt":946684800,"Description":"__Description__","Id":"__Id__","LastUpdatedAt":946684800,"RuntimeEnvironment":{"Type":"PROTON","Version":"__Version__"},"Status":"INITIALIZED"},{"Arn":"__Arn__","CreatedAt":946684800,"Description":"__Description__","Id":"__Id__","LastUpdatedAt":946684800,"RuntimeEnvironment":{"Type":"PROTON","Version":"__Version__"},"Status":"INITIALIZED"}],"NextToken":"__NextToken__"}

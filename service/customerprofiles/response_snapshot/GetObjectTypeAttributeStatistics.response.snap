@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CalculatedAt":946684800,"Statistics":{"Average":1,"Maximum":1,"Minimum":1,"Percentiles":{"P25":1,"P5":1,"P50":1,"P75":1,"P95":1},"StandardDeviation":1}}

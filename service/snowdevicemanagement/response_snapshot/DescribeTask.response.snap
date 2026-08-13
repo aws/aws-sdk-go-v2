@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"completedAt":946684800,"createdAt":946684800,"description":"__Description__","lastUpdatedAt":946684800,"state":"IN_PROGRESS","tags":{"key0":"__Value__"},"targets":["__Member__","__Member__"],"taskArn":"__TaskArn__","taskId":"__TaskId__"}

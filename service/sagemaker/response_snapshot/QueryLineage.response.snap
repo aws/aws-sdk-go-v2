@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.QueryLineage
-
-{"Edges":[{"AssociationType":"ContributedTo","DestinationArn":"__DestinationArn__","SourceArn":"__SourceArn__"},{"AssociationType":"ContributedTo","DestinationArn":"__DestinationArn__","SourceArn":"__SourceArn__"}],"NextToken":"__NextToken__","Vertices":[{"Arn":"__Arn__","LineageType":"TrialComponent","Type":"__Type__"},{"Arn":"__Arn__","LineageType":"TrialComponent","Type":"__Type__"}]}

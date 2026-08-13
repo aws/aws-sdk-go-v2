@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CrossClusterSearchConnections":[{"ConnectionStatus":{"Message":"__Message__","StatusCode":"PENDING_ACCEPTANCE"},"CrossClusterSearchConnectionId":"__CrossClusterSearchConnectionId__","DestinationDomainInfo":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"},"SourceDomainInfo":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"}},{"ConnectionStatus":{"Message":"__Message__","StatusCode":"PENDING_ACCEPTANCE"},"CrossClusterSearchConnectionId":"__CrossClusterSearchConnectionId__","DestinationDomainInfo":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"},"SourceDomainInfo":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"}}],"NextToken":"__NextToken__"}

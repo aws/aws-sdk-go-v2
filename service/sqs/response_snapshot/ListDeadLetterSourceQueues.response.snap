@@ -1,6 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonSQS.ListDeadLetterSourceQueues
-X-Amzn-Query-Mode: true
-
-{"NextToken":"__NextToken__","queueUrls":["__Member__","__Member__"]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonPersonalize.ListDataDeletionJobs
-
-{"dataDeletionJobs":[{"creationDateTime":946684800,"dataDeletionJobArn":"__DataDeletionJobArn__","datasetGroupArn":"__DatasetGroupArn__","failureReason":"__FailureReason__","jobName":"__JobName__","lastUpdatedDateTime":946684800,"status":"__Status__"},{"creationDateTime":946684800,"dataDeletionJobArn":"__DataDeletionJobArn__","datasetGroupArn":"__DatasetGroupArn__","failureReason":"__FailureReason__","jobName":"__JobName__","lastUpdatedDateTime":946684800,"status":"__Status__"}],"nextToken":"__NextToken__"}

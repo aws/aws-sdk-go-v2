@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListLabelingJobsForWorkteam
-
-{"LabelingJobSummaryList":[{"CreationTime":946684800,"JobReferenceCode":"__JobReferenceCode__","LabelCounters":{"HumanLabeled":1,"PendingHuman":1,"Total":1},"LabelingJobName":"__LabelingJobName__","NumberOfHumanWorkersPerDataObject":1,"WorkRequesterAccountId":"__WorkRequesterAccountId__"},{"CreationTime":946684800,"JobReferenceCode":"__JobReferenceCode__","LabelCounters":{"HumanLabeled":1,"PendingHuman":1,"Total":1},"LabelingJobName":"__LabelingJobName__","NumberOfHumanWorkersPerDataObject":1,"WorkRequesterAccountId":"__WorkRequesterAccountId__"}],"NextToken":"__NextToken__"}

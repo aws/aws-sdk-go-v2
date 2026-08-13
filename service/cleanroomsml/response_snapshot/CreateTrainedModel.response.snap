@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"trainedModelArn":"__TrainedModelArn__","versionIdentifier":"__VersionIdentifier__"}

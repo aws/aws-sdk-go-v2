@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.UpdateWorkspacesPool
-
-{"WorkspacesPool":{"ApplicationSettings":{"S3BucketName":"__S3BucketName__","SettingsGroup":"__SettingsGroup__","Status":"DISABLED"},"BundleId":"__BundleId__","CapacityStatus":{"ActiveUserSessions":1,"ActualUserSessions":1,"AvailableUserSessions":1,"DesiredUserSessions":1},"CreatedAt":946684800,"Description":"__Description__","DirectoryId":"__DirectoryId__","Errors":[{"ErrorCode":"IAM_SERVICE_ROLE_IS_MISSING","ErrorMessage":"__ErrorMessage__"},{"ErrorCode":"IAM_SERVICE_ROLE_IS_MISSING","ErrorMessage":"__ErrorMessage__"}],"PoolArn":"__PoolArn__","PoolId":"__PoolId__","PoolName":"__PoolName__","RunningMode":"AUTO_STOP","State":"CREATING","TimeoutSettings":{"DisconnectTimeoutInSeconds":1,"IdleDisconnectTimeoutInSeconds":1,"MaxUserDurationInSeconds":1}}}

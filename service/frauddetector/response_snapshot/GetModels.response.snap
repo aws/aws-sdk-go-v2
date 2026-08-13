@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHawksNestServiceFacade.GetModels
-
-{"models":[{"arn":"__Arn__","createdTime":"__CreatedTime__","description":"__Description__","eventTypeName":"__EventTypeName__","lastUpdatedTime":"__LastUpdatedTime__","modelId":"__ModelId__","modelType":"ONLINE_FRAUD_INSIGHTS"},{"arn":"__Arn__","createdTime":"__CreatedTime__","description":"__Description__","eventTypeName":"__EventTypeName__","lastUpdatedTime":"__LastUpdatedTime__","modelId":"__ModelId__","modelType":"ONLINE_FRAUD_INSIGHTS"}],"nextToken":"__NextToken__"}

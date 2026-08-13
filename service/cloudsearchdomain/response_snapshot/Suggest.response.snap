@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"status":{"rid":"__Rid__","timems":1},"suggest":{"found":1,"query":"__Query__","suggestions":[{"id":"__Id__","score":1,"suggestion":"__Suggestion__"},{"id":"__Id__","score":1,"suggestion":"__Suggestion__"}]}}

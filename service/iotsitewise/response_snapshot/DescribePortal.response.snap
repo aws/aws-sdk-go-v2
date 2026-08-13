@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"alarms":{"alarmRoleArn":"__AlarmRoleArn__","notificationLambdaArn":"__NotificationLambdaArn__"},"notificationSenderEmail":"__NotificationSenderEmail__","portalArn":"__PortalArn__","portalAuthMode":"IAM","portalClientId":"__PortalClientId__","portalContactEmail":"__PortalContactEmail__","portalCreationDate":946684800,"portalDescription":"__PortalDescription__","portalId":"__PortalId__","portalLastUpdateDate":946684800,"portalLogoImageLocation":{"id":"__Id__","url":"__Url__"},"portalName":"__PortalName__","portalStartUrl":"__PortalStartUrl__","portalStatus":{"error":{"code":"INTERNAL_FAILURE","message":"__Message__"},"state":"CREATING"},"portalType":"SITEWISE_PORTAL_V1","portalTypeConfiguration":{"key0":{"portalTools":["__Member__","__Member__"]}},"roleArn":"__RoleArn__"}

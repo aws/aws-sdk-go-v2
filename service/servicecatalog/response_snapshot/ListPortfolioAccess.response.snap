@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListPortfolioAccess
-
-{"AccountIds":["__Member__","__Member__"],"NextPageToken":"__NextPageToken__"}

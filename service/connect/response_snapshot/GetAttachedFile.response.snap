@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AssociatedResourceArn":"__AssociatedResourceArn__","CreatedBy":{"ConnectUserArn":"__CreatedByInfoMemberConnectUserArn__"},"CreationTime":"__CreationTime__","DownloadUrlMetadata":{"Url":"__Url__","UrlExpiry":"__UrlExpiry__"},"FileArn":"__FileArn__","FileId":"__FileId__","FileName":"__FileName__","FileSizeInBytes":1,"FileStatus":"APPROVED","FileUseCaseType":"CONTACT_ANALYSIS","Tags":{"key0":"__Value__"}}

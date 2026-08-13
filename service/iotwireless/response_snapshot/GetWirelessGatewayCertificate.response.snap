@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"IotCertificateId":"__IotCertificateId__","LoRaWANNetworkServerCertificateId":"__LoRaWANNetworkServerCertificateId__"}

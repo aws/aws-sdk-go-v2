@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","transactions":[{"confirmationStatus":"FINAL","network":"ETHEREUM_MAINNET","transactionHash":"__TransactionHash__","transactionId":"__TransactionId__","transactionTimestamp":946684800},{"confirmationStatus":"FINAL","network":"ETHEREUM_MAINNET","transactionHash":"__TransactionHash__","transactionId":"__TransactionId__","transactionTimestamp":946684800}]}

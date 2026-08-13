@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AnalysisId":"__AnalysisId__","Arn":"__Arn__","RequestId":"__RequestId__","RestorationFailedFolderArns":["__Member__","__Member__"],"Status":200}

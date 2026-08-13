@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","CapacityRegion":"__CapacityRegion__","CreationStatus":"CREATED","IdentityStore":"QUICKSIGHT","Name":"__Name__","RequestId":"__RequestId__","Status":200}

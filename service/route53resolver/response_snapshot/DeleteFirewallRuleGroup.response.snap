@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Resolver.DeleteFirewallRuleGroup
-
-{"FirewallRuleGroup":{"Arn":"__Arn__","CreationTime":"__CreationTime__","CreatorRequestId":"__CreatorRequestId__","Id":"__Id__","ModificationTime":"__ModificationTime__","Name":"__Name__","OwnerId":"__OwnerId__","RuleCount":1,"ShareStatus":"NOT_SHARED","Status":"COMPLETE","StatusMessage":"__StatusMessage__"}}

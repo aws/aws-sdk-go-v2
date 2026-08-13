@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"costScaleFactor":1,"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","description":"__Description__","displayName":"__DisplayName__","farmId":"__FarmId__","kmsKeyArn":"__KmsKeyArn__","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"}

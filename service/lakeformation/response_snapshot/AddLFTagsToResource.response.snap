@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Failures":[{"Error":{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},"LFTag":{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}},{"Error":{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},"LFTag":{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}}]}

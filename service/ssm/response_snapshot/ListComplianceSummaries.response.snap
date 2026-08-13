@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.ListComplianceSummaries
-
-{"ComplianceSummaryItems":[{"ComplianceType":"__ComplianceType__","CompliantSummary":{"CompliantCount":1,"SeveritySummary":{"CriticalCount":1,"HighCount":1,"InformationalCount":1,"LowCount":1,"MediumCount":1,"UnspecifiedCount":1}},"NonCompliantSummary":{"NonCompliantCount":1,"SeveritySummary":{"CriticalCount":1,"HighCount":1,"InformationalCount":1,"LowCount":1,"MediumCount":1,"UnspecifiedCount":1}}},{"ComplianceType":"__ComplianceType__","CompliantSummary":{"CompliantCount":1,"SeveritySummary":{"CriticalCount":1,"HighCount":1,"InformationalCount":1,"LowCount":1,"MediumCount":1,"UnspecifiedCount":1}},"NonCompliantSummary":{"NonCompliantCount":1,"SeveritySummary":{"CriticalCount":1,"HighCount":1,"InformationalCount":1,"LowCount":1,"MediumCount":1,"UnspecifiedCount":1}}}],"NextToken":"__NextToken__"}

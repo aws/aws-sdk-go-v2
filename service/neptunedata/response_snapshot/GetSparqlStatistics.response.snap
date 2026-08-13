@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"payload":{"active":true,"autoCompute":true,"date":"2000-01-01T00:00:00Z","note":"__Note__","signatureInfo":{"instanceCount":1,"predicateCount":1,"signatureCount":1},"statisticsId":"__StatisticsId__"},"status":"__Status__"}

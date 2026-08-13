@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"devices":[{"associatedWithJob":"__AssociatedWithJob__","managedDeviceArn":"__ManagedDeviceArn__","managedDeviceId":"__ManagedDeviceId__","tags":{"key0":"__Value__"}},{"associatedWithJob":"__AssociatedWithJob__","managedDeviceArn":"__ManagedDeviceArn__","managedDeviceId":"__ManagedDeviceId__","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

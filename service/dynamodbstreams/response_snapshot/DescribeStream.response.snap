@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDBStreams_20120810.DescribeStream
-
-{"StreamDescription":{"CreationRequestDateTime":946684800,"KeySchema":[{"AttributeName":"__AttributeName__","KeyType":"HASH"},{"AttributeName":"__AttributeName__","KeyType":"HASH"}],"LastEvaluatedShardId":"__LastEvaluatedShardId__","Shards":[{"ParentShardId":"__ParentShardId__","SequenceNumberRange":{"EndingSequenceNumber":"__EndingSequenceNumber__","StartingSequenceNumber":"__StartingSequenceNumber__"},"ShardId":"__ShardId__"},{"ParentShardId":"__ParentShardId__","SequenceNumberRange":{"EndingSequenceNumber":"__EndingSequenceNumber__","StartingSequenceNumber":"__StartingSequenceNumber__"},"ShardId":"__ShardId__"}],"StreamArn":"__StreamArn__","StreamLabel":"__StreamLabel__","StreamStatus":"ENABLING","StreamViewType":"NEW_IMAGE","TableName":"__TableName__"}}

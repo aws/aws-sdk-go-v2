@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","registryRecords":[{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","descriptorType":"MCP","name":"__Name__","recordArn":"__RecordArn__","recordId":"__RecordId__","recordVersion":"__RecordVersion__","registryArn":"__RegistryArn__","status":"DRAFT","updatedAt":"2000-01-01T00:00:00Z"},{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","descriptorType":"MCP","name":"__Name__","recordArn":"__RecordArn__","recordId":"__RecordId__","recordVersion":"__RecordVersion__","registryArn":"__RegistryArn__","status":"DRAFT","updatedAt":"2000-01-01T00:00:00Z"}]}

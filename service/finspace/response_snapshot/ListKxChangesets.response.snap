@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"kxChangesets":[{"activeFromTimestamp":946684800,"changesetId":"__ChangesetId__","createdTimestamp":946684800,"lastModifiedTimestamp":946684800,"status":"PENDING"},{"activeFromTimestamp":946684800,"changesetId":"__ChangesetId__","createdTimestamp":946684800,"lastModifiedTimestamp":946684800,"status":"PENDING"}],"nextToken":"__NextToken__"}

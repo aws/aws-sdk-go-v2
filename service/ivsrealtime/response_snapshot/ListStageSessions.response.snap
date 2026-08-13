@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","stageSessions":[{"endTime":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","startTime":"2000-01-01T00:00:00Z"},{"endTime":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","startTime":"2000-01-01T00:00:00Z"}]}

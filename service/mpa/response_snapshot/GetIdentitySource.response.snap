@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CreationTime":"2000-01-01T00:00:00Z","IdentitySourceArn":"__IdentitySourceArn__","IdentitySourceParameters":{"IamIdentityCenter":{"ApprovalPortalUrl":"__ApprovalPortalUrl__","InstanceArn":"__InstanceArn__","Region":"__Region__"}},"IdentitySourceType":"IAM_IDENTITY_CENTER","Status":"CREATING","StatusCode":"ACCESS_DENIED","StatusMessage":"__StatusMessage__"}

@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"MissingParameterException","code":"MissingParameterException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

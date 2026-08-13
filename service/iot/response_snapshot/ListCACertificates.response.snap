@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"certificates":[{"certificateArn":"__CertificateArn__","certificateId":"__CertificateId__","creationDate":946684800,"status":"ACTIVE"},{"certificateArn":"__CertificateArn__","certificateId":"__CertificateId__","creationDate":946684800,"status":"ACTIVE"}],"nextMarker":"__NextMarker__"}

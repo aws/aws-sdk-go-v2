@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CreateTime":"2000-01-01T00:00:00Z","Key":"__Key__","KeyArn":"__KeyArn__","KeyName":"__KeyName__"}

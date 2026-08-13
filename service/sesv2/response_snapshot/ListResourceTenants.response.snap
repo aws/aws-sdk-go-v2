@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ResourceTenants":[{"AssociatedTimestamp":946684800,"ResourceArn":"__ResourceArn__","TenantId":"__TenantId__","TenantName":"__TenantName__"},{"AssociatedTimestamp":946684800,"ResourceArn":"__ResourceArn__","TenantId":"__TenantId__","TenantName":"__TenantName__"}]}

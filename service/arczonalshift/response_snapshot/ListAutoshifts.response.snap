@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"awayFrom":"__AwayFrom__","endTime":946684800,"startTime":946684800,"status":"ACTIVE"},{"awayFrom":"__AwayFrom__","endTime":946684800,"startTime":946684800,"status":"ACTIVE"}],"nextToken":"__NextToken__"}

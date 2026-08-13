@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonEC2ContainerServiceV20141113.GetTaskProtection
-
-{"failures":[{"arn":"__Arn__","detail":"__Detail__","reason":"__Reason__"},{"arn":"__Arn__","detail":"__Detail__","reason":"__Reason__"}],"protectedTasks":[{"expirationDate":946684800,"protectionEnabled":true,"taskArn":"__TaskArn__"},{"expirationDate":946684800,"protectionEnabled":true,"taskArn":"__TaskArn__"}]}

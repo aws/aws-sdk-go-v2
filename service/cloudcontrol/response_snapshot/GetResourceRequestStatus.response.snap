@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CloudApiService.GetResourceRequestStatus
-
-{"HooksProgressEvent":[{"FailureMode":"__FailureMode__","HookEventTime":946684800,"HookStatus":"__HookStatus__","HookStatusMessage":"__HookStatusMessage__","HookTypeArn":"__HookTypeArn__","HookTypeName":"__HookTypeName__","HookTypeVersionId":"__HookTypeVersionId__","InvocationPoint":"__InvocationPoint__"},{"FailureMode":"__FailureMode__","HookEventTime":946684800,"HookStatus":"__HookStatus__","HookStatusMessage":"__HookStatusMessage__","HookTypeArn":"__HookTypeArn__","HookTypeName":"__HookTypeName__","HookTypeVersionId":"__HookTypeVersionId__","InvocationPoint":"__InvocationPoint__"}],"ProgressEvent":{"ErrorCode":"NotUpdatable","EventTime":946684800,"HooksRequestToken":"__HooksRequestToken__","Identifier":"__Identifier__","Operation":"CREATE","OperationStatus":"PENDING","RequestToken":"__RequestToken__","ResourceModel":"__ResourceModel__","RetryAfter":946684800,"StatusMessage":"__StatusMessage__","TypeName":"__TypeName__"}}

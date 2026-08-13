@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StorageGateway_20130630.ListGateways
-
-{"Gateways":[{"DeprecationDate":"__DeprecationDate__","Ec2InstanceId":"__Ec2InstanceId__","Ec2InstanceRegion":"__Ec2InstanceRegion__","GatewayARN":"__GatewayARN__","GatewayId":"__GatewayId__","GatewayName":"__GatewayName__","GatewayOperationalState":"__GatewayOperationalState__","GatewayType":"__GatewayType__","HostEnvironment":"VMWARE","HostEnvironmentId":"__HostEnvironmentId__","SoftwareVersion":"__SoftwareVersion__"},{"DeprecationDate":"__DeprecationDate__","Ec2InstanceId":"__Ec2InstanceId__","Ec2InstanceRegion":"__Ec2InstanceRegion__","GatewayARN":"__GatewayARN__","GatewayId":"__GatewayId__","GatewayName":"__GatewayName__","GatewayOperationalState":"__GatewayOperationalState__","GatewayType":"__GatewayType__","HostEnvironment":"VMWARE","HostEnvironmentId":"__HostEnvironmentId__","SoftwareVersion":"__SoftwareVersion__"}],"Marker":"__Marker__"}

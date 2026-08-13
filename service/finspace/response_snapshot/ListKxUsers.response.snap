@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","users":[{"createTimestamp":946684800,"iamRole":"__IamRole__","updateTimestamp":946684800,"userArn":"__UserArn__","userName":"__UserName__"},{"createTimestamp":946684800,"iamRole":"__IamRole__","updateTimestamp":946684800,"userArn":"__UserArn__","userName":"__UserName__"}]}

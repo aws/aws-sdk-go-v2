@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"deploymentId":"__DeploymentId__","iotJobArn":"__IotJobArn__","iotJobId":"__IotJobId__"}

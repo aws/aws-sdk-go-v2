@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appArn":"__AppArn__","failedEntries":[{"errorMessage":"__ErrorMessage__","groupingRecommendationId":"__GroupingRecommendationId__"},{"errorMessage":"__ErrorMessage__","groupingRecommendationId":"__GroupingRecommendationId__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Administrators":[{"AccountId":"__AccountId__","DelegationTime":"2000-01-01T00:00:00Z","GraphArn":"__GraphArn__"},{"AccountId":"__AccountId__","DelegationTime":"2000-01-01T00:00:00Z","GraphArn":"__GraphArn__"}],"NextToken":"__NextToken__"}

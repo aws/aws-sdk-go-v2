@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"paymentSession":{"availableLimits":{"availableSpendAmount":{"currency":"USD","value":"__Value__"},"updatedAt":"2000-01-01T00:00:00Z"},"createdAt":"2000-01-01T00:00:00Z","expiryTimeInMinutes":1,"limits":{"maxSpendAmount":{"currency":"USD","value":"__Value__"}},"paymentManagerArn":"__PaymentManagerArn__","paymentSessionId":"__PaymentSessionId__","updatedAt":"2000-01-01T00:00:00Z","userId":"__UserId__"}}

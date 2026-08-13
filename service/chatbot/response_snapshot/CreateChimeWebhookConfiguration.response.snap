@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"WebhookConfiguration":{"ChatConfigurationArn":"__ChatConfigurationArn__","ConfigurationName":"__ConfigurationName__","IamRoleArn":"__IamRoleArn__","LoggingLevel":"__LoggingLevel__","SnsTopicArns":["__Member__","__Member__"],"State":"__State__","StateReason":"__StateReason__","Tags":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}],"WebhookDescription":"__WebhookDescription__"}}

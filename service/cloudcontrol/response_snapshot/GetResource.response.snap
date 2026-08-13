@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CloudApiService.GetResource
-
-{"ResourceDescription":{"Identifier":"__Identifier__","Properties":"__Properties__"},"TypeName":"__TypeName__"}

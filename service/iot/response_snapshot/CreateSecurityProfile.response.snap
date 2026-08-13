@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"securityProfileArn":"__SecurityProfileArn__","securityProfileName":"__SecurityProfileName__"}

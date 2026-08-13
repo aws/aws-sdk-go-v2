@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","defaultAction":{"forward":{"targetGroups":[{"targetGroupIdentifier":"__TargetGroupIdentifier__","weight":1},{"targetGroupIdentifier":"__TargetGroupIdentifier__","weight":1}]}},"id":"__Id__","name":"__Name__","port":1,"protocol":"HTTP","serviceArn":"__ServiceArn__","serviceId":"__ServiceId__"}

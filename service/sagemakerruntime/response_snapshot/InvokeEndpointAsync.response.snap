@@ -1,6 +1,0 @@
-200
-Content-Type: application/json
-X-Amzn-Sagemaker-Failurelocation: __FailureLocation__
-X-Amzn-Sagemaker-Outputlocation: __OutputLocation__
-
-{"InferenceId":"__InferenceId__"}

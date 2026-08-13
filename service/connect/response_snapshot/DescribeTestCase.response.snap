@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"TestCase":{"Arn":"__Arn__","Content":"__Content__","Description":"__Description__","EntryPoint":{"ChatEntryPointParameters":{"FlowId":"__FlowId__"},"Type":"VOICE_CALL","VoiceCallEntryPointParameters":{"DestinationPhoneNumber":"__DestinationPhoneNumber__","FlowId":"__FlowId__","SourcePhoneNumber":"__SourcePhoneNumber__"}},"Id":"__Id__","InitializationData":"__InitializationData__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","Status":"PUBLISHED","Tags":{"key0":"__Value__"},"TestCaseSha256":"__TestCaseSha256__"}}

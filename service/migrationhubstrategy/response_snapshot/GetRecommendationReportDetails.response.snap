@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"id":"__Id__","recommendationReportDetails":{"completionTime":946684800,"s3Bucket":"__S3Bucket__","s3Keys":["__Member__","__Member__"],"startTime":946684800,"status":"FAILED","statusMessage":"__StatusMessage__"}}

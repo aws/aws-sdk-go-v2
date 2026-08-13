@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"apiKeys":[{"deletes":1,"description":"__Description__","expires":1,"id":"__Id__"},{"deletes":1,"description":"__Description__","expires":1,"id":"__Id__"}],"nextToken":"__NextToken__"}

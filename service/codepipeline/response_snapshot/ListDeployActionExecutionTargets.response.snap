@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.ListDeployActionExecutionTargets
-
-{"nextToken":"__NextToken__","targets":[{"endTime":946684800,"events":[{"context":{"message":"__Message__","ssmCommandId":"__SsmCommandId__"},"endTime":946684800,"name":"__Name__","startTime":946684800,"status":"__Status__"},{"context":{"message":"__Message__","ssmCommandId":"__SsmCommandId__"},"endTime":946684800,"name":"__Name__","startTime":946684800,"status":"__Status__"}],"startTime":946684800,"status":"__Status__","targetId":"__TargetId__","targetType":"__TargetType__"},{"endTime":946684800,"events":[{"context":{"message":"__Message__","ssmCommandId":"__SsmCommandId__"},"endTime":946684800,"name":"__Name__","startTime":946684800,"status":"__Status__"},{"context":{"message":"__Message__","ssmCommandId":"__SsmCommandId__"},"endTime":946684800,"name":"__Name__","startTime":946684800,"status":"__Status__"}],"startTime":946684800,"status":"__Status__","targetId":"__TargetId__","targetType":"__TargetType__"}]}

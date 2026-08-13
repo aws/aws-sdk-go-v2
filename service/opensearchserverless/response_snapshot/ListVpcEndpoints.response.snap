@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: OpenSearchServerless.ListVpcEndpoints
-
-{"nextToken":"__NextToken__","vpcEndpointSummaries":[{"id":"__Id__","name":"__Name__","status":"PENDING"},{"id":"__Id__","name":"__Name__","status":"PENDING"}]}

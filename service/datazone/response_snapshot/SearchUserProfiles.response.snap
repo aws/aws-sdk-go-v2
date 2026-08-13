@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"details":{"iam":{"arn":"__Arn__","groupProfileId":"__GroupProfileId__","principalId":"__PrincipalId__","sessionName":"__SessionName__"}},"domainId":"__DomainId__","id":"__Id__","status":"ASSIGNED","type":"IAM"},{"details":{"iam":{"arn":"__Arn__","groupProfileId":"__GroupProfileId__","principalId":"__PrincipalId__","sessionName":"__SessionName__"}},"domainId":"__DomainId__","id":"__Id__","status":"ASSIGNED","type":"IAM"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-503
-Content-Type: application/json
-
-{"__type":"InsufficientThroughputCapacity","ErrorCode":"__ErrorCode___","Message":"__Message__"}

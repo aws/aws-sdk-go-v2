@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"creationTime":"2000-01-01T00:00:00Z","failureMessage":"__FailureMessage__","jobArn":"__JobArn__","sourceAccountId":"__SourceAccountId__","sourceModelArn":"__SourceModelArn__","sourceModelName":"__SourceModelName__","status":"InProgress","targetModelArn":"__TargetModelArn__","targetModelKmsKeyArn":"__TargetModelKmsKeyArn__","targetModelName":"__TargetModelName__","targetModelTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

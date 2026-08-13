@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applicationArn":"__ApplicationArn__","arn":"__Arn__","clientId":"__ClientId__","configurationStatus":"CONFIGURED","contentSize":1,"createDateTime":"2000-01-01T00:00:00Z","customerRoleArn":"__CustomerRoleArn__","deleteDateTime":"2000-01-01T00:00:00Z","description":"__Description__","groupAdmins":["__Member__","__Member__"],"identityStoreId":"__IdentityStoreId__","name":"__Name__","randomDomain":"__RandomDomain__","roles":{"key0":["EXPERT","EXPERT"]},"spaceId":"__SpaceId__","status":"__Status__","storageLimit":1,"supportedEmailDomains":{"allowedDomains":["__Member__","__Member__"],"enabled":"ENABLED"},"tier":"BASIC","userAdmins":["__Member__","__Member__"],"userCount":1,"userKMSKey":"__UserKMSKey__","vanityDomain":"__VanityDomain__","vanityDomainStatus":"PENDING"}

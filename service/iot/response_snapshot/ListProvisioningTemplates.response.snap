@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","templates":[{"creationDate":946684800,"description":"__Description__","enabled":true,"lastModifiedDate":946684800,"templateArn":"__TemplateArn__","templateName":"__TemplateName__","type":"FLEET_PROVISIONING"},{"creationDate":946684800,"description":"__Description__","enabled":true,"lastModifiedDate":946684800,"templateArn":"__TemplateArn__","templateName":"__TemplateName__","type":"FLEET_PROVISIONING"}]}

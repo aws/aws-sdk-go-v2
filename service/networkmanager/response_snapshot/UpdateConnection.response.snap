@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Connection":{"ConnectedDeviceId":"__ConnectedDeviceId__","ConnectedLinkId":"__ConnectedLinkId__","ConnectionArn":"__ConnectionArn__","ConnectionId":"__ConnectionId__","CreatedAt":946684800,"Description":"__Description__","DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkId":"__LinkId__","State":"PENDING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}}

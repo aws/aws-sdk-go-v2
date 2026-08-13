@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SSMContacts.GetContact
-
-{"Alias":"__Alias__","ContactArn":"__ContactArn__","DisplayName":"__DisplayName__","Plan":{"RotationIds":["__Member__","__Member__"],"Stages":[{"DurationInMinutes":1,"Targets":[{"ChannelTargetInfo":{"ContactChannelId":"__ContactChannelId__","RetryIntervalInMinutes":1},"ContactTargetInfo":{"ContactId":"__ContactId__","IsEssential":true}},{"ChannelTargetInfo":{"ContactChannelId":"__ContactChannelId__","RetryIntervalInMinutes":1},"ContactTargetInfo":{"ContactId":"__ContactId__","IsEssential":true}}]},{"DurationInMinutes":1,"Targets":[{"ChannelTargetInfo":{"ContactChannelId":"__ContactChannelId__","RetryIntervalInMinutes":1},"ContactTargetInfo":{"ContactId":"__ContactId__","IsEssential":true}},{"ChannelTargetInfo":{"ContactChannelId":"__ContactChannelId__","RetryIntervalInMinutes":1},"ContactTargetInfo":{"ContactId":"__ContactId__","IsEssential":true}}]}]},"Type":"PERSONAL"}

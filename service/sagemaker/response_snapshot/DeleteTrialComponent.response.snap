@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DeleteTrialComponent
-
-{"TrialComponentArn":"__TrialComponentArn__"}

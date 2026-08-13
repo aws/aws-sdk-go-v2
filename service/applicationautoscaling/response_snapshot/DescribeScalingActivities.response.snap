@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AnyScaleFrontendService.DescribeScalingActivities
-
-{"NextToken":"__NextToken__","ScalingActivities":[{"ActivityId":"__ActivityId__","Cause":"__Cause__","Description":"__Description__","Details":"__Details__","EndTime":946684800,"NotScaledReasons":[{"Code":"__Code__","CurrentCapacity":1,"MaxCapacity":1,"MinCapacity":1},{"Code":"__Code__","CurrentCapacity":1,"MaxCapacity":1,"MinCapacity":1}],"ResourceId":"__ResourceId__","ScalableDimension":"ecs:service:DesiredCount","ServiceNamespace":"ecs","StartTime":946684800,"StatusCode":"Pending","StatusMessage":"__StatusMessage__"},{"ActivityId":"__ActivityId__","Cause":"__Cause__","Description":"__Description__","Details":"__Details__","EndTime":946684800,"NotScaledReasons":[{"Code":"__Code__","CurrentCapacity":1,"MaxCapacity":1,"MinCapacity":1},{"Code":"__Code__","CurrentCapacity":1,"MaxCapacity":1,"MinCapacity":1}],"ResourceId":"__ResourceId__","ScalableDimension":"ecs:service:DesiredCount","ServiceNamespace":"ecs","StartTime":946684800,"StatusCode":"Pending","StatusMessage":"__StatusMessage__"}]}

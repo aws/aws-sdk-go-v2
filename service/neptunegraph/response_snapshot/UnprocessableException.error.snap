@@ -1,4 +1,0 @@
-422
-Content-Type: application/json
-
-{"__type":"UnprocessableException","message":"__Message__","reason":"QUERY_TIMEOUT"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Errors":[{"Code":"INTERNAL_FAILURE","Id":"__Id__","Message":"__Message__"},{"Code":"INTERNAL_FAILURE","Id":"__Id__","Message":"__Message__"}],"Results":[{"Id":"__Id__","Timestamps":[946684800,946684800],"Values":[1,1]},{"Id":"__Id__","Timestamps":[946684800,946684800],"Values":[1,1]}]}

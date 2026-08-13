@@ -1,5 +1,0 @@
-500
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: B2BI.CreateCapability
-
-{"__type":"InternalServerException","message":"__Message__","retryAfterSeconds":1}

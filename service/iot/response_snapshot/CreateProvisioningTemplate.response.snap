@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"defaultVersionId":1,"templateArn":"__TemplateArn__","templateName":"__TemplateName__"}

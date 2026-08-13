@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BackupVaultArn":"__BackupVaultArn__","BackupVaultName":"__BackupVaultName__","Policy":"__Policy__"}

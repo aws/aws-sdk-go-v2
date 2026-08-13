@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DevicePositions":[{"Accuracy":{"Horizontal":1},"DeviceId":"__DeviceId__","Position":[1,1],"PositionProperties":{"key0":"__Value__"},"ReceivedTime":"2000-01-01T00:00:00Z","SampleTime":"2000-01-01T00:00:00Z"},{"Accuracy":{"Horizontal":1},"DeviceId":"__DeviceId__","Position":[1,1],"PositionProperties":{"key0":"__Value__"},"ReceivedTime":"2000-01-01T00:00:00Z","SampleTime":"2000-01-01T00:00:00Z"}],"NextToken":"__NextToken__"}

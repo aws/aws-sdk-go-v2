@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetLoadBalancerTlsPolicies
-
-{"nextPageToken":"__NextPageToken__","tlsPolicies":[{"ciphers":["__Member__","__Member__"],"description":"__Description__","isDefault":true,"name":"__Name__","protocols":["__Member__","__Member__"]},{"ciphers":["__Member__","__Member__"],"description":"__Description__","isDefault":true,"name":"__Name__","protocols":["__Member__","__Member__"]}]}

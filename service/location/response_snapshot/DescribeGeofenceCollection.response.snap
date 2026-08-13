@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CollectionArn":"__CollectionArn__","CollectionName":"__CollectionName__","CreateTime":"2000-01-01T00:00:00Z","Description":"__Description__","GeofenceCount":1,"KmsKeyId":"__KmsKeyId__","PricingPlan":"RequestBasedUsage","PricingPlanDataSource":"__PricingPlanDataSource__","Tags":{"key0":"__Value__"},"UpdateTime":"2000-01-01T00:00:00Z"}

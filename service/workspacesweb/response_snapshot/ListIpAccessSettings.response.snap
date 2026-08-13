@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ipAccessSettings":[{"creationDate":946684800,"description":"__Description__","displayName":"__DisplayName__","ipAccessSettingsArn":"__IpAccessSettingsArn__"},{"creationDate":946684800,"description":"__Description__","displayName":"__DisplayName__","ipAccessSettingsArn":"__IpAccessSettingsArn__"}],"nextToken":"__NextToken__"}

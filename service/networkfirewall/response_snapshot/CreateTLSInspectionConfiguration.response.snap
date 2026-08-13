@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.CreateTLSInspectionConfiguration
-
-{"TLSInspectionConfigurationResponse":{"CertificateAuthority":{"CertificateArn":"__CertificateArn__","CertificateSerial":"__CertificateSerial__","Status":"__Status__","StatusMessage":"__StatusMessage__"},"Certificates":[{"CertificateArn":"__CertificateArn__","CertificateSerial":"__CertificateSerial__","Status":"__Status__","StatusMessage":"__StatusMessage__"},{"CertificateArn":"__CertificateArn__","CertificateSerial":"__CertificateSerial__","Status":"__Status__","StatusMessage":"__StatusMessage__"}],"Description":"__Description__","EncryptionConfiguration":{"KeyId":"__KeyId__","Type":"CUSTOMER_KMS"},"LastModifiedTime":946684800,"NumberOfAssociations":1,"TLSInspectionConfigurationArn":"__TLSInspectionConfigurationArn__","TLSInspectionConfigurationId":"__TLSInspectionConfigurationId__","TLSInspectionConfigurationName":"__TLSInspectionConfigurationName__","TLSInspectionConfigurationStatus":"ACTIVE","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"UpdateToken":"__UpdateToken__"}

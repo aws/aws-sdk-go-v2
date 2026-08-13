@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"errorDetails":"__ErrorDetails__","expectedBucketOwner":"__ExpectedBucketOwner__","format":"TXT","location":"__Location__","name":"__Name__","status":"INACTIVE","tags":{"key0":"__Value__"},"updatedAt":946684800}

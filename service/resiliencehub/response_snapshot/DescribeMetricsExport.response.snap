@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"errorMessage":"__ErrorMessage__","exportLocation":{"bucket":"__Bucket__","prefix":"__Prefix__"},"metricsExportId":"__MetricsExportId__","status":"Pending"}

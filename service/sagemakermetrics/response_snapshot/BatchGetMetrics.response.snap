@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"MetricQueryResults":[{"Message":"__Message__","MetricValues":[1,1],"Status":"Complete","XAxisValues":[1,1]},{"Message":"__Message__","MetricValues":[1,1],"Status":"Complete","XAxisValues":[1,1]}]}

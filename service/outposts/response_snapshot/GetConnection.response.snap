@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ConnectionDetails":{"AllowedIps":["__Member__","__Member__"],"ClientPublicKey":"__ClientPublicKey__","ClientTunnelAddress":"__ClientTunnelAddress__","ServerEndpoint":"__ServerEndpoint__","ServerPublicKey":"__ServerPublicKey__","ServerTunnelAddress":"__ServerTunnelAddress__"},"ConnectionId":"__ConnectionId__"}

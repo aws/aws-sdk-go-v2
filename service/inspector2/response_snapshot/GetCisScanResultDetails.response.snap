@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","scanResultDetails":[{"accountId":"__AccountId__","checkDescription":"__CheckDescription__","checkId":"__CheckId__","findingArn":"__FindingArn__","level":"LEVEL_1","platform":"__Platform__","remediation":"__Remediation__","scanArn":"__ScanArn__","status":"PASSED","statusReason":"__StatusReason__","targetResourceId":"__TargetResourceId__","title":"__Title__"},{"accountId":"__AccountId__","checkDescription":"__CheckDescription__","checkId":"__CheckId__","findingArn":"__FindingArn__","level":"LEVEL_1","platform":"__Platform__","remediation":"__Remediation__","scanArn":"__ScanArn__","status":"PASSED","statusReason":"__StatusReason__","targetResourceId":"__TargetResourceId__","title":"__Title__"}]}

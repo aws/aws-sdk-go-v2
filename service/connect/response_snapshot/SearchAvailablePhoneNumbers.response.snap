@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AvailableNumbersList":[{"PhoneNumber":"__PhoneNumber__","PhoneNumberCountryCode":"AF","PhoneNumberType":"TOLL_FREE"},{"PhoneNumber":"__PhoneNumber__","PhoneNumberCountryCode":"AF","PhoneNumberType":"TOLL_FREE"}],"NextToken":"__NextToken__"}

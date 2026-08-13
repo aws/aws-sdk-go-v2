@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"lifecyclePolicySummaryList":[{"arn":"__Arn__","dateCreated":946684800,"dateLastRun":946684800,"dateUpdated":946684800,"description":"__Description__","executionRole":"__ExecutionRole__","name":"__Name__","resourceType":"AMI_IMAGE","status":"DISABLED","tags":{"key0":"__Value__"}},{"arn":"__Arn__","dateCreated":946684800,"dateLastRun":946684800,"dateUpdated":946684800,"description":"__Description__","executionRole":"__ExecutionRole__","name":"__Name__","resourceType":"AMI_IMAGE","status":"DISABLED","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

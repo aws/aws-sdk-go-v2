@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","OAuthClientApplications":[{"Arn":"__Arn__","CreatedTime":946684800,"DataSourceType":"ADOBE_ANALYTICS","IdentityProviderVpcConnectionProperties":{"VpcConnectionArn":"__VpcConnectionArn__"},"LastUpdatedTime":946684800,"Name":"__Name__","OAuthClientApplicationId":"__OAuthClientApplicationId__","OAuthClientAuthenticationType":"TOKEN"},{"Arn":"__Arn__","CreatedTime":946684800,"DataSourceType":"ADOBE_ANALYTICS","IdentityProviderVpcConnectionProperties":{"VpcConnectionArn":"__VpcConnectionArn__"},"LastUpdatedTime":946684800,"Name":"__Name__","OAuthClientApplicationId":"__OAuthClientApplicationId__","OAuthClientAuthenticationType":"TOKEN"}],"RequestId":"__RequestId__","Status":200}

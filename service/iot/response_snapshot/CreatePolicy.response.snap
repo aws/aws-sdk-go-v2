@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"policyArn":"__PolicyArn__","policyDocument":"__PolicyDocument__","policyName":"__PolicyName__","policyVersionId":"__PolicyVersionId__"}

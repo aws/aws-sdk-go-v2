@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListAlgorithms
-
-{"AlgorithmSummaryList":[{"AlgorithmArn":"__AlgorithmArn__","AlgorithmDescription":"__AlgorithmDescription__","AlgorithmName":"__AlgorithmName__","AlgorithmStatus":"Pending","CreationTime":946684800},{"AlgorithmArn":"__AlgorithmArn__","AlgorithmDescription":"__AlgorithmDescription__","AlgorithmName":"__AlgorithmName__","AlgorithmStatus":"Pending","CreationTime":946684800}],"NextToken":"__NextToken__"}

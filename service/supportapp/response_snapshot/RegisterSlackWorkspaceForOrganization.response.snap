@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accountType":"management","teamId":"__TeamId__","teamName":"__TeamName__"}

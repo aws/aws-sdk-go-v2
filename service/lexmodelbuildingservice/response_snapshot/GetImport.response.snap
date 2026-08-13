@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdDate":946684800,"failureReason":["__Member__","__Member__"],"importId":"__ImportId__","importStatus":"IN_PROGRESS","mergeStrategy":"OVERWRITE_LATEST","name":"__Name__","resourceType":"BOT"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"deviceCode":"__DeviceCode__","expiresIn":1,"interval":1,"userCode":"__UserCode__","verificationUri":"__VerificationUri__","verificationUriComplete":"__VerificationUriComplete__"}

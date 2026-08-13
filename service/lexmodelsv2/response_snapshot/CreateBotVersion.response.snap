@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","botStatus":"Creating","botVersion":"__BotVersion__","botVersionLocaleSpecification":{"key0":{"sourceBotVersion":"__SourceBotVersion__"}},"creationDateTime":946684800,"description":"__Description__"}

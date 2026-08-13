@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","volumes":[{"attachedWorkerId":"__AttachedWorkerId__","availabilityZoneId":"__AvailabilityZoneId__","farmId":"__FarmId__","fleetId":"__FleetId__","sizeGiB":1,"state":"PENDING_CREATION","volumeId":"__VolumeId__"},{"attachedWorkerId":"__AttachedWorkerId__","availabilityZoneId":"__AvailabilityZoneId__","farmId":"__FarmId__","fleetId":"__FleetId__","sizeGiB":1,"state":"PENDING_CREATION","volumeId":"__VolumeId__"}]}

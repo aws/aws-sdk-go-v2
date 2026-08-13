@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","securityRequirementSummaries":[{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","packId":"__PackId__","updatedAt":"2000-01-01T00:00:00Z"},{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","packId":"__PackId__","updatedAt":"2000-01-01T00:00:00Z"}]}

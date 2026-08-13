@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSInsightsIndexService.UpdateCostCategoryDefinition
-
-{"CostCategoryArn":"__CostCategoryArn__","EffectiveStart":"__EffectiveStart__"}

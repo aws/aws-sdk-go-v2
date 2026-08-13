@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"alertManagerDefinition":{"createdAt":946684800,"data":"YmxvYg==","modifiedAt":946684800,"status":{"statusCode":"CREATING","statusReason":"__StatusReason__"}}}

@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.BatchGetDeploymentGroups
-
-{"__type":"InvalidDeploymentGroupNameException","message":"__Message__"}

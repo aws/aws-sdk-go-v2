@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"findingsSummaries":[{"agentSpaceId":"__AgentSpaceId__","codeReviewId":"__CodeReviewId__","codeReviewJobId":"__CodeReviewJobId__","confidence":"FALSE_POSITIVE","createdAt":"2000-01-01T00:00:00Z","findingId":"__FindingId__","name":"__Name__","pentestId":"__PentestId__","pentestJobId":"__PentestJobId__","riskLevel":"UNKNOWN","riskType":"__RiskType__","status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z","validationStatus":"CONFIRMED"},{"agentSpaceId":"__AgentSpaceId__","codeReviewId":"__CodeReviewId__","codeReviewJobId":"__CodeReviewJobId__","confidence":"FALSE_POSITIVE","createdAt":"2000-01-01T00:00:00Z","findingId":"__FindingId__","name":"__Name__","pentestId":"__PentestId__","pentestJobId":"__PentestJobId__","riskLevel":"UNKNOWN","riskType":"__RiskType__","status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z","validationStatus":"CONFIRMED"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"acmCertificateArn":"__AcmCertificateArn__","gatewayId":"__GatewayId__","status":"PENDING_ASSOCIATION"}

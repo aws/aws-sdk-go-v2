@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHawksNestServiceFacade.DescribeDetector
-
-{"arn":"__Arn__","detectorId":"__DetectorId__","detectorVersionSummaries":[{"description":"__Description__","detectorVersionId":"__DetectorVersionId__","lastUpdatedTime":"__LastUpdatedTime__","status":"DRAFT"},{"description":"__Description__","detectorVersionId":"__DetectorVersionId__","lastUpdatedTime":"__LastUpdatedTime__","status":"DRAFT"}],"nextToken":"__NextToken__"}

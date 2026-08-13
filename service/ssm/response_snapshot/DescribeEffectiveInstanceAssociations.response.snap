@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribeEffectiveInstanceAssociations
-
-{"Associations":[{"AssociationId":"__AssociationId__","AssociationVersion":"__AssociationVersion__","Content":"__Content__","InstanceId":"__InstanceId__"},{"AssociationId":"__AssociationId__","AssociationVersion":"__AssociationVersion__","Content":"__Content__","InstanceId":"__InstanceId__"}],"NextToken":"__NextToken__"}

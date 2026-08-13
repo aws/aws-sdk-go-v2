@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: B2BI.ListCapabilities
-
-{"capabilities":[{"capabilityId":"__CapabilityId__","createdAt":"2000-01-01T00:00:00Z","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","type":"edi"},{"capabilityId":"__CapabilityId__","createdAt":"2000-01-01T00:00:00Z","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","type":"edi"}],"nextToken":"__NextToken__"}

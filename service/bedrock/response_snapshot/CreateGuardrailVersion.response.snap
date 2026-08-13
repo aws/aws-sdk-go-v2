@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"guardrailId":"__GuardrailId__","version":"__Version__"}

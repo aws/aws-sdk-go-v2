@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Policy":{"Rules":[{"BytesPerHour":1,"Strategy":"__Strategy__"},{"BytesPerHour":1,"Strategy":"__Strategy__"}]}}

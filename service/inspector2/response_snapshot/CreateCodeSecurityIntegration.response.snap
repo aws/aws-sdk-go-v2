@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"authorizationUrl":"__AuthorizationUrl__","integrationArn":"__IntegrationArn__","status":"PENDING"}

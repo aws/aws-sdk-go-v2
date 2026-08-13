@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: VoiceID.DescribeSpeaker
-
-{"Speaker":{"CreatedAt":946684800,"CustomerSpeakerId":"__CustomerSpeakerId__","DomainId":"__DomainId__","GeneratedSpeakerId":"__GeneratedSpeakerId__","LastAccessedAt":946684800,"Status":"ENROLLED","UpdatedAt":946684800}}

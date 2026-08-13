@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accessPolicies":[{"arn":"__Arn__","name":"__Name__"},{"arn":"__Arn__","name":"__Name__"}],"nextToken":"__NextToken__"}

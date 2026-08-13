@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DirectoryId":"__DirectoryId__","DistinguishedName":"__DistinguishedName__","GroupScope":"DomainLocal","GroupType":"Distribution","OtherAttributes":{"key0":{"S":"__AttributeValueMemberS__"}},"Realm":"__Realm__","SAMAccountName":"__SAMAccountName__","SID":"__SID__"}

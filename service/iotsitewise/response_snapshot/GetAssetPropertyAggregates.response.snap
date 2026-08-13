@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"aggregatedValues":[{"quality":"GOOD","timestamp":946684800,"value":{"average":1,"count":1,"maximum":1,"minimum":1,"standardDeviation":1,"sum":1}},{"quality":"GOOD","timestamp":946684800,"value":{"average":1,"count":1,"maximum":1,"minimum":1,"standardDeviation":1,"sum":1}}],"nextToken":"__NextToken__"}

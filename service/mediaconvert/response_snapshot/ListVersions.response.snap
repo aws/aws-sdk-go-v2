@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","versions":[{"expirationDate":946684800,"version":"__Version__"},{"expirationDate":946684800,"version":"__Version__"}]}

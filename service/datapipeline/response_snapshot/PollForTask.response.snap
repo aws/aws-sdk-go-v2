@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DataPipeline.PollForTask
-
-{"taskObject":{"attemptId":"__AttemptId__","objects":{"key0":{"fields":[{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"},{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"}],"id":"__Id__","name":"__Name__"}},"pipelineId":"__PipelineId__","taskId":"__TaskId__"}}

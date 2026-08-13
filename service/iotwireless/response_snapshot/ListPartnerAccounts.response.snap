@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Sidewalk":[{"AmazonId":"__AmazonId__","Arn":"__Arn__","Fingerprint":"__Fingerprint__"},{"AmazonId":"__AmazonId__","Arn":"__Arn__","Fingerprint":"__Fingerprint__"}]}

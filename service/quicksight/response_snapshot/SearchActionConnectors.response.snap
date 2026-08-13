@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ActionConnectorSummaries":[{"ActionConnectorId":"__ActionConnectorId__","Arn":"__Arn__","CreatedTime":946684800,"Error":{"Message":"__Message__","Type":"INTERNAL_FAILURE"},"LastUpdatedTime":946684800,"Name":"__Name__","Status":"CREATION_IN_PROGRESS","Type":"GENERIC_HTTP"},{"ActionConnectorId":"__ActionConnectorId__","Arn":"__Arn__","CreatedTime":946684800,"Error":{"Message":"__Message__","Type":"INTERNAL_FAILURE"},"LastUpdatedTime":946684800,"Name":"__Name__","Status":"CREATION_IN_PROGRESS","Type":"GENERIC_HTTP"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

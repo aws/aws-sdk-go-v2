@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"IAMPolicyAssignment":{"AssignmentId":"__AssignmentId__","AssignmentName":"__AssignmentName__","AssignmentStatus":"ENABLED","AwsAccountId":"__AwsAccountId__","Identities":{"key0":["__Member__","__Member__"]},"PolicyArn":"__PolicyArn__"},"RequestId":"__RequestId__","Status":200}

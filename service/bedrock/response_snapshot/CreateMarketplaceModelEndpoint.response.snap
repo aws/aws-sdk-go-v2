@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"marketplaceModelEndpoint":{"createdAt":"2000-01-01T00:00:00Z","endpointArn":"__EndpointArn__","endpointConfig":{"sageMaker":{"executionRole":"__ExecutionRole__","initialInstanceCount":1,"instanceType":"__InstanceType__","kmsEncryptionKey":"__KmsEncryptionKey__","vpc":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}}},"endpointStatus":"__EndpointStatus__","endpointStatusMessage":"__EndpointStatusMessage__","modelSourceIdentifier":"__ModelSourceIdentifier__","status":"REGISTERED","statusMessage":"__StatusMessage__","updatedAt":"2000-01-01T00:00:00Z"}}

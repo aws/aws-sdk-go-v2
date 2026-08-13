@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.ListDataIngestionJobs
-
-{"DataIngestionJobSummaries":[{"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","IngestionInputConfiguration":{"S3InputConfiguration":{"Bucket":"__Bucket__","KeyPattern":"__KeyPattern__","Prefix":"__Prefix__"}},"JobId":"__JobId__","Status":"IN_PROGRESS"},{"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","IngestionInputConfiguration":{"S3InputConfiguration":{"Bucket":"__Bucket__","KeyPattern":"__KeyPattern__","Prefix":"__Prefix__"}},"JobId":"__JobId__","Status":"IN_PROGRESS"}],"NextToken":"__NextToken__"}

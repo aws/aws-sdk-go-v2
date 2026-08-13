@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.GetLicenseUsage
-
-{"LicenseUsage":{"EntitlementUsages":[{"ConsumedValue":"__ConsumedValue__","MaxCount":"__MaxCount__","Name":"__Name__","Unit":"Count"},{"ConsumedValue":"__ConsumedValue__","MaxCount":"__MaxCount__","Name":"__Name__","Unit":"Count"}]}}

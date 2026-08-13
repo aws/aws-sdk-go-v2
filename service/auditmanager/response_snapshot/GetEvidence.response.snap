@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"evidence":{"assessmentReportSelection":"__AssessmentReportSelection__","attributes":{"key0":"__Value__"},"awsAccountId":"__AwsAccountId__","awsOrganization":"__AwsOrganization__","complianceCheck":"__ComplianceCheck__","dataSource":"__DataSource__","eventName":"__EventName__","eventSource":"__EventSource__","evidenceAwsAccountId":"__EvidenceAwsAccountId__","evidenceByType":"__EvidenceByType__","evidenceFolderId":"__EvidenceFolderId__","iamId":"__IamId__","id":"__Id__","resourcesIncluded":[{"arn":"__Arn__","complianceCheck":"__ComplianceCheck__","value":"__Value__"},{"arn":"__Arn__","complianceCheck":"__ComplianceCheck__","value":"__Value__"}],"time":946684800}}

@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"ResourceExistsException","Message":"__Message__","ResourceType":"__ResourceType__"}

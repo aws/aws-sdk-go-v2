@@ -1,4 +1,0 @@
-500
-Content-Type: application/json
-
-{"__type":"InternalServerException","error":"TOKEN_EXPIRED","message":"__Message__"}

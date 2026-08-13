@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"ExtensionArn":"__ExtensionArn__","Id":"__Id__","ResourceArn":"__ResourceArn__"},{"ExtensionArn":"__ExtensionArn__","Id":"__Id__","ResourceArn":"__ResourceArn__"}],"NextToken":"__NextToken__"}

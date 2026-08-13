@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DirectoryId":"__DirectoryId__","MemberRealm":"__MemberRealm__","Members":[{"MemberType":"USER","SAMAccountName":"__SAMAccountName__","SID":"__SID__"},{"MemberType":"USER","SAMAccountName":"__SAMAccountName__","SID":"__SID__"}],"NextToken":"__NextToken__","Realm":"__Realm__"}

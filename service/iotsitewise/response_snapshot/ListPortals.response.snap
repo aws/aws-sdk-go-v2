@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","portalSummaries":[{"creationDate":946684800,"description":"__Description__","id":"__Id__","lastUpdateDate":946684800,"name":"__Name__","portalType":"SITEWISE_PORTAL_V1","roleArn":"__RoleArn__","startUrl":"__StartUrl__","status":{"error":{"code":"INTERNAL_FAILURE","message":"__Message__"},"state":"CREATING"}},{"creationDate":946684800,"description":"__Description__","id":"__Id__","lastUpdateDate":946684800,"name":"__Name__","portalType":"SITEWISE_PORTAL_V1","roleArn":"__RoleArn__","startUrl":"__StartUrl__","status":{"error":{"code":"INTERNAL_FAILURE","message":"__Message__"},"state":"CREATING"}}]}

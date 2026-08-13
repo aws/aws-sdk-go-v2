@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DescribePartnerApp
-
-{"ApplicationConfig":{"AdminUsers":["__Member__","__Member__"],"Arguments":{"key0":"__Value__"},"AssignedGroupPatterns":["__Member__","__Member__"],"RoleGroupAssignments":[{"GroupPatterns":["__Member__","__Member__"],"RoleName":"__RoleName__"},{"GroupPatterns":["__Member__","__Member__"],"RoleName":"__RoleName__"}]},"Arn":"__Arn__","AuthType":"IAM","AvailableUpgrade":{"ReleaseNotes":["__Member__","__Member__"],"Version":"__Version__"},"BaseUrl":"__BaseUrl__","CreationTime":946684800,"CurrentVersionEolDate":946684800,"EnableAutoMinorVersionUpgrade":true,"EnableIamSessionBasedIdentity":true,"Error":{"Code":"__Code__","Reason":"__Reason__"},"ExecutionRoleArn":"__ExecutionRoleArn__","KmsKeyId":"__KmsKeyId__","LastModifiedTime":946684800,"MaintenanceConfig":{"MaintenanceWindowStart":"__MaintenanceWindowStart__"},"Name":"__Name__","Status":"Creating","Tier":"__Tier__","Type":"lakera-guard","Version":"__Version__"}

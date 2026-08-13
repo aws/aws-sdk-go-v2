@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"endTime":946684800,"errorDetails":{"errorMessage":"__ErrorMessage__"},"jobId":"__JobId__","jobType":"BATCH","metrics":{"deleteRecordsProcessed":1,"inputRecords":1,"mappedRecordsRemoved":1,"mappedSourceRecordsRemoved":1,"mappedTargetRecordsRemoved":1,"newMappedRecords":1,"newMappedSourceRecords":1,"newMappedTargetRecords":1,"newUniqueRecordsLoaded":1,"recordsNotProcessed":1,"totalMappedRecords":1,"totalMappedSourceRecords":1,"totalMappedTargetRecords":1,"totalRecordsProcessed":1,"uniqueRecordsLoaded":1},"outputSourceConfig":[{"KMSArn":"__KMSArn__","outputS3Path":"__OutputS3Path__","roleArn":"__RoleArn__"},{"KMSArn":"__KMSArn__","outputS3Path":"__OutputS3Path__","roleArn":"__RoleArn__"}],"startTime":946684800,"status":"RUNNING"}

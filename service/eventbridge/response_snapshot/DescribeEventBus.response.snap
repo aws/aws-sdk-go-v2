@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSEvents.DescribeEventBus
-
-{"Arn":"__Arn__","CreationTime":946684800,"DeadLetterConfig":{"Arn":"__Arn__"},"Description":"__Description__","KmsKeyIdentifier":"__KmsKeyIdentifier__","LastModifiedTime":946684800,"LogConfig":{"IncludeDetail":"NONE","Level":"OFF"},"Name":"__Name__","Policy":"__Policy__"}

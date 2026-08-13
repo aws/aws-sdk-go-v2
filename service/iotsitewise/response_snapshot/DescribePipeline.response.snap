@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"computations":[{"computeNodeName":"__ComputeNodeName__","dependsOn":["__Member__","__Member__"],"environmentVariables":{"key0":"__Value__"},"taskName":"__TaskName__"},{"computeNodeName":"__ComputeNodeName__","dependsOn":["__Member__","__Member__"],"environmentVariables":{"key0":"__Value__"},"taskName":"__TaskName__"}],"createdAt":946684800,"description":"__Description__","environmentVariables":{"key0":"__Value__"},"pipelineArn":"__PipelineArn__","pipelineName":"__PipelineName__","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"updatedAt":946684800,"version":"__Version__","workspaceName":"__WorkspaceName__"}

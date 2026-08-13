@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"reportDetails":{"acceptanceType":"PASSTHROUGH","arn":"__Arn__","category":"__Category__","companyName":"__CompanyName__","createdAt":"2000-01-01T00:00:00Z","deletedAt":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","lastModifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","periodEnd":"2000-01-01T00:00:00Z","periodStart":"2000-01-01T00:00:00Z","productName":"__ProductName__","sequenceNumber":1,"series":"__Series__","state":"PUBLISHED","statusMessage":"__StatusMessage__","termArn":"__TermArn__","uploadState":"PROCESSING","version":1}}

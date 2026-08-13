@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BillingPeriod":"__BillingPeriod__","NextToken":"__NextToken__","PricingPlanArn":"__PricingPlanArn__","PricingRuleArns":["__Member__","__Member__"]}

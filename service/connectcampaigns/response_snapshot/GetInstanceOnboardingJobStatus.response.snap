@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"connectInstanceOnboardingJobStatus":{"connectInstanceId":"__ConnectInstanceId__","failureCode":"EVENT_BRIDGE_ACCESS_DENIED","status":"IN_PROGRESS"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.ListNamespaces
-
-{"Namespaces":[{"Arn":"__Arn__","CreateDate":946684800,"Description":"__Description__","Id":"__Id__","Name":"__Name__","Properties":{"DnsProperties":{"HostedZoneId":"__HostedZoneId__","SOA":{"TTL":1}},"HttpProperties":{"HttpName":"__HttpName__"}},"ResourceOwner":"__ResourceOwner__","ServiceCount":1,"Type":"DNS_PUBLIC"},{"Arn":"__Arn__","CreateDate":946684800,"Description":"__Description__","Id":"__Id__","Name":"__Name__","Properties":{"DnsProperties":{"HostedZoneId":"__HostedZoneId__","SOA":{"TTL":1}},"HttpProperties":{"HttpName":"__HttpName__"}},"ResourceOwner":"__ResourceOwner__","ServiceCount":1,"Type":"DNS_PUBLIC"}],"NextToken":"__NextToken__"}

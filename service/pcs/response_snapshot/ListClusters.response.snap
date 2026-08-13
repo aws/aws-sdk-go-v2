@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSParallelComputingService.ListClusters
-
-{"clusters":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","status":"CREATING"},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","status":"CREATING"}],"nextToken":"__NextToken__"}

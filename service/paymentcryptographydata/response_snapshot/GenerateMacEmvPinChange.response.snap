@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"EncryptedPinBlock":"__EncryptedPinBlock__","Mac":"__Mac__","NewPinPekArn":"__NewPinPekArn__","NewPinPekKeyCheckValue":"__NewPinPekKeyCheckValue__","SecureMessagingConfidentialityKeyArn":"__SecureMessagingConfidentialityKeyArn__","SecureMessagingConfidentialityKeyCheckValue":"__SecureMessagingConfidentialityKeyCheckValue__","SecureMessagingIntegrityKeyArn":"__SecureMessagingIntegrityKeyArn__","SecureMessagingIntegrityKeyCheckValue":"__SecureMessagingIntegrityKeyCheckValue__","VisaAmexDerivationOutputs":{"AuthorizationRequestKeyArn":"__AuthorizationRequestKeyArn__","AuthorizationRequestKeyCheckValue":"__AuthorizationRequestKeyCheckValue__","CurrentPinPekArn":"__CurrentPinPekArn__","CurrentPinPekKeyCheckValue":"__CurrentPinPekKeyCheckValue__"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DescribeHub
-
-{"CreationTime":946684800,"FailureReason":"__FailureReason__","HubArn":"__HubArn__","HubDescription":"__HubDescription__","HubDisplayName":"__HubDisplayName__","HubName":"__HubName__","HubSearchKeywords":["__Member__","__Member__"],"HubStatus":"InService","LastModifiedTime":946684800,"S3StorageConfig":{"S3OutputPath":"__S3OutputPath__"}}

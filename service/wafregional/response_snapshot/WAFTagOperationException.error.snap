@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSWAF_Regional_20161128.CreateRateBasedRule
-
-{"__type":"WAFTagOperationException","message":"__Message__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AdvancedOptions":{"key0":"__Value__"},"ChangeProgressDetails":{"ChangeId":"__ChangeId__","ConfigChangeStatus":"Pending","InitiatedBy":"CUSTOMER","LastUpdatedTime":946684800,"Message":"__Message__","StartTime":946684800},"DomainName":"__DomainName__","PerformCheckOnly":true,"TargetVersion":"__TargetVersion__","UpgradeId":"__UpgradeId__"}

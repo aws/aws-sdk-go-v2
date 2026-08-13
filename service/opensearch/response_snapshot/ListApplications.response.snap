@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationSummaries":[{"arn":"__Arn__","createdAt":946684800,"endpoint":"__Endpoint__","id":"__Id__","lastUpdatedAt":946684800,"name":"__Name__","status":"CREATING"},{"arn":"__Arn__","createdAt":946684800,"endpoint":"__Endpoint__","id":"__Id__","lastUpdatedAt":946684800,"name":"__Name__","status":"CREATING"}],"nextToken":"__NextToken__"}

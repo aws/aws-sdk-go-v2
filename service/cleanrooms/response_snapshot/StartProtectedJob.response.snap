@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"protectedJob":{"computeConfiguration":{"worker":{"number":1,"properties":{"spark":{"key0":"__Value__"}},"type":"CR.1X"}},"createTime":946684800,"error":{"code":"__Code__","message":"__Message__"},"id":"__Id__","jobComputePayerAccountId":"__JobComputePayerAccountId__","jobParameters":{"analysisTemplateArn":"__AnalysisTemplateArn__","parameters":{"key0":"__Value__"}},"membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","result":{"output":{"s3":{"location":"__Location__"}}},"resultConfiguration":{"outputConfiguration":{"s3":{"bucket":"__Bucket__","keyPrefix":"__KeyPrefix__"}}},"statistics":{"billedResourceUtilization":{"units":1},"totalDurationInMillis":1},"status":"SUBMITTED"}}

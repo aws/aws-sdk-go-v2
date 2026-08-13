@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ElasticMapReduce.AddInstanceGroups
-
-{"ClusterArn":"__ClusterArn__","InstanceGroupIds":["__Member__","__Member__"],"JobFlowId":"__JobFlowId__"}

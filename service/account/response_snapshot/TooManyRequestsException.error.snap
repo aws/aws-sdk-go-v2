@@ -1,5 +1,0 @@
-429
-Content-Type: application/json
-X-Amzn-Errortype: TooManyRequestsException
-
-{"__type":"TooManyRequestsException","message":"__Message__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: OpenSearchServerless.BatchGetVpcEndpoint
-
-{"vpcEndpointDetails":[{"createdDate":1,"failureCode":"__FailureCode__","failureMessage":"__FailureMessage__","id":"__Id__","name":"__Name__","securityGroupIds":["__Member__","__Member__"],"status":"PENDING","subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"},{"createdDate":1,"failureCode":"__FailureCode__","failureMessage":"__FailureMessage__","id":"__Id__","name":"__Name__","securityGroupIds":["__Member__","__Member__"],"status":"PENDING","subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}],"vpcEndpointErrorDetails":[{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","id":"__Id__"},{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","id":"__Id__"}]}

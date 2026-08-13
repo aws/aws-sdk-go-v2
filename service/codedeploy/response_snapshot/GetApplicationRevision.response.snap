@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.GetApplicationRevision
-
-{"applicationName":"__ApplicationName__","revision":{"appSpecContent":{"content":"__Content__","sha256":"__Sha256__"},"gitHubLocation":{"commitId":"__CommitId__","repository":"__Repository__"},"revisionType":"S3","s3Location":{"bucket":"__Bucket__","bundleType":"tar","eTag":"__ETag__","key":"__Key__","version":"__Version__"},"string":{"content":"__Content__","sha256":"__Sha256__"}},"revisionInfo":{"deploymentGroups":["__Member__","__Member__"],"description":"__Description__","firstUsedTime":946684800,"lastUsedTime":946684800,"registerTime":946684800}}

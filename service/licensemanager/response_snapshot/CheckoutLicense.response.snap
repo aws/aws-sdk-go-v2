@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.CheckoutLicense
-
-{"CheckoutType":"PROVISIONAL","EntitlementsAllowed":[{"Name":"__Name__","Unit":"Count","Value":"__Value__"},{"Name":"__Name__","Unit":"Count","Value":"__Value__"}],"Expiration":"__Expiration__","IssuedAt":"__IssuedAt__","LicenseArn":"__LicenseArn__","LicenseConsumptionToken":"__LicenseConsumptionToken__","NodeId":"__NodeId__","SignedToken":"__SignedToken__"}

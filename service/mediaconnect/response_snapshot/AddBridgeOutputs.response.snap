@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"bridgeArn":"__BridgeArn__","outputs":[{"flowOutput":{"flowArn":"__FlowArn__","flowSourceArn":"__FlowSourceArn__","name":"__Name__"},"networkOutput":{"ipAddress":"__IpAddress__","name":"__Name__","networkName":"__NetworkName__","port":1,"protocol":"zixi-push","ttl":1}},{"flowOutput":{"flowArn":"__FlowArn__","flowSourceArn":"__FlowSourceArn__","name":"__Name__"},"networkOutput":{"ipAddress":"__IpAddress__","name":"__Name__","networkName":"__NetworkName__","port":1,"protocol":"zixi-push","ttl":1}}]}

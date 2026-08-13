@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"domain":{"arn":"__Arn__","assetSizeBytes":1,"createdTime":946684800,"encryptionKey":"__EncryptionKey__","name":"__Name__","owner":"__Owner__","repositoryCount":1,"s3BucketArn":"__S3BucketArn__","status":"Active"}}

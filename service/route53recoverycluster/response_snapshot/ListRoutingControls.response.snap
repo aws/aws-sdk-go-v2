@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: ToggleCustomerAPI.ListRoutingControls
-
-{"NextToken":"__NextToken__","RoutingControls":[{"ControlPanelArn":"__ControlPanelArn__","ControlPanelName":"__ControlPanelName__","Owner":"__Owner__","RoutingControlArn":"__RoutingControlArn__","RoutingControlName":"__RoutingControlName__","RoutingControlState":"On"},{"ControlPanelArn":"__ControlPanelArn__","ControlPanelName":"__ControlPanelName__","Owner":"__Owner__","RoutingControlArn":"__RoutingControlArn__","RoutingControlName":"__RoutingControlName__","RoutingControlState":"On"}]}

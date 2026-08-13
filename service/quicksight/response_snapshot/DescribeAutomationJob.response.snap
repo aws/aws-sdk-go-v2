@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","CreatedAt":946684800,"EndedAt":946684800,"InputPayload":"__InputPayload__","JobStatus":"FAILED","OutputPayload":"__OutputPayload__","RequestId":"__RequestId__","StartedAt":946684800}

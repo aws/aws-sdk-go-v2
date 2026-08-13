@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobDefinitionArn":"__JobDefinitionArn__","jobDefinitionName":"__JobDefinitionName__","revision":1}

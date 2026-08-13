@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.StartTextTranslationJob
-
-{"__type":"UnsupportedLanguagePairException","Message":"__Message__","SourceLanguageCode":"__SourceLanguageCode__","TargetLanguageCode":"__TargetLanguageCode__"}

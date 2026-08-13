@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"builtInSlotTypeSummaries":[{"description":"__Description__","slotTypeSignature":"__SlotTypeSignature__"},{"description":"__Description__","slotTypeSignature":"__SlotTypeSignature__"}],"localeId":"__LocaleId__","nextToken":"__NextToken__"}

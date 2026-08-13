@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AccountId":"__AccountId__","BackupSizeInBytes":1,"BackupVaultArn":"__BackupVaultArn__","CompletionDate":946684800,"CreatedBy":{"RestoreTestingPlanArn":"__RestoreTestingPlanArn__"},"CreatedResourceArn":"__CreatedResourceArn__","CreationDate":946684800,"DeletionStatus":"DELETING","DeletionStatusMessage":"__DeletionStatusMessage__","ExpectedCompletionTimeMinutes":1,"IamRoleArn":"__IamRoleArn__","IsParent":true,"ParentJobId":"__ParentJobId__","PercentDone":"__PercentDone__","RecoveryPointArn":"__RecoveryPointArn__","RecoveryPointCreationDate":946684800,"ResourceType":"__ResourceType__","RestoreJobId":"__RestoreJobId__","SourceResourceArn":"__SourceResourceArn__","Status":"PENDING","StatusMessage":"__StatusMessage__","ValidationStatus":"FAILED","ValidationStatusMessage":"__ValidationStatusMessage__"}

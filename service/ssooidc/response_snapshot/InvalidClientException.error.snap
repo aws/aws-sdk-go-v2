@@ -1,4 +1,0 @@
-401
-Content-Type: application/json
-
-{"__type":"InvalidClientException","error":"__Error___","error_description":"__Error_description__"}

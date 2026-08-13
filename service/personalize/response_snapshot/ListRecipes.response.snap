@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonPersonalize.ListRecipes
-
-{"nextToken":"__NextToken__","recipes":[{"creationDateTime":946684800,"domain":"ECOMMERCE","lastUpdatedDateTime":946684800,"name":"__Name__","recipeArn":"__RecipeArn__","status":"__Status__"},{"creationDateTime":946684800,"domain":"ECOMMERCE","lastUpdatedDateTime":946684800,"name":"__Name__","recipeArn":"__RecipeArn__","status":"__Status__"}]}

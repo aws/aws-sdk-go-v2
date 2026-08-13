@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"connectorArn":"__ConnectorArn__","connectorName":"__ConnectorName__","connectorState":"RUNNING"}

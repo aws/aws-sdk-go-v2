@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"datasetArn":"__DatasetArn__","datasetId":"__DatasetId__","datasetName":"__DatasetName__","datasetVersion":"__DatasetVersion__","description":"__Description__","downloadUrl":"__DownloadUrl__","downloadUrlExpiresAt":946684800,"draftStatus":"MODIFIED","exampleCount":1,"failureReason":"__FailureReason__","kmsKeyArn":"__KmsKeyArn__","schemaType":"AGENTCORE_EVALUATION_PREDEFINED_V1","status":"CREATING","tags":{"key0":"__Value__"},"updatedAt":946684800}

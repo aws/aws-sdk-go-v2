@@ -1,5 +1,0 @@
-500
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ElasticMapReduce.AddInstanceGroups
-
-{"__type":"InternalServerError"}

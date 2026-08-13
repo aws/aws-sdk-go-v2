@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonTimestreamInfluxDB.ListDbBackups
-
-{"items":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","dbResourceId":"__DbResourceId__","deploymentType":"SINGLE_AZ","engineType":"INFLUXDB_V2","expiresAfter":"__ExpiresAfter__","id":"__Id__","kmsKeyId":"__KmsKeyId__","name":"__Name__","status":"IN_PROGRESS","type":"HOURLY"},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","dbResourceId":"__DbResourceId__","deploymentType":"SINGLE_AZ","engineType":"INFLUXDB_V2","expiresAfter":"__ExpiresAfter__","id":"__Id__","kmsKeyId":"__KmsKeyId__","name":"__Name__","status":"IN_PROGRESS","type":"HOURLY"}],"nextToken":"__NextToken__"}

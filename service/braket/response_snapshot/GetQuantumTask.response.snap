@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"actionMetadata":{"actionType":"__ActionType__","executableCount":1,"programCount":1},"associations":[{"arn":"__Arn__","type":"RESERVATION_TIME_WINDOW_ARN"},{"arn":"__Arn__","type":"RESERVATION_TIME_WINDOW_ARN"}],"createdAt":"2000-01-01T00:00:00Z","deviceArn":"__DeviceArn__","deviceParameters":"__DeviceParameters__","endedAt":"2000-01-01T00:00:00Z","experimentalCapabilities":{"enabled":"ALL"},"failureReason":"__FailureReason__","jobArn":"__JobArn__","numSuccessfulShots":1,"outputS3Bucket":"__OutputS3Bucket__","outputS3Directory":"__OutputS3Directory__","quantumTaskArn":"__QuantumTaskArn__","queueInfo":{"message":"__Message__","position":"__Position__","queue":"QUANTUM_TASKS_QUEUE","queuePriority":"Normal"},"shots":1,"status":"CREATED","tags":{"key0":"__Value__"}}

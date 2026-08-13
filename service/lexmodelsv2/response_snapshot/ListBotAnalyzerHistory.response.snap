@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botAnalyzerHistoryList":[{"botAnalyzerRequestId":"__BotAnalyzerRequestId__","botAnalyzerStatus":"Processing","creationDateTime":946684800},{"botAnalyzerRequestId":"__BotAnalyzerRequestId__","botAnalyzerStatus":"Processing","creationDateTime":946684800}],"botId":"__BotId__","botVersion":"__BotVersion__","localeId":"__LocaleId__","nextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DescribeClusterSchedulerConfig
-
-{"ClusterArn":"__ClusterArn__","ClusterSchedulerConfigArn":"__ClusterSchedulerConfigArn__","ClusterSchedulerConfigId":"__ClusterSchedulerConfigId__","ClusterSchedulerConfigVersion":1,"CreatedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"CreationTime":946684800,"Description":"__Description__","FailureReason":"__FailureReason__","LastModifiedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"LastModifiedTime":946684800,"Name":"__Name__","SchedulerConfig":{"FairShare":"Enabled","IdleResourceSharing":"Enabled","PriorityClasses":[{"Name":"__Name__","Weight":1},{"Name":"__Name__","Weight":1}]},"Status":"Creating","StatusDetails":{"key0":"Creating"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSEvents.DescribeRule
-
-{"Arn":"__Arn__","CreatedBy":"__CreatedBy__","Description":"__Description__","EventBusName":"__EventBusName__","EventPattern":"__EventPattern__","ManagedBy":"__ManagedBy__","Name":"__Name__","RoleArn":"__RoleArn__","ScheduleExpression":"__ScheduleExpression__","State":"ENABLED"}

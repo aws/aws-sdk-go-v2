@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.CopyBackupToRegion
-
-{"DestinationBackup":{"CreateTimestamp":946684800,"SourceBackup":"__SourceBackup__","SourceCluster":"__SourceCluster__","SourceRegion":"__SourceRegion__"}}

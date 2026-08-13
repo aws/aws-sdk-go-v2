@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: B2BI.ListProfiles
-
-{"nextToken":"__NextToken__","profiles":[{"businessName":"__BusinessName__","createdAt":"2000-01-01T00:00:00Z","logGroupName":"__LogGroupName__","logging":"ENABLED","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","profileId":"__ProfileId__"},{"businessName":"__BusinessName__","createdAt":"2000-01-01T00:00:00Z","logGroupName":"__LogGroupName__","logging":"ENABLED","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","profileId":"__ProfileId__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSSupport_20130415.DescribeSupportedLanguages
-
-{"supportedLanguages":[{"code":"__Code__","display":"__Display__","language":"__Language__"},{"code":"__Code__","display":"__Display__","language":"__Language__"}]}

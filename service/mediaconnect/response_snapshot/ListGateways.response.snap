@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"gateways":[{"gatewayArn":"__GatewayArn__","gatewayState":"CREATING","name":"__Name__"},{"gatewayArn":"__GatewayArn__","gatewayState":"CREATING","name":"__Name__"}],"nextToken":"__NextToken__"}

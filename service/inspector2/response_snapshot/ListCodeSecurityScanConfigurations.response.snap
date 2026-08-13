@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configurations":[{"continuousIntegrationScanSupportedEvents":["PULL_REQUEST","PULL_REQUEST"],"frequencyExpression":"__FrequencyExpression__","name":"__Name__","ownerAccountId":"__OwnerAccountId__","periodicScanFrequency":"WEEKLY","ruleSetCategories":["SAST","SAST"],"scanConfigurationArn":"__ScanConfigurationArn__","scopeSettings":{"projectSelectionScope":"ALL"}},{"continuousIntegrationScanSupportedEvents":["PULL_REQUEST","PULL_REQUEST"],"frequencyExpression":"__FrequencyExpression__","name":"__Name__","ownerAccountId":"__OwnerAccountId__","periodicScanFrequency":"WEEKLY","ruleSetCategories":["SAST","SAST"],"scanConfigurationArn":"__ScanConfigurationArn__","scopeSettings":{"projectSelectionScope":"ALL"}}],"nextToken":"__NextToken__"}

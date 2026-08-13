@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StorageGateway_20130630.ListTapes
-
-{"Marker":"__Marker__","TapeInfos":[{"GatewayARN":"__GatewayARN__","PoolEntryDate":946684800,"PoolId":"__PoolId__","RetentionStartDate":946684800,"TapeARN":"__TapeARN__","TapeBarcode":"__TapeBarcode__","TapeSizeInBytes":1,"TapeStatus":"__TapeStatus__"},{"GatewayARN":"__GatewayARN__","PoolEntryDate":946684800,"PoolId":"__PoolId__","RetentionStartDate":946684800,"TapeARN":"__TapeARN__","TapeBarcode":"__TapeBarcode__","TapeSizeInBytes":1,"TapeStatus":"__TapeStatus__"}]}

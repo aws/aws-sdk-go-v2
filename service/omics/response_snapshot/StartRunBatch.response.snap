@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","id":"__Id__","status":"CREATING","tags":{"key0":"__Value__"},"uuid":"__Uuid__"}

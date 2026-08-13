@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Links":[{"Bandwidth":{"DownloadSpeed":1,"UploadSpeed":1},"CreatedAt":946684800,"Description":"__Description__","GlobalNetworkId":"__GlobalNetworkId__","LinkArn":"__LinkArn__","LinkId":"__LinkId__","Provider":"__Provider__","SiteId":"__SiteId__","State":"PENDING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"__Type__"},{"Bandwidth":{"DownloadSpeed":1,"UploadSpeed":1},"CreatedAt":946684800,"Description":"__Description__","GlobalNetworkId":"__GlobalNetworkId__","LinkArn":"__LinkArn__","LinkId":"__LinkId__","Provider":"__Provider__","SiteId":"__SiteId__","State":"PENDING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"__Type__"}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"dependencies":[{"applicationId":"__ApplicationId__","semanticVersion":"__SemanticVersion__"},{"applicationId":"__ApplicationId__","semanticVersion":"__SemanticVersion__"}],"nextToken":"__NextToken__"}

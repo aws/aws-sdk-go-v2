@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"agentRuntimes":[{"agentRuntimeArn":"__AgentRuntimeArn__","agentRuntimeId":"__AgentRuntimeId__","agentRuntimeName":"__AgentRuntimeName__","agentRuntimeVersion":"__AgentRuntimeVersion__","description":"__Description__","lastUpdatedAt":"2000-01-01T00:00:00Z","status":"CREATING"},{"agentRuntimeArn":"__AgentRuntimeArn__","agentRuntimeId":"__AgentRuntimeId__","agentRuntimeName":"__AgentRuntimeName__","agentRuntimeVersion":"__AgentRuntimeVersion__","description":"__Description__","lastUpdatedAt":"2000-01-01T00:00:00Z","status":"CREATING"}],"nextToken":"__NextToken__"}

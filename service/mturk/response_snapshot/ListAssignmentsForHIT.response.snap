@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: MTurkRequesterServiceV20170117.ListAssignmentsForHIT
-
-{"Assignments":[{"AcceptTime":946684800,"Answer":"__Answer__","ApprovalTime":946684800,"AssignmentId":"__AssignmentId__","AssignmentStatus":"Submitted","AutoApprovalTime":946684800,"Deadline":946684800,"HITId":"__HITId__","RejectionTime":946684800,"RequesterFeedback":"__RequesterFeedback__","SubmitTime":946684800,"WorkerId":"__WorkerId__"},{"AcceptTime":946684800,"Answer":"__Answer__","ApprovalTime":946684800,"AssignmentId":"__AssignmentId__","AssignmentStatus":"Submitted","AutoApprovalTime":946684800,"Deadline":946684800,"HITId":"__HITId__","RejectionTime":946684800,"RequesterFeedback":"__RequesterFeedback__","SubmitTime":946684800,"WorkerId":"__WorkerId__"}],"NextToken":"__NextToken__","NumResults":1}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ReferenceSummaryList":[{"Url":{"Name":"__Name__","Value":"__Value__"}},{"Url":{"Name":"__Name__","Value":"__Value__"}}]}

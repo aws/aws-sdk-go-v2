@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","vectorBuckets":[{"creationTime":946684800,"vectorBucketArn":"__VectorBucketArn__","vectorBucketName":"__VectorBucketName__"},{"creationTime":946684800,"vectorBucketArn":"__VectorBucketArn__","vectorBucketName":"__VectorBucketName__"}]}

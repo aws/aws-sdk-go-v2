@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: MTurkRequesterServiceV20170117.ListQualificationRequests
-
-{"NextToken":"__NextToken__","NumResults":1,"QualificationRequests":[{"Answer":"__Answer__","QualificationRequestId":"__QualificationRequestId__","QualificationTypeId":"__QualificationTypeId__","SubmitTime":946684800,"Test":"__Test__","WorkerId":"__WorkerId__"},{"Answer":"__Answer__","QualificationRequestId":"__QualificationRequestId__","QualificationTypeId":"__QualificationTypeId__","SubmitTime":946684800,"Test":"__Test__","WorkerId":"__WorkerId__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.ListLogSubscriptions
-
-{"LogSubscriptions":[{"DirectoryId":"__DirectoryId__","LogGroupName":"__LogGroupName__","SubscriptionCreatedDateTime":946684800},{"DirectoryId":"__DirectoryId__","LogGroupName":"__LogGroupName__","SubscriptionCreatedDateTime":946684800}],"NextToken":"__NextToken__"}

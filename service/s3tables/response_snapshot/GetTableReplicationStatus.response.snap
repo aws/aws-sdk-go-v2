@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"destinations":[{"destinationTableArn":"__DestinationTableArn__","destinationTableBucketArn":"__DestinationTableBucketArn__","failureMessage":"__FailureMessage__","lastSuccessfulReplicatedUpdate":{"metadataLocation":"__MetadataLocation__","timestamp":"2000-01-01T00:00:00Z"},"replicationStatus":"pending"},{"destinationTableArn":"__DestinationTableArn__","destinationTableBucketArn":"__DestinationTableBucketArn__","failureMessage":"__FailureMessage__","lastSuccessfulReplicatedUpdate":{"metadataLocation":"__MetadataLocation__","timestamp":"2000-01-01T00:00:00Z"},"replicationStatus":"pending"}],"sourceTableArn":"__SourceTableArn__"}

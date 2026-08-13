@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: OpenSearchServerless.CreateSecurityPolicy
-
-{"securityPolicyDetail":{"createdDate":1,"description":"__Description__","lastModifiedDate":1,"name":"__Name__","policy":"__Document__","policyVersion":"__PolicyVersion__","type":"encryption"}}

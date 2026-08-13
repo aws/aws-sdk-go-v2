@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"domainId":"__DomainId__","entityId":"__EntityId__","entityType":"ASSET","forms":[{"content":"__Content__","formName":"__FormName__","id":"__Id__","timestamp":946684800,"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","id":"__Id__","timestamp":946684800,"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"multiplexes":[{"arn":"__Arn__","availabilityZones":["__Member__","__Member__"],"id":"__Id__","multiplexSettings":{"transportStreamBitrate":1},"name":"__Name__","pipelinesRunningCount":1,"programCount":1,"state":"CREATING","tags":{"key0":"__Value__"}},{"arn":"__Arn__","availabilityZones":["__Member__","__Member__"],"id":"__Id__","multiplexSettings":{"transportStreamBitrate":1},"name":"__Name__","pipelinesRunningCount":1,"programCount":1,"state":"CREATING","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

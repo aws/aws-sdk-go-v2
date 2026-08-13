@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"domainConfigurations":[{"domainConfigurationArn":"__DomainConfigurationArn__","domainConfigurationName":"__DomainConfigurationName__","serviceType":"DATA"},{"domainConfigurationArn":"__DomainConfigurationArn__","domainConfigurationName":"__DomainConfigurationName__","serviceType":"DATA"}],"nextMarker":"__NextMarker__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"indexName":"__IndexName__","indexStatus":"ACTIVE","schema":"__Schema__"}

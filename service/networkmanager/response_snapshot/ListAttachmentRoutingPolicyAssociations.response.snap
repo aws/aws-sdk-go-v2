@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AttachmentRoutingPolicyAssociations":[{"AssociatedRoutingPolicies":["__Member__","__Member__"],"AttachmentId":"__AttachmentId__","PendingRoutingPolicies":["__Member__","__Member__"],"RoutingPolicyLabel":"__RoutingPolicyLabel__"},{"AssociatedRoutingPolicies":["__Member__","__Member__"],"AttachmentId":"__AttachmentId__","PendingRoutingPolicies":["__Member__","__Member__"],"RoutingPolicyLabel":"__RoutingPolicyLabel__"}],"NextToken":"__NextToken__"}

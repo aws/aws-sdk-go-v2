@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.GetDiscoveredResourceCounts
-
-{"nextToken":"__NextToken__","resourceCounts":[{"count":1,"resourceType":"AWS::EC2::CustomerGateway"},{"count":1,"resourceType":"AWS::EC2::CustomerGateway"}],"totalDiscoveredResources":1}

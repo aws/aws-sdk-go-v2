@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribeDocumentPermission
-
-{"AccountIds":["__Member__","__Member__"],"AccountSharingInfoList":[{"AccountId":"__AccountId__","SharedDocumentVersion":"__SharedDocumentVersion__"},{"AccountId":"__AccountId__","SharedDocumentVersion":"__SharedDocumentVersion__"}],"NextToken":"__NextToken__"}

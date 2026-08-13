@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"launchConfigurationTemplate":{"arn":"__Arn__","copyPrivateIp":true,"copyTags":true,"exportBucketArn":"__ExportBucketArn__","launchConfigurationTemplateID":"__LaunchConfigurationTemplateID__","launchDisposition":"STOPPED","launchIntoSourceInstance":true,"licensing":{"osByol":true},"postLaunchEnabled":true,"recoveryMode":"FAST","tags":{"key0":"__Value__"},"targetInstanceTypeRightSizingMethod":"NONE"}}

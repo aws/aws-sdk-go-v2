@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DataTableSummaryList":[{"Arn":"__Arn__","Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__"},{"Arn":"__Arn__","Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__"}],"NextToken":"__NextToken__"}

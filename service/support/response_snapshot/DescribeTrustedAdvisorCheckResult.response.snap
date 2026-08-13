@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSSupport_20130415.DescribeTrustedAdvisorCheckResult
-
-{"result":{"categorySpecificSummary":{"costOptimizing":{"estimatedMonthlySavings":1,"estimatedPercentMonthlySavings":1}},"checkId":"__CheckId__","flaggedResources":[{"isSuppressed":true,"metadata":["__Member__","__Member__"],"region":"__Region__","resourceId":"__ResourceId__","status":"__Status__"},{"isSuppressed":true,"metadata":["__Member__","__Member__"],"region":"__Region__","resourceId":"__ResourceId__","status":"__Status__"}],"resourcesSummary":{"resourcesFlagged":1,"resourcesIgnored":1,"resourcesProcessed":1,"resourcesSuppressed":1},"status":"__Status__","timestamp":"__Timestamp__"}}

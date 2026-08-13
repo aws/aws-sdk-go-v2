@@ -1,5 +1,0 @@
-500
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDB_20120810.BatchExecuteStatement
-
-{"__type":"InternalServerError","message":"__Message__"}

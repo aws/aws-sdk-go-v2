@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"countsByGroup":[{"count":1,"groupKey":"__GroupKey__"},{"count":1,"groupKey":"__GroupKey__"}]}

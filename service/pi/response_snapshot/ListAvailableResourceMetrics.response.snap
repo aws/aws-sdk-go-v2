@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.ListAvailableResourceMetrics
-
-{"Metrics":[{"Description":"__Description__","Metric":"__Metric__","Unit":"__Unit__"},{"Description":"__Description__","Metric":"__Metric__","Unit":"__Unit__"}],"NextToken":"__NextToken__"}

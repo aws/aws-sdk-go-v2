@@ -1,4 +1,0 @@
-404
-Content-Type: application/json
-
-{"__type":"UserNotFoundException","Message":"__Message__"}

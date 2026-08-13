@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: InspectorService.PreviewAgents
-
-{"agentPreviews":[{"agentHealth":"HEALTHY","agentId":"__AgentId__","agentVersion":"__AgentVersion__","autoScalingGroup":"__AutoScalingGroup__","hostname":"__Hostname__","ipv4Address":"__Ipv4Address__","kernelVersion":"__KernelVersion__","operatingSystem":"__OperatingSystem__"},{"agentHealth":"HEALTHY","agentId":"__AgentId__","agentVersion":"__AgentVersion__","autoScalingGroup":"__AutoScalingGroup__","hostname":"__Hostname__","ipv4Address":"__Ipv4Address__","kernelVersion":"__KernelVersion__","operatingSystem":"__OperatingSystem__"}],"nextToken":"__NextToken__"}

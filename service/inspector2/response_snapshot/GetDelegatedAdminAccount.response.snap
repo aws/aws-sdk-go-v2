@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"delegatedAdmin":{"accountId":"__AccountId__","relationshipStatus":"CREATED"}}

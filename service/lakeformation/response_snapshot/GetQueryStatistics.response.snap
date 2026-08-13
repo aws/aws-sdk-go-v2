@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ExecutionStatistics":{"AverageExecutionTimeMillis":1,"DataScannedBytes":1,"WorkUnitsExecutedCount":1},"PlanningStatistics":{"EstimatedDataToScanBytes":1,"PlanningTimeMillis":1,"QueueTimeMillis":1,"WorkUnitsGeneratedCount":1},"QuerySubmissionTime":"2000-01-01T00:00:00Z"}

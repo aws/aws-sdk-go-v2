@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"certificateList":[{"issuer":"__Issuer__","notValidAfter":946684800,"notValidBefore":946684800,"subject":"__Subject__","thumbprint":"__Thumbprint__"},{"issuer":"__Issuer__","notValidAfter":946684800,"notValidBefore":946684800,"subject":"__Subject__","thumbprint":"__Thumbprint__"}],"nextToken":"__NextToken__","trustStoreArn":"__TrustStoreArn__"}

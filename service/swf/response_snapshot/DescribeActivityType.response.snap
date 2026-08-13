@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: SimpleWorkflowService.DescribeActivityType
-
-{"configuration":{"defaultTaskHeartbeatTimeout":"__DefaultTaskHeartbeatTimeout__","defaultTaskList":{"name":"__Name__"},"defaultTaskPriority":"__DefaultTaskPriority__","defaultTaskScheduleToCloseTimeout":"__DefaultTaskScheduleToCloseTimeout__","defaultTaskScheduleToStartTimeout":"__DefaultTaskScheduleToStartTimeout__","defaultTaskStartToCloseTimeout":"__DefaultTaskStartToCloseTimeout__"},"typeInfo":{"activityType":{"name":"__Name__","version":"__Version__"},"creationDate":946684800,"deprecationDate":946684800,"description":"__Description__","status":"REGISTERED"}}

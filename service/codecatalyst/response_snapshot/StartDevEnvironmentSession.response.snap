@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accessDetails":{"streamUrl":"__StreamUrl__","tokenValue":"__TokenValue__"},"id":"__Id__","projectName":"__ProjectName__","sessionId":"__SessionId__","spaceName":"__SpaceName__"}

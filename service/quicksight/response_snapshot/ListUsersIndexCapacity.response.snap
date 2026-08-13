@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","requestId":"__RequestId__","users":[{"email":"__Email__","kbCount":1,"role":"__Role__","spaceCount":1,"totalCapacityBytes":1,"totalKBCapacityBytes":1,"totalSpaceCapacityBytes":1,"userArn":"__UserArn__","userName":"__UserName__"},{"email":"__Email__","kbCount":1,"role":"__Role__","spaceCount":1,"totalCapacityBytes":1,"totalKBCapacityBytes":1,"totalSpaceCapacityBytes":1,"userArn":"__UserArn__","userName":"__UserName__"}]}

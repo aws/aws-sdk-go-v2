@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AppRunner.ListConnections
-
-{"ConnectionSummaryList":[{"ConnectionArn":"__ConnectionArn__","ConnectionName":"__ConnectionName__","CreatedAt":946684800,"ProviderType":"GITHUB","Status":"PENDING_HANDSHAKE"},{"ConnectionArn":"__ConnectionArn__","ConnectionName":"__ConnectionName__","CreatedAt":946684800,"ProviderType":"GITHUB","Status":"PENDING_HANDSHAKE"}],"NextToken":"__NextToken__"}

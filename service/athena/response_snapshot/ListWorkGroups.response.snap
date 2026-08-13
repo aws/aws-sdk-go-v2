@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonAthena.ListWorkGroups
-
-{"NextToken":"__NextToken__","WorkGroups":[{"CreationTime":946684800,"Description":"__Description__","EngineVersion":{"EffectiveEngineVersion":"__EffectiveEngineVersion__","SelectedEngineVersion":"__SelectedEngineVersion__"},"IdentityCenterApplicationArn":"__IdentityCenterApplicationArn__","Name":"__Name__","State":"ENABLED"},{"CreationTime":946684800,"Description":"__Description__","EngineVersion":{"EffectiveEngineVersion":"__EffectiveEngineVersion__","SelectedEngineVersion":"__SelectedEngineVersion__"},"IdentityCenterApplicationArn":"__IdentityCenterApplicationArn__","Name":"__Name__","State":"ENABLED"}]}

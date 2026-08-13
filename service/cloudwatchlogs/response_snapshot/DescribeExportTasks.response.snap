@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Logs_20140328.DescribeExportTasks
-
-{"exportTasks":[{"destination":"__Destination__","destinationPrefix":"__DestinationPrefix__","executionInfo":{"completionTime":1,"creationTime":1},"from":1,"logGroupName":"__LogGroupName__","status":{"code":"CANCELLED","message":"__Message__"},"taskId":"__TaskId__","taskName":"__TaskName__","to":1},{"destination":"__Destination__","destinationPrefix":"__DestinationPrefix__","executionInfo":{"completionTime":1,"creationTime":1},"from":1,"logGroupName":"__LogGroupName__","status":{"code":"CANCELLED","message":"__Message__"},"taskId":"__TaskId__","taskName":"__TaskName__","to":1}],"nextToken":"__NextToken__"}

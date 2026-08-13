@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"payload":{"graphSummary":{"edgeLabels":["__Member__","__Member__"],"edgeProperties":[{"key0":1},{"key0":1}],"edgeStructures":[{"count":1,"edgeProperties":["__Member__","__Member__"]},{"count":1,"edgeProperties":["__Member__","__Member__"]}],"nodeLabels":["__Member__","__Member__"],"nodeProperties":[{"key0":1},{"key0":1}],"nodeStructures":[{"count":1,"distinctOutgoingEdgeLabels":["__Member__","__Member__"],"nodeProperties":["__Member__","__Member__"]},{"count":1,"distinctOutgoingEdgeLabels":["__Member__","__Member__"],"nodeProperties":["__Member__","__Member__"]}],"numEdgeLabels":1,"numEdgeProperties":1,"numEdges":1,"numNodeLabels":1,"numNodeProperties":1,"numNodes":1,"totalEdgePropertyValues":1,"totalNodePropertyValues":1},"lastStatisticsComputationTime":"2000-01-01T00:00:00Z","version":"__Version__"},"statusCode":200}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"encryptionConfig":{"kmsKeyArn":"__KmsKeyArn__"}}

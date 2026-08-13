@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"Description":"__Description__","Namespace":"__Namespace__","SchemaId":"__SchemaId__","SemanticVersion":"__SemanticVersion__","Type":"capability","Visibility":"PUBLIC"},{"Description":"__Description__","Namespace":"__Namespace__","SchemaId":"__SchemaId__","SemanticVersion":"__SemanticVersion__","Type":"capability","Visibility":"PUBLIC"}],"NextToken":"__NextToken__"}

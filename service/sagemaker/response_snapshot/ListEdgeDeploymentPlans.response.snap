@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListEdgeDeploymentPlans
-
-{"EdgeDeploymentPlanSummaries":[{"CreationTime":946684800,"DeviceFleetName":"__DeviceFleetName__","EdgeDeploymentFailed":1,"EdgeDeploymentPending":1,"EdgeDeploymentPlanArn":"__EdgeDeploymentPlanArn__","EdgeDeploymentPlanName":"__EdgeDeploymentPlanName__","EdgeDeploymentSuccess":1,"LastModifiedTime":946684800},{"CreationTime":946684800,"DeviceFleetName":"__DeviceFleetName__","EdgeDeploymentFailed":1,"EdgeDeploymentPending":1,"EdgeDeploymentPlanArn":"__EdgeDeploymentPlanArn__","EdgeDeploymentPlanName":"__EdgeDeploymentPlanName__","EdgeDeploymentSuccess":1,"LastModifiedTime":946684800}],"NextToken":"__NextToken__"}

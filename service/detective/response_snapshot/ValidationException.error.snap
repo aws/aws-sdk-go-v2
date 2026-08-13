@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"ValidationException","ErrorCode":"INVALID_GRAPH_ARN","ErrorCodeReason":"__ErrorCodeReason__","Message":"__Message__"}

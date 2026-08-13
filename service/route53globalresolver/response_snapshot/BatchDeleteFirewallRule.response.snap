@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"failures":[{"code":1,"firewallRule":{"clientToken":"__ClientToken__","id":"__Id__","name":"__Name__","status":"CREATING"},"message":"__Message__"},{"code":1,"firewallRule":{"clientToken":"__ClientToken__","id":"__Id__","name":"__Name__","status":"CREATING"},"message":"__Message__"}],"successes":[{"code":1,"firewallRule":{"clientToken":"__ClientToken__","id":"__Id__","name":"__Name__","status":"CREATING"},"message":"__Message__"},{"code":1,"firewallRule":{"clientToken":"__ClientToken__","id":"__Id__","name":"__Name__","status":"CREATING"},"message":"__Message__"}]}

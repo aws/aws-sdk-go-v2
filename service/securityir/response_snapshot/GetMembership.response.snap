@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accountId":"__AccountId__","customerType":"Standalone","incidentResponseTeam":[{"communicationPreferences":["Case Created","Case Created"],"email":"__Email__","jobTitle":"__JobTitle__","name":"__Name__"},{"communicationPreferences":["Case Created","Case Created"],"email":"__Email__","jobTitle":"__JobTitle__","name":"__Name__"}],"membershipAccountsConfigurations":{"coverEntireOrganization":true,"organizationalUnits":["__Member__","__Member__"]},"membershipActivationTimestamp":946684800,"membershipArn":"__MembershipArn__","membershipDeactivationTimestamp":946684800,"membershipId":"__MembershipId__","membershipName":"__MembershipName__","membershipStatus":"Active","numberOfAccountsCovered":1,"optInFeatures":[{"featureName":"Triage","isEnabled":true},{"featureName":"Triage","isEnabled":true}],"region":"af-south-1"}

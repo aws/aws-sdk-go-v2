@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Voices":[{"AdditionalLanguageCodes":["arb","arb"],"Gender":"Female","Id":"Aditi","LanguageCode":"arb","LanguageName":"__LanguageName__","Name":"__Name__","SupportedEngines":["standard","standard"]},{"AdditionalLanguageCodes":["arb","arb"],"Gender":"Female","Id":"Aditi","LanguageCode":"arb","LanguageName":"__LanguageName__","Name":"__Name__","SupportedEngines":["standard","standard"]}]}

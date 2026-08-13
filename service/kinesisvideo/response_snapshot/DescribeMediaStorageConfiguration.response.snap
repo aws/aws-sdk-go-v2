@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"MediaStorageConfiguration":{"Status":"ENABLED","StreamARN":"__StreamARN__"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"attributes":[{"attributeIdentifier":"__AttributeIdentifier__","forms":[{"content":"__Content__","formName":"__FormName__","typeName":"__TypeName__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","typeName":"__TypeName__","typeRevision":"__TypeRevision__"}]},{"attributeIdentifier":"__AttributeIdentifier__","forms":[{"content":"__Content__","formName":"__FormName__","typeName":"__TypeName__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","typeName":"__TypeName__","typeRevision":"__TypeRevision__"}]}],"errors":[{"attributeIdentifier":"__AttributeIdentifier__","code":"__Code__","message":"__Message__"},{"attributeIdentifier":"__AttributeIdentifier__","code":"__Code__","message":"__Message__"}]}

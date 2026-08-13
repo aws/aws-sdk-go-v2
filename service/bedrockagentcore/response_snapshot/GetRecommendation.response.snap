@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","kmsKeyArn":"__KmsKeyArn__","name":"__Name__","recommendationArn":"__RecommendationArn__","recommendationConfig":{"systemPromptRecommendationConfig":{"agentTraces":{"sessionSpans":["__Document__","__Document__"]},"evaluationConfig":{"evaluators":[{"evaluatorArn":"__EvaluatorArn__"},{"evaluatorArn":"__EvaluatorArn__"}]},"systemPrompt":{"text":"__SystemPromptConfigMemberText__"}}},"recommendationId":"__RecommendationId__","recommendationResult":{"systemPromptRecommendationResult":{"configurationBundle":{"bundleArn":"__BundleArn__","versionId":"__VersionId__"},"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","explanation":"__Explanation__","recommendedSystemPrompt":"__RecommendedSystemPrompt__"}},"status":"PENDING","type":"SYSTEM_PROMPT_RECOMMENDATION","updatedAt":"2000-01-01T00:00:00Z"}

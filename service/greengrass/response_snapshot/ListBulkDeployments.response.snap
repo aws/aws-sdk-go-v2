@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BulkDeployments":[{"BulkDeploymentArn":"__BulkDeploymentArn__","BulkDeploymentId":"__BulkDeploymentId__","CreatedAt":"__CreatedAt__"},{"BulkDeploymentArn":"__BulkDeploymentArn__","BulkDeploymentId":"__BulkDeploymentId__","CreatedAt":"__CreatedAt__"}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"UnsupportedAvailabilityZoneException","clusterName":"__ClusterName__","message":"__Message__","nodegroupName":"__NodegroupName__","validZones":["__Member__","__Member__"]}

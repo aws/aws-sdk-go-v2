@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RedshiftData.ListTables
-
-{"NextToken":"__NextToken__","Tables":[{"name":"__Name__","schema":"__Schema__","type":"__Type__"},{"name":"__Name__","schema":"__Schema__","type":"__Type__"}]}

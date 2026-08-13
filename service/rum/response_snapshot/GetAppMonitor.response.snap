@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AppMonitor":{"AppMonitorConfiguration":{"AllowCookies":true,"EnableXRay":true,"ExcludedPages":["__Member__","__Member__"],"FavoritePages":["__Member__","__Member__"],"GuestRoleArn":"__GuestRoleArn__","IdentityPoolId":"__IdentityPoolId__","IncludedPages":["__Member__","__Member__"],"SessionSampleRate":1,"Telemetries":["errors","errors"]},"Created":"__Created__","CustomEvents":{"Status":"ENABLED"},"DataStorage":{"CwLog":{"CwLogEnabled":true,"CwLogGroup":"__CwLogGroup__"}},"DeobfuscationConfiguration":{"JavaScriptSourceMaps":{"S3Uri":"__S3Uri__","Status":"ENABLED"}},"Domain":"__Domain__","DomainList":["__Member__","__Member__"],"Id":"__Id__","LastModified":"__LastModified__","Name":"__Name__","Platform":"Web","State":"CREATED","Tags":{"key0":"__Value__"}}}

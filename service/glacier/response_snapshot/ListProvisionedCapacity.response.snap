@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ProvisionedCapacityList":[{"CapacityId":"__CapacityId__","ExpirationDate":"__ExpirationDate__","StartDate":"__StartDate__"},{"CapacityId":"__CapacityId__","ExpirationDate":"__ExpirationDate__","StartDate":"__StartDate__"}]}

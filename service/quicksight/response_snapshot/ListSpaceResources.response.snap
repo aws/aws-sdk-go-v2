@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"RequestId":"__RequestId__","SpaceResources":[{"ResourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"ResourceName":"__ResourceName__","ResourceType":"TOPIC","UpdatedAt":946684800},{"ResourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"ResourceName":"__ResourceName__","ResourceType":"TOPIC","UpdatedAt":946684800}],"spaceArn":"__SpaceArn__","spaceId":"__SpaceId__"}

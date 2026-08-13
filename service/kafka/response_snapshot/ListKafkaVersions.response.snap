@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"kafkaVersions":[{"status":"ACTIVE","version":"__Version__"},{"status":"ACTIVE","version":"__Version__"}],"nextToken":"__NextToken__"}

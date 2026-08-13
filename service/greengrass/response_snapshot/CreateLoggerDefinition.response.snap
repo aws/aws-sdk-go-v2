@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","CreationTimestamp":"__CreationTimestamp__","Id":"__Id__","LastUpdatedTimestamp":"__LastUpdatedTimestamp__","LatestVersion":"__LatestVersion__","LatestVersionArn":"__LatestVersionArn__","Name":"__Name__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"batchJobSteps":[{"procStepName":"__ProcStepName__","procStepNumber":1,"stepCheckpoint":1,"stepCheckpointStatus":"__StepCheckpointStatus__","stepCheckpointTime":946684800,"stepCondCode":"__StepCondCode__","stepName":"__StepName__","stepNumber":1,"stepRestartable":true},{"procStepName":"__ProcStepName__","procStepNumber":1,"stepCheckpoint":1,"stepCheckpointStatus":"__StepCheckpointStatus__","stepCheckpointTime":946684800,"stepCondCode":"__StepCondCode__","stepName":"__StepName__","stepNumber":1,"stepRestartable":true}]}

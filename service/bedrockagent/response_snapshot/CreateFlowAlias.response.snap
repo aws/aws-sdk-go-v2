@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","concurrencyConfiguration":{"maxConcurrency":1,"type":"Automatic"},"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","flowId":"__FlowId__","id":"__Id__","name":"__Name__","routingConfiguration":[{"flowVersion":"__FlowVersion__"},{"flowVersion":"__FlowVersion__"}],"updatedAt":"2000-01-01T00:00:00Z"}

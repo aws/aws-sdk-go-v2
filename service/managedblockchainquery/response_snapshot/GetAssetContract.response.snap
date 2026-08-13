@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"contractIdentifier":{"contractAddress":"__ContractAddress__","network":"ETHEREUM_MAINNET"},"deployerAddress":"__DeployerAddress__","metadata":{"decimals":1,"name":"__Name__","symbol":"__Symbol__"},"tokenStandard":"ERC20"}

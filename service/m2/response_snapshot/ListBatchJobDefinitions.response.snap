@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"batchJobDefinitions":[{"fileBatchJobDefinition":{"fileName":"__FileName__","folderPath":"__FolderPath__"}},{"fileBatchJobDefinition":{"fileName":"__FileName__","folderPath":"__FolderPath__"}}],"nextToken":"__NextToken__"}

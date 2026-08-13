@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"autoDeployed":true,"createdDate":"2000-01-01T00:00:00Z","deploymentId":"__DeploymentId__","deploymentStatus":"PENDING","deploymentStatusMessage":"__DeploymentStatusMessage__","description":"__Description__"}

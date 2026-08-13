@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.DescribeExecution
-
-{"Execution":{"ExecutionId":"__ExecutionId__","ExecutionRole":"__ExecutionRole__","InitialFileLocation":{"EfsFileLocation":{"FileSystemId":"__FileSystemId__","Path":"__Path__"},"S3FileLocation":{"Bucket":"__Bucket__","Etag":"__Etag__","Key":"__Key__","VersionId":"__VersionId__"}},"LoggingConfiguration":{"LogGroupName":"__LogGroupName__","LoggingRole":"__LoggingRole__"},"PosixProfile":{"Gid":1,"SecondaryGids":[1,1],"Uid":1},"Results":{"OnExceptionSteps":[{"Error":{"Message":"__Message__","Type":"PERMISSION_DENIED"},"Outputs":"__Outputs__","StepType":"COPY"},{"Error":{"Message":"__Message__","Type":"PERMISSION_DENIED"},"Outputs":"__Outputs__","StepType":"COPY"}],"Steps":[{"Error":{"Message":"__Message__","Type":"PERMISSION_DENIED"},"Outputs":"__Outputs__","StepType":"COPY"},{"Error":{"Message":"__Message__","Type":"PERMISSION_DENIED"},"Outputs":"__Outputs__","StepType":"COPY"}]},"ServiceMetadata":{"UserDetails":{"ServerId":"__ServerId__","SessionId":"__SessionId__","UserName":"__UserName__"}},"Status":"IN_PROGRESS"},"WorkflowId":"__WorkflowId__"}

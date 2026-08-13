@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.StartSession
-
-{"SessionId":"__SessionId__","StreamUrl":"__StreamUrl__","TokenValue":"__TokenValue__"}

@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.DeleteEventDataStore
-
-{"__type":"EventDataStoreHasOngoingImportException","Message":"__Message__"}

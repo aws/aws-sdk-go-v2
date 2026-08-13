@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"status":"CREATING","topicArn":"__TopicArn__","topicName":"__TopicName__"}

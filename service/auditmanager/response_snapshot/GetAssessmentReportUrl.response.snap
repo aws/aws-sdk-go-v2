@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"preSignedUrl":{"hyperlinkName":"__HyperlinkName__","link":"__Link__"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ElasticMapReduce.DescribePersistentAppUI
-
-{"PersistentAppUI":{"AuthorId":"__AuthorId__","CreationTime":946684800,"LastModifiedTime":946684800,"LastStateChangeReason":"__LastStateChangeReason__","PersistentAppUIId":"__PersistentAppUIId__","PersistentAppUIStatus":"__PersistentAppUIStatus__","PersistentAppUITypeList":["SHS","SHS"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}}

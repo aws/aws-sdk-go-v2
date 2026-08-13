@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Firehose_20150804.PutRecordBatch
-
-{"Encrypted":true,"FailedPutCount":1,"RequestResponses":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","RecordId":"__RecordId__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","RecordId":"__RecordId__"}]}

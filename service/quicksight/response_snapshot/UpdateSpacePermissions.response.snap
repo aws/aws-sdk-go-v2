@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"permissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"requestId":"__RequestId__","spaceArn":"__SpaceArn__","spaceId":"__SpaceId__"}

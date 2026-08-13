@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"assertion":{"assertionId":"__AssertionId__","createdAt":946684800,"serviceArn":"__ServiceArn__","source":"AI_GENERATED","text":"__Text__","updatedAt":946684800}}

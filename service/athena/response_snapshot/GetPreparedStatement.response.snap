@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonAthena.GetPreparedStatement
-
-{"PreparedStatement":{"Description":"__Description__","LastModifiedTime":946684800,"QueryStatement":"__QueryStatement__","StatementName":"__StatementName__","WorkGroupName":"__WorkGroupName__"}}

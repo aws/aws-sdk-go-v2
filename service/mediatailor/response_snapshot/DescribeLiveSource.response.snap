@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","CreationTime":946684800,"HttpPackageConfigurations":[{"Path":"__Path__","SourceGroup":"__SourceGroup__","Type":"DASH"},{"Path":"__Path__","SourceGroup":"__SourceGroup__","Type":"DASH"}],"LastModifiedTime":946684800,"LiveSourceName":"__LiveSourceName__","SourceLocationName":"__SourceLocationName__","tags":{"key0":"__Value__"}}

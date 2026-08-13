@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CapacityProviderArn":"__CapacityProviderArn__","FunctionVersions":[{"FunctionArn":"__FunctionArn__","State":"Pending"},{"FunctionArn":"__FunctionArn__","State":"Pending"}],"NextMarker":"__NextMarker__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: OpenSearchServerless.CreateCollectionGroup
-
-{"createCollectionGroupDetail":{"arn":"__Arn__","capacityLimits":{"maxIndexingCapacityInOCU":1,"maxSearchCapacityInOCU":1,"minIndexingCapacityInOCU":1,"minSearchCapacityInOCU":1},"createdDate":1,"description":"__Description__","generation":"CLASSIC","id":"__Id__","name":"__Name__","standbyReplicas":"ENABLED","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}

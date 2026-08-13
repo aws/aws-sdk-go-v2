@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"category":"Customer relationship management (CRM)","description":"__Description__","type":"SERVICE_NOW"},{"category":"Customer relationship management (CRM)","description":"__Description__","type":"SERVICE_NOW"}],"nextToken":"__NextToken__"}

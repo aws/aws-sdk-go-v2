@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appId":"__AppId__","backendEnvironmentName":"__BackendEnvironmentName__","jobId":"__JobId__","status":"__Status__"}

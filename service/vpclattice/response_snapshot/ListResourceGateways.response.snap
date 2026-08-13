@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","ipAddressType":"IPV4","ipv4AddressesPerEni":1,"lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","resourceConfigDnsResolution":"IN_VPC","securityGroupIds":["__Member__","__Member__"],"status":"ACTIVE","subnetIds":["__Member__","__Member__"],"vpcIdentifier":"__VpcIdentifier__"},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","ipAddressType":"IPV4","ipv4AddressesPerEni":1,"lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","resourceConfigDnsResolution":"IN_VPC","securityGroupIds":["__Member__","__Member__"],"status":"ACTIVE","subnetIds":["__Member__","__Member__"],"vpcIdentifier":"__VpcIdentifier__"}],"nextToken":"__NextToken__"}

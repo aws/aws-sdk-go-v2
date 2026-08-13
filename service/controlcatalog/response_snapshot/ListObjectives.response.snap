@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Objectives":[{"Arn":"__Arn__","CreateTime":946684800,"Description":"__Description__","Domain":{"Arn":"__Arn__","Name":"__Name__"},"LastUpdateTime":946684800,"Name":"__Name__"},{"Arn":"__Arn__","CreateTime":946684800,"Description":"__Description__","Domain":{"Arn":"__Arn__","Name":"__Name__"},"LastUpdateTime":946684800,"Name":"__Name__"}]}

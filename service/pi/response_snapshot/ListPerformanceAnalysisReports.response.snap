@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.ListPerformanceAnalysisReports
-
-{"AnalysisReports":[{"AnalysisReportId":"__AnalysisReportId__","CreateTime":946684800,"EndTime":946684800,"StartTime":946684800,"Status":"RUNNING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"AnalysisReportId":"__AnalysisReportId__","CreateTime":946684800,"EndTime":946684800,"StartTime":946684800,"Status":"RUNNING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"NextToken":"__NextToken__"}

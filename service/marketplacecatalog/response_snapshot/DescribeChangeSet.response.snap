@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ChangeSet":[{"ChangeName":"__ChangeName__","ChangeType":"__ChangeType__","Details":"__Details__","DetailsDocument":"__Document__","Entity":{"Identifier":"__Identifier__","Type":"__Type__"},"ErrorDetailList":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}]},{"ChangeName":"__ChangeName__","ChangeType":"__ChangeType__","Details":"__Details__","DetailsDocument":"__Document__","Entity":{"Identifier":"__Identifier__","Type":"__Type__"},"ErrorDetailList":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}]}],"ChangeSetArn":"__ChangeSetArn__","ChangeSetId":"__ChangeSetId__","ChangeSetName":"__ChangeSetName__","EndTime":"__EndTime__","FailureCode":"CLIENT_ERROR","FailureDescription":"__FailureDescription__","Intent":"VALIDATE","StartTime":"__StartTime__","Status":"PREPARING"}

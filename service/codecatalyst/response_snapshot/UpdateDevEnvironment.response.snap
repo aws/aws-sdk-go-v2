@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"alias":"__Alias__","clientToken":"__ClientToken__","id":"__Id__","ides":[{"name":"__Name__","runtime":"__Runtime__"},{"name":"__Name__","runtime":"__Runtime__"}],"inactivityTimeoutMinutes":1,"instanceType":"dev.standard1.small","projectName":"__ProjectName__","spaceName":"__SpaceName__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/xml
-Location: __Location__
-
-<Invalidation xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CreateTime>2000-01-01T00:00:00Z</CreateTime><Id>__Id__</Id><InvalidationBatch><CallerReference>__CallerReference__</CallerReference><Paths><Items><Path>__Member__</Path><Path>__Member__</Path></Items><Quantity>1</Quantity></Paths></InvalidationBatch><Status>__Status__</Status></Invalidation>

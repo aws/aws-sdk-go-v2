@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ServiceQuotasV20190624.GetAWSDefaultServiceQuota
-
-{"Quota":{"Adjustable":true,"Description":"__Description__","ErrorReason":{"ErrorCode":"DEPENDENCY_ACCESS_DENIED_ERROR","ErrorMessage":"__ErrorMessage__"},"GlobalQuota":true,"Period":{"PeriodUnit":"MICROSECOND","PeriodValue":1},"QuotaAppliedAtLevel":"ACCOUNT","QuotaArn":"__QuotaArn__","QuotaCode":"__QuotaCode__","QuotaContext":{"ContextId":"__ContextId__","ContextScope":"RESOURCE","ContextScopeType":"__ContextScopeType__"},"QuotaName":"__QuotaName__","ServiceCode":"__ServiceCode__","ServiceName":"__ServiceName__","Unit":"__Unit__","UsageMetric":{"MetricDimensions":{"key0":"__Value__"},"MetricName":"__MetricName__","MetricNamespace":"__MetricNamespace__","MetricStatisticRecommendation":"__MetricStatisticRecommendation__"},"Value":1}}

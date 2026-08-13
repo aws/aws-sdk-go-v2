@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DescribeAIWorkloadConfig
-
-{"AIWorkloadConfigArn":"__AIWorkloadConfigArn__","AIWorkloadConfigName":"__AIWorkloadConfigName__","AIWorkloadConfigs":{"WorkloadSpec":{"Inline":"__WorkloadSpecMemberInline__"}},"CreationTime":946684800,"DatasetConfig":{"InputDataConfig":[{"ChannelName":"__ChannelName__","DataSource":{"S3DataSource":{"S3Uri":"__S3Uri__"}}},{"ChannelName":"__ChannelName__","DataSource":{"S3DataSource":{"S3Uri":"__S3Uri__"}}}]},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

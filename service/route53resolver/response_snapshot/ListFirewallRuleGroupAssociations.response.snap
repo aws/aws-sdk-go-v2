@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Resolver.ListFirewallRuleGroupAssociations
-
-{"FirewallRuleGroupAssociations":[{"Arn":"__Arn__","CreationTime":"__CreationTime__","CreatorRequestId":"__CreatorRequestId__","FirewallRuleGroupId":"__FirewallRuleGroupId__","Id":"__Id__","ManagedOwnerName":"__ManagedOwnerName__","ModificationTime":"__ModificationTime__","MutationProtection":"ENABLED","Name":"__Name__","Priority":1,"Status":"COMPLETE","StatusMessage":"__StatusMessage__","VpcId":"__VpcId__"},{"Arn":"__Arn__","CreationTime":"__CreationTime__","CreatorRequestId":"__CreatorRequestId__","FirewallRuleGroupId":"__FirewallRuleGroupId__","Id":"__Id__","ManagedOwnerName":"__ManagedOwnerName__","ModificationTime":"__ModificationTime__","MutationProtection":"ENABLED","Name":"__Name__","Priority":1,"Status":"COMPLETE","StatusMessage":"__StatusMessage__","VpcId":"__VpcId__"}],"NextToken":"__NextToken__"}

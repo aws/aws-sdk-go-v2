@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applicationId":"__ApplicationId__","creationTime":"__CreationTime__","expirationTime":"__ExpirationTime__","semanticVersion":"__SemanticVersion__","status":"PREPARING","templateId":"__TemplateId__","templateUrl":"__TemplateUrl__"}

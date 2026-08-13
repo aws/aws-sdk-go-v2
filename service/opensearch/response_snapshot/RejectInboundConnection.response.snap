@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Connection":{"ConnectionId":"__ConnectionId__","ConnectionMode":"DIRECT","ConnectionStatus":{"Message":"__Message__","StatusCode":"PENDING_ACCEPTANCE"},"LocalDomainInfo":{"AWSDomainInformation":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"}},"RemoteDomainInfo":{"AWSDomainInformation":{"DomainName":"__DomainName__","OwnerId":"__OwnerId__","Region":"__Region__"}}}}

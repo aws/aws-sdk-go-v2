@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: InspectorService.CreateAssessmentTarget
-
-{"__type":"LimitExceededException","canRetry":true,"errorCode":"ASSESSMENT_TARGET_LIMIT_EXCEEDED","message":"__Message__"}

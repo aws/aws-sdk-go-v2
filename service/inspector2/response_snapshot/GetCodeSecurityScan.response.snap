@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accountId":"__AccountId__","createdAt":946684800,"lastCommitId":"__LastCommitId__","resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanId":"__ScanId__","status":"IN_PROGRESS","statusReason":"__StatusReason__","updatedAt":946684800}

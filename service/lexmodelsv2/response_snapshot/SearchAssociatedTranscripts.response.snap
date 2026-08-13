@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"associatedTranscripts":[{"transcript":"__Transcript__"},{"transcript":"__Transcript__"}],"botId":"__BotId__","botRecommendationId":"__BotRecommendationId__","botVersion":"__BotVersion__","localeId":"__LocaleId__","nextIndex":1,"totalResults":1}

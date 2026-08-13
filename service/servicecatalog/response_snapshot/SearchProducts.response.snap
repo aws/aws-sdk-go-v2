@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.SearchProducts
-
-{"NextPageToken":"__NextPageToken__","ProductViewAggregations":{"key0":[{"ApproximateCount":1,"Value":"__Value__"},{"ApproximateCount":1,"Value":"__Value__"}]},"ProductViewSummaries":[{"Distributor":"__Distributor__","HasDefaultPath":true,"Id":"__Id__","Name":"__Name__","Owner":"__Owner__","ProductId":"__ProductId__","ShortDescription":"__ShortDescription__","SupportDescription":"__SupportDescription__","SupportEmail":"__SupportEmail__","SupportUrl":"__SupportUrl__","Type":"CLOUD_FORMATION_TEMPLATE"},{"Distributor":"__Distributor__","HasDefaultPath":true,"Id":"__Id__","Name":"__Name__","Owner":"__Owner__","ProductId":"__ProductId__","ShortDescription":"__ShortDescription__","SupportDescription":"__SupportDescription__","SupportEmail":"__SupportEmail__","SupportUrl":"__SupportUrl__","Type":"CLOUD_FORMATION_TEMPLATE"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applicationId":"__ApplicationId__","capabilityConfig":{"aiConfig":{}},"capabilityName":"__CapabilityName__","failures":[{"details":"__Details__","reason":"KMS_KEY_INSUFFICIENT_PERMISSION"},{"details":"__Details__","reason":"KMS_KEY_INSUFFICIENT_PERMISSION"}],"status":"creating"}

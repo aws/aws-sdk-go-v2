@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.CreateGlossaryTerm
-
-{"GlossaryId":"__GlossaryId__","Id":"__Id__","LongDescription":"__LongDescription__","Name":"__Name__","ShortDescription":"__ShortDescription__"}

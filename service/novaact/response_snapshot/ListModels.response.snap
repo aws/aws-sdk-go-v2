@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"compatibilityInformation":{"clientCompatibilityVersion":1,"message":"__Message__","supportedModelIds":["__Member__","__Member__"]},"modelAliases":[{"aliasName":"__AliasName__","latestModelId":"__LatestModelId__","resolvedModelId":"__ResolvedModelId__"},{"aliasName":"__AliasName__","latestModelId":"__LatestModelId__","resolvedModelId":"__ResolvedModelId__"}],"modelSummaries":[{"minimumCompatibilityVersion":1,"modelId":"__ModelId__","modelLifecycle":{"status":"ACTIVE"}},{"minimumCompatibilityVersion":1,"modelId":"__ModelId__","modelLifecycle":{"status":"ACTIVE"}}]}

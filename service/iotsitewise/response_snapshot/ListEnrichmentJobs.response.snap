@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobs":[{"createdAt":946684800,"datasetId":"__DatasetId__","jobId":"__JobId__","jobType":"EVENT_DETECTION","propertyAlias":"__PropertyAlias__","status":"PENDING","timeSeriesId":"__TimeSeriesId__","updatedAt":946684800,"workspaceName":"__WorkspaceName__"},{"createdAt":946684800,"datasetId":"__DatasetId__","jobId":"__JobId__","jobType":"EVENT_DETECTION","propertyAlias":"__PropertyAlias__","status":"PENDING","timeSeriesId":"__TimeSeriesId__","updatedAt":946684800,"workspaceName":"__WorkspaceName__"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<CloudFrontOriginAccessIdentityList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><IsTruncated>true</IsTruncated><Items><CloudFrontOriginAccessIdentitySummary><Comment>__Comment__</Comment><Id>__Id__</Id><S3CanonicalUserId>__S3CanonicalUserId__</S3CanonicalUserId></CloudFrontOriginAccessIdentitySummary><CloudFrontOriginAccessIdentitySummary><Comment>__Comment__</Comment><Id>__Id__</Id><S3CanonicalUserId>__S3CanonicalUserId__</S3CanonicalUserId></CloudFrontOriginAccessIdentitySummary></Items><Marker>__Marker__</Marker><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></CloudFrontOriginAccessIdentityList>

@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"ClientLimitExceededException","message":"__Message__"}

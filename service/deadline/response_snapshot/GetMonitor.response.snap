@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","displayName":"__DisplayName__","identityCenterApplicationArn":"__IdentityCenterApplicationArn__","identityCenterInstanceArn":"__IdentityCenterInstanceArn__","identityCenterRegion":"__IdentityCenterRegion__","monitorId":"__MonitorId__","roleArn":"__RoleArn__","subdomain":"__Subdomain__","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__","url":"__Url__"}

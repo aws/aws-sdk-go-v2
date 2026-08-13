@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"resource":{"actions":["__Member__","__Member__"],"analyzedAt":"2000-01-01T00:00:00Z","createdAt":"2000-01-01T00:00:00Z","error":"__Error__","isPublic":true,"resourceArn":"__ResourceArn__","resourceOwnerAccount":"__ResourceOwnerAccount__","resourceType":"AWS::S3::Bucket","sharedVia":["__Member__","__Member__"],"status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"failedRequests":[{"campaignId":"__CampaignId__","failureCode":"ResourceNotFound"},{"campaignId":"__CampaignId__","failureCode":"ResourceNotFound"}],"successfulRequests":[{"campaignId":"__CampaignId__","state":"Initialized"},{"campaignId":"__CampaignId__","state":"Initialized"}]}

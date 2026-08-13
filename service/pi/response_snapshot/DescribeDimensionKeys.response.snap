@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.DescribeDimensionKeys
-
-{"AlignedEndTime":946684800,"AlignedStartTime":946684800,"Keys":[{"AdditionalMetrics":{"key0":1},"Dimensions":{"key0":"__Value__"},"Partitions":[1,1],"Total":1},{"AdditionalMetrics":{"key0":1},"Dimensions":{"key0":"__Value__"},"Partitions":[1,1],"Total":1}],"NextToken":"__NextToken__","PartitionKeys":[{"Dimensions":{"key0":"__Value__"}},{"Dimensions":{"key0":"__Value__"}}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationId":"__ApplicationId__","DestinationStreamArn":"__DestinationStreamArn__","ExternalId":"__ExternalId__","LastModifiedDate":"__LastModifiedDate__","LastUpdatedBy":"__LastUpdatedBy__","RoleArn":"__RoleArn__"}

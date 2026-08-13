@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<VerifyDnsConfigurationResult xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><DnsConfigurationList><DnsConfiguration><Domain>__Domain__</Domain><Reason>__Reason__</Reason><Status>valid-configuration</Status></DnsConfiguration><DnsConfiguration><Domain>__Domain__</Domain><Reason>__Reason__</Reason><Status>valid-configuration</Status></DnsConfiguration></DnsConfigurationList></VerifyDnsConfigurationResult>

@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<VpcOriginList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><IsTruncated>true</IsTruncated><Items><VpcOriginSummary><AccountId>__AccountId__</AccountId><Arn>__Arn__</Arn><CreatedTime>2000-01-01T00:00:00Z</CreatedTime><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><OriginEndpointArn>__OriginEndpointArn__</OriginEndpointArn><Status>__Status__</Status></VpcOriginSummary><VpcOriginSummary><AccountId>__AccountId__</AccountId><Arn>__Arn__</Arn><CreatedTime>2000-01-01T00:00:00Z</CreatedTime><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><OriginEndpointArn>__OriginEndpointArn__</OriginEndpointArn><Status>__Status__</Status></VpcOriginSummary></Items><Marker>__Marker__</Marker><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></VpcOriginList>

@@ -1,4 +1,0 @@
-500
-Content-Type: application/json
-
-{"__type":"ServiceException","Message":"__Message__","Type":"__Type__"}

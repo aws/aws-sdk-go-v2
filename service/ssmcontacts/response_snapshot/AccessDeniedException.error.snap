@@ -1,5 +1,0 @@
-403
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SSMContacts.AcceptPage
-
-{"__type":"AccessDeniedException","Message":"__Message__"}

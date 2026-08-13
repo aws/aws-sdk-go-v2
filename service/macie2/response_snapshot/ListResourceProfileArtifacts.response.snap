@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"artifacts":[{"arn":"__Arn__","classificationResultStatus":"__ClassificationResultStatus__","sensitive":true},{"arn":"__Arn__","classificationResultStatus":"__ClassificationResultStatus__","sensitive":true}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","tasks":[{"startTime":946684800,"taskId":"__TaskId__","taskStatus":"IN_PROGRESS"},{"startTime":946684800,"taskId":"__TaskId__","taskStatus":"IN_PROGRESS"}]}

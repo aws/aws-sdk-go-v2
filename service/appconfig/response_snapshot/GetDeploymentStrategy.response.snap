@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DeploymentDurationInMinutes":1,"Description":"__Description__","FinalBakeTimeInMinutes":1,"GrowthFactor":1,"GrowthType":"LINEAR","Id":"__Id__","Name":"__Name__","ReplicateTo":"NONE"}

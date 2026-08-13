@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"errors":[{"code":"__Code__","message":"__Message__","securityRequirementName":"__SecurityRequirementName__"},{"code":"__Code__","message":"__Message__","securityRequirementName":"__SecurityRequirementName__"}],"updatedSecurityRequirementNames":["__Member__","__Member__"]}

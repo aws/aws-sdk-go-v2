@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.DeleteRemediationExceptions
-
-{"FailedBatches":[{"FailedItems":[{"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},{"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}],"FailureMessage":"__FailureMessage__"},{"FailedItems":[{"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},{"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}],"FailureMessage":"__FailureMessage__"}]}

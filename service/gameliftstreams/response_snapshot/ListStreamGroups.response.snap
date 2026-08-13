@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"Arn":"__Arn__","CreatedAt":946684800,"DefaultApplication":{"Arn":"__Arn__","Id":"__Id__"},"Description":"__Description__","ExpiresAt":946684800,"Id":"__Id__","LastUpdatedAt":946684800,"Status":"ACTIVATING","StreamClass":"gen4n_high"},{"Arn":"__Arn__","CreatedAt":946684800,"DefaultApplication":{"Arn":"__Arn__","Id":"__Id__"},"Description":"__Description__","ExpiresAt":946684800,"Id":"__Id__","LastUpdatedAt":946684800,"Status":"ACTIVATING","StreamClass":"gen4n_high"}],"NextToken":"__NextToken__"}

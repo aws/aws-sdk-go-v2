@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSWAF_20190729.AssociateWebACL
-
-{"__type":"WAFLimitsExceededException","Message":"__Message__","SourceType":"__SourceType__"}

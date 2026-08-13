@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"id":"__Id__","port":1,"reasonCode":"__ReasonCode__","status":"DRAINING"},{"id":"__Id__","port":1,"reasonCode":"__ReasonCode__","status":"DRAINING"}],"nextToken":"__NextToken__"}

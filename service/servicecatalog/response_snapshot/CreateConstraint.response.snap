@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.CreateConstraint
-
-{"ConstraintDetail":{"ConstraintId":"__ConstraintId__","Description":"__Description__","Owner":"__Owner__","PortfolioId":"__PortfolioId__","ProductId":"__ProductId__","Type":"__Type__"},"ConstraintParameters":"__ConstraintParameters__","Status":"AVAILABLE"}

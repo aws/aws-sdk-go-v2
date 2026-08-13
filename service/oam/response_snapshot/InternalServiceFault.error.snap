@@ -1,5 +1,0 @@
-500
-Content-Type: application/json
-X-Amzn-Errortype: InternalServiceFault
-
-{"__type":"InternalServiceFault","Message":"__Message__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"kxDatabases":[{"createdTimestamp":946684800,"databaseName":"__DatabaseName__","lastModifiedTimestamp":946684800},{"createdTimestamp":946684800,"databaseName":"__DatabaseName__","lastModifiedTimestamp":946684800}],"nextToken":"__NextToken__"}

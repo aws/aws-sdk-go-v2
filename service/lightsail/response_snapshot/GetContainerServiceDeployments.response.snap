@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetContainerServiceDeployments
-
-{"deployments":[{"containers":{"key0":{"command":["__Member__","__Member__"],"environment":{"key0":"__Value__"},"image":"__Image__","ports":{"key0":"HTTP"}}},"createdAt":946684800,"publicEndpoint":{"containerName":"__ContainerName__","containerPort":1,"healthCheck":{"healthyThreshold":1,"intervalSeconds":1,"path":"__Path__","successCodes":"__SuccessCodes__","timeoutSeconds":1,"unhealthyThreshold":1}},"state":"ACTIVATING","version":1},{"containers":{"key0":{"command":["__Member__","__Member__"],"environment":{"key0":"__Value__"},"image":"__Image__","ports":{"key0":"HTTP"}}},"createdAt":946684800,"publicEndpoint":{"containerName":"__ContainerName__","containerPort":1,"healthCheck":{"healthyThreshold":1,"intervalSeconds":1,"path":"__Path__","successCodes":"__SuccessCodes__","timeoutSeconds":1,"unhealthyThreshold":1}},"state":"ACTIVATING","version":1}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"certificates":[{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}},{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}}],"codeInterpreterArn":"__CodeInterpreterArn__","codeInterpreterId":"__CodeInterpreterId__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","executionRoleArn":"__ExecutionRoleArn__","failureReason":"__FailureReason__","filesystemConfigurations":[{"s3FilesConfiguration":{"accessPointArn":"__AccessPointArn__","fileSystemArn":"__FileSystemArn__","mountPath":"__MountPath__"}},{"s3FilesConfiguration":{"accessPointArn":"__AccessPointArn__","fileSystemArn":"__FileSystemArn__","mountPath":"__MountPath__"}}],"lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","networkConfiguration":{"networkMode":"PUBLIC","vpcConfig":{"requireServiceS3Endpoint":true,"securityGroups":["__Member__","__Member__"],"subnets":["__Member__","__Member__"]}},"status":"CREATING"}

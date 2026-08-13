@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Logs_20140328.CreateDelivery
-
-{"delivery":{"arn":"__Arn__","deliveryDestinationArn":"__DeliveryDestinationArn__","deliveryDestinationType":"S3","deliverySourceName":"__DeliverySourceName__","fieldDelimiter":"__FieldDelimiter__","id":"__Id__","recordFields":["__Member__","__Member__"],"s3DeliveryConfiguration":{"enableHiveCompatiblePath":true,"suffixPath":"__SuffixPath__"},"tags":{"key0":"__Value__"}}}

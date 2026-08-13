@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createTime":"2000-01-01T00:00:00Z","defaultOutputLocation":{"destination":{"s3Destination":{"s3Uri":"__S3Uri__"}},"roleArn":"__RoleArn__"},"membershipIdentifier":"__MembershipIdentifier__","updateTime":"2000-01-01T00:00:00Z"}

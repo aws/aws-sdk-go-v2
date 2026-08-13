@@ -1,4 +1,0 @@
-404
-Content-Type: application/json
-
-{"__type":"ResourceNotFoundException","addonName":"__AddonName__","clusterName":"__ClusterName__","fargateProfileName":"__FargateProfileName__","message":"__Message__","nodegroupName":"__NodegroupName__","subscriptionId":"__SubscriptionId__"}

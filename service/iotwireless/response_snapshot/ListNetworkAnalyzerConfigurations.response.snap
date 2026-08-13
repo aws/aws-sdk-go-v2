@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NetworkAnalyzerConfigurationList":[{"Arn":"__Arn__","Name":"__Name__"},{"Arn":"__Arn__","Name":"__Name__"}],"NextToken":"__NextToken__"}

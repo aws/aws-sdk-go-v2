@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configuration":{"key0":{"settings":{"icebergCompaction":{"strategy":"auto","targetFileSizeMB":1}},"status":"enabled"}},"tableARN":"__TableARN__"}

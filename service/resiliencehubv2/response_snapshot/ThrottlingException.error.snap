@@ -1,4 +1,0 @@
-429
-Content-Type: application/json
-
-{"__type":"ThrottlingException","message":"__Message__","retryAfterSeconds":1}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSStepFunctions.DescribeStateMachineForExecution
-
-{"definition":"__Definition__","encryptionConfiguration":{"kmsDataKeyReusePeriodSeconds":1,"kmsKeyId":"__KmsKeyId__","type":"AWS_OWNED_KEY"},"label":"__Label__","loggingConfiguration":{"destinations":[{"cloudWatchLogsLogGroup":{"logGroupArn":"__LogGroupArn__"}},{"cloudWatchLogsLogGroup":{"logGroupArn":"__LogGroupArn__"}}],"includeExecutionData":true,"level":"ALL"},"mapRunArn":"__MapRunArn__","name":"__Name__","revisionId":"__RevisionId__","roleArn":"__RoleArn__","stateMachineArn":"__StateMachineArn__","tracingConfiguration":{"enabled":true},"updateDate":946684800,"variableReferences":{"key0":["__Member__","__Member__"]}}

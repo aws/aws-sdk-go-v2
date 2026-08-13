@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AwsAccountId":"__AwsAccountId__","KeyRegistration":[{"DefaultKey":true,"KeyArn":"__KeyArn__"},{"DefaultKey":true,"KeyArn":"__KeyArn__"}],"QDataKey":{"QDataKeyArn":"__QDataKeyArn__","QDataKeyType":"AWS_OWNED"},"RequestId":"__RequestId__","Status":1}

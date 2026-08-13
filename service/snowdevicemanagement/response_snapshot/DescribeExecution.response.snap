@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"executionId":"__ExecutionId__","lastUpdatedAt":946684800,"managedDeviceId":"__ManagedDeviceId__","startedAt":946684800,"state":"QUEUED","taskId":"__TaskId__"}

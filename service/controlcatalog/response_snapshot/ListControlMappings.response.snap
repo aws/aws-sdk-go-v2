@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ControlMappings":[{"ControlArn":"__ControlArn__","Mapping":{"Framework":{"Item":"__Item__","Name":"__Name__"}},"MappingType":"FRAMEWORK"},{"ControlArn":"__ControlArn__","Mapping":{"Framework":{"Item":"__Item__","Name":"__Name__"}},"MappingType":"FRAMEWORK"}],"NextToken":"__NextToken__"}

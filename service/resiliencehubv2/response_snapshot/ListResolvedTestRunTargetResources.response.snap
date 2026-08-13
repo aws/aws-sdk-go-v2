@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","resolvedTargetResources":[{"resourceType":"__ResourceType__","targetInformation":{"key0":"__Value__"},"targetName":"__TargetName__"},{"resourceType":"__ResourceType__","targetInformation":{"key0":"__Value__"},"targetName":"__TargetName__"}]}

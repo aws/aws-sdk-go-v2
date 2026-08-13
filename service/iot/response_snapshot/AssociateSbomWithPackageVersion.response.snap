@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"packageName":"__PackageName__","sbom":{"s3Location":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"}},"sbomValidationStatus":"IN_PROGRESS","versionName":"__VersionName__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Contributors":[{"percentage":1,"rawFileSizeBytes":1,"userName":"__UserName__"},{"percentage":1,"rawFileSizeBytes":1,"userName":"__UserName__"}],"RequestId":"__RequestId__","Space":{"consumedSourceDocCount":1,"consumedSourceSize":1,"createdAt":946684800,"createdBy":"__CreatedBy__","createdByArn":"__CreatedByArn__","description":"__Description__","name":"__Name__","resources":[{"resourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"resourceType":"TOPIC"},{"resourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"resourceType":"TOPIC"}],"updatedAt":946684800},"spaceArn":"__SpaceArn__","spaceId":"__SpaceId__"}

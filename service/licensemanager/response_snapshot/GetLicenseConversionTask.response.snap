@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.GetLicenseConversionTask
-
-{"DestinationLicenseContext":{"ProductCodes":[{"ProductCodeId":"__ProductCodeId__","ProductCodeType":"marketplace"},{"ProductCodeId":"__ProductCodeId__","ProductCodeType":"marketplace"}],"UsageOperation":"__UsageOperation__"},"EndTime":946684800,"LicenseConversionTaskId":"__LicenseConversionTaskId__","LicenseConversionTime":946684800,"ResourceArn":"__ResourceArn__","SourceLicenseContext":{"ProductCodes":[{"ProductCodeId":"__ProductCodeId__","ProductCodeType":"marketplace"},{"ProductCodeId":"__ProductCodeId__","ProductCodeType":"marketplace"}],"UsageOperation":"__UsageOperation__"},"StartTime":946684800,"Status":"IN_PROGRESS","StatusMessage":"__StatusMessage__"}

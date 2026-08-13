@@ -1,5 +1,0 @@
-403
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSIdentityStore.CreateGroup
-
-{"__type":"AccessDeniedException","Message":"__Message__","Reason":"KMS_ACCESS_DENIED","RequestId":"__RequestId__"}

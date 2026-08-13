@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AuthenticationProfile":{"AllowedIps":["__Member__","__Member__"],"Arn":"__Arn__","BlockedIps":["__Member__","__Member__"],"CreatedTime":946684800,"Description":"__Description__","Id":"__Id__","IsDefault":true,"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"MaxSessionDuration":1,"Name":"__Name__","PeriodicSessionDuration":1,"SessionInactivityDuration":1,"SessionInactivityHandlingEnabled":true}}

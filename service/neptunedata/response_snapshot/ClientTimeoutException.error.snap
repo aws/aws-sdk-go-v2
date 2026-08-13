@@ -1,4 +1,0 @@
-408
-Content-Type: application/json
-
-{"__type":"ClientTimeoutException","code":"ClientTimeoutException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

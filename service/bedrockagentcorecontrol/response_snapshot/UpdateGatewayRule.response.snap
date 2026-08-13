@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"actions":[{"configurationBundle":{"staticOverride":{"bundleArn":"__BundleArn__","bundleVersion":"__BundleVersion__"}}},{"configurationBundle":{"staticOverride":{"bundleArn":"__BundleArn__","bundleVersion":"__BundleVersion__"}}}],"conditions":[{"matchPrincipals":{"anyOf":[{"iamPrincipal":{"arn":"__Arn__","operator":"StringEquals"}},{"iamPrincipal":{"arn":"__Arn__","operator":"StringEquals"}}]}},{"matchPrincipals":{"anyOf":[{"iamPrincipal":{"arn":"__Arn__","operator":"StringEquals"}},{"iamPrincipal":{"arn":"__Arn__","operator":"StringEquals"}}]}}],"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","gatewayArn":"__GatewayArn__","priority":1,"ruleId":"__RuleId__","status":"CREATING","system":{"managedBy":"__ManagedBy__"},"updatedAt":"2000-01-01T00:00:00Z"}

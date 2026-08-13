@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"createdAt":946684800,"imageArn":"__ImageArn__","latestActiveImageVersion":"__LatestActiveImageVersion__","latestFailedImageVersion":"__LatestFailedImageVersion__","name":"__Name__","state":"CREATING"},{"createdAt":946684800,"imageArn":"__ImageArn__","latestActiveImageVersion":"__LatestActiveImageVersion__","latestFailedImageVersion":"__LatestFailedImageVersion__","name":"__Name__","state":"CREATING"}],"nextToken":"__NextToken__"}

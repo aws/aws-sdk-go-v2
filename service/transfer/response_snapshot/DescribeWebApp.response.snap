@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.DescribeWebApp
-
-{"WebApp":{"AccessEndpoint":"__AccessEndpoint__","Arn":"__Arn__","DescribedEndpointDetails":{"Vpc":{"SubnetIds":["__Member__","__Member__"],"VpcEndpointId":"__VpcEndpointId__","VpcId":"__VpcId__"}},"DescribedIdentityProviderDetails":{"IdentityCenterConfig":{"ApplicationArn":"__ApplicationArn__","InstanceArn":"__InstanceArn__","Role":"__Role__"}},"EndpointType":"PUBLIC","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"WebAppEndpoint":"__WebAppEndpoint__","WebAppEndpointPolicy":"FIPS","WebAppId":"__WebAppId__","WebAppUnits":{"Provisioned":1}}}

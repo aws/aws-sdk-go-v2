@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Monitors":[{"MonitorArn":"__MonitorArn__","MonitorName":"__MonitorName__","ProcessingStatus":"OK","Status":"PENDING"},{"MonitorArn":"__MonitorArn__","MonitorName":"__MonitorName__","ProcessingStatus":"OK","Status":"PENDING"}],"NextToken":"__NextToken__"}

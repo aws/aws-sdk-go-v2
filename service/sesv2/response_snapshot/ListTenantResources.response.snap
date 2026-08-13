@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","TenantResources":[{"ResourceArn":"__ResourceArn__","ResourceType":"EMAIL_IDENTITY"},{"ResourceArn":"__ResourceArn__","ResourceType":"EMAIL_IDENTITY"}]}

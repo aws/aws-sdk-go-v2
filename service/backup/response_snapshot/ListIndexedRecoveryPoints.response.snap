@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"IndexedRecoveryPoints":[{"BackupCreationDate":946684800,"BackupVaultArn":"__BackupVaultArn__","IamRoleArn":"__IamRoleArn__","IndexCreationDate":946684800,"IndexStatus":"PENDING","IndexStatusMessage":"__IndexStatusMessage__","RecoveryPointArn":"__RecoveryPointArn__","ResourceType":"__ResourceType__","SourceResourceArn":"__SourceResourceArn__"},{"BackupCreationDate":946684800,"BackupVaultArn":"__BackupVaultArn__","IamRoleArn":"__IamRoleArn__","IndexCreationDate":946684800,"IndexStatus":"PENDING","IndexStatusMessage":"__IndexStatusMessage__","RecoveryPointArn":"__RecoveryPointArn__","ResourceType":"__ResourceType__","SourceResourceArn":"__SourceResourceArn__"}],"NextToken":"__NextToken__"}

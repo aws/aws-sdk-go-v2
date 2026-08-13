@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"adminAccounts":[{"adminAccountId":"__AdminAccountId__","adminStatus":"ENABLED"},{"adminAccountId":"__AdminAccountId__","adminStatus":"ENABLED"}],"nextToken":"__NextToken__"}

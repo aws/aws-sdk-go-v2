@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"portalStatus":{"error":{"code":"INTERNAL_FAILURE","message":"__Message__"},"state":"CREATING"}}

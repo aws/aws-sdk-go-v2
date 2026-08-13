@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","Constraints":{"InvisibleFields":[{"Id":{"Name":"__Name__"}},{"Id":{"Name":"__Name__"}}],"ReadOnlyFields":[{"Id":{"Name":"__Name__"}},{"Id":{"Name":"__Name__"}}],"RequiredFields":[{"Id":{"Name":"__Name__"}},{"Id":{"Name":"__Name__"}}]},"ContactFlowId":"__ContactFlowId__","CreatedTime":946684800,"Defaults":{"DefaultFieldValues":[{"DefaultValue":"__DefaultValue__","Id":{"Name":"__Name__"}},{"DefaultValue":"__DefaultValue__","Id":{"Name":"__Name__"}}]},"Description":"__Description__","Fields":[{"Description":"__Description__","Id":{"Name":"__Name__"},"SingleSelectOptions":["__Member__","__Member__"],"Type":"NAME"},{"Description":"__Description__","Id":{"Name":"__Name__"},"SingleSelectOptions":["__Member__","__Member__"],"Type":"NAME"}],"Id":"__Id__","InstanceId":"__InstanceId__","LastModifiedTime":946684800,"Name":"__Name__","SelfAssignFlowId":"__SelfAssignFlowId__","Status":"ACTIVE","Tags":{"key0":"__Value__"}}

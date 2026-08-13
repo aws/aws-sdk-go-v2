@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CostOptimizationHubService.GetPreferences
-
-{"__type":"ValidationException","fields":[{"fieldName":"__FieldName__","message":"__Message__"},{"fieldName":"__FieldName__","message":"__Message__"}],"message":"__Message__","reason":"FieldValidationFailed"}

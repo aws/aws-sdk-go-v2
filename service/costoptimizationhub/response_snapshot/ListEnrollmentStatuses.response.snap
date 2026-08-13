@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CostOptimizationHubService.ListEnrollmentStatuses
-
-{"includeMemberAccounts":true,"items":[{"accountId":"__AccountId__","createdTimestamp":946684800,"lastUpdatedTimestamp":946684800,"status":"Active"},{"accountId":"__AccountId__","createdTimestamp":946684800,"lastUpdatedTimestamp":946684800,"status":"Active"}],"nextToken":"__NextToken__"}

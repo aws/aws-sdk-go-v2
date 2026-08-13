@@ -1,5 +1,0 @@
-200
-Content-Type: application/xml
-Etag: __ETag__
-
-<TrustStore xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Arn>__Arn__</Arn><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><NumberOfCaCertificates>1</NumberOfCaCertificates><Reason>__Reason__</Reason><Status>pending</Status><UseClientCertificateOCSPEndpoint>true</UseClientCertificateOCSPEndpoint></TrustStore>

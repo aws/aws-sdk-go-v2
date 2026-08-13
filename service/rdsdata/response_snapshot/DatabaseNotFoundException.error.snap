@@ -1,4 +1,0 @@
-404
-Content-Type: application/json
-
-{"__type":"DatabaseNotFoundException","message":"__Message__"}

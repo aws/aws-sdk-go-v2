@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Groups":[{"Id":"__Id__","Name":"__Name__"},{"Id":"__Id__","Name":"__Name__"}],"Marker":"__Marker__"}

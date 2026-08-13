@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RekognitionService.AssociateFaces
-
-{"__type":"ProvisionedThroughputExceededException","Code":"ProvisionedThroughputExceededException","Logref":"__Logref__","Message":"__Message__"}

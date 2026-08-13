@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"FailedCount":1,"FailedFindings":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","Id":"__Id__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","Id":"__Id__"}],"SuccessCount":1}

@@ -1,5 +1,0 @@
-409
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Timestream_20181101.CreateScheduledQuery
-
-{"__type":"ConflictException","Message":"__Message__"}

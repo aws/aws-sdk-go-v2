@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"ReadOnlyViolationException","code":"ReadOnlyViolationException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"componentVersionList":[{"arn":"__Arn__","dateCreated":"__DateCreated__","description":"__Description__","name":"__Name__","owner":"__Owner__","platform":"Windows","productCodes":[{"productCodeId":"__ProductCodeId__","productCodeType":"marketplace"},{"productCodeId":"__ProductCodeId__","productCodeType":"marketplace"}],"status":"DEPRECATED","supportedOsVersions":["__Member__","__Member__"],"type":"BUILD","version":"__Version__"},{"arn":"__Arn__","dateCreated":"__DateCreated__","description":"__Description__","name":"__Name__","owner":"__Owner__","platform":"Windows","productCodes":[{"productCodeId":"__ProductCodeId__","productCodeType":"marketplace"},{"productCodeId":"__ProductCodeId__","productCodeType":"marketplace"}],"status":"DEPRECATED","supportedOsVersions":["__Member__","__Member__"],"type":"BUILD","version":"__Version__"}],"nextToken":"__NextToken__","requestId":"__RequestId__"}

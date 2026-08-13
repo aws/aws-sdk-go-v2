@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"description":"__Description__","domainExecutionRole":"__DomainExecutionRole__","id":"__Id__","lastUpdatedAt":946684800,"name":"__Name__","rootDomainUnitId":"__RootDomainUnitId__","serviceRole":"__ServiceRole__","singleSignOn":{"idcInstanceArn":"__IdcInstanceArn__","type":"IAM_IDC","userAssignment":"AUTOMATIC"}}

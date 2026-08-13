@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BlockSize":1,"Description":"__Description__","KmsKeyArn":"__KmsKeyArn__","OwnerId":"__OwnerId__","ParentSnapshotId":"__ParentSnapshotId__","SnapshotId":"__SnapshotId__","SseType":"sse-ebs","StartTime":946684800,"Status":"completed","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeSize":1}

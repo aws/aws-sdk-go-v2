@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","inferenceProfileArn":"__InferenceProfileArn__","inferenceProfileId":"__InferenceProfileId__","inferenceProfileName":"__InferenceProfileName__","models":[{"modelArn":"__ModelArn__"},{"modelArn":"__ModelArn__"}],"status":"ACTIVE","type":"SYSTEM_DEFINED","updatedAt":"2000-01-01T00:00:00Z"}

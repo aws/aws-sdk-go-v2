@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"agentKnowledgeBaseSummaries":[{"description":"__Description__","knowledgeBaseId":"__KnowledgeBaseId__","knowledgeBaseState":"ENABLED","updatedAt":"2000-01-01T00:00:00Z"},{"description":"__Description__","knowledgeBaseId":"__KnowledgeBaseId__","knowledgeBaseState":"ENABLED","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

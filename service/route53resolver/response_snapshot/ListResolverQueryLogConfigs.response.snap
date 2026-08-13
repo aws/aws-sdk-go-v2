@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Resolver.ListResolverQueryLogConfigs
-
-{"NextToken":"__NextToken__","ResolverQueryLogConfigs":[{"Arn":"__Arn__","AssociationCount":1,"CreationTime":"__CreationTime__","CreatorRequestId":"__CreatorRequestId__","DestinationArn":"__DestinationArn__","Id":"__Id__","Name":"__Name__","OwnerId":"__OwnerId__","ShareStatus":"NOT_SHARED","Status":"CREATING"},{"Arn":"__Arn__","AssociationCount":1,"CreationTime":"__CreationTime__","CreatorRequestId":"__CreatorRequestId__","DestinationArn":"__DestinationArn__","Id":"__Id__","Name":"__Name__","OwnerId":"__OwnerId__","ShareStatus":"NOT_SHARED","Status":"CREATING"}],"TotalCount":1,"TotalFilteredCount":1}

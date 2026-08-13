@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribeMaintenanceWindowsForTarget
-
-{"NextToken":"__NextToken__","WindowIdentities":[{"Name":"__Name__","WindowId":"__WindowId__"},{"Name":"__Name__","WindowId":"__WindowId__"}]}

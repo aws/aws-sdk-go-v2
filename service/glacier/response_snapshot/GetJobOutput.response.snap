@@ -1,8 +1,0 @@
-200
-Accept-Ranges: __AcceptRanges__
-Content-Range: __ContentRange__
-Content-Type: __ContentType__
-X-Amz-Archive-Description: __ArchiveDescription__
-X-Amz-Sha256-Tree-Hash: __Checksum__
-
-__Body__

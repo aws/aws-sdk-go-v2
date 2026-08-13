@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","TrafficDistributionGroupUserSummaryList":[{"UserId":"__UserId__"},{"UserId":"__UserId__"}]}

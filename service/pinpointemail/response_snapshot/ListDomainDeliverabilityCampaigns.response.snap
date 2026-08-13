@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DomainDeliverabilityCampaigns":[{"CampaignId":"__CampaignId__","DeleteRate":1,"Esps":["__Member__","__Member__"],"FirstSeenDateTime":946684800,"FromAddress":"__FromAddress__","ImageUrl":"__ImageUrl__","InboxCount":1,"LastSeenDateTime":946684800,"ProjectedVolume":1,"ReadDeleteRate":1,"ReadRate":1,"SendingIps":["__Member__","__Member__"],"SpamCount":1,"Subject":"__Subject__"},{"CampaignId":"__CampaignId__","DeleteRate":1,"Esps":["__Member__","__Member__"],"FirstSeenDateTime":946684800,"FromAddress":"__FromAddress__","ImageUrl":"__ImageUrl__","InboxCount":1,"LastSeenDateTime":946684800,"ProjectedVolume":1,"ReadDeleteRate":1,"ReadRate":1,"SendingIps":["__Member__","__Member__"],"SpamCount":1,"Subject":"__Subject__"}],"NextToken":"__NextToken__"}

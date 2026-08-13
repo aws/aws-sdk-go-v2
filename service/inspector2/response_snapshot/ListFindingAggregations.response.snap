@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"aggregationType":"FINDING_TYPE","nextToken":"__NextToken__","responses":[{"accountAggregation":{"accountId":"__AccountId__","exploitAvailableCount":1,"fixAvailableCount":1,"severityCounts":{"all":1,"critical":1,"high":1,"medium":1}}},{"accountAggregation":{"accountId":"__AccountId__","exploitAvailableCount":1,"fixAvailableCount":1,"severityCounts":{"all":1,"critical":1,"high":1,"medium":1}}}]}

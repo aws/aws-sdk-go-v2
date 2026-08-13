@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.ListFlywheels
-
-{"FlywheelSummaryList":[{"ActiveModelArn":"__ActiveModelArn__","CreationTime":946684800,"DataLakeS3Uri":"__DataLakeS3Uri__","FlywheelArn":"__FlywheelArn__","LastModifiedTime":946684800,"LatestFlywheelIteration":"__LatestFlywheelIteration__","Message":"__Message__","ModelType":"DOCUMENT_CLASSIFIER","Status":"CREATING"},{"ActiveModelArn":"__ActiveModelArn__","CreationTime":946684800,"DataLakeS3Uri":"__DataLakeS3Uri__","FlywheelArn":"__FlywheelArn__","LastModifiedTime":946684800,"LatestFlywheelIteration":"__LatestFlywheelIteration__","Message":"__Message__","ModelType":"DOCUMENT_CLASSIFIER","Status":"CREATING"}],"NextToken":"__NextToken__"}

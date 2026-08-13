@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TrentService.ScheduleKeyDeletion
-
-{"DeletionDate":946684800,"KeyId":"__KeyId__","KeyState":"Creating","PendingWindowInDays":1}

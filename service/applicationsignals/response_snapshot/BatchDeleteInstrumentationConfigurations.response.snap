@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DeletedCount":1,"Errors":[{"Code":"ResourceNotFoundException","Message":"__Message__","ResourceArn":"__ResourceArn__"},{"Code":"ResourceNotFoundException","Message":"__Message__","ResourceArn":"__ResourceArn__"}],"SuccessfulDeletions":[{"LocationHash":"__LocationHash__","ResourceArn":"__ResourceArn__","SignalType":"__SignalType__"},{"LocationHash":"__LocationHash__","ResourceArn":"__ResourceArn__","SignalType":"__SignalType__"}]}

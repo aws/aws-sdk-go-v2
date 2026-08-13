@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralAccount.PutAllianceLeadContact
-
-{"AllianceLeadContact":{"BusinessTitle":"__BusinessTitle__","Email":"__Email__","FirstName":"__FirstName__","LastName":"__LastName__"},"Arn":"__Arn__","Catalog":"__Catalog__","Id":"__Id__"}

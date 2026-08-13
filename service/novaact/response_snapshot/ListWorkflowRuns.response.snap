@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","workflowRunSummaries":[{"endedAt":"2000-01-01T00:00:00Z","startedAt":"2000-01-01T00:00:00Z","status":"RUNNING","traceLocation":{"location":"__Location__","locationType":"S3"},"workflowRunArn":"__WorkflowRunArn__","workflowRunId":"__WorkflowRunId__"},{"endedAt":"2000-01-01T00:00:00Z","startedAt":"2000-01-01T00:00:00Z","status":"RUNNING","traceLocation":{"location":"__Location__","locationType":"S3"},"workflowRunArn":"__WorkflowRunArn__","workflowRunId":"__WorkflowRunId__"}]}

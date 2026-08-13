@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DetachClusterNodeVolume
-
-{"AttachTime":946684800,"ClusterArn":"__ClusterArn__","DeviceName":"__DeviceName__","NodeId":"__NodeId__","Status":"attaching","VolumeId":"__VolumeId__"}

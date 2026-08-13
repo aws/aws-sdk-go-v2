@@ -1,5 +1,0 @@
-429
-Content-Type: application/json
-X-Amzn-Errortype: ServiceQuotaExceededException
-
-{"__type":"ServiceQuotaExceededException","Message":"__Message__"}

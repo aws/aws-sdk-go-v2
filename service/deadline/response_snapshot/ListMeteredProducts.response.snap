@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"meteredProducts":[{"family":"__Family__","port":1,"productId":"__ProductId__","vendor":"__Vendor__"},{"family":"__Family__","port":1,"productId":"__ProductId__","vendor":"__Vendor__"}],"nextToken":"__NextToken__"}

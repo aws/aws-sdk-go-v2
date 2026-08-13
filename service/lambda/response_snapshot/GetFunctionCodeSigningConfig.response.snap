@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CodeSigningConfigArn":"__CodeSigningConfigArn__","FunctionName":"__FunctionName__"}

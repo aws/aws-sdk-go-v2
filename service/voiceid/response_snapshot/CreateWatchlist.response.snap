@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: VoiceID.CreateWatchlist
-
-{"Watchlist":{"CreatedAt":946684800,"DefaultWatchlist":true,"Description":"__Description__","DomainId":"__DomainId__","Name":"__Name__","UpdatedAt":946684800,"WatchlistId":"__WatchlistId__"}}

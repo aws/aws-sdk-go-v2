@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BillingPeriod":"__BillingPeriod__","NextToken":"__NextToken__","PricingRules":[{"Arn":"__Arn__","AssociatedPricingPlanCount":1,"BillingEntity":"__BillingEntity__","CreationTime":1,"Description":"__Description__","LastModifiedTime":1,"ModifierPercentage":1,"Name":"__Name__","Operation":"__Operation__","Scope":"GLOBAL","Service":"__Service__","Tiering":{"FreeTier":{"Activated":true}},"Type":"MARKUP","UsageType":"__UsageType__"},{"Arn":"__Arn__","AssociatedPricingPlanCount":1,"BillingEntity":"__BillingEntity__","CreationTime":1,"Description":"__Description__","LastModifiedTime":1,"ModifierPercentage":1,"Name":"__Name__","Operation":"__Operation__","Scope":"GLOBAL","Service":"__Service__","Tiering":{"FreeTier":{"Activated":true}},"Type":"MARKUP","UsageType":"__UsageType__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.ListMaterializedViewRefreshTaskRuns
-
-{"MaterializedViewRefreshTaskRuns":[{"CatalogId":"__CatalogId__","CreationTime":946684800,"CustomerId":"__CustomerId__","DPUSeconds":1,"DatabaseName":"__DatabaseName__","EndTime":946684800,"ErrorMessage":"__ErrorMessage__","LastUpdated":946684800,"MaterializedViewRefreshTaskRunId":"__MaterializedViewRefreshTaskRunId__","ProcessedBytes":1,"RefreshType":"FULL","Role":"__Role__","StartTime":946684800,"Status":"STARTING","TableName":"__TableName__"},{"CatalogId":"__CatalogId__","CreationTime":946684800,"CustomerId":"__CustomerId__","DPUSeconds":1,"DatabaseName":"__DatabaseName__","EndTime":946684800,"ErrorMessage":"__ErrorMessage__","LastUpdated":946684800,"MaterializedViewRefreshTaskRunId":"__MaterializedViewRefreshTaskRunId__","ProcessedBytes":1,"RefreshType":"FULL","Role":"__Role__","StartTime":946684800,"Status":"STARTING","TableName":"__TableName__"}],"NextToken":"__NextToken__"}

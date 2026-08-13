@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"task":{"agentSpaceId":"__AgentSpaceId__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","executionId":"__ExecutionId__","hasLinkedTasks":true,"metadata":"__Document__","primaryTaskId":"__PrimaryTaskId__","priority":"CRITICAL","reference":{"associationId":"__AssociationId__","referenceId":"__ReferenceId__","referenceUrl":"__ReferenceUrl__","system":"__System__","title":"__Title__"},"status":"PENDING_TRIAGE","statusReason":"__StatusReason__","supportMetadata":"__Document__","taskId":"__TaskId__","taskType":"INVESTIGATION","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z","version":1}}

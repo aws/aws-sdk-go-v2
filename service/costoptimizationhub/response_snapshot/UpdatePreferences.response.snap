@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CostOptimizationHubService.UpdatePreferences
-
-{"memberAccountDiscountVisibility":"All","preferredCommitment":{"paymentOption":"AllUpfront","term":"OneYear"},"savingsEstimationMode":"BeforeDiscounts"}

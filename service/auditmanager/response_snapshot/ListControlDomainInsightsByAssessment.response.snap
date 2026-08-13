@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"controlDomainInsights":[{"controlsCountByNoncompliantEvidence":1,"evidenceInsights":{"compliantEvidenceCount":1,"inconclusiveEvidenceCount":1,"noncompliantEvidenceCount":1},"id":"__Id__","lastUpdated":946684800,"name":"__Name__","totalControlsCount":1},{"controlsCountByNoncompliantEvidence":1,"evidenceInsights":{"compliantEvidenceCount":1,"inconclusiveEvidenceCount":1,"noncompliantEvidenceCount":1},"id":"__Id__","lastUpdated":946684800,"name":"__Name__","totalControlsCount":1}],"nextToken":"__NextToken__"}

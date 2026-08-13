@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","workflowStepsSummary":[{"description":"__Description__","name":"__Name__","next":["__Member__","__Member__"],"noOfSrvCompleted":1,"noOfSrvFailed":1,"owner":"AWS_MANAGED","previous":["__Member__","__Member__"],"scriptLocation":"__ScriptLocation__","status":"AWAITING_DEPENDENCIES","statusMessage":"__StatusMessage__","stepActionType":"MANUAL","stepId":"__StepId__","totalNoOfSrv":1},{"description":"__Description__","name":"__Name__","next":["__Member__","__Member__"],"noOfSrvCompleted":1,"noOfSrvFailed":1,"owner":"AWS_MANAGED","previous":["__Member__","__Member__"],"scriptLocation":"__ScriptLocation__","status":"AWAITING_DEPENDENCIES","statusMessage":"__StatusMessage__","stepActionType":"MANUAL","stepId":"__StepId__","totalNoOfSrv":1}]}

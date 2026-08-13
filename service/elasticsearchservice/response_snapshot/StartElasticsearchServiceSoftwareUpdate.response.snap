@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ServiceSoftwareOptions":{"AutomatedUpdateDate":946684800,"Cancellable":true,"CurrentVersion":"__CurrentVersion__","Description":"__Description__","NewVersion":"__NewVersion__","OptionalDeployment":true,"UpdateAvailable":true,"UpdateStatus":"PENDING_UPDATE"}}

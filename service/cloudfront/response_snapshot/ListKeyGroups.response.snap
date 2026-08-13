@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<KeyGroupList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Items><KeyGroupSummary><KeyGroup><Id>__Id__</Id><KeyGroupConfig><Comment>__Comment__</Comment><Items><PublicKey>__Member__</PublicKey><PublicKey>__Member__</PublicKey></Items><Name>__Name__</Name></KeyGroupConfig><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime></KeyGroup></KeyGroupSummary><KeyGroupSummary><KeyGroup><Id>__Id__</Id><KeyGroupConfig><Comment>__Comment__</Comment><Items><PublicKey>__Member__</PublicKey><PublicKey>__Member__</PublicKey></Items><Name>__Name__</Name></KeyGroupConfig><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime></KeyGroup></KeyGroupSummary></Items><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></KeyGroupList>

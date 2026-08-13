@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Site":{"CreatedAt":946684800,"Description":"__Description__","GlobalNetworkId":"__GlobalNetworkId__","Location":{"Address":"__Address__","Latitude":"__Latitude__","Longitude":"__Longitude__"},"SiteArn":"__SiteArn__","SiteId":"__SiteId__","State":"PENDING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}}

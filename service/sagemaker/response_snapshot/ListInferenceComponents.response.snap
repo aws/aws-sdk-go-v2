@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListInferenceComponents
-
-{"InferenceComponents":[{"CreationTime":946684800,"EndpointArn":"__EndpointArn__","EndpointName":"__EndpointName__","InferenceComponentArn":"__InferenceComponentArn__","InferenceComponentName":"__InferenceComponentName__","InferenceComponentStatus":"InService","LastModifiedTime":946684800,"VariantName":"__VariantName__"},{"CreationTime":946684800,"EndpointArn":"__EndpointArn__","EndpointName":"__EndpointName__","InferenceComponentArn":"__InferenceComponentArn__","InferenceComponentName":"__InferenceComponentName__","InferenceComponentStatus":"InService","LastModifiedTime":946684800,"VariantName":"__VariantName__"}],"NextToken":"__NextToken__"}

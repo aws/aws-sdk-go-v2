@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"history":[{"dataSourceErrorCode":"__DataSourceErrorCode__","endTime":946684800,"error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"executionId":"__ExecutionId__","metrics":{"documentsAdded":"__DocumentsAdded__","documentsDeleted":"__DocumentsDeleted__","documentsFailed":"__DocumentsFailed__","documentsModified":"__DocumentsModified__","documentsScanned":"__DocumentsScanned__"},"startTime":946684800,"status":"FAILED"},{"dataSourceErrorCode":"__DataSourceErrorCode__","endTime":946684800,"error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"executionId":"__ExecutionId__","metrics":{"documentsAdded":"__DocumentsAdded__","documentsDeleted":"__DocumentsDeleted__","documentsFailed":"__DocumentsFailed__","documentsModified":"__DocumentsModified__","documentsScanned":"__DocumentsScanned__"},"startTime":946684800,"status":"FAILED"}],"nextToken":"__NextToken__"}

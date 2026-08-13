@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"actions":[{"arn":"__Arn__","description":"__Description__","id":"__Id__","tags":{"key0":"__Value__"},"targets":{"key0":{"resourceType":"__ResourceType__"}}},{"arn":"__Arn__","description":"__Description__","id":"__Id__","tags":{"key0":"__Value__"},"targets":{"key0":{"resourceType":"__ResourceType__"}}}],"nextToken":"__NextToken__"}

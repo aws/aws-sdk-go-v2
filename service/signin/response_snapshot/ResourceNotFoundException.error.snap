@@ -1,4 +1,0 @@
-404
-Content-Type: application/json
-
-{"__type":"ResourceNotFoundException","error":"TOKEN_EXPIRED","message":"__Message__"}

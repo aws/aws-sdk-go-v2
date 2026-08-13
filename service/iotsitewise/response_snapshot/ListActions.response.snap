@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"actionSummaries":[{"actionDefinitionId":"__ActionDefinitionId__","actionId":"__ActionId__","resolveTo":{"assetId":"__AssetId__"},"targetResource":{"assetId":"__AssetId__","computationModelId":"__ComputationModelId__"}},{"actionDefinitionId":"__ActionDefinitionId__","actionId":"__ActionId__","resolveTo":{"assetId":"__AssetId__"},"targetResource":{"assetId":"__AssetId__","computationModelId":"__ComputationModelId__"}}],"nextToken":"__NextToken__"}

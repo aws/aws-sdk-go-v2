@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","id":"__Id__","nsdOnboardingState":"CREATED","nsdOperationalState":"ENABLED","nsdUsageState":"IN_USE","tags":{"key0":"__Value__"}}

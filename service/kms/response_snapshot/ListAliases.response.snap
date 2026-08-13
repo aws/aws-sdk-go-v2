@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TrentService.ListAliases
-
-{"Aliases":[{"AliasArn":"__AliasArn__","AliasName":"__AliasName__","CreationDate":946684800,"LastUpdatedDate":946684800,"TargetKeyId":"__TargetKeyId__"},{"AliasArn":"__AliasArn__","AliasName":"__AliasName__","CreationDate":946684800,"LastUpdatedDate":946684800,"TargetKeyId":"__TargetKeyId__"}],"NextMarker":"__NextMarker__","Truncated":true}

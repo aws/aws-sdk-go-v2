@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"cellArn":"__CellArn__","cellName":"__CellName__","cells":["__Member__","__Member__"],"parentReadinessScopes":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

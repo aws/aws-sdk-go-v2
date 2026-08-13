@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribeInstancePatches
-
-{"NextToken":"__NextToken__","Patches":[{"CVEIds":"__CVEIds__","Classification":"__Classification__","InstalledTime":946684800,"KBId":"__KBId__","Severity":"__Severity__","State":"INSTALLED","Title":"__Title__"},{"CVEIds":"__CVEIds__","Classification":"__Classification__","InstalledTime":946684800,"KBId":"__KBId__","Severity":"__Severity__","State":"INSTALLED","Title":"__Title__"}]}

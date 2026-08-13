@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobs":[{"completedAt":946684800,"destinationS3Uri":"__DestinationS3Uri__","jobId":"__JobId__","startedAt":946684800,"status":"SUBMITTED"},{"completedAt":946684800,"destinationS3Uri":"__DestinationS3Uri__","jobId":"__JobId__","startedAt":946684800,"status":"SUBMITTED"}],"nextToken":"__NextToken__"}

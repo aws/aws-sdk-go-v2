@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","PathToObjectIdentifiersList":[{"ObjectIdentifiers":["__Member__","__Member__"],"Path":"__Path__"},{"ObjectIdentifiers":["__Member__","__Member__"],"Path":"__Path__"}]}

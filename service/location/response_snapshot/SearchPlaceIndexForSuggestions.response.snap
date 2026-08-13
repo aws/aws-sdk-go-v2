@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Results":[{"Categories":["__Member__","__Member__"],"PlaceId":"__PlaceId__","SupplementalCategories":["__Member__","__Member__"],"Text":"__Text__"},{"Categories":["__Member__","__Member__"],"PlaceId":"__PlaceId__","SupplementalCategories":["__Member__","__Member__"],"Text":"__Text__"}],"Summary":{"BiasPosition":[1,1],"DataSource":"__DataSource__","FilterBBox":[1,1],"FilterCategories":["__Member__","__Member__"],"FilterCountries":["__Member__","__Member__"],"Language":"__Language__","MaxResults":1,"Text":"__Text__"}}

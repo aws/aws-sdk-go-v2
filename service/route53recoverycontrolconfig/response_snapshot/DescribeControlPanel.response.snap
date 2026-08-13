@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ControlPanel":{"ClusterArn":"__ClusterArn__","ControlPanelArn":"__ControlPanelArn__","DefaultControlPanel":true,"Name":"__Name__","Owner":"__Owner__","RoutingControlCount":1,"Status":"PENDING"}}

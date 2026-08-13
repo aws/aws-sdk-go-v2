@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"annotationSetHash":"__AnnotationSetHash__","annotations":[{"addType":{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]}},{"addType":{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]}}],"buildWorkflowId":"__BuildWorkflowId__","name":"__Name__","policyArn":"__PolicyArn__","updatedAt":"2000-01-01T00:00:00Z"}

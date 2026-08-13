@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDB_20120810.DescribeLimits
-
-{"AccountMaxReadCapacityUnits":1,"AccountMaxWriteCapacityUnits":1,"TableMaxReadCapacityUnits":1,"TableMaxWriteCapacityUnits":1}

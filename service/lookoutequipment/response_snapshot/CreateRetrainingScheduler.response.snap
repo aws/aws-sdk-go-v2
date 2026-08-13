@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.CreateRetrainingScheduler
-
-{"ModelArn":"__ModelArn__","ModelName":"__ModelName__","Status":"PENDING"}

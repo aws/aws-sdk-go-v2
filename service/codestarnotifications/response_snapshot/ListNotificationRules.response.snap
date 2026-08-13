@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","NotificationRules":[{"Arn":"__Arn__","Id":"__Id__"},{"Arn":"__Arn__","Id":"__Id__"}]}

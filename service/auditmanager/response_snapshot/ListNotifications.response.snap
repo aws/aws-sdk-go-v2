@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","notifications":[{"assessmentId":"__AssessmentId__","assessmentName":"__AssessmentName__","controlSetId":"__ControlSetId__","controlSetName":"__ControlSetName__","description":"__Description__","eventTime":946684800,"id":"__Id__","source":"__Source__"},{"assessmentId":"__AssessmentId__","assessmentName":"__AssessmentName__","controlSetId":"__ControlSetId__","controlSetName":"__ControlSetName__","description":"__Description__","eventTime":946684800,"id":"__Id__","source":"__Source__"}]}

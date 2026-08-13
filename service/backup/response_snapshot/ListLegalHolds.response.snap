@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LegalHolds":[{"CancellationDate":946684800,"CreationDate":946684800,"Description":"__Description__","LegalHoldArn":"__LegalHoldArn__","LegalHoldId":"__LegalHoldId__","Status":"CREATING","Title":"__Title__"},{"CancellationDate":946684800,"CreationDate":946684800,"Description":"__Description__","LegalHoldArn":"__LegalHoldArn__","LegalHoldId":"__LegalHoldId__","Status":"CREATING","Title":"__Title__"}],"NextToken":"__NextToken__"}

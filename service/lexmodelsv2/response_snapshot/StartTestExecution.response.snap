@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"apiMode":"Streaming","creationDateTime":946684800,"target":{"botAliasTarget":{"botAliasId":"__BotAliasId__","botId":"__BotId__","localeId":"__LocaleId__"}},"testExecutionId":"__TestExecutionId__","testExecutionModality":"Text","testSetId":"__TestSetId__"}

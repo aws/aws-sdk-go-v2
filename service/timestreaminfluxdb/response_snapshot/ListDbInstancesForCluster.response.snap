@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonTimestreamInfluxDB.ListDbInstancesForCluster
-
-{"items":[{"allocatedStorage":1,"arn":"__Arn__","dbInstanceType":"db.influx.medium","dbStorageType":"InfluxIOIncludedT1","deploymentType":"SINGLE_AZ","endpoint":"__Endpoint__","id":"__Id__","instanceMode":"PRIMARY","instanceModes":["PRIMARY","PRIMARY"],"name":"__Name__","networkType":"IPV4","port":1,"status":"CREATING"},{"allocatedStorage":1,"arn":"__Arn__","dbInstanceType":"db.influx.medium","dbStorageType":"InfluxIOIncludedT1","deploymentType":"SINGLE_AZ","endpoint":"__Endpoint__","id":"__Id__","instanceMode":"PRIMARY","instanceModes":["PRIMARY","PRIMARY"],"name":"__Name__","networkType":"IPV4","port":1,"status":"CREATING"}],"nextToken":"__NextToken__"}

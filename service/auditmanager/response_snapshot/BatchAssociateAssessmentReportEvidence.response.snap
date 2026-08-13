@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"errors":[{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","evidenceId":"__EvidenceId__"},{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","evidenceId":"__EvidenceId__"}],"evidenceIds":["__Member__","__Member__"]}

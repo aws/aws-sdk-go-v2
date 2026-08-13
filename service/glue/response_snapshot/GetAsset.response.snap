@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.GetAsset
-
-{"AssetTypeId":"__AssetTypeId__","Attachments":{"key0":{"Content":"__Content__","FormTypeId":"__FormTypeId__"}},"CreatedAt":946684800,"Description":"__Description__","Forms":{"key0":{"Content":"__Content__","FormTypeId":"__FormTypeId__"}},"GlossaryTerms":["__Member__","__Member__"],"Id":"__Id__","IterableForms":{"key0":{"FormTypeId":"__FormTypeId__"}},"Name":"__Name__","UpdatedAt":946684800}

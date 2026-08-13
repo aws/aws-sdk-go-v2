@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appVersions":[{"appVersion":"__AppVersion__","creationTime":946684800,"identifier":1,"versionName":"__VersionName__"},{"appVersion":"__AppVersion__","creationTime":946684800,"identifier":1,"versionName":"__VersionName__"}],"nextToken":"__NextToken__"}

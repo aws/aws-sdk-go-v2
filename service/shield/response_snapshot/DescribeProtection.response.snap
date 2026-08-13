@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.DescribeProtection
-
-{"Protection":{"ApplicationLayerAutomaticResponseConfiguration":{"Action":{"Block":{},"Count":{}},"Status":"ENABLED"},"HealthCheckIds":["__Member__","__Member__"],"Id":"__Id__","Name":"__Name__","ProtectionArn":"__ProtectionArn__","ResourceArn":"__ResourceArn__"}}

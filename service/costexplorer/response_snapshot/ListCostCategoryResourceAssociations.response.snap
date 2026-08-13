@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSInsightsIndexService.ListCostCategoryResourceAssociations
-
-{"CostCategoryResourceAssociations":[{"CostCategoryArn":"__CostCategoryArn__","CostCategoryName":"__CostCategoryName__","ResourceArn":"__ResourceArn__"},{"CostCategoryArn":"__CostCategoryArn__","CostCategoryName":"__CostCategoryName__","ResourceArn":"__ResourceArn__"}],"NextToken":"__NextToken__"}

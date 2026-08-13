@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"stream":{"channelArn":"__ChannelArn__","health":"HEALTHY","playbackUrl":"__PlaybackUrl__","startTime":"2000-01-01T00:00:00Z","state":"LIVE","streamId":"__StreamId__","viewerCount":1}}

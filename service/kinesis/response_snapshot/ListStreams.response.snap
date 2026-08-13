@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Kinesis_20131202.ListStreams
-
-{"HasMoreStreams":true,"NextToken":"__NextToken__","StreamNames":["__Member__","__Member__"],"StreamSummaries":[{"StreamARN":"__StreamARN__","StreamCreationTimestamp":946684800,"StreamModeDetails":{"StreamMode":"PROVISIONED"},"StreamName":"__StreamName__","StreamStatus":"CREATING"},{"StreamARN":"__StreamARN__","StreamCreationTimestamp":946684800,"StreamModeDetails":{"StreamMode":"PROVISIONED"},"StreamName":"__StreamName__","StreamStatus":"CREATING"}]}

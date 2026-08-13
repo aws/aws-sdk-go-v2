@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"encryptionConfiguration":{"encryptionType":"SITEWISE_DEFAULT_ENCRYPTION","kmsKeyArn":"__KmsKeyArn__"},"updatedAt":946684800,"workspaceArn":"__WorkspaceArn__","workspaceDescription":"__WorkspaceDescription__","workspaceName":"__WorkspaceName__","workspaceStatus":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"}}

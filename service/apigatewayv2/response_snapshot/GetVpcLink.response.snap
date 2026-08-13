@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdDate":"2000-01-01T00:00:00Z","name":"__Name__","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"vpcLinkId":"__VpcLinkId__","vpcLinkStatus":"PENDING","vpcLinkStatusMessage":"__VpcLinkStatusMessage__","vpcLinkVersion":"V2"}

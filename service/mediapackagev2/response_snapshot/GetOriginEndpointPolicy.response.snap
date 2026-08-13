@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CdnAuthConfiguration":{"CdnIdentifierSecretArns":["__Member__","__Member__"],"SecretsRoleArn":"__SecretsRoleArn__"},"ChannelGroupName":"__ChannelGroupName__","ChannelName":"__ChannelName__","OriginEndpointName":"__OriginEndpointName__","Policy":"__Policy__"}

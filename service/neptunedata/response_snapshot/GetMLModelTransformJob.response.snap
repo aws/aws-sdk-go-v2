@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"baseProcessingJob":{"arn":"__Arn__","cloudwatchLogUrl":"__CloudwatchLogUrl__","failureReason":"__FailureReason__","name":"__Name__","outputLocation":"__OutputLocation__","status":"__Status__"},"id":"__Id__","models":[{"arn":"__Arn__","name":"__Name__"},{"arn":"__Arn__","name":"__Name__"}],"remoteModelTransformJob":{"arn":"__Arn__","cloudwatchLogUrl":"__CloudwatchLogUrl__","failureReason":"__FailureReason__","name":"__Name__","outputLocation":"__OutputLocation__","status":"__Status__"},"status":"__Status__"}

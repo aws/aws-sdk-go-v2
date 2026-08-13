@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ProfileSummaries":[{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__","ShareStatus":"NOT_SHARED"},{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__","ShareStatus":"NOT_SHARED"}]}

@@ -1,5 +1,0 @@
-404
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSCognitoIdentityProviderService.AdminAddUserToGroup
-
-{"__type":"UserNotFoundException","message":"__Message__"}

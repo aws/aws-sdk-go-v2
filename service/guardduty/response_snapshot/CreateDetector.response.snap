@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"detectorId":"__DetectorId__","unprocessedDataSources":{"malwareProtection":{"scanEc2InstanceWithFindings":{"ebsVolumes":{"reason":"__Reason__","status":"ENABLED"}},"serviceRole":"__ServiceRole__"}}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"inputDeviceTransfers":[{"id":"__Id__","message":"__Message__","targetCustomerId":"__TargetCustomerId__","transferType":"OUTGOING"},{"id":"__Id__","message":"__Message__","targetCustomerId":"__TargetCustomerId__","transferType":"OUTGOING"}],"nextToken":"__NextToken__"}

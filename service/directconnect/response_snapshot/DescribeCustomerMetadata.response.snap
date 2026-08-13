@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeCustomerMetadata
-
-{"agreements":[{"agreementName":"__AgreementName__","status":"__Status__"},{"agreementName":"__AgreementName__","status":"__Status__"}],"nniPartnerType":"v1"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","serviceFunctions":[{"createdAt":946684800,"criticality":"PRIMARY","description":"__Description__","name":"__Name__","resourceCount":1,"serviceArn":"__ServiceArn__","serviceFunctionId":"__ServiceFunctionId__","source":"AI_GENERATED","updatedAt":946684800},{"createdAt":946684800,"criticality":"PRIMARY","description":"__Description__","name":"__Name__","resourceCount":1,"serviceArn":"__ServiceArn__","serviceFunctionId":"__ServiceFunctionId__","source":"AI_GENERATED","updatedAt":946684800}]}

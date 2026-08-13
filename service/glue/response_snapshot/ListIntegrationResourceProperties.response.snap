@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.ListIntegrationResourceProperties
-
-{"IntegrationResourcePropertyList":[{"ResourceArn":"__ResourceArn__","ResourcePropertyArn":"__ResourcePropertyArn__","SourceProcessingProperties":{"RoleArn":"__RoleArn__"},"TargetProcessingProperties":{"ConnectionName":"__ConnectionName__","EventBusArn":"__EventBusArn__","KmsArn":"__KmsArn__","RoleArn":"__RoleArn__"}},{"ResourceArn":"__ResourceArn__","ResourcePropertyArn":"__ResourcePropertyArn__","SourceProcessingProperties":{"RoleArn":"__RoleArn__"},"TargetProcessingProperties":{"ConnectionName":"__ConnectionName__","EventBusArn":"__EventBusArn__","KmsArn":"__KmsArn__","RoleArn":"__RoleArn__"}}],"Marker":"__Marker__"}

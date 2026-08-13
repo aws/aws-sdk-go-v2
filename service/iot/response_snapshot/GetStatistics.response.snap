@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"statistics":{"average":1,"count":1,"maximum":1,"minimum":1,"stdDeviation":1,"sum":1,"sumOfSquares":1,"variance":1}}

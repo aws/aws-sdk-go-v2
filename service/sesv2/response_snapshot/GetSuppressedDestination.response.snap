@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"SuppressedDestination":{"Attributes":{"FeedbackId":"__FeedbackId__","MessageId":"__MessageId__"},"EmailAddress":"__EmailAddress__","LastUpdateTime":946684800,"Reason":"BOUNCE","TenantName":"__TenantName__"}}

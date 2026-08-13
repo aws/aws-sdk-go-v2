@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","testSources":[{"successCriteriaAlarm":{"accountId":"__AccountId__","alarmArn":"__AlarmArn__","alarmName":"__AlarmName__","createdAt":946684800,"region":"__Region__"}},{"successCriteriaAlarm":{"accountId":"__AccountId__","alarmArn":"__AlarmArn__","alarmName":"__AlarmName__","createdAt":946684800,"region":"__Region__"}}]}

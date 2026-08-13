@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"paymentInstrumentId":"__PaymentInstrumentId__","tokenBalance":{"amount":"__Amount__","chain":"BASE","decimals":1,"network":"ETHEREUM","token":"USDC"}}

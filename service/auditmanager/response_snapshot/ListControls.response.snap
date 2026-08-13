@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"controlMetadataList":[{"arn":"__Arn__","controlSources":"__ControlSources__","createdAt":946684800,"id":"__Id__","lastUpdatedAt":946684800,"name":"__Name__"},{"arn":"__Arn__","controlSources":"__ControlSources__","createdAt":946684800,"id":"__Id__","lastUpdatedAt":946684800,"name":"__Name__"}],"nextToken":"__NextToken__"}

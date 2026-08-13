@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListModelPackageGroups
-
-{"ModelPackageGroupSummaryList":[{"CreationTime":946684800,"ManagedConfiguration":{"ManagedStorageType":"Restricted"},"ModelPackageGroupArn":"__ModelPackageGroupArn__","ModelPackageGroupDescription":"__ModelPackageGroupDescription__","ModelPackageGroupName":"__ModelPackageGroupName__","ModelPackageGroupStatus":"Pending"},{"CreationTime":946684800,"ManagedConfiguration":{"ManagedStorageType":"Restricted"},"ModelPackageGroupArn":"__ModelPackageGroupArn__","ModelPackageGroupDescription":"__ModelPackageGroupDescription__","ModelPackageGroupName":"__ModelPackageGroupName__","ModelPackageGroupStatus":"Pending"}],"NextToken":"__NextToken__"}

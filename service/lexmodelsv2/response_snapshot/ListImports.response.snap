@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","botVersion":"__BotVersion__","importSummaries":[{"creationDateTime":946684800,"importId":"__ImportId__","importStatus":"InProgress","importedResourceId":"__ImportedResourceId__","importedResourceName":"__ImportedResourceName__","importedResourceType":"Bot","lastUpdatedDateTime":946684800,"mergeStrategy":"Overwrite"},{"creationDateTime":946684800,"importId":"__ImportId__","importStatus":"InProgress","importedResourceId":"__ImportedResourceId__","importedResourceName":"__ImportedResourceName__","importedResourceType":"Bot","lastUpdatedDateTime":946684800,"mergeStrategy":"Overwrite"}],"localeId":"__LocaleId__","nextToken":"__NextToken__"}

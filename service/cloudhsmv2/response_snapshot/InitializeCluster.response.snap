@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.InitializeCluster
-
-{"State":"CREATE_IN_PROGRESS","StateMessage":"__StateMessage__"}

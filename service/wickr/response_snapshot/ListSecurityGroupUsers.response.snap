@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","users":[{"cell":"__Cell__","challengeFailures":1,"codeValidation":true,"countryCode":"__CountryCode__","firstName":"__FirstName__","inviteCode":"__InviteCode__","isAdmin":true,"isInviteExpired":true,"isUser":true,"lastName":"__LastName__","otpEnabled":true,"scimId":"__ScimId__","securityGroups":["__Member__","__Member__"],"status":1,"suspended":true,"type":"__Type__","uname":"__Uname__","userId":"__UserId__","username":"__Username__"},{"cell":"__Cell__","challengeFailures":1,"codeValidation":true,"countryCode":"__CountryCode__","firstName":"__FirstName__","inviteCode":"__InviteCode__","isAdmin":true,"isInviteExpired":true,"isUser":true,"lastName":"__LastName__","otpEnabled":true,"scimId":"__ScimId__","securityGroups":["__Member__","__Member__"],"status":1,"suspended":true,"type":"__Type__","uname":"__Uname__","userId":"__UserId__","username":"__Username__"}]}

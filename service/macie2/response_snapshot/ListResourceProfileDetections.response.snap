@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"detections":[{"arn":"__Arn__","count":1,"id":"__Id__","name":"__Name__","suppressed":true,"type":"CUSTOM"},{"arn":"__Arn__","count":1,"id":"__Id__","name":"__Name__","suppressed":true,"type":"CUSTOM"}],"nextToken":"__NextToken__"}

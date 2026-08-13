@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeAccountModifications
-
-{"AccountModifications":[{"DedicatedTenancyManagementCidrRange":"__DedicatedTenancyManagementCidrRange__","DedicatedTenancySupport":"ENABLED","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ModificationState":"PENDING","StartTime":946684800},{"DedicatedTenancyManagementCidrRange":"__DedicatedTenancyManagementCidrRange__","DedicatedTenancySupport":"ENABLED","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ModificationState":"PENDING","StartTime":946684800}],"NextToken":"__NextToken__"}

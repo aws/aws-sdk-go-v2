@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"successful":[{"id":"__Id__","port":1},{"id":"__Id__","port":1}],"unsuccessful":[{"failureCode":"__FailureCode__","failureMessage":"__FailureMessage__","id":"__Id__","port":1},{"failureCode":"__FailureCode__","failureMessage":"__FailureMessage__","id":"__Id__","port":1}]}

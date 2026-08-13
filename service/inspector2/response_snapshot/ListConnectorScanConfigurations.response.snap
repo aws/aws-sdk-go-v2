@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","scanConfigurations":[{"awsConfigConnectorArn":"__AwsConfigConnectorArn__","connectorArns":["__Member__","__Member__"],"scanConfiguration":{"containerImageScanning":{"pullDuration":"DAYS_3","pushDuration":"LIFETIME"}}},{"awsConfigConnectorArn":"__AwsConfigConnectorArn__","connectorArns":["__Member__","__Member__"],"scanConfiguration":{"containerImageScanning":{"pullDuration":"DAYS_3","pushDuration":"LIFETIME"}}}]}

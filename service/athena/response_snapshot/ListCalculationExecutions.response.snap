@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonAthena.ListCalculationExecutions
-
-{"Calculations":[{"CalculationExecutionId":"__CalculationExecutionId__","Description":"__Description__","Status":{"CompletionDateTime":946684800,"State":"CREATING","StateChangeReason":"__StateChangeReason__","SubmissionDateTime":946684800}},{"CalculationExecutionId":"__CalculationExecutionId__","Description":"__Description__","Status":{"CompletionDateTime":946684800,"State":"CREATING","StateChangeReason":"__StateChangeReason__","SubmissionDateTime":946684800}}],"NextToken":"__NextToken__"}

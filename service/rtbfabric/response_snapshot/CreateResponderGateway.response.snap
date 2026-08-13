@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"externalInboundEndpoint":"__ExternalInboundEndpoint__","gatewayId":"__GatewayId__","listenerConfig":{"protocols":["HTTP","HTTP"]},"status":"PENDING_CREATION"}

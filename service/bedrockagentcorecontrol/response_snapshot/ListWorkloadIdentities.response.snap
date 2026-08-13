@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","workloadIdentities":[{"name":"__Name__","workloadIdentityArn":"__WorkloadIdentityArn__"},{"name":"__Name__","workloadIdentityArn":"__WorkloadIdentityArn__"}]}

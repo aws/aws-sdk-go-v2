@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetInstancePortStates
-
-{"portStates":[{"cidrListAliases":["__Member__","__Member__"],"cidrs":["__Member__","__Member__"],"fromPort":1,"ipv6Cidrs":["__Member__","__Member__"],"protocol":"tcp","state":"open","toPort":1},{"cidrListAliases":["__Member__","__Member__"],"cidrs":["__Member__","__Member__"],"fromPort":1,"ipv6Cidrs":["__Member__","__Member__"],"protocol":"tcp","state":"open","toPort":1}]}

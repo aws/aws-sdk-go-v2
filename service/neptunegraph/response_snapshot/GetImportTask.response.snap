@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"attemptNumber":1,"format":"CSV","graphId":"__GraphId__","importOptions":{"neptune":{"preserveDefaultVertexLabels":true,"preserveEdgeIds":true,"s3ExportKmsKeyId":"__S3ExportKmsKeyId__","s3ExportPath":"__S3ExportPath__"}},"importTaskDetails":{"dictionaryEntryCount":1,"errorCount":1,"errorDetails":"__ErrorDetails__","progressPercentage":1,"startTime":946684800,"statementCount":1,"status":"__Status__","timeElapsedSeconds":1},"parquetType":"COLUMNAR","roleArn":"__RoleArn__","source":"__Source__","status":"INITIALIZING","statusReason":"__StatusReason__","taskId":"__TaskId__"}

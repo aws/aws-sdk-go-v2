@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationId":"__ApplicationId__","Description":"__Description__","Id":"__Id__","KmsKeyArn":"__KmsKeyArn__","KmsKeyIdentifier":"__KmsKeyIdentifier__","LocationUri":"__LocationUri__","Name":"__Name__","RetrievalRoleArn":"__RetrievalRoleArn__","Type":"__Type__","Validators":[{"Content":"__Content__","Type":"JSON_SCHEMA"},{"Content":"__Content__","Type":"JSON_SCHEMA"}]}

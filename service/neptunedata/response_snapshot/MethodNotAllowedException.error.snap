@@ -1,4 +1,0 @@
-405
-Content-Type: application/json
-
-{"__type":"MethodNotAllowedException","code":"MethodNotAllowedException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

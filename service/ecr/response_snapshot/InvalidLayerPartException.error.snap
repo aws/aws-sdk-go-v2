@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.UploadLayerPart
-
-{"__type":"InvalidLayerPartException","lastValidByteReceived":1,"message":"__Message__","registryId":"__RegistryId__","repositoryName":"__RepositoryName__","uploadId":"__UploadId__"}

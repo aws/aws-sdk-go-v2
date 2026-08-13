@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"agentSpaceId":"__AgentSpaceId__","createdAt":946684800,"executionId":"__ExecutionId__","messages":[{"message":{"userMessage":[{"text":"__UserMessageBlockMemberText__"},{"text":"__UserMessageBlockMemberText__"}]},"messageId":"__MessageId__"},{"message":{"userMessage":[{"text":"__UserMessageBlockMemberText__"},{"text":"__UserMessageBlockMemberText__"}]},"messageId":"__MessageId__"}]}

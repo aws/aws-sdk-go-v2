@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSFreeTierService.GetAccountActivity
-
-{"activityId":"__ActivityId__","completedAt":"2000-01-01T00:00:00Z","description":"__Description__","estimatedTimeToCompleteInMinutes":1,"expiresAt":"2000-01-01T00:00:00Z","instructionsUrl":"__InstructionsUrl__","reward":{"credit":{"amount":1,"unit":"USD"}},"startedAt":"2000-01-01T00:00:00Z","status":"NOT_STARTED","title":"__Title__"}

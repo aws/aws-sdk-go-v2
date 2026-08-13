@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"test":{"actions":[{"actionId":"__ActionId__","description":"__Description__","resourceType":"__ResourceType__"},{"actionId":"__ActionId__","description":"__Description__","resourceType":"__ResourceType__"}],"creationTime":946684800,"loggingConfiguration":{"cloudWatchLogGroupArn":"__CloudWatchLogGroupArn__","logSchemaVersion":"__LogSchemaVersion__","s3BucketName":"__S3BucketName__"},"name":"__Name__","parameters":{"key0":["__Member__","__Member__"]},"roleName":"__RoleName__","serviceArn":"__ServiceArn__","stopConditions":[{"source":"aws:cloudwatch:alarm","value":"__Value__"},{"source":"aws:cloudwatch:alarm","value":"__Value__"}],"successfulTestRuns":1,"testId":"__TestId__","testTemplateArn":"__TestTemplateArn__","totalTestRuns":1}}

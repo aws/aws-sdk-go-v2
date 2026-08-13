@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ClientLocation":{"ASName":"__ASName__","ASNumber":1,"City":"__City__","Country":"__Country__","Latitude":1,"Longitude":1,"Metro":"__Metro__","Subdivision":"__Subdivision__"},"EndedAt":"2000-01-01T00:00:00Z","EventArn":"__EventArn__","EventId":"__EventId__","EventStatus":"ACTIVE","EventType":"AVAILABILITY","StartedAt":"2000-01-01T00:00:00Z"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"domains":[{"arn":"__Arn__","createdAt":946684800,"domainId":"__DomainId__","name":"__Name__","status":"ACTIVE"},{"arn":"__Arn__","createdAt":946684800,"domainId":"__DomainId__","name":"__Name__","status":"ACTIVE"}],"nextToken":"__NextToken__"}

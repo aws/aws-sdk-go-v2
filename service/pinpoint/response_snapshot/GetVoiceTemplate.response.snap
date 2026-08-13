@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","Body":"__Body__","CreationDate":"__CreationDate__","DefaultSubstitutions":"__DefaultSubstitutions__","LanguageCode":"__LanguageCode__","LastModifiedDate":"__LastModifiedDate__","TemplateDescription":"__TemplateDescription__","TemplateName":"__TemplateName__","TemplateType":"EMAIL","Version":"__Version__","VoiceId":"__VoiceId__","tags":{"key0":"__Value__"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SpencerFrontendService.PutImage
-
-{"image":{"imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},"imageManifest":"__ImageManifest__","imageManifestMediaType":"__ImageManifestMediaType__","registryId":"__RegistryId__","repositoryName":"__RepositoryName__"}}

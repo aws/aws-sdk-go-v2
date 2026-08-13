@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","status":"CREATING","tags":{"key0":"__Value__"},"uuid":"__Uuid__","versionName":"__VersionName__","workflowId":"__WorkflowId__"}

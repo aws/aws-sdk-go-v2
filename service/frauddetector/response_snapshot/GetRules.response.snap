@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHawksNestServiceFacade.GetRules
-
-{"nextToken":"__NextToken__","ruleDetails":[{"arn":"__Arn__","createdTime":"__CreatedTime__","description":"__Description__","detectorId":"__DetectorId__","expression":"__Expression__","language":"DETECTORPL","lastUpdatedTime":"__LastUpdatedTime__","outcomes":["__Member__","__Member__"],"ruleId":"__RuleId__","ruleVersion":"__RuleVersion__"},{"arn":"__Arn__","createdTime":"__CreatedTime__","description":"__Description__","detectorId":"__DetectorId__","expression":"__Expression__","language":"DETECTORPL","lastUpdatedTime":"__LastUpdatedTime__","outcomes":["__Member__","__Member__"],"ruleId":"__RuleId__","ruleVersion":"__RuleVersion__"}]}

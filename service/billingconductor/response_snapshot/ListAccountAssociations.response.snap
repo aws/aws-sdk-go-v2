@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LinkedAccounts":[{"AccountEmail":"__AccountEmail__","AccountId":"__AccountId__","AccountName":"__AccountName__","BillingGroupArn":"__BillingGroupArn__"},{"AccountEmail":"__AccountEmail__","AccountId":"__AccountId__","AccountName":"__AccountName__","BillingGroupArn":"__BillingGroupArn__"}],"NextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.ListConformancePackComplianceScores
-
-{"ConformancePackComplianceScores":[{"ConformancePackName":"__ConformancePackName__","LastUpdatedTime":946684800,"Score":"__Score__"},{"ConformancePackName":"__ConformancePackName__","LastUpdatedTime":946684800,"Score":"__Score__"}],"NextToken":"__NextToken__"}

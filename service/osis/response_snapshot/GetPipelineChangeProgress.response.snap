@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ChangeProgressStatuses":[{"ChangeProgressStages":[{"Description":"__Description__","LastUpdatedAt":946684800,"Name":"__Name__","Status":"PENDING"},{"Description":"__Description__","LastUpdatedAt":946684800,"Name":"__Name__","Status":"PENDING"}],"StartTime":946684800,"Status":"PENDING","TotalNumberOfStages":1},{"ChangeProgressStages":[{"Description":"__Description__","LastUpdatedAt":946684800,"Name":"__Name__","Status":"PENDING"},{"Description":"__Description__","LastUpdatedAt":946684800,"Name":"__Name__","Status":"PENDING"}],"StartTime":946684800,"Status":"PENDING","TotalNumberOfStages":1}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.ListChannels
-
-{"Channels":[{"ChannelArn":"__ChannelArn__","Name":"__Name__"},{"ChannelArn":"__ChannelArn__","Name":"__Name__"}],"NextToken":"__NextToken__"}

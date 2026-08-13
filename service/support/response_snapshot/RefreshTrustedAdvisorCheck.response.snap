@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSSupport_20130415.RefreshTrustedAdvisorCheck
-
-{"status":{"checkId":"__CheckId__","millisUntilNextRefreshable":1,"status":"__Status__"}}

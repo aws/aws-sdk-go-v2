@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"GroupMember":{"Arn":"__Arn__","MemberName":"__MemberName__"},"RequestId":"__RequestId__","Status":200}

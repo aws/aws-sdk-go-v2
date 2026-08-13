@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","reportDefinitions":[{"createdAt":946684800,"destinationS3Location":{"bucket":"__Bucket__","prefix":"__Prefix__"},"format":"CSV","lastUpdatedAt":946684800,"reportDescription":"__ReportDescription__","reportFrequency":"MONTHLY","reportId":"__ReportId__"},{"createdAt":946684800,"destinationS3Location":{"bucket":"__Bucket__","prefix":"__Prefix__"},"format":"CSV","lastUpdatedAt":946684800,"reportDescription":"__ReportDescription__","reportFrequency":"MONTHLY","reportId":"__ReportId__"}]}

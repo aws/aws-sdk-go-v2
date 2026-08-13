@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"capability":{"arn":"__Arn__","capabilityName":"__CapabilityName__","clusterName":"__ClusterName__","configuration":{"argoCd":{"awsIdc":{"idcInstanceArn":"__IdcInstanceArn__","idcManagedApplicationArn":"__IdcManagedApplicationArn__","idcRegion":"__IdcRegion__"},"namespace":"__Namespace__","networkAccess":{"vpceIds":["__Member__","__Member__"]},"rbacRoleMappings":[{"identities":[{"id":"__Id__","type":"SSO_USER"},{"id":"__Id__","type":"SSO_USER"}],"role":"ADMIN"},{"identities":[{"id":"__Id__","type":"SSO_USER"},{"id":"__Id__","type":"SSO_USER"}],"role":"ADMIN"}],"serverUrl":"__ServerUrl__"}},"createdAt":946684800,"deletePropagationPolicy":"RETAIN","health":{"issues":[{"code":"AccessDenied","message":"__Message__"},{"code":"AccessDenied","message":"__Message__"}]},"modifiedAt":946684800,"roleArn":"__RoleArn__","status":"CREATING","tags":{"key0":"__Value__"},"type":"ACK","version":"__Version__"}}

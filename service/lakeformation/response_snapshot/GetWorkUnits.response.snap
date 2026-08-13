@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","QueryId":"__QueryId__","WorkUnitRanges":[{"WorkUnitIdMax":1,"WorkUnitIdMin":1,"WorkUnitToken":"__WorkUnitToken__"},{"WorkUnitIdMax":1,"WorkUnitIdMin":1,"WorkUnitToken":"__WorkUnitToken__"}]}

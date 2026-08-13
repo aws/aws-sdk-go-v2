@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"collaborationConfiguredModelAlgorithmAssociations":[{"collaborationIdentifier":"__CollaborationIdentifier__","configuredModelAlgorithmArn":"__ConfiguredModelAlgorithmArn__","configuredModelAlgorithmAssociationArn":"__ConfiguredModelAlgorithmAssociationArn__","createTime":"2000-01-01T00:00:00Z","creatorAccountId":"__CreatorAccountId__","description":"__Description__","membershipIdentifier":"__MembershipIdentifier__","name":"__Name__","updateTime":"2000-01-01T00:00:00Z"},{"collaborationIdentifier":"__CollaborationIdentifier__","configuredModelAlgorithmArn":"__ConfiguredModelAlgorithmArn__","configuredModelAlgorithmAssociationArn":"__ConfiguredModelAlgorithmAssociationArn__","createTime":"2000-01-01T00:00:00Z","creatorAccountId":"__CreatorAccountId__","description":"__Description__","membershipIdentifier":"__MembershipIdentifier__","name":"__Name__","updateTime":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"PolicyDocument":"__PolicyDocument__","PolicyName":"__PolicyName__","PolicyType":"AWS_MANAGED","PolicyVersionArn":"__PolicyVersionArn__","ResourceArn":"__ResourceArn__"}

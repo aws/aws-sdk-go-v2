@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","users":[{"apiAccess":"ENABLED","apiAccessPrincipalArn":"__ApiAccessPrincipalArn__","emailAddress":"__EmailAddress__","firstName":"__FirstName__","lastName":"__LastName__","membershipStatus":"ADDITION_IN_PROGRESS","status":"CREATING","type":"SUPER_USER","userId":"__UserId__"},{"apiAccess":"ENABLED","apiAccessPrincipalArn":"__ApiAccessPrincipalArn__","emailAddress":"__EmailAddress__","firstName":"__FirstName__","lastName":"__LastName__","membershipStatus":"ADDITION_IN_PROGRESS","status":"CREATING","type":"SUPER_USER","userId":"__UserId__"}]}

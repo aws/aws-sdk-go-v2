@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appArn":"__AppArn__","appTemplateBody":"__AppTemplateBody__","appVersion":"__AppVersion__"}

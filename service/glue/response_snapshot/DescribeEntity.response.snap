@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.DescribeEntity
-
-{"Fields":[{"CustomProperties":{"key0":"__Value__"},"Description":"__Description__","FieldName":"__FieldName__","FieldType":"INT","IsCreateable":true,"IsDefaultOnCreate":true,"IsFilterable":true,"IsNullable":true,"IsPartitionable":true,"IsPrimaryKey":true,"IsRetrievable":true,"IsUpdateable":true,"IsUpsertable":true,"Label":"__Label__","NativeDataType":"__NativeDataType__","ParentField":"__ParentField__","SupportedFilterOperators":["LESS_THAN","LESS_THAN"],"SupportedValues":["__Member__","__Member__"]},{"CustomProperties":{"key0":"__Value__"},"Description":"__Description__","FieldName":"__FieldName__","FieldType":"INT","IsCreateable":true,"IsDefaultOnCreate":true,"IsFilterable":true,"IsNullable":true,"IsPartitionable":true,"IsPrimaryKey":true,"IsRetrievable":true,"IsUpdateable":true,"IsUpsertable":true,"Label":"__Label__","NativeDataType":"__NativeDataType__","ParentField":"__ParentField__","SupportedFilterOperators":["LESS_THAN","LESS_THAN"],"SupportedValues":["__Member__","__Member__"]}],"NextToken":"__NextToken__"}

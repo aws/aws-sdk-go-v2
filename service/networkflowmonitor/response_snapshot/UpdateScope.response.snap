@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"scopeArn":"__ScopeArn__","scopeId":"__ScopeId__","status":"SUCCEEDED","tags":{"key0":"__Value__"}}

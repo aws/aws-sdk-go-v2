@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configs":"__Configs__","partitionCount":1,"replicationFactor":1,"status":"CREATING","topicArn":"__TopicArn__","topicName":"__TopicName__"}

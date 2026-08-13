@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"capacityProviderArn":"__CapacityProviderArn__","capacityProviderId":"__CapacityProviderId__","createdAt":"2000-01-01T00:00:00Z","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","status":"CREATING"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","serviceEnvironments":[{"capacityLimits":[{"capacityUnit":"__CapacityUnit__","maxCapacity":1},{"capacityUnit":"__CapacityUnit__","maxCapacity":1}],"serviceEnvironmentArn":"__ServiceEnvironmentArn__","serviceEnvironmentName":"__ServiceEnvironmentName__","serviceEnvironmentType":"SAGEMAKER_TRAINING","state":"ENABLED","status":"CREATING","tags":{"key0":"__Value__"}},{"capacityLimits":[{"capacityUnit":"__CapacityUnit__","maxCapacity":1},{"capacityUnit":"__CapacityUnit__","maxCapacity":1}],"serviceEnvironmentArn":"__ServiceEnvironmentArn__","serviceEnvironmentName":"__ServiceEnvironmentName__","serviceEnvironmentType":"SAGEMAKER_TRAINING","state":"ENABLED","status":"CREATING","tags":{"key0":"__Value__"}}]}

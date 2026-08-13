@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BulkEmailEntryResults":[{"Error":"__Error__","MessageId":"__MessageId__","Status":"SUCCESS"},{"Error":"__Error__","MessageId":"__MessageId__","Status":"SUCCESS"}]}

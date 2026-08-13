@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonAthena.GetQueryResults
-
-{"NextToken":"__NextToken__","ResultSet":{"ResultSetMetadata":{"ColumnInfo":[{"CaseSensitive":true,"CatalogName":"__CatalogName__","Label":"__Label__","Name":"__Name__","Nullable":"NOT_NULL","Precision":1,"Scale":1,"SchemaName":"__SchemaName__","TableName":"__TableName__","Type":"__Type__"},{"CaseSensitive":true,"CatalogName":"__CatalogName__","Label":"__Label__","Name":"__Name__","Nullable":"NOT_NULL","Precision":1,"Scale":1,"SchemaName":"__SchemaName__","TableName":"__TableName__","Type":"__Type__"}]},"Rows":[{"Data":[{"VarCharValue":"__VarCharValue__"},{"VarCharValue":"__VarCharValue__"}]},{"Data":[{"VarCharValue":"__VarCharValue__"},{"VarCharValue":"__VarCharValue__"}]}]},"UpdateCount":1}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"apiCache":{"apiCachingBehavior":"FULL_REQUEST_CACHING","atRestEncryptionEnabled":true,"healthMetricsConfig":"ENABLED","status":"AVAILABLE","transitEncryptionEnabled":true,"ttl":1,"type":"T2_SMALL"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Marker":"__Marker__","MountTargets":[{"AvailabilityZoneId":"__AvailabilityZoneId__","AvailabilityZoneName":"__AvailabilityZoneName__","FileSystemId":"__FileSystemId__","IpAddress":"__IpAddress__","Ipv6Address":"__Ipv6Address__","LifeCycleState":"creating","MountTargetId":"__MountTargetId__","NetworkInterfaceId":"__NetworkInterfaceId__","OwnerId":"__OwnerId__","SubnetId":"__SubnetId__","VpcId":"__VpcId__"},{"AvailabilityZoneId":"__AvailabilityZoneId__","AvailabilityZoneName":"__AvailabilityZoneName__","FileSystemId":"__FileSystemId__","IpAddress":"__IpAddress__","Ipv6Address":"__Ipv6Address__","LifeCycleState":"creating","MountTargetId":"__MountTargetId__","NetworkInterfaceId":"__NetworkInterfaceId__","OwnerId":"__OwnerId__","SubnetId":"__SubnetId__","VpcId":"__VpcId__"}],"NextMarker":"__NextMarker__"}

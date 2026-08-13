@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"WrappedKey":{"KeyCheckValue":"__KeyCheckValue__","WrappedKeyMaterial":"__WrappedKeyMaterial__","WrappedKeyMaterialFormat":"KEY_CRYPTOGRAM"}}

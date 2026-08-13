@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.ListVirtualInterfaceRoutes
-
-{"nextToken":"__NextToken__","routes":[{"addressFamily":"ipv4","asPath":[{"path":[1,1],"pathType":"seq"},{"path":[1,1],"pathType":"seq"}],"awsLogicalDeviceId":"__AwsLogicalDeviceId__","cidr":"__Cidr__","communities":["__Member__","__Member__"],"routeDirection":"accepted","routeInstalledAt":946684800},{"addressFamily":"ipv4","asPath":[{"path":[1,1],"pathType":"seq"},{"path":[1,1],"pathType":"seq"}],"awsLogicalDeviceId":"__AwsLogicalDeviceId__","cidr":"__Cidr__","communities":["__Member__","__Member__"],"routeDirection":"accepted","routeInstalledAt":946684800}],"virtualInterfaceId":"__VirtualInterfaceId__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: MTurkRequesterServiceV20170117.GetQualificationScore
-
-{"Qualification":{"GrantTime":946684800,"IntegerValue":1,"LocaleValue":{"Country":"__Country__","Subdivision":"__Subdivision__"},"QualificationTypeId":"__QualificationTypeId__","Status":"Granted","WorkerId":"__WorkerId__"}}

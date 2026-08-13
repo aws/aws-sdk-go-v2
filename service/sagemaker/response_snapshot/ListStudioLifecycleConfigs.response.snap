@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListStudioLifecycleConfigs
-
-{"NextToken":"__NextToken__","StudioLifecycleConfigs":[{"CreationTime":946684800,"LastModifiedTime":946684800,"StudioLifecycleConfigAppType":"JupyterServer","StudioLifecycleConfigArn":"__StudioLifecycleConfigArn__","StudioLifecycleConfigName":"__StudioLifecycleConfigName__"},{"CreationTime":946684800,"LastModifiedTime":946684800,"StudioLifecycleConfigAppType":"JupyterServer","StudioLifecycleConfigArn":"__StudioLifecycleConfigArn__","StudioLifecycleConfigName":"__StudioLifecycleConfigName__"}]}

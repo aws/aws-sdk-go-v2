@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","buildNumber":"__BuildNumber__","createTime":946684800,"deletionProtection":true,"endpoint":"__Endpoint__","id":"__Id__","kmsKeyIdentifier":"__KmsKeyIdentifier__","name":"__Name__","provisionedMemory":1,"publicConnectivity":true,"replicaCount":1,"sourceSnapshotId":"__SourceSnapshotId__","status":"CREATING","statusReason":"__StatusReason__","vectorSearchConfiguration":{"dimension":1}}

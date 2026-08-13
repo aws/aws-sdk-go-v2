@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","permissionStatements":[{"condition":{"key0":{"key0":["__Member__","__Member__"]}},"sid":"__Sid__"},{"condition":{"key0":{"key0":["__Member__","__Member__"]}},"sid":"__Sid__"}]}

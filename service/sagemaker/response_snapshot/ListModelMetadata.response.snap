@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListModelMetadata
-
-{"ModelMetadataSummaries":[{"Domain":"__Domain__","Framework":"__Framework__","FrameworkVersion":"__FrameworkVersion__","Model":"__Model__","Task":"__Task__"},{"Domain":"__Domain__","Framework":"__Framework__","FrameworkVersion":"__FrameworkVersion__","Model":"__Model__","Task":"__Task__"}],"NextToken":"__NextToken__"}

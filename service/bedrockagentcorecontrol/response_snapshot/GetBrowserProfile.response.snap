@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","description":"__Description__","lastSavedAt":"2000-01-01T00:00:00Z","lastSavedBrowserId":"__LastSavedBrowserId__","lastSavedBrowserSessionId":"__LastSavedBrowserSessionId__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","profileArn":"__ProfileArn__","profileId":"__ProfileId__","status":"READY"}

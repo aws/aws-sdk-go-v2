@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBilling.ListBillingViews
-
-{"billingViews":[{"arn":"__Arn__","billingViewType":"PRIMARY","description":"__Description__","healthStatus":{"statusCode":"HEALTHY","statusReasons":["SOURCE_VIEW_UNHEALTHY","SOURCE_VIEW_UNHEALTHY"]},"name":"__Name__","ownerAccountId":"__OwnerAccountId__","sourceAccountId":"__SourceAccountId__"},{"arn":"__Arn__","billingViewType":"PRIMARY","description":"__Description__","healthStatus":{"statusCode":"HEALTHY","statusReasons":["SOURCE_VIEW_UNHEALTHY","SOURCE_VIEW_UNHEALTHY"]},"name":"__Name__","ownerAccountId":"__OwnerAccountId__","sourceAccountId":"__SourceAccountId__"}],"nextToken":"__NextToken__"}

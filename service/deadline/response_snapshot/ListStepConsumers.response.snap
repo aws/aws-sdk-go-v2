@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"consumers":[{"status":"RESOLVED","stepId":"__StepId__"},{"status":"RESOLVED","stepId":"__StepId__"}],"nextToken":"__NextToken__"}

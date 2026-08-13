@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"session":{"aiAgentConfiguration":{"key0":{"aiAgentId":"__AiAgentId__"}},"description":"__Description__","integrationConfiguration":{"topicIntegrationArn":"__TopicIntegrationArn__"},"name":"__Name__","orchestratorConfigurationList":[{"aiAgentId":"__AiAgentId__","orchestratorUseCase":"__OrchestratorUseCase__"},{"aiAgentId":"__AiAgentId__","orchestratorUseCase":"__OrchestratorUseCase__"}],"origin":"SYSTEM","sessionArn":"__SessionArn__","sessionId":"__SessionId__","tagFilter":{"tagCondition":{"key":"__Key__","value":"__Value__"}},"tags":{"key0":"__Value__"}}}

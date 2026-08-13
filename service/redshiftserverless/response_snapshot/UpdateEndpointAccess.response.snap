@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RedshiftServerless.UpdateEndpointAccess
-
-{"endpoint":{"address":"__Address__","endpointArn":"__EndpointArn__","endpointCreateTime":"2000-01-01T00:00:00Z","endpointName":"__EndpointName__","endpointStatus":"__EndpointStatus__","port":1,"subnetIds":["__Member__","__Member__"],"vpcEndpoint":{"networkInterfaces":[{"availabilityZone":"__AvailabilityZone__","ipv6Address":"__Ipv6Address__","networkInterfaceId":"__NetworkInterfaceId__","privateIpAddress":"__PrivateIpAddress__","subnetId":"__SubnetId__"},{"availabilityZone":"__AvailabilityZone__","ipv6Address":"__Ipv6Address__","networkInterfaceId":"__NetworkInterfaceId__","privateIpAddress":"__PrivateIpAddress__","subnetId":"__SubnetId__"}],"vpcEndpointId":"__VpcEndpointId__","vpcId":"__VpcId__"},"vpcSecurityGroups":[{"status":"__Status__","vpcSecurityGroupId":"__VpcSecurityGroupId__"},{"status":"__Status__","vpcSecurityGroupId":"__VpcSecurityGroupId__"}],"workgroupName":"__WorkgroupName__"}}

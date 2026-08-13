@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","recommendationResourceSummaries":[{"arn":"__Arn__","awsResourceId":"__AwsResourceId__","exclusionStatus":"excluded","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","metadata":{"key0":"__Value__"},"recommendationArn":"__RecommendationArn__","regionCode":"__RegionCode__","status":"ok"},{"arn":"__Arn__","awsResourceId":"__AwsResourceId__","exclusionStatus":"excluded","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","metadata":{"key0":"__Value__"},"recommendationArn":"__RecommendationArn__","regionCode":"__RegionCode__","status":"ok"}]}

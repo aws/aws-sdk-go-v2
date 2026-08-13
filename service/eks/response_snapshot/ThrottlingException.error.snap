@@ -1,4 +1,0 @@
-429
-Content-Type: application/json
-
-{"__type":"ThrottlingException","clusterName":"__ClusterName__","message":"__Message__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","Sidewalk":{"AmazonId":"__AmazonId__","AppServerPrivateKey":"__AppServerPrivateKey__"}}

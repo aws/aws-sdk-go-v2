@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListArtifacts
-
-{"ArtifactSummaries":[{"ArtifactArn":"__ArtifactArn__","ArtifactName":"__ArtifactName__","ArtifactType":"__ArtifactType__","CreationTime":946684800,"LastModifiedTime":946684800,"Source":{"SourceTypes":[{"SourceIdType":"MD5Hash","Value":"__Value__"},{"SourceIdType":"MD5Hash","Value":"__Value__"}],"SourceUri":"__SourceUri__"}},{"ArtifactArn":"__ArtifactArn__","ArtifactName":"__ArtifactName__","ArtifactType":"__ArtifactType__","CreationTime":946684800,"LastModifiedTime":946684800,"Source":{"SourceTypes":[{"SourceIdType":"MD5Hash","Value":"__Value__"},{"SourceIdType":"MD5Hash","Value":"__Value__"}],"SourceUri":"__SourceUri__"}}],"NextToken":"__NextToken__"}

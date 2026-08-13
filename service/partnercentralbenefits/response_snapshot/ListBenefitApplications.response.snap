@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralBenefitsService.ListBenefitApplications
-
-{"BenefitApplicationSummaries":[{"Arn":"__Arn__","AssociatedResources":["__Member__","__Member__"],"BenefitApplicationDetails":{"key0":"__Value__"},"BenefitId":"__BenefitId__","Catalog":"__Catalog__","CreatedAt":"2000-01-01T00:00:00Z","FulfillmentTypes":["CREDITS","CREDITS"],"Id":"__Id__","Name":"__Name__","Programs":["__Member__","__Member__"],"Stage":"__Stage__","Status":"PENDING_SUBMISSION","UpdatedAt":"2000-01-01T00:00:00Z"},{"Arn":"__Arn__","AssociatedResources":["__Member__","__Member__"],"BenefitApplicationDetails":{"key0":"__Value__"},"BenefitId":"__BenefitId__","Catalog":"__Catalog__","CreatedAt":"2000-01-01T00:00:00Z","FulfillmentTypes":["CREDITS","CREDITS"],"Id":"__Id__","Name":"__Name__","Programs":["__Member__","__Member__"],"Stage":"__Stage__","Status":"PENDING_SUBMISSION","UpdatedAt":"2000-01-01T00:00:00Z"}],"NextToken":"__NextToken__"}

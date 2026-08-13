@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"cancellationStatus":"CANCELLING","quantumTaskArn":"__QuantumTaskArn__"}

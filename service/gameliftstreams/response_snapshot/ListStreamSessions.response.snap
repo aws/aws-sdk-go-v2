@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"ApplicationArn":"__ApplicationArn__","Arn":"__Arn__","CreatedAt":946684800,"ExportFilesMetadata":{"OutputUri":"__OutputUri__","Status":"SUCCEEDED","StatusReason":"__StatusReason__"},"LastUpdatedAt":946684800,"Location":"__Location__","Protocol":"WebRTC","RoleArn":"__RoleArn__","Status":"ACTIVATING","StatusReason":"internalError","UserId":"__UserId__"},{"ApplicationArn":"__ApplicationArn__","Arn":"__Arn__","CreatedAt":946684800,"ExportFilesMetadata":{"OutputUri":"__OutputUri__","Status":"SUCCEEDED","StatusReason":"__StatusReason__"},"LastUpdatedAt":946684800,"Location":"__Location__","Protocol":"WebRTC","RoleArn":"__RoleArn__","Status":"ACTIVATING","StatusReason":"internalError","UserId":"__UserId__"}],"NextToken":"__NextToken__"}

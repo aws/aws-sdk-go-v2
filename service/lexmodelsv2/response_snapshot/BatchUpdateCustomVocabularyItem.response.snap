@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","botVersion":"__BotVersion__","errors":[{"errorCode":"DUPLICATE_INPUT","errorMessage":"__ErrorMessage__","itemId":"__ItemId__"},{"errorCode":"DUPLICATE_INPUT","errorMessage":"__ErrorMessage__","itemId":"__ItemId__"}],"localeId":"__LocaleId__","resources":[{"displayAs":"__DisplayAs__","itemId":"__ItemId__","phrase":"__Phrase__","weight":1},{"displayAs":"__DisplayAs__","itemId":"__ItemId__","phrase":"__Phrase__","weight":1}]}

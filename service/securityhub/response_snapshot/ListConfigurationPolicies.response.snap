@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ConfigurationPolicySummaries":[{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","Name":"__Name__","ServiceEnabled":true,"UpdatedAt":"2000-01-01T00:00:00Z"},{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","Name":"__Name__","ServiceEnabled":true,"UpdatedAt":"2000-01-01T00:00:00Z"}],"NextToken":"__NextToken__"}

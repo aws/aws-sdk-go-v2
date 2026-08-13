@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","resiliencyPolicies":[{"creationTime":946684800,"dataLocationConstraint":"AnyLocation","estimatedCostTier":"L1","policy":{"key0":{"rpoInSecs":1,"rtoInSecs":1}},"policyArn":"__PolicyArn__","policyDescription":"__PolicyDescription__","policyName":"__PolicyName__","tags":{"key0":"__Value__"},"tier":"MissionCritical"},{"creationTime":946684800,"dataLocationConstraint":"AnyLocation","estimatedCostTier":"L1","policy":{"key0":{"rpoInSecs":1,"rtoInSecs":1}},"policyArn":"__PolicyArn__","policyDescription":"__PolicyDescription__","policyName":"__PolicyName__","tags":{"key0":"__Value__"},"tier":"MissionCritical"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","botVersion":"__BotVersion__","generationSummaries":[{"creationDateTime":946684800,"generationId":"__GenerationId__","generationStatus":"Failed","lastUpdatedDateTime":946684800},{"creationDateTime":946684800,"generationId":"__GenerationId__","generationStatus":"Failed","lastUpdatedDateTime":946684800}],"localeId":"__LocaleId__","nextToken":"__NextToken__"}

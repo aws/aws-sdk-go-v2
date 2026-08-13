@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"destinations":[{"destinationId":"__DestinationId__","destinationType":"S3","status":"PENDING_VERIFICATION"},{"destinationId":"__DestinationId__","destinationType":"S3","status":"PENDING_VERIFICATION"}],"nextToken":"__NextToken__"}

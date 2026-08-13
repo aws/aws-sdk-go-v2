@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.BatchCreateBillingAdjustmentRequest
-
-{"errors":[{"clientToken":"__ClientToken__","code":"CONFLICT_EXCEPTION","message":"__Message__"},{"clientToken":"__ClientToken__","code":"CONFLICT_EXCEPTION","message":"__Message__"}],"items":[{"billingAdjustmentRequestId":"__BillingAdjustmentRequestId__","clientToken":"__ClientToken__"},{"billingAdjustmentRequestId":"__BillingAdjustmentRequestId__","clientToken":"__ClientToken__"}]}

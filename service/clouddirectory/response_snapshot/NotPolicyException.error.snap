@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"NotPolicyException","Message":"__Message__"}

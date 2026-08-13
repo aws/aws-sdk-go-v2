@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"recordingConfiguration":{"arn":"__Arn__","destinationConfiguration":{"s3":{"bucketName":"__BucketName__"}},"name":"__Name__","recordingReconnectWindowSeconds":1,"renditionConfiguration":{"renditionSelection":"ALL","renditions":["SD","SD"]},"state":"CREATING","tags":{"key0":"__Value__"},"thumbnailConfiguration":{"recordingMode":"DISABLED","resolution":"SD","storage":["SEQUENTIAL","SEQUENTIAL"],"targetIntervalSeconds":1}}}

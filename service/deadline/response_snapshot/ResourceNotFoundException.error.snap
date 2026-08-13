@@ -1,4 +1,0 @@
-404
-Content-Type: application/json
-
-{"__type":"ResourceNotFoundException","context":{"key0":"__Value__"},"message":"__Message__","resourceId":"__ResourceId__","resourceType":"__ResourceType__"}

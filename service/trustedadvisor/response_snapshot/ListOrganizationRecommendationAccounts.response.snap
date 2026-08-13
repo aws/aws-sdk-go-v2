@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accountRecommendationLifecycleSummaries":[{"accountId":"__AccountId__","accountRecommendationArn":"__AccountRecommendationArn__","lastUpdatedAt":"2000-01-01T00:00:00Z","lifecycleStage":"in_progress","updateReason":"__UpdateReason__","updateReasonCode":"non_critical_account","updatedOnBehalfOf":"__UpdatedOnBehalfOf__","updatedOnBehalfOfJobTitle":"__UpdatedOnBehalfOfJobTitle__"},{"accountId":"__AccountId__","accountRecommendationArn":"__AccountRecommendationArn__","lastUpdatedAt":"2000-01-01T00:00:00Z","lifecycleStage":"in_progress","updateReason":"__UpdateReason__","updateReasonCode":"non_critical_account","updatedOnBehalfOf":"__UpdatedOnBehalfOf__","updatedOnBehalfOfJobTitle":"__UpdatedOnBehalfOfJobTitle__"}],"nextToken":"__NextToken__"}

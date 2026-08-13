@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralBenefitsService.GetBenefit
-
-{"Arn":"__Arn__","BenefitRequestSchema":"__Document__","Catalog":"__Catalog__","Description":"__Description__","FulfillmentTypes":["CREDITS","CREDITS"],"Id":"__Id__","Name":"__Name__","Programs":["__Member__","__Member__"],"Status":"ACTIVE"}

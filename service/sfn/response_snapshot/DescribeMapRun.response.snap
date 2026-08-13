@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSStepFunctions.DescribeMapRun
-
-{"executionArn":"__ExecutionArn__","executionCounts":{"aborted":1,"failed":1,"failuresNotRedrivable":1,"pending":1,"pendingRedrive":1,"resultsWritten":1,"running":1,"succeeded":1,"timedOut":1,"total":1},"itemCounts":{"aborted":1,"failed":1,"failuresNotRedrivable":1,"pending":1,"pendingRedrive":1,"resultsWritten":1,"running":1,"succeeded":1,"timedOut":1,"total":1},"mapRunArn":"__MapRunArn__","maxConcurrency":1,"redriveCount":1,"redriveDate":946684800,"startDate":946684800,"status":"RUNNING","stopDate":946684800,"toleratedFailureCount":1,"toleratedFailurePercentage":1}

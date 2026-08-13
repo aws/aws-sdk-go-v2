@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"entities":[{"vocabulary":{"description":"__Description__","entityId":"__EntityId__","language":"EN","lastModifiedTime":"2000-01-01T00:00:00Z","numOfPhrases":1}},{"vocabulary":{"description":"__Description__","entityId":"__EntityId__","language":"EN","lastModifiedTime":"2000-01-01T00:00:00Z","numOfPhrases":1}}],"nextToken":"__NextToken__"}

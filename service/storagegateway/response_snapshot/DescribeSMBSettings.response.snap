@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StorageGateway_20130630.DescribeSMBSettings
-
-{"ActiveDirectoryStatus":"ACCESS_DENIED","DomainName":"__DomainName__","FileSharesVisible":true,"GatewayARN":"__GatewayARN__","SMBGuestPasswordSet":true,"SMBLocalGroups":{"GatewayAdmins":["__Member__","__Member__"]},"SMBSecurityStrategy":"ClientSpecified"}

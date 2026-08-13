@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"createdAt":946684800,"metadata":"__Document__","path":"__Path__","updatedAt":946684800,"version":1},{"createdAt":946684800,"metadata":"__Document__","path":"__Path__","updatedAt":946684800,"version":1}],"nextToken":"__NextToken__"}

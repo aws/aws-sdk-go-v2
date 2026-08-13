@@ -1,5 +1,0 @@
-404
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSOrganizationsV20161128.DisablePolicyType
-
-{"__type":"RootNotFoundException","Message":"__Message__"}

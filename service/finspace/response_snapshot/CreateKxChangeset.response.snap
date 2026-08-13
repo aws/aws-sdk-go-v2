@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"changeRequests":[{"changeType":"PUT","dbPath":"__DbPath__","s3Path":"__S3Path__"},{"changeType":"PUT","dbPath":"__DbPath__","s3Path":"__S3Path__"}],"changesetId":"__ChangesetId__","createdTimestamp":946684800,"databaseName":"__DatabaseName__","environmentId":"__EnvironmentId__","errorInfo":{"errorMessage":"__ErrorMessage__","errorType":"The inputs to this request are invalid."},"lastModifiedTimestamp":946684800,"status":"PENDING"}

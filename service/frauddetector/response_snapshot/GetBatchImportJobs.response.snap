@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHawksNestServiceFacade.GetBatchImportJobs
-
-{"batchImports":[{"arn":"__Arn__","completionTime":"__CompletionTime__","eventTypeName":"__EventTypeName__","failedRecordsCount":1,"failureReason":"__FailureReason__","iamRoleArn":"__IamRoleArn__","inputPath":"__InputPath__","jobId":"__JobId__","outputPath":"__OutputPath__","processedRecordsCount":1,"startTime":"__StartTime__","status":"IN_PROGRESS_INITIALIZING","totalRecordsCount":1},{"arn":"__Arn__","completionTime":"__CompletionTime__","eventTypeName":"__EventTypeName__","failedRecordsCount":1,"failureReason":"__FailureReason__","iamRoleArn":"__IamRoleArn__","inputPath":"__InputPath__","jobId":"__JobId__","outputPath":"__OutputPath__","processedRecordsCount":1,"startTime":"__StartTime__","status":"IN_PROGRESS_INITIALIZING","totalRecordsCount":1}],"nextToken":"__NextToken__"}

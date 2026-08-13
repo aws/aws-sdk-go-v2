@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextMarker":"__NextMarker__","policies":[{"policyArn":"__PolicyArn__","policyName":"__PolicyName__"},{"policyArn":"__PolicyArn__","policyName":"__PolicyName__"}]}

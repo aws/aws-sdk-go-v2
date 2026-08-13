@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Deleted":[{"KnowledgeBaseArn":"__KnowledgeBaseArn__","KnowledgeBaseId":"__KnowledgeBaseId__"},{"KnowledgeBaseArn":"__KnowledgeBaseArn__","KnowledgeBaseId":"__KnowledgeBaseId__"}],"Errors":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","KnowledgeBaseId":"__KnowledgeBaseId__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","KnowledgeBaseId":"__KnowledgeBaseId__"}],"RequestId":"__RequestId__","Status":200}

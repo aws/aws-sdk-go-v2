@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"cells":["__Member__","__Member__"],"recoveryGroupArn":"__RecoveryGroupArn__","recoveryGroupName":"__RecoveryGroupName__","tags":{"key0":"__Value__"}}

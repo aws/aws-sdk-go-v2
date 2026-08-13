@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SWBExternalService.DescribeRegion
-
-{"AddedDate":946684800,"IsPrimaryRegion":true,"RegionName":"__RegionName__","Status":"ACTIVE"}

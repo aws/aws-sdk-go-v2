@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListApps
-
-{"Apps":[{"AppName":"__AppName__","AppType":"JupyterServer","CreationTime":946684800,"DomainId":"__DomainId__","ResourceSpec":{"InstanceType":"system","LifecycleConfigArn":"__LifecycleConfigArn__","SageMakerImageArn":"__SageMakerImageArn__","SageMakerImageVersionAlias":"__SageMakerImageVersionAlias__","SageMakerImageVersionArn":"__SageMakerImageVersionArn__","TrainingPlanArn":"__TrainingPlanArn__"},"SpaceName":"__SpaceName__","Status":"Deleted","UserProfileName":"__UserProfileName__"},{"AppName":"__AppName__","AppType":"JupyterServer","CreationTime":946684800,"DomainId":"__DomainId__","ResourceSpec":{"InstanceType":"system","LifecycleConfigArn":"__LifecycleConfigArn__","SageMakerImageArn":"__SageMakerImageArn__","SageMakerImageVersionAlias":"__SageMakerImageVersionAlias__","SageMakerImageVersionArn":"__SageMakerImageVersionArn__","TrainingPlanArn":"__TrainingPlanArn__"},"SpaceName":"__SpaceName__","Status":"Deleted","UserProfileName":"__UserProfileName__"}],"NextToken":"__NextToken__"}

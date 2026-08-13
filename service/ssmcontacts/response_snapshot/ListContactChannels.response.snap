@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SSMContacts.ListContactChannels
-
-{"ContactChannels":[{"ActivationStatus":"ACTIVATED","ContactArn":"__ContactArn__","ContactChannelArn":"__ContactChannelArn__","DeliveryAddress":{"SimpleAddress":"__SimpleAddress__"},"Name":"__Name__","Type":"SMS"},{"ActivationStatus":"ACTIVATED","ContactArn":"__ContactArn__","ContactChannelArn":"__ContactChannelArn__","DeliveryAddress":{"SimpleAddress":"__SimpleAddress__"},"Name":"__Name__","Type":"SMS"}],"NextToken":"__NextToken__"}

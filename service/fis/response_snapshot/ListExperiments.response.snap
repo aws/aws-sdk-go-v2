@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"experiments":[{"arn":"__Arn__","creationTime":946684800,"experimentOptions":{"accountTargeting":"single-account","actionsMode":"skip-all","emptyTargetResolutionMode":"fail"},"experimentTemplateId":"__ExperimentTemplateId__","id":"__Id__","state":{"error":{"accountId":"__AccountId__","code":"__Code__","location":"__Location__"},"reason":"__Reason__","status":"pending"},"tags":{"key0":"__Value__"}},{"arn":"__Arn__","creationTime":946684800,"experimentOptions":{"accountTargeting":"single-account","actionsMode":"skip-all","emptyTargetResolutionMode":"fail"},"experimentTemplateId":"__ExperimentTemplateId__","id":"__Id__","state":{"error":{"accountId":"__AccountId__","code":"__Code__","location":"__Location__"},"reason":"__Reason__","status":"pending"},"tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

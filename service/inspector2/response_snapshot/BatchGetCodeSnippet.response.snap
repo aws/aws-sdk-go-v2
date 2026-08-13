@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"codeSnippetResults":[{"codeSnippet":[{"content":"__Content__","lineNumber":1},{"content":"__Content__","lineNumber":1}],"endLine":1,"findingArn":"__FindingArn__","startLine":1,"suggestedFixes":[{"code":"__Code__","description":"__Description__"},{"code":"__Code__","description":"__Description__"}]},{"codeSnippet":[{"content":"__Content__","lineNumber":1},{"content":"__Content__","lineNumber":1}],"endLine":1,"findingArn":"__FindingArn__","startLine":1,"suggestedFixes":[{"code":"__Code__","description":"__Description__"},{"code":"__Code__","description":"__Description__"}]}],"errors":[{"errorCode":"INTERNAL_ERROR","errorMessage":"__ErrorMessage__","findingArn":"__FindingArn__"},{"errorCode":"INTERNAL_ERROR","errorMessage":"__ErrorMessage__","findingArn":"__FindingArn__"}]}

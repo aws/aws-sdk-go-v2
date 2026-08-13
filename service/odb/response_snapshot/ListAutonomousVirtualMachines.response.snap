@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Odb.ListAutonomousVirtualMachines
-
-{"autonomousVirtualMachines":[{"autonomousVirtualMachineId":"__AutonomousVirtualMachineId__","clientIpAddress":"__ClientIpAddress__","cloudAutonomousVmClusterId":"__CloudAutonomousVmClusterId__","cpuCoreCount":1,"dbNodeStorageSizeInGBs":1,"dbServerDisplayName":"__DbServerDisplayName__","dbServerId":"__DbServerId__","memorySizeInGBs":1,"ociResourceAnchorName":"__OciResourceAnchorName__","ocid":"__Ocid__","status":"AVAILABLE","statusReason":"__StatusReason__","vmName":"__VmName__"},{"autonomousVirtualMachineId":"__AutonomousVirtualMachineId__","clientIpAddress":"__ClientIpAddress__","cloudAutonomousVmClusterId":"__CloudAutonomousVmClusterId__","cpuCoreCount":1,"dbNodeStorageSizeInGBs":1,"dbServerDisplayName":"__DbServerDisplayName__","dbServerId":"__DbServerId__","memorySizeInGBs":1,"ociResourceAnchorName":"__OciResourceAnchorName__","ocid":"__Ocid__","status":"AVAILABLE","statusReason":"__StatusReason__","vmName":"__VmName__"}],"nextToken":"__NextToken__"}

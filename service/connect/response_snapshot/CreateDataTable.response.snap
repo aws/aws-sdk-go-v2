@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","Id":"__Id__","LockVersion":{"Attribute":"__Attribute__","DataTable":"__DataTable__","PrimaryValues":"__PrimaryValues__","Value":"__Value__"}}

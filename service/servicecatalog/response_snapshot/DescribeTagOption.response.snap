@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribeTagOption
-
-{"TagOptionDetail":{"Active":true,"Id":"__Id__","Key":"__Key__","Owner":"__Owner__","Value":"__Value__"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","rules":[{"createdAt":946684800,"ruleArn":"__RuleArn__","ruleDisabled":true,"ruleName":"__RuleName__","topicPattern":"__TopicPattern__"},{"createdAt":946684800,"ruleArn":"__RuleArn__","ruleDisabled":true,"ruleName":"__RuleName__","topicPattern":"__TopicPattern__"}]}

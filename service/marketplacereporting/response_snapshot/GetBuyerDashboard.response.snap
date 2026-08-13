@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"dashboardIdentifier":"__DashboardIdentifier__","embedUrl":"__EmbedUrl__","embeddingDomains":["__Member__","__Member__"]}

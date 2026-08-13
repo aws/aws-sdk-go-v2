@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"allowedStorageProfileIds":["__Member__","__Member__"],"blockedReason":"NO_BUDGET_CONFIGURED","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","defaultBudgetAction":"NONE","description":"__Description__","displayName":"__DisplayName__","farmId":"__FarmId__","jobAttachmentSettings":{"rootPrefix":"__RootPrefix__","s3BucketName":"__S3BucketName__"},"jobRunAsUser":{"posix":{"group":"__Group__","user":"__User__"},"runAs":"QUEUE_CONFIGURED_USER","windows":{"passwordArn":"__PasswordArn__","user":"__User__"}},"queueId":"__QueueId__","requiredFileSystemLocationNames":["__Member__","__Member__"],"roleArn":"__RoleArn__","schedulingConfiguration":{"priorityFifo":{}},"status":"IDLE","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"}

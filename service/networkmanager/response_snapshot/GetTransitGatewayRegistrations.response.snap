@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","TransitGatewayRegistrations":[{"GlobalNetworkId":"__GlobalNetworkId__","State":{"Code":"PENDING","Message":"__Message__"},"TransitGatewayArn":"__TransitGatewayArn__"},{"GlobalNetworkId":"__GlobalNetworkId__","State":{"Code":"PENDING","Message":"__Message__"},"TransitGatewayArn":"__TransitGatewayArn__"}]}

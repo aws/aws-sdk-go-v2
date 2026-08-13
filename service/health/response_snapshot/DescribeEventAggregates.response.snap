@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHealth_20160804.DescribeEventAggregates
-
-{"eventAggregates":[{"aggregateValue":"__AggregateValue__","count":1},{"aggregateValue":"__AggregateValue__","count":1}],"nextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-419
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Timestream_20181101.WriteRecords
-
-{"__type":"RejectedRecordsException","Message":"__Message__","RejectedRecords":[{"ExistingVersion":1,"Reason":"__Reason__","RecordIndex":1},{"ExistingVersion":1,"Reason":"__Reason__","RecordIndex":1}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"identityProviders":[{"identityProviderArn":"__IdentityProviderArn__","identityProviderName":"__IdentityProviderName__","identityProviderType":"SAML"},{"identityProviderArn":"__IdentityProviderArn__","identityProviderName":"__IdentityProviderName__","identityProviderType":"SAML"}],"nextToken":"__NextToken__"}

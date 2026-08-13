@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDB_20120810.ListBackups
-
-{"BackupSummaries":[{"BackupArn":"__BackupArn__","BackupCreationDateTime":946684800,"BackupExpiryDateTime":946684800,"BackupName":"__BackupName__","BackupSizeBytes":1,"BackupStatus":"CREATING","BackupType":"USER","TableArn":"__TableArn__","TableId":"__TableId__","TableName":"__TableName__"},{"BackupArn":"__BackupArn__","BackupCreationDateTime":946684800,"BackupExpiryDateTime":946684800,"BackupName":"__BackupName__","BackupSizeBytes":1,"BackupStatus":"CREATING","BackupType":"USER","TableArn":"__TableArn__","TableId":"__TableId__","TableName":"__TableName__"}],"LastEvaluatedBackupArn":"__LastEvaluatedBackupArn__"}

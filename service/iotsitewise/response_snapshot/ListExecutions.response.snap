@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"executionSummaries":[{"actionType":"__ActionType__","executionEndTime":946684800,"executionEntityVersion":"__ExecutionEntityVersion__","executionId":"__ExecutionId__","executionStartTime":946684800,"executionStatus":{"state":"RUNNING"},"resolveTo":{"assetId":"__AssetId__"},"targetResource":{"assetId":"__AssetId__","computationModelId":"__ComputationModelId__"},"targetResourceVersion":"__TargetResourceVersion__"},{"actionType":"__ActionType__","executionEndTime":946684800,"executionEntityVersion":"__ExecutionEntityVersion__","executionId":"__ExecutionId__","executionStartTime":946684800,"executionStatus":{"state":"RUNNING"},"resolveTo":{"assetId":"__AssetId__"},"targetResource":{"assetId":"__AssetId__","computationModelId":"__ComputationModelId__"},"targetResourceVersion":"__TargetResourceVersion__"}],"nextToken":"__NextToken__"}

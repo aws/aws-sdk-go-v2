@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"TrafficDistributionGroup":{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","InstanceArn":"__InstanceArn__","IsDefault":true,"Name":"__Name__","Status":"CREATION_IN_PROGRESS","Tags":{"key0":"__Value__"}}}

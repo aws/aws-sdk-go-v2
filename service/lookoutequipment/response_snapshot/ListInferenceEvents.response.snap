@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.ListInferenceEvents
-
-{"InferenceEventSummaries":[{"Diagnostics":"__Diagnostics__","EventDurationInSeconds":1,"EventEndTime":946684800,"EventStartTime":946684800,"InferenceSchedulerArn":"__InferenceSchedulerArn__","InferenceSchedulerName":"__InferenceSchedulerName__"},{"Diagnostics":"__Diagnostics__","EventDurationInSeconds":1,"EventEndTime":946684800,"EventStartTime":946684800,"InferenceSchedulerArn":"__InferenceSchedulerArn__","InferenceSchedulerName":"__InferenceSchedulerName__"}],"NextToken":"__NextToken__"}

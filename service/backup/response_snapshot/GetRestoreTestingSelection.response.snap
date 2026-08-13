@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"RestoreTestingSelection":{"CreationTime":946684800,"CreatorRequestId":"__CreatorRequestId__","IamRoleArn":"__IamRoleArn__","ProtectedResourceArns":["__Member__","__Member__"],"ProtectedResourceConditions":{"StringEquals":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"StringNotEquals":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"ProtectedResourceType":"__ProtectedResourceType__","RestoreMetadataOverrides":{"key0":"__Value__"},"RestoreTestingPlanName":"__RestoreTestingPlanName__","RestoreTestingSelectionName":"__RestoreTestingSelectionName__","ValidationWindowHours":1}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","TieringConfigurations":[{"BackupVaultName":"__BackupVaultName__","CreationTime":946684800,"LastUpdatedTime":946684800,"TieringConfigurationArn":"__TieringConfigurationArn__","TieringConfigurationName":"__TieringConfigurationName__"},{"BackupVaultName":"__BackupVaultName__","CreationTime":946684800,"LastUpdatedTime":946684800,"TieringConfigurationArn":"__TieringConfigurationArn__","TieringConfigurationName":"__TieringConfigurationName__"}]}

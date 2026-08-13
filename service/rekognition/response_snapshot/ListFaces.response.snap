@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RekognitionService.ListFaces
-
-{"FaceModelVersion":"__FaceModelVersion__","Faces":[{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Confidence":1,"ExternalImageId":"__ExternalImageId__","FaceId":"__FaceId__","ImageId":"__ImageId__","IndexFacesModelVersion":"__IndexFacesModelVersion__","UserId":"__UserId__"},{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Confidence":1,"ExternalImageId":"__ExternalImageId__","FaceId":"__FaceId__","ImageId":"__ImageId__","IndexFacesModelVersion":"__IndexFacesModelVersion__","UserId":"__UserId__"}],"NextToken":"__NextToken__"}

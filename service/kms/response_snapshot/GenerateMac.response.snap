@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TrentService.GenerateMac
-
-{"KeyId":"__KeyId__","Mac":"YmxvYg==","MacAlgorithm":"HMAC_SHA_224"}

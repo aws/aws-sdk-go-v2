@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","SlackUserIdentities":[{"AwsUserIdentity":"__AwsUserIdentity__","ChatConfigurationArn":"__ChatConfigurationArn__","IamRoleArn":"__IamRoleArn__","SlackTeamId":"__SlackTeamId__","SlackUserId":"__SlackUserId__"},{"AwsUserIdentity":"__AwsUserIdentity__","ChatConfigurationArn":"__ChatConfigurationArn__","IamRoleArn":"__IamRoleArn__","SlackTeamId":"__SlackTeamId__","SlackUserId":"__SlackUserId__"}]}

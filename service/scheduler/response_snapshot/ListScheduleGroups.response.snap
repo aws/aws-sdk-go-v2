@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ScheduleGroups":[{"Arn":"__Arn__","CreationDate":946684800,"LastModificationDate":946684800,"Name":"__Name__","State":"ACTIVE"},{"Arn":"__Arn__","CreationDate":946684800,"LastModificationDate":946684800,"Name":"__Name__","State":"ACTIVE"}]}

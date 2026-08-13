@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"View":{"Filters":{"FilterString":"__FilterString__"},"IncludedProperties":[{"Name":"__Name__"},{"Name":"__Name__"}],"ScopeType":"__ScopeType__","ServiceLinkedRecorder":{"RecorderName":"__RecorderName__","RecorderType":"AWS","ServicePrincipal":"__ServicePrincipal__"},"ServiceViewArn":"__ServiceViewArn__","ServiceViewName":"__ServiceViewName__","StreamingAccessForService":"__StreamingAccessForService__"}}

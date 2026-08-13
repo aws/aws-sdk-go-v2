@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Configuration":{"CustomLayers":["__Member__","__Member__"],"PoliticalView":"__PoliticalView__","Style":"__Style__"},"CreateTime":"2000-01-01T00:00:00Z","DataSource":"__DataSource__","Description":"__Description__","MapArn":"__MapArn__","MapName":"__MapName__","PricingPlan":"RequestBasedUsage","Tags":{"key0":"__Value__"},"UpdateTime":"2000-01-01T00:00:00Z"}

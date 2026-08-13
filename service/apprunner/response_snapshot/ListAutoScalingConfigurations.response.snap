@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AppRunner.ListAutoScalingConfigurations
-
-{"AutoScalingConfigurationSummaryList":[{"AutoScalingConfigurationArn":"__AutoScalingConfigurationArn__","AutoScalingConfigurationName":"__AutoScalingConfigurationName__","AutoScalingConfigurationRevision":1,"CreatedAt":946684800,"HasAssociatedService":true,"IsDefault":true,"Status":"ACTIVE"},{"AutoScalingConfigurationArn":"__AutoScalingConfigurationArn__","AutoScalingConfigurationName":"__AutoScalingConfigurationName__","AutoScalingConfigurationRevision":1,"CreatedAt":946684800,"HasAssociatedService":true,"IsDefault":true,"Status":"ACTIVE"}],"NextToken":"__NextToken__"}

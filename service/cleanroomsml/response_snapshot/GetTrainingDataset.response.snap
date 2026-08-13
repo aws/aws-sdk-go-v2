@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createTime":"2000-01-01T00:00:00Z","description":"__Description__","name":"__Name__","roleArn":"__RoleArn__","status":"ACTIVE","tags":{"key0":"__Value__"},"trainingData":[{"inputConfig":{"dataSource":{"glueDataSource":{"catalogId":"__CatalogId__","databaseName":"__DatabaseName__","tableName":"__TableName__"}},"schema":[{"columnName":"__ColumnName__","columnTypes":["USER_ID","USER_ID"]},{"columnName":"__ColumnName__","columnTypes":["USER_ID","USER_ID"]}]},"type":"INTERACTIONS"},{"inputConfig":{"dataSource":{"glueDataSource":{"catalogId":"__CatalogId__","databaseName":"__DatabaseName__","tableName":"__TableName__"}},"schema":[{"columnName":"__ColumnName__","columnTypes":["USER_ID","USER_ID"]},{"columnName":"__ColumnName__","columnTypes":["USER_ID","USER_ID"]}]},"type":"INTERACTIONS"}],"trainingDatasetArn":"__TrainingDatasetArn__","updateTime":"2000-01-01T00:00:00Z"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.ListLabelGroups
-
-{"LabelGroupSummaries":[{"CreatedAt":946684800,"LabelGroupArn":"__LabelGroupArn__","LabelGroupName":"__LabelGroupName__","UpdatedAt":946684800},{"CreatedAt":946684800,"LabelGroupArn":"__LabelGroupArn__","LabelGroupName":"__LabelGroupName__","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

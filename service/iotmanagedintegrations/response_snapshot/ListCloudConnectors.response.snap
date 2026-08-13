@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"Description":"__Description__","EndpointConfig":{"lambda":{"arn":"__Arn__"}},"EndpointType":"LAMBDA","Id":"__Id__","Name":"__Name__","Type":"LISTED"},{"Description":"__Description__","EndpointConfig":{"lambda":{"arn":"__Arn__"}},"EndpointType":"LAMBDA","Id":"__Id__","Name":"__Name__","Type":"LISTED"}],"NextToken":"__NextToken__"}

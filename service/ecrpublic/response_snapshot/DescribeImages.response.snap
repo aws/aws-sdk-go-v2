@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SpencerFrontendService.DescribeImages
-
-{"imageDetails":[{"artifactMediaType":"__ArtifactMediaType__","imageDigest":"__ImageDigest__","imageManifestMediaType":"__ImageManifestMediaType__","imagePushedAt":946684800,"imageSizeInBytes":1,"imageTags":["__Member__","__Member__"],"registryId":"__RegistryId__","repositoryName":"__RepositoryName__"},{"artifactMediaType":"__ArtifactMediaType__","imageDigest":"__ImageDigest__","imageManifestMediaType":"__ImageManifestMediaType__","imagePushedAt":946684800,"imageSizeInBytes":1,"imageTags":["__Member__","__Member__"],"registryId":"__RegistryId__","repositoryName":"__RepositoryName__"}],"nextToken":"__NextToken__"}

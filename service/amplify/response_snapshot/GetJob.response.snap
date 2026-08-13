@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"job":{"steps":[{"artifactsUrl":"__ArtifactsUrl__","context":"__Context__","endTime":946684800,"logUrl":"__LogUrl__","screenshots":{"key0":"__Value__"},"startTime":946684800,"status":"CREATED","statusReason":"__StatusReason__","stepName":"__StepName__","testArtifactsUrl":"__TestArtifactsUrl__","testConfigUrl":"__TestConfigUrl__"},{"artifactsUrl":"__ArtifactsUrl__","context":"__Context__","endTime":946684800,"logUrl":"__LogUrl__","screenshots":{"key0":"__Value__"},"startTime":946684800,"status":"CREATED","statusReason":"__StatusReason__","stepName":"__StepName__","testArtifactsUrl":"__TestArtifactsUrl__","testConfigUrl":"__TestConfigUrl__"}],"summary":{"commitId":"__CommitId__","commitMessage":"__CommitMessage__","commitTime":946684800,"endTime":946684800,"jobArn":"__JobArn__","jobId":"__JobId__","jobType":"RELEASE","sourceUrl":"__SourceUrl__","sourceUrlType":"ZIP","startTime":946684800,"status":"CREATED"}}}

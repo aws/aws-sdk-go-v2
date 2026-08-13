@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"EncryptedPinBlock":"__EncryptedPinBlock__","EncryptionKeyArn":"__EncryptionKeyArn__","EncryptionKeyCheckValue":"__EncryptionKeyCheckValue__","GenerationKeyArn":"__GenerationKeyArn__","GenerationKeyCheckValue":"__GenerationKeyCheckValue__","PinData":{"PinOffset":"__PinDataMemberPinOffset__"}}

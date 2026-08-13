@@ -1,4 +1,0 @@
-500
-Content-Type: application/json
-
-{"__type":"InternalServerErrorException","ErrorDetails":[{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"},{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"}],"Message":"__Message__"}

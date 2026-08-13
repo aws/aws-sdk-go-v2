@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ManagedView":{"Filters":{"FilterString":"__FilterString__"},"IncludedProperties":[{"Name":"__Name__"},{"Name":"__Name__"}],"LastUpdatedAt":"2000-01-01T00:00:00Z","ManagedViewArn":"__ManagedViewArn__","ManagedViewName":"__ManagedViewName__","Owner":"__Owner__","ResourcePolicy":"__ResourcePolicy__","Scope":"__Scope__","TrustedService":"__TrustedService__","Version":"__Version__"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationLogOutputUri":"__ApplicationLogOutputUri__","ApplicationLogPaths":["__Member__","__Member__"],"ApplicationSourceUri":"__ApplicationSourceUri__","Arn":"__Arn__","AssociatedStreamGroups":["__Member__","__Member__"],"CreatedAt":946684800,"Description":"__Description__","ExecutablePath":"__ExecutablePath__","Id":"__Id__","LastUpdatedAt":946684800,"ReplicationStatuses":[{"Location":"__Location__","Status":"REPLICATING"},{"Location":"__Location__","Status":"REPLICATING"}],"RuntimeEnvironment":{"Type":"PROTON","Version":"__Version__"},"Status":"INITIALIZED","StatusReason":"internalError"}

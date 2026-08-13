@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSOrganizationsV20161128.ListOutboundResponsibilityTransfers
-
-{"NextToken":"__NextToken__","ResponsibilityTransfers":[{"ActiveHandshakeId":"__ActiveHandshakeId__","Arn":"__Arn__","EndTimestamp":946684800,"Id":"__Id__","Name":"__Name__","Source":{"ManagementAccountEmail":"__ManagementAccountEmail__","ManagementAccountId":"__ManagementAccountId__"},"StartTimestamp":946684800,"Status":"REQUESTED","Target":{"ManagementAccountEmail":"__ManagementAccountEmail__","ManagementAccountId":"__ManagementAccountId__"},"Type":"BILLING"},{"ActiveHandshakeId":"__ActiveHandshakeId__","Arn":"__Arn__","EndTimestamp":946684800,"Id":"__Id__","Name":"__Name__","Source":{"ManagementAccountEmail":"__ManagementAccountEmail__","ManagementAccountId":"__ManagementAccountId__"},"StartTimestamp":946684800,"Status":"REQUESTED","Target":{"ManagementAccountEmail":"__ManagementAccountEmail__","ManagementAccountId":"__ManagementAccountId__"},"Type":"BILLING"}]}

@@ -1,5 +1,0 @@
-429
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonElasticVMwareService.AssociateEipToVlan
-
-{"__type":"ThrottlingException","message":"__Message__","retryAfterSeconds":1}

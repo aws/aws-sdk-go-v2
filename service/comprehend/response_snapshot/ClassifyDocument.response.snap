@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.ClassifyDocument
-
-{"Classes":[{"Name":"__Name__","Page":1,"Score":1},{"Name":"__Name__","Page":1,"Score":1}],"DocumentMetadata":{"ExtractedCharacters":[{"Count":1,"Page":1},{"Count":1,"Page":1}],"Pages":1},"DocumentType":[{"Page":1,"Type":"NATIVE_PDF"},{"Page":1,"Type":"NATIVE_PDF"}],"Errors":[{"ErrorCode":"TEXTRACT_BAD_PAGE","ErrorMessage":"__ErrorMessage__","Page":1},{"ErrorCode":"TEXTRACT_BAD_PAGE","ErrorMessage":"__ErrorMessage__","Page":1}],"Labels":[{"Name":"__Name__","Page":1,"Score":1},{"Name":"__Name__","Page":1,"Score":1}],"Warnings":[{"Page":1,"WarnCode":"INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL","WarnMessage":"__WarnMessage__"},{"Page":1,"WarnCode":"INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL","WarnMessage":"__WarnMessage__"}]}

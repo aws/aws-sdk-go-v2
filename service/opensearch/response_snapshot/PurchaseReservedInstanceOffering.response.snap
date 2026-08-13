@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ReservationName":"__ReservationName__","ReservedInstanceId":"__ReservedInstanceId__"}

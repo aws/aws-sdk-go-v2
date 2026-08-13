@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"coverageStatistics":{"countByCoverageStatus":{"key0":1},"countByResourceType":{"key0":1}}}

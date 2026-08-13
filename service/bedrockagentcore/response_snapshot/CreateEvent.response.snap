@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"event":{"actorId":"__ActorId__","branch":{"name":"__Name__","rootEventId":"__RootEventId__"},"eventId":"__EventId__","eventTimestamp":946684800,"memoryId":"__MemoryId__","metadata":{"key0":{"stringValue":"__MetadataValueMemberStringValue__"}},"payload":[{"conversational":{"content":{"text":"__ContentMemberText__"},"role":"ASSISTANT"}},{"conversational":{"content":{"text":"__ContentMemberText__"},"role":"ASSISTANT"}}],"sessionId":"__SessionId__"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonAthena.GetQueryRuntimeStatistics
-
-{"QueryRuntimeStatistics":{"OutputStage":{"ExecutionTime":1,"InputBytes":1,"InputRows":1,"OutputBytes":1,"OutputRows":1,"QueryStagePlan":{"Children":[{},{}],"Identifier":"__Identifier__","Name":"__Name__","RemoteSources":["__Member__","__Member__"]},"StageId":1,"State":"__State__","SubStages":[{},{}]},"Rows":{"InputBytes":1,"InputRows":1,"OutputBytes":1,"OutputRows":1},"Timeline":{"EngineExecutionTimeInMillis":1,"QueryPlanningTimeInMillis":1,"QueryQueueTimeInMillis":1,"ServicePreProcessingTimeInMillis":1,"ServiceProcessingTimeInMillis":1,"TotalExecutionTimeInMillis":1}}}

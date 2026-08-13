@@ -1,5 +1,0 @@
-200
-Content-Type: application/json
-X-Amz-Geo-Pricing-Bucket: __PricingBucket__
-
-{"ErrorCount":1,"RouteMatrix":[[{"Distance":1,"Duration":1,"Error":"NoMatch"},{"Distance":1,"Duration":1,"Error":"NoMatch"}],[{"Distance":1,"Duration":1,"Error":"NoMatch"},{"Distance":1,"Duration":1,"Error":"NoMatch"}]],"RoutingBoundary":{"Geometry":{"AutoCircle":{"Margin":1,"MaxRadius":1},"BoundingBox":[1,1],"Circle":{"Center":[1,1],"Radius":1},"Polygon":[[[1,1],[1,1]],[[1,1],[1,1]]]},"Unbounded":true}}

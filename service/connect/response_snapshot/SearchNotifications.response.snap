@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApproximateTotalCount":1,"NextToken":"__NextToken__","Notifications":[{"Arn":"__Arn__","Content":{"key0":"__Value__"},"CreatedAt":946684800,"ExpiresAt":946684800,"Id":"__Id__","InstanceId":"__InstanceId__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Priority":"URGENT","Recipients":["__Member__","__Member__"],"Tags":{"key0":"__Value__"}},{"Arn":"__Arn__","Content":{"key0":"__Value__"},"CreatedAt":946684800,"ExpiresAt":946684800,"Id":"__Id__","InstanceId":"__InstanceId__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Priority":"URGENT","Recipients":["__Member__","__Member__"],"Tags":{"key0":"__Value__"}}]}

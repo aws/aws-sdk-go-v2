@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"Arn":"__Arn__","ChannelGroupName":"__ChannelGroupName__","CreatedAt":946684800,"Description":"__Description__","ModifiedAt":946684800},{"Arn":"__Arn__","ChannelGroupName":"__ChannelGroupName__","CreatedAt":946684800,"Description":"__Description__","ModifiedAt":946684800}],"NextToken":"__NextToken__"}

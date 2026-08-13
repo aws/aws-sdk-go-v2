@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.DescribeLanguageModel
-
-{"LanguageModel":{"BaseModelName":"NarrowBand","CreateTime":946684800,"FailureReason":"__FailureReason__","InputDataConfig":{"DataAccessRoleArn":"__DataAccessRoleArn__","S3Uri":"__S3Uri__","TuningDataS3Uri":"__TuningDataS3Uri__"},"LanguageCode":"en-US","LastModifiedTime":946684800,"ModelName":"__ModelName__","ModelStatus":"IN_PROGRESS","UpgradeAvailability":true}}

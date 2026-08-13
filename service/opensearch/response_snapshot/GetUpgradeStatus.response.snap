@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"StepStatus":"IN_PROGRESS","UpgradeName":"__UpgradeName__","UpgradeStep":"PRE_UPGRADE_CHECK"}

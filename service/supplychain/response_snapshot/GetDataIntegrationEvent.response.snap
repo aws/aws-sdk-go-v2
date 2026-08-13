@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"event":{"datasetTargetDetails":{"datasetIdentifier":"__DatasetIdentifier__","datasetLoadExecution":{"message":"__Message__","status":"SUCCEEDED"},"operationType":"APPEND"},"eventGroupId":"__EventGroupId__","eventId":"__EventId__","eventTimestamp":946684800,"eventType":"scn.data.forecast","instanceId":"__InstanceId__"}}

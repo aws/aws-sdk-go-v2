@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ContractEndDate":"__ContractEndDate__","NextToken":"__NextToken__","PaymentOption":"ALL_UPFRONT","PaymentTerm":"THREE_YEARS","Subscriptions":[{"BeginDate":946684800,"Currency":"USD","EndDate":946684800,"MonthlyRecurringPrice":1,"OrderIds":["__Member__","__Member__"],"SubscriptionId":"__SubscriptionId__","SubscriptionStatus":"ACTIVE","SubscriptionType":"ORIGINAL","UpfrontPrice":1},{"BeginDate":946684800,"Currency":"USD","EndDate":946684800,"MonthlyRecurringPrice":1,"OrderIds":["__Member__","__Member__"],"SubscriptionId":"__SubscriptionId__","SubscriptionStatus":"ACTIVE","SubscriptionType":"ORIGINAL","UpfrontPrice":1}]}

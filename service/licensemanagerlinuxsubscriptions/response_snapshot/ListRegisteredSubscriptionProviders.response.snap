@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","RegisteredSubscriptionProviders":[{"LastSuccessfulDataRetrievalTime":"__LastSuccessfulDataRetrievalTime__","SecretArn":"__SecretArn__","SubscriptionProviderArn":"__SubscriptionProviderArn__","SubscriptionProviderSource":"RedHat","SubscriptionProviderStatus":"ACTIVE","SubscriptionProviderStatusMessage":"__SubscriptionProviderStatusMessage__"},{"LastSuccessfulDataRetrievalTime":"__LastSuccessfulDataRetrievalTime__","SecretArn":"__SecretArn__","SubscriptionProviderArn":"__SubscriptionProviderArn__","SubscriptionProviderSource":"RedHat","SubscriptionProviderStatus":"ACTIVE","SubscriptionProviderStatusMessage":"__SubscriptionProviderStatusMessage__"}]}
