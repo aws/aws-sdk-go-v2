@@ -1,3 +1,7 @@
+# v1.51.0 (2026-08-13)
+
+* **Feature**: This release adds support for minimum aggregation thresholds and comparison controls to the Custom analysis rule type.
+
 # v1.50.0 (2026-08-11)
 
 * **Feature**: Adds support for exporting redacted query execution logs in AWS Clean Rooms

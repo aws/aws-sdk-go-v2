@@ -1,8 +1,0 @@
-{
-    "id": "9a1356b9-9cf0-428d-ba42-c05ec722593a",
-    "type": "feature",
-    "description": "This change allows customers to update their existing email-validated certificates to use the DNS validation method.",
-    "modules": [
-        "service/acm"
-    ]
-}

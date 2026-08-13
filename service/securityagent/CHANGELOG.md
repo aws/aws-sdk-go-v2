@@ -1,3 +1,7 @@
+# v1.11.0 (2026-08-13)
+
+* **Feature**: Add support for setting a maximum task-hour budget cap on penetration tests and code reviews, and for revalidating previously reported findings via a new REVALIDATION job type.
+
 # v1.10.1 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

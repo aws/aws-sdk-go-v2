@@ -1,3 +1,7 @@
+# v1.44.0 (2026-08-13)
+
+* **Feature**: This change allows customers to update their existing email-validated certificates to use the DNS validation method.
+
 # v1.43.5 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

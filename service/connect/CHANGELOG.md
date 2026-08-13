@@ -1,3 +1,7 @@
+# v1.188.0 (2026-08-13)
+
+* **Feature**: Adds the StartAssistantContact API to start chat contacts handled by an AI agent. Adds SegmentAttributes to StartWebRTCContact, and corrects its error response to now receive AccessDeniedException (previously returned as an internal server error due to a missing error declaration).
+
 # v1.187.0 (2026-08-11)
 
 * **Feature**: Seven new APIs for managing custom metrics, including create, describe, update, and delete. Using Custom Metrics, customers of Amazon Connect Customer can tailor analytics dashboards to their needs by applying custom thresholds, filters, and calculations to one or more out of the box measurements.

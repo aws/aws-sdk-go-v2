@@ -1,8 +1,0 @@
-{
-    "id": "50fb028c-5c76-4059-9ce1-a0fbbd3f79c4",
-    "type": "feature",
-    "description": "Adds the StartAssistantContact API to start chat contacts handled by an AI agent. Adds SegmentAttributes to StartWebRTCContact, and corrects its error response to now receive AccessDeniedException (previously returned as an internal server error due to a missing error declaration).",
-    "modules": [
-        "service/connect"
-    ]
-}
