@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configuredTable":{"allowedColumns":["__Member__","__Member__"],"analysisMethod":"DIRECT_QUERY","analysisRuleTypes":["AGGREGATION","AGGREGATION"],"arn":"__Arn__","createTime":946684800,"description":"__Description__","id":"__Id__","name":"__Name__","selectedAnalysisMethods":["DIRECT_QUERY","DIRECT_QUERY"],"tableReference":{"glue":{"databaseName":"__DatabaseName__","region":"us-west-1","tableName":"__TableName__"}},"updateTime":946684800}}

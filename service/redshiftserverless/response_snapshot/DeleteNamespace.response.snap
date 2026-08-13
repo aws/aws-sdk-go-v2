@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RedshiftServerless.DeleteNamespace
-
-{"namespace":{"adminPasswordSecretArn":"__AdminPasswordSecretArn__","adminPasswordSecretKmsKeyId":"__AdminPasswordSecretKmsKeyId__","adminUsername":"__AdminUsername__","catalogArn":"__CatalogArn__","creationDate":"2000-01-01T00:00:00Z","dbName":"__DbName__","defaultIamRoleArn":"__DefaultIamRoleArn__","iamRoles":["__Member__","__Member__"],"kmsKeyId":"__KmsKeyId__","lakehouseRegistrationStatus":"__LakehouseRegistrationStatus__","logExports":["useractivitylog","useractivitylog"],"namespaceArn":"__NamespaceArn__","namespaceId":"__NamespaceId__","namespaceName":"__NamespaceName__","status":"AVAILABLE"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"clientVpcConnections":[{"authentication":"__Authentication__","creationTime":"2000-01-01T00:00:00Z","owner":"__Owner__","state":"CREATING","vpcConnectionArn":"__VpcConnectionArn__"},{"authentication":"__Authentication__","creationTime":"2000-01-01T00:00:00Z","owner":"__Owner__","state":"CREATING","vpcConnectionArn":"__VpcConnectionArn__"}],"nextToken":"__NextToken__"}

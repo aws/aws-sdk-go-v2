@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BackupVaultName":"__BackupVaultName__","Index":"ENABLED","IndexStatus":"PENDING","RecoveryPointArn":"__RecoveryPointArn__"}

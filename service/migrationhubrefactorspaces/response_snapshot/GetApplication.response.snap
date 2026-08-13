@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApiGatewayProxy":{"ApiGatewayId":"__ApiGatewayId__","EndpointType":"REGIONAL","NlbArn":"__NlbArn__","NlbName":"__NlbName__","ProxyUrl":"__ProxyUrl__","StageName":"__StageName__","VpcLinkId":"__VpcLinkId__"},"ApplicationId":"__ApplicationId__","Arn":"__Arn__","CreatedByAccountId":"__CreatedByAccountId__","CreatedTime":946684800,"EnvironmentId":"__EnvironmentId__","Error":{"AccountId":"__AccountId__","AdditionalDetails":{"key0":"__Value__"},"Code":"INVALID_RESOURCE_STATE","Message":"__Message__","ResourceIdentifier":"__ResourceIdentifier__","ResourceType":"ENVIRONMENT"},"LastUpdatedTime":946684800,"Name":"__Name__","OwnerAccountId":"__OwnerAccountId__","ProxyType":"API_GATEWAY","State":"CREATING","Tags":{"key0":"__Value__"},"VpcId":"__VpcId__"}

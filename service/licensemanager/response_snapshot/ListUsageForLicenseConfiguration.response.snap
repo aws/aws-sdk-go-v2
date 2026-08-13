@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.ListUsageForLicenseConfiguration
-
-{"LicenseConfigurationUsageList":[{"AssociationTime":946684800,"ConsumedLicenses":1,"ResourceArn":"__ResourceArn__","ResourceOwnerId":"__ResourceOwnerId__","ResourceStatus":"__ResourceStatus__","ResourceType":"EC2_INSTANCE"},{"AssociationTime":946684800,"ConsumedLicenses":1,"ResourceArn":"__ResourceArn__","ResourceOwnerId":"__ResourceOwnerId__","ResourceStatus":"__ResourceStatus__","ResourceType":"EC2_INSTANCE"}],"NextToken":"__NextToken__"}

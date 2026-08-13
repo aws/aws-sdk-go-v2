@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Timestream_20181101.DescribeDatabase
-
-{"Database":{"Arn":"__Arn__","CreationTime":946684800,"DatabaseName":"__DatabaseName__","KmsKeyId":"__KmsKeyId__","LastUpdatedTime":946684800,"TableCount":1}}

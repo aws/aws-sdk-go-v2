@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ChangeSetSummaryList":[{"ChangeSetArn":"__ChangeSetArn__","ChangeSetId":"__ChangeSetId__","ChangeSetName":"__ChangeSetName__","EndTime":"__EndTime__","EntityIdList":["__Member__","__Member__"],"FailureCode":"CLIENT_ERROR","StartTime":"__StartTime__","Status":"PREPARING"},{"ChangeSetArn":"__ChangeSetArn__","ChangeSetId":"__ChangeSetId__","ChangeSetName":"__ChangeSetName__","EndTime":"__EndTime__","EntityIdList":["__Member__","__Member__"],"FailureCode":"CLIENT_ERROR","StartTime":"__StartTime__","Status":"PREPARING"}],"NextToken":"__NextToken__"}

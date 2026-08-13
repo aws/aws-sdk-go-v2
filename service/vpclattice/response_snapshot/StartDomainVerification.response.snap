@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","domainName":"__DomainName__","id":"__Id__","status":"VERIFIED","txtMethodConfig":{"name":"__Name__","value":"__Value__"}}

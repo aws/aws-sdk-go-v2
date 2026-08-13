@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"environmentArn":"__EnvironmentArn__","environmentId":"__EnvironmentId__","environmentUrl":"__EnvironmentUrl__"}

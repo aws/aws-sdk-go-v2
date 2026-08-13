@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BackupJobId":"__BackupJobId__","CreationDate":946684800,"IsParent":true,"RecoveryPointArn":"__RecoveryPointArn__"}

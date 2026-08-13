@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","CreationTime":"2000-01-01T00:00:00Z","DestinationName":"__DestinationName__","FailedImportedDeviceCount":1,"Id":"__Id__","InitializedImportedDeviceCount":1,"OnboardedImportedDeviceCount":1,"PendingImportedDeviceCount":1,"Positioning":"Enabled","Sidewalk":{"DeviceCreationFileList":["__Member__","__Member__"],"Positioning":{"DestinationName":"__DestinationName__"},"Role":"__Role__"},"Status":"INITIALIZING","StatusReason":"__StatusReason__"}

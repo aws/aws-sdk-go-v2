@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.ListResourceInventory
-
-{"NextToken":"__NextToken__","ResourceInventoryList":[{"AmiId":"__AmiId__","HostId":"__HostId__","InstanceType":"__InstanceType__","MarketplaceProductCodes":["__Member__","__Member__"],"Platform":"__Platform__","PlatformVersion":"__PlatformVersion__","Region":"__Region__","ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceOwningAccountId":"__ResourceOwningAccountId__","ResourceType":"EC2_INSTANCE","UsageOperation":"__UsageOperation__"},{"AmiId":"__AmiId__","HostId":"__HostId__","InstanceType":"__InstanceType__","MarketplaceProductCodes":["__Member__","__Member__"],"Platform":"__Platform__","PlatformVersion":"__PlatformVersion__","Region":"__Region__","ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceOwningAccountId":"__ResourceOwningAccountId__","ResourceType":"EC2_INSTANCE","UsageOperation":"__UsageOperation__"}]}

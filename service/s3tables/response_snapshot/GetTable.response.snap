@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","format":"ICEBERG","managedByService":"__ManagedByService__","managedTableInformation":{"replicationInformation":{"sourceTableARN":"__SourceTableARN__"}},"metadataLocation":"__MetadataLocation__","modifiedAt":"2000-01-01T00:00:00Z","modifiedBy":"__ModifiedBy__","name":"__Name__","namespace":["__Member__","__Member__"],"namespaceId":"__NamespaceId__","ownerAccountId":"__OwnerAccountId__","tableARN":"__TableARN__","tableBucketId":"__TableBucketId__","type":"customer","versionToken":"__VersionToken__","warehouseLocation":"__WarehouseLocation__"}

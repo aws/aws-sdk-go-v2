@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"amazonManaged":true,"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","customDomainName":"__CustomDomainName__","domainVerificationId":"__DomainVerificationId__","groupDomain":"__GroupDomain__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","resourceConfigurationGroupId":"__ResourceConfigurationGroupId__","resourceGatewayId":"__ResourceGatewayId__","status":"ACTIVE","type":"GROUP"},{"amazonManaged":true,"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","customDomainName":"__CustomDomainName__","domainVerificationId":"__DomainVerificationId__","groupDomain":"__GroupDomain__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","resourceConfigurationGroupId":"__ResourceConfigurationGroupId__","resourceGatewayId":"__ResourceGatewayId__","status":"ACTIVE","type":"GROUP"}],"nextToken":"__NextToken__"}

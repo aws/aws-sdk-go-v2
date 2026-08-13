@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"authCodeUrl":"__AuthCodeUrl__","userProfileId":"__UserProfileId__"}

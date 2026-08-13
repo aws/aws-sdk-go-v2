@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSCognitoIdentityProviderService.ListTerms
-
-{"NextToken":"__NextToken__","Terms":[{"CreationDate":946684800,"Enforcement":"NONE","LastModifiedDate":946684800,"TermsId":"__TermsId__","TermsName":"__TermsName__"},{"CreationDate":946684800,"Enforcement":"NONE","LastModifiedDate":946684800,"TermsId":"__TermsId__","TermsName":"__TermsName__"}]}

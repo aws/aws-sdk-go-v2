@@ -1,5 +1,0 @@
-400
-Content-Type: application/json
-X-Amzn-Errortype: MissingRequiredParameterException
-
-{"__type":"MissingRequiredParameterException","message":"__Message__"}

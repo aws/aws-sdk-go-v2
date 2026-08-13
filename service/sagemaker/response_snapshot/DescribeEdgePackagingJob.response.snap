@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DescribeEdgePackagingJob
-
-{"CompilationJobName":"__CompilationJobName__","CreationTime":946684800,"EdgePackagingJobArn":"__EdgePackagingJobArn__","EdgePackagingJobName":"__EdgePackagingJobName__","EdgePackagingJobStatus":"STARTING","EdgePackagingJobStatusMessage":"__EdgePackagingJobStatusMessage__","LastModifiedTime":946684800,"ModelArtifact":"__ModelArtifact__","ModelName":"__ModelName__","ModelSignature":"__ModelSignature__","ModelVersion":"__ModelVersion__","OutputConfig":{"KmsKeyId":"__KmsKeyId__","PresetDeploymentConfig":"__PresetDeploymentConfig__","PresetDeploymentType":"GreengrassV2Component","S3OutputLocation":"__S3OutputLocation__"},"PresetDeploymentOutput":{"Artifact":"__Artifact__","Status":"COMPLETED","StatusMessage":"__StatusMessage__","Type":"GreengrassV2Component"},"ResourceKey":"__ResourceKey__","RoleArn":"__RoleArn__"}

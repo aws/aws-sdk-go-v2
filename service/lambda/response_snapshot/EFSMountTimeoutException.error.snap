@@ -1,4 +1,0 @@
-408
-Content-Type: application/json
-
-{"__type":"EFSMountTimeoutException","Message":"__Message__","Type":"__Type__"}

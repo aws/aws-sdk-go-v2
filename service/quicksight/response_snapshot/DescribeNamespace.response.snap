@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Namespace":{"Arn":"__Arn__","CapacityRegion":"__CapacityRegion__","CreationStatus":"CREATED","IamIdentityCenterApplicationArn":"__IamIdentityCenterApplicationArn__","IamIdentityCenterInstanceArn":"__IamIdentityCenterInstanceArn__","IdentityStore":"QUICKSIGHT","Name":"__Name__","NamespaceError":{"Message":"__Message__","Type":"PERMISSION_DENIED"}},"RequestId":"__RequestId__","Status":200}

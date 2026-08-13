@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"brokerId":"__BrokerId__","consoleAccess":true,"groups":["__Member__","__Member__"],"pending":{"consoleAccess":true,"groups":["__Member__","__Member__"],"pendingChange":"CREATE"},"replicationUser":true,"username":"__Username__"}

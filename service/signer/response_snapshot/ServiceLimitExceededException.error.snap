@@ -1,4 +1,0 @@
-402
-Content-Type: application/json
-
-{"__type":"ServiceLimitExceededException","code":"ServiceLimitExceededException","message":"__Message__"}

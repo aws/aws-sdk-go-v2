@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"id":"__Id__","location":{"method":"__Method__","name":"__Name__","path":"__Path__","statusCode":"__StatusCode__","type":"API"},"properties":"__Properties__"}

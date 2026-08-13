@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"allowedRepositoryUpdates":{"key0":{"key0":["__Member__","__Member__"]}},"packageGroup":{"arn":"__Arn__","contactInfo":"__ContactInfo__","createdTime":946684800,"description":"__Description__","domainName":"__DomainName__","domainOwner":"__DomainOwner__","originConfiguration":{"restrictions":{"key0":{"effectiveMode":"ALLOW","inheritedFrom":{"arn":"__Arn__","pattern":"__Pattern__"},"mode":"ALLOW","repositoriesCount":1}}},"parent":{"arn":"__Arn__","pattern":"__Pattern__"},"pattern":"__Pattern__"}}

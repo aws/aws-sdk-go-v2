@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"controlInsightsByAssessment":[{"controlSetName":"__ControlSetName__","evidenceInsights":{"compliantEvidenceCount":1,"inconclusiveEvidenceCount":1,"noncompliantEvidenceCount":1},"id":"__Id__","lastUpdated":946684800,"name":"__Name__"},{"controlSetName":"__ControlSetName__","evidenceInsights":{"compliantEvidenceCount":1,"inconclusiveEvidenceCount":1,"noncompliantEvidenceCount":1},"id":"__Id__","lastUpdated":946684800,"name":"__Name__"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"tags":{"key0":"__Value__"},"update":{"cancellation":{"reason":"__Reason__","status":"InProgress"},"createdAt":946684800,"errors":[{"errorCode":"SubnetNotFound","errorMessage":"__ErrorMessage__","resourceIds":["__Member__","__Member__"]},{"errorCode":"SubnetNotFound","errorMessage":"__ErrorMessage__","resourceIds":["__Member__","__Member__"]}],"id":"__Id__","params":[{"type":"Version","value":"__Value__"},{"type":"Version","value":"__Value__"}],"status":"InProgress","type":"VersionUpdate"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ingestConfiguration":{"arn":"__Arn__","attributes":{"key0":"__Value__"},"ingestProtocol":"RTMP","name":"__Name__","participantId":"__ParticipantId__","redundantIngest":true,"redundantIngestCredentials":[{"participantId":"__ParticipantId__","streamKey":"__StreamKey__"},{"participantId":"__ParticipantId__","streamKey":"__StreamKey__"}],"stageArn":"__StageArn__","state":"ACTIVE","streamKey":"__StreamKey__","tags":{"key0":"__Value__"},"userId":"__UserId__"}}

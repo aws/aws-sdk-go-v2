@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"dictionaries":[{"arn":"__Arn__","id":"__Id__","language":"eng","name":"__Name__","status":"CREATING"},{"arn":"__Arn__","id":"__Id__","language":"eng","name":"__Name__","status":"CREATING"}],"nextToken":"__NextToken__"}

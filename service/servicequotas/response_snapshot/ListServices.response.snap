@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ServiceQuotasV20190624.ListServices
-
-{"NextToken":"__NextToken__","Services":[{"ServiceCode":"__ServiceCode__","ServiceName":"__ServiceName__"},{"ServiceCode":"__ServiceCode__","ServiceName":"__ServiceName__"}]}

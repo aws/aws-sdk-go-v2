@@ -1,5 +1,0 @@
-200
-Content-Type: application/json
-X-Amz-Geo-Pricing-Bucket: __PricingBucket__
-
-{"Connections":[{"Distance":1,"From":"__From__","RestDuration":1,"To":"__To__","TravelDuration":1,"WaitDuration":1},{"Distance":1,"From":"__From__","RestDuration":1,"To":"__To__","TravelDuration":1,"WaitDuration":1}],"Distance":1,"Duration":1,"ImpedingWaypoints":[{"FailedConstraints":[{"Constraint":"AccessHours","Reason":"__Reason__"},{"Constraint":"AccessHours","Reason":"__Reason__"}],"Id":"__Id__","Position":[1,1]},{"FailedConstraints":[{"Constraint":"AccessHours","Reason":"__Reason__"},{"Constraint":"AccessHours","Reason":"__Reason__"}],"Id":"__Id__","Position":[1,1]}],"OptimizedWaypoints":[{"ArrivalTime":"__ArrivalTime__","ClusterIndex":1,"DepartureTime":"__DepartureTime__","Id":"__Id__","Position":[1,1]},{"ArrivalTime":"__ArrivalTime__","ClusterIndex":1,"DepartureTime":"__DepartureTime__","Id":"__Id__","Position":[1,1]}],"TimeBreakdown":{"RestDuration":1,"ServiceDuration":1,"TravelDuration":1,"WaitDuration":1}}

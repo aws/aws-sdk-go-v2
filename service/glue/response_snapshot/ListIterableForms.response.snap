@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.ListIterableForms
-
-{"Items":[{"Description":"__Description__","GlossaryTerms":["__Member__","__Member__"],"ItemId":"__ItemId__","ItemName":"__ItemName__"},{"Description":"__Description__","GlossaryTerms":["__Member__","__Member__"],"ItemId":"__ItemId__","ItemName":"__ItemName__"}],"NextToken":"__NextToken__"}

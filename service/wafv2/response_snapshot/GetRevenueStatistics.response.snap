@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSWAF_20190729.GetRevenueStatistics
-
-{"NextMarker":"__NextMarker__","RevenuePathStatistics":[{"Amount":"__Amount__","Path":"__Path__","Percentage":1,"RequestCount":1},{"Amount":"__Amount__","Path":"__Path__","Percentage":1,"RequestCount":1}],"SourceStatistics":[{"Amount":"__Amount__","GroupByValue":"__GroupByValue__","Intent":"__Intent__","Organization":"__Organization__","Percentage":1,"RequestCount":1,"SourceCategory":"__SourceCategory__","SourceName":"__SourceName__","Verified":true},{"Amount":"__Amount__","GroupByValue":"__GroupByValue__","Intent":"__Intent__","Organization":"__Organization__","Percentage":1,"RequestCount":1,"SourceCategory":"__SourceCategory__","SourceName":"__SourceName__","Verified":true}]}

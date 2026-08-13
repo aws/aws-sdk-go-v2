@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ReviewTemplate":{"Description":"__Description__","Lenses":["__Member__","__Member__"],"Notes":"__Notes__","Owner":"__Owner__","QuestionCounts":{"key0":1},"ShareInvitationId":"__ShareInvitationId__","Tags":{"key0":"__Value__"},"TemplateArn":"__TemplateArn__","TemplateName":"__TemplateName__","UpdateStatus":"CURRENT","UpdatedAt":946684800}}

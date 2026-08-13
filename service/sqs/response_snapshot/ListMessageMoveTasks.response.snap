@@ -1,6 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonSQS.ListMessageMoveTasks
-X-Amzn-Query-Mode: true
-
-{"Results":[{"ApproximateNumberOfMessagesMoved":1,"ApproximateNumberOfMessagesToMove":1,"DestinationArn":"__DestinationArn__","FailureReason":"__FailureReason__","MaxNumberOfMessagesPerSecond":1,"SourceArn":"__SourceArn__","StartedTimestamp":1,"Status":"__Status__","TaskHandle":"__TaskHandle__"},{"ApproximateNumberOfMessagesMoved":1,"ApproximateNumberOfMessagesToMove":1,"DestinationArn":"__DestinationArn__","FailureReason":"__FailureReason__","MaxNumberOfMessagesPerSecond":1,"SourceArn":"__SourceArn__","StartedTimestamp":1,"Status":"__Status__","TaskHandle":"__TaskHandle__"}]}

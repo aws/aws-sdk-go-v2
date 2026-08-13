@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accounts":[{"accountId":"__AccountId__","resourceStatus":{"codeRepository":"ENABLING","ec2":"ENABLING","ecr":"ENABLING","lambda":"ENABLING","lambdaCode":"ENABLING"},"status":"ENABLING"},{"accountId":"__AccountId__","resourceStatus":{"codeRepository":"ENABLING","ec2":"ENABLING","ecr":"ENABLING","lambda":"ENABLING","lambdaCode":"ENABLING"},"status":"ENABLING"}],"failedAccounts":[{"accountId":"__AccountId__","errorCode":"ALREADY_ENABLED","errorMessage":"__ErrorMessage__","resourceStatus":{"codeRepository":"ENABLING","ec2":"ENABLING","ecr":"ENABLING","lambda":"ENABLING","lambdaCode":"ENABLING"},"status":"ENABLING"},{"accountId":"__AccountId__","errorCode":"ALREADY_ENABLED","errorMessage":"__ErrorMessage__","resourceStatus":{"codeRepository":"ENABLING","ec2":"ENABLING","ecr":"ENABLING","lambda":"ENABLING","lambdaCode":"ENABLING"},"status":"ENABLING"}]}

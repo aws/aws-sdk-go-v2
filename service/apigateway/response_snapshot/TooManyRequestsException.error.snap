@@ -1,5 +1,0 @@
-429
-Content-Type: application/json
-Retry-After: __RetryAfterSeconds__
-
-{"__type":"TooManyRequestsException","message":"__Message__"}

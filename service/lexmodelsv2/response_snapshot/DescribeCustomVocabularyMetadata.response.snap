@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","botVersion":"__BotVersion__","creationDateTime":946684800,"customVocabularyStatus":"Ready","lastUpdatedDateTime":946684800,"localeId":"__LocaleId__"}

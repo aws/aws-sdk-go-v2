@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralAccount.GetProfileVisibility
-
-{"Arn":"__Arn__","Catalog":"__Catalog__","Id":"__Id__","ProfileId":"__ProfileId__","Visibility":"PRIVATE"}

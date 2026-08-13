@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AnyScaleScalingPlannerFrontendService.GetScalingPlanResourceForecastData
-
-{"Datapoints":[{"Timestamp":946684800,"Value":1},{"Timestamp":946684800,"Value":1}]}

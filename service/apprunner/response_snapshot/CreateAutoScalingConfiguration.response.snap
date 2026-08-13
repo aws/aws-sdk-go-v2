@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AppRunner.CreateAutoScalingConfiguration
-
-{"AutoScalingConfiguration":{"AutoScalingConfigurationArn":"__AutoScalingConfigurationArn__","AutoScalingConfigurationName":"__AutoScalingConfigurationName__","AutoScalingConfigurationRevision":1,"CreatedAt":946684800,"DeletedAt":946684800,"HasAssociatedService":true,"IsDefault":true,"Latest":true,"MaxConcurrency":1,"MaxSize":1,"MinSize":1,"Status":"ACTIVE"}}

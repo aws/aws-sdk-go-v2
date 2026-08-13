@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"aggregatedUtterancesSummaries":[{"containsDataFromDeletedResources":true,"hitCount":1,"missedCount":1,"utterance":"__Utterance__","utteranceFirstRecordedInAggregationDuration":946684800,"utteranceLastRecordedInAggregationDuration":946684800},{"containsDataFromDeletedResources":true,"hitCount":1,"missedCount":1,"utterance":"__Utterance__","utteranceFirstRecordedInAggregationDuration":946684800,"utteranceLastRecordedInAggregationDuration":946684800}],"aggregationDuration":{"relativeAggregationDuration":{"timeDimension":"Hours","timeValue":1}},"aggregationLastRefreshedDateTime":946684800,"aggregationWindowEndTime":946684800,"aggregationWindowStartTime":946684800,"botAliasId":"__BotAliasId__","botId":"__BotId__","botVersion":"__BotVersion__","localeId":"__LocaleId__","nextToken":"__NextToken__"}

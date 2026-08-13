@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"latestVersionReferences":{"latestMajorVersionArn":"__LatestMajorVersionArn__","latestMinorVersionArn":"__LatestMinorVersionArn__","latestPatchVersionArn":"__LatestPatchVersionArn__","latestVersionArn":"__LatestVersionArn__"},"workflow":{"arn":"__Arn__","changeDescription":"__ChangeDescription__","data":"__Data__","dateCreated":"__DateCreated__","description":"__Description__","kmsKeyId":"__KmsKeyId__","name":"__Name__","owner":"__Owner__","parameters":[{"defaultValue":["__Member__","__Member__"],"description":"__Description__","name":"__Name__","type":"__Type__"},{"defaultValue":["__Member__","__Member__"],"description":"__Description__","name":"__Name__","type":"__Type__"}],"state":{"reason":"__Reason__","status":"DEPRECATED"},"tags":{"key0":"__Value__"},"type":"BUILD","version":"__Version__"}}

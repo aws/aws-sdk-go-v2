@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetInstanceState
-
-{"state":{"code":1,"name":"__Name__"}}

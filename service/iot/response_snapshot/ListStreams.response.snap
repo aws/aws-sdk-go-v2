@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","streams":[{"description":"__Description__","streamArn":"__StreamArn__","streamId":"__StreamId__","streamVersion":1},{"description":"__Description__","streamArn":"__StreamArn__","streamId":"__StreamId__","streamVersion":1}]}

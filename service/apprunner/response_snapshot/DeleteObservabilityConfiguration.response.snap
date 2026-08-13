@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AppRunner.DeleteObservabilityConfiguration
-
-{"ObservabilityConfiguration":{"CreatedAt":946684800,"DeletedAt":946684800,"Latest":true,"ObservabilityConfigurationArn":"__ObservabilityConfigurationArn__","ObservabilityConfigurationName":"__ObservabilityConfigurationName__","ObservabilityConfigurationRevision":1,"Status":"ACTIVE","TraceConfiguration":{"Vendor":"AWSXRAY"}}}

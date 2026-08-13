@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"buildStatus":"READY","pluginArn":"__PluginArn__","pluginId":"__PluginId__"}

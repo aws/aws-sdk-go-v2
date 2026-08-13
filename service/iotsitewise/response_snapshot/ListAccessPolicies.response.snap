@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accessPolicySummaries":[{"creationDate":946684800,"id":"__Id__","identity":{"group":{"id":"__Id__"},"iamRole":{"arn":"__Arn__"},"iamUser":{"arn":"__Arn__"},"user":{"id":"__Id__"}},"lastUpdateDate":946684800,"permission":"ADMINISTRATOR","resource":{"portal":{"id":"__Id__"},"project":{"id":"__Id__"}}},{"creationDate":946684800,"id":"__Id__","identity":{"group":{"id":"__Id__"},"iamRole":{"arn":"__Arn__"},"iamUser":{"arn":"__Arn__"},"user":{"id":"__Id__"}},"lastUpdateDate":946684800,"permission":"ADMINISTRATOR","resource":{"portal":{"id":"__Id__"},"project":{"id":"__Id__"}}}],"nextToken":"__NextToken__"}

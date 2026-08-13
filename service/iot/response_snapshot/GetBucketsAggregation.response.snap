@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"buckets":[{"count":1,"keyValue":"__KeyValue__"},{"count":1,"keyValue":"__KeyValue__"}],"totalCount":1}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"commandExecutions":[{"commandArn":"__CommandArn__","completedAt":946684800,"createdAt":946684800,"executionId":"__ExecutionId__","startedAt":946684800,"status":"CREATED","targetArn":"__TargetArn__"},{"commandArn":"__CommandArn__","completedAt":946684800,"createdAt":946684800,"executionId":"__ExecutionId__","startedAt":946684800,"status":"CREATED","targetArn":"__TargetArn__"}],"nextToken":"__NextToken__"}

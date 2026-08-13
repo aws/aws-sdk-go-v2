@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"evaluatorArn":"__EvaluatorArn__","evaluatorId":"__EvaluatorId__","status":"ACTIVE"}

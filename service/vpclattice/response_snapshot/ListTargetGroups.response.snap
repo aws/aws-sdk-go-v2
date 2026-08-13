@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","ipAddressType":"IPV4","lambdaEventStructureVersion":"V1","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","port":1,"protocol":"HTTP","serviceArns":["__Member__","__Member__"],"status":"CREATE_IN_PROGRESS","type":"IP","vpcIdentifier":"__VpcIdentifier__"},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","ipAddressType":"IPV4","lambdaEventStructureVersion":"V1","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","port":1,"protocol":"HTTP","serviceArns":["__Member__","__Member__"],"status":"CREATE_IN_PROGRESS","type":"IP","vpcIdentifier":"__VpcIdentifier__"}],"nextToken":"__NextToken__"}

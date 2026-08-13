@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.ListRegistries
-
-{"NextToken":"__NextToken__","Registries":[{"CreatedTime":"__CreatedTime__","Description":"__Description__","RegistryArn":"__RegistryArn__","RegistryName":"__RegistryName__","Status":"AVAILABLE","UpdatedTime":"__UpdatedTime__"},{"CreatedTime":"__CreatedTime__","Description":"__Description__","RegistryArn":"__RegistryArn__","RegistryName":"__RegistryName__","Status":"AVAILABLE","UpdatedTime":"__UpdatedTime__"}]}

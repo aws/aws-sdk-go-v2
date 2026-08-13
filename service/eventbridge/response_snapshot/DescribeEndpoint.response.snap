@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSEvents.DescribeEndpoint
-
-{"Arn":"__Arn__","CreationTime":946684800,"Description":"__Description__","EndpointId":"__EndpointId__","EndpointUrl":"__EndpointUrl__","EventBuses":[{"EventBusArn":"__EventBusArn__"},{"EventBusArn":"__EventBusArn__"}],"LastModifiedTime":946684800,"Name":"__Name__","ReplicationConfig":{"State":"ENABLED"},"RoleArn":"__RoleArn__","RoutingConfig":{"FailoverConfig":{"Primary":{"HealthCheck":"__HealthCheck__"},"Secondary":{"Route":"__Route__"}}},"State":"ACTIVE","StateReason":"__StateReason__"}

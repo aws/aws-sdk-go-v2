@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200,"TemplateVersionSummaryList":[{"Arn":"__Arn__","CreatedTime":946684800,"Description":"__Description__","Status":"CREATION_IN_PROGRESS","VersionNumber":1},{"Arn":"__Arn__","CreatedTime":946684800,"Description":"__Description__","Status":"CREATION_IN_PROGRESS","VersionNumber":1}]}

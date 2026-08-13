@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Errors":[{"Error":{"Code":"AccessDeniedError","Message":"__Message__"},"GeofenceId":"__GeofenceId__"},{"Error":{"Code":"AccessDeniedError","Message":"__Message__"},"GeofenceId":"__GeofenceId__"}]}

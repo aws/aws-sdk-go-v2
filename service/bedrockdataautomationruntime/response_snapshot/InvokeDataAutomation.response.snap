@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonBedrockKeystoneRuntimeService.InvokeDataAutomation
-
-{"outputConfiguration":{"s3Uri":"__S3Uri__"},"outputSegments":[{"customOutput":"__CustomOutput__","customOutputStatus":"MATCH","standardOutput":"__StandardOutput__"},{"customOutput":"__CustomOutput__","customOutputStatus":"MATCH","standardOutput":"__StandardOutput__"}],"semanticModality":"DOCUMENT"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applicationId":"__ApplicationId__","changeSetId":"__ChangeSetId__","semanticVersion":"__SemanticVersion__","stackId":"__StackId__"}

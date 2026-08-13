@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Odb.GetOdbPeeringConnection
-
-{"odbPeeringConnection":{"createdAt":"2000-01-01T00:00:00Z","displayName":"__DisplayName__","odbNetworkArn":"__OdbNetworkArn__","odbPeeringConnectionArn":"__OdbPeeringConnectionArn__","odbPeeringConnectionId":"__OdbPeeringConnectionId__","odbPeeringConnectionType":"__OdbPeeringConnectionType__","peerNetworkArn":"__PeerNetworkArn__","peerNetworkCidrs":["__Member__","__Member__"],"percentProgress":1,"status":"AVAILABLE","statusReason":"__StatusReason__"}}

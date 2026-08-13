@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DeliverabilityTestReport":{"CreateDate":946684800,"DeliverabilityTestStatus":"IN_PROGRESS","FromEmailAddress":"__FromEmailAddress__","ReportId":"__ReportId__","ReportName":"__ReportName__","Subject":"__Subject__"},"IspPlacements":[{"IspName":"__IspName__","PlacementStatistics":{"DkimPercentage":1,"InboxPercentage":1,"MissingPercentage":1,"SpamPercentage":1,"SpfPercentage":1}},{"IspName":"__IspName__","PlacementStatistics":{"DkimPercentage":1,"InboxPercentage":1,"MissingPercentage":1,"SpamPercentage":1,"SpfPercentage":1}}],"Message":"__Message__","OverallPlacement":{"DkimPercentage":1,"InboxPercentage":1,"MissingPercentage":1,"SpamPercentage":1,"SpfPercentage":1},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDB_20120810.GetItem
-
-{"ConsumedCapacity":{"CapacityUnits":1,"GlobalSecondaryIndexes":{"key0":{"CapacityUnits":1,"ReadCapacityUnits":1,"WriteCapacityUnits":1}},"LocalSecondaryIndexes":{"key0":{"CapacityUnits":1,"ReadCapacityUnits":1,"WriteCapacityUnits":1}},"ReadCapacityUnits":1,"Table":{"CapacityUnits":1,"ReadCapacityUnits":1,"WriteCapacityUnits":1},"TableName":"__TableName__","VectorIndexes":{"key0":{"VectorSearchRequestBytes":1,"VectorWriteRequestBytes":1}},"WriteCapacityUnits":1},"Item":{"key0":{"S":"__AttributeValueMemberS__"}}}

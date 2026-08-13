@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"customerAgreements":[{"acceptanceTerms":["__Member__","__Member__"],"agreementArn":"__AgreementArn__","arn":"__Arn__","awsAccountId":"__AwsAccountId__","description":"__Description__","effectiveEnd":"2000-01-01T00:00:00Z","effectiveStart":"2000-01-01T00:00:00Z","id":"__Id__","name":"__Name__","organizationArn":"__OrganizationArn__","state":"ACTIVE","terminateTerms":["__Member__","__Member__"],"type":"CUSTOM"},{"acceptanceTerms":["__Member__","__Member__"],"agreementArn":"__AgreementArn__","arn":"__Arn__","awsAccountId":"__AwsAccountId__","description":"__Description__","effectiveEnd":"2000-01-01T00:00:00Z","effectiveStart":"2000-01-01T00:00:00Z","id":"__Id__","name":"__Name__","organizationArn":"__OrganizationArn__","state":"ACTIVE","terminateTerms":["__Member__","__Member__"],"type":"CUSTOM"}],"nextToken":"__NextToken__"}

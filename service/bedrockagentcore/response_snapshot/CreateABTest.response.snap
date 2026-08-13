@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"abTestArn":"__AbTestArn__","abTestId":"__AbTestId__","createdAt":946684800,"executionStatus":"PAUSED","name":"__Name__","status":"CREATING"}

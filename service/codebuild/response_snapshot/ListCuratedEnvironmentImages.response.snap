@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.ListCuratedEnvironmentImages
-
-{"platforms":[{"languages":[{"images":[{"description":"__Description__","name":"__Name__","versions":["__Member__","__Member__"]},{"description":"__Description__","name":"__Name__","versions":["__Member__","__Member__"]}],"language":"JAVA"},{"images":[{"description":"__Description__","name":"__Name__","versions":["__Member__","__Member__"]},{"description":"__Description__","name":"__Name__","versions":["__Member__","__Member__"]}],"language":"JAVA"}],"platform":"DEBIAN"},{"languages":[{"images":[{"description":"__Description__","name":"__Name__","versions":["__Member__","__Member__"]},{"description":"__Description__","name":"__Name__","versions":["__Member__","__Member__"]}],"language":"JAVA"},{"images":[{"description":"__Description__","name":"__Name__","versions":["__Member__","__Member__"]},{"description":"__Description__","name":"__Name__","versions":["__Member__","__Member__"]}],"language":"JAVA"}],"platform":"DEBIAN"}]}

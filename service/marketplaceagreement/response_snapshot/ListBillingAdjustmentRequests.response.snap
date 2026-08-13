@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.ListBillingAdjustmentRequests
-
-{"items":[{"adjustmentAmount":"__AdjustmentAmount__","agreementId":"__AgreementId__","agreementType":"__AgreementType__","billingAdjustmentRequestId":"__BillingAdjustmentRequestId__","catalog":"__Catalog__","createdAt":946684800,"currencyCode":"__CurrencyCode__","originalInvoiceId":"__OriginalInvoiceId__","status":"PENDING","updatedAt":946684800},{"adjustmentAmount":"__AdjustmentAmount__","agreementId":"__AgreementId__","agreementType":"__AgreementType__","billingAdjustmentRequestId":"__BillingAdjustmentRequestId__","catalog":"__Catalog__","createdAt":946684800,"currencyCode":"__CurrencyCode__","originalInvoiceId":"__OriginalInvoiceId__","status":"PENDING","updatedAt":946684800}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","responsePlanSummaries":[{"arn":"__Arn__","displayName":"__DisplayName__","name":"__Name__"},{"arn":"__Arn__","displayName":"__DisplayName__","name":"__Name__"}]}

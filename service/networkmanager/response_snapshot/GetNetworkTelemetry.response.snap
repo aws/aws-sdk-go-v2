@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NetworkTelemetry":[{"AccountId":"__AccountId__","Address":"__Address__","AwsRegion":"__AwsRegion__","CoreNetworkId":"__CoreNetworkId__","Health":{"Status":"UP","Timestamp":946684800,"Type":"BGP"},"RegisteredGatewayArn":"__RegisteredGatewayArn__","ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},{"AccountId":"__AccountId__","Address":"__Address__","AwsRegion":"__AwsRegion__","CoreNetworkId":"__CoreNetworkId__","Health":{"Status":"UP","Timestamp":946684800,"Type":"BGP"},"RegisteredGatewayArn":"__RegisteredGatewayArn__","ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}],"NextToken":"__NextToken__"}

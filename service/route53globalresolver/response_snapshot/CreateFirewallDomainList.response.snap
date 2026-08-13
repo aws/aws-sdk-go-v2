@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","domainCount":1,"globalResolverId":"__GlobalResolverId__","id":"__Id__","name":"__Name__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"}

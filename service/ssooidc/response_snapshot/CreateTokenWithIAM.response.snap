@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accessToken":"__AccessToken__","awsAdditionalDetails":{"identityContext":"__IdentityContext__"},"expiresIn":1,"idToken":"__IdToken__","issuedTokenType":"__IssuedTokenType__","refreshToken":"__RefreshToken__","scope":["__Member__","__Member__"],"tokenType":"__TokenType__"}

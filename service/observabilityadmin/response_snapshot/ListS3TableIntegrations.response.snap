@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"IntegrationSummaries":[{"Arn":"__Arn__","Status":"ACTIVE"},{"Arn":"__Arn__","Status":"ACTIVE"}],"NextToken":"__NextToken__"}

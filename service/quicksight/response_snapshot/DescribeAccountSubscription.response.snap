@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AccountInfo":{"AccountName":"__AccountName__","AccountSubscriptionStatus":"__AccountSubscriptionStatus__","AuthenticationType":"__AuthenticationType__","Edition":"STANDARD","IAMIdentityCenterInstanceArn":"__IAMIdentityCenterInstanceArn__","NotificationEmail":"__NotificationEmail__"},"RequestId":"__RequestId__","Status":200}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","RequestId":"__RequestId__","SpaceSummaries":[{"consumedSourceDocCount":1,"consumedSourceSize":1,"createdAt":946684800,"createdBy":"__CreatedBy__","createdByArn":"__CreatedByArn__","description":"__Description__","name":"__Name__","resourcesCount":1,"spaceArn":"__SpaceArn__","spaceId":"__SpaceId__","updatedAt":946684800},{"consumedSourceDocCount":1,"consumedSourceSize":1,"createdAt":946684800,"createdBy":"__CreatedBy__","createdByArn":"__CreatedByArn__","description":"__Description__","name":"__Name__","resourcesCount":1,"spaceArn":"__SpaceArn__","spaceId":"__SpaceId__","updatedAt":946684800}],"spaceArn":"__SpaceArn__","spaceId":"__SpaceId__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BillingGroupCostReports":[{"AWSCost":"__AWSCost__","Arn":"__Arn__","Currency":"__Currency__","Margin":"__Margin__","MarginPercentage":"__MarginPercentage__","ProformaCost":"__ProformaCost__"},{"AWSCost":"__AWSCost__","Arn":"__Arn__","Currency":"__Currency__","Margin":"__Margin__","MarginPercentage":"__MarginPercentage__","ProformaCost":"__ProformaCost__"}],"NextToken":"__NextToken__"}

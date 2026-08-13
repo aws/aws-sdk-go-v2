@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.BatchRebootClusterNodes
-
-{"Failed":[{"ErrorCode":"InstanceIdNotFound","Message":"__Message__","NodeId":"__NodeId__"},{"ErrorCode":"InstanceIdNotFound","Message":"__Message__","NodeId":"__NodeId__"}],"FailedNodeLogicalIds":[{"ErrorCode":"InstanceIdNotFound","Message":"__Message__","NodeLogicalId":"__NodeLogicalId__"},{"ErrorCode":"InstanceIdNotFound","Message":"__Message__","NodeLogicalId":"__NodeLogicalId__"}],"Successful":["__Member__","__Member__"],"SuccessfulNodeLogicalIds":["__Member__","__Member__"]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListDaemonTaskDefinitions
-
-{"daemonTaskDefinitions":[{"arn":"__Arn__","deleteRequestedAt":946684800,"registeredAt":946684800,"registeredBy":"__RegisteredBy__","status":"ACTIVE"},{"arn":"__Arn__","deleteRequestedAt":946684800,"registeredAt":946684800,"registeredBy":"__RegisteredBy__","status":"ACTIVE"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__","ProvisioningType":"FLEET_PROVISIONING","Status":"CREATE_IN_PROGRESS"},{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__","ProvisioningType":"FLEET_PROVISIONING","Status":"CREATE_IN_PROGRESS"}],"NextToken":"__NextToken__"}

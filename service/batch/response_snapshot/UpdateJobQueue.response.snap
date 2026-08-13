@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobQueueArn":"__JobQueueArn__","jobQueueName":"__JobQueueName__"}

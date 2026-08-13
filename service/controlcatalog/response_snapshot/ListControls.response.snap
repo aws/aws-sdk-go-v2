@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Controls":[{"Aliases":["__Member__","__Member__"],"Arn":"__Arn__","Behavior":"PREVENTIVE","CreateTime":946684800,"Description":"__Description__","GovernedProviders":["__Member__","__Member__"],"GovernedResources":["__Member__","__Member__"],"Implementation":{"Identifier":"__Identifier__","Type":"__Type__"},"Name":"__Name__","ParameterRequirementSummary":"REQUIRED","Severity":"LOW"},{"Aliases":["__Member__","__Member__"],"Arn":"__Arn__","Behavior":"PREVENTIVE","CreateTime":946684800,"Description":"__Description__","GovernedProviders":["__Member__","__Member__"],"GovernedResources":["__Member__","__Member__"],"Implementation":{"Identifier":"__Identifier__","Type":"__Type__"},"Name":"__Name__","ParameterRequirementSummary":"REQUIRED","Severity":"LOW"}],"NextToken":"__NextToken__"}

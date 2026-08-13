@@ -1,4 +1,0 @@
-403
-Content-Type: application/json
-
-{"__type":"AccessDeniedException","ErrorCode":"INVALID_GRAPH_ARN","ErrorCodeReason":"__ErrorCodeReason__","Message":"__Message__","SubErrorCode":"INVALID_GRAPH_ARN","SubErrorCodeReason":"__SubErrorCodeReason__"}

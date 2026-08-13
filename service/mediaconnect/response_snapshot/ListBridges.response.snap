@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"bridges":[{"bridgeArn":"__BridgeArn__","bridgeState":"CREATING","bridgeType":"__BridgeType__","name":"__Name__","placementArn":"__PlacementArn__"},{"bridgeArn":"__BridgeArn__","bridgeState":"CREATING","bridgeType":"__BridgeType__","name":"__Name__","placementArn":"__PlacementArn__"}],"nextToken":"__NextToken__"}

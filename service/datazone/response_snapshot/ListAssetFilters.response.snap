@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"assetId":"__AssetId__","createdAt":946684800,"description":"__Description__","domainId":"__DomainId__","effectiveColumnNames":["__Member__","__Member__"],"effectiveRowFilter":"__EffectiveRowFilter__","errorMessage":"__ErrorMessage__","id":"__Id__","name":"__Name__","status":"VALID"},{"assetId":"__AssetId__","createdAt":946684800,"description":"__Description__","domainId":"__DomainId__","effectiveColumnNames":["__Member__","__Member__"],"effectiveRowFilter":"__EffectiveRowFilter__","errorMessage":"__ErrorMessage__","id":"__Id__","name":"__Name__","status":"VALID"}],"nextToken":"__NextToken__"}

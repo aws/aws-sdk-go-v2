@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"logTargetConfigurations":[{"logLevel":"DEBUG","logTarget":{"targetName":"__TargetName__","targetType":"DEFAULT"}},{"logLevel":"DEBUG","logTarget":{"targetName":"__TargetName__","targetType":"DEFAULT"}}],"nextToken":"__NextToken__"}

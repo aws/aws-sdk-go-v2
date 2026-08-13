@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"managedJobTemplates":[{"description":"__Description__","environments":["__Member__","__Member__"],"templateArn":"__TemplateArn__","templateName":"__TemplateName__","templateVersion":"__TemplateVersion__"},{"description":"__Description__","environments":["__Member__","__Member__"],"templateArn":"__TemplateArn__","templateName":"__TemplateName__","templateVersion":"__TemplateVersion__"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ingestions":[{"app":"__App__","arn":"__Arn__","state":"enabled","tenantId":"__TenantId__"},{"app":"__App__","arn":"__Arn__","state":"enabled","tenantId":"__TenantId__"}],"nextToken":"__NextToken__"}

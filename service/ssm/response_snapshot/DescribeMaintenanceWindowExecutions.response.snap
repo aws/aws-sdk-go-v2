@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribeMaintenanceWindowExecutions
-
-{"NextToken":"__NextToken__","WindowExecutions":[{"EndTime":946684800,"StartTime":946684800,"Status":"PENDING","StatusDetails":"__StatusDetails__","WindowExecutionId":"__WindowExecutionId__","WindowId":"__WindowId__"},{"EndTime":946684800,"StartTime":946684800,"Status":"PENDING","StatusDetails":"__StatusDetails__","WindowExecutionId":"__WindowExecutionId__","WindowId":"__WindowId__"}]}

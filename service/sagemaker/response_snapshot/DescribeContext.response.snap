@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DescribeContext
-
-{"ContextArn":"__ContextArn__","ContextName":"__ContextName__","ContextType":"__ContextType__","CreatedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"CreationTime":946684800,"Description":"__Description__","LastModifiedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"LastModifiedTime":946684800,"LineageGroupArn":"__LineageGroupArn__","Properties":{"key0":"__Value__"},"Source":{"SourceId":"__SourceId__","SourceType":"__SourceType__","SourceUri":"__SourceUri__"}}

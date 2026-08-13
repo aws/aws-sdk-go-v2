@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BaseLensVersion":"__BaseLensVersion__","LatestLensVersion":"__LatestLensVersion__","LensAlias":"__LensAlias__","LensArn":"__LensArn__","TargetLensVersion":"__TargetLensVersion__","VersionDifferences":{"PillarDifferences":[{"DifferenceStatus":"UPDATED","PillarId":"__PillarId__","PillarName":"__PillarName__","QuestionDifferences":[{"DifferenceStatus":"UPDATED","QuestionId":"__QuestionId__","QuestionTitle":"__QuestionTitle__"},{"DifferenceStatus":"UPDATED","QuestionId":"__QuestionId__","QuestionTitle":"__QuestionTitle__"}]},{"DifferenceStatus":"UPDATED","PillarId":"__PillarId__","PillarName":"__PillarName__","QuestionDifferences":[{"DifferenceStatus":"UPDATED","QuestionId":"__QuestionId__","QuestionTitle":"__QuestionTitle__"},{"DifferenceStatus":"UPDATED","QuestionId":"__QuestionId__","QuestionTitle":"__QuestionTitle__"}]}]}}

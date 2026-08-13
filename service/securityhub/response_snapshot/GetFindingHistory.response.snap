@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Records":[{"FindingCreated":true,"FindingIdentifier":{"Id":"__Id__","ProductArn":"__ProductArn__"},"NextToken":"__NextToken__","UpdateSource":{"Identity":"__Identity__","Type":"BATCH_UPDATE_FINDINGS"},"UpdateTime":"2000-01-01T00:00:00Z","Updates":[{"NewValue":"__NewValue__","OldValue":"__OldValue__","UpdatedField":"__UpdatedField__"},{"NewValue":"__NewValue__","OldValue":"__OldValue__","UpdatedField":"__UpdatedField__"}]},{"FindingCreated":true,"FindingIdentifier":{"Id":"__Id__","ProductArn":"__ProductArn__"},"NextToken":"__NextToken__","UpdateSource":{"Identity":"__Identity__","Type":"BATCH_UPDATE_FINDINGS"},"UpdateTime":"2000-01-01T00:00:00Z","Updates":[{"NewValue":"__NewValue__","OldValue":"__OldValue__","UpdatedField":"__UpdatedField__"},{"NewValue":"__NewValue__","OldValue":"__OldValue__","UpdatedField":"__UpdatedField__"}]}]}

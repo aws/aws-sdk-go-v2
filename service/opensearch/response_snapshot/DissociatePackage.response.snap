@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DomainPackageDetails":{"AssociationConfiguration":{"KeyStoreAccessOption":{"KeyAccessRoleArn":"__KeyAccessRoleArn__","KeyStoreAccessEnabled":true}},"DomainName":"__DomainName__","DomainPackageStatus":"ASSOCIATING","ErrorDetails":{"ErrorMessage":"__ErrorMessage__","ErrorType":"__ErrorType__"},"LastUpdated":946684800,"PackageID":"__PackageID__","PackageName":"__PackageName__","PackageType":"TXT-DICTIONARY","PackageVersion":"__PackageVersion__","PrerequisitePackageIDList":["__Member__","__Member__"],"ReferencePath":"__ReferencePath__"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"FailedRequestList":[{"FailureReasonCode":"INVALID_ATTRIBUTE_KEY","FailureReasonMessage":"__FailureReasonMessage__","RequestIdentifier":"__RequestIdentifier__"},{"FailureReasonCode":"INVALID_ATTRIBUTE_KEY","FailureReasonMessage":"__FailureReasonMessage__","RequestIdentifier":"__RequestIdentifier__"}],"SuccessfulRequestList":[{"ContactId":"__ContactId__","RequestIdentifier":"__RequestIdentifier__"},{"ContactId":"__ContactId__","RequestIdentifier":"__RequestIdentifier__"}]}

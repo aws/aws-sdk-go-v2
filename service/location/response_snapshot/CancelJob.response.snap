@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"JobArn":"__JobArn__","JobId":"__JobId__","Status":"Pending"}

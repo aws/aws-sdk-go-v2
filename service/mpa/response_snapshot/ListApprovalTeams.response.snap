@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApprovalTeams":[{"ApprovalStrategy":{"MofN":{"MinApprovalsRequired":1}},"Arn":"__Arn__","CreationTime":"2000-01-01T00:00:00Z","Description":"__Description__","Name":"__Name__","NumberOfApprovers":1,"Status":"ACTIVE","StatusCode":"VALIDATING","StatusMessage":"__StatusMessage__"},{"ApprovalStrategy":{"MofN":{"MinApprovalsRequired":1}},"Arn":"__Arn__","CreationTime":"2000-01-01T00:00:00Z","Description":"__Description__","Name":"__Name__","NumberOfApprovers":1,"Status":"ACTIVE","StatusCode":"VALIDATING","StatusMessage":"__StatusMessage__"}],"NextToken":"__NextToken__"}

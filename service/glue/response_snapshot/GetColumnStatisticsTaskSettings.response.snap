@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.GetColumnStatisticsTaskSettings
-
-{"ColumnStatisticsTaskSettings":{"CatalogID":"__CatalogID__","ColumnNameList":["__Member__","__Member__"],"DatabaseName":"__DatabaseName__","LastExecutionAttempt":{"ColumnStatisticsTaskRunId":"__ColumnStatisticsTaskRunId__","ErrorMessage":"__ErrorMessage__","ExecutionTimestamp":946684800,"Status":"FAILED"},"Role":"__Role__","SampleSize":1,"Schedule":{"ScheduleExpression":"__ScheduleExpression__","State":"SCHEDULED"},"ScheduleType":"CRON","SecurityConfiguration":"__SecurityConfiguration__","SettingSource":"CATALOG","TableName":"__TableName__"}}

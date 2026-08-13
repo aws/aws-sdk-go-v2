@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"InsightResults":{"GroupByAttribute":"__GroupByAttribute__","InsightArn":"__InsightArn__","ResultValues":[{"Count":1,"GroupByAttributeValue":"__GroupByAttributeValue__"},{"Count":1,"GroupByAttributeValue":"__GroupByAttributeValue__"}]}}

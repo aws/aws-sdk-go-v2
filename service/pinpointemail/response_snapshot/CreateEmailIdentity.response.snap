@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DkimAttributes":{"SigningEnabled":true,"Status":"PENDING","Tokens":["__Member__","__Member__"]},"IdentityType":"EMAIL_ADDRESS","VerifiedForSendingStatus":true}

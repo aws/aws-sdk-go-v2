@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"policyVersions":[{"createDate":946684800,"isDefaultVersion":true,"versionId":"__VersionId__"},{"createDate":946684800,"isDefaultVersion":true,"versionId":"__VersionId__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.ListDistributedGrants
-
-{"Grants":[{"GrantArn":"__GrantArn__","GrantName":"__GrantName__","GrantStatus":"PENDING_WORKFLOW","GrantedOperations":["CreateGrant","CreateGrant"],"GranteePrincipalArn":"__GranteePrincipalArn__","HomeRegion":"__HomeRegion__","LicenseArn":"__LicenseArn__","Options":{"ActivationOverrideBehavior":"DISTRIBUTED_GRANTS_ONLY"},"ParentArn":"__ParentArn__","StatusReason":"__StatusReason__","Version":"__Version__"},{"GrantArn":"__GrantArn__","GrantName":"__GrantName__","GrantStatus":"PENDING_WORKFLOW","GrantedOperations":["CreateGrant","CreateGrant"],"GranteePrincipalArn":"__GranteePrincipalArn__","HomeRegion":"__HomeRegion__","LicenseArn":"__LicenseArn__","Options":{"ActivationOverrideBehavior":"DISTRIBUTED_GRANTS_ONLY"},"ParentArn":"__ParentArn__","StatusReason":"__StatusReason__","Version":"__Version__"}],"NextToken":"__NextToken__"}

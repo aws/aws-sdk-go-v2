@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.BatchDeleteTableVersion
-
-{"Errors":[{"ErrorDetail":{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},"TableName":"__TableName__","VersionId":"__VersionId__"},{"ErrorDetail":{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},"TableName":"__TableName__","VersionId":"__VersionId__"}]}

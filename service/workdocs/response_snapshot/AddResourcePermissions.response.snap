@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ShareResults":[{"InviteePrincipalId":"__InviteePrincipalId__","PrincipalId":"__PrincipalId__","Role":"VIEWER","ShareId":"__ShareId__","Status":"SUCCESS","StatusMessage":"__StatusMessage__"},{"InviteePrincipalId":"__InviteePrincipalId__","PrincipalId":"__PrincipalId__","Role":"VIEWER","ShareId":"__ShareId__","Status":"SUCCESS","StatusMessage":"__StatusMessage__"}]}

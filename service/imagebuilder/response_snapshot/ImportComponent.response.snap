@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"clientToken":"__ClientToken__","componentBuildVersionArn":"__ComponentBuildVersionArn__","requestId":"__RequestId__"}

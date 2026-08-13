@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.CreateWorkspaceImage
-
-{"Created":946684800,"Description":"__Description__","ImageId":"__ImageId__","Name":"__Name__","OperatingSystem":{"Type":"WINDOWS"},"OwnerAccountId":"__OwnerAccountId__","RequiredTenancy":"DEFAULT","State":"AVAILABLE"}

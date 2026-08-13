@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListStageDevices
-
-{"DeviceDeploymentSummaries":[{"DeployedStageName":"__DeployedStageName__","DeploymentStartTime":946684800,"Description":"__Description__","DeviceArn":"__DeviceArn__","DeviceDeploymentStatus":"READYTODEPLOY","DeviceDeploymentStatusMessage":"__DeviceDeploymentStatusMessage__","DeviceFleetName":"__DeviceFleetName__","DeviceName":"__DeviceName__","EdgeDeploymentPlanArn":"__EdgeDeploymentPlanArn__","EdgeDeploymentPlanName":"__EdgeDeploymentPlanName__","StageName":"__StageName__"},{"DeployedStageName":"__DeployedStageName__","DeploymentStartTime":946684800,"Description":"__Description__","DeviceArn":"__DeviceArn__","DeviceDeploymentStatus":"READYTODEPLOY","DeviceDeploymentStatusMessage":"__DeviceDeploymentStatusMessage__","DeviceFleetName":"__DeviceFleetName__","DeviceName":"__DeviceName__","EdgeDeploymentPlanArn":"__EdgeDeploymentPlanArn__","EdgeDeploymentPlanName":"__EdgeDeploymentPlanName__","StageName":"__StageName__"}],"NextToken":"__NextToken__"}

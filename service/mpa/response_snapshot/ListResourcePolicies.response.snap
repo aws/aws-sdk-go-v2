@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ResourcePolicies":[{"PolicyArn":"__PolicyArn__","PolicyName":"__PolicyName__","PolicyType":"AWS_MANAGED"},{"PolicyArn":"__PolicyArn__","PolicyName":"__PolicyName__","PolicyType":"AWS_MANAGED"}]}

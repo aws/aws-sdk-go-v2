@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"userJourney":{"createdAt":946684800,"description":"__Description__","name":"__Name__","policyArn":"__PolicyArn__","updatedAt":946684800,"userJourneyId":"__UserJourneyId__"}}

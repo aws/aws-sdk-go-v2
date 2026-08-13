@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"gateway":{"egressCidrBlocks":["__Member__","__Member__"],"gatewayArn":"__GatewayArn__","gatewayMessages":[{"code":"__Code__","message":"__Message__","resourceName":"__ResourceName__"},{"code":"__Code__","message":"__Message__","resourceName":"__ResourceName__"}],"gatewayState":"CREATING","name":"__Name__","networks":[{"cidrBlock":"__CidrBlock__","name":"__Name__"},{"cidrBlock":"__CidrBlock__","name":"__Name__"}]}}

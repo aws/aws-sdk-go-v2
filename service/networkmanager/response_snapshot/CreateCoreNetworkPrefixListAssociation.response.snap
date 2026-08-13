@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CoreNetworkId":"__CoreNetworkId__","PrefixListAlias":"__PrefixListAlias__","PrefixListArn":"__PrefixListArn__"}

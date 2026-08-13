@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","userAccessLoggingSettings":[{"kinesisStreamArn":"__KinesisStreamArn__","userAccessLoggingSettingsArn":"__UserAccessLoggingSettingsArn__"},{"kinesisStreamArn":"__KinesisStreamArn__","userAccessLoggingSettingsArn":"__UserAccessLoggingSettingsArn__"}]}

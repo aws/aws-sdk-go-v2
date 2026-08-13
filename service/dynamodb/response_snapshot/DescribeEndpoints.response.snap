@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDB_20120810.DescribeEndpoints
-
-{"Endpoints":[{"Address":"__Address__","CachePeriodInMinutes":1},{"Address":"__Address__","CachePeriodInMinutes":1}]}

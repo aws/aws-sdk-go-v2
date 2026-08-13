@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CompatibleVersions":[{"SourceVersion":"__SourceVersion__","TargetVersions":["__Member__","__Member__"]},{"SourceVersion":"__SourceVersion__","TargetVersions":["__Member__","__Member__"]}]}

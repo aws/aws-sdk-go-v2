@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CreationTime":946684800,"RestoreTestingPlanArn":"__RestoreTestingPlanArn__","RestoreTestingPlanName":"__RestoreTestingPlanName__","RestoreTestingSelectionName":"__RestoreTestingSelectionName__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"connectorEntityMap":{"key0":[{"hasNestedEntities":true,"label":"__Label__","name":"__Name__"},{"hasNestedEntities":true,"label":"__Label__","name":"__Name__"}]},"nextToken":"__NextToken__"}

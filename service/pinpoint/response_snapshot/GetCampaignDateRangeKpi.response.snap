@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationId":"__ApplicationId__","CampaignId":"__CampaignId__","EndTime":"2000-01-01T00:00:00Z","KpiName":"__KpiName__","KpiResult":{"Rows":[{"GroupedBys":[{"Key":"__Key__","Type":"__Type__","Value":"__Value__"},{"Key":"__Key__","Type":"__Type__","Value":"__Value__"}],"Values":[{"Key":"__Key__","Type":"__Type__","Value":"__Value__"},{"Key":"__Key__","Type":"__Type__","Value":"__Value__"}]},{"GroupedBys":[{"Key":"__Key__","Type":"__Type__","Value":"__Value__"},{"Key":"__Key__","Type":"__Type__","Value":"__Value__"}],"Values":[{"Key":"__Key__","Type":"__Type__","Value":"__Value__"},{"Key":"__Key__","Type":"__Type__","Value":"__Value__"}]}]},"NextToken":"__NextToken__","StartTime":"2000-01-01T00:00:00Z"}

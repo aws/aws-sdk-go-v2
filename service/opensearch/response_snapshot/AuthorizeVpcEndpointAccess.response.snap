@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AuthorizedPrincipal":{"Principal":"__Principal__","PrincipalType":"AWS_ACCOUNT","ServiceOptions":{"SupportedRegions":["__Member__","__Member__"]}}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botAnalyzerRequestId":"__BotAnalyzerRequestId__","botAnalyzerStatus":"Processing","botId":"__BotId__","botVersion":"__BotVersion__","creationDateTime":946684800,"localeId":"__LocaleId__"}

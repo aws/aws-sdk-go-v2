@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"NetworkConnectorLimitExceededException","Type":"__Type__","message":"__Message__"}

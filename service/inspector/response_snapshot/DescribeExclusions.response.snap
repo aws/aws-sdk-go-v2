@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: InspectorService.DescribeExclusions
-
-{"exclusions":{"key0":{"arn":"__Arn__","attributes":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"description":"__Description__","recommendation":"__Recommendation__","scopes":[{"key":"INSTANCE_ID","value":"__Value__"},{"key":"INSTANCE_ID","value":"__Value__"}],"title":"__Title__"}},"failedItems":{"key0":{"failureCode":"INVALID_ARN","retryable":true}}}

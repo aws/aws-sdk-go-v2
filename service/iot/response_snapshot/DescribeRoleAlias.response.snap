@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"roleAliasDescription":{"creationDate":946684800,"credentialDurationSeconds":1,"lastModifiedDate":946684800,"owner":"__Owner__","roleAlias":"__RoleAlias__","roleAliasArn":"__RoleAliasArn__","roleArn":"__RoleArn__"}}

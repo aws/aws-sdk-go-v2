@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribePatchGroups
-
-{"Mappings":[{"BaselineIdentity":{"BaselineDescription":"__BaselineDescription__","BaselineId":"__BaselineId__","BaselineName":"__BaselineName__","DefaultBaseline":true,"OperatingSystem":"WINDOWS"},"PatchGroup":"__PatchGroup__"},{"BaselineIdentity":{"BaselineDescription":"__BaselineDescription__","BaselineId":"__BaselineId__","BaselineName":"__BaselineName__","DefaultBaseline":true,"OperatingSystem":"WINDOWS"},"PatchGroup":"__PatchGroup__"}],"NextToken":"__NextToken__"}

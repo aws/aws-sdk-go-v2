@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetInstanceAccessDetails
-
-{"accessDetails":{"certKey":"__CertKey__","expiresAt":946684800,"hostKeys":[{"algorithm":"__Algorithm__","fingerprintSHA1":"__FingerprintSHA1__","fingerprintSHA256":"__FingerprintSHA256__","notValidAfter":946684800,"notValidBefore":946684800,"publicKey":"__PublicKey__","witnessedAt":946684800},{"algorithm":"__Algorithm__","fingerprintSHA1":"__FingerprintSHA1__","fingerprintSHA256":"__FingerprintSHA256__","notValidAfter":946684800,"notValidBefore":946684800,"publicKey":"__PublicKey__","witnessedAt":946684800}],"instanceName":"__InstanceName__","ipAddress":"__IpAddress__","ipv6Addresses":["__Member__","__Member__"],"password":"__Password__","passwordData":{"ciphertext":"__Ciphertext__","keyPairName":"__KeyPairName__"},"privateKey":"__PrivateKey__","protocol":"ssh","username":"__Username__"}}

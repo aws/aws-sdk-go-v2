@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Lens":{"Description":"__Description__","LensArn":"__LensArn__","LensVersion":"__LensVersion__","Name":"__Name__","Owner":"__Owner__","ShareInvitationId":"__ShareInvitationId__","Tags":{"key0":"__Value__"}}}

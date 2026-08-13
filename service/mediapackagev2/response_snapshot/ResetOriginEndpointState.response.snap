@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","ChannelGroupName":"__ChannelGroupName__","ChannelName":"__ChannelName__","OriginEndpointName":"__OriginEndpointName__","ResetAt":946684800}

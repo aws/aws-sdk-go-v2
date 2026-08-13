@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSWAF_20150824.CreateRegexMatchSet
-
-{"ChangeToken":"__ChangeToken__","RegexMatchSet":{"Name":"__Name__","RegexMatchSetId":"__RegexMatchSetId__","RegexMatchTuples":[{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"RegexPatternSetId":"__RegexPatternSetId__","TextTransformation":"NONE"},{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"RegexPatternSetId":"__RegexPatternSetId__","TextTransformation":"NONE"}]}}

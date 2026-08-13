@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"asset":{"hashes":{"key0":"__Value__"},"name":"__Name__","size":1},"format":"npm","namespace":"__Namespace__","package":"__Package__","status":"Published","version":"__Version__","versionRevision":"__VersionRevision__"}

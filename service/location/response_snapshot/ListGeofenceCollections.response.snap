@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Entries":[{"CollectionName":"__CollectionName__","CreateTime":"2000-01-01T00:00:00Z","Description":"__Description__","PricingPlan":"RequestBasedUsage","PricingPlanDataSource":"__PricingPlanDataSource__","UpdateTime":"2000-01-01T00:00:00Z"},{"CollectionName":"__CollectionName__","CreateTime":"2000-01-01T00:00:00Z","Description":"__Description__","PricingPlan":"RequestBasedUsage","PricingPlanDataSource":"__PricingPlanDataSource__","UpdateTime":"2000-01-01T00:00:00Z"}],"NextToken":"__NextToken__"}

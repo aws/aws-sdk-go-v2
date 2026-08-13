@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ResourceInfo":{"ExpectedResourceOwnerAccount":"__ExpectedResourceOwnerAccount__","HybridAccessEnabled":true,"LastModified":946684800,"ResourceArn":"__ResourceArn__","RoleArn":"__RoleArn__","VerificationStatus":"VERIFIED","WithFederation":true,"WithPrivilegedAccess":true}}

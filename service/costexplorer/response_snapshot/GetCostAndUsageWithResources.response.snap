@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSInsightsIndexService.GetCostAndUsageWithResources
-
-{"DimensionValueAttributes":[{"Attributes":{"key0":"__Value__"},"Value":"__Value__"},{"Attributes":{"key0":"__Value__"},"Value":"__Value__"}],"GroupDefinitions":[{"Key":"__Key__","Type":"DIMENSION"},{"Key":"__Key__","Type":"DIMENSION"}],"NextPageToken":"__NextPageToken__","ResultsByTime":[{"Estimated":true,"Groups":[{"Keys":["__Member__","__Member__"],"Metrics":{"key0":{"Amount":"__Amount__","Unit":"__Unit__"}}},{"Keys":["__Member__","__Member__"],"Metrics":{"key0":{"Amount":"__Amount__","Unit":"__Unit__"}}}],"TimePeriod":{"End":"__End__","Start":"__Start__"},"Total":{"key0":{"Amount":"__Amount__","Unit":"__Unit__"}}},{"Estimated":true,"Groups":[{"Keys":["__Member__","__Member__"],"Metrics":{"key0":{"Amount":"__Amount__","Unit":"__Unit__"}}},{"Keys":["__Member__","__Member__"],"Metrics":{"key0":{"Amount":"__Amount__","Unit":"__Unit__"}}}],"TimePeriod":{"End":"__End__","Start":"__Start__"},"Total":{"key0":{"Amount":"__Amount__","Unit":"__Unit__"}}}]}

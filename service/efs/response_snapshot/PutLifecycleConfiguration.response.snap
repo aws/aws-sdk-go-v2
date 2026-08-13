@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LifecyclePolicies":[{"TransitionToArchive":"AFTER_1_DAY","TransitionToIA":"AFTER_7_DAYS","TransitionToPrimaryStorageClass":"AFTER_1_ACCESS"},{"TransitionToArchive":"AFTER_1_DAY","TransitionToIA":"AFTER_7_DAYS","TransitionToPrimaryStorageClass":"AFTER_1_ACCESS"}]}

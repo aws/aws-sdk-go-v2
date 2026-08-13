@@ -1,4 +1,0 @@
-504
-Content-Type: application/json
-
-{"__type":"GatewayTimeoutException","message":"__Message__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","creationTime":946684800,"deletionProtectionEnabled":true,"encryptionDetails":{"encryptionStatus":"ENABLED","encryptionType":"AWS_OWNED_KMS_KEY","kmsKeyArn":"__KmsKeyArn__"},"endpoint":"__Endpoint__","identifier":"__Identifier__","multiRegionProperties":{"clusters":["__Member__","__Member__"],"witnessRegion":"__WitnessRegion__"},"status":"CREATING","tags":{"key0":"__Value__"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","slackChannelConfigurations":[{"channelId":"__ChannelId__","channelName":"__ChannelName__","channelRoleArn":"__ChannelRoleArn__","notifyOnAddCorrespondenceToCase":true,"notifyOnCaseSeverity":"none","notifyOnCreateOrReopenCase":true,"notifyOnResolveCase":true,"teamId":"__TeamId__"},{"channelId":"__ChannelId__","channelName":"__ChannelName__","channelRoleArn":"__ChannelRoleArn__","notifyOnAddCorrespondenceToCase":true,"notifyOnCaseSeverity":"none","notifyOnCreateOrReopenCase":true,"notifyOnResolveCase":true,"teamId":"__TeamId__"}]}

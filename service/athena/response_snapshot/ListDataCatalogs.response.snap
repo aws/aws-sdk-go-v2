@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonAthena.ListDataCatalogs
-
-{"DataCatalogsSummary":[{"CatalogName":"__CatalogName__","ConnectionType":"DYNAMODB","Error":"__Error__","Status":"CREATE_IN_PROGRESS","Type":"LAMBDA"},{"CatalogName":"__CatalogName__","ConnectionType":"DYNAMODB","Error":"__Error__","Status":"CREATE_IN_PROGRESS","Type":"LAMBDA"}],"NextToken":"__NextToken__"}

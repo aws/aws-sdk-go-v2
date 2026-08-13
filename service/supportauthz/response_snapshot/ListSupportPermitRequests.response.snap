@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","supportPermitRequests":[{"createdAt":946684800,"permit":{"actions":{"allActions":{}},"conditions":[{"allowAfter":946684800},{"allowAfter":946684800}],"resources":{"allResourcesInRegion":{}}},"requestArn":"__RequestArn__","status":"PENDING","supportCaseDisplayId":"__SupportCaseDisplayId__","updatedAt":946684800},{"createdAt":946684800,"permit":{"actions":{"allActions":{}},"conditions":[{"allowAfter":946684800},{"allowAfter":946684800}],"resources":{"allResourcesInRegion":{}}},"requestArn":"__RequestArn__","status":"PENDING","supportCaseDisplayId":"__SupportCaseDisplayId__","updatedAt":946684800}]}

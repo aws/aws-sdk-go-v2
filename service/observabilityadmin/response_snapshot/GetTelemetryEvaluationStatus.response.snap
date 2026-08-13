@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"FailureReason":"__FailureReason__","HomeRegion":"__HomeRegion__","RegionStatuses":[{"FailureReason":"__FailureReason__","Region":"__Region__","RuleArn":"__RuleArn__","Status":"__Status__"},{"FailureReason":"__FailureReason__","Region":"__Region__","RuleArn":"__RuleArn__","Status":"__Status__"}],"Status":"NOT_STARTED"}

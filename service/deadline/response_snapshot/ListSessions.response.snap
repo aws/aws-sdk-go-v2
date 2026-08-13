@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","sessions":[{"endedAt":"2000-01-01T00:00:00Z","fleetId":"__FleetId__","lifecycleStatus":"STARTED","sessionId":"__SessionId__","startedAt":"2000-01-01T00:00:00Z","targetLifecycleStatus":"ENDED","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__","workerId":"__WorkerId__"},{"endedAt":"2000-01-01T00:00:00Z","fleetId":"__FleetId__","lifecycleStatus":"STARTED","sessionId":"__SessionId__","startedAt":"2000-01-01T00:00:00Z","targetLifecycleStatus":"ENDED","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__","workerId":"__WorkerId__"}]}

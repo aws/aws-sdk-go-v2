@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"acceptedQueryCount":1,"queries":[{"queryEvalStats":{"cancelled":true,"elapsed":1,"subqueries":"__Document__","waited":1},"queryId":"__QueryId__","queryString":"__QueryString__"},{"queryEvalStats":{"cancelled":true,"elapsed":1,"subqueries":"__Document__","waited":1},"queryId":"__QueryId__","queryString":"__QueryString__"}],"runningQueryCount":1}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListDomains
-
-{"Domains":[{"CreationTime":946684800,"DomainArn":"__DomainArn__","DomainId":"__DomainId__","DomainName":"__DomainName__","LastModifiedTime":946684800,"Status":"Deleting","Url":"__Url__"},{"CreationTime":946684800,"DomainArn":"__DomainArn__","DomainId":"__DomainId__","DomainName":"__DomainName__","LastModifiedTime":946684800,"Status":"Deleting","Url":"__Url__"}],"NextToken":"__NextToken__"}

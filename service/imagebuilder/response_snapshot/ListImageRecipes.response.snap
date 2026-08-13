@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"imageRecipeSummaryList":[{"arn":"__Arn__","dateCreated":"__DateCreated__","name":"__Name__","owner":"__Owner__","parentImage":"__ParentImage__","platform":"Windows","tags":{"key0":"__Value__"}},{"arn":"__Arn__","dateCreated":"__DateCreated__","name":"__Name__","owner":"__Owner__","parentImage":"__ParentImage__","platform":"Windows","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__","requestId":"__RequestId__"}

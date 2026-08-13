@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applications":[{"applicationArn":"__ApplicationArn__","applicationId":"__ApplicationId__","applicationVersion":1,"creationTime":946684800,"deploymentStatus":"Deploying","description":"__Description__","engineType":"microfocus","environmentId":"__EnvironmentId__","lastStartTime":946684800,"name":"__Name__","roleArn":"__RoleArn__","status":"Creating","versionStatus":"Creating"},{"applicationArn":"__ApplicationArn__","applicationId":"__ApplicationId__","applicationVersion":1,"creationTime":946684800,"deploymentStatus":"Deploying","description":"__Description__","engineType":"microfocus","environmentId":"__EnvironmentId__","lastStartTime":946684800,"name":"__Name__","roleArn":"__RoleArn__","status":"Creating","versionStatus":"Creating"}],"nextToken":"__NextToken__"}

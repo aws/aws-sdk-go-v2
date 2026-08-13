@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","plugins":[{"hostname":"__Hostname__","ipAddress":"__IpAddress__","pluginId":"__PluginId__","registeredTime":"__RegisteredTime__","status":"HEALTHY","version":"__Version__"},{"hostname":"__Hostname__","ipAddress":"__IpAddress__","pluginId":"__PluginId__","registeredTime":"__RegisteredTime__","status":"HEALTHY","version":"__Version__"}]}

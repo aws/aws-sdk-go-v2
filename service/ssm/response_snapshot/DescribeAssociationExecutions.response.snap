@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribeAssociationExecutions
-
-{"AssociationExecutions":[{"AlarmConfiguration":{"Alarms":[{"Name":"__Name__"},{"Name":"__Name__"}],"IgnorePollAlarmFailure":true},"AssociationId":"__AssociationId__","AssociationVersion":"__AssociationVersion__","CreatedTime":946684800,"DetailedStatus":"__DetailedStatus__","ExecutionId":"__ExecutionId__","LastExecutionDate":946684800,"ResourceCountByStatus":"__ResourceCountByStatus__","Status":"__Status__","TriggeredAlarms":[{"Name":"__Name__","State":"UNKNOWN"},{"Name":"__Name__","State":"UNKNOWN"}]},{"AlarmConfiguration":{"Alarms":[{"Name":"__Name__"},{"Name":"__Name__"}],"IgnorePollAlarmFailure":true},"AssociationId":"__AssociationId__","AssociationVersion":"__AssociationVersion__","CreatedTime":946684800,"DetailedStatus":"__DetailedStatus__","ExecutionId":"__ExecutionId__","LastExecutionDate":946684800,"ResourceCountByStatus":"__ResourceCountByStatus__","Status":"__Status__","TriggeredAlarms":[{"Name":"__Name__","State":"UNKNOWN"},{"Name":"__Name__","State":"UNKNOWN"}]}],"NextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonMWAAServerless.ListWorkflowVersions
-
-{"NextToken":"__NextToken__","WorkflowVersions":[{"CreatedAt":"2000-01-01T00:00:00Z","DefinitionS3Location":{"Bucket":"__Bucket__","ObjectKey":"__ObjectKey__","VersionId":"__VersionId__"},"IsLatestVersion":true,"ModifiedAt":"2000-01-01T00:00:00Z","ScheduleConfiguration":{"CronExpression":"__CronExpression__"},"TriggerMode":"__TriggerMode__","WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"},{"CreatedAt":"2000-01-01T00:00:00Z","DefinitionS3Location":{"Bucket":"__Bucket__","ObjectKey":"__ObjectKey__","VersionId":"__VersionId__"},"IsLatestVersion":true,"ModifiedAt":"2000-01-01T00:00:00Z","ScheduleConfiguration":{"CronExpression":"__CronExpression__"},"TriggerMode":"__TriggerMode__","WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","PolicyVersions":[{"Arn":"__Arn__","CreationTime":"2000-01-01T00:00:00Z","IsDefault":true,"LastUpdatedTime":"2000-01-01T00:00:00Z","Name":"__Name__","PolicyArn":"__PolicyArn__","PolicyType":"AWS_MANAGED","Status":"ATTACHABLE","VersionId":1},{"Arn":"__Arn__","CreationTime":"2000-01-01T00:00:00Z","IsDefault":true,"LastUpdatedTime":"2000-01-01T00:00:00Z","Name":"__Name__","PolicyArn":"__PolicyArn__","PolicyType":"AWS_MANAGED","Status":"ATTACHABLE","VersionId":1}]}

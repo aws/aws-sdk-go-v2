@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RedshiftServerless.ListManagedWorkgroups
-
-{"managedWorkgroups":[{"creationDate":"2000-01-01T00:00:00Z","managedWorkgroupId":"__ManagedWorkgroupId__","managedWorkgroupName":"__ManagedWorkgroupName__","sourceArn":"__SourceArn__","status":"CREATING"},{"creationDate":"2000-01-01T00:00:00Z","managedWorkgroupId":"__ManagedWorkgroupId__","managedWorkgroupName":"__ManagedWorkgroupName__","sourceArn":"__SourceArn__","status":"CREATING"}],"nextToken":"__NextToken__"}

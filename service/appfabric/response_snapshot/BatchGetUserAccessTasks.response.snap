@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"userAccessResultsList":[{"app":"__App__","email":"__Email__","resultStatus":"IN_PROGRESS","taskError":{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},"taskId":"__TaskId__","tenantDisplayName":"__TenantDisplayName__","tenantId":"__TenantId__","userFirstName":"__UserFirstName__","userFullName":"__UserFullName__","userId":"__UserId__","userLastName":"__UserLastName__","userStatus":"__UserStatus__"},{"app":"__App__","email":"__Email__","resultStatus":"IN_PROGRESS","taskError":{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},"taskId":"__TaskId__","tenantDisplayName":"__TenantDisplayName__","tenantId":"__TenantId__","userFirstName":"__UserFirstName__","userFullName":"__UserFullName__","userId":"__UserId__","userLastName":"__UserLastName__","userStatus":"__UserStatus__"}]}

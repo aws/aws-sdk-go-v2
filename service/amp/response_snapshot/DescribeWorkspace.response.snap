@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"workspace":{"alias":"__Alias__","arn":"__Arn__","createdAt":946684800,"kmsKeyArn":"__KmsKeyArn__","prometheusEndpoint":"__PrometheusEndpoint__","status":{"statusCode":"CREATING"},"tags":{"key0":"__Value__"},"workspaceId":"__WorkspaceId__"}}

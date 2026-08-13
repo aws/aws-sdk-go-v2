@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"calls":[{"callId":"__CallId__","input":"__Document__","name":"__Name__"},{"callId":"__CallId__","input":"__Document__","name":"__Name__"}],"stepId":"__StepId__"}

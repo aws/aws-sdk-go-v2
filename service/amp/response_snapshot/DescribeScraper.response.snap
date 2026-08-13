@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"scraper":{"alias":"__Alias__","arn":"__Arn__","createdAt":946684800,"destination":{"ampConfiguration":{"workspaceArn":"__WorkspaceArn__"}},"exporters":[{"openSearchConfiguration":{"domainArn":"__DomainArn__"}},{"openSearchConfiguration":{"domainArn":"__DomainArn__"}}],"lastModifiedAt":946684800,"roleArn":"__RoleArn__","roleConfiguration":{"sourceRoleArn":"__SourceRoleArn__","targetRoleArn":"__TargetRoleArn__"},"scrapeConfiguration":{"configurationBlob":"YmxvYg=="},"scraperId":"__ScraperId__","source":{"eksConfiguration":{"clusterArn":"__ClusterArn__","securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}},"status":{"statusCode":"CREATING"},"statusReason":"__StatusReason__","tags":{"key0":"__Value__"}}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListUserProfiles
-
-{"NextToken":"__NextToken__","UserProfiles":[{"CreationTime":946684800,"DomainId":"__DomainId__","LastModifiedTime":946684800,"Status":"Deleting","UserProfileName":"__UserProfileName__"},{"CreationTime":946684800,"DomainId":"__DomainId__","LastModifiedTime":946684800,"Status":"Deleting","UserProfileName":"__UserProfileName__"}]}

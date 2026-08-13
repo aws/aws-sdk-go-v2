@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSPartnerCentralSelling.ListEngagements
-
-{"EngagementSummaryList":[{"Arn":"__Arn__","ContextTypes":["CustomerProject","CustomerProject"],"CreatedAt":"2000-01-01T00:00:00Z","CreatedBy":"__CreatedBy__","Id":"__Id__","MemberCount":1,"ModifiedAt":"2000-01-01T00:00:00Z","ModifiedBy":"__ModifiedBy__","Title":"__Title__"},{"Arn":"__Arn__","ContextTypes":["CustomerProject","CustomerProject"],"CreatedAt":"2000-01-01T00:00:00Z","CreatedBy":"__CreatedBy__","Id":"__Id__","MemberCount":1,"ModifiedAt":"2000-01-01T00:00:00Z","ModifiedBy":"__ModifiedBy__","Title":"__Title__"}],"NextToken":"__NextToken__"}

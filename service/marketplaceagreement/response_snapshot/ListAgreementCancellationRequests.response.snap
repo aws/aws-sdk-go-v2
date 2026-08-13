@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.ListAgreementCancellationRequests
-
-{"items":[{"agreementCancellationRequestId":"__AgreementCancellationRequestId__","agreementId":"__AgreementId__","agreementType":"__AgreementType__","catalog":"__Catalog__","createdAt":946684800,"reasonCode":"INCORRECT_TERMS_ACCEPTED","status":"PENDING_APPROVAL","updatedAt":946684800},{"agreementCancellationRequestId":"__AgreementCancellationRequestId__","agreementId":"__AgreementId__","agreementType":"__AgreementType__","catalog":"__Catalog__","createdAt":946684800,"reasonCode":"INCORRECT_TERMS_ACCEPTED","status":"PENDING_APPROVAL","updatedAt":946684800}],"nextToken":"__NextToken__"}

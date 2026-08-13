@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.GetParallelData
-
-{"AuxiliaryDataLocation":{"Location":"__Location__","RepositoryType":"__RepositoryType__"},"DataLocation":{"Location":"__Location__","RepositoryType":"__RepositoryType__"},"LatestUpdateAttemptAuxiliaryDataLocation":{"Location":"__Location__","RepositoryType":"__RepositoryType__"},"ParallelDataProperties":{"Arn":"__Arn__","CreatedAt":946684800,"Description":"__Description__","EncryptionKey":{"Id":"__Id__","Type":"KMS"},"FailedRecordCount":1,"ImportedDataSize":1,"ImportedRecordCount":1,"LastUpdatedAt":946684800,"LatestUpdateAttemptAt":946684800,"LatestUpdateAttemptStatus":"CREATING","Message":"__Message__","Name":"__Name__","ParallelDataConfig":{"Format":"TSV","S3Uri":"__S3Uri__"},"SkippedRecordCount":1,"SourceLanguageCode":"__SourceLanguageCode__","Status":"CREATING","TargetLanguageCodes":["__Member__","__Member__"]}}

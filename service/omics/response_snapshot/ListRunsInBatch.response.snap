@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","runs":[{"runArn":"__RunArn__","runId":"__RunId__","runInternalUuid":"__RunInternalUuid__","runSettingId":"__RunSettingId__","submissionFailureMessage":"__SubmissionFailureMessage__","submissionFailureReason":"__SubmissionFailureReason__","submissionStatus":"SUCCESS"},{"runArn":"__RunArn__","runId":"__RunId__","runInternalUuid":"__RunInternalUuid__","runSettingId":"__RunSettingId__","submissionFailureMessage":"__SubmissionFailureMessage__","submissionFailureReason":"__SubmissionFailureReason__","submissionStatus":"SUCCESS"}]}

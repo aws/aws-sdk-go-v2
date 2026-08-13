@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: SimpleWorkflowService.ListOpenWorkflowExecutions
-
-{"executionInfos":[{"cancelRequested":true,"closeStatus":"COMPLETED","closeTimestamp":946684800,"execution":{"runId":"__RunId__","workflowId":"__WorkflowId__"},"executionStatus":"OPEN","parent":{"runId":"__RunId__","workflowId":"__WorkflowId__"},"startTimestamp":946684800,"tagList":["__Member__","__Member__"],"workflowType":{"name":"__Name__","version":"__Version__"}},{"cancelRequested":true,"closeStatus":"COMPLETED","closeTimestamp":946684800,"execution":{"runId":"__RunId__","workflowId":"__WorkflowId__"},"executionStatus":"OPEN","parent":{"runId":"__RunId__","workflowId":"__WorkflowId__"},"startTimestamp":946684800,"tagList":["__Member__","__Member__"],"workflowType":{"name":"__Name__","version":"__Version__"}}],"nextPageToken":"__NextPageToken__"}

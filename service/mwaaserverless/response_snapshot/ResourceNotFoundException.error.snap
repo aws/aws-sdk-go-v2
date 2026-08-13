@@ -1,5 +1,0 @@
-404
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonMWAAServerless.DeleteWorkflow
-
-{"__type":"ResourceNotFoundException","Message":"__Message__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}

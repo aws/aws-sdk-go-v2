@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSEvents.ListPartnerEventSourceAccounts
-
-{"NextToken":"__NextToken__","PartnerEventSourceAccounts":[{"Account":"__Account__","CreationTime":946684800,"ExpirationTime":946684800,"State":"PENDING"},{"Account":"__Account__","CreationTime":946684800,"ExpirationTime":946684800,"State":"PENDING"}]}

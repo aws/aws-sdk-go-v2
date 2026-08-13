@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Results":[{"LastBackupTime":946684800,"LastBackupVaultArn":"__LastBackupVaultArn__","LastRecoveryPointArn":"__LastRecoveryPointArn__","ResourceArn":"__ResourceArn__","ResourceName":"__ResourceName__","ResourceType":"__ResourceType__"},{"LastBackupTime":946684800,"LastBackupVaultArn":"__LastBackupVaultArn__","LastRecoveryPointArn":"__LastRecoveryPointArn__","ResourceArn":"__ResourceArn__","ResourceName":"__ResourceName__","ResourceType":"__ResourceType__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Kinesis_20131202.DescribeStreamSummary
-
-{"StreamDescriptionSummary":{"ConsumerCount":1,"EncryptionType":"NONE","EnhancedMonitoring":[{"ShardLevelMetrics":["IncomingBytes","IncomingBytes"]},{"ShardLevelMetrics":["IncomingBytes","IncomingBytes"]}],"KeyId":"__KeyId__","MaxRecordSizeInKiB":1,"OpenShardCount":1,"RetentionPeriodHours":1,"StreamARN":"__StreamARN__","StreamCreationTimestamp":946684800,"StreamId":"__StreamId__","StreamModeDetails":{"StreamMode":"PROVISIONED"},"StreamName":"__StreamName__","StreamStatus":"CREATING","WarmThroughput":{"CurrentMiBps":1,"TargetMiBps":1}}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"channelId":"__ChannelId__","multiplexProgramSettings":{"preferredChannelPipeline":"CURRENTLY_ACTIVE","programNumber":1,"serviceDescriptor":{"providerName":"__ProviderName__","serviceName":"__ServiceName__"},"videoSettings":{"constantBitrate":1,"statmuxSettings":{"maximumBitrate":1,"minimumBitrate":1,"priority":1}}},"packetIdentifiersMap":{"aribCaptionsPid":1,"audioPids":[1,1],"dvbSubPids":[1,1],"dvbTeletextPid":1,"dvbTeletextPids":[1,1],"ecmPid":1,"etvPlatformPid":1,"etvSignalPid":1,"klvDataPids":[1,1],"pcrPid":1,"pmtPid":1,"privateMetadataPid":1,"scte27Pids":[1,1],"scte35Pid":1,"smpte2038Pid":1,"timedMetadataPid":1,"videoPid":1},"pipelineDetails":[{"activeChannelPipeline":"__ActiveChannelPipeline__","pipelineId":"__PipelineId__"},{"activeChannelPipeline":"__ActiveChannelPipeline__","pipelineId":"__PipelineId__"}],"programName":"__ProgramName__"}

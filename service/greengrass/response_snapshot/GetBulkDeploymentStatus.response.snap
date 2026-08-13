@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BulkDeploymentMetrics":{"InvalidInputRecords":1,"RecordsProcessed":1,"RetryAttempts":1},"BulkDeploymentStatus":"Initializing","CreatedAt":"__CreatedAt__","ErrorDetails":[{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"},{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"}],"ErrorMessage":"__ErrorMessage__","tags":{"key0":"__Value__"}}

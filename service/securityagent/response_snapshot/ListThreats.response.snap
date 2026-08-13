@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","threats":[{"createdAt":"2000-01-01T00:00:00Z","createdBy":"CUSTOMER","severity":"CRITICAL","statement":"__Statement__","status":"OPEN","stride":["SPOOFING","SPOOFING"],"threatId":"__ThreatId__","threatJobId":"__ThreatJobId__","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"CUSTOMER"},{"createdAt":"2000-01-01T00:00:00Z","createdBy":"CUSTOMER","severity":"CRITICAL","statement":"__Statement__","status":"OPEN","stride":["SPOOFING","SPOOFING"],"threatId":"__ThreatId__","threatJobId":"__ThreatJobId__","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"CUSTOMER"}]}

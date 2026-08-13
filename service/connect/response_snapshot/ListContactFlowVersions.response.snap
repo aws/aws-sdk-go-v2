@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ContactFlowVersionSummaryList":[{"Arn":"__Arn__","Version":1,"VersionDescription":"__VersionDescription__"},{"Arn":"__Arn__","Version":1,"VersionDescription":"__VersionDescription__"}],"NextToken":"__NextToken__"}

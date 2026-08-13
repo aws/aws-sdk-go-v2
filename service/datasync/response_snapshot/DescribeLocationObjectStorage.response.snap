@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.DescribeLocationObjectStorage
-
-{"AccessKey":"__AccessKey__","AgentArns":["__Member__","__Member__"],"CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CreationTime":946684800,"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"LocationArn":"__LocationArn__","LocationUri":"__LocationUri__","ManagedSecretConfig":{"SecretArn":"__SecretArn__"},"ServerCertificate":"YmxvYg==","ServerPort":1,"ServerProtocol":"HTTPS"}

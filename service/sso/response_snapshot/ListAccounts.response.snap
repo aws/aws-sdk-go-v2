@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accountList":[{"accountId":"__AccountId__","accountName":"__AccountName__","emailAddress":"__EmailAddress__"},{"accountId":"__AccountId__","accountName":"__AccountName__","emailAddress":"__EmailAddress__"}],"nextToken":"__NextToken__"}

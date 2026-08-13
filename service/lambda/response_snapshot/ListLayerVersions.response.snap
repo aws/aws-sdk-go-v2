@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LayerVersions":[{"CompatibleArchitectures":["x86_64","x86_64"],"CompatibleRuntimes":["nodejs","nodejs"],"CreatedDate":"__CreatedDate__","Description":"__Description__","LayerVersionArn":"__LayerVersionArn__","LicenseInfo":"__LicenseInfo__","Version":1},{"CompatibleArchitectures":["x86_64","x86_64"],"CompatibleRuntimes":["nodejs","nodejs"],"CreatedDate":"__CreatedDate__","Description":"__Description__","LayerVersionArn":"__LayerVersionArn__","LicenseInfo":"__LicenseInfo__","Version":1}],"NextMarker":"__NextMarker__"}

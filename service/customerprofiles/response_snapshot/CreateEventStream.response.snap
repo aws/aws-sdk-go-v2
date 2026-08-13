@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"EventStreamArn":"__EventStreamArn__","Tags":{"key0":"__Value__"}}

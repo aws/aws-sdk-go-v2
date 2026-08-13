@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"authorizerDescription":{"authorizerArn":"__AuthorizerArn__","authorizerFunctionArn":"__AuthorizerFunctionArn__","authorizerName":"__AuthorizerName__","creationDate":946684800,"enableCachingForHttp":true,"lastModifiedDate":946684800,"signingDisabled":true,"status":"ACTIVE","tokenKeyName":"__TokenKeyName__","tokenSigningPublicKeys":{"key0":"__Value__"}}}

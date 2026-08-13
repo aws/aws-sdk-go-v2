@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ConnectionStatus":{"LoRaWAN":{"GatewayEuiEventTopic":"Enabled"},"WirelessGatewayIdEventTopic":"Enabled"},"DeviceRegistrationState":{"Sidewalk":{"AmazonIdEventTopic":"Enabled"},"WirelessDeviceIdEventTopic":"Enabled"},"Join":{"LoRaWAN":{"DevEuiEventTopic":"Enabled"},"WirelessDeviceIdEventTopic":"Enabled"},"MessageDeliveryStatus":{"Sidewalk":{"AmazonIdEventTopic":"Enabled"},"WirelessDeviceIdEventTopic":"Enabled"},"Proximity":{"Sidewalk":{"AmazonIdEventTopic":"Enabled"},"WirelessDeviceIdEventTopic":"Enabled"}}

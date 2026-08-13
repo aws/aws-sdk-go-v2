@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configurationId":"__ConfigurationId__","maxResults":1,"nextToken":"__NextToken__","revisions":[{"created":"2000-01-01T00:00:00Z","description":"__Description__","revision":1},{"created":"2000-01-01T00:00:00Z","description":"__Description__","revision":1}]}

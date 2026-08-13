@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.DescribeLocationNfs
-
-{"CreationTime":946684800,"LocationArn":"__LocationArn__","LocationUri":"__LocationUri__","MountOptions":{"Version":"AUTOMATIC"},"OnPremConfig":{"AgentArns":["__Member__","__Member__"]}}

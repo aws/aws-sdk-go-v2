@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configurationStatus":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"ACTIVE"},"disallowIngestNullNaN":true,"disassociatedDataStorage":"ENABLED","lastUpdateDate":946684800,"multiLayerStorage":{"customerManagedS3Storage":{"roleArn":"__RoleArn__","s3ResourceArn":"__S3ResourceArn__"}},"retentionPeriod":{"numberOfDays":1,"unlimited":true},"storageType":"SITEWISE_DEFAULT_STORAGE","warmTier":"ENABLED","warmTierRetentionPeriod":{"numberOfDays":1,"unlimited":true}}

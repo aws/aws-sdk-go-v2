@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Resolver.AssociateResolverEndpointIpAddress
-
-{"__type":"ResourceExistsException","Message":"__Message__","ResourceType":"__ResourceType__"}

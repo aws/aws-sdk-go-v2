@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Controls":[{"ControlId":"__ControlId__","ControlStatus":"ENABLED","ControlStatusUpdatedAt":"2000-01-01T00:00:00Z","Description":"__Description__","DisabledReason":"__DisabledReason__","RelatedRequirements":["__Member__","__Member__"],"RemediationUrl":"__RemediationUrl__","SeverityRating":"LOW","StandardsControlArn":"__StandardsControlArn__","Title":"__Title__"},{"ControlId":"__ControlId__","ControlStatus":"ENABLED","ControlStatusUpdatedAt":"2000-01-01T00:00:00Z","Description":"__Description__","DisabledReason":"__DisabledReason__","RelatedRequirements":["__Member__","__Member__"],"RemediationUrl":"__RemediationUrl__","SeverityRating":"LOW","StandardsControlArn":"__StandardsControlArn__","Title":"__Title__"}],"NextToken":"__NextToken__"}

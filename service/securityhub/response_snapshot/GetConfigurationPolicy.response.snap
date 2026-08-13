@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","ConfigurationPolicy":{"SecurityHub":{"EnabledStandardIdentifiers":["__Member__","__Member__"],"SecurityControlsConfiguration":{"DisabledSecurityControlIdentifiers":["__Member__","__Member__"],"EnabledSecurityControlIdentifiers":["__Member__","__Member__"],"SecurityControlCustomParameters":[{"Parameters":{"key0":{"Value":{"Integer":1},"ValueType":"DEFAULT"}},"SecurityControlId":"__SecurityControlId__"},{"Parameters":{"key0":{"Value":{"Integer":1},"ValueType":"DEFAULT"}},"SecurityControlId":"__SecurityControlId__"}]},"ServiceEnabled":true}},"CreatedAt":"2000-01-01T00:00:00Z","Description":"__Description__","Id":"__Id__","Name":"__Name__","UpdatedAt":"2000-01-01T00:00:00Z"}

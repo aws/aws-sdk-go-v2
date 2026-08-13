@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"agreementAvailability":{"errorMessage":"__ErrorMessage__","status":"AVAILABLE"},"authorizationStatus":"AUTHORIZED","entitlementAvailability":"AVAILABLE","modelId":"__ModelId__","regionAvailability":"AVAILABLE"}

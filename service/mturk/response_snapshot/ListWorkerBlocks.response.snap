@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: MTurkRequesterServiceV20170117.ListWorkerBlocks
-
-{"NextToken":"__NextToken__","NumResults":1,"WorkerBlocks":[{"Reason":"__Reason__","WorkerId":"__WorkerId__"},{"Reason":"__Reason__","WorkerId":"__WorkerId__"}]}

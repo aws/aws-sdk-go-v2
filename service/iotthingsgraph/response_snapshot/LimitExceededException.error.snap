@@ -1,5 +1,0 @@
-410
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: IotThingsGraphFrontEndService.CreateFlowTemplate
-
-{"__type":"LimitExceededException","message":"__Message__"}

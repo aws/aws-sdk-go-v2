@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"groupId":"__GroupId__","message":"__Message__","networkId":"__NetworkId__"}

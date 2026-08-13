@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CertificateManager.ListAcmeAccounts
-
-{"AcmeAccounts":[{"AccountUrl":"__AccountUrl__","AcmeExternalAccountBindingArn":"__AcmeExternalAccountBindingArn__","Contacts":["__Member__","__Member__"],"CreatedAt":946684800,"PublicKeyThumbprint":"__PublicKeyThumbprint__","Status":"VALID"},{"AccountUrl":"__AccountUrl__","AcmeExternalAccountBindingArn":"__AcmeExternalAccountBindingArn__","Contacts":["__Member__","__Member__"],"CreatedAt":946684800,"PublicKeyThumbprint":"__PublicKeyThumbprint__","Status":"VALID"}],"NextToken":"__NextToken__"}

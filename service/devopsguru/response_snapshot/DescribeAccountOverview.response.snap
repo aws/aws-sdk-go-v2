@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"MeanTimeToRecoverInMilliseconds":1,"ProactiveInsights":1,"ReactiveInsights":1}

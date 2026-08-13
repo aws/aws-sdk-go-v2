@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDBStreams_20120810.GetRecords
-
-{"__type":"TrimmedDataAccessException","message":"__Message__"}

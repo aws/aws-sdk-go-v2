@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.ListOpsItemEvents
-
-{"NextToken":"__NextToken__","Summaries":[{"CreatedBy":{"Arn":"__Arn__"},"CreatedTime":946684800,"Detail":"__Detail__","DetailType":"__DetailType__","EventId":"__EventId__","OpsItemId":"__OpsItemId__","Source":"__Source__"},{"CreatedBy":{"Arn":"__Arn__"},"CreatedTime":946684800,"Detail":"__Detail__","DetailType":"__DetailType__","EventId":"__EventId__","OpsItemId":"__OpsItemId__","Source":"__Source__"}]}

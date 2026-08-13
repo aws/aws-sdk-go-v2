@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"caseId":"__CaseId__","caseStatus":"Submitted","resolverType":"AWS"}

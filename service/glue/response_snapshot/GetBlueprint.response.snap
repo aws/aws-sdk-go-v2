@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.GetBlueprint
-
-{"Blueprint":{"BlueprintLocation":"__BlueprintLocation__","BlueprintServiceLocation":"__BlueprintServiceLocation__","CreatedOn":946684800,"Description":"__Description__","ErrorMessage":"__ErrorMessage__","LastActiveDefinition":{"BlueprintLocation":"__BlueprintLocation__","BlueprintServiceLocation":"__BlueprintServiceLocation__","Description":"__Description__","LastModifiedOn":946684800,"ParameterSpec":"__ParameterSpec__"},"LastModifiedOn":946684800,"Name":"__Name__","ParameterSpec":"__ParameterSpec__","Status":"CREATING"}}

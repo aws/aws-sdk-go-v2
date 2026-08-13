@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Products":[{"ActivationUrl":"__ActivationUrl__","Categories":["__Member__","__Member__"],"CompanyName":"__CompanyName__","Description":"__Description__","IntegrationTypes":["SEND_FINDINGS_TO_SECURITY_HUB","SEND_FINDINGS_TO_SECURITY_HUB"],"MarketplaceUrl":"__MarketplaceUrl__","ProductArn":"__ProductArn__","ProductName":"__ProductName__","ProductSubscriptionResourcePolicy":"__ProductSubscriptionResourcePolicy__"},{"ActivationUrl":"__ActivationUrl__","Categories":["__Member__","__Member__"],"CompanyName":"__CompanyName__","Description":"__Description__","IntegrationTypes":["SEND_FINDINGS_TO_SECURITY_HUB","SEND_FINDINGS_TO_SECURITY_HUB"],"MarketplaceUrl":"__MarketplaceUrl__","ProductArn":"__ProductArn__","ProductName":"__ProductName__","ProductSubscriptionResourcePolicy":"__ProductSubscriptionResourcePolicy__"}]}

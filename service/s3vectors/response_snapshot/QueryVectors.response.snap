@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"distanceMetric":"euclidean","nextToken":"__NextToken__","vectors":[{"distance":1,"key":"__Key__","metadata":"__Document__"},{"distance":1,"key":"__Key__","metadata":"__Document__"}]}

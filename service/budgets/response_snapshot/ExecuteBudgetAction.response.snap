@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSBudgetServiceGateway.ExecuteBudgetAction
-
-{"AccountId":"__AccountId__","ActionId":"__ActionId__","BudgetName":"__BudgetName__","ExecutionType":"APPROVE_BUDGET_ACTION"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.DescribeAttackStatistics
-
-{"DataItems":[{"AttackCount":1,"AttackVolume":{"BitsPerSecond":{"Max":1},"PacketsPerSecond":{"Max":1},"RequestsPerSecond":{"Max":1}}},{"AttackCount":1,"AttackVolume":{"BitsPerSecond":{"Max":1},"PacketsPerSecond":{"Max":1},"RequestsPerSecond":{"Max":1}}}],"TimeRange":{"FromInclusive":946684800,"ToExclusive":946684800}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"creationTime":"2000-01-01T00:00:00Z","id":"__Id__","referenceStoreId":"__ReferenceStoreId__","roleArn":"__RoleArn__","status":"SUBMITTED"}

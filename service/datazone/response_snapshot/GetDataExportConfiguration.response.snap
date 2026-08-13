@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","sseAlgorithm":"__SseAlgorithm__"},"isExportEnabled":true,"s3TableBucketArn":"__S3TableBucketArn__","status":"COMPLETED","updatedAt":946684800}

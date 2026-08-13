@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ShareInvitation":{"LensAlias":"__LensAlias__","LensArn":"__LensArn__","ProfileArn":"__ProfileArn__","ShareInvitationId":"__ShareInvitationId__","ShareResourceType":"WORKLOAD","TemplateArn":"__TemplateArn__","WorkloadId":"__WorkloadId__"}}

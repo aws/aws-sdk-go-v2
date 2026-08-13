@@ -1,5 +1,0 @@
-429
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.AcceptAgreementCancellationRequest
-
-{"__type":"ThrottlingException","message":"__Message__","requestId":"__RequestId__"}

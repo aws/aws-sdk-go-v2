@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"NextToken":"__NextToken__","QuickConnectSummaryList":[{"Arn":"__Arn__","Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","QuickConnectType":"USER"},{"Arn":"__Arn__","Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","QuickConnectType":"USER"}]}

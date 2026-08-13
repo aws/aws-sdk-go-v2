@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LoRaWAN":{"CurrentVersion":{"Model":"__Model__","PackageVersion":"__PackageVersion__","Station":"__Station__"}}}

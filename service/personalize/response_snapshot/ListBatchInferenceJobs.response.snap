@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonPersonalize.ListBatchInferenceJobs
-
-{"batchInferenceJobs":[{"batchInferenceJobArn":"__BatchInferenceJobArn__","batchInferenceJobMode":"BATCH_INFERENCE","creationDateTime":946684800,"failureReason":"__FailureReason__","jobName":"__JobName__","lastUpdatedDateTime":946684800,"solutionVersionArn":"__SolutionVersionArn__","status":"__Status__"},{"batchInferenceJobArn":"__BatchInferenceJobArn__","batchInferenceJobMode":"BATCH_INFERENCE","creationDateTime":946684800,"failureReason":"__FailureReason__","jobName":"__JobName__","lastUpdatedDateTime":946684800,"solutionVersionArn":"__SolutionVersionArn__","status":"__Status__"}],"nextToken":"__NextToken__"}

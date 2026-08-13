@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonMWAAServerless.GetWorkflowRun
-
-{"OverrideParameters":{"key0":"__Document__"},"RunDetail":{"CompletedOn":"2000-01-01T00:00:00Z","CreatedAt":"2000-01-01T00:00:00Z","Duration":1,"ErrorMessage":"__ErrorMessage__","ModifiedAt":"2000-01-01T00:00:00Z","RunId":"__RunId__","RunState":"STARTING","RunType":"ON_DEMAND","StartedOn":"2000-01-01T00:00:00Z","TaskInstances":["__Member__","__Member__"],"WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"},"RunId":"__RunId__","RunType":"ON_DEMAND","WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"}

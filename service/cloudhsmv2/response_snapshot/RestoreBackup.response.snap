@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.RestoreBackup
-
-{"Backup":{"BackupArn":"__BackupArn__","BackupId":"__BackupId__","BackupState":"CREATE_IN_PROGRESS","ClusterId":"__ClusterId__","CopyTimestamp":946684800,"CreateTimestamp":946684800,"DeleteTimestamp":946684800,"HsmType":"__HsmType__","Mode":"FIPS","NeverExpires":true,"SourceBackup":"__SourceBackup__","SourceCluster":"__SourceCluster__","SourceRegion":"__SourceRegion__","TagList":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}}

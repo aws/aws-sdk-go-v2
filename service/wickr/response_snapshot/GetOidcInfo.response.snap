@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"openidConnectInfo":{"applicationId":1,"applicationName":"__ApplicationName__","caCertificate":"__CaCertificate__","clientId":"__ClientId__","clientSecret":"__ClientSecret__","companyId":"__CompanyId__","customUsername":"__CustomUsername__","extraAuthParams":"__ExtraAuthParams__","issuer":"__Issuer__","redirectUrl":"__RedirectUrl__","scopes":"__Scopes__","secret":"__Secret__","ssoTokenBufferMinutes":1,"userId":"__UserId__"},"tokenInfo":{"accessToken":"__AccessToken__","codeChallenge":"__CodeChallenge__","codeVerifier":"__CodeVerifier__","expiresIn":1,"idToken":"__IdToken__","refreshToken":"__RefreshToken__","tokenType":"__TokenType__"}}

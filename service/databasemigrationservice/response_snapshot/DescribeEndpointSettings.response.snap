@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonDMSv20160101.DescribeEndpointSettings
-
-{"EndpointSettings":[{"Applicability":"__Applicability__","DefaultValue":"__DefaultValue__","EnumValues":["__Member__","__Member__"],"IntValueMax":1,"IntValueMin":1,"Name":"__Name__","Sensitive":true,"Type":"string","Units":"__Units__"},{"Applicability":"__Applicability__","DefaultValue":"__DefaultValue__","EnumValues":["__Member__","__Member__"],"IntValueMax":1,"IntValueMin":1,"Name":"__Name__","Sensitive":true,"Type":"string","Units":"__Units__"}],"Marker":"__Marker__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.GetExecutionPreview
-
-{"EndedAt":946684800,"ExecutionPreview":{"Automation":{"Regions":["__Member__","__Member__"],"StepPreviews":{"key0":1},"TargetPreviews":[{"Count":1,"TargetType":"__TargetType__"},{"Count":1,"TargetType":"__TargetType__"}],"TotalAccounts":1}},"ExecutionPreviewId":"__ExecutionPreviewId__","Status":"Pending","StatusMessage":"__StatusMessage__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeIpGroups
-
-{"NextToken":"__NextToken__","Result":[{"groupDesc":"__GroupDesc__","groupId":"__GroupId__","groupName":"__GroupName__","userRules":[{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"},{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"}]},{"groupDesc":"__GroupDesc__","groupId":"__GroupId__","groupName":"__GroupName__","userRules":[{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"},{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"}]}]}

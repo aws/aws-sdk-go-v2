@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"tags":{"key0":"__Value__"},"templateArn":"__TemplateArn__","templateId":"__TemplateId__"}

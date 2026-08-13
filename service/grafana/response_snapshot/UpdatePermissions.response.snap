@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"errors":[{"causedBy":{"action":"ADD","role":"ADMIN","users":[{"id":"__Id__","type":"SSO_USER"},{"id":"__Id__","type":"SSO_USER"}]},"code":1,"message":"__Message__"},{"causedBy":{"action":"ADD","role":"ADMIN","users":[{"id":"__Id__","type":"SSO_USER"},{"id":"__Id__","type":"SSO_USER"}]},"code":1,"message":"__Message__"}]}

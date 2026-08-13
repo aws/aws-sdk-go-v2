@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"aggregationField":"__AggregationField__","aggregationType":{"name":"Statistics","values":["__Member__","__Member__"]},"creationDate":946684800,"description":"__Description__","indexName":"__IndexName__","lastModifiedDate":946684800,"metricArn":"__MetricArn__","metricName":"__MetricName__","period":1,"queryString":"__QueryString__","queryVersion":"__QueryVersion__","unit":"Seconds","version":1}

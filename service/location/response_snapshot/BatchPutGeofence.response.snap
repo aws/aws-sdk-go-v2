@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Errors":[{"Error":{"Code":"AccessDeniedError","Message":"__Message__"},"GeofenceId":"__GeofenceId__"},{"Error":{"Code":"AccessDeniedError","Message":"__Message__"},"GeofenceId":"__GeofenceId__"}],"Successes":[{"CreateTime":"2000-01-01T00:00:00Z","GeofenceId":"__GeofenceId__","UpdateTime":"2000-01-01T00:00:00Z"},{"CreateTime":"2000-01-01T00:00:00Z","GeofenceId":"__GeofenceId__","UpdateTime":"2000-01-01T00:00:00Z"}]}

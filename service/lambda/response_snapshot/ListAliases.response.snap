@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Aliases":[{"AliasArn":"__AliasArn__","Description":"__Description__","FunctionVersion":"__FunctionVersion__","Name":"__Name__","RevisionId":"__RevisionId__","RoutingConfig":{"AdditionalVersionWeights":{"key0":1}}},{"AliasArn":"__AliasArn__","Description":"__Description__","FunctionVersion":"__FunctionVersion__","Name":"__Name__","RevisionId":"__RevisionId__","RoutingConfig":{"AdditionalVersionWeights":{"key0":1}}}],"NextMarker":"__NextMarker__"}

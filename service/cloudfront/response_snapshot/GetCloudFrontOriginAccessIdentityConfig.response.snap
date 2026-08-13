@@ -1,5 +1,0 @@
-200
-Content-Type: application/xml
-Etag: __ETag__
-
-<CloudFrontOriginAccessIdentityConfig xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CallerReference>__CallerReference__</CallerReference><Comment>__Comment__</Comment></CloudFrontOriginAccessIdentityConfig>

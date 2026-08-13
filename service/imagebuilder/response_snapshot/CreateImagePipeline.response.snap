@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"clientToken":"__ClientToken__","imagePipelineArn":"__ImagePipelineArn__","requestId":"__RequestId__"}

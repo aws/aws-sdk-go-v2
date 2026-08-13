@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.DescribeOrganizationConfigRuleStatuses
-
-{"NextToken":"__NextToken__","OrganizationConfigRuleStatuses":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","LastUpdateTime":946684800,"OrganizationConfigRuleName":"__OrganizationConfigRuleName__","OrganizationRuleStatus":"CREATE_SUCCESSFUL"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","LastUpdateTime":946684800,"OrganizationConfigRuleName":"__OrganizationConfigRuleName__","OrganizationRuleStatus":"CREATE_SUCCESSFUL"}]}

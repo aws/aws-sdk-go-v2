@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ReviewTemplates":[{"Description":"__Description__","Lenses":["__Member__","__Member__"],"Owner":"__Owner__","TemplateArn":"__TemplateArn__","TemplateName":"__TemplateName__","UpdateStatus":"CURRENT","UpdatedAt":946684800},{"Description":"__Description__","Lenses":["__Member__","__Member__"],"Owner":"__Owner__","TemplateArn":"__TemplateArn__","TemplateName":"__TemplateName__","UpdateStatus":"CURRENT","UpdatedAt":946684800}]}

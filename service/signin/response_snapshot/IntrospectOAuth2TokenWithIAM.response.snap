@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"account_id":"__AccountId__","active":true,"aud":"__Aud__","client_id":"__ClientId__","exp":1,"iat":1,"iss":"__Iss__","jti":"__Jti__","nbf":1,"resource":"__Resource__","signin_session":"__SigninSession__","sub":"__Sub__","token_type":"__TokenType__","user_id":"__UserId__"}

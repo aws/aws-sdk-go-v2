@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BackupVaultArn":"__BackupVaultArn__","IndexCompletionDate":946684800,"IndexCreationDate":946684800,"IndexDeletionDate":946684800,"IndexStatus":"PENDING","IndexStatusMessage":"__IndexStatusMessage__","RecoveryPointArn":"__RecoveryPointArn__","SourceResourceArn":"__SourceResourceArn__","TotalItemsIndexed":1}

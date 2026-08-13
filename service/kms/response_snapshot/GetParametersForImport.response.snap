@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TrentService.GetParametersForImport
-
-{"ImportToken":"YmxvYg==","KeyId":"__KeyId__","ParametersValidTo":946684800,"PublicKey":"YmxvYg=="}

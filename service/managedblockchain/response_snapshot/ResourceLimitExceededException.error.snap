@@ -1,4 +1,0 @@
-429
-Content-Type: application/json
-
-{"__type":"ResourceLimitExceededException","Message":"__Message__"}

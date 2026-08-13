@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.StartImageScan
-
-{"imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},"imageScanStatus":{"description":"__Description__","status":"IN_PROGRESS"},"registryId":"__RegistryId__","repositoryName":"__RepositoryName__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CreateTime":"2000-01-01T00:00:00Z","Description":"__Description__","EventBridgeEnabled":true,"KmsKeyEnableGeospatialQueries":true,"KmsKeyId":"__KmsKeyId__","PositionFiltering":"TimeBased","PricingPlan":"RequestBasedUsage","PricingPlanDataSource":"__PricingPlanDataSource__","Tags":{"key0":"__Value__"},"TrackerArn":"__TrackerArn__","TrackerName":"__TrackerName__","UpdateTime":"2000-01-01T00:00:00Z"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"attachments":[{"attachmentId":"__AttachmentId__","dataSourceArn":"__DataSourceArn__","status":"PENDING"},{"attachmentId":"__AttachmentId__","dataSourceArn":"__DataSourceArn__","status":"PENDING"}],"nextToken":"__NextToken__"}

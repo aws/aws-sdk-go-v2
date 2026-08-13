@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"RequestId":"__RequestId__","SelfUpgradeRequestDetail":{"CreationTime":1,"OriginalRole":"ADMIN","RequestNote":"__RequestNote__","RequestStatus":"PENDING","RequestedRole":"ADMIN","UpgradeRequestId":"__UpgradeRequestId__","UserName":"__UserName__","lastUpdateAttemptTime":1,"lastUpdateFailureReason":"__LastUpdateFailureReason__"},"Status":200}

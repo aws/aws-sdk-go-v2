@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"modelSummaries":[{"creationTime":"2000-01-01T00:00:00Z","instructSupported":true,"modelArchitecture":"__ModelArchitecture__","modelArn":"__ModelArn__","modelName":"__ModelName__"},{"creationTime":"2000-01-01T00:00:00Z","instructSupported":true,"modelArchitecture":"__ModelArchitecture__","modelArn":"__ModelArn__","modelName":"__ModelName__"}],"nextToken":"__NextToken__"}

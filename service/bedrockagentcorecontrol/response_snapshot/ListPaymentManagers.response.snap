@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","paymentManagers":[{"authorizerType":"CUSTOM_JWT","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","paymentManagerArn":"__PaymentManagerArn__","paymentManagerId":"__PaymentManagerId__","roleArn":"__RoleArn__","status":"CREATING"},{"authorizerType":"CUSTOM_JWT","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","paymentManagerArn":"__PaymentManagerArn__","paymentManagerId":"__PaymentManagerId__","roleArn":"__RoleArn__","status":"CREATING"}]}

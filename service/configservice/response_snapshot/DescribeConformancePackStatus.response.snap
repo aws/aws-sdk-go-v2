@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.DescribeConformancePackStatus
-
-{"ConformancePackStatusDetails":[{"ConformancePackArn":"__ConformancePackArn__","ConformancePackId":"__ConformancePackId__","ConformancePackName":"__ConformancePackName__","ConformancePackState":"CREATE_IN_PROGRESS","ConformancePackStatusReason":"__ConformancePackStatusReason__","LastUpdateCompletedTime":946684800,"LastUpdateRequestedTime":946684800,"StackArn":"__StackArn__"},{"ConformancePackArn":"__ConformancePackArn__","ConformancePackId":"__ConformancePackId__","ConformancePackName":"__ConformancePackName__","ConformancePackState":"CREATE_IN_PROGRESS","ConformancePackStatusReason":"__ConformancePackStatusReason__","LastUpdateCompletedTime":946684800,"LastUpdateRequestedTime":946684800,"StackArn":"__StackArn__"}],"NextToken":"__NextToken__"}

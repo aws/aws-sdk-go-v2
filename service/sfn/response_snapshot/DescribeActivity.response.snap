@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSStepFunctions.DescribeActivity
-
-{"activityArn":"__ActivityArn__","creationDate":946684800,"encryptionConfiguration":{"kmsDataKeyReusePeriodSeconds":1,"kmsKeyId":"__KmsKeyId__","type":"AWS_OWNED_KEY"},"name":"__Name__"}

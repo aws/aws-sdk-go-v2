@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CoreNetworks":[{"CoreNetworkArn":"__CoreNetworkArn__","CoreNetworkId":"__CoreNetworkId__","Description":"__Description__","GlobalNetworkId":"__GlobalNetworkId__","OwnerAccountId":"__OwnerAccountId__","State":"CREATING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"CoreNetworkArn":"__CoreNetworkArn__","CoreNetworkId":"__CoreNetworkId__","Description":"__Description__","GlobalNetworkId":"__GlobalNetworkId__","OwnerAccountId":"__OwnerAccountId__","State":"CREATING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"NextToken":"__NextToken__"}

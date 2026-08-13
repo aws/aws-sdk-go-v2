@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","microvmId":"__MicrovmId__","startedAt":946684800,"state":"PENDING"},{"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","microvmId":"__MicrovmId__","startedAt":946684800,"state":"PENDING"}],"nextToken":"__NextToken__"}

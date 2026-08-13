@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSInsightsIndexService.ListSavingsPlansPurchaseRecommendationGeneration
-
-{"GenerationSummaryList":[{"EstimatedCompletionTime":"__EstimatedCompletionTime__","GenerationCompletionTime":"__GenerationCompletionTime__","GenerationStartedTime":"__GenerationStartedTime__","GenerationStatus":"SUCCEEDED","RecommendationId":"__RecommendationId__"},{"EstimatedCompletionTime":"__EstimatedCompletionTime__","GenerationCompletionTime":"__GenerationCompletionTime__","GenerationStartedTime":"__GenerationStartedTime__","GenerationStatus":"SUCCEEDED","RecommendationId":"__RecommendationId__"}],"NextPageToken":"__NextPageToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"FindingAggregators":[{"FindingAggregatorArn":"__FindingAggregatorArn__"},{"FindingAggregatorArn":"__FindingAggregatorArn__"}],"NextToken":"__NextToken__"}

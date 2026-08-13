@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"targetResourceType":{"description":"__Description__","parameters":{"key0":{"description":"__Description__","required":true}},"resourceType":"__ResourceType__"}}

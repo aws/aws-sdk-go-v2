@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","targetResourceTypes":[{"description":"__Description__","resourceType":"__ResourceType__"},{"description":"__Description__","resourceType":"__ResourceType__"}]}

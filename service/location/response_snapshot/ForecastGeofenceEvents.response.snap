@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DistanceUnit":"Kilometers","ForecastedEvents":[{"EventId":"__EventId__","EventType":"ENTER","ForecastedBreachTime":"2000-01-01T00:00:00Z","GeofenceId":"__GeofenceId__","GeofenceProperties":{"key0":"__Value__"},"IsDeviceInGeofence":true,"NearestDistance":1},{"EventId":"__EventId__","EventType":"ENTER","ForecastedBreachTime":"2000-01-01T00:00:00Z","GeofenceId":"__GeofenceId__","GeofenceProperties":{"key0":"__Value__"},"IsDeviceInGeofence":true,"NearestDistance":1}],"NextToken":"__NextToken__","SpeedUnit":"KilometersPerHour"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"InstanceSummaryList":[{"Arn":"__Arn__","CreatedTime":946684800,"Id":"__Id__","IdentityManagementType":"SAML","InboundCallsEnabled":true,"InstanceAccessUrl":"__InstanceAccessUrl__","InstanceAlias":"__InstanceAlias__","InstanceStatus":"CREATION_IN_PROGRESS","OutboundCallsEnabled":true,"ServiceRole":"__ServiceRole__"},{"Arn":"__Arn__","CreatedTime":946684800,"Id":"__Id__","IdentityManagementType":"SAML","InboundCallsEnabled":true,"InstanceAccessUrl":"__InstanceAccessUrl__","InstanceAlias":"__InstanceAlias__","InstanceStatus":"CREATION_IN_PROGRESS","OutboundCallsEnabled":true,"ServiceRole":"__ServiceRole__"}],"NextToken":"__NextToken__"}

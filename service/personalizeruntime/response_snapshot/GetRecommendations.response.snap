@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"itemList":[{"itemId":"__ItemId__","metadata":{"key0":"__Value__"},"promotionName":"__PromotionName__","reason":["__Member__","__Member__"],"score":1},{"itemId":"__ItemId__","metadata":{"key0":"__Value__"},"promotionName":"__PromotionName__","reason":["__Member__","__Member__"],"score":1}],"recommendationId":"__RecommendationId__"}

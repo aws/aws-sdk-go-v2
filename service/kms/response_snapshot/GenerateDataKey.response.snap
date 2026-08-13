@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TrentService.GenerateDataKey
-
-{"CiphertextBlob":"YmxvYg==","CiphertextForRecipient":"YmxvYg==","KeyId":"__KeyId__","KeyMaterialId":"__KeyMaterialId__","Plaintext":"YmxvYg=="}

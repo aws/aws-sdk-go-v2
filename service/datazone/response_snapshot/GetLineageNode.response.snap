@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","downstreamNodes":[{"eventTimestamp":946684800,"id":"__Id__"},{"eventTimestamp":946684800,"id":"__Id__"}],"eventTimestamp":946684800,"formsOutput":[{"content":"__Content__","formName":"__FormName__","typeName":"__TypeName__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","typeName":"__TypeName__","typeRevision":"__TypeRevision__"}],"id":"__Id__","name":"__Name__","sourceIdentifier":"__SourceIdentifier__","typeName":"__TypeName__","typeRevision":"__TypeRevision__","updatedAt":946684800,"updatedBy":"__UpdatedBy__","upstreamNodes":[{"eventTimestamp":946684800,"id":"__Id__"},{"eventTimestamp":946684800,"id":"__Id__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","RuntimeVersions":[{"DeprecationDate":946684800,"Description":"__Description__","ReleaseDate":946684800,"VersionName":"__VersionName__"},{"DeprecationDate":946684800,"Description":"__Description__","ReleaseDate":946684800,"VersionName":"__VersionName__"}]}

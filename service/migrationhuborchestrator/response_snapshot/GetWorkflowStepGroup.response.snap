@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"creationTime":946684800,"description":"__Description__","endTime":946684800,"id":"__Id__","lastModifiedTime":946684800,"name":"__Name__","next":["__Member__","__Member__"],"owner":"AWS_MANAGED","previous":["__Member__","__Member__"],"status":"AWAITING_DEPENDENCIES","tools":[{"name":"__Name__","url":"__Url__"},{"name":"__Name__","url":"__Url__"}],"workflowId":"__WorkflowId__"}

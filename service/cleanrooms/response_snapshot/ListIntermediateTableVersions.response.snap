@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"intermediateTableVersionSummaries":[{"analysisId":"__AnalysisId__","analysisType":"QUERY","createTime":946684800,"expirationTime":946684800,"kmsKeyArn":"__KmsKeyArn__","status":"POPULATE_STARTED","tableId":"__TableId__","versionId":"__VersionId__"},{"analysisId":"__AnalysisId__","analysisType":"QUERY","createTime":946684800,"expirationTime":946684800,"kmsKeyArn":"__KmsKeyArn__","status":"POPULATE_STARTED","tableId":"__TableId__","versionId":"__VersionId__"}],"nextToken":"__NextToken__"}

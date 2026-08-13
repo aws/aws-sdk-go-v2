@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"assessmentTargets":[{"condition":"EQUALS","name":"__Name__","values":["__Member__","__Member__"]},{"condition":"EQUALS","name":"__Name__","values":["__Member__","__Member__"]}],"dataCollectionDetails":{"completionTime":946684800,"failed":1,"inProgress":1,"servers":1,"startTime":946684800,"status":"IN_PROGRESS","statusMessage":"__StatusMessage__","success":1},"id":"__Id__"}

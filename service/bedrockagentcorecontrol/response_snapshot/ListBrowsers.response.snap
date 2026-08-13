@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"browserSummaries":[{"browserArn":"__BrowserArn__","browserId":"__BrowserId__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","status":"CREATING"},{"browserArn":"__BrowserArn__","browserId":"__BrowserId__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","status":"CREATING"}],"nextToken":"__NextToken__"}

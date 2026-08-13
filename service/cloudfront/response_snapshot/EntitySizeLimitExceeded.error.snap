@@ -1,4 +1,0 @@
-413
-Content-Type: application/xml
-
-<ErrorResponse><Error><Code>EntitySizeLimitExceeded</Code><Message>__Message__</Message></Error></ErrorResponse>

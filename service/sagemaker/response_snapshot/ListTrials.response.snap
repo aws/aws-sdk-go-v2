@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListTrials
-
-{"NextToken":"__NextToken__","TrialSummaries":[{"CreationTime":946684800,"DisplayName":"__DisplayName__","LastModifiedTime":946684800,"TrialArn":"__TrialArn__","TrialName":"__TrialName__","TrialSource":{"SourceArn":"__SourceArn__","SourceType":"__SourceType__"}},{"CreationTime":946684800,"DisplayName":"__DisplayName__","LastModifiedTime":946684800,"TrialArn":"__TrialArn__","TrialName":"__TrialName__","TrialSource":{"SourceArn":"__SourceArn__","SourceType":"__SourceType__"}}]}

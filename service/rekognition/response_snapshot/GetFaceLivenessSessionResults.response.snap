@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RekognitionService.GetFaceLivenessSessionResults
-
-{"AuditImages":[{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Bytes":"YmxvYg==","S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Bytes":"YmxvYg==","S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}}],"Challenge":{"Type":"FaceMovementAndLightChallenge","Version":"__Version__"},"Confidence":1,"ReferenceImage":{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Bytes":"YmxvYg==","S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"SessionId":"__SessionId__","Status":"CREATED"}

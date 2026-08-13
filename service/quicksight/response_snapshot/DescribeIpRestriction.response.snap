@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AwsAccountId":"__AwsAccountId__","Enabled":true,"IpRestrictionRuleMap":{"key0":"__Value__"},"RequestId":"__RequestId__","Status":200,"VpcEndpointIdRestrictionRuleMap":{"key0":"__Value__"},"VpcIdRestrictionRuleMap":{"key0":"__Value__"}}

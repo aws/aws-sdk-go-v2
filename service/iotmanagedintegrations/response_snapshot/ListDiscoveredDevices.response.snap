@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"AuthenticationMaterial":"__AuthenticationMaterial__","Brand":"__Brand__","ConnectorDeviceId":"__ConnectorDeviceId__","ConnectorDeviceName":"__ConnectorDeviceName__","DeviceTypes":["__Member__","__Member__"],"DiscoveredAt":946684800,"ManagedThingId":"__ManagedThingId__","Model":"__Model__","Modification":"DISCOVERED"},{"AuthenticationMaterial":"__AuthenticationMaterial__","Brand":"__Brand__","ConnectorDeviceId":"__ConnectorDeviceId__","ConnectorDeviceName":"__ConnectorDeviceName__","DeviceTypes":["__Member__","__Member__"],"DiscoveredAt":946684800,"ManagedThingId":"__ManagedThingId__","Model":"__Model__","Modification":"DISCOVERED"}],"NextToken":"__NextToken__"}

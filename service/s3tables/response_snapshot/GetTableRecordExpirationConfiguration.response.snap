@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configuration":{"settings":{"days":1},"status":"enabled"}}

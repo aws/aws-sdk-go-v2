@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"flowId":"__FlowId__","preview":{"expiresAt":"__ExpiresAt__","previewUrl":"__PreviewUrl__"}}

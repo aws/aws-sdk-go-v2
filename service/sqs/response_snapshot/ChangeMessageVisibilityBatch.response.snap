@@ -1,6 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonSQS.ChangeMessageVisibilityBatch
-X-Amzn-Query-Mode: true
-
-{"Failed":[{"Code":"__Code__","Id":"__Id__","Message":"__Message__","SenderFault":true},{"Code":"__Code__","Id":"__Id__","Message":"__Message__","SenderFault":true}],"Successful":[{"Id":"__Id__"},{"Id":"__Id__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ResourceEndpointList":[{"Protocol":"WSS","ResourceEndpoint":"__ResourceEndpoint__"},{"Protocol":"WSS","ResourceEndpoint":"__ResourceEndpoint__"}]}

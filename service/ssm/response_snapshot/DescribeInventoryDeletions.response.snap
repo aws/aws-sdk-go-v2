@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribeInventoryDeletions
-
-{"InventoryDeletions":[{"DeletionId":"__DeletionId__","DeletionStartTime":946684800,"DeletionSummary":{"RemainingCount":1,"SummaryItems":[{"Count":1,"RemainingCount":1,"Version":"__Version__"},{"Count":1,"RemainingCount":1,"Version":"__Version__"}],"TotalCount":1},"LastStatus":"InProgress","LastStatusMessage":"__LastStatusMessage__","LastStatusUpdateTime":946684800,"TypeName":"__TypeName__"},{"DeletionId":"__DeletionId__","DeletionStartTime":946684800,"DeletionSummary":{"RemainingCount":1,"SummaryItems":[{"Count":1,"RemainingCount":1,"Version":"__Version__"},{"Count":1,"RemainingCount":1,"Version":"__Version__"}],"TotalCount":1},"LastStatus":"InProgress","LastStatusMessage":"__LastStatusMessage__","LastStatusUpdateTime":946684800,"TypeName":"__TypeName__"}],"NextToken":"__NextToken__"}

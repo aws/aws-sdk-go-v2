@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AlternateContact":{"AlternateContactType":"BILLING","EmailAddress":"__EmailAddress__","Name":"__Name__","PhoneNumber":"__PhoneNumber__","Title":"__Title__"}}

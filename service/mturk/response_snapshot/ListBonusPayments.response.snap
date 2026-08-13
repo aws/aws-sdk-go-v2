@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: MTurkRequesterServiceV20170117.ListBonusPayments
-
-{"BonusPayments":[{"AssignmentId":"__AssignmentId__","BonusAmount":"__BonusAmount__","GrantTime":946684800,"Reason":"__Reason__","WorkerId":"__WorkerId__"},{"AssignmentId":"__AssignmentId__","BonusAmount":"__BonusAmount__","GrantTime":946684800,"Reason":"__Reason__","WorkerId":"__WorkerId__"}],"NextToken":"__NextToken__","NumResults":1}

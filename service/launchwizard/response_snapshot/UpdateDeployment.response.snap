@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"deployment":{"createdAt":946684800,"id":"__Id__","modifiedAt":946684800,"name":"__Name__","patternName":"__PatternName__","status":"COMPLETED","workloadName":"__WorkloadName__"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"arn":"__Arn__","hostname":"__Hostname__","tags":{"key0":"__Value__"}},{"arn":"__Arn__","hostname":"__Hostname__","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"audienceModelArn":"__AudienceModelArn__","createTime":"2000-01-01T00:00:00Z","description":"__Description__","kmsKeyArn":"__KmsKeyArn__","name":"__Name__","status":"CREATE_PENDING","statusDetails":{"message":"__Message__","statusCode":"__StatusCode__"},"tags":{"key0":"__Value__"},"trainingDataEndTime":"2000-01-01T00:00:00Z","trainingDataStartTime":"2000-01-01T00:00:00Z","trainingDatasetArn":"__TrainingDatasetArn__","updateTime":"2000-01-01T00:00:00Z"}

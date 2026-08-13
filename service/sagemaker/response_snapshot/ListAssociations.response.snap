@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListAssociations
-
-{"AssociationSummaries":[{"AssociationType":"ContributedTo","CreatedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"CreationTime":946684800,"DestinationArn":"__DestinationArn__","DestinationName":"__DestinationName__","DestinationType":"__DestinationType__","SourceArn":"__SourceArn__","SourceName":"__SourceName__","SourceType":"__SourceType__"},{"AssociationType":"ContributedTo","CreatedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"CreationTime":946684800,"DestinationArn":"__DestinationArn__","DestinationName":"__DestinationName__","DestinationType":"__DestinationType__","SourceArn":"__SourceArn__","SourceName":"__SourceName__","SourceType":"__SourceType__"}],"NextToken":"__NextToken__"}

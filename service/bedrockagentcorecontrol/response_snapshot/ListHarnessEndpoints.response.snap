@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"endpoints":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","endpointName":"__EndpointName__","failureReason":"__FailureReason__","harnessId":"__HarnessId__","harnessName":"__HarnessName__","liveVersion":"__LiveVersion__","status":"CREATING","targetVersion":"__TargetVersion__","updatedAt":"2000-01-01T00:00:00Z"},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","endpointName":"__EndpointName__","failureReason":"__FailureReason__","harnessId":"__HarnessId__","harnessName":"__HarnessName__","liveVersion":"__LiveVersion__","status":"CREATING","targetVersion":"__TargetVersion__","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

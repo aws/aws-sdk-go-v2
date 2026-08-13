@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ExportJobs":[{"CompletedTimestamp":946684800,"CreatedTimestamp":946684800,"ExportSourceType":"METRICS_DATA","JobId":"__JobId__","JobStatus":"CREATED"},{"CompletedTimestamp":946684800,"CreatedTimestamp":946684800,"ExportSourceType":"METRICS_DATA","JobId":"__JobId__","JobStatus":"CREATED"}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"userAccessLoggingSettings":{"associatedPortalArns":["__Member__","__Member__"],"kinesisStreamArn":"__KinesisStreamArn__","userAccessLoggingSettingsArn":"__UserAccessLoggingSettingsArn__"}}

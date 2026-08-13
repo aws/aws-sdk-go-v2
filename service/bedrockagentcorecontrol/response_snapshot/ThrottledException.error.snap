@@ -1,4 +1,0 @@
-429
-Content-Type: application/json
-
-{"__type":"ThrottledException","message":"__Message__"}

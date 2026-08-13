@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"assetRelationshipSummaries":[{"hierarchyInfo":{"childAssetId":"__ChildAssetId__","parentAssetId":"__ParentAssetId__"},"relationshipType":"HIERARCHY"},{"hierarchyInfo":{"childAssetId":"__ChildAssetId__","parentAssetId":"__ParentAssetId__"},"relationshipType":"HIERARCHY"}],"nextToken":"__NextToken__"}

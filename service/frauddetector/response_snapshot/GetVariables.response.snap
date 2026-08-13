@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHawksNestServiceFacade.GetVariables
-
-{"nextToken":"__NextToken__","variables":[{"arn":"__Arn__","createdTime":"__CreatedTime__","dataSource":"EVENT","dataType":"STRING","defaultValue":"__DefaultValue__","description":"__Description__","lastUpdatedTime":"__LastUpdatedTime__","name":"__Name__","variableType":"__VariableType__"},{"arn":"__Arn__","createdTime":"__CreatedTime__","dataSource":"EVENT","dataType":"STRING","defaultValue":"__DefaultValue__","description":"__Description__","lastUpdatedTime":"__LastUpdatedTime__","name":"__Name__","variableType":"__VariableType__"}]}

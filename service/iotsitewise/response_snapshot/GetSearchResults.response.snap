@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","searchResults":[{"datasetId":"__DatasetId__","endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"score":1,"searchId":"__SearchId__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__","topTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"workspaceName":"__WorkspaceName__"},{"datasetId":"__DatasetId__","endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"score":1,"searchId":"__SearchId__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__","topTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"workspaceName":"__WorkspaceName__"}]}

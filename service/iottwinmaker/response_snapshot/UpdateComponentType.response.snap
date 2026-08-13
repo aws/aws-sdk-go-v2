@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","componentTypeId":"__ComponentTypeId__","state":"CREATING","workspaceId":"__WorkspaceId__"}

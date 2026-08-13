@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","limitId":"__LimitId__","queueId":"__QueueId__","status":"ACTIVE","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"}

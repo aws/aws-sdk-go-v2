@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"associations":[{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"}},{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"}}],"nextToken":"__NextToken__"}

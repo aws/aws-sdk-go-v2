@@ -1,4 +1,0 @@
-404
-Content-Type: application/json
-
-{"__type":"StreamRecordsNotFoundException","code":"StreamRecordsNotFoundException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

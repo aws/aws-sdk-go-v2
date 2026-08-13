@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"effectiveDeployments":[{"coreDeviceExecutionStatus":"IN_PROGRESS","creationTimestamp":946684800,"deploymentId":"__DeploymentId__","deploymentName":"__DeploymentName__","description":"__Description__","iotJobArn":"__IotJobArn__","iotJobId":"__IotJobId__","modifiedTimestamp":946684800,"reason":"__Reason__","statusDetails":{"errorStack":["__Member__","__Member__"],"errorTypes":["__Member__","__Member__"]},"targetArn":"__TargetArn__"},{"coreDeviceExecutionStatus":"IN_PROGRESS","creationTimestamp":946684800,"deploymentId":"__DeploymentId__","deploymentName":"__DeploymentName__","description":"__Description__","iotJobArn":"__IotJobArn__","iotJobId":"__IotJobId__","modifiedTimestamp":946684800,"reason":"__Reason__","statusDetails":{"errorStack":["__Member__","__Member__"],"errorTypes":["__Member__","__Member__"]},"targetArn":"__TargetArn__"}],"nextToken":"__NextToken__"}

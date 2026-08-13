@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","validationResultSummaries":[{"errorCode":"INCOMPATIBLE_FORMAT","errorMessage":"__ErrorMessage__","fileName":"__FileName__","validationResult":"FAILED"},{"errorCode":"INCOMPATIBLE_FORMAT","errorMessage":"__ErrorMessage__","fileName":"__FileName__","validationResult":"FAILED"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","scalingGroups":[{"availabilityZoneId":"__AvailabilityZoneId__","clusters":["__Member__","__Member__"],"createdTimestamp":946684800,"hostType":"__HostType__","lastModifiedTimestamp":946684800,"scalingGroupName":"__ScalingGroupName__","status":"CREATING","statusReason":"__StatusReason__"},{"availabilityZoneId":"__AvailabilityZoneId__","clusters":["__Member__","__Member__"],"createdTimestamp":946684800,"hostType":"__HostType__","lastModifiedTimestamp":946684800,"scalingGroupName":"__ScalingGroupName__","status":"CREATING","statusReason":"__StatusReason__"}]}

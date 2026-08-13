@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"id":"__Id__","status":"AWAITING_DEPENDENCIES","stepGroupId":"__StepGroupId__","workflowId":"__WorkflowId__"}

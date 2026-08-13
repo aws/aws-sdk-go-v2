@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AgentConfig":{"Distributions":[{"Percentage":1,"Region":"__Region__"},{"Percentage":1,"Region":"__Region__"}]},"Arn":"__Arn__","Id":"__Id__","SignInConfig":{"Distributions":[{"Enabled":true,"Region":"__Region__"},{"Enabled":true,"Region":"__Region__"}]},"TelephonyConfig":{"Distributions":[{"Percentage":1,"Region":"__Region__"},{"Percentage":1,"Region":"__Region__"}]}}

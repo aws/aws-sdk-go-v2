@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListNotebookInstances
-
-{"NextToken":"__NextToken__","NotebookInstances":[{"AdditionalCodeRepositories":["__Member__","__Member__"],"CreationTime":946684800,"DefaultCodeRepository":"__DefaultCodeRepository__","InstanceType":"ml.t2.medium","LastModifiedTime":946684800,"NotebookInstanceArn":"__NotebookInstanceArn__","NotebookInstanceLifecycleConfigName":"__NotebookInstanceLifecycleConfigName__","NotebookInstanceName":"__NotebookInstanceName__","NotebookInstanceStatus":"Pending","Url":"__Url__"},{"AdditionalCodeRepositories":["__Member__","__Member__"],"CreationTime":946684800,"DefaultCodeRepository":"__DefaultCodeRepository__","InstanceType":"ml.t2.medium","LastModifiedTime":946684800,"NotebookInstanceArn":"__NotebookInstanceArn__","NotebookInstanceLifecycleConfigName":"__NotebookInstanceLifecycleConfigName__","NotebookInstanceName":"__NotebookInstanceName__","NotebookInstanceStatus":"Pending","Url":"__Url__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.GetQueryResults
-
-{"ErrorMessage":"__ErrorMessage__","NextToken":"__NextToken__","QueryResultRows":[[{"key0":"__Value__"},{"key0":"__Value__"}],[{"key0":"__Value__"},{"key0":"__Value__"}]],"QueryStatistics":{"BytesScanned":1,"ResultsCount":1,"TotalResultsCount":1},"QueryStatus":"QUEUED"}

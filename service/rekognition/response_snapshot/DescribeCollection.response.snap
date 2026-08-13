@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RekognitionService.DescribeCollection
-
-{"CollectionARN":"__CollectionARN__","CreationTimestamp":946684800,"FaceCount":1,"FaceModelVersion":"__FaceModelVersion__","UserCount":1}

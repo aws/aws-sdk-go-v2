@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"bandwidthThrottling":1,"internetProtocol":"IPV4","name":"__Name__","recoveryInstanceID":"__RecoveryInstanceID__","usePrivateIP":true}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSSimbaAPIService_v20180301.UpdateFileCache
-
-{"FileCache":{"CreationTime":946684800,"DNSName":"__DNSName__","DataRepositoryAssociationIds":["__Member__","__Member__"],"FailureDetails":{"Message":"__Message__"},"FileCacheId":"__FileCacheId__","FileCacheType":"LUSTRE","FileCacheTypeVersion":"__FileCacheTypeVersion__","KmsKeyId":"__KmsKeyId__","Lifecycle":"AVAILABLE","LustreConfiguration":{"DeploymentType":"CACHE_1","LogConfiguration":{"Destination":"__Destination__","Level":"DISABLED"},"MetadataConfiguration":{"StorageCapacity":1},"MountName":"__MountName__","PerUnitStorageThroughput":1,"WeeklyMaintenanceStartTime":"__WeeklyMaintenanceStartTime__"},"NetworkInterfaceIds":["__Member__","__Member__"],"OwnerId":"__OwnerId__","ResourceARN":"__ResourceARN__","StorageCapacity":1,"SubnetIds":["__Member__","__Member__"],"VpcId":"__VpcId__"}}

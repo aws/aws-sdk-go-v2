@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","TaskDefinitions":[{"Arn":"__Arn__","Id":"__Id__","LoRaWAN":{"CurrentVersion":{"Model":"__Model__","PackageVersion":"__PackageVersion__","Station":"__Station__"},"UpdateVersion":{"Model":"__Model__","PackageVersion":"__PackageVersion__","Station":"__Station__"}}},{"Arn":"__Arn__","Id":"__Id__","LoRaWAN":{"CurrentVersion":{"Model":"__Model__","PackageVersion":"__PackageVersion__","Station":"__Station__"},"UpdateVersion":{"Model":"__Model__","PackageVersion":"__PackageVersion__","Station":"__Station__"}}}]}

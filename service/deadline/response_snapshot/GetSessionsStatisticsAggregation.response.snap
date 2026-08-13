@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","statistics":[{"aggregationEndTime":"2000-01-01T00:00:00Z","aggregationStartTime":"2000-01-01T00:00:00Z","costInUsd":{"avg":1,"max":1,"min":1,"sum":1},"count":1,"fleetId":"__FleetId__","instanceType":"__InstanceType__","jobId":"__JobId__","jobName":"__JobName__","licenseProduct":"__LicenseProduct__","queueId":"__QueueId__","runtimeInSeconds":{"avg":1,"max":1,"min":1,"sum":1},"usageType":"COMPUTE","userId":"__UserId__"},{"aggregationEndTime":"2000-01-01T00:00:00Z","aggregationStartTime":"2000-01-01T00:00:00Z","costInUsd":{"avg":1,"max":1,"min":1,"sum":1},"count":1,"fleetId":"__FleetId__","instanceType":"__InstanceType__","jobId":"__JobId__","jobName":"__JobName__","licenseProduct":"__LicenseProduct__","queueId":"__QueueId__","runtimeInSeconds":{"avg":1,"max":1,"min":1,"sum":1},"usageType":"COMPUTE","userId":"__UserId__"}],"status":"IN_PROGRESS","statusMessage":"__StatusMessage__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"endpoints":[{"url":"__Url__"},{"url":"__Url__"}],"nextToken":"__NextToken__"}

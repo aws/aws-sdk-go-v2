@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Pipelines":[{"CreatedAt":946684800,"Destinations":[{"Endpoint":"__Endpoint__","ServiceName":"__ServiceName__"},{"Endpoint":"__Endpoint__","ServiceName":"__ServiceName__"}],"LastUpdatedAt":946684800,"MaxUnits":1,"MinUnits":1,"PipelineArn":"__PipelineArn__","PipelineName":"__PipelineName__","Status":"CREATING","StatusReason":{"Description":"__Description__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"CreatedAt":946684800,"Destinations":[{"Endpoint":"__Endpoint__","ServiceName":"__ServiceName__"},{"Endpoint":"__Endpoint__","ServiceName":"__ServiceName__"}],"LastUpdatedAt":946684800,"MaxUnits":1,"MinUnits":1,"PipelineArn":"__PipelineArn__","PipelineName":"__PipelineName__","Status":"CREATING","StatusReason":{"Description":"__Description__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accessPolicyArn":"__AccessPolicyArn__","accessPolicyCreationDate":946684800,"accessPolicyId":"__AccessPolicyId__","accessPolicyIdentity":{"group":{"id":"__Id__"},"iamRole":{"arn":"__Arn__"},"iamUser":{"arn":"__Arn__"},"user":{"id":"__Id__"}},"accessPolicyLastUpdateDate":946684800,"accessPolicyPermission":"ADMINISTRATOR","accessPolicyResource":{"portal":{"id":"__Id__"},"project":{"id":"__Id__"}}}

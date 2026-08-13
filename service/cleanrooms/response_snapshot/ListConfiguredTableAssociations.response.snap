@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configuredTableAssociationSummaries":[{"analysisRuleTypes":["AGGREGATION","AGGREGATION"],"arn":"__Arn__","configuredTableId":"__ConfiguredTableId__","createTime":946684800,"id":"__Id__","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","updateTime":946684800},{"analysisRuleTypes":["AGGREGATION","AGGREGATION"],"arn":"__Arn__","configuredTableId":"__ConfiguredTableId__","createTime":946684800,"id":"__Id__","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","updateTime":946684800}],"nextToken":"__NextToken__"}

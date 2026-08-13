@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200,"ThemeAliasList":[{"AliasName":"__AliasName__","Arn":"__Arn__","ThemeVersionNumber":1},{"AliasName":"__AliasName__","Arn":"__Arn__","ThemeVersionNumber":1}]}

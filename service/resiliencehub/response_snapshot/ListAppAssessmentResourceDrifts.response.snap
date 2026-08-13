@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","resourceDrifts":[{"appArn":"__AppArn__","appVersion":"__AppVersion__","diffType":"NotEqual","referenceId":"__ReferenceId__","resourceIdentifier":{"logicalResourceId":{"eksSourceName":"__EksSourceName__","identifier":"__Identifier__","logicalStackName":"__LogicalStackName__","resourceGroupName":"__ResourceGroupName__","terraformSourceName":"__TerraformSourceName__"},"resourceType":"__ResourceType__"}},{"appArn":"__AppArn__","appVersion":"__AppVersion__","diffType":"NotEqual","referenceId":"__ReferenceId__","resourceIdentifier":{"logicalResourceId":{"eksSourceName":"__EksSourceName__","identifier":"__Identifier__","logicalStackName":"__LogicalStackName__","resourceGroupName":"__ResourceGroupName__","terraformSourceName":"__TerraformSourceName__"},"resourceType":"__ResourceType__"}}]}

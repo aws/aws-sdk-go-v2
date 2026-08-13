@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"package":{"format":"npm","name":"__Name__","namespace":"__Namespace__","originConfiguration":{"restrictions":{"publish":"ALLOW","upstream":"ALLOW"}}}}

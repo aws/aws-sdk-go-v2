@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"portal":{"additionalEncryptionContext":{"key0":"__Value__"},"authenticationType":"Standard","browserSettingsArn":"__BrowserSettingsArn__","browserType":"Chrome","creationDate":946684800,"customerManagedKey":"__CustomerManagedKey__","dataProtectionSettingsArn":"__DataProtectionSettingsArn__","displayName":"__DisplayName__","instanceType":"standard.regular","ipAccessSettingsArn":"__IpAccessSettingsArn__","maxConcurrentSessions":1,"networkSettingsArn":"__NetworkSettingsArn__","portalArn":"__PortalArn__","portalCustomDomain":"__PortalCustomDomain__","portalEndpoint":"__PortalEndpoint__","portalStatus":"Incomplete","rendererType":"AppStream","sessionLoggerArn":"__SessionLoggerArn__","statusReason":"__StatusReason__","trustStoreArn":"__TrustStoreArn__","userAccessLoggingSettingsArn":"__UserAccessLoggingSettingsArn__","userSettingsArn":"__UserSettingsArn__"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.DescribeLabel
-
-{"CreatedAt":946684800,"EndTime":946684800,"Equipment":"__Equipment__","FaultCode":"__FaultCode__","LabelGroupArn":"__LabelGroupArn__","LabelGroupName":"__LabelGroupName__","LabelId":"__LabelId__","Notes":"__Notes__","Rating":"ANOMALY","StartTime":946684800}

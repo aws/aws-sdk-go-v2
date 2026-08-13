@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DomainMaintenances":[{"Action":"REBOOT_NODE","CreatedAt":946684800,"DomainName":"__DomainName__","MaintenanceId":"__MaintenanceId__","NodeId":"__NodeId__","Status":"PENDING","StatusMessage":"__StatusMessage__","UpdatedAt":946684800},{"Action":"REBOOT_NODE","CreatedAt":946684800,"DomainName":"__DomainName__","MaintenanceId":"__MaintenanceId__","NodeId":"__NodeId__","Status":"PENDING","StatusMessage":"__StatusMessage__","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","workflowVersionList":[{"arn":"__Arn__","dateCreated":"__DateCreated__","description":"__Description__","name":"__Name__","owner":"__Owner__","type":"BUILD","version":"__Version__"},{"arn":"__Arn__","dateCreated":"__DateCreated__","description":"__Description__","name":"__Name__","owner":"__Owner__","type":"BUILD","version":"__Version__"}]}

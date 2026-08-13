@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribePortfolioShareStatus
-
-{"OrganizationNodeValue":"__OrganizationNodeValue__","PortfolioId":"__PortfolioId__","PortfolioShareToken":"__PortfolioShareToken__","ShareDetails":{"ShareErrors":[{"Accounts":["__Member__","__Member__"],"Error":"__Error__","Message":"__Message__"},{"Accounts":["__Member__","__Member__"],"Error":"__Error__","Message":"__Message__"}],"SuccessfulShares":["__Member__","__Member__"]},"Status":"NOT_STARTED"}

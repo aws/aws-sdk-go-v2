@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","PipelineEndpoints":[{"EndpointId":"__EndpointId__","IngestEndpointUrl":"__IngestEndpointUrl__","PipelineArn":"__PipelineArn__","Status":"CREATING","VpcId":"__VpcId__","VpcOptions":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}},{"EndpointId":"__EndpointId__","IngestEndpointUrl":"__IngestEndpointUrl__","PipelineArn":"__PipelineArn__","Status":"CREATING","VpcId":"__VpcId__","VpcOptions":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}}]}

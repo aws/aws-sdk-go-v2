@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.GetOnPremisesInstance
-
-{"instanceInfo":{"deregisterTime":946684800,"iamSessionArn":"__IamSessionArn__","iamUserArn":"__IamUserArn__","instanceArn":"__InstanceArn__","instanceName":"__InstanceName__","registerTime":946684800,"tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}}

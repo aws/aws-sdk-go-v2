@@ -1,5 +1,0 @@
-500
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonMWAAServerless.CreateWorkflow
-
-{"__type":"InternalServerException","Message":"__Message__","RetryAfterSeconds":1}

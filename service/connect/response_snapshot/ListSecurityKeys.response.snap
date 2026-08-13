@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","SecurityKeys":[{"AssociationId":"__AssociationId__","CreationTime":946684800,"Key":"__Key__"},{"AssociationId":"__AssociationId__","CreationTime":946684800,"Key":"__Key__"}]}

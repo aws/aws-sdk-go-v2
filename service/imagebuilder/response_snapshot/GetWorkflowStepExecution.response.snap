@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"action":"__Action__","description":"__Description__","endTime":"__EndTime__","imageBuildVersionArn":"__ImageBuildVersionArn__","inputs":"__Inputs__","message":"__Message__","name":"__Name__","onFailure":"__OnFailure__","outputs":"__Outputs__","requestId":"__RequestId__","rollbackStatus":"RUNNING","startTime":"__StartTime__","status":"PENDING","stepExecutionId":"__StepExecutionId__","timeoutSeconds":1,"workflowBuildVersionArn":"__WorkflowBuildVersionArn__","workflowExecutionId":"__WorkflowExecutionId__"}

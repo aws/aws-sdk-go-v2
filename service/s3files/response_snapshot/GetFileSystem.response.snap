@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"bucket":"__Bucket__","clientToken":"__ClientToken__","creationTime":946684800,"fileSystemArn":"__FileSystemArn__","fileSystemId":"__FileSystemId__","kmsKeyId":"__KmsKeyId__","name":"__Name__","ownerId":"__OwnerId__","prefix":"__Prefix__","roleArn":"__RoleArn__","status":"available","statusMessage":"__StatusMessage__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

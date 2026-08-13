@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"MemberDatasources":[{"AccountId":"__AccountId__","DatasourcePackageIngestHistory":{"key0":{"key0":{"Timestamp":"2000-01-01T00:00:00Z"}}},"GraphArn":"__GraphArn__"},{"AccountId":"__AccountId__","DatasourcePackageIngestHistory":{"key0":{"key0":{"Timestamp":"2000-01-01T00:00:00Z"}}},"GraphArn":"__GraphArn__"}],"UnprocessedAccounts":[{"AccountId":"__AccountId__","Reason":"__Reason__"},{"AccountId":"__AccountId__","Reason":"__Reason__"}]}

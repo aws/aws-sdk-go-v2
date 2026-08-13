@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.ListWebApps
-
-{"NextToken":"__NextToken__","WebApps":[{"AccessEndpoint":"__AccessEndpoint__","Arn":"__Arn__","EndpointType":"PUBLIC","WebAppEndpoint":"__WebAppEndpoint__","WebAppId":"__WebAppId__"},{"AccessEndpoint":"__AccessEndpoint__","Arn":"__Arn__","EndpointType":"PUBLIC","WebAppEndpoint":"__WebAppEndpoint__","WebAppId":"__WebAppId__"}]}

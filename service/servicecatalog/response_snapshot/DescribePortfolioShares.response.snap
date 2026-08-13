@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribePortfolioShares
-
-{"NextPageToken":"__NextPageToken__","PortfolioShareDetails":[{"Accepted":true,"PrincipalId":"__PrincipalId__","SharePrincipals":true,"ShareTagOptions":true,"Type":"ACCOUNT"},{"Accepted":true,"PrincipalId":"__PrincipalId__","SharePrincipals":true,"ShareTagOptions":true,"Type":"ACCOUNT"}]}

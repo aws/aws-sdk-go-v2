@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"FailedDisassociatedResources":[{"Arn":"__Arn__","Error":{"Message":"__Message__","Reason":"INVALID_ARN"}},{"Arn":"__Arn__","Error":{"Message":"__Message__","Reason":"INVALID_ARN"}}],"SuccessfullyDisassociatedResources":[{"Arn":"__Arn__","Error":{"Message":"__Message__","Reason":"INVALID_ARN"}},{"Arn":"__Arn__","Error":{"Message":"__Message__","Reason":"INVALID_ARN"}}]}

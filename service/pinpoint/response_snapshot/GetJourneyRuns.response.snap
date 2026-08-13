@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Item":[{"CreationTime":"__CreationTime__","LastUpdateTime":"__LastUpdateTime__","RunId":"__RunId__","Status":"SCHEDULED"},{"CreationTime":"__CreationTime__","LastUpdateTime":"__LastUpdateTime__","RunId":"__RunId__","Status":"SCHEDULED"}],"NextToken":"__NextToken__"}

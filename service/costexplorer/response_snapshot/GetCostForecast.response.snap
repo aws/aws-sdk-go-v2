@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSInsightsIndexService.GetCostForecast
-
-{"ForecastResultsByTime":[{"MeanValue":"__MeanValue__","PredictionIntervalLowerBound":"__PredictionIntervalLowerBound__","PredictionIntervalUpperBound":"__PredictionIntervalUpperBound__","TimePeriod":{"End":"__End__","Start":"__Start__"}},{"MeanValue":"__MeanValue__","PredictionIntervalLowerBound":"__PredictionIntervalLowerBound__","PredictionIntervalUpperBound":"__PredictionIntervalUpperBound__","TimePeriod":{"End":"__End__","Start":"__Start__"}}],"Total":{"Amount":"__Amount__","Unit":"__Unit__"}}

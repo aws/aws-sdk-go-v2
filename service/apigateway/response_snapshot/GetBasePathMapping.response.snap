@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"basePath":"__BasePath__","restApiId":"__RestApiId__","stage":"__Stage__"}

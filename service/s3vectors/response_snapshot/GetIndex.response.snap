@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"index":{"creationTime":946684800,"dataType":"float32","dimension":1,"distanceMetric":"euclidean","encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","sseType":"AES256"},"indexArn":"__IndexArn__","indexName":"__IndexName__","metadataConfiguration":{"nonFilterableMetadataKeys":["__Member__","__Member__"]},"vectorBucketName":"__VectorBucketName__"}}

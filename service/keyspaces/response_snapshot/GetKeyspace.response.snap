@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.GetKeyspace
-
-{"keyspaceName":"__KeyspaceName__","replicationGroupStatuses":[{"keyspaceStatus":"ACTIVE","region":"__Region__","tablesReplicationProgress":"__TablesReplicationProgress__"},{"keyspaceStatus":"ACTIVE","region":"__Region__","tablesReplicationProgress":"__TablesReplicationProgress__"}],"replicationRegions":["__Member__","__Member__"],"replicationStrategy":"SINGLE_REGION","resourceArn":"__ResourceArn__"}

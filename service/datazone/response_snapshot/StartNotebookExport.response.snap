@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","fileFormat":"PDF","id":"__Id__","notebookId":"__NotebookId__","owningProjectId":"__OwningProjectId__","status":"IN_PROGRESS"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<OriginAccessControlList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><IsTruncated>true</IsTruncated><Items><OriginAccessControlSummary><Description>__Description__</Description><Id>__Id__</Id><Name>__Name__</Name><OriginAccessControlOriginType>s3</OriginAccessControlOriginType><SigningBehavior>never</SigningBehavior><SigningProtocol>sigv4</SigningProtocol></OriginAccessControlSummary><OriginAccessControlSummary><Description>__Description__</Description><Id>__Id__</Id><Name>__Name__</Name><OriginAccessControlOriginType>s3</OriginAccessControlOriginType><SigningBehavior>never</SigningBehavior><SigningProtocol>sigv4</SigningProtocol></OriginAccessControlSummary></Items><Marker>__Marker__</Marker><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></OriginAccessControlList>

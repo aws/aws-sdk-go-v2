@@ -1,4 +1,0 @@
-404
-Content-Type: application/xml
-
-<ErrorResponse><Error><Code>NoSuchStreamingDistribution</Code><Message>__Message__</Message></Error></ErrorResponse>

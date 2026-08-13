@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Subscriptions":[{"InstanceCount":1,"Name":"__Name__","Type":"__Type__"},{"InstanceCount":1,"Name":"__Name__","Type":"__Type__"}]}

@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"SchemaAlreadyExistsException","Message":"__Message__"}

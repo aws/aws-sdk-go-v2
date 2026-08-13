@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"endedAt":"2000-01-01T00:00:00Z","logGroupName":"__LogGroupName__","modelId":"__ModelId__","startedAt":"2000-01-01T00:00:00Z","status":"RUNNING","workflowRunArn":"__WorkflowRunArn__","workflowRunId":"__WorkflowRunId__"}

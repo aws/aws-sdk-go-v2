@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"actionDefinitionId":"__ActionDefinitionId__","actionId":"__ActionId__","actionPayload":{"stringValue":"__StringValue__"},"executionTime":946684800,"resolveTo":{"assetId":"__AssetId__"},"targetResource":{"assetId":"__AssetId__","computationModelId":"__ComputationModelId__"}}

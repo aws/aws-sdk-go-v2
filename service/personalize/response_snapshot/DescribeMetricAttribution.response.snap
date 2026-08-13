@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonPersonalize.DescribeMetricAttribution
-
-{"metricAttribution":{"creationDateTime":946684800,"datasetGroupArn":"__DatasetGroupArn__","failureReason":"__FailureReason__","lastUpdatedDateTime":946684800,"metricAttributionArn":"__MetricAttributionArn__","metricsOutputConfig":{"roleArn":"__RoleArn__","s3DataDestination":{"kmsKeyArn":"__KmsKeyArn__","path":"__Path__"}},"name":"__Name__","status":"__Status__"}}

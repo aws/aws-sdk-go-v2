@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"abTests":[{"abTestArn":"__AbTestArn__","abTestId":"__AbTestId__","createdAt":946684800,"description":"__Description__","executionStatus":"PAUSED","gatewayArn":"__GatewayArn__","name":"__Name__","status":"CREATING","updatedAt":946684800},{"abTestArn":"__AbTestArn__","abTestId":"__AbTestId__","createdAt":946684800,"description":"__Description__","executionStatus":"PAUSED","gatewayArn":"__GatewayArn__","name":"__Name__","status":"CREATING","updatedAt":946684800}],"nextToken":"__NextToken__"}

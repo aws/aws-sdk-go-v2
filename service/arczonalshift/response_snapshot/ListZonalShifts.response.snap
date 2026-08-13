@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"awayFrom":"__AwayFrom__","comment":"__Comment__","expiryTime":946684800,"practiceRunOutcome":"FAILED","resourceIdentifier":"__ResourceIdentifier__","shiftType":"ZONAL_SHIFT","startTime":946684800,"status":"ACTIVE","zonalShiftId":"__ZonalShiftId__"},{"awayFrom":"__AwayFrom__","comment":"__Comment__","expiryTime":946684800,"practiceRunOutcome":"FAILED","resourceIdentifier":"__ResourceIdentifier__","shiftType":"ZONAL_SHIFT","startTime":946684800,"status":"ACTIVE","zonalShiftId":"__ZonalShiftId__"}],"nextToken":"__NextToken__"}

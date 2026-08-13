@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"destination":"__Destination__","exportFilter":{"edgeFilter":{"key0":{"properties":{"key0":{"multiValueHandling":"TO_LIST","outputType":"__OutputType__","sourcePropertyName":"__SourcePropertyName__"}}}},"vertexFilter":{"key0":{"properties":{"key0":{"multiValueHandling":"TO_LIST","outputType":"__OutputType__","sourcePropertyName":"__SourcePropertyName__"}}}}},"exportTaskDetails":{"numEdgesWritten":1,"numVerticesWritten":1,"progressPercentage":1,"startTime":946684800,"timeElapsedSeconds":1},"format":"PARQUET","graphId":"__GraphId__","kmsKeyIdentifier":"__KmsKeyIdentifier__","parquetType":"COLUMNAR","roleArn":"__RoleArn__","status":"INITIALIZING","statusReason":"__StatusReason__","taskId":"__TaskId__"}

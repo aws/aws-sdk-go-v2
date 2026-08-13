@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"additionalStep":{"oauth":{"authorizationUrl":"__AuthorizationUrl__"}},"kmsKeyArn":"__KmsKeyArn__","serviceId":"__ServiceId__","tags":{"key0":"__Value__"}}

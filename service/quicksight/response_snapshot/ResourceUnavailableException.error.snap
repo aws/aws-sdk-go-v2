@@ -1,4 +1,0 @@
-503
-Content-Type: application/json
-
-{"__type":"ResourceUnavailableException","Message":"__Message__","RequestId":"__RequestId__","ResourceType":"USER"}

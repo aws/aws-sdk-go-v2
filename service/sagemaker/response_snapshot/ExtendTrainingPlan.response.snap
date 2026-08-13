@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ExtendTrainingPlan
-
-{"TrainingPlanExtensions":[{"AvailabilityZone":"__AvailabilityZone__","AvailabilityZoneId":"__AvailabilityZoneId__","CurrencyCode":"__CurrencyCode__","DurationHours":1,"EndDate":946684800,"ExtendedAt":946684800,"PaymentStatus":"__PaymentStatus__","StartDate":946684800,"Status":"__Status__","TrainingPlanExtensionOfferingId":"__TrainingPlanExtensionOfferingId__","UpfrontFee":"__UpfrontFee__"},{"AvailabilityZone":"__AvailabilityZone__","AvailabilityZoneId":"__AvailabilityZoneId__","CurrencyCode":"__CurrencyCode__","DurationHours":1,"EndDate":946684800,"ExtendedAt":946684800,"PaymentStatus":"__PaymentStatus__","StartDate":946684800,"Status":"__Status__","TrainingPlanExtensionOfferingId":"__TrainingPlanExtensionOfferingId__","UpfrontFee":"__UpfrontFee__"}]}

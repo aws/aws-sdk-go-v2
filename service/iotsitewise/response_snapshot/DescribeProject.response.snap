@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"portalId":"__PortalId__","projectArn":"__ProjectArn__","projectCreationDate":946684800,"projectDescription":"__ProjectDescription__","projectId":"__ProjectId__","projectLastUpdateDate":946684800,"projectName":"__ProjectName__"}

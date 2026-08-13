@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobId":"__JobId__","jobOwner":"__JobOwner__","metadata":{"key0":"__Value__"},"signature":"YmxvYg=="}

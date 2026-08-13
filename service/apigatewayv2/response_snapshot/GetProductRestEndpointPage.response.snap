@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"displayContent":{"body":"__Body__","endpoint":"__Endpoint__","operationName":"__OperationName__"},"lastModified":"2000-01-01T00:00:00Z","productRestEndpointPageArn":"__ProductRestEndpointPageArn__","productRestEndpointPageId":"__ProductRestEndpointPageId__","rawDisplayContent":"__RawDisplayContent__","restEndpointIdentifier":{"identifierParts":{"method":"__Method__","path":"__Path__","restApiId":"__RestApiId__","stage":"__Stage__"}},"status":"AVAILABLE","statusException":{"exception":"__Exception__","message":"__Message__"},"tryItState":"ENABLED"}

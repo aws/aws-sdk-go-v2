@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.DescribeTestCases
-
-{"nextToken":"__NextToken__","testCases":[{"durationInNanoSeconds":1,"expired":946684800,"message":"__Message__","name":"__Name__","prefix":"__Prefix__","reportArn":"__ReportArn__","status":"__Status__","testRawDataPath":"__TestRawDataPath__","testSuiteName":"__TestSuiteName__"},{"durationInNanoSeconds":1,"expired":946684800,"message":"__Message__","name":"__Name__","prefix":"__Prefix__","reportArn":"__ReportArn__","status":"__Status__","testRawDataPath":"__TestRawDataPath__","testSuiteName":"__TestSuiteName__"}]}

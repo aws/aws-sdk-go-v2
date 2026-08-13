@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ProfileHistoryRecords":[{"ActionType":"ADDED_PROFILE_KEY","CreatedAt":946684800,"Id":"__Id__","LastUpdatedAt":946684800,"ObjectTypeName":"__ObjectTypeName__","PerformedBy":"__PerformedBy__","ProfileObjectUniqueKey":"__ProfileObjectUniqueKey__"},{"ActionType":"ADDED_PROFILE_KEY","CreatedAt":946684800,"Id":"__Id__","LastUpdatedAt":946684800,"ObjectTypeName":"__ObjectTypeName__","PerformedBy":"__PerformedBy__","ProfileObjectUniqueKey":"__ProfileObjectUniqueKey__"}]}

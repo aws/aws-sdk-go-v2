@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DescribeApp
-
-{"AppArn":"__AppArn__","AppName":"__AppName__","AppType":"JupyterServer","BuiltInLifecycleConfigArn":"__BuiltInLifecycleConfigArn__","CreationTime":946684800,"DomainId":"__DomainId__","EffectiveTrustedIdentityPropagationStatus":"ENABLED","FailureReason":"__FailureReason__","LastHealthCheckTimestamp":946684800,"LastUserActivityTimestamp":946684800,"RecoveryMode":true,"ResourceSpec":{"InstanceType":"system","LifecycleConfigArn":"__LifecycleConfigArn__","SageMakerImageArn":"__SageMakerImageArn__","SageMakerImageVersionAlias":"__SageMakerImageVersionAlias__","SageMakerImageVersionArn":"__SageMakerImageVersionArn__","TrainingPlanArn":"__TrainingPlanArn__"},"SpaceName":"__SpaceName__","Status":"Deleted","UserProfileName":"__UserProfileName__"}

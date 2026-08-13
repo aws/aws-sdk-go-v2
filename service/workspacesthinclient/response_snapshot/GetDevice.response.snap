@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"device":{"arn":"__Arn__","createdAt":946684800,"currentSoftwareSetId":"__CurrentSoftwareSetId__","currentSoftwareSetVersion":"__CurrentSoftwareSetVersion__","desiredSoftwareSetId":"__DesiredSoftwareSetId__","environmentId":"__EnvironmentId__","id":"__Id__","kmsKeyArn":"__KmsKeyArn__","lastConnectedAt":946684800,"lastPostureAt":946684800,"lastUserId":"__LastUserId__","model":"__Model__","name":"__Name__","pendingSoftwareSetId":"__PendingSoftwareSetId__","pendingSoftwareSetVersion":"__PendingSoftwareSetVersion__","serialNumber":"__SerialNumber__","softwareSetComplianceStatus":"NONE","softwareSetUpdateSchedule":"USE_MAINTENANCE_WINDOW","softwareSetUpdateStatus":"AVAILABLE","status":"REGISTERED","updatedAt":946684800}}

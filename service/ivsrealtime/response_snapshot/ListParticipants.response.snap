@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","participants":[{"firstJoinTime":"2000-01-01T00:00:00Z","ingestConfigurationArn":"__IngestConfigurationArn__","participantId":"__ParticipantId__","published":true,"recordingState":"STARTING","redundantIngest":true,"replicationState":"ACTIVE","replicationType":"SOURCE","sourceSessionId":"__SourceSessionId__","sourceStageArn":"__SourceStageArn__","state":"CONNECTED","userId":"__UserId__"},{"firstJoinTime":"2000-01-01T00:00:00Z","ingestConfigurationArn":"__IngestConfigurationArn__","participantId":"__ParticipantId__","published":true,"recordingState":"STARTING","redundantIngest":true,"replicationState":"ACTIVE","replicationType":"SOURCE","sourceSessionId":"__SourceSessionId__","sourceStageArn":"__SourceStageArn__","state":"CONNECTED","userId":"__UserId__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"attachedWorkerId":"__AttachedWorkerId__","availabilityZoneId":"__AvailabilityZoneId__","createdAt":"2000-01-01T00:00:00Z","expiresAt":"2000-01-01T00:00:00Z","farmId":"__FarmId__","fleetId":"__FleetId__","iops":1,"lastAssignedAt":"2000-01-01T00:00:00Z","lastReleasedAt":"2000-01-01T00:00:00Z","sizeGiB":1,"state":"PENDING_CREATION","throughputMiB":1,"volumeId":"__VolumeId__","volumeType":"gp3"}

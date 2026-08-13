@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: GlobalAccelerator_V20180706.ListCustomRoutingPortMappings
-
-{"NextToken":"__NextToken__","PortMappings":[{"AcceleratorPort":1,"DestinationSocketAddress":{"IpAddress":"__IpAddress__","Port":1},"DestinationTrafficState":"ALLOW","EndpointGroupArn":"__EndpointGroupArn__","EndpointId":"__EndpointId__","Protocols":["TCP","TCP"]},{"AcceleratorPort":1,"DestinationSocketAddress":{"IpAddress":"__IpAddress__","Port":1},"DestinationTrafficState":"ALLOW","EndpointGroupArn":"__EndpointGroupArn__","EndpointId":"__EndpointId__","Protocols":["TCP","TCP"]}]}

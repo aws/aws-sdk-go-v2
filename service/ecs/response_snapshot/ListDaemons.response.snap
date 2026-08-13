@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListDaemons
-
-{"daemonSummariesList":[{"createdAt":946684800,"daemonArn":"__DaemonArn__","status":"ACTIVE","updatedAt":946684800},{"createdAt":946684800,"daemonArn":"__DaemonArn__","status":"ACTIVE","updatedAt":946684800}],"nextToken":"__NextToken__"}

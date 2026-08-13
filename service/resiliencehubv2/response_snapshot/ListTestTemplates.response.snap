@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"testTemplates":[{"description":"__Description__","name":"__Name__","testTemplateArn":"__TestTemplateArn__"},{"description":"__Description__","name":"__Name__","testTemplateArn":"__TestTemplateArn__"}]}

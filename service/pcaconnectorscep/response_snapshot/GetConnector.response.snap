@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Connector":{"Arn":"__Arn__","CertificateAuthorityArn":"__CertificateAuthorityArn__","CreatedAt":946684800,"Endpoint":"__Endpoint__","MobileDeviceManagement":{"Intune":{"AzureApplicationId":"__AzureApplicationId__","Domain":"__Domain__"}},"OpenIdConfiguration":{"Audience":"__Audience__","Issuer":"__Issuer__","Subject":"__Subject__"},"Status":"CREATING","StatusReason":"INTERNAL_FAILURE","Type":"GENERAL_PURPOSE","UpdatedAt":946684800}}

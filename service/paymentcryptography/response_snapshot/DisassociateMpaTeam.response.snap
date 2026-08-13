@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PaymentCryptographyControlPlane.DisassociateMpaTeam
-
-{"MpaTeamAssociation":{"Action":"IMPORT_ROOT_PUBLIC_KEY_CERTIFICATE","AssociationState":"ACTIVE","MpaStatus":{"InitiationDate":946684800,"MpaSessionArn":"__MpaSessionArn__","Status":"PENDING","StatusMessage":"__StatusMessage__"},"MpaTeamArn":"__MpaTeamArn__"}}

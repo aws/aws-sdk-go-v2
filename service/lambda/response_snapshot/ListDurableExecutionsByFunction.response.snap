@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DurableExecutions":[{"DurableExecutionArn":"__DurableExecutionArn__","DurableExecutionName":"__DurableExecutionName__","EndTimestamp":946684800,"FunctionArn":"__FunctionArn__","KMSKeyArn":"__KMSKeyArn__","StartTimestamp":946684800,"Status":"RUNNING"},{"DurableExecutionArn":"__DurableExecutionArn__","DurableExecutionName":"__DurableExecutionName__","EndTimestamp":946684800,"FunctionArn":"__FunctionArn__","KMSKeyArn":"__KMSKeyArn__","StartTimestamp":946684800,"Status":"RUNNING"}],"NextMarker":"__NextMarker__"}

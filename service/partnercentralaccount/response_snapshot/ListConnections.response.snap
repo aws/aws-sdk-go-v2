@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralAccount.ListConnections
-
-{"ConnectionSummaries":[{"Arn":"__Arn__","Catalog":"__Catalog__","ConnectionTypes":{"key0":{"OtherParticipant":{"PartnerProfile":{"Id":"__Id__","Name":"__Name__"}},"Status":"ACTIVE"}},"Id":"__Id__","OtherParticipantAccountId":"__OtherParticipantAccountId__","UpdatedAt":"2000-01-01T00:00:00Z"},{"Arn":"__Arn__","Catalog":"__Catalog__","ConnectionTypes":{"key0":{"OtherParticipant":{"PartnerProfile":{"Id":"__Id__","Name":"__Name__"}},"Status":"ACTIVE"}},"Id":"__Id__","OtherParticipantAccountId":"__OtherParticipantAccountId__","UpdatedAt":"2000-01-01T00:00:00Z"}],"NextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/xml
-Etag: __ETag__
-
-<UpdateDomainAssociationResult xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Domain>__Domain__</Domain><ResourceId>__ResourceId__</ResourceId></UpdateDomainAssociationResult>

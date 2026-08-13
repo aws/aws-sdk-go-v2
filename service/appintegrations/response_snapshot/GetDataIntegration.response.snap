@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","Description":"__Description__","FileConfiguration":{"Filters":{"key0":["__Member__","__Member__"]},"Folders":["__Member__","__Member__"]},"Id":"__Id__","KmsKey":"__KmsKey__","Name":"__Name__","ObjectConfiguration":{"key0":{"key0":["__Member__","__Member__"]}},"ScheduleConfiguration":{"FirstExecutionFrom":"__FirstExecutionFrom__","Object":"__Object__","ScheduleExpression":"__ScheduleExpression__"},"SourceURI":"__SourceURI__","Tags":{"key0":"__Value__"}}

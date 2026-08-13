@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.ListKeyspaces
-
-{"keyspaces":[{"keyspaceName":"__KeyspaceName__","replicationRegions":["__Member__","__Member__"],"replicationStrategy":"SINGLE_REGION","resourceArn":"__ResourceArn__"},{"keyspaceName":"__KeyspaceName__","replicationRegions":["__Member__","__Member__"],"replicationStrategy":"SINGLE_REGION","resourceArn":"__ResourceArn__"}],"nextToken":"__NextToken__"}

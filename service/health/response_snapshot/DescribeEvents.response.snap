@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSHealth_20160804.DescribeEvents
-
-{"events":[{"actionability":"ACTION_REQUIRED","arn":"__Arn__","availabilityZone":"__AvailabilityZone__","endTime":946684800,"eventScopeCode":"PUBLIC","eventTypeCategory":"issue","eventTypeCode":"__EventTypeCode__","lastUpdatedTime":946684800,"personas":["OPERATIONS","OPERATIONS"],"region":"__Region__","service":"__Service__","startTime":946684800,"statusCode":"open"},{"actionability":"ACTION_REQUIRED","arn":"__Arn__","availabilityZone":"__AvailabilityZone__","endTime":946684800,"eventScopeCode":"PUBLIC","eventTypeCategory":"issue","eventTypeCode":"__EventTypeCode__","lastUpdatedTime":946684800,"personas":["OPERATIONS","OPERATIONS"],"region":"__Region__","service":"__Service__","startTime":946684800,"statusCode":"open"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"privacyImpact":{"differentialPrivacy":{"aggregations":[{"maxCount":1,"type":"AVG"},{"maxCount":1,"type":"AVG"}]}}}

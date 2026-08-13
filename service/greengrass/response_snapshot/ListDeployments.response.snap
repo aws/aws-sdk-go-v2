@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Deployments":[{"CreatedAt":"__CreatedAt__","DeploymentArn":"__DeploymentArn__","DeploymentId":"__DeploymentId__","DeploymentType":"NewDeployment","GroupArn":"__GroupArn__"},{"CreatedAt":"__CreatedAt__","DeploymentArn":"__DeploymentArn__","DeploymentId":"__DeploymentId__","DeploymentType":"NewDeployment","GroupArn":"__GroupArn__"}],"NextToken":"__NextToken__"}

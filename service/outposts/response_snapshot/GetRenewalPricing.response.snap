@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"PricingOptions":[{"PricingType":"SUBSCRIPTION","SubscriptionPricingDetails":{"Currency":"USD","MonthlyRecurringPrice":1,"PaymentOption":"ALL_UPFRONT","PaymentTerm":"THREE_YEARS","UpfrontPrice":1}},{"PricingType":"SUBSCRIPTION","SubscriptionPricingDetails":{"Currency":"USD","MonthlyRecurringPrice":1,"PaymentOption":"ALL_UPFRONT","PaymentTerm":"THREE_YEARS","UpfrontPrice":1}}],"PricingResult":"PRICED"}

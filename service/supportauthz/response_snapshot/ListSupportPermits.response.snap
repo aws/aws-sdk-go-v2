@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","supportPermits":[{"arn":"__Arn__","createdAt":946684800,"name":"__Name__","permit":{"actions":{"allActions":{}},"conditions":[{"allowAfter":946684800},{"allowAfter":946684800}],"resources":{"allResourcesInRegion":{}}},"signingKeyInfo":{"kmsKey":"__SigningKeyInfoMemberKmsKey__"},"status":"ACTIVE","supportCaseDisplayId":"__SupportCaseDisplayId__"},{"arn":"__Arn__","createdAt":946684800,"name":"__Name__","permit":{"actions":{"allActions":{}},"conditions":[{"allowAfter":946684800},{"allowAfter":946684800}],"resources":{"allResourcesInRegion":{}}},"signingKeyInfo":{"kmsKey":"__SigningKeyInfoMemberKmsKey__"},"status":"ACTIVE","supportCaseDisplayId":"__SupportCaseDisplayId__"}]}

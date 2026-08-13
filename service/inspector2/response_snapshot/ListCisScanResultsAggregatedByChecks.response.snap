@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"checkAggregations":[{"accountId":"__AccountId__","checkDescription":"__CheckDescription__","checkId":"__CheckId__","level":"LEVEL_1","platform":"__Platform__","scanArn":"__ScanArn__","statusCounts":{"failed":1,"passed":1,"skipped":1},"title":"__Title__"},{"accountId":"__AccountId__","checkDescription":"__CheckDescription__","checkId":"__CheckId__","level":"LEVEL_1","platform":"__Platform__","scanArn":"__ScanArn__","statusCounts":{"failed":1,"passed":1,"skipped":1},"title":"__Title__"}],"nextToken":"__NextToken__"}

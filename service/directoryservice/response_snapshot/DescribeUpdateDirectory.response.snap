@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.DescribeUpdateDirectory
-
-{"NextToken":"__NextToken__","UpdateActivities":[{"InitiatedBy":"__InitiatedBy__","LastUpdatedDateTime":946684800,"NewValue":{"OSUpdateSettings":{"OSVersion":"SERVER_2012"}},"PreviousValue":{"OSUpdateSettings":{"OSVersion":"SERVER_2012"}},"Region":"__Region__","StartTime":946684800,"Status":"Updated","StatusReason":"__StatusReason__"},{"InitiatedBy":"__InitiatedBy__","LastUpdatedDateTime":946684800,"NewValue":{"OSUpdateSettings":{"OSVersion":"SERVER_2012"}},"PreviousValue":{"OSUpdateSettings":{"OSVersion":"SERVER_2012"}},"Region":"__Region__","StartTime":946684800,"Status":"Updated","StatusReason":"__StatusReason__"}]}

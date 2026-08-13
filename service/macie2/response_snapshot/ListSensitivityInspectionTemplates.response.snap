@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","sensitivityInspectionTemplates":[{"id":"__Id__","name":"__Name__"},{"id":"__Id__","name":"__Name__"}]}

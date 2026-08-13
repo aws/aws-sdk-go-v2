@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.StartMedicalTranscriptionJob
-
-{"MedicalTranscriptionJob":{"CompletionTime":946684800,"ContentIdentificationType":"PHI","CreationTime":946684800,"FailureReason":"__FailureReason__","LanguageCode":"af-ZA","Media":{"MediaFileUri":"__MediaFileUri__","RedactedMediaFileUri":"__RedactedMediaFileUri__"},"MediaFormat":"mp3","MediaSampleRateHertz":1,"MedicalTranscriptionJobName":"__MedicalTranscriptionJobName__","Settings":{"ChannelIdentification":true,"MaxAlternatives":1,"MaxSpeakerLabels":1,"ShowAlternatives":true,"ShowSpeakerLabels":true,"VocabularyName":"__VocabularyName__"},"Specialty":"PRIMARYCARE","StartTime":946684800,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Transcript":{"TranscriptFileUri":"__TranscriptFileUri__"},"TranscriptionJobStatus":"QUEUED","Type":"CONVERSATION"}}

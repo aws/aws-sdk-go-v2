@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Connected":true,"DisconnectReason":"AUTH_ERROR","ManagedThingId":"__ManagedThingId__","Timestamp":946684800}

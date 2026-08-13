@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","steps":[{"action":"__Action__","imageBuildVersionArn":"__ImageBuildVersionArn__","name":"__Name__","startTime":"__StartTime__","stepExecutionId":"__StepExecutionId__","workflowBuildVersionArn":"__WorkflowBuildVersionArn__","workflowExecutionId":"__WorkflowExecutionId__"},{"action":"__Action__","imageBuildVersionArn":"__ImageBuildVersionArn__","name":"__Name__","startTime":"__StartTime__","stepExecutionId":"__StepExecutionId__","workflowBuildVersionArn":"__WorkflowBuildVersionArn__","workflowExecutionId":"__WorkflowExecutionId__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDB_20120810.DescribeContributorInsights
-
-{"ContributorInsightsMode":"ACCESSED_AND_THROTTLED_KEYS","ContributorInsightsRuleList":["__Member__","__Member__"],"ContributorInsightsStatus":"ENABLING","FailureException":{"ExceptionDescription":"__ExceptionDescription__","ExceptionName":"__ExceptionName__"},"IndexName":"__IndexName__","LastUpdateDateTime":946684800,"TableName":"__TableName__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"anomalyDetector":{"alias":"__Alias__","anomalyDetectorId":"__AnomalyDetectorId__","arn":"__Arn__","configuration":{"randomCutForest":{"ignoreNearExpectedFromAbove":{"amount":1},"ignoreNearExpectedFromBelow":{"amount":1},"query":"__Query__","sampleSize":1,"shingleSize":1}},"createdAt":946684800,"evaluationIntervalInSeconds":1,"labels":{"key0":"__Value__"},"missingDataAction":{"markAsAnomaly":true},"modifiedAt":946684800,"status":{"statusCode":"CREATING","statusReason":"__StatusReason__"},"tags":{"key0":"__Value__"}}}

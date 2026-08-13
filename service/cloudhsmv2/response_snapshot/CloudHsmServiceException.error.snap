@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.CopyBackupToRegion
-
-{"__type":"CloudHsmServiceException","Message":"__Message__"}

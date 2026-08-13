@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"PolicyEnforcedException","code":"PolicyEnforcedException","message":"__Message__","type":"__Type__"}

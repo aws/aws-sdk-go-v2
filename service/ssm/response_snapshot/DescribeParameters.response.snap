@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribeParameters
-
-{"NextToken":"__NextToken__","Parameters":[{"ARN":"__ARN__","AllowedPattern":"__AllowedPattern__","DataType":"__DataType__","Description":"__Description__","KeyId":"__KeyId__","LastModifiedDate":946684800,"LastModifiedUser":"__LastModifiedUser__","Name":"__Name__","Policies":[{"PolicyStatus":"__PolicyStatus__","PolicyText":"__PolicyText__","PolicyType":"__PolicyType__"},{"PolicyStatus":"__PolicyStatus__","PolicyText":"__PolicyText__","PolicyType":"__PolicyType__"}],"Tier":"Standard","Type":"String","Version":1},{"ARN":"__ARN__","AllowedPattern":"__AllowedPattern__","DataType":"__DataType__","Description":"__Description__","KeyId":"__KeyId__","LastModifiedDate":946684800,"LastModifiedUser":"__LastModifiedUser__","Name":"__Name__","Policies":[{"PolicyStatus":"__PolicyStatus__","PolicyText":"__PolicyText__","PolicyType":"__PolicyType__"},{"PolicyStatus":"__PolicyStatus__","PolicyText":"__PolicyText__","PolicyType":"__PolicyType__"}],"Tier":"Standard","Type":"String","Version":1}]}

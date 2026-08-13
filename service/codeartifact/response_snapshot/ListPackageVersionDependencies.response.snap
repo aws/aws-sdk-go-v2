@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"dependencies":[{"dependencyType":"__DependencyType__","namespace":"__Namespace__","package":"__Package__","versionRequirement":"__VersionRequirement__"},{"dependencyType":"__DependencyType__","namespace":"__Namespace__","package":"__Package__","versionRequirement":"__VersionRequirement__"}],"format":"npm","namespace":"__Namespace__","nextToken":"__NextToken__","package":"__Package__","version":"__Version__","versionRevision":"__VersionRevision__"}

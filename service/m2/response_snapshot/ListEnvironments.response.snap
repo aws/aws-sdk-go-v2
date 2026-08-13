@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"environments":[{"creationTime":946684800,"engineType":"microfocus","engineVersion":"__EngineVersion__","environmentArn":"__EnvironmentArn__","environmentId":"__EnvironmentId__","instanceType":"__InstanceType__","name":"__Name__","networkType":"ipv4","status":"Creating"},{"creationTime":946684800,"engineType":"microfocus","engineVersion":"__EngineVersion__","environmentArn":"__EnvironmentArn__","environmentId":"__EnvironmentId__","instanceType":"__InstanceType__","name":"__Name__","networkType":"ipv4","status":"Creating"}],"nextToken":"__NextToken__"}

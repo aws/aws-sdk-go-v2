@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<MonitoringSubscription xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><RealtimeMetricsSubscriptionConfig><RealtimeMetricsSubscriptionStatus>Enabled</RealtimeMetricsSubscriptionStatus></RealtimeMetricsSubscriptionConfig></MonitoringSubscription>

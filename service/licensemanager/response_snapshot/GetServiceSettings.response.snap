@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.GetServiceSettings
-
-{"CrossRegionDiscoveryHomeRegion":"__CrossRegionDiscoveryHomeRegion__","CrossRegionDiscoverySourceRegions":["__Member__","__Member__"],"EnableCrossAccountsDiscovery":true,"LicenseManagerResourceShareArn":"__LicenseManagerResourceShareArn__","OrganizationConfiguration":{"EnableIntegration":true},"S3BucketArn":"__S3BucketArn__","ServiceStatus":{"CrossAccountDiscovery":{"Message":"__Message__"},"CrossRegionDiscovery":{"Message":{"key0":{"Status":"__Status__"}}}},"SnsTopicArn":"__SnsTopicArn__"}

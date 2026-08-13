@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"certificateExpiryTime":"2000-01-01T00:00:00Z","dnsResolution":"PUBLIC","failureMessage":"__FailureMessage__","hostAddress":"__HostAddress__","name":"__Name__","resourceConfigurationId":"__ResourceConfigurationId__","resourceGatewayId":"__ResourceGatewayId__","status":"ACTIVE","tags":{"key0":"__Value__"},"type":"SELF_MANAGED","vpcId":"__VpcId__"}

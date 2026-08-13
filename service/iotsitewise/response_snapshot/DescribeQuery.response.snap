@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"completedAt":946684800,"errorMessage":"__ErrorMessage__","queryId":"__QueryId__","statistics":{"bytesScanned":1,"executionTimeInMillis":1,"rowCount":1},"status":"SUBMITTED","submittedAt":946684800}

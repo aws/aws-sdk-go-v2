@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBilling.GetBillingPreferences
-
-{"billingPreferences":[{"accountId":"__AccountId__","accountName":"__AccountName__","billingPeriod":{"month":1,"year":1},"feature":"RI_SHARING","key":"__Key__","value":"ENABLED"},{"accountId":"__AccountId__","accountName":"__AccountName__","billingPeriod":{"month":1,"year":1},"feature":"RI_SHARING","key":"__Key__","value":"ENABLED"}],"nextToken":"__NextToken__"}

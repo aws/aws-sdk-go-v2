@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applicationArn":"__ApplicationArn__","options":["APPLY_APPLICATION_TAG","APPLY_APPLICATION_TAG"],"resourceArn":"__ResourceArn__"}

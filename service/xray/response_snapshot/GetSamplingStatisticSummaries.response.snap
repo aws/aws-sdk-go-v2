@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","SamplingStatisticSummaries":[{"BorrowCount":1,"RequestCount":1,"RuleName":"__RuleName__","SampledCount":1,"Timestamp":946684800},{"BorrowCount":1,"RequestCount":1,"RuleName":"__RuleName__","SampledCount":1,"Timestamp":946684800}]}

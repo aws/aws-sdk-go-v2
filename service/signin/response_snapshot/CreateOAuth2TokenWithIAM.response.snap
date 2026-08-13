@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"access_token":"__AccessToken__","expires_in":1,"token_type":"__TokenType__"}

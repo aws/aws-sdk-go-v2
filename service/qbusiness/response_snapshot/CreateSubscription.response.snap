@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"currentSubscription":{"type":"Q_LITE"},"nextSubscription":{"type":"Q_LITE"},"subscriptionArn":"__SubscriptionArn__","subscriptionId":"__SubscriptionId__"}

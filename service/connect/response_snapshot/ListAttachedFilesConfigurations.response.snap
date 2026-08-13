@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AttachedFilesConfigurations":[{"AttachmentScope":"EMAIL","ExtensionConfiguration":{"AllowedExtensions":[{"Extension":"__Extension__"},{"Extension":"__Extension__"}]},"InstanceId":"__InstanceId__","MaximumSizeLimitInBytes":1},{"AttachmentScope":"EMAIL","ExtensionConfiguration":{"AllowedExtensions":[{"Extension":"__Extension__"},{"Extension":"__Extension__"}]},"InstanceId":"__InstanceId__","MaximumSizeLimitInBytes":1}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"blueprint":{"blueprintArn":"__BlueprintArn__","blueprintName":"__BlueprintName__","blueprintStage":"DEVELOPMENT","blueprintVersion":"__BlueprintVersion__","creationTime":"2000-01-01T00:00:00Z","kmsEncryptionContext":{"key0":"__Value__"},"kmsKeyId":"__KmsKeyId__","lastModifiedTime":"2000-01-01T00:00:00Z","optimizationSamples":[{"assetS3Object":{"s3Uri":"__S3Uri__","version":"__Version__"},"groundTruthS3Object":{"s3Uri":"__S3Uri__","version":"__Version__"}},{"assetS3Object":{"s3Uri":"__S3Uri__","version":"__Version__"},"groundTruthS3Object":{"s3Uri":"__S3Uri__","version":"__Version__"}}],"optimizationTime":"2000-01-01T00:00:00Z","schema":"__Schema__","type":"DOCUMENT"}}

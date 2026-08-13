@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Fragments":[{"FragmentLengthInMilliseconds":1,"FragmentNumber":"__FragmentNumber__","FragmentSizeInBytes":1,"ProducerTimestamp":946684800,"ServerTimestamp":946684800},{"FragmentLengthInMilliseconds":1,"FragmentNumber":"__FragmentNumber__","FragmentSizeInBytes":1,"ProducerTimestamp":946684800,"ServerTimestamp":946684800}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"apiEndpoint":"__ApiEndpoint__","apiGatewayManaged":true,"apiId":"__ApiId__","apiKeySelectionExpression":"__ApiKeySelectionExpression__","corsConfiguration":{"allowCredentials":true,"allowHeaders":["__Member__","__Member__"],"allowMethods":["__Member__","__Member__"],"allowOrigins":["__Member__","__Member__"],"exposeHeaders":["__Member__","__Member__"],"maxAge":1},"createdDate":"2000-01-01T00:00:00Z","description":"__Description__","disableExecuteApiEndpoint":true,"disableSchemaValidation":true,"importInfo":["__Member__","__Member__"],"ipAddressType":"ipv4","name":"__Name__","protocolType":"WEBSOCKET","routeSelectionExpression":"__RouteSelectionExpression__","tags":{"key0":"__Value__"},"version":"__Version__","warnings":["__Member__","__Member__"]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","workspaceSummaries":[{"arn":"__Arn__","creationDateTime":946684800,"description":"__Description__","linkedServices":["__Member__","__Member__"],"updateDateTime":946684800,"workspaceId":"__WorkspaceId__"},{"arn":"__Arn__","creationDateTime":946684800,"description":"__Description__","linkedServices":["__Member__","__Member__"],"updateDateTime":946684800,"workspaceId":"__WorkspaceId__"}]}

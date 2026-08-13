@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.DescribeSecurityPolicy
-
-{"SecurityPolicy":{"Fips":true,"Protocols":["SFTP","SFTP"],"SecurityPolicyName":"__SecurityPolicyName__","SshCiphers":["__Member__","__Member__"],"SshHostKeyAlgorithms":["__Member__","__Member__"],"SshKexs":["__Member__","__Member__"],"SshMacs":["__Member__","__Member__"],"TlsCiphers":["__Member__","__Member__"],"Type":"SERVER"}}

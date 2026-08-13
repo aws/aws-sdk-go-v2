@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: OpenSearchServerless.DeleteCollection
-
-{"deleteCollectionDetail":{"deletionProtection":"ENABLED","id":"__Id__","name":"__Name__","status":"CREATING"}}

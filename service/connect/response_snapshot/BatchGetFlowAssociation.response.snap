@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"FlowAssociationSummaryList":[{"FlowId":"__FlowId__","ResourceId":"__ResourceId__","ResourceType":"WHATSAPP_MESSAGING_PHONE_NUMBER"},{"FlowId":"__FlowId__","ResourceId":"__ResourceId__","ResourceType":"WHATSAPP_MESSAGING_PHONE_NUMBER"}]}

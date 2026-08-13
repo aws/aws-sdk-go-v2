@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botAnalyzerRecommendationList":[{"issueDescription":"__IssueDescription__","issueLocation":{"botLocale":"__BotLocale__","intentId":"__IntentId__","slotId":"__SlotId__"},"priority":"High","proposedFix":"__ProposedFix__"},{"issueDescription":"__IssueDescription__","issueLocation":{"botLocale":"__BotLocale__","intentId":"__IntentId__","slotId":"__SlotId__"},"priority":"High","proposedFix":"__ProposedFix__"}],"botAnalyzerStatus":"Processing","botId":"__BotId__","botVersion":"__BotVersion__","creationDateTime":946684800,"localeId":"__LocaleId__","nextToken":"__NextToken__"}

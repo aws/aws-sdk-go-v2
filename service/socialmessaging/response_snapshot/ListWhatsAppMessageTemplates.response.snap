@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","templates":[{"metaTemplateId":"__MetaTemplateId__","templateCategory":"__TemplateCategory__","templateLanguage":"__TemplateLanguage__","templateName":"__TemplateName__","templateQualityScore":"__TemplateQualityScore__","templateStatus":"__TemplateStatus__"},{"metaTemplateId":"__MetaTemplateId__","templateCategory":"__TemplateCategory__","templateLanguage":"__TemplateLanguage__","templateName":"__TemplateName__","templateQualityScore":"__TemplateQualityScore__","templateStatus":"__TemplateStatus__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StorageGateway_20130630.DescribeTapeArchives
-
-{"Marker":"__Marker__","TapeArchives":[{"CompletionTime":946684800,"KMSKey":"__KMSKey__","PoolEntryDate":946684800,"PoolId":"__PoolId__","RetentionStartDate":946684800,"RetrievedTo":"__RetrievedTo__","TapeARN":"__TapeARN__","TapeBarcode":"__TapeBarcode__","TapeCreatedDate":946684800,"TapeSizeInBytes":1,"TapeStatus":"__TapeStatus__","TapeUsedInBytes":1,"Worm":true},{"CompletionTime":946684800,"KMSKey":"__KMSKey__","PoolEntryDate":946684800,"PoolId":"__PoolId__","RetentionStartDate":946684800,"RetrievedTo":"__RetrievedTo__","TapeARN":"__TapeARN__","TapeBarcode":"__TapeBarcode__","TapeCreatedDate":946684800,"TapeSizeInBytes":1,"TapeStatus":"__TapeStatus__","TapeUsedInBytes":1,"Worm":true}]}

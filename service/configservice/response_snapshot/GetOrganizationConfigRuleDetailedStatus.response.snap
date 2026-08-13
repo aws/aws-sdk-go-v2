@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.GetOrganizationConfigRuleDetailedStatus
-
-{"NextToken":"__NextToken__","OrganizationConfigRuleDetailedStatus":[{"AccountId":"__AccountId__","ConfigRuleName":"__ConfigRuleName__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","LastUpdateTime":946684800,"MemberAccountRuleStatus":"CREATE_SUCCESSFUL"},{"AccountId":"__AccountId__","ConfigRuleName":"__ConfigRuleName__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","LastUpdateTime":946684800,"MemberAccountRuleStatus":"CREATE_SUCCESSFUL"}]}

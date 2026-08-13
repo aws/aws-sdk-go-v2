@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Attributes":[{"DefaultValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"IsImmutable":true,"Name":"__Name__","RequiredBehavior":"REQUIRED_ALWAYS","Rules":{"key0":{"Parameters":{"key0":"__Value__"},"Type":"BINARY_LENGTH"}},"Type":"STRING"},{"DefaultValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"IsImmutable":true,"Name":"__Name__","RequiredBehavior":"REQUIRED_ALWAYS","Rules":{"key0":{"Parameters":{"key0":"__Value__"},"Type":"BINARY_LENGTH"}},"Type":"STRING"}],"NextToken":"__NextToken__"}

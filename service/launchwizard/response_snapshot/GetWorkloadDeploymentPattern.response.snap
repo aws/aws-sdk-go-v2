@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"workloadDeploymentPattern":{"deploymentPatternName":"__DeploymentPatternName__","deploymentPatternVersionName":"__DeploymentPatternVersionName__","description":"__Description__","displayName":"__DisplayName__","specifications":[{"allowedValues":["__Member__","__Member__"],"conditionals":[{"comparator":"__Comparator__","name":"__Name__","value":"__Value__"},{"comparator":"__Comparator__","name":"__Name__","value":"__Value__"}],"description":"__Description__","name":"__Name__","required":"__Required__"},{"allowedValues":["__Member__","__Member__"],"conditionals":[{"comparator":"__Comparator__","name":"__Name__","value":"__Value__"},{"comparator":"__Comparator__","name":"__Name__","value":"__Value__"}],"description":"__Description__","name":"__Name__","required":"__Required__"}],"status":"ACTIVE","statusMessage":"__StatusMessage__","workloadName":"__WorkloadName__","workloadVersionName":"__WorkloadVersionName__"}}

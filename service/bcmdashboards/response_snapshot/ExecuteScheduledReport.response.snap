@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBCMDashboardsService.ExecuteScheduledReport
-
-{"executionTriggered":true,"healthStatus":{"lastRefreshedAt":946684800,"statusCode":"HEALTHY","statusReasons":["DATA_SOURCE_ACCESS_DENIED","DATA_SOURCE_ACCESS_DENIED"]}}

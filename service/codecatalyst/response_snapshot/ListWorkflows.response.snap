@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"createdTime":"2000-01-01T00:00:00Z","definition":{"path":"__Path__"},"id":"__Id__","lastUpdatedTime":"2000-01-01T00:00:00Z","name":"__Name__","runMode":"QUEUED","sourceBranchName":"__SourceBranchName__","sourceRepositoryName":"__SourceRepositoryName__","status":"INVALID"},{"createdTime":"2000-01-01T00:00:00Z","definition":{"path":"__Path__"},"id":"__Id__","lastUpdatedTime":"2000-01-01T00:00:00Z","name":"__Name__","runMode":"QUEUED","sourceBranchName":"__SourceBranchName__","sourceRepositoryName":"__SourceRepositoryName__","status":"INVALID"}],"nextToken":"__NextToken__"}

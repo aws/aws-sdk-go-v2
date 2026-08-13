@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"ResourceLimitExceededException","clusterName":"__ClusterName__","message":"__Message__","nodegroupName":"__NodegroupName__","subscriptionId":"__SubscriptionId__"}

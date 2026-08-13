@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Timestream_20181101.PrepareQuery
-
-{"Columns":[{"Aliased":true,"DatabaseName":"__DatabaseName__","Name":"__Name__","TableName":"__TableName__","Type":{"ArrayColumnInfo":{"Name":"__Name__"},"RowColumnInfo":[{"Name":"__Name__"},{"Name":"__Name__"}],"ScalarType":"VARCHAR","TimeSeriesMeasureValueColumnInfo":{"Name":"__Name__"}}},{"Aliased":true,"DatabaseName":"__DatabaseName__","Name":"__Name__","TableName":"__TableName__","Type":{"ArrayColumnInfo":{"Name":"__Name__"},"RowColumnInfo":[{"Name":"__Name__"},{"Name":"__Name__"}],"ScalarType":"VARCHAR","TimeSeriesMeasureValueColumnInfo":{"Name":"__Name__"}}}],"Parameters":[{"Name":"__Name__","Type":{"ArrayColumnInfo":{"Name":"__Name__"},"RowColumnInfo":[{"Name":"__Name__"},{"Name":"__Name__"}],"ScalarType":"VARCHAR","TimeSeriesMeasureValueColumnInfo":{"Name":"__Name__"}}},{"Name":"__Name__","Type":{"ArrayColumnInfo":{"Name":"__Name__"},"RowColumnInfo":[{"Name":"__Name__"},{"Name":"__Name__"}],"ScalarType":"VARCHAR","TimeSeriesMeasureValueColumnInfo":{"Name":"__Name__"}}}],"QueryString":"__QueryString__"}

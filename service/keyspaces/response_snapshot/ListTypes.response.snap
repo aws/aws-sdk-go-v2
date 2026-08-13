@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: KeyspacesService.ListTypes
-
-{"nextToken":"__NextToken__","types":["__Member__","__Member__"]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DatasetArn":"__DatasetArn__","RequestId":"__RequestId__","Status":200,"TopicArn":"__TopicArn__","TopicId":"__TopicId__"}

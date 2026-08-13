@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","Comment":"__Comment__","CreatedAt":"2000-01-01T00:00:00Z","DataSetId":"__DataSetId__","Finalized":true,"Id":"__Id__","RevocationComment":"__RevocationComment__","Revoked":true,"RevokedAt":"2000-01-01T00:00:00Z","SourceId":"__SourceId__","UpdatedAt":"2000-01-01T00:00:00Z"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AppRunner.ListServices
-
-{"NextToken":"__NextToken__","ServiceSummaryList":[{"CreatedAt":946684800,"ServiceArn":"__ServiceArn__","ServiceId":"__ServiceId__","ServiceName":"__ServiceName__","ServiceUrl":"__ServiceUrl__","Status":"CREATE_FAILED","UpdatedAt":946684800},{"CreatedAt":946684800,"ServiceArn":"__ServiceArn__","ServiceId":"__ServiceId__","ServiceName":"__ServiceName__","ServiceUrl":"__ServiceUrl__","Status":"CREATE_FAILED","UpdatedAt":946684800}]}

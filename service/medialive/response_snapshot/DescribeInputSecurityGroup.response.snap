@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","channels":["__Member__","__Member__"],"id":"__Id__","inputs":["__Member__","__Member__"],"state":"IDLE","tags":{"key0":"__Value__"},"whitelistRules":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}

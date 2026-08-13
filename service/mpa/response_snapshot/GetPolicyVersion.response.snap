@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"PolicyVersion":{"Arn":"__Arn__","CreationTime":"2000-01-01T00:00:00Z","Document":"__Document__","IsDefault":true,"LastUpdatedTime":"2000-01-01T00:00:00Z","Name":"__Name__","PolicyArn":"__PolicyArn__","PolicyType":"AWS_MANAGED","Status":"ATTACHABLE","VersionId":1}}

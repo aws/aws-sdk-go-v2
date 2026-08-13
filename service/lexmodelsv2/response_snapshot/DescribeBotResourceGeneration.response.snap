@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","botVersion":"__BotVersion__","creationDateTime":946684800,"failureReasons":["__Member__","__Member__"],"generatedBotLocaleUrl":"__GeneratedBotLocaleUrl__","generationId":"__GenerationId__","generationInputPrompt":"__GenerationInputPrompt__","generationStatus":"Failed","lastUpdatedDateTime":946684800,"localeId":"__LocaleId__","modelArn":"__ModelArn__"}

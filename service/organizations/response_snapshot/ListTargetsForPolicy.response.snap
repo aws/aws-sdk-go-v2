@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSOrganizationsV20161128.ListTargetsForPolicy
-
-{"NextToken":"__NextToken__","Targets":[{"Arn":"__Arn__","Name":"__Name__","TargetId":"__TargetId__","Type":"ACCOUNT"},{"Arn":"__Arn__","Name":"__Name__","TargetId":"__TargetId__","Type":"ACCOUNT"}]}

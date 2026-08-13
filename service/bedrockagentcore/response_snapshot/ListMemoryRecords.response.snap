@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"memoryRecordSummaries":[{"content":{"text":"__MemoryContentMemberText__"},"createdAt":946684800,"memoryRecordId":"__MemoryRecordId__","memoryStrategyId":"__MemoryStrategyId__","metadata":{"key0":{"stringValue":"__MemoryRecordMetadataValueMemberStringValue__"}},"namespaces":["__Member__","__Member__"],"score":1},{"content":{"text":"__MemoryContentMemberText__"},"createdAt":946684800,"memoryRecordId":"__MemoryRecordId__","memoryStrategyId":"__MemoryStrategyId__","metadata":{"key0":{"stringValue":"__MemoryRecordMetadataValueMemberStringValue__"}},"namespaces":["__Member__","__Member__"],"score":1}],"nextToken":"__NextToken__"}

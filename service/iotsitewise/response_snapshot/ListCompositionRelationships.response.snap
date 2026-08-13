@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"compositionRelationshipSummaries":[{"assetModelCompositeModelId":"__AssetModelCompositeModelId__","assetModelCompositeModelType":"__AssetModelCompositeModelType__","assetModelId":"__AssetModelId__"},{"assetModelCompositeModelId":"__AssetModelCompositeModelId__","assetModelCompositeModelType":"__AssetModelCompositeModelType__","assetModelId":"__AssetModelId__"}],"nextToken":"__NextToken__"}

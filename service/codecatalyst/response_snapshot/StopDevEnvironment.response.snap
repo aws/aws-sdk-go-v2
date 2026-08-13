@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"id":"__Id__","projectName":"__ProjectName__","spaceName":"__SpaceName__","status":"PENDING"}

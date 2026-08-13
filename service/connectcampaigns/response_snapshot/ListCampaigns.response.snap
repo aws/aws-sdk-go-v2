@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"campaignSummaryList":[{"arn":"__Arn__","connectInstanceId":"__ConnectInstanceId__","id":"__Id__","name":"__Name__"},{"arn":"__Arn__","connectInstanceId":"__ConnectInstanceId__","id":"__Id__","name":"__Name__"}],"nextToken":"__NextToken__"}

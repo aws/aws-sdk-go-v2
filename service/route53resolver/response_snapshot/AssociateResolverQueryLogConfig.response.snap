@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Resolver.AssociateResolverQueryLogConfig
-
-{"ResolverQueryLogConfigAssociation":{"CreationTime":"__CreationTime__","Error":"NONE","ErrorMessage":"__ErrorMessage__","Id":"__Id__","ResolverQueryLogConfigId":"__ResolverQueryLogConfigId__","ResourceId":"__ResourceId__","Status":"CREATING"}}

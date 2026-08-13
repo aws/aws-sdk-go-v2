@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"KnowledgeBaseArn":"__KnowledgeBaseArn__","KnowledgeBaseId":"__KnowledgeBaseId__","RequestId":"__RequestId__","Status":200}

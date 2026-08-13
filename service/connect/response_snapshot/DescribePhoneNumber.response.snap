@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ClaimedPhoneNumberSummary":{"InstanceId":"__InstanceId__","PhoneNumber":"__PhoneNumber__","PhoneNumberArn":"__PhoneNumberArn__","PhoneNumberCountryCode":"AF","PhoneNumberDescription":"__PhoneNumberDescription__","PhoneNumberId":"__PhoneNumberId__","PhoneNumberStatus":{"Message":"__Message__","Status":"CLAIMED"},"PhoneNumberType":"TOLL_FREE","SourcePhoneNumberArn":"__SourcePhoneNumberArn__","Tags":{"key0":"__Value__"},"TargetArn":"__TargetArn__"}}

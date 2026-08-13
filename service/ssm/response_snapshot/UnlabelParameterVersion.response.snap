@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.UnlabelParameterVersion
-
-{"InvalidLabels":["__Member__","__Member__"],"RemovedLabels":["__Member__","__Member__"]}

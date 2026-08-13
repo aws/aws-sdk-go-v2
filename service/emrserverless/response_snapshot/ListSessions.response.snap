@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","sessions":[{"applicationId":"__ApplicationId__","arn":"__Arn__","createdAt":946684800,"createdBy":"__CreatedBy__","executionRoleArn":"__ExecutionRoleArn__","name":"__Name__","releaseLabel":"__ReleaseLabel__","sessionId":"__SessionId__","state":"SUBMITTED","stateDetails":"__StateDetails__","updatedAt":946684800},{"applicationId":"__ApplicationId__","arn":"__Arn__","createdAt":946684800,"createdBy":"__CreatedBy__","executionRoleArn":"__ExecutionRoleArn__","name":"__Name__","releaseLabel":"__ReleaseLabel__","sessionId":"__SessionId__","state":"SUBMITTED","stateDetails":"__StateDetails__","updatedAt":946684800}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DeviceFarm_20150623.ListOfferingTransactions
-
-{"nextToken":"__NextToken__","offeringTransactions":[{"cost":{"amount":1,"currencyCode":"USD"},"createdOn":946684800,"offeringPromotionId":"__OfferingPromotionId__","offeringStatus":{"effectiveOn":946684800,"offering":{"description":"__Description__","id":"__Id__","platform":"ANDROID","recurringCharges":[{"cost":{"amount":1,"currencyCode":"USD"},"frequency":"MONTHLY"},{"cost":{"amount":1,"currencyCode":"USD"},"frequency":"MONTHLY"}],"type":"RECURRING"},"quantity":1,"type":"PURCHASE"},"transactionId":"__TransactionId__"},{"cost":{"amount":1,"currencyCode":"USD"},"createdOn":946684800,"offeringPromotionId":"__OfferingPromotionId__","offeringStatus":{"effectiveOn":946684800,"offering":{"description":"__Description__","id":"__Id__","platform":"ANDROID","recurringCharges":[{"cost":{"amount":1,"currencyCode":"USD"},"frequency":"MONTHLY"},{"cost":{"amount":1,"currencyCode":"USD"},"frequency":"MONTHLY"}],"type":"RECURRING"},"quantity":1,"type":"PURCHASE"},"transactionId":"__TransactionId__"}]}

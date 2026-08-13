@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Timestream_20181101.ListScheduledQueries
-
-{"NextToken":"__NextToken__","ScheduledQueries":[{"Arn":"__Arn__","CreationTime":946684800,"ErrorReportConfiguration":{"S3Configuration":{"BucketName":"__BucketName__","EncryptionOption":"SSE_S3","ObjectKeyPrefix":"__ObjectKeyPrefix__"}},"LastRunStatus":"AUTO_TRIGGER_SUCCESS","Name":"__Name__","NextInvocationTime":946684800,"PreviousInvocationTime":946684800,"State":"ENABLED","TargetDestination":{"TimestreamDestination":{"DatabaseName":"__DatabaseName__","TableName":"__TableName__"}}},{"Arn":"__Arn__","CreationTime":946684800,"ErrorReportConfiguration":{"S3Configuration":{"BucketName":"__BucketName__","EncryptionOption":"SSE_S3","ObjectKeyPrefix":"__ObjectKeyPrefix__"}},"LastRunStatus":"AUTO_TRIGGER_SUCCESS","Name":"__Name__","NextInvocationTime":946684800,"PreviousInvocationTime":946684800,"State":"ENABLED","TargetDestination":{"TimestreamDestination":{"DatabaseName":"__DatabaseName__","TableName":"__TableName__"}}}]}

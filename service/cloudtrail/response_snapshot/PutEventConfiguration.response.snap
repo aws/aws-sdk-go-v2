@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.PutEventConfiguration
-
-{"AggregationConfigurations":[{"EventCategory":"Data","Templates":["API_ACTIVITY","API_ACTIVITY"]},{"EventCategory":"Data","Templates":["API_ACTIVITY","API_ACTIVITY"]}],"ContextKeySelectors":[{"Equals":["__Member__","__Member__"],"Type":"TagContext"},{"Equals":["__Member__","__Member__"],"Type":"TagContext"}],"EventDataStoreArn":"__EventDataStoreArn__","MaxEventSize":"Standard","TrailARN":"__TrailARN__"}

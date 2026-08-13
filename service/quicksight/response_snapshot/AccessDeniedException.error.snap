@@ -1,4 +1,0 @@
-401
-Content-Type: application/json
-
-{"__type":"AccessDeniedException","Message":"__Message__","RequestId":"__RequestId__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","id":"__Id__","ipAddressType":"IPV4","ipv4AddressesPerEni":1,"name":"__Name__","resourceConfigDnsResolution":"IN_VPC","securityGroupIds":["__Member__","__Member__"],"status":"ACTIVE","subnetIds":["__Member__","__Member__"],"vpcIdentifier":"__VpcIdentifier__"}

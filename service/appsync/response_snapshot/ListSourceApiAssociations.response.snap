@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","sourceApiAssociationSummaries":[{"associationArn":"__AssociationArn__","associationId":"__AssociationId__","description":"__Description__","mergedApiArn":"__MergedApiArn__","mergedApiId":"__MergedApiId__","sourceApiArn":"__SourceApiArn__","sourceApiId":"__SourceApiId__"},{"associationArn":"__AssociationArn__","associationId":"__AssociationId__","description":"__Description__","mergedApiArn":"__MergedApiArn__","mergedApiId":"__MergedApiId__","sourceApiArn":"__SourceApiArn__","sourceApiId":"__SourceApiId__"}]}

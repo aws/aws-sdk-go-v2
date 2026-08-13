@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"policy":{"httpInputs":"ALLOWED","httpsInputs":"ALLOWED","s3Inputs":"ALLOWED"}}

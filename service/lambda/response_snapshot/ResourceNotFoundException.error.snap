@@ -1,4 +1,0 @@
-404
-Content-Type: application/json
-
-{"__type":"ResourceNotFoundException","Message":"__Message__","Type":"__Type__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appAuthorization":{"app":"__App__","appAuthorizationArn":"__AppAuthorizationArn__","appBundleArn":"__AppBundleArn__","authType":"oauth2","authUrl":"__AuthUrl__","createdAt":"2000-01-01T00:00:00Z","persona":"admin","status":"PendingConnect","tenant":{"tenantDisplayName":"__TenantDisplayName__","tenantIdentifier":"__TenantIdentifier__"},"updatedAt":"2000-01-01T00:00:00Z"}}

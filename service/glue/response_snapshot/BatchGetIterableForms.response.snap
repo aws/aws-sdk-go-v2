@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.BatchGetIterableForms
-
-{"Errors":[{"Code":"__Code__","ItemIdentifier":"__ItemIdentifier__","Message":"__Message__"},{"Code":"__Code__","ItemIdentifier":"__ItemIdentifier__","Message":"__Message__"}],"Items":[{"Attachments":{"key0":{"Content":"__Content__","FormTypeId":"__FormTypeId__"}},"Forms":{"key0":{"Content":"__Content__","FormTypeId":"__FormTypeId__"}},"GlossaryTerms":["__Member__","__Member__"],"ItemId":"__ItemId__","ItemName":"__ItemName__"},{"Attachments":{"key0":{"Content":"__Content__","FormTypeId":"__FormTypeId__"}},"Forms":{"key0":{"Content":"__Content__","FormTypeId":"__FormTypeId__"}},"GlossaryTerms":["__Member__","__Member__"],"ItemId":"__ItemId__","ItemName":"__ItemName__"}]}

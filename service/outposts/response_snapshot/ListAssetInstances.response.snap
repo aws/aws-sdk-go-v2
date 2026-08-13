@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AssetInstances":[{"AccountId":"__AccountId__","AssetId":"__AssetId__","AwsServiceName":"AWS","InstanceId":"__InstanceId__","InstanceType":"__InstanceType__"},{"AccountId":"__AccountId__","AssetId":"__AssetId__","AwsServiceName":"AWS","InstanceId":"__InstanceId__","InstanceType":"__InstanceType__"}],"NextToken":"__NextToken__"}

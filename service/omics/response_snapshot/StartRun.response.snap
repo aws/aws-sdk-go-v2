@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","configuration":{"arn":"__Arn__","name":"__Name__","uuid":"__Uuid__"},"id":"__Id__","networkingMode":"__NetworkingMode__","runOutputUri":"__RunOutputUri__","status":"PENDING","tags":{"key0":"__Value__"},"uuid":"__Uuid__"}

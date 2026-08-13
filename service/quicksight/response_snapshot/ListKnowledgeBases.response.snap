@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"KnowledgeBaseSummaries":[{"CreatedAt":946684800,"DataSourceArn":"__DataSourceArn__","DocumentCount":1,"KnowledgeBaseArn":"__KnowledgeBaseArn__","KnowledgeBaseId":"__KnowledgeBaseId__","KnowledgeBaseSizeBytes":1,"Name":"__Name__","PrimaryOwnerArn":"__PrimaryOwnerArn__","PrimaryOwnerUsername":"__PrimaryOwnerUsername__","Status":"CREATING","Type":"__Type__","UpdatedAt":946684800},{"CreatedAt":946684800,"DataSourceArn":"__DataSourceArn__","DocumentCount":1,"KnowledgeBaseArn":"__KnowledgeBaseArn__","KnowledgeBaseId":"__KnowledgeBaseId__","KnowledgeBaseSizeBytes":1,"Name":"__Name__","PrimaryOwnerArn":"__PrimaryOwnerArn__","PrimaryOwnerUsername":"__PrimaryOwnerUsername__","Status":"CREATING","Type":"__Type__","UpdatedAt":946684800}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

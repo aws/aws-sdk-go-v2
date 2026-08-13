@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LensSummaries":[{"CreatedAt":946684800,"Description":"__Description__","LensAlias":"__LensAlias__","LensArn":"__LensArn__","LensName":"__LensName__","LensStatus":"CURRENT","LensType":"AWS_OFFICIAL","LensVersion":"__LensVersion__","Owner":"__Owner__","UpdatedAt":946684800},{"CreatedAt":946684800,"Description":"__Description__","LensAlias":"__LensAlias__","LensArn":"__LensArn__","LensName":"__LensName__","LensStatus":"CURRENT","LensType":"AWS_OFFICIAL","LensVersion":"__LensVersion__","Owner":"__Owner__","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

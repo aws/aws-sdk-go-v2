@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationId":"__ApplicationId__","JourneyId":"__JourneyId__","LastEvaluatedTime":"__LastEvaluatedTime__","Metrics":{"key0":"__Value__"},"RunId":"__RunId__"}

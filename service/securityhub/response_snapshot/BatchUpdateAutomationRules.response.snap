@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ProcessedAutomationRules":["__Member__","__Member__"],"UnprocessedAutomationRules":[{"ErrorCode":1,"ErrorMessage":"__ErrorMessage__","RuleArn":"__RuleArn__"},{"ErrorCode":1,"ErrorMessage":"__ErrorMessage__","RuleArn":"__RuleArn__"}]}

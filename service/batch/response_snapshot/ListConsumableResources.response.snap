@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"consumableResources":[{"consumableResourceArn":"__ConsumableResourceArn__","consumableResourceName":"__ConsumableResourceName__","inUseQuantity":1,"resourceType":"__ResourceType__","totalQuantity":1},{"consumableResourceArn":"__ConsumableResourceArn__","consumableResourceName":"__ConsumableResourceName__","inUseQuantity":1,"resourceType":"__ResourceType__","totalQuantity":1}],"nextToken":"__NextToken__"}

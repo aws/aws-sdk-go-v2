@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Logs_20140328.DescribeLogStreams
-
-{"logStreams":[{"arn":"__Arn__","creationTime":1,"firstEventTimestamp":1,"lastEventTimestamp":1,"lastIngestionTime":1,"logStreamName":"__LogStreamName__","storedBytes":1,"uploadSequenceToken":"__UploadSequenceToken__"},{"arn":"__Arn__","creationTime":1,"firstEventTimestamp":1,"lastEventTimestamp":1,"lastIngestionTime":1,"logStreamName":"__LogStreamName__","storedBytes":1,"uploadSequenceToken":"__UploadSequenceToken__"}],"nextToken":"__NextToken__"}

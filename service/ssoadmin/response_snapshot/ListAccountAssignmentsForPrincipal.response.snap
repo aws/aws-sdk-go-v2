@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SWBExternalService.ListAccountAssignmentsForPrincipal
-
-{"AccountAssignments":[{"AccountId":"__AccountId__","PermissionSetArn":"__PermissionSetArn__","PrincipalId":"__PrincipalId__","PrincipalType":"USER"},{"AccountId":"__AccountId__","PermissionSetArn":"__PermissionSetArn__","PrincipalId":"__PrincipalId__","PrincipalType":"USER"}],"NextToken":"__NextToken__"}

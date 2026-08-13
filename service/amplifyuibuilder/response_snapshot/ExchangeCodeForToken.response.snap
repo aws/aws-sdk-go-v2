@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accessToken":"__AccessToken__","expiresIn":1,"refreshToken":"__RefreshToken__"}

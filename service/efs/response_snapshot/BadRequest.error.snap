@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"BadRequest","ErrorCode":"__ErrorCode___","Message":"__Message__"}

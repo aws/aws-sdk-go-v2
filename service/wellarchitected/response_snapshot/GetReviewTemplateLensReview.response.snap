@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LensReview":{"LensAlias":"__LensAlias__","LensArn":"__LensArn__","LensName":"__LensName__","LensStatus":"CURRENT","LensVersion":"__LensVersion__","NextToken":"__NextToken__","Notes":"__Notes__","PillarReviewSummaries":[{"Notes":"__Notes__","PillarId":"__PillarId__","PillarName":"__PillarName__","QuestionCounts":{"key0":1}},{"Notes":"__Notes__","PillarId":"__PillarId__","PillarName":"__PillarName__","QuestionCounts":{"key0":1}}],"QuestionCounts":{"key0":1},"UpdatedAt":946684800},"TemplateArn":"__TemplateArn__"}

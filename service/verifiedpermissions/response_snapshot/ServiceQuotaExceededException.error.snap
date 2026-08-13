@@ -1,5 +1,0 @@
-402
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: VerifiedPermissions.CreateIdentitySource
-
-{"__type":"ServiceQuotaExceededException","message":"__Message__","quotaCode":"__QuotaCode__","resourceId":"__ResourceId__","resourceType":"IDENTITY_SOURCE","serviceCode":"__ServiceCode__"}

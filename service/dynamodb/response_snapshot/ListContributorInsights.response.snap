@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: DynamoDB_20120810.ListContributorInsights
-
-{"ContributorInsightsSummaries":[{"ContributorInsightsMode":"ACCESSED_AND_THROTTLED_KEYS","ContributorInsightsStatus":"ENABLING","IndexName":"__IndexName__","TableName":"__TableName__"},{"ContributorInsightsMode":"ACCESSED_AND_THROTTLED_KEYS","ContributorInsightsStatus":"ENABLING","IndexName":"__IndexName__","TableName":"__TableName__"}],"NextToken":"__NextToken__"}

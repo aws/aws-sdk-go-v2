@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","securityProfileIdentifiers":[{"arn":"__Arn__","name":"__Name__"},{"arn":"__Arn__","name":"__Name__"}]}

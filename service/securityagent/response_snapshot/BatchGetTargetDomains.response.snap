@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"notFound":["__Member__","__Member__"],"targetDomains":[{"createdAt":"2000-01-01T00:00:00Z","domainName":"__DomainName__","targetDomainId":"__TargetDomainId__","verificationDetails":{"dnsTxt":{"dnsRecordName":"__DnsRecordName__","dnsRecordType":"TXT","token":"__Token__"},"httpRoute":{"routePath":"__RoutePath__","token":"__Token__"},"method":"DNS_TXT"},"verificationStatus":"PENDING","verificationStatusReason":"__VerificationStatusReason__","verifiedAt":"2000-01-01T00:00:00Z"},{"createdAt":"2000-01-01T00:00:00Z","domainName":"__DomainName__","targetDomainId":"__TargetDomainId__","verificationDetails":{"dnsTxt":{"dnsRecordName":"__DnsRecordName__","dnsRecordType":"TXT","token":"__Token__"},"httpRoute":{"routePath":"__RoutePath__","token":"__Token__"},"method":"DNS_TXT"},"verificationStatus":"PENDING","verificationStatusReason":"__VerificationStatusReason__","verifiedAt":"2000-01-01T00:00:00Z"}]}

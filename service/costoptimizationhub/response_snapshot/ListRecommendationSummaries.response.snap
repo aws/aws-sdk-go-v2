@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CostOptimizationHubService.ListRecommendationSummaries
-
-{"currencyCode":"__CurrencyCode__","estimatedTotalDedupedSavings":1,"groupBy":"__GroupBy__","items":[{"estimatedMonthlySavings":1,"group":"__Group__","recommendationCount":1},{"estimatedMonthlySavings":1,"group":"__Group__","recommendationCount":1}],"metrics":{"savingsPercentage":"__SavingsPercentage__"},"nextToken":"__NextToken__"}

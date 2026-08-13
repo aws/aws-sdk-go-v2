@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","principals":[{"creationTime":946684800,"external":true,"id":"__Id__","lastUpdatedTime":946684800,"resourceShareArn":"__ResourceShareArn__"},{"creationTime":946684800,"external":true,"id":"__Id__","lastUpdatedTime":946684800,"resourceShareArn":"__ResourceShareArn__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ServiceIntegration":{"KMSServerSideEncryption":{"KMSKeyId":"__KMSKeyId__","OptInStatus":"ENABLED","Type":"CUSTOMER_MANAGED_KEY"},"LogsAnomalyDetection":{"OptInStatus":"ENABLED"},"OpsCenter":{"OptInStatus":"ENABLED"}}}

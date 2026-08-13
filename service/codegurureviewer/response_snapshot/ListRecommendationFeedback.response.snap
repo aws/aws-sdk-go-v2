@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","RecommendationFeedbackSummaries":[{"Reactions":["ThumbsUp","ThumbsUp"],"RecommendationId":"__RecommendationId__","UserId":"__UserId__"},{"Reactions":["ThumbsUp","ThumbsUp"],"RecommendationId":"__RecommendationId__","UserId":"__UserId__"}]}

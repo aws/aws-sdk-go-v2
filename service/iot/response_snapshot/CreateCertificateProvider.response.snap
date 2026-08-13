@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"certificateProviderArn":"__CertificateProviderArn__","certificateProviderName":"__CertificateProviderName__"}

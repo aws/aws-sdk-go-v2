@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AirflowIdentity":"__AirflowIdentity__","IamIdentity":"__IamIdentity__","WebServerHostname":"__WebServerHostname__","WebToken":"__WebToken__"}

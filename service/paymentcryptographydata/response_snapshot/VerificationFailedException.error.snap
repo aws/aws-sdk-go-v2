@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"VerificationFailedException","Message":"__Message__","Reason":"INVALID_MAC"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.DescribeConfigurationRecorderStatus
-
-{"ConfigurationRecordersStatus":[{"arn":"__Arn__","lastErrorCode":"__LastErrorCode__","lastErrorMessage":"__LastErrorMessage__","lastStartTime":946684800,"lastStatus":"Pending","lastStatusChangeTime":946684800,"lastStopTime":946684800,"name":"__Name__","recording":true,"servicePrincipal":"__ServicePrincipal__"},{"arn":"__Arn__","lastErrorCode":"__LastErrorCode__","lastErrorMessage":"__LastErrorMessage__","lastStartTime":946684800,"lastStatus":"Pending","lastStatusChangeTime":946684800,"lastStopTime":946684800,"name":"__Name__","recording":true,"servicePrincipal":"__ServicePrincipal__"}]}

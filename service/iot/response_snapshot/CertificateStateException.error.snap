@@ -1,4 +1,0 @@
-406
-Content-Type: application/json
-
-{"__type":"CertificateStateException","message":"__Message__"}

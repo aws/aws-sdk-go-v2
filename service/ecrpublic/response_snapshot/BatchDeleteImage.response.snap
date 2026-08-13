@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SpencerFrontendService.BatchDeleteImage
-
-{"failures":[{"failureCode":"InvalidImageDigest","failureReason":"__FailureReason__","imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"}},{"failureCode":"InvalidImageDigest","failureReason":"__FailureReason__","imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"}}],"imageIds":[{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"}]}

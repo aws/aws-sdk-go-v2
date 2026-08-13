@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: SimpleWorkflowService.DescribeWorkflowType
-
-{"configuration":{"defaultChildPolicy":"TERMINATE","defaultExecutionStartToCloseTimeout":"__DefaultExecutionStartToCloseTimeout__","defaultLambdaRole":"__DefaultLambdaRole__","defaultTaskList":{"name":"__Name__"},"defaultTaskPriority":"__DefaultTaskPriority__","defaultTaskStartToCloseTimeout":"__DefaultTaskStartToCloseTimeout__"},"typeInfo":{"creationDate":946684800,"deprecationDate":946684800,"description":"__Description__","status":"REGISTERED","workflowType":{"name":"__Name__","version":"__Version__"}}}

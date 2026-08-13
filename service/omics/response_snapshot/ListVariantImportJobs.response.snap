@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","variantImportJobs":[{"annotationFields":{"key0":"__Value__"},"completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","destinationName":"__DestinationName__","id":"__Id__","roleArn":"__RoleArn__","runLeftNormalization":true,"status":"SUBMITTED","updateTime":"2000-01-01T00:00:00Z"},{"annotationFields":{"key0":"__Value__"},"completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","destinationName":"__DestinationName__","id":"__Id__","roleArn":"__RoleArn__","runLeftNormalization":true,"status":"SUBMITTED","updateTime":"2000-01-01T00:00:00Z"}]}

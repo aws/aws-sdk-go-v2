@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AssetId":"__AssetId__","CapacityTaskId":"__CapacityTaskId__","CapacityTaskStatus":"REQUESTED","CompletionDate":946684800,"CreationDate":946684800,"DryRun":true,"Failed":{"Reason":"__Reason__","Type":"UNSUPPORTED_CAPACITY_CONFIGURATION"},"InstancesToExclude":{"AccountIds":["__Member__","__Member__"],"Instances":["__Member__","__Member__"],"Services":["AWS","AWS"]},"LastModifiedDate":946684800,"OrderId":"__OrderId__","OutpostId":"__OutpostId__","RequestedInstancePools":[{"Count":1,"InstanceType":"__InstanceType__"},{"Count":1,"InstanceType":"__InstanceType__"}],"TaskActionOnBlockingInstances":"WAIT_FOR_EVACUATION"}

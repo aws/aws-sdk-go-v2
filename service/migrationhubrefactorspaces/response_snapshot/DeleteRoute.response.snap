@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationId":"__ApplicationId__","Arn":"__Arn__","LastUpdatedTime":946684800,"RouteId":"__RouteId__","ServiceId":"__ServiceId__","State":"CREATING"}

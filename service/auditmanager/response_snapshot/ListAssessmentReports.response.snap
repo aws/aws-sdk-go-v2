@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"assessmentReports":[{"assessmentId":"__AssessmentId__","assessmentName":"__AssessmentName__","author":"__Author__","creationTime":946684800,"description":"__Description__","id":"__Id__","name":"__Name__","status":"COMPLETE"},{"assessmentId":"__AssessmentId__","assessmentName":"__AssessmentName__","author":"__Author__","creationTime":946684800,"description":"__Description__","id":"__Id__","name":"__Name__","status":"COMPLETE"}],"nextToken":"__NextToken__"}

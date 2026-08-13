@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ingestionJob":{"dataSourceId":"__DataSourceId__","description":"__Description__","failureReasons":["__Member__","__Member__"],"ingestionJobId":"__IngestionJobId__","knowledgeBaseId":"__KnowledgeBaseId__","startedAt":"2000-01-01T00:00:00Z","statistics":{"numberOfDocumentsDeleted":1,"numberOfDocumentsFailed":1,"numberOfDocumentsScanned":1,"numberOfDocumentsSkipped":1,"numberOfMetadataDocumentsModified":1,"numberOfMetadataDocumentsScanned":1,"numberOfModifiedDocumentsIndexed":1,"numberOfNewDocumentsIndexed":1},"status":"STARTING","updatedAt":"2000-01-01T00:00:00Z"}}

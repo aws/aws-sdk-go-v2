@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: VerifiedPermissions.CreatePolicy
-
-{"actions":[{"actionId":"__ActionId__","actionType":"__ActionType__"},{"actionId":"__ActionId__","actionType":"__ActionType__"}],"createdDate":"2000-01-01T00:00:00Z","effect":"Permit","lastUpdatedDate":"2000-01-01T00:00:00Z","policyId":"__PolicyId__","policyStoreId":"__PolicyStoreId__","policyType":"STATIC","principal":{"entityId":"__EntityId__","entityType":"__EntityType__"},"resource":{"entityId":"__EntityId__","entityType":"__EntityType__"}}

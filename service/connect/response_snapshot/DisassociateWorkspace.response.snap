@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"FailedList":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ResourceArn":"__ResourceArn__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ResourceArn":"__ResourceArn__"}],"SuccessfulList":[{"ResourceArn":"__ResourceArn__"},{"ResourceArn":"__ResourceArn__"}]}

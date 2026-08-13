@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"flowAssets":[{"assetType":"__AssetType__","downloadUrl":"__DownloadUrl__","name":"__Name__"},{"assetType":"__AssetType__","downloadUrl":"__DownloadUrl__","name":"__Name__"}],"nextToken":"__NextToken__"}

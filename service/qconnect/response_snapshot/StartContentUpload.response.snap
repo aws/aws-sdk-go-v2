@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"headersToInclude":{"key0":"__Value__"},"uploadId":"__UploadId__","url":"__Url__","urlExpiry":946684800}

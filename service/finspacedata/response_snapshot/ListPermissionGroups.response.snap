@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","permissionGroups":[{"applicationPermissions":["CreateDataset","CreateDataset"],"createTime":1,"description":"__Description__","lastModifiedTime":1,"membershipStatus":"ADDITION_IN_PROGRESS","name":"__Name__","permissionGroupId":"__PermissionGroupId__"},{"applicationPermissions":["CreateDataset","CreateDataset"],"createTime":1,"description":"__Description__","lastModifiedTime":1,"membershipStatus":"ADDITION_IN_PROGRESS","name":"__Name__","permissionGroupId":"__PermissionGroupId__"}]}

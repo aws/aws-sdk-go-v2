@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.GetMapping
-
-{"Mapping":[{"SourcePath":"__SourcePath__","SourceTable":"__SourceTable__","SourceType":"__SourceType__","TargetPath":"__TargetPath__","TargetTable":"__TargetTable__","TargetType":"__TargetType__"},{"SourcePath":"__SourcePath__","SourceTable":"__SourceTable__","SourceType":"__SourceType__","TargetPath":"__TargetPath__","TargetTable":"__TargetTable__","TargetType":"__TargetType__"}]}

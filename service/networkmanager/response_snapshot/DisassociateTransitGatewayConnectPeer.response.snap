@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"TransitGatewayConnectPeerAssociation":{"DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkId":"__LinkId__","State":"PENDING","TransitGatewayConnectPeerArn":"__TransitGatewayConnectPeerArn__"}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeRouterConfiguration
-
-{"customerRouterConfig":"__CustomerRouterConfig__","router":{"platform":"__Platform__","routerTypeIdentifier":"__RouterTypeIdentifier__","software":"__Software__","vendor":"__Vendor__","xsltTemplateName":"__XsltTemplateName__","xsltTemplateNameForMacSec":"__XsltTemplateNameForMacSec__"},"virtualInterfaceId":"__VirtualInterfaceId__","virtualInterfaceName":"__VirtualInterfaceName__"}

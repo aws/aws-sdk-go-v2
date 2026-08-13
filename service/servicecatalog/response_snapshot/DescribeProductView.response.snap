@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribeProductView
-
-{"ProductViewSummary":{"Distributor":"__Distributor__","HasDefaultPath":true,"Id":"__Id__","Name":"__Name__","Owner":"__Owner__","ProductId":"__ProductId__","ShortDescription":"__ShortDescription__","SupportDescription":"__SupportDescription__","SupportEmail":"__SupportEmail__","SupportUrl":"__SupportUrl__","Type":"CLOUD_FORMATION_TEMPLATE"},"ProvisioningArtifacts":[{"CreatedTime":946684800,"Description":"__Description__","Guidance":"DEFAULT","Id":"__Id__","Name":"__Name__"},{"CreatedTime":946684800,"Description":"__Description__","Guidance":"DEFAULT","Id":"__Id__","Name":"__Name__"}]}

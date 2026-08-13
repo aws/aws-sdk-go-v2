@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.ListCallAnalyticsJobs
-
-{"CallAnalyticsJobSummaries":[{"CallAnalyticsJobDetails":{"Skipped":[{"Feature":"GENERATIVE_SUMMARIZATION","Message":"__Message__","ReasonCode":"INSUFFICIENT_CONVERSATION_CONTENT"},{"Feature":"GENERATIVE_SUMMARIZATION","Message":"__Message__","ReasonCode":"INSUFFICIENT_CONVERSATION_CONTENT"}]},"CallAnalyticsJobName":"__CallAnalyticsJobName__","CallAnalyticsJobStatus":"QUEUED","CompletionTime":946684800,"CreationTime":946684800,"FailureReason":"__FailureReason__","LanguageCode":"af-ZA","StartTime":946684800},{"CallAnalyticsJobDetails":{"Skipped":[{"Feature":"GENERATIVE_SUMMARIZATION","Message":"__Message__","ReasonCode":"INSUFFICIENT_CONVERSATION_CONTENT"},{"Feature":"GENERATIVE_SUMMARIZATION","Message":"__Message__","ReasonCode":"INSUFFICIENT_CONVERSATION_CONTENT"}]},"CallAnalyticsJobName":"__CallAnalyticsJobName__","CallAnalyticsJobStatus":"QUEUED","CompletionTime":946684800,"CreationTime":946684800,"FailureReason":"__FailureReason__","LanguageCode":"af-ZA","StartTime":946684800}],"NextToken":"__NextToken__","Status":"QUEUED"}

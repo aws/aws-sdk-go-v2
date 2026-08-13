@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.StartMedicalScribeJob
-
-{"MedicalScribeJob":{"ChannelDefinitions":[{"ChannelId":1,"ParticipantRole":"PATIENT"},{"ChannelId":1,"ParticipantRole":"PATIENT"}],"CompletionTime":946684800,"CreationTime":946684800,"DataAccessRoleArn":"__DataAccessRoleArn__","FailureReason":"__FailureReason__","LanguageCode":"en-US","Media":{"MediaFileUri":"__MediaFileUri__","RedactedMediaFileUri":"__RedactedMediaFileUri__"},"MedicalScribeContextProvided":true,"MedicalScribeJobName":"__MedicalScribeJobName__","MedicalScribeJobStatus":"QUEUED","MedicalScribeOutput":{"ClinicalDocumentUri":"__ClinicalDocumentUri__","TranscriptFileUri":"__TranscriptFileUri__"},"Settings":{"ChannelIdentification":true,"ClinicalNoteGenerationSettings":{"NoteTemplate":"HISTORY_AND_PHYSICAL"},"MaxSpeakerLabels":1,"ShowSpeakerLabels":true,"VocabularyFilterMethod":"remove","VocabularyFilterName":"__VocabularyFilterName__","VocabularyName":"__VocabularyName__"},"StartTime":946684800,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}}

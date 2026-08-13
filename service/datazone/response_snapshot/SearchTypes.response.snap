@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"assetTypeItem":{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","formsOutput":{"key0":{"required":true,"typeName":"__TypeName__","typeRevision":"__TypeRevision__"}},"name":"__Name__","originDomainId":"__OriginDomainId__","originProjectId":"__OriginProjectId__","owningProjectId":"__OwningProjectId__","revision":"__Revision__","updatedAt":946684800,"updatedBy":"__UpdatedBy__"}},{"assetTypeItem":{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","formsOutput":{"key0":{"required":true,"typeName":"__TypeName__","typeRevision":"__TypeRevision__"}},"name":"__Name__","originDomainId":"__OriginDomainId__","originProjectId":"__OriginProjectId__","owningProjectId":"__OwningProjectId__","revision":"__Revision__","updatedAt":946684800,"updatedBy":"__UpdatedBy__"}}],"nextToken":"__NextToken__","totalMatchCount":1}

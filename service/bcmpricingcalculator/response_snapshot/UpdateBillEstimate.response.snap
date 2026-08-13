@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBCMPricingCalculator.UpdateBillEstimate
-
-{"billInterval":{"end":946684800,"start":946684800},"costCategoryGroupSharingPreferenceArn":"__CostCategoryGroupSharingPreferenceArn__","costCategoryGroupSharingPreferenceEffectiveDate":946684800,"costSummary":{"serviceCostDifferences":{"key0":{"estimatedCost":{"amount":1,"currency":"USD"},"historicalCost":{"amount":1,"currency":"USD"}}},"totalCostDifference":{"estimatedCost":{"amount":1,"currency":"USD"},"historicalCost":{"amount":1,"currency":"USD"}}},"createdAt":946684800,"expiresAt":946684800,"failureMessage":"__FailureMessage__","groupSharingPreference":"OPEN","id":"__Id__","name":"__Name__","status":"IN_PROGRESS"}

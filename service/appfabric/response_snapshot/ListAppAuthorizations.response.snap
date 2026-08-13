@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appAuthorizationSummaryList":[{"app":"__App__","appAuthorizationArn":"__AppAuthorizationArn__","appBundleArn":"__AppBundleArn__","status":"PendingConnect","tenant":{"tenantDisplayName":"__TenantDisplayName__","tenantIdentifier":"__TenantIdentifier__"},"updatedAt":"2000-01-01T00:00:00Z"},{"app":"__App__","appAuthorizationArn":"__AppAuthorizationArn__","appBundleArn":"__AppBundleArn__","status":"PendingConnect","tenant":{"tenantDisplayName":"__TenantDisplayName__","tenantIdentifier":"__TenantIdentifier__"},"updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

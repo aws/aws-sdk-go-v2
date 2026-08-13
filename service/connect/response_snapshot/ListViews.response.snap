@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ViewsSummaryList":[{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","Name":"__Name__","Status":"PUBLISHED","Type":"CUSTOMER_MANAGED"},{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","Name":"__Name__","Status":"PUBLISHED","Type":"CUSTOMER_MANAGED"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","sourceAssociations":[{"creationTime":946684800,"lastUpdatedTime":946684800,"resourceShareArn":"__ResourceShareArn__","sourceId":"__SourceId__","sourceType":"__SourceType__","status":"__Status__","statusMessage":"__StatusMessage__"},{"creationTime":946684800,"lastUpdatedTime":946684800,"resourceShareArn":"__ResourceShareArn__","sourceId":"__SourceId__","sourceType":"__SourceType__","status":"__Status__","statusMessage":"__StatusMessage__"}]}

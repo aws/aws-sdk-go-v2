@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"membershipSummaries":[{"agentSpaceId":"__AgentSpaceId__","applicationId":"__ApplicationId__","config":{"user":{"role":"MEMBER"}},"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","memberType":"USER","membershipId":"__MembershipId__","metadata":{"user":{"email":"__Email__","username":"__Username__"}},"updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"},{"agentSpaceId":"__AgentSpaceId__","applicationId":"__ApplicationId__","config":{"user":{"role":"MEMBER"}},"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","memberType":"USER","membershipId":"__MembershipId__","metadata":{"user":{"email":"__Email__","username":"__Username__"}},"updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"}],"nextToken":"__NextToken__"}

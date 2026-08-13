@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"creationTime":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","name":"__Name__","numVersions":1,"reference":{"referenceArn":"__ReferenceItemMemberReferenceArn__"},"sseConfig":{"keyArn":"__KeyArn__","type":"KMS"},"status":"CREATING","statusMessage":"__StatusMessage__","storeArn":"__StoreArn__","storeFormat":"GFF","storeOptions":{"tsvStoreOptions":{"annotationType":"GENERIC","formatToHeader":{"key0":"__Value__"},"schema":[{"key0":"LONG"},{"key0":"LONG"}]}},"storeSizeBytes":1,"tags":{"key0":"__Value__"},"updateTime":"2000-01-01T00:00:00Z"}

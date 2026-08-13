@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"s3AccessPointArn":"__S3AccessPointArn__","storeId":"__StoreId__","storeType":"SEQUENCE_STORE"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"GroupCertificateAuthorities":[{"GroupCertificateAuthorityArn":"__GroupCertificateAuthorityArn__","GroupCertificateAuthorityId":"__GroupCertificateAuthorityId__"},{"GroupCertificateAuthorityArn":"__GroupCertificateAuthorityArn__","GroupCertificateAuthorityId":"__GroupCertificateAuthorityId__"}]}

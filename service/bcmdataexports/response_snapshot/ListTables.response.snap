@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSBillingAndCostManagementDataExports.ListTables
-
-{"NextToken":"__NextToken__","Tables":[{"Description":"__Description__","TableName":"__TableName__","TableProperties":[{"DefaultValue":"__DefaultValue__","Description":"__Description__","Name":"__Name__","ValidValues":["__Member__","__Member__"]},{"DefaultValue":"__DefaultValue__","Description":"__Description__","Name":"__Name__","ValidValues":["__Member__","__Member__"]}]},{"Description":"__Description__","TableName":"__TableName__","TableProperties":[{"DefaultValue":"__DefaultValue__","Description":"__Description__","Name":"__Name__","ValidValues":["__Member__","__Member__"]},{"DefaultValue":"__DefaultValue__","Description":"__Description__","Name":"__Name__","ValidValues":["__Member__","__Member__"]}]}]}

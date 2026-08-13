@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"results":{"contentFilter":{"results":[{"category":"VIOLENCE","severityScore":1},{"category":"VIOLENCE","severityScore":1}]},"promptAttack":{"results":[{"category":"JAILBREAK","severityScore":1},{"category":"JAILBREAK","severityScore":1}]},"sensitiveInformation":{"results":[{"beginOffset":1,"confidenceScore":1,"contentIndex":1,"endOffset":1,"messageIndex":1,"type":"ADDRESS"},{"beginOffset":1,"confidenceScore":1,"contentIndex":1,"endOffset":1,"messageIndex":1,"type":"ADDRESS"}],"truncated":true}},"usage":{"contentFilter":{"textUnits":1},"promptAttack":{"textUnits":1},"sensitiveInformation":{"textUnits":1}}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Odb.UpdateOdbNetwork
-
-{"displayName":"__DisplayName__","odbNetworkId":"__OdbNetworkId__","status":"AVAILABLE","statusReason":"__StatusReason__"}

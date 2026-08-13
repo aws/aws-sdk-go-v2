@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"contentAssociation":{"associationData":{"amazonConnectGuideAssociation":{"flowId":"__FlowId__"}},"associationType":"AMAZON_CONNECT_GUIDE","contentArn":"__ContentArn__","contentAssociationArn":"__ContentAssociationArn__","contentAssociationId":"__ContentAssociationId__","contentId":"__ContentId__","knowledgeBaseArn":"__KnowledgeBaseArn__","knowledgeBaseId":"__KnowledgeBaseId__","tags":{"key0":"__Value__"}}}

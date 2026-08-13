@@ -1,4 +1,0 @@
-400
-Content-Type: application/xml
-
-<ErrorResponse><Error><Code>InvalidGeoRestrictionParameter</Code><Message>__Message__</Message></Error></ErrorResponse>

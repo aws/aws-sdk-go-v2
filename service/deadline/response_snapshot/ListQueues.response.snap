@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","queues":[{"blockedReason":"NO_BUDGET_CONFIGURED","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","defaultBudgetAction":"NONE","displayName":"__DisplayName__","farmId":"__FarmId__","queueId":"__QueueId__","status":"IDLE","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"},{"blockedReason":"NO_BUDGET_CONFIGURED","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","defaultBudgetAction":"NONE","displayName":"__DisplayName__","farmId":"__FarmId__","queueId":"__QueueId__","status":"IDLE","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"}]}

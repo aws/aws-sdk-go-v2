@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.ListInferenceSchedulers
-
-{"InferenceSchedulerSummaries":[{"DataDelayOffsetInMinutes":1,"DataUploadFrequency":"PT5M","InferenceSchedulerArn":"__InferenceSchedulerArn__","InferenceSchedulerName":"__InferenceSchedulerName__","LatestInferenceResult":"ANOMALOUS","ModelArn":"__ModelArn__","ModelName":"__ModelName__","Status":"PENDING"},{"DataDelayOffsetInMinutes":1,"DataUploadFrequency":"PT5M","InferenceSchedulerArn":"__InferenceSchedulerArn__","InferenceSchedulerName":"__InferenceSchedulerName__","LatestInferenceResult":"ANOMALOUS","ModelArn":"__ModelArn__","ModelName":"__ModelName__","Status":"PENDING"}],"NextToken":"__NextToken__"}

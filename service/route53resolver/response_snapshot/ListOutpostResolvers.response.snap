@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Resolver.ListOutpostResolvers
-
-{"NextToken":"__NextToken__","OutpostResolvers":[{"Arn":"__Arn__","CreationTime":"__CreationTime__","CreatorRequestId":"__CreatorRequestId__","Id":"__Id__","InstanceCount":1,"ModificationTime":"__ModificationTime__","Name":"__Name__","OutpostArn":"__OutpostArn__","PreferredInstanceType":"__PreferredInstanceType__","Status":"CREATING","StatusMessage":"__StatusMessage__"},{"Arn":"__Arn__","CreationTime":"__CreationTime__","CreatorRequestId":"__CreatorRequestId__","Id":"__Id__","InstanceCount":1,"ModificationTime":"__ModificationTime__","Name":"__Name__","OutpostArn":"__OutpostArn__","PreferredInstanceType":"__PreferredInstanceType__","Status":"CREATING","StatusMessage":"__StatusMessage__"}]}

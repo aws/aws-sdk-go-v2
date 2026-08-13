@@ -1,4 +1,0 @@
-500
-Content-Type: application/json
-
-{"__type":"InternalFailureException","code":"InternalFailureException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

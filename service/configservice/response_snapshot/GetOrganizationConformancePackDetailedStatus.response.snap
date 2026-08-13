@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.GetOrganizationConformancePackDetailedStatus
-
-{"NextToken":"__NextToken__","OrganizationConformancePackDetailedStatuses":[{"AccountId":"__AccountId__","ConformancePackName":"__ConformancePackName__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","LastUpdateTime":946684800,"Status":"CREATE_SUCCESSFUL"},{"AccountId":"__AccountId__","ConformancePackName":"__ConformancePackName__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","LastUpdateTime":946684800,"Status":"CREATE_SUCCESSFUL"}]}

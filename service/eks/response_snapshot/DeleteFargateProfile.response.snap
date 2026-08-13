@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"fargateProfile":{"clusterName":"__ClusterName__","createdAt":946684800,"fargateProfileArn":"__FargateProfileArn__","fargateProfileName":"__FargateProfileName__","health":{"issues":[{"code":"PodExecutionRoleAlreadyInUse","message":"__Message__","resourceIds":["__Member__","__Member__"]},{"code":"PodExecutionRoleAlreadyInUse","message":"__Message__","resourceIds":["__Member__","__Member__"]}]},"podExecutionRoleArn":"__PodExecutionRoleArn__","selectors":[{"labels":{"key0":"__Value__"},"namespace":"__Namespace__"},{"labels":{"key0":"__Value__"},"namespace":"__Namespace__"}],"status":"CREATING","subnets":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","RuleSummaryList":[{"ActionSummaries":[{"ActionType":"CREATE_TASK"},{"ActionType":"CREATE_TASK"}],"CreatedTime":946684800,"EventSourceName":"OnPostCallAnalysisAvailable","LastUpdatedTime":946684800,"Name":"__Name__","PublishStatus":"DRAFT","RuleArn":"__RuleArn__","RuleCapabilityTiers":["GenerativeAI","GenerativeAI"],"RuleId":"__RuleId__"},{"ActionSummaries":[{"ActionType":"CREATE_TASK"},{"ActionType":"CREATE_TASK"}],"CreatedTime":946684800,"EventSourceName":"OnPostCallAnalysisAvailable","LastUpdatedTime":946684800,"Name":"__Name__","PublishStatus":"DRAFT","RuleArn":"__RuleArn__","RuleCapabilityTiers":["GenerativeAI","GenerativeAI"],"RuleId":"__RuleId__"}]}

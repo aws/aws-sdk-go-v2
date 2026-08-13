@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AppliedFunctionScalingConfig":{"MaxExecutionEnvironments":1,"MinExecutionEnvironments":1},"FunctionArn":"__FunctionArn__","RequestedFunctionScalingConfig":{"MaxExecutionEnvironments":1,"MinExecutionEnvironments":1}}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeLocations
-
-{"locations":[{"availableMacSecPortSpeeds":["__Member__","__Member__"],"availablePortSpeeds":["__Member__","__Member__"],"availableProviders":["__Member__","__Member__"],"locationCode":"__LocationCode__","locationName":"__LocationName__","region":"__Region__"},{"availableMacSecPortSpeeds":["__Member__","__Member__"],"availablePortSpeeds":["__Member__","__Member__"],"availableProviders":["__Member__","__Member__"],"locationCode":"__LocationCode__","locationName":"__LocationName__","region":"__Region__"}]}

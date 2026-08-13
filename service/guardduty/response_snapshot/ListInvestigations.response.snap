@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"investigations":[{"accountId":"__AccountId__","confidence":"Unknown","endTime":946684800,"investigationId":"__InvestigationId__","riskLevel":"Info","startTime":946684800,"status":"RUNNING","title":"__Title__","triggerPrompt":"__TriggerPrompt__"},{"accountId":"__AccountId__","confidence":"Unknown","endTime":946684800,"investigationId":"__InvestigationId__","riskLevel":"Info","startTime":946684800,"status":"RUNNING","title":"__Title__","triggerPrompt":"__TriggerPrompt__"}],"nextToken":"__NextToken__"}

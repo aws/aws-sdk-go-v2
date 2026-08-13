@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"LFTags":[{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}],"NextToken":"__NextToken__"}

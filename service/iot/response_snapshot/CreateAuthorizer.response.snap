@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"authorizerArn":"__AuthorizerArn__","authorizerName":"__AuthorizerName__"}

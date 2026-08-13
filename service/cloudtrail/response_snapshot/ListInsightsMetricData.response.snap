@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.ListInsightsMetricData
-
-{"ErrorCode":"__ErrorCode__","EventName":"__EventName__","EventSource":"__EventSource__","InsightType":"ApiCallRateInsight","NextToken":"__NextToken__","Timestamps":[946684800,946684800],"TrailARN":"__TrailARN__","Values":[1,1]}

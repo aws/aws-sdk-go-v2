@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","thingGroups":[{"groupArn":"__GroupArn__","groupName":"__GroupName__"},{"groupArn":"__GroupArn__","groupName":"__GroupName__"}]}

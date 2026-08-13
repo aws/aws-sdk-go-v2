@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"checkSummaries":[{"arn":"__Arn__","awsResourceTypes":["__Member__","__Member__"],"awsServices":["__Member__","__Member__"],"checkGranularity":"__CheckGranularity__","description":"__Description__","id":"__Id__","metadata":{"key0":"__Value__"},"name":"__Name__","pillars":["cost_optimizing","cost_optimizing"],"recommendationId":"__RecommendationId__","resourceArnQueryable":true,"source":"aws_config"},{"arn":"__Arn__","awsResourceTypes":["__Member__","__Member__"],"awsServices":["__Member__","__Member__"],"checkGranularity":"__CheckGranularity__","description":"__Description__","id":"__Id__","metadata":{"key0":"__Value__"},"name":"__Name__","pillars":["cost_optimizing","cost_optimizing"],"recommendationId":"__RecommendationId__","resourceArnQueryable":true,"source":"aws_config"}],"nextToken":"__NextToken__"}

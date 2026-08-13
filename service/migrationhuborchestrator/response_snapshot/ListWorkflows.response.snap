@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"migrationWorkflowSummary":[{"adsApplicationConfigurationName":"__AdsApplicationConfigurationName__","completedSteps":1,"creationTime":946684800,"endTime":946684800,"id":"__Id__","name":"__Name__","status":"CREATING","statusMessage":"__StatusMessage__","templateId":"__TemplateId__","totalSteps":1},{"adsApplicationConfigurationName":"__AdsApplicationConfigurationName__","completedSteps":1,"creationTime":946684800,"endTime":946684800,"id":"__Id__","name":"__Name__","status":"CREATING","statusMessage":"__StatusMessage__","templateId":"__TemplateId__","totalSteps":1}],"nextToken":"__NextToken__"}

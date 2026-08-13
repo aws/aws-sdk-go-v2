@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobProperties":{"dataAccessRoleArn":"__DataAccessRoleArn__","datastoreId":"__DatastoreId__","endedAt":946684800,"importConfiguration":{"dicomJsonMetadataImportConfiguration":{"dicomMetadataMappings":[{"metadataFilePath":"__MetadataFilePath__","seriesInstanceUID":"__SeriesInstanceUID__","studyInstanceUID":"__StudyInstanceUID__"},{"metadataFilePath":"__MetadataFilePath__","seriesInstanceUID":"__SeriesInstanceUID__","studyInstanceUID":"__StudyInstanceUID__"}]}},"inputS3Uri":"__InputS3Uri__","jobId":"__JobId__","jobName":"__JobName__","jobStatus":"SUBMITTED","message":"__Message__","outputS3Uri":"__OutputS3Uri__","submittedAt":946684800}}

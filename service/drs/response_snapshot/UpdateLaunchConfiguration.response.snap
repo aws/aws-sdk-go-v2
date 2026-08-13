@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"copyPrivateIp":true,"copyTags":true,"ec2LaunchTemplateID":"__Ec2LaunchTemplateID__","launchDisposition":"STOPPED","launchIntoInstanceProperties":{"launchIntoEC2InstanceID":"__LaunchIntoEC2InstanceID__"},"licensing":{"osByol":true},"name":"__Name__","postLaunchEnabled":true,"recoveryMode":"FAST","sourceServerID":"__SourceServerID__","targetInstanceTypeRightSizingMethod":"NONE"}

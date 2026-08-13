@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","PrefixListAssociations":[{"CoreNetworkId":"__CoreNetworkId__","PrefixListAlias":"__PrefixListAlias__","PrefixListArn":"__PrefixListArn__"},{"CoreNetworkId":"__CoreNetworkId__","PrefixListAlias":"__PrefixListAlias__","PrefixListArn":"__PrefixListArn__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.ListLicenseAssetGroups
-
-{"LicenseAssetGroups":[{"AssociatedLicenseAssetRulesetARNs":["__Member__","__Member__"],"Description":"__Description__","LatestResourceDiscoveryTime":946684800,"LatestUsageAnalysisTime":946684800,"LicenseAssetGroupArn":"__LicenseAssetGroupArn__","LicenseAssetGroupConfigurations":[{"UsageDimension":"__UsageDimension__"},{"UsageDimension":"__UsageDimension__"}],"Name":"__Name__","Properties":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Status":"ACTIVE","StatusMessage":"__StatusMessage__"},{"AssociatedLicenseAssetRulesetARNs":["__Member__","__Member__"],"Description":"__Description__","LatestResourceDiscoveryTime":946684800,"LatestUsageAnalysisTime":946684800,"LicenseAssetGroupArn":"__LicenseAssetGroupArn__","LicenseAssetGroupConfigurations":[{"UsageDimension":"__UsageDimension__"},{"UsageDimension":"__UsageDimension__"}],"Name":"__Name__","Properties":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Status":"ACTIVE","StatusMessage":"__StatusMessage__"}],"NextToken":"__NextToken__"}

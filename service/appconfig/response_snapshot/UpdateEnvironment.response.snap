@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationId":"__ApplicationId__","Description":"__Description__","Id":"__Id__","Monitors":[{"AlarmArn":"__AlarmArn__","AlarmRoleArn":"__AlarmRoleArn__"},{"AlarmArn":"__AlarmArn__","AlarmRoleArn":"__AlarmRoleArn__"}],"Name":"__Name__","State":"READY_FOR_DEPLOYMENT"}

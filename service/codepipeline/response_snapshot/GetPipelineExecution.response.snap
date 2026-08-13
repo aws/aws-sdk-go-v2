@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.GetPipelineExecution
-
-{"pipelineExecution":{"artifactRevisions":[{"created":946684800,"name":"__Name__","revisionChangeIdentifier":"__RevisionChangeIdentifier__","revisionId":"__RevisionId__","revisionSummary":"__RevisionSummary__","revisionUrl":"__RevisionUrl__"},{"created":946684800,"name":"__Name__","revisionChangeIdentifier":"__RevisionChangeIdentifier__","revisionId":"__RevisionId__","revisionSummary":"__RevisionSummary__","revisionUrl":"__RevisionUrl__"}],"executionMode":"QUEUED","executionType":"STANDARD","pipelineExecutionId":"__PipelineExecutionId__","pipelineName":"__PipelineName__","pipelineVersion":1,"rollbackMetadata":{"rollbackTargetPipelineExecutionId":"__RollbackTargetPipelineExecutionId__"},"status":"Cancelled","statusSummary":"__StatusSummary__","trigger":{"triggerDetail":"__TriggerDetail__","triggerType":"CreatePipeline"},"variables":[{"name":"__Name__","resolvedValue":"__ResolvedValue__"},{"name":"__Name__","resolvedValue":"__ResolvedValue__"}]}}

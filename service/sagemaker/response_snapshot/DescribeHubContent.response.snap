@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DescribeHubContent
-
-{"CreationTime":946684800,"DocumentSchemaVersion":"__DocumentSchemaVersion__","FailureReason":"__FailureReason__","HubArn":"__HubArn__","HubContentArn":"__HubContentArn__","HubContentDependencies":[{"DependencyCopyPath":"__DependencyCopyPath__","DependencyOriginPath":"__DependencyOriginPath__"},{"DependencyCopyPath":"__DependencyCopyPath__","DependencyOriginPath":"__DependencyOriginPath__"}],"HubContentDescription":"__HubContentDescription__","HubContentDisplayName":"__HubContentDisplayName__","HubContentDocument":"__HubContentDocument__","HubContentMarkdown":"__HubContentMarkdown__","HubContentName":"__HubContentName__","HubContentSearchKeywords":["__Member__","__Member__"],"HubContentStatus":"Available","HubContentType":"Model","HubContentVersion":"__HubContentVersion__","HubName":"__HubName__","LastModifiedTime":946684800,"ReferenceMinVersion":"__ReferenceMinVersion__","SageMakerPublicHubContentArn":"__SageMakerPublicHubContentArn__","SupportStatus":"Supported"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StorageGateway_20130630.DescribeTapeRecoveryPoints
-
-{"GatewayARN":"__GatewayARN__","Marker":"__Marker__","TapeRecoveryPointInfos":[{"TapeARN":"__TapeARN__","TapeRecoveryPointTime":946684800,"TapeSizeInBytes":1,"TapeStatus":"__TapeStatus__"},{"TapeARN":"__TapeARN__","TapeRecoveryPointTime":946684800,"TapeSizeInBytes":1,"TapeStatus":"__TapeStatus__"}]}

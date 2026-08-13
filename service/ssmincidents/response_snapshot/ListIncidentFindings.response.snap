@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"findings":[{"id":"__Id__","lastModifiedTime":946684800},{"id":"__Id__","lastModifiedTime":946684800}],"nextToken":"__NextToken__"}

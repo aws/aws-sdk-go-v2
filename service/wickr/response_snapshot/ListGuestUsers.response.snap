@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"guestlist":[{"billingPeriod":"__BillingPeriod__","username":"__Username__","usernameHash":"__UsernameHash__"},{"billingPeriod":"__BillingPeriod__","username":"__Username__","usernameHash":"__UsernameHash__"}],"nextToken":"__NextToken__"}

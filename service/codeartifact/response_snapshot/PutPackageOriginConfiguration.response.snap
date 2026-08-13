@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"originConfiguration":{"restrictions":{"publish":"ALLOW","upstream":"ALLOW"}}}

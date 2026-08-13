@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.ValidateCloudConnector
-
-{"NextToken":"__NextToken__","ValidationFindings":[{"Code":"TargetInaccessible","Message":"__Message__","ProviderMessage":"__ProviderMessage__","Scope":{"Id":"__Id__","Type":"azure:tenant"},"Type":"INFO"},{"Code":"TargetInaccessible","Message":"__Message__","ProviderMessage":"__ProviderMessage__","Scope":{"Id":"__Id__","Type":"azure:tenant"},"Type":"INFO"}]}

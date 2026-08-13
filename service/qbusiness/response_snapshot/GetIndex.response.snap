@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applicationId":"__ApplicationId__","capacityConfiguration":{"units":1},"createdAt":946684800,"description":"__Description__","displayName":"__DisplayName__","documentAttributeConfigurations":[{"name":"__Name__","search":"ENABLED","type":"STRING"},{"name":"__Name__","search":"ENABLED","type":"STRING"}],"error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"indexArn":"__IndexArn__","indexId":"__IndexId__","indexStatistics":{"textDocumentStatistics":{"indexedTextBytes":1,"indexedTextDocumentCount":1}},"status":"CREATING","type":"ENTERPRISE","updatedAt":946684800}

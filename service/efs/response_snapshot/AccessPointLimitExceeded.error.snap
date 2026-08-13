@@ -1,4 +1,0 @@
-403
-Content-Type: application/json
-
-{"__type":"AccessPointLimitExceeded","ErrorCode":"__ErrorCode___","Message":"__Message__"}

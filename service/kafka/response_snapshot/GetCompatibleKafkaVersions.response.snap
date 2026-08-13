@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"compatibleKafkaVersions":[{"sourceVersion":"__SourceVersion__","targetVersions":["__Member__","__Member__"]},{"sourceVersion":"__SourceVersion__","targetVersions":["__Member__","__Member__"]}]}

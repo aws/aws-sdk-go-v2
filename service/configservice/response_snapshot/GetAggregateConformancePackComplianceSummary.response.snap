@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.GetAggregateConformancePackComplianceSummary
-
-{"AggregateConformancePackComplianceSummaries":[{"ComplianceSummary":{"CompliantConformancePackCount":1,"NonCompliantConformancePackCount":1},"GroupName":"__GroupName__"},{"ComplianceSummary":{"CompliantConformancePackCount":1,"NonCompliantConformancePackCount":1},"GroupName":"__GroupName__"}],"GroupByKey":"__GroupByKey__","NextToken":"__NextToken__"}

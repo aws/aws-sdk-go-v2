@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"View":{"Arn":"__Arn__","Content":{"Actions":["__Member__","__Member__"],"InputSchema":"__InputSchema__","Template":"__Template__"},"CreatedTime":946684800,"Description":"__Description__","Id":"__Id__","LastModifiedTime":946684800,"Name":"__Name__","Status":"PUBLISHED","Tags":{"key0":"__Value__"},"Type":"CUSTOMER_MANAGED","Version":1,"VersionDescription":"__VersionDescription__","ViewContentSha256":"__ViewContentSha256__"}}

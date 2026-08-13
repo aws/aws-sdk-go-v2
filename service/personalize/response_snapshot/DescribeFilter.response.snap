@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonPersonalize.DescribeFilter
-
-{"filter":{"creationDateTime":946684800,"datasetGroupArn":"__DatasetGroupArn__","failureReason":"__FailureReason__","filterArn":"__FilterArn__","filterExpression":"__FilterExpression__","lastUpdatedDateTime":946684800,"name":"__Name__","status":"__Status__"}}

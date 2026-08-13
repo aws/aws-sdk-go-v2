@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: VoiceID.ListFraudsters
-
-{"FraudsterSummaries":[{"CreatedAt":946684800,"DomainId":"__DomainId__","GeneratedFraudsterId":"__GeneratedFraudsterId__","WatchlistIds":["__Member__","__Member__"]},{"CreatedAt":946684800,"DomainId":"__DomainId__","GeneratedFraudsterId":"__GeneratedFraudsterId__","WatchlistIds":["__Member__","__Member__"]}],"NextToken":"__NextToken__"}

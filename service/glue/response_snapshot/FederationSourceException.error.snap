@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.BatchGetPartition
-
-{"__type":"FederationSourceException","FederationSourceErrorCode":"AccessDeniedException","Message":"__Message__"}

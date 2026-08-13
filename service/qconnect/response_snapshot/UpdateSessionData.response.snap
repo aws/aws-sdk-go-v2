@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"data":[{"key":"__Key__","value":{"stringValue":"__RuntimeSessionDataValueMemberStringValue__"}},{"key":"__Key__","value":{"stringValue":"__RuntimeSessionDataValueMemberStringValue__"}}],"namespace":"Custom","sessionArn":"__SessionArn__","sessionId":"__SessionId__"}

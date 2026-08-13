@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.GetApplication
-
-{"application":{"applicationId":"__ApplicationId__","applicationName":"__ApplicationName__","computePlatform":"Server","createTime":946684800,"gitHubAccountName":"__GitHubAccountName__","linkedToGitHub":true}}

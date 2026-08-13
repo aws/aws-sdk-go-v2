@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Deployments":[{"Definitions":[{"Checksum":{"Sum":"__Sum__","Type":"SHA1"},"ModelHandle":"__ModelHandle__","S3Url":"__S3Url__","State":"DEPLOY"},{"Checksum":{"Sum":"__Sum__","Type":"SHA1"},"ModelHandle":"__ModelHandle__","S3Url":"__S3Url__","State":"DEPLOY"}],"DeploymentName":"__DeploymentName__","FailureHandlingPolicy":"ROLLBACK_ON_FAILURE","Type":"Model"},{"Definitions":[{"Checksum":{"Sum":"__Sum__","Type":"SHA1"},"ModelHandle":"__ModelHandle__","S3Url":"__S3Url__","State":"DEPLOY"},{"Checksum":{"Sum":"__Sum__","Type":"SHA1"},"ModelHandle":"__ModelHandle__","S3Url":"__S3Url__","State":"DEPLOY"}],"DeploymentName":"__DeploymentName__","FailureHandlingPolicy":"ROLLBACK_ON_FAILURE","Type":"Model"}]}

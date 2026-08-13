@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"failed":[{"field":"__Field__","reason":"__Reason__","userId":"__UserId__"},{"field":"__Field__","reason":"__Reason__","userId":"__UserId__"}],"message":"__Message__","successful":[{"userId":"__UserId__"},{"userId":"__UserId__"}]}

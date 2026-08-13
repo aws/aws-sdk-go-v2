@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Odb.GetDbServer
-
-{"dbServer":{"autonomousVirtualMachineIds":["__Member__","__Member__"],"autonomousVmClusterIds":["__Member__","__Member__"],"computeModel":"ECPU","cpuCoreCount":1,"createdAt":"2000-01-01T00:00:00Z","dbNodeStorageSizeInGBs":1,"dbServerId":"__DbServerId__","dbServerPatchingDetails":{"estimatedPatchDuration":1,"patchingStatus":"COMPLETE","timePatchingEnded":"__TimePatchingEnded__","timePatchingStarted":"__TimePatchingStarted__"},"displayName":"__DisplayName__","exadataInfrastructureId":"__ExadataInfrastructureId__","maxCpuCount":1,"maxDbNodeStorageInGBs":1,"maxMemoryInGBs":1,"memorySizeInGBs":1,"ociResourceAnchorName":"__OciResourceAnchorName__","ocid":"__Ocid__","shape":"__Shape__","status":"AVAILABLE","statusReason":"__StatusReason__","vmClusterIds":["__Member__","__Member__"]}}

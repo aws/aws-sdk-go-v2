@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"FolderMemberList":[{"MemberArn":"__MemberArn__","MemberId":"__MemberId__"},{"MemberArn":"__MemberArn__","MemberId":"__MemberId__"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

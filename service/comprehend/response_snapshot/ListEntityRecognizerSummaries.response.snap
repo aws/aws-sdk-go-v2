@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.ListEntityRecognizerSummaries
-
-{"EntityRecognizerSummariesList":[{"LatestVersionCreatedAt":946684800,"LatestVersionName":"__LatestVersionName__","LatestVersionStatus":"SUBMITTED","NumberOfVersions":1,"RecognizerName":"__RecognizerName__"},{"LatestVersionCreatedAt":946684800,"LatestVersionName":"__LatestVersionName__","LatestVersionStatus":"SUBMITTED","NumberOfVersions":1,"RecognizerName":"__RecognizerName__"}],"NextToken":"__NextToken__"}

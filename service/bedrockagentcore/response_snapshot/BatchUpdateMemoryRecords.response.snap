@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"failedRecords":[{"errorCode":1,"errorMessage":"__ErrorMessage__","memoryRecordId":"__MemoryRecordId__","requestIdentifier":"__RequestIdentifier__","status":"SUCCEEDED"},{"errorCode":1,"errorMessage":"__ErrorMessage__","memoryRecordId":"__MemoryRecordId__","requestIdentifier":"__RequestIdentifier__","status":"SUCCEEDED"}],"successfulRecords":[{"errorCode":1,"errorMessage":"__ErrorMessage__","memoryRecordId":"__MemoryRecordId__","requestIdentifier":"__RequestIdentifier__","status":"SUCCEEDED"},{"errorCode":1,"errorMessage":"__ErrorMessage__","memoryRecordId":"__MemoryRecordId__","requestIdentifier":"__RequestIdentifier__","status":"SUCCEEDED"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"InstanceTypeDetails":[{"AdvancedSecurityEnabled":true,"AppLogsEnabled":true,"AvailabilityZones":["__Member__","__Member__"],"CognitoEnabled":true,"EncryptionEnabled":true,"InstanceRole":["__Member__","__Member__"],"InstanceType":"m3.medium.search","WarmEnabled":true},{"AdvancedSecurityEnabled":true,"AppLogsEnabled":true,"AvailabilityZones":["__Member__","__Member__"],"CognitoEnabled":true,"EncryptionEnabled":true,"InstanceRole":["__Member__","__Member__"],"InstanceType":"m3.medium.search","WarmEnabled":true}],"NextToken":"__NextToken__"}

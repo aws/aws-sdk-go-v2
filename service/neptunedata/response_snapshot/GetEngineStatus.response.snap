@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"dbEngineVersion":"__DbEngineVersion__","dfeQueryEngine":"__DfeQueryEngine__","features":{"key0":"__Document__"},"gremlin":{"version":"__Version__"},"labMode":{"key0":"__Value__"},"opencypher":{"version":"__Version__"},"role":"__Role__","rollingBackTrxCount":1,"rollingBackTrxEarliestStartTime":"__RollingBackTrxEarliestStartTime__","settings":{"key0":"__Value__"},"sparql":{"version":"__Version__"},"startTime":"__StartTime__","status":"__Status__"}

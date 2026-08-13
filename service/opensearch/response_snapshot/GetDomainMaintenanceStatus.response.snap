@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Action":"REBOOT_NODE","CreatedAt":946684800,"NodeId":"__NodeId__","Status":"PENDING","StatusMessage":"__StatusMessage__","UpdatedAt":946684800}

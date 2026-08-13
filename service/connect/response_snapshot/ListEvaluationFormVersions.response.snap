@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"EvaluationFormVersionSummaryList":[{"CreatedBy":"__CreatedBy__","CreatedTime":946684800,"EvaluationFormArn":"__EvaluationFormArn__","EvaluationFormId":"__EvaluationFormId__","EvaluationFormVersion":1,"LastModifiedBy":"__LastModifiedBy__","LastModifiedTime":946684800,"Locked":true,"Status":"DRAFT"},{"CreatedBy":"__CreatedBy__","CreatedTime":946684800,"EvaluationFormArn":"__EvaluationFormArn__","EvaluationFormId":"__EvaluationFormId__","EvaluationFormVersion":1,"LastModifiedBy":"__LastModifiedBy__","LastModifiedTime":946684800,"Locked":true,"Status":"DRAFT"}],"NextToken":"__NextToken__"}

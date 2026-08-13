@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","subscriptions":[{"arn":"__Arn__","autoRenew":true,"createdAt":946684800,"effectiveDate":946684800,"expirationDate":946684800,"id":"__Id__","licenseArns":["__Member__","__Member__"],"licenseQuantity":1,"licenseType":"Cluster","licenses":[{"id":"__Id__","token":"__Token__"},{"id":"__Id__","token":"__Token__"}],"status":"__Status__","tags":{"key0":"__Value__"},"term":{"duration":1,"unit":"MONTHS"}},{"arn":"__Arn__","autoRenew":true,"createdAt":946684800,"effectiveDate":946684800,"expirationDate":946684800,"id":"__Id__","licenseArns":["__Member__","__Member__"],"licenseQuantity":1,"licenseType":"Cluster","licenses":[{"id":"__Id__","token":"__Token__"},{"id":"__Id__","token":"__Token__"}],"status":"__Status__","tags":{"key0":"__Value__"},"term":{"duration":1,"unit":"MONTHS"}}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListPipelineVersions
-
-{"NextToken":"__NextToken__","PipelineVersionSummaries":[{"CreationTime":946684800,"LastExecutionPipelineExecutionArn":"__LastExecutionPipelineExecutionArn__","PipelineArn":"__PipelineArn__","PipelineVersionDescription":"__PipelineVersionDescription__","PipelineVersionDisplayName":"__PipelineVersionDisplayName__","PipelineVersionId":1},{"CreationTime":946684800,"LastExecutionPipelineExecutionArn":"__LastExecutionPipelineExecutionArn__","PipelineArn":"__PipelineArn__","PipelineVersionDescription":"__PipelineVersionDescription__","PipelineVersionDisplayName":"__PipelineVersionDisplayName__","PipelineVersionId":1}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.GetCatalogImportStatus
-
-{"ImportStatus":{"ImportCompleted":true,"ImportTime":946684800,"ImportedBy":"__ImportedBy__"}}

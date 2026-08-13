@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"devEnvironmentId":"__DevEnvironmentId__","id":"__Id__","projectName":"__ProjectName__","spaceName":"__SpaceName__","startedTime":"2000-01-01T00:00:00Z"},{"devEnvironmentId":"__DevEnvironmentId__","id":"__Id__","projectName":"__ProjectName__","spaceName":"__SpaceName__","startedTime":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

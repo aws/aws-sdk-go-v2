@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"description":"__Description__","displayName":"__DisplayName__","name":"__Name__","regionName":"__RegionName__"},{"description":"__Description__","displayName":"__DisplayName__","name":"__Name__","regionName":"__RegionName__"}],"nextToken":"__NextToken__"}

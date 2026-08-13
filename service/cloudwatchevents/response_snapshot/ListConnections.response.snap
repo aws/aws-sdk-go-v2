@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSEvents.ListConnections
-
-{"Connections":[{"AuthorizationType":"BASIC","ConnectionArn":"__ConnectionArn__","ConnectionState":"CREATING","CreationTime":946684800,"LastAuthorizedTime":946684800,"LastModifiedTime":946684800,"Name":"__Name__","StateReason":"__StateReason__"},{"AuthorizationType":"BASIC","ConnectionArn":"__ConnectionArn__","ConnectionState":"CREATING","CreationTime":946684800,"LastAuthorizedTime":946684800,"LastModifiedTime":946684800,"Name":"__Name__","StateReason":"__StateReason__"}],"NextToken":"__NextToken__"}

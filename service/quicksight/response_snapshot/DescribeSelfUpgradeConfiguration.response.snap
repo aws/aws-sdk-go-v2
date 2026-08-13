@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"RequestId":"__RequestId__","SelfUpgradeConfiguration":{"SelfUpgradeStatus":"AUTO_APPROVAL"},"Status":200}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","projectSummaries":[{"creationDate":946684800,"description":"__Description__","id":"__Id__","lastUpdateDate":946684800,"name":"__Name__"},{"creationDate":946684800,"description":"__Description__","id":"__Id__","lastUpdateDate":946684800,"name":"__Name__"}]}

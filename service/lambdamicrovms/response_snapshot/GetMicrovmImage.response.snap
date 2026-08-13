@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"imageArn":"__ImageArn__","latestActiveImageVersion":"__LatestActiveImageVersion__","latestFailedImageVersion":"__LatestFailedImageVersion__","name":"__Name__","state":"CREATING","tags":{"key0":"__Value__"},"updatedAt":946684800}

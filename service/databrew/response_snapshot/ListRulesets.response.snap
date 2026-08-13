@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Rulesets":[{"AccountId":"__AccountId__","CreateDate":946684800,"CreatedBy":"__CreatedBy__","Description":"__Description__","LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":946684800,"Name":"__Name__","ResourceArn":"__ResourceArn__","RuleCount":1,"Tags":{"key0":"__Value__"},"TargetArn":"__TargetArn__"},{"AccountId":"__AccountId__","CreateDate":946684800,"CreatedBy":"__CreatedBy__","Description":"__Description__","LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":946684800,"Name":"__Name__","ResourceArn":"__ResourceArn__","RuleCount":1,"Tags":{"key0":"__Value__"},"TargetArn":"__TargetArn__"}]}

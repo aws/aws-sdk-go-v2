@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CodeSigningConfig":{"AllowedPublishers":{"SigningProfileVersionArns":["__Member__","__Member__"]},"CodeSigningConfigArn":"__CodeSigningConfigArn__","CodeSigningConfigId":"__CodeSigningConfigId__","CodeSigningPolicies":{"UntrustedArtifactOnDeployment":"Warn"},"Description":"__Description__","LastModified":"__LastModified__"}}

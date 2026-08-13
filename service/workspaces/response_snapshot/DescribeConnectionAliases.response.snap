@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeConnectionAliases
-
-{"ConnectionAliases":[{"AliasId":"__AliasId__","Associations":[{"AssociatedAccountId":"__AssociatedAccountId__","AssociationStatus":"NOT_ASSOCIATED","ConnectionIdentifier":"__ConnectionIdentifier__","ResourceId":"__ResourceId__"},{"AssociatedAccountId":"__AssociatedAccountId__","AssociationStatus":"NOT_ASSOCIATED","ConnectionIdentifier":"__ConnectionIdentifier__","ResourceId":"__ResourceId__"}],"ConnectionString":"__ConnectionString__","OwnerAccountId":"__OwnerAccountId__","State":"CREATING"},{"AliasId":"__AliasId__","Associations":[{"AssociatedAccountId":"__AssociatedAccountId__","AssociationStatus":"NOT_ASSOCIATED","ConnectionIdentifier":"__ConnectionIdentifier__","ResourceId":"__ResourceId__"},{"AssociatedAccountId":"__AssociatedAccountId__","AssociationStatus":"NOT_ASSOCIATED","ConnectionIdentifier":"__ConnectionIdentifier__","ResourceId":"__ResourceId__"}],"ConnectionString":"__ConnectionString__","OwnerAccountId":"__OwnerAccountId__","State":"CREATING"}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"agentRuntimeId":"__AgentRuntimeId__","agentRuntimeVersion":"__AgentRuntimeVersion__","status":"CREATING"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeWorkspaceSnapshots
-
-{"RebuildSnapshots":[{"SnapshotTime":946684800},{"SnapshotTime":946684800}],"RestoreSnapshots":[{"SnapshotTime":946684800},{"SnapshotTime":946684800}]}

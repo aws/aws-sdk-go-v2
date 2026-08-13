@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"messages":[{"messageText":"__MessageText__"},{"messageText":"__MessageText__"}],"nextToken":"__NextToken__","readiness":"READY","resources":[{"componentId":"__ComponentId__","lastCheckedTimestamp":"2000-01-01T00:00:00Z","readiness":"READY","resourceArn":"__ResourceArn__"},{"componentId":"__ComponentId__","lastCheckedTimestamp":"2000-01-01T00:00:00Z","readiness":"READY","resourceArn":"__ResourceArn__"}]}

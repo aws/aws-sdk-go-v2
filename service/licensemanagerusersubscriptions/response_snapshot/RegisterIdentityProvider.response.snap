@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"IdentityProviderSummary":{"FailureMessage":"__FailureMessage__","IdentityProvider":{"ActiveDirectoryIdentityProvider":{"ActiveDirectorySettings":{"DomainCredentialsProvider":{"SecretsManagerCredentialsProvider":{"SecretId":"__SecretId__"}},"DomainIpv4List":["__Member__","__Member__"],"DomainIpv6List":["__Member__","__Member__"],"DomainName":"__DomainName__","DomainNetworkSettings":{"Subnets":["__Member__","__Member__"]}},"ActiveDirectoryType":"SELF_MANAGED","DirectoryId":"__DirectoryId__","IsSharedActiveDirectory":true}},"IdentityProviderArn":"__IdentityProviderArn__","OwnerAccountId":"__OwnerAccountId__","Product":"__Product__","Settings":{"SecurityGroupId":"__SecurityGroupId__","Subnets":["__Member__","__Member__"]},"Status":"__Status__"}}

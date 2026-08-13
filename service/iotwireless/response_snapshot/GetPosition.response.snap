@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Accuracy":{"HorizontalAccuracy":1,"VerticalAccuracy":1},"Position":[1,1],"SolverProvider":"Semtech","SolverType":"GNSS","SolverVersion":"__SolverVersion__","Timestamp":"__Timestamp__"}

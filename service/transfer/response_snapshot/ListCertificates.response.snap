@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.ListCertificates
-
-{"Certificates":[{"ActiveDate":946684800,"Arn":"__Arn__","CertificateId":"__CertificateId__","Description":"__Description__","InactiveDate":946684800,"Status":"ACTIVE","Type":"CERTIFICATE","Usage":"SIGNING"},{"ActiveDate":946684800,"Arn":"__Arn__","CertificateId":"__CertificateId__","Description":"__Description__","InactiveDate":946684800,"Status":"ACTIVE","Type":"CERTIFICATE","Usage":"SIGNING"}],"NextToken":"__NextToken__"}

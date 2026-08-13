@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DomainNodesStatusList":[{"AvailabilityZone":"__AvailabilityZone__","InstanceType":"m3.medium.search","NodeId":"__NodeId__","NodeStatus":"Active","NodeType":"Data","StorageSize":"__StorageSize__","StorageType":"__StorageType__","StorageVolumeType":"standard"},{"AvailabilityZone":"__AvailabilityZone__","InstanceType":"m3.medium.search","NodeId":"__NodeId__","NodeStatus":"Active","NodeType":"Data","StorageSize":"__StorageSize__","StorageType":"__StorageType__","StorageVolumeType":"standard"}]}

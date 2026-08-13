@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"description":"__Description__","document":"__Document__","documentParameters":[{"description":"__Description__","example":"__Example__","key":"__Key__","optional":true,"regex":"__Regex__"},{"description":"__Description__","example":"__Example__","key":"__Key__","optional":true,"regex":"__Regex__"}],"environments":["__Member__","__Member__"],"templateArn":"__TemplateArn__","templateName":"__TemplateName__","templateVersion":"__TemplateVersion__"}

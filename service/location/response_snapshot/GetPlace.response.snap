@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Place":{"AddressNumber":"__AddressNumber__","Categories":["__Member__","__Member__"],"Country":"__Country__","Geometry":{"Point":[1,1]},"Interpolated":true,"Label":"__Label__","Municipality":"__Municipality__","Neighborhood":"__Neighborhood__","PostalCode":"__PostalCode__","Region":"__Region__","Street":"__Street__","SubMunicipality":"__SubMunicipality__","SubRegion":"__SubRegion__","SupplementalCategories":["__Member__","__Member__"],"TimeZone":{"Name":"__Name__","Offset":1},"UnitNumber":"__UnitNumber__","UnitType":"__UnitType__"}}

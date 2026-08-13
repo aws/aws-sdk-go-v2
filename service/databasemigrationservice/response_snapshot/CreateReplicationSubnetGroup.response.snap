@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonDMSv20160101.CreateReplicationSubnetGroup
-
-{"ReplicationSubnetGroup":{"IsReadOnly":true,"ReplicationSubnetGroupDescription":"__ReplicationSubnetGroupDescription__","ReplicationSubnetGroupIdentifier":"__ReplicationSubnetGroupIdentifier__","SubnetGroupStatus":"__SubnetGroupStatus__","Subnets":[{"SubnetAvailabilityZone":{"Name":"__Name__"},"SubnetIdentifier":"__SubnetIdentifier__","SubnetStatus":"__SubnetStatus__"},{"SubnetAvailabilityZone":{"Name":"__Name__"},"SubnetIdentifier":"__SubnetIdentifier__","SubnetStatus":"__SubnetStatus__"}],"SupportedNetworkTypes":["__Member__","__Member__"],"VpcId":"__VpcId__"}}

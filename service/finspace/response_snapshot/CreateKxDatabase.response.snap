@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdTimestamp":946684800,"databaseArn":"__DatabaseArn__","databaseName":"__DatabaseName__","description":"__Description__","environmentId":"__EnvironmentId__","lastModifiedTimestamp":946684800}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.GetMaintenanceWindowExecutionTask
-
-{"AlarmConfiguration":{"Alarms":[{"Name":"__Name__"},{"Name":"__Name__"}],"IgnorePollAlarmFailure":true},"EndTime":946684800,"MaxConcurrency":"__MaxConcurrency__","MaxErrors":"__MaxErrors__","Priority":1,"ServiceRole":"__ServiceRole__","StartTime":946684800,"Status":"PENDING","StatusDetails":"__StatusDetails__","TaskArn":"__TaskArn__","TaskExecutionId":"__TaskExecutionId__","TaskParameters":[{"key0":{"Values":["__Member__","__Member__"]}},{"key0":{"Values":["__Member__","__Member__"]}}],"TriggeredAlarms":[{"Name":"__Name__","State":"UNKNOWN"},{"Name":"__Name__","State":"UNKNOWN"}],"Type":"RUN_COMMAND","WindowExecutionId":"__WindowExecutionId__"}

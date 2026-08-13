@@ -1,8 +1,0 @@
-200
-Content-Type: application/octet-stream
-X-Amz-Durable-Execution-Arn: __DurableExecutionArn__
-X-Amz-Executed-Version: __ExecutedVersion__
-X-Amz-Function-Error: __FunctionError__
-X-Amz-Log-Result: __LogResult__
-
-blob

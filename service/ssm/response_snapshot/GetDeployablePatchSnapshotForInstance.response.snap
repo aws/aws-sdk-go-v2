@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.GetDeployablePatchSnapshotForInstance
-
-{"InstanceId":"__InstanceId__","Product":"__Product__","SnapshotDownloadUrl":"__SnapshotDownloadUrl__","SnapshotId":"__SnapshotId__"}

@@ -1,5 +1,0 @@
-409
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSOrganizationsV20161128.CreatePolicy
-
-{"__type":"DuplicatePolicyException","Message":"__Message__"}

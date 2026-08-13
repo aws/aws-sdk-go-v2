@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"chatResponseConfigurations":[{"chatResponseConfigurationArn":"__ChatResponseConfigurationArn__","chatResponseConfigurationId":"__ChatResponseConfigurationId__","createdAt":946684800,"displayName":"__DisplayName__","responseConfigurationSummary":"__ResponseConfigurationSummary__","status":"CREATING","updatedAt":946684800},{"chatResponseConfigurationArn":"__ChatResponseConfigurationArn__","chatResponseConfigurationId":"__ChatResponseConfigurationId__","createdAt":946684800,"displayName":"__DisplayName__","responseConfigurationSummary":"__ResponseConfigurationSummary__","status":"CREATING","updatedAt":946684800}],"nextToken":"__NextToken__"}

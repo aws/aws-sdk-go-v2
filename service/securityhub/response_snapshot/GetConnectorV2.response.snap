@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ConnectorArn":"__ConnectorArn__","ConnectorId":"__ConnectorId__","CreatedAt":"2000-01-01T00:00:00Z","Description":"__Description__","EnablementStatus":"ENABLED","EnablementStatusReason":"__EnablementStatusReason__","Health":{"ConnectorStatus":"CONNECTED","Issues":[{"Code":"AUTHENTICATION_FAILURE","Message":"__Message__"},{"Code":"AUTHENTICATION_FAILURE","Message":"__Message__"}],"LastCheckedAt":"2000-01-01T00:00:00Z","Message":"__Message__"},"KmsKeyArn":"__KmsKeyArn__","LastUpdatedAt":"2000-01-01T00:00:00Z","Name":"__Name__","ProviderDetail":{"JiraCloud":{"AuthStatus":"ACTIVE","AuthUrl":"__AuthUrl__","CloudId":"__CloudId__","Domain":"__Domain__","ProjectKey":"__ProjectKey__"}}}

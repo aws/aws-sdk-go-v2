@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DataPipeline.DescribePipelines
-
-{"pipelineDescriptionList":[{"description":"__Description__","fields":[{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"},{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"}],"name":"__Name__","pipelineId":"__PipelineId__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]},{"description":"__Description__","fields":[{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"},{"key":"__Key__","refValue":"__RefValue__","stringValue":"__StringValue__"}],"name":"__Name__","pipelineId":"__PipelineId__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}]}

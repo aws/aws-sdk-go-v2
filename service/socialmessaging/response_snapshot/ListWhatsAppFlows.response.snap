@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"flows":[{"flowCategories":["SIGN_UP","SIGN_UP"],"flowId":"__FlowId__","flowName":"__FlowName__","flowStatus":"__FlowStatus__","validationErrors":["__Member__","__Member__"]},{"flowCategories":["SIGN_UP","SIGN_UP"],"flowId":"__FlowId__","flowName":"__FlowName__","flowStatus":"__FlowStatus__","validationErrors":["__Member__","__Member__"]}],"nextToken":"__NextToken__"}

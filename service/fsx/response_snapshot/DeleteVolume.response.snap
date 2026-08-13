@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSSimbaAPIService_v20180301.DeleteVolume
-
-{"Lifecycle":"CREATING","OntapResponse":{"FinalBackupId":"__FinalBackupId__","FinalBackupTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"VolumeId":"__VolumeId__"}

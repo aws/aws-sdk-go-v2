@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"errors":[{"code":"__Code__","jobIdentifier":"__JobIdentifier__","message":"__Message__"},{"code":"__Code__","jobIdentifier":"__JobIdentifier__","message":"__Message__"}],"evaluationJobs":[{"jobIdentifier":"__JobIdentifier__","jobStatus":"InProgress"},{"jobIdentifier":"__JobIdentifier__","jobStatus":"InProgress"}]}

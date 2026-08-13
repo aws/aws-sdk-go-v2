@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"VpcEndpointErrors":[{"ErrorCode":"ENDPOINT_NOT_FOUND","ErrorMessage":"__ErrorMessage__","VpcEndpointId":"__VpcEndpointId__"},{"ErrorCode":"ENDPOINT_NOT_FOUND","ErrorMessage":"__ErrorMessage__","VpcEndpointId":"__VpcEndpointId__"}],"VpcEndpoints":[{"DomainArn":"__DomainArn__","Endpoint":"__Endpoint__","Status":"CREATING","VpcEndpointId":"__VpcEndpointId__","VpcEndpointOwner":"__VpcEndpointOwner__","VpcOptions":{"AvailabilityZones":["__Member__","__Member__"],"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"VPCId":"__VPCId__"}},{"DomainArn":"__DomainArn__","Endpoint":"__Endpoint__","Status":"CREATING","VpcEndpointId":"__VpcEndpointId__","VpcEndpointOwner":"__VpcEndpointOwner__","VpcOptions":{"AvailabilityZones":["__Member__","__Member__"],"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"VPCId":"__VPCId__"}}]}

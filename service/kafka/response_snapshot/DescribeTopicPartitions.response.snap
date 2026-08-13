@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","partitions":[{"isr":[1,1],"leader":1,"partition":1,"replicas":[1,1]},{"isr":[1,1],"leader":1,"partition":1,"replicas":[1,1]}]}

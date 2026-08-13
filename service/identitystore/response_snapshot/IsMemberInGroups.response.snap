@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSIdentityStore.IsMemberInGroups
-
-{"Results":[{"GroupId":"__GroupId__","MemberId":{"UserId":"__MemberIdMemberUserId__"},"MembershipExists":true},{"GroupId":"__GroupId__","MemberId":{"UserId":"__MemberIdMemberUserId__"},"MembershipExists":true}]}

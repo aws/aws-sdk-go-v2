@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Resolver.UpdateResolverConfig
-
-{"ResolverConfig":{"AutodefinedReverse":"ENABLING","Id":"__Id__","OwnerId":"__OwnerId__","ResourceId":"__ResourceId__"}}

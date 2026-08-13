@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Logs_20140328.GetQueryResults
-
-{"encryptionKey":"__EncryptionKey__","nextToken":"__NextToken__","queryLanguage":"CWLI","results":[[{"field":"__Field__","value":"__Value__"},{"field":"__Field__","value":"__Value__"}],[{"field":"__Field__","value":"__Value__"},{"field":"__Field__","value":"__Value__"}]],"statistics":{"bytesScanned":1,"estimatedBytesSkipped":1,"estimatedRecordsSkipped":1,"logGroupsScanned":1,"recordsMatched":1,"recordsScanned":1},"status":"Scheduled"}

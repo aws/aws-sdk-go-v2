@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","streams":[{"channelArn":"__ChannelArn__","health":"HEALTHY","startTime":"2000-01-01T00:00:00Z","state":"LIVE","streamId":"__StreamId__","viewerCount":1},{"channelArn":"__ChannelArn__","health":"HEALTHY","startTime":"2000-01-01T00:00:00Z","state":"LIVE","streamId":"__StreamId__","viewerCount":1}]}

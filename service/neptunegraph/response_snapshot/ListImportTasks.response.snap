@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","tasks":[{"format":"CSV","graphId":"__GraphId__","parquetType":"COLUMNAR","roleArn":"__RoleArn__","source":"__Source__","status":"INITIALIZING","taskId":"__TaskId__"},{"format":"CSV","graphId":"__GraphId__","parquetType":"COLUMNAR","roleArn":"__RoleArn__","source":"__Source__","status":"INITIALIZING","taskId":"__TaskId__"}]}

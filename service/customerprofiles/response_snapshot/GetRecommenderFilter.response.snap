@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CreatedAt":946684800,"Description":"__Description__","FailureReason":"__FailureReason__","RecommenderFilterExpression":"__RecommenderFilterExpression__","RecommenderFilterName":"__RecommenderFilterName__","RecommenderSchemaName":"__RecommenderSchemaName__","Status":"ACTIVE","Tags":{"key0":"__Value__"}}

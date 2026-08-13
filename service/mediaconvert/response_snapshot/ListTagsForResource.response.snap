@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"resourceTags":{"arn":"__Arn__","tags":{"key0":"__Value__"}}}

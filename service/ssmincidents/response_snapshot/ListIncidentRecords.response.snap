@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"incidentRecordSummaries":[{"arn":"__Arn__","creationTime":946684800,"impact":1,"incidentRecordSource":{"createdBy":"__CreatedBy__","invokedBy":"__InvokedBy__","resourceArn":"__ResourceArn__","source":"__Source__"},"resolvedTime":946684800,"status":"OPEN","title":"__Title__"},{"arn":"__Arn__","creationTime":946684800,"impact":1,"incidentRecordSource":{"createdBy":"__CreatedBy__","invokedBy":"__InvokedBy__","resourceArn":"__ResourceArn__","source":"__Source__"},"resolvedTime":946684800,"status":"OPEN","title":"__Title__"}],"nextToken":"__NextToken__"}

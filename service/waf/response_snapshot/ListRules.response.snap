@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSWAF_20150824.ListRules
-
-{"NextMarker":"__NextMarker__","Rules":[{"Name":"__Name__","RuleId":"__RuleId__"},{"Name":"__Name__","RuleId":"__RuleId__"}]}

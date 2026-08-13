@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"functionInstances":[{"arn":"__Arn__","id":"__Id__","instantiatedVnfInfo":{"vnfState":"STARTED"},"instantiationState":"INSTANTIATED","metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z"},"nsInstanceId":"__NsInstanceId__","vnfPkgId":"__VnfPkgId__","vnfPkgName":"__VnfPkgName__"},{"arn":"__Arn__","id":"__Id__","instantiatedVnfInfo":{"vnfState":"STARTED"},"instantiationState":"INSTANTIATED","metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z"},"nsInstanceId":"__NsInstanceId__","vnfPkgId":"__VnfPkgId__","vnfPkgName":"__VnfPkgName__"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobs":[{"appId":"__AppId__","backendEnvironmentName":"__BackendEnvironmentName__","createTime":"__CreateTime__","error":"__Error__","jobId":"__JobId__","operation":"__Operation__","status":"__Status__","updateTime":"__UpdateTime__"},{"appId":"__AppId__","backendEnvironmentName":"__BackendEnvironmentName__","createTime":"__CreateTime__","error":"__Error__","jobId":"__JobId__","operation":"__Operation__","status":"__Status__","updateTime":"__UpdateTime__"}],"nextToken":"__NextToken__"}

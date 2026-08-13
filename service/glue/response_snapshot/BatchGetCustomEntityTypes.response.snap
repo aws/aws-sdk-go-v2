@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.BatchGetCustomEntityTypes
-
-{"CustomEntityTypes":[{"ContextWords":["__Member__","__Member__"],"Name":"__Name__","RegexString":"__RegexString__"},{"ContextWords":["__Member__","__Member__"],"Name":"__Name__","RegexString":"__RegexString__"}],"CustomEntityTypesNotFound":["__Member__","__Member__"]}

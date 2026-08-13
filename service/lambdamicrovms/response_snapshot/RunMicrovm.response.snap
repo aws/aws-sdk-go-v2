@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"egressNetworkConnectors":["__Member__","__Member__"],"endpoint":"__Endpoint__","executionRoleArn":"__ExecutionRoleArn__","idlePolicy":{"autoResumeEnabled":true,"maxIdleDurationSeconds":1,"suspendedDurationSeconds":1},"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","ingressNetworkConnectors":["__Member__","__Member__"],"maximumDurationInSeconds":1,"microvmId":"__MicrovmId__","startedAt":946684800,"state":"PENDING","stateReason":"__StateReason__","terminatedAt":946684800}

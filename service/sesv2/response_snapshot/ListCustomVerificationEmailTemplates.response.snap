@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CustomVerificationEmailTemplates":[{"FailureRedirectionURL":"__FailureRedirectionURL__","FromEmailAddress":"__FromEmailAddress__","SuccessRedirectionURL":"__SuccessRedirectionURL__","TemplateName":"__TemplateName__","TemplateSubject":"__TemplateSubject__"},{"FailureRedirectionURL":"__FailureRedirectionURL__","FromEmailAddress":"__FromEmailAddress__","SuccessRedirectionURL":"__SuccessRedirectionURL__","TemplateName":"__TemplateName__","TemplateSubject":"__TemplateSubject__"}],"NextToken":"__NextToken__"}

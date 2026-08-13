@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Attribute":{"AttributeId":"__AttributeId__","DataTableArn":"__DataTableArn__","DataTableId":"__DataTableId__","Description":"__Description__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"LockVersion":{"Attribute":"__Attribute__","DataTable":"__DataTable__","PrimaryValues":"__PrimaryValues__","Value":"__Value__"},"Name":"__Name__","Primary":true,"Validation":{"Enum":{"Strict":true,"Values":["__Member__","__Member__"]},"ExclusiveMaximum":1,"ExclusiveMinimum":1,"IgnoreCase":true,"MaxLength":1,"MaxValues":1,"Maximum":1,"MinLength":1,"MinValues":1,"Minimum":1,"MultipleOf":1},"ValueType":"TEXT","Version":"__Version__"}}

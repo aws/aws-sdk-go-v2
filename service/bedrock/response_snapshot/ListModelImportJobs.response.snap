@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"modelImportJobSummaries":[{"creationTime":"2000-01-01T00:00:00Z","endTime":"2000-01-01T00:00:00Z","importedModelArn":"__ImportedModelArn__","importedModelName":"__ImportedModelName__","jobArn":"__JobArn__","jobName":"__JobName__","lastModifiedTime":"2000-01-01T00:00:00Z","status":"InProgress"},{"creationTime":"2000-01-01T00:00:00Z","endTime":"2000-01-01T00:00:00Z","importedModelArn":"__ImportedModelArn__","importedModelName":"__ImportedModelName__","jobArn":"__JobArn__","jobName":"__JobName__","lastModifiedTime":"2000-01-01T00:00:00Z","status":"InProgress"}],"nextToken":"__NextToken__"}

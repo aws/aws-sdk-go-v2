@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","AssociatedResources":[{"Arn":"__Arn__","EndBillingPeriod":"__EndBillingPeriod__","Relationship":"PARENT"},{"Arn":"__Arn__","EndBillingPeriod":"__EndBillingPeriod__","Relationship":"PARENT"}],"NextToken":"__NextToken__"}

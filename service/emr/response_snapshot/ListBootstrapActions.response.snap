@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ElasticMapReduce.ListBootstrapActions
-
-{"BootstrapActions":[{"Args":["__Member__","__Member__"],"Name":"__Name__","ScriptPath":"__ScriptPath__"},{"Args":["__Member__","__Member__"],"Name":"__Name__","ScriptPath":"__ScriptPath__"}],"Marker":"__Marker__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SWBExternalService.DescribeAccountAssignmentCreationStatus
-
-{"AccountAssignmentCreationStatus":{"CreatedDate":946684800,"FailureReason":"__FailureReason__","PermissionSetArn":"__PermissionSetArn__","PrincipalId":"__PrincipalId__","PrincipalType":"USER","RequestId":"__RequestId__","Status":"IN_PROGRESS","TargetId":"__TargetId__","TargetType":"AWS_ACCOUNT"}}

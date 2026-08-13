@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListProvisioningArtifacts
-
-{"NextPageToken":"__NextPageToken__","ProvisioningArtifactDetails":[{"Active":true,"CreatedTime":946684800,"Description":"__Description__","Guidance":"DEFAULT","Id":"__Id__","Name":"__Name__","SourceRevision":"__SourceRevision__","Type":"CLOUD_FORMATION_TEMPLATE"},{"Active":true,"CreatedTime":946684800,"Description":"__Description__","Guidance":"DEFAULT","Id":"__Id__","Name":"__Name__","SourceRevision":"__SourceRevision__","Type":"CLOUD_FORMATION_TEMPLATE"}]}

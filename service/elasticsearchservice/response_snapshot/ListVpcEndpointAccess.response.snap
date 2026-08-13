@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AuthorizedPrincipalList":[{"Principal":"__Principal__","PrincipalType":"AWS_ACCOUNT"},{"Principal":"__Principal__","PrincipalType":"AWS_ACCOUNT"}],"NextToken":"__NextToken__"}

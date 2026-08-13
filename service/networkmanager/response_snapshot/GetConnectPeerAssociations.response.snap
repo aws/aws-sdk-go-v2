@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ConnectPeerAssociations":[{"ConnectPeerId":"__ConnectPeerId__","DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkId":"__LinkId__","State":"PENDING"},{"ConnectPeerId":"__ConnectPeerId__","DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkId":"__LinkId__","State":"PENDING"}],"NextToken":"__NextToken__"}

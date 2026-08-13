@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Credentials":{"AccessToken":"__AccessToken__","AccessTokenExpiration":946684800,"RefreshToken":"__RefreshToken__","RefreshTokenExpiration":946684800},"SignInUrl":"__SignInUrl__","UserArn":"__UserArn__","UserId":"__UserId__"}

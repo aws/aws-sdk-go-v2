@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AggregationPeriod":"__AggregationPeriod__","NextToken":"__NextToken__","RestoreJobSummaries":[{"AccountId":"__AccountId__","Count":1,"EndTime":946684800,"Region":"__Region__","ResourceType":"__ResourceType__","StartTime":946684800,"State":"CREATED"},{"AccountId":"__AccountId__","Count":1,"EndTime":946684800,"Region":"__Region__","ResourceType":"__ResourceType__","StartTime":946684800,"State":"CREATED"}]}

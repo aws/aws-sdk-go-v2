@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","plugins":[{"buildStatus":"READY","createdAt":946684800,"displayName":"__DisplayName__","pluginId":"__PluginId__","serverUrl":"__ServerUrl__","state":"ENABLED","type":"SERVICE_NOW","updatedAt":946684800},{"buildStatus":"READY","createdAt":946684800,"displayName":"__DisplayName__","pluginId":"__PluginId__","serverUrl":"__ServerUrl__","state":"ENABLED","type":"SERVICE_NOW","updatedAt":946684800}]}

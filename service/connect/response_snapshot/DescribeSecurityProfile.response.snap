@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"SecurityProfile":{"AllowedAccessControlHierarchyGroupId":"__AllowedAccessControlHierarchyGroupId__","AllowedAccessControlTags":{"key0":"__Value__"},"Arn":"__Arn__","Description":"__Description__","GranularAccessControlConfiguration":{"DataTableAccessControlConfiguration":{"PrimaryAttributeAccessControlConfiguration":{"PrimaryAttributeValues":[{"AccessType":"ALLOW","AttributeName":"__AttributeName__","Values":["__Member__","__Member__"]},{"AccessType":"ALLOW","AttributeName":"__AttributeName__","Values":["__Member__","__Member__"]}]}}},"HierarchyRestrictedResources":["__Member__","__Member__"],"Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"OrganizationResourceId":"__OrganizationResourceId__","SecurityProfileName":"__SecurityProfileName__","TagRestrictedResources":["__Member__","__Member__"],"Tags":{"key0":"__Value__"}}}

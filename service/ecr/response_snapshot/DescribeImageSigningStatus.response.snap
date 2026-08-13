@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.DescribeImageSigningStatus
-
-{"imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},"registryId":"__RegistryId__","repositoryName":"__RepositoryName__","signingStatuses":[{"failureCode":"__FailureCode__","failureReason":"__FailureReason__","signingProfileArn":"__SigningProfileArn__","status":"IN_PROGRESS"},{"failureCode":"__FailureCode__","failureReason":"__FailureReason__","signingProfileArn":"__SigningProfileArn__","status":"IN_PROGRESS"}]}

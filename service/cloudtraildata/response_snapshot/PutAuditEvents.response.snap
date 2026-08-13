@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"failed":[{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","id":"__Id__"},{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__","id":"__Id__"}],"successful":[{"eventID":"__EventID__","id":"__Id__"},{"eventID":"__EventID__","id":"__Id__"}]}

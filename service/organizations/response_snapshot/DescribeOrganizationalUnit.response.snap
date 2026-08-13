@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSOrganizationsV20161128.DescribeOrganizationalUnit
-
-{"OrganizationalUnit":{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__","Path":"__Path__"}}

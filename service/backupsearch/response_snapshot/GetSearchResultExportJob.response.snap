@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CompletionTime":946684800,"CreationTime":946684800,"ExportJobArn":"__ExportJobArn__","ExportJobIdentifier":"__ExportJobIdentifier__","ExportSpecification":{"s3ExportSpecification":{"DestinationBucket":"__DestinationBucket__","DestinationPrefix":"__DestinationPrefix__"}},"SearchJobArn":"__SearchJobArn__","Status":"RUNNING","StatusMessage":"__StatusMessage__"}

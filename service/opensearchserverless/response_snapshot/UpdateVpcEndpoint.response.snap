@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: OpenSearchServerless.UpdateVpcEndpoint
-
-{"UpdateVpcEndpointDetail":{"id":"__Id__","lastModifiedDate":1,"name":"__Name__","securityGroupIds":["__Member__","__Member__"],"status":"PENDING","subnetIds":["__Member__","__Member__"]}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"frameworkMetadataList":[{"arn":"__Arn__","complianceType":"__ComplianceType__","controlSetsCount":1,"controlsCount":1,"createdAt":946684800,"description":"__Description__","id":"__Id__","lastUpdatedAt":946684800,"logo":"__Logo__","name":"__Name__","type":"Standard"},{"arn":"__Arn__","complianceType":"__ComplianceType__","controlSetsCount":1,"controlsCount":1,"createdAt":946684800,"description":"__Description__","id":"__Id__","lastUpdatedAt":946684800,"logo":"__Logo__","name":"__Name__","type":"Standard"}],"nextToken":"__NextToken__"}

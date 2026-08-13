@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","recommendations":[{"additionalContext":"__AdditionalContext__","agentSpaceArn":"__AgentSpaceArn__","content":{"spec":"__Spec__","summary":"__Summary__"},"createdAt":"2000-01-01T00:00:00Z","goalId":"__GoalId__","goalVersion":1,"priority":"HIGH","rankPosition":1,"rankedAt":"2000-01-01T00:00:00Z","recommendationId":"__RecommendationId__","status":"PROPOSED","taskId":"__TaskId__","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z","version":1},{"additionalContext":"__AdditionalContext__","agentSpaceArn":"__AgentSpaceArn__","content":{"spec":"__Spec__","summary":"__Summary__"},"createdAt":"2000-01-01T00:00:00Z","goalId":"__GoalId__","goalVersion":1,"priority":"HIGH","rankPosition":1,"rankedAt":"2000-01-01T00:00:00Z","recommendationId":"__RecommendationId__","status":"PROPOSED","taskId":"__TaskId__","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z","version":1}]}

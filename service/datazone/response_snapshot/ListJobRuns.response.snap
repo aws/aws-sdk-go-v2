@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","endTime":946684800,"error":{"message":"__Message__"},"jobId":"__JobId__","jobType":"LINEAGE","runId":"__RunId__","runMode":"SCHEDULED","startTime":946684800,"status":"SCHEDULED"},{"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","endTime":946684800,"error":{"message":"__Message__"},"jobId":"__JobId__","jobType":"LINEAGE","runId":"__RunId__","runMode":"SCHEDULED","startTime":946684800,"status":"SCHEDULED"}],"nextToken":"__NextToken__"}

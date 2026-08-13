@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListProvisionedProductPlans
-
-{"NextPageToken":"__NextPageToken__","ProvisionedProductPlans":[{"PlanId":"__PlanId__","PlanName":"__PlanName__","PlanType":"CLOUDFORMATION","ProvisionProductId":"__ProvisionProductId__","ProvisionProductName":"__ProvisionProductName__","ProvisioningArtifactId":"__ProvisioningArtifactId__"},{"PlanId":"__PlanId__","PlanName":"__PlanName__","PlanType":"CLOUDFORMATION","ProvisionProductId":"__ProvisionProductId__","ProvisionProductName":"__ProvisionProductName__","ProvisioningArtifactId":"__ProvisioningArtifactId__"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Pipeline":{"Arn":"__Arn__","Configuration":{"Body":"__Body__"},"CreatedTimeStamp":1,"LastUpdateTimeStamp":1,"Name":"__Name__","Status":"CREATING","StatusReason":{"Description":"__Description__"},"Tags":{"key0":"__Value__"}}}

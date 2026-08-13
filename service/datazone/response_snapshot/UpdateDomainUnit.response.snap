@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","id":"__Id__","lastUpdatedAt":946684800,"lastUpdatedBy":"__LastUpdatedBy__","name":"__Name__","owners":[{"user":{"userId":"__UserId__"}},{"user":{"userId":"__UserId__"}}],"parentDomainUnitId":"__ParentDomainUnitId__"}

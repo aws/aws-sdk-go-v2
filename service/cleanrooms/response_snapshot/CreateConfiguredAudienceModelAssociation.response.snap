@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configuredAudienceModelAssociation":{"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","configuredAudienceModelArn":"__ConfiguredAudienceModelArn__","createTime":946684800,"description":"__Description__","id":"__Id__","manageResourcePolicies":true,"membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","updateTime":946684800}}

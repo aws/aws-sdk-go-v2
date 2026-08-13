@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AssociationStatus":"PENDING","AssociationStatusMessage":"__AssociationStatusMessage__","AssociationType":"INHERITED","ConfigurationPolicyId":"__ConfigurationPolicyId__","TargetId":"__TargetId__","TargetType":"ACCOUNT","UpdatedAt":"2000-01-01T00:00:00Z"}

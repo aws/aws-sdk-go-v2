@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AuthConfig":{"GeneralAuthorization":[{"AuthMaterialName":"__AuthMaterialName__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}},{"AuthMaterialName":"__AuthMaterialName__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}}],"oAuth":{"authUrl":"__AuthUrl__","oAuthCompleteRedirectUrl":"__OAuthCompleteRedirectUrl__","proactiveRefreshTokenRenewal":{"DaysBeforeRenewal":1,"enabled":true},"scope":"__Scope__","tokenEndpointAuthenticationScheme":"HTTP_BASIC","tokenUrl":"__TokenUrl__"}},"AuthType":"OAUTH","CloudConnectorId":"__CloudConnectorId__","Description":"__Description__","Id":"__Id__","Name":"__Name__","OAuthCompleteRedirectUrl":"__OAuthCompleteRedirectUrl__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}}

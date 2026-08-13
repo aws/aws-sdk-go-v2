@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"expectedBucketOwner":"__ExpectedBucketOwner__","format":"TXT","location":"__Location__","name":"__Name__","status":"INACTIVE","tags":{"key0":"__Value__"}}

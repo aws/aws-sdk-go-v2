@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applicationId":"__ApplicationId__","authToken":"__AuthToken__","authTokenExpiresAt":946684800,"endpoint":"__Endpoint__","sessionId":"__SessionId__"}

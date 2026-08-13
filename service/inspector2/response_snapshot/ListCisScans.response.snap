@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","scans":[{"failedChecks":1,"scanArn":"__ScanArn__","scanConfigurationArn":"__ScanConfigurationArn__","scanDate":946684800,"scanName":"__ScanName__","scheduledBy":"__ScheduledBy__","securityLevel":"LEVEL_1","status":"FAILED","targets":{"accountIds":["__Member__","__Member__"],"targetResourceTags":{"key0":["__Member__","__Member__"]}},"totalChecks":1},{"failedChecks":1,"scanArn":"__ScanArn__","scanConfigurationArn":"__ScanConfigurationArn__","scanDate":946684800,"scanName":"__ScanName__","scheduledBy":"__ScheduledBy__","securityLevel":"LEVEL_1","status":"FAILED","targets":{"accountIds":["__Member__","__Member__"],"targetResourceTags":{"key0":["__Member__","__Member__"]}},"totalChecks":1}]}

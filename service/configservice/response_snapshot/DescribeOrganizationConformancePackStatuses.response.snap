@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.DescribeOrganizationConformancePackStatuses
-
-{"NextToken":"__NextToken__","OrganizationConformancePackStatuses":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","LastUpdateTime":946684800,"OrganizationConformancePackName":"__OrganizationConformancePackName__","Status":"CREATE_SUCCESSFUL"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","LastUpdateTime":946684800,"OrganizationConformancePackName":"__OrganizationConformancePackName__","Status":"CREATE_SUCCESSFUL"}]}

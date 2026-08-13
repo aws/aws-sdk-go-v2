@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","workloads":[{"displayName":"__DisplayName__","status":"ACTIVE","workloadName":"__WorkloadName__"},{"displayName":"__DisplayName__","status":"ACTIVE","workloadName":"__WorkloadName__"}]}

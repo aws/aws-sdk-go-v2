@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"acquiredLimits":[{"count":1,"limitId":"__LimitId__"},{"count":1,"limitId":"__LimitId__"}],"definition":{"envEnter":{"environmentId":"__EnvironmentId__"}},"endedAt":"2000-01-01T00:00:00Z","manifests":[{"outputManifestHash":"__OutputManifestHash__","outputManifestPath":"__OutputManifestPath__"},{"outputManifestHash":"__OutputManifestHash__","outputManifestPath":"__OutputManifestPath__"}],"processExitCode":1,"progressMessage":"__ProgressMessage__","progressPercent":1,"sessionActionId":"__SessionActionId__","sessionId":"__SessionId__","startedAt":"2000-01-01T00:00:00Z","status":"ASSIGNED","workerUpdatedAt":"2000-01-01T00:00:00Z"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","repositories":[{"administratorAccount":"__AdministratorAccount__","arn":"__Arn__","createdTime":946684800,"description":"__Description__","domainName":"__DomainName__","domainOwner":"__DomainOwner__","name":"__Name__"},{"administratorAccount":"__AdministratorAccount__","arn":"__Arn__","createdTime":946684800,"description":"__Description__","domainName":"__DomainName__","domainOwner":"__DomainOwner__","name":"__Name__"}]}

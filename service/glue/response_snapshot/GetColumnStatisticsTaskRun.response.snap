@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.GetColumnStatisticsTaskRun
-
-{"ColumnStatisticsTaskRun":{"CatalogID":"__CatalogID__","ColumnNameList":["__Member__","__Member__"],"ColumnStatisticsTaskRunId":"__ColumnStatisticsTaskRunId__","ComputationType":"FULL","CreationTime":946684800,"CustomerId":"__CustomerId__","DPUSeconds":1,"DatabaseName":"__DatabaseName__","EndTime":946684800,"ErrorMessage":"__ErrorMessage__","LastUpdated":946684800,"NumberOfWorkers":1,"Role":"__Role__","SampleSize":1,"SecurityConfiguration":"__SecurityConfiguration__","StartTime":946684800,"Status":"STARTING","TableName":"__TableName__","WorkerType":"__WorkerType__"}}

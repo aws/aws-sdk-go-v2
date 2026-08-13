@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","CreationTime":"2000-01-01T00:00:00Z","ExecutionRoleArn":"__ExecutionRoleArn__","ExportStatus":"IN_PROGRESS","OutputConfig":{"S3Data":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"}}}

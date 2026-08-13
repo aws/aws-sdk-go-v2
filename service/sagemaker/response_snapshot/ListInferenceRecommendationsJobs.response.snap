@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListInferenceRecommendationsJobs
-
-{"InferenceRecommendationsJobs":[{"CompletionTime":946684800,"CreationTime":946684800,"FailureReason":"__FailureReason__","JobArn":"__JobArn__","JobDescription":"__JobDescription__","JobName":"__JobName__","JobType":"Default","LastModifiedTime":946684800,"ModelName":"__ModelName__","ModelPackageVersionArn":"__ModelPackageVersionArn__","RoleArn":"__RoleArn__","SamplePayloadUrl":"__SamplePayloadUrl__","Status":"PENDING"},{"CompletionTime":946684800,"CreationTime":946684800,"FailureReason":"__FailureReason__","JobArn":"__JobArn__","JobDescription":"__JobDescription__","JobName":"__JobName__","JobType":"Default","LastModifiedTime":946684800,"ModelName":"__ModelName__","ModelPackageVersionArn":"__ModelPackageVersionArn__","RoleArn":"__RoleArn__","SamplePayloadUrl":"__SamplePayloadUrl__","Status":"PENDING"}],"NextToken":"__NextToken__"}

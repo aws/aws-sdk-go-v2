@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","creationDateTime":946684800,"description":"__Description__","linkedServices":["__Member__","__Member__"],"role":"__Role__","s3Location":"__S3Location__","updateDateTime":946684800,"workspaceId":"__WorkspaceId__"}

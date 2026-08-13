@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"message":"__Message__","reasons":[{"description":"__Description__","statementId":"__StatementId__","statementIndex":1},{"description":"__Description__","statementId":"__StatementId__","statementIndex":1}],"result":"PASS"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: PerformanceInsightsv20180227.ListAvailableResourceDimensions
-
-{"MetricDimensions":[{"Groups":[{"Dimensions":[{"Identifier":"__Identifier__"},{"Identifier":"__Identifier__"}],"Group":"__Group__"},{"Dimensions":[{"Identifier":"__Identifier__"},{"Identifier":"__Identifier__"}],"Group":"__Group__"}],"Metric":"__Metric__"},{"Groups":[{"Dimensions":[{"Identifier":"__Identifier__"},{"Identifier":"__Identifier__"}],"Group":"__Group__"},{"Dimensions":[{"Identifier":"__Identifier__"},{"Identifier":"__Identifier__"}],"Group":"__Group__"}],"Metric":"__Metric__"}],"NextToken":"__NextToken__"}

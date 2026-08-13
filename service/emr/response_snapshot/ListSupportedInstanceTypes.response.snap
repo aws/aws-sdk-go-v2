@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ElasticMapReduce.ListSupportedInstanceTypes
-
-{"Marker":"__Marker__","SupportedInstanceTypes":[{"Architecture":"__Architecture__","EbsOptimizedAvailable":true,"EbsOptimizedByDefault":true,"EbsStorageOnly":true,"InstanceFamilyId":"__InstanceFamilyId__","Is64BitsOnly":true,"MemoryGB":1,"NumberOfDisks":1,"StorageGB":1,"Type":"__Type__","VCPU":1},{"Architecture":"__Architecture__","EbsOptimizedAvailable":true,"EbsOptimizedByDefault":true,"EbsStorageOnly":true,"InstanceFamilyId":"__InstanceFamilyId__","Is64BitsOnly":true,"MemoryGB":1,"NumberOfDisks":1,"StorageGB":1,"Type":"__Type__","VCPU":1}]}

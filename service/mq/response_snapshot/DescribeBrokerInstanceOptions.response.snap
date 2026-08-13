@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"brokerInstanceOptions":[{"availabilityZones":[{"name":"__Name__"},{"name":"__Name__"}],"engineType":"ACTIVEMQ","hostInstanceType":"__HostInstanceType__","storageType":"EBS","supportedDeploymentModes":["SINGLE_INSTANCE","SINGLE_INSTANCE"],"supportedEngineVersions":["__Member__","__Member__"]},{"availabilityZones":[{"name":"__Name__"},{"name":"__Name__"}],"engineType":"ACTIVEMQ","hostInstanceType":"__HostInstanceType__","storageType":"EBS","supportedDeploymentModes":["SINGLE_INSTANCE","SINGLE_INSTANCE"],"supportedEngineVersions":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

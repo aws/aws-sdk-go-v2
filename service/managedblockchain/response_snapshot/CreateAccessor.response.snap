@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AccessorId":"__AccessorId__","BillingToken":"__BillingToken__","NetworkType":"ETHEREUM_GOERLI"}

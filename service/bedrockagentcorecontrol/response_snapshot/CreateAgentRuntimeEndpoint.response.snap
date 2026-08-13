@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"agentRuntimeArn":"__AgentRuntimeArn__","agentRuntimeEndpointArn":"__AgentRuntimeEndpointArn__","agentRuntimeId":"__AgentRuntimeId__","createdAt":"2000-01-01T00:00:00Z","endpointName":"__EndpointName__","status":"CREATING","targetVersion":"__TargetVersion__"}

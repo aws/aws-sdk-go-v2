@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","CreatedTime":946684800,"Description":"__Description__","EnvironmentId":"__EnvironmentId__","LastUpdatedTime":946684800,"Name":"__Name__","NetworkFabricType":"TRANSIT_GATEWAY","OwnerAccountId":"__OwnerAccountId__","State":"CREATING","Tags":{"key0":"__Value__"}}

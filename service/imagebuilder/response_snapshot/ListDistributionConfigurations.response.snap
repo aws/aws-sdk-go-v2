@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"distributionConfigurationSummaryList":[{"arn":"__Arn__","dateCreated":"__DateCreated__","dateUpdated":"__DateUpdated__","description":"__Description__","name":"__Name__","regions":["__Member__","__Member__"],"tags":{"key0":"__Value__"}},{"arn":"__Arn__","dateCreated":"__DateCreated__","dateUpdated":"__DateUpdated__","description":"__Description__","name":"__Name__","regions":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__","requestId":"__RequestId__"}

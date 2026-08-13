@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"architecture":"ARM_64","buildId":"__BuildId__","buildState":"PENDING","chipset":"GRAVITON","chipsetGeneration":"__ChipsetGeneration__","createdAt":946684800,"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","snapshotBuild":{"codeInstallSizeInBytes":1,"diskSnapshotSizeInBytes":1,"memorySnapshotSizeInBytes":1},"stateReason":"__StateReason__"}

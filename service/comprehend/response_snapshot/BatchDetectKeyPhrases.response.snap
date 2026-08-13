@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.BatchDetectKeyPhrases
-
-{"ErrorList":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","Index":1},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","Index":1}],"ResultList":[{"Index":1,"KeyPhrases":[{"BeginOffset":1,"EndOffset":1,"Score":1,"Text":"__Text__"},{"BeginOffset":1,"EndOffset":1,"Score":1,"Text":"__Text__"}]},{"Index":1,"KeyPhrases":[{"BeginOffset":1,"EndOffset":1,"Score":1,"Text":"__Text__"},{"BeginOffset":1,"EndOffset":1,"Score":1,"Text":"__Text__"}]}]}

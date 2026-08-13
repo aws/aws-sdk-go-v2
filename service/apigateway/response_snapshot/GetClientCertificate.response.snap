@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"clientCertificateId":"__ClientCertificateId__","createdDate":946684800,"description":"__Description__","expirationDate":946684800,"pemEncodedCertificate":"__PemEncodedCertificate__","tags":{"key0":"__Value__"}}

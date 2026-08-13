@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","sessionSummaries":[{"sessionId":"__SessionId__"},{"sessionId":"__SessionId__"}]}

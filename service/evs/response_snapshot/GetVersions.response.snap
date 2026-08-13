@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonElasticVMwareService.GetVersions
-
-{"instanceTypeEsxVersions":[{"esxVersions":["__Member__","__Member__"],"instanceType":"i4i.metal"},{"esxVersions":["__Member__","__Member__"],"instanceType":"i4i.metal"}],"vcfVersions":[{"defaultEsxVersion":"__DefaultEsxVersion__","instanceTypes":["i4i.metal","i4i.metal"],"status":"__Status__","vcfVersion":"VCF-5.2.1"},{"defaultEsxVersion":"__DefaultEsxVersion__","instanceTypes":["i4i.metal","i4i.metal"],"status":"__Status__","vcfVersion":"VCF-5.2.1"}]}

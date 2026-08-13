@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","botRecommendationId":"__BotRecommendationId__","botRecommendationStatus":"Processing","botVersion":"__BotVersion__","localeId":"__LocaleId__"}

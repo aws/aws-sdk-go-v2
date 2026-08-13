@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"campaign":{"arn":"__Arn__","connectInstanceId":"__ConnectInstanceId__","dialerConfig":{"progressiveDialerConfig":{"bandwidthAllocation":1,"dialingCapacity":1}},"id":"__Id__","name":"__Name__","outboundCallConfig":{"answerMachineDetectionConfig":{"awaitAnswerMachinePrompt":true,"enableAnswerMachineDetection":true},"connectContactFlowId":"__ConnectContactFlowId__","connectQueueId":"__ConnectQueueId__","connectSourcePhoneNumber":"__ConnectSourcePhoneNumber__"},"tags":{"key0":"__Value__"}}}

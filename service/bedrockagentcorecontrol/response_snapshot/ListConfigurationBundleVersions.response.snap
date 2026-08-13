@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","versions":[{"bundleArn":"__BundleArn__","bundleId":"__BundleId__","lineageMetadata":{"branchName":"__BranchName__","commitMessage":"__CommitMessage__","createdBy":{"arn":"__Arn__","name":"__Name__"},"parentVersionIds":["__Member__","__Member__"]},"versionCreatedAt":946684800,"versionId":"__VersionId__"},{"bundleArn":"__BundleArn__","bundleId":"__BundleId__","lineageMetadata":{"branchName":"__BranchName__","commitMessage":"__CommitMessage__","createdBy":{"arn":"__Arn__","name":"__Name__"},"parentVersionIds":["__Member__","__Member__"]},"versionCreatedAt":946684800,"versionId":"__VersionId__"}]}

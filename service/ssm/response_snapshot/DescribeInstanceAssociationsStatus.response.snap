@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.DescribeInstanceAssociationsStatus
-
-{"InstanceAssociationStatusInfos":[{"AssociationId":"__AssociationId__","AssociationName":"__AssociationName__","AssociationVersion":"__AssociationVersion__","DetailedStatus":"__DetailedStatus__","DocumentVersion":"__DocumentVersion__","ErrorCode":"__ErrorCode__","ExecutionDate":946684800,"ExecutionSummary":"__ExecutionSummary__","InstanceId":"__InstanceId__","Name":"__Name__","OutputUrl":{"S3OutputUrl":{"OutputUrl":"__OutputUrl__"}},"Status":"__Status__"},{"AssociationId":"__AssociationId__","AssociationName":"__AssociationName__","AssociationVersion":"__AssociationVersion__","DetailedStatus":"__DetailedStatus__","DocumentVersion":"__DocumentVersion__","ErrorCode":"__ErrorCode__","ExecutionDate":946684800,"ExecutionSummary":"__ExecutionSummary__","InstanceId":"__InstanceId__","Name":"__Name__","OutputUrl":{"S3OutputUrl":{"OutputUrl":"__OutputUrl__"}},"Status":"__Status__"}],"NextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSInsightsIndexService.ListCostCategoryDefinitions
-
-{"CostCategoryReferences":[{"CostCategoryArn":"__CostCategoryArn__","DefaultValue":"__DefaultValue__","EffectiveEnd":"__EffectiveEnd__","EffectiveStart":"__EffectiveStart__","Name":"__Name__","NumberOfRules":1,"ProcessingStatus":[{"Component":"COST_EXPLORER","Status":"PROCESSING"},{"Component":"COST_EXPLORER","Status":"PROCESSING"}],"SupportedResourceTypes":["__Member__","__Member__"],"Values":["__Member__","__Member__"]},{"CostCategoryArn":"__CostCategoryArn__","DefaultValue":"__DefaultValue__","EffectiveEnd":"__EffectiveEnd__","EffectiveStart":"__EffectiveStart__","Name":"__Name__","NumberOfRules":1,"ProcessingStatus":[{"Component":"COST_EXPLORER","Status":"PROCESSING"},{"Component":"COST_EXPLORER","Status":"PROCESSING"}],"SupportedResourceTypes":["__Member__","__Member__"],"Values":["__Member__","__Member__"]}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BackupAccessPoints":[{"AccessPointArn":"__AccessPointArn__","AccessPointMetadata":{"key0":"__Value__"},"BackupVaultArn":"__BackupVaultArn__","BackupVaultName":"__BackupVaultName__","CreationTime":946684800,"Name":"__Name__","RecoveryPointArn":"__RecoveryPointArn__","ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__","Status":"AVAILABLE","StatusMessage":"__StatusMessage__"},{"AccessPointArn":"__AccessPointArn__","AccessPointMetadata":{"key0":"__Value__"},"BackupVaultArn":"__BackupVaultArn__","BackupVaultName":"__BackupVaultName__","CreationTime":946684800,"Name":"__Name__","RecoveryPointArn":"__RecoveryPointArn__","ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__","Status":"AVAILABLE","StatusMessage":"__StatusMessage__"}],"NextToken":"__NextToken__"}

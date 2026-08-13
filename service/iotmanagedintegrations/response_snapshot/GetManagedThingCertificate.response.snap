@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CertificatePem":"__CertificatePem__","ManagedThingId":"__ManagedThingId__"}

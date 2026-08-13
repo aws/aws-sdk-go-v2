@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","destinationArn":"__DestinationArn__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","resourceArn":"__ResourceArn__","resourceId":"__ResourceId__","serviceNetworkLogType":"SERVICE"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: HealthLake.DescribeDataTransformationJob
-
-{"TransformationJobProperties":{"DataAccessRoleArn":"__DataAccessRoleArn__","DriftDetectionEnabled":true,"EndTime":946684800,"InputDataConfig":{"S3Uri":"__S3Uri__","SourceFormat":"CCDA"},"JobId":"__JobId__","JobName":"__JobName__","JobProgressReport":{"TotalFilesConverted":1,"TotalFilesFailed":1,"TotalFilesScanned":1,"TotalResourcesGenerated":1},"JobStatus":"SUBMITTED","Message":"__Message__","OutputDataConfig":{"S3Configuration":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"}},"ProfileId":"__ProfileId__","ProfileName":"__ProfileName__","ProfileVersion":1,"ProvenanceEnabled":true,"SubmitTime":946684800}}

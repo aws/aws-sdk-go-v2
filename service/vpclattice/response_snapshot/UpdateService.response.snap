@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","authType":"NONE","certificateArn":"__CertificateArn__","customDomainName":"__CustomDomainName__","id":"__Id__","idleTimeoutSeconds":1,"name":"__Name__"}

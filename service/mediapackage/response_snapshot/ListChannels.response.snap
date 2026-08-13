@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"channels":[{"arn":"__Arn__","createdAt":"__CreatedAt__","description":"__Description__","egressAccessLogs":{"logGroupName":"__LogGroupName__"},"hlsIngest":{"ingestEndpoints":[{"id":"__Id__","password":"__Password__","url":"__Url__","username":"__Username__"},{"id":"__Id__","password":"__Password__","url":"__Url__","username":"__Username__"}]},"id":"__Id__","ingressAccessLogs":{"logGroupName":"__LogGroupName__"},"tags":{"key0":"__Value__"}},{"arn":"__Arn__","createdAt":"__CreatedAt__","description":"__Description__","egressAccessLogs":{"logGroupName":"__LogGroupName__"},"hlsIngest":{"ingestEndpoints":[{"id":"__Id__","password":"__Password__","url":"__Url__","username":"__Username__"},{"id":"__Id__","password":"__Password__","url":"__Url__","username":"__Username__"}]},"id":"__Id__","ingressAccessLogs":{"logGroupName":"__LogGroupName__"},"tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

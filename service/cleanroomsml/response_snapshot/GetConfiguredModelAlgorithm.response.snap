@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"configuredModelAlgorithmArn":"__ConfiguredModelAlgorithmArn__","createTime":"2000-01-01T00:00:00Z","description":"__Description__","inferenceContainerConfig":{"imageUri":"__ImageUri__"},"kmsKeyArn":"__KmsKeyArn__","name":"__Name__","roleArn":"__RoleArn__","tags":{"key0":"__Value__"},"trainingContainerConfig":{"arguments":["__Member__","__Member__"],"entrypoint":["__Member__","__Member__"],"imageUri":"__ImageUri__","metricDefinitions":[{"name":"__Name__","regex":"__Regex__"},{"name":"__Name__","regex":"__Regex__"}]},"updateTime":"2000-01-01T00:00:00Z"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.UpdateWorkteam
-
-{"Workteam":{"CreateDate":946684800,"Description":"__Description__","LastUpdatedDate":946684800,"MemberDefinitions":[{"CognitoMemberDefinition":{"ClientId":"__ClientId__","UserGroup":"__UserGroup__","UserPool":"__UserPool__"},"OidcMemberDefinition":{"Groups":["__Member__","__Member__"]}},{"CognitoMemberDefinition":{"ClientId":"__ClientId__","UserGroup":"__UserGroup__","UserPool":"__UserPool__"},"OidcMemberDefinition":{"Groups":["__Member__","__Member__"]}}],"NotificationConfiguration":{"NotificationTopicArn":"__NotificationTopicArn__"},"ProductListingIds":["__Member__","__Member__"],"SubDomain":"__SubDomain__","WorkerAccessConfiguration":{"S3Presign":{"IamPolicyConstraints":{"SourceIp":"Enabled","VpcSourceIp":"Enabled"}}},"WorkforceArn":"__WorkforceArn__","WorkteamArn":"__WorkteamArn__","WorkteamName":"__WorkteamName__"}}

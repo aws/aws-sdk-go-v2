@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AdditionalEnvironmentVariables":{"key0":"__Value__"},"AdditionalLaunchArgs":["__Member__","__Member__"],"ApplicationArn":"__ApplicationArn__","Arn":"__Arn__","ConnectionTimeoutSeconds":1,"CreatedAt":946684800,"Description":"__Description__","DisplayConfiguration":{"Resolution":{"Height":1,"Width":1}},"ExportFilesMetadata":{"OutputUri":"__OutputUri__","Status":"SUCCEEDED","StatusReason":"__StatusReason__"},"LastUpdatedAt":946684800,"Location":"__Location__","LogFileLocationUri":"__LogFileLocationUri__","PerformanceStatsConfiguration":{"SharedWithClient":true},"Protocol":"WebRTC","RoleArn":"__RoleArn__","SessionLengthSeconds":1,"SignalRequest":"__SignalRequest__","SignalResponse":"__SignalResponse__","Status":"ACTIVATING","StatusReason":"internalError","StreamGroupId":"__StreamGroupId__","UserId":"__UserId__","WebSdkProtocolUrl":"__WebSdkProtocolUrl__"}

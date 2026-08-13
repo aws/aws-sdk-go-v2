@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.GetNamespace
-
-{"Namespace":{"Arn":"__Arn__","CreateDate":946684800,"CreatorRequestId":"__CreatorRequestId__","Description":"__Description__","Id":"__Id__","Name":"__Name__","Properties":{"DnsProperties":{"HostedZoneId":"__HostedZoneId__","SOA":{"TTL":1}},"HttpProperties":{"HttpName":"__HttpName__"}},"ResourceOwner":"__ResourceOwner__","ServiceCount":1,"Type":"DNS_PUBLIC"}}

@@ -1,4 +1,0 @@
-402
-Content-Type: application/json
-
-{"__type":"ServiceQuotaExceededException","context":{"key0":"__Value__"},"message":"__Message__","quotaCode":"__QuotaCode__","reason":"SERVICE_QUOTA_EXCEEDED_EXCEPTION","resourceId":"__ResourceId__","resourceType":"__ResourceType__","serviceCode":"__ServiceCode__"}

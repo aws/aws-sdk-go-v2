@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"signatureAlgorithm":"__SignatureAlgorithm__","signatureDateTime":"__SignatureDateTime__","signatureKeyId":"__SignatureKeyId__","signatureValid":true,"validationErrors":["__Member__","__Member__"]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","relevantContent":[{"content":"__Content__","documentAttributes":[{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}},{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}}],"documentId":"__DocumentId__","documentTitle":"__DocumentTitle__","documentUri":"__DocumentUri__","scoreAttributes":{"scoreConfidence":"VERY_HIGH"}},{"content":"__Content__","documentAttributes":[{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}},{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}}],"documentId":"__DocumentId__","documentTitle":"__DocumentTitle__","documentUri":"__DocumentUri__","scoreAttributes":{"scoreConfidence":"VERY_HIGH"}}]}

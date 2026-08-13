@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSBilling.GetBillingView
-
-{"billingView":{"arn":"__Arn__","billingViewType":"PRIMARY","createdAt":946684800,"dataFilterExpression":{"costCategories":{"key":"__Key__","values":["__Member__","__Member__"]},"dimensions":{"key":"LINKED_ACCOUNT","values":["__Member__","__Member__"]},"tags":{"key":"__Key__","values":["__Member__","__Member__"]},"timeRange":{"beginDateInclusive":946684800,"endDateInclusive":946684800}},"derivedViewCount":1,"description":"__Description__","healthStatus":{"statusCode":"HEALTHY","statusReasons":["SOURCE_VIEW_UNHEALTHY","SOURCE_VIEW_UNHEALTHY"]},"name":"__Name__","ownerAccountId":"__OwnerAccountId__","sourceAccountId":"__SourceAccountId__","sourceViewCount":1,"updatedAt":946684800,"viewDefinitionLastUpdatedAt":946684800}}

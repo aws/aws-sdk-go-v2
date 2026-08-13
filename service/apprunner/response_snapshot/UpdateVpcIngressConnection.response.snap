@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AppRunner.UpdateVpcIngressConnection
-
-{"VpcIngressConnection":{"AccountId":"__AccountId__","CreatedAt":946684800,"DeletedAt":946684800,"DomainName":"__DomainName__","IngressVpcConfiguration":{"VpcEndpointId":"__VpcEndpointId__","VpcId":"__VpcId__"},"ServiceArn":"__ServiceArn__","Status":"AVAILABLE","VpcIngressConnectionArn":"__VpcIngressConnectionArn__","VpcIngressConnectionName":"__VpcIngressConnectionName__"}}

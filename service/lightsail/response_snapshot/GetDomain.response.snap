@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetDomain
-
-{"domain":{"arn":"__Arn__","createdAt":946684800,"domainEntries":[{"id":"__Id__","isAlias":true,"name":"__Name__","options":{"key0":"__Value__"},"target":"__Target__","type":"__Type__"},{"id":"__Id__","isAlias":true,"name":"__Name__","options":{"key0":"__Value__"},"target":"__Target__","type":"__Type__"}],"location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"name":"__Name__","registeredDomainDelegationInfo":{"nameServersUpdateState":{"code":"SUCCEEDED","message":"__Message__"},"r53HostedZoneDeletionState":{"code":"SUCCEEDED","message":"__Message__"}},"resourceType":"ContainerService","supportCode":"__SupportCode__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}

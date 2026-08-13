@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSWAF_20150824.GetRule
-
-{"Rule":{"MetricName":"__MetricName__","Name":"__Name__","Predicates":[{"DataId":"__DataId__","Negated":true,"Type":"IPMatch"},{"DataId":"__DataId__","Negated":true,"Type":"IPMatch"}],"RuleId":"__RuleId__"}}

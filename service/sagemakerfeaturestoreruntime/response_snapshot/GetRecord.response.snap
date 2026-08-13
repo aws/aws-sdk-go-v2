@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ExpiresAt":"__ExpiresAt__","Record":[{"FeatureName":"__FeatureName__","ValueAsString":"__ValueAsString__","ValueAsStringList":["__Member__","__Member__"]},{"FeatureName":"__FeatureName__","ValueAsString":"__ValueAsString__","ValueAsStringList":["__Member__","__Member__"]}]}

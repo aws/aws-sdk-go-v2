@@ -1,8 +1,0 @@
-200
-Content-Type: __ContentType__
-X-Amzn-Invoked-Production-Variant: __InvokedProductionVariant__
-X-Amzn-Sagemaker-Closed-Session-Id: __ClosedSessionId__
-X-Amzn-Sagemaker-Custom-Attributes: __CustomAttributes__
-X-Amzn-Sagemaker-New-Session-Id: __NewSessionId__
-
-blob

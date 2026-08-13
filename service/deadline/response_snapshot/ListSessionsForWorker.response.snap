@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","sessions":[{"endedAt":"2000-01-01T00:00:00Z","jobId":"__JobId__","lifecycleStatus":"STARTED","queueId":"__QueueId__","sessionId":"__SessionId__","startedAt":"2000-01-01T00:00:00Z","targetLifecycleStatus":"ENDED"},{"endedAt":"2000-01-01T00:00:00Z","jobId":"__JobId__","lifecycleStatus":"STARTED","queueId":"__QueueId__","sessionId":"__SessionId__","startedAt":"2000-01-01T00:00:00Z","targetLifecycleStatus":"ENDED"}]}

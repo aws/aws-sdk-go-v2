@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Pipes":[{"Arn":"__Arn__","CreationTime":946684800,"CurrentState":"RUNNING","DesiredState":"RUNNING","Enrichment":"__Enrichment__","LastModifiedTime":946684800,"Name":"__Name__","Source":"__Source__","StateReason":"__StateReason__","Target":"__Target__"},{"Arn":"__Arn__","CreationTime":946684800,"CurrentState":"RUNNING","DesiredState":"RUNNING","Enrichment":"__Enrichment__","LastModifiedTime":946684800,"Name":"__Name__","Source":"__Source__","StateReason":"__StateReason__","Target":"__Target__"}]}

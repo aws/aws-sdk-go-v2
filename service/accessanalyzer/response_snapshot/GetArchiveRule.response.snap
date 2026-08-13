@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"archiveRule":{"createdAt":"2000-01-01T00:00:00Z","filter":{"key0":{"contains":["__Member__","__Member__"],"eq":["__Member__","__Member__"],"exists":true,"neq":["__Member__","__Member__"]}},"ruleName":"__RuleName__","updatedAt":"2000-01-01T00:00:00Z"}}

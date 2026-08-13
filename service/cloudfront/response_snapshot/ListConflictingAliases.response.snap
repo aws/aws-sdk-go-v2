@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<ConflictingAliasesList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Items><ConflictingAlias><AccountId>__AccountId__</AccountId><Alias>__Alias__</Alias><DistributionId>__DistributionId__</DistributionId></ConflictingAlias><ConflictingAlias><AccountId>__AccountId__</AccountId><Alias>__Alias__</Alias><DistributionId>__DistributionId__</DistributionId></ConflictingAlias></Items><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></ConflictingAliasesList>

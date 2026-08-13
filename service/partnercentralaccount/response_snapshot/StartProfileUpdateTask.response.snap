@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralAccount.StartProfileUpdateTask
-
-{"Arn":"__Arn__","Catalog":"__Catalog__","EndedAt":"2000-01-01T00:00:00Z","ErrorDetailList":[{"Locale":"__Locale__","Message":"__Message__","Reason":"INVALID_CONTENT"},{"Locale":"__Locale__","Message":"__Message__","Reason":"INVALID_CONTENT"}],"Id":"__Id__","StartedAt":"2000-01-01T00:00:00Z","Status":"IN_PROGRESS","TaskDetails":{"Description":"__Description__","DisplayName":"__DisplayName__","Headquarters":{"CountryCode":"__CountryCode__","SubdivisionCode":"__SubdivisionCode__"},"IndustrySegments":["AGRICULTURE_MINING","AGRICULTURE_MINING"],"LocalizedContents":[{"Description":"__Description__","DisplayName":"__DisplayName__","Locale":"__Locale__","LogoUrl":"__LogoUrl__","WebsiteUrl":"__WebsiteUrl__"},{"Description":"__Description__","DisplayName":"__DisplayName__","Locale":"__Locale__","LogoUrl":"__LogoUrl__","WebsiteUrl":"__WebsiteUrl__"}],"LogoUrl":"__LogoUrl__","PrimarySolutionType":"SOFTWARE_PRODUCTS","TranslationSourceLocale":"__TranslationSourceLocale__","WebsiteUrl":"__WebsiteUrl__"},"TaskId":"__TaskId__"}

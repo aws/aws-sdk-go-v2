@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"accountId":"__AccountId__","status":"ENABLED"},{"accountId":"__AccountId__","status":"ENABLED"}],"nextToken":"__NextToken__"}

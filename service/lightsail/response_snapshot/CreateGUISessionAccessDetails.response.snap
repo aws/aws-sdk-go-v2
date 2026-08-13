@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.CreateGUISessionAccessDetails
-
-{"failureReason":"__FailureReason__","percentageComplete":1,"resourceName":"__ResourceName__","sessions":[{"isPrimary":true,"name":"__Name__","url":"__Url__"},{"isPrimary":true,"name":"__Name__","url":"__Url__"}],"status":"startExpired"}

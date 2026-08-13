@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RekognitionService.SearchFacesByImage
-
-{"FaceMatches":[{"Face":{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Confidence":1,"ExternalImageId":"__ExternalImageId__","FaceId":"__FaceId__","ImageId":"__ImageId__","IndexFacesModelVersion":"__IndexFacesModelVersion__","UserId":"__UserId__"},"Similarity":1},{"Face":{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Confidence":1,"ExternalImageId":"__ExternalImageId__","FaceId":"__FaceId__","ImageId":"__ImageId__","IndexFacesModelVersion":"__IndexFacesModelVersion__","UserId":"__UserId__"},"Similarity":1}],"FaceModelVersion":"__FaceModelVersion__","SearchedFaceBoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"SearchedFaceConfidence":1}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"clusterOperationInfoList":[{"clusterArn":"__ClusterArn__","clusterType":"PROVISIONED","endTime":"2000-01-01T00:00:00Z","operationArn":"__OperationArn__","operationState":"__OperationState__","operationType":"__OperationType__","startTime":"2000-01-01T00:00:00Z"},{"clusterArn":"__ClusterArn__","clusterType":"PROVISIONED","endTime":"2000-01-01T00:00:00Z","operationArn":"__OperationArn__","operationState":"__OperationState__","operationType":"__OperationType__","startTime":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

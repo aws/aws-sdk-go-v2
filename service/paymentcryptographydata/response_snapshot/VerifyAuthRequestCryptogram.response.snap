@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AuthResponseValue":"__AuthResponseValue__","KeyArn":"__KeyArn__","KeyCheckValue":"__KeyCheckValue__"}

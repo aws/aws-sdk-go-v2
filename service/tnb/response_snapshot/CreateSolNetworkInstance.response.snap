@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","id":"__Id__","nsInstanceName":"__NsInstanceName__","nsdInfoId":"__NsdInfoId__","tags":{"key0":"__Value__"}}

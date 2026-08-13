@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListClusterEvents
-
-{"Events":[{"ClusterArn":"__ClusterArn__","ClusterName":"__ClusterName__","Description":"__Description__","EventId":"__EventId__","EventLevel":"Info","EventTime":946684800,"InstanceGroupName":"__InstanceGroupName__","InstanceId":"__InstanceId__","ResourceType":"Cluster"},{"ClusterArn":"__ClusterArn__","ClusterName":"__ClusterName__","Description":"__Description__","EventId":"__EventId__","EventLevel":"Info","EventTime":946684800,"InstanceGroupName":"__InstanceGroupName__","InstanceId":"__InstanceId__","ResourceType":"Cluster"}],"NextToken":"__NextToken__"}

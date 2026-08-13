@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DataFormat":"CSV","DestinationUri":"__DestinationUri__","EncryptionKey":"__EncryptionKey__","RoleArn":"__RoleArn__","SnapshotId":"__SnapshotId__","Status":"COMPLETED","StatusMessage":"__StatusMessage__"}

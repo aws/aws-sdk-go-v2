@@ -1,5 +1,0 @@
-404
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Invoicing.BatchGetInvoiceProfile
-
-{"__type":"ResourceNotFoundException","message":"__Message__","resourceName":"__ResourceName__"}

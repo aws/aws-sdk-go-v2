@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","PositionConfigurationList":[{"Destination":"__Destination__","ResourceIdentifier":"__ResourceIdentifier__","ResourceType":"WirelessDevice","Solvers":{"SemtechGnss":{"Fec":"ROSE","Provider":"Semtech","Status":"Enabled","Type":"GNSS"}}},{"Destination":"__Destination__","ResourceIdentifier":"__ResourceIdentifier__","ResourceType":"WirelessDevice","Solvers":{"SemtechGnss":{"Fec":"ROSE","Provider":"Semtech","Status":"Enabled","Type":"GNSS"}}}]}

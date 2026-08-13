@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"domainId":"__DomainId__","groupName":"__GroupName__","id":"__Id__","rolePrincipalArn":"__RolePrincipalArn__","rolePrincipalId":"__RolePrincipalId__","status":"ASSIGNED"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/xml
-Etag: __ETag__
-
-<KeyGroup xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Id>__Id__</Id><KeyGroupConfig><Comment>__Comment__</Comment><Items><PublicKey>__Member__</PublicKey><PublicKey>__Member__</PublicKey></Items><Name>__Name__</Name></KeyGroupConfig><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime></KeyGroup>

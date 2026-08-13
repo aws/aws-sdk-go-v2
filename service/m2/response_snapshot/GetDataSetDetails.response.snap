@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"blocksize":1,"creationTime":946684800,"dataSetName":"__DataSetName__","dataSetOrg":{"vsam":{"alternateKeys":[{"allowDuplicates":true,"length":1,"name":"__Name__","offset":1},{"allowDuplicates":true,"length":1,"name":"__Name__","offset":1}],"cacheAtStartup":true,"compressed":true,"encoding":"__Encoding__","primaryKey":{"length":1,"name":"__Name__","offset":1},"recordFormat":"__RecordFormat__"}},"fileSize":1,"lastReferencedTime":946684800,"lastUpdatedTime":946684800,"location":"__Location__","recordLength":1}

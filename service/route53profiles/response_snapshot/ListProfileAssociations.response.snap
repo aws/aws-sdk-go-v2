@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ProfileAssociations":[{"CreationTime":946684800,"Id":"__Id__","ModificationTime":946684800,"Name":"__Name__","OwnerId":"__OwnerId__","ProfileId":"__ProfileId__","ResourceId":"__ResourceId__","Status":"COMPLETE","StatusMessage":"__StatusMessage__"},{"CreationTime":946684800,"Id":"__Id__","ModificationTime":946684800,"Name":"__Name__","OwnerId":"__OwnerId__","ProfileId":"__ProfileId__","ResourceId":"__ResourceId__","Status":"COMPLETE","StatusMessage":"__StatusMessage__"}]}

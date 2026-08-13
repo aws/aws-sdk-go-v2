@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSCognitoIdentityProviderService.UpdateManagedLoginBranding
-
-{"ManagedLoginBranding":{"Assets":[{"Bytes":"YmxvYg==","Category":"FAVICON_ICO","ColorMode":"LIGHT","Extension":"ICO","ResourceId":"__ResourceId__"},{"Bytes":"YmxvYg==","Category":"FAVICON_ICO","ColorMode":"LIGHT","Extension":"ICO","ResourceId":"__ResourceId__"}],"CreationDate":946684800,"LastModifiedDate":946684800,"ManagedLoginBrandingId":"__ManagedLoginBrandingId__","Settings":"__Document__","UseCognitoProvidedValues":true,"UserPoolId":"__UserPoolId__"}}

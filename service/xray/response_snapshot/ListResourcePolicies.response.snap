@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ResourcePolicies":[{"LastUpdatedTime":946684800,"PolicyDocument":"__PolicyDocument__","PolicyName":"__PolicyName__","PolicyRevisionId":"__PolicyRevisionId__"},{"LastUpdatedTime":946684800,"PolicyDocument":"__PolicyDocument__","PolicyName":"__PolicyName__","PolicyRevisionId":"__PolicyRevisionId__"}]}

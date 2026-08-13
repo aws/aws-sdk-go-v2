@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DedicatedIp":{"Ip":"__Ip__","PoolName":"__PoolName__","WarmupPercentage":1,"WarmupStatus":"IN_PROGRESS"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","NotificationConfigurationList":[{"DestinationName":"__DestinationName__","EventType":"DEVICE_COMMAND"},{"DestinationName":"__DestinationName__","EventType":"DEVICE_COMMAND"}]}

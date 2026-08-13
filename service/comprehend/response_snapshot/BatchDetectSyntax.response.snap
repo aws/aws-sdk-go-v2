@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.BatchDetectSyntax
-
-{"ErrorList":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","Index":1},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","Index":1}],"ResultList":[{"Index":1,"SyntaxTokens":[{"BeginOffset":1,"EndOffset":1,"PartOfSpeech":{"Score":1,"Tag":"ADJ"},"Text":"__Text__","TokenId":1},{"BeginOffset":1,"EndOffset":1,"PartOfSpeech":{"Score":1,"Tag":"ADJ"},"Text":"__Text__","TokenId":1}]},{"Index":1,"SyntaxTokens":[{"BeginOffset":1,"EndOffset":1,"PartOfSpeech":{"Score":1,"Tag":"ADJ"},"Text":"__Text__","TokenId":1},{"BeginOffset":1,"EndOffset":1,"PartOfSpeech":{"Score":1,"Tag":"ADJ"},"Text":"__Text__","TokenId":1}]}]}

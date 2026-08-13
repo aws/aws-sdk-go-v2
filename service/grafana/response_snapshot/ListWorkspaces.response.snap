@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","workspaces":[{"authentication":{"providers":["AWS_SSO","AWS_SSO"],"samlConfigurationStatus":"CONFIGURED"},"created":946684800,"description":"__Description__","endpoint":"__Endpoint__","grafanaToken":"__GrafanaToken__","grafanaVersion":"__GrafanaVersion__","id":"__Id__","licenseType":"ENTERPRISE","modified":946684800,"name":"__Name__","notificationDestinations":["SNS","SNS"],"status":"ACTIVE","tags":{"key0":"__Value__"}},{"authentication":{"providers":["AWS_SSO","AWS_SSO"],"samlConfigurationStatus":"CONFIGURED"},"created":946684800,"description":"__Description__","endpoint":"__Endpoint__","grafanaToken":"__GrafanaToken__","grafanaVersion":"__GrafanaVersion__","id":"__Id__","licenseType":"ENTERPRISE","modified":946684800,"name":"__Name__","notificationDestinations":["SNS","SNS"],"status":"ACTIVE","tags":{"key0":"__Value__"}}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"linkedAccounts":[{"arn":"__Arn__","datasetId":"__DatasetId__","eventDestinations":[{"eventDestinationArn":"__EventDestinationArn__","roleArn":"__RoleArn__"},{"eventDestinationArn":"__EventDestinationArn__","roleArn":"__RoleArn__"}],"id":"__Id__","linkDate":946684800,"marketingMessagesOnboardingStatus":"__MarketingMessagesOnboardingStatus__","registrationStatus":"COMPLETE","wabaId":"__WabaId__","wabaName":"__WabaName__"},{"arn":"__Arn__","datasetId":"__DatasetId__","eventDestinations":[{"eventDestinationArn":"__EventDestinationArn__","roleArn":"__RoleArn__"},{"eventDestinationArn":"__EventDestinationArn__","roleArn":"__RoleArn__"}],"id":"__Id__","linkDate":946684800,"marketingMessagesOnboardingStatus":"__MarketingMessagesOnboardingStatus__","registrationStatus":"COMPLETE","wabaId":"__WabaId__","wabaName":"__WabaName__"}],"nextToken":"__NextToken__"}

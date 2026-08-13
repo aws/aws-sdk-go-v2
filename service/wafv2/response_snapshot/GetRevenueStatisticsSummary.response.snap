@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSWAF_20190729.GetRevenueStatisticsSummary
-
-{"RevenueBreakdown":{"Currency":"USDC","TotalAmount":"__TotalAmount__","TotalMonetizeServed":1,"TotalSettled":1,"UnverifiedAmount":"__UnverifiedAmount__","VerifiedAmount":"__VerifiedAmount__"}}

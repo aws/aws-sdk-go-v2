@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: CodeConnections_20231201.GetRepositorySyncStatus
-
-{"LatestSync":{"Events":[{"Event":"__Event__","ExternalId":"__ExternalId__","Time":946684800,"Type":"__Type__"},{"Event":"__Event__","ExternalId":"__ExternalId__","Time":946684800,"Type":"__Type__"}],"StartedAt":946684800,"Status":"FAILED"}}

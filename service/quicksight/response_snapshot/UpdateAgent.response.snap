@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AgentId":"__AgentId__","AgentStatus":"ACTIVE","Arn":"__Arn__","FailedToAddActionConnectors":[{"Arn":"__Arn__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},{"Arn":"__Arn__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}],"FailedToAddSpaces":[{"Arn":"__Arn__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},{"Arn":"__Arn__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}],"FailedToRemoveActionConnectors":[{"Arn":"__Arn__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},{"Arn":"__Arn__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}],"FailedToRemoveSpaces":[{"Arn":"__Arn__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},{"Arn":"__Arn__","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}],"RequestId":"__RequestId__"}

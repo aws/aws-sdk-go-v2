@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"description":"__Description__","packageArn":"__PackageArn__","packageName":"__PackageName__"}

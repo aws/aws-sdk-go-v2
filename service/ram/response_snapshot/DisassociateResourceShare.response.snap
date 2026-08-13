@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"clientToken":"__ClientToken__","resourceShareAssociations":[{"associatedEntity":"__AssociatedEntity__","associationType":"PRINCIPAL","creationTime":946684800,"external":true,"lastUpdatedTime":946684800,"resourceShareArn":"__ResourceShareArn__","resourceShareName":"__ResourceShareName__","status":"ASSOCIATING","statusMessage":"__StatusMessage__"},{"associatedEntity":"__AssociatedEntity__","associationType":"PRINCIPAL","creationTime":946684800,"external":true,"lastUpdatedTime":946684800,"resourceShareArn":"__ResourceShareArn__","resourceShareName":"__ResourceShareName__","status":"ASSOCIATING","statusMessage":"__StatusMessage__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListTrainingJobs
-
-{"NextToken":"__NextToken__","TrainingJobSummaries":[{"CreationTime":946684800,"LastModifiedTime":946684800,"SecondaryStatus":"Starting","TrainingEndTime":946684800,"TrainingJobArn":"__TrainingJobArn__","TrainingJobName":"__TrainingJobName__","TrainingJobStatus":"InProgress","TrainingPlanArn":"__TrainingPlanArn__","WarmPoolStatus":{"ResourceRetainedBillableTimeInSeconds":1,"ReusedByJob":"__ReusedByJob__","Status":"Available"}},{"CreationTime":946684800,"LastModifiedTime":946684800,"SecondaryStatus":"Starting","TrainingEndTime":946684800,"TrainingJobArn":"__TrainingJobArn__","TrainingJobName":"__TrainingJobName__","TrainingJobStatus":"InProgress","TrainingPlanArn":"__TrainingPlanArn__","WarmPoolStatus":{"ResourceRetainedBillableTimeInSeconds":1,"ReusedByJob":"__ReusedByJob__","Status":"Available"}}]}

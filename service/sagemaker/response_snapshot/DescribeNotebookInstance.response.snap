@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.DescribeNotebookInstance
-
-{"AcceleratorTypes":["ml.eia1.medium","ml.eia1.medium"],"AdditionalCodeRepositories":["__Member__","__Member__"],"CreationTime":946684800,"DefaultCodeRepository":"__DefaultCodeRepository__","DirectInternetAccess":"Enabled","FailureReason":"__FailureReason__","InstanceMetadataServiceConfiguration":{"MinimumInstanceMetadataServiceVersion":"__MinimumInstanceMetadataServiceVersion__"},"InstanceType":"ml.t2.medium","IpAddressType":"ipv4","KmsKeyId":"__KmsKeyId__","LastModifiedTime":946684800,"NetworkInterfaceId":"__NetworkInterfaceId__","NotebookInstanceArn":"__NotebookInstanceArn__","NotebookInstanceLifecycleConfigName":"__NotebookInstanceLifecycleConfigName__","NotebookInstanceName":"__NotebookInstanceName__","NotebookInstanceStatus":"Pending","PlatformIdentifier":"__PlatformIdentifier__","RoleArn":"__RoleArn__","RootAccess":"Enabled","SecurityGroups":["__Member__","__Member__"],"SubnetId":"__SubnetId__","Url":"__Url__","VolumeSizeInGB":1}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AllocatedProvisionedConcurrentExecutions":1,"AvailableProvisionedConcurrentExecutions":1,"LastModified":"__LastModified__","RequestedProvisionedConcurrentExecutions":1,"Status":"IN_PROGRESS","StatusReason":"__StatusReason__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BillingGroupCostReportResults":[{"AWSCost":"__AWSCost__","Arn":"__Arn__","Attributes":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Currency":"__Currency__","Margin":"__Margin__","MarginPercentage":"__MarginPercentage__","ProformaCost":"__ProformaCost__"},{"AWSCost":"__AWSCost__","Arn":"__Arn__","Attributes":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Currency":"__Currency__","Margin":"__Margin__","MarginPercentage":"__MarginPercentage__","ProformaCost":"__ProformaCost__"}],"NextToken":"__NextToken__"}

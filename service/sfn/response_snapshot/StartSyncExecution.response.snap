@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSStepFunctions.StartSyncExecution
-
-{"billingDetails":{"billedDurationInMilliseconds":1,"billedMemoryUsedInMB":1},"cause":"__Cause__","error":"__Error__","executionArn":"__ExecutionArn__","input":"__Input__","inputDetails":{"included":true},"name":"__Name__","output":"__Output__","outputDetails":{"included":true},"startDate":946684800,"stateMachineArn":"__StateMachineArn__","status":"SUCCEEDED","stopDate":946684800,"traceHeader":"__TraceHeader__"}

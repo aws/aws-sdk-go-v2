@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","AssociationSize":1,"BillingGroupArn":"__BillingGroupArn__","ChargeDetails":{"Flat":{"ChargeValue":1},"LineItemFilters":[{"Attribute":"LINE_ITEM_TYPE","AttributeValues":["__Member__","__Member__"],"MatchOption":"NOT_EQUAL","Values":["SAVINGS_PLAN_NEGATION","SAVINGS_PLAN_NEGATION"]},{"Attribute":"LINE_ITEM_TYPE","AttributeValues":["__Member__","__Member__"],"MatchOption":"NOT_EQUAL","Values":["SAVINGS_PLAN_NEGATION","SAVINGS_PLAN_NEGATION"]}],"Percentage":{"PercentageValue":1},"Type":"CREDIT"},"Description":"__Description__","LastModifiedTime":1,"Name":"__Name__"}

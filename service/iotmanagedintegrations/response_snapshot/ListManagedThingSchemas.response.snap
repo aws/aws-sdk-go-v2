@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"CapabilityId":"__CapabilityId__","EndpointId":"__EndpointId__","Schema":"__Document__"},{"CapabilityId":"__CapabilityId__","EndpointId":"__EndpointId__","Schema":"__Document__"}],"NextToken":"__NextToken__"}

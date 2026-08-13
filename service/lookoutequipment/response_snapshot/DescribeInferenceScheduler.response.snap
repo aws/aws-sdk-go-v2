@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.DescribeInferenceScheduler
-
-{"CreatedAt":946684800,"DataDelayOffsetInMinutes":1,"DataInputConfiguration":{"InferenceInputNameConfiguration":{"ComponentTimestampDelimiter":"__ComponentTimestampDelimiter__","TimestampFormat":"__TimestampFormat__"},"InputTimeZoneOffset":"__InputTimeZoneOffset__","S3InputConfiguration":{"Bucket":"__Bucket__","Prefix":"__Prefix__"}},"DataOutputConfiguration":{"KmsKeyId":"__KmsKeyId__","S3OutputConfiguration":{"Bucket":"__Bucket__","Prefix":"__Prefix__"}},"DataUploadFrequency":"PT5M","InferenceSchedulerArn":"__InferenceSchedulerArn__","InferenceSchedulerName":"__InferenceSchedulerName__","LatestInferenceResult":"ANOMALOUS","ModelArn":"__ModelArn__","ModelName":"__ModelName__","RoleArn":"__RoleArn__","ServerSideKmsKeyId":"__ServerSideKmsKeyId__","Status":"PENDING","UpdatedAt":946684800}

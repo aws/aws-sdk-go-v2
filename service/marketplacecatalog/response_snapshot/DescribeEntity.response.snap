@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Details":"__Details__","DetailsDocument":"__Document__","EntityArn":"__EntityArn__","EntityIdentifier":"__EntityIdentifier__","EntityType":"__EntityType__","LastModifiedDate":"__LastModifiedDate__"}

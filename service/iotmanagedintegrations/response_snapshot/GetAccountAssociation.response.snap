@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AccountAssociationId":"__AccountAssociationId__","Arn":"__Arn__","AssociationState":"ASSOCIATION_IN_PROGRESS","ConnectorDestinationId":"__ConnectorDestinationId__","Description":"__Description__","ErrorMessage":"__ErrorMessage__","GeneralAuthorization":{"AuthMaterialName":"__AuthMaterialName__"},"Name":"__Name__","OAuthAuthorizationUrl":"__OAuthAuthorizationUrl__","Tags":{"key0":"__Value__"}}

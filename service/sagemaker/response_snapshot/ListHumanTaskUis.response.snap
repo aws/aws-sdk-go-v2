@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListHumanTaskUis
-
-{"HumanTaskUiSummaries":[{"CreationTime":946684800,"HumanTaskUiArn":"__HumanTaskUiArn__","HumanTaskUiName":"__HumanTaskUiName__"},{"CreationTime":946684800,"HumanTaskUiArn":"__HumanTaskUiArn__","HumanTaskUiName":"__HumanTaskUiName__"}],"NextToken":"__NextToken__"}

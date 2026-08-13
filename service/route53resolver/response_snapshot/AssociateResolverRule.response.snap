@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Resolver.AssociateResolverRule
-
-{"ResolverRuleAssociation":{"Id":"__Id__","Name":"__Name__","ResolverRuleId":"__ResolverRuleId__","Status":"CREATING","StatusMessage":"__StatusMessage__","VPCId":"__VPCId__"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","schemaList":[{"createdAt":946684800,"hasWorkflows":true,"schemaArn":"__SchemaArn__","schemaName":"__SchemaName__","updatedAt":946684800},{"createdAt":946684800,"hasWorkflows":true,"schemaArn":"__SchemaArn__","schemaName":"__SchemaName__","updatedAt":946684800}]}

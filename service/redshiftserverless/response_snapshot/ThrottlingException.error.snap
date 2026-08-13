@@ -1,5 +1,0 @@
-429
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RedshiftServerless.CreateCustomDomainAssociation
-
-{"__type":"ThrottlingException","code":"ThrottlingException","message":"__Message__"}

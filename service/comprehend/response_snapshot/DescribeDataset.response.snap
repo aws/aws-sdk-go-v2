@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.DescribeDataset
-
-{"DatasetProperties":{"CreationTime":946684800,"DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","DatasetS3Uri":"__DatasetS3Uri__","DatasetType":"TRAIN","Description":"__Description__","EndTime":946684800,"Message":"__Message__","NumberOfDocuments":1,"Status":"CREATING"}}

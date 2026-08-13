@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"accessPointArn":"__AccessPointArn__","accessPointId":"__AccessPointId__","clientToken":"__ClientToken__","fileSystemId":"__FileSystemId__","name":"__Name__","ownerId":"__OwnerId__","posixUser":{"gid":1,"secondaryGids":[1,1],"uid":1},"rootDirectory":{"creationPermissions":{"ownerGid":1,"ownerUid":1,"permissions":"__Permissions__"},"path":"__Path__"},"status":"available","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

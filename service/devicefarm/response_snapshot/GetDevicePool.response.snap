@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DeviceFarm_20150623.GetDevicePool
-
-{"devicePool":{"arn":"__Arn__","description":"__Description__","maxDevices":1,"name":"__Name__","rules":[{"attribute":"ARN","operator":"EQUALS","value":"__Value__"},{"attribute":"ARN","operator":"EQUALS","value":"__Value__"}],"type":"CURATED"}}

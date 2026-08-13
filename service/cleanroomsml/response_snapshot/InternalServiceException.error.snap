@@ -1,4 +1,0 @@
-500
-Content-Type: application/json
-
-{"__type":"InternalServiceException","message":"__Message__"}

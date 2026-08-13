@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","totals":[{"accountId":"__AccountId__","usage":[{"cloudProvider":"AWS","currency":"USD","estimatedMonthlyCost":1,"total":1,"type":"EC2_INSTANCE_HOURS"},{"cloudProvider":"AWS","currency":"USD","estimatedMonthlyCost":1,"total":1,"type":"EC2_INSTANCE_HOURS"}]},{"accountId":"__AccountId__","usage":[{"cloudProvider":"AWS","currency":"USD","estimatedMonthlyCost":1,"total":1,"type":"EC2_INSTANCE_HOURS"},{"cloudProvider":"AWS","currency":"USD","estimatedMonthlyCost":1,"total":1,"type":"EC2_INSTANCE_HOURS"}]}]}

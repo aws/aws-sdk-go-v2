@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSFreeTierService.GetFreeTierUsage
-
-{"freeTierUsages":[{"actualUsageAmount":1,"description":"__Description__","forecastedUsageAmount":1,"freeTierType":"__FreeTierType__","limit":1,"operation":"__Operation__","region":"__Region__","service":"__Service__","unit":"__Unit__","usageType":"__UsageType__"},{"actualUsageAmount":1,"description":"__Description__","forecastedUsageAmount":1,"freeTierType":"__FreeTierType__","limit":1,"operation":"__Operation__","region":"__Region__","service":"__Service__","unit":"__Unit__","usageType":"__UsageType__"}],"nextToken":"__NextToken__"}

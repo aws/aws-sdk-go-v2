@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","botRecommendationId":"__BotRecommendationId__","botVersion":"__BotVersion__","localeId":"__LocaleId__","nextToken":"__NextToken__","summaryList":[{"intentId":"__IntentId__","intentName":"__IntentName__","sampleUtterancesCount":1},{"intentId":"__IntentId__","intentName":"__IntentName__","sampleUtterancesCount":1}]}

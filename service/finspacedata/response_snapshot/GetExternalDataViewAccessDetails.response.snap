@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"credentials":{"accessKeyId":"__AccessKeyId__","expiration":1,"secretAccessKey":"__SecretAccessKey__","sessionToken":"__SessionToken__"},"s3Location":{"bucket":"__Bucket__","key":"__Key__"}}

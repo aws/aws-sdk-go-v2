@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: InspectorService.GetTelemetryMetadata
-
-{"telemetryMetadata":[{"count":1,"dataSize":1,"messageType":"__MessageType__"},{"count":1,"dataSize":1,"messageType":"__MessageType__"}]}

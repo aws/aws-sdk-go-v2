@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CatalogItems":[{"CatalogItemId":"__CatalogItemId__","EC2Capacities":[{"Family":"__Family__","MaxSize":"__MaxSize__","Quantity":"__Quantity__"},{"Family":"__Family__","MaxSize":"__MaxSize__","Quantity":"__Quantity__"}],"ItemStatus":"AVAILABLE","PowerKva":1,"SupportedStorage":["EBS","EBS"],"SupportedUplinkGbps":[1,1],"WeightLbs":1},{"CatalogItemId":"__CatalogItemId__","EC2Capacities":[{"Family":"__Family__","MaxSize":"__MaxSize__","Quantity":"__Quantity__"},{"Family":"__Family__","MaxSize":"__MaxSize__","Quantity":"__Quantity__"}],"ItemStatus":"AVAILABLE","PowerKva":1,"SupportedStorage":["EBS","EBS"],"SupportedUplinkGbps":[1,1],"WeightLbs":1}],"NextToken":"__NextToken__"}

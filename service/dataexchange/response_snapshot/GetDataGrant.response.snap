@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AcceptanceState":"PENDING_RECEIVER_ACCEPTANCE","AcceptedAt":"2000-01-01T00:00:00Z","Arn":"__Arn__","CreatedAt":"2000-01-01T00:00:00Z","DataSetId":"__DataSetId__","Description":"__Description__","EndsAt":"2000-01-01T00:00:00Z","GrantDistributionScope":"AWS_ORGANIZATION","Id":"__Id__","Name":"__Name__","ReceiverPrincipal":"__ReceiverPrincipal__","SenderPrincipal":"__SenderPrincipal__","SourceDataSetId":"__SourceDataSetId__","Tags":{"key0":"__Value__"},"UpdatedAt":"2000-01-01T00:00:00Z"}

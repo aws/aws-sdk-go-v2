@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobSummaries":[{"dataAccessRoleArn":"__DataAccessRoleArn__","datastoreId":"__DatastoreId__","endedAt":946684800,"jobId":"__JobId__","jobName":"__JobName__","jobStatus":"SUBMITTED","message":"__Message__","submittedAt":946684800},{"dataAccessRoleArn":"__DataAccessRoleArn__","datastoreId":"__DatastoreId__","endedAt":946684800,"jobId":"__JobId__","jobName":"__JobName__","jobStatus":"SUBMITTED","message":"__Message__","submittedAt":946684800}],"nextToken":"__NextToken__"}

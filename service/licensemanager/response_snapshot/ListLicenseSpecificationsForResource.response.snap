@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSLicenseManager.ListLicenseSpecificationsForResource
-
-{"LicenseSpecifications":[{"AmiAssociationScope":"__AmiAssociationScope__","LicenseConfigurationArn":"__LicenseConfigurationArn__"},{"AmiAssociationScope":"__AmiAssociationScope__","LicenseConfigurationArn":"__LicenseConfigurationArn__"}],"NextToken":"__NextToken__"}

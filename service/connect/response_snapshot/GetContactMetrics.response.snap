@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","Id":"__Id__","MetricResults":[{"Name":"ESTIMATED_WAIT_TIME","Value":{"Number":1}},{"Name":"ESTIMATED_WAIT_TIME","Value":{"Number":1}}]}

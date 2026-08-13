@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"executionId":"__ExecutionId__","flowArn":"__FlowArn__","flowStatus":"Active"}

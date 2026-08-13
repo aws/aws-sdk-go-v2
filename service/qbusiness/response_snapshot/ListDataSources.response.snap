@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"dataSources":[{"createdAt":946684800,"dataSourceId":"__DataSourceId__","displayName":"__DisplayName__","status":"PENDING_CREATION","type":"__Type__","updatedAt":946684800},{"createdAt":946684800,"dataSourceId":"__DataSourceId__","displayName":"__DisplayName__","status":"PENDING_CREATION","type":"__Type__","updatedAt":946684800}],"nextToken":"__NextToken__"}

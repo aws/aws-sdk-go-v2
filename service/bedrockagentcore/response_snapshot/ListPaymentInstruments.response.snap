@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","paymentInstruments":[{"createdAt":"2000-01-01T00:00:00Z","paymentConnectorId":"__PaymentConnectorId__","paymentInstrumentId":"__PaymentInstrumentId__","paymentInstrumentType":"EMBEDDED_CRYPTO_WALLET","paymentManagerArn":"__PaymentManagerArn__","status":"INITIATED","updatedAt":"2000-01-01T00:00:00Z","userId":"__UserId__"},{"createdAt":"2000-01-01T00:00:00Z","paymentConnectorId":"__PaymentConnectorId__","paymentInstrumentId":"__PaymentInstrumentId__","paymentInstrumentType":"EMBEDDED_CRYPTO_WALLET","paymentManagerArn":"__PaymentManagerArn__","status":"INITIATED","updatedAt":"2000-01-01T00:00:00Z","userId":"__UserId__"}]}

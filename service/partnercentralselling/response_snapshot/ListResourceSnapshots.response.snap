@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSPartnerCentralSelling.ListResourceSnapshots
-
-{"NextToken":"__NextToken__","ResourceSnapshotSummaries":[{"Arn":"__Arn__","CreatedBy":"__CreatedBy__","ResourceId":"__ResourceId__","ResourceSnapshotTemplateName":"__ResourceSnapshotTemplateName__","ResourceType":"Opportunity","Revision":1},{"Arn":"__Arn__","CreatedBy":"__CreatedBy__","ResourceId":"__ResourceId__","ResourceSnapshotTemplateName":"__ResourceSnapshotTemplateName__","ResourceType":"Opportunity","Revision":1}]}

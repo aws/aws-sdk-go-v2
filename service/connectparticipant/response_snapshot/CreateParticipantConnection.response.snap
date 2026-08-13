@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ConnectionCredentials":{"ConnectionToken":"__ConnectionToken__","Expiry":"__Expiry__"},"WebRTCConnection":{"Attendee":{"AttendeeId":"__AttendeeId__","JoinToken":"__JoinToken__"},"Meeting":{"MediaPlacement":{"AudioFallbackUrl":"__AudioFallbackUrl__","AudioHostUrl":"__AudioHostUrl__","EventIngestionUrl":"__EventIngestionUrl__","SignalingUrl":"__SignalingUrl__"},"MeetingFeatures":{"Audio":{"EchoReduction":"AVAILABLE"}},"MeetingId":"__MeetingId__"}},"Websocket":{"ConnectionExpiry":"__ConnectionExpiry__","Url":"__Url__"}}

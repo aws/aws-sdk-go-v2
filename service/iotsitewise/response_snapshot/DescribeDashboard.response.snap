@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"dashboardArn":"__DashboardArn__","dashboardCreationDate":946684800,"dashboardDefinition":"__DashboardDefinition__","dashboardDescription":"__DashboardDescription__","dashboardId":"__DashboardId__","dashboardLastUpdateDate":946684800,"dashboardName":"__DashboardName__","projectId":"__ProjectId__"}

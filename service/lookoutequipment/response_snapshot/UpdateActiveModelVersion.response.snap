@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSLookoutEquipmentFrontendService.UpdateActiveModelVersion
-
-{"CurrentActiveVersion":1,"CurrentActiveVersionArn":"__CurrentActiveVersionArn__","ModelArn":"__ModelArn__","ModelName":"__ModelName__","PreviousActiveVersion":1,"PreviousActiveVersionArn":"__PreviousActiveVersionArn__"}

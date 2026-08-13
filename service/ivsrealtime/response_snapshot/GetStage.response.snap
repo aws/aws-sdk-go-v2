@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"stage":{"activeSessionId":"__ActiveSessionId__","arn":"__Arn__","autoParticipantRecordingConfiguration":{"hlsConfiguration":{"targetSegmentDurationSeconds":1},"mediaTypes":["AUDIO_VIDEO","AUDIO_VIDEO"],"recordParticipantReplicas":true,"recordingReconnectWindowSeconds":1,"storageConfigurationArn":"__StorageConfigurationArn__","thumbnailConfiguration":{"recordingMode":"INTERVAL","storage":["SEQUENTIAL","SEQUENTIAL"],"targetIntervalSeconds":1}},"endpoints":{"events":"__Events__","rtmp":"__Rtmp__","rtmps":"__Rtmps__","whip":"__Whip__"},"name":"__Name__","tags":{"key0":"__Value__"}}}

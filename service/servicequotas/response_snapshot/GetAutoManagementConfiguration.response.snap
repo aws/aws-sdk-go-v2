@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ServiceQuotasV20190624.GetAutoManagementConfiguration
-
-{"ExclusionList":{"key0":[{"QuotaCode":"__QuotaCode__","QuotaName":"__QuotaName__"},{"QuotaCode":"__QuotaCode__","QuotaName":"__QuotaName__"}]},"NotificationArn":"__NotificationArn__","OptInLevel":"ACCOUNT","OptInStatus":"ENABLED","OptInType":"NotifyOnly"}

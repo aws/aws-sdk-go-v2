@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"TieringConfiguration":{"BackupVaultName":"__BackupVaultName__","CreationTime":946684800,"CreatorRequestId":"__CreatorRequestId__","LastUpdatedTime":946684800,"ResourceSelection":[{"ResourceType":"__ResourceType__","Resources":["__Member__","__Member__"],"TieringDownSettingsInDays":1},{"ResourceType":"__ResourceType__","Resources":["__Member__","__Member__"],"TieringDownSettingsInDays":1}],"TieringConfigurationArn":"__TieringConfigurationArn__","TieringConfigurationName":"__TieringConfigurationName__"}}

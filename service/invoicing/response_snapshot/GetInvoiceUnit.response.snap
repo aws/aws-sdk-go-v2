@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Invoicing.GetInvoiceUnit
-
-{"Description":"__Description__","InvoiceReceiver":"__InvoiceReceiver__","InvoiceUnitArn":"__InvoiceUnitArn__","LastModified":946684800,"Name":"__Name__","Rule":{"BillSourceAccounts":["__Member__","__Member__"],"LinkedAccounts":["__Member__","__Member__"]},"TaxInheritanceDisabled":true}

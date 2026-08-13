@@ -1,4 +1,0 @@
-403
-Content-Type: application/xml
-
-<ErrorResponse><Error><Code>AccessDenied</Code><Message>__Message__</Message></Error></ErrorResponse>

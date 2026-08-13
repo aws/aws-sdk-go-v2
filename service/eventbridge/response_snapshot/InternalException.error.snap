@@ -1,5 +1,0 @@
-500
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSEvents.ActivateEventSource
-
-{"__type":"InternalException","message":"__Message__"}

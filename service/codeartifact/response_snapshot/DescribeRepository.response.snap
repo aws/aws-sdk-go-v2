@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"repository":{"administratorAccount":"__AdministratorAccount__","arn":"__Arn__","createdTime":946684800,"description":"__Description__","domainName":"__DomainName__","domainOwner":"__DomainOwner__","externalConnections":[{"externalConnectionName":"__ExternalConnectionName__","packageFormat":"npm","status":"Available"},{"externalConnectionName":"__ExternalConnectionName__","packageFormat":"npm","status":"Available"}],"name":"__Name__","upstreams":[{"repositoryName":"__RepositoryName__"},{"repositoryName":"__RepositoryName__"}]}}

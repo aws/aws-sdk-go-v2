@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Odb.ListAutonomousDatabaseVersions
-
-{"autonomousDatabaseVersions":[{"dbWorkload":"OLTP","details":"__Details__","version":"__Version__"},{"dbWorkload":"OLTP","details":"__Details__","version":"__Version__"}],"nextToken":"__NextToken__"}

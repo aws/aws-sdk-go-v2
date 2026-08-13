@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonPersonalize.ListRecommenders
-
-{"nextToken":"__NextToken__","recommenders":[{"creationDateTime":946684800,"datasetGroupArn":"__DatasetGroupArn__","lastUpdatedDateTime":946684800,"name":"__Name__","recipeArn":"__RecipeArn__","recommenderArn":"__RecommenderArn__","recommenderConfig":{"enableMetadataWithRecommendations":true,"itemExplorationConfig":{"key0":"__Value__"},"minRecommendationRequestsPerSecond":1,"trainingDataConfig":{"excludedDatasetColumns":{"key0":["__Member__","__Member__"]},"includedDatasetColumns":{"key0":["__Member__","__Member__"]}}},"status":"__Status__"},{"creationDateTime":946684800,"datasetGroupArn":"__DatasetGroupArn__","lastUpdatedDateTime":946684800,"name":"__Name__","recipeArn":"__RecipeArn__","recommenderArn":"__RecommenderArn__","recommenderConfig":{"enableMetadataWithRecommendations":true,"itemExplorationConfig":{"key0":"__Value__"},"minRecommendationRequestsPerSecond":1,"trainingDataConfig":{"excludedDatasetColumns":{"key0":["__Member__","__Member__"]},"includedDatasetColumns":{"key0":["__Member__","__Member__"]}}},"status":"__Status__"}]}

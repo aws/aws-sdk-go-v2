@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"continuationToken":"__ContinuationToken__","tables":[{"createdAt":"2000-01-01T00:00:00Z","managedByService":"__ManagedByService__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","namespace":["__Member__","__Member__"],"namespaceId":"__NamespaceId__","tableARN":"__TableARN__","tableBucketId":"__TableBucketId__","type":"customer"},{"createdAt":"2000-01-01T00:00:00Z","managedByService":"__ManagedByService__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","namespace":["__Member__","__Member__"],"namespaceId":"__NamespaceId__","tableARN":"__TableARN__","tableBucketId":"__TableBucketId__","type":"customer"}]}

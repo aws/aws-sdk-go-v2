@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"completedAt":946684800,"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","id":"__Id__","notebookId":"__NotebookId__","owningProjectId":"__OwningProjectId__","scheduleId":"__ScheduleId__","startedAt":946684800,"status":"QUEUED","triggerSource":{"name":"__Name__","type":"MANUAL"},"updatedAt":946684800,"updatedBy":"__UpdatedBy__"},{"completedAt":946684800,"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","id":"__Id__","notebookId":"__NotebookId__","owningProjectId":"__OwningProjectId__","scheduleId":"__ScheduleId__","startedAt":946684800,"status":"QUEUED","triggerSource":{"name":"__Name__","type":"MANUAL"},"updatedAt":946684800,"updatedBy":"__UpdatedBy__"}],"nextToken":"__NextToken__"}

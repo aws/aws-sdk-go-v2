@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"RepositoryAssociation":{"AssociationArn":"__AssociationArn__","AssociationId":"__AssociationId__","ConnectionArn":"__ConnectionArn__","CreatedTimeStamp":946684800,"KMSKeyDetails":{"EncryptionOption":"AWS_OWNED_CMK","KMSKeyId":"__KMSKeyId__"},"LastUpdatedTimeStamp":946684800,"Name":"__Name__","Owner":"__Owner__","ProviderType":"CodeCommit","S3RepositoryDetails":{"BucketName":"__BucketName__","CodeArtifacts":{"BuildArtifactsObjectKey":"__BuildArtifactsObjectKey__","SourceCodeArtifactsObjectKey":"__SourceCodeArtifactsObjectKey__"}},"State":"Associated","StateReason":"__StateReason__"},"Tags":{"key0":"__Value__"}}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"executionStatus":"ENABLED","failureReason":"__FailureReason__","onlineEvaluationConfigArn":"__OnlineEvaluationConfigArn__","onlineEvaluationConfigId":"__OnlineEvaluationConfigId__","outputConfig":{"cloudWatchConfig":{"logGroupName":"__LogGroupName__"}},"status":"ACTIVE"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: VerifiedPermissions.BatchIsAuthorized
-
-{"results":[{"decision":"ALLOW","determiningPolicies":[{"policyId":"__PolicyId__"},{"policyId":"__PolicyId__"}],"errors":[{"errorDescription":"__ErrorDescription__"},{"errorDescription":"__ErrorDescription__"}],"request":{"action":{"actionId":"__ActionId__","actionType":"__ActionType__"},"context":{"contextMap":{"key0":{"boolean":true}}},"principal":{"entityId":"__EntityId__","entityType":"__EntityType__"},"resource":{"entityId":"__EntityId__","entityType":"__EntityType__"}}},{"decision":"ALLOW","determiningPolicies":[{"policyId":"__PolicyId__"},{"policyId":"__PolicyId__"}],"errors":[{"errorDescription":"__ErrorDescription__"},{"errorDescription":"__ErrorDescription__"}],"request":{"action":{"actionId":"__ActionId__","actionType":"__ActionType__"},"context":{"contextMap":{"key0":{"boolean":true}}},"principal":{"entityId":"__EntityId__","entityType":"__EntityType__"},"resource":{"entityId":"__EntityId__","entityType":"__EntityType__"}}}]}

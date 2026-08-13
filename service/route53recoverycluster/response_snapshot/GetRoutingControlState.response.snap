@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: ToggleCustomerAPI.GetRoutingControlState
-
-{"RoutingControlArn":"__RoutingControlArn__","RoutingControlName":"__RoutingControlName__","RoutingControlState":"On"}

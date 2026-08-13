@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CompatibleArchitectures":["x86_64","x86_64"],"CompatibleRuntimes":["nodejs","nodejs"],"Content":{"CodeSha256":"__CodeSha256__","CodeSize":1,"Location":"__Location__","ResolvedS3Object":{"S3Bucket":"__S3Bucket__","S3Key":"__S3Key__","S3ObjectVersion":"__S3ObjectVersion__"},"SigningJobArn":"__SigningJobArn__","SigningProfileVersionArn":"__SigningProfileVersionArn__"},"CreatedDate":"__CreatedDate__","Description":"__Description__","LayerArn":"__LayerArn__","LayerVersionArn":"__LayerVersionArn__","LicenseInfo":"__LicenseInfo__","Version":1}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<KeyValueStoreList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Items><KeyValueStore><ARN>__ARN__</ARN><Comment>__Comment__</Comment><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><Status>__Status__</Status></KeyValueStore><KeyValueStore><ARN>__ARN__</ARN><Comment>__Comment__</Comment><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><Status>__Status__</Status></KeyValueStore></Items><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></KeyValueStoreList>

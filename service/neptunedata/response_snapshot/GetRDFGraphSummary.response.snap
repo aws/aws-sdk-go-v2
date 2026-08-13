@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"payload":{"graphSummary":{"classes":["__Member__","__Member__"],"numClasses":1,"numDistinctPredicates":1,"numDistinctSubjects":1,"numQuads":1,"predicates":[{"key0":1},{"key0":1}],"subjectStructures":[{"count":1,"predicates":["__Member__","__Member__"]},{"count":1,"predicates":["__Member__","__Member__"]}]},"lastStatisticsComputationTime":"2000-01-01T00:00:00Z","version":"__Version__"},"statusCode":200}

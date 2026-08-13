@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"attachment":{"attachmentId":"__AttachmentId__","contentDisposition":"ATTACHMENT","name":"__Name__","uploadedTime":"2000-01-01T00:00:00Z","url":"__Url__","urlExpiry":"2000-01-01T00:00:00Z"}}

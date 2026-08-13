@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.AssociateDRTLogBucket
-
-{"__type":"InvalidParameterException","fields":[{"message":"__Message__","name":"__Name__"},{"message":"__Message__","name":"__Name__"}],"message":"__Message__","reason":"FIELD_VALIDATION_FAILED"}

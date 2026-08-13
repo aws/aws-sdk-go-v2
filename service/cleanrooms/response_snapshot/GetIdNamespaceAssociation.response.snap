@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"idNamespaceAssociation":{"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"description":"__Description__","id":"__Id__","idMappingConfig":{"allowUseAsDimensionColumn":true},"inputReferenceConfig":{"inputReferenceArn":"__InputReferenceArn__","manageResourcePolicies":true},"inputReferenceProperties":{"idMappingWorkflowsSupported":["__Document__","__Document__"],"idNamespaceType":"SOURCE"},"membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","updateTime":946684800}}

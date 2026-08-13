@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListPipelineExecutions
-
-{"NextToken":"__NextToken__","PipelineExecutionSummaries":[{"PipelineExecutionArn":"__PipelineExecutionArn__","PipelineExecutionDescription":"__PipelineExecutionDescription__","PipelineExecutionDisplayName":"__PipelineExecutionDisplayName__","PipelineExecutionFailureReason":"__PipelineExecutionFailureReason__","PipelineExecutionStatus":"Executing","StartTime":946684800},{"PipelineExecutionArn":"__PipelineExecutionArn__","PipelineExecutionDescription":"__PipelineExecutionDescription__","PipelineExecutionDisplayName":"__PipelineExecutionDisplayName__","PipelineExecutionFailureReason":"__PipelineExecutionFailureReason__","PipelineExecutionStatus":"Executing","StartTime":946684800}]}

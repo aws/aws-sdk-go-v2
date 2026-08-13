@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSSimbaAPIService_v20180301.UpdateDataRepositoryAssociation
-
-{"Association":{"AssociationId":"__AssociationId__","BatchImportMetaDataOnCreate":true,"CreationTime":946684800,"DataRepositoryPath":"__DataRepositoryPath__","DataRepositorySubdirectories":["__Member__","__Member__"],"FailureDetails":{"Message":"__Message__"},"FileCacheId":"__FileCacheId__","FileCachePath":"__FileCachePath__","FileSystemId":"__FileSystemId__","FileSystemPath":"__FileSystemPath__","ImportedFileChunkSize":1,"Lifecycle":"CREATING","NFS":{"AutoExportPolicy":{"Events":["NEW","NEW"]},"DnsIps":["__Member__","__Member__"],"Version":"NFS3"},"ResourceARN":"__ResourceARN__","S3":{"AutoExportPolicy":{"Events":["NEW","NEW"]},"AutoImportPolicy":{"Events":["NEW","NEW"]}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}}

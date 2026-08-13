@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"HomeRegions":["__Member__","__Member__"],"LinuxSubscriptionsDiscovery":"Enabled","LinuxSubscriptionsDiscoverySettings":{"OrganizationIntegration":"Enabled","SourceRegions":["__Member__","__Member__"]},"Status":"InProgress","StatusMessage":{"key0":"__Value__"}}

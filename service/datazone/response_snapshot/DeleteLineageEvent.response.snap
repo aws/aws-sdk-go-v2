@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"domainId":"__DomainId__","id":"__Id__","processingStatus":"REQUESTED"}

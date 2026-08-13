@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.DescribeAggregationAuthorizations
-
-{"AggregationAuthorizations":[{"AggregationAuthorizationArn":"__AggregationAuthorizationArn__","AuthorizedAccountId":"__AuthorizedAccountId__","AuthorizedAwsRegion":"__AuthorizedAwsRegion__","CreationTime":946684800},{"AggregationAuthorizationArn":"__AggregationAuthorizationArn__","AuthorizedAccountId":"__AuthorizedAccountId__","AuthorizedAwsRegion":"__AuthorizedAwsRegion__","CreationTime":946684800}],"NextToken":"__NextToken__"}

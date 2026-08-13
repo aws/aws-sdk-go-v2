@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StarlingDoveService.DescribeRetentionConfigurations
-
-{"NextToken":"__NextToken__","RetentionConfigurations":[{"Name":"__Name__","RetentionPeriodInDays":1},{"Name":"__Name__","RetentionPeriodInDays":1}]}

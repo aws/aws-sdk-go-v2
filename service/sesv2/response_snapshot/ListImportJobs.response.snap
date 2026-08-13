@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ImportJobs":[{"CreatedTimestamp":946684800,"FailedRecordsCount":1,"ImportDestination":{"ContactListDestination":{"ContactListImportAction":"DELETE","ContactListName":"__ContactListName__"},"SuppressionListDestination":{"SuppressionListImportAction":"DELETE"}},"JobId":"__JobId__","JobStatus":"CREATED","ProcessedRecordsCount":1},{"CreatedTimestamp":946684800,"FailedRecordsCount":1,"ImportDestination":{"ContactListDestination":{"ContactListImportAction":"DELETE","ContactListName":"__ContactListName__"},"SuppressionListDestination":{"SuppressionListImportAction":"DELETE"}},"JobId":"__JobId__","JobStatus":"CREATED","ProcessedRecordsCount":1}],"NextToken":"__NextToken__"}

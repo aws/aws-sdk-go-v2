@@ -1,5 +1,0 @@
-500
-Content-Type: application/json
-Retry-After: 1
-
-{"__type":"InternalServerException","message":"__Message__","reason":"FAILED_TO_GENERATE_SBOM"}

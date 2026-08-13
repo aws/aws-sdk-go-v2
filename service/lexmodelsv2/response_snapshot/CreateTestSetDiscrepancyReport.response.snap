@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"creationDateTime":946684800,"target":{"botAliasTarget":{"botAliasId":"__BotAliasId__","botId":"__BotId__","localeId":"__LocaleId__"}},"testSetDiscrepancyReportId":"__TestSetDiscrepancyReportId__","testSetId":"__TestSetId__"}

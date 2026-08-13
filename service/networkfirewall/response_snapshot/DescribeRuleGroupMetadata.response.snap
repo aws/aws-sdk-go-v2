@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.DescribeRuleGroupMetadata
-
-{"Capacity":1,"Description":"__Description__","LastModifiedTime":946684800,"ListingName":"__ListingName__","ProductId":"__ProductId__","RuleGroupArn":"__RuleGroupArn__","RuleGroupName":"__RuleGroupName__","StatefulRuleOptions":{"RuleOrder":"DEFAULT_ACTION_ORDER"},"Type":"STATELESS","VendorName":"__VendorName__"}

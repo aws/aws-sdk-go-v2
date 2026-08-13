@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Schedules":[{"AccountId":"__AccountId__","CreateDate":946684800,"CreatedBy":"__CreatedBy__","CronExpression":"__CronExpression__","JobNames":["__Member__","__Member__"],"LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":946684800,"Name":"__Name__","ResourceArn":"__ResourceArn__","Tags":{"key0":"__Value__"}},{"AccountId":"__AccountId__","CreateDate":946684800,"CreatedBy":"__CreatedBy__","CronExpression":"__CronExpression__","JobNames":["__Member__","__Member__"],"LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":946684800,"Name":"__Name__","ResourceArn":"__ResourceArn__","Tags":{"key0":"__Value__"}}]}

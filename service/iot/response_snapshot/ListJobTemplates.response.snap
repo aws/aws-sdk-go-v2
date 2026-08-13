@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobTemplates":[{"createdAt":946684800,"description":"__Description__","jobTemplateArn":"__JobTemplateArn__","jobTemplateId":"__JobTemplateId__"},{"createdAt":946684800,"description":"__Description__","jobTemplateArn":"__JobTemplateArn__","jobTemplateId":"__JobTemplateId__"}],"nextToken":"__NextToken__"}

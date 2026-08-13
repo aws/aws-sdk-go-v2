@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.DescribeQuery
-
-{"DeliveryS3Uri":"__DeliveryS3Uri__","DeliveryStatus":"SUCCESS","ErrorMessage":"__ErrorMessage__","EventDataStoreOwnerAccountId":"__EventDataStoreOwnerAccountId__","Prompt":"__Prompt__","QueryId":"__QueryId__","QueryStatistics":{"BytesScanned":1,"CreationTime":946684800,"EventsMatched":1,"EventsScanned":1,"ExecutionTimeInMillis":1},"QueryStatus":"QUEUED","QueryString":"__QueryString__"}

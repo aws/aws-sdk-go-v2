@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","privacyBudgetTemplateSummaries":[{"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"id":"__Id__","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","privacyBudgetType":"DIFFERENTIAL_PRIVACY","updateTime":946684800},{"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"id":"__Id__","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","privacyBudgetType":"DIFFERENTIAL_PRIVACY","updateTime":946684800}]}

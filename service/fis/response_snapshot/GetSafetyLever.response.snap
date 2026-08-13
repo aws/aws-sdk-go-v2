@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"safetyLever":{"arn":"__Arn__","id":"__Id__","state":{"reason":"__Reason__","status":"disengaged"}}}

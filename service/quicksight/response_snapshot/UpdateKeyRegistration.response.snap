@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"FailedKeyRegistration":[{"KeyArn":"__KeyArn__","Message":"__Message__","SenderFault":true,"StatusCode":1},{"KeyArn":"__KeyArn__","Message":"__Message__","SenderFault":true,"StatusCode":1}],"RequestId":"__RequestId__","SuccessfulKeyRegistration":[{"KeyArn":"__KeyArn__","StatusCode":1},{"KeyArn":"__KeyArn__","StatusCode":1}]}

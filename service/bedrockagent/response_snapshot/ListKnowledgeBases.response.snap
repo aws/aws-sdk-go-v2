@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"knowledgeBaseSummaries":[{"description":"__Description__","knowledgeBaseId":"__KnowledgeBaseId__","name":"__Name__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"},{"description":"__Description__","knowledgeBaseId":"__KnowledgeBaseId__","name":"__Name__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

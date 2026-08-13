@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","domainUnitId":"__DomainUnitId__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","status":"ENABLED"},{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","domainUnitId":"__DomainUnitId__","id":"__Id__","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","status":"ENABLED"}],"nextToken":"__NextToken__"}

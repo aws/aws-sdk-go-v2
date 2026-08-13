@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.ListFlowOperationResults
-
-{"AvailabilityZone":"__AvailabilityZone__","FirewallArn":"__FirewallArn__","FlowOperationId":"__FlowOperationId__","FlowOperationStatus":"COMPLETED","FlowRequestTimestamp":946684800,"Flows":[{"Age":1,"ByteCount":1,"DestinationAddress":{"AddressDefinition":"__AddressDefinition__"},"DestinationPort":"__DestinationPort__","PacketCount":1,"Protocol":"__Protocol__","SourceAddress":{"AddressDefinition":"__AddressDefinition__"},"SourcePort":"__SourcePort__"},{"Age":1,"ByteCount":1,"DestinationAddress":{"AddressDefinition":"__AddressDefinition__"},"DestinationPort":"__DestinationPort__","PacketCount":1,"Protocol":"__Protocol__","SourceAddress":{"AddressDefinition":"__AddressDefinition__"},"SourcePort":"__SourcePort__"}],"NextToken":"__NextToken__","StatusMessage":"__StatusMessage__","VpcEndpointAssociationArn":"__VpcEndpointAssociationArn__","VpcEndpointId":"__VpcEndpointId__"}

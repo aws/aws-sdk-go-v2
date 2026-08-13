@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"description":"__Description__","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"taskArn":"__TaskArn__","taskConfiguration":{"containerTaskConfiguration":{"command":["__Member__","__Member__"],"ecrUri":"__EcrUri__","environmentVariables":{"key0":"__Value__"},"processingType":"GENERIC_COMPUTE_PROCESSING","processingUnit":"UNITS_2","taskExecutionRole":"__TaskExecutionRole__","timeoutSeconds":1}},"taskName":"__TaskName__","updatedAt":946684800,"version":"__Version__","workspaceName":"__WorkspaceName__"}

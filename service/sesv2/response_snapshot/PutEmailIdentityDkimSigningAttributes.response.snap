@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DkimStatus":"PENDING","DkimTokens":["__Member__","__Member__"],"SigningHostedZone":"__SigningHostedZone__"}

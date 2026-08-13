@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StorageGateway_20130630.ListVolumeRecoveryPoints
-
-{"GatewayARN":"__GatewayARN__","VolumeRecoveryPointInfos":[{"VolumeARN":"__VolumeARN__","VolumeRecoveryPointTime":"__VolumeRecoveryPointTime__","VolumeSizeInBytes":1,"VolumeUsageInBytes":1},{"VolumeARN":"__VolumeARN__","VolumeRecoveryPointTime":"__VolumeRecoveryPointTime__","VolumeSizeInBytes":1,"VolumeUsageInBytes":1}]}

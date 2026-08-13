@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSPartnerCentralSelling.ListResourceSnapshotJobs
-
-{"NextToken":"__NextToken__","ResourceSnapshotJobSummaries":[{"Arn":"__Arn__","EngagementId":"__EngagementId__","Id":"__Id__","Status":"Running"},{"Arn":"__Arn__","EngagementId":"__EngagementId__","Id":"__Id__","Status":"Running"}]}

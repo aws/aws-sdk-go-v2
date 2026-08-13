@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ParticipantCredentials":{"Expiry":"__Expiry__","ParticipantToken":"__ParticipantToken__"},"ParticipantId":"__ParticipantId__"}

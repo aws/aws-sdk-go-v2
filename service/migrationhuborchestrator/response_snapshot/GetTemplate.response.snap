@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"creationTime":946684800,"description":"__Description__","id":"__Id__","inputs":[{"dataType":"STRING","inputName":"__InputName__","required":true},{"dataType":"STRING","inputName":"__InputName__","required":true}],"name":"__Name__","owner":"__Owner__","status":"CREATED","statusMessage":"__StatusMessage__","tags":{"key0":"__Value__"},"templateArn":"__TemplateArn__","templateClass":"__TemplateClass__","tools":[{"name":"__Name__","url":"__Url__"},{"name":"__Name__","url":"__Url__"}]}

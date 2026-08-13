@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: GlobalAccelerator_V20180706.ListCrossAccountAttachments
-
-{"CrossAccountAttachments":[{"AttachmentArn":"__AttachmentArn__","CreatedTime":946684800,"LastModifiedTime":946684800,"Name":"__Name__","Principals":["__Member__","__Member__"],"Resources":[{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"},{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"}]},{"AttachmentArn":"__AttachmentArn__","CreatedTime":946684800,"LastModifiedTime":946684800,"Name":"__Name__","Principals":["__Member__","__Member__"],"Resources":[{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"},{"Cidr":"__Cidr__","EndpointId":"__EndpointId__","Region":"__Region__"}]}],"NextToken":"__NextToken__"}

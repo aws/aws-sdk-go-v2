@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appVersion":1,"cardStatus":{"key0":{"currentState":"IN_PROGRESS","currentValue":"__CurrentValue__","submissions":[{"submissionId":"__SubmissionId__","timestamp":"2000-01-01T00:00:00Z","value":"__Document__"},{"submissionId":"__SubmissionId__","timestamp":"2000-01-01T00:00:00Z","value":"__Document__"}]}},"latestPublishedAppVersion":1,"sessionArn":"__SessionArn__","sessionId":"__SessionId__","sessionName":"__SessionName__","status":"IN_PROGRESS","userIsHost":true}

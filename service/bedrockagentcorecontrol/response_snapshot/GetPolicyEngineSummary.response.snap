@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":"2000-01-01T00:00:00Z","encryptionKeyArn":"__EncryptionKeyArn__","name":"__Name__","policyEngineArn":"__PolicyEngineArn__","policyEngineId":"__PolicyEngineId__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z"}

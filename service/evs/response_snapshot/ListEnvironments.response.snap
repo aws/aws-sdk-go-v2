@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonElasticVMwareService.ListEnvironments
-
-{"environmentSummaries":[{"createdAt":946684800,"environmentArn":"__EnvironmentArn__","environmentId":"__EnvironmentId__","environmentName":"__EnvironmentName__","environmentState":"CREATING","environmentStatus":"PASSED","modifiedAt":946684800,"vcfVersion":"VCF-5.2.1"},{"createdAt":946684800,"environmentArn":"__EnvironmentArn__","environmentId":"__EnvironmentId__","environmentName":"__EnvironmentName__","environmentState":"CREATING","environmentStatus":"PASSED","modifiedAt":946684800,"vcfVersion":"VCF-5.2.1"}],"nextToken":"__NextToken__"}

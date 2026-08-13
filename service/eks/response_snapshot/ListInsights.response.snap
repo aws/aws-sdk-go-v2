@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"insights":[{"category":"UPGRADE_READINESS","description":"__Description__","id":"__Id__","insightStatus":{"reason":"__Reason__","status":"PASSING"},"kubernetesVersion":"__KubernetesVersion__","lastRefreshTime":946684800,"lastTransitionTime":946684800,"name":"__Name__"},{"category":"UPGRADE_READINESS","description":"__Description__","id":"__Id__","insightStatus":{"reason":"__Reason__","status":"PASSING"},"kubernetesVersion":"__KubernetesVersion__","lastRefreshTime":946684800,"lastTransitionTime":946684800,"name":"__Name__"}],"nextToken":"__NextToken__"}

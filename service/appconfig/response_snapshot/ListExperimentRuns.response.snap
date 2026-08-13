@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"Description":"__Description__","EndedAt":"2000-01-01T00:00:00Z","ExperimentDefinitionId":"__ExperimentDefinitionId__","Run":1,"StartedAt":"2000-01-01T00:00:00Z","Status":"RUNNING","UpdatedAt":"2000-01-01T00:00:00Z"},{"Description":"__Description__","EndedAt":"2000-01-01T00:00:00Z","ExperimentDefinitionId":"__ExperimentDefinitionId__","Run":1,"StartedAt":"2000-01-01T00:00:00Z","Status":"RUNNING","UpdatedAt":"2000-01-01T00:00:00Z"}],"NextToken":"__NextToken__"}

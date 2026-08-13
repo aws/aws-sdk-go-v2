@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"analyzableServers":[{"hostname":"__Hostname__","ipAddress":"__IpAddress__","source":"__Source__","vmId":"__VmId__"},{"hostname":"__Hostname__","ipAddress":"__IpAddress__","source":"__Source__","vmId":"__VmId__"}],"nextToken":"__NextToken__"}

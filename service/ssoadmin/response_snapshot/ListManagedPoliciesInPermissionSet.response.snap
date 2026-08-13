@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SWBExternalService.ListManagedPoliciesInPermissionSet
-
-{"AttachedManagedPolicies":[{"Arn":"__Arn__","Name":"__Name__"},{"Arn":"__Arn__","Name":"__Name__"}],"NextToken":"__NextToken__"}

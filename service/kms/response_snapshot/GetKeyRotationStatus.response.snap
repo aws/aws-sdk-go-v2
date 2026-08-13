@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TrentService.GetKeyRotationStatus
-
-{"KeyId":"__KeyId__","KeyRotationEnabled":true,"NextRotationDate":946684800,"OnDemandRotationStartDate":946684800,"RotationPeriodInDays":1}

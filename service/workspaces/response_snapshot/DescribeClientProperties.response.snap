@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeClientProperties
-
-{"ClientPropertiesList":[{"ClientProperties":{"ClientExperiencePolicy":"__ClientExperiencePolicy__","LogUploadEnabled":"ENABLED","ReconnectEnabled":"ENABLED"},"ResourceId":"__ResourceId__"},{"ClientProperties":{"ClientExperiencePolicy":"__ClientExperiencePolicy__","LogUploadEnabled":"ENABLED","ReconnectEnabled":"ENABLED"},"ResourceId":"__ResourceId__"}]}

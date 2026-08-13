@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"crl":{"createdAt":"2000-01-01T00:00:00Z","crlArn":"__CrlArn__","crlData":"YmxvYg==","crlId":"__CrlId__","enabled":true,"name":"__Name__","trustAnchorArn":"__TrustAnchorArn__","updatedAt":"2000-01-01T00:00:00Z"}}

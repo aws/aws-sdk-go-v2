@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"destinationId":"__DestinationId__","destinationProperties":{"destinationArn":"__DestinationArn__","kmsKeyArn":"__KmsKeyArn__"},"destinationType":"S3","publishingFailureStartTimestamp":1,"status":"PENDING_VERIFICATION","tags":{"key0":"__Value__"}}

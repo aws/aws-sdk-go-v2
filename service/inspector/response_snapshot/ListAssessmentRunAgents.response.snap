@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: InspectorService.ListAssessmentRunAgents
-
-{"assessmentRunAgents":[{"agentHealth":"HEALTHY","agentHealthCode":"IDLE","agentHealthDetails":"__AgentHealthDetails__","agentId":"__AgentId__","assessmentRunArn":"__AssessmentRunArn__","autoScalingGroup":"__AutoScalingGroup__","telemetryMetadata":[{"count":1,"dataSize":1,"messageType":"__MessageType__"},{"count":1,"dataSize":1,"messageType":"__MessageType__"}]},{"agentHealth":"HEALTHY","agentHealthCode":"IDLE","agentHealthDetails":"__AgentHealthDetails__","agentId":"__AgentId__","assessmentRunArn":"__AssessmentRunArn__","autoScalingGroup":"__AutoScalingGroup__","telemetryMetadata":[{"count":1,"dataSize":1,"messageType":"__MessageType__"},{"count":1,"dataSize":1,"messageType":"__MessageType__"}]}],"nextToken":"__NextToken__"}

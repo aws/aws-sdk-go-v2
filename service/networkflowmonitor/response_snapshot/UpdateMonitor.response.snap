@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"localResources":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}],"modifiedAt":946684800,"monitorArn":"__MonitorArn__","monitorName":"__MonitorName__","monitorStatus":"PENDING","remoteResources":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}],"tags":{"key0":"__Value__"}}

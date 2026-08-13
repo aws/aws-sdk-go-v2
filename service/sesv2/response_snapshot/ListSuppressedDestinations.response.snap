@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","SuppressedDestinationSummaries":[{"EmailAddress":"__EmailAddress__","LastUpdateTime":946684800,"Reason":"BOUNCE"},{"EmailAddress":"__EmailAddress__","LastUpdateTime":946684800,"Reason":"BOUNCE"}]}

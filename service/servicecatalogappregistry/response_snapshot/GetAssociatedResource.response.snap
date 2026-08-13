@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"applicationTagResult":{"applicationTagStatus":"IN_PROGRESS","errorMessage":"__ErrorMessage__","nextToken":"__NextToken__","resources":[{"errorMessage":"__ErrorMessage__","resourceArn":"__ResourceArn__","resourceType":"__ResourceType__","status":"__Status__"},{"errorMessage":"__ErrorMessage__","resourceArn":"__ResourceArn__","resourceType":"__ResourceType__","status":"__Status__"}]},"options":["APPLY_APPLICATION_TAG","APPLY_APPLICATION_TAG"],"resource":{"arn":"__Arn__","associationTime":"2000-01-01T00:00:00Z","integrations":{"resourceGroup":{"arn":"__Arn__","errorMessage":"__ErrorMessage__","state":"CREATING"}},"name":"__Name__"}}

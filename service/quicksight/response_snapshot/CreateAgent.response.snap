@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AgentId":"__AgentId__","AgentName":"__AgentName__","AgentStatus":"ACTIVE","Arn":"__Arn__","RequestId":"__RequestId__"}

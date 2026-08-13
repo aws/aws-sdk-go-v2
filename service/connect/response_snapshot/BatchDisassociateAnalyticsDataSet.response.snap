@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Deleted":["__Member__","__Member__"],"Errors":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}]}

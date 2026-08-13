@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobs":[{"createdAt":"2000-01-01T00:00:00Z","device":"__Device__","endedAt":"2000-01-01T00:00:00Z","jobArn":"__JobArn__","jobName":"__JobName__","startedAt":"2000-01-01T00:00:00Z","status":"QUEUED","tags":{"key0":"__Value__"}},{"createdAt":"2000-01-01T00:00:00Z","device":"__Device__","endedAt":"2000-01-01T00:00:00Z","jobArn":"__JobArn__","jobName":"__JobName__","startedAt":"2000-01-01T00:00:00Z","status":"QUEUED","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

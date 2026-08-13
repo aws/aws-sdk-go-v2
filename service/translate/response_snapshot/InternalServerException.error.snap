@@ -1,5 +1,0 @@
-500
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShineFrontendService_20170701.CreateParallelData
-
-{"__type":"InternalServerException","Message":"__Message__"}

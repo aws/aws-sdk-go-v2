@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"items":[{"body":"__Body__","commentId":"__CommentId__","createdDate":946684800,"creator":"__Creator__","lastUpdatedBy":"__LastUpdatedBy__","lastUpdatedDate":946684800},{"body":"__Body__","commentId":"__CommentId__","createdDate":946684800,"creator":"__Creator__","lastUpdatedBy":"__LastUpdatedBy__","lastUpdatedDate":946684800}],"nextToken":"__NextToken__","total":1}

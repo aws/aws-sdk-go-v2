@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"namespaces":[{"arn":"__Arn__","createdTime":946684800,"description":"__Description__","instanceId":"__InstanceId__","lastModifiedTime":946684800,"name":"__Name__"},{"arn":"__Arn__","createdTime":946684800,"description":"__Description__","instanceId":"__InstanceId__","lastModifiedTime":946684800,"name":"__Name__"}],"nextToken":"__NextToken__"}

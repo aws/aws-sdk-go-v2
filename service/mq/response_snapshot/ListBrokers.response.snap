@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"brokerSummaries":[{"brokerArn":"__BrokerArn__","brokerId":"__BrokerId__","brokerName":"__BrokerName__","brokerState":"CREATION_IN_PROGRESS","created":"2000-01-01T00:00:00Z","deploymentMode":"SINGLE_INSTANCE","engineType":"ACTIVEMQ","hostInstanceType":"__HostInstanceType__"},{"brokerArn":"__BrokerArn__","brokerId":"__BrokerId__","brokerName":"__BrokerName__","brokerState":"CREATION_IN_PROGRESS","created":"2000-01-01T00:00:00Z","deploymentMode":"SINGLE_INSTANCE","engineType":"ACTIVEMQ","hostInstanceType":"__HostInstanceType__"}],"nextToken":"__NextToken__"}

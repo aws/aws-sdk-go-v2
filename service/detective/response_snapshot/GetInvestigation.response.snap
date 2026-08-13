@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CreatedTime":"2000-01-01T00:00:00Z","EntityArn":"__EntityArn__","EntityType":"IAM_ROLE","GraphArn":"__GraphArn__","InvestigationId":"__InvestigationId__","ScopeEndTime":"2000-01-01T00:00:00Z","ScopeStartTime":"2000-01-01T00:00:00Z","Severity":"INFORMATIONAL","State":"ACTIVE","Status":"RUNNING"}

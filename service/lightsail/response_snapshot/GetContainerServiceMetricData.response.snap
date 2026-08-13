@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetContainerServiceMetricData
-
-{"metricData":[{"average":1,"maximum":1,"minimum":1,"sampleCount":1,"sum":1,"timestamp":946684800,"unit":"Seconds"},{"average":1,"maximum":1,"minimum":1,"sampleCount":1,"sum":1,"timestamp":946684800,"unit":"Seconds"}],"metricName":"CPUUtilization"}

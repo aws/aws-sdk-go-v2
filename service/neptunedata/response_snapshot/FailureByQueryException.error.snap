@@ -1,4 +1,0 @@
-500
-Content-Type: application/json
-
-{"__type":"FailureByQueryException","code":"FailureByQueryException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ContactFlowModulesSummaryList":[{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__","State":"ACTIVE"},{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__","State":"ACTIVE"}],"NextToken":"__NextToken__"}

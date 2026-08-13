@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","TelemetryConfigurations":[{"AccountIdentifier":"__AccountIdentifier__","LastUpdateTimeStamp":1,"ResourceIdentifier":"__ResourceIdentifier__","ResourceTags":{"key0":"__Value__"},"ResourceType":"AWS::EC2::Instance","TelemetryConfigurationState":{"key0":"Enabled"},"TelemetrySourceType":"VPC_FLOW_LOGS"},{"AccountIdentifier":"__AccountIdentifier__","LastUpdateTimeStamp":1,"ResourceIdentifier":"__ResourceIdentifier__","ResourceTags":{"key0":"__Value__"},"ResourceType":"AWS::EC2::Instance","TelemetryConfigurationState":{"key0":"Enabled"},"TelemetrySourceType":"VPC_FLOW_LOGS"}]}

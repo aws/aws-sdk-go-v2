@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","permissions":[{"action":"__Action__","principal":"__Principal__","profileVersion":"__ProfileVersion__","statementId":"__StatementId__"},{"action":"__Action__","principal":"__Principal__","profileVersion":"__ProfileVersion__","statementId":"__StatementId__"}],"policySizeBytes":1,"revisionId":"__RevisionId__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: Odb.CreateOdbPeeringConnection
-
-{"displayName":"__DisplayName__","odbPeeringConnectionId":"__OdbPeeringConnectionId__","status":"AVAILABLE","statusReason":"__StatusReason__"}

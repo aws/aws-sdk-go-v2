@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"LastUpdatedAt":946684800,"Value":"__Value__"},{"LastUpdatedAt":946684800,"Value":"__Value__"}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"dataSets":[{"creationTime":946684800,"dataSetName":"__DataSetName__","dataSetOrg":"__DataSetOrg__","format":"__Format__","lastReferencedTime":946684800,"lastUpdatedTime":946684800},{"creationTime":946684800,"dataSetName":"__DataSetName__","dataSetOrg":"__DataSetOrg__","format":"__Format__","lastReferencedTime":946684800,"lastUpdatedTime":946684800}],"nextToken":"__NextToken__"}

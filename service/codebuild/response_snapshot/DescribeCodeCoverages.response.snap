@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.DescribeCodeCoverages
-
-{"codeCoverages":[{"branchCoveragePercentage":1,"branchesCovered":1,"branchesMissed":1,"expired":946684800,"filePath":"__FilePath__","id":"__Id__","lineCoveragePercentage":1,"linesCovered":1,"linesMissed":1,"reportARN":"__ReportARN__"},{"branchCoveragePercentage":1,"branchesCovered":1,"branchesMissed":1,"expired":946684800,"filePath":"__FilePath__","id":"__Id__","lineCoveragePercentage":1,"linesCovered":1,"linesMissed":1,"reportARN":"__ReportARN__"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ProcessedFindings":[{"Id":"__Id__","ProductArn":"__ProductArn__"},{"Id":"__Id__","ProductArn":"__ProductArn__"}],"UnprocessedFindings":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","FindingIdentifier":{"Id":"__Id__","ProductArn":"__ProductArn__"}},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","FindingIdentifier":{"Id":"__Id__","ProductArn":"__ProductArn__"}}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","Outposts":[{"CapacityInBytes":1,"OutpostArn":"__OutpostArn__","OutpostId":"__OutpostId__","OwnerId":"__OwnerId__","S3OutpostArn":"__S3OutpostArn__"},{"CapacityInBytes":1,"OutpostArn":"__OutpostArn__","OutpostId":"__OutpostId__","OwnerId":"__OwnerId__","S3OutpostArn":"__S3OutpostArn__"}]}

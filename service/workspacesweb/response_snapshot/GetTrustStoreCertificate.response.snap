@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"certificate":{"body":"YmxvYg==","issuer":"__Issuer__","notValidAfter":946684800,"notValidBefore":946684800,"subject":"__Subject__","thumbprint":"__Thumbprint__"},"trustStoreArn":"__TrustStoreArn__"}

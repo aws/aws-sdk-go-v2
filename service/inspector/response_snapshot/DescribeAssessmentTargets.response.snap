@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: InspectorService.DescribeAssessmentTargets
-
-{"assessmentTargets":[{"arn":"__Arn__","createdAt":946684800,"name":"__Name__","resourceGroupArn":"__ResourceGroupArn__","updatedAt":946684800},{"arn":"__Arn__","createdAt":946684800,"name":"__Name__","resourceGroupArn":"__ResourceGroupArn__","updatedAt":946684800}],"failedItems":{"key0":{"failureCode":"INVALID_ARN","retryable":true}}}

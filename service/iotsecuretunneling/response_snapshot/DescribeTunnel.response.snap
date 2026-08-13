@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: IoTSecuredTunneling.DescribeTunnel
-
-{"tunnel":{"createdAt":946684800,"description":"__Description__","destinationConfig":{"services":["__Member__","__Member__"],"thingName":"__ThingName__"},"destinationConnectionState":{"lastUpdatedAt":946684800,"status":"CONNECTED"},"lastUpdatedAt":946684800,"sourceConnectionState":{"lastUpdatedAt":946684800,"status":"CONNECTED"},"status":"OPEN","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"timeoutConfig":{"maxLifetimeTimeoutMinutes":1},"tunnelArn":"__TunnelArn__","tunnelId":"__TunnelId__"}}

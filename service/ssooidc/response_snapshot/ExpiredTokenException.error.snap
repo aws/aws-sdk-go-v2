@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"ExpiredTokenException","error":"__Error___","error_description":"__Error_description__"}

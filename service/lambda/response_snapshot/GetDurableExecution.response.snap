@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DurableConfig":{"ExecutionTimeout":1,"KMSKeyArn":"__KMSKeyArn__","RetentionPeriodInDays":1},"DurableExecutionArn":"__DurableExecutionArn__","DurableExecutionName":"__DurableExecutionName__","EndTimestamp":946684800,"Error":{"ErrorData":"__ErrorData__","ErrorMessage":"__ErrorMessage__","ErrorType":"__ErrorType__","StackTrace":["__Member__","__Member__"]},"ExecutionDataIncluded":true,"FunctionArn":"__FunctionArn__","InputPayload":"__InputPayload__","Result":"__Result__","StartTimestamp":946684800,"Status":"RUNNING","TraceHeader":{"XAmznTraceId":"__XAmznTraceId__"},"Version":"__Version__"}

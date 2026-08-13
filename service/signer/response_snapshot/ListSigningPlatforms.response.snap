@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","platforms":[{"category":"AWSIoT","displayName":"__DisplayName__","maxSizeInMB":1,"partner":"__Partner__","platformId":"__PlatformId__","revocationSupported":true,"signingConfiguration":{"encryptionAlgorithmOptions":{"allowedValues":["RSA","RSA"],"defaultValue":"RSA"},"hashAlgorithmOptions":{"allowedValues":["SHA1","SHA1"],"defaultValue":"SHA1"}},"signingImageFormat":{"defaultFormat":"JSON","supportedFormats":["JSON","JSON"]},"target":"__Target__"},{"category":"AWSIoT","displayName":"__DisplayName__","maxSizeInMB":1,"partner":"__Partner__","platformId":"__PlatformId__","revocationSupported":true,"signingConfiguration":{"encryptionAlgorithmOptions":{"allowedValues":["RSA","RSA"],"defaultValue":"RSA"},"hashAlgorithmOptions":{"allowedValues":["SHA1","SHA1"],"defaultValue":"SHA1"}},"signingImageFormat":{"defaultFormat":"JSON","supportedFormats":["JSON","JSON"]},"target":"__Target__"}]}

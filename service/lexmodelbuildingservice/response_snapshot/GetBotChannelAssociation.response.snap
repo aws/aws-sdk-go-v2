@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botAlias":"__BotAlias__","botConfiguration":{"key0":"__Value__"},"botName":"__BotName__","createdDate":946684800,"description":"__Description__","failureReason":"__FailureReason__","name":"__Name__","status":"IN_PROGRESS","type":"Facebook"}

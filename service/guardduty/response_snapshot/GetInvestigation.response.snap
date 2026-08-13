@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"investigation":{"cloud":{"account":"__Account__","provider":"AWS","region":"__Region__"},"confidence":"Unknown","endTime":946684800,"error":"__Error__","investigationId":"__InvestigationId__","metadata":{"product":{"feature":"__Feature__","name":"__Name__"},"version":"__Version__"},"risk":"__Risk__","riskLevel":"Info","startTime":946684800,"status":"RUNNING","summary":"__Summary__","triggerPrompt":"__TriggerPrompt__","triggeredBy":"__TriggeredBy__"}}

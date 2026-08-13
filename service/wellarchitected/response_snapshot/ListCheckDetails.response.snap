@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CheckDetails":[{"AccountId":"__AccountId__","ChoiceId":"__ChoiceId__","Description":"__Description__","FlaggedResources":1,"Id":"__Id__","LensArn":"__LensArn__","Name":"__Name__","PillarId":"__PillarId__","Provider":"TRUSTED_ADVISOR","QuestionId":"__QuestionId__","Reason":"ASSUME_ROLE_ERROR","Status":"OKAY","UpdatedAt":946684800},{"AccountId":"__AccountId__","ChoiceId":"__ChoiceId__","Description":"__Description__","FlaggedResources":1,"Id":"__Id__","LensArn":"__LensArn__","Name":"__Name__","PillarId":"__PillarId__","Provider":"TRUSTED_ADVISOR","QuestionId":"__QuestionId__","Reason":"ASSUME_ROLE_ERROR","Status":"OKAY","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

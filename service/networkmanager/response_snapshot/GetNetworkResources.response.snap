@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NetworkResources":[{"AccountId":"__AccountId__","AwsRegion":"__AwsRegion__","CoreNetworkId":"__CoreNetworkId__","Definition":"__Definition__","DefinitionTimestamp":946684800,"Metadata":{"key0":"__Value__"},"RegisteredGatewayArn":"__RegisteredGatewayArn__","ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"AccountId":"__AccountId__","AwsRegion":"__AwsRegion__","CoreNetworkId":"__CoreNetworkId__","Definition":"__Definition__","DefinitionTimestamp":946684800,"Metadata":{"key0":"__Value__"},"RegisteredGatewayArn":"__RegisteredGatewayArn__","ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"NextToken":"__NextToken__"}

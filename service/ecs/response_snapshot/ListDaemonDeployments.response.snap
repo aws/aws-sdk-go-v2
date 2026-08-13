@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListDaemonDeployments
-
-{"daemonDeployments":[{"clusterArn":"__ClusterArn__","createdAt":946684800,"daemonArn":"__DaemonArn__","daemonDeploymentArn":"__DaemonDeploymentArn__","finishedAt":946684800,"startedAt":946684800,"status":"PENDING","statusReason":"__StatusReason__","stoppedAt":946684800,"targetDaemonRevisionArn":"__TargetDaemonRevisionArn__"},{"clusterArn":"__ClusterArn__","createdAt":946684800,"daemonArn":"__DaemonArn__","daemonDeploymentArn":"__DaemonDeploymentArn__","finishedAt":946684800,"startedAt":946684800,"status":"PENDING","statusReason":"__StatusReason__","stoppedAt":946684800,"targetDaemonRevisionArn":"__TargetDaemonRevisionArn__"}],"nextToken":"__NextToken__"}

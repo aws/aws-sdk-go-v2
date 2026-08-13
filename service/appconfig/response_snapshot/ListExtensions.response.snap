@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Items":[{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","Name":"__Name__","VersionNumber":1},{"Arn":"__Arn__","Description":"__Description__","Id":"__Id__","Name":"__Name__","VersionNumber":1}],"NextToken":"__NextToken__"}

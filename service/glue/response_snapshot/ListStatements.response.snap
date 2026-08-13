@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSGlue.ListStatements
-
-{"NextToken":"__NextToken__","Statements":[{"Code":"__Code__","CompletedOn":1,"Id":1,"Output":{"Data":{"TextPlain":"__TextPlain__"},"ErrorName":"__ErrorName__","ErrorValue":"__ErrorValue__","ExecutionCount":1,"Status":"WAITING","Traceback":["__Member__","__Member__"]},"Progress":1,"StartedOn":1,"State":"WAITING"},{"Code":"__Code__","CompletedOn":1,"Id":1,"Output":{"Data":{"TextPlain":"__TextPlain__"},"ErrorName":"__ErrorName__","ErrorValue":"__ErrorValue__","ExecutionCount":1,"Status":"WAITING","Traceback":["__Member__","__Member__"]},"Progress":1,"StartedOn":1,"State":"WAITING"}]}

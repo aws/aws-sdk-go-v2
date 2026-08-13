@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"associatedClientDevices":[{"associationTimestamp":946684800,"thingName":"__ThingName__"},{"associationTimestamp":946684800,"thingName":"__ThingName__"}],"nextToken":"__NextToken__"}

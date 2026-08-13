@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"RouteMatrix":[[{"Distance":1,"DurationSeconds":1,"Error":{"Code":"RouteNotFound","Message":"__Message__"}},{"Distance":1,"DurationSeconds":1,"Error":{"Code":"RouteNotFound","Message":"__Message__"}}],[{"Distance":1,"DurationSeconds":1,"Error":{"Code":"RouteNotFound","Message":"__Message__"}},{"Distance":1,"DurationSeconds":1,"Error":{"Code":"RouteNotFound","Message":"__Message__"}}]],"SnappedDeparturePositions":[[1,1],[1,1]],"SnappedDestinationPositions":[[1,1],[1,1]],"Summary":{"DataSource":"__DataSource__","DistanceUnit":"Kilometers","ErrorCount":1,"RouteCount":1}}

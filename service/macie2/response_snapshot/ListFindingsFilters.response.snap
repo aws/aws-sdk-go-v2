@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"findingsFilterListItems":[{"action":"ARCHIVE","arn":"__Arn__","id":"__Id__","name":"__Name__","tags":{"key0":"__Value__"}},{"action":"ARCHIVE","arn":"__Arn__","id":"__Id__","name":"__Name__","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

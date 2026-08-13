@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"botId":"__BotId__","nextToken":"__NextToken__","results":[{"binKeys":[{"name":"ConversationStartTime","value":1},{"name":"ConversationStartTime","value":1}],"groupByKeys":[{"name":"IntentStageName","value":"__Value__"},{"name":"IntentStageName","value":"__Value__"}],"metricsResults":[{"name":"Count","statistic":"Sum","value":1},{"name":"Count","statistic":"Sum","value":1}]},{"binKeys":[{"name":"ConversationStartTime","value":1},{"name":"ConversationStartTime","value":1}],"groupByKeys":[{"name":"IntentStageName","value":"__Value__"},{"name":"IntentStageName","value":"__Value__"}],"metricsResults":[{"name":"Count","statistic":"Sum","value":1},{"name":"Count","statistic":"Sum","value":1}]}]}

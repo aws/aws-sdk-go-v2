@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"deleted":[{"uniqueId":"__UniqueId__"},{"uniqueId":"__UniqueId__"}],"disconnectedUniqueIds":["__Member__","__Member__"],"errors":[{"errorType":"SERVICE_ERROR","uniqueId":"__UniqueId__"},{"errorType":"SERVICE_ERROR","uniqueId":"__UniqueId__"}],"status":"COMPLETED"}

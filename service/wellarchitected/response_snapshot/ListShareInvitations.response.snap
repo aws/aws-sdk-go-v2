@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"NextToken":"__NextToken__","ShareInvitationSummaries":[{"LensArn":"__LensArn__","LensName":"__LensName__","PermissionType":"READONLY","ProfileArn":"__ProfileArn__","ProfileName":"__ProfileName__","ShareInvitationId":"__ShareInvitationId__","ShareResourceType":"WORKLOAD","SharedBy":"__SharedBy__","SharedWith":"__SharedWith__","TemplateArn":"__TemplateArn__","TemplateName":"__TemplateName__","WorkloadId":"__WorkloadId__","WorkloadName":"__WorkloadName__"},{"LensArn":"__LensArn__","LensName":"__LensName__","PermissionType":"READONLY","ProfileArn":"__ProfileArn__","ProfileName":"__ProfileName__","ShareInvitationId":"__ShareInvitationId__","ShareResourceType":"WORKLOAD","SharedBy":"__SharedBy__","SharedWith":"__SharedWith__","TemplateArn":"__TemplateArn__","TemplateName":"__TemplateName__","WorkloadId":"__WorkloadId__","WorkloadName":"__WorkloadName__"}]}

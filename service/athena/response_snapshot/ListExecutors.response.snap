@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonAthena.ListExecutors
-
-{"ExecutorsSummary":[{"ExecutorId":"__ExecutorId__","ExecutorSize":1,"ExecutorState":"CREATING","ExecutorType":"COORDINATOR","StartDateTime":1,"TerminationDateTime":1},{"ExecutorId":"__ExecutorId__","ExecutorSize":1,"ExecutorState":"CREATING","ExecutorType":"COORDINATOR","StartDateTime":1,"TerminationDateTime":1}],"NextToken":"__NextToken__","SessionId":"__SessionId__"}

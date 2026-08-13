@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CloudTrail_20131101.SearchSampleQueries
-
-{"NextToken":"__NextToken__","SearchResults":[{"Description":"__Description__","Name":"__Name__","Relevance":1,"SQL":"__SQL__"},{"Description":"__Description__","Name":"__Name__","Relevance":1,"SQL":"__SQL__"}]}

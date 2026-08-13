@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"groupId":"__GroupId__","searchId":"__SearchId__","status":"QUEUED","workspaceName":"__WorkspaceName__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"integrationSummaryList":[{"customerProfiles":{"domainArn":"__DomainArn__","objectTypeNames":{"key0":"__Value__"}}},{"customerProfiles":{"domainArn":"__DomainArn__","objectTypeNames":{"key0":"__Value__"}}}],"nextToken":"__NextToken__"}

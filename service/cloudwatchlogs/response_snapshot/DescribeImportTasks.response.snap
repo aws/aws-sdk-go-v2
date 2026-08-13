@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Logs_20140328.DescribeImportTasks
-
-{"imports":[{"creationTime":1,"errorMessage":"__ErrorMessage__","importDestinationArn":"__ImportDestinationArn__","importFilter":{"endEventTime":1,"startEventTime":1},"importId":"__ImportId__","importSourceArn":"__ImportSourceArn__","importStatistics":{"bytesImported":1},"importStatus":"IN_PROGRESS","lastUpdatedTime":1},{"creationTime":1,"errorMessage":"__ErrorMessage__","importDestinationArn":"__ImportDestinationArn__","importFilter":{"endEventTime":1,"startEventTime":1},"importId":"__ImportId__","importSourceArn":"__ImportSourceArn__","importStatistics":{"bytesImported":1},"importStatus":"IN_PROGRESS","lastUpdatedTime":1}],"nextToken":"__NextToken__"}

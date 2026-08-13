@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"testTemplate":{"actions":[{"actionId":"__ActionId__","description":"__Description__","resourceType":"__ResourceType__"},{"actionId":"__ActionId__","description":"__Description__","resourceType":"__ResourceType__"}],"description":"__Description__","name":"__Name__","parameters":[{"defaultValue":"__DefaultValue__","description":"__Description__","maxValues":1,"name":"__Name__","required":true,"type":"STRING"},{"defaultValue":"__DefaultValue__","description":"__Description__","maxValues":1,"name":"__Name__","required":true,"type":"STRING"}],"testTemplateArn":"__TestTemplateArn__"}}

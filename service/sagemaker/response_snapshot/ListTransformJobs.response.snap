@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListTransformJobs
-
-{"NextToken":"__NextToken__","TransformJobSummaries":[{"CreationTime":946684800,"FailureReason":"__FailureReason__","LastModifiedTime":946684800,"TransformEndTime":946684800,"TransformJobArn":"__TransformJobArn__","TransformJobName":"__TransformJobName__","TransformJobStatus":"InProgress"},{"CreationTime":946684800,"FailureReason":"__FailureReason__","LastModifiedTime":946684800,"TransformEndTime":946684800,"TransformJobArn":"__TransformJobArn__","TransformJobName":"__TransformJobName__","TransformJobStatus":"InProgress"}]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"thumbnailDetails":[{"pipelineId":"__PipelineId__","thumbnails":[{"body":"__Body__","contentType":"__ContentType__","thumbnailType":"UNSPECIFIED","timeStamp":"2000-01-01T00:00:00Z"},{"body":"__Body__","contentType":"__ContentType__","thumbnailType":"UNSPECIFIED","timeStamp":"2000-01-01T00:00:00Z"}]},{"pipelineId":"__PipelineId__","thumbnails":[{"body":"__Body__","contentType":"__ContentType__","thumbnailType":"UNSPECIFIED","timeStamp":"2000-01-01T00:00:00Z"},{"body":"__Body__","contentType":"__ContentType__","thumbnailType":"UNSPECIFIED","timeStamp":"2000-01-01T00:00:00Z"}]}]}

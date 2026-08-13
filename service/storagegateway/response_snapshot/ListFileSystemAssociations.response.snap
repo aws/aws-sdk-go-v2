@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: StorageGateway_20130630.ListFileSystemAssociations
-
-{"FileSystemAssociationSummaryList":[{"FileSystemAssociationARN":"__FileSystemAssociationARN__","FileSystemAssociationId":"__FileSystemAssociationId__","FileSystemAssociationStatus":"__FileSystemAssociationStatus__","GatewayARN":"__GatewayARN__"},{"FileSystemAssociationARN":"__FileSystemAssociationARN__","FileSystemAssociationId":"__FileSystemAssociationId__","FileSystemAssociationStatus":"__FileSystemAssociationStatus__","GatewayARN":"__GatewayARN__"}],"Marker":"__Marker__","NextMarker":"__NextMarker__"}

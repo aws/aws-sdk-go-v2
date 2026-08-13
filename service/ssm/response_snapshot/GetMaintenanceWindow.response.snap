@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.GetMaintenanceWindow
-
-{"AllowUnassociatedTargets":true,"CreatedDate":946684800,"Cutoff":1,"Description":"__Description__","Duration":1,"Enabled":true,"EndDate":"__EndDate__","ModifiedDate":946684800,"Name":"__Name__","NextExecutionTime":"__NextExecutionTime__","Schedule":"__Schedule__","ScheduleOffset":1,"ScheduleTimezone":"__ScheduleTimezone__","StartDate":"__StartDate__","WindowId":"__WindowId__"}

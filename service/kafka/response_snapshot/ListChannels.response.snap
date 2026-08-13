@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"channels":[{"channelArn":"__ChannelArn__","channelName":"__ChannelName__","clusterOperationArn":"__ClusterOperationArn__","creationTime":"2000-01-01T00:00:00Z","destinationType":"ICEBERG","status":"CREATING"},{"channelArn":"__ChannelArn__","channelName":"__ChannelName__","clusterOperationArn":"__ClusterOperationArn__","creationTime":"2000-01-01T00:00:00Z","destinationType":"ICEBERG","status":"CREATING"}],"nextToken":"__NextToken__"}

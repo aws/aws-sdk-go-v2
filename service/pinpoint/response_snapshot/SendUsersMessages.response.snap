@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ApplicationId":"__ApplicationId__","RequestId":"__RequestId__","Result":{"key0":{"key0":{"Address":"__Address__","DeliveryStatus":"SUCCESSFUL","MessageId":"__MessageId__","StatusCode":1,"StatusMessage":"__StatusMessage__","UpdatedToken":"__UpdatedToken__"}}}}

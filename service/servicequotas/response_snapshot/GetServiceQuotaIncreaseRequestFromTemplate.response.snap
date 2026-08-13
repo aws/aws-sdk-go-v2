@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate
-
-{"ServiceQuotaIncreaseRequestInTemplate":{"AwsRegion":"__AwsRegion__","DesiredValue":1,"GlobalQuota":true,"QuotaCode":"__QuotaCode__","QuotaName":"__QuotaName__","ServiceCode":"__ServiceCode__","ServiceName":"__ServiceName__","Unit":"__Unit__"}}

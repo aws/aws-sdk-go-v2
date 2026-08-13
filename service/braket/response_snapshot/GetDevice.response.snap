@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"deviceArn":"__DeviceArn__","deviceCapabilities":"__DeviceCapabilities__","deviceName":"__DeviceName__","deviceQueueInfo":[{"queue":"QUANTUM_TASKS_QUEUE","queuePriority":"Normal","queueSize":"__QueueSize__"},{"queue":"QUANTUM_TASKS_QUEUE","queuePriority":"Normal","queueSize":"__QueueSize__"}],"deviceStatus":"ONLINE","deviceType":"QPU","providerName":"__ProviderName__"}

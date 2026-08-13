@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AutoEnableControls":true,"ControlFindingGenerator":"STANDARD_CONTROL","HubArn":"__HubArn__","SubscribedAt":"__SubscribedAt__"}

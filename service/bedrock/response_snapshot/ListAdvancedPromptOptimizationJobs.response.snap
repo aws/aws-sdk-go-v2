@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"jobSummaries":[{"creationTime":"2000-01-01T00:00:00Z","jobArn":"__JobArn__","jobName":"__JobName__","jobStatus":"InProgress","lastModifiedTime":"2000-01-01T00:00:00Z"},{"creationTime":"2000-01-01T00:00:00Z","jobArn":"__JobArn__","jobName":"__JobName__","jobStatus":"InProgress","lastModifiedTime":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

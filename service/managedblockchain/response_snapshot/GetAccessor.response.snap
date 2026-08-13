@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Accessor":{"Arn":"__Arn__","BillingToken":"__BillingToken__","CreationDate":"2000-01-01T00:00:00Z","Id":"__Id__","NetworkType":"ETHEREUM_GOERLI","Status":"AVAILABLE","Tags":{"key0":"__Value__"},"Type":"BILLING_TOKEN"}}

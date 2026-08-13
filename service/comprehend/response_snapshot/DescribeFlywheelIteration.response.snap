@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.DescribeFlywheelIteration
-
-{"FlywheelIterationProperties":{"CreationTime":946684800,"EndTime":946684800,"EvaluatedModelArn":"__EvaluatedModelArn__","EvaluatedModelMetrics":{"AverageAccuracy":1,"AverageF1Score":1,"AveragePrecision":1,"AverageRecall":1},"EvaluationManifestS3Prefix":"__EvaluationManifestS3Prefix__","FlywheelArn":"__FlywheelArn__","FlywheelIterationId":"__FlywheelIterationId__","Message":"__Message__","Status":"TRAINING","TrainedModelArn":"__TrainedModelArn__","TrainedModelMetrics":{"AverageAccuracy":1,"AverageF1Score":1,"AveragePrecision":1,"AverageRecall":1}}}

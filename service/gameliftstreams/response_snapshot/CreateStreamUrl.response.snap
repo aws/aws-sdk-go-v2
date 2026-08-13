@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"AdditionalEnvironmentVariables":{"key0":"__Value__"},"AdditionalLaunchArgs":["__Member__","__Member__"],"ApplicationArn":"__ApplicationArn__","Arn":"__Arn__","CreatedAt":946684800,"Description":"__Description__","DisplayConfiguration":{"Resolution":{"Height":1,"Width":1}},"ExpiresAt":946684800,"Locations":["__Member__","__Member__"],"Protocol":"WebRTC","RemainingUses":1,"RoleArn":"__RoleArn__","SessionLengthSeconds":1,"Status":"ACTIVE","StatusReason":"userRevoked","StreamGroupArn":"__StreamGroupArn__","StreamUrl":"__StreamUrl__","StreamUrlId":"__StreamUrlId__","UsageLimit":1}

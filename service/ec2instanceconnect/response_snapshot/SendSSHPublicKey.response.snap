@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSEC2InstanceConnectService.SendSSHPublicKey
-
-{"RequestId":"__RequestId__","Success":true}

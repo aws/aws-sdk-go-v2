@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ConnectionId":"__ConnectionId__","UnderlayIpAddress":"__UnderlayIpAddress__"}

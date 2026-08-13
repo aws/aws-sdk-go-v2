@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"ValidationException","error":"TOKEN_EXPIRED","message":"__Message__"}

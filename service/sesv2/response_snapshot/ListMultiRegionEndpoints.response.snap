@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"MultiRegionEndpoints":[{"CreatedTimestamp":946684800,"EndpointId":"__EndpointId__","EndpointName":"__EndpointName__","LastUpdatedTimestamp":946684800,"Regions":["__Member__","__Member__"],"Status":"CREATING"},{"CreatedTimestamp":946684800,"EndpointId":"__EndpointId__","EndpointName":"__EndpointName__","LastUpdatedTimestamp":946684800,"Regions":["__Member__","__Member__"],"Status":"CREATING"}],"NextToken":"__NextToken__"}

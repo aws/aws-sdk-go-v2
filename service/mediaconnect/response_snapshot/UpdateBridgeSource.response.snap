@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"bridgeArn":"__BridgeArn__","source":{"flowSource":{"flowArn":"__FlowArn__","flowVpcInterfaceAttachment":{"vpcInterfaceName":"__VpcInterfaceName__"},"name":"__Name__","outputArn":"__OutputArn__"},"networkSource":{"multicastIp":"__MulticastIp__","multicastSourceSettings":{"multicastSourceIp":"__MulticastSourceIp__"},"name":"__Name__","networkName":"__NetworkName__","port":1,"protocol":"zixi-push"}}}

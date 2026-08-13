@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSCognitoIdentityService.ListIdentities
-
-{"Identities":[{"CreationDate":946684800,"IdentityId":"__IdentityId__","LastModifiedDate":946684800,"Logins":["__Member__","__Member__"]},{"CreationDate":946684800,"IdentityId":"__IdentityId__","LastModifiedDate":946684800,"Logins":["__Member__","__Member__"]}],"IdentityPoolId":"__IdentityPoolId__","NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"BackupPlanVersionsList":[{"AdvancedBackupSettings":[{"BackupOptions":{"key0":"__Value__"},"ResourceType":"__ResourceType__"},{"BackupOptions":{"key0":"__Value__"},"ResourceType":"__ResourceType__"}],"BackupPlanArn":"__BackupPlanArn__","BackupPlanId":"__BackupPlanId__","BackupPlanName":"__BackupPlanName__","CreationDate":946684800,"CreatorRequestId":"__CreatorRequestId__","DeletionDate":946684800,"LastExecutionDate":946684800,"VersionId":"__VersionId__"},{"AdvancedBackupSettings":[{"BackupOptions":{"key0":"__Value__"},"ResourceType":"__ResourceType__"},{"BackupOptions":{"key0":"__Value__"},"ResourceType":"__ResourceType__"}],"BackupPlanArn":"__BackupPlanArn__","BackupPlanId":"__BackupPlanId__","BackupPlanName":"__BackupPlanName__","CreationDate":946684800,"CreatorRequestId":"__CreatorRequestId__","DeletionDate":946684800,"LastExecutionDate":946684800,"VersionId":"__VersionId__"}],"NextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonSSM.ListDocumentVersions
-
-{"DocumentVersions":[{"CreatedDate":946684800,"DisplayName":"__DisplayName__","DocumentFormat":"YAML","DocumentVersion":"__DocumentVersion__","IsDefaultVersion":true,"Name":"__Name__","ReviewStatus":"APPROVED","Status":"Creating","StatusInformation":"__StatusInformation__","VersionName":"__VersionName__"},{"CreatedDate":946684800,"DisplayName":"__DisplayName__","DocumentFormat":"YAML","DocumentVersion":"__DocumentVersion__","IsDefaultVersion":true,"Name":"__Name__","ReviewStatus":"APPROVED","Status":"Creating","StatusInformation":"__StatusInformation__","VersionName":"__VersionName__"}],"NextToken":"__NextToken__"}

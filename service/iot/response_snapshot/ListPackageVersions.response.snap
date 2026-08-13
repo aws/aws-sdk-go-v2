@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","packageVersionSummaries":[{"creationDate":946684800,"lastModifiedDate":946684800,"packageName":"__PackageName__","status":"DRAFT","versionName":"__VersionName__"},{"creationDate":946684800,"lastModifiedDate":946684800,"packageName":"__PackageName__","status":"DRAFT","versionName":"__VersionName__"}]}

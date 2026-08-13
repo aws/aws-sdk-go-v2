@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RedshiftServerless.CreateUsageLimit
-
-{"usageLimit":{"amount":1,"breachAction":"log","period":"daily","resourceArn":"__ResourceArn__","usageLimitArn":"__UsageLimitArn__","usageLimitId":"__UsageLimitId__","usageType":"serverless-compute"}}

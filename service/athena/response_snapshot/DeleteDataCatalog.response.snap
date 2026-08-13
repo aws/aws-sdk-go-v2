@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonAthena.DeleteDataCatalog
-
-{"DataCatalog":{"ConnectionType":"DYNAMODB","Description":"__Description__","Error":"__Error__","Name":"__Name__","Parameters":{"key0":"__Value__"},"Status":"CREATE_IN_PROGRESS","Type":"LAMBDA"}}

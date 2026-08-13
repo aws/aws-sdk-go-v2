@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","versions":[{"creationDate":946684800,"isDefaultVersion":true,"versionId":1},{"creationDate":946684800,"isDefaultVersion":true,"versionId":1}]}

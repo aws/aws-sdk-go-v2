@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"ScheduledAction":{"Cancellable":true,"Description":"__Description__","Id":"__Id__","Mandatory":true,"ScheduledBy":"CUSTOMER","ScheduledTime":1,"Severity":"HIGH","Status":"PENDING_UPDATE","Type":"SERVICE_SOFTWARE_UPDATE"}}

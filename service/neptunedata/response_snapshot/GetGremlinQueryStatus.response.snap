@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"queryEvalStats":{"cancelled":true,"elapsed":1,"subqueries":"__Document__","waited":1},"queryId":"__QueryId__","queryString":"__QueryString__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextToken":"__NextToken__","results":["__Member__","__Member__"],"timestamp":1}

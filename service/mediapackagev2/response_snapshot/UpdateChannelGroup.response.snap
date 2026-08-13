@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Arn":"__Arn__","ChannelGroupName":"__ChannelGroupName__","CreatedAt":946684800,"Description":"__Description__","ETag":"__ETag__","EgressDomain":"__EgressDomain__","ModifiedAt":946684800,"tags":{"key0":"__Value__"}}

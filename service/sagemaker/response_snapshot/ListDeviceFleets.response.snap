@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.ListDeviceFleets
-
-{"DeviceFleetSummaries":[{"CreationTime":946684800,"DeviceFleetArn":"__DeviceFleetArn__","DeviceFleetName":"__DeviceFleetName__","LastModifiedTime":946684800},{"CreationTime":946684800,"DeviceFleetArn":"__DeviceFleetArn__","DeviceFleetName":"__DeviceFleetName__","LastModifiedTime":946684800}],"NextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.ListWorkflows
-
-{"NextToken":"__NextToken__","Workflows":[{"Arn":"__Arn__","Description":"__Description__","WorkflowId":"__WorkflowId__"},{"Arn":"__Arn__","Description":"__Description__","WorkflowId":"__WorkflowId__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: TransferService.DescribeUser
-
-{"ServerId":"__ServerId__","User":{"Arn":"__Arn__","HomeDirectory":"__HomeDirectory__","HomeDirectoryMappings":[{"Entry":"__Entry__","Target":"__Target__","Type":"FILE"},{"Entry":"__Entry__","Target":"__Target__","Type":"FILE"}],"HomeDirectoryType":"PATH","Policy":"__Policy__","PosixProfile":{"Gid":1,"SecondaryGids":[1,1],"Uid":1},"Role":"__Role__","SshPublicKeys":[{"DateImported":946684800,"SshPublicKeyBody":"__SshPublicKeyBody__","SshPublicKeyId":"__SshPublicKeyId__"},{"DateImported":946684800,"SshPublicKeyBody":"__SshPublicKeyBody__","SshPublicKeyId":"__SshPublicKeyId__"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UserName":"__UserName__"}}

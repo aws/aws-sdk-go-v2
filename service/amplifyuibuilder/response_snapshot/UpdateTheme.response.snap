@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"appId":"__AppId__","createdAt":"2000-01-01T00:00:00Z","environmentName":"__EnvironmentName__","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","overrides":[{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}},{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}}],"tags":{"key0":"__Value__"},"values":[{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}},{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}}]}

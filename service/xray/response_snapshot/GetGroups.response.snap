@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Groups":[{"FilterExpression":"__FilterExpression__","GroupARN":"__GroupARN__","GroupName":"__GroupName__","InsightsConfiguration":{"InsightsEnabled":true,"NotificationsEnabled":true}},{"FilterExpression":"__FilterExpression__","GroupARN":"__GroupARN__","GroupName":"__GroupName__","InsightsConfiguration":{"InsightsEnabled":true,"NotificationsEnabled":true}}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"DataSourceSummaries":[{"Arn":"__Arn__","CreatedTime":946684800,"DataSourceId":"__DataSourceId__","LastUpdatedTime":946684800,"Name":"__Name__","Type":"ADOBE_ANALYTICS"},{"Arn":"__Arn__","CreatedTime":946684800,"DataSourceId":"__DataSourceId__","LastUpdatedTime":946684800,"Name":"__Name__","Type":"ADOBE_ANALYTICS"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

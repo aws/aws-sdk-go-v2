@@ -1,5 +1,0 @@
-500
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: MTurkRequesterServiceV20170117.AcceptQualificationRequest
-
-{"__type":"ServiceFault","Message":"__Message__","TurkErrorCode":"__TurkErrorCode__"}

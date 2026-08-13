@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"nextMarker":"__NextMarker__","outgoingCertificates":[{"certificateArn":"__CertificateArn__","certificateId":"__CertificateId__","creationDate":946684800,"transferDate":946684800,"transferMessage":"__TransferMessage__","transferredTo":"__TransferredTo__"},{"certificateArn":"__CertificateArn__","certificateId":"__CertificateId__","creationDate":946684800,"transferDate":946684800,"transferMessage":"__TransferMessage__","transferredTo":"__TransferredTo__"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSEvents.CreateApiDestination
-
-{"ApiDestinationArn":"__ApiDestinationArn__","ApiDestinationState":"ACTIVE","CreationTime":946684800,"LastModifiedTime":946684800}

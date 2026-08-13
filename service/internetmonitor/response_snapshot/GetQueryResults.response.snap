@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"Data":[["__Member__","__Member__"],["__Member__","__Member__"]],"Fields":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"NextToken":"__NextToken__"}

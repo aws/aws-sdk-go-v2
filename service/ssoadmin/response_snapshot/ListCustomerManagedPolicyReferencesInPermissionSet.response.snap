@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SWBExternalService.ListCustomerManagedPolicyReferencesInPermissionSet
-
-{"CustomerManagedPolicyReferences":[{"Name":"__Name__","Path":"__Path__"},{"Name":"__Name__","Path":"__Path__"}],"NextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"createdAt":946684800,"createdBy":"__CreatedBy__","description":"__Description__","domainId":"__DomainId__","id":"__Id__","name":"__Name__","owningProjectId":"__OwningProjectId__","status":"DISABLED","updatedAt":946684800,"updatedBy":"__UpdatedBy__","usageRestrictions":["ASSET_GOVERNED_TERMS","ASSET_GOVERNED_TERMS"]}

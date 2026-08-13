@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"arn":"__Arn__","id":"__Id__","metadata":{"nsd":{"overrides":[{"defaultValue":"__DefaultValue__","name":"__Name__"},{"defaultValue":"__DefaultValue__","name":"__Name__"}]}},"nsdId":"__NsdId__","nsdName":"__NsdName__","nsdVersion":"__NsdVersion__","vnfPkgIds":["__Member__","__Member__"]}

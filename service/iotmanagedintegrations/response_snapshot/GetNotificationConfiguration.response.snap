@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"CreatedAt":946684800,"DestinationName":"__DestinationName__","EventType":"DEVICE_COMMAND","Tags":{"key0":"__Value__"},"UpdatedAt":946684800}

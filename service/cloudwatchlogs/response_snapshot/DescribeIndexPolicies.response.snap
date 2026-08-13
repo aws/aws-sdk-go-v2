@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Logs_20140328.DescribeIndexPolicies
-
-{"indexPolicies":[{"lastUpdateTime":1,"logGroupIdentifier":"__LogGroupIdentifier__","policyDocument":"__PolicyDocument__","policyName":"__PolicyName__","source":"ACCOUNT"},{"lastUpdateTime":1,"logGroupIdentifier":"__LogGroupIdentifier__","policyDocument":"__PolicyDocument__","policyName":"__PolicyName__","source":"ACCOUNT"}],"nextToken":"__NextToken__"}

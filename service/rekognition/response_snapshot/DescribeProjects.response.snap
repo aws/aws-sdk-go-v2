@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: RekognitionService.DescribeProjects
-
-{"NextToken":"__NextToken__","ProjectDescriptions":[{"AutoUpdate":"ENABLED","CreationTimestamp":946684800,"Datasets":[{"CreationTimestamp":946684800,"DatasetArn":"__DatasetArn__","DatasetType":"TRAIN","Status":"CREATE_IN_PROGRESS","StatusMessage":"__StatusMessage__","StatusMessageCode":"SUCCESS"},{"CreationTimestamp":946684800,"DatasetArn":"__DatasetArn__","DatasetType":"TRAIN","Status":"CREATE_IN_PROGRESS","StatusMessage":"__StatusMessage__","StatusMessageCode":"SUCCESS"}],"Feature":"CONTENT_MODERATION","ProjectArn":"__ProjectArn__","Status":"CREATING"},{"AutoUpdate":"ENABLED","CreationTimestamp":946684800,"Datasets":[{"CreationTimestamp":946684800,"DatasetArn":"__DatasetArn__","DatasetType":"TRAIN","Status":"CREATE_IN_PROGRESS","StatusMessage":"__StatusMessage__","StatusMessageCode":"SUCCESS"},{"CreationTimestamp":946684800,"DatasetArn":"__DatasetArn__","DatasetType":"TRAIN","Status":"CREATE_IN_PROGRESS","StatusMessage":"__StatusMessage__","StatusMessageCode":"SUCCESS"}],"Feature":"CONTENT_MODERATION","ProjectArn":"__ProjectArn__","Status":"CREATING"}]}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSMPCommerceService_v20200301.GetBillingAdjustmentRequest
-
-{"adjustmentAmount":"__AdjustmentAmount__","adjustmentReasonCode":"INCORRECT_TERMS_ACCEPTED","agreementId":"__AgreementId__","billingAdjustmentRequestId":"__BillingAdjustmentRequestId__","createdAt":946684800,"currencyCode":"__CurrencyCode__","description":"__Description__","originalInvoiceId":"__OriginalInvoiceId__","status":"PENDING","statusMessage":"__StatusMessage__","updatedAt":946684800}

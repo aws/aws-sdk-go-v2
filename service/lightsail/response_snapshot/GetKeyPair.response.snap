@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Lightsail_20161128.GetKeyPair
-
-{"keyPair":{"arn":"__Arn__","createdAt":946684800,"fingerprint":"__Fingerprint__","location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"name":"__Name__","resourceType":"ContainerService","supportCode":"__SupportCode__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}

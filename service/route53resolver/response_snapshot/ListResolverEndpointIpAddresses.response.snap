@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Resolver.ListResolverEndpointIpAddresses
-
-{"IpAddresses":[{"CreationTime":"__CreationTime__","Ip":"__Ip__","IpId":"__IpId__","Ipv6":"__Ipv6__","ModificationTime":"__ModificationTime__","Status":"CREATING","StatusMessage":"__StatusMessage__","SubnetId":"__SubnetId__"},{"CreationTime":"__CreationTime__","Ip":"__Ip__","IpId":"__IpId__","Ipv6":"__Ipv6__","ModificationTime":"__ModificationTime__","Status":"CREATING","StatusMessage":"__StatusMessage__","SubnetId":"__SubnetId__"}],"MaxResults":1,"NextToken":"__NextToken__"}

@@ -1,5 +1,0 @@
-200
-Content-Type: application/xml
-Etag: __ETag__
-
-<OriginRequestPolicy xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Id>__Id__</Id><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><OriginRequestPolicyConfig><Comment>__Comment__</Comment><CookiesConfig><CookieBehavior>none</CookieBehavior><Cookies><Items><Name>__Member__</Name><Name>__Member__</Name></Items><Quantity>1</Quantity></Cookies></CookiesConfig><HeadersConfig><HeaderBehavior>none</HeaderBehavior><Headers><Items><Name>__Member__</Name><Name>__Member__</Name></Items><Quantity>1</Quantity></Headers></HeadersConfig><Name>__Name__</Name><QueryStringsConfig><QueryStringBehavior>none</QueryStringBehavior><QueryStrings><Items><Name>__Member__</Name><Name>__Member__</Name></Items><Quantity>1</Quantity></QueryStrings></QueryStringsConfig></OriginRequestPolicyConfig></OriginRequestPolicy>

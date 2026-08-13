@@ -1,4 +1,0 @@
-400
-Content-Type: application/json
-
-{"__type":"InvalidParameterValueException","code":"InvalidParameterValueException","message":"__Message__","type":"__Type__"}
