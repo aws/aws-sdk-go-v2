@@ -1,3 +1,9 @@
+# v1.38.7 (2026-08-14)
+
+* **Documentation**: Amazon Redshift now unlocks a locked admin user account and resets the failed-login counter when you update the admin password using the UpdateNamespace API. This option is available only when account lockout security is enabled.
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.6 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

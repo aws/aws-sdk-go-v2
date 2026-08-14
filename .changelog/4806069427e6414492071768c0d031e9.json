@@ -1,8 +1,0 @@
-{
-    "id": "48060694-27e6-4144-9207-1768c0d031e9",
-    "type": "feature",
-    "description": "Adds support for Consuming code for MWAA Serverless",
-    "modules": [
-        "service/mwaaserverless"
-    ]
-}

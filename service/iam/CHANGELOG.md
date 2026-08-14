@@ -1,3 +1,8 @@
+# v1.59.1 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.0 (2026-08-12)
 
 * **Feature**: Introduced role manager, an IAM capability that automatically sets up the IAM roles your AWS services need. When you set up a supported service in the console, role manager creates a role for you or reuses an existing one from an AWS-managed template.

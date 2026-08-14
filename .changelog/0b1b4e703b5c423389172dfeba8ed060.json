@@ -1,8 +1,0 @@
-{
-    "id": "0b1b4e70-3b5c-4233-8917-2dfeba8ed060",
-    "type": "feature",
-    "description": "Adds AgentCore Payments support for CMK, Marketplace Subscriptions and QuickCreate",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

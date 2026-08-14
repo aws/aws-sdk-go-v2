@@ -1,3 +1,8 @@
+# v1.124.1 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.124.0 (2026-08-12)
 
 * **Feature**: Added APIs for DLP with Microsoft Purview (manage configs with label enforcement across Spaces, Chat, Knowledge Bases), Approval Workflows (CRUD for policies on asset sharing for Agents, Knowledge Bases, Spaces), and Limits Management (limit profiles for index storage and agent hours per user).

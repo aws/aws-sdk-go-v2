@@ -1,3 +1,9 @@
+# v1.56.0 (2026-08-14)
+
+* **Feature**: Adds AgentCore Payments support for CMK, Marketplace Subscriptions and QuickCreate
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.1 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

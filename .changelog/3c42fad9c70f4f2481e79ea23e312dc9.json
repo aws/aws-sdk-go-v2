@@ -1,8 +1,0 @@
-{
-    "id": "3c42fad9-c70f-4f24-81e7-9ea23e312dc9",
-    "type": "feature",
-    "description": "Adds CheckIngestedDocumentAcl and GetIngestedDocumentAcl APIs to Amazon Bedrock Knowledge Bases. Customers can verify user access to documents based on ingested ACLs and retrieve full ACL details including allow and deny entries, enabling validation of ACL ingestion without test retrievals.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

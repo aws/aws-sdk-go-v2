@@ -1,3 +1,9 @@
+# v1.23.0 (2026-08-14)
+
+* **Feature**: CloudWatch Logs centralization rules now support tag propagation. You can configure a TagPropagationConfiguration on your centralization rule to automatically sync resource tags from source to destination log groups, with configurable conflict resolution strategies.
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.2 (2026-08-10)
 
 * **Dependency Update**: Update to smithy-go v1.27.7.

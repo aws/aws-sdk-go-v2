@@ -1,3 +1,8 @@
+# v1.72.1 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.72.0 (2026-08-13)
 
 * **Feature**: Amazon EC2 Auto Scaling now supports terminating multiple instances in a single TerminateInstanceInAutoScalingGroup call via the new InstanceIds parameter, returning an Activities list. LaunchInstances now returns IdempotentCallInProgressFault for duplicate client tokens.

@@ -1,3 +1,9 @@
+# v1.57.0 (2026-08-14)
+
+* **Feature**: Adds CheckIngestedDocumentAcl and GetIngestedDocumentAcl APIs to Amazon Bedrock Knowledge Bases. Customers can verify user access to documents based on ingested ACLs and retrieve full ACL details including allow and deny entries, enabling validation of ACL ingestion without test retrievals.
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2026-08-11)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

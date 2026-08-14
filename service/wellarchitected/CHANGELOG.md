@@ -1,3 +1,8 @@
+# v1.43.1 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2026-08-12)
 
 * **Feature**: This change releases the Well-Architected Agent, a generative AI service that analyzes a customer's AWS environment and delivers personalized, prioritized recommendations across cost, security, performance, and resilience.

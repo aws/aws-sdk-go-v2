@@ -1,8 +1,0 @@
-{
-    "id": "5a437c1f-7730-4af8-b339-55aead0e9c5f",
-    "type": "feature",
-    "description": "CloudWatch Logs centralization rules now support tag propagation. You can configure a TagPropagationConfiguration on your centralization rule to automatically sync resource tags from source to destination log groups, with configurable conflict resolution strategies.",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}

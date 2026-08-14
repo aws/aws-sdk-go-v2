@@ -1,3 +1,9 @@
+# v1.39.0 (2026-08-14)
+
+* **Feature**: Add support for the Machine Payments Protocol (MPP) and x402 upto scheme payments protocol in Amazon Bedrock AgentCore Payments. Customers can now pay for MPP-gated resources and also pay services which requires upto scheme in x402
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2026-08-11)
 
 * **Feature**: Adding online eval arn as input for recommendation API

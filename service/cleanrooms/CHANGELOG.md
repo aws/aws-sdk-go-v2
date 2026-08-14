@@ -1,3 +1,8 @@
+# v1.51.1 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.0 (2026-08-13)
 
 * **Feature**: This release adds support for minimum aggregation thresholds and comparison controls to the Custom analysis rule type.

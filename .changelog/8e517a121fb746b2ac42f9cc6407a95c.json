@@ -1,8 +1,0 @@
-{
-    "id": "8e517a12-1fb7-46b2-ac42-f9cc6407a95c",
-    "type": "feature",
-    "description": "Added support for associating glossary terms with iterable form items, such as table columns.",
-    "modules": [
-        "service/glue"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "529aeff8-4f95-4651-89e7-ac7f0e68bd8a",
-    "type": "documentation",
-    "description": "Amazon Redshift now unlocks a locked admin user account and resets the failed-login counter when you update the admin password using the UpdateNamespace API. This option is available only when account lockout security is enabled.",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

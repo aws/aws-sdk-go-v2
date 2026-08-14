@@ -1,3 +1,31 @@
+# Release (2026-08-14)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.39.0](service/bedrockagentcore/CHANGELOG.md#v1390-2026-08-14)
+  * **Feature**: Add support for the Machine Payments Protocol (MPP) and x402 upto scheme payments protocol in Amazon Bedrock AgentCore Payments. Customers can now pay for MPP-gated resources and also pay services which requires upto scheme in x402
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.56.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1560-2026-08-14)
+  * **Feature**: Adds AgentCore Payments support for CMK, Marketplace Subscriptions and QuickCreate
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.57.0](service/bedrockagentruntime/CHANGELOG.md#v1570-2026-08-14)
+  * **Feature**: Adds CheckIngestedDocumentAcl and GetIngestedDocumentAcl APIs to Amazon Bedrock Knowledge Bases. Customers can verify user access to documents based on ingested ACLs and retrieve full ACL details including allow and deny entries, enabling validation of ACL ingestion without test retrievals.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.153.0](service/glue/CHANGELOG.md#v11530-2026-08-14)
+  * **Feature**: Added support for associating glossary terms with iterable form items, such as table columns.
+* `github.com/aws/aws-sdk-go-v2/service/mwaaserverless`: [v1.4.0](service/mwaaserverless/CHANGELOG.md#v140-2026-08-14)
+  * **Feature**: Adds support for Consuming code for MWAA Serverless
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.23.0](service/observabilityadmin/CHANGELOG.md#v1230-2026-08-14)
+  * **Feature**: CloudWatch Logs centralization rules now support tag propagation. You can configure a TagPropagationConfiguration on your centralization rule to automatically sync resource tags from source to destination log groups, with configurable conflict resolution strategies.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.65.6](service/redshift/CHANGELOG.md#v1656-2026-08-14)
+  * **Documentation**: Amazon Redshift now unlocks a locked admin user account and resets the failed-login counter when you update the admin password using the ModifyCluster API. This option is available only when account lockout security is enabled.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.38.7](service/redshiftserverless/CHANGELOG.md#v1387-2026-08-14)
+  * **Documentation**: Amazon Redshift now unlocks a locked admin user account and resets the failed-login counter when you update the admin password using the UpdateNamespace API. This option is available only when account lockout security is enabled.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.107.2](service/s3/CHANGELOG.md#v11072-2026-08-14)
+  * **Bug Fix**: Forward the original response body's `Closer` in S3 200-error handling instead of wrapping it in `io.NopCloser`, to avoid issues with TCP connection reuse (observed on CompleteMultipartUpload).
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.267.0](service/sagemaker/CHANGELOG.md#v12670-2026-08-14)
+  * **Feature**: Release support for g7.2xlarge, g7.4xlarge, g7.8xlarge, g7.12xlarge, g7.24xlarge, and g7.48xlarge instance types for SageMaker HyperPod
+
 # Release (2026-08-13)
 
 ## Module Highlights

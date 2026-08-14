@@ -1,3 +1,8 @@
+# v1.33.7 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.6 (2026-08-11)
 
 * **Documentation**: Added an end-of-support notice to Amazon Cloud Directory public CLI reference documentation.

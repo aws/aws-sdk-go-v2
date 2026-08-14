@@ -1,3 +1,9 @@
+# v1.153.0 (2026-08-14)
+
+* **Feature**: Added support for associating glossary terms with iterable form items, such as table columns.
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.152.2 (2026-08-12)
 
 * **Documentation**: Documentation updates for materialized views APIs.

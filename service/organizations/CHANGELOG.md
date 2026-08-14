@@ -1,3 +1,8 @@
+# v1.53.8 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.7 (2026-08-11)
 
 * **Documentation**: Documentation update for AWS Organizations that clarifies valid input values for the HandshakePartyType parameter in the InviteAccountToOrganization. API ORGANIZATION is valid in responses only. valid input values are ACCOUNT and EMAIL

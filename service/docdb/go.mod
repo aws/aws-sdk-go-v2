@@ -3,11 +3,11 @@ module github.com/aws/aws-sdk-go-v2/service/docdb
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.43.5
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.36
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.36
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.16
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.36
+	github.com/aws/aws-sdk-go-v2 v1.43.6
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.37
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.37
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.17
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.37
 	github.com/aws/smithy-go v1.27.8
 )
 
