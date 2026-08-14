@@ -948,6 +948,42 @@
                         "smithy.api#enumValue": "ml.g6e.48xlarge"
                     }
                 },
+                "ML_G7_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.2xlarge"
+                    }
+                },
+                "ML_G7_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.4xlarge"
+                    }
+                },
+                "ML_G7_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.8xlarge"
+                    }
+                },
+                "ML_G7_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.12xlarge"
+                    }
+                },
+                "ML_G7_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.24xlarge"
+                    }
+                },
+                "ML_G7_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.48xlarge"
+                    }
+                },
                 "ML_G7E_2XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -12345,6 +12381,42 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.m8g.48xlarge"
+                    }
+                },
+                "ML_G7_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.2xlarge"
+                    }
+                },
+                "ML_G7_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.4xlarge"
+                    }
+                },
+                "ML_G7_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.8xlarge"
+                    }
+                },
+                "ML_G7_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.12xlarge"
+                    }
+                },
+                "ML_G7_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.24xlarge"
+                    }
+                },
+                "ML_G7_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7.48xlarge"
                     }
                 }
             }
@@ -67044,16 +67116,14 @@
                     "target": "com.amazonaws.sagemaker#ProcessingInstanceCount",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The number of ML compute instances to use in the processing job. For distributed processing jobs, specify a value greater than 1. The default value is 1.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The number of ML compute instances to use in the processing job. For distributed processing jobs, specify a value greater than 1. The default value is 1.</p>"
                     }
                 },
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#ProcessingInstanceType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ML compute instance type for the processing job.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ML compute instance type for the processing job.</p>"
                     }
                 },
                 "VolumeSizeInGB": {

@@ -407,6 +407,20 @@
                 }
             }
         },
+        "com.amazonaws.mwaaserverless#Code": {
+            "type": "union",
+            "members": {
+                "S3Location": {
+                    "target": "com.amazonaws.mwaaserverless#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the code artifacts that your workflow tasks use during execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Amazon S3 location of code artifacts that workflows use during execution.</p>"
+            }
+        },
         "com.amazonaws.mwaaserverless#ConflictException": {
             "type": "structure",
             "members": {
@@ -499,6 +513,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 location where the workflow definition file is stored. This must point to a valid YAML file that defines the workflow structure using supported Amazon Web Services operators and tasks. Amazon Managed Workflows for Apache Airflow Serverless takes a snapshot of the definition at creation time, so subsequent changes to the Amazon S3 object will not affect the workflow unless you create a new version. In your YAML definition, include task dependencies, scheduling information, and operator configurations that are compatible with the Amazon Managed Workflows for Apache Airflow Serverless execution environment.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.mwaaserverless#Code",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of code artifacts in Amazon S3 for the workflow. The service copies the code from this location at the time of the request.</p>"
                     }
                 },
                 "RoleArn": {
@@ -1130,6 +1150,18 @@
                     "target": "com.amazonaws.mwaaserverless#DefinitionS3Location",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 location of the workflow definition file.</p>"
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.mwaaserverless#Code",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the code artifacts provided during workflow creation or update.</p>"
+                    }
+                },
+                "CodeSnapshottedAt": {
+                    "target": "com.amazonaws.mwaaserverless#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the code artifacts were copied for this workflow, in ISO 8601 date-time format.</p>"
                     }
                 },
                 "ScheduleConfiguration": {
@@ -2003,6 +2035,46 @@
                 }
             }
         },
+        "com.amazonaws.mwaaserverless#S3Location": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket.</p>",
+                        "smithy.api#length": {
+                            "min": 3,
+                            "max": 63
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the code artifact within the Amazon S3 bucket.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the object in Amazon S3. If not specified, the latest version is used.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Amazon S3 location of code artifacts that workflows use during execution.</p>"
+            }
+        },
         "com.amazonaws.mwaaserverless#ScheduleConfiguration": {
             "type": "structure",
             "members": {
@@ -2823,6 +2895,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Code": {
+                    "target": "com.amazonaws.mwaaserverless#Code",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of code artifacts in Amazon S3 for the updated workflow. The service copies the code from this location at the time of the request.</p>"
+                    }
+                },
                 "RoleArn": {
                     "target": "com.amazonaws.mwaaserverless#RoleARN",
                     "traits": {
@@ -3075,6 +3153,12 @@
                 },
                 "WorkflowDefinition": {
                     "target": "com.amazonaws.mwaaserverless#GenericString"
+                },
+                "Code": {
+                    "target": "com.amazonaws.mwaaserverless#Code"
+                },
+                "CodeSnapshottedAt": {
+                    "target": "com.amazonaws.mwaaserverless#TimestampValue"
                 }
             },
             "create": {

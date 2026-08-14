@@ -2963,6 +2963,18 @@
                         "smithy.api#required": {}
                     }
                 },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the glossary terms are associated with an item within the iterable form rather than the asset itself.</p>"
+                    }
+                },
+                "ItemIdentifier": {
+                    "target": "com.amazonaws.glue#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>"
+                    }
+                },
                 "GlossaryTermIdentifiers": {
                     "target": "com.amazonaws.glue#GlossaryTermIdList",
                     "traits": {
@@ -2989,6 +3001,18 @@
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
+                    }
+                },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form, if the association targets an item.</p>"
+                    }
+                },
+                "ItemIdentifier": {
+                    "target": "com.amazonaws.glue#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the item within the iterable form, if applicable.</p>"
                     }
                 },
                 "GlossaryTerms": {
@@ -16823,6 +16847,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
                     }
+                },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form, if the deletion targets an item.</p>"
+                    }
+                },
+                "ItemIdentifier": {
+                    "target": "com.amazonaws.glue#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the item within the iterable form, if applicable.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20036,6 +20072,18 @@
                         "smithy.api#required": {}
                     }
                 },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the glossary terms are disassociated from an item within the iterable form rather than the asset itself.</p>"
+                    }
+                },
+                "ItemIdentifier": {
+                    "target": "com.amazonaws.glue#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>"
+                    }
+                },
                 "GlossaryTermIdentifiers": {
                     "target": "com.amazonaws.glue#GlossaryTermIdList",
                     "traits": {
@@ -20062,6 +20110,18 @@
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
+                    }
+                },
+                "IterableFormName": {
+                    "target": "com.amazonaws.glue#IterableFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the iterable form, if the disassociation targets an item.</p>"
+                    }
+                },
+                "ItemIdentifier": {
+                    "target": "com.amazonaws.glue#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the item within the iterable form, if applicable.</p>"
                     }
                 },
                 "GlossaryTerms": {
@@ -40660,6 +40720,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.glue#InternalServiceException"

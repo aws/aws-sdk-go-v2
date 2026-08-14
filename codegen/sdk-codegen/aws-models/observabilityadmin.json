@@ -361,6 +361,18 @@
                         "smithy.api#documentation": "<p>The reason why an organization centralization rule is marked UNHEALTHY.</p>"
                     }
                 },
+                "TagPropagationStatus": {
+                    "target": "com.amazonaws.observabilityadmin#TagPropagationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health status of tag propagation for this rule. This status is independent of the overall <code>RuleHealth</code> for log delivery. Returns <code>Healthy</code> when the most recent tag-propagation attempt succeeded, or <code>Unhealthy</code> when the most recent attempt failed.</p>"
+                    }
+                },
+                "TagPropagationFailureReason": {
+                    "target": "com.amazonaws.observabilityadmin#TagPropagationFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason tag propagation is unhealthy for this rule. Only present when <code>TagPropagationStatus</code> is <code>Unhealthy</code>.</p>"
+                    }
+                },
                 "DestinationAccountId": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -1205,6 +1217,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration that specifies a naming pattern for destination log groups created during centralization. The pattern supports static text and dynamic variables that are replaced with source attributes when log groups are created.</p>"
                     }
+                },
+                "TagPropagationConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#TagPropagationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the tag propagation configuration for this centralization rule. When present, <code>LogGroupNameConfiguration</code> must use a <code>LogGroupNamePattern</code> that contains <code>${source.logGroup}</code>, <code>${source.accountId}</code>, and <code>${source.region}</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1576,6 +1594,18 @@
                     "target": "com.amazonaws.observabilityadmin#CentralizationFailureReason",
                     "traits": {
                         "smithy.api#documentation": "<p>The reason why an organization centralization rule is marked UNHEALTHY.</p>"
+                    }
+                },
+                "TagPropagationStatus": {
+                    "target": "com.amazonaws.observabilityadmin#TagPropagationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health status of tag propagation for this rule. This status is independent of the overall <code>RuleHealth</code> for log delivery. Returns <code>Healthy</code> when the most recent tag-propagation attempt succeeded, or <code>Unhealthy</code> when the most recent attempt failed.</p>"
+                    }
+                },
+                "TagPropagationFailureReason": {
+                    "target": "com.amazonaws.observabilityadmin#TagPropagationFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason tag propagation is unhealthy for this rule. Only present when <code>TagPropagationStatus</code> is <code>Unhealthy</code>.</p>"
                     }
                 },
                 "CentralizationRule": {
@@ -2160,6 +2190,16 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#IamRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:role/[\\w+=,.@/-]+$"
             }
         },
         "com.amazonaws.observabilityadmin#IntegrationStatus": {
@@ -5175,6 +5215,32 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.observabilityadmin#TagConflictResolutionStrategy": {
+            "type": "enum",
+            "members": {
+                "IN_SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_SYNC"
+                    }
+                },
+                "ADD_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADD_ONLY"
+                    }
+                },
+                "UPDATE_SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_SYNC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The strategy for resolving tag conflicts between source and destination log groups.</p> <ul> <li> <p> <code>ADD_ONLY</code> – Only adds new tags from the source without modifying existing destination tags.</p> </li> <li> <p> <code>UPDATE_SYNC</code> – Adds new tags and updates existing tags from the source. Does not remove destination tags that are absent from the source.</p> </li> <li> <p> <code>IN_SYNC</code> – Keeps destination tags fully synchronized with source tags, including removing destination tags that do not exist on the source.</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.observabilityadmin#TagKey": {
             "type": "string",
             "traits": {
@@ -5220,6 +5286,67 @@
             },
             "value": {
                 "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagPropagationConfiguration": {
+            "type": "structure",
+            "members": {
+                "DestinationRoleArn": {
+                    "target": "com.amazonaws.observabilityadmin#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a customer-managed IAM role in the destination account. The service assumes this role to propagate tags to destination log groups. You must have <code>iam:PassRole</code> permission on this role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagConflictResolutionStrategy": {
+                    "target": "com.amazonaws.observabilityadmin#TagConflictResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy for resolving conflicts when a tag key exists on both the source and destination log groups. If not specified, defaults to <code>UPDATE_SYNC</code>.</p> <ul> <li> <p> <code>ADD_ONLY</code> – Only adds new tags from the source without modifying existing destination tags.</p> </li> <li> <p> <code>UPDATE_SYNC</code> – Adds new tags and updates existing tags from the source. Does not remove destination tags that are absent from the source.</p> </li> <li> <p> <code>IN_SYNC</code> – Keeps destination tags fully synchronized with source tags, including removing destination tags that do not exist on the source.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configuration for propagating resource tags from source log groups to centralized destination log groups. The service uses a customer-managed IAM role in the destination account to add, update, and remove tags on destination log groups.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagPropagationFailureReason": {
+            "type": "enum",
+            "members": {
+                "ROLE_NOT_ASSUMABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleNotAssumable"
+                    }
+                },
+                "ROLE_LACKS_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleLacksPermissions"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reason tag propagation is unhealthy for a centralization rule.</p> <ul> <li> <p> <code>RoleNotAssumable</code> – The service cannot assume the destination role due to a trust policy or external ID misconfiguration.</p> </li> <li> <p> <code>RoleLacksPermissions</code> – The role was assumed successfully but the tag API call was denied by the role's permissions policy.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagPropagationStatus": {
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Healthy"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unhealthy"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The health status of tag propagation for a centralization rule. This status is independent of the overall <code>RuleHealth</code> for log delivery.</p>"
             }
         },
         "com.amazonaws.observabilityadmin#TagResource": {
