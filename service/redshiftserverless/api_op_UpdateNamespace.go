@@ -44,6 +44,10 @@ type UpdateNamespaceInput struct {
 	// namespace. This parameter must be updated together with adminUsername .
 	//
 	// You can't use adminUserPassword if manageAdminPassword is true.
+	//
+	// If your admin user account is locked, this operation also unlocks your account
+	// and resets the failed-login counter. This option is available only when account
+	// lockout security is enabled for the namespace.
 	AdminUserPassword *string
 
 	// The username of the administrator for the first database created in the

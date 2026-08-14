@@ -14281,12 +14281,6 @@ func validateProcessingClusterConfig(v *types.ProcessingClusterConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProcessingClusterConfig"}
-	if v.InstanceCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
-	}
-	if len(v.InstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
 	if v.VolumeSizeInGB == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInGB"))
 	}

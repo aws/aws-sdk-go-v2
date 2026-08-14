@@ -2357,7 +2357,8 @@ func TestCheckRequestSnapshot_CreatePaymentConnector(t *testing.T) {
 				},
 			},
 		},
-		ClientToken: ptr.String("__ClientToken__"),
+		ProvisionMode: types.PaymentConnectorProvisionMode("MANUAL"),
+		ClientToken:   ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2519,6 +2520,7 @@ func TestCheckRequestSnapshot_CreatePaymentManager(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7879,6 +7881,7 @@ func TestCheckRequestSnapshot_UpdatePaymentManager(t *testing.T) {
 		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		ClientToken: ptr.String("__ClientToken__"),
+		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10426,7 +10429,8 @@ func TestUpdateRequestSnapshot_CreatePaymentConnector(t *testing.T) {
 				},
 			},
 		},
-		ClientToken: ptr.String("__ClientToken__"),
+		ProvisionMode: types.PaymentConnectorProvisionMode("MANUAL"),
+		ClientToken:   ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10588,6 +10592,7 @@ func TestUpdateRequestSnapshot_CreatePaymentManager(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -15948,6 +15953,7 @@ func TestUpdateRequestSnapshot_UpdatePaymentManager(t *testing.T) {
 		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		ClientToken: ptr.String("__ClientToken__"),
+		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

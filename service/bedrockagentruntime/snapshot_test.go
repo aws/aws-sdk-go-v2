@@ -74,6 +74,18 @@ func TestCheckSnapshot_AgenticRetrieveStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CheckIngestedDocumentAcl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckIngestedDocumentAcl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CheckIngestedDocumentAcl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateInvocation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInvocation(context.Background(), nil, func(o *Options) {
@@ -187,6 +199,18 @@ func TestCheckSnapshot_GetFlowExecution(t *testing.T) {
 	_, err := svc.GetFlowExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetFlowExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetIngestedDocumentAcl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIngestedDocumentAcl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIngestedDocumentAcl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -469,6 +493,18 @@ func TestUpdateSnapshot_AgenticRetrieveStream(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CheckIngestedDocumentAcl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckIngestedDocumentAcl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CheckIngestedDocumentAcl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateInvocation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInvocation(context.Background(), nil, func(o *Options) {
@@ -582,6 +618,18 @@ func TestUpdateSnapshot_GetFlowExecution(t *testing.T) {
 	_, err := svc.GetFlowExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFlowExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetIngestedDocumentAcl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIngestedDocumentAcl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIngestedDocumentAcl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

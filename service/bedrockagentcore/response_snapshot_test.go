@@ -3757,8 +3757,9 @@ func TestCheckResponseSnapshot_ProcessPayment(t *testing.T) {
 		PaymentType:         types.PaymentType("CRYPTO_X402"),
 		PaymentInput: &types.PaymentInputMemberCryptoX402{
 			Value: types.CryptoX402PaymentInput{
-				Version: ptr.String("__Version__"),
-				Payload: document.NewLazyDocument("__Document__"),
+				Version:               ptr.String("__Version__"),
+				Payload:               document.NewLazyDocument("__Document__"),
+				Permit2AllowanceLimit: ptr.String("__Permit2AllowanceLimit__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -5346,6 +5347,59 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceQuotaExceededException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_SubscriptionRequiredException(t *testing.T) {
+	want := &types.SubscriptionRequiredException{
+		Message:         ptr.String("__Message__"),
+		SubscriptionUrl: ptr.String("__SubscriptionUrl__"),
+		ProductName:     ptr.String("__ProductName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SubscriptionRequiredException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreatePaymentInstrument(context.Background(), &CreatePaymentInstrumentInput{
+		UserId:                ptr.String("__UserId__"),
+		AgentName:             ptr.String("__AgentName__"),
+		PaymentManagerArn:     ptr.String("__PaymentManagerArn__"),
+		PaymentConnectorId:    ptr.String("__PaymentConnectorId__"),
+		PaymentInstrumentType: types.PaymentInstrumentType("EMBEDDED_CRYPTO_WALLET"),
+		PaymentInstrumentDetails: &types.PaymentInstrumentDetailsMemberEmbeddedCryptoWallet{
+			Value: types.EmbeddedCryptoWallet{
+				Network: types.CryptoWalletNetwork("ETHEREUM"),
+				LinkedAccounts: []types.LinkedAccount{
+					&types.LinkedAccountMemberEmail{
+						Value: types.LinkedAccountEmail{
+							EmailAddress: ptr.String("__EmailAddress__"),
+						},
+					},
+					&types.LinkedAccountMemberEmail{
+						Value: types.LinkedAccountEmail{
+							EmailAddress: ptr.String("__EmailAddress__"),
+						},
+					},
+				},
+				WalletAddress: ptr.String("__WalletAddress__"),
+				RedirectUrl:   ptr.String("__RedirectUrl__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.SubscriptionRequiredException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.SubscriptionRequiredException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "SubscriptionRequiredException.error", err)
 	}
 }
 

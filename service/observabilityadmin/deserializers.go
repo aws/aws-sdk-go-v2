@@ -1673,6 +1673,24 @@ func awsRestjson1_deserializeOpDocumentGetCentralizationRuleForOrganizationOutpu
 				sv.RuleName = ptr.String(jtv)
 			}
 
+		case "TagPropagationFailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagPropagationFailureReason to be of type string, got %T instead", value)
+				}
+				sv.TagPropagationFailureReason = types.TagPropagationFailureReason(jtv)
+			}
+
+		case "TagPropagationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagPropagationStatus to be of type string, got %T instead", value)
+				}
+				sv.TagPropagationStatus = types.TagPropagationStatus(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7305,6 +7323,24 @@ func awsRestjson1_deserializeDocumentCentralizationRuleSummary(v **types.Central
 				sv.RuleName = ptr.String(jtv)
 			}
 
+		case "TagPropagationFailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagPropagationFailureReason to be of type string, got %T instead", value)
+				}
+				sv.TagPropagationFailureReason = types.TagPropagationFailureReason(jtv)
+			}
+
+		case "TagPropagationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagPropagationStatus to be of type string, got %T instead", value)
+				}
+				sv.TagPropagationStatus = types.TagPropagationStatus(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7664,6 +7700,11 @@ func awsRestjson1_deserializeDocumentDestinationLogsConfiguration(v **types.Dest
 
 		case "LogsEncryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentLogsEncryptionConfiguration(&sv.LogsEncryptionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "TagPropagationConfiguration":
+			if err := awsRestjson1_deserializeDocumentTagPropagationConfiguration(&sv.TagPropagationConfiguration, value); err != nil {
 				return err
 			}
 
@@ -9440,6 +9481,55 @@ func awsRestjson1_deserializeDocumentTagMapOutput(v *map[string]string, value in
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTagPropagationConfiguration(v **types.TagPropagationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TagPropagationConfiguration
+	if *v == nil {
+		sv = &types.TagPropagationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DestinationRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
+				}
+				sv.DestinationRoleArn = ptr.String(jtv)
+			}
+
+		case "TagConflictResolutionStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagConflictResolutionStrategy to be of type string, got %T instead", value)
+				}
+				sv.TagConflictResolutionStrategy = types.TagConflictResolutionStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

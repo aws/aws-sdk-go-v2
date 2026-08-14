@@ -229,6 +229,10 @@ type ModifyClusterInput struct {
 	//
 	// You can't use MasterUserPassword if ManageMasterPassword is true .
 	//
+	// If your admin user account is locked, this operation also unlocks your account
+	// and resets the failed-login counter. This option is available only when account
+	// lockout security is enabled for the cluster.
+	//
 	// Operations never return the password, so this operation provides a way to
 	// regain access to the admin user account for a cluster if the password is lost.
 	//

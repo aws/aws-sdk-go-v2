@@ -7412,6 +7412,11 @@ func awsRestjson1_serializeDocumentCryptoX402PaymentInput(v *types.CryptoX402Pay
 		}
 	}
 
+	if v.Permit2AllowanceLimit != nil {
+		ok := object.Key("permit2AllowanceLimit")
+		ok.String(*v.Permit2AllowanceLimit)
+	}
+
 	if v.Version != nil {
 		ok := object.Key("version")
 		ok.String(*v.Version)
@@ -9643,6 +9648,30 @@ func awsRestjson1_serializeDocumentMouseScrollArguments(v *types.MouseScrollArgu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMppPaymentInput(v *types.MppPaymentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BuyerPaysGasFees != nil {
+		ok := object.Key("buyerPaysGasFees")
+		ok.Boolean(*v.BuyerPaysGasFees)
+	}
+
+	if v.Version != nil {
+		ok := object.Key("version")
+		ok.String(*v.Version)
+	}
+
+	if v.WwwAuthenticateHeaders != nil {
+		ok := object.Key("wwwAuthenticateHeaders")
+		if err := awsRestjson1_serializeDocumentWwwAuthenticateHeaderList(v.WwwAuthenticateHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNamespacesList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -9843,6 +9872,12 @@ func awsRestjson1_serializeDocumentPaymentInput(v types.PaymentInput, value smit
 	case *types.PaymentInputMemberCryptoX402:
 		av := object.Key("cryptoX402")
 		if err := awsRestjson1_serializeDocumentCryptoX402PaymentInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.PaymentInputMemberMpp:
+		av := object.Key("mpp")
+		if err := awsRestjson1_serializeDocumentMppPaymentInput(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -10937,6 +10972,17 @@ func awsRestjson1_serializeDocumentViewPort(v *types.ViewPort, value smithyjson.
 		ok.Integer(*v.Width)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWwwAuthenticateHeaderList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

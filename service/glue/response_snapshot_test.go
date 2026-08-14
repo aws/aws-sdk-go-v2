@@ -110,7 +110,9 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 }
 func TestCheckResponseSnapshot_AssociateGlossaryTerms(t *testing.T) {
 	want := &AssociateGlossaryTermsOutput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTerms: []string{
 			"__Member__",
 			"__Member__",
@@ -125,7 +127,9 @@ func TestCheckResponseSnapshot_AssociateGlossaryTerms(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.AssociateGlossaryTerms(context.Background(), &AssociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -14935,7 +14939,9 @@ func TestCheckResponseSnapshot_DeleteAssetType(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteAttachment(t *testing.T) {
 	want := &DeleteAttachmentOutput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAttachment.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -16853,7 +16859,9 @@ func TestCheckResponseSnapshot_DescribeIntegrations(t *testing.T) {
 
 func TestCheckResponseSnapshot_DisassociateGlossaryTerms(t *testing.T) {
 	want := &DisassociateGlossaryTermsOutput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTerms: []string{
 			"__Member__",
 			"__Member__",
@@ -16868,7 +16876,9 @@ func TestCheckResponseSnapshot_DisassociateGlossaryTerms(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.DisassociateGlossaryTerms(context.Background(), &DisassociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -46053,7 +46063,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.AssociateGlossaryTerms(context.Background(), &AssociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -46386,7 +46398,9 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.AssociateGlossaryTerms(context.Background(), &AssociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -46612,7 +46626,9 @@ func TestCheckResponseSnapshot_Error_EntityNotFoundException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.AssociateGlossaryTerms(context.Background(), &AssociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -47388,7 +47404,9 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.AssociateGlossaryTerms(context.Background(), &AssociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -47421,7 +47439,9 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.AssociateGlossaryTerms(context.Background(), &AssociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -48478,7 +48498,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.AssociateGlossaryTerms(context.Background(), &AssociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",

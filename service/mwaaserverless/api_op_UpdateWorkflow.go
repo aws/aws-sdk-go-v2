@@ -49,6 +49,10 @@ type UpdateWorkflowInput struct {
 	// This member is required.
 	WorkflowArn *string
 
+	// The location of code artifacts in Amazon S3 for the updated workflow. The
+	// service copies the code from this location at the time of the request.
+	Code types.Code
+
 	// An updated description for the workflow.
 	Description *string
 

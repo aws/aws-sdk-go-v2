@@ -7,6 +7,26 @@ import (
 	"time"
 )
 
+// Specifies the Amazon S3 location of code artifacts that workflows use during
+// execution.
+//
+// The following types satisfy this interface:
+//
+//	CodeMemberS3Location
+type Code interface {
+	isCode()
+}
+
+// The Amazon S3 location of the code artifacts that your workflow tasks use
+// during execution.
+type CodeMemberS3Location struct {
+	Value S3Location
+
+	noSmithyDocumentSerde
+}
+
+func (*CodeMemberS3Location) isCode() {}
+
 // Specifies the Amazon S3 location of a workflow definition file. This structure
 // contains the bucket name, object key, and optional version ID for the workflow
 // definition. Amazon Managed Workflows for Apache Airflow Serverless takes a
@@ -112,6 +132,27 @@ type RunDetailSummary struct {
 
 	// The current status of the workflow run.
 	Status WorkflowRunStatus
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the Amazon S3 location of code artifacts that workflows use during
+// execution.
+type S3Location struct {
+
+	// The name of the Amazon S3 bucket.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The key of the code artifact within the Amazon S3 bucket.
+	//
+	// This member is required.
+	ObjectKey *string
+
+	// The version ID of the object in Amazon S3. If not specified, the latest version
+	// is used.
+	VersionId *string
 
 	noSmithyDocumentSerde
 }
@@ -326,3 +367,14 @@ type WorkflowVersionSummary struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isCode() {}

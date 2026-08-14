@@ -71,6 +71,10 @@ type CreateWorkflowInput struct {
 	// of the request. This token prevents duplicate workflow creation requests.
 	ClientToken *string
 
+	// The location of code artifacts in Amazon S3 for the workflow. The service
+	// copies the code from this location at the time of the request.
+	Code types.Code
+
 	// An optional description of the workflow that you can use to provide additional
 	// context about the workflow's purpose and functionality.
 	Description *string

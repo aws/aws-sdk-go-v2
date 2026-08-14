@@ -1962,8 +1962,9 @@ func TestCheckRequestSnapshot_ProcessPayment(t *testing.T) {
 		PaymentType:         types.PaymentType("CRYPTO_X402"),
 		PaymentInput: &types.PaymentInputMemberCryptoX402{
 			Value: types.CryptoX402PaymentInput{
-				Version: ptr.String("__Version__"),
-				Payload: document.NewLazyDocument("__Document__"),
+				Version:               ptr.String("__Version__"),
+				Payload:               document.NewLazyDocument("__Document__"),
+				Permit2AllowanceLimit: ptr.String("__Permit2AllowanceLimit__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -4558,8 +4559,9 @@ func TestUpdateRequestSnapshot_ProcessPayment(t *testing.T) {
 		PaymentType:         types.PaymentType("CRYPTO_X402"),
 		PaymentInput: &types.PaymentInputMemberCryptoX402{
 			Value: types.CryptoX402PaymentInput{
-				Version: ptr.String("__Version__"),
-				Payload: document.NewLazyDocument("__Document__"),
+				Version:               ptr.String("__Version__"),
+				Payload:               document.NewLazyDocument("__Document__"),
+				Permit2AllowanceLimit: ptr.String("__Permit2AllowanceLimit__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),

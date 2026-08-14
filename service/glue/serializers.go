@@ -30823,6 +30823,16 @@ func awsAwsjson11_serializeOpDocumentAssociateGlossaryTermsInput(v *AssociateGlo
 		}
 	}
 
+	if v.ItemIdentifier != nil {
+		ok := object.Key("ItemIdentifier")
+		ok.String(*v.ItemIdentifier)
+	}
+
+	if v.IterableFormName != nil {
+		ok := object.Key("IterableFormName")
+		ok.String(*v.IterableFormName)
+	}
+
 	return nil
 }
 
@@ -33553,6 +33563,16 @@ func awsAwsjson11_serializeOpDocumentDisassociateGlossaryTermsInput(v *Disassoci
 		if err := awsAwsjson11_serializeDocumentGlossaryTermIdList(v.GlossaryTermIdentifiers, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ItemIdentifier != nil {
+		ok := object.Key("ItemIdentifier")
+		ok.String(*v.ItemIdentifier)
+	}
+
+	if v.IterableFormName != nil {
+		ok := object.Key("IterableFormName")
+		ok.String(*v.IterableFormName)
 	}
 
 	return nil

@@ -690,6 +690,8 @@ type CapacityProviderConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the capacity provider to use for the
 	// AgentCore Runtime.
+	//
+	// This member is required.
 	CapacityProviderArn *string
 
 	noSmithyDocumentSerde
@@ -6505,6 +6507,10 @@ type PaymentManagerSummary struct {
 
 	// The description of the payment manager.
 	Description *string
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive payment
+	// manager data at rest, if configured.
+	KmsKeyArn *string
 
 	noSmithyDocumentSerde
 }

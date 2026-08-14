@@ -90,6 +90,10 @@ type GetPaymentManagerOutput struct {
 	// The description of the payment manager.
 	Description *string
 
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive payment
+	// manager data at rest, if configured.
+	KmsKeyArn *string
+
 	// The tags associated with the payment manager.
 	Tags map[string]string
 

@@ -142,6 +142,30 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_CheckIngestedDocumentAcl(t *testing.T) {
+	want := &CheckIngestedDocumentAclOutput{
+		HasAccess: ptr.Bool(true),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentRunTimeService)
+	opSchema := smithy.NewOperationSchema(schemas.CheckIngestedDocumentAcl, schemas.CheckIngestedDocumentAclResponse, schemas.CheckIngestedDocumentAclResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CheckIngestedDocumentAcl.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateInvocation(t *testing.T) {
 	want := &CreateInvocationOutput{
 		SessionId:    ptr.String("__SessionId__"),
@@ -435,6 +459,133 @@ func TestUpdateResponseSnapshot_GetFlowExecution(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetFlowExecution.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetIngestedDocumentAcl(t *testing.T) {
+	want := &GetIngestedDocumentAclOutput{
+		DocumentAcl: &types.DocumentAcl{
+			AllowList: &types.DocumentAclMembership{
+				MemberRelation: types.DocumentAclMemberRelation("AND"),
+				Conditions: []types.DocumentAclCondition{
+					{
+						ConditionOperator: types.DocumentAclMemberRelation("AND"),
+						Users: []types.DocumentAclUser{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+						Groups: []types.DocumentAclGroup{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+					},
+					{
+						ConditionOperator: types.DocumentAclMemberRelation("AND"),
+						Users: []types.DocumentAclUser{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+						Groups: []types.DocumentAclGroup{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+					},
+				},
+			},
+			DenyList: &types.DocumentAclMembership{
+				MemberRelation: types.DocumentAclMemberRelation("AND"),
+				Conditions: []types.DocumentAclCondition{
+					{
+						ConditionOperator: types.DocumentAclMemberRelation("AND"),
+						Users: []types.DocumentAclUser{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+						Groups: []types.DocumentAclGroup{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+					},
+					{
+						ConditionOperator: types.DocumentAclMemberRelation("AND"),
+						Users: []types.DocumentAclUser{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+						Groups: []types.DocumentAclGroup{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentRunTimeService)
+	opSchema := smithy.NewOperationSchema(schemas.GetIngestedDocumentAcl, schemas.GetIngestedDocumentAclResponse, schemas.GetIngestedDocumentAclResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetIngestedDocumentAcl.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1423,7 +1574,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockAgentRunTimeService)
-	opSchema := smithy.NewOperationSchema(schemas.CreateInvocation, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.CheckIngestedDocumentAcl, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1526,7 +1677,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		Reason:  ptr.String("__Reason__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockAgentRunTimeService)
-	opSchema := smithy.NewOperationSchema(schemas.CreateInvocation, schemas.InternalServerException, schemas.InternalServerException)
+	opSchema := smithy.NewOperationSchema(schemas.CheckIngestedDocumentAcl, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1551,7 +1702,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockAgentRunTimeService)
-	opSchema := smithy.NewOperationSchema(schemas.CreateInvocation, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.CheckIngestedDocumentAcl, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1601,7 +1752,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockAgentRunTimeService)
-	opSchema := smithy.NewOperationSchema(schemas.CreateInvocation, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.CheckIngestedDocumentAcl, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1626,7 +1777,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockAgentRunTimeService)
-	opSchema := smithy.NewOperationSchema(schemas.CreateInvocation, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.CheckIngestedDocumentAcl, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

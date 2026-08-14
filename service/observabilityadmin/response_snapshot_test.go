@@ -153,6 +153,10 @@ func TestCheckResponseSnapshot_CreateCentralizationRuleForOrganization(t *testin
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
 					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
+					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -855,14 +859,16 @@ func TestCheckResponseSnapshot_DeleteTelemetryRuleForOrganization(t *testing.T) 
 
 func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T) {
 	want := &GetCentralizationRuleForOrganizationOutput{
-		RuleName:            ptr.String("__RuleName__"),
-		RuleArn:             ptr.String("__RuleArn__"),
-		CreatorAccountId:    ptr.String("__CreatorAccountId__"),
-		CreatedTimeStamp:    ptr.Int64(1),
-		CreatedRegion:       ptr.String("__CreatedRegion__"),
-		LastUpdateTimeStamp: ptr.Int64(1),
-		RuleHealth:          types.RuleHealth("Healthy"),
-		FailureReason:       types.CentralizationFailureReason("TRUSTED_ACCESS_NOT_ENABLED"),
+		RuleName:                    ptr.String("__RuleName__"),
+		RuleArn:                     ptr.String("__RuleArn__"),
+		CreatorAccountId:            ptr.String("__CreatorAccountId__"),
+		CreatedTimeStamp:            ptr.Int64(1),
+		CreatedRegion:               ptr.String("__CreatedRegion__"),
+		LastUpdateTimeStamp:         ptr.Int64(1),
+		RuleHealth:                  types.RuleHealth("Healthy"),
+		FailureReason:               types.CentralizationFailureReason("TRUSTED_ACCESS_NOT_ENABLED"),
+		TagPropagationStatus:        types.TagPropagationStatus("Healthy"),
+		TagPropagationFailureReason: types.TagPropagationFailureReason("RoleNotAssumable"),
 		CentralizationRule: &types.CentralizationRule{
 			Source: &types.CentralizationRuleSource{
 				Regions: []string{
@@ -895,6 +901,10 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 					},
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
@@ -1641,28 +1651,32 @@ func TestCheckResponseSnapshot_ListCentralizationRulesForOrganization(t *testing
 	want := &ListCentralizationRulesForOrganizationOutput{
 		CentralizationRuleSummaries: []types.CentralizationRuleSummary{
 			{
-				RuleName:             ptr.String("__RuleName__"),
-				RuleArn:              ptr.String("__RuleArn__"),
-				CreatorAccountId:     ptr.String("__CreatorAccountId__"),
-				CreatedTimeStamp:     ptr.Int64(1),
-				CreatedRegion:        ptr.String("__CreatedRegion__"),
-				LastUpdateTimeStamp:  ptr.Int64(1),
-				RuleHealth:           types.RuleHealth("Healthy"),
-				FailureReason:        types.CentralizationFailureReason("TRUSTED_ACCESS_NOT_ENABLED"),
-				DestinationAccountId: ptr.String("__DestinationAccountId__"),
-				DestinationRegion:    ptr.String("__DestinationRegion__"),
+				RuleName:                    ptr.String("__RuleName__"),
+				RuleArn:                     ptr.String("__RuleArn__"),
+				CreatorAccountId:            ptr.String("__CreatorAccountId__"),
+				CreatedTimeStamp:            ptr.Int64(1),
+				CreatedRegion:               ptr.String("__CreatedRegion__"),
+				LastUpdateTimeStamp:         ptr.Int64(1),
+				RuleHealth:                  types.RuleHealth("Healthy"),
+				FailureReason:               types.CentralizationFailureReason("TRUSTED_ACCESS_NOT_ENABLED"),
+				TagPropagationStatus:        types.TagPropagationStatus("Healthy"),
+				TagPropagationFailureReason: types.TagPropagationFailureReason("RoleNotAssumable"),
+				DestinationAccountId:        ptr.String("__DestinationAccountId__"),
+				DestinationRegion:           ptr.String("__DestinationRegion__"),
 			},
 			{
-				RuleName:             ptr.String("__RuleName__"),
-				RuleArn:              ptr.String("__RuleArn__"),
-				CreatorAccountId:     ptr.String("__CreatorAccountId__"),
-				CreatedTimeStamp:     ptr.Int64(1),
-				CreatedRegion:        ptr.String("__CreatedRegion__"),
-				LastUpdateTimeStamp:  ptr.Int64(1),
-				RuleHealth:           types.RuleHealth("Healthy"),
-				FailureReason:        types.CentralizationFailureReason("TRUSTED_ACCESS_NOT_ENABLED"),
-				DestinationAccountId: ptr.String("__DestinationAccountId__"),
-				DestinationRegion:    ptr.String("__DestinationRegion__"),
+				RuleName:                    ptr.String("__RuleName__"),
+				RuleArn:                     ptr.String("__RuleArn__"),
+				CreatorAccountId:            ptr.String("__CreatorAccountId__"),
+				CreatedTimeStamp:            ptr.Int64(1),
+				CreatedRegion:               ptr.String("__CreatedRegion__"),
+				LastUpdateTimeStamp:         ptr.Int64(1),
+				RuleHealth:                  types.RuleHealth("Healthy"),
+				FailureReason:               types.CentralizationFailureReason("TRUSTED_ACCESS_NOT_ENABLED"),
+				TagPropagationStatus:        types.TagPropagationStatus("Healthy"),
+				TagPropagationFailureReason: types.TagPropagationFailureReason("RoleNotAssumable"),
+				DestinationAccountId:        ptr.String("__DestinationAccountId__"),
+				DestinationRegion:           ptr.String("__DestinationRegion__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2374,6 +2388,10 @@ func TestCheckResponseSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
 					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
+					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3013,6 +3031,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
 					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
+					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3086,6 +3108,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
 					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
+					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3158,6 +3184,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 					},
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
@@ -3291,6 +3321,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
 					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
+					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -3361,6 +3395,10 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 					},
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
@@ -3448,6 +3486,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 					},
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{

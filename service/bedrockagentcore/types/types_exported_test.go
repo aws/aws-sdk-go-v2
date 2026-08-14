@@ -1000,6 +1000,9 @@ func ExamplePaymentInput_outputUsage() {
 	case *types.PaymentInputMemberCryptoX402:
 		_ = v.Value // Value is types.CryptoX402PaymentInput
 
+	case *types.PaymentInputMemberMpp:
+		_ = v.Value // Value is types.MppPaymentInput
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -1009,6 +1012,7 @@ func ExamplePaymentInput_outputUsage() {
 	}
 }
 
+var _ *types.MppPaymentInput
 var _ *types.CryptoX402PaymentInput
 
 func ExamplePaymentInstrumentDetails_outputUsage() {
@@ -1036,6 +1040,9 @@ func ExamplePaymentOutput_outputUsage() {
 	case *types.PaymentOutputMemberCryptoX402:
 		_ = v.Value // Value is types.CryptoX402PaymentOutput
 
+	case *types.PaymentOutputMemberMpp:
+		_ = v.Value // Value is types.MppPaymentOutput
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -1046,6 +1053,7 @@ func ExamplePaymentOutput_outputUsage() {
 }
 
 var _ *types.CryptoX402PaymentOutput
+var _ *types.MppPaymentOutput
 
 func ExamplePaymentTokenRequestInput_outputUsage() {
 	var union types.PaymentTokenRequestInput

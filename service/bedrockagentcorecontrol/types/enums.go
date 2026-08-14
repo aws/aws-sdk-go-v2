@@ -1623,17 +1623,42 @@ func (PassthroughProtocolType) Values() []PassthroughProtocolType {
 	}
 }
 
+type PaymentConnectorProvisionMode string
+
+// Enum values for PaymentConnectorProvisionMode
+const (
+	PaymentConnectorProvisionModeManual      PaymentConnectorProvisionMode = "MANUAL"
+	PaymentConnectorProvisionModeQuickCreate PaymentConnectorProvisionMode = "QUICK_CREATE"
+)
+
+// Values returns all known values for PaymentConnectorProvisionMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PaymentConnectorProvisionMode) Values() []PaymentConnectorProvisionMode {
+	return []PaymentConnectorProvisionMode{
+		"MANUAL",
+		"QUICK_CREATE",
+	}
+}
+
 type PaymentConnectorStatus string
 
 // Enum values for PaymentConnectorStatus
 const (
-	PaymentConnectorStatusCreating     PaymentConnectorStatus = "CREATING"
-	PaymentConnectorStatusUpdating     PaymentConnectorStatus = "UPDATING"
-	PaymentConnectorStatusDeleting     PaymentConnectorStatus = "DELETING"
-	PaymentConnectorStatusReady        PaymentConnectorStatus = "READY"
-	PaymentConnectorStatusCreateFailed PaymentConnectorStatus = "CREATE_FAILED"
-	PaymentConnectorStatusUpdateFailed PaymentConnectorStatus = "UPDATE_FAILED"
-	PaymentConnectorStatusDeleteFailed PaymentConnectorStatus = "DELETE_FAILED"
+	PaymentConnectorStatusCreating                           PaymentConnectorStatus = "CREATING"
+	PaymentConnectorStatusUpdating                           PaymentConnectorStatus = "UPDATING"
+	PaymentConnectorStatusDeleting                           PaymentConnectorStatus = "DELETING"
+	PaymentConnectorStatusReady                              PaymentConnectorStatus = "READY"
+	PaymentConnectorStatusCreateFailed                       PaymentConnectorStatus = "CREATE_FAILED"
+	PaymentConnectorStatusUpdateFailed                       PaymentConnectorStatus = "UPDATE_FAILED"
+	PaymentConnectorStatusDeleteFailed                       PaymentConnectorStatus = "DELETE_FAILED"
+	PaymentConnectorStatusAwsMarketplaceSubscriptionRequired PaymentConnectorStatus = "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED"
+	PaymentConnectorStatusPendingAuthentication              PaymentConnectorStatus = "PENDING_AUTHENTICATION"
+	PaymentConnectorStatusProvisioning                       PaymentConnectorStatus = "PROVISIONING"
+	PaymentConnectorStatusAuthenticationExpired              PaymentConnectorStatus = "AUTHENTICATION_EXPIRED"
+	PaymentConnectorStatusAuthenticationFailed               PaymentConnectorStatus = "AUTHENTICATION_FAILED"
 )
 
 // Values returns all known values for PaymentConnectorStatus. Note that this can
@@ -1649,6 +1674,11 @@ func (PaymentConnectorStatus) Values() []PaymentConnectorStatus {
 		"CREATE_FAILED",
 		"UPDATE_FAILED",
 		"DELETE_FAILED",
+		"AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED",
+		"PENDING_AUTHENTICATION",
+		"PROVISIONING",
+		"AUTHENTICATION_EXPIRED",
+		"AUTHENTICATION_FAILED",
 	}
 }
 

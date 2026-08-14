@@ -215,6 +215,13 @@ func TestCheckRequestSnapshot_CreateWorkflow(t *testing.T) {
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
 		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
+		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -649,6 +656,13 @@ func TestCheckRequestSnapshot_UpdateWorkflow(t *testing.T) {
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
 		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
+		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
 		LoggingConfiguration: &types.LoggingConfiguration{
@@ -697,6 +711,13 @@ func TestUpdateRequestSnapshot_CreateWorkflow(t *testing.T) {
 			Bucket:    ptr.String("__Bucket__"),
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
+		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
 		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
@@ -1131,6 +1152,13 @@ func TestUpdateRequestSnapshot_UpdateWorkflow(t *testing.T) {
 			Bucket:    ptr.String("__Bucket__"),
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
+		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
 		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),

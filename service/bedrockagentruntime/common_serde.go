@@ -1513,6 +1513,45 @@ func serializeContentBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 	s.CloseList()
 }
 
+func serializeDocumentAclConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DocumentAclCondition) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDocumentAclGroupList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DocumentAclGroup) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDocumentAclUserList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DocumentAclUser) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeExternalSources(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExternalSource) {
 	if v == nil {
 		return
@@ -2462,6 +2501,45 @@ func deserializeContentBlocks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	return smithy.ReadList(d, s, func() error {
 
 		if err := deserializeContentBlock(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDocumentAclConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DocumentAclCondition) error {
+	var vv types.DocumentAclCondition
+	return smithy.ReadList(d, s, func() error {
+		vv = types.DocumentAclCondition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDocumentAclGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DocumentAclGroup) error {
+	var vv types.DocumentAclGroup
+	return smithy.ReadList(d, s, func() error {
+		vv = types.DocumentAclGroup{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDocumentAclUserList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DocumentAclUser) error {
+	var vv types.DocumentAclUser
+	return smithy.ReadList(d, s, func() error {
+		vv = types.DocumentAclUser{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

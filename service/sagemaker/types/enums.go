@@ -221,6 +221,12 @@ const (
 	AIRecommendationInstanceTypeMlG6e16xlarge    AIRecommendationInstanceType = "ml.g6e.16xlarge"
 	AIRecommendationInstanceTypeMlG6e24xlarge    AIRecommendationInstanceType = "ml.g6e.24xlarge"
 	AIRecommendationInstanceTypeMlG6e48xlarge    AIRecommendationInstanceType = "ml.g6e.48xlarge"
+	AIRecommendationInstanceTypeMlG72xlarge      AIRecommendationInstanceType = "ml.g7.2xlarge"
+	AIRecommendationInstanceTypeMlG74xlarge      AIRecommendationInstanceType = "ml.g7.4xlarge"
+	AIRecommendationInstanceTypeMlG78xlarge      AIRecommendationInstanceType = "ml.g7.8xlarge"
+	AIRecommendationInstanceTypeMlG712xlarge     AIRecommendationInstanceType = "ml.g7.12xlarge"
+	AIRecommendationInstanceTypeMlG724xlarge     AIRecommendationInstanceType = "ml.g7.24xlarge"
+	AIRecommendationInstanceTypeMlG748xlarge     AIRecommendationInstanceType = "ml.g7.48xlarge"
 	AIRecommendationInstanceTypeMlG7e2xlarge     AIRecommendationInstanceType = "ml.g7e.2xlarge"
 	AIRecommendationInstanceTypeMlG7e4xlarge     AIRecommendationInstanceType = "ml.g7e.4xlarge"
 	AIRecommendationInstanceTypeMlG7e8xlarge     AIRecommendationInstanceType = "ml.g7e.8xlarge"
@@ -270,6 +276,12 @@ func (AIRecommendationInstanceType) Values() []AIRecommendationInstanceType {
 		"ml.g6e.16xlarge",
 		"ml.g6e.24xlarge",
 		"ml.g6e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 		"ml.g7e.2xlarge",
 		"ml.g7e.4xlarge",
 		"ml.g7e.8xlarge",
@@ -2418,6 +2430,12 @@ const (
 	ClusterInstanceTypeMlM8g16xlarge      ClusterInstanceType = "ml.m8g.16xlarge"
 	ClusterInstanceTypeMlM8g24xlarge      ClusterInstanceType = "ml.m8g.24xlarge"
 	ClusterInstanceTypeMlM8g48xlarge      ClusterInstanceType = "ml.m8g.48xlarge"
+	ClusterInstanceTypeMlG72xlarge        ClusterInstanceType = "ml.g7.2xlarge"
+	ClusterInstanceTypeMlG74xlarge        ClusterInstanceType = "ml.g7.4xlarge"
+	ClusterInstanceTypeMlG78xlarge        ClusterInstanceType = "ml.g7.8xlarge"
+	ClusterInstanceTypeMlG712xlarge       ClusterInstanceType = "ml.g7.12xlarge"
+	ClusterInstanceTypeMlG724xlarge       ClusterInstanceType = "ml.g7.24xlarge"
+	ClusterInstanceTypeMlG748xlarge       ClusterInstanceType = "ml.g7.48xlarge"
 )
 
 // Values returns all known values for ClusterInstanceType. Note that this can be
@@ -2627,6 +2645,12 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.m8g.16xlarge",
 		"ml.m8g.24xlarge",
 		"ml.m8g.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 	}
 }
 

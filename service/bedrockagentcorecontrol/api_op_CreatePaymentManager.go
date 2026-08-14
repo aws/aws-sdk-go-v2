@@ -68,6 +68,11 @@ type CreatePaymentManagerInput struct {
 	// A description of the payment manager.
 	Description *string
 
+	// The Amazon Resource Name (ARN) of the customer managed KMS key to use for
+	// encrypting sensitive payment manager data at rest. If you don't specify a key,
+	// the data is encrypted with an Amazon Web Services owned key.
+	KmsKeyArn *string
+
 	// A map of tag keys and values to assign to the payment manager.
 	Tags map[string]string
 
@@ -116,6 +121,10 @@ type CreatePaymentManagerOutput struct {
 	// Represents inbound authorization configuration options used to authenticate
 	// incoming requests.
 	AuthorizerConfiguration types.AuthorizerConfiguration
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive payment
+	// manager data at rest, if configured.
+	KmsKeyArn *string
 
 	// The tags associated with the created payment manager.
 	Tags map[string]string

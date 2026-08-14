@@ -75,11 +75,6 @@ type GetAgentRuntimeOutput struct {
 	// This member is required.
 	LifecycleConfiguration *types.LifecycleConfiguration
 
-	// The network configuration for the AgentCore Runtime.
-	//
-	// This member is required.
-	NetworkConfiguration *types.NetworkConfiguration
-
 	// The IAM role ARN that provides permissions for the AgentCore Runtime.
 	//
 	// This member is required.
@@ -114,6 +109,9 @@ type GetAgentRuntimeOutput struct {
 	// Configuration for microVM Metadata Service (MMDS) settings for the AgentCore
 	// Runtime.
 	MetadataConfiguration *types.RuntimeMetadataConfiguration
+
+	// The network configuration for the AgentCore Runtime.
+	NetworkConfiguration *types.NetworkConfiguration
 
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.

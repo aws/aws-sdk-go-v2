@@ -447,6 +447,66 @@ func (Status) Values() []Status {
 	}
 }
 
+type TagConflictResolutionStrategy string
+
+// Enum values for TagConflictResolutionStrategy
+const (
+	TagConflictResolutionStrategyInSync     TagConflictResolutionStrategy = "IN_SYNC"
+	TagConflictResolutionStrategyAddOnly    TagConflictResolutionStrategy = "ADD_ONLY"
+	TagConflictResolutionStrategyUpdateSync TagConflictResolutionStrategy = "UPDATE_SYNC"
+)
+
+// Values returns all known values for TagConflictResolutionStrategy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagConflictResolutionStrategy) Values() []TagConflictResolutionStrategy {
+	return []TagConflictResolutionStrategy{
+		"IN_SYNC",
+		"ADD_ONLY",
+		"UPDATE_SYNC",
+	}
+}
+
+type TagPropagationFailureReason string
+
+// Enum values for TagPropagationFailureReason
+const (
+	TagPropagationFailureReasonRoleNotAssumable     TagPropagationFailureReason = "RoleNotAssumable"
+	TagPropagationFailureReasonRoleLacksPermissions TagPropagationFailureReason = "RoleLacksPermissions"
+)
+
+// Values returns all known values for TagPropagationFailureReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagPropagationFailureReason) Values() []TagPropagationFailureReason {
+	return []TagPropagationFailureReason{
+		"RoleNotAssumable",
+		"RoleLacksPermissions",
+	}
+}
+
+type TagPropagationStatus string
+
+// Enum values for TagPropagationStatus
+const (
+	TagPropagationStatusHealthy   TagPropagationStatus = "Healthy"
+	TagPropagationStatusUnhealthy TagPropagationStatus = "Unhealthy"
+)
+
+// Values returns all known values for TagPropagationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagPropagationStatus) Values() []TagPropagationStatus {
+	return []TagPropagationStatus{
+		"Healthy",
+		"Unhealthy",
+	}
+}
+
 type TelemetryEnrichmentStatus string
 
 // Enum values for TelemetryEnrichmentStatus

@@ -747,6 +747,11 @@ func validateDestinationLogsConfiguration(v *types.DestinationLogsConfiguration)
 			invalidParams.AddNested("LogGroupNameConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TagPropagationConfiguration != nil {
+		if err := validateTagPropagationConfiguration(v.TagPropagationConfiguration); err != nil {
+			invalidParams.AddNested("TagPropagationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -870,6 +875,21 @@ func validateSourceLogsConfiguration(v *types.SourceLogsConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SourceLogsConfiguration"}
 	if len(v.EncryptedLogGroupStrategy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptedLogGroupStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagPropagationConfiguration(v *types.TagPropagationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagPropagationConfiguration"}
+	if v.DestinationRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

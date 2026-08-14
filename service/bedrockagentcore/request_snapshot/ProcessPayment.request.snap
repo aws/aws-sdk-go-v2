@@ -4,4 +4,4 @@ Content-Type: application/json
 X-Amzn-Bedrock-Agentcore-Payments-Agent-Name: __AgentName__
 X-Amzn-Bedrock-Agentcore-Payments-User-Id: __UserId__
 
-{"clientToken":"__ClientToken__","paymentInput":{"cryptoX402":{"payload":"__Document__","version":"__Version__"}},"paymentInstrumentId":"__PaymentInstrumentId__","paymentManagerArn":"__PaymentManagerArn__","paymentSessionId":"__PaymentSessionId__","paymentType":"CRYPTO_X402"}
+{"clientToken":"__ClientToken__","paymentInput":{"cryptoX402":{"payload":"__Document__","permit2AllowanceLimit":"__Permit2AllowanceLimit__","version":"__Version__"}},"paymentInstrumentId":"__PaymentInstrumentId__","paymentManagerArn":"__PaymentManagerArn__","paymentSessionId":"__PaymentSessionId__","paymentType":"CRYPTO_X402"}

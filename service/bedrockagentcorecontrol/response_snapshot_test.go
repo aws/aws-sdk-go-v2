@@ -3391,8 +3391,9 @@ func TestCheckResponseSnapshot_CreatePaymentConnector(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Status:    types.PaymentConnectorStatus("CREATING"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:           types.PaymentConnectorStatus("CREATING"),
+		AuthorizationUrl: ptr.String("__AuthorizationUrl__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreatePaymentConnector.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3419,7 +3420,8 @@ func TestCheckResponseSnapshot_CreatePaymentConnector(t *testing.T) {
 				},
 			},
 		},
-		ClientToken: ptr.String("__ClientToken__"),
+		ProvisionMode: types.PaymentConnectorProvisionMode("MANUAL"),
+		ClientToken:   ptr.String("__ClientToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3584,6 +3586,7 @@ func TestCheckResponseSnapshot_CreatePaymentManager(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreatePaymentManager.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3681,6 +3684,7 @@ func TestCheckResponseSnapshot_CreatePaymentManager(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7104,9 +7108,10 @@ func TestCheckResponseSnapshot_GetPaymentConnector(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		LastUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Status:        types.PaymentConnectorStatus("CREATING"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:           types.PaymentConnectorStatus("CREATING"),
+		AuthorizationUrl: ptr.String("__AuthorizationUrl__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetPaymentConnector.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -7269,6 +7274,7 @@ func TestCheckResponseSnapshot_GetPaymentManager(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetPaymentManager.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -9333,6 +9339,7 @@ func TestCheckResponseSnapshot_ListPaymentManagers(t *testing.T) {
 				Status:            types.PaymentManagerStatus("CREATING"),
 				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastUpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				KmsKeyArn:         ptr.String("__KmsKeyArn__"),
 			},
 			{
 				PaymentManagerArn: ptr.String("__PaymentManagerArn__"),
@@ -9344,6 +9351,7 @@ func TestCheckResponseSnapshot_ListPaymentManagers(t *testing.T) {
 				Status:            types.PaymentManagerStatus("CREATING"),
 				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastUpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				KmsKeyArn:         ptr.String("__KmsKeyArn__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -13072,8 +13080,9 @@ func TestCheckResponseSnapshot_UpdatePaymentConnector(t *testing.T) {
 				},
 			},
 		},
-		LastUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Status:        types.PaymentConnectorStatus("CREATING"),
+		LastUpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:           types.PaymentConnectorStatus("CREATING"),
+		AuthorizationUrl: ptr.String("__AuthorizationUrl__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdatePaymentConnector.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -13182,6 +13191,7 @@ func TestCheckResponseSnapshot_UpdatePaymentManager(t *testing.T) {
 		},
 		LastUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Status:        types.PaymentManagerStatus("CREATING"),
+		KmsKeyArn:     ptr.String("__KmsKeyArn__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdatePaymentManager.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -13276,6 +13286,7 @@ func TestCheckResponseSnapshot_UpdatePaymentManager(t *testing.T) {
 		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		ClientToken: ptr.String("__ClientToken__"),
+		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -14504,6 +14515,52 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceQuotaExceededException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_SubscriptionRequiredException(t *testing.T) {
+	want := &types.SubscriptionRequiredException{
+		Message:         ptr.String("__Message__"),
+		SubscriptionUrl: ptr.String("__SubscriptionUrl__"),
+		ProductName:     ptr.String("__ProductName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SubscriptionRequiredException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreatePaymentConnector(context.Background(), &CreatePaymentConnectorInput{
+		PaymentManagerId: ptr.String("__PaymentManagerId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		Type:             types.PaymentConnectorType("CoinbaseCDP"),
+		CredentialProviderConfigurations: []types.CredentialsProviderConfiguration{
+			&types.CredentialsProviderConfigurationMemberCoinbaseCDP{
+				Value: types.PaymentCredentialProviderConfiguration{
+					CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+				},
+			},
+			&types.CredentialsProviderConfigurationMemberCoinbaseCDP{
+				Value: types.PaymentCredentialProviderConfiguration{
+					CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+				},
+			},
+		},
+		ProvisionMode: types.PaymentConnectorProvisionMode("MANUAL"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.SubscriptionRequiredException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.SubscriptionRequiredException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "SubscriptionRequiredException.error", err)
 	}
 }
 

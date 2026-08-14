@@ -47,6 +47,14 @@ type GetWorkflowOutput struct {
 	// This member is required.
 	WorkflowArn *string
 
+	// The Amazon S3 location of the code artifacts provided during workflow creation
+	// or update.
+	Code types.Code
+
+	// The time at which the code artifacts were copied for this workflow, in ISO 8601
+	// date-time format.
+	CodeSnapshottedAt *time.Time
+
 	// The timestamp when the workflow was created, in ISO 8601 date-time format.
 	CreatedAt *time.Time
 

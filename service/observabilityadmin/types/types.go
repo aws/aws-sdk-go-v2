@@ -157,6 +157,16 @@ type CentralizationRuleSummary struct {
 	// The name of the organization centralization rule.
 	RuleName *string
 
+	// The reason tag propagation is unhealthy for this rule. Only present when
+	// TagPropagationStatus is Unhealthy .
+	TagPropagationFailureReason TagPropagationFailureReason
+
+	// The health status of tag propagation for this rule. This status is independent
+	// of the overall RuleHealth for log delivery. Returns Healthy when the most
+	// recent tag-propagation attempt succeeded, or Unhealthy when the most recent
+	// attempt failed.
+	TagPropagationStatus TagPropagationStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -242,6 +252,11 @@ type DestinationLogsConfiguration struct {
 
 	// The encryption configuration for centralization destination log groups.
 	LogsEncryptionConfiguration *LogsEncryptionConfiguration
+
+	// Specifies the tag propagation configuration for this centralization rule. When
+	// present, LogGroupNameConfiguration must use a LogGroupNamePattern that contains
+	// ${source.logGroup} , ${source.accountId} , and ${source.region} .
+	TagPropagationConfiguration *TagPropagationConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -613,6 +628,35 @@ type SourceMetricsConfiguration struct {
 	// Currently, only * (all metrics) is supported. Other values return a validation
 	// error.
 	MetricsSelectionCriteria *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies configuration for propagating resource tags from source log groups to
+// centralized destination log groups. The service uses a customer-managed IAM role
+// in the destination account to add, update, and remove tags on destination log
+// groups.
+type TagPropagationConfiguration struct {
+
+	// The ARN of a customer-managed IAM role in the destination account. The service
+	// assumes this role to propagate tags to destination log groups. You must have
+	// iam:PassRole permission on this role.
+	//
+	// This member is required.
+	DestinationRoleArn *string
+
+	// The strategy for resolving conflicts when a tag key exists on both the source
+	// and destination log groups. If not specified, defaults to UPDATE_SYNC .
+	//
+	//   - ADD_ONLY – Only adds new tags from the source without modifying existing
+	//   destination tags.
+	//
+	//   - UPDATE_SYNC – Adds new tags and updates existing tags from the source. Does
+	//   not remove destination tags that are absent from the source.
+	//
+	//   - IN_SYNC – Keeps destination tags fully synchronized with source tags,
+	//   including removing destination tags that do not exist on the source.
+	TagConflictResolutionStrategy TagConflictResolutionStrategy
 
 	noSmithyDocumentSerde
 }

@@ -79,6 +79,10 @@ type GetPaymentConnectorOutput struct {
 	// This member is required.
 	Type types.PaymentConnectorType
 
+	// The URL that the user must open to complete OAuth consent. This field is only
+	// present when the payment connector status is PENDING_AUTHENTICATION .
+	AuthorizationUrl *string
+
 	// The description of the payment connector.
 	Description *string
 

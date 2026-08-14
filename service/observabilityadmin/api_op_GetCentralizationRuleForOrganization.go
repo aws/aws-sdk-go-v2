@@ -68,6 +68,16 @@ type GetCentralizationRuleForOrganizationOutput struct {
 	// The name of the organization centralization rule.
 	RuleName *string
 
+	// The reason tag propagation is unhealthy for this rule. Only present when
+	// TagPropagationStatus is Unhealthy .
+	TagPropagationFailureReason types.TagPropagationFailureReason
+
+	// The health status of tag propagation for this rule. This status is independent
+	// of the overall RuleHealth for log delivery. Returns Healthy when the most
+	// recent tag-propagation attempt succeeded, or Unhealthy when the most recent
+	// attempt failed.
+	TagPropagationStatus types.TagPropagationStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

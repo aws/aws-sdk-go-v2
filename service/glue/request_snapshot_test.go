@@ -209,7 +209,9 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 }
 func TestCheckRequestSnapshot_AssociateGlossaryTerms(t *testing.T) {
 	input := &AssociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -7474,7 +7476,9 @@ func TestCheckRequestSnapshot_DescribeIntegrations(t *testing.T) {
 
 func TestCheckRequestSnapshot_DisassociateGlossaryTerms(t *testing.T) {
 	input := &DisassociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -18736,7 +18740,9 @@ func TestCheckRequestSnapshot_UpdateWorkflow(t *testing.T) {
 }
 func TestUpdateRequestSnapshot_AssociateGlossaryTerms(t *testing.T) {
 	input := &AssociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",
@@ -26001,7 +26007,9 @@ func TestUpdateRequestSnapshot_DescribeIntegrations(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DisassociateGlossaryTerms(t *testing.T) {
 	input := &DisassociateGlossaryTermsInput{
-		AssetIdentifier: ptr.String("__AssetIdentifier__"),
+		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		IterableFormName: ptr.String("__IterableFormName__"),
+		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
 		GlossaryTermIdentifiers: []string{
 			"__Member__",
 			"__Member__",

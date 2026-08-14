@@ -1175,6 +1175,19 @@ type CryptoX402PaymentInput struct {
 	// This member is required.
 	Version *string
 
+	// The maximum on-chain Permit2 allowance to grant before signing the payment
+	// authorization, in the asset's smallest denomination. This field is valid only
+	// for the upto (metered) scheme; supplying it for the exact scheme returns a
+	// validation error.
+	//
+	// When set, the service approves an ERC-20 allowance for this amount before
+	// processing the payment. The approval sets, rather than adds to, the wallet's
+	// allowance. Set this field only when the wallet needs approving, for example on
+	// its first upto payment, to avoid a redundant on-chain transaction. Omit the
+	// field to skip allowance handling. This is the default, and the only behavior for
+	// the exact scheme.
+	Permit2AllowanceLimit *string
+
 	noSmithyDocumentSerde
 }
 
@@ -3954,6 +3967,63 @@ type MouseScrollResult struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the payment challenge from a 402 Payment Required response. Forward
+// the raw WWW-Authenticate: Payment header value verbatim. In response, you
+// receive a payment credential that satisfies the challenge. Provide exactly one
+// challenge per request.
+type MppPaymentInput struct {
+
+	// The MPP protocol version, for example "1" or "2".
+	//
+	// This member is required.
+	Version *string
+
+	// The raw WWW-Authenticate: Payment header value from the 402 response, passed
+	// verbatim. Provide exactly one entry. The service uses this value to generate the
+	// payment credential.
+	//
+	// This member is required.
+	WwwAuthenticateHeaders []string
+
+	// Authorizes the service to sign a payment whose blockchain network (gas) fees
+	// are charged to your wallet, on top of the payment amount.
+	//
+	// The challenge indicates who sponsors the network fees. When the challenge does
+	// not sponsor them, the service signs the payment only if this field is true .
+	// Otherwise it returns a validation error, so you can decide whether to pay the
+	// fees or obtain a challenge that sponsors them.
+	//
+	// Optional. When omitted or false , you decline to pay network fees. This field
+	// has no effect on challenges that already sponsor the fees.
+	BuyerPaysGasFees *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains the payment credential, ready to retry the request.
+type MppPaymentOutput struct {
+
+	// Ready-to-send value for the Authorization header, in the form "Payment
+	// <base64url-token>". Attach this header and retry the original request. To
+	// inspect the full credential, base64url-decode the token.
+	//
+	// This member is required.
+	PaymentCredential *string
+
+	// The id of the challenge that was paid, echoed from the input challenge so you
+	// can correlate the result without decoding the credential.
+	//
+	// This member is required.
+	SelectedPaymentId *string
+
+	// The MPP protocol version, for example "1" or "2".
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // OAuth2 authentication information for third-party providers.
 type OAuth2Authentication struct {
 
@@ -4095,6 +4165,7 @@ func (*PayloadTypeMemberConversational) isPayloadType() {}
 // The following types satisfy this interface:
 //
 //	PaymentInputMemberCryptoX402
+//	PaymentInputMemberMpp
 type PaymentInput interface {
 	isPaymentInput()
 }
@@ -4107,6 +4178,18 @@ type PaymentInputMemberCryptoX402 struct {
 }
 
 func (*PaymentInputMemberCryptoX402) isPaymentInput() {}
+
+// Contains the payment challenge from a 402 Payment Required response. Forward
+// the raw WWW-Authenticate: Payment header value verbatim. In response, you
+// receive a payment credential that satisfies the challenge. Provide exactly one
+// challenge per request.
+type PaymentInputMemberMpp struct {
+	Value MppPaymentInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentInputMemberMpp) isPaymentInput() {}
 
 // Represents a payment instrument.
 type PaymentInstrument struct {
@@ -4228,6 +4311,7 @@ type PaymentInstrumentSummary struct {
 // The following types satisfy this interface:
 //
 //	PaymentOutputMemberCryptoX402
+//	PaymentOutputMemberMpp
 type PaymentOutput interface {
 	isPaymentOutput()
 }
@@ -4240,6 +4324,15 @@ type PaymentOutputMemberCryptoX402 struct {
 }
 
 func (*PaymentOutputMemberCryptoX402) isPaymentOutput() {}
+
+// Contains the payment credential, ready to retry the request.
+type PaymentOutputMemberMpp struct {
+	Value MppPaymentOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentOutputMemberMpp) isPaymentOutput() {}
 
 // A payment session for managing payment transactions.
 type PaymentSession struct {

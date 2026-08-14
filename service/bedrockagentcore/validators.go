@@ -3286,6 +3286,24 @@ func validateMouseScrollArguments(v *types.MouseScrollArguments) error {
 	}
 }
 
+func validateMppPaymentInput(v *types.MppPaymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MppPaymentInput"}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.WwwAuthenticateHeaders == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WwwAuthenticateHeaders"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOAuth2Authentication(v *types.OAuth2Authentication) error {
 	if v == nil {
 		return nil
@@ -3400,6 +3418,11 @@ func validatePaymentInput(v types.PaymentInput) error {
 	case *types.PaymentInputMemberCryptoX402:
 		if err := validateCryptoX402PaymentInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[cryptoX402]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PaymentInputMemberMpp:
+		if err := validateMppPaymentInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[mpp]", err.(smithy.InvalidParamsError))
 		}
 
 	}

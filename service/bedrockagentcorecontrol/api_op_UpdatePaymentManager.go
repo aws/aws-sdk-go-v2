@@ -51,6 +51,10 @@ type UpdatePaymentManagerInput struct {
 	// The updated description of the payment manager.
 	Description *string
 
+	// The updated Amazon Resource Name (ARN) of the customer managed KMS key used to
+	// encrypt sensitive payment manager data at rest.
+	KmsKeyArn *string
+
 	// The updated Amazon Resource Name (ARN) of the IAM role for the payment manager.
 	RoleArn *string
 
@@ -96,6 +100,10 @@ type UpdatePaymentManagerOutput struct {
 	//
 	// This member is required.
 	Status types.PaymentManagerStatus
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive payment
+	// manager data at rest, if configured.
+	KmsKeyArn *string
 
 	// The information about the workload identity.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails

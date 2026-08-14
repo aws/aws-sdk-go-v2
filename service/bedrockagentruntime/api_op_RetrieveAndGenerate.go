@@ -58,9 +58,9 @@ type RetrieveAndGenerateInput struct {
 	// interactions. You can't explicitly set the sessionId yourself.
 	SessionId *string
 
-	// Contains information about the user making the request. Use this to pass user
-	// identity information for access control filtering, so that retrieval results
-	// only include documents the user is authorized to access.
+	// Contains information about the user making the request. This is used for access
+	// control filtering to ensure that retrieval results only include documents the
+	// user is authorized to access.
 	UserContext *types.UserContext
 
 	noSmithyDocumentSerde

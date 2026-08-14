@@ -932,6 +932,24 @@ func (m *awsAwsjson10_serializeOpUpdateWorkflow) HandleSerialize(ctx context.Con
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentCode(v types.Code, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CodeMemberS3Location:
+		av := object.Key("S3Location")
+		if err := awsAwsjson10_serializeDocumentS3Location(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDefinitionS3Location(v *types.DefinitionS3Location, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1020,6 +1038,28 @@ func awsAwsjson10_serializeDocumentObjectMap(v map[string]document.Interface, va
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentS3Location(v *types.S3Location, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("Bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.ObjectKey != nil {
+		ok := object.Key("ObjectKey")
+		ok.String(*v.ObjectKey)
+	}
+
+	if v.VersionId != nil {
+		ok := object.Key("VersionId")
+		ok.String(*v.VersionId)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1086,6 +1126,13 @@ func awsAwsjson10_serializeOpDocumentCreateWorkflowInput(v *CreateWorkflowInput,
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.Code != nil {
+		ok := object.Key("Code")
+		if err := awsAwsjson10_serializeDocumentCode(v.Code, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.DefinitionS3Location != nil {
@@ -1416,6 +1463,13 @@ func awsAwsjson10_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 func awsAwsjson10_serializeOpDocumentUpdateWorkflowInput(v *UpdateWorkflowInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Code != nil {
+		ok := object.Key("Code")
+		if err := awsAwsjson10_serializeDocumentCode(v.Code, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DefinitionS3Location != nil {
 		ok := object.Key("DefinitionS3Location")

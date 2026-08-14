@@ -41,6 +41,15 @@ type DisassociateGlossaryTermsInput struct {
 	// of the request.
 	ClientToken *string
 
+	// The identifier of the item within the iterable form. Required when
+	// iterableFormName is specified.
+	ItemIdentifier *string
+
+	// The name of the iterable form. When specified along with itemIdentifier , the
+	// glossary terms are disassociated from an item within the iterable form rather
+	// than the asset itself.
+	IterableFormName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -51,6 +60,12 @@ type DisassociateGlossaryTermsOutput struct {
 
 	// The remaining glossary terms associated with the asset.
 	GlossaryTerms []string
+
+	// The identifier of the item within the iterable form, if applicable.
+	ItemIdentifier *string
+
+	// The name of the iterable form, if the disassociation targets an item.
+	IterableFormName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

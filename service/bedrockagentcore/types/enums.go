@@ -889,6 +889,7 @@ const (
 	PaymentInstrumentStatusActive    PaymentInstrumentStatus = "ACTIVE"
 	PaymentInstrumentStatusFailed    PaymentInstrumentStatus = "FAILED"
 	PaymentInstrumentStatusDeleted   PaymentInstrumentStatus = "DELETED"
+	PaymentInstrumentStatusBlocked   PaymentInstrumentStatus = "BLOCKED"
 )
 
 // Values returns all known values for PaymentInstrumentStatus. Note that this can
@@ -901,6 +902,7 @@ func (PaymentInstrumentStatus) Values() []PaymentInstrumentStatus {
 		"ACTIVE",
 		"FAILED",
 		"DELETED",
+		"BLOCKED",
 	}
 }
 
@@ -964,6 +966,7 @@ type PaymentType string
 // Enum values for PaymentType
 const (
 	PaymentTypeCryptoX402 PaymentType = "CRYPTO_X402"
+	PaymentTypeMpp        PaymentType = "MPP"
 )
 
 // Values returns all known values for PaymentType. Note that this can be expanded
@@ -973,6 +976,7 @@ const (
 func (PaymentType) Values() []PaymentType {
 	return []PaymentType{
 		"CRYPTO_X402",
+		"MPP",
 	}
 }
 

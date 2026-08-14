@@ -3631,6 +3631,13 @@ func awsRestjson1_serializeDocumentDestinationLogsConfiguration(v *types.Destina
 		}
 	}
 
+	if v.TagPropagationConfiguration != nil {
+		ok := object.Key("TagPropagationConfiguration")
+		if err := awsRestjson1_serializeDocumentTagPropagationConfiguration(v.TagPropagationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4049,6 +4056,23 @@ func awsRestjson1_serializeDocumentTagMapInput(v map[string]string, value smithy
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagPropagationConfiguration(v *types.TagPropagationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationRoleArn != nil {
+		ok := object.Key("DestinationRoleArn")
+		ok.String(*v.DestinationRoleArn)
+	}
+
+	if len(v.TagConflictResolutionStrategy) > 0 {
+		ok := object.Key("TagConflictResolutionStrategy")
+		ok.String(string(v.TagConflictResolutionStrategy))
+	}
+
 	return nil
 }
 

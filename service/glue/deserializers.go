@@ -28259,6 +28259,9 @@ func awsAwsjson11_deserializeOpErrorPutAssetType(response *smithyhttp.Response, 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
 
+	case strings.EqualFold("EntityNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceException(response, errorBody)
 
@@ -80038,6 +80041,24 @@ func awsAwsjson11_deserializeOpDocumentAssociateGlossaryTermsOutput(v **Associat
 				return err
 			}
 
+		case "ItemIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ItemIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ItemIdentifier = ptr.String(jtv)
+			}
+
+		case "IterableFormName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IterableFormName to be of type string, got %T instead", value)
+				}
+				sv.IterableFormName = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -82785,6 +82806,24 @@ func awsAwsjson11_deserializeOpDocumentDeleteAttachmentOutput(v **DeleteAttachme
 				sv.AssetIdentifier = ptr.String(jtv)
 			}
 
+		case "ItemIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ItemIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ItemIdentifier = ptr.String(jtv)
+			}
+
+		case "IterableFormName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IterableFormName to be of type string, got %T instead", value)
+				}
+				sv.IterableFormName = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -84434,6 +84473,24 @@ func awsAwsjson11_deserializeOpDocumentDisassociateGlossaryTermsOutput(v **Disas
 		case "GlossaryTerms":
 			if err := awsAwsjson11_deserializeDocumentGlossaryTermIdList(&sv.GlossaryTerms, value); err != nil {
 				return err
+			}
+
+		case "ItemIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ItemIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ItemIdentifier = ptr.String(jtv)
+			}
+
+		case "IterableFormName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IterableFormName to be of type string, got %T instead", value)
+				}
+				sv.IterableFormName = ptr.String(jtv)
 			}
 
 		default:

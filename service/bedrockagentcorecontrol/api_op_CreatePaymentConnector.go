@@ -64,6 +64,15 @@ type CreatePaymentConnectorInput struct {
 	// A description of the payment connector.
 	Description *string
 
+	// The provision mode for creating the payment connector. If you don't specify a
+	// value, the default is MANUAL .
+	//
+	//   - MANUAL - You provide the credential provider configurations directly.
+	//
+	//   - QUICK_CREATE - The service orchestrates OAuth consent and provisions the
+	//   credential provider for you.
+	ProvisionMode types.PaymentConnectorProvisionMode
+
 	noSmithyDocumentSerde
 }
 
@@ -104,6 +113,10 @@ type CreatePaymentConnectorOutput struct {
 	//
 	// This member is required.
 	Type types.PaymentConnectorType
+
+	// The URL that the user must open to complete OAuth consent. This field is only
+	// present when the payment connector status is PENDING_AUTHENTICATION .
+	AuthorizationUrl *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

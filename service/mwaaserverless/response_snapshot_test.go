@@ -137,6 +137,13 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
 		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
+		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -258,6 +265,14 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
 		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
+		},
+		CodeSnapshottedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		ScheduleConfiguration: &types.ScheduleConfiguration{
 			CronExpression: ptr.String("__CronExpression__"),
 		},
@@ -701,6 +716,13 @@ func TestCheckResponseSnapshot_UpdateWorkflow(t *testing.T) {
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
 		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
+		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
 		LoggingConfiguration: &types.LoggingConfiguration{
@@ -746,6 +768,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			Bucket:    ptr.String("__Bucket__"),
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
+		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
 		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
@@ -806,6 +835,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
 		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
+		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -864,6 +900,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
 		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
+		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -920,6 +963,13 @@ func TestCheckResponseSnapshot_Error_OperationTimeoutException(t *testing.T) {
 			Bucket:    ptr.String("__Bucket__"),
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
+		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
 		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
@@ -1012,6 +1062,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
 		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
+		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -1071,6 +1128,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 			Bucket:    ptr.String("__Bucket__"),
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
+		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
 		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),
@@ -1139,6 +1203,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 			Bucket:    ptr.String("__Bucket__"),
 			ObjectKey: ptr.String("__ObjectKey__"),
 			VersionId: ptr.String("__VersionId__"),
+		},
+		Code: &types.CodeMemberS3Location{
+			Value: types.S3Location{
+				Bucket:    ptr.String("__Bucket__"),
+				ObjectKey: ptr.String("__ObjectKey__"),
+				VersionId: ptr.String("__VersionId__"),
+			},
 		},
 		RoleArn:     ptr.String("__RoleArn__"),
 		Description: ptr.String("__Description__"),

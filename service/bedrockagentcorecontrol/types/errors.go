@@ -295,6 +295,37 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request failed because it requires an active Amazon Web Services
+// Marketplace subscription that is not present. Subscribe to the required product
+// in Amazon Web Services Marketplace and try again.
+type SubscriptionRequiredException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	SubscriptionUrl *string
+	ProductName     *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SubscriptionRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SubscriptionRequiredException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SubscriptionRequiredException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SubscriptionRequiredException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SubscriptionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // API rate limit has been exceeded.
 type ThrottledException struct {
 	Message *string

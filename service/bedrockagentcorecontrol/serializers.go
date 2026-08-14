@@ -2847,6 +2847,11 @@ func awsRestjson1_serializeOpDocumentCreatePaymentConnectorInput(v *CreatePaymen
 		ok.String(*v.Name)
 	}
 
+	if len(v.ProvisionMode) > 0 {
+		ok := object.Key("provisionMode")
+		ok.String(string(v.ProvisionMode))
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
@@ -3048,6 +3053,11 @@ func awsRestjson1_serializeOpDocumentCreatePaymentManagerInput(v *CreatePaymentM
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
 	}
 
 	if v.Name != nil {
@@ -14665,6 +14675,11 @@ func awsRestjson1_serializeOpDocumentUpdatePaymentManagerInput(v *UpdatePaymentM
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
 	}
 
 	if v.RoleArn != nil {

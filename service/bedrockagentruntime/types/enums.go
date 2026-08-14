@@ -275,6 +275,44 @@ func (CustomControlMethod) Values() []CustomControlMethod {
 	}
 }
 
+type DocumentAclMemberRelation string
+
+// Enum values for DocumentAclMemberRelation
+const (
+	DocumentAclMemberRelationAnd DocumentAclMemberRelation = "AND"
+	DocumentAclMemberRelationOr  DocumentAclMemberRelation = "OR"
+)
+
+// Values returns all known values for DocumentAclMemberRelation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentAclMemberRelation) Values() []DocumentAclMemberRelation {
+	return []DocumentAclMemberRelation{
+		"AND",
+		"OR",
+	}
+}
+
+type DocumentAclMembershipType string
+
+// Enum values for DocumentAclMembershipType
+const (
+	DocumentAclMembershipTypeKnowledgeBase DocumentAclMembershipType = "KNOWLEDGE_BASE"
+	DocumentAclMembershipTypeDataSource    DocumentAclMembershipType = "DATA_SOURCE"
+)
+
+// Values returns all known values for DocumentAclMembershipType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentAclMembershipType) Values() []DocumentAclMembershipType {
+	return []DocumentAclMembershipType{
+		"KNOWLEDGE_BASE",
+		"DATA_SOURCE",
+	}
+}
+
 type DocumentOutputFormat string
 
 // Enum values for DocumentOutputFormat

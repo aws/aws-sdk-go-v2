@@ -112,6 +112,34 @@ func TestCheckResponseSnapshot_AgenticRetrieveStream(t *testing.T) {
 	t.Skip("event stream operation")
 }
 
+func TestCheckResponseSnapshot_CheckIngestedDocumentAcl(t *testing.T) {
+	want := &CheckIngestedDocumentAclOutput{
+		HasAccess: ptr.Bool(true),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CheckIngestedDocumentAcl.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CheckIngestedDocumentAcl(context.Background(), &CheckIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CheckIngestedDocumentAcl.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateInvocation(t *testing.T) {
 	want := &CreateInvocationOutput{
 		SessionId:    ptr.String("__SessionId__"),
@@ -434,6 +462,134 @@ func TestCheckResponseSnapshot_GetFlowExecution(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetFlowExecution.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIngestedDocumentAcl(t *testing.T) {
+	want := &GetIngestedDocumentAclOutput{
+		DocumentAcl: &types.DocumentAcl{
+			AllowList: &types.DocumentAclMembership{
+				MemberRelation: types.DocumentAclMemberRelation("AND"),
+				Conditions: []types.DocumentAclCondition{
+					{
+						ConditionOperator: types.DocumentAclMemberRelation("AND"),
+						Users: []types.DocumentAclUser{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+						Groups: []types.DocumentAclGroup{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+					},
+					{
+						ConditionOperator: types.DocumentAclMemberRelation("AND"),
+						Users: []types.DocumentAclUser{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+						Groups: []types.DocumentAclGroup{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+					},
+				},
+			},
+			DenyList: &types.DocumentAclMembership{
+				MemberRelation: types.DocumentAclMemberRelation("AND"),
+				Conditions: []types.DocumentAclCondition{
+					{
+						ConditionOperator: types.DocumentAclMemberRelation("AND"),
+						Users: []types.DocumentAclUser{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+						Groups: []types.DocumentAclGroup{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+					},
+					{
+						ConditionOperator: types.DocumentAclMemberRelation("AND"),
+						Users: []types.DocumentAclUser{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+						Groups: []types.DocumentAclGroup{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.DocumentAclMembershipType("KNOWLEDGE_BASE"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIngestedDocumentAcl.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIngestedDocumentAcl(context.Background(), &GetIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIngestedDocumentAcl.response", err)
 	}
 }
 
@@ -1855,10 +2011,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
-		InvocationId:      ptr.String("__InvocationId__"),
-		Description:       ptr.String("__Description__"),
-		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	_, opErr := svc.CheckIngestedDocumentAcl(context.Background(), &CheckIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1976,10 +2135,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
-		InvocationId:      ptr.String("__InvocationId__"),
-		Description:       ptr.String("__Description__"),
-		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	_, opErr := svc.CheckIngestedDocumentAcl(context.Background(), &CheckIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2005,10 +2167,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
-		InvocationId:      ptr.String("__InvocationId__"),
-		Description:       ptr.String("__Description__"),
-		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	_, opErr := svc.CheckIngestedDocumentAcl(context.Background(), &CheckIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2063,10 +2228,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
-		InvocationId:      ptr.String("__InvocationId__"),
-		Description:       ptr.String("__Description__"),
-		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	_, opErr := svc.CheckIngestedDocumentAcl(context.Background(), &CheckIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2092,10 +2260,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateInvocation(context.Background(), &CreateInvocationInput{
-		InvocationId:      ptr.String("__InvocationId__"),
-		Description:       ptr.String("__Description__"),
-		SessionIdentifier: ptr.String("__SessionIdentifier__"),
+	_, opErr := svc.CheckIngestedDocumentAcl(context.Background(), &CheckIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

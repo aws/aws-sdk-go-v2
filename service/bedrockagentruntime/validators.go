@@ -30,6 +30,26 @@ func (m *validateOpAgenticRetrieveStream) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCheckIngestedDocumentAcl struct {
+}
+
+func (*validateOpCheckIngestedDocumentAcl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCheckIngestedDocumentAcl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CheckIngestedDocumentAclInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCheckIngestedDocumentAclInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateInvocation struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpGetFlowExecution) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetFlowExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIngestedDocumentAcl struct {
+}
+
+func (*validateOpGetIngestedDocumentAcl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIngestedDocumentAcl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIngestedDocumentAclInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIngestedDocumentAclInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -634,6 +674,10 @@ func addOpAgenticRetrieveStreamValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpAgenticRetrieveStream{}, middleware.After)
 }
 
+func addOpCheckIngestedDocumentAclValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCheckIngestedDocumentAcl{}, middleware.After)
+}
+
 func addOpCreateInvocationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInvocation{}, middleware.After)
 }
@@ -668,6 +712,10 @@ func addOpGetExecutionFlowSnapshotValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetFlowExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFlowExecution{}, middleware.After)
+}
+
+func addOpGetIngestedDocumentAclValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIngestedDocumentAcl{}, middleware.After)
 }
 
 func addOpGetInvocationStepValidationMiddleware(stack *middleware.Stack) error {
@@ -2948,6 +2996,34 @@ func validateOpAgenticRetrieveStreamInput(v *AgenticRetrieveStreamInput) error {
 	}
 }
 
+func validateOpCheckIngestedDocumentAclInput(v *CheckIngestedDocumentAclInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CheckIngestedDocumentAclInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if v.DocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
+	}
+	if v.UserContext == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserContext"))
+	} else if v.UserContext != nil {
+		if err := validateUserContext(v.UserContext); err != nil {
+			invalidParams.AddNested("UserContext", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateInvocationInput(v *CreateInvocationInput) error {
 	if v == nil {
 		return nil
@@ -3121,6 +3197,27 @@ func validateOpGetFlowExecutionInput(v *GetFlowExecutionInput) error {
 	}
 	if v.ExecutionIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIngestedDocumentAclInput(v *GetIngestedDocumentAclInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIngestedDocumentAclInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if v.DocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

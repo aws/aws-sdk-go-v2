@@ -207,6 +207,38 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_CheckIngestedDocumentAcl(t *testing.T) {
+	input := &CheckIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CheckIngestedDocumentAcl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CheckIngestedDocumentAcl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateInvocation(t *testing.T) {
 	input := &CreateInvocationInput{
 		InvocationId:      ptr.String("__InvocationId__"),
@@ -511,6 +543,35 @@ func TestCheckRequestSnapshot_GetFlowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetFlowExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetIngestedDocumentAcl(t *testing.T) {
+	input := &GetIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIngestedDocumentAcl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIngestedDocumentAcl"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1397,6 +1458,38 @@ func TestCheckRequestSnapshot_UpdateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_CheckIngestedDocumentAcl(t *testing.T) {
+	input := &CheckIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+		UserContext: &types.UserContext{
+			UserId: ptr.String("__UserId__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CheckIngestedDocumentAcl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CheckIngestedDocumentAcl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateInvocation(t *testing.T) {
 	input := &CreateInvocationInput{
 		InvocationId:      ptr.String("__InvocationId__"),
@@ -1701,6 +1794,35 @@ func TestUpdateRequestSnapshot_GetFlowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetFlowExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetIngestedDocumentAcl(t *testing.T) {
+	input := &GetIngestedDocumentAclInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		DataSourceId:    ptr.String("__DataSourceId__"),
+		DocumentId:      ptr.String("__DocumentId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetIngestedDocumentAcl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetIngestedDocumentAcl"); err != nil {
 		t.Fatal(err)
 	}
 }

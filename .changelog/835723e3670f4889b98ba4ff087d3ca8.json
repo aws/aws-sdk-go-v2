@@ -1,0 +1,8 @@
+{
+    "id": "835723e3-670f-4889-b98b-a4ff087d3ca8",
+    "type": "feature",
+    "description": "Add support for the Machine Payments Protocol (MPP) and x402 upto scheme payments protocol in Amazon Bedrock AgentCore Payments. Customers can now pay for MPP-gated resources and also pay services which requires upto scheme in x402",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

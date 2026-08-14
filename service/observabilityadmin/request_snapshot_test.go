@@ -241,6 +241,10 @@ func TestCheckRequestSnapshot_CreateCentralizationRuleForOrganization(t *testing
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
 					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
+					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -1772,6 +1776,10 @@ func TestCheckRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testing
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
 					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
+					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
@@ -2415,6 +2423,10 @@ func TestUpdateRequestSnapshot_CreateCentralizationRuleForOrganization(t *testin
 					},
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
@@ -3946,6 +3958,10 @@ func TestUpdateRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 					},
 					LogGroupNameConfiguration: &types.LogGroupNameConfiguration{
 						LogGroupNamePattern: ptr.String("__LogGroupNamePattern__"),
+					},
+					TagPropagationConfiguration: &types.TagPropagationConfiguration{
+						DestinationRoleArn:            ptr.String("__DestinationRoleArn__"),
+						TagConflictResolutionStrategy: types.TagConflictResolutionStrategy("IN_SYNC"),
 					},
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{

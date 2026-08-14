@@ -2280,6 +2280,46 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCode(v *types.Code, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.Code
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "S3Location":
+			var mv types.S3Location
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentS3Location(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.CodeMemberS3Location{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2815,6 +2855,64 @@ func awsAwsjson10_deserializeDocumentRunDetailSummary(v **types.RunDetailSummary
 					return fmt.Errorf("expected WorkflowRunStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.WorkflowRunStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentS3Location(v **types.S3Location, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3Location
+	if *v == nil {
+		sv = &types.S3Location{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "ObjectKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ObjectKey = ptr.String(jtv)
+			}
+
+		case "VersionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.VersionId = ptr.String(jtv)
 			}
 
 		default:
@@ -4360,6 +4458,24 @@ func awsAwsjson10_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 
 	for key, value := range shape {
 		switch key {
+		case "Code":
+			if err := awsAwsjson10_deserializeDocumentCode(&sv.Code, value); err != nil {
+				return err
+			}
+
+		case "CodeSnapshottedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestampValue to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.CodeSnapshottedAt = ptr.Time(t)
+			}
+
 		case "CreatedAt":
 			if value != nil {
 				jtv, ok := value.(string)

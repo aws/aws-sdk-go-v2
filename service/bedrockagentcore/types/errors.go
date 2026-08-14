@@ -285,6 +285,38 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Returned when you attempt a wallet operation against a Coinbase Marketplace
+// connector whose account does not hold an active Marketplace subscription and is
+// not within the legacy exception period. Subscribe to the Marketplace listing
+// before you retry the operation.
+type SubscriptionRequiredException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	SubscriptionUrl *string
+	ProductName     *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SubscriptionRequiredException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SubscriptionRequiredException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SubscriptionRequiredException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SubscriptionRequiredException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SubscriptionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request was denied due to request throttling. Reduce the frequency of
 // requests and try again.
 type ThrottledException struct {

@@ -3363,6 +3363,241 @@ func (v *CustomOrchestrationTraceEvent) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
+// The access control list for a document, containing allow and deny membership
+// lists. Each list specifies conditions that determine which users and groups are
+// granted or denied access.
+type DocumentAcl struct {
+
+	// The list of principals allowed access to the document.
+	AllowList *DocumentAclMembership
+
+	// The list of principals denied access to the document.
+	DenyList *DocumentAclMembership
+
+	noSmithyDocumentSerde
+}
+
+func (v *DocumentAcl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentAcl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentAcl) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowList != nil {
+		s.WriteStruct(schemas.DocumentAcl_allowList)
+		v.AllowList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DenyList != nil {
+		s.WriteStruct(schemas.DocumentAcl_denyList)
+		v.DenyList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DocumentAcl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentAcl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentAcl_allowList:
+			v.AllowList = &DocumentAclMembership{}
+			return v.AllowList.Deserialize(d)
+		case schemas.DocumentAcl_denyList:
+			v.DenyList = &DocumentAclMembership{}
+			return v.DenyList.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A condition within a document access control list (ACL) membership, specifying
+// users and groups that are evaluated together.
+type DocumentAclCondition struct {
+
+	// The logical operator for combining users and groups within this condition.
+	// Valid values: AND – Both a user match and a group match are required. OR –
+	// Either a user match or a group match is sufficient.
+	ConditionOperator DocumentAclMemberRelation
+
+	// The list of group entries in this condition.
+	Groups []DocumentAclGroup
+
+	// The list of user entries in this condition.
+	Users []DocumentAclUser
+
+	noSmithyDocumentSerde
+}
+
+func (v *DocumentAclCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentAclCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentAclCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionOperator != "" {
+		s.WriteString(schemas.DocumentAclCondition_conditionOperator, string(v.ConditionOperator))
+	}
+	serializeDocumentAclGroupList(s, schemas.DocumentAclCondition_groups, v.Groups)
+	serializeDocumentAclUserList(s, schemas.DocumentAclCondition_users, v.Users)
+}
+func (v *DocumentAclCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentAclCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentAclCondition_conditionOperator:
+			var ev string
+			if err := d.ReadString(schemas.DocumentAclCondition_conditionOperator, &ev); err != nil {
+				return err
+			}
+			v.ConditionOperator = DocumentAclMemberRelation(ev)
+			return nil
+		case schemas.DocumentAclCondition_groups:
+			return deserializeDocumentAclGroupList(d, schemas.DocumentAclCondition_groups, &v.Groups)
+		case schemas.DocumentAclCondition_users:
+			return deserializeDocumentAclUserList(d, schemas.DocumentAclCondition_users, &v.Users)
+		}
+		return nil
+	})
+}
+
+// A group entry within a document access control list (ACL) condition.
+type DocumentAclGroup struct {
+
+	// The identifier of the group.
+	//
+	// This member is required.
+	Id *string
+
+	// The membership type indicating the scope of the group entry.
+	//
+	// This member is required.
+	Type DocumentAclMembershipType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DocumentAclGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentAclGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentAclGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DocumentAclGroup_id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DocumentAclGroup_type, string(v.Type))
+	}
+}
+func (v *DocumentAclGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentAclGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentAclGroup_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DocumentAclGroup_id, v.Id)
+		case schemas.DocumentAclGroup_type:
+			var ev string
+			if err := d.ReadString(schemas.DocumentAclGroup_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DocumentAclMembershipType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The membership entry for a document access control list (ACL), containing
+// conditions and their logical relation.
+type DocumentAclMembership struct {
+
+	// The list of conditions that determine membership.
+	Conditions []DocumentAclCondition
+
+	// The logical relation between conditions. Valid values: AND – All conditions
+	// must match. OR – At least one condition must match.
+	MemberRelation DocumentAclMemberRelation
+
+	noSmithyDocumentSerde
+}
+
+func (v *DocumentAclMembership) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentAclMembership)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentAclMembership) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentAclConditionList(s, schemas.DocumentAclMembership_conditions, v.Conditions)
+	if v.MemberRelation != "" {
+		s.WriteString(schemas.DocumentAclMembership_memberRelation, string(v.MemberRelation))
+	}
+}
+func (v *DocumentAclMembership) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentAclMembership, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentAclMembership_conditions:
+			return deserializeDocumentAclConditionList(d, schemas.DocumentAclMembership_conditions, &v.Conditions)
+		case schemas.DocumentAclMembership_memberRelation:
+			var ev string
+			if err := d.ReadString(schemas.DocumentAclMembership_memberRelation, &ev); err != nil {
+				return err
+			}
+			v.MemberRelation = DocumentAclMemberRelation(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A user entry within a document access control list (ACL) condition.
+type DocumentAclUser struct {
+
+	// The identifier of the user.
+	//
+	// This member is required.
+	Id *string
+
+	// The membership type indicating the scope of the user entry.
+	//
+	// This member is required.
+	Type DocumentAclMembershipType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DocumentAclUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentAclUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentAclUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DocumentAclUser_id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DocumentAclUser_type, string(v.Type))
+	}
+}
+func (v *DocumentAclUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentAclUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentAclUser_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DocumentAclUser_id, v.Id)
+		case schemas.DocumentAclUser_type:
+			var ev string
+			if err := d.ReadString(schemas.DocumentAclUser_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DocumentAclMembershipType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The unique external source of the content contained in the wrapper object.
 type ExternalSource struct {
 
@@ -9027,21 +9262,8 @@ func (v *ManagedSearchBedrockRerankingModelConfiguration) Deserialize(d smithy.S
 // configuration.
 type ManagedSearchConfiguration struct {
 
-	// Specifies the filters to use on the metadata attributes in the knowledge base
-	// data sources before returning results. For more information, see [Query configurations]. See the
-	// examples below to see how to use these filters.
-	//
-	// This data type is used in the following API operations:
-	//
-	// [Retrieve request]
-	//   - – in the filter field
-	//
-	// [RetrieveAndGenerate request]
-	//   - – in the filter field
-	//
-	// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
-	// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
-	// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+	// Filters the metadata of the retrieved results so that Amazon Bedrock returns
+	// only results that match the filter.
 	Filter RetrievalFilter
 
 	// The number of results to retrieve.

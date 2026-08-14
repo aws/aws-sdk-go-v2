@@ -1178,8 +1178,14 @@ func awsRestjson1_deserializeOpErrorCreatePaymentInstrument(response *smithyhttp
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("SubscriptionRequiredException", errorCode):
+		return awsRestjson1_deserializeErrorSubscriptionRequiredException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -1350,6 +1356,9 @@ func awsRestjson1_deserializeOpErrorCreatePaymentSession(response *smithyhttp.Re
 
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("SubscriptionRequiredException", errorCode):
+		return awsRestjson1_deserializeErrorSubscriptionRequiredException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -9579,8 +9588,14 @@ func awsRestjson1_deserializeOpErrorProcessPayment(response *smithyhttp.Response
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("SubscriptionRequiredException", errorCode):
+		return awsRestjson1_deserializeErrorSubscriptionRequiredException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -15620,6 +15635,42 @@ func awsRestjson1_deserializeErrorServiceQuotaExceededException(response *smithy
 	}
 
 	err := awsRestjson1_deserializeDocumentServiceQuotaExceededException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorSubscriptionRequiredException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.SubscriptionRequiredException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentSubscriptionRequiredException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -22265,6 +22316,64 @@ func awsRestjson1_deserializeDocumentMouseScrollResult(v **types.MouseScrollResu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMppPaymentOutput(v **types.MppPaymentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MppPaymentOutput
+	if *v == nil {
+		sv = &types.MppPaymentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "paymentCredential":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MppPaymentCredential to be of type string, got %T instead", value)
+				}
+				sv.PaymentCredential = ptr.String(jtv)
+			}
+
+		case "selectedPaymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SelectedPaymentId = ptr.String(jtv)
+			}
+
+		case "version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Version to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNamespacesList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22936,6 +23045,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.PaymentOutputMemberCryptoX402{Value: mv}
+			break loop
+
+		case "mpp":
+			var mv types.MppPaymentOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMppPaymentOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PaymentOutputMemberMpp{Value: mv}
 			break loop
 
 		default:
@@ -25101,6 +25220,64 @@ func awsRestjson1_deserializeDocumentStripePrivyTokenResponseOutput(v **types.St
 					return err
 				}
 				sv.RequestExpiry = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubscriptionRequiredException(v **types.SubscriptionRequiredException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubscriptionRequiredException
+	if *v == nil {
+		sv = &types.SubscriptionRequiredException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "productName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProductName = ptr.String(jtv)
+			}
+
+		case "subscriptionUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SubscriptionUrl = ptr.String(jtv)
 			}
 
 		default:

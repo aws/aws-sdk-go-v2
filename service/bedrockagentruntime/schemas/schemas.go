@@ -15,6 +15,13 @@ var AgenticRetrieveStream = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/agenticRetrieveStream",
 	Code: 200})
 
+var CheckIngestedDocumentAcl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "CheckIngestedDocumentAcl",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/check-ingested-document-acl",
+	Code: 200})
+
 var CreateInvocation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "CreateInvocation",
@@ -83,6 +90,13 @@ var GetFlowExecution = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetFlowExecution",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}",
+	Code: 200})
+
+var GetIngestedDocumentAcl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "GetIngestedDocumentAcl",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/get-ingested-document-acl",
 	Code: 200})
 
 var GetInvocationStep = smithy.NewSchema(smithy.ShapeID{
@@ -1280,6 +1294,82 @@ var DependencyFailedException = smithy.NewSchema(smithy.ShapeID{
 var DependencyFailedException_message *smithy.Schema
 
 var DependencyFailedException_resourceName *smithy.Schema
+
+var DocumentAcl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAcl",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
+var DocumentAcl_allowList *smithy.Schema
+
+var DocumentAcl_denyList *smithy.Schema
+
+var DocumentAclCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAclCondition",
+}, smithy.ShapeTypeStructure, 3)
+var DocumentAclCondition_conditionOperator *smithy.Schema
+
+var DocumentAclCondition_users *smithy.Schema
+
+var DocumentAclCondition_groups *smithy.Schema
+
+var _DocumentAclConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAclConditionList",
+}, smithy.ShapeTypeList, 1)
+var _DocumentAclConditionList_member *smithy.Schema
+
+var DocumentAclGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAclGroup",
+}, smithy.ShapeTypeStructure, 2)
+var DocumentAclGroup_id *smithy.Schema
+
+var DocumentAclGroup_type *smithy.Schema
+
+var _DocumentAclGroupList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAclGroupList",
+}, smithy.ShapeTypeList, 1)
+var _DocumentAclGroupList_member *smithy.Schema
+
+var DocumentAclMemberRelation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAclMemberRelation",
+}, smithy.ShapeTypeEnum, 2)
+var DocumentAclMemberRelation_AND *smithy.Schema
+
+var DocumentAclMemberRelation_OR *smithy.Schema
+
+var DocumentAclMembership = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAclMembership",
+}, smithy.ShapeTypeStructure, 2)
+var DocumentAclMembership_memberRelation *smithy.Schema
+
+var DocumentAclMembership_conditions *smithy.Schema
+
+var DocumentAclMembershipType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAclMembershipType",
+}, smithy.ShapeTypeEnum, 2)
+var DocumentAclMembershipType_KNOWLEDGE_BASE *smithy.Schema
+
+var DocumentAclMembershipType_DATA_SOURCE *smithy.Schema
+
+var DocumentAclUser = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAclUser",
+}, smithy.ShapeTypeStructure, 2)
+var DocumentAclUser_id *smithy.Schema
+
+var DocumentAclUser_type *smithy.Schema
+
+var _DocumentAclUserList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "DocumentAclUserList",
+}, smithy.ShapeTypeList, 1)
+var _DocumentAclUserList_member *smithy.Schema
 
 var _DocumentId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -4912,6 +5002,24 @@ var AgenticRetrieveStreamResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AgenticRetrieveStreamResponse_stream *smithy.Schema
 
+var CheckIngestedDocumentAclRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "CheckIngestedDocumentAclRequest",
+}, smithy.ShapeTypeStructure, 4)
+var CheckIngestedDocumentAclRequest_knowledgeBaseId *smithy.Schema
+
+var CheckIngestedDocumentAclRequest_dataSourceId *smithy.Schema
+
+var CheckIngestedDocumentAclRequest_documentId *smithy.Schema
+
+var CheckIngestedDocumentAclRequest_userContext *smithy.Schema
+
+var CheckIngestedDocumentAclResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "CheckIngestedDocumentAclResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CheckIngestedDocumentAclResponse_hasAccess *smithy.Schema
+
 var CreateInvocationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "CreateInvocationRequest",
@@ -5115,6 +5223,22 @@ var GetFlowExecutionResponse_flowAliasIdentifier *smithy.Schema
 var GetFlowExecutionResponse_flowIdentifier *smithy.Schema
 
 var GetFlowExecutionResponse_flowVersion *smithy.Schema
+
+var GetIngestedDocumentAclRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "GetIngestedDocumentAclRequest",
+}, smithy.ShapeTypeStructure, 3)
+var GetIngestedDocumentAclRequest_knowledgeBaseId *smithy.Schema
+
+var GetIngestedDocumentAclRequest_dataSourceId *smithy.Schema
+
+var GetIngestedDocumentAclRequest_documentId *smithy.Schema
+
+var GetIngestedDocumentAclResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "GetIngestedDocumentAclResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetIngestedDocumentAclResponse_documentAcl *smithy.Schema
 
 var GetInvocationStepRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -7047,6 +7171,42 @@ func init() {
 
 	CustomOrchestration_executor = CustomOrchestration.AddMember("executor", OrchestrationExecutor)
 
+	DocumentAclMemberRelation_AND = DocumentAclMemberRelation.AddMember("AND", smithyprelude.Unit)
+
+	DocumentAclMemberRelation_OR = DocumentAclMemberRelation.AddMember("OR", smithyprelude.Unit)
+
+	DocumentAclMembershipType_KNOWLEDGE_BASE = DocumentAclMembershipType.AddMember("KNOWLEDGE_BASE", smithyprelude.Unit)
+
+	DocumentAclMembershipType_DATA_SOURCE = DocumentAclMembershipType.AddMember("DATA_SOURCE", smithyprelude.Unit)
+
+	DocumentAclUser_id = DocumentAclUser.AddMember("id", smithyprelude.String)
+
+	DocumentAclUser_type = DocumentAclUser.AddMember("type", DocumentAclMembershipType)
+
+	_DocumentAclUserList_member = _DocumentAclUserList.AddMember("member", DocumentAclUser)
+
+	DocumentAclGroup_id = DocumentAclGroup.AddMember("id", smithyprelude.String)
+
+	DocumentAclGroup_type = DocumentAclGroup.AddMember("type", DocumentAclMembershipType)
+
+	_DocumentAclGroupList_member = _DocumentAclGroupList.AddMember("member", DocumentAclGroup)
+
+	DocumentAclCondition_conditionOperator = DocumentAclCondition.AddMember("conditionOperator", DocumentAclMemberRelation)
+
+	DocumentAclCondition_users = DocumentAclCondition.AddMember("users", _DocumentAclUserList)
+
+	DocumentAclCondition_groups = DocumentAclCondition.AddMember("groups", _DocumentAclGroupList)
+
+	_DocumentAclConditionList_member = _DocumentAclConditionList.AddMember("member", DocumentAclCondition)
+
+	DocumentAclMembership_memberRelation = DocumentAclMembership.AddMember("memberRelation", DocumentAclMemberRelation)
+
+	DocumentAclMembership_conditions = DocumentAclMembership.AddMember("conditions", _DocumentAclConditionList)
+
+	DocumentAcl_allowList = DocumentAcl.AddMember("allowList", DocumentAclMembership)
+
+	DocumentAcl_denyList = DocumentAcl.AddMember("denyList", DocumentAclMembership)
+
 	DocumentOutputFormat_RAW = DocumentOutputFormat.AddMember("RAW", smithyprelude.Unit)
 
 	DocumentOutputFormat_EXTRACTED = DocumentOutputFormat.AddMember("EXTRACTED", smithyprelude.Unit)
@@ -7963,6 +8123,16 @@ func init() {
 
 	AgenticRetrieveStreamResponse_stream = AgenticRetrieveStreamResponse.AddMember("stream", AgenticRetrieveStreamResponseOutput, &smithytraits.HTTPPayload{})
 
+	CheckIngestedDocumentAclRequest_knowledgeBaseId = CheckIngestedDocumentAclRequest.AddMember("knowledgeBaseId", _KnowledgeBaseIdentifier, &smithytraits.HTTPLabel{})
+
+	CheckIngestedDocumentAclRequest_dataSourceId = CheckIngestedDocumentAclRequest.AddMember("dataSourceId", _DataSourceId, &smithytraits.HTTPLabel{})
+
+	CheckIngestedDocumentAclRequest_documentId = CheckIngestedDocumentAclRequest.AddMember("documentId", _DocumentId)
+
+	CheckIngestedDocumentAclRequest_userContext = CheckIngestedDocumentAclRequest.AddMember("userContext", UserContext)
+
+	CheckIngestedDocumentAclResponse_hasAccess = CheckIngestedDocumentAclResponse.AddMember("hasAccess", smithyprelude.Boolean)
+
 	CreateInvocationRequest_invocationId = CreateInvocationRequest.AddMember("invocationId", _Uuid)
 
 	CreateInvocationRequest_description = CreateInvocationRequest.AddMember("description", _InvocationDescription)
@@ -8084,6 +8254,14 @@ func init() {
 	GetFlowExecutionResponse_flowIdentifier = GetFlowExecutionResponse.AddMember("flowIdentifier", _FlowIdentifier)
 
 	GetFlowExecutionResponse_flowVersion = GetFlowExecutionResponse.AddMember("flowVersion", _Version)
+
+	GetIngestedDocumentAclRequest_knowledgeBaseId = GetIngestedDocumentAclRequest.AddMember("knowledgeBaseId", _KnowledgeBaseIdentifier, &smithytraits.HTTPLabel{})
+
+	GetIngestedDocumentAclRequest_dataSourceId = GetIngestedDocumentAclRequest.AddMember("dataSourceId", _DataSourceId, &smithytraits.HTTPLabel{})
+
+	GetIngestedDocumentAclRequest_documentId = GetIngestedDocumentAclRequest.AddMember("documentId", _DocumentId)
+
+	GetIngestedDocumentAclResponse_documentAcl = GetIngestedDocumentAclResponse.AddMember("documentAcl", DocumentAcl)
 
 	GetInvocationStepRequest_invocationIdentifier = GetInvocationStepRequest.AddMember("invocationIdentifier", _InvocationIdentifier)
 

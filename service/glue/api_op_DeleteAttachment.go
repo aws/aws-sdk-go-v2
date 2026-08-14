@@ -52,6 +52,12 @@ type DeleteAttachmentOutput struct {
 	// The unique identifier of the asset.
 	AssetIdentifier *string
 
+	// The identifier of the item within the iterable form, if applicable.
+	ItemIdentifier *string
+
+	// The name of the iterable form, if the deletion targets an item.
+	IterableFormName *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

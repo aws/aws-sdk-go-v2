@@ -48,9 +48,9 @@ type GetDocumentContentInput struct {
 	// EXTRACTED returns parsed text as JSON. Defaults to RAW .
 	OutputFormat types.DocumentOutputFormat
 
-	// Contains information about the user making the request. Use this to pass user
-	// identity information for access control filtering, so that retrieval results
-	// only include documents the user is authorized to access.
+	// Contains information about the user making the request. This is used for access
+	// control filtering to ensure that results only include documents the user is
+	// authorized to access.
 	UserContext *types.UserContext
 
 	noSmithyDocumentSerde

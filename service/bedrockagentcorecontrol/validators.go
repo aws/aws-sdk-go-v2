@@ -3849,6 +3849,21 @@ func validateBrowserSigningConfigInput(v *types.BrowserSigningConfigInput) error
 	}
 }
 
+func validateCapacityProviderConfiguration(v *types.CapacityProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CapacityProviderConfiguration"}
+	if v.CapacityProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityProviderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCapacityProviderVolumeConfiguration(v *types.CapacityProviderVolumeConfiguration) error {
 	if v == nil {
 		return nil
@@ -8889,6 +8904,11 @@ func validateOpCreateAgentRuntimeInput(v *CreateAgentRuntimeInput) error {
 			invalidParams.AddNested("FilesystemConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CapacityProviderConfiguration != nil {
+		if err := validateCapacityProviderConfiguration(v.CapacityProviderConfiguration); err != nil {
+			invalidParams.AddNested("CapacityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11086,6 +11106,11 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 	if v.FilesystemConfigurations != nil {
 		if err := validateFilesystemConfigurations(v.FilesystemConfigurations); err != nil {
 			invalidParams.AddNested("FilesystemConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CapacityProviderConfiguration != nil {
+		if err := validateCapacityProviderConfiguration(v.CapacityProviderConfiguration); err != nil {
+			invalidParams.AddNested("CapacityProviderConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

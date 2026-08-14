@@ -12,6 +12,11 @@ import (
 	"sync"
 )
 
+// Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to
+// new customers. For capabilities similar to Bedrock Agents Classic, explore
+// Amazon Bedrock AgentCore. Existing customers can continue to use the service as
+// normal. For more information, see [Amazon Bedrock Agents Classic availability change].
+//
 // Sends a prompt for the agent to process and respond to. Note the following
 // fields for the request:
 //
@@ -46,6 +51,7 @@ import (
 //   - Errors are also surfaced in the response.
 //
 // [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events
+// [Amazon Bedrock Agents Classic availability change]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html
 func (c *Client) InvokeAgent(ctx context.Context, params *InvokeAgentInput, optFns ...func(*Options)) (*InvokeAgentOutput, error) {
 	if params == nil {
 		params = &InvokeAgentInput{}
