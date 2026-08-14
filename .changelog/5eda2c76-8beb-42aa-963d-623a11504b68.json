@@ -1,7 +1,7 @@
 {
     "id": "5eda2c76-8beb-42aa-963d-623a11504b68",
     "type": "bugfix",
-    "description": "Forward the original response body's Closer in the S3 200-error handling instead of wrapping it in `io.NopCloser`, so closing the response body reaches the underlying transport body and the connection is released. Previously the connection could be leaked (observed on CompleteMultipartUpload).",
+    "description": "Forward the original response body's `Closer` in S3 200-error handling instead of wrapping it in `io.NopCloser`, to avoid issues with TCP connection reuse (observed on CompleteMultipartUpload).",
     "collapse": false,
     "modules": [
         "service/s3"
