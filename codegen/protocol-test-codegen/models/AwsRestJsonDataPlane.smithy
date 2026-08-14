@@ -12,6 +12,6 @@ use aws.auth#sigv4
 @service(sdkId: "RestJsonDataPlane")
 service AwsRestJsonDataPlane {
     version: "1999-12-31"
-    operations: [Healthcheck]
+    operations: [Healthcheck, GetObjectStreaming]
     resources: [S3Object, CloudWatchMetric]
 }

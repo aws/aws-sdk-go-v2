@@ -98,6 +98,18 @@ func TestCheckSnapshot_GetObject(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetObjectStreaming(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetObjectStreaming(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetObjectStreaming")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_HeadObject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.HeadObject(context.Background(), nil, func(o *Options) {
@@ -174,6 +186,18 @@ func TestUpdateSnapshot_GetObject(t *testing.T) {
 	_, err := svc.GetObject(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetObject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetObjectStreaming(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetObjectStreaming(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetObjectStreaming")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

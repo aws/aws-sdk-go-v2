@@ -1,0 +1,36 @@
+GetObjectStreaming
+	Initialize stack step
+		AWSChecksum:SetupOutputContext
+		OperationInputValidation
+	Serialize stack step
+		setOperationInput
+		ResolveEndpoint
+		OperationSerializer
+	Build stack step
+		ClientRequestID
+		ComputeContentLength
+		AWSChecksum:ResponseMetricsTracking
+		SetCredentialSourceMiddleware
+		UserAgent
+		RecursionDetection
+	Finalize stack step
+		spanRetryLoop
+		InterceptBeforeRetryLoop
+		Retry
+		InterceptAttempt
+		RetryMetricsHeader
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		ComputePayloadHash
+		setLegacyContextSigningOptions
+		Signing
+	Deserialize stack step
+		AddRawResponseToMetadata
+		ResponseErrorWrapper
+		RequestIDRetriever
+		OperationDeserializer
+		RecordResponseTiming
+		AWSChecksum:ValidateOutputPayloadChecksum
+		RequestResponseLogger

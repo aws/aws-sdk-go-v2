@@ -70,6 +70,26 @@ func (m *validateOpGetObject) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetObjectStreaming struct {
+}
+
+func (*validateOpGetObjectStreaming) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetObjectStreaming) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetObjectStreamingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetObjectStreamingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpHeadObject struct {
 }
 
@@ -140,6 +160,10 @@ func addOpGetMetricDataValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetObjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetObject{}, middleware.After)
+}
+
+func addOpGetObjectStreamingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetObjectStreaming{}, middleware.After)
 }
 
 func addOpHeadObjectValidationMiddleware(stack *middleware.Stack) error {
@@ -419,6 +443,24 @@ func validateOpGetObjectInput(v *GetObjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetObjectInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetObjectStreamingInput(v *GetObjectStreamingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetObjectStreamingInput"}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}

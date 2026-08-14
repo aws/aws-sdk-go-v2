@@ -8,9 +8,8 @@ use aws.protocols#restJson1
 use smithy.test#httpResponseTests
 
 @documentation("""
-As seen in Amazon S3.
-Object I/O is HTTP payload I/O, and is more of a function of network and checksum performance than serde.
-It is here because it's an important operation, for completeness.
+As seen in Amazon S3 but with a buffered response payload to benchmark that
+path as well.
 """)
 @http(method: "GET", uri: "/{Bucket}/{Key}")
 @httpChecksum(

@@ -12,9 +12,8 @@ import (
 	"time"
 )
 
-// As seen in Amazon S3. Object I/O is HTTP payload I/O, and is more of a function
-// of network and checksum performance than serde. It is here because it's an
-// important operation, for completeness.
+// As seen in Amazon S3 but with a buffered response payload to benchmark that
+// path as well.
 func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns ...func(*Options)) (*GetObjectOutput, error) {
 	if params == nil {
 		params = &GetObjectInput{}

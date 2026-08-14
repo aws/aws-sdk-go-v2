@@ -336,6 +336,10 @@ func TestCheckResponseSnapshot_GetObject(t *testing.T) {
 	t.Skip("asymmetric")
 }
 
+func TestCheckResponseSnapshot_GetObjectStreaming(t *testing.T) {
+	t.Skip("asymmetric")
+}
+
 func TestCheckResponseSnapshot_HeadObject(t *testing.T) {
 	t.Skip("asymmetric")
 }
