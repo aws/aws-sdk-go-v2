@@ -3,6 +3,7 @@ package customizations_test
 import (
 	"context"
 	"errors"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -129,4 +130,57 @@ type fakeCredentials struct{}
 
 func (*fakeCredentials) Retrieve(_ context.Context) (aws.Credentials, error) {
 	return aws.Credentials{}, nil
+}
+
+type mockHTTPClient struct {
+	r *http.Response
+}
+
+func (m *mockHTTPClient) Do(*http.Request) (*http.Response, error) {
+	return m.r, nil
+}
+
+// bodyCloseTracker records whether Close was called on the underlying body.
+type bodyCloseTracker struct {
+	io.Reader
+	closed bool
+}
+
+func (b *bodyCloseTracker) Close() error {
+	b.closed = true
+	return nil
+}
+
+// TestResponseBodyClosed verifies the custom error deserialization forwards
+// Close to the original response body.
+func TestResponseBodyClosed(t *testing.T) {
+	cases := map[string]string{
+		"error":   `<InvalidChangeBatch><Messages><Message>oops</Message></Messages></InvalidChangeBatch>`,
+		"success": `<ChangeResourceRecordSetsResponse><ChangeInfo><Id>mockID</Id></ChangeInfo></ChangeResourceRecordSetsResponse>`,
+	}
+
+	for name, body := range cases {
+		t.Run(name, func(t *testing.T) {
+			status := 200
+			if name == "error" {
+				status = 500
+			}
+			tracked := &bodyCloseTracker{Reader: strings.NewReader(body)}
+			svc := route53.New(route53.Options{
+				Region:      "us-east-1",
+				Credentials: &fakeCredentials{},
+				Retryer:     aws.NopRetryer{},
+				HTTPClient:  &mockHTTPClient{&http.Response{StatusCode: status, Body: tracked}},
+			})
+
+			_, _ = svc.ChangeResourceRecordSets(context.Background(), &route53.ChangeResourceRecordSetsInput{
+				ChangeBatch:  &types.ChangeBatch{Changes: []types.Change{}, Comment: aws.String("mock")},
+				HostedZoneId: aws.String("zone"),
+			})
+
+			if !tracked.closed {
+				t.Error("original response body was not closed")
+			}
+		})
+	}
 }
