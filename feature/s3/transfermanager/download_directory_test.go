@@ -8,7 +8,6 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
-	"runtime"
 	"sort"
 	"strings"
 	"sync"
@@ -44,9 +43,6 @@ func (oc *objectkeyCallback) UpdateRequest(in *GetObjectInput) {
 }
 
 func TestDownloadDirectory(t *testing.T) {
-	_, filename, _, _ := runtime.Caller(0)
-	root := filepath.Join(filepath.Dir(filename), "testdata")
-
 	cases := map[string]struct {
 		destination             string
 		keyPrefix               string
@@ -487,7 +483,7 @@ func TestDownloadDirectory(t *testing.T) {
 			s3Client.PartsCount = 1
 			mgr := New(s3Client)
 
-			dstPath := filepath.Join(root, c.destination)
+			dstPath := filepath.Join("testdata", c.destination)
 			defer os.RemoveAll(dstPath)
 
 			req := &DownloadDirectoryInput{
@@ -566,8 +562,6 @@ func TestDownloadDirectory(t *testing.T) {
 }
 
 func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
-	_, filename, _, _ := runtime.Caller(0)
-	root := filepath.Join(filepath.Dir(filename), "testdata")
 	cases := map[string]struct {
 		destination        string
 		objectsLists       [][]s3types.Object
@@ -652,7 +646,7 @@ func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
 			s3Client.PartsCount = 1
 			mgr := New(s3Client)
 
-			dstPath := filepath.Join(root, c.destination)
+			dstPath := filepath.Join("testdata", c.destination)
 			defer os.RemoveAll(dstPath)
 
 			req := &DownloadDirectoryInput{
@@ -675,9 +669,7 @@ func TestDownloadDirectoryObjectsTransferred(t *testing.T) {
 }
 
 func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
-	_, filename, _, _ := runtime.Caller(0)
-	root := filepath.Join(filepath.Dir(filename), "testdata")
-	dstPath := filepath.Join(root, "context-canceled")
+	dstPath := filepath.Join("testdata", "context-canceled")
 	defer os.RemoveAll(dstPath)
 	c := s3.New(s3.Options{
 		UsePathStyle: true,
@@ -740,9 +732,6 @@ func (c *createdFileCapture) stillOpen() []string {
 // and when individual object downloads fail and are ignored. Regression test
 // for a file-handle leak analogous to aws/aws-sdk-go-v2#3512.
 func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
-	_, filename, _, _ := runtime.Caller(0)
-	root := filepath.Join(filepath.Dir(filename), "testdata")
-
 	cases := map[string]struct {
 		destination        string
 		objectsLists       [][]s3types.Object
@@ -837,7 +826,7 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			s3Client.PartsCount = 1
 			mgr := New(s3Client)
 
-			dstPath := filepath.Join(root, c.destination)
+			dstPath := filepath.Join("testdata", c.destination)
 			defer os.RemoveAll(dstPath)
 
 			req := &DownloadDirectoryInput{

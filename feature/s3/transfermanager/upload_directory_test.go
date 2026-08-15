@@ -161,11 +161,13 @@ func TestUploadDirectory(t *testing.T) {
 			preprocessFunc: func(root string) (func() error, error) {
 				symlinkPath1 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symFoo")
 				symlinkPath2 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symBar")
+				symlinkPath3 := filepath.Join(root, "multi-file-contain-symlink", "to", "symZoo") // the relative symlink
 				postprocessFunc := func() error {
 					// this cleans up all possible symlinks regardless of
 					// whether or not it is successfully created
 					os.Remove(symlinkPath1)
 					os.Remove(symlinkPath2)
+					os.Remove(symlinkPath3)
 					return nil
 				}
 				if err := os.Symlink(filepath.Join(root, "dstFile1"), symlinkPath1); err != nil {
@@ -174,14 +176,20 @@ func TestUploadDirectory(t *testing.T) {
 				if err := os.Symlink(filepath.Join(root, "dstFile2"), symlinkPath2); err != nil {
 					return postprocessFunc, err
 				}
-
+				relTarget, err := filepath.Rel(symlinkPath3, filepath.Join(root, "dstFile2"))
+				if err != nil {
+					return postprocessFunc, err
+				}
+				if err = os.Symlink(relTarget, symlinkPath3); err != nil {
+					return postprocessFunc, err
+				}
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo", "to/the/symBar", "to/the/yee"},
-			expectFilesUploaded: 6,
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo", "to/the/symBar", "to/the/yee", "to/symZoo"},
+			expectFilesUploaded: 7,
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
-				l.expectComplete(t, in, out, 6)
+				l.expectComplete(t, in, out, 7)
 			},
 		},
 		"folder containing multi symlinks but not follow": {

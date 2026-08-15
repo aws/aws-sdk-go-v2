@@ -345,7 +345,7 @@ func (u *directoryUploader) traverseSymlink(path string) (string, error) {
 		if filepath.IsAbs(dst) {
 			path = dst
 		} else {
-			path = filepath.Join(filepath.Dir(path), dst)
+			path = filepath.Join(path, dst)
 		}
 		if _, seen := visited[path]; seen {
 			return "", fmt.Errorf("traversed duplicate path: %s", path)
