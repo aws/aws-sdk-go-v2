@@ -3,6 +3,7 @@ package transfermanager
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -694,19 +695,20 @@ func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
 	}
 }
 
-// createdFileCapture records the *os.File handles that DownloadDirectory
-// creates via createFileFn, so a test can assert after the call returns that
-// each one was closed. A closed *os.File returns an error from Stat, so a nil
-// error means the handle leaked. It is safe for concurrent use by the download
-// workers.
+// createdFileCapture records map of file path corresponding to their *os.File handle that
+// DownloadDirectory creates via createFileFn, so a test can assert after the call returns that
+// each file was either closed or removed if downloaded failed. A
+// removed file path returns os.ErrNotExist from os.Stat, and a closed *os.File
+// returns an error from file.Stat, so a nil error means the handle leaked. It is safe for concurrent
+// use by the download workers.
 type createdFileCapture struct {
 	mu    sync.Mutex
-	files []*os.File
+	files map[string]*os.File
 }
 
-func (c *createdFileCapture) capture(f *os.File) {
+func (c *createdFileCapture) capture(path string, f *os.File) {
 	c.mu.Lock()
-	c.files = append(c.files, f)
+	c.files[path] = f
 	c.mu.Unlock()
 }
 
@@ -714,17 +716,20 @@ func (c *createdFileCapture) count() int {
 	return len(c.files)
 }
 
-// stillOpen returns the names of captured files that are still open. A closed
-// *os.File returns an error from Stat, so a nil error means the handle leaked.
-func (c *createdFileCapture) stillOpen() []string {
-	var open []string
-	for _, f := range c.files {
-		if _, err := f.Stat(); err == nil {
-			open = append(open, f.Name())
+// notRemovedOrStillOpen returns the names of captured files that are removed when download
+// failed or closed after download.
+func (c *createdFileCapture) removedOrClosed() (removed, closed []string) {
+	for path, file := range c.files {
+		_, err := os.Stat(path)
+		if errors.Is(err, os.ErrNotExist) {
+			removed = append(removed, path)
+		} else if _, err := file.Stat(); errors.Is(err, os.ErrClosed) {
+			closed = append(closed, path)
 		}
 	}
-	sort.Strings(open)
-	return open
+	sort.Strings(closed)
+	sort.Strings(removed)
+	return
 }
 
 // TestDownloadDirectoryClosesCreatedFiles verifies that DownloadDirectory
@@ -739,6 +744,8 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 		getobjectFn        func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 		failurePolicy      DownloadDirectoryFailurePolicy
 		expectCreated      int
+		expectRemoved      int
+		expectClosed       int
 		expectErr          string
 	}{
 		"single object": {
@@ -747,6 +754,7 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 				{{Key: aws.String("foo/bar")}},
 			},
 			expectCreated: 1,
+			expectClosed:  1,
 		},
 		"multiple objects with subdirs": {
 			destination: "close-multiple-objects",
@@ -759,6 +767,7 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 				},
 			},
 			expectCreated: 4,
+			expectClosed:  4,
 		},
 		"multiple objects paginated": {
 			destination: "close-multiple-objects-paginated",
@@ -769,6 +778,7 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			},
 			continuationTokens: []string{"token1", "token2"},
 			expectCreated:      6,
+			expectClosed:       6,
 		},
 		"created files are closed when some downloads fail and are ignored": {
 			destination: "close-error-ignored",
@@ -798,17 +808,21 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			// created, closed, and removed; the other two download normally.
 			// Every created file must be closed regardless of the outcome.
 			expectCreated: 4,
+			expectClosed:  2,
+			expectRemoved: 2,
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			capture := &createdFileCapture{}
+			capture := &createdFileCapture{
+				files: make(map[string]*os.File),
+			}
 			prev := createFileFn
-			createFileFn = func(name string) (*os.File, error) {
-				f, err := prev(name)
+			createFileFn = func(path string) (*os.File, error) {
+				f, err := prev(path)
 				if err == nil {
-					capture.capture(f)
+					capture.capture(path, f)
 				}
 				return f, err
 			}
@@ -847,10 +861,14 @@ func TestDownloadDirectoryClosesCreatedFiles(t *testing.T) {
 			}
 
 			if e, a := c.expectCreated, capture.count(); e != a {
-				t.Fatalf("expected DownloadDirectory to create %d file(s) under %s, captured %d", e, dstPath, a)
+				t.Errorf("expected DownloadDirectory to create %d file(s) under %s, captured %d", e, dstPath, a)
 			}
-			if open := capture.stillOpen(); len(open) != 0 {
-				t.Fatalf("expected all created files under %s to be closed after DownloadDirectory returned, but these remain open: %v", dstPath, open)
+			removed, closed := capture.removedOrClosed()
+			if e := c.expectRemoved; e != len(removed) {
+				t.Errorf("expected %d files to be removed, but removed %v", e, removed)
+			}
+			if e := c.expectClosed; e != len(closed) {
+				t.Errorf("expected %d created files under %s to be closed after DownloadDirectory returned, but only close those: %v", e, dstPath, closed)
 			}
 		})
 	}

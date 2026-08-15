@@ -2,6 +2,7 @@ package transfermanager
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -680,17 +681,17 @@ func (c *openFileCapture) count() int {
 	return len(c.files)
 }
 
-// stillOpen returns the names of captured files that are still open. A closed
-// *os.File returns an error from Stat, so a nil error means the handle leaked.
-func (c *openFileCapture) stillOpen() []string {
-	var open []string
+// closed returns the names of captured files that are closed. A closed
+// *os.File returns an ErrClosed from Stat, so a nil error means the handle leaked.
+func (c *openFileCapture) closed() []string {
+	var closed []string
 	for _, f := range c.files {
-		if _, err := f.Stat(); err == nil {
-			open = append(open, f.Name())
+		if _, err := f.Stat(); errors.Is(err, os.ErrClosed) {
+			closed = append(closed, f.Name())
 		}
 	}
-	sort.Strings(open)
-	return open
+	sort.Strings(closed)
+	return closed
 }
 
 // TestUploadDirectoryClosesOpenedFiles verifies that UploadDirectory closes
@@ -799,10 +800,10 @@ func TestUploadDirectoryClosesOpenedFiles(t *testing.T) {
 			}
 
 			if e, a := c.expectFilesTraversed, capture.count(); e != a {
-				t.Fatalf("expected UploadDirectory to open %d file under %s, captured %d", e, c.source, a)
+				t.Errorf("expected UploadDirectory to open %d file under %s, captured %d", e, c.source, a)
 			}
-			if open := capture.stillOpen(); len(open) != 0 {
-				t.Fatalf("expected all opened files under %s to be closed after UploadDirectory returned, but these remain open: %v", c.source, open)
+			if e, a := c.expectFilesTraversed, capture.closed(); len(a) != e {
+				t.Errorf("expected all %d opened files under %s to be closed after UploadDirectory returned, but only closed those: %v", e, c.source, a)
 			}
 		})
 	}
