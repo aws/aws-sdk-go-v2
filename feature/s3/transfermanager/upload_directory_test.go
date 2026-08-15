@@ -682,16 +682,30 @@ func (c *openFileCapture) count() int {
 }
 
 // closed returns the names of captured files that are closed. A closed
-// *os.File returns an ErrClosed from Stat, so a nil error means the handle leaked.
+// *os.File that has already been closed makes isFileClosed report true, so a
+// false result means the handle leaked.
 func (c *openFileCapture) closed() []string {
 	var closed []string
 	for _, f := range c.files {
-		if _, err := f.Stat(); errors.Is(err, os.ErrClosed) {
+		if isFileClosed(f) {
 			closed = append(closed, f.Name())
 		}
 	}
 	sort.Strings(closed)
 	return closed
+}
+
+// isFileClosed reports whether f's underlying descriptor has already been
+// closed. It probes with a second Close rather than Stat because Stat is not a
+// portable signal for closed-ness: on Windows (*os.File).Stat resolves by path
+// rather than through the descriptor, so it never surfaces os.ErrClosed, and
+// even the Unix Fstat path only began mapping internal/poll.ErrFileClosing to
+// os.ErrClosed in Go 1.23 (golang/go#66665). A second Close, by contrast,
+// consistently returns an error matching os.ErrClosed across platforms when the
+// file is already closed, and returns nil (harmlessly closing the leaked handle)
+// when it is not.
+func isFileClosed(f *os.File) bool {
+	return errors.Is(f.Close(), os.ErrClosed)
 }
 
 // TestUploadDirectoryClosesOpenedFiles verifies that UploadDirectory closes

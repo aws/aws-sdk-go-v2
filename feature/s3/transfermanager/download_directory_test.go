@@ -698,8 +698,9 @@ func TestDownloadDirectoryWithContextCanceled(t *testing.T) {
 // createdFileCapture records map of file path corresponding to their *os.File handle that
 // DownloadDirectory creates via createFileFn, so a test can assert after the call returns that
 // each file was either closed or removed if downloaded failed. A
-// removed file path returns os.ErrNotExist from os.Stat, and a closed *os.File
-// returns an error from file.Stat, so a nil error means the handle leaked. It is safe for concurrent
+// removed file path returns os.ErrNotExist from os.Stat, and isFileClosed
+// reports whether a still-present file's handle was closed, so a file that is
+// neither removed nor closed indicates the handle leaked. It is safe for concurrent
 // use by the download workers.
 type createdFileCapture struct {
 	mu    sync.Mutex
@@ -723,7 +724,7 @@ func (c *createdFileCapture) removedOrClosed() (removed, closed []string) {
 		_, err := os.Stat(path)
 		if errors.Is(err, os.ErrNotExist) {
 			removed = append(removed, path)
-		} else if _, err := file.Stat(); errors.Is(err, os.ErrClosed) {
+		} else if isFileClosed(file) {
 			closed = append(closed, path)
 		}
 	}
