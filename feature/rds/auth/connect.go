@@ -69,6 +69,8 @@ func BuildAuthToken(ctx context.Context, endpoint, region, dbUser string, creds 
 	if err != nil {
 		return "", err
 	}
+	// Match aws rds generate-db-auth-token URL shape (path must be "/" before query).
+	req.URL.Path = "/"
 	values := req.URL.Query()
 	values.Set("Action", "connect")
 	values.Set("DBUser", dbUser)
