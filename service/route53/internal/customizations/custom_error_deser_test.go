@@ -152,32 +152,45 @@ func (b *bodyCloseTracker) Close() error {
 }
 
 // TestResponseBodyClosed verifies the custom error deserialization forwards
-// Close to the original response body.
+// Close to the original response body on both the error and success paths.
 func TestResponseBodyClosed(t *testing.T) {
-	cases := map[string]string{
-		"error":   `<InvalidChangeBatch><Messages><Message>oops</Message></Messages></InvalidChangeBatch>`,
-		"success": `<ChangeResourceRecordSetsResponse><ChangeInfo><Id>mockID</Id></ChangeInfo></ChangeResourceRecordSetsResponse>`,
+	cases := map[string]struct {
+		status      int
+		body        string
+		expectError bool
+	}{
+		"error": {
+			status:      500,
+			body:        `<InvalidChangeBatch><Messages><Message>oops</Message></Messages></InvalidChangeBatch>`,
+			expectError: true,
+		},
+		"success": {
+			status: 200,
+			body:   `<ChangeResourceRecordSetsResponse><ChangeInfo><Id>mockID</Id></ChangeInfo></ChangeResourceRecordSetsResponse>`,
+		},
 	}
 
-	for name, body := range cases {
+	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			status := 200
-			if name == "error" {
-				status = 500
-			}
-			tracked := &bodyCloseTracker{Reader: strings.NewReader(body)}
+			tracked := &bodyCloseTracker{Reader: strings.NewReader(c.body)}
 			svc := route53.New(route53.Options{
 				Region:      "us-east-1",
 				Credentials: &fakeCredentials{},
 				Retryer:     aws.NopRetryer{},
-				HTTPClient:  &mockHTTPClient{&http.Response{StatusCode: status, Body: tracked}},
+				HTTPClient:  &mockHTTPClient{&http.Response{StatusCode: c.status, Body: tracked}},
 			})
 
-			_, _ = svc.ChangeResourceRecordSets(context.Background(), &route53.ChangeResourceRecordSetsInput{
+			_, err := svc.ChangeResourceRecordSets(context.Background(), &route53.ChangeResourceRecordSetsInput{
 				ChangeBatch:  &types.ChangeBatch{Changes: []types.Change{}, Comment: aws.String("mock")},
 				HostedZoneId: aws.String("zone"),
 			})
 
+			if c.expectError && err == nil {
+				t.Error("expected an error, got none")
+			}
+			if !c.expectError && err != nil {
+				t.Errorf("expected no error, got %v", err)
+			}
 			if !tracked.closed {
 				t.Error("original response body was not closed")
 			}
