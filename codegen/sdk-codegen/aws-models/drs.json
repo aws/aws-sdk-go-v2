@@ -230,6 +230,76 @@
                 "smithy.api#documentation": "<p>Information about a server's CPU.</p>"
             }
         },
+        "com.amazonaws.drs#CancelRecoveryPlanExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#CancelRecoveryPlanExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#CancelRecoveryPlanExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels an in-progress Recovery Plan execution. Remaining steps are skipped.</p>",
+                "smithy.api#http": {
+                    "uri": "/CancelRecoveryPlanExecution",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#CancelRecoveryPlanExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan execution to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#CancelRecoveryPlanExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecution": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cancelled Recovery Plan execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.drs#CfnStackName": {
             "type": "string",
             "traits": {
@@ -239,6 +309,15 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.drs#ClientIdempotencyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.drs#ConflictException": {
@@ -514,6 +593,184 @@
                         "smithy.api#documentation": "<p>Created Launch Configuration Template.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.drs#CreateRecoveryPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#CreateRecoveryPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#CreateRecoveryPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Recovery Plan to orchestrate multi-server disaster recovery.</p>",
+                "smithy.api#http": {
+                    "uri": "/CreateRecoveryPlan",
+                    "method": "POST",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.drs#CreateRecoveryPlanRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.drs#RecoveryPlanName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.drs#RecoveryPlanDescription"
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.drs#ClientIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string provided to ensure request idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.drs#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the Recovery Plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#CreateRecoveryPlanResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlan": {
+                    "target": "com.amazonaws.drs#RecoveryPlan",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#CreateRecoveryPlanStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#CreateRecoveryPlanStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#CreateRecoveryPlanStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a step in a Recovery Plan. A step is either <code>SERVER</code> type (servers to recover in parallel) or <code>WAIT</code> type (timed pause between steps).</p>",
+                "smithy.api#http": {
+                    "uri": "/CreateRecoveryPlanStep",
+                    "method": "POST",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.drs#CreateRecoveryPlanStepRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan to add the step to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepName": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepOrder": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepOrder"
+                },
+                "configuration": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.drs#ClientIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string provided to ensure request idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#CreateRecoveryPlanStepResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanStep": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStep",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.drs#CreateReplicationConfigurationTemplate": {
@@ -1340,6 +1597,216 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.drs#DeleteRecoveryPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#DeleteRecoveryPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#DeleteRecoveryPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Recovery Plan. Cannot delete a plan that has an execution in a non-terminal status (<code>CREATED</code>, <code>IN_PROGRESS</code>).</p>",
+                "smithy.api#http": {
+                    "uri": "/DeleteRecoveryPlan",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#DeleteRecoveryPlanExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#DeleteRecoveryPlanExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#DeleteRecoveryPlanExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Recovery Plan execution record. Must be in a terminal status.</p>",
+                "smithy.api#http": {
+                    "uri": "/DeleteRecoveryPlanExecution",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#DeleteRecoveryPlanExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan execution to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#DeleteRecoveryPlanExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the deleted Recovery Plan execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#DeleteRecoveryPlanRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#DeleteRecoveryPlanResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the deleted Recovery Plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#DeleteRecoveryPlanStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#DeleteRecoveryPlanStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#DeleteRecoveryPlanStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a step from a Recovery Plan.</p>",
+                "smithy.api#http": {
+                    "uri": "/DeleteRecoveryPlanStep",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#DeleteRecoveryPlanStepRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan step to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#DeleteRecoveryPlanStepResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the deleted Recovery Plan step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.drs#DeleteReplicationConfigurationTemplate": {
@@ -2527,10 +2994,37 @@
             "version": "2020-02-26",
             "operations": [
                 {
+                    "target": "com.amazonaws.drs#CancelRecoveryPlanExecution"
+                },
+                {
                     "target": "com.amazonaws.drs#CreateExtendedSourceServer"
                 },
                 {
+                    "target": "com.amazonaws.drs#CreateRecoveryPlanStep"
+                },
+                {
                     "target": "com.amazonaws.drs#DeleteLaunchAction"
+                },
+                {
+                    "target": "com.amazonaws.drs#DeleteRecoveryPlan"
+                },
+                {
+                    "target": "com.amazonaws.drs#DeleteRecoveryPlanExecution"
+                },
+                {
+                    "target": "com.amazonaws.drs#DeleteRecoveryPlanStep"
+                },
+                {
+                    "target": "com.amazonaws.drs#GetRecoveryPlan"
+                },
+                {
+                    "target": "com.amazonaws.drs#GetRecoveryPlanExecution"
+                },
+                {
+                    "target": "com.amazonaws.drs#GetRecoveryPlanExecutionStep"
+                },
+                {
+                    "target": "com.amazonaws.drs#GetRecoveryPlanStep"
                 },
                 {
                     "target": "com.amazonaws.drs#InitializeService"
@@ -2542,6 +3036,18 @@
                     "target": "com.amazonaws.drs#ListLaunchActions"
                 },
                 {
+                    "target": "com.amazonaws.drs#ListRecoveryPlanExecutions"
+                },
+                {
+                    "target": "com.amazonaws.drs#ListRecoveryPlanExecutionSteps"
+                },
+                {
+                    "target": "com.amazonaws.drs#ListRecoveryPlans"
+                },
+                {
+                    "target": "com.amazonaws.drs#ListRecoveryPlanSteps"
+                },
+                {
                     "target": "com.amazonaws.drs#ListStagingAccounts"
                 },
                 {
@@ -2551,10 +3057,25 @@
                     "target": "com.amazonaws.drs#PutLaunchAction"
                 },
                 {
+                    "target": "com.amazonaws.drs#ReorderRecoveryPlanSteps"
+                },
+                {
+                    "target": "com.amazonaws.drs#RetryRecoveryPlanExecutionStep"
+                },
+                {
                     "target": "com.amazonaws.drs#TagResource"
                 },
                 {
                     "target": "com.amazonaws.drs#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.drs#UpdateRecoveryPlan"
+                },
+                {
+                    "target": "com.amazonaws.drs#UpdateRecoveryPlanExecutionStep"
+                },
+                {
+                    "target": "com.amazonaws.drs#UpdateRecoveryPlanStep"
                 }
             ],
             "resources": [
@@ -2569,6 +3090,9 @@
                 },
                 {
                     "target": "com.amazonaws.drs#RecoveryInstanceResource"
+                },
+                {
+                    "target": "com.amazonaws.drs#RecoveryPlanResource"
                 },
                 {
                     "target": "com.amazonaws.drs#ReplicationConfigurationTemplateResource"
@@ -3647,6 +4171,28 @@
                 }
             }
         },
+        "com.amazonaws.drs#ErrorDetail": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error details for a failed operation.</p>"
+            }
+        },
         "com.amazonaws.drs#EventResourceData": {
             "type": "union",
             "members": {
@@ -3659,6 +4205,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Properties of resource related to a job event.</p>"
+            }
+        },
+        "com.amazonaws.drs#ExecutionServerStepConfiguration": {
+            "type": "structure",
+            "members": {
+                "servers": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionServers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of servers in this execution step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a <code>SERVER</code> type execution step.</p>"
             }
         },
         "com.amazonaws.drs#ExportSourceNetworkCfnTemplate": {
@@ -4025,6 +4586,275 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#GetRecoveryPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#GetRecoveryPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a Recovery Plan by ARN.</p>",
+                "smithy.api#http": {
+                    "uri": "/GetRecoveryPlan",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#GetRecoveryPlanExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#GetRecoveryPlanExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of a Recovery Plan execution.</p>",
+                "smithy.api#http": {
+                    "uri": "/GetRecoveryPlanExecution",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecution": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Recovery Plan execution details.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanExecutionStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#GetRecoveryPlanExecutionStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#GetRecoveryPlanExecutionStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of a step within a Recovery Plan execution.</p>",
+                "smithy.api#http": {
+                    "uri": "/GetRecoveryPlanExecutionStep",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanExecutionStepRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the execution step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanExecutionStepResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionStep": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStep",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlan": {
+                    "target": "com.amazonaws.drs#RecoveryPlan",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#GetRecoveryPlanStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#GetRecoveryPlanStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a Recovery Plan step by ARN.</p>",
+                "smithy.api#http": {
+                    "uri": "/GetRecoveryPlanStep",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanStepRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan step to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#GetRecoveryPlanStepResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanStep": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStep",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.drs#GetReplicationConfiguration": {
@@ -5563,6 +6393,386 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.drs#ListRecoveryPlanExecutionSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ListRecoveryPlanExecutionStepsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ListRecoveryPlanExecutionStepsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all steps within a Recovery Plan execution.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListRecoveryPlanExecutionSteps",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "recoveryPlanExecutionSteps"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlanExecutionStepsFilter": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by execution step status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters for listing Recovery Plan execution steps.</p>"
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlanExecutionStepsRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.drs#ListRecoveryPlanExecutionStepsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters for listing execution steps.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.drs#MaxResultsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlanExecutionStepsResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionSteps": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStepSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of execution steps.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlanExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ListRecoveryPlanExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ListRecoveryPlanExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists executions of Recovery Plans, optionally filtered by plan or status.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListRecoveryPlanExecutions",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "recoveryPlanExecutions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlanExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter executions by Recovery Plan ARN.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter executions by status.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.drs#MaxResultsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlanExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutions": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Recovery Plan executions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlanSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ListRecoveryPlanStepsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ListRecoveryPlanStepsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all steps in a Recovery Plan.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListRecoveryPlanSteps",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "recoveryPlanSteps"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlanStepsRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.drs#MaxResultsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlanStepsResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanSteps": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Recovery Plan steps.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ListRecoveryPlansRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ListRecoveryPlansResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all Recovery Plans in the account.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListRecoveryPlans",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "recoveryPlans"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlansRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.drs#MaxResultsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#ListRecoveryPlansResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlans": {
+                    "target": "com.amazonaws.drs#RecoveryPlanSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Recovery Plans.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.drs#ListStagingAccounts": {
             "type": "operation",
             "input": {
@@ -6910,6 +8120,744 @@
                 ]
             }
         },
+        "com.amazonaws.drs#RecoveryPlan": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.drs#RecoveryPlanName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.drs#RecoveryPlanDescription"
+                },
+                "status": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Recovery Plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Recovery Plan was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Recovery Plan was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.drs#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the Recovery Plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A Recovery Plan resource."
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The description of a Recovery Plan.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecution": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan being executed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mode": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution mode.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the execution started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "completedAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the execution completed.</p>"
+                    }
+                },
+                "errorDetail": {
+                    "target": "com.amazonaws.drs#ErrorDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details if the execution failed.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.drs#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the Recovery Plan execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A Recovery Plan execution.</p>"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Execution mode. <code>DRILL</code> for testing, <code>RECOVERY</code> for actual disaster recovery.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "DRILL",
+                        "name": "DRILL"
+                    },
+                    {
+                        "value": "RECOVERY",
+                        "name": "RECOVERY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionServer": {
+            "type": "structure",
+            "members": {
+                "serverArn": {
+                    "target": "com.amazonaws.drs#SourceServerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "impactLevel": {
+                    "target": "com.amazonaws.drs#RecoveryPlanServerImpactLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Defaults to CRITICAL if not specified."
+                    }
+                },
+                "jobID": {
+                    "target": "com.amazonaws.drs#JobID",
+                    "traits": {
+                        "smithy.api#documentation": "The DRS recovery job ID. Populated when recovery is initiated for this server."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A server within a recovery plan execution step, enriched with execution state."
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionServers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#RecoveryPlanExecutionServer"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionSourceServer": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.drs#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recoverySnapshotID": {
+                    "target": "com.amazonaws.drs#RecoverySnapshotID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the recovery snapshot to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A source server with a specific recovery snapshot for plan execution.</p>"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionSourceServerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#RecoveryPlanExecutionSourceServer"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a Recovery Plan execution.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "CANCELLING",
+                        "name": "CANCELLING"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionStep": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the execution step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepIndex": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepOrder",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the execution step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepName": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStepConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorDetail": {
+                    "target": "com.amazonaws.drs#ErrorDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details if the step failed.</p>"
+                    }
+                },
+                "attempt": {
+                    "target": "com.amazonaws.drs#StrictlyPositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times this step has been attempted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the execution step was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the execution step was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A Recovery Plan Execution Step resource."
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionStepConfiguration": {
+            "type": "union",
+            "members": {
+                "executionServerStepConfiguration": {
+                    "target": "com.amazonaws.drs#ExecutionServerStepConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Configuration for a SERVER type step (with execution state like jobID)."
+                    }
+                },
+                "waitStepConfiguration": {
+                    "target": "com.amazonaws.drs#WaitStepConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Configuration for a WAIT type step."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Type-specific configuration for an execution step response.\nMirrors RecoveryPlanStepConfiguration but uses execution-enriched server shapes."
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionStepStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a step within a Recovery Plan execution.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "NOT_STARTED",
+                        "name": "NOT_STARTED"
+                    },
+                    {
+                        "value": "EXECUTING",
+                        "name": "EXECUTING"
+                    },
+                    {
+                        "value": "WAITING",
+                        "name": "WAITING"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "TIMED_OUT",
+                        "name": "TIMED_OUT"
+                    },
+                    {
+                        "value": "SKIPPED",
+                        "name": "SKIPPED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionStepSummary": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the execution step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepName": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepIndex": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepOrder",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the execution step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStepConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorDetail": {
+                    "target": "com.amazonaws.drs#ErrorDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details if the step failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a Recovery Plan execution step.</p>"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionStepSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#RecoveryPlanExecutionStepSummary"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionSummary": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mode": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution mode.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the execution started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorDetail": {
+                    "target": "com.amazonaws.drs#ErrorDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details if the execution failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a Recovery Plan execution.</p>"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanExecutionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#RecoveryPlanExecutionSummary"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 22,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^plan-[0-9a-zA-Z]{17,59}$"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The name of a Recovery Plan.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _-]*$"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanResource": {
+            "type": "resource",
+            "identifiers": {
+                "recoveryPlanID": {
+                    "target": "com.amazonaws.drs#RecoveryPlanID"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.drs#CreateRecoveryPlan"
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.drs#StartRecoveryPlanExecution"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "recovery-plan/{recoveryPlanID}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag"
+                ],
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanServer": {
+            "type": "structure",
+            "members": {
+                "serverArn": {
+                    "target": "com.amazonaws.drs#SourceServerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "impactLevel": {
+                    "target": "com.amazonaws.drs#RecoveryPlanServerImpactLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Defaults to CRITICAL if not specified."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A server associated with a Recovery Plan Step."
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanServerImpactLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The impact level of a server within a Recovery Plan step. <code>CRITICAL</code> means the step fails if this server fails. <code>OPTIONAL</code> means the step continues even if this server fails.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CRITICAL",
+                        "name": "CRITICAL"
+                    },
+                    {
+                        "value": "OPTIONAL",
+                        "name": "OPTIONAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanServers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#RecoveryPlanServer"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Recovery Plan status. <code>ACTIVE</code> means executable. <code>INVALID</code> means the plan has no <code>SERVER</code> type steps and cannot be executed.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INVALID",
+                        "name": "INVALID"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanStep": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepOrder": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepOrder",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepName": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the step was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the step was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A Recovery Plan Step resource."
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanStepArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#StrictDRSARN"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanStepConfiguration": {
+            "type": "union",
+            "members": {
+                "serverStepConfiguration": {
+                    "target": "com.amazonaws.drs#ServerStepConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Configuration for a SERVER type step."
+                    }
+                },
+                "waitStepConfiguration": {
+                    "target": "com.amazonaws.drs#WaitStepConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Configuration for a WAIT type step."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Type-specific configuration for a recovery plan step.\nExactly one member must be set."
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanStepList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#RecoveryPlanStep"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanStepName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The name of a Recovery Plan Step.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9 _-]*$"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanStepOrder": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "The order of a step within a Recovery Plan (1-based).",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanSummary": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.drs#RecoveryPlanName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Recovery Plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Recovery Plan was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Recovery Plan was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a Recovery Plan.</p>"
+            }
+        },
+        "com.amazonaws.drs#RecoveryPlanSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#RecoveryPlanSummary"
+            }
+        },
         "com.amazonaws.drs#RecoveryResult": {
             "type": "string",
             "traits": {
@@ -7015,6 +8963,83 @@
                         "value": "DESC"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.drs#ReorderRecoveryPlanSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ReorderRecoveryPlanStepsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ReorderRecoveryPlanStepsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Reorders steps in a Recovery Plan. Accepts a complete ordered list of step ARNs.</p>",
+                "smithy.api#http": {
+                    "uri": "/ReorderRecoveryPlanSteps",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#ReorderRecoveryPlanStepsRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "orderedStepArns": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ordered list of all step ARNs representing the desired sequence.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#ReorderRecoveryPlanStepsResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanSteps": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The steps with updated order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.drs#ReplicationConfiguration": {
@@ -7586,6 +9611,75 @@
                 }
             }
         },
+        "com.amazonaws.drs#RetryRecoveryPlanExecutionStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#RetryRecoveryPlanExecutionStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#RetryRecoveryPlanExecutionStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retries a failed <code>SERVER</code> type execution step.</p>",
+                "smithy.api#http": {
+                    "uri": "/RetryRecoveryPlanExecutionStep",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#RetryRecoveryPlanExecutionStepRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the execution step to retry.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#RetryRecoveryPlanExecutionStepResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionStep": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStep",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.drs#ReverseReplication": {
             "type": "operation",
             "input": {
@@ -7672,6 +9766,21 @@
                     "max": 256
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.drs#ServerStepConfiguration": {
+            "type": "structure",
+            "members": {
+                "servers": {
+                    "target": "com.amazonaws.drs#RecoveryPlanServers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of servers to recover in this step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a <code>SERVER</code> type step.</p>"
             }
         },
         "com.amazonaws.drs#ServiceQuotaExceededException": {
@@ -8398,6 +10507,105 @@
                 }
             }
         },
+        "com.amazonaws.drs#StartRecoveryPlanExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#StartRecoveryPlanExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#StartRecoveryPlanExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts executing a Recovery Plan in <code>DRILL</code> or <code>RECOVERY</code> mode. A plan cannot have more than one execution in a non-terminal status at a time.</p>",
+                "smithy.api#http": {
+                    "uri": "/StartRecoveryPlanExecution",
+                    "method": "POST",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.drs#StartRecoveryPlanExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan to execute.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mode": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution mode (<code>DRILL</code> or <code>RECOVERY</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.drs#ClientIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string provided to ensure request idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "sourceServers": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionSourceServerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional list of source servers with specific recovery snapshots. If not provided, the latest snapshot is used for each server.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.drs#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the Recovery Plan execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#StartRecoveryPlanExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecution": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The started Recovery Plan execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.drs#StartRecoveryRequest": {
             "type": "structure",
             "members": {
@@ -8882,6 +11090,17 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#StrictDRSARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Strict ARN type for Recovery Plan resources.\nOnly allows safe characters in the resource portion — rejects HTML/script\ninjection characters (<, >, \", ', etc.) per AWS API input validation standards.\nResource portion allows: [A-Za-z0-9_/.-] which covers all DRS recovery plan\nresource identifiers (plan-xxx, st-xxx, exec-xxx, step-xxx).",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z0-9]+)*:drs:[a-z0-9-]+:[0-9]{12}:[a-zA-Z0-9_/.-]+$"
             }
         },
         "com.amazonaws.drs#StrictlyPositiveInteger": {
@@ -9473,6 +11692,243 @@
                 }
             }
         },
+        "com.amazonaws.drs#UpdateRecoveryPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#UpdateRecoveryPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#UpdateRecoveryPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a Recovery Plan's name or description.</p>",
+                "smithy.api#http": {
+                    "uri": "/UpdateRecoveryPlan",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#UpdateRecoveryPlanExecutionStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#UpdateRecoveryPlanExecutionStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#UpdateRecoveryPlanExecutionStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an execution step. Supports two actions: (1) skip a step that is in <code>NOT_STARTED</code> or <code>FAILED</code> status; (2) update the wait duration of a <code>WAIT</code> type step that is in <code>NOT_STARTED</code> status.</p>",
+                "smithy.api#http": {
+                    "uri": "/UpdateRecoveryPlanExecutionStep",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#UpdateRecoveryPlanExecutionStepRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the execution step to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Only SKIPPED is accepted. Step must be in NOT_STARTED or FAILED status."
+                    }
+                },
+                "servers": {
+                    "target": "com.amazonaws.drs#RecoveryPlanServers",
+                    "traits": {
+                        "smithy.api#documentation": "Full replacement of the server list. Only allowed when the step is in NOT_STARTED status (Server type steps only)."
+                    }
+                },
+                "waitDurationMinutes": {
+                    "target": "com.amazonaws.drs#WaitDurationMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "Updated wait duration. Only allowed when the step is in NOT_STARTED status (Wait type steps only)."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#UpdateRecoveryPlanExecutionStepResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanExecutionStep": {
+                    "target": "com.amazonaws.drs#RecoveryPlanExecutionStep",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#UpdateRecoveryPlanRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.drs#RecoveryPlanName"
+                },
+                "description": {
+                    "target": "com.amazonaws.drs#RecoveryPlanDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#UpdateRecoveryPlanResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlan": {
+                    "target": "com.amazonaws.drs#RecoveryPlan",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#UpdateRecoveryPlanStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#UpdateRecoveryPlanStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#UpdateRecoveryPlanStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a Recovery Plan step's name or configuration. Step type is immutable.</p>",
+                "smithy.api#http": {
+                    "uri": "/UpdateRecoveryPlanStep",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#UpdateRecoveryPlanStepRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanStepArn": {
+                    "target": "com.amazonaws.drs#StrictDRSARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Recovery Plan step to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepName": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepName"
+                },
+                "configuration": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStepConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#UpdateRecoveryPlanStepResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPlanStep": {
+                    "target": "com.amazonaws.drs#RecoveryPlanStep",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.drs#UpdateReplicationConfiguration": {
             "type": "operation",
             "input": {
@@ -9914,6 +12370,30 @@
                     "max": 21
                 },
                 "smithy.api#pattern": "^vpc-[0-9a-fA-F]{8,}$"
+            }
+        },
+        "com.amazonaws.drs#WaitDurationMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "The wait duration in minutes for a Wait type step.",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 120
+                }
+            }
+        },
+        "com.amazonaws.drs#WaitStepConfiguration": {
+            "type": "structure",
+            "members": {
+                "waitDurationMinutes": {
+                    "target": "com.amazonaws.drs#WaitDurationMinutes",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a <code>WAIT</code> type step.</p>"
             }
         }
     }

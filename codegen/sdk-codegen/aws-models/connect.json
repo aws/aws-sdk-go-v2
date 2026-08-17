@@ -149,6 +149,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SUBMIT_AUTO_EVALUATION"
                     }
+                },
+                "EXTRACT_INFORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTRACT_INFORMATION"
+                    }
                 }
             }
         },
@@ -1010,7 +1016,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 128
-                }
+                },
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$"
             }
         },
         "com.amazonaws.connect#AiAgentInfo": {
@@ -1435,6 +1442,9 @@
                     "target": "com.amazonaws.connect#CreateEvaluationForm"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateExtractionDefinition"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateHoursOfOperation"
                 },
                 {
@@ -1555,6 +1565,9 @@
                     "target": "com.amazonaws.connect#DeleteEvaluationForm"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteExtractionDefinition"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteHoursOfOperation"
                 },
                 {
@@ -1670,6 +1683,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeEvaluationForm"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeExtractionDefinition"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeHoursOfOperation"
@@ -1922,6 +1938,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ListEvaluationFormVersions"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListExtractionDefinitions"
                 },
                 {
                     "target": "com.amazonaws.connect#ListFlowAssociations"
@@ -2321,6 +2340,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateEvaluationForm"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateExtractionDefinition"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateHoursOfOperation"
@@ -12373,6 +12395,117 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#CreateExtractionDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateExtractionDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateExtractionDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an extraction definition in the specified Connect Customer instance. An extraction\n   definition specifies how structured data is extracted from customer interactions using generative\n   AI, including the prompt hint that guides extraction and the behavior when a value cannot be\n   found.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/extraction-definitions/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateExtractionDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n   request. If not provided, the Amazon Web Services SDK populates this field.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionConfiguration": {
+                    "target": "com.amazonaws.connect#ExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that defines how data is extracted, including the prompt hint and\n   not-found behavior.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Display": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionDisplay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display settings for the extraction definition, including the label shown in the\n   agent workspace.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreateExtractionDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "ExtractionDefinitionArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionId": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#CreateHoursOfOperation": {
             "type": "operation",
             "input": {
@@ -17860,6 +17993,71 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#DeleteExtractionDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteExtractionDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteExtractionDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an extraction definition from the specified Connect Customer instance.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/extraction-definitions/{InstanceId}/{ExtractionDefinitionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteExtractionDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionId": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the extraction definition to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteExtractionDefinitionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#DeleteHoursOfOperation": {
             "type": "operation",
             "input": {
@@ -20579,6 +20777,79 @@
                     "target": "com.amazonaws.connect#EvaluationForm",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the evaluation form.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeExtractionDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeExtractionDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeExtractionDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an extraction definition in the specified Connect Customer instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/extraction-definitions/{InstanceId}/{ExtractionDefinitionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeExtractionDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionId": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the extraction definition to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DescribeExtractionDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "ExtractionDefinition": {
+                    "target": "com.amazonaws.connect#ExtractionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The extraction definition.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -28149,6 +28420,18 @@
                         "smithy.api#enumValue": "OnPostChatAnalysisAvailable"
                     }
                 },
+                "OnAfterCallWorkAvailable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnAfterCallWorkAvailable"
+                    }
+                },
+                "OnAfterChatWorkAvailable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnAfterChatWorkAvailable"
+                    }
+                },
                 "OnEmailAnalysisAvailable": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -28388,6 +28671,238 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The external invocation configuration for the flow module</p>"
+            }
+        },
+        "com.amazonaws.connect#ExtractInformationActionDefinition": {
+            "type": "structure",
+            "members": {
+                "RulesExtractionDefinitions": {
+                    "target": "com.amazonaws.connect#RulesExtractionDefinitionIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of extraction definition identifiers that specify what data to extract.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the extract information action, which references extraction definitions\n   to use when extracting structured data from customer interactions.</p>"
+            }
+        },
+        "com.amazonaws.connect#ExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "PromptHint": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionPromptHint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prompt hint that guides the extraction. This text tells the generative AI model what\n   data to look for in the customer interaction.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotFoundBehavior": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionNotFoundBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The behavior when the extraction cannot find the specified data in the interaction.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The extraction configuration that defines how data is extracted from customer\n   interactions.</p>"
+            }
+        },
+        "com.amazonaws.connect#ExtractionDefinition": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionId": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionConfiguration": {
+                    "target": "com.amazonaws.connect#ExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that defines how data is extracted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Display": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionDisplay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display settings for the extraction definition.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the extraction definition was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the extraction definition was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an extraction definition.</p>"
+            }
+        },
+        "com.amazonaws.connect#ExtractionDefinitionDisplay": {
+            "type": "structure",
+            "members": {
+                "Label": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionDisplayLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label displayed in the agent workspace for this extraction definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The display configuration for an extraction definition.</p>"
+            }
+        },
+        "com.amazonaws.connect#ExtractionDefinitionDisplayLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connect#ExtractionDefinitionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#ExtractionDefinitionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#ExtractionDefinitionNotFoundBehavior": {
+            "type": "structure",
+            "members": {
+                "Behavior": {
+                    "target": "com.amazonaws.connect#NotFoundBehaviorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The behavior type. <code>USE_DEFAULT_VALUE</code> returns the specified default value.\n   <code>OMIT</code> excludes the field from the output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.connect#NotFoundDefaultValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value to use when the behavior is <code>USE_DEFAULT_VALUE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The behavior configuration when an extraction definition cannot find the target value.</p>"
+            }
+        },
+        "com.amazonaws.connect#ExtractionDefinitionPromptHint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.connect#ExtractionDefinitionSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionId": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the extraction definition was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the extraction definition was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an extraction definition.</p>"
+            }
+        },
+        "com.amazonaws.connect#ExtractionDefinitionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ExtractionDefinitionSummary"
             }
         },
         "com.amazonaws.connect#FailedBatchAssociationSummary": {
@@ -35852,6 +36367,97 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#ListExtractionDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListExtractionDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListExtractionDefinitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists extraction definitions in the specified Connect Customer instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/extraction-definitions/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ExtractionDefinitionSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListExtractionDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. The default MaxResult size is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n   the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListExtractionDefinitionsResponse": {
+            "type": "structure",
+            "members": {
+                "ExtractionDefinitionSummaryList": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the extraction definitions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#ListFlowAssociationResourceType": {
             "type": "enum",
             "members": {
@@ -42133,6 +42739,32 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2500
+                }
+            }
+        },
+        "com.amazonaws.connect#NotFoundBehaviorType": {
+            "type": "enum",
+            "members": {
+                "USE_DEFAULT_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USE_DEFAULT_VALUE"
+                    }
+                },
+                "OMIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OMIT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#NotFoundDefaultValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
                 }
             }
         },
@@ -50178,6 +50810,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the submit automated evaluation action.</p>"
                     }
+                },
+                "ExtractInformationAction": {
+                    "target": "com.amazonaws.connect#ExtractInformationActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the extract information action.</p>"
+                    }
                 }
             },
             "traits": {
@@ -50487,6 +51125,36 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The rules configuration for conversational analytics. Controls whether Contact Lens rules are evaluated against\n   the analytics output.</p>"
+            }
+        },
+        "com.amazonaws.connect#RulesExtractionDefinitionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#RulesExtractionDefinitionIdentifier": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.connect#RulesExtractionDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An identifier that references an extraction definition resource.</p>"
+            }
+        },
+        "com.amazonaws.connect#RulesExtractionDefinitionIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RulesExtractionDefinitionIdentifier"
             }
         },
         "com.amazonaws.connect#RulesSearchConditionList": {
@@ -55275,10 +55943,13 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a chat contact with an AI agent.</p>\n         <p>Use the returned <code>ParticipantToken</code> to call the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API.</p>\n         <p>For more information about chat, see the following topics in the <i>Connect Customer\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Starts a chat contact with an AI agent.</p>\n         <p>Use the returned <code>ParticipantToken</code> with the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> operation.</p>\n         <p>For more information about chat, see the following topics in the <i>Connect Customer\n   Administrator Guide</i>: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html\">Concepts: Web and mobile messaging capabilities in Connect Customer</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/assistant",
@@ -55299,7 +55970,7 @@
                 "AiAgent": {
                     "target": "com.amazonaws.connect#AiAgentInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AI agent that participates in the contact.</p>",
+                        "smithy.api#documentation": "<p>The AI agent configuration for this contact.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -55319,7 +55990,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.connect#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key-value pairs to associate with the contact. Amazon Connect makes these attributes available to\n   flows as standard contact attributes.</p>\n         <p>You can provide up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can contain only\n   alphanumeric characters, dashes, and underscores.</p>"
+                        "smithy.api#documentation": "<p>A map of key-value pairs to associate with the contact. We make these attributes available to\n   flows as standard contact attributes.</p>\n         <p>You can provide up to 32,768 UTF-8 bytes across all key-value pairs for each contact.</p>"
                     }
                 },
                 "ClientToken": {
@@ -55364,13 +56035,13 @@
                 "ParticipantToken": {
                     "target": "com.amazonaws.connect#ParticipantToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token that the chat participant uses to call the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API. The token remains valid for the lifetime of the chat participant.</p>"
+                        "smithy.api#documentation": "<p>The token that the chat participant uses with the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> operation. The token remains valid for the lifetime of the chat participant.</p>"
                     }
                 },
                 "ContinuedFromContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>For a persistent chat, the identifier of the contact from which the chat continues. Amazon Connect returns this\n   field only for persistent chats.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the contact from which the chat continues, returned only for persistent chats.</p>"
                     }
                 }
             },
@@ -57213,7 +57884,7 @@
                 "SegmentAttributes": {
                     "target": "com.amazonaws.connect#SegmentAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this map to specify system-defined attributes for the WebRTC contact segment. Use the\n   <code>connect:Subtype</code> attribute to specify the channel subtype, such as <code>connect:WebRTC</code>.</p>\n         <p>Attribute keys can contain only alphanumeric characters, hyphens, and underscores.</p>"
+                        "smithy.api#documentation": "<p>A map of system-defined attributes for the WebRTC contact segment. Use the\n   <code>connect:Subtype</code> attribute to specify the channel subtype, such as <code>connect:WebRTC</code>.</p>"
                     }
                 }
             },
@@ -62169,6 +62840,101 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateExtractionDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateExtractionDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateExtractionDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an extraction definition in the specified Connect Customer instance.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/extraction-definitions/{InstanceId}/{ExtractionDefinitionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateExtractionDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n   request. If not provided, the Amazon Web Services SDK populates this field.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ExtractionDefinitionId": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the extraction definition to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extraction definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionConfiguration": {
+                    "target": "com.amazonaws.connect#ExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that defines how data is extracted, including the prompt hint and\n   not-found behavior.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Display": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionDisplay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display settings for the extraction definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdateExtractionDefinitionResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
