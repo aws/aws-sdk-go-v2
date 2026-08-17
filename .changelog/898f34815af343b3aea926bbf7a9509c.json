@@ -1,8 +1,0 @@
-{
-    "id": "898f3481-5af3-43b3-aea9-26bbf7a9509c",
-    "type": "feature",
-    "description": "Add new Transfer Responsibility error codes and document related CloudTrail events for accepting and terminating a Transfer Responsibility.",
-    "modules": [
-        "service/organizations"
-    ]
-}

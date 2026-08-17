@@ -1,3 +1,7 @@
+# v1.14.0 (2026-08-17)
+
+* **Feature**: Amazon Location Service now supports POI density and category filtering on dynamic maps. The GetStyleDescriptor API adds two optional parameters. PoiDensity (Off to VeryDense) controls POI volume, and PoiCategories filters by up to nine categories. Available on HERE and Grab map styles.
+
 # v1.13.6 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

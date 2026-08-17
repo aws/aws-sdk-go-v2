@@ -1,3 +1,7 @@
+# v1.57.0 (2026-08-17)
+
+* **Feature**: Adds implementations of third-party evaluators, both managed-as-a-service and as templates within custom evaluators.
+
 # v1.56.0 (2026-08-14)
 
 * **Feature**: Adds AgentCore Payments support for CMK, Marketplace Subscriptions and QuickCreate

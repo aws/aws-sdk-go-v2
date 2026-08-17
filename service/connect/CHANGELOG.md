@@ -1,3 +1,7 @@
+# v1.189.0 (2026-08-17)
+
+* **Feature**: This release adds new APIs to create, describe, update, delete, and list extraction definitions, enabling customers to manage lifecycle of extraction definition resources. Additionally, this release adds new event sources for Rules related to ACW and new action to Extract Information.
+
 # v1.188.1 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

@@ -1,8 +1,0 @@
-{
-    "id": "941fc2ef-8b25-4930-9291-98160b090f11",
-    "type": "feature",
-    "description": "AgenticRetrieveStream API now supports Amazon Bedrock AgentCore Memory. Use the new memoryConfiguration parameter to continue a session from short-term memory and retrieve from long-term memory.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

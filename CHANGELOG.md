@@ -1,3 +1,19 @@
+# Release (2026-08-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.57.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1570-2026-08-17)
+  * **Feature**: Adds implementations of third-party evaluators, both managed-as-a-service and as templates within custom evaluators.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.58.0](service/bedrockagentruntime/CHANGELOG.md#v1580-2026-08-17)
+  * **Feature**: AgenticRetrieveStream API now supports Amazon Bedrock AgentCore Memory. Use the new memoryConfiguration parameter to continue a session from short-term memory and retrieve from long-term memory.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.189.0](service/connect/CHANGELOG.md#v11890-2026-08-17)
+  * **Feature**: This release adds new APIs to create, describe, update, delete, and list extraction definitions, enabling customers to manage lifecycle of extraction definition resources. Additionally, this release adds new event sources for Rules related to ACW and new action to Extract Information.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.43.0](service/drs/CHANGELOG.md#v1430-2026-08-17)
+  * **Feature**: AWS Elastic Disaster Recovery (AWS DRS) now offers Recovery Plans to recover multi-server applications in the right order in one action. Define the launch sequence once, with ordered steps and wait times, and DRS runs it automatically. Validate with non-disruptive drills and monitor in real time.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.14.0](service/geomaps/CHANGELOG.md#v1140-2026-08-17)
+  * **Feature**: Amazon Location Service now supports POI density and category filtering on dynamic maps. The GetStyleDescriptor API adds two optional parameters. PoiDensity (Off to VeryDense) controls POI volume, and PoiCategories filters by up to nine categories. Available on HERE and Grab map styles.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.54.0](service/organizations/CHANGELOG.md#v1540-2026-08-17)
+  * **Feature**: Add new Transfer Responsibility error codes and document related CloudTrail events for accepting and terminating a Transfer Responsibility.
+
 # Release (2026-08-14)
 
 ## General Highlights

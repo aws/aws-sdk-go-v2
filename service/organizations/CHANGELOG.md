@@ -1,3 +1,7 @@
+# v1.54.0 (2026-08-17)
+
+* **Feature**: Add new Transfer Responsibility error codes and document related CloudTrail events for accepting and terminating a Transfer Responsibility.
+
 # v1.53.8 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.
