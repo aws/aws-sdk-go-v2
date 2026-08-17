@@ -453,13 +453,30 @@ var _AgentCollaboratorPayloadString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AgentCollaboratorPayloadString",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var _AgentCoreMemoryActorId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgentCoreMemoryActorId",
+}, smithy.ShapeTypeString, 0)
+
+var _AgentCoreMemoryId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgentCoreMemoryId",
+}, smithy.ShapeTypeString, 0)
+
+var _AgentCoreMemorySessionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgentCoreMemorySessionId",
+}, smithy.ShapeTypeString, 0)
+
 var AgenticRetrieveAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveAction",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var AgenticRetrieveAction_retrieve *smithy.Schema
 
 var AgenticRetrieveAction_fullDocumentExpansion *smithy.Schema
+
+var AgenticRetrieveAction_memoryRetrieve *smithy.Schema
 
 var AgenticRetrieveActionDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -576,6 +593,151 @@ var AgenticRetrieveGuardrailWarning_version *smithy.Schema
 var AgenticRetrieveGuardrailWarning_action *smithy.Schema
 
 var AgenticRetrieveGuardrailWarning_message *smithy.Schema
+
+var AgenticRetrieveMemoryConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var AgenticRetrieveMemoryConfiguration_memoryId *smithy.Schema
+
+var AgenticRetrieveMemoryConfiguration_sessionBinding *smithy.Schema
+
+var AgenticRetrieveMemoryConfiguration_retrievalConfigs *smithy.Schema
+
+var AgenticRetrieveMemoryConfiguration_persistenceMode *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataFilter",
+}, smithy.ShapeTypeStructure, 3)
+var AgenticRetrieveMemoryMetadataFilter_left *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilter_operator *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilter_right *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterLeft = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataFilterLeft",
+}, smithy.ShapeTypeUnion, 1)
+var AgenticRetrieveMemoryMetadataFilterLeft_metadataKey *smithy.Schema
+
+var _AgenticRetrieveMemoryMetadataFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataFilterList",
+}, smithy.ShapeTypeList, 1)
+var _AgenticRetrieveMemoryMetadataFilterList_member *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataFilterOperator",
+}, smithy.ShapeTypeEnum, 10)
+var AgenticRetrieveMemoryMetadataFilterOperator_EQUALS_TO *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator_EXISTS *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator_NOT_EXISTS *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator_BEFORE *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator_AFTER *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator_CONTAINS *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator_GREATER_THAN *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator_GREATER_THAN_OR_EQUALS *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator_LESS_THAN *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterOperator_LESS_THAN_OR_EQUALS *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataFilterRight = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataFilterRight",
+}, smithy.ShapeTypeUnion, 1)
+var AgenticRetrieveMemoryMetadataFilterRight_metadataValue *smithy.Schema
+
+var _AgenticRetrieveMemoryMetadataKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataKey",
+}, smithy.ShapeTypeString, 0)
+
+var _AgenticRetrieveMemoryMetadataStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataStringList",
+}, smithy.ShapeTypeList, 1)
+var _AgenticRetrieveMemoryMetadataStringList_member *smithy.Schema
+
+var _AgenticRetrieveMemoryMetadataStringListItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataStringListItem",
+}, smithy.ShapeTypeString, 0)
+
+var _AgenticRetrieveMemoryMetadataStringValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataStringValue",
+}, smithy.ShapeTypeString, 0)
+
+var AgenticRetrieveMemoryMetadataValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryMetadataValue",
+}, smithy.ShapeTypeUnion, 4)
+var AgenticRetrieveMemoryMetadataValue_stringValue *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataValue_numberValue *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataValue_stringListValue *smithy.Schema
+
+var AgenticRetrieveMemoryMetadataValue_dateTimeValue *smithy.Schema
+
+var AgenticRetrieveMemoryPersistenceMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryPersistenceMode",
+}, smithy.ShapeTypeEnum, 2)
+var AgenticRetrieveMemoryPersistenceMode_DEFAULT *smithy.Schema
+
+var AgenticRetrieveMemoryPersistenceMode_NONE *smithy.Schema
+
+var AgenticRetrieveMemoryRetrievalConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryRetrievalConfig",
+}, smithy.ShapeTypeStructure, 4)
+var AgenticRetrieveMemoryRetrievalConfig_namespace *smithy.Schema
+
+var AgenticRetrieveMemoryRetrievalConfig_namespacePath *smithy.Schema
+
+var AgenticRetrieveMemoryRetrievalConfig_strategyId *smithy.Schema
+
+var AgenticRetrieveMemoryRetrievalConfig_metadataFilters *smithy.Schema
+
+var _AgenticRetrieveMemoryRetrievalConfigList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryRetrievalConfigList",
+}, smithy.ShapeTypeList, 1)
+var _AgenticRetrieveMemoryRetrievalConfigList_member *smithy.Schema
+
+var AgenticRetrieveMemoryRetrieveDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemoryRetrieveDetails",
+}, smithy.ShapeTypeStructure, 5)
+var AgenticRetrieveMemoryRetrieveDetails_inputQuery *smithy.Schema
+
+var AgenticRetrieveMemoryRetrieveDetails_memoryId *smithy.Schema
+
+var AgenticRetrieveMemoryRetrieveDetails_namespace *smithy.Schema
+
+var AgenticRetrieveMemoryRetrieveDetails_namespacePath *smithy.Schema
+
+var AgenticRetrieveMemoryRetrieveDetails_strategyId *smithy.Schema
+
+var AgenticRetrieveMemorySessionBinding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveMemorySessionBinding",
+}, smithy.ShapeTypeStructure, 2)
+var AgenticRetrieveMemorySessionBinding_actorId *smithy.Schema
+
+var AgenticRetrieveMemorySessionBinding_sessionId *smithy.Schema
 
 var AgenticRetrieveMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -720,7 +882,7 @@ var AgenticRetrieveStatus_FAILED *smithy.Schema
 var AgenticRetrieveStep = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveStep",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var AgenticRetrieveStep_PLANNING *smithy.Schema
 
 var AgenticRetrieveStep_RETRIEVAL *smithy.Schema
@@ -728,6 +890,8 @@ var AgenticRetrieveStep_RETRIEVAL *smithy.Schema
 var AgenticRetrieveStep_SPECULATIVE_RETRIEVAL *smithy.Schema
 
 var AgenticRetrieveStep_FULL_DOCUMENT_EXPANSION *smithy.Schema
+
+var AgenticRetrieveStep_SESSION_HISTORY_LOAD *smithy.Schema
 
 var AgenticRetrieveStreamResponseOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -806,8 +970,10 @@ var _AgenticRetrieveTraceResults_member *smithy.Schema
 var AgenticRetrieveType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var AgenticRetrieveType_BEDROCK_KNOWLEDGE_BASE *smithy.Schema
+
+var AgenticRetrieveType_BEDROCK_AGENT_CORE_MEMORY *smithy.Schema
 
 var AgenticRetrieveWarning = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -3154,6 +3320,11 @@ var _MemoryId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MemoryId",
 }, smithy.ShapeTypeString, 0)
 
+var _MemoryNamespace = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MemoryNamespace",
+}, smithy.ShapeTypeString, 0)
+
 var MemorySessionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "MemorySessionSummary",
@@ -3167,6 +3338,11 @@ var MemorySessionSummary_sessionStartTime *smithy.Schema
 var MemorySessionSummary_sessionExpiryTime *smithy.Schema
 
 var MemorySessionSummary_summaryText *smithy.Schema
+
+var _MemoryStrategyId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MemoryStrategyId",
+}, smithy.ShapeTypeString, 0)
 
 var MemoryType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -4981,7 +5157,7 @@ var VideoSegment_summary *smithy.Schema
 var AgenticRetrieveStreamRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveStreamRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var AgenticRetrieveStreamRequest_messages *smithy.Schema
 
 var AgenticRetrieveStreamRequest_retrievers *smithy.Schema
@@ -4993,6 +5169,8 @@ var AgenticRetrieveStreamRequest_policyConfiguration *smithy.Schema
 var AgenticRetrieveStreamRequest_nextToken *smithy.Schema
 
 var AgenticRetrieveStreamRequest_userContext *smithy.Schema
+
+var AgenticRetrieveStreamRequest_memoryConfiguration *smithy.Schema
 
 var AgenticRetrieveStreamRequest_generateResponse *smithy.Schema
 
@@ -6059,9 +6237,21 @@ func init() {
 
 	AgenticRetrieveFullDocExpansionDetails_sourceRetriever = AgenticRetrieveFullDocExpansionDetails.AddMember("sourceRetriever", AgenticRetrieveSourceRetriever)
 
+	AgenticRetrieveMemoryRetrieveDetails_inputQuery = AgenticRetrieveMemoryRetrieveDetails.AddMember("inputQuery", AgenticRetrieveMessageContent)
+
+	AgenticRetrieveMemoryRetrieveDetails_memoryId = AgenticRetrieveMemoryRetrieveDetails.AddMember("memoryId", smithyprelude.String)
+
+	AgenticRetrieveMemoryRetrieveDetails_namespace = AgenticRetrieveMemoryRetrieveDetails.AddMember("namespace", smithyprelude.String)
+
+	AgenticRetrieveMemoryRetrieveDetails_namespacePath = AgenticRetrieveMemoryRetrieveDetails.AddMember("namespacePath", smithyprelude.String)
+
+	AgenticRetrieveMemoryRetrieveDetails_strategyId = AgenticRetrieveMemoryRetrieveDetails.AddMember("strategyId", smithyprelude.String)
+
 	AgenticRetrieveAction_retrieve = AgenticRetrieveAction.AddMember("retrieve", AgenticRetrieveActionDetails)
 
 	AgenticRetrieveAction_fullDocumentExpansion = AgenticRetrieveAction.AddMember("fullDocumentExpansion", AgenticRetrieveFullDocExpansionDetails)
+
+	AgenticRetrieveAction_memoryRetrieve = AgenticRetrieveAction.AddMember("memoryRetrieve", AgenticRetrieveMemoryRetrieveDetails)
 
 	_AgenticRetrieveActions_member = _AgenticRetrieveActions.AddMember("member", AgenticRetrieveAction)
 
@@ -6140,6 +6330,74 @@ func init() {
 	AgenticRetrieveGuardrailWarning_action = AgenticRetrieveGuardrailWarning.AddMember("action", GuardrailAction)
 
 	AgenticRetrieveGuardrailWarning_message = AgenticRetrieveGuardrailWarning.AddMember("message", smithyprelude.String)
+
+	AgenticRetrieveMemorySessionBinding_actorId = AgenticRetrieveMemorySessionBinding.AddMember("actorId", _AgentCoreMemoryActorId)
+
+	AgenticRetrieveMemorySessionBinding_sessionId = AgenticRetrieveMemorySessionBinding.AddMember("sessionId", _AgentCoreMemorySessionId)
+
+	AgenticRetrieveMemoryMetadataFilterLeft_metadataKey = AgenticRetrieveMemoryMetadataFilterLeft.AddMember("metadataKey", _AgenticRetrieveMemoryMetadataKey)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_EQUALS_TO = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("EQUALS_TO", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_EXISTS = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("EXISTS", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_NOT_EXISTS = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("NOT_EXISTS", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_BEFORE = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("BEFORE", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_AFTER = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("AFTER", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_CONTAINS = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("CONTAINS", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_GREATER_THAN = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_GREATER_THAN_OR_EQUALS = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("GREATER_THAN_OR_EQUALS", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_LESS_THAN = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("LESS_THAN", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryMetadataFilterOperator_LESS_THAN_OR_EQUALS = AgenticRetrieveMemoryMetadataFilterOperator.AddMember("LESS_THAN_OR_EQUALS", smithyprelude.Unit)
+
+	_AgenticRetrieveMemoryMetadataStringList_member = _AgenticRetrieveMemoryMetadataStringList.AddMember("member", _AgenticRetrieveMemoryMetadataStringListItem)
+
+	AgenticRetrieveMemoryMetadataValue_stringValue = AgenticRetrieveMemoryMetadataValue.AddMember("stringValue", _AgenticRetrieveMemoryMetadataStringValue)
+
+	AgenticRetrieveMemoryMetadataValue_numberValue = AgenticRetrieveMemoryMetadataValue.AddMember("numberValue", smithyprelude.Double)
+
+	AgenticRetrieveMemoryMetadataValue_stringListValue = AgenticRetrieveMemoryMetadataValue.AddMember("stringListValue", _AgenticRetrieveMemoryMetadataStringList)
+
+	AgenticRetrieveMemoryMetadataValue_dateTimeValue = AgenticRetrieveMemoryMetadataValue.AddMember("dateTimeValue", smithyprelude.Timestamp)
+
+	AgenticRetrieveMemoryMetadataFilterRight_metadataValue = AgenticRetrieveMemoryMetadataFilterRight.AddMember("metadataValue", AgenticRetrieveMemoryMetadataValue)
+
+	AgenticRetrieveMemoryMetadataFilter_left = AgenticRetrieveMemoryMetadataFilter.AddMember("left", AgenticRetrieveMemoryMetadataFilterLeft)
+
+	AgenticRetrieveMemoryMetadataFilter_operator = AgenticRetrieveMemoryMetadataFilter.AddMember("operator", AgenticRetrieveMemoryMetadataFilterOperator)
+
+	AgenticRetrieveMemoryMetadataFilter_right = AgenticRetrieveMemoryMetadataFilter.AddMember("right", AgenticRetrieveMemoryMetadataFilterRight)
+
+	_AgenticRetrieveMemoryMetadataFilterList_member = _AgenticRetrieveMemoryMetadataFilterList.AddMember("member", AgenticRetrieveMemoryMetadataFilter)
+
+	AgenticRetrieveMemoryRetrievalConfig_namespace = AgenticRetrieveMemoryRetrievalConfig.AddMember("namespace", _MemoryNamespace)
+
+	AgenticRetrieveMemoryRetrievalConfig_namespacePath = AgenticRetrieveMemoryRetrievalConfig.AddMember("namespacePath", _MemoryNamespace)
+
+	AgenticRetrieveMemoryRetrievalConfig_strategyId = AgenticRetrieveMemoryRetrievalConfig.AddMember("strategyId", _MemoryStrategyId)
+
+	AgenticRetrieveMemoryRetrievalConfig_metadataFilters = AgenticRetrieveMemoryRetrievalConfig.AddMember("metadataFilters", _AgenticRetrieveMemoryMetadataFilterList)
+
+	_AgenticRetrieveMemoryRetrievalConfigList_member = _AgenticRetrieveMemoryRetrievalConfigList.AddMember("member", AgenticRetrieveMemoryRetrievalConfig)
+
+	AgenticRetrieveMemoryPersistenceMode_DEFAULT = AgenticRetrieveMemoryPersistenceMode.AddMember("DEFAULT", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryPersistenceMode_NONE = AgenticRetrieveMemoryPersistenceMode.AddMember("NONE", smithyprelude.Unit)
+
+	AgenticRetrieveMemoryConfiguration_memoryId = AgenticRetrieveMemoryConfiguration.AddMember("memoryId", _AgentCoreMemoryId)
+
+	AgenticRetrieveMemoryConfiguration_sessionBinding = AgenticRetrieveMemoryConfiguration.AddMember("sessionBinding", AgenticRetrieveMemorySessionBinding)
+
+	AgenticRetrieveMemoryConfiguration_retrievalConfigs = AgenticRetrieveMemoryConfiguration.AddMember("retrievalConfigs", _AgenticRetrieveMemoryRetrievalConfigList)
+
+	AgenticRetrieveMemoryConfiguration_persistenceMode = AgenticRetrieveMemoryConfiguration.AddMember("persistenceMode", AgenticRetrieveMemoryPersistenceMode)
 
 	ConversationRole_USER = ConversationRole.AddMember("USER", smithyprelude.Unit)
 
@@ -6229,6 +6487,8 @@ func init() {
 
 	AgenticRetrieveType_BEDROCK_KNOWLEDGE_BASE = AgenticRetrieveType.AddMember("BEDROCK_KNOWLEDGE_BASE", smithyprelude.Unit)
 
+	AgenticRetrieveType_BEDROCK_AGENT_CORE_MEMORY = AgenticRetrieveType.AddMember("BEDROCK_AGENT_CORE_MEMORY", smithyprelude.Unit)
+
 	AgenticRetrieveSourceMetadata_identifier = AgenticRetrieveSourceMetadata.AddMember("identifier", smithyprelude.String)
 
 	AgenticRetrieveSourceMetadata_retrievalType = AgenticRetrieveSourceMetadata.AddMember("retrievalType", AgenticRetrieveType)
@@ -6248,6 +6508,8 @@ func init() {
 	AgenticRetrieveStep_SPECULATIVE_RETRIEVAL = AgenticRetrieveStep.AddMember("SPECULATIVE_RETRIEVAL", smithyprelude.Unit)
 
 	AgenticRetrieveStep_FULL_DOCUMENT_EXPANSION = AgenticRetrieveStep.AddMember("FULL_DOCUMENT_EXPANSION", smithyprelude.Unit)
+
+	AgenticRetrieveStep_SESSION_HISTORY_LOAD = AgenticRetrieveStep.AddMember("SESSION_HISTORY_LOAD", smithyprelude.Unit)
 
 	AgenticRetrieveWarningMessage_message = AgenticRetrieveWarningMessage.AddMember("message", smithyprelude.String)
 
@@ -8118,6 +8380,8 @@ func init() {
 	AgenticRetrieveStreamRequest_nextToken = AgenticRetrieveStreamRequest.AddMember("nextToken", _NextToken)
 
 	AgenticRetrieveStreamRequest_userContext = AgenticRetrieveStreamRequest.AddMember("userContext", UserContext)
+
+	AgenticRetrieveStreamRequest_memoryConfiguration = AgenticRetrieveStreamRequest.AddMember("memoryConfiguration", AgenticRetrieveMemoryConfiguration)
 
 	AgenticRetrieveStreamRequest_generateResponse = AgenticRetrieveStreamRequest.AddMember("generateResponse", smithyprelude.Boolean)
 

@@ -1,0 +1,5 @@
+POST /UpdateRecoveryPlanStep
+
+Content-Type: application/json
+
+{"configuration":{"serverStepConfiguration":{"servers":[{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"},{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"}]}},"recoveryPlanStepArn":"__RecoveryPlanStepArn__","stepName":"__StepName__"}

@@ -1,0 +1,5 @@
+POST /DeleteRecoveryPlanStep
+
+Content-Type: application/json
+
+{"recoveryPlanStepArn":"__RecoveryPlanStepArn__"}

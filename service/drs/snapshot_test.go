@@ -74,6 +74,18 @@ func TestCheckSnapshot_AssociateSourceNetworkStack(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelRecoveryPlanExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelRecoveryPlanExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelRecoveryPlanExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateExtendedSourceServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateExtendedSourceServer(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,30 @@ func TestCheckSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 	_, err := svc.CreateLaunchConfigurationTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateLaunchConfigurationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRecoveryPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRecoveryPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRecoveryPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRecoveryPlanStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRecoveryPlanStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRecoveryPlanStep")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -163,6 +199,42 @@ func TestCheckSnapshot_DeleteRecoveryInstance(t *testing.T) {
 	_, err := svc.DeleteRecoveryInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRecoveryInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRecoveryPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRecoveryPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRecoveryPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRecoveryPlanExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRecoveryPlanExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRecoveryPlanExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRecoveryPlanStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRecoveryPlanStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRecoveryPlanStep")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,6 +434,54 @@ func TestCheckSnapshot_GetLaunchConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetRecoveryPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRecoveryPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRecoveryPlanExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPlanExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRecoveryPlanExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRecoveryPlanExecutionStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPlanExecutionStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRecoveryPlanExecutionStep")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRecoveryPlanStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPlanStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRecoveryPlanStep")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetReplicationConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetReplicationConfiguration(context.Background(), nil, func(o *Options) {
@@ -410,6 +530,54 @@ func TestCheckSnapshot_ListLaunchActions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListRecoveryPlanExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecoveryPlanExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRecoveryPlanExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRecoveryPlanExecutionSteps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecoveryPlanExecutionSteps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRecoveryPlanExecutionSteps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRecoveryPlans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecoveryPlans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRecoveryPlans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRecoveryPlanSteps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecoveryPlanSteps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRecoveryPlanSteps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListStagingAccounts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListStagingAccounts(context.Background(), nil, func(o *Options) {
@@ -446,11 +614,35 @@ func TestCheckSnapshot_PutLaunchAction(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ReorderRecoveryPlanSteps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReorderRecoveryPlanSteps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ReorderRecoveryPlanSteps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RetryDataReplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RetryDataReplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RetryDataReplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RetryRecoveryPlanExecutionStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RetryRecoveryPlanExecutionStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RetryRecoveryPlanExecutionStep")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -487,6 +679,18 @@ func TestCheckSnapshot_StartRecovery(t *testing.T) {
 	_, err := svc.StartRecovery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartRecoveryPlanExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRecoveryPlanExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartRecoveryPlanExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -638,6 +842,42 @@ func TestCheckSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateRecoveryPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecoveryPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRecoveryPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRecoveryPlanExecutionStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecoveryPlanExecutionStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRecoveryPlanExecutionStep")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRecoveryPlanStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecoveryPlanStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRecoveryPlanStep")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateReplicationConfiguration(context.Background(), nil, func(o *Options) {
@@ -673,6 +913,18 @@ func TestUpdateSnapshot_AssociateSourceNetworkStack(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelRecoveryPlanExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelRecoveryPlanExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelRecoveryPlanExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateExtendedSourceServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateExtendedSourceServer(context.Background(), nil, func(o *Options) {
@@ -690,6 +942,30 @@ func TestUpdateSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 	_, err := svc.CreateLaunchConfigurationTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateLaunchConfigurationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRecoveryPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRecoveryPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRecoveryPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRecoveryPlanStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRecoveryPlanStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRecoveryPlanStep")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -762,6 +1038,42 @@ func TestUpdateSnapshot_DeleteRecoveryInstance(t *testing.T) {
 	_, err := svc.DeleteRecoveryInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRecoveryInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRecoveryPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRecoveryPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRecoveryPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRecoveryPlanExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRecoveryPlanExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRecoveryPlanExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRecoveryPlanStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRecoveryPlanStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRecoveryPlanStep")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -961,6 +1273,54 @@ func TestUpdateSnapshot_GetLaunchConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetRecoveryPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRecoveryPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRecoveryPlanExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPlanExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRecoveryPlanExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRecoveryPlanExecutionStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPlanExecutionStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRecoveryPlanExecutionStep")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRecoveryPlanStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRecoveryPlanStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRecoveryPlanStep")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetReplicationConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetReplicationConfiguration(context.Background(), nil, func(o *Options) {
@@ -1009,6 +1369,54 @@ func TestUpdateSnapshot_ListLaunchActions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListRecoveryPlanExecutions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecoveryPlanExecutions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRecoveryPlanExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRecoveryPlanExecutionSteps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecoveryPlanExecutionSteps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRecoveryPlanExecutionSteps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRecoveryPlans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecoveryPlans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRecoveryPlans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRecoveryPlanSteps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRecoveryPlanSteps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRecoveryPlanSteps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListStagingAccounts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListStagingAccounts(context.Background(), nil, func(o *Options) {
@@ -1045,11 +1453,35 @@ func TestUpdateSnapshot_PutLaunchAction(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ReorderRecoveryPlanSteps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReorderRecoveryPlanSteps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ReorderRecoveryPlanSteps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RetryDataReplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RetryDataReplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RetryDataReplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RetryRecoveryPlanExecutionStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RetryRecoveryPlanExecutionStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RetryRecoveryPlanExecutionStep")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1086,6 +1518,18 @@ func TestUpdateSnapshot_StartRecovery(t *testing.T) {
 	_, err := svc.StartRecovery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartRecoveryPlanExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRecoveryPlanExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartRecoveryPlanExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1230,6 +1674,42 @@ func TestUpdateSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 	_, err := svc.UpdateLaunchConfigurationTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLaunchConfigurationTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRecoveryPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecoveryPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRecoveryPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRecoveryPlanExecutionStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecoveryPlanExecutionStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRecoveryPlanExecutionStep")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRecoveryPlanStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecoveryPlanStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRecoveryPlanStep")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -23,6 +23,45 @@ func serializeActionGroupExecutor(s smithy.ShapeSerializer, schema *smithy.Schem
 	}
 }
 
+func serializeAgenticRetrieveMemoryMetadataFilterLeft(s smithy.ShapeSerializer, schema *smithy.Schema, v AgenticRetrieveMemoryMetadataFilterLeft) {
+	switch vv := v.(type) {
+	case *AgenticRetrieveMemoryMetadataFilterLeftMemberMetadataKey:
+		s.WriteUnion(schema, schemas.AgenticRetrieveMemoryMetadataFilterLeft_metadataKey)
+		s.WriteString(schemas.AgenticRetrieveMemoryMetadataFilterLeft_metadataKey, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeAgenticRetrieveMemoryMetadataFilterRight(s smithy.ShapeSerializer, schema *smithy.Schema, v AgenticRetrieveMemoryMetadataFilterRight) {
+	switch vv := v.(type) {
+	case *AgenticRetrieveMemoryMetadataFilterRightMemberMetadataValue:
+		s.WriteUnion(schema, schemas.AgenticRetrieveMemoryMetadataFilterRight_metadataValue)
+		serializeAgenticRetrieveMemoryMetadataValue(s, schemas.AgenticRetrieveMemoryMetadataFilterRight_metadataValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeAgenticRetrieveMemoryMetadataValue(s smithy.ShapeSerializer, schema *smithy.Schema, v AgenticRetrieveMemoryMetadataValue) {
+	switch vv := v.(type) {
+	case *AgenticRetrieveMemoryMetadataValueMemberDateTimeValue:
+		s.WriteUnion(schema, schemas.AgenticRetrieveMemoryMetadataValue_dateTimeValue)
+		s.WriteTime(schemas.AgenticRetrieveMemoryMetadataValue_dateTimeValue, vv.Value)
+		s.CloseUnion()
+	case *AgenticRetrieveMemoryMetadataValueMemberNumberValue:
+		s.WriteUnion(schema, schemas.AgenticRetrieveMemoryMetadataValue_numberValue)
+		s.WriteFloat64(schemas.AgenticRetrieveMemoryMetadataValue_numberValue, vv.Value)
+		s.CloseUnion()
+	case *AgenticRetrieveMemoryMetadataValueMemberStringListValue:
+		s.WriteUnion(schema, schemas.AgenticRetrieveMemoryMetadataValue_stringListValue)
+		serializeAgenticRetrieveMemoryMetadataStringList(s, schemas.AgenticRetrieveMemoryMetadataValue_stringListValue, vv.Value)
+		s.CloseUnion()
+	case *AgenticRetrieveMemoryMetadataValueMemberStringValue:
+		s.WriteUnion(schema, schemas.AgenticRetrieveMemoryMetadataValue_stringValue)
+		s.WriteString(schemas.AgenticRetrieveMemoryMetadataValue_stringValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
 func serializeAgenticRetrieveWarning(s smithy.ShapeSerializer, schema *smithy.Schema, v AgenticRetrieveWarning) {
 	switch vv := v.(type) {
 	case *AgenticRetrieveWarningMemberGuardrail:
@@ -645,6 +684,54 @@ func deserializeActionGroupExecutor(d smithy.ShapeDeserializer, s *smithy.Schema
 			return vv.Deserialize(d)
 		case schemas.ActionGroupExecutor_lambda:
 			vv := &ActionGroupExecutorMemberLambda{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAgenticRetrieveMemoryMetadataFilterLeft(d smithy.ShapeDeserializer, s *smithy.Schema, v *AgenticRetrieveMemoryMetadataFilterLeft) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AgenticRetrieveMemoryMetadataFilterLeft_metadataKey:
+			vv := &AgenticRetrieveMemoryMetadataFilterLeftMemberMetadataKey{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAgenticRetrieveMemoryMetadataFilterRight(d smithy.ShapeDeserializer, s *smithy.Schema, v *AgenticRetrieveMemoryMetadataFilterRight) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AgenticRetrieveMemoryMetadataFilterRight_metadataValue:
+			vv := &AgenticRetrieveMemoryMetadataFilterRightMemberMetadataValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAgenticRetrieveMemoryMetadataValue(d smithy.ShapeDeserializer, s *smithy.Schema, v *AgenticRetrieveMemoryMetadataValue) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AgenticRetrieveMemoryMetadataValue_dateTimeValue:
+			vv := &AgenticRetrieveMemoryMetadataValueMemberDateTimeValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgenticRetrieveMemoryMetadataValue_numberValue:
+			vv := &AgenticRetrieveMemoryMetadataValueMemberNumberValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgenticRetrieveMemoryMetadataValue_stringListValue:
+			vv := &AgenticRetrieveMemoryMetadataValueMemberStringListValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgenticRetrieveMemoryMetadataValue_stringValue:
+			vv := &AgenticRetrieveMemoryMetadataValueMemberStringValue{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -1313,6 +1400,43 @@ func serializeAgenticRetrieveCitationReferenceList(s smithy.ShapeSerializer, sch
 }
 
 func serializeAgenticRetrieveFailures(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgenticRetrieveFailure) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAgenticRetrieveMemoryMetadataFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgenticRetrieveMemoryMetadataFilter) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAgenticRetrieveMemoryMetadataStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAgenticRetrieveMemoryRetrievalConfigList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgenticRetrieveMemoryRetrievalConfig) {
 	if v == nil {
 		return
 	}
@@ -2304,6 +2428,45 @@ func deserializeAgenticRetrieveFailures(d smithy.ShapeDeserializer, s *smithy.Sc
 	var vv AgenticRetrieveFailure
 	return smithy.ReadList(d, s, func() error {
 		vv = AgenticRetrieveFailure{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgenticRetrieveMemoryMetadataFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgenticRetrieveMemoryMetadataFilter) error {
+	var vv AgenticRetrieveMemoryMetadataFilter
+	return smithy.ReadList(d, s, func() error {
+		vv = AgenticRetrieveMemoryMetadataFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgenticRetrieveMemoryMetadataStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgenticRetrieveMemoryRetrievalConfigList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgenticRetrieveMemoryRetrievalConfig) error {
+	var vv AgenticRetrieveMemoryRetrievalConfig
+	return smithy.ReadList(d, s, func() error {
+		vv = AgenticRetrieveMemoryRetrievalConfig{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

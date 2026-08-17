@@ -4867,6 +4867,28 @@ func validateDeleteMemoryStrategyInput(v *types.DeleteMemoryStrategyInput) error
 	}
 }
 
+func validateDerivedEvaluatorConfig(v *types.DerivedEvaluatorConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DerivedEvaluatorConfig"}
+	if v.BaseEvaluatorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseEvaluatorId"))
+	}
+	if v.ModelConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelConfig"))
+	} else if v.ModelConfig != nil {
+		if err := validateEvaluatorModelConfig(v.ModelConfig); err != nil {
+			invalidParams.AddNested("ModelConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEbsVolumeConfiguration(v *types.EbsVolumeConfiguration) error {
 	if v == nil {
 		return nil
@@ -5092,6 +5114,11 @@ func validateEvaluatorConfig(v types.EvaluatorConfig) error {
 	case *types.EvaluatorConfigMemberCodeBased:
 		if err := validateCodeBasedEvaluatorConfig(uv.Value); err != nil {
 			invalidParams.AddNested("[codeBased]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.EvaluatorConfigMemberDerived:
+		if err := validateDerivedEvaluatorConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[derived]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.EvaluatorConfigMemberLlmAsAJudge:

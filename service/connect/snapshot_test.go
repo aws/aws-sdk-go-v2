@@ -602,6 +602,18 @@ func TestCheckSnapshot_CreateEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateExtractionDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExtractionDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateExtractionDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateHoursOfOperation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateHoursOfOperation(context.Background(), nil, func(o *Options) {
@@ -1082,6 +1094,18 @@ func TestCheckSnapshot_DeleteEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteExtractionDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExtractionDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteExtractionDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteHoursOfOperation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteHoursOfOperation(context.Background(), nil, func(o *Options) {
@@ -1543,6 +1567,18 @@ func TestCheckSnapshot_DescribeEvaluationForm(t *testing.T) {
 	_, err := svc.DescribeEvaluationForm(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeEvaluationForm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeExtractionDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeExtractionDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeExtractionDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2551,6 +2587,18 @@ func TestCheckSnapshot_ListEvaluationFormVersions(t *testing.T) {
 	_, err := svc.ListEvaluationFormVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEvaluationFormVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListExtractionDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExtractionDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExtractionDefinitions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4154,6 +4202,18 @@ func TestCheckSnapshot_UpdateEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateExtractionDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExtractionDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateExtractionDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateHoursOfOperation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateHoursOfOperation(context.Background(), nil, func(o *Options) {
@@ -5257,6 +5317,18 @@ func TestUpdateSnapshot_CreateEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateExtractionDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExtractionDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateExtractionDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateHoursOfOperation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateHoursOfOperation(context.Background(), nil, func(o *Options) {
@@ -5737,6 +5809,18 @@ func TestUpdateSnapshot_DeleteEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteExtractionDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExtractionDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteExtractionDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteHoursOfOperation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteHoursOfOperation(context.Background(), nil, func(o *Options) {
@@ -6198,6 +6282,18 @@ func TestUpdateSnapshot_DescribeEvaluationForm(t *testing.T) {
 	_, err := svc.DescribeEvaluationForm(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeEvaluationForm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeExtractionDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeExtractionDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeExtractionDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7206,6 +7302,18 @@ func TestUpdateSnapshot_ListEvaluationFormVersions(t *testing.T) {
 	_, err := svc.ListEvaluationFormVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEvaluationFormVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListExtractionDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExtractionDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExtractionDefinitions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8802,6 +8910,18 @@ func TestUpdateSnapshot_UpdateEvaluationForm(t *testing.T) {
 	_, err := svc.UpdateEvaluationForm(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateEvaluationForm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateExtractionDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExtractionDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateExtractionDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

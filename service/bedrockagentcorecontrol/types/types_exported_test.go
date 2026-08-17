@@ -559,6 +559,9 @@ func ExampleEvaluatorConfig_outputUsage() {
 	case *types.EvaluatorConfigMemberCodeBased:
 		_ = v.Value // Value is types.CodeBasedEvaluatorConfig
 
+	case *types.EvaluatorConfigMemberDerived:
+		_ = v.Value // Value is types.DerivedEvaluatorConfig
+
 	case *types.EvaluatorConfigMemberLlmAsAJudge:
 		_ = v.Value // Value is types.LlmAsAJudgeEvaluatorConfig
 
@@ -571,6 +574,7 @@ func ExampleEvaluatorConfig_outputUsage() {
 	}
 }
 
+var _ *types.DerivedEvaluatorConfig
 var _ *types.LlmAsAJudgeEvaluatorConfig
 var _ types.CodeBasedEvaluatorConfig
 

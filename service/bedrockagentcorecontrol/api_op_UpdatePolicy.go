@@ -14,6 +14,15 @@ import (
 // the policy's identity. The updated policy is validated against the Cedar schema
 // before being applied. This is an asynchronous operation. Use the GetPolicy
 // operation to poll the status field to track completion.
+//
+// If the updated policy is a temporal policy, the policy engine invalidates all
+// active temporal sessions. If the update adds or removes temporal operators, the
+// policy engine also invalidates active temporal sessions. For more information
+// about temporal policy sessions, see [session-based temporal policies]. The policy engine returns an HTTP 409
+// ConflictException to in-flight sessions. To resume, you must start a new session
+// with a new session ID.
+//
+// [session-based temporal policies]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy-session-based-temporal.html
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyInput{}

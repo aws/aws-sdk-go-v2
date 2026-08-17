@@ -1,0 +1,5 @@
+POST /ListRecoveryPlanExecutionSteps
+
+Content-Type: application/json
+
+{"filter":{"status":"NOT_STARTED"},"maxResults":1,"nextToken":"__NextToken__","recoveryPlanExecutionArn":"__RecoveryPlanExecutionArn__"}

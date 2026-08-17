@@ -233,6 +233,33 @@ func TestCheckRequestSnapshot_AssociateSourceNetworkStack(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CancelRecoveryPlanExecution(t *testing.T) {
+	input := &CancelRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelRecoveryPlanExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelRecoveryPlanExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateExtendedSourceServer(t *testing.T) {
 	input := &CreateExtendedSourceServerInput{
 		SourceServerArn: ptr.String("__SourceServerArn__"),
@@ -299,6 +326,82 @@ func TestCheckRequestSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateLaunchConfigurationTemplate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateRecoveryPlan(t *testing.T) {
+	input := &CreateRecoveryPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateRecoveryPlan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRecoveryPlan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateRecoveryPlanStep(t *testing.T) {
+	input := &CreateRecoveryPlanStepInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		StepName:        ptr.String("__StepName__"),
+		StepOrder:       ptr.Int32(1),
+		Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+			Value: types.ServerStepConfiguration{
+				Servers: []types.RecoveryPlanServer{
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateRecoveryPlanStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRecoveryPlanStep"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -504,6 +607,87 @@ func TestCheckRequestSnapshot_DeleteRecoveryInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRecoveryInstance"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteRecoveryPlan(t *testing.T) {
+	input := &DeleteRecoveryPlanInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRecoveryPlan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRecoveryPlan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteRecoveryPlanExecution(t *testing.T) {
+	input := &DeleteRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRecoveryPlanExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRecoveryPlanExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteRecoveryPlanStep(t *testing.T) {
+	input := &DeleteRecoveryPlanStepInput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRecoveryPlanStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRecoveryPlanStep"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1000,6 +1184,114 @@ func TestCheckRequestSnapshot_GetLaunchConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetRecoveryPlan(t *testing.T) {
+	input := &GetRecoveryPlanInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRecoveryPlan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecoveryPlan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetRecoveryPlanExecution(t *testing.T) {
+	input := &GetRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRecoveryPlanExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecoveryPlanExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetRecoveryPlanExecutionStep(t *testing.T) {
+	input := &GetRecoveryPlanExecutionStepInput{
+		RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRecoveryPlanExecutionStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecoveryPlanExecutionStep"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetRecoveryPlanStep(t *testing.T) {
+	input := &GetRecoveryPlanStepInput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRecoveryPlanStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecoveryPlanStep"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetReplicationConfiguration(t *testing.T) {
 	input := &GetReplicationConfigurationInput{
 		SourceServerID: ptr.String("__SourceServerID__"),
@@ -1116,6 +1408,125 @@ func TestCheckRequestSnapshot_ListLaunchActions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListRecoveryPlanExecutions(t *testing.T) {
+	input := &ListRecoveryPlanExecutionsInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		Status:          types.RecoveryPlanExecutionStatus("CREATED"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecoveryPlanExecutions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecoveryPlanExecutions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListRecoveryPlanExecutionSteps(t *testing.T) {
+	input := &ListRecoveryPlanExecutionStepsInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+		Filter: &types.ListRecoveryPlanExecutionStepsFilter{
+			Status: types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecoveryPlanExecutionSteps(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecoveryPlanExecutionSteps"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListRecoveryPlans(t *testing.T) {
+	input := &ListRecoveryPlansInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecoveryPlans(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecoveryPlans"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListRecoveryPlanSteps(t *testing.T) {
+	input := &ListRecoveryPlanStepsInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecoveryPlanSteps(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecoveryPlanSteps"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListStagingAccounts(t *testing.T) {
 	input := &ListStagingAccountsInput{
 		MaxResults: ptr.Int32(1),
@@ -1213,6 +1624,37 @@ func TestCheckRequestSnapshot_PutLaunchAction(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ReorderRecoveryPlanSteps(t *testing.T) {
+	input := &ReorderRecoveryPlanStepsInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		OrderedStepArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ReorderRecoveryPlanSteps(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ReorderRecoveryPlanSteps"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_RetryDataReplication(t *testing.T) {
 	input := &RetryDataReplicationInput{
 		SourceServerID: ptr.String("__SourceServerID__"),
@@ -1236,6 +1678,33 @@ func TestCheckRequestSnapshot_RetryDataReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RetryDataReplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RetryRecoveryPlanExecutionStep(t *testing.T) {
+	input := &RetryRecoveryPlanExecutionStepInput{
+		RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RetryRecoveryPlanExecutionStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RetryRecoveryPlanExecutionStep"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1336,6 +1805,48 @@ func TestCheckRequestSnapshot_StartRecovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartRecovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartRecoveryPlanExecution(t *testing.T) {
+	input := &StartRecoveryPlanExecutionInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		Mode:            types.RecoveryPlanExecutionMode("DRILL"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		SourceServers: []types.RecoveryPlanExecutionSourceServer{
+			{
+				SourceServerID:     ptr.String("__SourceServerID__"),
+				RecoverySnapshotID: ptr.String("__RecoverySnapshotID__"),
+			},
+			{
+				SourceServerID:     ptr.String("__SourceServerID__"),
+				RecoverySnapshotID: ptr.String("__RecoverySnapshotID__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartRecoveryPlanExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartRecoveryPlanExecution"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1715,6 +2226,116 @@ func TestCheckRequestSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateRecoveryPlan(t *testing.T) {
+	input := &UpdateRecoveryPlanInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRecoveryPlan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRecoveryPlan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateRecoveryPlanExecutionStep(t *testing.T) {
+	input := &UpdateRecoveryPlanExecutionStepInput{
+		RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+		Status:                       types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+		Servers: []types.RecoveryPlanServer{
+			{
+				ServerArn:   ptr.String("__ServerArn__"),
+				ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+			},
+			{
+				ServerArn:   ptr.String("__ServerArn__"),
+				ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+			},
+		},
+		WaitDurationMinutes: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRecoveryPlanExecutionStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRecoveryPlanExecutionStep"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateRecoveryPlanStep(t *testing.T) {
+	input := &UpdateRecoveryPlanStepInput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+		StepName:            ptr.String("__StepName__"),
+		Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+			Value: types.ServerStepConfiguration{
+				Servers: []types.RecoveryPlanServer{
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRecoveryPlanStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRecoveryPlanStep"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 	input := &UpdateReplicationConfigurationInput{
 		SourceServerID:                ptr.String("__SourceServerID__"),
@@ -1886,6 +2507,33 @@ func TestUpdateRequestSnapshot_AssociateSourceNetworkStack(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CancelRecoveryPlanExecution(t *testing.T) {
+	input := &CancelRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelRecoveryPlanExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelRecoveryPlanExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateExtendedSourceServer(t *testing.T) {
 	input := &CreateExtendedSourceServerInput{
 		SourceServerArn: ptr.String("__SourceServerArn__"),
@@ -1952,6 +2600,82 @@ func TestUpdateRequestSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateLaunchConfigurationTemplate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateRecoveryPlan(t *testing.T) {
+	input := &CreateRecoveryPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateRecoveryPlan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRecoveryPlan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateRecoveryPlanStep(t *testing.T) {
+	input := &CreateRecoveryPlanStepInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		StepName:        ptr.String("__StepName__"),
+		StepOrder:       ptr.Int32(1),
+		Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+			Value: types.ServerStepConfiguration{
+				Servers: []types.RecoveryPlanServer{
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateRecoveryPlanStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRecoveryPlanStep"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2157,6 +2881,87 @@ func TestUpdateRequestSnapshot_DeleteRecoveryInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRecoveryInstance"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteRecoveryPlan(t *testing.T) {
+	input := &DeleteRecoveryPlanInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRecoveryPlan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRecoveryPlan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteRecoveryPlanExecution(t *testing.T) {
+	input := &DeleteRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRecoveryPlanExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRecoveryPlanExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteRecoveryPlanStep(t *testing.T) {
+	input := &DeleteRecoveryPlanStepInput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRecoveryPlanStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRecoveryPlanStep"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2653,6 +3458,114 @@ func TestUpdateRequestSnapshot_GetLaunchConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetRecoveryPlan(t *testing.T) {
+	input := &GetRecoveryPlanInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRecoveryPlan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecoveryPlan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetRecoveryPlanExecution(t *testing.T) {
+	input := &GetRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRecoveryPlanExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecoveryPlanExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetRecoveryPlanExecutionStep(t *testing.T) {
+	input := &GetRecoveryPlanExecutionStepInput{
+		RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRecoveryPlanExecutionStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecoveryPlanExecutionStep"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetRecoveryPlanStep(t *testing.T) {
+	input := &GetRecoveryPlanStepInput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetRecoveryPlanStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRecoveryPlanStep"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetReplicationConfiguration(t *testing.T) {
 	input := &GetReplicationConfigurationInput{
 		SourceServerID: ptr.String("__SourceServerID__"),
@@ -2769,6 +3682,125 @@ func TestUpdateRequestSnapshot_ListLaunchActions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListRecoveryPlanExecutions(t *testing.T) {
+	input := &ListRecoveryPlanExecutionsInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		Status:          types.RecoveryPlanExecutionStatus("CREATED"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecoveryPlanExecutions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecoveryPlanExecutions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRecoveryPlanExecutionSteps(t *testing.T) {
+	input := &ListRecoveryPlanExecutionStepsInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+		Filter: &types.ListRecoveryPlanExecutionStepsFilter{
+			Status: types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecoveryPlanExecutionSteps(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecoveryPlanExecutionSteps"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRecoveryPlans(t *testing.T) {
+	input := &ListRecoveryPlansInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecoveryPlans(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecoveryPlans"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRecoveryPlanSteps(t *testing.T) {
+	input := &ListRecoveryPlanStepsInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecoveryPlanSteps(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecoveryPlanSteps"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListStagingAccounts(t *testing.T) {
 	input := &ListStagingAccountsInput{
 		MaxResults: ptr.Int32(1),
@@ -2866,6 +3898,37 @@ func TestUpdateRequestSnapshot_PutLaunchAction(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ReorderRecoveryPlanSteps(t *testing.T) {
+	input := &ReorderRecoveryPlanStepsInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		OrderedStepArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ReorderRecoveryPlanSteps(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ReorderRecoveryPlanSteps"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_RetryDataReplication(t *testing.T) {
 	input := &RetryDataReplicationInput{
 		SourceServerID: ptr.String("__SourceServerID__"),
@@ -2889,6 +3952,33 @@ func TestUpdateRequestSnapshot_RetryDataReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RetryDataReplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RetryRecoveryPlanExecutionStep(t *testing.T) {
+	input := &RetryRecoveryPlanExecutionStepInput{
+		RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RetryRecoveryPlanExecutionStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RetryRecoveryPlanExecutionStep"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2989,6 +4079,48 @@ func TestUpdateRequestSnapshot_StartRecovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartRecovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartRecoveryPlanExecution(t *testing.T) {
+	input := &StartRecoveryPlanExecutionInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		Mode:            types.RecoveryPlanExecutionMode("DRILL"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		SourceServers: []types.RecoveryPlanExecutionSourceServer{
+			{
+				SourceServerID:     ptr.String("__SourceServerID__"),
+				RecoverySnapshotID: ptr.String("__RecoverySnapshotID__"),
+			},
+			{
+				SourceServerID:     ptr.String("__SourceServerID__"),
+				RecoverySnapshotID: ptr.String("__RecoverySnapshotID__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartRecoveryPlanExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartRecoveryPlanExecution"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3364,6 +4496,116 @@ func TestUpdateRequestSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLaunchConfigurationTemplate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateRecoveryPlan(t *testing.T) {
+	input := &UpdateRecoveryPlanInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRecoveryPlan(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRecoveryPlan"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateRecoveryPlanExecutionStep(t *testing.T) {
+	input := &UpdateRecoveryPlanExecutionStepInput{
+		RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+		Status:                       types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+		Servers: []types.RecoveryPlanServer{
+			{
+				ServerArn:   ptr.String("__ServerArn__"),
+				ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+			},
+			{
+				ServerArn:   ptr.String("__ServerArn__"),
+				ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+			},
+		},
+		WaitDurationMinutes: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRecoveryPlanExecutionStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRecoveryPlanExecutionStep"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateRecoveryPlanStep(t *testing.T) {
+	input := &UpdateRecoveryPlanStepInput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+		StepName:            ptr.String("__StepName__"),
+		Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+			Value: types.ServerStepConfiguration{
+				Servers: []types.RecoveryPlanServer{
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRecoveryPlanStep(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRecoveryPlanStep"); err != nil {
 		t.Fatal(err)
 	}
 }

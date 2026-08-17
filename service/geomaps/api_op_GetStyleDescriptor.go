@@ -70,6 +70,61 @@ type GetStyleDescriptorInput struct {
 	// SigV4 signature must be provided when making a request.
 	Key *string
 
+	// Renders only the specified categories of points of interest. When you omit this
+	// parameter, the map renders all categories.
+	//
+	// The following categories are currently supported:
+	//
+	//   - FoodAndDrink
+	//
+	//   - Entertainment
+	//
+	//   - SightsAndMuseums
+	//
+	//   - Transportation
+	//
+	//   - Accommodations
+	//
+	//   - LeisureAndOutdoor
+	//
+	//   - Shopping
+	//
+	//   - BusinessAndServices
+	//
+	//   - FacilitiesAndBuildings
+	//
+	// Specify each category as a separate poi-categories query parameter. Duplicate
+	// values are rejected.
+	//
+	// This parameter has no effect when poi-density is set to Off , which hides all
+	// points of interest regardless of category.
+	//
+	// This parameter is valid only for the Standard and Hybrid map styles. In
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers, this parameter is
+	// valid only for the Standard map style.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+	PoiCategories []types.PoiCategory
+
+	// Controls how densely points of interest are rendered on the map. The density
+	// value controls the zoom level at which each category of points of interest
+	// appears, and how quickly less prominent points of interest are revealed as you
+	// zoom in. Denser values display more points of interest at lower zoom levels.
+	//
+	// Use Off to hide all points of interest. When you omit this parameter, the map
+	// renders at Default density.
+	//
+	// The difference between density values is most noticeable at mid-range zoom
+	// levels. At high zoom levels, all density values converge on displaying every
+	// available point of interest.
+	//
+	// This parameter is valid only for the Standard and Hybrid map styles. In
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers, this parameter is
+	// valid only for the Standard map style.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+	PoiDensity types.PoiDensity
+
 	// Specifies the political view using ISO 3166-2 or ISO 3166-3 country code
 	// format. Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
 	// customers.

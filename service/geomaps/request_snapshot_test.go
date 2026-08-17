@@ -321,8 +321,13 @@ func TestCheckRequestSnapshot_GetStyleDescriptor(t *testing.T) {
 			types.TravelMode("Transit"),
 			types.TravelMode("Transit"),
 		},
-		Buildings: types.Buildings("Buildings3D"),
-		Key:       ptr.String("__Key__"),
+		Buildings:  types.Buildings("Buildings3D"),
+		PoiDensity: types.PoiDensity("Off"),
+		PoiCategories: []types.PoiCategory{
+			types.PoiCategory("FoodAndDrink"),
+			types.PoiCategory("FoodAndDrink"),
+		},
+		Key: ptr.String("__Key__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -497,8 +502,13 @@ func TestUpdateRequestSnapshot_GetStyleDescriptor(t *testing.T) {
 			types.TravelMode("Transit"),
 			types.TravelMode("Transit"),
 		},
-		Buildings: types.Buildings("Buildings3D"),
-		Key:       ptr.String("__Key__"),
+		Buildings:  types.Buildings("Buildings3D"),
+		PoiDensity: types.PoiDensity("Off"),
+		PoiCategories: []types.PoiCategory{
+			types.PoiCategory("FoodAndDrink"),
+			types.PoiCategory("FoodAndDrink"),
+		},
+		Key: ptr.String("__Key__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

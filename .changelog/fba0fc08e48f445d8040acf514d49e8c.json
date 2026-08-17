@@ -1,0 +1,8 @@
+{
+    "id": "fba0fc08-e48f-445d-8040-acf514d49e8c",
+    "type": "feature",
+    "description": "Adds implementations of third-party evaluators, both managed-as-a-service and as templates within custom evaluators.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

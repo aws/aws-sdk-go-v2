@@ -90,12 +90,9 @@ type StartWebRTCContactInput struct {
 	// related to the contact starting.
 	RelatedContactId *string
 
-	// Use this map to specify system-defined attributes for the WebRTC contact
-	// segment. Use the connect:Subtype attribute to specify the channel subtype, such
-	// as connect:WebRTC .
-	//
-	// Attribute keys can contain only alphanumeric characters, hyphens, and
-	// underscores.
+	// A map of system-defined attributes for the WebRTC contact segment. Use the
+	// connect:Subtype attribute to specify the channel subtype, such as connect:WebRTC
+	// .
 	SegmentAttributes map[string]types.SegmentAttributeValue
 
 	noSmithyDocumentSerde

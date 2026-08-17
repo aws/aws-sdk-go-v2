@@ -233,6 +233,22 @@ type Disk struct {
 	noSmithyDocumentSerde
 }
 
+// Error details for a failed operation.
+type ErrorDetail struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Properties of resource related to a job event.
 //
 // The following types satisfy this interface:
@@ -250,6 +266,17 @@ type EventResourceDataMemberSourceNetworkData struct {
 }
 
 func (*EventResourceDataMemberSourceNetworkData) isEventResourceData() {}
+
+// Configuration for a SERVER type execution step.
+type ExecutionServerStepConfiguration struct {
+
+	// The list of servers in this execution step.
+	//
+	// This member is required.
+	Servers []RecoveryPlanExecutionServer
+
+	noSmithyDocumentSerde
+}
 
 // Hints used to uniquely identify a machine.
 type IdentificationHints struct {
@@ -552,6 +579,15 @@ type LifeCycleLastLaunchInitiated struct {
 
 	// The Job type that was used to last launch the Source Server.
 	Type LastLaunchType
+
+	noSmithyDocumentSerde
+}
+
+// Filters for listing Recovery Plan execution steps.
+type ListRecoveryPlanExecutionStepsFilter struct {
+
+	// Filter by execution step status.
+	Status RecoveryPlanExecutionStepStatus
 
 	noSmithyDocumentSerde
 }
@@ -910,6 +946,378 @@ type RecoveryLifeCycle struct {
 	noSmithyDocumentSerde
 }
 
+// A Recovery Plan resource.
+type RecoveryPlan struct {
+
+	// The timestamp when the Recovery Plan was created.
+	//
+	// This member is required.
+	CreatedAt *string
+
+	// The name of a Recovery Plan.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the Recovery Plan.
+	//
+	// This member is required.
+	RecoveryPlanArn *string
+
+	// The status of the Recovery Plan.
+	//
+	// This member is required.
+	Status RecoveryPlanStatus
+
+	// The timestamp when the Recovery Plan was last updated.
+	//
+	// This member is required.
+	UpdatedAt *string
+
+	// The description of a Recovery Plan.
+	Description *string
+
+	// The tags associated with the Recovery Plan.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A Recovery Plan execution.
+type RecoveryPlanExecution struct {
+
+	// The execution mode.
+	//
+	// This member is required.
+	Mode RecoveryPlanExecutionMode
+
+	// The ARN of the Recovery Plan being executed.
+	//
+	// This member is required.
+	RecoveryPlanArn *string
+
+	// The ARN of the Recovery Plan execution.
+	//
+	// This member is required.
+	RecoveryPlanExecutionArn *string
+
+	// The timestamp when the execution started.
+	//
+	// This member is required.
+	StartedAt *string
+
+	// The execution status.
+	//
+	// This member is required.
+	Status RecoveryPlanExecutionStatus
+
+	// The timestamp when the execution completed.
+	CompletedAt *string
+
+	// Error details if the execution failed.
+	ErrorDetail *ErrorDetail
+
+	// The tags associated with the Recovery Plan execution.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A server within a recovery plan execution step, enriched with execution state.
+type RecoveryPlanExecutionServer struct {
+
+	// The ARN of the source server.
+	//
+	// This member is required.
+	ServerArn *string
+
+	// Defaults to CRITICAL if not specified.
+	ImpactLevel RecoveryPlanServerImpactLevel
+
+	// The DRS recovery job ID. Populated when recovery is initiated for this server.
+	JobID *string
+
+	noSmithyDocumentSerde
+}
+
+// A source server with a specific recovery snapshot for plan execution.
+type RecoveryPlanExecutionSourceServer struct {
+
+	// The ID of the recovery snapshot to use.
+	//
+	// This member is required.
+	RecoverySnapshotID *string
+
+	// The ID of the source server.
+	//
+	// This member is required.
+	SourceServerID *string
+
+	noSmithyDocumentSerde
+}
+
+// A Recovery Plan Execution Step resource.
+type RecoveryPlanExecutionStep struct {
+
+	// The number of times this step has been attempted.
+	//
+	// This member is required.
+	Attempt *int32
+
+	// Type-specific configuration for an execution step response. Mirrors
+	// RecoveryPlanStepConfiguration but uses execution-enriched server shapes.
+	//
+	// This member is required.
+	Configuration RecoveryPlanExecutionStepConfiguration
+
+	// The timestamp when the execution step was created.
+	//
+	// This member is required.
+	CreatedAt *string
+
+	// The ARN of the execution step.
+	//
+	// This member is required.
+	RecoveryPlanExecutionStepArn *string
+
+	// The status of the execution step.
+	//
+	// This member is required.
+	Status RecoveryPlanExecutionStepStatus
+
+	// The order of a step within a Recovery Plan (1-based).
+	//
+	// This member is required.
+	StepIndex *int32
+
+	// The name of a Recovery Plan Step.
+	//
+	// This member is required.
+	StepName *string
+
+	// The timestamp when the execution step was last updated.
+	//
+	// This member is required.
+	UpdatedAt *string
+
+	// Error details if the step failed.
+	ErrorDetail *ErrorDetail
+
+	noSmithyDocumentSerde
+}
+
+// Type-specific configuration for an execution step response. Mirrors
+// RecoveryPlanStepConfiguration but uses execution-enriched server shapes.
+//
+// The following types satisfy this interface:
+//
+//	RecoveryPlanExecutionStepConfigurationMemberExecutionServerStepConfiguration
+//	RecoveryPlanExecutionStepConfigurationMemberWaitStepConfiguration
+type RecoveryPlanExecutionStepConfiguration interface {
+	isRecoveryPlanExecutionStepConfiguration()
+}
+
+// Configuration for a SERVER type step (with execution state like jobID).
+type RecoveryPlanExecutionStepConfigurationMemberExecutionServerStepConfiguration struct {
+	Value ExecutionServerStepConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RecoveryPlanExecutionStepConfigurationMemberExecutionServerStepConfiguration) isRecoveryPlanExecutionStepConfiguration() {
+}
+
+// Configuration for a WAIT type step.
+type RecoveryPlanExecutionStepConfigurationMemberWaitStepConfiguration struct {
+	Value WaitStepConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RecoveryPlanExecutionStepConfigurationMemberWaitStepConfiguration) isRecoveryPlanExecutionStepConfiguration() {
+}
+
+// Summary information about a Recovery Plan execution step.
+type RecoveryPlanExecutionStepSummary struct {
+
+	// Type-specific configuration for an execution step response. Mirrors
+	// RecoveryPlanStepConfiguration but uses execution-enriched server shapes.
+	//
+	// This member is required.
+	Configuration RecoveryPlanExecutionStepConfiguration
+
+	// The ARN of the execution step.
+	//
+	// This member is required.
+	RecoveryPlanExecutionStepArn *string
+
+	// The status of the execution step.
+	//
+	// This member is required.
+	Status RecoveryPlanExecutionStepStatus
+
+	// The order of a step within a Recovery Plan (1-based).
+	//
+	// This member is required.
+	StepIndex *int32
+
+	// The name of a Recovery Plan Step.
+	//
+	// This member is required.
+	StepName *string
+
+	// Error details if the step failed.
+	ErrorDetail *ErrorDetail
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a Recovery Plan execution.
+type RecoveryPlanExecutionSummary struct {
+
+	// The execution mode.
+	//
+	// This member is required.
+	Mode RecoveryPlanExecutionMode
+
+	// The ARN of the Recovery Plan.
+	//
+	// This member is required.
+	RecoveryPlanArn *string
+
+	// The ARN of the Recovery Plan execution.
+	//
+	// This member is required.
+	RecoveryPlanExecutionArn *string
+
+	// The timestamp when the execution started.
+	//
+	// This member is required.
+	StartedAt *string
+
+	// The execution status.
+	//
+	// This member is required.
+	Status RecoveryPlanExecutionStatus
+
+	// Error details if the execution failed.
+	ErrorDetail *ErrorDetail
+
+	noSmithyDocumentSerde
+}
+
+// A server associated with a Recovery Plan Step.
+type RecoveryPlanServer struct {
+
+	// The ARN of the source server.
+	//
+	// This member is required.
+	ServerArn *string
+
+	// Defaults to CRITICAL if not specified.
+	ImpactLevel RecoveryPlanServerImpactLevel
+
+	noSmithyDocumentSerde
+}
+
+// A Recovery Plan Step resource.
+type RecoveryPlanStep struct {
+
+	// Type-specific configuration for a recovery plan step. Exactly one member must
+	// be set.
+	//
+	// This member is required.
+	Configuration RecoveryPlanStepConfiguration
+
+	// The timestamp when the step was created.
+	//
+	// This member is required.
+	CreatedAt *string
+
+	// The ARN of the Recovery Plan step.
+	//
+	// This member is required.
+	RecoveryPlanStepArn *string
+
+	// The name of a Recovery Plan Step.
+	//
+	// This member is required.
+	StepName *string
+
+	// The order of a step within a Recovery Plan (1-based).
+	//
+	// This member is required.
+	StepOrder *int32
+
+	// The timestamp when the step was last updated.
+	//
+	// This member is required.
+	UpdatedAt *string
+
+	noSmithyDocumentSerde
+}
+
+// Type-specific configuration for a recovery plan step. Exactly one member must
+// be set.
+//
+// The following types satisfy this interface:
+//
+//	RecoveryPlanStepConfigurationMemberServerStepConfiguration
+//	RecoveryPlanStepConfigurationMemberWaitStepConfiguration
+type RecoveryPlanStepConfiguration interface {
+	isRecoveryPlanStepConfiguration()
+}
+
+// Configuration for a SERVER type step.
+type RecoveryPlanStepConfigurationMemberServerStepConfiguration struct {
+	Value ServerStepConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RecoveryPlanStepConfigurationMemberServerStepConfiguration) isRecoveryPlanStepConfiguration() {
+}
+
+// Configuration for a WAIT type step.
+type RecoveryPlanStepConfigurationMemberWaitStepConfiguration struct {
+	Value WaitStepConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RecoveryPlanStepConfigurationMemberWaitStepConfiguration) isRecoveryPlanStepConfiguration() {}
+
+// Summary information about a Recovery Plan.
+type RecoveryPlanSummary struct {
+
+	// The timestamp when the Recovery Plan was created.
+	//
+	// This member is required.
+	CreatedAt *string
+
+	// The name of a Recovery Plan.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the Recovery Plan.
+	//
+	// This member is required.
+	RecoveryPlanArn *string
+
+	// The status of the Recovery Plan.
+	//
+	// This member is required.
+	Status RecoveryPlanStatus
+
+	// The timestamp when the Recovery Plan was last updated.
+	//
+	// This member is required.
+	UpdatedAt *string
+
+	noSmithyDocumentSerde
+}
+
 // A snapshot of a Source Server used during recovery.
 type RecoverySnapshot struct {
 
@@ -1026,6 +1434,17 @@ type ReplicationConfigurationTemplate struct {
 
 	// Whether to use a dedicated Replication Server in the replication staging area.
 	UseDedicatedReplicationServer *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a SERVER type step.
+type ServerStepConfiguration struct {
+
+	// The list of servers to recover in this step.
+	//
+	// This member is required.
+	Servers []RecoveryPlanServer
 
 	noSmithyDocumentSerde
 }
@@ -1275,6 +1694,17 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a WAIT type step.
+type WaitStepConfiguration struct {
+
+	// The wait duration in minutes for a Wait type step.
+	//
+	// This member is required.
+	WaitDurationMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1286,5 +1716,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isEventResourceData()       {}
-func (*UnknownUnionMember) isParticipatingResourceID() {}
+func (*UnknownUnionMember) isEventResourceData()                      {}
+func (*UnknownUnionMember) isParticipatingResourceID()                {}
+func (*UnknownUnionMember) isRecoveryPlanExecutionStepConfiguration() {}
+func (*UnknownUnionMember) isRecoveryPlanStepConfiguration()          {}

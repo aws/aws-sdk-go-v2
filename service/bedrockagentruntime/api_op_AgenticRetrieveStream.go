@@ -59,6 +59,10 @@ type AgenticRetrieveStreamInput struct {
 	// Whether to generate a response based on the retrieved results.
 	GenerateResponse *bool
 
+	// The configuration for using an Amazon Bedrock AgentCore Memory resource with
+	// this retrieval.
+	MemoryConfiguration *types.AgenticRetrieveMemoryConfiguration
+
 	// Opaque continuation token for paginated results.
 	NextToken *string
 
@@ -87,6 +91,11 @@ func (v *AgenticRetrieveStreamInput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.GenerateResponse != nil {
 		s.WriteBool(schemas.AgenticRetrieveStreamRequest_generateResponse, *v.GenerateResponse)
+	}
+	if v.MemoryConfiguration != nil {
+		s.WriteStruct(schemas.AgenticRetrieveStreamRequest_memoryConfiguration)
+		v.MemoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	serializeAgenticRetrieveMessages(s, schemas.AgenticRetrieveStreamRequest_messages, v.Messages)
 	if v.NextToken != nil {

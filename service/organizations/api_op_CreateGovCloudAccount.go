@@ -57,8 +57,8 @@ import (
 // minutes before you can successfully access the account. To check the status of
 // the request, do one of the following:
 //
-//   - Use the OperationId response element from this operation to provide as a
-//     parameter to the DescribeCreateAccountStatusoperation.
+//   - Use the Id response element from this operation to provide as a parameter to
+//     the DescribeCreateAccountStatusoperation.
 //
 //   - Check the CloudTrail log for the CreateAccountResult event. For information
 //     on using CloudTrail with Organizations, see [Logging and monitoring in Organizations]in the Organizations User Guide.

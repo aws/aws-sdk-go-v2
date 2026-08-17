@@ -12,6 +12,13 @@ import (
 // Ends a transfer. A transfer is an arrangement between two management accounts
 // where one account designates the other with specified responsibilities for their
 // organization.
+//
+// When a transfer ends, Organizations publishes a ResponsibilityTransferTerminated
+// service event to CloudTrail. Each affected account receives this event,
+// including upstream participants such as distributors in a chained transfer. For
+// an example log entry, see [Example log entries: TerminateResponsibilityTransfer]in the Organizations User Guide.
+//
+// [Example log entries: TerminateResponsibilityTransfer]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_cloudtrail-integration.html#Log-entries-terminate-responsibility-transfer
 func (c *Client) TerminateResponsibilityTransfer(ctx context.Context, params *TerminateResponsibilityTransferInput, optFns ...func(*Options)) (*TerminateResponsibilityTransferOutput, error) {
 	if params == nil {
 		params = &TerminateResponsibilityTransferInput{}

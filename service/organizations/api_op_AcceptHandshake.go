@@ -36,6 +36,13 @@ import (
 // departureTime and an AccountJoinedOrganization event with joinedMethod:INVITED
 // and joinedTime are logged in their respective management accounts.
 //
+// When a billing transfer ( TRANSFER_RESPONSIBILITY ) handshake is accepted,
+// Organizations publishes a ResponsibilityTransferAccepted service event to
+// CloudTrail. Each affected account receives this event, including upstream
+// participants such as distributors in a chained transfer. For an example log
+// entry, see [Example log entries: AcceptResponsibilityTransfer]in the Organizations User Guide.
+//
+// [Example log entries: AcceptResponsibilityTransfer]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_cloudtrail-integration.html#Log-entries-accept-responsibility-transfer
 // [Enabling all features]: https://docs.aws.amazon.com/organizations/latest/userguide/manage-begin-all-features-standard-migration.html#manage-approve-all-features-invite
 // [Responding to invitations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_accept-decline-invite.html
 // [Responding to a billing transfer invitation]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_transfer_billing-respond-invitation.html

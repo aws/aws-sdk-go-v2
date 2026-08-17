@@ -21,6 +21,13 @@ import (
 // asynchronous operation. Use the [GetPolicy]operation to poll the status field to track
 // completion.
 //
+// If the new policy is a temporal policy, creating it invalidates the policy
+// engine's active temporal sessions. For more information about temporal policy
+// sessions, see [session-based temporal policies]. The policy engine returns an HTTP 409 ConflictException to
+// in-flight sessions. To resume, you must start a new session with a new session
+// ID.
+//
+// [session-based temporal policies]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy-session-based-temporal.html
 // [GetPolicy]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetPolicy.html
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {

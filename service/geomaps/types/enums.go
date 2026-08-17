@@ -120,6 +120,66 @@ func (MapStyle) Values() []MapStyle {
 	}
 }
 
+type PoiCategory string
+
+// Enum values for PoiCategory
+const (
+	PoiCategoryFoodAndDrink           PoiCategory = "FoodAndDrink"
+	PoiCategoryEntertainment          PoiCategory = "Entertainment"
+	PoiCategorySightsAndMuseums       PoiCategory = "SightsAndMuseums"
+	PoiCategoryTransportation         PoiCategory = "Transportation"
+	PoiCategoryAccommodations         PoiCategory = "Accommodations"
+	PoiCategoryLeisureAndOutdoor      PoiCategory = "LeisureAndOutdoor"
+	PoiCategoryShopping               PoiCategory = "Shopping"
+	PoiCategoryBusinessAndServices    PoiCategory = "BusinessAndServices"
+	PoiCategoryFacilitiesAndBuildings PoiCategory = "FacilitiesAndBuildings"
+)
+
+// Values returns all known values for PoiCategory. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PoiCategory) Values() []PoiCategory {
+	return []PoiCategory{
+		"FoodAndDrink",
+		"Entertainment",
+		"SightsAndMuseums",
+		"Transportation",
+		"Accommodations",
+		"LeisureAndOutdoor",
+		"Shopping",
+		"BusinessAndServices",
+		"FacilitiesAndBuildings",
+	}
+}
+
+type PoiDensity string
+
+// Enum values for PoiDensity
+const (
+	PoiDensityOff        PoiDensity = "Off"
+	PoiDensityVerySparse PoiDensity = "VerySparse"
+	PoiDensitySparse     PoiDensity = "Sparse"
+	PoiDensityDefault    PoiDensity = "Default"
+	PoiDensityDense      PoiDensity = "Dense"
+	PoiDensityVeryDense  PoiDensity = "VeryDense"
+)
+
+// Values returns all known values for PoiDensity. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PoiDensity) Values() []PoiDensity {
+	return []PoiDensity{
+		"Off",
+		"VerySparse",
+		"Sparse",
+		"Default",
+		"Dense",
+		"VeryDense",
+	}
+}
+
 type ScaleBarUnit string
 
 // Enum values for ScaleBarUnit
@@ -253,12 +313,8 @@ const (
 	// No such operation is supported.
 	ValidationExceptionReasonUnknownOperation ValidationExceptionReason = "UnknownOperation"
 	// The required input is missing.
-	ValidationExceptionReasonMissing ValidationExceptionReason = "Missing"
-	// The input cannot be parsed. For example a required JSON document, ARN
-	// identifier, date value, or numeric field cannot be parsed.
-	ValidationExceptionReasonCannotParse ValidationExceptionReason = "CannotParse"
-	// The input is present and parsable, but it is otherwise invalid. For example, a
-	// required numeric argument is outside the allowed range.
+	ValidationExceptionReasonMissing               ValidationExceptionReason = "Missing"
+	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "CannotParse"
 	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FieldValidationFailed"
 	// The input is invalid but no more specific reason is applicable.
 	ValidationExceptionReasonOther ValidationExceptionReason = "Other"

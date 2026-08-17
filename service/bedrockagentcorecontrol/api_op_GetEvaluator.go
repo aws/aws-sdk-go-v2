@@ -94,6 +94,21 @@ type GetEvaluatorOutput struct {
 	//  The description of the evaluator.
 	Description *string
 
+	//  The kind of evaluator resource. Valid values:
+	//
+	//   - Builtin – An Amazon Web Services-managed global evaluator.
+	//
+	//   - ThirdParty – An Amazon Web Services-managed global evaluator from a
+	//   third-party provider.
+	//
+	//   - Custom – A customer-created evaluator.
+	//
+	//   - CustomCode – A customer-created code-based evaluator.
+	//
+	//   - CustomDerived – A customer-created evaluator derived from an existing base
+	//   evaluator.
+	EvaluatorType types.EvaluatorType
+
 	//  The Amazon Resource Name (ARN) of the customer managed KMS key used to encrypt
 	// the evaluator's sensitive data. This field is only present for evaluators
 	// encrypted with a customer managed key.
@@ -102,6 +117,10 @@ type GetEvaluatorOutput struct {
 	//  Whether the evaluator is locked for modification due to being referenced by
 	// active online evaluation configurations.
 	LockedForModification *bool
+
+	//  The source of the evaluator's logic: Amazon Web Services, a third-party
+	// library, or you.
+	Provider types.Provider
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

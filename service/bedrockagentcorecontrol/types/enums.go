@@ -588,6 +588,9 @@ const (
 	//  AgentCore simulated evaluation schema, version 1. Dataset for synthetic data
 	// generation where each example is a scenario used to generate full conversations.
 	DatasetSchemaTypeAgentcoreEvaluationSimulatedV1 DatasetSchemaType = "AGENTCORE_EVALUATION_SIMULATED_V1"
+	//  Unified generic evaluation schema, version 1. Supports single-turn (string
+	// input) and multi-turn (message list input) across all evaluation frameworks.
+	DatasetSchemaTypeGenericEvaluationPredefinedV1 DatasetSchemaType = "GENERIC_EVALUATION_PREDEFINED_V1"
 )
 
 // Values returns all known values for DatasetSchemaType. Note that this can be
@@ -598,6 +601,7 @@ func (DatasetSchemaType) Values() []DatasetSchemaType {
 	return []DatasetSchemaType{
 		"AGENTCORE_EVALUATION_PREDEFINED_V1",
 		"AGENTCORE_EVALUATION_SIMULATED_V1",
+		"GENERIC_EVALUATION_PREDEFINED_V1",
 	}
 }
 
@@ -804,9 +808,11 @@ type EvaluatorType string
 
 // Enum values for EvaluatorType
 const (
-	EvaluatorTypeBuiltin EvaluatorType = "Builtin"
-	EvaluatorTypeCustom  EvaluatorType = "Custom"
-	EvaluatorTypeCode    EvaluatorType = "CustomCode"
+	EvaluatorTypeBuiltin       EvaluatorType = "Builtin"
+	EvaluatorTypeThirdParty    EvaluatorType = "ThirdParty"
+	EvaluatorTypeCustom        EvaluatorType = "Custom"
+	EvaluatorTypeCode          EvaluatorType = "CustomCode"
+	EvaluatorTypeCustomDerived EvaluatorType = "CustomDerived"
 )
 
 // Values returns all known values for EvaluatorType. Note that this can be
@@ -816,8 +822,10 @@ const (
 func (EvaluatorType) Values() []EvaluatorType {
 	return []EvaluatorType{
 		"Builtin",
+		"ThirdParty",
 		"Custom",
 		"CustomCode",
+		"CustomDerived",
 	}
 }
 
@@ -1906,6 +1914,29 @@ func (PrincipalMatchOperator) Values() []PrincipalMatchOperator {
 	return []PrincipalMatchOperator{
 		"StringEquals",
 		"StringLike",
+	}
+}
+
+type Provider string
+
+// Enum values for Provider
+const (
+	ProviderAws      Provider = "AWS"
+	ProviderDeepEval Provider = "DeepEval"
+	ProviderAutoEval Provider = "AutoEval"
+	ProviderCustom   Provider = "Custom"
+)
+
+// Values returns all known values for Provider. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Provider) Values() []Provider {
+	return []Provider{
+		"AWS",
+		"DeepEval",
+		"AutoEval",
+		"Custom",
 	}
 }
 

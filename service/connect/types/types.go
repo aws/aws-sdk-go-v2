@@ -5403,6 +5403,145 @@ type ExternalInvocationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the extract information action, which references extraction
+// definitions to use when extracting structured data from customer interactions.
+type ExtractInformationActionDefinition struct {
+
+	// The list of extraction definition identifiers that specify what data to extract.
+	//
+	// This member is required.
+	RulesExtractionDefinitions []RulesExtractionDefinitionIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// The extraction configuration that defines how data is extracted from customer
+// interactions.
+type ExtractionConfiguration struct {
+
+	// The prompt hint that guides the extraction. This text tells the generative AI
+	// model what data to look for in the customer interaction.
+	//
+	// This member is required.
+	PromptHint *string
+
+	// The behavior when the extraction cannot find the specified data in the
+	// interaction.
+	NotFoundBehavior *ExtractionDefinitionNotFoundBehavior
+
+	noSmithyDocumentSerde
+}
+
+// Information about an extraction definition.
+type ExtractionDefinition struct {
+
+	// The timestamp when the extraction definition was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The configuration that defines how data is extracted.
+	//
+	// This member is required.
+	ExtractionConfiguration *ExtractionConfiguration
+
+	// The Amazon Resource Name (ARN) of the extraction definition.
+	//
+	// This member is required.
+	ExtractionDefinitionArn *string
+
+	// The identifier of the extraction definition.
+	//
+	// This member is required.
+	ExtractionDefinitionId *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the extraction
+	// definition.
+	//
+	// This member is required.
+	LastUpdatedBy *string
+
+	// The timestamp when the extraction definition was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the extraction definition.
+	//
+	// This member is required.
+	Name *string
+
+	// The display settings for the extraction definition.
+	Display *ExtractionDefinitionDisplay
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The display configuration for an extraction definition.
+type ExtractionDefinitionDisplay struct {
+
+	// The label displayed in the agent workspace for this extraction definition.
+	Label *string
+
+	noSmithyDocumentSerde
+}
+
+// The behavior configuration when an extraction definition cannot find the target
+// value.
+type ExtractionDefinitionNotFoundBehavior struct {
+
+	// The behavior type. USE_DEFAULT_VALUE returns the specified default value. OMIT
+	// excludes the field from the output.
+	//
+	// This member is required.
+	Behavior NotFoundBehaviorType
+
+	// The default value to use when the behavior is USE_DEFAULT_VALUE .
+	DefaultValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an extraction definition.
+type ExtractionDefinitionSummary struct {
+
+	// The timestamp when the extraction definition was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the extraction definition.
+	//
+	// This member is required.
+	ExtractionDefinitionArn *string
+
+	// The identifier of the extraction definition.
+	//
+	// This member is required.
+	ExtractionDefinitionId *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the extraction
+	// definition.
+	//
+	// This member is required.
+	LastUpdatedBy *string
+
+	// The timestamp when the extraction definition was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the extraction definition.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a resource that failed to be associated with a
 // workspace in a batch operation.
 type FailedBatchAssociationSummary struct {
@@ -9925,6 +10064,9 @@ type RuleAction struct {
 	// OnPostChatAnalysisAvailable | OnContactEvaluationSubmit | OnMetricDataUpdate
 	EventBridgeAction *EventBridgeActionDefinition
 
+	// Information about the extract information action.
+	ExtractInformationAction *ExtractInformationActionDefinition
+
 	// Information about the send notification action.
 	//
 	// Supported only for TriggerEventSource values: OnPostCallAnalysisAvailable |
@@ -10047,6 +10189,17 @@ type RuleSearchSummary struct {
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An identifier that references an extraction definition resource.
+type RulesExtractionDefinitionIdentifier struct {
+
+	// The identifier of the extraction definition.
+	//
+	// This member is required.
+	Identifier *string
 
 	noSmithyDocumentSerde
 }

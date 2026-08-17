@@ -17211,6 +17211,25 @@ func awsRestjson1_serializeDocumentDeleteMemoryStrategyInput(v *types.DeleteMemo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDerivedEvaluatorConfig(v *types.DerivedEvaluatorConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaseEvaluatorId != nil {
+		ok := object.Key("baseEvaluatorId")
+		ok.String(*v.BaseEvaluatorId)
+	}
+
+	if v.ModelConfig != nil {
+		ok := object.Key("modelConfig")
+		if err := awsRestjson1_serializeDocumentEvaluatorModelConfig(v.ModelConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDescriptors(v *types.Descriptors, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17699,6 +17718,12 @@ func awsRestjson1_serializeDocumentEvaluatorConfig(v types.EvaluatorConfig, valu
 	case *types.EvaluatorConfigMemberCodeBased:
 		av := object.Key("codeBased")
 		if err := awsRestjson1_serializeDocumentCodeBasedEvaluatorConfig(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.EvaluatorConfigMemberDerived:
+		av := object.Key("derived")
+		if err := awsRestjson1_serializeDocumentDerivedEvaluatorConfig(&uv.Value, av); err != nil {
 			return err
 		}
 

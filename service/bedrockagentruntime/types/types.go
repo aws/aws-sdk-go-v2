@@ -560,6 +560,9 @@ type AgenticRetrieveAction struct {
 	// Details of a full document expansion action.
 	FullDocumentExpansion *AgenticRetrieveFullDocExpansionDetails
 
+	// The details of a long-term memory retrieval that the agent chose to perform.
+	MemoryRetrieve *AgenticRetrieveMemoryRetrieveDetails
+
 	// Details of the retrieve action.
 	Retrieve *AgenticRetrieveActionDetails
 
@@ -578,6 +581,11 @@ func (v *AgenticRetrieveAction) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FullDocumentExpansion.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MemoryRetrieve != nil {
+		s.WriteStruct(schemas.AgenticRetrieveAction_memoryRetrieve)
+		v.MemoryRetrieve.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Retrieve != nil {
 		s.WriteStruct(schemas.AgenticRetrieveAction_retrieve)
 		v.Retrieve.SerializeMembers(s)
@@ -590,6 +598,9 @@ func (v *AgenticRetrieveAction) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AgenticRetrieveAction_fullDocumentExpansion:
 			v.FullDocumentExpansion = &AgenticRetrieveFullDocExpansionDetails{}
 			return v.FullDocumentExpansion.Deserialize(d)
+		case schemas.AgenticRetrieveAction_memoryRetrieve:
+			v.MemoryRetrieve = &AgenticRetrieveMemoryRetrieveDetails{}
+			return v.MemoryRetrieve.Deserialize(d)
 		case schemas.AgenticRetrieveAction_retrieve:
 			v.Retrieve = &AgenticRetrieveActionDetails{}
 			return v.Retrieve.Deserialize(d)
@@ -1097,6 +1108,456 @@ func (v *AgenticRetrieveGuardrailWarning) Deserialize(d smithy.ShapeDeserializer
 		case schemas.AgenticRetrieveGuardrailWarning_version:
 			v.Version = new(string)
 			return d.ReadString(schemas.AgenticRetrieveGuardrailWarning_version, v.Version)
+		}
+		return nil
+	})
+}
+
+// Specifies an AgentCore Memory resource and how this retrieval uses it. Set
+// sessionBinding to restore and continue a session. Set retrievalConfigs to let
+// the agent retrieve from long-term memory. You must specify at least one of the
+// two.
+type AgenticRetrieveMemoryConfiguration struct {
+
+	// The identifier of the AgentCore Memory resource to use. The resource must exist
+	// in your account and be in the ACTIVE state.
+	//
+	// This member is required.
+	MemoryId *string
+
+	// Specifies whether the agent-generated answer is written back to the given
+	// short-term memory session, and applies only when sessionBinding is set. Valid
+	// values:
+	//
+	//   - DEFAULT (default) – Specifies that the question and the agent-generated
+	//   answer are persisted to the session as a single event. This value requires
+	//   generateResponse to be true.
+	//
+	//   - NONE – Specifies that the session is left unchanged.
+	PersistenceMode AgenticRetrieveMemoryPersistenceMode
+
+	// Specifies the long-term memory configuration the agent can retrieve from. The
+	// agent decides whether to retrieve and composes its own query. This field
+	// currently accepts at most one entry.
+	RetrievalConfigs []AgenticRetrieveMemoryRetrievalConfig
+
+	// The short-term memory session whose history is restored for this retrieval. To
+	// persist the agent-generated answer to the session, omit persistenceMode or set
+	// it to DEFAULT. To leave the session unchanged, set persistenceMode to NONE.
+	// Supply session history through the existing messages parameter or through
+	// short-term memory, but not both.
+	SessionBinding *AgenticRetrieveMemorySessionBinding
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveMemoryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveMemoryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveMemoryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemoryId != nil {
+		s.WriteString(schemas.AgenticRetrieveMemoryConfiguration_memoryId, *v.MemoryId)
+	}
+	if v.PersistenceMode != "" {
+		s.WriteString(schemas.AgenticRetrieveMemoryConfiguration_persistenceMode, string(v.PersistenceMode))
+	}
+	serializeAgenticRetrieveMemoryRetrievalConfigList(s, schemas.AgenticRetrieveMemoryConfiguration_retrievalConfigs, v.RetrievalConfigs)
+	if v.SessionBinding != nil {
+		s.WriteStruct(schemas.AgenticRetrieveMemoryConfiguration_sessionBinding)
+		v.SessionBinding.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AgenticRetrieveMemoryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveMemoryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgenticRetrieveMemoryConfiguration_memoryId:
+			v.MemoryId = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemoryConfiguration_memoryId, v.MemoryId)
+		case schemas.AgenticRetrieveMemoryConfiguration_persistenceMode:
+			var ev string
+			if err := d.ReadString(schemas.AgenticRetrieveMemoryConfiguration_persistenceMode, &ev); err != nil {
+				return err
+			}
+			v.PersistenceMode = AgenticRetrieveMemoryPersistenceMode(ev)
+			return nil
+		case schemas.AgenticRetrieveMemoryConfiguration_retrievalConfigs:
+			return deserializeAgenticRetrieveMemoryRetrievalConfigList(d, schemas.AgenticRetrieveMemoryConfiguration_retrievalConfigs, &v.RetrievalConfigs)
+		case schemas.AgenticRetrieveMemoryConfiguration_sessionBinding:
+			v.SessionBinding = &AgenticRetrieveMemorySessionBinding{}
+			return v.SessionBinding.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A metadata filter expression, in the form accepted by the AgentCore Memory
+// RetrieveMemoryRecords operation. The expression has a left operand that names
+// the metadata key, an operator, and a right operand. For the EXISTS and
+// NOT_EXISTS operators, omit the right operand.
+type AgenticRetrieveMemoryMetadataFilter struct {
+
+	// The metadata key that the expression evaluates.
+	//
+	// This member is required.
+	Left AgenticRetrieveMemoryMetadataFilterLeft
+
+	// The relationship that the metadata key and value must have for a memory record
+	// to match.
+	//
+	// This member is required.
+	Operator AgenticRetrieveMemoryMetadataFilterOperator
+
+	// The value that the expression compares the metadata key against. Supply this
+	// value for every operator except EXISTS and NOT_EXISTS.
+	Right AgenticRetrieveMemoryMetadataFilterRight
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveMemoryMetadataFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveMemoryMetadataFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveMemoryMetadataFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgenticRetrieveMemoryMetadataFilterLeft(s, schemas.AgenticRetrieveMemoryMetadataFilter_left, v.Left)
+	if v.Operator != "" {
+		s.WriteString(schemas.AgenticRetrieveMemoryMetadataFilter_operator, string(v.Operator))
+	}
+	serializeAgenticRetrieveMemoryMetadataFilterRight(s, schemas.AgenticRetrieveMemoryMetadataFilter_right, v.Right)
+}
+func (v *AgenticRetrieveMemoryMetadataFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveMemoryMetadataFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgenticRetrieveMemoryMetadataFilter_left:
+			return deserializeAgenticRetrieveMemoryMetadataFilterLeft(d, schemas.AgenticRetrieveMemoryMetadataFilter_left, &v.Left)
+		case schemas.AgenticRetrieveMemoryMetadataFilter_operator:
+			var ev string
+			if err := d.ReadString(schemas.AgenticRetrieveMemoryMetadataFilter_operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = AgenticRetrieveMemoryMetadataFilterOperator(ev)
+			return nil
+		case schemas.AgenticRetrieveMemoryMetadataFilter_right:
+			return deserializeAgenticRetrieveMemoryMetadataFilterRight(d, schemas.AgenticRetrieveMemoryMetadataFilter_right, &v.Right)
+		}
+		return nil
+	})
+}
+
+// The left operand of a metadata filter expression. Set exactly one member.
+//
+// The following types satisfy this interface:
+//
+//	AgenticRetrieveMemoryMetadataFilterLeftMemberMetadataKey
+type AgenticRetrieveMemoryMetadataFilterLeft interface {
+	isAgenticRetrieveMemoryMetadataFilterLeft()
+}
+
+// The metadata key to filter on.
+type AgenticRetrieveMemoryMetadataFilterLeftMemberMetadataKey struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AgenticRetrieveMemoryMetadataFilterLeftMemberMetadataKey) isAgenticRetrieveMemoryMetadataFilterLeft() {
+}
+func (v *AgenticRetrieveMemoryMetadataFilterLeftMemberMetadataKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AgenticRetrieveMemoryMetadataFilterLeft_metadataKey, v.Value)
+}
+func (v *AgenticRetrieveMemoryMetadataFilterLeftMemberMetadataKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AgenticRetrieveMemoryMetadataFilterLeft_metadataKey, &v.Value)
+}
+
+// The right operand of a metadata filter expression. Set exactly one member.
+//
+// The following types satisfy this interface:
+//
+//	AgenticRetrieveMemoryMetadataFilterRightMemberMetadataValue
+type AgenticRetrieveMemoryMetadataFilterRight interface {
+	isAgenticRetrieveMemoryMetadataFilterRight()
+}
+
+// The value to compare the metadata key against.
+type AgenticRetrieveMemoryMetadataFilterRightMemberMetadataValue struct {
+	Value AgenticRetrieveMemoryMetadataValue
+
+	noSmithyDocumentSerde
+}
+
+func (*AgenticRetrieveMemoryMetadataFilterRightMemberMetadataValue) isAgenticRetrieveMemoryMetadataFilterRight() {
+}
+func (v *AgenticRetrieveMemoryMetadataFilterRightMemberMetadataValue) Serialize(s smithy.ShapeSerializer) {
+	serializeAgenticRetrieveMemoryMetadataValue(s, schemas.AgenticRetrieveMemoryMetadataFilterRight_metadataValue, v.Value)
+}
+func (v *AgenticRetrieveMemoryMetadataFilterRightMemberMetadataValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAgenticRetrieveMemoryMetadataValue(d, schemas.AgenticRetrieveMemoryMetadataFilterRight_metadataValue, &v.Value)
+}
+
+// A metadata value that a filter expression compares against. Set exactly one
+// member.
+//
+// The following types satisfy this interface:
+//
+//	AgenticRetrieveMemoryMetadataValueMemberDateTimeValue
+//	AgenticRetrieveMemoryMetadataValueMemberNumberValue
+//	AgenticRetrieveMemoryMetadataValueMemberStringListValue
+//	AgenticRetrieveMemoryMetadataValueMemberStringValue
+type AgenticRetrieveMemoryMetadataValue interface {
+	isAgenticRetrieveMemoryMetadataValue()
+}
+
+// A timestamp value in ISO 8601 UTC format.
+type AgenticRetrieveMemoryMetadataValueMemberDateTimeValue struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*AgenticRetrieveMemoryMetadataValueMemberDateTimeValue) isAgenticRetrieveMemoryMetadataValue() {
+}
+func (v *AgenticRetrieveMemoryMetadataValueMemberDateTimeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteTime(schemas.AgenticRetrieveMemoryMetadataValue_dateTimeValue, v.Value)
+}
+func (v *AgenticRetrieveMemoryMetadataValueMemberDateTimeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadTime(schemas.AgenticRetrieveMemoryMetadataValue_dateTimeValue, &v.Value)
+}
+
+// A numeric value.
+type AgenticRetrieveMemoryMetadataValueMemberNumberValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*AgenticRetrieveMemoryMetadataValueMemberNumberValue) isAgenticRetrieveMemoryMetadataValue() {}
+func (v *AgenticRetrieveMemoryMetadataValueMemberNumberValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.AgenticRetrieveMemoryMetadataValue_numberValue, v.Value)
+}
+func (v *AgenticRetrieveMemoryMetadataValueMemberNumberValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadFloat64(schemas.AgenticRetrieveMemoryMetadataValue_numberValue, &v.Value)
+}
+
+// A list of string values.
+type AgenticRetrieveMemoryMetadataValueMemberStringListValue struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*AgenticRetrieveMemoryMetadataValueMemberStringListValue) isAgenticRetrieveMemoryMetadataValue() {
+}
+func (v *AgenticRetrieveMemoryMetadataValueMemberStringListValue) Serialize(s smithy.ShapeSerializer) {
+	serializeAgenticRetrieveMemoryMetadataStringList(s, schemas.AgenticRetrieveMemoryMetadataValue_stringListValue, v.Value)
+}
+func (v *AgenticRetrieveMemoryMetadataValueMemberStringListValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAgenticRetrieveMemoryMetadataStringList(d, schemas.AgenticRetrieveMemoryMetadataValue_stringListValue, &v.Value)
+}
+
+// A string value.
+type AgenticRetrieveMemoryMetadataValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AgenticRetrieveMemoryMetadataValueMemberStringValue) isAgenticRetrieveMemoryMetadataValue() {}
+func (v *AgenticRetrieveMemoryMetadataValueMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AgenticRetrieveMemoryMetadataValue_stringValue, v.Value)
+}
+func (v *AgenticRetrieveMemoryMetadataValueMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AgenticRetrieveMemoryMetadataValue_stringValue, &v.Value)
+}
+
+// The long-term memory namespace that the agent might retrieve memory records
+// from, and the filters applied to that retrieval. You must specify either
+// namespace or namespacePath.
+type AgenticRetrieveMemoryRetrievalConfig struct {
+
+	// The metadata filter expressions that restrict retrieval to matching memory
+	// records. You can specify a maximum of 5 expressions.
+	MetadataFilters []AgenticRetrieveMemoryMetadataFilter
+
+	// The namespace prefix to filter memory records by. The agent retrieves memory
+	// records in namespaces that start with the provided prefix. You must specify
+	// either namespace or namespacePath.
+	Namespace *string
+
+	// The parent namespace to use for hierarchical retrievals. The agent retrieves
+	// all memory records whose namespace falls under the same parent hierarchy. You
+	// must specify either namespace or namespacePath.
+	NamespacePath *string
+
+	// The extraction strategy ID that restricts retrieval to memory records produced
+	// by a single strategy. Omit this parameter to retrieve records from every
+	// strategy on the memory resource.
+	StrategyId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveMemoryRetrievalConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveMemoryRetrievalConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveMemoryRetrievalConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgenticRetrieveMemoryMetadataFilterList(s, schemas.AgenticRetrieveMemoryRetrievalConfig_metadataFilters, v.MetadataFilters)
+	if v.Namespace != nil {
+		s.WriteString(schemas.AgenticRetrieveMemoryRetrievalConfig_namespace, *v.Namespace)
+	}
+	if v.NamespacePath != nil {
+		s.WriteString(schemas.AgenticRetrieveMemoryRetrievalConfig_namespacePath, *v.NamespacePath)
+	}
+	if v.StrategyId != nil {
+		s.WriteString(schemas.AgenticRetrieveMemoryRetrievalConfig_strategyId, *v.StrategyId)
+	}
+}
+func (v *AgenticRetrieveMemoryRetrievalConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveMemoryRetrievalConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgenticRetrieveMemoryRetrievalConfig_metadataFilters:
+			return deserializeAgenticRetrieveMemoryMetadataFilterList(d, schemas.AgenticRetrieveMemoryRetrievalConfig_metadataFilters, &v.MetadataFilters)
+		case schemas.AgenticRetrieveMemoryRetrievalConfig_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemoryRetrievalConfig_namespace, v.Namespace)
+		case schemas.AgenticRetrieveMemoryRetrievalConfig_namespacePath:
+			v.NamespacePath = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemoryRetrievalConfig_namespacePath, v.NamespacePath)
+		case schemas.AgenticRetrieveMemoryRetrievalConfig_strategyId:
+			v.StrategyId = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemoryRetrievalConfig_strategyId, v.StrategyId)
+		}
+		return nil
+	})
+}
+
+// A long-term memory retrieval that the agent chose to perform. The record
+// reports the query and the namespace. The corresponding Retrieval step reports
+// the results.
+type AgenticRetrieveMemoryRetrieveDetails struct {
+
+	// The query that the agent composed.
+	//
+	// This member is required.
+	InputQuery *AgenticRetrieveMessageContent
+
+	// The identifier of the AgentCore Memory resource retrieved from.
+	//
+	// This member is required.
+	MemoryId *string
+
+	// The namespace prefix retrieved from, as supplied in the request. This field is
+	// present when the request specified namespace.
+	Namespace *string
+
+	// The parent namespace retrieved from hierarchically, as supplied in the request.
+	// This field is present when the request specified namespacePath.
+	NamespacePath *string
+
+	// The extraction strategy that restricted retrieval, if the request specified one.
+	StrategyId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveMemoryRetrieveDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveMemoryRetrieveDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveMemoryRetrieveDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputQuery != nil {
+		s.WriteStruct(schemas.AgenticRetrieveMemoryRetrieveDetails_inputQuery)
+		v.InputQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.AgenticRetrieveMemoryRetrieveDetails_memoryId, *v.MemoryId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.AgenticRetrieveMemoryRetrieveDetails_namespace, *v.Namespace)
+	}
+	if v.NamespacePath != nil {
+		s.WriteString(schemas.AgenticRetrieveMemoryRetrieveDetails_namespacePath, *v.NamespacePath)
+	}
+	if v.StrategyId != nil {
+		s.WriteString(schemas.AgenticRetrieveMemoryRetrieveDetails_strategyId, *v.StrategyId)
+	}
+}
+func (v *AgenticRetrieveMemoryRetrieveDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveMemoryRetrieveDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgenticRetrieveMemoryRetrieveDetails_inputQuery:
+			v.InputQuery = &AgenticRetrieveMessageContent{}
+			return v.InputQuery.Deserialize(d)
+		case schemas.AgenticRetrieveMemoryRetrieveDetails_memoryId:
+			v.MemoryId = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemoryRetrieveDetails_memoryId, v.MemoryId)
+		case schemas.AgenticRetrieveMemoryRetrieveDetails_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemoryRetrieveDetails_namespace, v.Namespace)
+		case schemas.AgenticRetrieveMemoryRetrieveDetails_namespacePath:
+			v.NamespacePath = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemoryRetrieveDetails_namespacePath, v.NamespacePath)
+		case schemas.AgenticRetrieveMemoryRetrieveDetails_strategyId:
+			v.StrategyId = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemoryRetrieveDetails_strategyId, v.StrategyId)
+		}
+		return nil
+	})
+}
+
+// The short-term memory session that this retrieval reads from and writes to.
+type AgenticRetrieveMemorySessionBinding struct {
+
+	// The identifier of the end user or agent that the session belongs to. This
+	// identifier scopes session history so that one actor's history is never returned
+	// for another. You are responsible for sending the correct actor value.
+	//
+	// This member is required.
+	ActorId *string
+
+	// The identifier of the session to restore and continue. You are responsible for
+	// sending the correct session value.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveMemorySessionBinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveMemorySessionBinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveMemorySessionBinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActorId != nil {
+		s.WriteString(schemas.AgenticRetrieveMemorySessionBinding_actorId, *v.ActorId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.AgenticRetrieveMemorySessionBinding_sessionId, *v.SessionId)
+	}
+}
+func (v *AgenticRetrieveMemorySessionBinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveMemorySessionBinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgenticRetrieveMemorySessionBinding_actorId:
+			v.ActorId = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemorySessionBinding_actorId, v.ActorId)
+		case schemas.AgenticRetrieveMemorySessionBinding_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.AgenticRetrieveMemorySessionBinding_sessionId, v.SessionId)
 		}
 		return nil
 	})
@@ -15698,6 +16159,9 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isActionGroupExecutor()                         {}
+func (*UnknownUnionMember) isAgenticRetrieveMemoryMetadataFilterLeft()     {}
+func (*UnknownUnionMember) isAgenticRetrieveMemoryMetadataFilterRight()    {}
+func (*UnknownUnionMember) isAgenticRetrieveMemoryMetadataValue()          {}
 func (*UnknownUnionMember) isAgenticRetrieveStreamResponseOutput()         {}
 func (*UnknownUnionMember) isAgenticRetrieveWarning()                      {}
 func (*UnknownUnionMember) isAPISchema()                                   {}

@@ -8,12 +8,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// This operation is not supported in ap-southeast-1 and ap-southeast-5 regions
-// for [GrabMaps]customers.
-//
 // GetStaticMap provides high-quality static map images with customizable options.
 // You can modify the map's appearance and overlay additional information. It's an
-// ideal solution for applications requiring tailored static map snapshots.
+// ideal solution for applications requiring tailored static map snapshots. Not
+// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
 //
 // For more information, see the following topics in the Amazon Location Service
 // Developer Guide:

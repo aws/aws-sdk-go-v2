@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	"time"
 )
 
 func ExampleActionGroupExecutor_outputUsage() {
@@ -29,6 +30,72 @@ func ExampleActionGroupExecutor_outputUsage() {
 
 var _ *string
 var _ types.CustomControlMethod
+
+func ExampleAgenticRetrieveMemoryMetadataFilterLeft_outputUsage() {
+	var union types.AgenticRetrieveMemoryMetadataFilterLeft
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgenticRetrieveMemoryMetadataFilterLeftMemberMetadataKey:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleAgenticRetrieveMemoryMetadataFilterRight_outputUsage() {
+	var union types.AgenticRetrieveMemoryMetadataFilterRight
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgenticRetrieveMemoryMetadataFilterRightMemberMetadataValue:
+		_ = v.Value // Value is types.AgenticRetrieveMemoryMetadataValue
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.AgenticRetrieveMemoryMetadataValue
+
+func ExampleAgenticRetrieveMemoryMetadataValue_outputUsage() {
+	var union types.AgenticRetrieveMemoryMetadataValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgenticRetrieveMemoryMetadataValueMemberDateTimeValue:
+		_ = v.Value // Value is time.Time
+
+	case *types.AgenticRetrieveMemoryMetadataValueMemberNumberValue:
+		_ = v.Value // Value is float64
+
+	case *types.AgenticRetrieveMemoryMetadataValueMemberStringListValue:
+		_ = v.Value // Value is []string
+
+	case *types.AgenticRetrieveMemoryMetadataValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []string
+var _ *string
+var _ *float64
+var _ *time.Time
 
 func ExampleAgenticRetrieveStreamResponseOutput_outputUsage() {
 	var union types.AgenticRetrieveStreamResponseOutput

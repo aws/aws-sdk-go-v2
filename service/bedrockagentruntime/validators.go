@@ -913,6 +913,118 @@ func validateAgenticRetrieveConfiguration(v *types.AgenticRetrieveConfiguration)
 	}
 }
 
+func validateAgenticRetrieveMemoryConfiguration(v *types.AgenticRetrieveMemoryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgenticRetrieveMemoryConfiguration"}
+	if v.MemoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
+	}
+	if v.SessionBinding != nil {
+		if err := validateAgenticRetrieveMemorySessionBinding(v.SessionBinding); err != nil {
+			invalidParams.AddNested("SessionBinding", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetrievalConfigs != nil {
+		if err := validateAgenticRetrieveMemoryRetrievalConfigList(v.RetrievalConfigs); err != nil {
+			invalidParams.AddNested("RetrievalConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgenticRetrieveMemoryMetadataFilter(v *types.AgenticRetrieveMemoryMetadataFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgenticRetrieveMemoryMetadataFilter"}
+	if v.Left == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Left"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgenticRetrieveMemoryMetadataFilterList(v []types.AgenticRetrieveMemoryMetadataFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgenticRetrieveMemoryMetadataFilterList"}
+	for i := range v {
+		if err := validateAgenticRetrieveMemoryMetadataFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgenticRetrieveMemoryRetrievalConfig(v *types.AgenticRetrieveMemoryRetrievalConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgenticRetrieveMemoryRetrievalConfig"}
+	if v.MetadataFilters != nil {
+		if err := validateAgenticRetrieveMemoryMetadataFilterList(v.MetadataFilters); err != nil {
+			invalidParams.AddNested("MetadataFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgenticRetrieveMemoryRetrievalConfigList(v []types.AgenticRetrieveMemoryRetrievalConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgenticRetrieveMemoryRetrievalConfigList"}
+	for i := range v {
+		if err := validateAgenticRetrieveMemoryRetrievalConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgenticRetrieveMemorySessionBinding(v *types.AgenticRetrieveMemorySessionBinding) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgenticRetrieveMemorySessionBinding"}
+	if v.ActorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActorId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAgenticRetrieveMessage(v *types.AgenticRetrieveMessage) error {
 	if v == nil {
 		return nil
@@ -2987,6 +3099,11 @@ func validateOpAgenticRetrieveStreamInput(v *AgenticRetrieveStreamInput) error {
 	if v.UserContext != nil {
 		if err := validateUserContext(v.UserContext); err != nil {
 			invalidParams.AddNested("UserContext", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MemoryConfiguration != nil {
+		if err := validateAgenticRetrieveMemoryConfiguration(v.MemoryConfiguration); err != nil {
+			invalidParams.AddNested("MemoryConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

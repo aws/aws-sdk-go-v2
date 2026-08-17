@@ -11,7 +11,7 @@ import (
 
 // Starts a chat contact with an AI agent.
 //
-// Use the returned ParticipantToken to call the [CreateParticipantConnection] API.
+// Use the returned ParticipantToken with the [CreateParticipantConnection] operation.
 //
 // For more information about chat, see the following topics in the Connect
 // Customer Administrator Guide:
@@ -40,7 +40,7 @@ func (c *Client) StartAssistantContact(ctx context.Context, params *StartAssista
 
 type StartAssistantContactInput struct {
 
-	// The AI agent that participates in the contact.
+	// The AI agent configuration for this contact.
 	//
 	// This member is required.
 	AiAgent *types.AiAgentInput
@@ -58,12 +58,11 @@ type StartAssistantContactInput struct {
 	// This member is required.
 	ParticipantDetails *types.ParticipantDetails
 
-	// A map of key-value pairs to associate with the contact. Amazon Connect makes
-	// these attributes available to flows as standard contact attributes.
+	// A map of key-value pairs to associate with the contact. We make these
+	// attributes available to flows as standard contact attributes.
 	//
-	// You can provide up to 32,768 UTF-8 bytes across all key-value pairs per
-	// contact. Attribute keys can contain only alphanumeric characters, dashes, and
-	// underscores.
+	// You can provide up to 32,768 UTF-8 bytes across all key-value pairs for each
+	// contact.
 	Attributes map[string]string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -96,15 +95,15 @@ type StartAssistantContactOutput struct {
 	// The identifier of the contact within the Connect Customer instance.
 	ContactId *string
 
-	// For a persistent chat, the identifier of the contact from which the chat
-	// continues. Amazon Connect returns this field only for persistent chats.
+	// The identifier of the contact from which the chat continues, returned only for
+	// persistent chats.
 	ContinuedFromContactId *string
 
 	// The identifier of the chat participant. The participant identifier remains the
 	// same throughout the chat lifecycle.
 	ParticipantId *string
 
-	// The token that the chat participant uses to call the [CreateParticipantConnection] API. The token remains
+	// The token that the chat participant uses with the [CreateParticipantConnection] operation. The token remains
 	// valid for the lifetime of the chat participant.
 	//
 	// [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html

@@ -270,6 +270,43 @@ func TestCheckResponseSnapshot_AssociateSourceNetworkStack(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelRecoveryPlanExecution(t *testing.T) {
+	want := &CancelRecoveryPlanExecutionOutput{
+		RecoveryPlanExecution: &types.RecoveryPlanExecution{
+			RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+			RecoveryPlanArn:          ptr.String("__RecoveryPlanArn__"),
+			Mode:                     types.RecoveryPlanExecutionMode("DRILL"),
+			Status:                   types.RecoveryPlanExecutionStatus("CREATED"),
+			StartedAt:                ptr.String("__StartedAt__"),
+			CompletedAt:              ptr.String("__CompletedAt__"),
+			ErrorDetail: &types.ErrorDetail{
+				Message: ptr.String("__Message__"),
+				Code:    ptr.String("__Code__"),
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelRecoveryPlanExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelRecoveryPlanExecution(context.Background(), &CancelRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelRecoveryPlanExecution.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateExtendedSourceServer(t *testing.T) {
 	want := &CreateExtendedSourceServerOutput{
 		SourceServer: &types.SourceServer{
@@ -483,6 +520,104 @@ func TestCheckResponseSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateRecoveryPlan(t *testing.T) {
+	want := &CreateRecoveryPlanOutput{
+		RecoveryPlan: &types.RecoveryPlan{
+			RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+			Name:            ptr.String("__Name__"),
+			Description:     ptr.String("__Description__"),
+			Status:          types.RecoveryPlanStatus("ACTIVE"),
+			CreatedAt:       ptr.String("__CreatedAt__"),
+			UpdatedAt:       ptr.String("__UpdatedAt__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateRecoveryPlan.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateRecoveryPlan(context.Background(), &CreateRecoveryPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateRecoveryPlan.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateRecoveryPlanStep(t *testing.T) {
+	want := &CreateRecoveryPlanStepOutput{
+		RecoveryPlanStep: &types.RecoveryPlanStep{
+			RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+			StepOrder:           ptr.Int32(1),
+			StepName:            ptr.String("__StepName__"),
+			Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+				Value: types.ServerStepConfiguration{
+					Servers: []types.RecoveryPlanServer{
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+						},
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+						},
+					},
+				},
+			},
+			CreatedAt: ptr.String("__CreatedAt__"),
+			UpdatedAt: ptr.String("__UpdatedAt__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateRecoveryPlanStep.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateRecoveryPlanStep(context.Background(), &CreateRecoveryPlanStepInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		StepName:        ptr.String("__StepName__"),
+		StepOrder:       ptr.Int32(1),
+		Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+			Value: types.ServerStepConfiguration{
+				Servers: []types.RecoveryPlanServer{
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateRecoveryPlanStep.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateReplicationConfigurationTemplate(t *testing.T) {
 	want := &CreateReplicationConfigurationTemplateOutput{
 		ReplicationConfigurationTemplateID: ptr.String("__ReplicationConfigurationTemplateID__"),
@@ -692,6 +827,75 @@ func TestCheckResponseSnapshot_DeleteRecoveryInstance(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRecoveryInstance.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteRecoveryPlan(t *testing.T) {
+	want := &DeleteRecoveryPlanOutput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteRecoveryPlan.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteRecoveryPlan(context.Background(), &DeleteRecoveryPlanInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRecoveryPlan.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteRecoveryPlanExecution(t *testing.T) {
+	want := &DeleteRecoveryPlanExecutionOutput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteRecoveryPlanExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteRecoveryPlanExecution(context.Background(), &DeleteRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRecoveryPlanExecution.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteRecoveryPlanStep(t *testing.T) {
+	want := &DeleteRecoveryPlanStepOutput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteRecoveryPlanStep.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteRecoveryPlanStep(context.Background(), &DeleteRecoveryPlanStepInput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRecoveryPlanStep.response", err)
 	}
 }
 
@@ -2343,6 +2547,170 @@ func TestCheckResponseSnapshot_GetLaunchConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetRecoveryPlan(t *testing.T) {
+	want := &GetRecoveryPlanOutput{
+		RecoveryPlan: &types.RecoveryPlan{
+			RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+			Name:            ptr.String("__Name__"),
+			Description:     ptr.String("__Description__"),
+			Status:          types.RecoveryPlanStatus("ACTIVE"),
+			CreatedAt:       ptr.String("__CreatedAt__"),
+			UpdatedAt:       ptr.String("__UpdatedAt__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRecoveryPlan.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRecoveryPlan(context.Background(), &GetRecoveryPlanInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRecoveryPlan.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetRecoveryPlanExecution(t *testing.T) {
+	want := &GetRecoveryPlanExecutionOutput{
+		RecoveryPlanExecution: &types.RecoveryPlanExecution{
+			RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+			RecoveryPlanArn:          ptr.String("__RecoveryPlanArn__"),
+			Mode:                     types.RecoveryPlanExecutionMode("DRILL"),
+			Status:                   types.RecoveryPlanExecutionStatus("CREATED"),
+			StartedAt:                ptr.String("__StartedAt__"),
+			CompletedAt:              ptr.String("__CompletedAt__"),
+			ErrorDetail: &types.ErrorDetail{
+				Message: ptr.String("__Message__"),
+				Code:    ptr.String("__Code__"),
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRecoveryPlanExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRecoveryPlanExecution(context.Background(), &GetRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRecoveryPlanExecution.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetRecoveryPlanExecutionStep(t *testing.T) {
+	want := &GetRecoveryPlanExecutionStepOutput{
+		RecoveryPlanExecutionStep: &types.RecoveryPlanExecutionStep{
+			RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+			StepIndex:                    ptr.Int32(1),
+			Status:                       types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+			StepName:                     ptr.String("__StepName__"),
+			Configuration: &types.RecoveryPlanExecutionStepConfigurationMemberExecutionServerStepConfiguration{
+				Value: types.ExecutionServerStepConfiguration{
+					Servers: []types.RecoveryPlanExecutionServer{
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							JobID:       ptr.String("__JobID__"),
+						},
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							JobID:       ptr.String("__JobID__"),
+						},
+					},
+				},
+			},
+			ErrorDetail: &types.ErrorDetail{
+				Message: ptr.String("__Message__"),
+				Code:    ptr.String("__Code__"),
+			},
+			Attempt:   ptr.Int32(1),
+			CreatedAt: ptr.String("__CreatedAt__"),
+			UpdatedAt: ptr.String("__UpdatedAt__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRecoveryPlanExecutionStep.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRecoveryPlanExecutionStep(context.Background(), &GetRecoveryPlanExecutionStepInput{
+		RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRecoveryPlanExecutionStep.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetRecoveryPlanStep(t *testing.T) {
+	want := &GetRecoveryPlanStepOutput{
+		RecoveryPlanStep: &types.RecoveryPlanStep{
+			RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+			StepOrder:           ptr.Int32(1),
+			StepName:            ptr.String("__StepName__"),
+			Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+				Value: types.ServerStepConfiguration{
+					Servers: []types.RecoveryPlanServer{
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+						},
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+						},
+					},
+				},
+			},
+			CreatedAt: ptr.String("__CreatedAt__"),
+			UpdatedAt: ptr.String("__UpdatedAt__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRecoveryPlanStep.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRecoveryPlanStep(context.Background(), &GetRecoveryPlanStepInput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRecoveryPlanStep.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetReplicationConfiguration(t *testing.T) {
 	want := &GetReplicationConfigurationOutput{
 		SourceServerID:                ptr.String("__SourceServerID__"),
@@ -2549,6 +2917,247 @@ func TestCheckResponseSnapshot_ListLaunchActions(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListRecoveryPlanExecutionSteps(t *testing.T) {
+	want := &ListRecoveryPlanExecutionStepsOutput{
+		RecoveryPlanExecutionSteps: []types.RecoveryPlanExecutionStepSummary{
+			{
+				RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+				StepName:                     ptr.String("__StepName__"),
+				StepIndex:                    ptr.Int32(1),
+				Status:                       types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+				Configuration: &types.RecoveryPlanExecutionStepConfigurationMemberExecutionServerStepConfiguration{
+					Value: types.ExecutionServerStepConfiguration{
+						Servers: []types.RecoveryPlanExecutionServer{
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+								JobID:       ptr.String("__JobID__"),
+							},
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+								JobID:       ptr.String("__JobID__"),
+							},
+						},
+					},
+				},
+				ErrorDetail: &types.ErrorDetail{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			{
+				RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+				StepName:                     ptr.String("__StepName__"),
+				StepIndex:                    ptr.Int32(1),
+				Status:                       types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+				Configuration: &types.RecoveryPlanExecutionStepConfigurationMemberExecutionServerStepConfiguration{
+					Value: types.ExecutionServerStepConfiguration{
+						Servers: []types.RecoveryPlanExecutionServer{
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+								JobID:       ptr.String("__JobID__"),
+							},
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+								JobID:       ptr.String("__JobID__"),
+							},
+						},
+					},
+				},
+				ErrorDetail: &types.ErrorDetail{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRecoveryPlanExecutionSteps.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRecoveryPlanExecutionSteps(context.Background(), &ListRecoveryPlanExecutionStepsInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+		Filter: &types.ListRecoveryPlanExecutionStepsFilter{
+			Status: types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRecoveryPlanExecutionSteps.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRecoveryPlanExecutions(t *testing.T) {
+	want := &ListRecoveryPlanExecutionsOutput{
+		RecoveryPlanExecutions: []types.RecoveryPlanExecutionSummary{
+			{
+				RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+				RecoveryPlanArn:          ptr.String("__RecoveryPlanArn__"),
+				Mode:                     types.RecoveryPlanExecutionMode("DRILL"),
+				Status:                   types.RecoveryPlanExecutionStatus("CREATED"),
+				StartedAt:                ptr.String("__StartedAt__"),
+				ErrorDetail: &types.ErrorDetail{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			{
+				RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+				RecoveryPlanArn:          ptr.String("__RecoveryPlanArn__"),
+				Mode:                     types.RecoveryPlanExecutionMode("DRILL"),
+				Status:                   types.RecoveryPlanExecutionStatus("CREATED"),
+				StartedAt:                ptr.String("__StartedAt__"),
+				ErrorDetail: &types.ErrorDetail{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRecoveryPlanExecutions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRecoveryPlanExecutions(context.Background(), &ListRecoveryPlanExecutionsInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		Status:          types.RecoveryPlanExecutionStatus("CREATED"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRecoveryPlanExecutions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRecoveryPlanSteps(t *testing.T) {
+	want := &ListRecoveryPlanStepsOutput{
+		RecoveryPlanSteps: []types.RecoveryPlanStep{
+			{
+				RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+				StepOrder:           ptr.Int32(1),
+				StepName:            ptr.String("__StepName__"),
+				Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+					Value: types.ServerStepConfiguration{
+						Servers: []types.RecoveryPlanServer{
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							},
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							},
+						},
+					},
+				},
+				CreatedAt: ptr.String("__CreatedAt__"),
+				UpdatedAt: ptr.String("__UpdatedAt__"),
+			},
+			{
+				RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+				StepOrder:           ptr.Int32(1),
+				StepName:            ptr.String("__StepName__"),
+				Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+					Value: types.ServerStepConfiguration{
+						Servers: []types.RecoveryPlanServer{
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							},
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							},
+						},
+					},
+				},
+				CreatedAt: ptr.String("__CreatedAt__"),
+				UpdatedAt: ptr.String("__UpdatedAt__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRecoveryPlanSteps.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRecoveryPlanSteps(context.Background(), &ListRecoveryPlanStepsInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRecoveryPlanSteps.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRecoveryPlans(t *testing.T) {
+	want := &ListRecoveryPlansOutput{
+		RecoveryPlans: []types.RecoveryPlanSummary{
+			{
+				RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+				Name:            ptr.String("__Name__"),
+				Status:          types.RecoveryPlanStatus("ACTIVE"),
+				CreatedAt:       ptr.String("__CreatedAt__"),
+				UpdatedAt:       ptr.String("__UpdatedAt__"),
+			},
+			{
+				RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+				Name:            ptr.String("__Name__"),
+				Status:          types.RecoveryPlanStatus("ACTIVE"),
+				CreatedAt:       ptr.String("__CreatedAt__"),
+				UpdatedAt:       ptr.String("__UpdatedAt__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRecoveryPlans.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRecoveryPlans(context.Background(), &ListRecoveryPlansInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRecoveryPlans.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListStagingAccounts(t *testing.T) {
 	want := &ListStagingAccountsOutput{
 		Accounts: []types.Account{
@@ -2657,6 +3266,76 @@ func TestCheckResponseSnapshot_PutLaunchAction(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutLaunchAction.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ReorderRecoveryPlanSteps(t *testing.T) {
+	want := &ReorderRecoveryPlanStepsOutput{
+		RecoveryPlanSteps: []types.RecoveryPlanStep{
+			{
+				RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+				StepOrder:           ptr.Int32(1),
+				StepName:            ptr.String("__StepName__"),
+				Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+					Value: types.ServerStepConfiguration{
+						Servers: []types.RecoveryPlanServer{
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							},
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							},
+						},
+					},
+				},
+				CreatedAt: ptr.String("__CreatedAt__"),
+				UpdatedAt: ptr.String("__UpdatedAt__"),
+			},
+			{
+				RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+				StepOrder:           ptr.Int32(1),
+				StepName:            ptr.String("__StepName__"),
+				Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+					Value: types.ServerStepConfiguration{
+						Servers: []types.RecoveryPlanServer{
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							},
+							{
+								ServerArn:   ptr.String("__ServerArn__"),
+								ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							},
+						},
+					},
+				},
+				CreatedAt: ptr.String("__CreatedAt__"),
+				UpdatedAt: ptr.String("__UpdatedAt__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ReorderRecoveryPlanSteps.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ReorderRecoveryPlanSteps(context.Background(), &ReorderRecoveryPlanStepsInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		OrderedStepArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ReorderRecoveryPlanSteps.response", err)
 	}
 }
 
@@ -2812,6 +3491,57 @@ func TestCheckResponseSnapshot_RetryDataReplication(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RetryDataReplication.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RetryRecoveryPlanExecutionStep(t *testing.T) {
+	want := &RetryRecoveryPlanExecutionStepOutput{
+		RecoveryPlanExecutionStep: &types.RecoveryPlanExecutionStep{
+			RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+			StepIndex:                    ptr.Int32(1),
+			Status:                       types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+			StepName:                     ptr.String("__StepName__"),
+			Configuration: &types.RecoveryPlanExecutionStepConfigurationMemberExecutionServerStepConfiguration{
+				Value: types.ExecutionServerStepConfiguration{
+					Servers: []types.RecoveryPlanExecutionServer{
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							JobID:       ptr.String("__JobID__"),
+						},
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							JobID:       ptr.String("__JobID__"),
+						},
+					},
+				},
+			},
+			ErrorDetail: &types.ErrorDetail{
+				Message: ptr.String("__Message__"),
+				Code:    ptr.String("__Code__"),
+			},
+			Attempt:   ptr.Int32(1),
+			CreatedAt: ptr.String("__CreatedAt__"),
+			UpdatedAt: ptr.String("__UpdatedAt__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("RetryRecoveryPlanExecutionStep.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RetryRecoveryPlanExecutionStep(context.Background(), &RetryRecoveryPlanExecutionStepInput{
+		RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RetryRecoveryPlanExecutionStep.response", err)
 	}
 }
 
@@ -3178,6 +3908,58 @@ func TestCheckResponseSnapshot_StartRecovery(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartRecovery.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartRecoveryPlanExecution(t *testing.T) {
+	want := &StartRecoveryPlanExecutionOutput{
+		RecoveryPlanExecution: &types.RecoveryPlanExecution{
+			RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
+			RecoveryPlanArn:          ptr.String("__RecoveryPlanArn__"),
+			Mode:                     types.RecoveryPlanExecutionMode("DRILL"),
+			Status:                   types.RecoveryPlanExecutionStatus("CREATED"),
+			StartedAt:                ptr.String("__StartedAt__"),
+			CompletedAt:              ptr.String("__CompletedAt__"),
+			ErrorDetail: &types.ErrorDetail{
+				Message: ptr.String("__Message__"),
+				Code:    ptr.String("__Code__"),
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartRecoveryPlanExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartRecoveryPlanExecution(context.Background(), &StartRecoveryPlanExecutionInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		Mode:            types.RecoveryPlanExecutionMode("DRILL"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		SourceServers: []types.RecoveryPlanExecutionSourceServer{
+			{
+				SourceServerID:     ptr.String("__SourceServerID__"),
+				RecoverySnapshotID: ptr.String("__RecoverySnapshotID__"),
+			},
+			{
+				SourceServerID:     ptr.String("__SourceServerID__"),
+				RecoverySnapshotID: ptr.String("__RecoverySnapshotID__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartRecoveryPlanExecution.response", err)
 	}
 }
 
@@ -4113,6 +4895,162 @@ func TestCheckResponseSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateRecoveryPlan(t *testing.T) {
+	want := &UpdateRecoveryPlanOutput{
+		RecoveryPlan: &types.RecoveryPlan{
+			RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+			Name:            ptr.String("__Name__"),
+			Description:     ptr.String("__Description__"),
+			Status:          types.RecoveryPlanStatus("ACTIVE"),
+			CreatedAt:       ptr.String("__CreatedAt__"),
+			UpdatedAt:       ptr.String("__UpdatedAt__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRecoveryPlan.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRecoveryPlan(context.Background(), &UpdateRecoveryPlanInput{
+		RecoveryPlanArn: ptr.String("__RecoveryPlanArn__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRecoveryPlan.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateRecoveryPlanExecutionStep(t *testing.T) {
+	want := &UpdateRecoveryPlanExecutionStepOutput{
+		RecoveryPlanExecutionStep: &types.RecoveryPlanExecutionStep{
+			RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+			StepIndex:                    ptr.Int32(1),
+			Status:                       types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+			StepName:                     ptr.String("__StepName__"),
+			Configuration: &types.RecoveryPlanExecutionStepConfigurationMemberExecutionServerStepConfiguration{
+				Value: types.ExecutionServerStepConfiguration{
+					Servers: []types.RecoveryPlanExecutionServer{
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							JobID:       ptr.String("__JobID__"),
+						},
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+							JobID:       ptr.String("__JobID__"),
+						},
+					},
+				},
+			},
+			ErrorDetail: &types.ErrorDetail{
+				Message: ptr.String("__Message__"),
+				Code:    ptr.String("__Code__"),
+			},
+			Attempt:   ptr.Int32(1),
+			CreatedAt: ptr.String("__CreatedAt__"),
+			UpdatedAt: ptr.String("__UpdatedAt__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRecoveryPlanExecutionStep.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRecoveryPlanExecutionStep(context.Background(), &UpdateRecoveryPlanExecutionStepInput{
+		RecoveryPlanExecutionStepArn: ptr.String("__RecoveryPlanExecutionStepArn__"),
+		Status:                       types.RecoveryPlanExecutionStepStatus("NOT_STARTED"),
+		Servers: []types.RecoveryPlanServer{
+			{
+				ServerArn:   ptr.String("__ServerArn__"),
+				ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+			},
+			{
+				ServerArn:   ptr.String("__ServerArn__"),
+				ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+			},
+		},
+		WaitDurationMinutes: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRecoveryPlanExecutionStep.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateRecoveryPlanStep(t *testing.T) {
+	want := &UpdateRecoveryPlanStepOutput{
+		RecoveryPlanStep: &types.RecoveryPlanStep{
+			RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+			StepOrder:           ptr.Int32(1),
+			StepName:            ptr.String("__StepName__"),
+			Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+				Value: types.ServerStepConfiguration{
+					Servers: []types.RecoveryPlanServer{
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+						},
+						{
+							ServerArn:   ptr.String("__ServerArn__"),
+							ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+						},
+					},
+				},
+			},
+			CreatedAt: ptr.String("__CreatedAt__"),
+			UpdatedAt: ptr.String("__UpdatedAt__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRecoveryPlanStep.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRecoveryPlanStep(context.Background(), &UpdateRecoveryPlanStepInput{
+		RecoveryPlanStepArn: ptr.String("__RecoveryPlanStepArn__"),
+		StepName:            ptr.String("__StepName__"),
+		Configuration: &types.RecoveryPlanStepConfigurationMemberServerStepConfiguration{
+			Value: types.ServerStepConfiguration{
+				Servers: []types.RecoveryPlanServer{
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+					{
+						ServerArn:   ptr.String("__ServerArn__"),
+						ImpactLevel: types.RecoveryPlanServerImpactLevel("CRITICAL"),
+					},
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRecoveryPlanStep.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 	want := &UpdateReplicationConfigurationOutput{
 		SourceServerID:                ptr.String("__SourceServerID__"),
@@ -4355,11 +5293,8 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExtendedSourceServer(context.Background(), &CreateExtendedSourceServerInput{
-		SourceServerArn: ptr.String("__SourceServerArn__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
+	_, opErr := svc.CancelRecoveryPlanExecution(context.Background(), &CancelRecoveryPlanExecutionInput{
+		RecoveryPlanExecutionArn: ptr.String("__RecoveryPlanExecutionArn__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

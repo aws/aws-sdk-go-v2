@@ -14749,6 +14749,15 @@ func awsRestjson1_deserializeOpDocumentGetEvaluatorOutput(v **GetEvaluatorOutput
 				sv.EvaluatorName = ptr.String(jtv)
 			}
 
+		case "evaluatorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvaluatorType to be of type string, got %T instead", value)
+				}
+				sv.EvaluatorType = types.EvaluatorType(jtv)
+			}
+
 		case "kmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14774,6 +14783,15 @@ func awsRestjson1_deserializeOpDocumentGetEvaluatorOutput(v **GetEvaluatorOutput
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.LockedForModification = ptr.Bool(jtv)
+			}
+
+		case "provider":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Provider to be of type string, got %T instead", value)
+				}
+				sv.Provider = types.Provider(jtv)
 			}
 
 		case "status":
@@ -40833,6 +40851,51 @@ func awsRestjson1_deserializeDocumentDecryptionFailure(v **types.DecryptionFailu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDerivedEvaluatorConfig(v **types.DerivedEvaluatorConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DerivedEvaluatorConfig
+	if *v == nil {
+		sv = &types.DerivedEvaluatorConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "baseEvaluatorId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvaluatorId to be of type string, got %T instead", value)
+				}
+				sv.BaseEvaluatorId = ptr.String(jtv)
+			}
+
+		case "modelConfig":
+			if err := awsRestjson1_deserializeDocumentEvaluatorModelConfig(&sv.ModelConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDescriptors(v **types.Descriptors, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41838,6 +41901,16 @@ loop:
 			uv = &types.EvaluatorConfigMemberCodeBased{Value: mv}
 			break loop
 
+		case "derived":
+			var mv types.DerivedEvaluatorConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDerivedEvaluatorConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.EvaluatorConfigMemberDerived{Value: mv}
+			break loop
+
 		case "llmAsAJudge":
 			var mv types.LlmAsAJudgeEvaluatorConfig
 			destAddr := &mv
@@ -42090,6 +42163,15 @@ func awsRestjson1_deserializeDocumentEvaluatorSummary(v **types.EvaluatorSummary
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.LockedForModification = ptr.Bool(jtv)
+			}
+
+		case "provider":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Provider to be of type string, got %T instead", value)
+				}
+				sv.Provider = types.Provider(jtv)
 			}
 
 		case "status":

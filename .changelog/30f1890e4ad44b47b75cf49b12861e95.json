@@ -1,0 +1,8 @@
+{
+    "id": "30f1890e-4ad4-4b47-b75c-f49b12861e95",
+    "type": "feature",
+    "description": "Documentation update for the ECR PutReplicationConfiguration API to increase the replication rule limit from 10 to 25",
+    "modules": [
+        "service/ecr"
+    ]
+}

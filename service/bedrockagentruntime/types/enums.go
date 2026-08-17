@@ -69,6 +69,85 @@ func (AgentCollaboration) Values() []AgentCollaboration {
 	}
 }
 
+type AgenticRetrieveMemoryMetadataFilterOperator string
+
+// Enum values for AgenticRetrieveMemoryMetadataFilterOperator
+const (
+	// The EQUALS_TO operator matches memory records whose metadata value equals the
+	// supplied value.
+	AgenticRetrieveMemoryMetadataFilterOperatorEqualsTo AgenticRetrieveMemoryMetadataFilterOperator = "EQUALS_TO"
+	// The EXISTS operator matches memory records that carry the metadata key,
+	// whatever its value. This operator takes no right operand.
+	AgenticRetrieveMemoryMetadataFilterOperatorExists AgenticRetrieveMemoryMetadataFilterOperator = "EXISTS"
+	// The NOT_EXISTS operator matches memory records that do not carry the metadata
+	// key. This operator takes no right operand.
+	AgenticRetrieveMemoryMetadataFilterOperatorNotExists AgenticRetrieveMemoryMetadataFilterOperator = "NOT_EXISTS"
+	// The BEFORE operator matches memory records whose timestamp metadata value falls
+	// before the supplied value.
+	AgenticRetrieveMemoryMetadataFilterOperatorBefore AgenticRetrieveMemoryMetadataFilterOperator = "BEFORE"
+	// The AFTER operator matches memory records whose timestamp metadata value falls
+	// after the supplied value.
+	AgenticRetrieveMemoryMetadataFilterOperatorAfter AgenticRetrieveMemoryMetadataFilterOperator = "AFTER"
+	// The CONTAINS operator matches memory records whose metadata value contains the
+	// supplied value.
+	AgenticRetrieveMemoryMetadataFilterOperatorContains AgenticRetrieveMemoryMetadataFilterOperator = "CONTAINS"
+	// The GREATER_THAN operator matches memory records whose numeric metadata value
+	// is greater than the supplied value.
+	AgenticRetrieveMemoryMetadataFilterOperatorGreaterThan AgenticRetrieveMemoryMetadataFilterOperator = "GREATER_THAN"
+	// The GREATER_THAN_OR_EQUALS operator matches memory records whose numeric
+	// metadata value is greater than or equal to the supplied value.
+	AgenticRetrieveMemoryMetadataFilterOperatorGreaterThanOrEquals AgenticRetrieveMemoryMetadataFilterOperator = "GREATER_THAN_OR_EQUALS"
+	// The LESS_THAN operator matches memory records whose numeric metadata value is
+	// less than the supplied value.
+	AgenticRetrieveMemoryMetadataFilterOperatorLessThan AgenticRetrieveMemoryMetadataFilterOperator = "LESS_THAN"
+	// The LESS_THAN_OR_EQUALS operator matches memory records whose numeric metadata
+	// value is less than or equal to the supplied value.
+	AgenticRetrieveMemoryMetadataFilterOperatorLessThanOrEquals AgenticRetrieveMemoryMetadataFilterOperator = "LESS_THAN_OR_EQUALS"
+)
+
+// Values returns all known values for
+// AgenticRetrieveMemoryMetadataFilterOperator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgenticRetrieveMemoryMetadataFilterOperator) Values() []AgenticRetrieveMemoryMetadataFilterOperator {
+	return []AgenticRetrieveMemoryMetadataFilterOperator{
+		"EQUALS_TO",
+		"EXISTS",
+		"NOT_EXISTS",
+		"BEFORE",
+		"AFTER",
+		"CONTAINS",
+		"GREATER_THAN",
+		"GREATER_THAN_OR_EQUALS",
+		"LESS_THAN",
+		"LESS_THAN_OR_EQUALS",
+	}
+}
+
+type AgenticRetrieveMemoryPersistenceMode string
+
+// Enum values for AgenticRetrieveMemoryPersistenceMode
+const (
+	// Specifies that the question and the agent-generated answer are persisted to the
+	// session. This is the default when persistenceMode is omitted.
+	AgenticRetrieveMemoryPersistenceModeDefault AgenticRetrieveMemoryPersistenceMode = "DEFAULT"
+	// Specifies that the session is left unchanged.
+	AgenticRetrieveMemoryPersistenceModeNone AgenticRetrieveMemoryPersistenceMode = "NONE"
+)
+
+// Values returns all known values for AgenticRetrieveMemoryPersistenceMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgenticRetrieveMemoryPersistenceMode) Values() []AgenticRetrieveMemoryPersistenceMode {
+	return []AgenticRetrieveMemoryPersistenceMode{
+		"DEFAULT",
+		"NONE",
+	}
+}
+
 type AgenticRetrieveRerankingConfigurationType string
 
 // Enum values for AgenticRetrieveRerankingConfigurationType
@@ -145,6 +224,9 @@ const (
 	AgenticRetrieveStepSpeculativeRetrieval AgenticRetrieveStep = "SpeculativeRetrieval"
 	// The full document expansion phase.
 	AgenticRetrieveStepFullDocumentExpansion AgenticRetrieveStep = "FullDocumentExpansion"
+	// The phase that restores prior session history from AgentCore Memory short-term
+	// memory, before the agent begins work.
+	AgenticRetrieveStepSessionHistoryLoad AgenticRetrieveStep = "SessionHistoryLoad"
 )
 
 // Values returns all known values for AgenticRetrieveStep. Note that this can be
@@ -157,6 +239,7 @@ func (AgenticRetrieveStep) Values() []AgenticRetrieveStep {
 		"Retrieval",
 		"SpeculativeRetrieval",
 		"FullDocumentExpansion",
+		"SessionHistoryLoad",
 	}
 }
 
@@ -166,6 +249,9 @@ type AgenticRetrieveType string
 const (
 	// A Bedrock knowledge base retrieval source.
 	AgenticRetrieveTypeBedrockKnowledgeBase AgenticRetrieveType = "BedrockKnowledgeBase"
+	// An AgentCore Memory resource. Long-term memory retrievals report under the
+	// Retrieval step with this source type.
+	AgenticRetrieveTypeBedrockAgentCoreMemory AgenticRetrieveType = "BedrockAgentCoreMemory"
 )
 
 // Values returns all known values for AgenticRetrieveType. Note that this can be
@@ -175,6 +261,7 @@ const (
 func (AgenticRetrieveType) Values() []AgenticRetrieveType {
 	return []AgenticRetrieveType{
 		"BedrockKnowledgeBase",
+		"BedrockAgentCoreMemory",
 	}
 }
 

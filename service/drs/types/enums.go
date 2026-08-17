@@ -828,6 +828,121 @@ func (RecoveryMode) Values() []RecoveryMode {
 	}
 }
 
+type RecoveryPlanExecutionMode string
+
+// Enum values for RecoveryPlanExecutionMode
+const (
+	RecoveryPlanExecutionModeDrill    RecoveryPlanExecutionMode = "DRILL"
+	RecoveryPlanExecutionModeRecovery RecoveryPlanExecutionMode = "RECOVERY"
+)
+
+// Values returns all known values for RecoveryPlanExecutionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecoveryPlanExecutionMode) Values() []RecoveryPlanExecutionMode {
+	return []RecoveryPlanExecutionMode{
+		"DRILL",
+		"RECOVERY",
+	}
+}
+
+type RecoveryPlanExecutionStatus string
+
+// Enum values for RecoveryPlanExecutionStatus
+const (
+	RecoveryPlanExecutionStatusCreated    RecoveryPlanExecutionStatus = "CREATED"
+	RecoveryPlanExecutionStatusInProgress RecoveryPlanExecutionStatus = "IN_PROGRESS"
+	RecoveryPlanExecutionStatusCompleted  RecoveryPlanExecutionStatus = "COMPLETED"
+	RecoveryPlanExecutionStatusFailed     RecoveryPlanExecutionStatus = "FAILED"
+	RecoveryPlanExecutionStatusCancelling RecoveryPlanExecutionStatus = "CANCELLING"
+	RecoveryPlanExecutionStatusCancelled  RecoveryPlanExecutionStatus = "CANCELLED"
+)
+
+// Values returns all known values for RecoveryPlanExecutionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecoveryPlanExecutionStatus) Values() []RecoveryPlanExecutionStatus {
+	return []RecoveryPlanExecutionStatus{
+		"CREATED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"CANCELLING",
+		"CANCELLED",
+	}
+}
+
+type RecoveryPlanExecutionStepStatus string
+
+// Enum values for RecoveryPlanExecutionStepStatus
+const (
+	RecoveryPlanExecutionStepStatusNotStarted RecoveryPlanExecutionStepStatus = "NOT_STARTED"
+	RecoveryPlanExecutionStepStatusExecuting  RecoveryPlanExecutionStepStatus = "EXECUTING"
+	RecoveryPlanExecutionStepStatusWaiting    RecoveryPlanExecutionStepStatus = "WAITING"
+	RecoveryPlanExecutionStepStatusCompleted  RecoveryPlanExecutionStepStatus = "COMPLETED"
+	RecoveryPlanExecutionStepStatusFailed     RecoveryPlanExecutionStepStatus = "FAILED"
+	RecoveryPlanExecutionStepStatusTimedOut   RecoveryPlanExecutionStepStatus = "TIMED_OUT"
+	RecoveryPlanExecutionStepStatusSkipped    RecoveryPlanExecutionStepStatus = "SKIPPED"
+)
+
+// Values returns all known values for RecoveryPlanExecutionStepStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecoveryPlanExecutionStepStatus) Values() []RecoveryPlanExecutionStepStatus {
+	return []RecoveryPlanExecutionStepStatus{
+		"NOT_STARTED",
+		"EXECUTING",
+		"WAITING",
+		"COMPLETED",
+		"FAILED",
+		"TIMED_OUT",
+		"SKIPPED",
+	}
+}
+
+type RecoveryPlanServerImpactLevel string
+
+// Enum values for RecoveryPlanServerImpactLevel
+const (
+	RecoveryPlanServerImpactLevelCritical RecoveryPlanServerImpactLevel = "CRITICAL"
+	RecoveryPlanServerImpactLevelOptional RecoveryPlanServerImpactLevel = "OPTIONAL"
+)
+
+// Values returns all known values for RecoveryPlanServerImpactLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecoveryPlanServerImpactLevel) Values() []RecoveryPlanServerImpactLevel {
+	return []RecoveryPlanServerImpactLevel{
+		"CRITICAL",
+		"OPTIONAL",
+	}
+}
+
+type RecoveryPlanStatus string
+
+// Enum values for RecoveryPlanStatus
+const (
+	RecoveryPlanStatusActive  RecoveryPlanStatus = "ACTIVE"
+	RecoveryPlanStatusInvalid RecoveryPlanStatus = "INVALID"
+)
+
+// Values returns all known values for RecoveryPlanStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecoveryPlanStatus) Values() []RecoveryPlanStatus {
+	return []RecoveryPlanStatus{
+		"ACTIVE",
+		"INVALID",
+	}
+}
+
 type RecoveryResult string
 
 // Enum values for RecoveryResult

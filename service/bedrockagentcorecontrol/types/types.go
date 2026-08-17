@@ -2145,6 +2145,25 @@ type DeleteMemoryStrategyInput struct {
 	noSmithyDocumentSerde
 }
 
+//	The configuration for a derived evaluator. It reuses an existing evaluator's
+//
+// logic on your own model.
+type DerivedEvaluatorConfig struct {
+
+	//  The identifier of the base evaluator whose logic to run (a Builtin.* or
+	// ThirdParty.* evaluator).
+	//
+	// This member is required.
+	BaseEvaluatorId *string
+
+	//  The configuration of the evaluator model that you supply.
+	//
+	// This member is required.
+	ModelConfig EvaluatorModelConfig
+
+	noSmithyDocumentSerde
+}
+
 // Contains descriptor-type-specific configurations for a registry record. Only
 // the descriptor matching the record's descriptorType should be populated.
 type Descriptors struct {
@@ -2577,6 +2596,7 @@ type EpisodicReflectionOverride struct {
 // The following types satisfy this interface:
 //
 //	EvaluatorConfigMemberCodeBased
+//	EvaluatorConfigMemberDerived
 //	EvaluatorConfigMemberLlmAsAJudge
 type EvaluatorConfig interface {
 	isEvaluatorConfig()
@@ -2592,6 +2612,18 @@ type EvaluatorConfigMemberCodeBased struct {
 }
 
 func (*EvaluatorConfigMemberCodeBased) isEvaluatorConfig() {}
+
+//	The configuration for an evaluator derived from an existing base evaluator (a
+//
+// built-in or third-party evaluator), run on your own model. The base evaluator
+// supplies the prompt and scoring.
+type EvaluatorConfigMemberDerived struct {
+	Value DerivedEvaluatorConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluatorConfigMemberDerived) isEvaluatorConfig() {}
 
 //	The LLM-as-a-Judge configuration that uses a language model to evaluate agent
 //
@@ -2712,6 +2744,10 @@ type EvaluatorSummary struct {
 	//  Whether the evaluator is locked for modification due to being referenced by
 	// active online evaluation configurations.
 	LockedForModification *bool
+
+	//  The source of the evaluator's logic: Amazon Web Services, a third-party
+	// library, or you.
+	Provider Provider
 
 	noSmithyDocumentSerde
 }

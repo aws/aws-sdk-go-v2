@@ -32,6 +32,7 @@ const (
 	ActionTypeAssignSla                ActionType = "ASSIGN_SLA"
 	ActionTypeEndAssociatedTasks       ActionType = "END_ASSOCIATED_TASKS"
 	ActionTypeSubmitAutoEvaluation     ActionType = "SUBMIT_AUTO_EVALUATION"
+	ActionTypeExtractInformation       ActionType = "EXTRACT_INFORMATION"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -49,6 +50,7 @@ func (ActionType) Values() []ActionType {
 		"ASSIGN_SLA",
 		"END_ASSOCIATED_TASKS",
 		"SUBMIT_AUTO_EVALUATION",
+		"EXTRACT_INFORMATION",
 	}
 }
 
@@ -1647,6 +1649,8 @@ const (
 	EventSourceNameOnRealTimeCallAnalysisAvailable  EventSourceName = "OnRealTimeCallAnalysisAvailable"
 	EventSourceNameOnRealTimeChatAnalysisAvailable  EventSourceName = "OnRealTimeChatAnalysisAvailable"
 	EventSourceNameOnPostChatAnalysisAvailable      EventSourceName = "OnPostChatAnalysisAvailable"
+	EventSourceNameOnAfterCallWorkAvailable         EventSourceName = "OnAfterCallWorkAvailable"
+	EventSourceNameOnAfterChatWorkAvailable         EventSourceName = "OnAfterChatWorkAvailable"
 	EventSourceNameOnEmailAnalysisAvailable         EventSourceName = "OnEmailAnalysisAvailable"
 	EventSourceNameOnZendeskTicketCreate            EventSourceName = "OnZendeskTicketCreate"
 	EventSourceNameOnZendeskTicketStatusUpdate      EventSourceName = "OnZendeskTicketStatusUpdate"
@@ -1672,6 +1676,8 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnRealTimeCallAnalysisAvailable",
 		"OnRealTimeChatAnalysisAvailable",
 		"OnPostChatAnalysisAvailable",
+		"OnAfterCallWorkAvailable",
+		"OnAfterChatWorkAvailable",
 		"OnEmailAnalysisAvailable",
 		"OnZendeskTicketCreate",
 		"OnZendeskTicketStatusUpdate",
@@ -2616,6 +2622,25 @@ const (
 func (NextContactType) Values() []NextContactType {
 	return []NextContactType{
 		"QUICK_CONNECT",
+	}
+}
+
+type NotFoundBehaviorType string
+
+// Enum values for NotFoundBehaviorType
+const (
+	NotFoundBehaviorTypeUseDefaultValue NotFoundBehaviorType = "USE_DEFAULT_VALUE"
+	NotFoundBehaviorTypeOmit            NotFoundBehaviorType = "OMIT"
+)
+
+// Values returns all known values for NotFoundBehaviorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotFoundBehaviorType) Values() []NotFoundBehaviorType {
+	return []NotFoundBehaviorType{
+		"USE_DEFAULT_VALUE",
+		"OMIT",
 	}
 }
 

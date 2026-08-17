@@ -910,6 +910,26 @@ func (m *validateOpCreateEvaluationForm) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateExtractionDefinition struct {
+}
+
+func (*validateOpCreateExtractionDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExtractionDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExtractionDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExtractionDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateHoursOfOperation struct {
 }
 
@@ -1710,6 +1730,26 @@ func (m *validateOpDeleteEvaluationForm) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteExtractionDefinition struct {
+}
+
+func (*validateOpDeleteExtractionDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExtractionDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExtractionDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExtractionDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteHoursOfOperation struct {
 }
 
@@ -2485,6 +2525,26 @@ func (m *validateOpDescribeEvaluationForm) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeEvaluationFormInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeExtractionDefinition struct {
+}
+
+func (*validateOpDescribeExtractionDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeExtractionDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeExtractionDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeExtractionDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4165,6 +4225,26 @@ func (m *validateOpListEvaluationFormVersions) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEvaluationFormVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExtractionDefinitions struct {
+}
+
+func (*validateOpListExtractionDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExtractionDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExtractionDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExtractionDefinitionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6730,6 +6810,26 @@ func (m *validateOpUpdateEvaluationForm) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateExtractionDefinition struct {
+}
+
+func (*validateOpUpdateExtractionDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateExtractionDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateExtractionDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateExtractionDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateHoursOfOperation struct {
 }
 
@@ -7850,6 +7950,10 @@ func addOpCreateEvaluationFormValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateEvaluationForm{}, middleware.After)
 }
 
+func addOpCreateExtractionDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExtractionDefinition{}, middleware.After)
+}
+
 func addOpCreateHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHoursOfOperation{}, middleware.After)
 }
@@ -8010,6 +8114,10 @@ func addOpDeleteEvaluationFormValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteEvaluationForm{}, middleware.After)
 }
 
+func addOpDeleteExtractionDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExtractionDefinition{}, middleware.After)
+}
+
 func addOpDeleteHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteHoursOfOperation{}, middleware.After)
 }
@@ -8164,6 +8272,10 @@ func addOpDescribeEmailAddressValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDescribeEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEvaluationForm{}, middleware.After)
+}
+
+func addOpDescribeExtractionDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeExtractionDefinition{}, middleware.After)
 }
 
 func addOpDescribeHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
@@ -8500,6 +8612,10 @@ func addOpListEvaluationFormsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListEvaluationFormVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEvaluationFormVersions{}, middleware.After)
+}
+
+func addOpListExtractionDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExtractionDefinitions{}, middleware.After)
 }
 
 func addOpListFlowAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -9012,6 +9128,10 @@ func addOpUpdateEmailAddressMetadataValidationMiddleware(stack *middleware.Stack
 
 func addOpUpdateEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEvaluationForm{}, middleware.After)
+}
+
+func addOpUpdateExtractionDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateExtractionDefinition{}, middleware.After)
 }
 
 func addOpUpdateHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
@@ -10910,6 +11030,60 @@ func validateExtensionConfiguration(v *types.ExtensionConfiguration) error {
 	}
 }
 
+func validateExtractInformationActionDefinition(v *types.ExtractInformationActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtractInformationActionDefinition"}
+	if v.RulesExtractionDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RulesExtractionDefinitions"))
+	} else if v.RulesExtractionDefinitions != nil {
+		if err := validateRulesExtractionDefinitionIdentifierList(v.RulesExtractionDefinitions); err != nil {
+			invalidParams.AddNested("RulesExtractionDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExtractionConfiguration(v *types.ExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtractionConfiguration"}
+	if v.PromptHint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptHint"))
+	}
+	if v.NotFoundBehavior != nil {
+		if err := validateExtractionDefinitionNotFoundBehavior(v.NotFoundBehavior); err != nil {
+			invalidParams.AddNested("NotFoundBehavior", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExtractionDefinitionNotFoundBehavior(v *types.ExtractionDefinitionNotFoundBehavior) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtractionDefinitionNotFoundBehavior"}
+	if len(v.Behavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Behavior"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFieldValue(v *types.FieldValue) error {
 	if v == nil {
 		return nil
@@ -12191,6 +12365,11 @@ func validateRuleAction(v *types.RuleAction) error {
 			invalidParams.AddNested("SubmitAutoEvaluationAction", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ExtractInformationAction != nil {
+		if err := validateExtractInformationActionDefinition(v.ExtractInformationAction); err != nil {
+			invalidParams.AddNested("ExtractInformationAction", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -12205,6 +12384,38 @@ func validateRuleActions(v []types.RuleAction) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RuleActions"}
 	for i := range v {
 		if err := validateRuleAction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRulesExtractionDefinitionIdentifier(v *types.RulesExtractionDefinitionIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RulesExtractionDefinitionIdentifier"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRulesExtractionDefinitionIdentifierList(v []types.RulesExtractionDefinitionIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RulesExtractionDefinitionIdentifierList"}
+	for i := range v {
+		if err := validateRulesExtractionDefinitionIdentifier(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -14058,6 +14269,31 @@ func validateOpCreateEvaluationFormInput(v *CreateEvaluationFormInput) error {
 	}
 }
 
+func validateOpCreateExtractionDefinitionInput(v *CreateExtractionDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExtractionDefinitionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ExtractionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtractionConfiguration"))
+	} else if v.ExtractionConfiguration != nil {
+		if err := validateExtractionConfiguration(v.ExtractionConfiguration); err != nil {
+			invalidParams.AddNested("ExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateHoursOfOperationInput(v *CreateHoursOfOperationInput) error {
 	if v == nil {
 		return nil
@@ -14991,6 +15227,24 @@ func validateOpDeleteEvaluationFormInput(v *DeleteEvaluationFormInput) error {
 	}
 }
 
+func validateOpDeleteExtractionDefinitionInput(v *DeleteExtractionDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExtractionDefinitionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ExtractionDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtractionDefinitionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteHoursOfOperationInput(v *DeleteHoursOfOperationInput) error {
 	if v == nil {
 		return nil
@@ -15703,6 +15957,24 @@ func validateOpDescribeEvaluationFormInput(v *DescribeEvaluationFormInput) error
 	}
 	if v.EvaluationFormId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeExtractionDefinitionInput(v *DescribeExtractionDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeExtractionDefinitionInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ExtractionDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtractionDefinitionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17301,6 +17573,21 @@ func validateOpListEvaluationFormVersionsInput(v *ListEvaluationFormVersionsInpu
 	}
 	if v.EvaluationFormId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExtractionDefinitionsInput(v *ListExtractionDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExtractionDefinitionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -19839,6 +20126,34 @@ func validateOpUpdateEvaluationFormInput(v *UpdateEvaluationFormInput) error {
 	if v.TargetConfiguration != nil {
 		if err := validateEvaluationFormTargetConfiguration(v.TargetConfiguration); err != nil {
 			invalidParams.AddNested("TargetConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateExtractionDefinitionInput(v *UpdateExtractionDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExtractionDefinitionInput"}
+	if v.ExtractionDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtractionDefinitionId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ExtractionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtractionConfiguration"))
+	} else if v.ExtractionConfiguration != nil {
+		if err := validateExtractionConfiguration(v.ExtractionConfiguration); err != nil {
+			invalidParams.AddNested("ExtractionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

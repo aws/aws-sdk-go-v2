@@ -2681,6 +2681,45 @@ func TestCheckResponseSnapshot_CreateEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateExtractionDefinition(t *testing.T) {
+	want := &CreateExtractionDefinitionOutput{
+		ExtractionDefinitionArn: ptr.String("__ExtractionDefinitionArn__"),
+		ExtractionDefinitionId:  ptr.String("__ExtractionDefinitionId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateExtractionDefinition.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateExtractionDefinition(context.Background(), &CreateExtractionDefinitionInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			PromptHint: ptr.String("__PromptHint__"),
+			NotFoundBehavior: &types.ExtractionDefinitionNotFoundBehavior{
+				Behavior:     types.NotFoundBehaviorType("USE_DEFAULT_VALUE"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+			},
+		},
+		Display: &types.ExtractionDefinitionDisplay{
+			Label: ptr.String("__Label__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateExtractionDefinition.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateHoursOfOperation(t *testing.T) {
 	want := &CreateHoursOfOperationOutput{
 		HoursOfOperationId:  ptr.String("__HoursOfOperationId__"),
@@ -3527,6 +3566,16 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
+				ExtractInformationAction: &types.ExtractInformationActionDefinition{
+					RulesExtractionDefinitions: []types.RulesExtractionDefinitionIdentifier{
+						{
+							Identifier: ptr.String("__Identifier__"),
+						},
+						{
+							Identifier: ptr.String("__Identifier__"),
+						},
+					},
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -3643,6 +3692,16 @@ func TestCheckResponseSnapshot_CreateRule(t *testing.T) {
 				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
+				},
+				ExtractInformationAction: &types.ExtractInformationActionDefinition{
+					RulesExtractionDefinitions: []types.RulesExtractionDefinitionIdentifier{
+						{
+							Identifier: ptr.String("__Identifier__"),
+						},
+						{
+							Identifier: ptr.String("__Identifier__"),
+						},
+					},
 				},
 			},
 		},
@@ -4694,6 +4753,28 @@ func TestCheckResponseSnapshot_DeleteEvaluationForm(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteEvaluationForm.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteExtractionDefinition(t *testing.T) {
+	want := &DeleteExtractionDefinitionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteExtractionDefinition.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteExtractionDefinition(context.Background(), &DeleteExtractionDefinitionInput{
+		InstanceId:             ptr.String("__InstanceId__"),
+		ExtractionDefinitionId: ptr.String("__ExtractionDefinitionId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteExtractionDefinition.response", err)
 	}
 }
 
@@ -7463,6 +7544,50 @@ func TestCheckResponseSnapshot_DescribeEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeExtractionDefinition(t *testing.T) {
+	want := &DescribeExtractionDefinitionOutput{
+		ExtractionDefinition: &types.ExtractionDefinition{
+			Name:                    ptr.String("__Name__"),
+			ExtractionDefinitionId:  ptr.String("__ExtractionDefinitionId__"),
+			ExtractionDefinitionArn: ptr.String("__ExtractionDefinitionArn__"),
+			ExtractionConfiguration: &types.ExtractionConfiguration{
+				PromptHint: ptr.String("__PromptHint__"),
+				NotFoundBehavior: &types.ExtractionDefinitionNotFoundBehavior{
+					Behavior:     types.NotFoundBehaviorType("USE_DEFAULT_VALUE"),
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+			Display: &types.ExtractionDefinitionDisplay{
+				Label: ptr.String("__Label__"),
+			},
+			CreatedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedBy:   ptr.String("__LastUpdatedBy__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeExtractionDefinition.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeExtractionDefinition(context.Background(), &DescribeExtractionDefinitionInput{
+		InstanceId:             ptr.String("__InstanceId__"),
+		ExtractionDefinitionId: ptr.String("__ExtractionDefinitionId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeExtractionDefinition.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeHoursOfOperation(t *testing.T) {
 	want := &DescribeHoursOfOperationOutput{
 		HoursOfOperation: &types.HoursOfOperation{
@@ -8369,6 +8494,16 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
+					ExtractInformationAction: &types.ExtractInformationActionDefinition{
+						RulesExtractionDefinitions: []types.RulesExtractionDefinitionIdentifier{
+							{
+								Identifier: ptr.String("__Identifier__"),
+							},
+							{
+								Identifier: ptr.String("__Identifier__"),
+							},
+						},
+					},
 				},
 				{
 					ActionType: types.ActionType("CREATE_TASK"),
@@ -8485,6 +8620,16 @@ func TestCheckResponseSnapshot_DescribeRule(t *testing.T) {
 					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
+					},
+					ExtractInformationAction: &types.ExtractInformationActionDefinition{
+						RulesExtractionDefinitions: []types.RulesExtractionDefinitionIdentifier{
+							{
+								Identifier: ptr.String("__Identifier__"),
+							},
+							{
+								Identifier: ptr.String("__Identifier__"),
+							},
+						},
 					},
 				},
 			},
@@ -12458,6 +12603,49 @@ func TestCheckResponseSnapshot_ListEvaluationForms(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListEvaluationForms.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListExtractionDefinitions(t *testing.T) {
+	want := &ListExtractionDefinitionsOutput{
+		ExtractionDefinitionSummaryList: []types.ExtractionDefinitionSummary{
+			{
+				Name:                    ptr.String("__Name__"),
+				ExtractionDefinitionId:  ptr.String("__ExtractionDefinitionId__"),
+				ExtractionDefinitionArn: ptr.String("__ExtractionDefinitionArn__"),
+				CreatedTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedBy:           ptr.String("__LastUpdatedBy__"),
+			},
+			{
+				Name:                    ptr.String("__Name__"),
+				ExtractionDefinitionId:  ptr.String("__ExtractionDefinitionId__"),
+				ExtractionDefinitionArn: ptr.String("__ExtractionDefinitionArn__"),
+				CreatedTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedBy:           ptr.String("__LastUpdatedBy__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListExtractionDefinitions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListExtractionDefinitions(context.Background(), &ListExtractionDefinitionsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListExtractionDefinitions.response", err)
 	}
 }
 
@@ -22059,6 +22247,40 @@ func TestCheckResponseSnapshot_UpdateEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateExtractionDefinition(t *testing.T) {
+	want := &UpdateExtractionDefinitionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateExtractionDefinition.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateExtractionDefinition(context.Background(), &UpdateExtractionDefinitionInput{
+		ClientToken:            ptr.String("__ClientToken__"),
+		ExtractionDefinitionId: ptr.String("__ExtractionDefinitionId__"),
+		InstanceId:             ptr.String("__InstanceId__"),
+		Name:                   ptr.String("__Name__"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			PromptHint: ptr.String("__PromptHint__"),
+			NotFoundBehavior: &types.ExtractionDefinitionNotFoundBehavior{
+				Behavior:     types.NotFoundBehaviorType("USE_DEFAULT_VALUE"),
+				DefaultValue: ptr.String("__DefaultValue__"),
+			},
+		},
+		Display: &types.ExtractionDefinitionDisplay{
+			Label: ptr.String("__Label__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateExtractionDefinition.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateHoursOfOperation(t *testing.T) {
 	want := &UpdateHoursOfOperationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdateHoursOfOperation.response")
@@ -23096,6 +23318,16 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
+				ExtractInformationAction: &types.ExtractInformationActionDefinition{
+					RulesExtractionDefinitions: []types.RulesExtractionDefinitionIdentifier{
+						{
+							Identifier: ptr.String("__Identifier__"),
+						},
+						{
+							Identifier: ptr.String("__Identifier__"),
+						},
+					},
+				},
 			},
 			{
 				ActionType: types.ActionType("CREATE_TASK"),
@@ -23212,6 +23444,16 @@ func TestCheckResponseSnapshot_UpdateRule(t *testing.T) {
 				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
+				},
+				ExtractInformationAction: &types.ExtractInformationActionDefinition{
+					RulesExtractionDefinitions: []types.RulesExtractionDefinitionIdentifier{
+						{
+							Identifier: ptr.String("__Identifier__"),
+						},
+						{
+							Identifier: ptr.String("__Identifier__"),
+						},
+					},
 				},
 			},
 		},
