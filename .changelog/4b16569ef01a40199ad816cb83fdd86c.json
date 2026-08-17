@@ -1,0 +1,8 @@
+{
+    "id": "4b16569e-f01a-4019-9ad8-16cb83fdd86c",
+    "type": "bugfix",
+    "description": "Fix flaky test from feature/s3/manager upload retry",
+    "modules": [
+        "feature/s3/manager"
+    ]
+}
