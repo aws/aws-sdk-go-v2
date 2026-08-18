@@ -1,8 +1,0 @@
-{
-    "id": "9b4c117d-b6a8-46a8-8953-2bcc067e8481",
-    "type": "feature",
-    "description": "Added ResourceNotFoundException to DeleteSchemaMapping, DeleteMatchingWorkflow, DeleteIdMappingWorkflow, and DeleteIdNamespace. These operations now return a 404 ResourceNotFoundException (previously a 200 Success) when the target resource does not exist.",
-    "modules": [
-        "service/entityresolution"
-    ]
-}

@@ -1,3 +1,23 @@
+# Release (2026-08-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.3.14](feature/s3/transfermanager/CHANGELOG.md#v0314-2026-08-18)
+  * **Bug Fix**: Close each file transferred during directory upload/download to avoid leaking file handles
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.68.7](service/batch/CHANGELOG.md#v1687-2026-08-18)
+  * **Documentation**: Update AWS Batch documentation with newer Fargate Supported configurations, notes, and fix broken Docker link re-directs.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.321.3](service/ec2/CHANGELOG.md#v13213-2026-08-18)
+  * **Documentation**: Doc release for CreateImage support for instances with local snapshots in Outpost
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.31.0](service/entityresolution/CHANGELOG.md#v1310-2026-08-18)
+  * **Feature**: Added ResourceNotFoundException to DeleteSchemaMapping, DeleteMatchingWorkflow, DeleteIdMappingWorkflow, and DeleteIdNamespace. These operations now return a 404 ResourceNotFoundException (previously a 200 Success) when the target resource does not exist.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.45.0](service/marketplacecatalog/CHANGELOG.md#v1450-2026-08-18)
+  * **Feature**: Introducing two new APIs, DescribeAssessment and ListAssessments. These APIs expose validation issues on Marketplace resources. The validation issues are exposed via a newly created resource called Assessment.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.103.0](service/medialive/CHANGELOG.md#v11030-2026-08-18)
+  * **Feature**: AWS Elemental MediaLive now supports SCTE-35 marker passthrough without IDR frame insertion for CMAF Ingest, MediaPackage V2, and transport stream outputs.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.67.0](service/outposts/CHANGELOG.md#v1670-2026-08-18)
+  * **Feature**: AWS Outposts now supports VPC Endpoint configuration in CreatePrivateConnectivityConfig, enabling scoped private connectivity with provisioning role creation for secure outpost installations
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.74.0](service/workspaces/CHANGELOG.md#v1740-2026-08-18)
+  * **Feature**: Amazon WorkSpaces now supports nested virtualization, allowing you to run hypervisors and virtualization-based workloads within your WorkSpaces. You can enable or disable nested virtualization when creating a WorkSpace or by modifying an existing WorkSpace's properties.
+
 # Release (2026-08-17)
 
 ## Module Highlights

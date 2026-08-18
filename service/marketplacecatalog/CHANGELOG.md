@@ -1,3 +1,7 @@
+# v1.45.0 (2026-08-18)
+
+* **Feature**: Introducing two new APIs, DescribeAssessment and ListAssessments. These APIs expose validation issues on Marketplace resources. The validation issues are exposed via a newly created resource called Assessment.
+
 # v1.44.3 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

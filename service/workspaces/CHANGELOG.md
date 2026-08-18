@@ -1,3 +1,7 @@
+# v1.74.0 (2026-08-18)
+
+* **Feature**: Amazon WorkSpaces now supports nested virtualization, allowing you to run hypervisors and virtualization-based workloads within your WorkSpaces. You can enable or disable nested virtualization when creating a WorkSpace or by modifying an existing WorkSpace's properties.
+
 # v1.73.3 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

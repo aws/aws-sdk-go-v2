@@ -1,8 +1,0 @@
-{
-    "id": "ef7fcdde-5f2e-4043-b83f-0eaa64e9f031",
-    "type": "bugfix",
-    "description": "Close each file transferred during directory upload/download to avoid leaking file handles",
-    "modules": [
-        "feature/s3/transfermanager"
-    ]
-}

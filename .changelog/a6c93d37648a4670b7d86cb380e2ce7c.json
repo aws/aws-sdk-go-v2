@@ -1,8 +1,0 @@
-{
-    "id": "a6c93d37-648a-4670-b7d8-6cb380e2ce7c",
-    "type": "documentation",
-    "description": "Doc release for CreateImage support for instances with local snapshots in Outpost",
-    "modules": [
-        "service/ec2"
-    ]
-}

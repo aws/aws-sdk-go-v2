@@ -1,8 +1,0 @@
-{
-    "id": "4caa57c4-7ac6-4092-8e2b-cd0840f2ba74",
-    "type": "feature",
-    "description": "Introducing two new APIs, DescribeAssessment and ListAssessments. These APIs expose validation issues on Marketplace resources. The validation issues are exposed via a newly created resource called Assessment.",
-    "modules": [
-        "service/marketplacecatalog"
-    ]
-}

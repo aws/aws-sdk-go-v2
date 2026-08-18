@@ -1,3 +1,7 @@
+# v1.67.0 (2026-08-18)
+
+* **Feature**: AWS Outposts now supports VPC Endpoint configuration in CreatePrivateConnectivityConfig, enabling scoped private connectivity with provisioning role creation for secure outpost installations
+
 # v1.66.3 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

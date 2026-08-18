@@ -1,3 +1,7 @@
+# v1.68.7 (2026-08-18)
+
+* **Documentation**: Update AWS Batch documentation with newer Fargate Supported configurations, notes, and fix broken Docker link re-directs.
+
 # v1.68.6 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

@@ -1,3 +1,7 @@
+# v0.3.14 (2026-08-18)
+
+* **Bug Fix**: Close each file transferred during directory upload/download to avoid leaking file handles
+
 # v0.3.13 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

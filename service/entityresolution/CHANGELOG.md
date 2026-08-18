@@ -1,3 +1,7 @@
+# v1.31.0 (2026-08-18)
+
+* **Feature**: Added ResourceNotFoundException to DeleteSchemaMapping, DeleteMatchingWorkflow, DeleteIdMappingWorkflow, and DeleteIdNamespace. These operations now return a 404 ResourceNotFoundException (previously a 200 Success) when the target resource does not exist.
+
 # v1.30.6 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.
