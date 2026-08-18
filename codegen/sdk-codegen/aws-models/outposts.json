@@ -1470,6 +1470,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.outposts#CreatePrivateConnectivityConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#CreatePrivateConnectivityConfigInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#CreatePrivateConnectivityConfigOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates the private connectivity configuration for the specified Outpost. Private\n      connectivity establishes a service link VPN connection between the Outpost and its home\n      Amazon Web Services Region using a VPC and subnet that you specify, which allows the service link traffic\n      to flow through your VPC and minimizes public internet exposure.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/outposts/{OutpostId}/privateConnectivity",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#CreatePrivateConnectivityConfigInput": {
+            "type": "structure",
+            "members": {
+                "OutpostId": {
+                    "target": "com.amazonaws.outposts#OutpostId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the Outpost.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcInformationList": {
+                    "target": "com.amazonaws.outposts#VpcInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the VPC used for private connectivity, including the VPC, its subnets,\n      and an associated VPC endpoint. You can specify at most one entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#CreatePrivateConnectivityConfigOutput": {
+            "type": "structure",
+            "members": {
+                "PrivateConnectivityConfig": {
+                    "target": "com.amazonaws.outposts#PrivateConnectivityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private connectivity configuration for the Outpost.</p>"
+                    }
+                },
+                "OutpostId": {
+                    "target": "com.amazonaws.outposts#OutpostId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Outpost.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.outposts#CreateQuote": {
             "type": "operation",
             "input": {
@@ -2816,6 +2893,67 @@
                 },
                 "NextToken": {
                     "target": "com.amazonaws.outposts#Token"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.outposts#GetPrivateConnectivityConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#GetPrivateConnectivityConfigInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#GetPrivateConnectivityConfigOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the private connectivity configuration for the specified Outpost.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/outposts/{OutpostId}/privateConnectivity",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#GetPrivateConnectivityConfigInput": {
+            "type": "structure",
+            "members": {
+                "OutpostId": {
+                    "target": "com.amazonaws.outposts#OutpostId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of the Outpost.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.outposts#GetPrivateConnectivityConfigOutput": {
+            "type": "structure",
+            "members": {
+                "PrivateConnectivityConfig": {
+                    "target": "com.amazonaws.outposts#PrivateConnectivityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private connectivity configuration for the Outpost.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5221,6 +5359,9 @@
                     "target": "com.amazonaws.outposts#CreateOutpost"
                 },
                 {
+                    "target": "com.amazonaws.outposts#CreatePrivateConnectivityConfig"
+                },
+                {
                     "target": "com.amazonaws.outposts#CreateQuote"
                 },
                 {
@@ -5261,6 +5402,9 @@
                 },
                 {
                     "target": "com.amazonaws.outposts#GetOutpostSupportedInstanceTypes"
+                },
+                {
+                    "target": "com.amazonaws.outposts#GetPrivateConnectivityConfig"
                 },
                 {
                     "target": "com.amazonaws.outposts#GetQuote"
@@ -5350,7 +5494,7 @@
                     "name": "outposts"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Outposts is a fully managed service that extends Amazon Web Services infrastructure, APIs, and tools to\n      customer premises. By providing local access to Amazon Web Services managed infrastructure, Amazon Web Services Outposts enables\n      customers to build and run applications on premises using the same programming interfaces as\n      in Amazon Web Services Regions, while using local compute and storage resources for lower latency and local\n      data processing needs.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services Outposts is a fully managed service that extends Amazon Web Services infrastructure, APIs, and tools to\n      customer premises. By providing local access to Amazon Web Services managed infrastructure, Amazon Web Services Outposts enables\n      customers to build and run applications on premises using the same programming interfaces as\n      in Amazon Web Services Regions, while using local compute and storage resources for lower latency and local\n      data processing needs.</p>\n         <p>You can use certain Amazon EC2 API actions for Amazon Web Services Outposts. For more information on these API actions, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/operation-list-outposts.html\">Amazon Web Services Outposts actions</a> in the <i>Amazon EC2 API Reference</i>.</p>",
                 "smithy.api#title": "AWS Outposts",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -6751,6 +6895,55 @@
                 }
             }
         },
+        "com.amazonaws.outposts#PrivateConnectivityConfig": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.outposts#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that Amazon Web Services Outposts creates and uses to\n      provision and attach the network interfaces for private connectivity in your VPC. The role's\n      permissions are scoped to the specific Outpost and VPC.</p>"
+                    }
+                },
+                "PrivateConnectivityStatus": {
+                    "target": "com.amazonaws.outposts#PrivateConnectivityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of private connectivity for the Outpost. Valid values are <code>ENABLED</code>\n      and <code>DISABLED</code>.</p>"
+                    }
+                },
+                "VpcInformationList": {
+                    "target": "com.amazonaws.outposts#VpcInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the VPC used for private connectivity.</p>"
+                    }
+                },
+                "ProvisioningRoleArn": {
+                    "target": "com.amazonaws.outposts#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the provisioning role in your account that Amazon Web Services Outposts uses\n      to establish the service link connection during Outpost installation. This field is present\n      only when VPC endpoint-based provisioning is configured.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the private connectivity configuration for an Outpost.</p>"
+            }
+        },
+        "com.amazonaws.outposts#PrivateConnectivityStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.outposts#Quantity": {
             "type": "string"
         },
@@ -7488,6 +7681,16 @@
                 }
             }
         },
+        "com.amazonaws.outposts#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 150
+                },
+                "smithy.api#pattern": "^arn:aws([a-z-]+)?:iam::\\d{12}:role\\/[a-zA-Z_0-9+=,.@\\-_\\/]+$"
+            }
+        },
         "com.amazonaws.outposts#ServerEndpoint": {
             "type": "string",
             "traits": {
@@ -8124,6 +8327,28 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^[\\S \\n]+$"
+            }
+        },
+        "com.amazonaws.outposts#SubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.outposts#SubnetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#SubnetId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.outposts#Subscription": {
@@ -9110,6 +9335,64 @@
                 "smithy.api#documentation": "<p>A parameter is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.outposts#VpcEndpointId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                },
+                "smithy.api#pattern": "^vpce-[a-f0-9]+$"
+            }
+        },
+        "com.amazonaws.outposts#VpcId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.outposts#VpcInformation": {
+            "type": "structure",
+            "members": {
+                "VpcId": {
+                    "target": "com.amazonaws.outposts#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC used for private connectivity.</p>"
+                    }
+                },
+                "SubnetIds": {
+                    "target": "com.amazonaws.outposts#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the subnets associated with the VPC endpoint. Currently, only one subnet is\n      supported.</p>"
+                    }
+                },
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.outposts#VpcEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the interface VPC endpoint for the Amazon Web Services Outposts service. When specified, the endpoint\n      must be in the <code>available</code> state and the specified subnets must be associated with\n      it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a VPC used for private connectivity, including its subnets and an\n      associated VPC endpoint.</p>"
+            }
+        },
+        "com.amazonaws.outposts#VpcInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#VpcInformation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.outposts#WireGuardPublicKey": {

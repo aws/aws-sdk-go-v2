@@ -1877,6 +1877,9 @@
                     "target": "com.amazonaws.entityresolution#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.entityresolution#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.entityresolution#ThrottlingException"
                 },
                 {
@@ -1884,7 +1887,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the <code>IdMappingWorkflow</code> with a given name. This operation will succeed even if a workflow with the given name does not exist.</p>",
+                "smithy.api#documentation": "<p>Deletes the <code>IdMappingWorkflow</code> with a given name. This operation returns a <code>ResourceNotFoundException</code> if a workflow with the given name does not exist.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1940,6 +1943,9 @@
                     "target": "com.amazonaws.entityresolution#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.entityresolution#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.entityresolution#ThrottlingException"
                 },
                 {
@@ -1947,7 +1953,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the <code>IdNamespace</code> with a given name.</p>",
+                "smithy.api#documentation": "<p>Deletes the <code>IdNamespace</code> with a given name. This operation returns a <code>ResourceNotFoundException</code> if an ID namespace with the given name does not exist.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -2006,6 +2012,9 @@
                     "target": "com.amazonaws.entityresolution#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.entityresolution#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.entityresolution#ThrottlingException"
                 },
                 {
@@ -2013,7 +2022,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the <code>MatchingWorkflow</code> with a given name. This operation will succeed even if a workflow with the given name does not exist.</p>",
+                "smithy.api#documentation": "<p>Deletes the <code>MatchingWorkflow</code> with a given name. This operation returns a <code>ResourceNotFoundException</code> if a workflow with the given name does not exist.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -2162,6 +2171,9 @@
                     "target": "com.amazonaws.entityresolution#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.entityresolution#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.entityresolution#ThrottlingException"
                 },
                 {
@@ -2169,7 +2181,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the <code>SchemaMapping</code> with a given name. This operation will succeed even if a schema with the given name does not exist. This operation will fail if there is a <code>MatchingWorkflow</code> object that references the <code>SchemaMapping</code> in the workflow's <code>InputSourceConfig</code>.</p>",
+                "smithy.api#documentation": "<p>Deletes the <code>SchemaMapping</code> with a given name. This operation returns a <code>ResourceNotFoundException</code> if a schema with the given name does not exist. This operation will fail if there is a <code>MatchingWorkflow</code> object that references the <code>SchemaMapping</code> in the workflow's <code>InputSourceConfig</code>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -6325,7 +6337,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 2,
-                    "max": 35
+                    "max": 60
                 }
             }
         },
@@ -6643,7 +6655,7 @@
                     "min": 12,
                     "max": 64
                 },
-                "smithy.api#pattern": "^(\\d{12})|([a-z0-9\\.]+)$"
+                "smithy.api#pattern": "^((\\d{12})|([a-z0-9\\.]+))$"
             }
         },
         "com.amazonaws.entityresolution#StatementPrincipalList": {

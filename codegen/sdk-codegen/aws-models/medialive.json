@@ -5147,7 +5147,7 @@
                 "Scte35Type": {
                     "target": "com.amazonaws.medialive#Scte35Type",
                     "traits": {
-                        "smithy.api#documentation": "Type of scte35 track to add. none or scte35WithoutSegmentation",
+                        "smithy.api#documentation": "SCTE-35 insertion type. Option \"none\" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option \"scte35WithoutIdr\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option \"scte35WithoutSegmentation\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame so that a downstream re-packager might split the segment there, but MediaLive itself will not introduce a new segment boundary there.",
                         "smithy.api#jsonName": "scte35Type"
                     }
                 },
@@ -25371,6 +25371,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PASSTHROUGH"
                     }
+                },
+                "SCTE_35_WITHOUT_IDR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE_35_WITHOUT_IDR"
+                    }
                 }
             },
             "traits": {
@@ -25713,7 +25719,7 @@
                 "Scte35Control": {
                     "target": "com.amazonaws.medialive#M2tsScte35Control",
                     "traits": {
-                        "smithy.api#documentation": "Optionally pass SCTE-35 signals from the input source to this output.",
+                        "smithy.api#documentation": "SCTE-35 control. Option \"none\" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option \"scte35WithoutIdr\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option \"passthrough\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame, and MediaLive itself will introduce a new segment boundary there.",
                         "smithy.api#jsonName": "scte35Control"
                     }
                 },
@@ -27900,7 +27906,7 @@
                 "Scte35Type": {
                     "target": "com.amazonaws.medialive#Scte35Type",
                     "traits": {
-                        "smithy.api#documentation": "Type of scte35 track to add. none or scte35WithoutSegmentation",
+                        "smithy.api#documentation": "SCTE-35 insertion type. Option \"none\" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option \"scte35WithoutIdr\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option \"scte35WithoutSegmentation\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame so that a downstream re-packager might split the segment there, but MediaLive itself will not introduce a new segment boundary there.",
                         "smithy.api#jsonName": "scte35Type"
                     }
                 },
@@ -29096,7 +29102,7 @@
                 "Scte35Control": {
                     "target": "com.amazonaws.medialive#M2tsScte35Control",
                     "traits": {
-                        "smithy.api#documentation": "Optionally pass SCTE-35 signals from the input source to this output.",
+                        "smithy.api#documentation": "SCTE-35 control. Option \"none\" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option \"scte35WithoutIdr\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option \"passthrough\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame, and MediaLive itself will introduce a new segment boundary there.",
                         "smithy.api#jsonName": "scte35Control"
                     }
                 },
@@ -29920,6 +29926,39 @@
                 "smithy.api#documentation": "Nielsen Naes Ii Nw"
             }
         },
+        "com.amazonaws.medialive#NielsenNwOnly": {
+            "type": "structure",
+            "members": {
+                "CheckDigitString": {
+                    "target": "com.amazonaws.medialive#__stringMin2Max2",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Enter the check digit string for the watermark",
+                        "smithy.api#jsonName": "checkDigitString",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sid": {
+                    "target": "com.amazonaws.medialive#__doubleMin1Max65535",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Enter the Nielsen Source ID (SID) to include in the watermark",
+                        "smithy.api#jsonName": "sid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Timezone": {
+                    "target": "com.amazonaws.medialive#NielsenWatermarkTimezones",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the timezone for the time stamps in the watermark. If not provided,\nthe timestamps will be in Coordinated Universal Time (UTC)",
+                        "smithy.api#jsonName": "timezone"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Nielsen Nw Only"
+            }
+        },
         "com.amazonaws.medialive#NielsenPcmToId3TaggingState": {
             "type": "enum",
             "members": {
@@ -30070,6 +30109,13 @@
                     "traits": {
                         "smithy.api#documentation": "Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW).",
                         "smithy.api#jsonName": "nielsenNaesIiNwSettings"
+                    }
+                },
+                "NielsenNwOnlySettings": {
+                    "target": "com.amazonaws.medialive#NielsenNwOnly",
+                    "traits": {
+                        "smithy.api#documentation": "Complete these fields only if you want to insert watermarks of type Nielsen NAES VI (NW) only,\nwithout inserting NAES II (N2) watermarks.",
+                        "smithy.api#jsonName": "nielsenNwOnlySettings"
                     }
                 }
             },
@@ -33277,6 +33323,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SCTE_35_WITHOUT_SEGMENTATION"
+                    }
+                },
+                "SCTE_35_WITHOUT_IDR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE_35_WITHOUT_IDR"
                     }
                 }
             },
