@@ -801,11 +801,11 @@ func init() {
 
 	_FlattenedXmlMapWithXmlNameOutputMap_value = _FlattenedXmlMapWithXmlNameOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"})
 
-	_FlattenedXmlMapWithXmlNamespaceOutputMap_key = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLNamespace{URI: "https://the-key.example.com"},
-		&smithytraits.XMLName{Name: "K"})
+	_FlattenedXmlMapWithXmlNamespaceOutputMap_key = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLName{Name: "K"},
+		&smithytraits.XMLNamespace{URI: "https://the-key.example.com"})
 
-	_FlattenedXmlMapWithXmlNamespaceOutputMap_value = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLNamespace{URI: "https://the-value.example.com"},
-		&smithytraits.XMLName{Name: "V"})
+	_FlattenedXmlMapWithXmlNamespaceOutputMap_value = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"},
+		&smithytraits.XMLNamespace{URI: "https://the-value.example.com"})
 
 	InvalidGreeting_Message = InvalidGreeting.AddMember("Message", smithyprelude.String)
 

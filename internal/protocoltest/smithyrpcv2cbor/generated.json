@@ -30,6 +30,8 @@
         "api_op_RpcV2CborLists_test.go",
         "api_op_RpcV2CborSparseMaps.go",
         "api_op_RpcV2CborSparseMaps_test.go",
+        "api_op_RpcV2CborUnions.go",
+        "api_op_RpcV2CborUnions_test.go",
         "api_op_SimpleScalarProperties.go",
         "api_op_SimpleScalarProperties_test.go",
         "api_op_SparseNullsOperation.go",
@@ -56,6 +58,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.24",

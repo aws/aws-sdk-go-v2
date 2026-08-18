@@ -251,6 +251,28 @@ func TestClient_JsonUnions_Serialize(t *testing.T) {
 			}`))
 			},
 		},
+		// Serializes a nested union value
+		"RestJsonSerializeNestedUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberUnionValue{Value: &types.NestedUnionMemberStringValue{Value: "foo"}},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "unionValue": {
+			            "stringValue": "foo"
+			        }
+			    }
+			}`))
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -479,6 +501,24 @@ func TestClient_JsonUnions_Deserialize(t *testing.T) {
 				Contents: &types.MyUnionMemberStructureValue{Value: types.GreetingStruct{
 					Hi: ptr.String("hello"),
 				}},
+			},
+		},
+		// Deserializes a nested union value
+		"RestJsonDeserializeNestedUnionValue": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			        "unionValue": {
+			            "stringValue": "foo"
+			        }
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberUnionValue{Value: &types.NestedUnionMemberStringValue{Value: "foo"}},
 			},
 		},
 		// Ignores an unrecognized __type property

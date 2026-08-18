@@ -609,6 +609,36 @@ func TestCheckRequestSnapshot_RpcV2CborSparseMaps(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_RpcV2CborUnions(t *testing.T) {
+	input := &RpcV2CborUnionsInput{
+		Contents: &types.RpcV2CborUnionMemberStringValue{
+			Value: "__RpcV2CborUnionMemberStringValue__",
+		},
+		OtherValue: ptr.String("__OtherValue__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RpcV2CborUnions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RpcV2CborUnions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_SimpleScalarProperties(t *testing.T) {
 	input := &SimpleScalarPropertiesInput{
 		TrueBooleanValue:  ptr.Bool(true),
@@ -1089,6 +1119,36 @@ func TestUpdateRequestSnapshot_RpcV2CborSparseMaps(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RpcV2CborSparseMaps"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RpcV2CborUnions(t *testing.T) {
+	input := &RpcV2CborUnionsInput{
+		Contents: &types.RpcV2CborUnionMemberStringValue{
+			Value: "__RpcV2CborUnionMemberStringValue__",
+		},
+		OtherValue: ptr.String("__OtherValue__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RpcV2CborUnions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RpcV2CborUnions"); err != nil {
 		t.Fatal(err)
 	}
 }

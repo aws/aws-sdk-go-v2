@@ -58,6 +58,19 @@ func serializeMyUnion(s smithy.ShapeSerializer, schema *smithy.Schema, v types.M
 		s.WriteUnion(schema, schemas.MyUnion_timestampValue)
 		s.WriteTime(schemas.MyUnion_timestampValue, vv.Value)
 		s.CloseUnion()
+	case *types.MyUnionMemberUnionValue:
+		s.WriteUnion(schema, schemas.MyUnion_unionValue)
+		serializeNestedUnion(s, schemas.MyUnion_unionValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeNestedUnion(s smithy.ShapeSerializer, schema *smithy.Schema, v types.NestedUnion) {
+	switch vv := v.(type) {
+	case *types.NestedUnionMemberStringValue:
+		s.WriteUnion(schema, schemas.NestedUnion_stringValue)
+		s.WriteString(schemas.NestedUnion_stringValue, vv.Value)
+		s.CloseUnion()
 	}
 }
 
@@ -172,6 +185,22 @@ func deserializeMyUnion(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.M
 			return vv.Deserialize(d)
 		case schemas.MyUnion_timestampValue:
 			vv := &types.MyUnionMemberTimestampValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.MyUnion_unionValue:
+			vv := &types.MyUnionMemberUnionValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeNestedUnion(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.NestedUnion) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.NestedUnion_stringValue:
+			vv := &types.NestedUnionMemberStringValue{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

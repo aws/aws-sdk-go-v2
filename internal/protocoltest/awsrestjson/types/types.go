@@ -732,6 +732,7 @@ func (v *HeadersEvent) Deserialize(d smithy.ShapeDeserializer) error {
 //	MyUnionMemberStringValue
 //	MyUnionMemberStructureValue
 //	MyUnionMemberTimestampValue
+//	MyUnionMemberUnionValue
 type MyUnion interface {
 	isMyUnion()
 }
@@ -885,6 +886,21 @@ func (v *MyUnionMemberTimestampValue) Deserialize(d smithy.ShapeDeserializer) er
 	return d.ReadTime(schemas.MyUnion_timestampValue, &v.Value)
 }
 
+// A union used to test unions nested inside unions.
+type MyUnionMemberUnionValue struct {
+	Value NestedUnion
+
+	noSmithyDocumentSerde
+}
+
+func (*MyUnionMemberUnionValue) isMyUnion() {}
+func (v *MyUnionMemberUnionValue) Serialize(s smithy.ShapeSerializer) {
+	serializeNestedUnion(s, schemas.MyUnion_unionValue, v.Value)
+}
+func (v *MyUnionMemberUnionValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeNestedUnion(d, schemas.MyUnion_unionValue, &v.Value)
+}
+
 type NestedPayload struct {
 	Greeting *string
 
@@ -919,6 +935,29 @@ func (v *NestedPayload) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// A union used to test unions nested inside unions.
+//
+// The following types satisfy this interface:
+//
+//	NestedUnionMemberStringValue
+type NestedUnion interface {
+	isNestedUnion()
+}
+
+type NestedUnionMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*NestedUnionMemberStringValue) isNestedUnion() {}
+func (v *NestedUnionMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.NestedUnion_stringValue, v.Value)
+}
+func (v *NestedUnionMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.NestedUnion_stringValue, &v.Value)
 }
 
 type PayloadConfig struct {
@@ -1535,6 +1574,7 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isEventStream()          {}
 func (*UnknownUnionMember) isMyUnion()              {}
+func (*UnknownUnionMember) isNestedUnion()          {}
 func (*UnknownUnionMember) isPayloadUnion()         {}
 func (*UnknownUnionMember) isPlayerAction()         {}
 func (*UnknownUnionMember) isSimpleUnion()          {}
