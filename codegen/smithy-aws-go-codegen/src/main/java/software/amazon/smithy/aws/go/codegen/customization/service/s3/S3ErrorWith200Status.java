@@ -183,7 +183,7 @@ public class S3ErrorWith200Status implements GoIntegration {
     private static Set<String> buildEnabledOperations() {
         Set<String> enabled = new HashSet<>(ORIGINAL_OPERATIONS);
         enabled.addAll(WAVE_1_OPERATIONS);
-        // enabled.addAll(WAVE_2_OPERATIONS);
+        enabled.addAll(WAVE_2_OPERATIONS);
         // enabled.addAll(WAVE_3_OPERATIONS);
         // enabled.addAll(WAVE_4_OPERATIONS);
         return Set.copyOf(enabled);
