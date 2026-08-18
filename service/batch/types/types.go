@@ -1207,10 +1207,10 @@ type ContainerDetail struct {
 	// [Amazon ECS container agent configuration]in the Amazon Elastic Container Service Developer Guide.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
 	// [Configure logging drivers]: https://docs.docker.com/engine/admin/logging/overview/
 	// [Amazon ECS container agent configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	// [LogConfiguration]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties-logconfiguration.html
 	LogConfiguration *LogConfiguration
 
@@ -1247,8 +1247,8 @@ type ContainerDetail struct {
 	// and the --read-only option to [docker run]docker run .
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/commandline/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	ReadonlyRootFilesystem *bool
 
 	// A short (255 max characters) human-readable string to provide additional
@@ -1283,16 +1283,16 @@ type ContainerDetail struct {
 	// This parameter isn't applicable to jobs that are running on Fargate resources.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Ulimits []Ulimit
 
 	// The user name to use inside the container. This parameter maps to User in the [Create a container]
 	// section of the [Docker Remote API]and the --user option to [docker run].
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	User *string
 
 	// The number of vCPUs reserved for the container. For jobs that run on Amazon EC2
@@ -1309,8 +1309,8 @@ type ContainerDetail struct {
 	// using resourceRequirements .
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Vcpus *int32
 
 	// A list of volumes that are associated with the job.
@@ -1393,8 +1393,8 @@ type ContainerProperties struct {
 	// section of the [Docker Remote API]and the COMMAND parameter to [docker run]. For more information, see [https://docs.docker.com/engine/reference/builder/#cmd].
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	// [https://docs.docker.com/engine/reference/builder/#cmd]: https://docs.docker.com/engine/reference/builder/#cmd
 	Command []string
 
@@ -1412,8 +1412,8 @@ type ContainerProperties struct {
 	// reserved for variables that Batch sets.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Environment []KeyValuePair
 
 	// The amount of ephemeral storage to allocate for the task. This parameter is
@@ -1461,8 +1461,8 @@ type ContainerProperties struct {
 	//   (for example, quay.io/assemblyline/ubuntu ).
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Image *string
 
 	// The instance type to use for a multi-node parallel job. All node groups in a
@@ -1509,10 +1509,10 @@ type ContainerProperties struct {
 	// [Amazon ECS container agent configuration]in the Amazon Elastic Container Service Developer Guide.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
 	// [Configure logging drivers]: https://docs.docker.com/engine/admin/logging/overview/
 	// [Amazon ECS container agent configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	// [LogConfiguration]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-batch-jobdefinition-containerproperties-logconfiguration.html
 	LogConfiguration *LogConfiguration
 
@@ -1531,8 +1531,8 @@ type ContainerProperties struct {
 	// Volumes in the [Create a container] section of the [Docker Remote API] and the --volume option to [docker run].
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	MountPoints []MountPoint
 
 	// The network configuration for jobs that are running on Fargate resources. Jobs
@@ -1548,16 +1548,16 @@ type ContainerProperties struct {
 	// and shouldn't be provided, or specified as false.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Privileged *bool
 
 	// When this parameter is true, the container is given read-only access to its
 	// root file system. This parameter maps to ReadonlyRootfs in the [Create a container] section of the [Docker Remote API]
 	// and the --read-only option to docker run .
 	//
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	ReadonlyRootFilesystem *bool
 
 	// The private repository authentication credentials to use.
@@ -1584,16 +1584,16 @@ type ContainerProperties struct {
 	// and shouldn't be provided.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Ulimits []Ulimit
 
 	// The user name to use inside the container. This parameter maps to User in the [Create a container]
 	// section of the [Docker Remote API]and the --user option to [docker run].
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	User *string
 
 	// This parameter is deprecated, use resourceRequirements to specify the vCPU
@@ -1607,8 +1607,8 @@ type ContainerProperties struct {
 	// least once for each node.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
 	Vcpus *int32
@@ -1933,6 +1933,8 @@ type EcsTaskProperties struct {
 	// If no value is specified, then the IPC resource namespace sharing depends on
 	// the Docker daemon setting on the container instance. For more information, see [IPC settings]
 	// in the Docker run reference.
+	//
+	// This parameter is not supported for jobs that run on Fargate resources.
 	//
 	// [IPC settings]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
 	IpcMode *string
@@ -3847,8 +3849,8 @@ type LinuxParameters struct {
 	// Don't provide it for these jobs.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Devices []Device
 
 	// If true, run an init process inside the container that forwards signals and
@@ -4084,7 +4086,7 @@ type LogConfiguration struct {
 // properties. This parameter maps to Volumes in the [Create a container] section of the Docker Remote
 // API and the --volume option to docker run.
 //
-// [Create a container]: https://docs.docker.com/engine/api/v1.43/#tag/Container/operation/ContainerCreate
+// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
 type MountPoint struct {
 
 	// The path on the container where the host volume is mounted.
@@ -4550,11 +4552,17 @@ type ResourceRequirement struct {
 	//
 	// value = 20480, 24576, or 28672 VCPU = 4 or 8
 	//
-	// value = 36864, 45056, 53248, or 61440 VCPU = 8
+	// value = 36864, 45056, or 53248 VCPU = 8
+	//
+	// value = 61440 VCPU = 8 or 32
 	//
 	// value = 32768, 40960, 49152, or 57344 VCPU = 8 or 16
 	//
-	// value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880 VCPU = 16
+	// value = 65536, 73728, 81920, 90112, 98304, 106496, or 114688 VCPU = 16
+	//
+	// value = 122880 VCPU = 16 or 32
+	//
+	// value = 249856 VCPU = 32
 	//
 	// type="VCPU" The number of vCPUs reserved for the container. This parameter maps
 	// to CpuShares in the [Create a container] section of the [Docker Remote API] and the --cpu-shares option to [docker run]. Each vCPU
@@ -4568,7 +4576,7 @@ type ResourceRequirement struct {
 	//
 	// For jobs that are running on Fargate resources, then value must match one of
 	// the supported values and the MEMORY values must be one of the values supported
-	// for that VCPU value. The supported values are 0.25, 0.5, 1, 2, 4, 8, and 16
+	// for that VCPU value. The supported values are 0.25, 0.5, 1, 2, 4, 8, 16, and 32.
 	//
 	// value = 0.25 MEMORY = 512, 1024, or 2048
 	//
@@ -4589,10 +4597,12 @@ type ResourceRequirement struct {
 	// value = 16 MEMORY = 32768, 40960, 49152, 57344, 65536, 73728, 81920, 90112,
 	// 98304, 106496, 114688, or 122880
 	//
+	// value = 32 MEMORY = 61440, 122880, or 249856
+	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
 	// [Memory management]: https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	// [Fargate quotas]: https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate
 	//
 	// This member is required.
@@ -5097,8 +5107,8 @@ type TaskContainerDetails struct {
 	// section of the [Docker Remote API]and the COMMAND parameter to [docker run]. For more information, see [https://docs.docker.com/engine/reference/builder/#cmd].
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	// [https://docs.docker.com/engine/reference/builder/#cmd]: https://docs.docker.com/engine/reference/builder/#cmd
 	Command []string
 
@@ -5112,8 +5122,8 @@ type TaskContainerDetails struct {
 	// information, such as credential data.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Environment []KeyValuePair
 
 	// If the essential parameter of a container is marked as true , and that container
@@ -5150,8 +5160,8 @@ type TaskContainerDetails struct {
 	// IMAGE parameter of the [docker run].
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Image *string
 
 	// Linux-specific modifications that are applied to the container, such as Linux
@@ -5191,10 +5201,10 @@ type TaskContainerDetails struct {
 	// [Amazon ECS container agent configuration]in the Amazon Elastic Container Service Developer Guide.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
 	// [Configure logging drivers]: https://docs.docker.com/engine/admin/logging/overview/
 	// [Amazon ECS container agent configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	LogConfiguration *LogConfiguration
 
 	// The name of the CloudWatch Logs log stream that's associated with the
@@ -5211,8 +5221,8 @@ type TaskContainerDetails struct {
 	// drive, and mount point can't be across drives.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	MountPoints []MountPoint
 
 	// The name of a container.
@@ -5228,8 +5238,8 @@ type TaskContainerDetails struct {
 	// This parameter is not supported for Windows containers or tasks run on Fargate.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Privileged *bool
 
 	// When this parameter is true, the container is given read-only access to its
@@ -5239,8 +5249,8 @@ type TaskContainerDetails struct {
 	// This parameter is not supported for Windows containers.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	ReadonlyRootFilesystem *bool
 
 	// A short (255 max characters) human-readable string to provide additional
@@ -5293,8 +5303,8 @@ type TaskContainerDetails struct {
 	// This parameter is not supported for Windows containers.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Ulimits []Ulimit
 
 	// The user to use inside the container. This parameter maps to User in the Create
@@ -5372,8 +5382,8 @@ type TaskContainerProperties struct {
 	// IMAGE parameter of the [docker run].
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	//
 	// This member is required.
 	Image *string
@@ -5382,9 +5392,9 @@ type TaskContainerProperties struct {
 	// section of the [Docker Remote API]and the COMMAND parameter to [docker run]. For more information, see [Dockerfile reference: CMD].
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
 	// [Dockerfile reference: CMD]: https://docs.docker.com/engine/reference/builder/#cmd
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Command []string
 
 	// A list of containers that this container depends on.
@@ -5400,8 +5410,8 @@ type TaskContainerProperties struct {
 	// reserved for variables that Batch sets.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/
-	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Environment []KeyValuePair
 
 	// If the essential parameter of a container is marked as true , and that container
@@ -5461,10 +5471,10 @@ type TaskContainerProperties struct {
 	// [Amazon ECS container agent configuration]in the Amazon Elastic Container Service Developer Guide.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
 	// [Configure logging drivers]: https://docs.docker.com/engine/admin/logging/overview/
 	// [Amazon ECS container agent configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	LogConfiguration *LogConfiguration
 
 	// The mount points for data volumes in your container.
@@ -5476,8 +5486,8 @@ type TaskContainerProperties struct {
 	// drive, and mount point can't be across drives.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	MountPoints []MountPoint
 
 	// The name of a container. The name can be used as a unique identifier to target
@@ -5491,8 +5501,8 @@ type TaskContainerProperties struct {
 	// This parameter is not supported for Windows containers or tasks run on Fargate.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Privileged *bool
 
 	// When this parameter is true, the container is given read-only access to its
@@ -5502,8 +5512,8 @@ type TaskContainerProperties struct {
 	// This parameter is not supported for Windows containers.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	ReadonlyRootFilesystem *bool
 
 	// The private repository authentication credentials to use.
@@ -5552,8 +5562,8 @@ type TaskContainerProperties struct {
 	// This parameter is not supported for Windows containers.
 	//
 	// [docker run]: https://docs.docker.com/engine/reference/run/#security-configuration
-	// [Create a container]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.35/
+	// [Create a container]: https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate
+	// [Docker Remote API]: https://docs.docker.com/engine/api/latest/
 	Ulimits []Ulimit
 
 	// The user to use inside the container. This parameter maps to User in the Create

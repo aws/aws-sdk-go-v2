@@ -7,8 +7,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes the MatchingWorkflow with a given name. This operation will succeed
-// even if a workflow with the given name does not exist.
+// Deletes the MatchingWorkflow with a given name. This operation returns a
+// ResourceNotFoundException if a workflow with the given name does not exist.
 func (c *Client) DeleteMatchingWorkflow(ctx context.Context, params *DeleteMatchingWorkflowInput, optFns ...func(*Options)) (*DeleteMatchingWorkflowOutput, error) {
 	if params == nil {
 		params = &DeleteMatchingWorkflowInput{}

@@ -5189,8 +5189,9 @@ type M2tsScte35Control string
 
 // Enum values for M2tsScte35Control
 const (
-	M2tsScte35ControlNone        M2tsScte35Control = "NONE"
-	M2tsScte35ControlPassthrough M2tsScte35Control = "PASSTHROUGH"
+	M2tsScte35ControlNone             M2tsScte35Control = "NONE"
+	M2tsScte35ControlPassthrough      M2tsScte35Control = "PASSTHROUGH"
+	M2tsScte35ControlScte35WithoutIdr M2tsScte35Control = "SCTE_35_WITHOUT_IDR"
 )
 
 // Values returns all known values for M2tsScte35Control. Note that this can be
@@ -5201,6 +5202,7 @@ func (M2tsScte35Control) Values() []M2tsScte35Control {
 	return []M2tsScte35Control{
 		"NONE",
 		"PASSTHROUGH",
+		"SCTE_35_WITHOUT_IDR",
 	}
 }
 
@@ -6607,6 +6609,7 @@ type Scte35Type string
 const (
 	Scte35TypeNone                      Scte35Type = "NONE"
 	Scte35TypeScte35WithoutSegmentation Scte35Type = "SCTE_35_WITHOUT_SEGMENTATION"
+	Scte35TypeScte35WithoutIdr          Scte35Type = "SCTE_35_WITHOUT_IDR"
 )
 
 // Values returns all known values for Scte35Type. Note that this can be expanded
@@ -6617,6 +6620,7 @@ func (Scte35Type) Values() []Scte35Type {
 	return []Scte35Type{
 		"NONE",
 		"SCTE_35_WITHOUT_SEGMENTATION",
+		"SCTE_35_WITHOUT_IDR",
 	}
 }
 

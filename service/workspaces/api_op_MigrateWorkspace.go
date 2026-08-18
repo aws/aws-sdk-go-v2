@@ -20,6 +20,9 @@ import (
 // For available migration scenarios, details about what happens during migration,
 // and best practices, see [Migrate a WorkSpace].
 //
+// If the source WorkSpace has nested virtualization enabled and the target bundle
+// does not support nested virtualization, the migration fails.
+//
 // [Migrate a WorkSpace]: https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html
 func (c *Client) MigrateWorkspace(ctx context.Context, params *MigrateWorkspaceInput, optFns ...func(*Options)) (*MigrateWorkspaceOutput, error) {
 	if params == nil {

@@ -48,6 +48,25 @@ func (AmiProductVisibilityString) Values() []AmiProductVisibilityString {
 	}
 }
 
+type AssessmentResult string
+
+// Enum values for AssessmentResult
+const (
+	AssessmentResultPass AssessmentResult = "PASS"
+	AssessmentResultFail AssessmentResult = "FAIL"
+)
+
+// Values returns all known values for AssessmentResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssessmentResult) Values() []AssessmentResult {
+	return []AssessmentResult{
+		"PASS",
+		"FAIL",
+	}
+}
+
 type ChangeStatus string
 
 // Enum values for ChangeStatus
@@ -119,6 +138,29 @@ func (ContainerProductVisibilityString) Values() []ContainerProductVisibilityStr
 		"Public",
 		"Restricted",
 		"Draft",
+	}
+}
+
+type ControlAssessmentResult string
+
+// Enum values for ControlAssessmentResult
+const (
+	ControlAssessmentResultPass          ControlAssessmentResult = "PASS"
+	ControlAssessmentResultFail          ControlAssessmentResult = "FAIL"
+	ControlAssessmentResultNotExecuted   ControlAssessmentResult = "NOT_EXECUTED"
+	ControlAssessmentResultExemptionPass ControlAssessmentResult = "EXEMPTION_PASS"
+)
+
+// Values returns all known values for ControlAssessmentResult. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ControlAssessmentResult) Values() []ControlAssessmentResult {
+	return []ControlAssessmentResult{
+		"PASS",
+		"FAIL",
+		"NOT_EXECUTED",
+		"EXEMPTION_PASS",
 	}
 }
 
@@ -590,5 +632,28 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type ValidationExceptionReason string
+
+// Enum values for ValidationExceptionReason
+const (
+	ValidationExceptionReasonUnknownOperation      ValidationExceptionReason = "UnknownOperation"
+	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "CannotParse"
+	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FieldValidationFailed"
+	ValidationExceptionReasonOther                 ValidationExceptionReason = "Other"
+)
+
+// Values returns all known values for ValidationExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationExceptionReason) Values() []ValidationExceptionReason {
+	return []ValidationExceptionReason{
+		"UnknownOperation",
+		"CannotParse",
+		"FieldValidationFailed",
+		"Other",
 	}
 }

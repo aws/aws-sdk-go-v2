@@ -199,6 +199,117 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeAssessment(t *testing.T) {
+	want := &DescribeAssessmentOutput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		AssessmentId:  ptr.String("__AssessmentId__"),
+		FrameworkId:   ptr.String("__FrameworkId__"),
+		AssessmentTargetSummary: &types.AssessmentTargetSummary{
+			EntityId:    ptr.String("__EntityId__"),
+			ChangeSetId: ptr.String("__ChangeSetId__"),
+		},
+		FrameworkSummary: &types.FrameworkSummaryMemberAMISecuritySummary{
+			Value: types.AMISecuritySummary{
+				DeliveryOptionId: ptr.String("__DeliveryOptionId__"),
+			},
+		},
+		AssessmentResult: types.AssessmentResult("PASS"),
+		CreatedAt:        ptr.String("__CreatedAt__"),
+		ExpiresAt:        ptr.String("__ExpiresAt__"),
+		ControlAssessments: []types.ControlAssessment{
+			{
+				ControlId:               ptr.String("__ControlId__"),
+				ControlAssessmentResult: types.ControlAssessmentResult("PASS"),
+				Errors: []types.ControlError{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+						Scope: []types.ErrorScope{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+						Scope: []types.ErrorScope{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				ControlId:               ptr.String("__ControlId__"),
+				ControlAssessmentResult: types.ControlAssessmentResult("PASS"),
+				Errors: []types.ControlError{
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+						Scope: []types.ErrorScope{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						Code:    ptr.String("__Code__"),
+						Message: ptr.String("__Message__"),
+						Scope: []types.ErrorScope{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeAssessment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeAssessment(context.Background(), &DescribeAssessmentInput{
+		Catalog:              ptr.String("__Catalog__"),
+		AssessmentIdentifier: ptr.String("__AssessmentIdentifier__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeAssessment.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeChangeSet(t *testing.T) {
 	want := &DescribeChangeSetOutput{
 		ChangeSetId:        ptr.String("__ChangeSetId__"),
@@ -322,6 +433,77 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetResourcePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListAssessments(t *testing.T) {
+	want := &ListAssessmentsOutput{
+		AssessmentSummaryList: []types.AssessmentSummary{
+			{
+				AssessmentArn: ptr.String("__AssessmentArn__"),
+				AssessmentId:  ptr.String("__AssessmentId__"),
+				FrameworkId:   ptr.String("__FrameworkId__"),
+				AssessmentTargetSummary: &types.AssessmentTargetSummary{
+					EntityId:    ptr.String("__EntityId__"),
+					ChangeSetId: ptr.String("__ChangeSetId__"),
+				},
+				FrameworkSummary: &types.FrameworkSummaryMemberAMISecuritySummary{
+					Value: types.AMISecuritySummary{
+						DeliveryOptionId: ptr.String("__DeliveryOptionId__"),
+					},
+				},
+				AssessmentResult: types.AssessmentResult("PASS"),
+				CreatedAt:        ptr.String("__CreatedAt__"),
+				ExpiresAt:        ptr.String("__ExpiresAt__"),
+			},
+			{
+				AssessmentArn: ptr.String("__AssessmentArn__"),
+				AssessmentId:  ptr.String("__AssessmentId__"),
+				FrameworkId:   ptr.String("__FrameworkId__"),
+				AssessmentTargetSummary: &types.AssessmentTargetSummary{
+					EntityId:    ptr.String("__EntityId__"),
+					ChangeSetId: ptr.String("__ChangeSetId__"),
+				},
+				FrameworkSummary: &types.FrameworkSummaryMemberAMISecuritySummary{
+					Value: types.AMISecuritySummary{
+						DeliveryOptionId: ptr.String("__DeliveryOptionId__"),
+					},
+				},
+				AssessmentResult: types.AssessmentResult("PASS"),
+				CreatedAt:        ptr.String("__CreatedAt__"),
+				ExpiresAt:        ptr.String("__ExpiresAt__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAssessments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAssessments(context.Background(), &ListAssessmentsInput{
+		Catalog:     ptr.String("__Catalog__"),
+		FrameworkId: ptr.String("__FrameworkId__"),
+		AssessmentTargetFilter: &types.AssessmentTargetFilter{
+			EntityId:    ptr.String("__EntityId__"),
+			ChangeSetId: ptr.String("__ChangeSetId__"),
+		},
+		FrameworkFilters: &types.FrameworkFiltersMemberAMISecurityFilters{
+			Value: types.AMISecurityFilters{
+				DeliveryOptionId: ptr.String("__DeliveryOptionId__"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAssessments.response", err)
 	}
 }
 
@@ -1093,6 +1275,24 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		Message: ptr.String("__Message__"),
+		ValidationExceptionFieldList: []types.ValidationExceptionField{
+			{
+				Reason:     types.ValidationExceptionReason("UnknownOperation"),
+				EntityType: ptr.String("__EntityType__"),
+				EntityId:   ptr.String("__EntityId__"),
+				ChangeType: ptr.String("__ChangeType__"),
+				Field:      ptr.String("__Field__"),
+				Message:    ptr.String("__Message__"),
+			},
+			{
+				Reason:     types.ValidationExceptionReason("UnknownOperation"),
+				EntityType: ptr.String("__EntityType__"),
+				EntityId:   ptr.String("__EntityId__"),
+				ChangeType: ptr.String("__ChangeType__"),
+				Field:      ptr.String("__Field__"),
+				Message:    ptr.String("__Message__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
 	if errors.Is(err, fs.ErrNotExist) {

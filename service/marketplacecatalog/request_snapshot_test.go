@@ -297,6 +297,36 @@ func TestCheckRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeAssessment(t *testing.T) {
+	input := &DescribeAssessmentInput{
+		Catalog:              ptr.String("__Catalog__"),
+		AssessmentIdentifier: ptr.String("__AssessmentIdentifier__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAssessment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeChangeSet(t *testing.T) {
 	input := &DescribeChangeSetInput{
 		Catalog:     ptr.String("__Catalog__"),
@@ -376,6 +406,45 @@ func TestCheckRequestSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAssessments(t *testing.T) {
+	input := &ListAssessmentsInput{
+		Catalog:     ptr.String("__Catalog__"),
+		FrameworkId: ptr.String("__FrameworkId__"),
+		AssessmentTargetFilter: &types.AssessmentTargetFilter{
+			EntityId:    ptr.String("__EntityId__"),
+			ChangeSetId: ptr.String("__ChangeSetId__"),
+		},
+		FrameworkFilters: &types.FrameworkFiltersMemberAMISecurityFilters{
+			Value: types.AMISecurityFilters{
+				DeliveryOptionId: ptr.String("__DeliveryOptionId__"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAssessments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAssessments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -810,6 +879,36 @@ func TestUpdateRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeAssessment(t *testing.T) {
+	input := &DescribeAssessmentInput{
+		Catalog:              ptr.String("__Catalog__"),
+		AssessmentIdentifier: ptr.String("__AssessmentIdentifier__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAssessment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeChangeSet(t *testing.T) {
 	input := &DescribeChangeSetInput{
 		Catalog:     ptr.String("__Catalog__"),
@@ -889,6 +988,45 @@ func TestUpdateRequestSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAssessments(t *testing.T) {
+	input := &ListAssessmentsInput{
+		Catalog:     ptr.String("__Catalog__"),
+		FrameworkId: ptr.String("__FrameworkId__"),
+		AssessmentTargetFilter: &types.AssessmentTargetFilter{
+			EntityId:    ptr.String("__EntityId__"),
+			ChangeSetId: ptr.String("__ChangeSetId__"),
+		},
+		FrameworkFilters: &types.FrameworkFiltersMemberAMISecurityFilters{
+			Value: types.AMISecurityFilters{
+				DeliveryOptionId: ptr.String("__DeliveryOptionId__"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAssessments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAssessments"); err != nil {
 		t.Fatal(err)
 	}
 }

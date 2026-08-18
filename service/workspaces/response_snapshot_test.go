@@ -729,6 +729,7 @@ func TestCheckResponseSnapshot_CreateWorkspaces(t *testing.T) {
 							Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 							PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 						},
+						NestedVirtualizationEnabled: ptr.Bool(true),
 					},
 					Tags: []types.Tag{
 						{
@@ -769,6 +770,7 @@ func TestCheckResponseSnapshot_CreateWorkspaces(t *testing.T) {
 							Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 							PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 						},
+						NestedVirtualizationEnabled: ptr.Bool(true),
 					},
 					Tags: []types.Tag{
 						{
@@ -819,6 +821,7 @@ func TestCheckResponseSnapshot_CreateWorkspaces(t *testing.T) {
 						Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 						PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 					},
+					NestedVirtualizationEnabled: ptr.Bool(true),
 				},
 				ModificationStates: []types.ModificationState{
 					{
@@ -892,6 +895,7 @@ func TestCheckResponseSnapshot_CreateWorkspaces(t *testing.T) {
 						Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 						PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 					},
+					NestedVirtualizationEnabled: ptr.Bool(true),
 				},
 				ModificationStates: []types.ModificationState{
 					{
@@ -968,6 +972,7 @@ func TestCheckResponseSnapshot_CreateWorkspaces(t *testing.T) {
 						Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 						PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 					},
+					NestedVirtualizationEnabled: ptr.Bool(true),
 				},
 				Tags: []types.Tag{
 					{
@@ -1004,6 +1009,7 @@ func TestCheckResponseSnapshot_CreateWorkspaces(t *testing.T) {
 						Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 						PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 					},
+					NestedVirtualizationEnabled: ptr.Bool(true),
 				},
 				Tags: []types.Tag{
 					{
@@ -2687,6 +2693,7 @@ func TestCheckResponseSnapshot_DescribeWorkspaces(t *testing.T) {
 						Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 						PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 					},
+					NestedVirtualizationEnabled: ptr.Bool(true),
 				},
 				ModificationStates: []types.ModificationState{
 					{
@@ -2760,6 +2767,7 @@ func TestCheckResponseSnapshot_DescribeWorkspaces(t *testing.T) {
 						Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 						PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 					},
+					NestedVirtualizationEnabled: ptr.Bool(true),
 				},
 				ModificationStates: []types.ModificationState{
 					{
@@ -3788,6 +3796,7 @@ func TestCheckResponseSnapshot_ModifyWorkspaceProperties(t *testing.T) {
 				Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 				PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 			},
+			NestedVirtualizationEnabled: ptr.Bool(true),
 		},
 		DataReplication: types.DataReplication("NO_REPLICATION"),
 	})
@@ -5093,6 +5102,7 @@ func TestCheckResponseSnapshot_Error_UnsupportedWorkspaceConfigurationException(
 				Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
 				PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
 			},
+			NestedVirtualizationEnabled: ptr.Bool(true),
 		},
 		DataReplication: types.DataReplication("NO_REPLICATION"),
 	})

@@ -7,8 +7,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes the IdMappingWorkflow with a given name. This operation will succeed
-// even if a workflow with the given name does not exist.
+// Deletes the IdMappingWorkflow with a given name. This operation returns a
+// ResourceNotFoundException if a workflow with the given name does not exist.
 func (c *Client) DeleteIdMappingWorkflow(ctx context.Context, params *DeleteIdMappingWorkflowInput, optFns ...func(*Options)) (*DeleteIdMappingWorkflowOutput, error) {
 	if params == nil {
 		params = &DeleteIdMappingWorkflowInput{}

@@ -6803,6 +6803,11 @@ func awsAwsjson11_serializeDocumentWorkspaceProperties(v *types.WorkspacePropert
 		}
 	}
 
+	if v.NestedVirtualizationEnabled != nil {
+		ok := object.Key("NestedVirtualizationEnabled")
+		ok.Boolean(*v.NestedVirtualizationEnabled)
+	}
+
 	if len(v.OperatingSystemName) > 0 {
 		ok := object.Key("OperatingSystemName")
 		ok.String(string(v.OperatingSystemName))

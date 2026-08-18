@@ -928,7 +928,7 @@ type MicrosoftEntraConfig struct {
 // Describes a WorkSpace modification.
 type ModificationState struct {
 
-	// The resource.
+	// The WorkSpace property being modified.
 	Resource ModificationResourceEnum
 
 	// The modification state.
@@ -1779,6 +1779,13 @@ type WorkspaceProperties struct {
 
 	// Indicates the Global Accelerator properties.
 	GlobalAccelerator *GlobalAcceleratorForWorkSpace
+
+	// Specifies whether nested virtualization is enabled for the WorkSpace.
+	//
+	// For more information, see [Nested virtualization for Amazon WorkSpaces].
+	//
+	// [Nested virtualization for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/nested-virtualization.html
+	NestedVirtualizationEnabled *bool
 
 	// The name of the operating system.
 	OperatingSystemName OperatingSystemName

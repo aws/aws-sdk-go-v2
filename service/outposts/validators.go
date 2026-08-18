@@ -90,6 +90,26 @@ func (m *validateOpCreateOutpost) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePrivateConnectivityConfig struct {
+}
+
+func (*validateOpCreatePrivateConnectivityConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePrivateConnectivityConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePrivateConnectivityConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePrivateConnectivityConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateQuote struct {
 }
 
@@ -365,6 +385,26 @@ func (m *validateOpGetOutpostSupportedInstanceTypes) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetOutpostSupportedInstanceTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPrivateConnectivityConfig struct {
+}
+
+func (*validateOpGetPrivateConnectivityConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPrivateConnectivityConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPrivateConnectivityConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPrivateConnectivityConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -746,6 +786,10 @@ func addOpCreateOutpostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOutpost{}, middleware.After)
 }
 
+func addOpCreatePrivateConnectivityConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePrivateConnectivityConfig{}, middleware.After)
+}
+
 func addOpCreateQuoteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateQuote{}, middleware.After)
 }
@@ -800,6 +844,10 @@ func addOpGetOutpostInstanceTypesValidationMiddleware(stack *middleware.Stack) e
 
 func addOpGetOutpostSupportedInstanceTypesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOutpostSupportedInstanceTypes{}, middleware.After)
+}
+
+func addOpGetPrivateConnectivityConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPrivateConnectivityConfig{}, middleware.After)
 }
 
 func addOpGetQuoteValidationMiddleware(stack *middleware.Stack) error {
@@ -1000,6 +1048,24 @@ func validateOpCreateOutpostInput(v *CreateOutpostInput) error {
 	}
 	if v.SiteId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePrivateConnectivityConfigInput(v *CreatePrivateConnectivityConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePrivateConnectivityConfigInput"}
+	if v.OutpostId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostId"))
+	}
+	if v.VpcInformationList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcInformationList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1232,6 +1298,21 @@ func validateOpGetOutpostSupportedInstanceTypesInput(v *GetOutpostSupportedInsta
 	invalidParams := smithy.InvalidParamsError{Context: "GetOutpostSupportedInstanceTypesInput"}
 	if v.OutpostIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPrivateConnectivityConfigInput(v *GetPrivateConnectivityConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPrivateConnectivityConfigInput"}
+	if v.OutpostId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

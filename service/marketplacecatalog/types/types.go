@@ -106,6 +106,84 @@ type AmiProductVisibilityFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Filters that apply to assessments performed against the AMI Security framework.
+type AMISecurityFilters struct {
+
+	// The unique ID of the delivery option whose AMI Security assessments you want to
+	// list.
+	DeliveryOptionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the resource assessed under the AMI Security framework.
+type AMISecuritySummary struct {
+
+	// The unique ID of the delivery option that was evaluated.
+	DeliveryOptionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summarized information about an assessment.
+type AssessmentSummary struct {
+
+	// The ARN associated with the assessment.
+	AssessmentArn *string
+
+	// The unique ID of the assessment.
+	AssessmentId *string
+
+	// The overall result of the assessment.
+	AssessmentResult AssessmentResult
+
+	// Identifies the entity or change set that was assessed.
+	AssessmentTargetSummary *AssessmentTargetSummary
+
+	// The date and time the assessment was created, in ISO 8601 format (
+	// 2018-02-27T13:45:22Z ).
+	CreatedAt *string
+
+	// The date and time the assessment expires, in ISO 8601 format (
+	// 2018-02-27T13:45:22Z ).
+	ExpiresAt *string
+
+	// The identifier of the framework that was evaluated by this assessment, in the
+	// format frameworkId@version (for example, AMISecurity@1.0 ).
+	FrameworkId *string
+
+	// The framework-specific details of the assessed resource. The set member
+	// corresponds to the framework identified by FrameworkId .
+	FrameworkSummary FrameworkSummary
+
+	noSmithyDocumentSerde
+}
+
+// Filters assessment list results by the resource that was assessed. Provide an
+// entity identifier, a change set identifier, or both.
+type AssessmentTargetFilter struct {
+
+	// The unique ID of the change set that triggered the assessments you want to list.
+	ChangeSetId *string
+
+	// The unique ID of the entity whose assessments you want to list.
+	EntityId *string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies the entity or change set that was assessed.
+type AssessmentTargetSummary struct {
+
+	// The unique ID of the change set that was assessed.
+	ChangeSetId *string
+
+	// The unique ID of the entity that was assessed.
+	EntityId *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains an error code and error message.
 type BatchDescribeErrorDetail struct {
 
@@ -333,6 +411,57 @@ type ContainerProductVisibilityFilter struct {
 
 	// A string array of unique visibility values to be filtered on.
 	ValueList []ContainerProductVisibilityString
+
+	noSmithyDocumentSerde
+}
+
+// Filters that apply to assessments performed against the Container Security
+// framework.
+type ContainerSecurityFilters struct {
+
+	// The unique ID of the delivery option whose Container Security assessments you
+	// want to list.
+	DeliveryOptionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the resource assessed under the Container Security framework.
+type ContainerSecuritySummary struct {
+
+	// The unique ID of the delivery option that was evaluated.
+	DeliveryOptionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The result of evaluating a single control as part of an assessment.
+type ControlAssessment struct {
+
+	// The result of the control evaluation.
+	ControlAssessmentResult ControlAssessmentResult
+
+	// The unique ID of the control that was evaluated.
+	ControlId *string
+
+	// An array of ControlError objects associated with the control evaluation.
+	Errors []ControlError
+
+	noSmithyDocumentSerde
+}
+
+// An error reported during the evaluation of a single control.
+type ControlError struct {
+
+	// The error code that identifies the type of error.
+	Code *string
+
+	// The message for the error.
+	Message *string
+
+	// The list of name-value pairs that identify the resource or attribute that the
+	// error applies to.
+	Scope []ErrorScope
 
 	noSmithyDocumentSerde
 }
@@ -734,6 +863,20 @@ type ErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
+// A name-value pair that identifies the resource or attribute that a ControlError
+// applies to.
+type ErrorScope struct {
+
+	// The name of the resource field the error applies to (for example, AMI_ID ,
+	// FILE_PATH , or PACKAGE_NAME ).
+	Name *string
+
+	// The value of the resource field the error applies to.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // A filter object, used to optionally filter results from calls to the
 // ListEntities and ListChangeSets actions.
 type Filter struct {
@@ -771,6 +914,65 @@ type Filter struct {
 
 	noSmithyDocumentSerde
 }
+
+// Framework-specific filters used to scope ListAssessments results. Set exactly
+// one member, corresponding to the framework you want to filter by.
+//
+// The following types satisfy this interface:
+//
+//	FrameworkFiltersMemberAMISecurityFilters
+//	FrameworkFiltersMemberContainerSecurityFilters
+type FrameworkFilters interface {
+	isFrameworkFilters()
+}
+
+// Filters that apply to assessments performed against the AMI Security framework.
+type FrameworkFiltersMemberAMISecurityFilters struct {
+	Value AMISecurityFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*FrameworkFiltersMemberAMISecurityFilters) isFrameworkFilters() {}
+
+// Filters that apply to assessments performed against the Container Security
+// framework.
+type FrameworkFiltersMemberContainerSecurityFilters struct {
+	Value ContainerSecurityFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*FrameworkFiltersMemberContainerSecurityFilters) isFrameworkFilters() {}
+
+// The framework-specific details of the assessed resource. Exactly one member is
+// set, corresponding to the framework that was assessed.
+//
+// The following types satisfy this interface:
+//
+//	FrameworkSummaryMemberAMISecuritySummary
+//	FrameworkSummaryMemberContainerSecuritySummary
+type FrameworkSummary interface {
+	isFrameworkSummary()
+}
+
+// The details of the resource assessed under the AMI Security framework.
+type FrameworkSummaryMemberAMISecuritySummary struct {
+	Value AMISecuritySummary
+
+	noSmithyDocumentSerde
+}
+
+func (*FrameworkSummaryMemberAMISecuritySummary) isFrameworkSummary() {}
+
+// The details of the resource assessed under the Container Security framework.
+type FrameworkSummaryMemberContainerSecuritySummary struct {
+	Value ContainerSecuritySummary
+
+	noSmithyDocumentSerde
+}
+
+func (*FrameworkSummaryMemberContainerSecuritySummary) isFrameworkSummary() {}
 
 // The filter for machine learning product entity IDs.
 type MachineLearningProductEntityIdFilter struct {
@@ -1746,6 +1948,36 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Detailed information about a single request field that failed validation,
+// including the field's location, the reason it failed, and a human-readable
+// message.
+type ValidationExceptionField struct {
+
+	// The change type the failing field applies to, if the field is part of a change
+	// request. For example, AddDeliveryOptions .
+	ChangeType *string
+
+	// The entity identifier the failing field applies to, if the field is on a
+	// specific entity.
+	EntityId *string
+
+	// The entity type the failing field applies to, if the field is on a specific
+	// entity. For example, AmiProduct@1.0 .
+	EntityType *string
+
+	// The name of the request field that failed validation, expressed as a JSON path
+	// (for example, Details.DeliveryOptions[0].Type ).
+	Field *string
+
+	// A human-readable message describing why the field failed validation.
+	Message *string
+
+	// The reason the field failed validation.
+	Reason ValidationExceptionReason
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1759,3 +1991,5 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isEntityTypeFilters() {}
 func (*UnknownUnionMember) isEntityTypeSort()    {}
+func (*UnknownUnionMember) isFrameworkFilters()  {}
+func (*UnknownUnionMember) isFrameworkSummary()  {}

@@ -302,6 +302,70 @@ func TestCheckResponseSnapshot_CreateOutpost(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreatePrivateConnectivityConfig(t *testing.T) {
+	want := &CreatePrivateConnectivityConfigOutput{
+		PrivateConnectivityConfig: &types.PrivateConnectivityConfig{
+			RoleArn:                   ptr.String("__RoleArn__"),
+			PrivateConnectivityStatus: types.PrivateConnectivityStatus("ENABLED"),
+			VpcInformationList: []types.VpcInformation{
+				{
+					VpcId: ptr.String("__VpcId__"),
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					VpcEndpointId: ptr.String("__VpcEndpointId__"),
+				},
+				{
+					VpcId: ptr.String("__VpcId__"),
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					VpcEndpointId: ptr.String("__VpcEndpointId__"),
+				},
+			},
+			ProvisioningRoleArn: ptr.String("__ProvisioningRoleArn__"),
+		},
+		OutpostId: ptr.String("__OutpostId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreatePrivateConnectivityConfig.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreatePrivateConnectivityConfig(context.Background(), &CreatePrivateConnectivityConfigInput{
+		OutpostId: ptr.String("__OutpostId__"),
+		VpcInformationList: []types.VpcInformation{
+			{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcEndpointId: ptr.String("__VpcEndpointId__"),
+			},
+			{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcEndpointId: ptr.String("__VpcEndpointId__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreatePrivateConnectivityConfig.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateQuote(t *testing.T) {
 	want := &CreateQuoteOutput{
 		Quote: &types.Quote{
@@ -1419,6 +1483,51 @@ func TestCheckResponseSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetOutpostSupportedInstanceTypes.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetPrivateConnectivityConfig(t *testing.T) {
+	want := &GetPrivateConnectivityConfigOutput{
+		PrivateConnectivityConfig: &types.PrivateConnectivityConfig{
+			RoleArn:                   ptr.String("__RoleArn__"),
+			PrivateConnectivityStatus: types.PrivateConnectivityStatus("ENABLED"),
+			VpcInformationList: []types.VpcInformation{
+				{
+					VpcId: ptr.String("__VpcId__"),
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					VpcEndpointId: ptr.String("__VpcEndpointId__"),
+				},
+				{
+					VpcId: ptr.String("__VpcId__"),
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					VpcEndpointId: ptr.String("__VpcEndpointId__"),
+				},
+			},
+			ProvisioningRoleArn: ptr.String("__ProvisioningRoleArn__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetPrivateConnectivityConfig.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetPrivateConnectivityConfig(context.Background(), &GetPrivateConnectivityConfigInput{
+		OutpostId: ptr.String("__OutpostId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetPrivateConnectivityConfig.response", err)
 	}
 }
 

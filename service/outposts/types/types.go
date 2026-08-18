@@ -664,6 +664,31 @@ type PricingOption struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the private connectivity configuration for an Outpost.
+type PrivateConnectivityConfig struct {
+
+	// The status of private connectivity for the Outpost. Valid values are ENABLED
+	// and DISABLED .
+	PrivateConnectivityStatus PrivateConnectivityStatus
+
+	// The Amazon Resource Name (ARN) of the provisioning role in your account that
+	// Amazon Web Services Outposts uses to establish the service link connection
+	// during Outpost installation. This field is present only when VPC endpoint-based
+	// provisioning is configured.
+	ProvisioningRoleArn *string
+
+	// The Amazon Resource Name (ARN) of the service-linked role that Amazon Web
+	// Services Outposts creates and uses to provision and attach the network
+	// interfaces for private connectivity in your VPC. The role's permissions are
+	// scoped to the specific Outpost and VPC.
+	RoleArn *string
+
+	// Information about the VPC used for private connectivity.
+	VpcInformationList []VpcInformation
+
+	noSmithyDocumentSerde
+}
+
 // Information about a quote for an Outpost. A quote provides pricing and
 // configuration options based on the requested capacity.
 type Quote struct {
@@ -1088,6 +1113,25 @@ type SubscriptionPricingDetails struct {
 
 	// The upfront price.
 	UpfrontPrice *float32
+
+	noSmithyDocumentSerde
+}
+
+// Information about a VPC used for private connectivity, including its subnets
+// and an associated VPC endpoint.
+type VpcInformation struct {
+
+	// The IDs of the subnets associated with the VPC endpoint. Currently, only one
+	// subnet is supported.
+	SubnetIds []string
+
+	// The ID of the interface VPC endpoint for the Amazon Web Services Outposts
+	// service. When specified, the endpoint must be in the available state and the
+	// specified subnets must be associated with it.
+	VpcEndpointId *string
+
+	// The ID of the VPC used for private connectivity.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

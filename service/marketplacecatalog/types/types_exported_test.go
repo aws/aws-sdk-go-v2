@@ -98,3 +98,47 @@ var _ *types.OfferSort
 var _ *types.DataProductSort
 var _ *types.ResaleAuthorizationSort
 var _ *types.ContainerProductSort
+
+func ExampleFrameworkFilters_outputUsage() {
+	var union types.FrameworkFilters
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FrameworkFiltersMemberAMISecurityFilters:
+		_ = v.Value // Value is types.AMISecurityFilters
+
+	case *types.FrameworkFiltersMemberContainerSecurityFilters:
+		_ = v.Value // Value is types.ContainerSecurityFilters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AMISecurityFilters
+var _ *types.ContainerSecurityFilters
+
+func ExampleFrameworkSummary_outputUsage() {
+	var union types.FrameworkSummary
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FrameworkSummaryMemberAMISecuritySummary:
+		_ = v.Value // Value is types.AMISecuritySummary
+
+	case *types.FrameworkSummaryMemberContainerSecuritySummary:
+		_ = v.Value // Value is types.ContainerSecuritySummary
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ContainerSecuritySummary
+var _ *types.AMISecuritySummary

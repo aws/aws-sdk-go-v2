@@ -4414,6 +4414,24 @@ func validateNielsenNaesIiNw(v *types.NielsenNaesIiNw) error {
 	}
 }
 
+func validateNielsenNwOnly(v *types.NielsenNwOnly) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NielsenNwOnly"}
+	if v.CheckDigitString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CheckDigitString"))
+	}
+	if v.Sid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sid"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNielsenWatermarksSettings(v *types.NielsenWatermarksSettings) error {
 	if v == nil {
 		return nil
@@ -4427,6 +4445,11 @@ func validateNielsenWatermarksSettings(v *types.NielsenWatermarksSettings) error
 	if v.NielsenNaesIiNwSettings != nil {
 		if err := validateNielsenNaesIiNw(v.NielsenNaesIiNwSettings); err != nil {
 			invalidParams.AddNested("NielsenNaesIiNwSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NielsenNwOnlySettings != nil {
+		if err := validateNielsenNwOnly(v.NielsenNwOnlySettings); err != nil {
+			invalidParams.AddNested("NielsenNwOnlySettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

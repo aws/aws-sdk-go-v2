@@ -205,6 +205,8 @@ type ValidationException struct {
 
 	ErrorCodeOverride *string
 
+	ValidationExceptionFieldList []ValidationExceptionField
+
 	noSmithyDocumentSerde
 }
 

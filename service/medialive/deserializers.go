@@ -45916,6 +45916,89 @@ func awsRestjson1_deserializeDocumentNielsenNaesIiNw(v **types.NielsenNaesIiNw, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNielsenNwOnly(v **types.NielsenNwOnly, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NielsenNwOnly
+	if *v == nil {
+		sv = &types.NielsenNwOnly{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "checkDigitString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin2Max2 to be of type string, got %T instead", value)
+				}
+				sv.CheckDigitString = ptr.String(jtv)
+			}
+
+		case "sid":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Sid = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Sid = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMin1Max65535 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "timezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NielsenWatermarkTimezones to be of type string, got %T instead", value)
+				}
+				sv.Timezone = types.NielsenWatermarkTimezones(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNielsenWatermarksSettings(v **types.NielsenWatermarksSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45954,6 +46037,11 @@ func awsRestjson1_deserializeDocumentNielsenWatermarksSettings(v **types.Nielsen
 
 		case "nielsenNaesIiNwSettings":
 			if err := awsRestjson1_deserializeDocumentNielsenNaesIiNw(&sv.NielsenNaesIiNwSettings, value); err != nil {
+				return err
+			}
+
+		case "nielsenNwOnlySettings":
+			if err := awsRestjson1_deserializeDocumentNielsenNwOnly(&sv.NielsenNwOnlySettings, value); err != nil {
 				return err
 			}
 

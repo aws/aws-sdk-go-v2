@@ -18044,6 +18044,41 @@ func awsRestjson1_serializeDocumentNielsenNaesIiNw(v *types.NielsenNaesIiNw, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNielsenNwOnly(v *types.NielsenNwOnly, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CheckDigitString != nil {
+		ok := object.Key("checkDigitString")
+		ok.String(*v.CheckDigitString)
+	}
+
+	if v.Sid != nil {
+		ok := object.Key("sid")
+		switch {
+		case math.IsNaN(*v.Sid):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Sid, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Sid, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Sid)
+
+		}
+	}
+
+	if len(v.Timezone) > 0 {
+		ok := object.Key("timezone")
+		ok.String(string(v.Timezone))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNielsenWatermarksSettings(v *types.NielsenWatermarksSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18063,6 +18098,13 @@ func awsRestjson1_serializeDocumentNielsenWatermarksSettings(v *types.NielsenWat
 	if v.NielsenNaesIiNwSettings != nil {
 		ok := object.Key("nielsenNaesIiNwSettings")
 		if err := awsRestjson1_serializeDocumentNielsenNaesIiNw(v.NielsenNaesIiNwSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NielsenNwOnlySettings != nil {
+		ok := object.Key("nielsenNwOnlySettings")
+		if err := awsRestjson1_serializeDocumentNielsenNwOnly(v.NielsenNwOnlySettings, ok); err != nil {
 			return err
 		}
 	}

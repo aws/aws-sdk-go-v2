@@ -1,0 +1,8 @@
+{
+    "id": "eadc3daf-5927-44c3-abd5-65069ca93f59",
+    "type": "feature",
+    "description": "AWS Elemental MediaLive now supports SCTE-35 marker passthrough without IDR frame insertion for CMAF Ingest, MediaPackage V2, and transport stream outputs.",
+    "modules": [
+        "service/medialive"
+    ]
+}

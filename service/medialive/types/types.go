@@ -1849,7 +1849,17 @@ type CmafIngestGroupSettings struct {
 	// underscore (_) and period (.) and has a maximum length of 100 characters.
 	Scte35NameModifier *string
 
-	// Type of scte35 track to add. none or scte35WithoutSegmentation
+	// SCTE-35 insertion type. Option "none" indicates that a SCTE-35 marker will not
+	// be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the
+	// segment be segmented. Option "scte35WithoutIdr" indicates that a SCTE-35 marker
+	// will be inserted to indicate the cue point, but MediaLive will not insert an IDR
+	// on that frame nor will it introduce a new segment boundary there if it wasn't
+	// already going to be one (this option is required for use with downstream
+	// multiview bitstream stitching workflows). Option "scte35WithoutSegmentation"
+	// indicates that a SCTE-35 marker will be inserted to indicate the cue point, and
+	// an IDR will be inserted on that frame so that a downstream re-packager might
+	// split the segment there, but MediaLive itself will not introduce a new segment
+	// boundary there.
 	Scte35Type Scte35Type
 
 	// The nominal duration of segments. The units are specified in
@@ -5194,7 +5204,16 @@ type M2tsSettings struct {
 	// the range of 32 (or 0x20)..8182 (or 0x1ff6).
 	Scte27Pids *string
 
-	// Optionally pass SCTE-35 signals from the input source to this output.
+	// SCTE-35 control. Option "none" indicates that a SCTE-35 marker will not be
+	// inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the
+	// segment be segmented. Option "scte35WithoutIdr" indicates that a SCTE-35 marker
+	// will be inserted to indicate the cue point, but MediaLive will not insert an IDR
+	// on that frame nor will it introduce a new segment boundary there if it wasn't
+	// already going to be one (this option is required for use with downstream
+	// multiview bitstream stitching workflows). Option "passthrough" indicates that a
+	// SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be
+	// inserted on that frame, and MediaLive itself will introduce a new segment
+	// boundary there.
 	Scte35Control M2tsScte35Control
 
 	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can be
@@ -5620,7 +5639,17 @@ type MediaPackageV2GroupSettings struct {
 	// output.
 	NielsenId3Behavior CmafNielsenId3Behavior
 
-	// Type of scte35 track to add. none or scte35WithoutSegmentation
+	// SCTE-35 insertion type. Option "none" indicates that a SCTE-35 marker will not
+	// be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the
+	// segment be segmented. Option "scte35WithoutIdr" indicates that a SCTE-35 marker
+	// will be inserted to indicate the cue point, but MediaLive will not insert an IDR
+	// on that frame nor will it introduce a new segment boundary there if it wasn't
+	// already going to be one (this option is required for use with downstream
+	// multiview bitstream stitching workflows). Option "scte35WithoutSegmentation"
+	// indicates that a SCTE-35 marker will be inserted to indicate the cue point, and
+	// an IDR will be inserted on that frame so that a downstream re-packager might
+	// split the segment there, but MediaLive itself will not introduce a new segment
+	// boundary there.
 	Scte35Type Scte35Type
 
 	// The nominal duration of segments. The units are specified in
@@ -6193,7 +6222,16 @@ type MultiplexM2tsSettings struct {
 	// into the transport stream.
 	PcrPeriod *int32
 
-	// Optionally pass SCTE-35 signals from the input source to this output.
+	// SCTE-35 control. Option "none" indicates that a SCTE-35 marker will not be
+	// inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the
+	// segment be segmented. Option "scte35WithoutIdr" indicates that a SCTE-35 marker
+	// will be inserted to indicate the cue point, but MediaLive will not insert an IDR
+	// on that frame nor will it introduce a new segment boundary there if it wasn't
+	// already going to be one (this option is required for use with downstream
+	// multiview bitstream stitching workflows). Option "passthrough" indicates that a
+	// SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be
+	// inserted on that frame, and MediaLive itself will introduce a new segment
+	// boundary there.
 	Scte35Control M2tsScte35Control
 
 	// Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the
@@ -6570,6 +6608,26 @@ type NielsenNaesIiNw struct {
 	noSmithyDocumentSerde
 }
 
+// Nielsen Nw Only
+type NielsenNwOnly struct {
+
+	// Enter the check digit string for the watermark
+	//
+	// This member is required.
+	CheckDigitString *string
+
+	// Enter the Nielsen Source ID (SID) to include in the watermark
+	//
+	// This member is required.
+	Sid *float64
+
+	// Choose the timezone for the time stamps in the watermark. If not provided, the
+	// timestamps will be in Coordinated Universal Time (UTC)
+	Timezone NielsenWatermarkTimezones
+
+	noSmithyDocumentSerde
+}
+
 // Nielsen Watermarks Settings
 type NielsenWatermarksSettings struct {
 
@@ -6585,6 +6643,10 @@ type NielsenWatermarksSettings struct {
 	// Complete these fields only if you want to insert watermarks of type Nielsen
 	// NAES II (N2) and Nielsen NAES VI (NW).
 	NielsenNaesIiNwSettings *NielsenNaesIiNw
+
+	// Complete these fields only if you want to insert watermarks of type Nielsen
+	// NAES VI (NW) only, without inserting NAES II (N2) watermarks.
+	NielsenNwOnlySettings *NielsenNwOnly
 
 	noSmithyDocumentSerde
 }

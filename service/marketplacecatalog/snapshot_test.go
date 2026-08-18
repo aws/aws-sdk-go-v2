@@ -98,6 +98,18 @@ func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeChangeSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeChangeSet(context.Background(), nil, func(o *Options) {
@@ -127,6 +139,18 @@ func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssessments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssessments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssessments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -253,6 +277,18 @@ func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeChangeSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeChangeSet(context.Background(), nil, func(o *Options) {
@@ -282,6 +318,18 @@ func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssessments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssessments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssessments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

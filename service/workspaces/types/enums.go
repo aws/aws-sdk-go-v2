@@ -872,10 +872,11 @@ type ModificationResourceEnum string
 
 // Enum values for ModificationResourceEnum
 const (
-	ModificationResourceEnumRootVolume  ModificationResourceEnum = "ROOT_VOLUME"
-	ModificationResourceEnumUserVolume  ModificationResourceEnum = "USER_VOLUME"
-	ModificationResourceEnumComputeType ModificationResourceEnum = "COMPUTE_TYPE"
-	ModificationResourceEnumProtocol    ModificationResourceEnum = "PROTOCOL"
+	ModificationResourceEnumRootVolume           ModificationResourceEnum = "ROOT_VOLUME"
+	ModificationResourceEnumUserVolume           ModificationResourceEnum = "USER_VOLUME"
+	ModificationResourceEnumComputeType          ModificationResourceEnum = "COMPUTE_TYPE"
+	ModificationResourceEnumProtocol             ModificationResourceEnum = "PROTOCOL"
+	ModificationResourceEnumNestedVirtualization ModificationResourceEnum = "NESTED_VIRTUALIZATION"
 )
 
 // Values returns all known values for ModificationResourceEnum. Note that this
@@ -888,6 +889,7 @@ func (ModificationResourceEnum) Values() []ModificationResourceEnum {
 		"USER_VOLUME",
 		"COMPUTE_TYPE",
 		"PROTOCOL",
+		"NESTED_VIRTUALIZATION",
 	}
 }
 

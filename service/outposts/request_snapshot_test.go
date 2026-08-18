@@ -336,6 +336,51 @@ func TestCheckRequestSnapshot_CreateOutpost(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreatePrivateConnectivityConfig(t *testing.T) {
+	input := &CreatePrivateConnectivityConfigInput{
+		OutpostId: ptr.String("__OutpostId__"),
+		VpcInformationList: []types.VpcInformation{
+			{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcEndpointId: ptr.String("__VpcEndpointId__"),
+			},
+			{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcEndpointId: ptr.String("__VpcEndpointId__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreatePrivateConnectivityConfig(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePrivateConnectivityConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateQuote(t *testing.T) {
 	input := &CreateQuoteInput{
 		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
@@ -796,6 +841,33 @@ func TestCheckRequestSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOutpostSupportedInstanceTypes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetPrivateConnectivityConfig(t *testing.T) {
+	input := &GetPrivateConnectivityConfigInput{
+		OutpostId: ptr.String("__OutpostId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetPrivateConnectivityConfig(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPrivateConnectivityConfig"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1792,6 +1864,51 @@ func TestUpdateRequestSnapshot_CreateOutpost(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreatePrivateConnectivityConfig(t *testing.T) {
+	input := &CreatePrivateConnectivityConfigInput{
+		OutpostId: ptr.String("__OutpostId__"),
+		VpcInformationList: []types.VpcInformation{
+			{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcEndpointId: ptr.String("__VpcEndpointId__"),
+			},
+			{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VpcEndpointId: ptr.String("__VpcEndpointId__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreatePrivateConnectivityConfig(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePrivateConnectivityConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateQuote(t *testing.T) {
 	input := &CreateQuoteInput{
 		OutpostIdentifier: ptr.String("__OutpostIdentifier__"),
@@ -2252,6 +2369,33 @@ func TestUpdateRequestSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOutpostSupportedInstanceTypes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetPrivateConnectivityConfig(t *testing.T) {
+	input := &GetPrivateConnectivityConfigInput{
+		OutpostId: ptr.String("__OutpostId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetPrivateConnectivityConfig(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPrivateConnectivityConfig"); err != nil {
 		t.Fatal(err)
 	}
 }

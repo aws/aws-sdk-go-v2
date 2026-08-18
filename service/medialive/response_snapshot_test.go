@@ -1687,6 +1687,11 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 									Sid:              ptr.Float64(1.0),
 									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 								},
+								NielsenNwOnlySettings: &types.NielsenNwOnly{
+									CheckDigitString: ptr.String("__CheckDigitString__"),
+									Sid:              ptr.Float64(1.0),
+									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+								},
 							},
 						},
 						CodecSettings: &types.AudioCodecSettings{
@@ -1816,6 +1821,11 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 								},
 								NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 								NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+									CheckDigitString: ptr.String("__CheckDigitString__"),
+									Sid:              ptr.Float64(1.0),
+									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+								},
+								NielsenNwOnlySettings: &types.NielsenNwOnly{
 									CheckDigitString: ptr.String("__CheckDigitString__"),
 									Sid:              ptr.Float64(1.0),
 									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
@@ -5091,6 +5101,11 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
 						},
 					},
 					CodecSettings: &types.AudioCodecSettings{
@@ -5220,6 +5235,11 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 							},
 							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
 								CheckDigitString: ptr.String("__CheckDigitString__"),
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
@@ -10094,6 +10114,11 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
 						},
 					},
 					CodecSettings: &types.AudioCodecSettings{
@@ -10223,6 +10248,11 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 							},
 							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
 								CheckDigitString: ptr.String("__CheckDigitString__"),
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
@@ -14163,6 +14193,11 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
 						},
 					},
 					CodecSettings: &types.AudioCodecSettings{
@@ -14292,6 +14327,11 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 							},
 							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
 								CheckDigitString: ptr.String("__CheckDigitString__"),
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
@@ -21477,6 +21517,11 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
 						},
 					},
 					CodecSettings: &types.AudioCodecSettings{
@@ -21606,6 +21651,11 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 							},
 							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
 								CheckDigitString: ptr.String("__CheckDigitString__"),
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
@@ -24912,6 +24962,11 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
 						},
 					},
 					CodecSettings: &types.AudioCodecSettings{
@@ -25041,6 +25096,11 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 							},
 							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
 								CheckDigitString: ptr.String("__CheckDigitString__"),
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
@@ -28759,6 +28819,11 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
 						},
 					},
 					CodecSettings: &types.AudioCodecSettings{
@@ -28888,6 +28953,11 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 							},
 							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
 								CheckDigitString: ptr.String("__CheckDigitString__"),
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
@@ -32315,6 +32385,11 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 									Sid:              ptr.Float64(1.0),
 									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 								},
+								NielsenNwOnlySettings: &types.NielsenNwOnly{
+									CheckDigitString: ptr.String("__CheckDigitString__"),
+									Sid:              ptr.Float64(1.0),
+									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+								},
 							},
 						},
 						CodecSettings: &types.AudioCodecSettings{
@@ -32444,6 +32519,11 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 								},
 								NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 								NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+									CheckDigitString: ptr.String("__CheckDigitString__"),
+									Sid:              ptr.Float64(1.0),
+									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+								},
+								NielsenNwOnlySettings: &types.NielsenNwOnly{
 									CheckDigitString: ptr.String("__CheckDigitString__"),
 									Sid:              ptr.Float64(1.0),
 									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
@@ -35719,6 +35799,11 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
 						},
 					},
 					CodecSettings: &types.AudioCodecSettings{
@@ -35848,6 +35933,11 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 							},
 							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+							NielsenNwOnlySettings: &types.NielsenNwOnly{
 								CheckDigitString: ptr.String("__CheckDigitString__"),
 								Sid:              ptr.Float64(1.0),
 								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
@@ -39130,6 +39220,11 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 									Sid:              ptr.Float64(1.0),
 									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
 								},
+								NielsenNwOnlySettings: &types.NielsenNwOnly{
+									CheckDigitString: ptr.String("__CheckDigitString__"),
+									Sid:              ptr.Float64(1.0),
+									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+								},
 							},
 						},
 						CodecSettings: &types.AudioCodecSettings{
@@ -39259,6 +39354,11 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 								},
 								NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
 								NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+									CheckDigitString: ptr.String("__CheckDigitString__"),
+									Sid:              ptr.Float64(1.0),
+									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+								},
+								NielsenNwOnlySettings: &types.NielsenNwOnly{
 									CheckDigitString: ptr.String("__CheckDigitString__"),
 									Sid:              ptr.Float64(1.0),
 									Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),

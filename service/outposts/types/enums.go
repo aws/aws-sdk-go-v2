@@ -709,6 +709,25 @@ func (PricingResult) Values() []PricingResult {
 	}
 }
 
+type PrivateConnectivityStatus string
+
+// Enum values for PrivateConnectivityStatus
+const (
+	PrivateConnectivityStatusEnabled  PrivateConnectivityStatus = "ENABLED"
+	PrivateConnectivityStatusDisabled PrivateConnectivityStatus = "DISABLED"
+)
+
+// Values returns all known values for PrivateConnectivityStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrivateConnectivityStatus) Values() []PrivateConnectivityStatus {
+	return []PrivateConnectivityStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type QuoteCapacityType string
 
 // Enum values for QuoteCapacityType

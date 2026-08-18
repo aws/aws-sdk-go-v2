@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateOutpost(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePrivateConnectivityConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePrivateConnectivityConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePrivateConnectivityConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateQuote(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateQuote(context.Background(), nil, func(o *Options) {
@@ -271,6 +283,18 @@ func TestCheckSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 	_, err := svc.GetOutpostSupportedInstanceTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetOutpostSupportedInstanceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPrivateConnectivityConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPrivateConnectivityConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPrivateConnectivityConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -625,6 +649,18 @@ func TestUpdateSnapshot_CreateOutpost(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePrivateConnectivityConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePrivateConnectivityConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePrivateConnectivityConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateQuote(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateQuote(context.Background(), nil, func(o *Options) {
@@ -786,6 +822,18 @@ func TestUpdateSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 	_, err := svc.GetOutpostSupportedInstanceTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetOutpostSupportedInstanceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPrivateConnectivityConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPrivateConnectivityConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPrivateConnectivityConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

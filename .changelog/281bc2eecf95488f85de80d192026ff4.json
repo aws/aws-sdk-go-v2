@@ -1,0 +1,8 @@
+{
+    "id": "281bc2ee-cf95-488f-85de-80d192026ff4",
+    "type": "documentation",
+    "description": "Update AWS Batch documentation with newer Fargate Supported configurations, notes, and fix broken Docker link re-directs.",
+    "modules": [
+        "service/batch"
+    ]
+}
