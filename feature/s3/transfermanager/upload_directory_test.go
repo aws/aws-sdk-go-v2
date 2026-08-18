@@ -2,6 +2,7 @@ package transfermanager
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -9,6 +10,7 @@ import (
 	"runtime"
 	"sort"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
@@ -160,11 +162,13 @@ func TestUploadDirectory(t *testing.T) {
 			preprocessFunc: func(root string) (func() error, error) {
 				symlinkPath1 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symFoo")
 				symlinkPath2 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symBar")
+				symlinkPath3 := filepath.Join(root, "multi-file-contain-symlink", "to", "symZoo") // the relative symlink
 				postprocessFunc := func() error {
 					// this cleans up all possible symlinks regardless of
 					// whether or not it is successfully created
 					os.Remove(symlinkPath1)
 					os.Remove(symlinkPath2)
+					os.Remove(symlinkPath3)
 					return nil
 				}
 				if err := os.Symlink(filepath.Join(root, "dstFile1"), symlinkPath1); err != nil {
@@ -173,14 +177,20 @@ func TestUploadDirectory(t *testing.T) {
 				if err := os.Symlink(filepath.Join(root, "dstFile2"), symlinkPath2); err != nil {
 					return postprocessFunc, err
 				}
-
+				relTarget, err := filepath.Rel(symlinkPath3, filepath.Join(root, "dstFile2"))
+				if err != nil {
+					return postprocessFunc, err
+				}
+				if err = os.Symlink(relTarget, symlinkPath3); err != nil {
+					return postprocessFunc, err
+				}
 				return postprocessFunc, nil
 			},
-			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo", "to/the/symBar", "to/the/yee"},
-			expectFilesUploaded: 6,
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symFoo", "to/the/symBar", "to/the/yee", "to/symZoo"},
+			expectFilesUploaded: 7,
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
 				l.expectStart(t, in)
-				l.expectComplete(t, in, out, 6)
+				l.expectComplete(t, in, out, 7)
 			},
 		},
 		"folder containing multi symlinks but not follow": {
@@ -643,5 +653,172 @@ func TestUploadDirectoryWithContextCanceled(t *testing.T) {
 
 	if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	}
+}
+
+// openFileCapture records the *os.File bodies that UploadDirectory opens. It
+// implements PutRequestCallback, which the directory uploader invokes for every
+// object with input.Body still set to the raw *os.File it opened (before that
+// body is read/replaced for the actual PutObject call). This lets a black-box
+// test observe the exact set of file handles opened and, after UploadDirectory
+// returns, assert that each one was closed - a regression guard for
+// aws/aws-sdk-go-v2#3512. It is safe for concurrent use by the upload workers.
+type openFileCapture struct {
+	mu    sync.Mutex
+	files []*os.File
+}
+
+// UpdateRequest implements PutRequestCallback, capturing the opened *os.File.
+func (c *openFileCapture) UpdateRequest(in *UploadObjectInput) {
+	if f, ok := in.Body.(*os.File); ok {
+		c.mu.Lock()
+		c.files = append(c.files, f)
+		c.mu.Unlock()
+	}
+}
+
+func (c *openFileCapture) count() int {
+	return len(c.files)
+}
+
+// closed returns the names of captured files that are closed. A closed
+// *os.File that has already been closed makes isFileClosed report true, so a
+// false result means the handle leaked.
+func (c *openFileCapture) closed() []string {
+	var closed []string
+	for _, f := range c.files {
+		if isFileClosed(f) {
+			closed = append(closed, f.Name())
+		}
+	}
+	sort.Strings(closed)
+	return closed
+}
+
+// isFileClosed reports whether f's underlying descriptor has already been
+// closed. It probes with a second Close rather than Stat because Stat is not a
+// portable signal for closed-ness: on Windows (*os.File).Stat resolves by path
+// rather than through the descriptor, so it never surfaces os.ErrClosed, and
+// even the Unix Fstat path only began mapping internal/poll.ErrFileClosing to
+// os.ErrClosed in Go 1.23 (golang/go#66665). A second Close, by contrast,
+// consistently returns an error matching os.ErrClosed across platforms when the
+// file is already closed, and returns nil (harmlessly closing the leaked handle)
+// when it is not.
+func isFileClosed(f *os.File) bool {
+	return errors.Is(f.Close(), os.ErrClosed)
+}
+
+// TestUploadDirectoryClosesOpenedFiles verifies that UploadDirectory closes
+// every file handle it opens before returning, across recursive/non-recursive
+// walks and even when individual object uploads fail. Regression test for
+// aws/aws-sdk-go-v2#3512.
+func TestUploadDirectoryClosesOpenedFiles(t *testing.T) {
+	_, filename, _, _ := runtime.Caller(0)
+	root := filepath.Join(filepath.Dir(filename), "testdata")
+
+	cases := map[string]struct {
+		source               string
+		recursive            bool
+		followSymLinks       bool
+		keyPrefix            string
+		putobjectFunc        func(*s3testing.TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
+		preprocessFunc       func(string) (func(), error)
+		failurePolicy        UploadDirectoryFailurePolicy
+		expectFilesTraversed int
+		expectErr            string
+	}{
+		"single file recursively": {
+			source:               filepath.Join(root, "single-file-dir"),
+			recursive:            true,
+			expectFilesTraversed: 1,
+		},
+		"multi file at root recursively": {
+			source:               filepath.Join(root, "multi-file-at-root"),
+			recursive:            true,
+			expectFilesTraversed: 3,
+		},
+		"multi file with subdir recursively": {
+			source:               filepath.Join(root, "multi-file-with-subdir"),
+			recursive:            true,
+			expectFilesTraversed: 4,
+		},
+		"multi file with subdir non-recursively": {
+			source:               filepath.Join(root, "multi-file-with-subdir"),
+			expectFilesTraversed: 2,
+		},
+		"multi file with subdir and symlink recursively": {
+			source:         filepath.Join(root, "multi-file-contain-symlink"),
+			recursive:      true,
+			followSymLinks: true,
+			preprocessFunc: func(string) (func(), error) {
+				symlinkPath1 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symFoo")
+				symlinkPath2 := filepath.Join(root, "multi-file-contain-symlink", "to", "symBar")
+				postprocessFunc := func() {
+					os.Remove(symlinkPath1)
+					os.Remove(symlinkPath2)
+				}
+				if err := os.Symlink(filepath.Join(root, "dstFile1"), symlinkPath1); err != nil {
+					return postprocessFunc, err
+				}
+				if err := os.Symlink(filepath.Join(root, "dstDir1"), symlinkPath2); err != nil {
+					return postprocessFunc, err
+				}
+				return postprocessFunc, nil
+			},
+			expectFilesTraversed: 6,
+		},
+		"files are closed even when every upload fails and is ignored": {
+			source:    filepath.Join(root, "multi-file-with-subdir"),
+			recursive: true,
+			putobjectFunc: func(*s3testing.TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
+				return nil, fmt.Errorf("banned key")
+			},
+			expectFilesTraversed: 4,
+			failurePolicy:        IgnoreUploadFailurePolicy{},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			capture := &openFileCapture{}
+
+			s3Client, _ := s3testing.NewUploadDirectoryClient([]string{"UploadPart", "CompleteMultipartUpload"})
+			s3Client.PutObjectFn = c.putobjectFunc
+			mgr := New(s3Client)
+
+			if c.preprocessFunc != nil {
+				postprocessFunc, err := c.preprocessFunc(root)
+				defer postprocessFunc()
+				if err != nil {
+					t.Fatalf("error when preprocessing: %v", err)
+				}
+			}
+
+			req := &UploadDirectoryInput{
+				Bucket:              aws.String("mock-bucket"),
+				Source:              aws.String(c.source),
+				Recursive:           aws.Bool(c.recursive),
+				FollowSymbolicLinks: aws.Bool(c.followSymLinks),
+				KeyPrefix:           aws.String(c.keyPrefix),
+				Callback:            capture,
+				FailurePolicy:       c.failurePolicy,
+			}
+
+			_, err := mgr.UploadDirectory(context.Background(), req)
+			if c.expectErr == "" {
+				if err != nil {
+					t.Fatalf("expect no error, got %v", err)
+				}
+			} else if err == nil || !strings.Contains(err.Error(), c.expectErr) {
+				t.Fatalf("expect error containing %q, got %v", c.expectErr, err)
+			}
+
+			if e, a := c.expectFilesTraversed, capture.count(); e != a {
+				t.Errorf("expected UploadDirectory to open %d file under %s, captured %d", e, c.source, a)
+			}
+			if e, a := c.expectFilesTraversed, capture.closed(); len(a) != e {
+				t.Errorf("expected all %d opened files under %s to be closed after UploadDirectory returned, but only closed those: %v", e, c.source, a)
+			}
+		})
 	}
 }
