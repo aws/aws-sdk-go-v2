@@ -523,6 +523,33 @@ func TestUpdateResponseSnapshot_RpcV2CborSparseMaps(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_RpcV2CborUnions(t *testing.T) {
+	want := &RpcV2CborUnionsOutput{
+		Contents: &types.RpcV2CborUnionMemberStringValue{
+			Value: "__RpcV2CborUnionMemberStringValue__",
+		},
+		OtherValue: ptr.String("__OtherValue__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.RpcV2Protocol)
+	opSchema := smithy.NewOperationSchema(schemas.RpcV2CborUnions, schemas.RpcV2CborUnionInputOutput, schemas.RpcV2CborUnionInputOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RpcV2CborUnions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_SimpleScalarProperties(t *testing.T) {
 	want := &SimpleScalarPropertiesOutput{
 		TrueBooleanValue:  ptr.Bool(true),

@@ -329,6 +329,19 @@ func TestClient_GreetingWithErrors_FooError_Deserialize(t *testing.T) {
 			}`),
 			ExpectError: &types.FooError{},
 		},
+		// Because only the part after '#' is considered, an unrecognized namespace should
+		// not make a difference.
+		"AwsJson10FooErrorWithDunderTypeAndDifferentNamespace": {
+			StatusCode: 500,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "__type": "aws.different.namespace#FooError"
+			}`),
+			ExpectError: &types.FooError{},
+		},
 		// Some services serialize errors using __type, and it might contain a namespace.
 		// It also might contain a URI. Clients should just take the last part of the
 		// string after '#' and before ":". This is a pathalogical case that might not

@@ -63,6 +63,11 @@ var RpcV2CborSparseMaps = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RpcV2CborSparseMaps",
 }, smithy.ShapeTypeOperation, 0)
 
+var RpcV2CborUnions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "smithy.protocoltests.rpcv2Cbor",
+	Name:      "RpcV2CborUnions",
+}, smithy.ShapeTypeOperation, 0)
+
 var SimpleScalarProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "smithy.protocoltests.rpcv2Cbor",
 	Name:      "SimpleScalarProperties",
@@ -251,6 +256,14 @@ var RpcV2CborSparseMapsInputOutput_sparseStringMap *smithy.Schema
 
 var RpcV2CborSparseMapsInputOutput_sparseSetMap *smithy.Schema
 
+var RpcV2CborUnionInputOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "smithy.protocoltests.rpcv2Cbor",
+	Name:      "RpcV2CborUnionInputOutput",
+}, smithy.ShapeTypeStructure, 2)
+var RpcV2CborUnionInputOutput_contents *smithy.Schema
+
+var RpcV2CborUnionInputOutput_otherValue *smithy.Schema
+
 var SimpleScalarStructure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "smithy.protocoltests.rpcv2Cbor",
 	Name:      "SimpleScalarStructure",
@@ -414,6 +427,20 @@ var RecursiveShapesInputOutputNested2 = smithy.NewSchema(smithy.ShapeID{
 var RecursiveShapesInputOutputNested2_bar *smithy.Schema
 
 var RecursiveShapesInputOutputNested2_recursiveMember *smithy.Schema
+
+var RpcV2CborNestedUnion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "smithy.protocoltests.rpcv2Cbor",
+	Name:      "RpcV2CborNestedUnion",
+}, smithy.ShapeTypeUnion, 1)
+var RpcV2CborNestedUnion_stringValue *smithy.Schema
+
+var RpcV2CborUnion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "smithy.protocoltests.rpcv2Cbor",
+	Name:      "RpcV2CborUnion",
+}, smithy.ShapeTypeUnion, 2)
+var RpcV2CborUnion_stringValue *smithy.Schema
+
+var RpcV2CborUnion_unionValue *smithy.Schema
 
 var _SparseBooleanMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "smithy.protocoltests.rpcv2Cbor",
@@ -866,6 +893,16 @@ func init() {
 	RpcV2CborSparseMapsInputOutput_sparseStringMap = RpcV2CborSparseMapsInputOutput.AddMember("sparseStringMap", _SparseStringMap)
 
 	RpcV2CborSparseMapsInputOutput_sparseSetMap = RpcV2CborSparseMapsInputOutput.AddMember("sparseSetMap", _SparseSetMap)
+
+	RpcV2CborNestedUnion_stringValue = RpcV2CborNestedUnion.AddMember("stringValue", smithyprelude.String)
+
+	RpcV2CborUnion_stringValue = RpcV2CborUnion.AddMember("stringValue", smithyprelude.String)
+
+	RpcV2CborUnion_unionValue = RpcV2CborUnion.AddMember("unionValue", RpcV2CborNestedUnion)
+
+	RpcV2CborUnionInputOutput_contents = RpcV2CborUnionInputOutput.AddMember("contents", RpcV2CborUnion)
+
+	RpcV2CborUnionInputOutput_otherValue = RpcV2CborUnionInputOutput.AddMember("otherValue", smithyprelude.String)
 
 	SimpleScalarStructure_trueBooleanValue = SimpleScalarStructure.AddMember("trueBooleanValue", smithyprelude.Boolean)
 

@@ -350,6 +350,15 @@ func TestClient_GreetingWithErrors_FooError_Deserialize(t *testing.T) {
 			},
 			ExpectError: &types.FooError{},
 		},
+		// Because namespace and URL are ignored, an unrecognized namespace should not
+		// make a difference.
+		"RestJsonFooErrorUsingXAmznErrorTypeWithUriAndDifferentNamespace": {
+			StatusCode: 500,
+			Header: http.Header{
+				"X-Amzn-Errortype": []string{"aws.different.namespace#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"},
+			},
+			ExpectError: &types.FooError{},
+		},
 		// This example uses the 'code' property in the output rather than
 		// X-Amzn-Errortype. Some services do this though it's preferable to send the
 		// X-Amzn-Errortype. Client implementations must first check for the

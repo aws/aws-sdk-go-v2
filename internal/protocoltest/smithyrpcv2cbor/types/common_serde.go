@@ -3,9 +3,60 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
 	smithy "github.com/aws/smithy-go"
 	"time"
 )
+
+func serializeRpcV2CborNestedUnion(s smithy.ShapeSerializer, schema *smithy.Schema, v RpcV2CborNestedUnion) {
+	switch vv := v.(type) {
+	case *RpcV2CborNestedUnionMemberStringValue:
+		s.WriteUnion(schema, schemas.RpcV2CborNestedUnion_stringValue)
+		s.WriteString(schemas.RpcV2CborNestedUnion_stringValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeRpcV2CborUnion(s smithy.ShapeSerializer, schema *smithy.Schema, v RpcV2CborUnion) {
+	switch vv := v.(type) {
+	case *RpcV2CborUnionMemberStringValue:
+		s.WriteUnion(schema, schemas.RpcV2CborUnion_stringValue)
+		s.WriteString(schemas.RpcV2CborUnion_stringValue, vv.Value)
+		s.CloseUnion()
+	case *RpcV2CborUnionMemberUnionValue:
+		s.WriteUnion(schema, schemas.RpcV2CborUnion_unionValue)
+		serializeRpcV2CborNestedUnion(s, schemas.RpcV2CborUnion_unionValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func deserializeRpcV2CborNestedUnion(d smithy.ShapeDeserializer, s *smithy.Schema, v *RpcV2CborNestedUnion) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.RpcV2CborNestedUnion_stringValue:
+			vv := &RpcV2CborNestedUnionMemberStringValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeRpcV2CborUnion(d smithy.ShapeDeserializer, s *smithy.Schema, v *RpcV2CborUnion) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.RpcV2CborUnion_stringValue:
+			vv := &RpcV2CborUnionMemberStringValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.RpcV2CborUnion_unionValue:
+			vv := &RpcV2CborUnionMemberUnionValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
 	if v == nil {

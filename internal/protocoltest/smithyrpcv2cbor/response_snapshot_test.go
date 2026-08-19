@@ -597,6 +597,35 @@ func TestCheckResponseSnapshot_RpcV2CborSparseMaps(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_RpcV2CborUnions(t *testing.T) {
+	want := &RpcV2CborUnionsOutput{
+		Contents: &types.RpcV2CborUnionMemberStringValue{
+			Value: "__RpcV2CborUnionMemberStringValue__",
+		},
+		OtherValue: ptr.String("__OtherValue__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RpcV2CborUnions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RpcV2CborUnions(context.Background(), &RpcV2CborUnionsInput{
+		Contents: &types.RpcV2CborUnionMemberStringValue{
+			Value: "__RpcV2CborUnionMemberStringValue__",
+		},
+		OtherValue: ptr.String("__OtherValue__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RpcV2CborUnions.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_SimpleScalarProperties(t *testing.T) {
 	want := &SimpleScalarPropertiesOutput{
 		TrueBooleanValue:  ptr.Bool(true),
