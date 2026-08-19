@@ -52,8 +52,8 @@ type CreateEventInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The content payload of the event. This can include conversational data or
-	// binary content.
+	// The content payload of the event. This can include conversational data, JSON
+	// data, or binary content.
 	//
 	// This member is required.
 	Payload []types.PayloadType
@@ -66,6 +66,11 @@ type CreateEventInput struct {
 	// more than one time. If this token matches a previous request, AgentCore ignores
 	// the request, but does not return an error.
 	ClientToken *string
+
+	// The extraction configuration for long-term memory records. Use this parameter
+	// to specify namespace variable keys and their values for namespace substitution
+	// during extraction.
+	ExtractionConfig *types.ExtractionConfig
 
 	// Controls long-term memory extraction for this event. When set to SKIP , the
 	// event is stored in short-term memory but is excluded from long-term memory

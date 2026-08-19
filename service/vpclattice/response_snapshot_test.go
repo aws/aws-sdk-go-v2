@@ -3344,6 +3344,14 @@ func TestCheckResponseSnapshot_UpdateServiceNetworkVpcAssociation(t *testing.T) 
 			"__Member__",
 			"__Member__",
 		},
+		PrivateDnsEnabled: ptr.Bool(true),
+		DnsOptions: &types.DnsOptions{
+			PrivateDnsPreference: types.PrivateDnsPreference("VERIFIED_DOMAINS_ONLY"),
+			PrivateDnsSpecifiedDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateServiceNetworkVpcAssociation.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3358,6 +3366,14 @@ func TestCheckResponseSnapshot_UpdateServiceNetworkVpcAssociation(t *testing.T) 
 		SecurityGroupIds: []string{
 			"__Member__",
 			"__Member__",
+		},
+		PrivateDnsEnabled: ptr.Bool(true),
+		DnsOptions: &types.DnsOptions{
+			PrivateDnsPreference: types.PrivateDnsPreference("VERIFIED_DOMAINS_ONLY"),
+			PrivateDnsSpecifiedDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	})
 	if err != nil {

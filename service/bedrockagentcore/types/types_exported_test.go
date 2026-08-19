@@ -981,6 +981,9 @@ func ExamplePayloadType_outputUsage() {
 	case *types.PayloadTypeMemberConversational:
 		_ = v.Value // Value is types.Conversational
 
+	case *types.PayloadTypeMemberJson:
+		_ = v.Value // Value is types.MemoryJsonData
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -990,6 +993,7 @@ func ExamplePayloadType_outputUsage() {
 	}
 }
 
+var _ *types.MemoryJsonData
 var _ document.Interface
 var _ *types.Conversational
 

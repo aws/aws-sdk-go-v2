@@ -5302,6 +5302,40 @@ func validateVideoDescription(v *types.VideoDescription) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.CropRectangle != nil {
+		if err := validateVideoPositionRectangle(v.CropRectangle); err != nil {
+			invalidParams.AddNested("CropRectangle", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputPositionRectangle != nil {
+		if err := validateVideoPositionRectangle(v.OutputPositionRectangle); err != nil {
+			invalidParams.AddNested("OutputPositionRectangle", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVideoPositionRectangle(v *types.VideoPositionRectangle) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoPositionRectangle"}
+	if v.Height == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Height"))
+	}
+	if v.Width == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Width"))
+	}
+	if v.X == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("X"))
+	}
+	if v.Y == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Y"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

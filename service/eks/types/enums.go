@@ -340,6 +340,92 @@ func (Category) Values() []Category {
 	}
 }
 
+type CertificateAuthorityActivatedBy string
+
+// Enum values for CertificateAuthorityActivatedBy
+const (
+	CertificateAuthorityActivatedByEks      CertificateAuthorityActivatedBy = "EKS"
+	CertificateAuthorityActivatedByCustomer CertificateAuthorityActivatedBy = "CUSTOMER"
+)
+
+// Values returns all known values for CertificateAuthorityActivatedBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthorityActivatedBy) Values() []CertificateAuthorityActivatedBy {
+	return []CertificateAuthorityActivatedBy{
+		"EKS",
+		"CUSTOMER",
+	}
+}
+
+type CertificateAuthorityCreatedBy string
+
+// Enum values for CertificateAuthorityCreatedBy
+const (
+	CertificateAuthorityCreatedByEks      CertificateAuthorityCreatedBy = "EKS"
+	CertificateAuthorityCreatedByCustomer CertificateAuthorityCreatedBy = "CUSTOMER"
+)
+
+// Values returns all known values for CertificateAuthorityCreatedBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthorityCreatedBy) Values() []CertificateAuthorityCreatedBy {
+	return []CertificateAuthorityCreatedBy{
+		"EKS",
+		"CUSTOMER",
+	}
+}
+
+type CertificateAuthorityDistributionStatus string
+
+// Enum values for CertificateAuthorityDistributionStatus
+const (
+	CertificateAuthorityDistributionStatusInProgress CertificateAuthorityDistributionStatus = "IN_PROGRESS"
+	CertificateAuthorityDistributionStatusComplete   CertificateAuthorityDistributionStatus = "COMPLETE"
+	CertificateAuthorityDistributionStatusFailed     CertificateAuthorityDistributionStatus = "FAILED"
+	CertificateAuthorityDistributionStatusDeleting   CertificateAuthorityDistributionStatus = "DELETING"
+)
+
+// Values returns all known values for CertificateAuthorityDistributionStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthorityDistributionStatus) Values() []CertificateAuthorityDistributionStatus {
+	return []CertificateAuthorityDistributionStatus{
+		"IN_PROGRESS",
+		"COMPLETE",
+		"FAILED",
+		"DELETING",
+	}
+}
+
+type CertificateAuthoritySigningStatus string
+
+// Enum values for CertificateAuthoritySigningStatus
+const (
+	CertificateAuthoritySigningStatusNotUsed    CertificateAuthoritySigningStatus = "NOT_USED"
+	CertificateAuthoritySigningStatusActivating CertificateAuthoritySigningStatus = "ACTIVATING"
+	CertificateAuthoritySigningStatusInUse      CertificateAuthoritySigningStatus = "IN_USE"
+)
+
+// Values returns all known values for CertificateAuthoritySigningStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthoritySigningStatus) Values() []CertificateAuthoritySigningStatus {
+	return []CertificateAuthoritySigningStatus{
+		"NOT_USED",
+		"ACTIVATING",
+		"IN_USE",
+	}
+}
+
 type ClusterIssueCode string
 
 // Enum values for ClusterIssueCode
@@ -1122,6 +1208,10 @@ const (
 	UpdateParamTypeKubeApiServerConfig              UpdateParamType = "KubeApiServerConfig"
 	UpdateParamTypeKubeSchedulerConfig              UpdateParamType = "KubeSchedulerConfig"
 	UpdateParamTypeKubeControllerManagerConfig      UpdateParamType = "KubeControllerManagerConfig"
+	UpdateParamTypeActiveCertificateAuthority       UpdateParamType = "ActiveCertificateAuthority"
+	UpdateParamTypeTrustedCertificateAuthorities    UpdateParamType = "TrustedCertificateAuthorities"
+	UpdateParamTypeCertificateAuthorityId           UpdateParamType = "CertificateAuthorityId"
+	UpdateParamTypeSigningStatus                    UpdateParamType = "SigningStatus"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -1184,6 +1274,10 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"KubeApiServerConfig",
 		"KubeSchedulerConfig",
 		"KubeControllerManagerConfig",
+		"ActiveCertificateAuthority",
+		"TrustedCertificateAuthorities",
+		"CertificateAuthorityId",
+		"SigningStatus",
 	}
 }
 
@@ -1235,6 +1329,7 @@ const (
 	UpdateTypeControlPlaneEgressUpdate           UpdateType = "ControlPlaneEgressUpdate"
 	UpdateTypeVersionRollback                    UpdateType = "VersionRollback"
 	UpdateTypeControlPlaneComponentConfigUpdate  UpdateType = "ControlPlaneComponentConfigUpdate"
+	UpdateTypeCertificateAuthorityUpdate         UpdateType = "CertificateAuthorityUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -1264,6 +1359,7 @@ func (UpdateType) Values() []UpdateType {
 		"ControlPlaneEgressUpdate",
 		"VersionRollback",
 		"ControlPlaneComponentConfigUpdate",
+		"CertificateAuthorityUpdate",
 	}
 }
 

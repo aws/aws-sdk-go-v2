@@ -6221,6 +6221,18 @@ func awsRestjson1_serializeOpDocumentUpdateServiceNetworkVpcAssociationInput(v *
 	object := value.Object()
 	defer object.Close()
 
+	if v.DnsOptions != nil {
+		ok := object.Key("dnsOptions")
+		if err := awsRestjson1_serializeDocumentDnsOptions(v.DnsOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrivateDnsEnabled != nil {
+		ok := object.Key("privateDnsEnabled")
+		ok.Boolean(*v.PrivateDnsEnabled)
+	}
+
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("securityGroupIds")
 		if err := awsRestjson1_serializeDocumentSecurityGroupList(v.SecurityGroupIds, ok); err != nil {

@@ -1776,6 +1776,19 @@ type ExternalProxy struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for extraction behavior. Use this structure to specify
+// namespace variable keys and their values for namespace substitution during
+// long-term memory extraction.
+type ExtractionConfig struct {
+
+	// A map of namespaceKeys to their values. The service substitutes these values
+	// into namespaceTemplates during long-term memory extraction to control namespace
+	// hierarchy.
+	NamespaceVariables map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the metadata of a memory extraction job such as the message
 // identifiers that compose this job.
 type ExtractionJob struct {
@@ -3509,6 +3522,19 @@ type MemoryContentMemberText struct {
 
 func (*MemoryContentMemberText) isMemoryContent() {}
 
+// Contains non-conversational, JSON-formatted content for an event payload. JSON
+// payloads are extracted into long-term memory.
+type MemoryJsonData struct {
+
+	// The JSON content of the payload. Accepts any JSON value, including objects,
+	// arrays, strings, numbers, booleans, and null. The maximum size is 100 KB.
+	//
+	// This member is required.
+	Content document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // Filters to apply to metadata associated with a memory. Specify the metadata key
 // and value in the left and right fields and use the operator field to define the
 // relationship to match.
@@ -3606,6 +3632,10 @@ type MemoryRecordDeleteInput struct {
 	//
 	// This member is required.
 	MemoryRecordId *string
+
+	// The namespace of the memory record being deleted. This value is used for IAM
+	// condition key authorization.
+	Namespace *string
 
 	noSmithyDocumentSerde
 }
@@ -3783,6 +3813,10 @@ type MemoryRecordUpdateInput struct {
 
 	// The updated list of namespace identifiers for categorizing the memory record.
 	Namespaces []string
+
+	// The namespaces of the source memory record being updated. This value is used
+	// for IAM condition key authorization.
+	SourceNamespaces []string
 
 	noSmithyDocumentSerde
 }
@@ -4138,6 +4172,7 @@ func (*OutputConfigMemberCloudWatchConfig) isOutputConfig() {}
 //
 //	PayloadTypeMemberBlob
 //	PayloadTypeMemberConversational
+//	PayloadTypeMemberJson
 type PayloadType interface {
 	isPayloadType()
 }
@@ -4159,6 +4194,16 @@ type PayloadTypeMemberConversational struct {
 }
 
 func (*PayloadTypeMemberConversational) isPayloadType() {}
+
+// The JSON content of the payload. Use this type to store non-conversational,
+// JSON-formatted data, such as behavioral events, activity logs, or system events.
+type PayloadTypeMemberJson struct {
+	Value MemoryJsonData
+
+	noSmithyDocumentSerde
+}
+
+func (*PayloadTypeMemberJson) isPayloadType() {}
 
 // The payment input details, which vary by payment type.
 //

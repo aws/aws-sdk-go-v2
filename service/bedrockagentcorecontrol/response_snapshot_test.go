@@ -2900,6 +2900,28 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 					Type: types.MetadataValueType("STRING"),
 				},
 			},
+			NamespaceKeys: []types.NamespaceKeyEntry{
+				{
+					Key: ptr.String("__Key__"),
+					Validation: &types.NamespaceKeyValidation{
+						AllowedValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						RegexPattern: ptr.String("__RegexPattern__"),
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Validation: &types.NamespaceKeyValidation{
+						AllowedValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						RegexPattern: ptr.String("__RegexPattern__"),
+					},
+				},
+			},
 			StreamDeliveryResources: &types.StreamDeliveryResources{
 				Resources: []types.StreamDeliveryResource{
 					&types.StreamDeliveryResourceMemberKinesis{
@@ -3074,6 +3096,28 @@ func TestCheckResponseSnapshot_CreateMemory(t *testing.T) {
 			{
 				Key:  ptr.String("__Key__"),
 				Type: types.MetadataValueType("STRING"),
+			},
+		},
+		NamespaceKeys: []types.NamespaceKeyEntry{
+			{
+				Key: ptr.String("__Key__"),
+				Validation: &types.NamespaceKeyValidation{
+					AllowedValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexPattern: ptr.String("__RegexPattern__"),
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Validation: &types.NamespaceKeyValidation{
+					AllowedValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexPattern: ptr.String("__RegexPattern__"),
+				},
 			},
 		},
 		StreamDeliveryResources: &types.StreamDeliveryResources{
@@ -6847,6 +6891,28 @@ func TestCheckResponseSnapshot_GetMemory(t *testing.T) {
 				{
 					Key:  ptr.String("__Key__"),
 					Type: types.MetadataValueType("STRING"),
+				},
+			},
+			NamespaceKeys: []types.NamespaceKeyEntry{
+				{
+					Key: ptr.String("__Key__"),
+					Validation: &types.NamespaceKeyValidation{
+						AllowedValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						RegexPattern: ptr.String("__RegexPattern__"),
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Validation: &types.NamespaceKeyValidation{
+						AllowedValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						RegexPattern: ptr.String("__RegexPattern__"),
+					},
 				},
 			},
 			StreamDeliveryResources: &types.StreamDeliveryResources{
@@ -12385,6 +12451,28 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 					Type: types.MetadataValueType("STRING"),
 				},
 			},
+			NamespaceKeys: []types.NamespaceKeyEntry{
+				{
+					Key: ptr.String("__Key__"),
+					Validation: &types.NamespaceKeyValidation{
+						AllowedValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						RegexPattern: ptr.String("__RegexPattern__"),
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Validation: &types.NamespaceKeyValidation{
+						AllowedValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						RegexPattern: ptr.String("__RegexPattern__"),
+					},
+				},
+			},
 			StreamDeliveryResources: &types.StreamDeliveryResources{
 				Resources: []types.StreamDeliveryResource{
 					&types.StreamDeliveryResourceMemberKinesis{
@@ -12778,6 +12866,28 @@ func TestCheckResponseSnapshot_UpdateMemory(t *testing.T) {
 			{
 				Key:  ptr.String("__Key__"),
 				Type: types.MetadataValueType("STRING"),
+			},
+		},
+		NamespaceKeys: []types.NamespaceKeyEntry{
+			{
+				Key: ptr.String("__Key__"),
+				Validation: &types.NamespaceKeyValidation{
+					AllowedValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexPattern: ptr.String("__RegexPattern__"),
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Validation: &types.NamespaceKeyValidation{
+					AllowedValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexPattern: ptr.String("__RegexPattern__"),
+				},
 			},
 		},
 		StreamDeliveryResources: &types.StreamDeliveryResources{
@@ -14436,6 +14546,28 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 				Type: types.MetadataValueType("STRING"),
 			},
 		},
+		NamespaceKeys: []types.NamespaceKeyEntry{
+			{
+				Key: ptr.String("__Key__"),
+				Validation: &types.NamespaceKeyValidation{
+					AllowedValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexPattern: ptr.String("__RegexPattern__"),
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Validation: &types.NamespaceKeyValidation{
+					AllowedValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexPattern: ptr.String("__RegexPattern__"),
+				},
+			},
+		},
 		StreamDeliveryResources: &types.StreamDeliveryResources{
 			Resources: []types.StreamDeliveryResource{
 				&types.StreamDeliveryResourceMemberKinesis{
@@ -14709,6 +14841,28 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 			{
 				Key:  ptr.String("__Key__"),
 				Type: types.MetadataValueType("STRING"),
+			},
+		},
+		NamespaceKeys: []types.NamespaceKeyEntry{
+			{
+				Key: ptr.String("__Key__"),
+				Validation: &types.NamespaceKeyValidation{
+					AllowedValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexPattern: ptr.String("__RegexPattern__"),
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Validation: &types.NamespaceKeyValidation{
+					AllowedValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RegexPattern: ptr.String("__RegexPattern__"),
+				},
 			},
 		},
 		StreamDeliveryResources: &types.StreamDeliveryResources{

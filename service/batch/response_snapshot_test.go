@@ -228,6 +228,9 @@ func TestCheckResponseSnapshot_CreateComputeEnvironment(t *testing.T) {
 			KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
 		},
 		Context: ptr.String("__Context__"),
+		EcsSettings: &types.EcsSettings{
+			ContainerInsights: types.ContainerInsights("ENABLED"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -707,6 +710,9 @@ func TestCheckResponseSnapshot_DescribeComputeEnvironments(t *testing.T) {
 				ContainerOrchestrationType: types.OrchestrationType("ECS"),
 				Uuid:                       ptr.String("__Uuid__"),
 				Context:                    ptr.String("__Context__"),
+				EcsSettings: &types.EcsSettings{
+					ContainerInsights: types.ContainerInsights("ENABLED"),
+				},
 			},
 			{
 				ComputeEnvironmentName: ptr.String("__ComputeEnvironmentName__"),
@@ -805,6 +811,9 @@ func TestCheckResponseSnapshot_DescribeComputeEnvironments(t *testing.T) {
 				ContainerOrchestrationType: types.OrchestrationType("ECS"),
 				Uuid:                       ptr.String("__Uuid__"),
 				Context:                    ptr.String("__Context__"),
+				EcsSettings: &types.EcsSettings{
+					ContainerInsights: types.ContainerInsights("ENABLED"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -22326,6 +22335,9 @@ func TestCheckResponseSnapshot_UpdateComputeEnvironment(t *testing.T) {
 			JobExecutionTimeoutMinutes: ptr.Int64(1),
 		},
 		Context: ptr.String("__Context__"),
+		EcsSettings: &types.EcsSettings{
+			ContainerInsights: types.ContainerInsights("ENABLED"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

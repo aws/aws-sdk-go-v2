@@ -321,6 +321,9 @@ func TestCheckRequestSnapshot_CreateComputeEnvironment(t *testing.T) {
 			KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
 		},
 		Context: ptr.String("__Context__"),
+		EcsSettings: &types.EcsSettings{
+			ContainerInsights: types.ContainerInsights("ENABLED"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6249,6 +6252,9 @@ func TestCheckRequestSnapshot_UpdateComputeEnvironment(t *testing.T) {
 			JobExecutionTimeoutMinutes: ptr.Int64(1),
 		},
 		Context: ptr.String("__Context__"),
+		EcsSettings: &types.EcsSettings{
+			ContainerInsights: types.ContainerInsights("ENABLED"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6637,6 +6643,9 @@ func TestUpdateRequestSnapshot_CreateComputeEnvironment(t *testing.T) {
 			KubernetesNamespace: ptr.String("__KubernetesNamespace__"),
 		},
 		Context: ptr.String("__Context__"),
+		EcsSettings: &types.EcsSettings{
+			ContainerInsights: types.ContainerInsights("ENABLED"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -12565,6 +12574,9 @@ func TestUpdateRequestSnapshot_UpdateComputeEnvironment(t *testing.T) {
 			JobExecutionTimeoutMinutes: ptr.Int64(1),
 		},
 		Context: ptr.String("__Context__"),
+		EcsSettings: &types.EcsSettings{
+			ContainerInsights: types.ContainerInsights("ENABLED"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

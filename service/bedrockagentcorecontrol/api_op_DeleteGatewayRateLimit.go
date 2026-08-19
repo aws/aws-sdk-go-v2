@@ -41,13 +41,12 @@ type DeleteGatewayRateLimitInput struct {
 
 type DeleteGatewayRateLimitOutput struct {
 
-	// Limit identifier. Optional on Create (system-generates if not provided by
-	// customer). Always present in responses.
+	// The unique identifier of the deleted rate limit.
 	//
 	// This member is required.
 	RateLimitId *string
 
-	// Status of a gateway limit
+	// The current status of the rate limit deletion.
 	//
 	// This member is required.
 	Status types.GatewayRateLimitStatus

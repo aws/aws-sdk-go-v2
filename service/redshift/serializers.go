@@ -13652,6 +13652,18 @@ func awsAwsquery_serializeOpDocumentDisableLoggingInput(v *DisableLoggingInput, 
 		objectKey.String(*v.ClusterIdentifier)
 	}
 
+	if len(v.LogDestinationType) > 0 {
+		objectKey := object.Key("LogDestinationType")
+		objectKey.String(string(v.LogDestinationType))
+	}
+
+	if v.LogExports != nil {
+		objectKey := object.Key("LogExports")
+		if err := awsAwsquery_serializeDocumentLogTypeList(v.LogExports, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -13723,6 +13735,16 @@ func awsAwsquery_serializeOpDocumentEnableLoggingInput(v *EnableLoggingInput, va
 	if v.S3KeyPrefix != nil {
 		objectKey := object.Key("S3KeyPrefix")
 		objectKey.String(*v.S3KeyPrefix)
+	}
+
+	if v.S3TableGranularity != nil {
+		objectKey := object.Key("S3TableGranularity")
+		objectKey.String(*v.S3TableGranularity)
+	}
+
+	if v.S3TableKmsKeyId != nil {
+		objectKey := object.Key("S3TableKmsKeyId")
+		objectKey.String(*v.S3TableKmsKeyId)
 	}
 
 	return nil

@@ -694,17 +694,14 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEntitlement(context.Background(), &CreateEntitlementInput{
-		ApplicationArn: ptr.String("__ApplicationArn__"),
-		Entitlement: &types.EntitlementMemberPrincipalRole{
-			Value: types.PrincipalRoleEntitlement{
-				Principal: &types.PrincipalMemberIdentityCenter{
-					Value: &types.IdentityCenterPrincipalMemberUserId{
-						Value: "__IdentityCenterPrincipalMemberUserId__",
-					},
-				},
-				RoleArn: ptr.String("__RoleArn__"),
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		IdentitySource: &types.IdentitySourceMemberIdentityCenter{
+			Value: types.IdentityCenter{
+				InstanceArn: ptr.String("__InstanceArn__"),
 			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
 		},
 	})
 	if opErr == nil {

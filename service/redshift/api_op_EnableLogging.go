@@ -44,11 +44,15 @@ type EnableLoggingInput struct {
 	//   - The cluster must have read bucket and put object permissions
 	BucketName *string
 
-	// The log destination type. An enum with possible values of s3 and cloudwatch .
+	// The log destination type. An enum with possible values of s3 , cloudwatch , and
+	// s3table .
 	LogDestinationType types.LogDestinationType
 
-	// The collection of exported log types. Possible values are connectionlog ,
-	// useractivitylog , and userlog .
+	// The collection of exported log types. When LogDestinationType is s3 or
+	// cloudwatch , possible values are connectionlog , useractivitylog , and userlog .
+	// When LogDestinationType is s3table , the values are the names of the system
+	// tables to publish. Omitting this parameter, passing an empty list, or including
+	// the value all publishes all current and future system tables.
 	LogExports []string
 
 	// The prefix applied to the log file names.
@@ -58,6 +62,16 @@ type EnableLoggingInput struct {
 	// ), colon ( : ), slash ( / ), equal ( = ), plus ( + ), backslash ( \ ), hyphen ( -
 	// ), at symbol ( @ ).
 	S3KeyPrefix *string
+
+	// The scope of system table publishing. Valid values are cluster and account . A
+	// value of cluster scopes publishing to the individual cluster. A value of account
+	// scopes publishing to the Amazon Web Services account. This parameter is valid
+	// only when LogDestinationType is s3table .
+	S3TableGranularity *string
+
+	// The identifier of a customer managed KMS key used to encrypt the S3 tables.
+	// This parameter is valid only when LogDestinationType is s3table .
+	S3TableKmsKeyId *string
 
 	noSmithyDocumentSerde
 }
@@ -77,11 +91,14 @@ type EnableLoggingOutput struct {
 	// The last time that logs were delivered.
 	LastSuccessfulDeliveryTime *time.Time
 
-	// The log destination type. An enum with possible values of s3 and cloudwatch .
+	// The log destination type. An enum with possible values of s3 , cloudwatch , and
+	// s3table .
 	LogDestinationType types.LogDestinationType
 
-	// The collection of exported log types. Possible values are connectionlog ,
-	// useractivitylog , and userlog .
+	// The collection of exported log types. When LogDestinationType is s3 or
+	// cloudwatch , possible values are connectionlog , useractivitylog , and userlog .
+	// When LogDestinationType is s3table , the values are the names of the system
+	// tables being published.
 	LogExports []string
 
 	// true if logging is on, false if logging is off.
@@ -89,6 +106,10 @@ type EnableLoggingOutput struct {
 
 	// The prefix applied to the log file names.
 	S3KeyPrefix *string
+
+	// The status of system table publishing to S3 Tables. This field is populated
+	// only when system table publishing is active.
+	S3Tables *types.S3TablePublishStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -82,6 +82,10 @@ type CreateComputeEnvironmentInput struct {
 	// Reserved.
 	Context *string
 
+	// The Amazon ECS settings for the compute environment. These settings control
+	// CloudWatch Container Insights collection for the compute environment.
+	EcsSettings *types.EcsSettings
+
 	// The details for the Amazon EKS cluster that supports the compute environment.
 	//
 	// To create a compute environment that uses EKS resources, the caller must have

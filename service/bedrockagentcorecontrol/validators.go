@@ -7043,6 +7043,38 @@ func validateModifyStrategyConfiguration(v *types.ModifyStrategyConfiguration) e
 	}
 }
 
+func validateNamespaceKeyEntry(v *types.NamespaceKeyEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NamespaceKeyEntry"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNamespaceKeysList(v []types.NamespaceKeyEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NamespaceKeysList"}
+	for i := range v {
+		if err := validateNamespaceKeyEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
 	if v == nil {
 		return nil
@@ -9398,6 +9430,11 @@ func validateOpCreateMemoryInput(v *CreateMemoryInput) error {
 			invalidParams.AddNested("IndexedKeys", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.NamespaceKeys != nil {
+		if err := validateNamespaceKeysList(v.NamespaceKeys); err != nil {
+			invalidParams.AddNested("NamespaceKeys", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.StreamDeliveryResources != nil {
 		if err := validateStreamDeliveryResources(v.StreamDeliveryResources); err != nil {
 			invalidParams.AddNested("StreamDeliveryResources", err.(smithy.InvalidParamsError))
@@ -11476,6 +11513,11 @@ func validateOpUpdateMemoryInput(v *UpdateMemoryInput) error {
 	if v.AddIndexedKeys != nil {
 		if err := validateIndexedKeysList(v.AddIndexedKeys); err != nil {
 			invalidParams.AddNested("AddIndexedKeys", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NamespaceKeys != nil {
+		if err := validateNamespaceKeysList(v.NamespaceKeys); err != nil {
+			invalidParams.AddNested("NamespaceKeys", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.StreamDeliveryResources != nil {

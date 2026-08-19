@@ -277,9 +277,11 @@ func TestCheckRequestSnapshot_BatchDeleteMemoryRecords(t *testing.T) {
 		Records: []types.MemoryRecordDeleteInput{
 			{
 				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+				Namespace:      ptr.String("__Namespace__"),
 			},
 			{
 				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+				Namespace:      ptr.String("__Namespace__"),
 			},
 		},
 	}
@@ -320,6 +322,10 @@ func TestCheckRequestSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				SourceNamespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
 				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
@@ -334,6 +340,10 @@ func TestCheckRequestSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					Value: "__MemoryContentMemberText__",
 				},
 				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceNamespaces: []string{
 					"__Member__",
 					"__Member__",
 				},
@@ -506,6 +516,11 @@ func TestCheckRequestSnapshot_CreateEvent(t *testing.T) {
 			},
 		},
 		ExtractionMode: types.ExtractionMode("SKIP"),
+		ExtractionConfig: &types.ExtractionConfig{
+			NamespaceVariables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -734,6 +749,7 @@ func TestCheckRequestSnapshot_DeleteMemoryRecord(t *testing.T) {
 	input := &DeleteMemoryRecordInput{
 		MemoryId:       ptr.String("__MemoryId__"),
 		MemoryRecordId: ptr.String("__MemoryRecordId__"),
+		Namespace:      ptr.String("__Namespace__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1110,6 +1126,7 @@ func TestCheckRequestSnapshot_GetMemoryRecord(t *testing.T) {
 	input := &GetMemoryRecordInput{
 		MemoryId:       ptr.String("__MemoryId__"),
 		MemoryRecordId: ptr.String("__MemoryRecordId__"),
+		Namespace:      ptr.String("__Namespace__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2874,9 +2891,11 @@ func TestUpdateRequestSnapshot_BatchDeleteMemoryRecords(t *testing.T) {
 		Records: []types.MemoryRecordDeleteInput{
 			{
 				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+				Namespace:      ptr.String("__Namespace__"),
 			},
 			{
 				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+				Namespace:      ptr.String("__Namespace__"),
 			},
 		},
 	}
@@ -2917,6 +2936,10 @@ func TestUpdateRequestSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				SourceNamespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
 				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
@@ -2931,6 +2954,10 @@ func TestUpdateRequestSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					Value: "__MemoryContentMemberText__",
 				},
 				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceNamespaces: []string{
 					"__Member__",
 					"__Member__",
 				},
@@ -3103,6 +3130,11 @@ func TestUpdateRequestSnapshot_CreateEvent(t *testing.T) {
 			},
 		},
 		ExtractionMode: types.ExtractionMode("SKIP"),
+		ExtractionConfig: &types.ExtractionConfig{
+			NamespaceVariables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3331,6 +3363,7 @@ func TestUpdateRequestSnapshot_DeleteMemoryRecord(t *testing.T) {
 	input := &DeleteMemoryRecordInput{
 		MemoryId:       ptr.String("__MemoryId__"),
 		MemoryRecordId: ptr.String("__MemoryRecordId__"),
+		Namespace:      ptr.String("__Namespace__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3707,6 +3740,7 @@ func TestUpdateRequestSnapshot_GetMemoryRecord(t *testing.T) {
 	input := &GetMemoryRecordInput{
 		MemoryId:       ptr.String("__MemoryId__"),
 		MemoryRecordId: ptr.String("__MemoryRecordId__"),
+		Namespace:      ptr.String("__Namespace__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -30,15 +30,19 @@ func (c *Client) UpdateServiceNetworkVpcAssociation(ctx context.Context, params 
 
 type UpdateServiceNetworkVpcAssociationInput struct {
 
-	// The IDs of the security groups.
-	//
-	// This member is required.
-	SecurityGroupIds []string
-
 	// The ID or ARN of the association.
 	//
 	// This member is required.
 	ServiceNetworkVpcAssociationIdentifier *string
+
+	//  DNS options for the service network VPC association.
+	DnsOptions *types.DnsOptions
+
+	//  Indicates if private DNS is enabled for the VPC association.
+	PrivateDnsEnabled *bool
+
+	// The IDs of the security groups.
+	SecurityGroupIds []string
 
 	noSmithyDocumentSerde
 }
@@ -51,8 +55,14 @@ type UpdateServiceNetworkVpcAssociationOutput struct {
 	// The account that created the association.
 	CreatedBy *string
 
+	//  DNS options for the service network VPC association.
+	DnsOptions *types.DnsOptions
+
 	// The ID of the association.
 	Id *string
+
+	//  Indicates if private DNS is enabled for the VPC association.
+	PrivateDnsEnabled *bool
 
 	// The IDs of the security groups.
 	SecurityGroupIds []string

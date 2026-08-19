@@ -342,6 +342,10 @@ type Cluster struct {
 	// cluster is successfully registered with Amazon Redshift federated permissions.
 	LakehouseRegistrationStatus *string
 
+	// The status of system table publishing for the cluster. This field is present
+	// only when system table publishing is configured.
+	LoggingPublishStatus *LoggingPublishStatus
+
 	// The name of the maintenance track for the cluster.
 	MaintenanceTrackName *string
 
@@ -1283,6 +1287,15 @@ type LakeFormationScopeUnionMemberLakeFormationQuery struct {
 
 func (*LakeFormationScopeUnionMemberLakeFormationQuery) isLakeFormationScopeUnion() {}
 
+// Describes the system table publishing status for a cluster.
+type LoggingPublishStatus struct {
+
+	// The status of system table publishing to S3 Tables.
+	S3Tables *S3TablePublishStatus
+
+	noSmithyDocumentSerde
+}
+
 // Defines a maintenance track that determines which Amazon Redshift version to
 // apply during a maintenance window. If the value for MaintenanceTrack is current
 // , the cluster is updated to the most recently certified maintenance release. If
@@ -2047,6 +2060,30 @@ type S3AccessGrantsScopeUnionMemberReadWriteAccess struct {
 }
 
 func (*S3AccessGrantsScopeUnionMemberReadWriteAccess) isS3AccessGrantsScopeUnion() {}
+
+// Describes the status of system table publishing to S3 Tables for a cluster.
+type S3TablePublishStatus struct {
+
+	// true if the cluster is enrolled in all current and future system tables rather
+	// than an explicit subset.
+	EnabledAll *bool
+
+	// A map whose keys are the names of the published system tables and whose values
+	// are the time each table last received data. Use this to judge data freshness.
+	LastIngestionTimes map[string]string
+
+	// The scope of system table publishing in effect. Possible values are cluster and
+	// account .
+	S3TableGranularity *string
+
+	// The namespace in the S3 table bucket that holds the published tables.
+	S3TableNamespace *string
+
+	// The system tables currently being published.
+	S3Tables []string
+
+	noSmithyDocumentSerde
+}
 
 // Describes a scheduled action. You can use a scheduled action to trigger some
 // Amazon Redshift API operations on a schedule. For information about which API

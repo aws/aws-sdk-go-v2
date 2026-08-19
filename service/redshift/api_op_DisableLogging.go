@@ -35,6 +35,16 @@ type DisableLoggingInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
+	// The log destination type. An enum with possible values of s3 , cloudwatch , and
+	// s3table . When set to s3table , stops system table publishing. When omitted, the
+	// operation disables audit logging.
+	LogDestinationType types.LogDestinationType
+
+	// The collection of log types to stop exporting. When LogDestinationType is
+	// s3table , the values are the names of the system tables to stop publishing.
+	// Omitting this parameter or passing all stops publishing all system tables.
+	LogExports []string
+
 	noSmithyDocumentSerde
 }
 
@@ -53,11 +63,14 @@ type DisableLoggingOutput struct {
 	// The last time that logs were delivered.
 	LastSuccessfulDeliveryTime *time.Time
 
-	// The log destination type. An enum with possible values of s3 and cloudwatch .
+	// The log destination type. An enum with possible values of s3 , cloudwatch , and
+	// s3table .
 	LogDestinationType types.LogDestinationType
 
-	// The collection of exported log types. Possible values are connectionlog ,
-	// useractivitylog , and userlog .
+	// The collection of exported log types. When LogDestinationType is s3 or
+	// cloudwatch , possible values are connectionlog , useractivitylog , and userlog .
+	// When LogDestinationType is s3table , the values are the names of the system
+	// tables being published.
 	LogExports []string
 
 	// true if logging is on, false if logging is off.
@@ -65,6 +78,10 @@ type DisableLoggingOutput struct {
 
 	// The prefix applied to the log file names.
 	S3KeyPrefix *string
+
+	// The status of system table publishing to S3 Tables. This field is populated
+	// only when system table publishing is active.
+	S3Tables *types.S3TablePublishStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

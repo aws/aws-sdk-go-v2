@@ -30,13 +30,14 @@ func (c *Client) CreateGatewayRateLimit(ctx context.Context, params *CreateGatew
 
 type CreateGatewayRateLimitInput struct {
 
-	// Ordered list of dimension names defining the scope of this limit. Unique per
-	// gateway — no two limits can share the same dimensionKeys.
+	// The ordered list of dimension key names that define the scope of this rate
+	// limit. Must be unique per gateway—no two rate limits can share the same
+	// dimension keys.
 	//
 	// This member is required.
 	DimensionKeys []string
 
-	// Rule entries mapping dimension values to rate configurations.
+	// The rule entries that map dimension values to rate configurations.
 	//
 	// This member is required.
 	Entries []types.LimitEntry
@@ -54,16 +55,18 @@ type CreateGatewayRateLimitInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// Optional human-readable description for this limit.
+	// An optional human-readable description for this rate limit. If not provided,
+	// the rate limit is created without a description.
 	Description *string
 
-	// Optional customer-defined limit ID. If not provided, system generates one.
+	// An optional customer-defined identifier for the rate limit. If not provided,
+	// the system generates one.
 	RateLimitId *string
 
 	noSmithyDocumentSerde
 }
 
-// Shared fields for GatewayRateLimit responses
+// Shared fields for GatewayRateLimit responses.
 type CreateGatewayRateLimitOutput struct {
 
 	// The timestamp when the rate limit was created.
@@ -71,12 +74,13 @@ type CreateGatewayRateLimitOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Ordered list of dimension key names defining the scope of a limit
+	// The ordered list of dimension key names that define the scope of this rate
+	// limit.
 	//
 	// This member is required.
 	DimensionKeys []string
 
-	// List of rule entries within a limit
+	// The list of rule entries that map dimension values to rate configurations.
 	//
 	// This member is required.
 	Entries []types.LimitEntry
@@ -86,13 +90,12 @@ type CreateGatewayRateLimitOutput struct {
 	// This member is required.
 	GatewayIdentifier *string
 
-	// Limit identifier. Optional on Create (system-generates if not provided by
-	// customer). Always present in responses.
+	// The unique identifier of the created rate limit.
 	//
 	// This member is required.
 	RateLimitId *string
 
-	// Status of a gateway limit
+	// The current status of the rate limit.
 	//
 	// This member is required.
 	Status types.GatewayRateLimitStatus
@@ -102,7 +105,7 @@ type CreateGatewayRateLimitOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Optional human-readable description for this limit.
+	// The human-readable description of the rate limit.
 	Description *string
 
 	// Metadata pertaining to the operation's result.

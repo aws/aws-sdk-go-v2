@@ -1,0 +1,8 @@
+{
+    "id": "9dadb1b4-6c6f-4760-b327-4a4445ad34dd",
+    "type": "feature",
+    "description": "AWS Elemental MediaLive now supports video cropping and output positioning. Use cropRectangle and outputPositionRectangle to position the encoded video within the output frame, with the surrounding area filled with black.",
+    "modules": [
+        "service/medialive"
+    ]
+}

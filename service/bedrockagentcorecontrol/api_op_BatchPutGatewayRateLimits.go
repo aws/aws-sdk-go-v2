@@ -35,8 +35,9 @@ type BatchPutGatewayRateLimitsInput struct {
 	// This member is required.
 	GatewayIdentifier *string
 
-	// Complete set of rate limits for this gateway. Replaces all existing limits
-	// atomically.
+	// The complete set of rate limits for this gateway. This operation replaces all
+	// existing rate limits in a single request. If the operation fails, no rate limits
+	// are changed.
 	//
 	// This member is required.
 	RateLimits []types.BatchPutLimitEntry

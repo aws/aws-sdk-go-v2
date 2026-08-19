@@ -7770,6 +7770,11 @@ func awsRestjson1_deserializeDocumentComputeEnvironmentDetail(v **types.ComputeE
 				sv.EcsClusterArn = ptr.String(jtv)
 			}
 
+		case "ecsSettings":
+			if err := awsRestjson1_deserializeDocumentEcsSettings(&sv.EcsSettings, value); err != nil {
+				return err
+			}
+
 		case "eksConfiguration":
 			if err := awsRestjson1_deserializeDocumentEksConfiguration(&sv.EksConfiguration, value); err != nil {
 				return err
@@ -9239,6 +9244,46 @@ func awsRestjson1_deserializeDocumentEcsPropertiesDetail(v **types.EcsProperties
 		case "taskProperties":
 			if err := awsRestjson1_deserializeDocumentListEcsTaskDetails(&sv.TaskProperties, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEcsSettings(v **types.EcsSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EcsSettings
+	if *v == nil {
+		sv = &types.EcsSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "containerInsights":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContainerInsights to be of type string, got %T instead", value)
+				}
+				sv.ContainerInsights = types.ContainerInsights(jtv)
 			}
 
 		default:

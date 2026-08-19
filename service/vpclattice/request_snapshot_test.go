@@ -2571,6 +2571,14 @@ func TestCheckRequestSnapshot_UpdateServiceNetworkVpcAssociation(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		PrivateDnsEnabled: ptr.Bool(true),
+		DnsOptions: &types.DnsOptions{
+			PrivateDnsPreference: types.PrivateDnsPreference("VERIFIED_DOMAINS_ONLY"),
+			PrivateDnsSpecifiedDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5000,6 +5008,14 @@ func TestUpdateRequestSnapshot_UpdateServiceNetworkVpcAssociation(t *testing.T) 
 		SecurityGroupIds: []string{
 			"__Member__",
 			"__Member__",
+		},
+		PrivateDnsEnabled: ptr.Bool(true),
+		DnsOptions: &types.DnsOptions{
+			PrivateDnsPreference: types.PrivateDnsPreference("VERIFIED_DOMAINS_ONLY"),
+			PrivateDnsSpecifiedDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 	}
 	body := &bytes.Buffer{}

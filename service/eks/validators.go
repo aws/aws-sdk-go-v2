@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpActivateCertificateAuthority struct {
+}
+
+func (*validateOpActivateCertificateAuthority) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpActivateCertificateAuthority) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ActivateCertificateAuthorityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpActivateCertificateAuthorityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateAccessPolicy struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpCreateCapability) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCapabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCertificateAuthority struct {
+}
+
+func (*validateOpCreateCertificateAuthority) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCertificateAuthority) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCertificateAuthorityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCertificateAuthorityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -305,6 +345,26 @@ func (m *validateOpDeleteCapability) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCapabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCertificateAuthority struct {
+}
+
+func (*validateOpDeleteCertificateAuthority) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCertificateAuthority) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCertificateAuthorityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCertificateAuthorityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -505,6 +565,26 @@ func (m *validateOpDescribeCapability) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCapabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCertificateAuthority struct {
+}
+
+func (*validateOpDescribeCertificateAuthority) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCertificateAuthority) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCertificateAuthorityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCertificateAuthorityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -805,6 +885,26 @@ func (m *validateOpListCapabilities) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListCapabilitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCertificateAuthorities struct {
+}
+
+func (*validateOpListCertificateAuthorities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCertificateAuthorities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCertificateAuthoritiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCertificateAuthoritiesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1210,6 +1310,10 @@ func (m *validateOpUpdatePodIdentityAssociation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpActivateCertificateAuthorityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpActivateCertificateAuthority{}, middleware.After)
+}
+
 func addOpAssociateAccessPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateAccessPolicy{}, middleware.After)
 }
@@ -1236,6 +1340,10 @@ func addOpCreateAddonValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateCapabilityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCapability{}, middleware.After)
+}
+
+func addOpCreateCertificateAuthorityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCertificateAuthority{}, middleware.After)
 }
 
 func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -1268,6 +1376,10 @@ func addOpDeleteAddonValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteCapabilityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCapability{}, middleware.After)
+}
+
+func addOpDeleteCertificateAuthorityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCertificateAuthority{}, middleware.After)
 }
 
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -1308,6 +1420,10 @@ func addOpDescribeAddonValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeCapabilityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCapability{}, middleware.After)
+}
+
+func addOpDescribeCertificateAuthorityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCertificateAuthority{}, middleware.After)
 }
 
 func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -1368,6 +1484,10 @@ func addOpListAssociatedAccessPoliciesValidationMiddleware(stack *middleware.Sta
 
 func addOpListCapabilitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCapabilities{}, middleware.After)
+}
+
+func addOpListCertificateAuthoritiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCertificateAuthorities{}, middleware.After)
 }
 
 func addOpListFargateProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -1746,6 +1866,24 @@ func validateUpdateRoleMappings(v *types.UpdateRoleMappings) error {
 	}
 }
 
+func validateOpActivateCertificateAuthorityInput(v *ActivateCertificateAuthorityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActivateCertificateAuthorityInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.CertificateAuthorityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateAccessPolicyInput(v *AssociateAccessPolicyInput) error {
 	if v == nil {
 		return nil
@@ -1893,6 +2031,21 @@ func validateOpCreateCapabilityInput(v *CreateCapabilityInput) error {
 	}
 	if len(v.DeletePropagationPolicy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DeletePropagationPolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCertificateAuthorityInput(v *CreateCertificateAuthorityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCertificateAuthorityInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2068,6 +2221,24 @@ func validateOpDeleteCapabilityInput(v *DeleteCapabilityInput) error {
 	}
 }
 
+func validateOpDeleteCertificateAuthorityInput(v *DeleteCertificateAuthorityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCertificateAuthorityInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.CertificateAuthorityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	if v == nil {
 		return nil
@@ -2231,6 +2402,24 @@ func validateOpDescribeCapabilityInput(v *DescribeCapabilityInput) error {
 	}
 	if v.CapabilityName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCertificateAuthorityInput(v *DescribeCertificateAuthorityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificateAuthorityInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.CertificateAuthorityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2492,6 +2681,21 @@ func validateOpListCapabilitiesInput(v *ListCapabilitiesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListCapabilitiesInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCertificateAuthoritiesInput(v *ListCertificateAuthoritiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCertificateAuthoritiesInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}

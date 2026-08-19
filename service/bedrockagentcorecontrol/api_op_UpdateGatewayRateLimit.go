@@ -28,7 +28,8 @@ func (c *Client) UpdateGatewayRateLimit(ctx context.Context, params *UpdateGatew
 
 type UpdateGatewayRateLimitInput struct {
 
-	// Updated rule entries. key and dimensionKeys are immutable and cannot be changed.
+	// The updated rule entries. The dimension keys are immutable after creation and
+	// cannot be changed.
 	//
 	// This member is required.
 	Entries []types.LimitEntry
@@ -43,13 +44,13 @@ type UpdateGatewayRateLimitInput struct {
 	// This member is required.
 	RateLimitId *string
 
-	// Optional human-readable description for this limit.
+	// The updated human-readable description for this rate limit.
 	Description *string
 
 	noSmithyDocumentSerde
 }
 
-// Shared fields for GatewayRateLimit responses
+// Shared fields for GatewayRateLimit responses.
 type UpdateGatewayRateLimitOutput struct {
 
 	// The timestamp when the rate limit was created.
@@ -57,12 +58,13 @@ type UpdateGatewayRateLimitOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Ordered list of dimension key names defining the scope of a limit
+	// The ordered list of dimension key names that define the scope of this rate
+	// limit.
 	//
 	// This member is required.
 	DimensionKeys []string
 
-	// List of rule entries within a limit
+	// The list of rule entries that map dimension values to rate configurations.
 	//
 	// This member is required.
 	Entries []types.LimitEntry
@@ -72,13 +74,12 @@ type UpdateGatewayRateLimitOutput struct {
 	// This member is required.
 	GatewayIdentifier *string
 
-	// Limit identifier. Optional on Create (system-generates if not provided by
-	// customer). Always present in responses.
+	// The unique identifier of the rate limit.
 	//
 	// This member is required.
 	RateLimitId *string
 
-	// Status of a gateway limit
+	// The current status of the rate limit.
 	//
 	// This member is required.
 	Status types.GatewayRateLimitStatus
@@ -88,7 +89,7 @@ type UpdateGatewayRateLimitOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Optional human-readable description for this limit.
+	// The human-readable description of the rate limit.
 	Description *string
 
 	// Metadata pertaining to the operation's result.

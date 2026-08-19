@@ -51788,6 +51788,11 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				return err
 			}
 
+		case "cropRectangle":
+			if err := awsRestjson1_deserializeDocumentVideoPositionRectangle(&sv.CropRectangle, value); err != nil {
+				return err
+			}
+
 		case "height":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -51808,6 +51813,11 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "outputPositionRectangle":
+			if err := awsRestjson1_deserializeDocumentVideoPositionRectangle(&sv.OutputPositionRectangle, value); err != nil {
+				return err
 			}
 
 		case "respondToAfd":
@@ -51852,6 +51862,89 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 					return err
 				}
 				sv.Width = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoPositionRectangle(v **types.VideoPositionRectangle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoPositionRectangle
+	if *v == nil {
+		sv = &types.VideoPositionRectangle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "height":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin2Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Height = ptr.Int32(int32(i64))
+			}
+
+		case "width":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin2Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Width = ptr.Int32(int32(i64))
+			}
+
+		case "x":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max8190 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.X = ptr.Int32(int32(i64))
+			}
+
+		case "y":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max8190 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Y = ptr.Int32(int32(i64))
 			}
 
 		default:

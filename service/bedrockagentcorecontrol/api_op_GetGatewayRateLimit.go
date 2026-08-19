@@ -40,7 +40,7 @@ type GetGatewayRateLimitInput struct {
 	noSmithyDocumentSerde
 }
 
-// Shared fields for GatewayRateLimit responses
+// Shared fields for GatewayRateLimit responses.
 type GetGatewayRateLimitOutput struct {
 
 	// The timestamp when the rate limit was created.
@@ -48,12 +48,13 @@ type GetGatewayRateLimitOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Ordered list of dimension key names defining the scope of a limit
+	// The ordered list of dimension key names that define the scope of this rate
+	// limit.
 	//
 	// This member is required.
 	DimensionKeys []string
 
-	// List of rule entries within a limit
+	// The list of rule entries that map dimension values to rate configurations.
 	//
 	// This member is required.
 	Entries []types.LimitEntry
@@ -63,13 +64,12 @@ type GetGatewayRateLimitOutput struct {
 	// This member is required.
 	GatewayIdentifier *string
 
-	// Limit identifier. Optional on Create (system-generates if not provided by
-	// customer). Always present in responses.
+	// The unique identifier of the rate limit.
 	//
 	// This member is required.
 	RateLimitId *string
 
-	// Status of a gateway limit
+	// The current status of the rate limit.
 	//
 	// This member is required.
 	Status types.GatewayRateLimitStatus
@@ -79,7 +79,7 @@ type GetGatewayRateLimitOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Optional human-readable description for this limit.
+	// The human-readable description of the rate limit.
 	Description *string
 
 	// Metadata pertaining to the operation's result.

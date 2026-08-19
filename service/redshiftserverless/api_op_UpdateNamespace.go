@@ -12,6 +12,10 @@ import (
 // update multiple parameters in one request. For example, you must specify both
 // adminUsername and adminUserPassword to update either field, but you can't
 // update both kmsKeyId and logExports in a single request.
+//
+// Similarly, an S3 Tables log-publishing update (a request where
+// logDestinationType is s3table ) cannot be combined with any other namespace
+// configuration change and must be submitted as its own request.
 func (c *Client) UpdateNamespace(ctx context.Context, params *UpdateNamespaceInput, optFns ...func(*Options)) (*UpdateNamespaceOutput, error) {
 	if params == nil {
 		params = &UpdateNamespaceInput{}
@@ -66,6 +70,12 @@ type UpdateNamespaceInput struct {
 	// your data.
 	KmsKeyId *string
 
+	// The destination for the log data. Valid values are s3table and cloudwatch .
+	//
+	// Set this to s3table to manage Amazon S3 Tables system-table publishing for the
+	// namespace.
+	LogDestinationType types.LogDestinationType
+
 	// The types of logs the namespace can export. The export types are userlog ,
 	// connectionlog , and useractivitylog .
 	LogExports []types.LogExport
@@ -75,6 +85,39 @@ type UpdateNamespaceInput struct {
 	// manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword
 	// for the admin user account's password.
 	ManageAdminPassword *bool
+
+	// Whether to enable or disable Amazon S3 Tables publishing. Valid values are
+	// Enable and Disable , matched case-insensitively.
+	//
+	// When omitted, defaults to Enable . Valid only when logDestinationType is s3table
+	// .
+	S3TableAction types.S3TableAction
+
+	// The scope of the Amazon S3 Tables destination. Valid values are namespace and
+	// account , matched case-insensitively. namespace scopes the published tables to
+	// this namespace; account scopes them to the Amazon Web Services account.
+	//
+	// Required when enabling. Omitting this parameter or passing a blank value fails
+	// with ValidationException . Valid only when logDestinationType is s3table .
+	S3TableGranularity types.S3TableGranularity
+
+	// The identifier of the Key Management Service key used to encrypt the published
+	// Amazon S3 Tables data. When omitted, the data is encrypted with SSE-S3 (Amazon
+	// S3 managed keys).
+	//
+	// Valid only when logDestinationType is s3table .
+	S3TableKmsKeyId *string
+
+	// The system tables to publish (on enable) or to stop publishing (on disable).
+	// Each value is either a system table view name that begins with sys_ or the
+	// keyword all .
+	//
+	// Omitting this parameter, passing an empty list, or including all each select
+	// every current and future system table. Each name must be 1-128 characters, and
+	// the list can contain up to 256 names.
+	//
+	// Valid only when logDestinationType is s3table .
+	S3TableNames []string
 
 	noSmithyDocumentSerde
 }

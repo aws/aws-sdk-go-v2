@@ -632,7 +632,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AWSAccountAccess)
-	opSchema := smithy.NewOperationSchema(schemas.CreateEntitlement, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateApplication, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

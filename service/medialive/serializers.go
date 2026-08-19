@@ -20096,6 +20096,13 @@ func awsRestjson1_serializeDocumentVideoDescription(v *types.VideoDescription, v
 		}
 	}
 
+	if v.CropRectangle != nil {
+		ok := object.Key("cropRectangle")
+		if err := awsRestjson1_serializeDocumentVideoPositionRectangle(v.CropRectangle, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Height != nil {
 		ok := object.Key("height")
 		ok.Integer(*v.Height)
@@ -20104,6 +20111,13 @@ func awsRestjson1_serializeDocumentVideoDescription(v *types.VideoDescription, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.OutputPositionRectangle != nil {
+		ok := object.Key("outputPositionRectangle")
+		if err := awsRestjson1_serializeDocumentVideoPositionRectangle(v.OutputPositionRectangle, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.RespondToAfd) > 0 {
@@ -20124,6 +20138,33 @@ func awsRestjson1_serializeDocumentVideoDescription(v *types.VideoDescription, v
 	if v.Width != nil {
 		ok := object.Key("width")
 		ok.Integer(*v.Width)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoPositionRectangle(v *types.VideoPositionRectangle, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Height != nil {
+		ok := object.Key("height")
+		ok.Integer(*v.Height)
+	}
+
+	if v.Width != nil {
+		ok := object.Key("width")
+		ok.Integer(*v.Width)
+	}
+
+	if v.X != nil {
+		ok := object.Key("x")
+		ok.Integer(*v.X)
+	}
+
+	if v.Y != nil {
+		ok := object.Key("y")
+		ok.Integer(*v.Y)
 	}
 
 	return nil

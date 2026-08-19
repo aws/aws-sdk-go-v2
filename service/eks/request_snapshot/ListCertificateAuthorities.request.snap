@@ -1,0 +1,3 @@
+GET /clusters/__ClusterName__/certificate-authorities?maxResults=1&nextToken=__NextToken__
+
+

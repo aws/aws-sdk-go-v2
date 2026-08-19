@@ -1,0 +1,8 @@
+{
+    "id": "1ef0721e-e86f-4f16-95d5-c9fb1a30dd97",
+    "type": "feature",
+    "description": "Adds throttling exceptions to operation outputs that were previously inconsistent with other operations.",
+    "modules": [
+        "service/accountaccess"
+    ]
+}

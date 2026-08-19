@@ -2,4 +2,4 @@ PATCH /servicenetworkvpcassociations/__ServiceNetworkVpcAssociationIdentifier__
 
 Content-Type: application/json
 
-{"securityGroupIds":["__Member__","__Member__"]}
+{"dnsOptions":{"privateDnsPreference":"VERIFIED_DOMAINS_ONLY","privateDnsSpecifiedDomains":["__Member__","__Member__"]},"privateDnsEnabled":true,"securityGroupIds":["__Member__","__Member__"]}

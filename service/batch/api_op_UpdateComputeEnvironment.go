@@ -43,6 +43,10 @@ type UpdateComputeEnvironmentInput struct {
 	// Reserved.
 	Context *string
 
+	// The Amazon ECS settings for the compute environment. These settings control
+	// CloudWatch Container Insights collection for the compute environment.
+	EcsSettings *types.EcsSettings
+
 	// The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make
 	// calls to other Amazon Web Services services on your behalf. For more
 	// information, see [Batch service IAM role]in the Batch User Guide.

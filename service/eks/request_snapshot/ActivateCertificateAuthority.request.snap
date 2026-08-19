@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/certificate-authorities/__CertificateAuthorityId__/activate
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__"}

@@ -3065,6 +3065,21 @@ func validateLinkedAccountSms(v *types.LinkedAccountSms) error {
 	}
 }
 
+func validateMemoryJsonData(v *types.MemoryJsonData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryJsonData"}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMemoryMetadataFilterExpression(v *types.MemoryMetadataFilterExpression) error {
 	if v == nil {
 		return nil
@@ -3382,6 +3397,11 @@ func validatePayloadType(v types.PayloadType) error {
 	case *types.PayloadTypeMemberConversational:
 		if err := validateConversational(&uv.Value); err != nil {
 			invalidParams.AddNested("[conversational]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PayloadTypeMemberJson:
+		if err := validateMemoryJsonData(&uv.Value); err != nil {
+			invalidParams.AddNested("[json]", err.(smithy.InvalidParamsError))
 		}
 
 	}

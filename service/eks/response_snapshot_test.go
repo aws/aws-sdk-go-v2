@@ -107,6 +107,77 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_ActivateCertificateAuthority(t *testing.T) {
+	want := &ActivateCertificateAuthorityOutput{
+		Update: &types.Update{
+			Id:     ptr.String("__Id__"),
+			Status: types.UpdateStatus("InProgress"),
+			Type:   types.UpdateType("VersionUpdate"),
+			Params: []types.UpdateParam{
+				{
+					Type:  types.UpdateParamType("Version"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Type:  types.UpdateParamType("Version"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Errors: []types.ErrorDetail{
+				{
+					ErrorCode:    types.ErrorCode("SubnetNotFound"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					ErrorCode:    types.ErrorCode("SubnetNotFound"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Cancellation: &types.Cancellation{
+				Status: types.CancellationStatus("InProgress"),
+				Reason: ptr.String("__Reason__"),
+			},
+		},
+		CertificateAuthority: &types.CertificateAuthoritySummary{
+			Id:                 ptr.String("__Id__"),
+			CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBy:          types.CertificateAuthorityCreatedBy("EKS"),
+			ActivatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ActivatedBy:        types.CertificateAuthorityActivatedBy("EKS"),
+			SigningStatus:      types.CertificateAuthoritySigningStatus("NOT_USED"),
+			DistributionStatus: types.CertificateAuthorityDistributionStatus("IN_PROGRESS"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ActivateCertificateAuthority.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ActivateCertificateAuthority(context.Background(), &ActivateCertificateAuthorityInput{
+		ClusterName:            ptr.String("__ClusterName__"),
+		CertificateAuthorityId: ptr.String("__CertificateAuthorityId__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ActivateCertificateAuthority.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AssociateAccessPolicy(t *testing.T) {
 	want := &AssociateAccessPolicyOutput{
 		ClusterName:  ptr.String("__ClusterName__"),
@@ -659,6 +730,76 @@ func TestCheckResponseSnapshot_CreateCapability(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateCertificateAuthority(t *testing.T) {
+	want := &CreateCertificateAuthorityOutput{
+		Update: &types.Update{
+			Id:     ptr.String("__Id__"),
+			Status: types.UpdateStatus("InProgress"),
+			Type:   types.UpdateType("VersionUpdate"),
+			Params: []types.UpdateParam{
+				{
+					Type:  types.UpdateParamType("Version"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Type:  types.UpdateParamType("Version"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Errors: []types.ErrorDetail{
+				{
+					ErrorCode:    types.ErrorCode("SubnetNotFound"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					ErrorCode:    types.ErrorCode("SubnetNotFound"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Cancellation: &types.Cancellation{
+				Status: types.CancellationStatus("InProgress"),
+				Reason: ptr.String("__Reason__"),
+			},
+		},
+		CertificateAuthority: &types.CertificateAuthoritySummary{
+			Id:                 ptr.String("__Id__"),
+			CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBy:          types.CertificateAuthorityCreatedBy("EKS"),
+			ActivatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ActivatedBy:        types.CertificateAuthorityActivatedBy("EKS"),
+			SigningStatus:      types.CertificateAuthoritySigningStatus("NOT_USED"),
+			DistributionStatus: types.CertificateAuthorityDistributionStatus("IN_PROGRESS"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateCertificateAuthority.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateCertificateAuthority(context.Background(), &CreateCertificateAuthorityInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateCertificateAuthority.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 	want := &CreateClusterOutput{
 		Cluster: &types.Cluster{
@@ -721,6 +862,10 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 			Status: types.ClusterStatus("CREATING"),
 			CertificateAuthority: &types.Certificate{
 				Data: ptr.String("__Data__"),
+				Active: &types.ActiveCertificateAuthority{
+					Id:          ptr.String("__Id__"),
+					ActivatedBy: types.CertificateAuthorityActivatedBy("EKS"),
+				},
 			},
 			ClientRequestToken: ptr.String("__ClientRequestToken__"),
 			PlatformVersion:    ptr.String("__PlatformVersion__"),
@@ -1692,6 +1837,77 @@ func TestCheckResponseSnapshot_DeleteCapability(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteCertificateAuthority(t *testing.T) {
+	want := &DeleteCertificateAuthorityOutput{
+		Update: &types.Update{
+			Id:     ptr.String("__Id__"),
+			Status: types.UpdateStatus("InProgress"),
+			Type:   types.UpdateType("VersionUpdate"),
+			Params: []types.UpdateParam{
+				{
+					Type:  types.UpdateParamType("Version"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Type:  types.UpdateParamType("Version"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Errors: []types.ErrorDetail{
+				{
+					ErrorCode:    types.ErrorCode("SubnetNotFound"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					ErrorCode:    types.ErrorCode("SubnetNotFound"),
+					ErrorMessage: ptr.String("__ErrorMessage__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Cancellation: &types.Cancellation{
+				Status: types.CancellationStatus("InProgress"),
+				Reason: ptr.String("__Reason__"),
+			},
+		},
+		CertificateAuthority: &types.CertificateAuthoritySummary{
+			Id:                 ptr.String("__Id__"),
+			CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBy:          types.CertificateAuthorityCreatedBy("EKS"),
+			ActivatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ActivatedBy:        types.CertificateAuthorityActivatedBy("EKS"),
+			SigningStatus:      types.CertificateAuthoritySigningStatus("NOT_USED"),
+			DistributionStatus: types.CertificateAuthorityDistributionStatus("IN_PROGRESS"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteCertificateAuthority.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteCertificateAuthority(context.Background(), &DeleteCertificateAuthorityInput{
+		ClusterName:            ptr.String("__ClusterName__"),
+		CertificateAuthorityId: ptr.String("__CertificateAuthorityId__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCertificateAuthority.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 	want := &DeleteClusterOutput{
 		Cluster: &types.Cluster{
@@ -1754,6 +1970,10 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 			Status: types.ClusterStatus("CREATING"),
 			CertificateAuthority: &types.Certificate{
 				Data: ptr.String("__Data__"),
+				Active: &types.ActiveCertificateAuthority{
+					Id:          ptr.String("__Id__"),
+					ActivatedBy: types.CertificateAuthorityActivatedBy("EKS"),
+				},
 			},
 			ClientRequestToken: ptr.String("__ClientRequestToken__"),
 			PlatformVersion:    ptr.String("__PlatformVersion__"),
@@ -2303,6 +2523,10 @@ func TestCheckResponseSnapshot_DeregisterCluster(t *testing.T) {
 			Status: types.ClusterStatus("CREATING"),
 			CertificateAuthority: &types.Certificate{
 				Data: ptr.String("__Data__"),
+				Active: &types.ActiveCertificateAuthority{
+					Id:          ptr.String("__Id__"),
+					ActivatedBy: types.CertificateAuthorityActivatedBy("EKS"),
+				},
 			},
 			ClientRequestToken: ptr.String("__ClientRequestToken__"),
 			PlatformVersion:    ptr.String("__PlatformVersion__"),
@@ -2915,6 +3139,48 @@ func TestCheckResponseSnapshot_DescribeCapability(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeCertificateAuthority(t *testing.T) {
+	want := &DescribeCertificateAuthorityOutput{
+		CertificateAuthority: &types.CertificateAuthority{
+			Id:                 ptr.String("__Id__"),
+			CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBy:          types.CertificateAuthorityCreatedBy("EKS"),
+			ActivatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ActivatedBy:        types.CertificateAuthorityActivatedBy("EKS"),
+			SigningStatus:      types.CertificateAuthoritySigningStatus("NOT_USED"),
+			DistributionStatus: types.CertificateAuthorityDistributionStatus("IN_PROGRESS"),
+			Validity: &types.CertificateAuthorityValidity{
+				NotBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				NotAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			ScheduledEvents: &types.CertificateAuthorityScheduledEvents{
+				FirstAutoActivation: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FinalAutoActivation: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			RollbackAvailable: ptr.Bool(true),
+			Data:              ptr.String("__Data__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeCertificateAuthority.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeCertificateAuthority(context.Background(), &DescribeCertificateAuthorityInput{
+		ClusterName:            ptr.String("__ClusterName__"),
+		CertificateAuthorityId: ptr.String("__CertificateAuthorityId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeCertificateAuthority.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 	want := &DescribeClusterOutput{
 		Cluster: &types.Cluster{
@@ -2977,6 +3243,10 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 			Status: types.ClusterStatus("CREATING"),
 			CertificateAuthority: &types.Certificate{
 				Data: ptr.String("__Data__"),
+				Active: &types.ActiveCertificateAuthority{
+					Id:          ptr.String("__Id__"),
+					ActivatedBy: types.CertificateAuthorityActivatedBy("EKS"),
+				},
 			},
 			ClientRequestToken: ptr.String("__ClientRequestToken__"),
 			PlatformVersion:    ptr.String("__PlatformVersion__"),
@@ -4543,6 +4813,51 @@ func TestCheckResponseSnapshot_ListCapabilities(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListCertificateAuthorities(t *testing.T) {
+	want := &ListCertificateAuthoritiesOutput{
+		CertificateAuthorities: []types.CertificateAuthoritySummary{
+			{
+				Id:                 ptr.String("__Id__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:          types.CertificateAuthorityCreatedBy("EKS"),
+				ActivatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ActivatedBy:        types.CertificateAuthorityActivatedBy("EKS"),
+				SigningStatus:      types.CertificateAuthoritySigningStatus("NOT_USED"),
+				DistributionStatus: types.CertificateAuthorityDistributionStatus("IN_PROGRESS"),
+			},
+			{
+				Id:                 ptr.String("__Id__"),
+				CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:          types.CertificateAuthorityCreatedBy("EKS"),
+				ActivatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ActivatedBy:        types.CertificateAuthorityActivatedBy("EKS"),
+				SigningStatus:      types.CertificateAuthoritySigningStatus("NOT_USED"),
+				DistributionStatus: types.CertificateAuthorityDistributionStatus("IN_PROGRESS"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCertificateAuthorities.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCertificateAuthorities(context.Background(), &ListCertificateAuthoritiesInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCertificateAuthorities.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 	want := &ListClustersOutput{
 		Clusters: []string{
@@ -4993,6 +5308,10 @@ func TestCheckResponseSnapshot_RegisterCluster(t *testing.T) {
 			Status: types.ClusterStatus("CREATING"),
 			CertificateAuthority: &types.Certificate{
 				Data: ptr.String("__Data__"),
+				Active: &types.ActiveCertificateAuthority{
+					Id:          ptr.String("__Id__"),
+					ActivatedBy: types.CertificateAuthorityActivatedBy("EKS"),
+				},
 			},
 			ClientRequestToken: ptr.String("__ClientRequestToken__"),
 			PlatformVersion:    ptr.String("__PlatformVersion__"),
@@ -6238,17 +6557,10 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{
-		ClusterName:  ptr.String("__ClusterName__"),
-		PrincipalArn: ptr.String("__PrincipalArn__"),
-		PolicyArn:    ptr.String("__PolicyArn__"),
-		AccessScope: &types.AccessScope{
-			Type: types.AccessScopeType("cluster"),
-			Namespaces: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
+	_, opErr := svc.ActivateCertificateAuthority(context.Background(), &ActivateCertificateAuthorityInput{
+		ClusterName:            ptr.String("__ClusterName__"),
+		CertificateAuthorityId: ptr.String("__CertificateAuthorityId__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6468,17 +6780,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{
-		ClusterName:  ptr.String("__ClusterName__"),
-		PrincipalArn: ptr.String("__PrincipalArn__"),
-		PolicyArn:    ptr.String("__PolicyArn__"),
-		AccessScope: &types.AccessScope{
-			Type: types.AccessScopeType("cluster"),
-			Namespaces: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
+	_, opErr := svc.ActivateCertificateAuthority(context.Background(), &ActivateCertificateAuthorityInput{
+		ClusterName:            ptr.String("__ClusterName__"),
+		CertificateAuthorityId: ptr.String("__CertificateAuthorityId__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6543,17 +6848,10 @@ func TestCheckResponseSnapshot_Error_ServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{
-		ClusterName:  ptr.String("__ClusterName__"),
-		PrincipalArn: ptr.String("__PrincipalArn__"),
-		PolicyArn:    ptr.String("__PolicyArn__"),
-		AccessScope: &types.AccessScope{
-			Type: types.AccessScopeType("cluster"),
-			Namespaces: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
+	_, opErr := svc.ActivateCertificateAuthority(context.Background(), &ActivateCertificateAuthorityInput{
+		ClusterName:            ptr.String("__ClusterName__"),
+		CertificateAuthorityId: ptr.String("__CertificateAuthorityId__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6579,178 +6877,10 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
-		Name:    ptr.String("__Name__"),
-		Version: ptr.String("__Version__"),
-		RoleArn: ptr.String("__RoleArn__"),
-		ResourcesVpcConfig: &types.VpcConfigRequest{
-			SubnetIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			SecurityGroupIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			EndpointPublicAccess:  ptr.Bool(true),
-			EndpointPrivateAccess: ptr.Bool(true),
-			PublicAccessCidrs: []string{
-				"__Member__",
-				"__Member__",
-			},
-			ControlPlaneEgressMode: types.ControlPlaneEgressModeType("AWS_MANAGED"),
-		},
-		KubernetesNetworkConfig: &types.KubernetesNetworkConfigRequest{
-			ServiceIpv4Cidr: ptr.String("__ServiceIpv4Cidr__"),
-			IpFamily:        types.IpFamily("ipv4"),
-			ElasticLoadBalancing: &types.ElasticLoadBalancing{
-				Enabled: ptr.Bool(true),
-			},
-		},
-		Logging: &types.Logging{
-			ClusterLogging: []types.LogSetup{
-				{
-					Types: []types.LogType{
-						types.LogType("api"),
-						types.LogType("api"),
-					},
-					Enabled: ptr.Bool(true),
-				},
-				{
-					Types: []types.LogType{
-						types.LogType("api"),
-						types.LogType("api"),
-					},
-					Enabled: ptr.Bool(true),
-				},
-			},
-		},
-		ClientRequestToken: ptr.String("__ClientRequestToken__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		EncryptionConfig: []types.EncryptionConfig{
-			{
-				Resources: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Provider: &types.Provider{
-					KeyArn: ptr.String("__KeyArn__"),
-				},
-			},
-			{
-				Resources: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Provider: &types.Provider{
-					KeyArn: ptr.String("__KeyArn__"),
-				},
-			},
-		},
-		OutpostConfig: &types.OutpostConfigRequest{
-			OutpostArns: []string{
-				"__Member__",
-				"__Member__",
-			},
-			ControlPlaneInstanceType: ptr.String("__ControlPlaneInstanceType__"),
-			ControlPlanePlacement: &types.ControlPlanePlacementRequest{
-				GroupName:   ptr.String("__GroupName__"),
-				SpreadLevel: types.SpreadLevel("host"),
-			},
-			EtcdInstanceType: ptr.String("__EtcdInstanceType__"),
-			EtcdPlacement: &types.EtcdPlacementRequest{
-				SpreadLevel: types.SpreadLevel("host"),
-			},
-		},
-		AccessConfig: &types.CreateAccessConfigRequest{
-			BootstrapClusterCreatorAdminPermissions: ptr.Bool(true),
-			AuthenticationMode:                      types.AuthenticationMode("API"),
-		},
-		BootstrapSelfManagedAddons: ptr.Bool(true),
-		UpgradePolicy: &types.UpgradePolicyRequest{
-			SupportType: types.SupportType("STANDARD"),
-		},
-		ZonalShiftConfig: &types.ZonalShiftConfigRequest{
-			Enabled: ptr.Bool(true),
-		},
-		RemoteNetworkConfig: &types.RemoteNetworkConfigRequest{
-			RemoteNodeNetworks: []types.RemoteNodeNetwork{
-				{
-					Cidrs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				{
-					Cidrs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-			},
-			RemotePodNetworks: []types.RemotePodNetwork{
-				{
-					Cidrs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				{
-					Cidrs: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-			},
-		},
-		ComputeConfig: &types.ComputeConfigRequest{
-			Enabled: ptr.Bool(true),
-			NodePools: []string{
-				"__Member__",
-				"__Member__",
-			},
-			NodeRoleArn: ptr.String("__NodeRoleArn__"),
-		},
-		StorageConfig: &types.StorageConfigRequest{
-			BlockStorage: &types.BlockStorage{
-				Enabled: ptr.Bool(true),
-			},
-		},
-		DeletionProtection: ptr.Bool(true),
-		ControlPlaneScalingConfig: &types.ControlPlaneScalingConfig{
-			Tier: types.ProvisionedControlPlaneTier("standard"),
-		},
-		KubeApiServerConfig: &types.KubeApiServerConfigRequest{
-			EventTtl: ptr.String("__EventTtl__"),
-			ServiceNodePortRange: &types.ServiceNodePortRange{
-				MinPort: 1,
-				MaxPort: 1,
-			},
-		},
-		KubeSchedulerConfig: &types.KubeSchedulerConfigRequest{
-			NodeResourcesFit: &types.NodeResourcesFitConfig{
-				ScoringStrategy: &types.ScoringStrategy{
-					Type: types.ScoringStrategyType("LeastAllocated"),
-					Resources: []types.ResourceWeight{
-						{
-							Name:   ptr.String("__Name__"),
-							Weight: ptr.Int32(1),
-						},
-						{
-							Name:   ptr.String("__Name__"),
-							Weight: ptr.Int32(1),
-						},
-					},
-				},
-			},
-		},
-		KubeControllerManagerConfig: &types.KubeControllerManagerConfigRequest{
-			HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigRequest{
-				HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
-			},
-		},
+	_, opErr := svc.ActivateCertificateAuthority(context.Background(), &ActivateCertificateAuthorityInput{
+		ClusterName:            ptr.String("__ClusterName__"),
+		CertificateAuthorityId: ptr.String("__CertificateAuthorityId__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

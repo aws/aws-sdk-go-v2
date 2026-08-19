@@ -212,6 +212,10 @@ type Namespace struct {
 	// [Reserved Words]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
 	NamespaceName *string
 
+	// The current Amazon S3 Tables log-publishing status for the namespace. Not
+	// returned when S3 Tables publishing has never been configured for the namespace.
+	S3TablePublishStatus *S3TablePublishStatus
+
 	// The status of the namespace.
 	Status NamespaceStatus
 
@@ -356,6 +360,32 @@ type ResourcePolicy struct {
 
 	// The Amazon Resource Name (ARN) of the policy.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the state of Amazon S3 Tables system-table log publishing for a
+// namespace.
+type S3TablePublishStatus struct {
+
+	// true when the namespace is enrolled in every current and future system table
+	// rather than an explicit list of tables.
+	EnabledAll *bool
+
+	// A map of system table name to the time that table last received data, as an
+	// ISO-8601 timestamp. A table that has not yet been ingested is absent from the
+	// map. Use it to judge data freshness.
+	LastIngestionTimes map[string]string
+
+	// The scope currently in effect. Values are namespace or account .
+	S3TableGranularity S3TableGranularity
+
+	// The identifier of the namespace in the S3 table bucket that holds the published
+	// tables.
+	S3TableNamespace *string
+
+	// The system tables currently being published.
+	S3Tables []string
 
 	noSmithyDocumentSerde
 }

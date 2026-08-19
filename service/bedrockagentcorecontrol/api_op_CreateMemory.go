@@ -61,6 +61,10 @@ type CreateMemoryInput struct {
 	// is extracted, processed, and consolidated.
 	MemoryStrategies []types.MemoryStrategyInput
 
+	// The namespace variable key definitions with optional validation rules. Use
+	// these namespaceKeys in namespaceTemplates to control namespace hierarchy.
+	NamespaceKeys []types.NamespaceKeyEntry
+
 	// Configuration for streaming memory record data to external resources.
 	StreamDeliveryResources *types.StreamDeliveryResources
 

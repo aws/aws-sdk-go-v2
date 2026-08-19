@@ -3821,6 +3821,18 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
 					Sharpness:       ptr.Int32(1),
 					Width:           ptr.Int32(1),
+					CropRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
+					OutputPositionRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -4037,6 +4049,18 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
 					Sharpness:       ptr.Int32(1),
 					Width:           ptr.Int32(1),
+					CropRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
+					OutputPositionRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -10378,6 +10402,18 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
 					Sharpness:       ptr.Int32(1),
 					Width:           ptr.Int32(1),
+					CropRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
+					OutputPositionRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -10594,6 +10630,18 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
 					Sharpness:       ptr.Int32(1),
 					Width:           ptr.Int32(1),
+					CropRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
+					OutputPositionRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -15391,6 +15439,18 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
 					Sharpness:       ptr.Int32(1),
 					Width:           ptr.Int32(1),
+					CropRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
+					OutputPositionRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -15607,6 +15667,18 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
 					Sharpness:       ptr.Int32(1),
 					Width:           ptr.Int32(1),
+					CropRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
+					OutputPositionRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -21948,6 +22020,18 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
 					Sharpness:       ptr.Int32(1),
 					Width:           ptr.Int32(1),
+					CropRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
+					OutputPositionRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -22164,6 +22248,18 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
 					Sharpness:       ptr.Int32(1),
 					Width:           ptr.Int32(1),
+					CropRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
+					OutputPositionRectangle: &types.VideoPositionRectangle{
+						Height: ptr.Int32(1),
+						Width:  ptr.Int32(1),
+						X:      ptr.Int32(1),
+						Y:      ptr.Int32(1),
+					},
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{

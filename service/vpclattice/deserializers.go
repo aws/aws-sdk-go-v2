@@ -14296,6 +14296,11 @@ func awsRestjson1_deserializeOpDocumentUpdateServiceNetworkVpcAssociationOutput(
 				sv.CreatedBy = ptr.String(jtv)
 			}
 
+		case "dnsOptions":
+			if err := awsRestjson1_deserializeDocumentDnsOptions(&sv.DnsOptions, value); err != nil {
+				return err
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14303,6 +14308,15 @@ func awsRestjson1_deserializeOpDocumentUpdateServiceNetworkVpcAssociationOutput(
 					return fmt.Errorf("expected ServiceNetworkVpcAssociationId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "privateDnsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PrivateDnsEnabled = ptr.Bool(jtv)
 			}
 
 		case "securityGroupIds":

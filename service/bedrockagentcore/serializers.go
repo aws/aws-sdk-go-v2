@@ -642,6 +642,13 @@ func awsRestjson1_serializeOpDocumentCreateEventInput(v *CreateEventInput, value
 		ok.Double(smithytime.FormatEpochSeconds(*v.EventTimestamp))
 	}
 
+	if v.ExtractionConfig != nil {
+		ok := object.Key("extractionConfig")
+		if err := awsRestjson1_serializeDocumentExtractionConfig(v.ExtractionConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ExtractionMode) > 0 {
 		ok := object.Key("extractionMode")
 		ok.String(string(v.ExtractionMode))
@@ -1293,6 +1300,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteMemoryRecordInput(v *DeleteMemory
 		if err := encoder.SetURI("memoryRecordId").String(*v.MemoryRecordId); err != nil {
 			return err
 		}
+	}
+
+	if v.Namespace != nil {
+		encoder.SetQuery("namespace").String(*v.Namespace)
 	}
 
 	return nil
@@ -2219,6 +2230,10 @@ func awsRestjson1_serializeOpHttpBindingsGetMemoryRecordInput(v *GetMemoryRecord
 		if err := encoder.SetURI("memoryRecordId").String(*v.MemoryRecordId); err != nil {
 			return err
 		}
+	}
+
+	if v.Namespace != nil {
+		encoder.SetQuery("namespace").String(*v.Namespace)
 	}
 
 	return nil
@@ -7793,6 +7808,20 @@ func awsRestjson1_serializeDocumentExternalProxy(v *types.ExternalProxy, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentExtractionConfig(v *types.ExtractionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NamespaceVariables != nil {
+		ok := object.Key("namespaceVariables")
+		if err := awsRestjson1_serializeDocumentNamespaceVariablesMap(v.NamespaceVariables, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentExtractionJob(v *types.ExtractionJob, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9229,6 +9258,35 @@ func awsRestjson1_serializeDocumentMemoryDocument(v document.Interface, value sm
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMemoryJsonData(v *types.MemoryJsonData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		if err := awsRestjson1_serializeDocumentMemoryJsonDataContent(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMemoryJsonDataContent(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMemoryMetadataFilterExpression(v *types.MemoryMetadataFilterExpression, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9318,6 +9376,11 @@ func awsRestjson1_serializeDocumentMemoryRecordDeleteInput(v *types.MemoryRecord
 	if v.MemoryRecordId != nil {
 		ok := object.Key("memoryRecordId")
 		ok.String(*v.MemoryRecordId)
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("namespace")
+		ok.String(*v.Namespace)
 	}
 
 	return nil
@@ -9486,6 +9549,13 @@ func awsRestjson1_serializeDocumentMemoryRecordUpdateInput(v *types.MemoryRecord
 	if v.Namespaces != nil {
 		ok := object.Key("namespaces")
 		if err := awsRestjson1_serializeDocumentNamespacesList(v.Namespaces, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceNamespaces != nil {
+		ok := object.Key("sourceNamespaces")
+		if err := awsRestjson1_serializeDocumentNamespacesList(v.SourceNamespaces, ok); err != nil {
 			return err
 		}
 	}
@@ -9683,6 +9753,17 @@ func awsRestjson1_serializeDocumentNamespacesList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNamespaceVariablesMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOAuth2Authentication(v *types.OAuth2Authentication, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9823,6 +9904,12 @@ func awsRestjson1_serializeDocumentPayloadType(v types.PayloadType, value smithy
 	case *types.PayloadTypeMemberConversational:
 		av := object.Key("conversational")
 		if err := awsRestjson1_serializeDocumentConversational(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.PayloadTypeMemberJson:
+		av := object.Key("json")
+		if err := awsRestjson1_serializeDocumentMemoryJsonData(&uv.Value, av); err != nil {
 			return err
 		}
 

@@ -3412,7 +3412,12 @@ func TestCheckRequestSnapshot_DescribeUsageLimits(t *testing.T) {
 
 func TestCheckRequestSnapshot_DisableLogging(t *testing.T) {
 	input := &DisableLoggingInput{
-		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		ClusterIdentifier:  ptr.String("__ClusterIdentifier__"),
+		LogDestinationType: types.LogDestinationType("s3"),
+		LogExports: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3504,6 +3509,8 @@ func TestCheckRequestSnapshot_EnableLogging(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: ptr.String("__S3TableGranularity__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8331,7 +8338,12 @@ func TestUpdateRequestSnapshot_DescribeUsageLimits(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DisableLogging(t *testing.T) {
 	input := &DisableLoggingInput{
-		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		ClusterIdentifier:  ptr.String("__ClusterIdentifier__"),
+		LogDestinationType: types.LogDestinationType("s3"),
+		LogExports: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8423,6 +8435,8 @@ func TestUpdateRequestSnapshot_EnableLogging(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: ptr.String("__S3TableGranularity__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

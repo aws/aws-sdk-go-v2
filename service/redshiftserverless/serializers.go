@@ -4079,6 +4079,17 @@ func awsAwsjson11_serializeDocumentPerformanceTarget(v *types.PerformanceTarget,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentS3TableNameList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSchedule(v types.Schedule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5672,6 +5683,11 @@ func awsAwsjson11_serializeOpDocumentUpdateNamespaceInput(v *UpdateNamespaceInpu
 		ok.String(*v.KmsKeyId)
 	}
 
+	if len(v.LogDestinationType) > 0 {
+		ok := object.Key("logDestinationType")
+		ok.String(string(v.LogDestinationType))
+	}
+
 	if v.LogExports != nil {
 		ok := object.Key("logExports")
 		if err := awsAwsjson11_serializeDocumentLogExportList(v.LogExports, ok); err != nil {
@@ -5687,6 +5703,28 @@ func awsAwsjson11_serializeOpDocumentUpdateNamespaceInput(v *UpdateNamespaceInpu
 	if v.NamespaceName != nil {
 		ok := object.Key("namespaceName")
 		ok.String(*v.NamespaceName)
+	}
+
+	if len(v.S3TableAction) > 0 {
+		ok := object.Key("s3TableAction")
+		ok.String(string(v.S3TableAction))
+	}
+
+	if len(v.S3TableGranularity) > 0 {
+		ok := object.Key("s3TableGranularity")
+		ok.String(string(v.S3TableGranularity))
+	}
+
+	if v.S3TableKmsKeyId != nil {
+		ok := object.Key("s3TableKmsKeyId")
+		ok.String(*v.S3TableKmsKeyId)
+	}
+
+	if v.S3TableNames != nil {
+		ok := object.Key("s3TableNames")
+		if err := awsAwsjson11_serializeDocumentS3TableNameList(v.S3TableNames, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

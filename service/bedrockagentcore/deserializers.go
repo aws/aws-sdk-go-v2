@@ -21475,6 +21475,50 @@ func awsRestjson1_deserializeDocumentMemoryDocument(v *document.Interface, value
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMemoryJsonData(v **types.MemoryJsonData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MemoryJsonData
+	if *v == nil {
+		sv = &types.MemoryJsonData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "content":
+			if err := awsRestjson1_deserializeDocumentMemoryJsonDataContent(&sv.Content, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMemoryJsonDataContent(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMemoryRecord(v **types.MemoryRecord, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22664,6 +22708,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.PayloadTypeMemberConversational{Value: mv}
+			break loop
+
+		case "json":
+			var mv types.MemoryJsonData
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMemoryJsonData(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PayloadTypeMemberJson{Value: mv}
 			break loop
 
 		default:

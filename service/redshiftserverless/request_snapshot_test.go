@@ -2056,6 +2056,14 @@ func TestCheckRequestSnapshot_UpdateNamespace(t *testing.T) {
 		},
 		ManageAdminPassword:         ptr.Bool(true),
 		AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
+		LogDestinationType:          types.LogDestinationType("s3table"),
+		S3TableAction:               types.S3TableAction("Enable"),
+		S3TableNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: types.S3TableGranularity("namespace"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4123,6 +4131,14 @@ func TestUpdateRequestSnapshot_UpdateNamespace(t *testing.T) {
 		},
 		ManageAdminPassword:         ptr.Bool(true),
 		AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
+		LogDestinationType:          types.LogDestinationType("s3table"),
+		S3TableAction:               types.S3TableAction("Enable"),
+		S3TableNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: types.S3TableGranularity("namespace"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

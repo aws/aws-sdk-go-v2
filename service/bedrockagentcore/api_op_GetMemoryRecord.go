@@ -39,6 +39,10 @@ type GetMemoryRecordInput struct {
 	// This member is required.
 	MemoryRecordId *string
 
+	// The namespace of the memory record to retrieve. This value is used for IAM
+	// condition key authorization.
+	Namespace *string
+
 	noSmithyDocumentSerde
 }
 

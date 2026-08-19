@@ -8677,11 +8677,28 @@ type VideoDescription struct {
 	// Video codec settings.
 	CodecSettings *VideoCodecSettings
 
+	// Region of the input video to crop before scaling. If not specified, the entire
+	// input frame is used.
+	//
+	// Note: Unlike {@link outputPositionRectangle}, the bounds of cropRectangle are
+	// validated at ingest time by the encoder/scaler rather than at the API level,
+	// because the input resolution is not known until the source is probed.
+	// Field-level constraints on (x, y, width, height) defined on {@link
+	// VideoPositionRectangle} still apply.
+	CropRectangle *VideoPositionRectangle
+
 	// Output video height, in pixels. Must be an even number. For most codecs, you
 	// can leave this field and width blank in order to use the height and width
 	// (resolution) from the source. Note, however, that leaving blank is not
 	// recommended. For the Frame Capture codec, height and width are required.
 	Height *int32
+
+	// Position of the encoded video within the output frame. The area outside the
+	// rectangle is filled with black. If not specified, the video fills the entire
+	// output frame. When used, both {@link width} and {@link height} of the
+	// VideoDescription must be explicitly specified so that the rectangle can be
+	// validated against the output frame.
+	OutputPositionRectangle *VideoPositionRectangle
 
 	// Indicates how MediaLive will respond to the AFD values that might be in the
 	// input video. If you do not know what AFD signaling is, or if your downstream
@@ -8714,6 +8731,33 @@ type VideoDescription struct {
 	// (resolution) from the source. Note, however, that leaving blank is not
 	// recommended. For the Frame Capture codec, height and width are required.
 	Width *int32
+
+	noSmithyDocumentSerde
+}
+
+// A rectangle defined by position (x, y) and dimensions (width, height) in
+// pixels. Used for output positioning and input cropping.
+type VideoPositionRectangle struct {
+
+	// Height in pixels. Must be an even number.
+	//
+	// This member is required.
+	Height *int32
+
+	// Width in pixels. Must be an even number.
+	//
+	// This member is required.
+	Width *int32
+
+	// Left offset in pixels. Must be an even number.
+	//
+	// This member is required.
+	X *int32
+
+	// Top offset in pixels. Must be an even number.
+	//
+	// This member is required.
+	Y *int32
 
 	noSmithyDocumentSerde
 }

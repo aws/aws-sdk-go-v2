@@ -298,6 +298,18 @@ func TestCheckResponseSnapshot_CreateNamespace(t *testing.T) {
 			AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
 			LakehouseRegistrationStatus: ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                  ptr.String("__CatalogArn__"),
+			S3TablePublishStatus: &types.S3TablePublishStatus{
+				S3Tables: []string{
+					"__Member__",
+					"__Member__",
+				},
+				S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+				S3TableGranularity: types.S3TableGranularity("namespace"),
+				EnabledAll:         ptr.Bool(true),
+				LastIngestionTimes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateNamespace.response")
@@ -867,6 +879,18 @@ func TestCheckResponseSnapshot_DeleteNamespace(t *testing.T) {
 			AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
 			LakehouseRegistrationStatus: ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                  ptr.String("__CatalogArn__"),
+			S3TablePublishStatus: &types.S3TablePublishStatus{
+				S3Tables: []string{
+					"__Member__",
+					"__Member__",
+				},
+				S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+				S3TableGranularity: types.S3TableGranularity("namespace"),
+				EnabledAll:         ptr.Bool(true),
+				LastIngestionTimes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteNamespace.response")
@@ -1368,6 +1392,18 @@ func TestCheckResponseSnapshot_GetNamespace(t *testing.T) {
 			AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
 			LakehouseRegistrationStatus: ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                  ptr.String("__CatalogArn__"),
+			S3TablePublishStatus: &types.S3TablePublishStatus{
+				S3Tables: []string{
+					"__Member__",
+					"__Member__",
+				},
+				S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+				S3TableGranularity: types.S3TableGranularity("namespace"),
+				EnabledAll:         ptr.Bool(true),
+				LastIngestionTimes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetNamespace.response")
@@ -2068,6 +2104,18 @@ func TestCheckResponseSnapshot_ListNamespaces(t *testing.T) {
 				AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
 				LakehouseRegistrationStatus: ptr.String("__LakehouseRegistrationStatus__"),
 				CatalogArn:                  ptr.String("__CatalogArn__"),
+				S3TablePublishStatus: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: types.S3TableGranularity("namespace"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
 			},
 			{
 				NamespaceArn:      ptr.String("__NamespaceArn__"),
@@ -2091,6 +2139,18 @@ func TestCheckResponseSnapshot_ListNamespaces(t *testing.T) {
 				AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
 				LakehouseRegistrationStatus: ptr.String("__LakehouseRegistrationStatus__"),
 				CatalogArn:                  ptr.String("__CatalogArn__"),
+				S3TablePublishStatus: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: types.S3TableGranularity("namespace"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
 			},
 		},
 	}
@@ -2892,6 +2952,18 @@ func TestCheckResponseSnapshot_RestoreFromRecoveryPoint(t *testing.T) {
 			AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
 			LakehouseRegistrationStatus: ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                  ptr.String("__CatalogArn__"),
+			S3TablePublishStatus: &types.S3TablePublishStatus{
+				S3Tables: []string{
+					"__Member__",
+					"__Member__",
+				},
+				S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+				S3TableGranularity: types.S3TableGranularity("namespace"),
+				EnabledAll:         ptr.Bool(true),
+				LastIngestionTimes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreFromRecoveryPoint.response")
@@ -2942,6 +3014,18 @@ func TestCheckResponseSnapshot_RestoreFromSnapshot(t *testing.T) {
 			AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
 			LakehouseRegistrationStatus: ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                  ptr.String("__CatalogArn__"),
+			S3TablePublishStatus: &types.S3TablePublishStatus{
+				S3Tables: []string{
+					"__Member__",
+					"__Member__",
+				},
+				S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+				S3TableGranularity: types.S3TableGranularity("namespace"),
+				EnabledAll:         ptr.Bool(true),
+				LastIngestionTimes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreFromSnapshot.response")
@@ -3276,6 +3360,18 @@ func TestCheckResponseSnapshot_UpdateNamespace(t *testing.T) {
 			AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
 			LakehouseRegistrationStatus: ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                  ptr.String("__CatalogArn__"),
+			S3TablePublishStatus: &types.S3TablePublishStatus{
+				S3Tables: []string{
+					"__Member__",
+					"__Member__",
+				},
+				S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+				S3TableGranularity: types.S3TableGranularity("namespace"),
+				EnabledAll:         ptr.Bool(true),
+				LastIngestionTimes: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateNamespace.response")
@@ -3302,6 +3398,14 @@ func TestCheckResponseSnapshot_UpdateNamespace(t *testing.T) {
 		},
 		ManageAdminPassword:         ptr.Bool(true),
 		AdminPasswordSecretKmsKeyId: ptr.String("__AdminPasswordSecretKmsKeyId__"),
+		LogDestinationType:          types.LogDestinationType("s3table"),
+		S3TableAction:               types.S3TableAction("Enable"),
+		S3TableNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: types.S3TableGranularity("namespace"),
 	})
 	if err != nil {
 		t.Fatal(err)

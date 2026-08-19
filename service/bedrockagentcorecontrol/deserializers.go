@@ -49782,6 +49782,11 @@ func awsRestjson1_deserializeDocumentMemory(v **types.Memory, value interface{})
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "namespaceKeys":
+			if err := awsRestjson1_deserializeDocumentNamespaceKeysList(&sv.NamespaceKeys, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -50488,6 +50493,166 @@ func awsRestjson1_deserializeDocumentModelMapping(v **types.ModelMapping, value 
 		case "providerPrefix":
 			if err := awsRestjson1_deserializeDocumentProviderPrefix(&sv.ProviderPrefix, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNamespaceAllowedValuesList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NamespaceAllowedValue to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNamespaceKeyEntry(v **types.NamespaceKeyEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NamespaceKeyEntry
+	if *v == nil {
+		sv = &types.NamespaceKeyEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NamespaceVariableKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "validation":
+			if err := awsRestjson1_deserializeDocumentNamespaceKeyValidation(&sv.Validation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNamespaceKeysList(v *[]types.NamespaceKeyEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NamespaceKeyEntry
+	if *v == nil {
+		cv = []types.NamespaceKeyEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NamespaceKeyEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNamespaceKeyEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNamespaceKeyValidation(v **types.NamespaceKeyValidation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NamespaceKeyValidation
+	if *v == nil {
+		sv = &types.NamespaceKeyValidation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedValues":
+			if err := awsRestjson1_deserializeDocumentNamespaceAllowedValuesList(&sv.AllowedValues, value); err != nil {
+				return err
+			}
+
+		case "regexPattern":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NamespaceRegexPattern to be of type string, got %T instead", value)
+				}
+				sv.RegexPattern = ptr.String(jtv)
 			}
 
 		default:

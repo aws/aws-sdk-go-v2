@@ -105,6 +105,27 @@ func (CEType) Values() []CEType {
 	}
 }
 
+type ContainerInsights string
+
+// Enum values for ContainerInsights
+const (
+	ContainerInsightsEnabled  ContainerInsights = "ENABLED"
+	ContainerInsightsEnhanced ContainerInsights = "ENHANCED"
+	ContainerInsightsDisabled ContainerInsights = "DISABLED"
+)
+
+// Values returns all known values for ContainerInsights. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerInsights) Values() []ContainerInsights {
+	return []ContainerInsights{
+		"ENABLED",
+		"ENHANCED",
+		"DISABLED",
+	}
+}
+
 type CRAllocationStrategy string
 
 // Enum values for CRAllocationStrategy

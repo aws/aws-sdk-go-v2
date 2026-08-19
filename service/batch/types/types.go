@@ -217,6 +217,10 @@ type ComputeEnvironmentDetail struct {
 	// compute environment uses.
 	EcsClusterArn *string
 
+	// The Amazon ECS settings for the compute environment. These settings control
+	// CloudWatch Container Insights collection.
+	EcsSettings *EcsSettings
+
 	// The configuration for the Amazon EKS cluster that supports the Batch compute
 	// environment. Only specify this parameter if the containerOrchestrationType is
 	// EKS .
@@ -1820,6 +1824,31 @@ type EcsPropertiesOverride struct {
 	//
 	// This object is currently limited to one element.
 	TaskProperties []TaskPropertiesOverride
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon ECS settings for a compute environment, including the CloudWatch
+// Container Insights mode. Use this structure with CreateComputeEnvironment and
+// UpdateComputeEnvironment .
+type EcsSettings struct {
+
+	// Specifies the CloudWatch Container Insights mode for the compute environment.
+	// Valid values are:
+	//
+	// ENABLED Turns on standard Container Insights, which collects CPU, memory, disk,
+	// and network utilization metrics for the compute environment.
+	//
+	// ENHANCED Turns on enhanced Container Insights, which collects the standard
+	// metrics along with additional per-task observability metrics.
+	//
+	// DISABLED Turns off Container Insights for the compute environment.
+	//
+	// If you don't specify a value, the default is DISABLED . For more information,
+	// see [Container Insights]in the Batch User Guide.
+	//
+	// [Container Insights]: https://docs.aws.amazon.com/batch/latest/userguide/cloudwatch-container-insights.html
+	ContainerInsights ContainerInsights
 
 	noSmithyDocumentSerde
 }

@@ -106,6 +106,21 @@ type AccessScope struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies the certificate authority that is currently signing certificates for
+// the cluster.
+type ActiveCertificateAuthority struct {
+
+	// The entity that activated the current signing certificate authority, either
+	// CUSTOMER or EKS .
+	ActivatedBy CertificateAuthorityActivatedBy
+
+	// The unique identifier of the certificate authority that is currently signing
+	// certificates for the cluster.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // An Amazon EKS add-on. For more information, see [Amazon EKS add-ons] in the Amazon EKS User Guide.
 //
 // [Amazon EKS add-ons]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
@@ -701,10 +716,141 @@ type CapabilitySummary struct {
 // An object representing the certificate-authority-data for your cluster.
 type Certificate struct {
 
+	// An object identifying the certificate authority that is currently signing
+	// certificates for the cluster.
+	Active *ActiveCertificateAuthority
+
 	// The Base64-encoded certificate data required to communicate with your cluster.
 	// Add this to the certificate-authority-data section of the kubeconfig file for
 	// your cluster.
 	Data *string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a certificate authority (CA) for an Amazon EKS cluster.
+type CertificateAuthority struct {
+
+	// The Unix epoch timestamp in seconds for when the certificate authority was last
+	// activated as the cluster's signer. This value is absent if the certificate
+	// authority has never been activated.
+	ActivatedAt *time.Time
+
+	// The entity that most recently activated the certificate authority. A value of
+	// EKS indicates that Amazon EKS activated it automatically; CUSTOMER indicates
+	// that you activated it.
+	ActivatedBy CertificateAuthorityActivatedBy
+
+	// The Unix epoch timestamp in seconds for when the certificate authority was
+	// created.
+	CreatedAt *time.Time
+
+	// The entity that created the certificate authority. Certificate authorities that
+	// you create are CUSTOMER ; those that Amazon EKS provisions on your behalf, such
+	// as a cluster's initial certificate authority, are EKS .
+	CreatedBy CertificateAuthorityCreatedBy
+
+	// The Base64-encoded public certificate of the certificate authority.
+	Data *string
+
+	// The distribution status of the certificate authority, which tracks whether
+	// Amazon EKS has distributed its trust to the Amazon Web Services managed
+	// components in your cluster (the control plane, Amazon EKS Auto Mode instances,
+	// and Amazon Web Services Fargate nodes). Valid values are IN_PROGRESS , COMPLETE
+	// , FAILED , and DELETING . A successor CA can only be activated after its
+	// distribution status is COMPLETE .
+	DistributionStatus CertificateAuthorityDistributionStatus
+
+	// The unique identifier of the certificate authority.
+	Id *string
+
+	// Indicates whether CA rollback is still available for this certificate
+	// authority. After you activate a successor CA, rollback lets you revert to the
+	// outgoing CA for a limited period while you finish updating any worker nodes or
+	// clients that were missed.
+	RollbackAvailable *bool
+
+	// The scheduled auto-activation events for the certificate authority, computed
+	// from its validity period.
+	ScheduledEvents *CertificateAuthorityScheduledEvents
+
+	// The signing status of the certificate authority. IN_USE means the certificate
+	// authority is currently signing certificates for the cluster, ACTIVATING means
+	// it's being promoted to the signer, and NOT_USED means it's trusted by the
+	// cluster (for example, a successor CA during a rotation, or a retired outgoing
+	// CA) but isn't the signer.
+	SigningStatus CertificateAuthoritySigningStatus
+
+	// The validity period of the certificate authority's certificate.
+	Validity *CertificateAuthorityValidity
+
+	noSmithyDocumentSerde
+}
+
+// The scheduled events during which Amazon EKS may automatically activate a
+// certificate authority, computed from its validity period. These events help
+// ensure that a cluster's signing certificate authority is rotated before its
+// certificate expires.
+type CertificateAuthorityScheduledEvents struct {
+
+	// The Unix epoch timestamp in seconds by which Amazon EKS will automatically
+	// activate this certificate authority if you haven't already activated it.
+	FinalAutoActivation *time.Time
+
+	// The earliest Unix epoch timestamp in seconds at which Amazon EKS may
+	// automatically activate this certificate authority.
+	FirstAutoActivation *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a certificate authority (CA) for an Amazon EKS
+// cluster, returned by [ListCertificateAuthorities]ListCertificateAuthorities and the certificate-authority
+// write operations.
+//
+// [ListCertificateAuthorities]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListCertificateAuthorities.html
+type CertificateAuthoritySummary struct {
+
+	// The Unix epoch timestamp in seconds for when the certificate authority was last
+	// activated. This value is absent if the certificate authority has never been
+	// activated.
+	ActivatedAt *time.Time
+
+	// The entity that most recently activated the certificate authority, either
+	// CUSTOMER or EKS .
+	ActivatedBy CertificateAuthorityActivatedBy
+
+	// The Unix epoch timestamp in seconds for when the certificate authority was
+	// created.
+	CreatedAt *time.Time
+
+	// The entity that created the certificate authority, either CUSTOMER or EKS .
+	CreatedBy CertificateAuthorityCreatedBy
+
+	// The distribution status of the certificate authority: IN_PROGRESS , COMPLETE ,
+	// FAILED , or DELETING .
+	DistributionStatus CertificateAuthorityDistributionStatus
+
+	// The unique identifier of the certificate authority.
+	Id *string
+
+	// The signing status of the certificate authority: IN_USE , ACTIVATING , or
+	// NOT_USED .
+	SigningStatus CertificateAuthoritySigningStatus
+
+	noSmithyDocumentSerde
+}
+
+// The validity period of a certificate authority's certificate.
+type CertificateAuthorityValidity struct {
+
+	// The Unix epoch timestamp in seconds for the end of the certificate authority's
+	// validity period.
+	NotAfter *time.Time
+
+	// The Unix epoch timestamp in seconds for the start of the certificate
+	// authority's validity period.
+	NotBefore *time.Time
 
 	noSmithyDocumentSerde
 }

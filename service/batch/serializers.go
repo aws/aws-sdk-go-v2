@@ -192,6 +192,13 @@ func awsRestjson1_serializeOpDocumentCreateComputeEnvironmentInput(v *CreateComp
 		ok.String(*v.Context)
 	}
 
+	if v.EcsSettings != nil {
+		ok := object.Key("ecsSettings")
+		if err := awsRestjson1_serializeDocumentEcsSettings(v.EcsSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EksConfiguration != nil {
 		ok := object.Key("eksConfiguration")
 		if err := awsRestjson1_serializeDocumentEksConfiguration(v.EksConfiguration, ok); err != nil {
@@ -3804,6 +3811,13 @@ func awsRestjson1_serializeOpDocumentUpdateComputeEnvironmentInput(v *UpdateComp
 		ok.String(*v.Context)
 	}
 
+	if v.EcsSettings != nil {
+		ok := object.Key("ecsSettings")
+		if err := awsRestjson1_serializeDocumentEcsSettings(v.EcsSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ServiceRole != nil {
 		ok := object.Key("serviceRole")
 		ok.String(*v.ServiceRole)
@@ -5082,6 +5096,18 @@ func awsRestjson1_serializeDocumentEcsPropertiesOverride(v *types.EcsPropertiesO
 		if err := awsRestjson1_serializeDocumentListTaskPropertiesOverride(v.TaskProperties, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEcsSettings(v *types.EcsSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ContainerInsights) > 0 {
+		ok := object.Key("containerInsights")
+		ok.String(string(v.ContainerInsights))
 	}
 
 	return nil

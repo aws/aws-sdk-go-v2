@@ -1030,6 +1030,20 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateCluster.response")
@@ -2615,6 +2629,20 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteCluster.response")
@@ -4369,6 +4397,20 @@ func TestCheckResponseSnapshot_DescribeClusters(t *testing.T) {
 				LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 				CatalogArn:                           ptr.String("__CatalogArn__"),
 				ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+				LoggingPublishStatus: &types.LoggingPublishStatus{
+					S3Tables: &types.S3TablePublishStatus{
+						S3Tables: []string{
+							"__Member__",
+							"__Member__",
+						},
+						S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+						S3TableGranularity: ptr.String("__S3TableGranularity__"),
+						EnabledAll:         ptr.Bool(true),
+						LastIngestionTimes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
 			},
 			{
 				ClusterIdentifier:         ptr.String("__ClusterIdentifier__"),
@@ -4641,6 +4683,20 @@ func TestCheckResponseSnapshot_DescribeClusters(t *testing.T) {
 				LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 				CatalogArn:                           ptr.String("__CatalogArn__"),
 				ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+				LoggingPublishStatus: &types.LoggingPublishStatus{
+					S3Tables: &types.S3TablePublishStatus{
+						S3Tables: []string{
+							"__Member__",
+							"__Member__",
+						},
+						S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+						S3TableGranularity: ptr.String("__S3TableGranularity__"),
+						EnabledAll:         ptr.Bool(true),
+						LastIngestionTimes: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -5722,6 +5778,18 @@ func TestCheckResponseSnapshot_DescribeLoggingStatus(t *testing.T) {
 		LogExports: []string{
 			"__Member__",
 			"__Member__",
+		},
+		S3Tables: &types.S3TablePublishStatus{
+			S3Tables: []string{
+				"__Member__",
+				"__Member__",
+			},
+			S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+			S3TableGranularity: ptr.String("__S3TableGranularity__"),
+			EnabledAll:         ptr.Bool(true),
+			LastIngestionTimes: map[string]string{
+				"key0": "__Value__",
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeLoggingStatus.response")
@@ -6898,6 +6966,18 @@ func TestCheckResponseSnapshot_DisableLogging(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		S3Tables: &types.S3TablePublishStatus{
+			S3Tables: []string{
+				"__Member__",
+				"__Member__",
+			},
+			S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+			S3TableGranularity: ptr.String("__S3TableGranularity__"),
+			EnabledAll:         ptr.Bool(true),
+			LastIngestionTimes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DisableLogging.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6908,7 +6988,12 @@ func TestCheckResponseSnapshot_DisableLogging(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.DisableLogging(context.Background(), &DisableLoggingInput{
-		ClusterIdentifier: ptr.String("__ClusterIdentifier__"),
+		ClusterIdentifier:  ptr.String("__ClusterIdentifier__"),
+		LogDestinationType: types.LogDestinationType("s3"),
+		LogExports: []string{
+			"__Member__",
+			"__Member__",
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7191,6 +7276,20 @@ func TestCheckResponseSnapshot_DisableSnapshotCopy(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DisableSnapshotCopy.response")
@@ -7275,6 +7374,18 @@ func TestCheckResponseSnapshot_EnableLogging(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		S3Tables: &types.S3TablePublishStatus{
+			S3Tables: []string{
+				"__Member__",
+				"__Member__",
+			},
+			S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+			S3TableGranularity: ptr.String("__S3TableGranularity__"),
+			EnabledAll:         ptr.Bool(true),
+			LastIngestionTimes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("EnableLogging.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -7293,6 +7404,8 @@ func TestCheckResponseSnapshot_EnableLogging(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: ptr.String("__S3TableGranularity__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7575,6 +7688,20 @@ func TestCheckResponseSnapshot_EnableSnapshotCopy(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("EnableSnapshotCopy.response")
@@ -7873,6 +8000,20 @@ func TestCheckResponseSnapshot_FailoverPrimaryCompute(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("FailoverPrimaryCompute.response")
@@ -8625,6 +8766,20 @@ func TestCheckResponseSnapshot_ModifyCluster(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyCluster.response")
@@ -8954,6 +9109,20 @@ func TestCheckResponseSnapshot_ModifyClusterDbRevision(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyClusterDbRevision.response")
@@ -9249,6 +9418,20 @@ func TestCheckResponseSnapshot_ModifyClusterIamRoles(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyClusterIamRoles.response")
@@ -9552,6 +9735,20 @@ func TestCheckResponseSnapshot_ModifyClusterMaintenance(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyClusterMaintenance.response")
@@ -10581,6 +10778,20 @@ func TestCheckResponseSnapshot_ModifySnapshotCopyRetentionPeriod(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifySnapshotCopyRetentionPeriod.response")
@@ -10975,6 +11186,20 @@ func TestCheckResponseSnapshot_PauseCluster(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PauseCluster.response")
@@ -11343,6 +11568,20 @@ func TestCheckResponseSnapshot_RebootCluster(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RebootCluster.response")
@@ -11765,6 +12004,20 @@ func TestCheckResponseSnapshot_ResizeCluster(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResizeCluster.response")
@@ -12065,6 +12318,20 @@ func TestCheckResponseSnapshot_RestoreFromClusterSnapshot(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreFromClusterSnapshot.response")
@@ -12452,6 +12719,20 @@ func TestCheckResponseSnapshot_ResumeCluster(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResumeCluster.response")
@@ -12972,6 +13253,20 @@ func TestCheckResponseSnapshot_RotateEncryptionKey(t *testing.T) {
 			LakehouseRegistrationStatus:          ptr.String("__LakehouseRegistrationStatus__"),
 			CatalogArn:                           ptr.String("__CatalogArn__"),
 			ExtraComputeForAutomaticOptimization: ptr.String("__ExtraComputeForAutomaticOptimization__"),
+			LoggingPublishStatus: &types.LoggingPublishStatus{
+				S3Tables: &types.S3TablePublishStatus{
+					S3Tables: []string{
+						"__Member__",
+						"__Member__",
+					},
+					S3TableNamespace:   ptr.String("__S3TableNamespace__"),
+					S3TableGranularity: ptr.String("__S3TableGranularity__"),
+					EnabledAll:         ptr.Bool(true),
+					LastIngestionTimes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RotateEncryptionKey.response")
@@ -13369,6 +13664,8 @@ func TestCheckResponseSnapshot_Error_BucketNotFoundFault(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: ptr.String("__S3TableGranularity__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -15214,6 +15511,8 @@ func TestCheckResponseSnapshot_Error_InsufficientS3BucketPolicyFault(t *testing.
 			"__Member__",
 			"__Member__",
 		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: ptr.String("__S3TableGranularity__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -16314,6 +16613,8 @@ func TestCheckResponseSnapshot_Error_InvalidS3BucketNameFault(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: ptr.String("__S3TableGranularity__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -16348,6 +16649,8 @@ func TestCheckResponseSnapshot_Error_InvalidS3KeyPrefixFault(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		S3TableKmsKeyId:    ptr.String("__S3TableKmsKeyId__"),
+		S3TableGranularity: ptr.String("__S3TableGranularity__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

@@ -247,9 +247,11 @@ func TestCheckResponseSnapshot_BatchDeleteMemoryRecords(t *testing.T) {
 		Records: []types.MemoryRecordDeleteInput{
 			{
 				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+				Namespace:      ptr.String("__Namespace__"),
 			},
 			{
 				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+				Namespace:      ptr.String("__Namespace__"),
 			},
 		},
 	})
@@ -317,6 +319,10 @@ func TestCheckResponseSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				SourceNamespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
 				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
 				Metadata: map[string]types.MemoryRecordMetadataValue{
 					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
@@ -331,6 +337,10 @@ func TestCheckResponseSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 					Value: "__MemoryContentMemberText__",
 				},
 				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceNamespaces: []string{
 					"__Member__",
 					"__Member__",
 				},
@@ -527,6 +537,11 @@ func TestCheckResponseSnapshot_CreateEvent(t *testing.T) {
 			},
 		},
 		ExtractionMode: types.ExtractionMode("SKIP"),
+		ExtractionConfig: &types.ExtractionConfig{
+			NamespaceVariables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -781,6 +796,7 @@ func TestCheckResponseSnapshot_DeleteMemoryRecord(t *testing.T) {
 	got, err := svc.DeleteMemoryRecord(context.Background(), &DeleteMemoryRecordInput{
 		MemoryId:       ptr.String("__MemoryId__"),
 		MemoryRecordId: ptr.String("__MemoryRecordId__"),
+		Namespace:      ptr.String("__Namespace__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2455,6 +2471,7 @@ func TestCheckResponseSnapshot_GetMemoryRecord(t *testing.T) {
 	got, err := svc.GetMemoryRecord(context.Background(), &GetMemoryRecordInput{
 		MemoryId:       ptr.String("__MemoryId__"),
 		MemoryRecordId: ptr.String("__MemoryRecordId__"),
+		Namespace:      ptr.String("__Namespace__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5057,6 +5074,11 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 			},
 		},
 		ExtractionMode: types.ExtractionMode("SKIP"),
+		ExtractionConfig: &types.ExtractionConfig{
+			NamespaceVariables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5180,6 +5202,11 @@ func TestCheckResponseSnapshot_Error_RetryableConflictException(t *testing.T) {
 			},
 		},
 		ExtractionMode: types.ExtractionMode("SKIP"),
+		ExtractionConfig: &types.ExtractionConfig{
+			NamespaceVariables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

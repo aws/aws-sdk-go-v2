@@ -2479,6 +2479,13 @@ func awsRestjson1_serializeOpDocumentCreateMemoryInput(v *CreateMemoryInput, val
 		ok.String(*v.Name)
 	}
 
+	if v.NamespaceKeys != nil {
+		ok := object.Key("namespaceKeys")
+		if err := awsRestjson1_serializeDocumentNamespaceKeysList(v.NamespaceKeys, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StreamDeliveryResources != nil {
 		ok := object.Key("streamDeliveryResources")
 		if err := awsRestjson1_serializeDocumentStreamDeliveryResources(v.StreamDeliveryResources, ok); err != nil {
@@ -14109,6 +14116,13 @@ func awsRestjson1_serializeOpDocumentUpdateMemoryInput(v *UpdateMemoryInput, val
 		}
 	}
 
+	if v.NamespaceKeys != nil {
+		ok := object.Key("namespaceKeys")
+		if err := awsRestjson1_serializeDocumentNamespaceKeysList(v.NamespaceKeys, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StreamDeliveryResources != nil {
 		ok := object.Key("streamDeliveryResources")
 		if err := awsRestjson1_serializeDocumentStreamDeliveryResources(v.StreamDeliveryResources, ok); err != nil {
@@ -20814,6 +20828,68 @@ func awsRestjson1_serializeDocumentModifyStrategyConfiguration(v *types.ModifySt
 		if err := awsRestjson1_serializeDocumentModifySelfManagedConfiguration(v.SelfManagedConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNamespaceAllowedValuesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNamespaceKeyEntry(v *types.NamespaceKeyEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Validation != nil {
+		ok := object.Key("validation")
+		if err := awsRestjson1_serializeDocumentNamespaceKeyValidation(v.Validation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNamespaceKeysList(v []types.NamespaceKeyEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentNamespaceKeyEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNamespaceKeyValidation(v *types.NamespaceKeyValidation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedValues != nil {
+		ok := object.Key("allowedValues")
+		if err := awsRestjson1_serializeDocumentNamespaceAllowedValuesList(v.AllowedValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RegexPattern != nil {
+		ok := object.Key("regexPattern")
+		ok.String(*v.RegexPattern)
 	}
 
 	return nil

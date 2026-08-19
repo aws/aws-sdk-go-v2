@@ -492,24 +492,27 @@ type AuthorizingClaimMatchValueType struct {
 	noSmithyDocumentSerde
 }
 
-// A limit definition within a BatchPut request (rateLimitId used for upsert
-// matching)
+// A rate limit definition within a batch put request. If you provide a rateLimitId
+// , the service uses it for upsert matching against existing rate limits.
 type BatchPutLimitEntry struct {
 
-	// Ordered list of dimension key names defining the scope of a limit
+	// The ordered list of dimension key names that define the scope of this rate
+	// limit.
 	//
 	// This member is required.
 	DimensionKeys []string
 
-	// List of rule entries within a limit
+	// The list of rule entries that map dimension values to rate configurations.
 	//
 	// This member is required.
 	Entries []LimitEntry
 
-	// Optional human-readable description for this limit.
+	// An optional human-readable description for this rate limit. If not provided,
+	// the rate limit is created without a description.
 	Description *string
 
-	// Optional — if provided, used for upsert matching against existing limits.
+	// The unique identifier of the rate limit. If provided, the service uses it for
+	// upsert matching against existing rate limits.
 	RateLimitId *string
 
 	noSmithyDocumentSerde
@@ -1923,9 +1926,9 @@ type CustomOauth2ProviderConfigInput struct {
 	// The private endpoint overrides for the custom OAuth2 provider configuration.
 	PrivateEndpointOverrides []PrivateEndpointOverride
 
-	// Configuration for private_key_jwt client authentication (RFC 7523). On Create:
-	// privateKeySource and signingAlgorithm are required (enforced server-side). On
-	// Update: all fields are optional — only provided fields are updated.
+	// The private_key_jwt client authentication configuration for this credential
+	// provider. When specified, the credential provider uses JWT client assertions to
+	// authenticate with the token endpoint.
 	PrivateKeyJwtConfig *PrivateKeyJwtConfig
 
 	noSmithyDocumentSerde
@@ -1956,9 +1959,8 @@ type CustomOauth2ProviderConfigOutput struct {
 	// The private endpoint overrides for the custom OAuth2 provider configuration.
 	PrivateEndpointOverrides []PrivateEndpointOverride
 
-	// Configuration for private_key_jwt client authentication (RFC 7523). On Create:
-	// privateKeySource and signingAlgorithm are required (enforced server-side). On
-	// Update: all fields are optional — only provided fields are updated.
+	// The configuration for private_key_jwt client authentication used by this OAuth2
+	// credential provider.
 	PrivateKeyJwtConfig *PrivateKeyJwtConfig
 
 	noSmithyDocumentSerde
@@ -3046,7 +3048,8 @@ type GatewayProtocolConfigurationMemberMcp struct {
 
 func (*GatewayProtocolConfigurationMemberMcp) isGatewayProtocolConfiguration() {}
 
-// Shared fields for GatewayRateLimit responses
+// Contains detailed information about a gateway rate limit, including its
+// configuration and current status.
 type GatewayRateLimitDetail struct {
 
 	// The timestamp when the rate limit was created.
@@ -3054,12 +3057,13 @@ type GatewayRateLimitDetail struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Ordered list of dimension key names defining the scope of a limit
+	// The ordered list of dimension key names that define the scope of this rate
+	// limit.
 	//
 	// This member is required.
 	DimensionKeys []string
 
-	// List of rule entries within a limit
+	// The list of rule entries that map dimension values to rate configurations.
 	//
 	// This member is required.
 	Entries []LimitEntry
@@ -3069,13 +3073,12 @@ type GatewayRateLimitDetail struct {
 	// This member is required.
 	GatewayIdentifier *string
 
-	// Limit identifier. Optional on Create (system-generates if not provided by
-	// customer). Always present in responses.
+	// The unique identifier of the rate limit.
 	//
 	// This member is required.
 	RateLimitId *string
 
-	// Status of a gateway limit
+	// The current status of the rate limit.
 	//
 	// This member is required.
 	Status GatewayRateLimitStatus
@@ -3085,7 +3088,7 @@ type GatewayRateLimitDetail struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Optional human-readable description for this limit.
+	// The human-readable description of the rate limit.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -4974,25 +4977,28 @@ type LifecycleConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A single rule entry within a limit, mapping dimension values to rate
-// configurations
+// A single rule entry within a rate limit that maps dimension values to rate
+// configurations. Each entry defines the rate limits for a specific combination of
+// dimension values.
 type LimitEntry struct {
 
-	// Map of dimension name to dimension value, matching the parent limit's
-	// dimensionKeys. Keys must exactly match the dimensionKeys. Values may be "" as a
-	// wildcard. "" may only appear at trailing positions (based on dimensionKeys
-	// ordering).
+	// A map of dimension names to dimension values for this rule entry. Keys must
+	// match the parent rate limit's dimension keys. Values may use * as a wildcard,
+	// but only in trailing positions based on the dimension keys ordering.
 	//
 	// This member is required.
 	Dimensions map[string]string
 
-	// Connection rate limits (per second only). Limited to 1 entry for now. — P2
+	// The connection rate limit configuration. Specifies the maximum number of
+	// concurrent connections allowed.
 	Connections []RateConfig
 
-	// Request rate limits (RPS or RPM). Limited to 1 entry for now.
+	// The request rate limit configuration. Specifies the maximum number of requests
+	// allowed per time period.
 	Requests []RateConfig
 
-	// Token rate limits (TPM). Limited to 1 entry for now. — P1
+	// The token rate limit configuration. Specifies the maximum number of tokens
+	// allowed per time period.
 	Tokens []RateConfig
 
 	noSmithyDocumentSerde
@@ -5433,6 +5439,10 @@ type Memory struct {
 	// The ARN of the IAM role that provides permissions for the memory.
 	MemoryExecutionRoleArn *string
 
+	// The namespace variable key definitions for this memory. Namespace keys define
+	// custom variables used in namespaceTemplates with optional validation rules.
+	NamespaceKeys []NamespaceKeyEntry
+
 	// The list of memory strategies associated with this memory.
 	Strategies []MemoryStrategy
 
@@ -5867,6 +5877,34 @@ type ModifyStrategyConfiguration struct {
 
 	// The updated self-managed configuration.
 	SelfManagedConfiguration *ModifySelfManagedConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A namespace variable key definition with optional NamespaceKeyValidation rules.
+type NamespaceKeyEntry struct {
+
+	// The namespace variable key name.
+	//
+	// This member is required.
+	Key *string
+
+	// The validation rules that constrain values for this namespace variable at
+	// runtime ( CreateEvent API).
+	Validation *NamespaceKeyValidation
+
+	noSmithyDocumentSerde
+}
+
+// The validation rules for namespace variable values. When you specify multiple
+// rules, the service enforces a logical AND across all provided key-value pairs.
+type NamespaceKeyValidation struct {
+
+	// The allowed values for this namespace variable key.
+	AllowedValues []string
+
+	// A regex pattern that the namespace variable key-value must match.
+	RegexPattern *string
 
 	noSmithyDocumentSerde
 }
@@ -7159,9 +7197,7 @@ type PrivateEndpointOverride struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for private_key_jwt client authentication (RFC 7523). On Create:
-// privateKeySource and signingAlgorithm are required (enforced server-side). On
-// Update: all fields are optional — only provided fields are updated.
+// The private key configuration for private_key_jwt client authentication.
 type PrivateKeyJwtConfig struct {
 
 	// A map of additional claims to include in the JWT client assertion header.
@@ -7230,10 +7266,15 @@ type ProviderPrefix struct {
 	noSmithyDocumentSerde
 }
 
-// Rate configuration for a metric (requests or tokens)
+// Contains the rate configuration for a rate limit metric, specifying the allowed
+// rate and time period.
 type RateConfig struct {
 
-	// Time period for rate limiting
+	// The time period for the rate limit. Valid values:
+	//
+	//   - second —Measures the rate limit over a one-second window.
+	//
+	//   - minute —Measures the rate limit over a one-minute window.
 	//
 	// This member is required.
 	Period Period
