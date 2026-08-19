@@ -3699,7 +3699,7 @@
                 "payload": {
                     "target": "com.amazonaws.bedrockagentcore#PayloadTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content payload of the event. This can include conversational data or binary content.</p>",
+                        "smithy.api#documentation": "<p>The content payload of the event. This can include conversational data, JSON data, or binary content.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3726,6 +3726,12 @@
                     "target": "com.amazonaws.bedrockagentcore#ExtractionMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Controls long-term memory extraction for this event. When set to <code>SKIP</code>, the event is stored in short-term memory but is excluded from long-term memory extraction. If not specified, the event is processed for extraction as usual.</p>"
+                    }
+                },
+                "extractionConfig": {
+                    "target": "com.amazonaws.bedrockagentcore#ExtractionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The extraction configuration for long-term memory records. Use this parameter to specify namespace variable keys and their values for namespace substitution during extraction.</p>"
                     }
                 }
             },
@@ -4550,6 +4556,13 @@
                         "smithy.api#documentation": "<p>The identifier of the memory record to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.bedrockagentcore#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the memory record to delete. This value is used for IAM condition key authorization.</p>",
+                        "smithy.api#httpQuery": "namespace"
                     }
                 }
             },
@@ -5910,6 +5923,20 @@
                 "smithy.api#documentation": "<p>Configuration for a customer-managed external proxy server. Includes server location, optional domain-based routing patterns, and authentication credentials.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#ExtractionConfig": {
+            "type": "structure",
+            "members": {
+                "namespaceVariables": {
+                    "target": "com.amazonaws.bedrockagentcore#NamespaceVariablesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of <code>namespaceKeys</code> to their values. The service substitutes these values into <code>namespaceTemplates</code> during long-term memory extraction to control namespace hierarchy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for extraction behavior. Use this structure to specify namespace variable keys and their values for namespace substitution during long-term memory extraction.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#ExtractionJob": {
             "type": "structure",
             "members": {
@@ -7183,6 +7210,13 @@
                         "smithy.api#documentation": "<p>The identifier of the memory record to retrieve.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.bedrockagentcore#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the memory record to retrieve. This value is used for IAM condition key authorization.</p>",
+                        "smithy.api#httpQuery": "namespace"
                     }
                 }
             },
@@ -12840,6 +12874,28 @@
                 "smithy.api#pattern": "^(arn:(aws|aws-cn|aws-us-gov):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/)?[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
             }
         },
+        "com.amazonaws.bedrockagentcore#MemoryJsonData": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.bedrockagentcore#MemoryJsonDataContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON content of the payload. Accepts any JSON value, including objects, arrays, strings, numbers, booleans, and null. The maximum size is 100 KB.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains non-conversational, JSON-formatted content for an event payload. JSON payloads are extracted into long-term memory.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#MemoryJsonDataContent": {
+            "type": "document",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentcore#MemoryMetadataFilterExpression": {
             "type": "structure",
             "members": {
@@ -12985,6 +13041,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique ID of the memory record to be deleted.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.bedrockagentcore#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the memory record being deleted. This value is used for IAM condition key authorization.</p>"
                     }
                 }
             },
@@ -13287,6 +13349,12 @@
                     "target": "com.amazonaws.bedrockagentcore#NamespacesList",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated list of namespace identifiers for categorizing the memory record.</p>"
+                    }
+                },
+                "sourceNamespaces": {
+                    "target": "com.amazonaws.bedrockagentcore#NamespacesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespaces of the source memory record being updated. This value is used for IAM condition key authorization.</p>"
                     }
                 },
                 "memoryStrategyId": {
@@ -13850,6 +13918,44 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9/*][a-zA-Z0-9-_/*]*(?::[a-zA-Z0-9-_/*]+)*[a-zA-Z0-9-_/*]*$"
             }
         },
+        "com.amazonaws.bedrockagentcore#NamespaceVariableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the namespace variable key. The name cannot be a built-in variable name (<code>actorId</code>, <code>sessionId</code>, or <code>memoryStrategyId</code>).</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^(?!memoryStrategyId$|actorId$|sessionId$)[a-z][a-z0-9]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#NamespaceVariableValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The value of a namespace variable key.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9][a-z0-9-_]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#NamespaceVariablesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagentcore#NamespaceVariableName"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentcore#NamespaceVariableValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of <code>namespaceKeys</code> to their values for namespace substitution.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcore#NamespacesList": {
             "type": "list",
             "member": {
@@ -14203,6 +14309,12 @@
                     "target": "com.amazonaws.bedrockagentcore#MemoryDocument",
                     "traits": {
                         "smithy.api#documentation": "<p>The binary content of the payload.</p>"
+                    }
+                },
+                "json": {
+                    "target": "com.amazonaws.bedrockagentcore#MemoryJsonData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON content of the payload. Use this type to store non-conversational, JSON-formatted data, such as behavioral events, activity logs, or system events.</p>"
                     }
                 }
             },

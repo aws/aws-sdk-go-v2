@@ -1625,7 +1625,7 @@
                     }
                 },
                 "serviceNetworkIdentifier": {
-                    "target": "com.amazonaws.vpclattice#ServiceNetworkIdentifier",
+                    "target": "com.amazonaws.vpclattice#ServiceNetworkIdentifierWithoutRegex",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID or ARN of the service network. You must use an ARN if the resources are in different accounts.</p>",
                         "smithy.api#required": {}
@@ -8014,15 +8014,15 @@
             }
         },
         "com.amazonaws.vpclattice#ProtocolType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "TCP",
-                        "value": "TCP",
-                        "documentation": "Resource Configuration protocol type TCP"
+            "type": "enum",
+            "members": {
+                "TCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Resource Configuration protocol type TCP",
+                        "smithy.api#enumValue": "TCP"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.vpclattice#PutAuthPolicy": {
@@ -11882,8 +11882,19 @@
                         "smithy.api#length": {
                             "min": 1,
                             "max": 5
-                        },
-                        "smithy.api#required": {}
+                        }
+                    }
+                },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is enabled for the VPC association. </p>"
+                    }
+                },
+                "dnsOptions": {
+                    "target": "com.amazonaws.vpclattice#DnsOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> DNS options for the service network VPC association. </p>"
                     }
                 }
             }
@@ -11919,6 +11930,18 @@
                     "target": "com.amazonaws.vpclattice#SecurityGroupList",
                     "traits": {
                         "smithy.api#documentation": "<p>The IDs of the security groups.</p>"
+                    }
+                },
+                "privateDnsEnabled": {
+                    "target": "com.amazonaws.vpclattice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates if private DNS is enabled for the VPC association. </p>"
+                    }
+                },
+                "dnsOptions": {
+                    "target": "com.amazonaws.vpclattice#DnsOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> DNS options for the service network VPC association. </p>"
                     }
                 }
             }

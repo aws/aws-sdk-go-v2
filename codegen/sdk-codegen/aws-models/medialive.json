@@ -39911,6 +39911,20 @@
                         "smithy.api#documentation": "Output video width, in pixels. Must be an even number. For most codecs, you can leave this field and height blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.",
                         "smithy.api#jsonName": "width"
                     }
+                },
+                "CropRectangle": {
+                    "target": "com.amazonaws.medialive#VideoPositionRectangle",
+                    "traits": {
+                        "smithy.api#documentation": "Region of the input video to crop before scaling. If not specified, the entire input\nframe is used.\n\nNote: Unlike {@link outputPositionRectangle}, the bounds of cropRectangle are validated\nat ingest time by the encoder/scaler rather than at the API level, because the input\nresolution is not known until the source is probed. Field-level constraints on (x, y,\nwidth, height) defined on {@link VideoPositionRectangle} still apply.",
+                        "smithy.api#jsonName": "cropRectangle"
+                    }
+                },
+                "OutputPositionRectangle": {
+                    "target": "com.amazonaws.medialive#VideoPositionRectangle",
+                    "traits": {
+                        "smithy.api#documentation": "Position of the encoded video within the output frame. The area outside the rectangle\nis filled with black. If not specified, the video fills the entire output frame.\nWhen used, both {@link width} and {@link height} of the VideoDescription must be\nexplicitly specified so that the rectangle can be validated against the output frame.",
+                        "smithy.api#jsonName": "outputPositionRectangle"
+                    }
                 }
             },
             "traits": {
@@ -39967,6 +39981,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "Video Description Scaling Behavior"
+            }
+        },
+        "com.amazonaws.medialive#VideoPositionRectangle": {
+            "type": "structure",
+            "members": {
+                "Height": {
+                    "target": "com.amazonaws.medialive#__integerMin2Max8192",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Height in pixels. Must be an even number.",
+                        "smithy.api#jsonName": "height",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Width": {
+                    "target": "com.amazonaws.medialive#__integerMin2Max8192",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Width in pixels. Must be an even number.",
+                        "smithy.api#jsonName": "width",
+                        "smithy.api#required": {}
+                    }
+                },
+                "X": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max8190",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Left offset in pixels. Must be an even number.",
+                        "smithy.api#jsonName": "x",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Y": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max8190",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Top offset in pixels. Must be an even number.",
+                        "smithy.api#jsonName": "y",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A rectangle defined by position (x, y) and dimensions (width, height) in pixels.\nUsed for output positioning and input cropping."
             }
         },
         "com.amazonaws.medialive#VideoSelector": {
@@ -40500,6 +40558,12 @@
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max8000000"
             }
         },
+        "com.amazonaws.medialive#__integerMin0Max8190": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max8190"
+            }
+        },
         "com.amazonaws.medialive#__integerMin0Max8191": {
             "type": "integer",
             "traits": {
@@ -40666,6 +40730,12 @@
             "type": "integer",
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __integerMin25Max2000"
+            }
+        },
+        "com.amazonaws.medialive#__integerMin2Max8192": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin2Max8192"
             }
         },
         "com.amazonaws.medialive#__integerMin3": {

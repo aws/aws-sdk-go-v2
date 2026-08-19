@@ -2345,7 +2345,7 @@
                 "rateLimits": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#BatchPutLimitEntries",
                     "traits": {
-                        "smithy.api#documentation": "Complete set of rate limits for this gateway. Replaces all existing limits atomically.",
+                        "smithy.api#documentation": "<p>The complete set of rate limits for this gateway. This operation replaces all existing rate limits in a single request. If the operation fails, no rate limits are changed.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2360,7 +2360,7 @@
                 "rateLimits": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimits",
                     "traits": {
-                        "smithy.api#documentation": "The resulting set of rate limits after the batch operation.",
+                        "smithy.api#documentation": "<p>The resulting set of rate limits after the batch operation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2387,30 +2387,32 @@
                 "rateLimitId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
                     "traits": {
-                        "smithy.api#documentation": "Optional — if provided, used for upsert matching against existing limits."
+                        "smithy.api#documentation": "<p>The unique identifier of the rate limit. If provided, the service uses it for upsert matching against existing rate limits.</p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
                     "traits": {
-                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                        "smithy.api#documentation": "<p>An optional human-readable description for this rate limit. If not provided, the rate limit is created without a description.</p>"
                     }
                 },
                 "dimensionKeys": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
                     "traits": {
+                        "smithy.api#documentation": "<p>The ordered list of dimension key names that define the scope of this rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "entries": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
                     "traits": {
+                        "smithy.api#documentation": "<p>The list of rule entries that map dimension values to rate configurations.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A limit definition within a BatchPut request (rateLimitId used for upsert matching)"
+                "smithy.api#documentation": "<p>A rate limit definition within a batch put request. If you provide a <code>rateLimitId</code>, the service uses it for upsert matching against existing rate limits.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#BedrockAgentcoreResourceArn": {
@@ -6050,26 +6052,26 @@
                 "rateLimitId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
                     "traits": {
-                        "smithy.api#documentation": "Optional customer-defined limit ID. If not provided, system generates one."
+                        "smithy.api#documentation": "<p>An optional customer-defined identifier for the rate limit. If not provided, the system generates one.</p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
                     "traits": {
-                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                        "smithy.api#documentation": "<p>An optional human-readable description for this rate limit. If not provided, the rate limit is created without a description.</p>"
                     }
                 },
                 "dimensionKeys": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
                     "traits": {
-                        "smithy.api#documentation": "Ordered list of dimension names defining the scope of this limit.\nUnique per gateway — no two limits can share the same dimensionKeys.",
+                        "smithy.api#documentation": "<p>The ordered list of dimension key names that define the scope of this rate limit. Must be unique per gateway—no two rate limits can share the same dimension keys.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "entries": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
                     "traits": {
-                        "smithy.api#documentation": "Rule entries mapping dimension values to rate configurations.",
+                        "smithy.api#documentation": "<p>The rule entries that map dimension values to rate configurations.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6084,6 +6086,7 @@
                 "rateLimitId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
                     "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the created rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6097,24 +6100,27 @@
                 "description": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
                     "traits": {
-                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                        "smithy.api#documentation": "<p>The human-readable description of the rate limit.</p>"
                     }
                 },
                 "dimensionKeys": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
                     "traits": {
+                        "smithy.api#documentation": "<p>The ordered list of dimension key names that define the scope of this rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "entries": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
                     "traits": {
+                        "smithy.api#documentation": "<p>The list of rule entries that map dimension values to rate configurations.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
                     "traits": {
+                        "smithy.api#documentation": "<p>The current status of the rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6134,7 +6140,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Shared fields for GatewayRateLimit responses",
+                "smithy.api#documentation": "<p>Shared fields for <code>GatewayRateLimit</code> responses.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -7123,6 +7129,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#IndexedKeysList",
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata keys to index for filtering. Once declared, indexed keys cannot be removed.</p>"
+                    }
+                },
+                "namespaceKeys": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NamespaceKeysList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace variable key definitions with optional validation rules. Use these <code>namespaceKeys</code> in <code>namespaceTemplates</code> to control namespace hierarchy.</p>"
                     }
                 },
                 "streamDeliveryResources": {
@@ -9294,7 +9306,10 @@
                     }
                 },
                 "privateKeyJwtConfig": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#PrivateKeyJwtConfig"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PrivateKeyJwtConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private_key_jwt client authentication configuration for this credential provider. When specified, the credential provider uses JWT client assertions to authenticate with the token endpoint.</p>"
+                    }
                 },
                 "privateEndpoint": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PrivateEndpoint",
@@ -9354,7 +9369,10 @@
                     }
                 },
                 "privateKeyJwtConfig": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#PrivateKeyJwtConfig"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PrivateKeyJwtConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for private_key_jwt client authentication used by this OAuth2 credential provider.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10934,12 +10952,14 @@
                 "rateLimitId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
                     "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deleted rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
                     "traits": {
+                        "smithy.api#documentation": "<p>The current status of the rate limit deletion.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12465,7 +12485,7 @@
         "com.amazonaws.bedrockagentcorecontrol#DimensionKey": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "A dimension key specifying the scope dimension for rate limiting.\nAllowed values: \"targetName\", \"toolName\", \"qualifiedModelId\",\nor context-path expressions: \"$.context.iam.principal\", \"$.context.iam.sourceIdentity\",\n\"$.context.jwt.<claim>\" where <claim> is a JWT claim name (e.g., \"$.context.jwt.sub\").\nValidated server-side to enforce allowed prefixes and patterns.",
+                "smithy.api#documentation": "<p>A dimension key specifying the scope dimension for rate limiting.</p> <p>Allowed values: <code>targetName</code>, <code>toolName</code>, <code>qualifiedModelId</code>, or context-path expressions: <code>$.context.iam.principal</code>, <code>$.context.iam.sourceIdentity</code>, <code>$.context.jwt.&lt;claim&gt;</code> where <code>&lt;claim&gt;</code> is a JWT claim name (for example, <code>$.context.jwt.sub</code>). Validated server-side to enforce allowed prefixes and patterns.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 80
@@ -12479,7 +12499,7 @@
                 "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKey"
             },
             "traits": {
-                "smithy.api#documentation": "Ordered list of dimension key names defining the scope of a limit",
+                "smithy.api#documentation": "<p>An ordered list of dimension key names defining the scope of a limit.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 10
@@ -12489,7 +12509,7 @@
         "com.amazonaws.bedrockagentcorecontrol#DimensionValue": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "A dimension value in a rule entry (exact value or \"*\" wildcard)",
+                "smithy.api#documentation": "<p>A dimension value in a rule entry (exact value or <code>*</code> wildcard).</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
@@ -12505,7 +12525,7 @@
                 "target": "com.amazonaws.bedrockagentcorecontrol#DimensionValue"
             },
             "traits": {
-                "smithy.api#documentation": "Map of dimension name to dimension value for a rule entry",
+                "smithy.api#documentation": "<p>A map of dimension name to dimension value for a rule entry.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 10
@@ -14267,7 +14287,7 @@
         "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Optional human-readable description for a gateway limit.",
+                "smithy.api#documentation": "<p>An optional human-readable description for a gateway limit.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 512
@@ -14280,6 +14300,7 @@
                 "rateLimitId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
                     "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14293,24 +14314,27 @@
                 "description": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
                     "traits": {
-                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                        "smithy.api#documentation": "<p>The human-readable description of the rate limit.</p>"
                     }
                 },
                 "dimensionKeys": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
                     "traits": {
+                        "smithy.api#documentation": "<p>The ordered list of dimension key names that define the scope of this rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "entries": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
                     "traits": {
+                        "smithy.api#documentation": "<p>The list of rule entries that map dimension values to rate configurations.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
                     "traits": {
+                        "smithy.api#documentation": "<p>The current status of the rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14330,13 +14354,13 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Shared fields for GatewayRateLimit responses"
+                "smithy.api#documentation": "<p>Contains detailed information about a gateway rate limit, including its configuration and current status.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Limit identifier. Optional on Create (system-generates if not provided by customer).\nAlways present in responses.",
+                "smithy.api#documentation": "<p>The limit identifier. Optional on create (the system generates it if not provided by the customer). Always present in responses.</p>",
                 "smithy.api#length": {
                     "min": 2,
                     "max": 64
@@ -14415,7 +14439,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Status of a gateway limit"
+                "smithy.api#documentation": "<p>The status of a gateway limit.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimits": {
@@ -16565,6 +16589,7 @@
                 "rateLimitId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
                     "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16578,24 +16603,27 @@
                 "description": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
                     "traits": {
-                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                        "smithy.api#documentation": "<p>The human-readable description of the rate limit.</p>"
                     }
                 },
                 "dimensionKeys": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
                     "traits": {
+                        "smithy.api#documentation": "<p>The ordered list of dimension key names that define the scope of this rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "entries": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
                     "traits": {
+                        "smithy.api#documentation": "<p>The list of rule entries that map dimension values to rate configurations.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
                     "traits": {
+                        "smithy.api#documentation": "<p>The current status of the rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16615,7 +16643,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Shared fields for GatewayRateLimit responses",
+                "smithy.api#documentation": "<p>Shared fields for <code>GatewayRateLimit</code> responses.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -22593,7 +22621,7 @@
                 "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntry"
             },
             "traits": {
-                "smithy.api#documentation": "List of rule entries within a limit",
+                "smithy.api#documentation": "<p>A list of rule entries within a limit.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1000
@@ -22606,7 +22634,7 @@
                 "dimensions": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Dimensions",
                     "traits": {
-                        "smithy.api#documentation": "Map of dimension name to dimension value, matching the parent limit's dimensionKeys.\nKeys must exactly match the dimensionKeys. Values may be \"*\" as a wildcard.\n\"*\" may only appear at trailing positions (based on dimensionKeys ordering).",
+                        "smithy.api#documentation": "<p>A map of dimension names to dimension values for this rule entry. Keys must match the parent rate limit's dimension keys. Values may use <code>*</code> as a wildcard, but only in trailing positions based on the dimension keys ordering.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 10
@@ -22617,24 +22645,24 @@
                 "requests": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#RateConfigs",
                     "traits": {
-                        "smithy.api#documentation": "Request rate limits (RPS or RPM). Limited to 1 entry for now."
+                        "smithy.api#documentation": "<p>The request rate limit configuration. Specifies the maximum number of requests allowed per time period.</p>"
                     }
                 },
                 "tokens": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#RateConfigs",
                     "traits": {
-                        "smithy.api#documentation": "Token rate limits (TPM). Limited to 1 entry for now. — P1"
+                        "smithy.api#documentation": "<p>The token rate limit configuration. Specifies the maximum number of tokens allowed per time period.</p>"
                     }
                 },
                 "connections": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#RateConfigs",
                     "traits": {
-                        "smithy.api#documentation": "Connection rate limits (per second only). Limited to 1 entry for now. — P2"
+                        "smithy.api#documentation": "<p>The connection rate limit configuration. Specifies the maximum number of concurrent connections allowed.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A single rule entry within a limit, mapping dimension values to rate configurations"
+                "smithy.api#documentation": "<p>A single rule entry within a rate limit that maps dimension values to rate configurations. Each entry defines the rate limits for a specific combination of dimension values.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#LinkedinOauth2ProviderConfigInput": {
@@ -26814,6 +26842,12 @@
                         "smithy.api#documentation": "<p>The indexed metadata keys for this memory. Only indexed keys can be used in metadata filters.</p>"
                     }
                 },
+                "namespaceKeys": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NamespaceKeysList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace variable key definitions for this memory. Namespace keys define custom variables used in <code>namespaceTemplates</code> with optional validation rules.</p>"
+                    }
+                },
                 "streamDeliveryResources": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#StreamDeliveryResources",
                     "traits": {
@@ -27701,7 +27735,101 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\-_\\/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_\\/]*)*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-_\\/]*(\\{[a-zA-Z][a-zA-Z0-9]*\\}[a-zA-Z0-9\\-_\\/]*)*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#NamespaceAllowedValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9][a-z0-9-_]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#NamespaceAllowedValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#NamespaceAllowedValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#NamespaceKeyEntry": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NamespaceVariableKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace variable key name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "validation": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NamespaceKeyValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation rules that constrain values for this namespace variable at runtime (<code>CreateEvent</code> API).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A namespace variable key definition with optional <code>NamespaceKeyValidation</code> rules.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#NamespaceKeyValidation": {
+            "type": "structure",
+            "members": {
+                "allowedValues": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NamespaceAllowedValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The allowed values for this namespace variable key.</p>"
+                    }
+                },
+                "regexPattern": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NamespaceRegexPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A regex pattern that the namespace variable key-value must match.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The validation rules for namespace variable values. When you specify multiple rules, the service enforces a logical <code>AND</code> across all provided key-value pairs.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#NamespaceKeysList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#NamespaceKeyEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#NamespaceRegexPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#NamespaceVariableKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^(?!memoryStrategyId$|actorId$|sessionId$)[a-z][a-z0-9]*$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#NamespacesList": {
@@ -29372,7 +29500,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Time period for rate limiting"
+                "smithy.api#documentation": "<p>The time period for rate limiting.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#PermissionsConfiguration": {
@@ -30434,7 +30562,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Configuration for private_key_jwt client authentication (RFC 7523).\nOn Create: privateKeySource and signingAlgorithm are required (enforced server-side).\nOn Update: all fields are optional — only provided fields are updated."
+                "smithy.api#documentation": "<p>The private key configuration for private_key_jwt client authentication.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#PrivateKeySource": {
@@ -30621,12 +30749,13 @@
                 "period": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Period",
                     "traits": {
+                        "smithy.api#documentation": "<p>The time period for the rate limit. Valid values:</p> <ul> <li> <p> <code>second</code>—Measures the rate limit over a one-second window.</p> </li> <li> <p> <code>minute</code>—Measures the rate limit over a one-minute window.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Rate configuration for a metric (requests or tokens)"
+                "smithy.api#documentation": "<p>Contains the rate configuration for a rate limit metric, specifying the allowed rate and time period.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#RateConfigs": {
@@ -30635,7 +30764,7 @@
                 "target": "com.amazonaws.bedrockagentcorecontrol#RateConfig"
             },
             "traits": {
-                "smithy.api#documentation": "List of rate configs (limited to 1 for now, array for future multi-period support)",
+                "smithy.api#documentation": "<p>A list of rate configurations for the limit. Currently supports one entry per limit.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1
@@ -36036,13 +36165,13 @@
                 "description": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
                     "traits": {
-                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                        "smithy.api#documentation": "<p>The updated human-readable description for this rate limit.</p>"
                     }
                 },
                 "entries": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
                     "traits": {
-                        "smithy.api#documentation": "Updated rule entries. key and dimensionKeys are immutable and cannot be changed.",
+                        "smithy.api#documentation": "<p>The updated rule entries. The dimension keys are immutable after creation and cannot be changed.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -36057,6 +36186,7 @@
                 "rateLimitId": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitId",
                     "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -36070,24 +36200,27 @@
                 "description": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitDescription",
                     "traits": {
-                        "smithy.api#documentation": "Optional human-readable description for this limit."
+                        "smithy.api#documentation": "<p>The human-readable description of the rate limit.</p>"
                     }
                 },
                 "dimensionKeys": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#DimensionKeys",
                     "traits": {
+                        "smithy.api#documentation": "<p>The ordered list of dimension key names that define the scope of this rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "entries": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LimitEntries",
                     "traits": {
+                        "smithy.api#documentation": "<p>The list of rule entries that map dimension values to rate configurations.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#GatewayRateLimitStatus",
                     "traits": {
+                        "smithy.api#documentation": "<p>The current status of the rate limit.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -36107,7 +36240,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Shared fields for GatewayRateLimit responses",
+                "smithy.api#documentation": "<p>Shared fields for <code>GatewayRateLimit</code> responses.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -37082,6 +37215,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#IndexedKeysList",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional metadata keys to index. Previously indexed keys cannot be removed.</p>"
+                    }
+                },
+                "namespaceKeys": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NamespaceKeysList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace variable key definitions with validation rules for this memory. Use this parameter to update existing <code>namespaceKey</code> validation rules or add new keys when namespace templates change.</p>"
                     }
                 },
                 "streamDeliveryResources": {

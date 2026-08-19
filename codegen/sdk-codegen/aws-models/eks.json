@@ -177,6 +177,9 @@
             "version": "2017-11-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.eks#ActivateCertificateAuthority"
+                },
+                {
                     "target": "com.amazonaws.eks#AssociateAccessPolicy"
                 },
                 {
@@ -196,6 +199,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#CreateCapability"
+                },
+                {
+                    "target": "com.amazonaws.eks#CreateCertificateAuthority"
                 },
                 {
                     "target": "com.amazonaws.eks#CreateCluster"
@@ -220,6 +226,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#DeleteCapability"
+                },
+                {
+                    "target": "com.amazonaws.eks#DeleteCertificateAuthority"
                 },
                 {
                     "target": "com.amazonaws.eks#DeleteCluster"
@@ -253,6 +262,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#DescribeCapability"
+                },
+                {
+                    "target": "com.amazonaws.eks#DescribeCertificateAuthority"
                 },
                 {
                     "target": "com.amazonaws.eks#DescribeCluster"
@@ -304,6 +316,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#ListCapabilities"
+                },
+                {
+                    "target": "com.amazonaws.eks#ListCertificateAuthorities"
                 },
                 {
                     "target": "com.amazonaws.eks#ListClusters"
@@ -1768,6 +1783,108 @@
                         "smithy.api#enumValue": "namespace"
                     }
                 }
+            }
+        },
+        "com.amazonaws.eks#ActivateCertificateAuthority": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#ActivateCertificateAuthorityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#ActivateCertificateAuthorityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Activates a successor certificate authority (CA) as the signing certificate authority\n            for your cluster, completing a CA rotation.</p>\n         <p>When you activate a successor CA, Amazon EKS promotes it to be the cluster's signer (its\n                <code>signingStatus</code> becomes <code>IN_USE</code>) and the outgoing CA is\n            retired (<code>NOT_USED</code>). The outgoing CA remains in the cluster's trust bundle but\n            no longer signs certificates. The successor CA you activate must already be present on\n            the cluster and fully distributed (its <code>distributionStatus</code> must be\n                <code>COMPLETE</code>). This is an asynchronous operation that returns an\n                <code>update</code> object you can track with <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeUpdate.html\">\n               <code>DescribeUpdate</code>\n            </a>.</p>\n         <p>Before you activate the successor CA, make sure the worker nodes you manage and your\n            external clients have been updated to trust it, so they maintain connectivity to the API\n            server after activation. For a limited period after activation, CA rollback is available\n            to revert to the outgoing CA if needed. If you don't activate the successor CA yourself,\n            Amazon EKS activates it automatically as the expiration deadline approaches. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/certificate-authority-rotation.html\">Rotate the Amazon EKS\n                cluster certificate authority</a> in the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/clusters/{clusterName}/certificate-authorities/{certificateAuthorityId}/activate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#ActivateCertificateAuthorityRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "certificateAuthorityId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the certificate authority to activate as the cluster's signing certificate\n            authority. This certificate authority must already exist on the cluster and have a\n                <code>distributionStatus</code> of <code>COMPLETE</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\nthe idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#ActivateCertificateAuthorityResponse": {
+            "type": "structure",
+            "members": {
+                "update": {
+                    "target": "com.amazonaws.eks#Update",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the asynchronous update that promotes the certificate authority\n            to be the cluster's signer.</p>"
+                    }
+                },
+                "certificateAuthority": {
+                    "target": "com.amazonaws.eks#CertificateAuthoritySummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about the certificate authority that is being activated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#ActiveCertificateAuthority": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the certificate authority that is currently signing\n            certificates for the cluster.</p>"
+                    }
+                },
+                "activatedBy": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityActivatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that activated the current signing certificate authority, either\n                <code>CUSTOMER</code> or <code>EKS</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the certificate authority that is currently signing certificates for the\n            cluster.</p>"
             }
         },
         "com.amazonaws.eks#AdditionalInfoMap": {
@@ -3383,10 +3500,281 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Base64-encoded certificate data required to communicate with your cluster. Add\n            this to the <code>certificate-authority-data</code> section of the\n                <code>kubeconfig</code> file for your cluster.</p>"
                     }
+                },
+                "active": {
+                    "target": "com.amazonaws.eks#ActiveCertificateAuthority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object identifying the certificate authority that is currently signing certificates\n            for the cluster.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object representing the <code>certificate-authority-data</code> for your\n            cluster.</p>"
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthority": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the certificate authority.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the certificate authority was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityCreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that created the certificate authority. Certificate authorities that you\n            create are <code>CUSTOMER</code>; those that Amazon EKS provisions on your behalf, such as a\n            cluster's initial certificate authority, are <code>EKS</code>.</p>"
+                    }
+                },
+                "activatedAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the certificate authority was last\n            activated as the cluster's signer. This value is absent if the certificate authority has\n            never been activated.</p>"
+                    }
+                },
+                "activatedBy": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityActivatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that most recently activated the certificate authority. A value of\n                <code>EKS</code> indicates that Amazon EKS activated it automatically; <code>CUSTOMER</code>\n            indicates that you activated it.</p>"
+                    }
+                },
+                "signingStatus": {
+                    "target": "com.amazonaws.eks#CertificateAuthoritySigningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing status of the certificate authority. <code>IN_USE</code> means the\n            certificate authority is currently signing certificates for the cluster,\n                <code>ACTIVATING</code> means it's being promoted to the signer, and\n                <code>NOT_USED</code> means it's trusted by the cluster (for example, a successor CA\n            during a rotation, or a retired outgoing CA) but isn't the signer.</p>"
+                    }
+                },
+                "distributionStatus": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityDistributionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution status of the certificate authority, which tracks whether Amazon EKS has\n            distributed its trust to the Amazon Web Services managed components in your cluster (the control plane,\n            Amazon EKS Auto Mode instances, and Amazon Web Services Fargate nodes). Valid values are\n                <code>IN_PROGRESS</code>, <code>COMPLETE</code>, <code>FAILED</code>, and\n                <code>DELETING</code>. A successor CA can only be activated after its distribution\n            status is <code>COMPLETE</code>.</p>"
+                    }
+                },
+                "validity": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityValidity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validity period of the certificate authority's certificate.</p>"
+                    }
+                },
+                "scheduledEvents": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityScheduledEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduled auto-activation events for the certificate authority, computed from its\n            validity period.</p>"
+                    }
+                },
+                "rollbackAvailable": {
+                    "target": "com.amazonaws.eks#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether CA rollback is still available for this certificate authority. After\n            you activate a successor CA, rollback lets you revert to the outgoing CA for a limited\n            period while you finish updating any worker nodes or clients that were missed.</p>"
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Base64-encoded public certificate of the certificate authority.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a certificate authority (CA) for an Amazon EKS cluster.</p>"
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthorityActivatedBy": {
+            "type": "enum",
+            "members": {
+                "EKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS"
+                    }
+                },
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthorityCreatedBy": {
+            "type": "enum",
+            "members": {
+                "EKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS"
+                    }
+                },
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthorityDistributionStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthorityMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthorityScheduledEvents": {
+            "type": "structure",
+            "members": {
+                "firstAutoActivation": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The earliest Unix epoch timestamp in seconds at which Amazon EKS may automatically activate\n            this certificate authority.</p>"
+                    }
+                },
+                "finalAutoActivation": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds by which Amazon EKS will automatically activate this\n            certificate authority if you haven't already activated it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scheduled events during which Amazon EKS may automatically activate a certificate\n            authority, computed from its validity period. These events help ensure that a cluster's\n            signing certificate authority is rotated before its certificate expires.</p>"
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthoritySigningStatus": {
+            "type": "enum",
+            "members": {
+                "NOT_USED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_USED"
+                    }
+                },
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                },
+                "IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_USE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthoritySummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the certificate authority.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the certificate authority was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityCreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that created the certificate authority, either <code>CUSTOMER</code> or\n                <code>EKS</code>.</p>"
+                    }
+                },
+                "activatedAt": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for when the certificate authority was last\n            activated. This value is absent if the certificate authority has never been\n            activated.</p>"
+                    }
+                },
+                "activatedBy": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityActivatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that most recently activated the certificate authority, either\n                <code>CUSTOMER</code> or <code>EKS</code>.</p>"
+                    }
+                },
+                "signingStatus": {
+                    "target": "com.amazonaws.eks#CertificateAuthoritySigningStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing status of the certificate authority: <code>IN_USE</code>,\n                <code>ACTIVATING</code>, or <code>NOT_USED</code>.</p>"
+                    }
+                },
+                "distributionStatus": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityDistributionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution status of the certificate authority: <code>IN_PROGRESS</code>,\n                <code>COMPLETE</code>, <code>FAILED</code>, or <code>DELETING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a certificate authority (CA) for an Amazon EKS cluster, returned by\n                <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ListCertificateAuthorities.html\">\n               <code>ListCertificateAuthorities</code>\n            </a> and the certificate-authority write\n            operations.</p>"
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthoritySummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#CertificateAuthoritySummary"
+            }
+        },
+        "com.amazonaws.eks#CertificateAuthorityValidity": {
+            "type": "structure",
+            "members": {
+                "notBefore": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for the start of the certificate authority's\n            validity period.</p>"
+                    }
+                },
+                "notAfter": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix epoch timestamp in seconds for the end of the certificate authority's validity\n            period.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The validity period of a certificate authority's certificate.</p>"
             }
         },
         "com.amazonaws.eks#ClientException": {
@@ -4696,6 +5084,86 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#CreateCertificateAuthority": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#CreateCertificateAuthorityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#CreateCertificateAuthorityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Appends a successor certificate authority (CA) to your cluster, beginning the CA\n            rotation process.</p>\n         <p>A cluster certificate authority is the root of trust for your cluster's control plane.\n            It signs the certificates that secure communication between the Kubernetes API server and its\n            clients, and its public certificate is distributed to your cluster's trust bundle so that\n            worker nodes and clients can verify the API server's identity. Each cluster can have at\n            most two certificate authorities at a time: the outgoing CA that's currently signing (its\n                <code>signingStatus</code> is <code>IN_USE</code>) and one successor CA\n            (<code>signingStatus</code> of <code>NOT_USED</code>) that you can later activate to\n            complete the rotation.</p>\n         <p>Appending a successor CA adds its public certificate to the cluster's trust bundle so\n            that the cluster trusts both CAs simultaneously (the dual trust period), but it doesn't\n            begin signing certificates. Amazon EKS then distributes the successor CA to the Amazon Web Services managed\n            components in your cluster; you can track this through the CA's\n                <code>distributionStatus</code>. The successor CA can't be activated until its\n                <code>distributionStatus</code> is <code>COMPLETE</code>. To activate it as the\n            cluster's signer, use <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ActivateCertificateAuthority.html\">\n               <code>ActivateCertificateAuthority</code>\n            </a>. This is an asynchronous operation\n            that returns an <code>update</code> object. If you don't append a successor CA yourself,\n            Amazon EKS appends one automatically before the outgoing CA approaches expiration.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/certificate-authority-rotation.html\">Rotate the Amazon EKS\n                cluster certificate authority</a> in the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/clusters/{clusterName}/certificate-authorities",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#CreateCertificateAuthorityRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\nthe idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#CreateCertificateAuthorityResponse": {
+            "type": "structure",
+            "members": {
+                "update": {
+                    "target": "com.amazonaws.eks#Update",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the asynchronous update that adds the certificate authority to\n            the cluster's trust bundle.</p>"
+                    }
+                },
+                "certificateAuthority": {
+                    "target": "com.amazonaws.eks#CertificateAuthoritySummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about the certificate authority that was created, including its ID\n            and initial signing and distribution status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#CreateCluster": {
             "type": "operation",
             "input": {
@@ -5640,6 +6108,92 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#DeleteCertificateAuthority": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DeleteCertificateAuthorityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DeleteCertificateAuthorityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a certificate authority (CA) from your cluster.</p>\n         <p>Deleting a certificate authority removes its public certificate from the cluster's\n            trust bundle. You can't delete the certificate authority that's currently signing\n            certificates for the cluster (its <code>signingStatus</code> is <code>IN_USE</code>) — to\n            remove the outgoing CA, first activate the successor CA with <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ActivateCertificateAuthority.html\">\n               <code>ActivateCertificateAuthority</code>\n            </a>. Amazon EKS also protects a successor CA\n            from deletion in certain cases to keep a valid rotation path — for example, a successor\n            that Amazon EKS appended can't be deleted while it's the only successor on the cluster. This is\n            an asynchronous operation that returns an <code>update</code> object.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/clusters/{clusterName}/certificate-authorities/{certificateAuthorityId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DeleteCertificateAuthorityRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "certificateAuthorityId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the certificate authority to delete. You can't delete the certificate\n            authority that's currently signing certificates for the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\nthe idempotency of the request.</p>",
+                        "smithy.api#httpQuery": "clientRequestToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DeleteCertificateAuthorityResponse": {
+            "type": "structure",
+            "members": {
+                "update": {
+                    "target": "com.amazonaws.eks#Update",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the asynchronous update that removes the certificate authority\n            from the cluster's trust bundle.</p>"
+                    }
+                },
+                "certificateAuthority": {
+                    "target": "com.amazonaws.eks#CertificateAuthoritySummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about the certificate authority that is being deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#DeleteCluster": {
             "type": "operation",
             "input": {
@@ -6565,6 +7119,72 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.eks#DescribeCertificateAuthority": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DescribeCertificateAuthorityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DescribeCertificateAuthorityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns detailed information about a certificate authority (CA) in your cluster,\n            including its validity period, signing and distribution status, provenance, scheduled\n            auto-activation events, and public certificate data.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/clusters/{clusterName}/certificate-authorities/{certificateAuthorityId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DescribeCertificateAuthorityRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "certificateAuthorityId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the certificate authority to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#DescribeCertificateAuthorityResponse": {
+            "type": "structure",
+            "members": {
+                "certificateAuthority": {
+                    "target": "com.amazonaws.eks#CertificateAuthority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing detailed information about the certificate authority.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.eks#DescribeCluster": {
             "type": "operation",
             "input": {
@@ -7482,6 +8102,43 @@
                     "method": "GET",
                     "uri": "/clusters/{name}/updates/{updateId}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "CertificateAuthorityUpdateComplete": {
+                        "acceptors": [
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "update.status",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "update.status",
+                                        "expected": "Cancelled",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "update.status",
+                                        "expected": "Successful",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30
+                    }
                 }
             }
         },
@@ -9675,6 +10332,93 @@
                     "target": "com.amazonaws.eks#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListCapabilities</code> request. When the results of a <code>ListCapabilities</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#ListCertificateAuthorities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#ListCertificateAuthoritiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#ListCertificateAuthoritiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the certificate authorities (CAs) for your cluster. A cluster has at most two\n            certificate authorities: the outgoing CA that's currently signing and, during a rotation,\n            one successor CA.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/clusters/{clusterName}/certificate-authorities",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "certificateAuthorities",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.eks#ListCertificateAuthoritiesRequest": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.eks#CertificateAuthorityMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n            results, make another call with the returned <code>nextToken</code> value. If you don't\n            specify a value, the default is 100 results.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated request, where\n                <code>maxResults</code> was used and the results exceeded the value of that\n            parameter. Pagination continues from the end of the previous results that returned the\n                <code>nextToken</code> value. This value is null when there are no more results to\n            return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#ListCertificateAuthoritiesResponse": {
+            "type": "structure",
+            "members": {
+                "certificateAuthorities": {
+                    "target": "com.amazonaws.eks#CertificateAuthoritySummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of certificate authority summary objects, each containing basic information\n            about a certificate authority, including its ID, signing status, and distribution\n            status.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future\n                <code>ListCertificateAuthorities</code> request. When the results of a\n                <code>ListCertificateAuthorities</code> request exceed <code>maxResults</code>, you\n            can use this value to retrieve the next page of results. This value is null when there\n            are no more results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
             },
@@ -14185,6 +14929,30 @@
                     "traits": {
                         "smithy.api#enumValue": "KubeControllerManagerConfig"
                     }
+                },
+                "ACTIVE_CERTIFICATE_AUTHORITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ActiveCertificateAuthority"
+                    }
+                },
+                "TRUSTED_CERTIFICATE_AUTHORITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TrustedCertificateAuthorities"
+                    }
+                },
+                "CERTIFICATE_AUTHORITY_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CertificateAuthorityId"
+                    }
+                },
+                "SIGNING_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SigningStatus"
+                    }
                 }
             }
         },
@@ -14490,6 +15258,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ControlPlaneComponentConfigUpdate"
+                    }
+                },
+                "CERTIFICATE_AUTHORITY_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CertificateAuthorityUpdate"
                     }
                 }
             }

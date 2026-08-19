@@ -4169,6 +4169,22 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#LogDestinationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Destination type for log publishing.",
+                "smithy.api#enum": [
+                    {
+                        "name": "S3TABLE",
+                        "value": "s3table"
+                    },
+                    {
+                        "name": "CLOUDWATCH",
+                        "value": "cloudwatch"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.redshiftserverless#LogExport": {
             "type": "string",
             "traits": {
@@ -4390,6 +4406,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Glue Data Catalog associated with the namespace enabled with Amazon Redshift federated permissions.</p>"
+                    }
+                },
+                "s3TablePublishStatus": {
+                    "target": "com.amazonaws.redshiftserverless#S3TablePublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current Amazon S3 Tables log-publishing status for the namespace. Not returned when S3 Tables publishing has never been configured for the namespace.</p>"
                     }
                 }
             },
@@ -6359,6 +6381,112 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.redshiftserverless#S3TableAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Action to perform for S3 Table log publishing.",
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLE",
+                        "value": "Enable"
+                    },
+                    {
+                        "name": "DISABLE",
+                        "value": "Disable"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#S3TableGranularity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Granularity for S3 Table scoping in serverless.",
+                "smithy.api#enum": [
+                    {
+                        "name": "NAMESPACE",
+                        "value": "namespace"
+                    },
+                    {
+                        "name": "ACCOUNT",
+                        "value": "account"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#S3TableLastIngestionTimeMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "Map of system table name to the last ingestion time (ISO-8601) for that table."
+            }
+        },
+        "com.amazonaws.redshiftserverless#S3TableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A system-table view name to publish to S3 Tables (e.g. \"sys_query_history\"), or the\nkeyword \"all\" to publish every current and future system table.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(all|sys_[a-z0-9_]+)$"
+            }
+        },
+        "com.amazonaws.redshiftserverless#S3TableNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#S3TableName"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of system table names (or \"all\") to publish to S3 Tables. Sized to hold the full\nSYS_* universe (28+ today, grows as new views are onboarded) plus headroom.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#S3TablePublishStatus": {
+            "type": "structure",
+            "members": {
+                "s3Tables": {
+                    "target": "com.amazonaws.redshiftserverless#S3TableNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system tables currently being published.</p>"
+                    }
+                },
+                "s3TableNamespace": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the namespace in the S3 table bucket that holds the published tables.</p>"
+                    }
+                },
+                "s3TableGranularity": {
+                    "target": "com.amazonaws.redshiftserverless#S3TableGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope currently in effect. Values are <code>namespace</code> or <code>account</code>.</p>"
+                    }
+                },
+                "enabledAll": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> <code>true</code> when the namespace is enrolled in every current and future system table rather than an explicit list of tables.</p>"
+                    }
+                },
+                "lastIngestionTimes": {
+                    "target": "com.amazonaws.redshiftserverless#S3TableLastIngestionTimeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of system table name to the time that table last received data, as an ISO-8601 timestamp. A table that has not yet been ingested is absent from the map. Use it to judge data freshness.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the state of Amazon S3 Tables system-table log publishing for a namespace.</p>"
+            }
+        },
         "com.amazonaws.redshiftserverless#Schedule": {
             "type": "union",
             "members": {
@@ -7521,7 +7649,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a namespace with the specified settings. Unless required, you can't update multiple parameters in one request. For example, you must specify both <code>adminUsername</code> and <code>adminUserPassword</code> to update either field, but you can't update both <code>kmsKeyId</code> and <code>logExports</code> in a single request.</p>"
+                "smithy.api#documentation": "<p>Updates a namespace with the specified settings. Unless required, you can't update multiple parameters in one request. For example, you must specify both <code>adminUsername</code> and <code>adminUserPassword</code> to update either field, but you can't update both <code>kmsKeyId</code> and <code>logExports</code> in a single request.</p> <p>Similarly, an S3 Tables log-publishing update (a request where <code>logDestinationType</code> is <code>s3table</code>) cannot be combined with any other namespace configuration change and must be submitted as its own request.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#UpdateNamespaceRequest": {
@@ -7580,6 +7708,36 @@
                     "target": "com.amazonaws.redshiftserverless#KmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if <code>manageAdminPassword</code> is true.</p>"
+                    }
+                },
+                "logDestinationType": {
+                    "target": "com.amazonaws.redshiftserverless#LogDestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the log data. Valid values are <code>s3table</code> and <code>cloudwatch</code>.</p> <p>Set this to <code>s3table</code> to manage Amazon S3 Tables system-table publishing for the namespace.</p>"
+                    }
+                },
+                "s3TableAction": {
+                    "target": "com.amazonaws.redshiftserverless#S3TableAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable or disable Amazon S3 Tables publishing. Valid values are <code>Enable</code> and <code>Disable</code>, matched case-insensitively.</p> <p>When omitted, defaults to <code>Enable</code>. Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>"
+                    }
+                },
+                "s3TableNames": {
+                    "target": "com.amazonaws.redshiftserverless#S3TableNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system tables to publish (on enable) or to stop publishing (on disable). Each value is either a system table view name that begins with <code>sys_</code> or the keyword <code>all</code>.</p> <p>Omitting this parameter, passing an empty list, or including <code>all</code> each select every current and future system table. Each name must be 1-128 characters, and the list can contain up to 256 names.</p> <p>Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>"
+                    }
+                },
+                "s3TableKmsKeyId": {
+                    "target": "com.amazonaws.redshiftserverless#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Key Management Service key used to encrypt the published Amazon S3 Tables data. When omitted, the data is encrypted with SSE-S3 (Amazon S3 managed keys).</p> <p>Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>"
+                    }
+                },
+                "s3TableGranularity": {
+                    "target": "com.amazonaws.redshiftserverless#S3TableGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the Amazon S3 Tables destination. Valid values are <code>namespace</code> and <code>account</code>, matched case-insensitively. <code>namespace</code> scopes the published tables to this namespace; <code>account</code> scopes them to the Amazon Web Services account.</p> <p>Required when enabling. Omitting this parameter or passing a blank value fails with <code>ValidationException</code>. Valid only when <code>logDestinationType</code> is <code>s3table</code>.</p>"
                     }
                 }
             },

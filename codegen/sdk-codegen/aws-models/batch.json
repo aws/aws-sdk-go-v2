@@ -2083,6 +2083,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved.</p>"
                     }
+                },
+                "ecsSettings": {
+                    "target": "com.amazonaws.batch#EcsSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon ECS settings for the compute environment. These settings control CloudWatch\n   Container Insights collection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2654,6 +2660,32 @@
                 "smithy.api#documentation": "<p>An object that represents the details of a container that's part of a job.</p>"
             }
         },
+        "com.amazonaws.batch#ContainerInsights": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "ENHANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENHANCED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the CloudWatch Container Insights mode for the compute environment.</p>"
+            }
+        },
         "com.amazonaws.batch#ContainerOverrides": {
             "type": "structure",
             "members": {
@@ -3046,6 +3078,12 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved.</p>"
+                    }
+                },
+                "ecsSettings": {
+                    "target": "com.amazonaws.batch#EcsSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon ECS settings for the compute environment. These settings control CloudWatch\n      Container Insights collection for the compute environment.</p>"
                     }
                 }
             },
@@ -5277,6 +5315,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains overrides for the Amazon ECS task definition of a job.</p>"
+            }
+        },
+        "com.amazonaws.batch#EcsSettings": {
+            "type": "structure",
+            "members": {
+                "containerInsights": {
+                    "target": "com.amazonaws.batch#ContainerInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the CloudWatch Container Insights mode for the compute environment. Valid values\n   are:</p>\n         <dl>\n            <dt>ENABLED</dt>\n            <dd>\n               <p>Turns on standard Container Insights, which collects CPU, memory, disk, and network\n      utilization metrics for the compute environment.</p>\n            </dd>\n            <dt>ENHANCED</dt>\n            <dd>\n               <p>Turns on enhanced Container Insights, which collects the standard metrics along with\n      additional per-task observability metrics.</p>\n            </dd>\n            <dt>DISABLED</dt>\n            <dd>\n               <p>Turns off Container Insights for the compute environment.</p>\n            </dd>\n         </dl>\n         <p>If you don't specify a value, the default is <code>DISABLED</code>. For more information,\n   see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/cloudwatch-container-insights.html\">Container Insights</a> in the\n   <i>Batch User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon ECS settings for a compute environment, including the CloudWatch Container Insights\n   mode. Use this structure with <code>CreateComputeEnvironment</code> and\n   <code>UpdateComputeEnvironment</code>.</p>"
             }
         },
         "com.amazonaws.batch#EcsTaskDetails": {
@@ -11705,6 +11757,12 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved.</p>"
+                    }
+                },
+                "ecsSettings": {
+                    "target": "com.amazonaws.batch#EcsSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon ECS settings for the compute environment. These settings control CloudWatch\n      Container Insights collection for the compute environment.</p>"
                     }
                 }
             },
