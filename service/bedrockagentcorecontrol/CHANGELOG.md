@@ -1,3 +1,7 @@
+# v1.58.0 (2026-08-19)
+
+* **Feature**: AgentCore Memory now supports Flexible Namespaces
+
 # v1.57.0 (2026-08-17)
 
 * **Feature**: Adds implementations of third-party evaluators, both managed-as-a-service and as templates within custom evaluators.

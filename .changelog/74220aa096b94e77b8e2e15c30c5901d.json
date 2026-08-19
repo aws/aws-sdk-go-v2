@@ -1,8 +1,0 @@
-{
-    "id": "74220aa0-96b9-4e77-b8e2-e15c30c5901d",
-    "type": "feature",
-    "description": "AWS Batch now supports managing CloudWatch Container Insights on compute environments via CreateComputeEnvironment and UpdateComputeEnvironment.",
-    "modules": [
-        "service/batch"
-    ]
-}

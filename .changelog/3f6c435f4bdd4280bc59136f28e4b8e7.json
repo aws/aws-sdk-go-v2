@@ -1,8 +1,0 @@
-{
-    "id": "3f6c435f-4bdd-4280-bc59-136f28e4b8e7",
-    "type": "feature",
-    "description": "Amazon VPC Lattice now supports modification of private DNS options on Service Network VPC Associations",
-    "modules": [
-        "service/vpclattice"
-    ]
-}

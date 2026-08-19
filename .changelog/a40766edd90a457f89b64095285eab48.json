@@ -1,8 +1,0 @@
-{
-    "id": "a40766ed-d90a-457f-89b6-4095285eab48",
-    "type": "feature",
-    "description": "Adds support for EKS cluster certificate authorities (CA)",
-    "modules": [
-        "service/eks"
-    ]
-}

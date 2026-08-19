@@ -1,3 +1,7 @@
+# v1.104.0 (2026-08-19)
+
+* **Feature**: AWS Elemental MediaLive now supports video cropping and output positioning. Use cropRectangle and outputPositionRectangle to position the encoded video within the output frame, with the surrounding area filled with black.
+
 # v1.103.0 (2026-08-18)
 
 * **Feature**: AWS Elemental MediaLive now supports SCTE-35 marker passthrough without IDR frame insertion for CMAF Ingest, MediaPackage V2, and transport stream outputs.

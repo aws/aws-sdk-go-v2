@@ -1,3 +1,25 @@
+# Release (2026-08-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accountaccess`: [v1.1.0](service/accountaccess/CHANGELOG.md#v110-2026-08-19)
+  * **Feature**: Adds throttling exceptions to operation outputs that were previously inconsistent with other operations.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.69.0](service/batch/CHANGELOG.md#v1690-2026-08-19)
+  * **Feature**: AWS Batch now supports managing CloudWatch Container Insights on compute environments via CreateComputeEnvironment and UpdateComputeEnvironment.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.40.0](service/bedrockagentcore/CHANGELOG.md#v1400-2026-08-19)
+  * **Feature**: AgentCore Memory now supports Flexible Namespaces and Non-Conversational Payloads in CreateEvent API
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.58.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1580-2026-08-19)
+  * **Feature**: AgentCore Memory now supports Flexible Namespaces
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.92.0](service/eks/CHANGELOG.md#v1920-2026-08-19)
+  * **Feature**: Adds support for EKS cluster certificate authorities (CA)
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.104.0](service/medialive/CHANGELOG.md#v11040-2026-08-19)
+  * **Feature**: AWS Elemental MediaLive now supports video cropping and output positioning. Use cropRectangle and outputPositionRectangle to position the encoded video within the output frame, with the surrounding area filled with black.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.66.0](service/redshift/CHANGELOG.md#v1660-2026-08-19)
+  * **Feature**: Amazon Redshift enhanced System Table retention that allows customers to store their system table data directly in S3 Tables in customer's account instead of Redshift Managed Storage
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.39.0](service/redshiftserverless/CHANGELOG.md#v1390-2026-08-19)
+  * **Feature**: Amazon Redshift Enhanced System Table Retention that allows customers to store their system table data directly in S3 Tables in customer's account instead of Redshift Managed Storage
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.26.0](service/vpclattice/CHANGELOG.md#v1260-2026-08-19)
+  * **Feature**: Amazon VPC Lattice now supports modification of private DNS options on Service Network VPC Associations
+
 # Release (2026-08-18)
 
 ## Module Highlights

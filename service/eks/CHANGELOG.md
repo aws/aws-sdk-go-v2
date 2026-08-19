@@ -1,3 +1,7 @@
+# v1.92.0 (2026-08-19)
+
+* **Feature**: Adds support for EKS cluster certificate authorities (CA)
+
 # v1.91.1 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

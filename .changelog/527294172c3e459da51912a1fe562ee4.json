@@ -1,8 +1,0 @@
-{
-    "id": "52729417-2c3e-459d-a519-12a1fe562ee4",
-    "type": "feature",
-    "description": "AgentCore Memory now supports Flexible Namespaces and Non-Conversational Payloads in CreateEvent API",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

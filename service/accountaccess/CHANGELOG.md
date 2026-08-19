@@ -1,3 +1,7 @@
+# v1.1.0 (2026-08-19)
+
+* **Feature**: Adds throttling exceptions to operation outputs that were previously inconsistent with other operations.
+
 # v1.0.1 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

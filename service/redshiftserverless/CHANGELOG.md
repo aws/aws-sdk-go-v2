@@ -1,3 +1,7 @@
+# v1.39.0 (2026-08-19)
+
+* **Feature**: Amazon Redshift Enhanced System Table Retention that allows customers to store their system table data directly in S3 Tables in customer's account instead of Redshift Managed Storage
+
 # v1.38.7 (2026-08-14)
 
 * **Documentation**: Amazon Redshift now unlocks a locked admin user account and resets the failed-login counter when you update the admin password using the UpdateNamespace API. This option is available only when account lockout security is enabled.

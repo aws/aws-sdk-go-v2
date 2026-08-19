@@ -1,3 +1,7 @@
+# v1.26.0 (2026-08-19)
+
+* **Feature**: Amazon VPC Lattice now supports modification of private DNS options on Service Network VPC Associations
+
 # v1.25.7 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

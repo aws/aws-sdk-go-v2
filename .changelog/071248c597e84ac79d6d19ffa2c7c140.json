@@ -1,8 +1,0 @@
-{
-    "id": "071248c5-97e8-4ac7-9d6d-19ffa2c7c140",
-    "type": "feature",
-    "description": "AgentCore Memory now supports Flexible Namespaces",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

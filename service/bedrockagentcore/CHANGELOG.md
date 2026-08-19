@@ -1,3 +1,7 @@
+# v1.40.0 (2026-08-19)
+
+* **Feature**: AgentCore Memory now supports Flexible Namespaces and Non-Conversational Payloads in CreateEvent API
+
 # v1.39.0 (2026-08-14)
 
 * **Feature**: Add support for the Machine Payments Protocol (MPP) and x402 upto scheme payments protocol in Amazon Bedrock AgentCore Payments. Customers can now pay for MPP-gated resources and also pay services which requires upto scheme in x402
