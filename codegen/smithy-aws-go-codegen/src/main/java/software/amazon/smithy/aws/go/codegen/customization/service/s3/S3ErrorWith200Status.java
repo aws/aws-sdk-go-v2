@@ -140,7 +140,6 @@ public class S3ErrorWith200Status implements GoIntegration {
             "GetBucketVersioning",
             "GetBucketWebsite",
             "GetObjectLockConfiguration",
-            "GetPublicAccessBlock",
             "ListBuckets",
             "ListDirectoryBuckets",
             "PutBucketAcl",
