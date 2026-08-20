@@ -1827,6 +1827,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FARGATE_SPOT"
                     }
+                },
+                "ECS_MANAGED_INSTANCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS_MANAGED_INSTANCES"
+                    }
                 }
             }
         },
@@ -1957,6 +1963,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.batch#CapacityLimit"
+            }
+        },
+        "com.amazonaws.batch#CapacityReservationRequest": {
+            "type": "structure",
+            "members": {
+                "reservationGroupArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity reservation group to target.</p>"
+                    }
+                },
+                "reservationPreference": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity reservation preference. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RESERVATIONS_ONLY</code> — Use only capacity reservations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESERVATIONS_FIRST</code> — Prefer capacity reservations but fall back to\n     On-Demand if unavailable.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESERVATIONS_EXCLUDED</code> — Do not use capacity reservations.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity reservation configuration for Amazon ECS Managed Instances. Use this to target\n   On-Demand Capacity Reservations or Reserved Instances.</p>"
             }
         },
         "com.amazonaws.batch#ClientException": {
@@ -2138,7 +2164,7 @@
                     "target": "com.amazonaws.batch#CRType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The type of compute environment: <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>,\n   or <code>FARGATE_SPOT</code>. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html\">Compute environments</a> in the\n    <i>Batch User Guide</i>.</p>\n         <p> If you choose <code>SPOT</code>, you must also specify an Amazon EC2 Spot Fleet role with the\n    <code>spotIamFleetRole</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html\">Amazon EC2 spot fleet role</a> in the\n    <i>Batch User Guide</i>.</p>\n         <note>\n            <p>Multi-node parallel jobs aren't supported on Spot Instances.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The type of compute environment: <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>,\n   <code>FARGATE_SPOT</code>, or <code>ECS_MANAGED_INSTANCES</code>. For more information, see\n   <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html\">Compute\n    environments</a> in the <i>Batch User Guide</i>.</p>\n         <p> If you choose <code>SPOT</code>, you must also specify an Amazon EC2 Spot Fleet role with the\n    <code>spotIamFleetRole</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html\">Amazon EC2 spot fleet role</a> in the\n    <i>Batch User Guide</i>.</p>\n         <p>If you choose <code>ECS_MANAGED_INSTANCES</code>, you must also specify a\n   <code>managedInstancesProvider</code> configuration. To use Spot capacity, set\n   <code>capacityOptionType</code> to <code>SPOT</code> in the\n   <code>managedInstancesProvider.instanceLaunchTemplate</code> configuration. For more\n   information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html\">Amazon ECS Managed Instances compute\n    environments</a> in the <i>Batch User Guide</i>.</p>\n         <note>\n            <p>Multi-node parallel jobs aren't supported on Spot Instances or Amazon ECS Managed\n    Instances.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2248,6 +2274,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The scaling policy configuration for the compute environment.</p>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>\n         </note>"
                     }
+                },
+                "managedInstancesProvider": {
+                    "target": "com.amazonaws.batch#ManagedInstancesProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the Amazon ECS Managed Instances capacity provider. This parameter is\n   required when <code>computeResources.type</code> is <code>ECS_MANAGED_INSTANCES</code> and must\n   not be specified for other compute environment types.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html\">Amazon ECS\n   Managed Instances compute environments</a> in the\n   <i>Batch User Guide</i>.</p>"
+                    }
+                },
+                "capacityTags": {
+                    "target": "com.amazonaws.batch#TagrisTagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the Amazon ECS capacity provider and Amazon EC2 instances launched by the\n   compute environment. These tags are separate from the compute environment resource tags (the\n   top-level <code>tags</code> parameter). Use <code>capacityTags</code> for cost allocation and\n   organization of the underlying infrastructure resources.</p>\n         <p>This parameter is only valid for <code>ECS_MANAGED_INSTANCES</code> compute environments.\n   You must have the <code>batch:SetCapacityTags</code> permission on the\n   compute environment resource to use this parameter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2350,7 +2388,7 @@
                 "type": {
                     "target": "com.amazonaws.batch#CRType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of compute environment: <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>,\n   or <code>FARGATE_SPOT</code>. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html\">Compute environments</a> in the\n    <i>Batch User Guide</i>.</p>\n         <p> If you choose <code>SPOT</code>, you must also specify an Amazon EC2 Spot Fleet role with the\n    <code>spotIamFleetRole</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html\">Amazon EC2 spot fleet role</a> in the\n    <i>Batch User Guide</i>.</p>\n         <p>When updating a compute environment, changing the type of a compute environment requires an\n   infrastructure update of the compute environment. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute\n    environments</a> in the <i>Batch User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The type of compute environment: <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>,\n   <code>FARGATE_SPOT</code>, or <code>ECS_MANAGED_INSTANCES</code>. For more information, see\n   <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html\">Compute\n    environments</a> in the <i>Batch User Guide</i>.</p>\n         <p> If you choose <code>SPOT</code>, you must also specify an Amazon EC2 Spot Fleet role with the\n    <code>spotIamFleetRole</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html\">Amazon EC2 spot fleet role</a> in the\n    <i>Batch User Guide</i>.</p>\n         <p>When updating a compute environment, changing the type of a compute environment requires an\n   infrastructure update of the compute environment. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html\">Updating compute\n    environments</a> in the <i>Batch User Guide</i>.</p>\n         <p>You cannot change the type to or from <code>ECS_MANAGED_INSTANCES</code>.</p>"
                     }
                 },
                 "imageId": {
@@ -2363,6 +2401,18 @@
                     "target": "com.amazonaws.batch#ComputeScalingPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The scaling policy configuration for the compute environment.</p>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it.</p>\n         </note>"
+                    }
+                },
+                "managedInstancesProvider": {
+                    "target": "com.amazonaws.batch#UpdateManagedInstancesProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated configuration for the Amazon ECS Managed Instances capacity provider. This parameter\n   is only valid when the compute environment type is <code>ECS_MANAGED_INSTANCES</code>. You\n   cannot change <code>capacityOptionType</code> or <code>fipsEnabled</code> on update.</p>"
+                    }
+                },
+                "capacityTags": {
+                    "target": "com.amazonaws.batch#TagrisTagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated tags to apply to the Amazon ECS capacity provider and Amazon EC2 instances. This\n   parameter is only valid for <code>ECS_MANAGED_INSTANCES</code> compute environments. You must\n   have the <code>batch:SetCapacityTags</code> permission on the compute environment resource to\n   use this parameter.</p>"
                     }
                 }
             },
@@ -3010,6 +3060,121 @@
                             "computeEnvironmentName": "M4Spot",
                             "computeEnvironmentArn": "arn:aws:batch:us-east-1:012345678910:compute-environment/M4Spot"
                         }
+                    },
+                    {
+                        "title": "To create an ECS Managed Instances compute environment with capacity reservations",
+                        "documentation": "This example creates an ECS Managed Instances compute environment that targets On-Demand Capacity Reservations for predictable capacity.",
+                        "input": {
+                            "computeEnvironmentName": "my-reserved-managed-instances-ce",
+                            "state": "ENABLED",
+                            "type": "MANAGED",
+                            "computeResources": {
+                                "type": "ECS_MANAGED_INSTANCES",
+                                "maxvCpus": 512,
+                                "managedInstancesProvider": {
+                                    "infrastructureRoleArn": "arn:aws:iam::123456789012:role/ecsInfrastructureRole",
+                                    "instanceLaunchTemplate": {
+                                        "ec2InstanceProfileArn": "arn:aws:iam::123456789012:instance-profile/ecsInstanceProfile",
+                                        "networkConfiguration": {
+                                            "subnets": [
+                                                "subnet-abcde012",
+                                                "subnet-bcde012a"
+                                            ],
+                                            "securityGroups": [
+                                                "sg-abcde012"
+                                            ]
+                                        },
+                                        "instanceRequirements": {
+                                            "allowedInstanceTypes": [
+                                                "m5.xlarge",
+                                                "m5.2xlarge"
+                                            ]
+                                        },
+                                        "capacityReservations": {
+                                            "reservationGroupArn": "arn:aws:ec2:us-east-1:123456789012:capacity-reservation-group/my-reservation-group",
+                                            "reservationPreference": "RESERVATIONS_FIRST"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "output": {
+                            "computeEnvironmentName": "my-reserved-managed-instances-ce",
+                            "computeEnvironmentArn": "arn:aws:batch:us-east-1:123456789012:compute-environment/my-reserved-managed-instances-ce"
+                        }
+                    },
+                    {
+                        "title": "To create an ECS Managed Instances compute environment",
+                        "documentation": "This example creates a managed compute environment that uses ECS Managed Instances.",
+                        "input": {
+                            "computeEnvironmentName": "my-managed-instances-ce",
+                            "state": "ENABLED",
+                            "type": "MANAGED",
+                            "computeResources": {
+                                "type": "ECS_MANAGED_INSTANCES",
+                                "maxvCpus": 256,
+                                "managedInstancesProvider": {
+                                    "infrastructureRoleArn": "arn:aws:iam::123456789012:role/ecsInfrastructureRole",
+                                    "instanceLaunchTemplate": {
+                                        "ec2InstanceProfileArn": "arn:aws:iam::123456789012:instance-profile/ecsInstanceProfile",
+                                        "networkConfiguration": {
+                                            "subnets": [
+                                                "subnet-abcde012",
+                                                "subnet-bcde012a"
+                                            ],
+                                            "securityGroups": [
+                                                "sg-abcde012"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "output": {
+                            "computeEnvironmentName": "my-managed-instances-ce",
+                            "computeEnvironmentArn": "arn:aws:batch:us-east-1:123456789012:compute-environment/my-managed-instances-ce"
+                        }
+                    },
+                    {
+                        "title": "To create an ECS Managed Instances Spot compute environment",
+                        "documentation": "This example creates a Spot-backed ECS Managed Instances compute environment constrained to specific instance types.",
+                        "input": {
+                            "computeEnvironmentName": "my-spot-managed-instances-ce",
+                            "state": "ENABLED",
+                            "type": "MANAGED",
+                            "computeResources": {
+                                "type": "ECS_MANAGED_INSTANCES",
+                                "maxvCpus": 1000,
+                                "managedInstancesProvider": {
+                                    "infrastructureRoleArn": "arn:aws:iam::123456789012:role/ecsInfrastructureRole",
+                                    "instanceLaunchTemplate": {
+                                        "ec2InstanceProfileArn": "arn:aws:iam::123456789012:instance-profile/ecsInstanceProfile",
+                                        "networkConfiguration": {
+                                            "subnets": [
+                                                "subnet-abcde012",
+                                                "subnet-bcde012a"
+                                            ],
+                                            "securityGroups": [
+                                                "sg-abcde012"
+                                            ]
+                                        },
+                                        "instanceRequirements": {
+                                            "allowedInstanceTypes": [
+                                                "m5.large",
+                                                "m5.xlarge",
+                                                "m6i.large",
+                                                "m6i.xlarge"
+                                            ]
+                                        },
+                                        "capacityOptionType": "SPOT"
+                                    }
+                                }
+                            }
+                        },
+                        "output": {
+                            "computeEnvironmentName": "my-spot-managed-instances-ce",
+                            "computeEnvironmentArn": "arn:aws:batch:us-east-1:123456789012:compute-environment/my-spot-managed-instances-ce"
+                        }
                     }
                 ],
                 "smithy.api#http": {
@@ -3253,6 +3418,25 @@
                         }
                     },
                     {
+                        "title": "To create a job queue with an ECS Managed Instances compute environment",
+                        "documentation": "This example creates a job queue called ManagedInstancesQueue that uses an ECS Managed Instances compute environment.",
+                        "input": {
+                            "priority": 10,
+                            "state": "ENABLED",
+                            "computeEnvironmentOrder": [
+                                {
+                                    "computeEnvironment": "my-managed-instances-ce",
+                                    "order": 1
+                                }
+                            ],
+                            "jobQueueName": "ManagedInstancesQueue"
+                        },
+                        "output": {
+                            "jobQueueName": "ManagedInstancesQueue",
+                            "jobQueueArn": "arn:aws:batch:us-east-1:123456789012:job-queue/ManagedInstancesQueue"
+                        }
+                    },
+                    {
                         "title": "To create a job queue with multiple compute environments",
                         "documentation": "This example creates a job queue called HighPriority that uses the C4OnDemand compute environment with an order of 1 and the M4Spot compute environment with an order of 2.",
                         "input": {
@@ -3273,6 +3457,29 @@
                         "output": {
                             "jobQueueName": "HighPriority",
                             "jobQueueArn": "arn:aws:batch:us-east-1:012345678910:job-queue/HighPriority"
+                        }
+                    },
+                    {
+                        "title": "To create a job queue with On-Demand and Spot ECS Managed Instances compute environments",
+                        "documentation": "This example creates a job queue that uses both On-Demand and Spot ECS Managed Instances compute environments. On-Demand environments must be ordered before Spot environments.",
+                        "input": {
+                            "priority": 5,
+                            "state": "ENABLED",
+                            "computeEnvironmentOrder": [
+                                {
+                                    "computeEnvironment": "my-managed-instances-ce",
+                                    "order": 1
+                                },
+                                {
+                                    "computeEnvironment": "my-spot-managed-instances-ce",
+                                    "order": 2
+                                }
+                            ],
+                            "jobQueueName": "ManagedInstancesMixedQueue"
+                        },
+                        "output": {
+                            "jobQueueName": "ManagedInstancesMixedQueue",
+                            "jobQueueArn": "arn:aws:batch:us-east-1:123456789012:job-queue/ManagedInstancesMixedQueue"
                         }
                     }
                 ],
@@ -5397,7 +5604,7 @@
                 "runtimePlatform": {
                     "target": "com.amazonaws.batch#RuntimePlatform",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that represents the compute environment architecture for Batch jobs on\n   Fargate.</p>"
+                        "smithy.api#documentation": "<p>An object that represents the compute environment architecture for Batch jobs on\n   Fargate or Amazon ECS Managed Instances. Contains the operating system family and CPU architecture\n   of the task.</p>"
                     }
                 },
                 "volumes": {
@@ -5410,6 +5617,12 @@
                     "target": "com.amazonaws.batch#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines whether execute command functionality is turned on for this task. If <code>true</code>, execute\n            command functionality is turned on all the containers in the task.</p>"
+                    }
+                },
+                "networkMode": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network mode configured for the task. This field is populated for jobs running on Amazon ECS\n   Managed Instances (<code>MANAGED_INSTANCES</code> platform capability) and always returns\n   <code>host</code>.</p>"
                     }
                 }
             },
@@ -5467,13 +5680,13 @@
                 "networkConfiguration": {
                     "target": "com.amazonaws.batch#NetworkConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network configuration for jobs that are running on Fargate resources. Jobs that are\n   running on Amazon EC2 resources must not specify this parameter.</p>"
+                        "smithy.api#documentation": "<p>The network configuration for jobs that are running on Fargate resources. Jobs that are\n   running on Amazon EC2 resources or Amazon ECS Managed Instances must not specify this parameter.</p>"
                     }
                 },
                 "runtimePlatform": {
                     "target": "com.amazonaws.batch#RuntimePlatform",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that represents the compute environment architecture for Batch jobs on\n   Fargate.</p>"
+                        "smithy.api#documentation": "<p>An object that represents the compute environment architecture for Batch jobs on\n   Fargate or Amazon ECS Managed Instances. Use this to specify the operating system family\n   (<code>operatingSystemFamily</code>) and CPU architecture\n   (<code>cpuArchitecture</code>).</p>\n         <p>For Amazon ECS Managed Instances, the valid value for <code>operatingSystemFamily</code> is\n   <code>LINUX</code> (default). The valid values for <code>cpuArchitecture</code> are\n   <code>X86_64</code> and <code>ARM64</code>.</p>"
                     }
                 },
                 "volumes": {
@@ -5486,6 +5699,12 @@
                     "target": "com.amazonaws.batch#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines whether execute command functionality is turned on for this task. If <code>true</code>, execute\n            command functionality is turned on all the containers in the task.</p>"
+                    }
+                },
+                "networkMode": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network mode to use for the task. Valid values: <code>host</code>. When not specified,\n   the default is <code>host</code>.</p>\n         <p>With <code>host</code> mode, the container shares the host instance's network stack\n   directly. When running tasks that use the <code>host</code> network mode, do not run containers\n   using the root user (UID 0). Running as root grants unrestricted access to host resources and\n   increases the attack surface.</p>\n         <p>This parameter only applies to jobs running on Amazon ECS Managed Instances\n   (<code>MANAGED_INSTANCES</code> platform capability). It cannot be specified for Fargate or\n   Amazon EC2 platform job definitions.</p>"
                     }
                 }
             },
@@ -6790,6 +7009,162 @@
                 }
             }
         },
+        "com.amazonaws.batch#InfrastructureOptimization": {
+            "type": "structure",
+            "members": {
+                "scaleInAfter": {
+                    "target": "com.amazonaws.batch#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds an instance can remain idle before it is terminated. Valid\n   values are <code>-1</code> or <code>0</code> to <code>3600</code>. Use <code>-1</code> as a\n   special value to disable scale-in (instances are never terminated for being idle). If not\n   specified, a default value applies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The infrastructure optimization configuration for an Amazon ECS Managed Instances capacity\n   provider. Specifies the idle-instance scale-in behavior.</p>"
+            }
+        },
+        "com.amazonaws.batch#InstanceLaunchTemplate": {
+            "type": "structure",
+            "members": {
+                "ec2InstanceProfileArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EC2 instance profile for the managed instances. The instance profile\n   must use the <code>AmazonECSInstanceRolePolicyForManagedInstances</code> managed policy with a\n   trust policy for <code>ec2.amazonaws.com</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "networkConfiguration": {
+                    "target": "com.amazonaws.batch#ManagedInstancesNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The network configuration for the managed instances. Specifies the VPC subnets and security\n   groups where instances are launched.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instanceRequirements": {
+                    "target": "com.amazonaws.batch#InstanceRequirementsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type requirements for the capacity provider. Use this to constrain which Amazon EC2\n   instance types Amazon ECS can launch. If not specified, all available instance types are\n   eligible.</p>"
+                    }
+                },
+                "capacityOptionType": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity pricing model for the managed instances. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ON_DEMAND</code> (default) — On-Demand pricing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SPOT</code> — Spot Instances, which can provide significant cost savings\n     for fault-tolerant workloads.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.batch#ManagedInstancesStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage configuration for the managed instances. Configures the root EBS volume size.\n   If not specified, the service uses the default EBS volume size for the instance type.</p>"
+                    }
+                },
+                "monitoring": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of CloudWatch monitoring for the managed instances. Valid values are\n   <code>BASIC</code> and <code>DETAILED</code>.</p>"
+                    }
+                },
+                "fipsEnabled": {
+                    "target": "com.amazonaws.batch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether FIPS 140-2 validated cryptographic modules are enabled on the managed\n   instances. Not available in all Regions.</p>"
+                    }
+                },
+                "capacityReservations": {
+                    "target": "com.amazonaws.batch#CapacityReservationRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity reservation configuration for the managed instances. Use this to target\n   On-Demand Capacity Reservations or Reserved Instances for predictable capacity and cost\n   optimization.</p>"
+                    }
+                },
+                "instanceMetadataTagsPropagation": {
+                    "target": "com.amazonaws.batch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether instance tags are accessible from the instance metadata service (IMDS).\n   If not specified, instance tags are not accessible from IMDS.</p>"
+                    }
+                },
+                "localStorageConfiguration": {
+                    "target": "com.amazonaws.batch#ManagedInstancesLocalStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The local storage configuration for the managed instances. If not specified, instance store\n   volumes are not available to containers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instance launch configuration for an Amazon ECS Managed Instances capacity provider.\n   Specifies the instance profile, networking, instance selection constraints, capacity pricing\n   model, storage, and monitoring settings.</p>"
+            }
+        },
+        "com.amazonaws.batch#InstanceLaunchTemplateUpdate": {
+            "type": "structure",
+            "members": {
+                "ec2InstanceProfileArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated Amazon Resource Name (ARN) of the Amazon EC2 instance profile for the managed instances.</p>"
+                    }
+                },
+                "networkConfiguration": {
+                    "target": "com.amazonaws.batch#ManagedInstancesNetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated network configuration for the managed instances.</p>"
+                    }
+                },
+                "instanceRequirements": {
+                    "target": "com.amazonaws.batch#InstanceRequirementsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated instance type requirements for the capacity provider.</p>"
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.batch#ManagedInstancesStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated storage configuration for the managed instances.</p>"
+                    }
+                },
+                "monitoring": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated monitoring level. Valid values are <code>BASIC</code> and\n   <code>DETAILED</code>.</p>"
+                    }
+                },
+                "capacityReservations": {
+                    "target": "com.amazonaws.batch#CapacityReservationRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated capacity reservation configuration.</p>"
+                    }
+                },
+                "instanceMetadataTagsPropagation": {
+                    "target": "com.amazonaws.batch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether instance tags are accessible from the instance metadata service\n   (IMDS).</p>"
+                    }
+                },
+                "localStorageConfiguration": {
+                    "target": "com.amazonaws.batch#ManagedInstancesLocalStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated local storage configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instance launch configuration for updating an Amazon ECS Managed Instances capacity\n   provider. You cannot change <code>capacityOptionType</code> or <code>fipsEnabled</code> after\n   the compute environment is created.</p>"
+            }
+        },
+        "com.amazonaws.batch#InstanceRequirementsRequest": {
+            "type": "structure",
+            "members": {
+                "allowedInstanceTypes": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of specific instance types or instance families that Amazon ECS can launch (for example,\n   <code>m5.large</code> or <code>g5</code>). When specified, only these instance types are\n   used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instance type requirements for the Amazon ECS Managed Instances capacity provider. Use this\n   to specify which Amazon EC2 instance types or instance families Amazon ECS can launch.</p>"
+            }
+        },
         "com.amazonaws.batch#Integer": {
             "type": "integer"
         },
@@ -6969,7 +7344,7 @@
                 "platformCapabilities": {
                     "target": "com.amazonaws.batch#PlatformCapabilityList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform capabilities required by the job definition. If no value is specified, it\n   defaults to <code>EC2</code>. Jobs run on Fargate resources specify\n   <code>FARGATE</code>.</p>"
+                        "smithy.api#documentation": "<p>The platform capabilities required by the job definition. If no value is specified, it\n   defaults to <code>EC2</code>. Jobs run on Fargate resources specify\n   <code>FARGATE</code>. Jobs run on Amazon ECS Managed Instances specify\n   <code>MANAGED_INSTANCES</code>.</p>"
                     }
                 },
                 "ecsProperties": {
@@ -7206,7 +7581,7 @@
                 "platformCapabilities": {
                     "target": "com.amazonaws.batch#PlatformCapabilityList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform capabilities required by the job definition. If no value is specified, it\n   defaults to <code>EC2</code>. Jobs run on Fargate resources specify\n   <code>FARGATE</code>.</p>"
+                        "smithy.api#documentation": "<p>The platform capabilities required by the job definition. If no value is specified, it\n   defaults to <code>EC2</code>. Jobs run on Fargate resources specify\n   <code>FARGATE</code>. Jobs run on Amazon ECS Managed Instances specify\n   <code>MANAGED_INSTANCES</code>.</p>"
                     }
                 },
                 "eksProperties": {
@@ -7386,6 +7761,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SAGEMAKER_TRAINING"
+                    }
+                },
+                "ECS_MANAGED_INSTANCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS_MANAGED_INSTANCES"
                     }
                 }
             }
@@ -8759,6 +9140,94 @@
         "com.amazonaws.batch#Long": {
             "type": "long"
         },
+        "com.amazonaws.batch#ManagedInstancesLocalStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "useLocalStorage": {
+                    "target": "com.amazonaws.batch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether instance store volumes (local NVMe SSDs) are available to containers.\n   When enabled, containers can use the instance store for high-performance temporary\n   storage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The local storage configuration for Amazon ECS Managed Instances.</p>"
+            }
+        },
+        "com.amazonaws.batch#ManagedInstancesNetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "subnets": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The VPC subnets where managed instances are launched. If your subnets don't provide public\n   IP addresses, they must have a NAT gateway for outbound internet access.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "securityGroups": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The VPC security groups to associate with the managed instances.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The network configuration for Amazon ECS Managed Instances. Specifies the VPC subnets and\n   security groups where instances are launched.</p>"
+            }
+        },
+        "com.amazonaws.batch#ManagedInstancesProvider": {
+            "type": "structure",
+            "members": {
+                "propagateTags": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether tags on the capacity provider are propagated to the Amazon EC2 instances it\n   launches. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPACITY_PROVIDER</code> — Propagates tags to instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> (default) — Does not propagate tags to instances.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "infrastructureRoleArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that Amazon ECS assumes to manage Amazon EC2 instances on your behalf.\n   This role must have a trust policy for <code>ecs.amazonaws.com</code>. You must have the\n   <code>iam:PassRole</code> permission for this role with the condition\n   <code>iam:PassedToService: ecs.amazonaws.com</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instanceLaunchTemplate": {
+                    "target": "com.amazonaws.batch#InstanceLaunchTemplate",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The instance launch configuration for the Amazon ECS Managed Instances capacity provider.\n   Contains networking, instance profile, instance requirements, capacity type, storage, and\n   monitoring configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "infrastructureOptimization": {
+                    "target": "com.amazonaws.batch#InfrastructureOptimization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The infrastructure optimization configuration for the capacity provider. Specifies the\n   idle-instance scale-in behavior.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an Amazon ECS Managed Instances capacity provider. This object is required\n   when creating a compute environment with <code>computeResources.type</code> set to\n   <code>ECS_MANAGED_INSTANCES</code>.</p>"
+            }
+        },
+        "com.amazonaws.batch#ManagedInstancesStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "storageSizeGiB": {
+                    "target": "com.amazonaws.batch#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the root EBS volume in GiB for the managed instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The storage configuration for Amazon ECS Managed Instances.</p>"
+            }
+        },
         "com.amazonaws.batch#MountPoint": {
             "type": "structure",
             "members": {
@@ -9078,6 +9547,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FARGATE"
+                    }
+                },
+                "MANAGED_INSTANCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_INSTANCES"
                     }
                 }
             }
@@ -9524,6 +9999,52 @@
                         }
                     },
                     {
+                        "title": "To register a GPU job definition on ECS Managed Instances",
+                        "documentation": "This example registers a job definition that requests GPU resources on ECS Managed Instances.",
+                        "input": {
+                            "jobDefinitionName": "my-gpu-managed-instances-job-def",
+                            "type": "container",
+                            "platformCapabilities": [
+                                "MANAGED_INSTANCES"
+                            ],
+                            "ecsProperties": {
+                                "taskProperties": [
+                                    {
+                                        "containers": [
+                                            {
+                                                "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-gpu-image:latest",
+                                                "name": "main",
+                                                "command": [
+                                                    "nvidia-smi"
+                                                ],
+                                                "resourceRequirements": [
+                                                    {
+                                                        "type": "VCPU",
+                                                        "value": "4"
+                                                    },
+                                                    {
+                                                        "type": "MEMORY",
+                                                        "value": "16384"
+                                                    },
+                                                    {
+                                                        "type": "GPU",
+                                                        "value": "1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole"
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "jobDefinitionName": "my-gpu-managed-instances-job-def",
+                            "jobDefinitionArn": "arn:aws:batch:us-east-1:123456789012:job-definition/my-gpu-managed-instances-job-def:1",
+                            "revision": 1
+                        }
+                    },
+                    {
                         "title": "To register a job definition",
                         "documentation": "This example registers a job definition for a simple container job.",
                         "input": {
@@ -9550,6 +10071,112 @@
                         "output": {
                             "jobDefinitionName": "sleep10",
                             "jobDefinitionArn": "arn:aws:batch:us-east-1:012345678910:job-definition/sleep10:1",
+                            "revision": 1
+                        }
+                    },
+                    {
+                        "title": "To register a job definition on ECS Managed Instances",
+                        "documentation": "This example registers a job definition that runs on ECS Managed Instances using ecsProperties with the MANAGED_INSTANCES platform capability.",
+                        "input": {
+                            "jobDefinitionName": "my-managed-instances-job-def",
+                            "type": "container",
+                            "platformCapabilities": [
+                                "MANAGED_INSTANCES"
+                            ],
+                            "ecsProperties": {
+                                "taskProperties": [
+                                    {
+                                        "containers": [
+                                            {
+                                                "image": "public.ecr.aws/amazonlinux/amazonlinux:2023",
+                                                "name": "main",
+                                                "command": [
+                                                    "echo",
+                                                    "hello managed instances"
+                                                ],
+                                                "resourceRequirements": [
+                                                    {
+                                                        "type": "VCPU",
+                                                        "value": "1"
+                                                    },
+                                                    {
+                                                        "type": "MEMORY",
+                                                        "value": "1024"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole"
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "jobDefinitionName": "my-managed-instances-job-def",
+                            "jobDefinitionArn": "arn:aws:batch:us-east-1:123456789012:job-definition/my-managed-instances-job-def:1",
+                            "revision": 1
+                        }
+                    },
+                    {
+                        "title": "To register a multi-container job definition on ECS Managed Instances",
+                        "documentation": "This example registers a job definition with a main container and a sidecar logging container on ECS Managed Instances.",
+                        "input": {
+                            "jobDefinitionName": "my-sidecar-managed-instances-job-def",
+                            "type": "container",
+                            "platformCapabilities": [
+                                "MANAGED_INSTANCES"
+                            ],
+                            "ecsProperties": {
+                                "taskProperties": [
+                                    {
+                                        "containers": [
+                                            {
+                                                "image": "public.ecr.aws/amazonlinux/amazonlinux:2023",
+                                                "name": "main",
+                                                "command": [
+                                                    "echo",
+                                                    "processing data"
+                                                ],
+                                                "essential": true,
+                                                "resourceRequirements": [
+                                                    {
+                                                        "type": "VCPU",
+                                                        "value": "2"
+                                                    },
+                                                    {
+                                                        "type": "MEMORY",
+                                                        "value": "4096"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "image": "public.ecr.aws/amazonlinux/amazonlinux:2023",
+                                                "name": "sidecar",
+                                                "command": [
+                                                    "echo",
+                                                    "logging sidecar"
+                                                ],
+                                                "essential": false,
+                                                "resourceRequirements": [
+                                                    {
+                                                        "type": "VCPU",
+                                                        "value": "1"
+                                                    },
+                                                    {
+                                                        "type": "MEMORY",
+                                                        "value": "512"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole"
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "jobDefinitionName": "my-sidecar-managed-instances-job-def",
+                            "jobDefinitionArn": "arn:aws:batch:us-east-1:123456789012:job-definition/my-sidecar-managed-instances-job-def:1",
                             "revision": 1
                         }
                     }
@@ -9631,7 +10258,7 @@
                 "platformCapabilities": {
                     "target": "com.amazonaws.batch#PlatformCapabilityList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform capabilities required by the job definition. If no value is specified, it\n      defaults to <code>EC2</code>. To run the job on Fargate resources, specify\n        <code>FARGATE</code>.</p>\n         <note>\n            <p>If the job runs on Amazon EKS resources, then you must not specify\n          <code>platformCapabilities</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The platform capabilities required by the job definition. If no value is specified, it\n      defaults to <code>EC2</code>. To run the job on Fargate resources, specify\n      <code>FARGATE</code>. To run the job on Amazon ECS Managed Instances, specify\n      <code>MANAGED_INSTANCES</code>.</p>\n         <p>Jobs with the <code>MANAGED_INSTANCES</code> platform capability must use\n      <code>ecsProperties</code> (not <code>containerProperties</code>) and do not support\n      multi-node parallel jobs.</p>\n         <note>\n            <p>If the job runs on Amazon EKS resources, then you must not specify\n          <code>platformCapabilities</code>.</p>\n         </note>"
                     }
                 },
                 "eksProperties": {
@@ -12007,6 +12634,38 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.batch#UpdateManagedInstancesProviderConfiguration": {
+            "type": "structure",
+            "members": {
+                "propagateTags": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether tags on the capacity provider are propagated to the Amazon EC2 instances it\n   launches. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPACITY_PROVIDER</code> — Propagates tags to instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> — Does not propagate tags to instances.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "infrastructureRoleArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated Amazon Resource Name (ARN) of the IAM role that Amazon ECS assumes to manage Amazon EC2 instances on\n   your behalf.</p>"
+                    }
+                },
+                "instanceLaunchTemplate": {
+                    "target": "com.amazonaws.batch#InstanceLaunchTemplateUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated instance launch configuration for the Amazon ECS Managed Instances capacity\n   provider.</p>"
+                    }
+                },
+                "infrastructureOptimization": {
+                    "target": "com.amazonaws.batch#InfrastructureOptimization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated infrastructure optimization configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for updating an Amazon ECS Managed Instances capacity provider. Used in\n   <code>UpdateComputeEnvironment</code> requests. The <code>capacityOptionType</code> and\n   <code>fipsEnabled</code> fields cannot be changed on update.</p>"
             }
         },
         "com.amazonaws.batch#UpdatePolicy": {

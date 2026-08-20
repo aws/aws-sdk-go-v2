@@ -4082,6 +4082,16 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sso::[0-9]{12}:application/(sso)?ins-[a-zA-Z0-9.-]{16}/apl-[a-zA-Z0-9.-]{16}$"
+            }
+        },
         "com.amazonaws.sagemaker#ApprovalDescription": {
             "type": "string",
             "traits": {
@@ -18887,6 +18897,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.sagemaker#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services KMS key used to encrypt the data at rest associated with the MLflow App. If you don't specify a value, the MLflow App is not encrypted with a customer-managed key.</p>"
+                    }
+                },
                 "ModelRegistrationMode": {
                     "target": "com.amazonaws.sagemaker#ModelRegistrationMode",
                     "traits": {
@@ -20420,11 +20436,17 @@
                         "smithy.api#documentation": "<p>Configuration settings for the SageMaker Partner AI App.</p>"
                     }
                 },
+                "IdcConfig": {
+                    "target": "com.amazonaws.sagemaker#IdcConfigInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services IAM Identity Center configuration for the SageMaker Partner AI App. Specify this parameter when <code>AuthType</code> is <code>IDC</code>. Apps that use <code>IAM</code> authorization don't use this parameter.</p>"
+                    }
+                },
                 "AuthType": {
                     "target": "com.amazonaws.sagemaker#PartnerAppAuthType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The authorization type that users use to access the SageMaker Partner AI App.</p>",
+                        "smithy.api#documentation": "<p>The authorization type that users use to access the SageMaker Partner AI App. Valid values:</p> <ul> <li> <p> <code>IAM</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM identity.</p> </li> <li> <p> <code>IDC</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM Identity Center identity. Specify the Identity Center instance to use in <code>IdcConfig</code>.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -22942,7 +22964,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2
+                    "max": 3
                 }
             }
         },
@@ -31532,6 +31554,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an IAM role in your account that the MLflow App uses to access the artifact store in Amazon S3.</p>"
                     }
                 },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.sagemaker#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services KMS key used to encrypt the data at rest associated with the MLflow App. This field is absent if the MLflow App is not encrypted with a customer-managed key.</p>"
+                    }
+                },
                 "Status": {
                     "target": "com.amazonaws.sagemaker#MlflowAppStatus",
                     "traits": {
@@ -33495,7 +33523,7 @@
                 "AuthType": {
                     "target": "com.amazonaws.sagemaker#PartnerAppAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authorization type that users use to access the SageMaker Partner AI App.</p>"
+                        "smithy.api#documentation": "<p>The authorization type that users use to access the SageMaker Partner AI App. Valid values:</p> <ul> <li> <p> <code>IAM</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM identity.</p> </li> <li> <p> <code>IDC</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM Identity Center identity.</p> </li> </ul>"
                     }
                 },
                 "EnableIamSessionBasedIdentity": {
@@ -33526,6 +33554,12 @@
                     "target": "com.amazonaws.sagemaker#AvailableUpgrade",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of available minor version upgrades for the SageMaker Partner AI App. The key is the semantic version number, and the value is a list of release notes for that version. A null value indicates no upgrades are available.</p>"
+                    }
+                },
+                "IdcConfig": {
+                    "target": "com.amazonaws.sagemaker#IdcConfigOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the Amazon Web Services IAM Identity Center configuration for the SageMaker Partner AI App, including the Identity Center instance and the Identity Center application that SageMaker creates for the app. The service returns this field for apps that use <code>IDC</code> authorization.</p>"
                     }
                 }
             },
@@ -43320,6 +43354,42 @@
                 "smithy.api#documentation": "<p>Use this parameter to specify a supported global condition key that is added to the IAM policy.</p>"
             }
         },
+        "com.amazonaws.sagemaker#IdcConfigInput": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.sagemaker#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services IAM Identity Center instance that the SageMaker Partner AI App uses to authenticate users.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Amazon Web Services IAM Identity Center configuration to use for a SageMaker Partner AI App that uses <code>IDC</code> authorization.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#IdcConfigOutput": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.sagemaker#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services IAM Identity Center instance that the SageMaker Partner AI App uses to authenticate users.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.sagemaker#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services IAM Identity Center application that SageMaker creates for the SageMaker Partner AI App.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Amazon Web Services IAM Identity Center configuration of a SageMaker Partner AI App that uses <code>IDC</code> authorization.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#IdempotencyToken": {
             "type": "string",
             "traits": {
@@ -45503,6 +45573,16 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#InstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sso:::instance/(sso)?ins-[a-zA-Z0-9.-]{16}$"
             }
         },
         "com.amazonaws.sagemaker#InstanceCount": {
@@ -64313,7 +64393,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2
+                    "max": 3
                 }
             }
         },
@@ -65632,6 +65712,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IAM"
+                    }
+                },
+                "IDC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDC"
                     }
                 }
             }
@@ -90267,6 +90353,18 @@
                     "target": "com.amazonaws.sagemaker#PartnerAppConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration settings for the SageMaker Partner AI App.</p>"
+                    }
+                },
+                "IdcConfig": {
+                    "target": "com.amazonaws.sagemaker#IdcConfigInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services IAM Identity Center configuration for the SageMaker Partner AI App. Specify this parameter when <code>AuthType</code> is <code>IDC</code>. Apps that use <code>IAM</code> authorization don't use this parameter.</p>"
+                    }
+                },
+                "AuthType": {
+                    "target": "com.amazonaws.sagemaker#PartnerAppAuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization type that users use to access the SageMaker Partner AI App. Use this parameter to migrate an existing SageMaker Partner AI App from <code>IAM</code> authorization to <code>IDC</code> authorization. Valid values:</p> <ul> <li> <p> <code>IAM</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM identity.</p> </li> <li> <p> <code>IDC</code>: Users access the SageMaker Partner AI App with their Amazon Web Services IAM Identity Center identity. Specify the Identity Center instance to use in <code>IdcConfig</code>.</p> </li> </ul>"
                     }
                 },
                 "EnableIamSessionBasedIdentity": {

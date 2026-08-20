@@ -2650,6 +2650,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A Neptune global database execution block.</p>"
                     }
+                },
+                "rdsSwitchoverReadReplicaConfig": {
+                    "target": "com.amazonaws.arcregionswitch#RdsSwitchoverReadReplicaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon RDS switchover read replica execution block.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2759,6 +2765,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NeptuneGlobalDatabase"
+                    }
+                },
+                "RDS_SWITCHOVER_READ_REPLICA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RdsSwitchoverReadReplica"
                     }
                 }
             }
@@ -5083,6 +5095,77 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for promoting an Amazon RDS read replica to a standalone database instance during a Region switch.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#RdsSwitchoverReadReplicaConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The timeout value specified for the configuration.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "crossAccountRole": {
+                    "target": "com.amazonaws.arcregionswitch#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross-account role for the configuration.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID (secret key) for the configuration.</p>"
+                    }
+                },
+                "dbInstanceArnMap": {
+                    "target": "com.amazonaws.arcregionswitch#RdsDbInstanceArnMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of database instance ARNs for each Region in the plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ungraceful": {
+                    "target": "com.amazonaws.arcregionswitch#RdsUngraceful",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ungraceful execution settings for the configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for switching over an Amazon RDS read replica to become the new primary database instance during a Region switch.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#RdsUngraceful": {
+            "type": "structure",
+            "members": {
+                "ungraceful": {
+                    "target": "com.amazonaws.arcregionswitch#RdsUngracefulBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ungraceful behavior to perform if switching to ungraceful execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ungraceful execution settings for an Amazon RDS switchover read replica execution block.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#RdsUngracefulBehavior": {
+            "type": "enum",
+            "members": {
+                "PROMOTE_READ_REPLICA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "promoteReadReplica"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ungraceful behavior for an Amazon RDS switchover read replica, that is, promote the read replica to a standalone primary.</p>"
             }
         },
         "com.amazonaws.arcregionswitch#RecoveryApproach": {

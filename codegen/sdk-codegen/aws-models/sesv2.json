@@ -925,6 +925,20 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.sesv2#ConfigurationOverrides": {
+            "type": "structure",
+            "members": {
+                "Tracking": {
+                    "target": "com.amazonaws.sesv2#TrackingConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that overrides the open and click tracking settings that would otherwise\n            apply to the message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that overrides settings for a single email sending request. An override\n            applies only to the message or messages in the request that contains it. It doesn't\n            change your account-level settings, and it doesn't change the configuration set that the\n            request uses.</p>\n         <p>A setting that you don't override keeps the value that would otherwise apply to the\n            message. Depending on the setting, that value comes from the configuration set that the\n            message uses, from your account-level settings, or from the Amazon SES default.</p>"
+            }
+        },
         "com.amazonaws.sesv2#ConfigurationSetName": {
             "type": "string",
             "traits": {
@@ -9964,12 +9978,12 @@
                 "NextPlan": {
                     "target": "com.amazonaws.sesv2#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing plan that will become active at the start of the next billing cycle, if a\n            scheduled change has been requested. This field is empty when no scheduled change is\n            pending.</p>"
+                        "smithy.api#documentation": "<p>The pricing plan that will become active at the start of the next monthly cycle, if a\n            scheduled change has been requested. This field is empty when no scheduled change is\n            pending.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The pricing attributes that apply to your Amazon SES account, including the currently active\n            pricing plan and any scheduled change for the next billing cycle.</p>"
+                "smithy.api#documentation": "<p>The pricing attributes that apply to your Amazon SES account, including the currently active\n            pricing plan and any scheduled change.</p>"
             }
         },
         "com.amazonaws.sesv2#PricingPlan": {
@@ -10173,7 +10187,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Set the pricing plan for your Amazon SES account. Use this operation to choose a billing plan\n            that packages multiple Amazon SES features at a single rate.</p>",
+                "smithy.api#documentation": "<p>Set the pricing plan for your Amazon SES account.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/account/pricing-attributes",
@@ -10187,7 +10201,7 @@
                 "Plan": {
                     "target": "com.amazonaws.sesv2#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing plan to apply to your Amazon SES account. Can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NONE</code> – No pricing plan is applied; billing follows per-feature\n                    pricing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ESSENTIALS</code> – Baseline Amazon SES capabilities and select premium\n                    features.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PRO</code> – Includes everything in <code>ESSENTIALS</code>, plus\n                    additional premium features for growing senders.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code> – Includes everything in <code>PRO</code>, plus\n                    features intended for large-scale senders.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The pricing plan to apply to your Amazon SES account. For details about each plan, see <a href=\"http://aws.amazon.com/ses/pricing/\">Amazon SES Pricing</a>. Can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NONE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ESSENTIALS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PRO</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12289,6 +12303,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the tenant through which this bulk email will be sent.</p>\n         <note>\n            <p>\n                The email sending operation will only succeed if all referenced resources\n                (identities, configuration sets, and templates) are associated with this tenant.\n            </p>\n         </note>"
                     }
+                },
+                "ConfigurationOverrides": {
+                    "target": "com.amazonaws.sesv2#ConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that overrides, for the messages in this request only, settings that would\n            otherwise apply to them. The overrides apply to every message in the request. Each\n            setting that you don't override keeps the value that already applies.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12516,6 +12536,12 @@
                     "target": "com.amazonaws.sesv2#ListManagementOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>An object used to specify a list or topic to which an email belongs, which will be\n            used when a contact chooses to unsubscribe.</p>"
+                    }
+                },
+                "ConfigurationOverrides": {
+                    "target": "com.amazonaws.sesv2#ConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that overrides, for this message only, settings that would otherwise apply to\n            it. Each setting that you don't override keeps the value that already applies.</p>"
                     }
                 }
             },
@@ -15822,6 +15848,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sesv2#Topic"
+            }
+        },
+        "com.amazonaws.sesv2#TrackingConfigurationOverrides": {
+            "type": "structure",
+            "members": {
+                "OpenTrackingEnabled": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon SES tracks when the recipient opens this message. Can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – Amazon SES tracks opens for this message, even when\n                    your account-level and configuration set settings don't enable open\n                    tracking.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – Amazon SES doesn't track opens for this message, even\n                    when your account-level or configuration set settings enable open tracking. Amazon SES\n                    doesn't add the tracking image to the message.</p>\n            </li>\n         </ul>\n         <p>If you don't specify this value, Amazon SES uses the open tracking setting that would\n            otherwise apply to the message.</p>"
+                    }
+                },
+                "ClickTrackingEnabled": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon SES tracks when the recipient clicks a link in this message. Can be\n            one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – Amazon SES tracks clicks for this message, even when\n                    your account-level and configuration set settings don't enable click\n                    tracking.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – Amazon SES doesn't track clicks for this message, even\n                    when your account-level or configuration set settings enable click tracking.\n                    Amazon SES doesn't rewrite the links in the message.</p>\n            </li>\n         </ul>\n         <p>If you don't specify this value, Amazon SES uses the click tracking setting that would\n            otherwise apply to the message.</p>\n         <note>\n            <p>Enabling open or click tracking with an override doesn't create an event\n                destination. Amazon SES records the resulting open and click events in VDM, where you can\n                review them using VDM metrics and Message Insights. To also receive these events at\n                a destination that you own, the configuration set that the message uses must have an\n                event destination that publishes open and click events.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that overrides, for a single email sending request, the engagement tracking\n            settings that would otherwise apply. Use these overrides to turn open tracking or click\n            tracking on or off for an individual message, for example to suppress tracking in a\n            transactional message that you send from an account or a configuration set that has\n            tracking enabled.</p>\n         <p>Without an override, engagement tracking is determined by your account-level\n            <code>EngagementMetrics</code> setting, which you configure using the\n                <code>PutAccountVdmAttributes</code> operation, by the\n                <code>EngagementMetrics</code> setting of the configuration set that the message\n            uses, which you configure using the <code>PutConfigurationSetVdmOptions</code> operation,\n            and by whether that configuration set has an event destination whose\n                <code>MatchingEventTypes</code> include the <code>OPEN</code> or <code>CLICK</code>\n            event types.</p>\n         <p>For more information about tracking open and click events, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/event-publishing.html\">Amazon SES\n                Developer Guide</a>.</p>"
             }
         },
         "com.amazonaws.sesv2#TrackingOptions": {
