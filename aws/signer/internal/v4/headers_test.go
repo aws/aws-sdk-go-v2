@@ -23,6 +23,34 @@ func TestAllowedQueryHoisting(t *testing.T) {
 			Header:      "X-SomeOtherHeader",
 			ExpectHoist: false,
 		},
+		"checksum SHA256": {
+			Header:      "X-Amz-Checksum-Sha256",
+			ExpectHoist: false,
+		},
+		"checksum CRC32": {
+			Header:      "X-Amz-Checksum-Crc32",
+			ExpectHoist: false,
+		},
+		"checksum CRC32C": {
+			Header:      "X-Amz-Checksum-Crc32c",
+			ExpectHoist: false,
+		},
+		"checksum CRC64NVME": {
+			Header:      "X-Amz-Checksum-Crc64nvme",
+			ExpectHoist: false,
+		},
+		"checksum SHA1": {
+			Header:      "X-Amz-Checksum-Sha1",
+			ExpectHoist: false,
+		},
+		"checksum SHA512": {
+			Header:      "X-Amz-Checksum-Sha512",
+			ExpectHoist: false,
+		},
+		"checksum future algorithm": {
+			Header:      "X-Amz-Checksum-Somefuturealgorithm",
+			ExpectHoist: false,
+		},
 	}
 
 	for name, c := range cases {

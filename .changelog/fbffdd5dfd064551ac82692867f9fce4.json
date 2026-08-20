@@ -1,0 +1,8 @@
+{
+    "id": "fbffdd5d-fd06-4551-ac82-692867f9fce4",
+    "type": "bugfix",
+    "description": "Make x-amz-checksum-* headers on presigner always show up as headers",
+    "modules": [
+        "."
+    ]
+}
