@@ -31213,6 +31213,18 @@ func awsAwsjson11_serializeDocumentIamPolicyConstraints(v *types.IamPolicyConstr
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIdcConfigInput(v *types.IdcConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceArn != nil {
+		ok := object.Key("InstanceArn")
+		ok.String(*v.InstanceArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIdentityProviderOAuthSetting(v *types.IdentityProviderOAuthSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -41184,6 +41196,11 @@ func awsAwsjson11_serializeOpDocumentCreateMlflowAppInput(v *CreateMlflowAppInpu
 		}
 	}
 
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
 	if len(v.ModelRegistrationMode) > 0 {
 		ok := object.Key("ModelRegistrationMode")
 		ok.String(string(v.ModelRegistrationMode))
@@ -42079,6 +42096,13 @@ func awsAwsjson11_serializeOpDocumentCreatePartnerAppInput(v *CreatePartnerAppIn
 	if v.ExecutionRoleArn != nil {
 		ok := object.Key("ExecutionRoleArn")
 		ok.String(*v.ExecutionRoleArn)
+	}
+
+	if v.IdcConfig != nil {
+		ok := object.Key("IdcConfig")
+		if err := awsAwsjson11_serializeDocumentIdcConfigInput(v.IdcConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KmsKeyId != nil {
@@ -51419,6 +51443,11 @@ func awsAwsjson11_serializeOpDocumentUpdatePartnerAppInput(v *UpdatePartnerAppIn
 		ok.String(*v.Arn)
 	}
 
+	if len(v.AuthType) > 0 {
+		ok := object.Key("AuthType")
+		ok.String(string(v.AuthType))
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -51432,6 +51461,13 @@ func awsAwsjson11_serializeOpDocumentUpdatePartnerAppInput(v *UpdatePartnerAppIn
 	if v.EnableIamSessionBasedIdentity != nil {
 		ok := object.Key("EnableIamSessionBasedIdentity")
 		ok.Boolean(*v.EnableIamSessionBasedIdentity)
+	}
+
+	if v.IdcConfig != nil {
+		ok := object.Key("IdcConfig")
+		if err := awsAwsjson11_serializeDocumentIdcConfigInput(v.IdcConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MaintenanceConfig != nil {

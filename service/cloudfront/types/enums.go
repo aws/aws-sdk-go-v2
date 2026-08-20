@@ -646,7 +646,8 @@ type OriginAccessControlSigningProtocols string
 
 // Enum values for OriginAccessControlSigningProtocols
 const (
-	OriginAccessControlSigningProtocolsSigv4 OriginAccessControlSigningProtocols = "sigv4"
+	OriginAccessControlSigningProtocolsSigv4  OriginAccessControlSigningProtocols = "sigv4"
+	OriginAccessControlSigningProtocolsSigv4a OriginAccessControlSigningProtocols = "sigv4a"
 )
 
 // Values returns all known values for OriginAccessControlSigningProtocols. Note
@@ -657,6 +658,7 @@ const (
 func (OriginAccessControlSigningProtocols) Values() []OriginAccessControlSigningProtocols {
 	return []OriginAccessControlSigningProtocols{
 		"sigv4",
+		"sigv4a",
 	}
 }
 

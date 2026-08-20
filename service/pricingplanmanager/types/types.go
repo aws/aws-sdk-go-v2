@@ -102,7 +102,7 @@ type Subscription struct {
 	// This member is required.
 	PlanTier *string
 
-	// The ARNs of the AWS resources covered by this subscription.
+	// The ARNs of the resources covered by this subscription.
 	//
 	// This member is required.
 	ResourceArns []string
@@ -243,7 +243,7 @@ type SubscriptionSummary struct {
 	// This member is required.
 	PlanTier *string
 
-	// The ARNs of the AWS resources covered by this subscription.
+	// The ARNs of the resources covered by this subscription.
 	//
 	// This member is required.
 	ResourceArns []string

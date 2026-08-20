@@ -117,6 +117,26 @@ type DeleteLagOutput struct {
 	// The ID of the Amazon Web Services account that owns the LAG.
 	OwnerAccount *string
 
+	// The total number of inbound IPv4 route prefixes you can allocate across the
+	// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and
+	// support hosted connections.
+	PrefixPoolSizeIpv4 *int32
+
+	// The total number of inbound IPv6 route prefixes you can allocate across the
+	// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and
+	// support hosted connections.
+	PrefixPoolSizeIpv6 *int32
+
+	// The number of inbound IPv4 route prefixes in the LAG prefix pool not yet
+	// allocated to a virtual interface. Not applicable to LAGs that are interconnects
+	// and support hosted connections.
+	PrefixPoolUnallocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes in the LAG prefix pool not yet
+	// allocated to a virtual interface. Not applicable to LAGs that are interconnects
+	// and support hosted connections.
+	PrefixPoolUnallocatedCountIpv6 *int32
+
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 

@@ -8341,6 +8341,13 @@ func awsRestjson1_serializeOpDocumentSendBulkEmailInput(v *SendBulkEmailInput, v
 		}
 	}
 
+	if v.ConfigurationOverrides != nil {
+		ok := object.Key("ConfigurationOverrides")
+		if err := awsRestjson1_serializeDocumentConfigurationOverrides(v.ConfigurationOverrides, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ConfigurationSetName != nil {
 		ok := object.Key("ConfigurationSetName")
 		ok.String(*v.ConfigurationSetName)
@@ -8563,6 +8570,13 @@ func awsRestjson1_serializeOpHttpBindingsSendEmailInput(v *SendEmailInput, encod
 func awsRestjson1_serializeOpDocumentSendEmailInput(v *SendEmailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ConfigurationOverrides != nil {
+		ok := object.Key("ConfigurationOverrides")
+		if err := awsRestjson1_serializeDocumentConfigurationOverrides(v.ConfigurationOverrides, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ConfigurationSetName != nil {
 		ok := object.Key("ConfigurationSetName")
@@ -9993,6 +10007,20 @@ func awsRestjson1_serializeDocumentCloudWatchDimensionConfigurations(v []types.C
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConfigurationOverrides(v *types.ConfigurationOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tracking != nil {
+		ok := object.Key("Tracking")
+		if err := awsRestjson1_serializeDocumentTrackingConfigurationOverrides(v.Tracking, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContactListDestination(v *types.ContactListDestination, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11272,6 +11300,23 @@ func awsRestjson1_serializeDocumentTopics(v []types.Topic, value smithyjson.Valu
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrackingConfigurationOverrides(v *types.TrackingConfigurationOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ClickTrackingEnabled) > 0 {
+		ok := object.Key("ClickTrackingEnabled")
+		ok.String(string(v.ClickTrackingEnabled))
+	}
+
+	if len(v.OpenTrackingEnabled) > 0 {
+		ok := object.Key("OpenTrackingEnabled")
+		ok.String(string(v.OpenTrackingEnabled))
+	}
+
 	return nil
 }
 

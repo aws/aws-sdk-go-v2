@@ -949,6 +949,11 @@ func validateComputeResource(v *types.ComputeResource) error {
 			invalidParams.AddNested("Ec2Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ManagedInstancesProvider != nil {
+		if err := validateManagedInstancesProvider(v.ManagedInstancesProvider); err != nil {
+			invalidParams.AddNested("ManagedInstancesProvider", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -964,6 +969,11 @@ func validateComputeResourceUpdate(v *types.ComputeResourceUpdate) error {
 	if v.Ec2Configuration != nil {
 		if err := validateEc2ConfigurationList(v.Ec2Configuration); err != nil {
 			invalidParams.AddNested("Ec2Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManagedInstancesProvider != nil {
+		if err := validateUpdateManagedInstancesProviderConfiguration(v.ManagedInstancesProvider); err != nil {
+			invalidParams.AddNested("ManagedInstancesProvider", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1578,6 +1588,45 @@ func validateImagePullSecrets(v []types.ImagePullSecret) error {
 	}
 }
 
+func validateInstanceLaunchTemplate(v *types.InstanceLaunchTemplate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceLaunchTemplate"}
+	if v.Ec2InstanceProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ec2InstanceProfileArn"))
+	}
+	if v.NetworkConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkConfiguration"))
+	} else if v.NetworkConfiguration != nil {
+		if err := validateManagedInstancesNetworkConfiguration(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstanceLaunchTemplateUpdate(v *types.InstanceLaunchTemplateUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceLaunchTemplateUpdate"}
+	if v.NetworkConfiguration != nil {
+		if err := validateManagedInstancesNetworkConfiguration(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateJobStateTimeLimitAction(v *types.JobStateTimeLimitAction) error {
 	if v == nil {
 		return nil
@@ -1720,6 +1769,46 @@ func validateLogConfiguration(v *types.LogConfiguration) error {
 	if v.SecretOptions != nil {
 		if err := validateSecretList(v.SecretOptions); err != nil {
 			invalidParams.AddNested("SecretOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedInstancesNetworkConfiguration(v *types.ManagedInstancesNetworkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedInstancesNetworkConfiguration"}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if v.SecurityGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroups"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedInstancesProvider(v *types.ManagedInstancesProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedInstancesProvider"}
+	if v.InfrastructureRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureRoleArn"))
+	}
+	if v.InstanceLaunchTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceLaunchTemplate"))
+	} else if v.InstanceLaunchTemplate != nil {
+		if err := validateInstanceLaunchTemplate(v.InstanceLaunchTemplate); err != nil {
+			invalidParams.AddNested("InstanceLaunchTemplate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2292,6 +2381,23 @@ func validateUlimits(v []types.Ulimit) error {
 	for i := range v {
 		if err := validateUlimit(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateManagedInstancesProviderConfiguration(v *types.UpdateManagedInstancesProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateManagedInstancesProviderConfiguration"}
+	if v.InstanceLaunchTemplate != nil {
+		if err := validateInstanceLaunchTemplateUpdate(v.InstanceLaunchTemplate); err != nil {
+			invalidParams.AddNested("InstanceLaunchTemplate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

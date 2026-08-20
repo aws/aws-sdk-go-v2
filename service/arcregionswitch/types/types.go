@@ -1423,6 +1423,7 @@ func (v *ExecutionApprovalConfiguration) Deserialize(d smithy.ShapeDeserializer)
 //	ExecutionBlockConfigurationMemberParallelConfig
 //	ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig
 //	ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig
+//	ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig
 //	ExecutionBlockConfigurationMemberRegionSwitchPlanConfig
 //	ExecutionBlockConfigurationMemberRoute53HealthCheckConfig
 type ExecutionBlockConfiguration interface {
@@ -1689,6 +1690,24 @@ func (v *ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig) Serialize
 	s.CloseStruct()
 }
 func (v *ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An Amazon RDS switchover read replica execution block.
+type ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig struct {
+	Value RdsSwitchoverReadReplicaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig) isExecutionBlockConfiguration() {
+}
+func (v *ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -2819,6 +2838,111 @@ func (v *RdsPromoteReadReplicaConfiguration) Deserialize(d smithy.ShapeDeseriali
 		case schemas.RdsPromoteReadReplicaConfiguration_timeoutMinutes:
 			v.TimeoutMinutes = new(int32)
 			return d.ReadInt32(schemas.RdsPromoteReadReplicaConfiguration_timeoutMinutes, v.TimeoutMinutes)
+		}
+		return nil
+	})
+}
+
+// Configuration for switching over an Amazon RDS read replica to become the new
+// primary database instance during a Region switch.
+type RdsSwitchoverReadReplicaConfiguration struct {
+
+	// A map of database instance ARNs for each Region in the plan.
+	//
+	// This member is required.
+	DbInstanceArnMap map[string]string
+
+	// The cross-account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	// The ungraceful execution settings for the configuration.
+	Ungraceful *RdsUngraceful
+
+	noSmithyDocumentSerde
+}
+
+func (v *RdsSwitchoverReadReplicaConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RdsSwitchoverReadReplicaConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RdsSwitchoverReadReplicaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountRole != nil {
+		s.WriteString(schemas.RdsSwitchoverReadReplicaConfiguration_crossAccountRole, *v.CrossAccountRole)
+	}
+	serializeRdsDbInstanceArnMap(s, schemas.RdsSwitchoverReadReplicaConfiguration_dbInstanceArnMap, v.DbInstanceArnMap)
+	if v.ExternalId != nil {
+		s.WriteString(schemas.RdsSwitchoverReadReplicaConfiguration_externalId, *v.ExternalId)
+	}
+	if v.TimeoutMinutes != nil {
+		s.WriteInt32(schemas.RdsSwitchoverReadReplicaConfiguration_timeoutMinutes, *v.TimeoutMinutes)
+	}
+	if v.Ungraceful != nil {
+		s.WriteStruct(schemas.RdsSwitchoverReadReplicaConfiguration_ungraceful)
+		v.Ungraceful.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RdsSwitchoverReadReplicaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RdsSwitchoverReadReplicaConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RdsSwitchoverReadReplicaConfiguration_crossAccountRole:
+			v.CrossAccountRole = new(string)
+			return d.ReadString(schemas.RdsSwitchoverReadReplicaConfiguration_crossAccountRole, v.CrossAccountRole)
+		case schemas.RdsSwitchoverReadReplicaConfiguration_dbInstanceArnMap:
+			return deserializeRdsDbInstanceArnMap(d, schemas.RdsSwitchoverReadReplicaConfiguration_dbInstanceArnMap, &v.DbInstanceArnMap)
+		case schemas.RdsSwitchoverReadReplicaConfiguration_externalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.RdsSwitchoverReadReplicaConfiguration_externalId, v.ExternalId)
+		case schemas.RdsSwitchoverReadReplicaConfiguration_timeoutMinutes:
+			v.TimeoutMinutes = new(int32)
+			return d.ReadInt32(schemas.RdsSwitchoverReadReplicaConfiguration_timeoutMinutes, v.TimeoutMinutes)
+		case schemas.RdsSwitchoverReadReplicaConfiguration_ungraceful:
+			v.Ungraceful = &RdsUngraceful{}
+			return v.Ungraceful.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The ungraceful execution settings for an Amazon RDS switchover read replica
+// execution block.
+type RdsUngraceful struct {
+
+	// The ungraceful behavior to perform if switching to ungraceful execution.
+	Ungraceful RdsUngracefulBehavior
+
+	noSmithyDocumentSerde
+}
+
+func (v *RdsUngraceful) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RdsUngraceful)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RdsUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ungraceful != "" {
+		s.WriteString(schemas.RdsUngraceful_ungraceful, string(v.Ungraceful))
+	}
+}
+func (v *RdsUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RdsUngraceful, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RdsUngraceful_ungraceful:
+			var ev string
+			if err := d.ReadString(schemas.RdsUngraceful_ungraceful, &ev); err != nil {
+				return err
+			}
+			v.Ungraceful = RdsUngracefulBehavior(ev)
+			return nil
 		}
 		return nil
 	})

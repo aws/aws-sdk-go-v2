@@ -4024,6 +4024,16 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterface(v *types.NewPrivat
 		ok.Integer(*v.Mtu)
 	}
 
+	if v.PrefixPoolAllocatedCountIpv4 != nil {
+		ok := object.Key("prefixPoolAllocatedCountIpv4")
+		ok.Integer(*v.PrefixPoolAllocatedCountIpv4)
+	}
+
+	if v.PrefixPoolAllocatedCountIpv6 != nil {
+		ok := object.Key("prefixPoolAllocatedCountIpv6")
+		ok.Integer(*v.PrefixPoolAllocatedCountIpv6)
+	}
+
 	if v.RateLimit != nil {
 		ok := object.Key("rateLimit")
 		ok.String(*v.RateLimit)
@@ -4297,6 +4307,16 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterface(v *types.NewTransi
 	if v.Mtu != nil {
 		ok := object.Key("mtu")
 		ok.Integer(*v.Mtu)
+	}
+
+	if v.PrefixPoolAllocatedCountIpv4 != nil {
+		ok := object.Key("prefixPoolAllocatedCountIpv4")
+		ok.Integer(*v.PrefixPoolAllocatedCountIpv4)
+	}
+
+	if v.PrefixPoolAllocatedCountIpv6 != nil {
+		ok := object.Key("prefixPoolAllocatedCountIpv6")
+		ok.Integer(*v.PrefixPoolAllocatedCountIpv6)
 	}
 
 	if v.RateLimit != nil {
@@ -5896,6 +5916,16 @@ func awsAwsjson11_serializeOpDocumentUpdateVirtualInterfaceAttributesInput(v *Up
 	if v.Mtu != nil {
 		ok := object.Key("mtu")
 		ok.Integer(*v.Mtu)
+	}
+
+	if v.PrefixPoolAllocatedCountIpv4 != nil {
+		ok := object.Key("prefixPoolAllocatedCountIpv4")
+		ok.Integer(*v.PrefixPoolAllocatedCountIpv4)
+	}
+
+	if v.PrefixPoolAllocatedCountIpv6 != nil {
+		ok := object.Key("prefixPoolAllocatedCountIpv6")
+		ok.Integer(*v.PrefixPoolAllocatedCountIpv6)
 	}
 
 	if v.RateLimit != nil {

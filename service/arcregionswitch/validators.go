@@ -899,6 +899,11 @@ func validateExecutionBlockConfiguration(v types.ExecutionBlockConfiguration) er
 			invalidParams.AddNested("[rdsPromoteReadReplicaConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig:
+		if err := validateRdsSwitchoverReadReplicaConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[rdsSwitchoverReadReplicaConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ExecutionBlockConfigurationMemberRegionSwitchPlanConfig:
 		if err := validateRegionSwitchPlanConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[regionSwitchPlanConfig]", err.(smithy.InvalidParamsError))
@@ -1090,6 +1095,21 @@ func validateRdsPromoteReadReplicaConfiguration(v *types.RdsPromoteReadReplicaCo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RdsPromoteReadReplicaConfiguration"}
+	if v.DbInstanceArnMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbInstanceArnMap"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRdsSwitchoverReadReplicaConfiguration(v *types.RdsSwitchoverReadReplicaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RdsSwitchoverReadReplicaConfiguration"}
 	if v.DbInstanceArnMap == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbInstanceArnMap"))
 	}

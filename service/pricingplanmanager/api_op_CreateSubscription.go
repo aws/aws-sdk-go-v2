@@ -47,21 +47,22 @@ type CreateSubscriptionInput struct {
 	// This member is required.
 	PlanTier *string
 
-	// The ARNs of the AWS resources to include in the subscription. Specify one or
-	// more supported resources.
+	// The ARNs of the resources to include in the subscription. Specify one or more
+	// supported resources.
 	//
 	// For subscriptions in the CloudFront plan family, the resources must include
-	// exactly one Amazon CloudFront distribution and exactly one AWS WAF web ACL. You
-	// can also include other supported resources, such as Amazon Route 53 hosted zones
-	// and CloudFront KeyValueStores.
+	// exactly one Amazon CloudFront distribution and exactly one WAF web ACL. You can
+	// also include other supported resources, such as Amazon Route 53 hosted zones and
+	// CloudFront KeyValueStores.
 	//
 	// This member is required.
 	ResourceArns []string
 
 	// Determines whether the subscription requires explicit approval before billing
 	// starts. Set to MANUAL to require a separate ApprovePaidSubscription call, or
-	// IMMEDIATE to activate the subscription right away. Defaults to IMMEDIATE if not
-	// specified.
+	// IMMEDIATE to activate the subscription right away. For paid tier plans, this
+	// defaults to MANUAL if not specified. For the FREE plan tier, only IMMEDIATE is
+	// supported, and it is the default.
 	ApprovalMode types.ApprovalMode
 
 	// A unique, case-sensitive identifier that you provide to ensure that the request

@@ -48,6 +48,13 @@ type DescribePartnerAppOutput struct {
 	Arn *string
 
 	// The authorization type that users use to access the SageMaker Partner AI App.
+	// Valid values:
+	//
+	//   - IAM : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM identity.
+	//
+	//   - IDC : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM Identity Center identity.
 	AuthType types.PartnerAppAuthType
 
 	// A map of available minor version upgrades for the SageMaker Partner AI App. The
@@ -80,6 +87,12 @@ type DescribePartnerAppOutput struct {
 
 	// The ARN of the IAM role associated with the SageMaker Partner AI App.
 	ExecutionRoleArn *string
+
+	// Contains the Amazon Web Services IAM Identity Center configuration for the
+	// SageMaker Partner AI App, including the Identity Center instance and the
+	// Identity Center application that SageMaker creates for the app. The service
+	// returns this field for apps that use IDC authorization.
+	IdcConfig *types.IdcConfigOutput
 
 	// The Amazon Web Services KMS customer managed key used to encrypt the data at
 	// rest associated with SageMaker Partner AI Apps.

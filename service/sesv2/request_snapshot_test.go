@@ -3605,6 +3605,12 @@ func TestCheckRequestSnapshot_SendBulkEmail(t *testing.T) {
 		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
 		EndpointId:           ptr.String("__EndpointId__"),
 		TenantName:           ptr.String("__TenantName__"),
+		ConfigurationOverrides: &types.ConfigurationOverrides{
+			Tracking: &types.TrackingConfigurationOverrides{
+				OpenTrackingEnabled:  types.FeatureStatus("ENABLED"),
+				ClickTrackingEnabled: types.FeatureStatus("ENABLED"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3789,6 +3795,12 @@ func TestCheckRequestSnapshot_SendEmail(t *testing.T) {
 		ListManagementOptions: &types.ListManagementOptions{
 			ContactListName: ptr.String("__ContactListName__"),
 			TopicName:       ptr.String("__TopicName__"),
+		},
+		ConfigurationOverrides: &types.ConfigurationOverrides{
+			Tracking: &types.TrackingConfigurationOverrides{
+				OpenTrackingEnabled:  types.FeatureStatus("ENABLED"),
+				ClickTrackingEnabled: types.FeatureStatus("ENABLED"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -7603,6 +7615,12 @@ func TestUpdateRequestSnapshot_SendBulkEmail(t *testing.T) {
 		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
 		EndpointId:           ptr.String("__EndpointId__"),
 		TenantName:           ptr.String("__TenantName__"),
+		ConfigurationOverrides: &types.ConfigurationOverrides{
+			Tracking: &types.TrackingConfigurationOverrides{
+				OpenTrackingEnabled:  types.FeatureStatus("ENABLED"),
+				ClickTrackingEnabled: types.FeatureStatus("ENABLED"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7787,6 +7805,12 @@ func TestUpdateRequestSnapshot_SendEmail(t *testing.T) {
 		ListManagementOptions: &types.ListManagementOptions{
 			ContactListName: ptr.String("__ContactListName__"),
 			TopicName:       ptr.String("__TopicName__"),
+		},
+		ConfigurationOverrides: &types.ConfigurationOverrides{
+			Tracking: &types.TrackingConfigurationOverrides{
+				OpenTrackingEnabled:  types.FeatureStatus("ENABLED"),
+				ClickTrackingEnabled: types.FeatureStatus("ENABLED"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}

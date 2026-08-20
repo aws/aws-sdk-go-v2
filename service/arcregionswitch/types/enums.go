@@ -238,6 +238,7 @@ const (
 	ExecutionBlockTypeAuroraServerlessScaling     ExecutionBlockType = "AuroraServerlessScaling"
 	ExecutionBlockTypeAuroraProvisionedScaling    ExecutionBlockType = "AuroraProvisionedScaling"
 	ExecutionBlockTypeNeptune                     ExecutionBlockType = "NeptuneGlobalDatabase"
+	ExecutionBlockTypeRdsSwitchoverReadReplica    ExecutionBlockType = "RdsSwitchoverReadReplica"
 )
 
 // Values returns all known values for ExecutionBlockType. Note that this can be
@@ -263,6 +264,7 @@ func (ExecutionBlockType) Values() []ExecutionBlockType {
 		"AuroraServerlessScaling",
 		"AuroraProvisionedScaling",
 		"NeptuneGlobalDatabase",
+		"RdsSwitchoverReadReplica",
 	}
 }
 
@@ -515,6 +517,23 @@ const (
 func (NeptuneUngracefulBehavior) Values() []NeptuneUngracefulBehavior {
 	return []NeptuneUngracefulBehavior{
 		"failover",
+	}
+}
+
+type RdsUngracefulBehavior string
+
+// Enum values for RdsUngracefulBehavior
+const (
+	RdsUngracefulBehaviorPromoteReadReplica RdsUngracefulBehavior = "promoteReadReplica"
+)
+
+// Values returns all known values for RdsUngracefulBehavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RdsUngracefulBehavior) Values() []RdsUngracefulBehavior {
+	return []RdsUngracefulBehavior{
+		"promoteReadReplica",
 	}
 }
 

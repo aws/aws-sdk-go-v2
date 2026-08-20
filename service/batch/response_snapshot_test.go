@@ -218,6 +218,49 @@ func TestCheckResponseSnapshot_CreateComputeEnvironment(t *testing.T) {
 			ScalingPolicy: &types.ComputeScalingPolicy{
 				MinScaleDownDelayMinutes: ptr.Int32(1),
 			},
+			ManagedInstancesProvider: &types.ManagedInstancesProvider{
+				PropagateTags:         ptr.String("__PropagateTags__"),
+				InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+				InstanceLaunchTemplate: &types.InstanceLaunchTemplate{
+					Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
+					NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					InstanceRequirements: &types.InstanceRequirementsRequest{
+						AllowedInstanceTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					CapacityOptionType: ptr.String("__CapacityOptionType__"),
+					StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
+						StorageSizeGiB: ptr.Int32(1),
+					},
+					Monitoring:  ptr.String("__Monitoring__"),
+					FipsEnabled: ptr.Bool(true),
+					CapacityReservations: &types.CapacityReservationRequest{
+						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
+						ReservationPreference: ptr.String("__ReservationPreference__"),
+					},
+					InstanceMetadataTagsPropagation: ptr.Bool(true),
+					LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
+						UseLocalStorage: ptr.Bool(true),
+					},
+				},
+				InfrastructureOptimization: &types.InfrastructureOptimization{
+					ScaleInAfter: ptr.Int32(1),
+				},
+			},
+			CapacityTags: map[string]string{
+				"key0": "__Value__",
+			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),
 		Tags: map[string]string{
@@ -697,6 +740,49 @@ func TestCheckResponseSnapshot_DescribeComputeEnvironments(t *testing.T) {
 					ScalingPolicy: &types.ComputeScalingPolicy{
 						MinScaleDownDelayMinutes: ptr.Int32(1),
 					},
+					ManagedInstancesProvider: &types.ManagedInstancesProvider{
+						PropagateTags:         ptr.String("__PropagateTags__"),
+						InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+						InstanceLaunchTemplate: &types.InstanceLaunchTemplate{
+							Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
+							NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
+								Subnets: []string{
+									"__Member__",
+									"__Member__",
+								},
+								SecurityGroups: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							InstanceRequirements: &types.InstanceRequirementsRequest{
+								AllowedInstanceTypes: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							CapacityOptionType: ptr.String("__CapacityOptionType__"),
+							StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
+								StorageSizeGiB: ptr.Int32(1),
+							},
+							Monitoring:  ptr.String("__Monitoring__"),
+							FipsEnabled: ptr.Bool(true),
+							CapacityReservations: &types.CapacityReservationRequest{
+								ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
+								ReservationPreference: ptr.String("__ReservationPreference__"),
+							},
+							InstanceMetadataTagsPropagation: ptr.Bool(true),
+							LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
+								UseLocalStorage: ptr.Bool(true),
+							},
+						},
+						InfrastructureOptimization: &types.InfrastructureOptimization{
+							ScaleInAfter: ptr.Int32(1),
+						},
+					},
+					CapacityTags: map[string]string{
+						"key0": "__Value__",
+					},
 				},
 				ServiceRole: ptr.String("__ServiceRole__"),
 				UpdatePolicy: &types.UpdatePolicy{
@@ -797,6 +883,49 @@ func TestCheckResponseSnapshot_DescribeComputeEnvironments(t *testing.T) {
 					},
 					ScalingPolicy: &types.ComputeScalingPolicy{
 						MinScaleDownDelayMinutes: ptr.Int32(1),
+					},
+					ManagedInstancesProvider: &types.ManagedInstancesProvider{
+						PropagateTags:         ptr.String("__PropagateTags__"),
+						InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+						InstanceLaunchTemplate: &types.InstanceLaunchTemplate{
+							Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
+							NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
+								Subnets: []string{
+									"__Member__",
+									"__Member__",
+								},
+								SecurityGroups: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							InstanceRequirements: &types.InstanceRequirementsRequest{
+								AllowedInstanceTypes: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							CapacityOptionType: ptr.String("__CapacityOptionType__"),
+							StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
+								StorageSizeGiB: ptr.Int32(1),
+							},
+							Monitoring:  ptr.String("__Monitoring__"),
+							FipsEnabled: ptr.Bool(true),
+							CapacityReservations: &types.CapacityReservationRequest{
+								ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
+								ReservationPreference: ptr.String("__ReservationPreference__"),
+							},
+							InstanceMetadataTagsPropagation: ptr.Bool(true),
+							LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
+								UseLocalStorage: ptr.Bool(true),
+							},
+						},
+						InfrastructureOptimization: &types.InfrastructureOptimization{
+							ScaleInAfter: ptr.Int32(1),
+						},
+					},
+					CapacityTags: map[string]string{
+						"key0": "__Value__",
 					},
 				},
 				ServiceRole: ptr.String("__ServiceRole__"),
@@ -1654,6 +1783,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 									{
 										Containers: []types.TaskContainerProperties{
@@ -2010,6 +2140,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 								},
 							},
@@ -2858,6 +2989,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 									{
 										Containers: []types.TaskContainerProperties{
@@ -3214,6 +3346,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 								},
 							},
@@ -3876,6 +4009,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 								},
 							},
 							EnableExecuteCommand: ptr.Bool(true),
+							NetworkMode:          ptr.String("__NetworkMode__"),
 						},
 						{
 							Containers: []types.TaskContainerProperties{
@@ -4232,6 +4366,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 								},
 							},
 							EnableExecuteCommand: ptr.Bool(true),
+							NetworkMode:          ptr.String("__NetworkMode__"),
 						},
 					},
 				},
@@ -5305,6 +5440,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 									{
 										Containers: []types.TaskContainerProperties{
@@ -5661,6 +5797,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 								},
 							},
@@ -6509,6 +6646,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 									{
 										Containers: []types.TaskContainerProperties{
@@ -6865,6 +7003,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 								},
 							},
@@ -7527,6 +7666,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 								},
 							},
 							EnableExecuteCommand: ptr.Bool(true),
+							NetworkMode:          ptr.String("__NetworkMode__"),
 						},
 						{
 							Containers: []types.TaskContainerProperties{
@@ -7883,6 +8023,7 @@ func TestCheckResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 								},
 							},
 							EnableExecuteCommand: ptr.Bool(true),
+							NetworkMode:          ptr.String("__NetworkMode__"),
 						},
 					},
 				},
@@ -9368,6 +9509,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 									{
 										Containers: []types.TaskContainerProperties{
@@ -9724,6 +9866,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 								},
 							},
@@ -10572,6 +10715,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 									{
 										Containers: []types.TaskContainerProperties{
@@ -10928,6 +11072,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 								},
 							},
@@ -11998,6 +12143,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 								},
 							},
 							EnableExecuteCommand: ptr.Bool(true),
+							NetworkMode:          ptr.String("__NetworkMode__"),
 						},
 						{
 							Containers: []types.TaskContainerDetails{
@@ -12386,6 +12532,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 								},
 							},
 							EnableExecuteCommand: ptr.Bool(true),
+							NetworkMode:          ptr.String("__NetworkMode__"),
 						},
 					},
 				},
@@ -13437,6 +13584,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 									{
 										Containers: []types.TaskContainerProperties{
@@ -13793,6 +13941,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 								},
 							},
@@ -14641,6 +14790,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 									{
 										Containers: []types.TaskContainerProperties{
@@ -14997,6 +15147,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 											},
 										},
 										EnableExecuteCommand: ptr.Bool(true),
+										NetworkMode:          ptr.String("__NetworkMode__"),
 									},
 								},
 							},
@@ -16067,6 +16218,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 								},
 							},
 							EnableExecuteCommand: ptr.Bool(true),
+							NetworkMode:          ptr.String("__NetworkMode__"),
 						},
 						{
 							Containers: []types.TaskContainerDetails{
@@ -16455,6 +16607,7 @@ func TestCheckResponseSnapshot_DescribeJobs(t *testing.T) {
 								},
 							},
 							EnableExecuteCommand: ptr.Bool(true),
+							NetworkMode:          ptr.String("__NetworkMode__"),
 						},
 					},
 				},
@@ -18209,6 +18362,7 @@ func TestCheckResponseSnapshot_RegisterJobDefinition(t *testing.T) {
 									},
 								},
 								EnableExecuteCommand: ptr.Bool(true),
+								NetworkMode:          ptr.String("__NetworkMode__"),
 							},
 							{
 								Containers: []types.TaskContainerProperties{
@@ -18565,6 +18719,7 @@ func TestCheckResponseSnapshot_RegisterJobDefinition(t *testing.T) {
 									},
 								},
 								EnableExecuteCommand: ptr.Bool(true),
+								NetworkMode:          ptr.String("__NetworkMode__"),
 							},
 						},
 					},
@@ -19413,6 +19568,7 @@ func TestCheckResponseSnapshot_RegisterJobDefinition(t *testing.T) {
 									},
 								},
 								EnableExecuteCommand: ptr.Bool(true),
+								NetworkMode:          ptr.String("__NetworkMode__"),
 							},
 							{
 								Containers: []types.TaskContainerProperties{
@@ -19769,6 +19925,7 @@ func TestCheckResponseSnapshot_RegisterJobDefinition(t *testing.T) {
 									},
 								},
 								EnableExecuteCommand: ptr.Bool(true),
+								NetworkMode:          ptr.String("__NetworkMode__"),
 							},
 						},
 					},
@@ -20730,6 +20887,7 @@ func TestCheckResponseSnapshot_RegisterJobDefinition(t *testing.T) {
 						},
 					},
 					EnableExecuteCommand: ptr.Bool(true),
+					NetworkMode:          ptr.String("__NetworkMode__"),
 				},
 				{
 					Containers: []types.TaskContainerProperties{
@@ -21086,6 +21244,7 @@ func TestCheckResponseSnapshot_RegisterJobDefinition(t *testing.T) {
 						},
 					},
 					EnableExecuteCommand: ptr.Bool(true),
+					NetworkMode:          ptr.String("__NetworkMode__"),
 				},
 			},
 		},
@@ -22327,6 +22486,47 @@ func TestCheckResponseSnapshot_UpdateComputeEnvironment(t *testing.T) {
 			ImageId:                    ptr.String("__ImageId__"),
 			ScalingPolicy: &types.ComputeScalingPolicy{
 				MinScaleDownDelayMinutes: ptr.Int32(1),
+			},
+			ManagedInstancesProvider: &types.UpdateManagedInstancesProviderConfiguration{
+				PropagateTags:         ptr.String("__PropagateTags__"),
+				InfrastructureRoleArn: ptr.String("__InfrastructureRoleArn__"),
+				InstanceLaunchTemplate: &types.InstanceLaunchTemplateUpdate{
+					Ec2InstanceProfileArn: ptr.String("__Ec2InstanceProfileArn__"),
+					NetworkConfiguration: &types.ManagedInstancesNetworkConfiguration{
+						Subnets: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SecurityGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					InstanceRequirements: &types.InstanceRequirementsRequest{
+						AllowedInstanceTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					StorageConfiguration: &types.ManagedInstancesStorageConfiguration{
+						StorageSizeGiB: ptr.Int32(1),
+					},
+					Monitoring: ptr.String("__Monitoring__"),
+					CapacityReservations: &types.CapacityReservationRequest{
+						ReservationGroupArn:   ptr.String("__ReservationGroupArn__"),
+						ReservationPreference: ptr.String("__ReservationPreference__"),
+					},
+					InstanceMetadataTagsPropagation: ptr.Bool(true),
+					LocalStorageConfiguration: &types.ManagedInstancesLocalStorageConfiguration{
+						UseLocalStorage: ptr.Bool(true),
+					},
+				},
+				InfrastructureOptimization: &types.InfrastructureOptimization{
+					ScaleInAfter: ptr.Int32(1),
+				},
+			},
+			CapacityTags: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),

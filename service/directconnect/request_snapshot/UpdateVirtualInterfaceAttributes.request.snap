@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: OvertureService.UpdateVirtualInterfaceAttributes
 
-{"enableSiteLink":true,"mtu":1,"rateLimit":"__RateLimit__","virtualInterfaceId":"__VirtualInterfaceId__","virtualInterfaceName":"__VirtualInterfaceName__"}
+{"enableSiteLink":true,"mtu":1,"prefixPoolAllocatedCountIpv4":1,"prefixPoolAllocatedCountIpv6":1,"rateLimit":"__RateLimit__","virtualInterfaceId":"__VirtualInterfaceId__","virtualInterfaceName":"__VirtualInterfaceName__"}

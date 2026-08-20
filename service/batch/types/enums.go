@@ -157,10 +157,11 @@ type CRType string
 
 // Enum values for CRType
 const (
-	CRTypeEc2         CRType = "EC2"
-	CRTypeSpot        CRType = "SPOT"
-	CRTypeFargate     CRType = "FARGATE"
-	CRTypeFargateSpot CRType = "FARGATE_SPOT"
+	CRTypeEc2                 CRType = "EC2"
+	CRTypeSpot                CRType = "SPOT"
+	CRTypeFargate             CRType = "FARGATE"
+	CRTypeFargateSpot         CRType = "FARGATE_SPOT"
+	CRTypeEcsManagedInstances CRType = "ECS_MANAGED_INSTANCES"
 )
 
 // Values returns all known values for CRType. Note that this can be expanded in
@@ -173,6 +174,7 @@ func (CRType) Values() []CRType {
 		"SPOT",
 		"FARGATE",
 		"FARGATE_SPOT",
+		"ECS_MANAGED_INSTANCES",
 	}
 }
 
@@ -302,10 +304,11 @@ type JobQueueType string
 
 // Enum values for JobQueueType
 const (
-	JobQueueTypeEks               JobQueueType = "EKS"
-	JobQueueTypeEcs               JobQueueType = "ECS"
-	JobQueueTypeEcsFargate        JobQueueType = "ECS_FARGATE"
-	JobQueueTypeSagemakerTraining JobQueueType = "SAGEMAKER_TRAINING"
+	JobQueueTypeEks                 JobQueueType = "EKS"
+	JobQueueTypeEcs                 JobQueueType = "ECS"
+	JobQueueTypeEcsFargate          JobQueueType = "ECS_FARGATE"
+	JobQueueTypeSagemakerTraining   JobQueueType = "SAGEMAKER_TRAINING"
+	JobQueueTypeEcsManagedInstances JobQueueType = "ECS_MANAGED_INSTANCES"
 )
 
 // Values returns all known values for JobQueueType. Note that this can be
@@ -318,6 +321,7 @@ func (JobQueueType) Values() []JobQueueType {
 		"ECS",
 		"ECS_FARGATE",
 		"SAGEMAKER_TRAINING",
+		"ECS_MANAGED_INSTANCES",
 	}
 }
 
@@ -488,8 +492,9 @@ type PlatformCapability string
 
 // Enum values for PlatformCapability
 const (
-	PlatformCapabilityEc2     PlatformCapability = "EC2"
-	PlatformCapabilityFargate PlatformCapability = "FARGATE"
+	PlatformCapabilityEc2              PlatformCapability = "EC2"
+	PlatformCapabilityFargate          PlatformCapability = "FARGATE"
+	PlatformCapabilityManagedInstances PlatformCapability = "MANAGED_INSTANCES"
 )
 
 // Values returns all known values for PlatformCapability. Note that this can be
@@ -500,6 +505,7 @@ func (PlatformCapability) Values() []PlatformCapability {
 	return []PlatformCapability{
 		"EC2",
 		"FARGATE",
+		"MANAGED_INSTANCES",
 	}
 }
 

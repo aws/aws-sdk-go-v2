@@ -221,6 +221,10 @@ func TestCheckResponseSnapshot_AllocateConnectionOnInterconnect(t *testing.T) {
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
 		PartnerInterconnectMacSecCapable: ptr.Bool(true),
+		PrefixPoolSizeIpv4:               ptr.Int32(1),
+		PrefixPoolSizeIpv6:               ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AllocateConnectionOnInterconnect.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -298,6 +302,10 @@ func TestCheckResponseSnapshot_AllocateHostedConnection(t *testing.T) {
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
 		PartnerInterconnectMacSecCapable: ptr.Bool(true),
+		PrefixPoolSizeIpv4:               ptr.Int32(1),
+		PrefixPoolSizeIpv6:               ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AllocateHostedConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -403,8 +411,10 @@ func TestCheckResponseSnapshot_AllocatePrivateVirtualInterface(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		SiteLinkEnabled: ptr.Bool(true),
-		RateLimit:       ptr.String("__RateLimit__"),
+		SiteLinkEnabled:              ptr.Bool(true),
+		PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+		RateLimit:                    ptr.String("__RateLimit__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AllocatePrivateVirtualInterface.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -519,8 +529,10 @@ func TestCheckResponseSnapshot_AllocatePublicVirtualInterface(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		SiteLinkEnabled: ptr.Bool(true),
-		RateLimit:       ptr.String("__RateLimit__"),
+		SiteLinkEnabled:              ptr.Bool(true),
+		PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+		RateLimit:                    ptr.String("__RateLimit__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AllocatePublicVirtualInterface.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -643,8 +655,10 @@ func TestCheckResponseSnapshot_AllocateTransitVirtualInterface(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			SiteLinkEnabled: ptr.Bool(true),
-			RateLimit:       ptr.String("__RateLimit__"),
+			SiteLinkEnabled:              ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("AllocateTransitVirtualInterface.response")
@@ -742,6 +756,10 @@ func TestCheckResponseSnapshot_AssociateConnectionWithLag(t *testing.T) {
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
 		PartnerInterconnectMacSecCapable: ptr.Bool(true),
+		PrefixPoolSizeIpv4:               ptr.Int32(1),
+		PrefixPoolSizeIpv6:               ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssociateConnectionWithLag.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -816,6 +834,10 @@ func TestCheckResponseSnapshot_AssociateHostedConnection(t *testing.T) {
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
 		PartnerInterconnectMacSecCapable: ptr.Bool(true),
+		PrefixPoolSizeIpv4:               ptr.Int32(1),
+		PrefixPoolSizeIpv6:               ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssociateHostedConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -948,8 +970,10 @@ func TestCheckResponseSnapshot_AssociateVirtualInterface(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		SiteLinkEnabled: ptr.Bool(true),
-		RateLimit:       ptr.String("__RateLimit__"),
+		SiteLinkEnabled:              ptr.Bool(true),
+		PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+		RateLimit:                    ptr.String("__RateLimit__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssociateVirtualInterface.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1161,8 +1185,10 @@ func TestCheckResponseSnapshot_CreateBGPPeer(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			SiteLinkEnabled: ptr.Bool(true),
-			RateLimit:       ptr.String("__RateLimit__"),
+			SiteLinkEnabled:              ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateBGPPeer.response")
@@ -1245,6 +1271,10 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
 		PartnerInterconnectMacSecCapable: ptr.Bool(true),
+		PrefixPoolSizeIpv4:               ptr.Int32(1),
+		PrefixPoolSizeIpv6:               ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1283,12 +1313,13 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 func TestCheckResponseSnapshot_CreateDirectConnectGateway(t *testing.T) {
 	want := &CreateDirectConnectGatewayOutput{
 		DirectConnectGateway: &types.DirectConnectGateway{
-			DirectConnectGatewayId:    ptr.String("__DirectConnectGatewayId__"),
-			DirectConnectGatewayName:  ptr.String("__DirectConnectGatewayName__"),
-			AmazonSideAsn:             ptr.Int64(1),
-			OwnerAccount:              ptr.String("__OwnerAccount__"),
-			DirectConnectGatewayState: types.DirectConnectGatewayState("pending"),
-			StateChangeError:          ptr.String("__StateChangeError__"),
+			DirectConnectGatewayId:     ptr.String("__DirectConnectGatewayId__"),
+			DirectConnectGatewayName:   ptr.String("__DirectConnectGatewayName__"),
+			AmazonSideAsn:              ptr.Int64(1),
+			OwnerAccount:               ptr.String("__OwnerAccount__"),
+			DirectConnectGatewayState:  types.DirectConnectGatewayState("pending"),
+			StateChangeError:           ptr.String("__StateChangeError__"),
+			TotalPrefixPoolAllocations: ptr.Int32(1),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -1605,6 +1636,10 @@ func TestCheckResponseSnapshot_CreateLag(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -1658,6 +1693,10 @@ func TestCheckResponseSnapshot_CreateLag(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 		},
 		AllowsHostedConnections: true,
@@ -1690,6 +1729,10 @@ func TestCheckResponseSnapshot_CreateLag(t *testing.T) {
 				StartOn:   ptr.String("__StartOn__"),
 			},
 		},
+		PrefixPoolSizeIpv4:             ptr.Int32(1),
+		PrefixPoolSizeIpv6:             ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6: ptr.Int32(1),
 		RateLimiterStatus: &types.RateLimiterStatus{
 			MaxAllowed:     1,
 			InUse:          1,
@@ -1813,8 +1856,10 @@ func TestCheckResponseSnapshot_CreatePrivateVirtualInterface(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		SiteLinkEnabled: ptr.Bool(true),
-		RateLimit:       ptr.String("__RateLimit__"),
+		SiteLinkEnabled:              ptr.Bool(true),
+		PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+		RateLimit:                    ptr.String("__RateLimit__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreatePrivateVirtualInterface.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1848,8 +1893,10 @@ func TestCheckResponseSnapshot_CreatePrivateVirtualInterface(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			EnableSiteLink: ptr.Bool(true),
-			RateLimit:      ptr.String("__RateLimit__"),
+			EnableSiteLink:               ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	})
 	if err != nil {
@@ -1931,8 +1978,10 @@ func TestCheckResponseSnapshot_CreatePublicVirtualInterface(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		SiteLinkEnabled: ptr.Bool(true),
-		RateLimit:       ptr.String("__RateLimit__"),
+		SiteLinkEnabled:              ptr.Bool(true),
+		PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+		RateLimit:                    ptr.String("__RateLimit__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreatePublicVirtualInterface.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2054,8 +2103,10 @@ func TestCheckResponseSnapshot_CreateTransitVirtualInterface(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			SiteLinkEnabled: ptr.Bool(true),
-			RateLimit:       ptr.String("__RateLimit__"),
+			SiteLinkEnabled:              ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateTransitVirtualInterface.response")
@@ -2089,8 +2140,10 @@ func TestCheckResponseSnapshot_CreateTransitVirtualInterface(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			EnableSiteLink: ptr.Bool(true),
-			RateLimit:      ptr.String("__RateLimit__"),
+			EnableSiteLink:               ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	})
 	if err != nil {
@@ -2173,8 +2226,10 @@ func TestCheckResponseSnapshot_DeleteBGPPeer(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			SiteLinkEnabled: ptr.Bool(true),
-			RateLimit:       ptr.String("__RateLimit__"),
+			SiteLinkEnabled:              ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteBGPPeer.response")
@@ -2253,6 +2308,10 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
 		PartnerInterconnectMacSecCapable: ptr.Bool(true),
+		PrefixPoolSizeIpv4:               ptr.Int32(1),
+		PrefixPoolSizeIpv6:               ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2276,12 +2335,13 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 func TestCheckResponseSnapshot_DeleteDirectConnectGateway(t *testing.T) {
 	want := &DeleteDirectConnectGatewayOutput{
 		DirectConnectGateway: &types.DirectConnectGateway{
-			DirectConnectGatewayId:    ptr.String("__DirectConnectGatewayId__"),
-			DirectConnectGatewayName:  ptr.String("__DirectConnectGatewayName__"),
-			AmazonSideAsn:             ptr.Int64(1),
-			OwnerAccount:              ptr.String("__OwnerAccount__"),
-			DirectConnectGatewayState: types.DirectConnectGatewayState("pending"),
-			StateChangeError:          ptr.String("__StateChangeError__"),
+			DirectConnectGatewayId:     ptr.String("__DirectConnectGatewayId__"),
+			DirectConnectGatewayName:   ptr.String("__DirectConnectGatewayName__"),
+			AmazonSideAsn:              ptr.Int64(1),
+			OwnerAccount:               ptr.String("__OwnerAccount__"),
+			DirectConnectGatewayState:  types.DirectConnectGatewayState("pending"),
+			StateChangeError:           ptr.String("__StateChangeError__"),
+			TotalPrefixPoolAllocations: ptr.Int32(1),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -2506,6 +2566,10 @@ func TestCheckResponseSnapshot_DeleteLag(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -2559,6 +2623,10 @@ func TestCheckResponseSnapshot_DeleteLag(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 		},
 		AllowsHostedConnections: true,
@@ -2591,6 +2659,10 @@ func TestCheckResponseSnapshot_DeleteLag(t *testing.T) {
 				StartOn:   ptr.String("__StartOn__"),
 			},
 		},
+		PrefixPoolSizeIpv4:             ptr.Int32(1),
+		PrefixPoolSizeIpv6:             ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6: ptr.Int32(1),
 		RateLimiterStatus: &types.RateLimiterStatus{
 			MaxAllowed:     1,
 			InUse:          1,
@@ -2723,6 +2795,10 @@ func TestCheckResponseSnapshot_DescribeConnections(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -2776,6 +2852,10 @@ func TestCheckResponseSnapshot_DescribeConnections(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2856,6 +2936,10 @@ func TestCheckResponseSnapshot_DescribeConnectionsOnInterconnect(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -2909,6 +2993,10 @@ func TestCheckResponseSnapshot_DescribeConnectionsOnInterconnect(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3186,12 +3274,13 @@ func TestCheckResponseSnapshot_DescribeDirectConnectGateways(t *testing.T) {
 	want := &DescribeDirectConnectGatewaysOutput{
 		DirectConnectGateways: []types.DirectConnectGateway{
 			{
-				DirectConnectGatewayId:    ptr.String("__DirectConnectGatewayId__"),
-				DirectConnectGatewayName:  ptr.String("__DirectConnectGatewayName__"),
-				AmazonSideAsn:             ptr.Int64(1),
-				OwnerAccount:              ptr.String("__OwnerAccount__"),
-				DirectConnectGatewayState: types.DirectConnectGatewayState("pending"),
-				StateChangeError:          ptr.String("__StateChangeError__"),
+				DirectConnectGatewayId:     ptr.String("__DirectConnectGatewayId__"),
+				DirectConnectGatewayName:   ptr.String("__DirectConnectGatewayName__"),
+				AmazonSideAsn:              ptr.Int64(1),
+				OwnerAccount:               ptr.String("__OwnerAccount__"),
+				DirectConnectGatewayState:  types.DirectConnectGatewayState("pending"),
+				StateChangeError:           ptr.String("__StateChangeError__"),
+				TotalPrefixPoolAllocations: ptr.Int32(1),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -3204,12 +3293,13 @@ func TestCheckResponseSnapshot_DescribeDirectConnectGateways(t *testing.T) {
 				},
 			},
 			{
-				DirectConnectGatewayId:    ptr.String("__DirectConnectGatewayId__"),
-				DirectConnectGatewayName:  ptr.String("__DirectConnectGatewayName__"),
-				AmazonSideAsn:             ptr.Int64(1),
-				OwnerAccount:              ptr.String("__OwnerAccount__"),
-				DirectConnectGatewayState: types.DirectConnectGatewayState("pending"),
-				StateChangeError:          ptr.String("__StateChangeError__"),
+				DirectConnectGatewayId:     ptr.String("__DirectConnectGatewayId__"),
+				DirectConnectGatewayName:   ptr.String("__DirectConnectGatewayName__"),
+				AmazonSideAsn:              ptr.Int64(1),
+				OwnerAccount:               ptr.String("__OwnerAccount__"),
+				DirectConnectGatewayState:  types.DirectConnectGatewayState("pending"),
+				StateChangeError:           ptr.String("__StateChangeError__"),
+				TotalPrefixPoolAllocations: ptr.Int32(1),
 				Tags: []types.Tag{
 					{
 						Key:   ptr.String("__Key__"),
@@ -3300,6 +3390,10 @@ func TestCheckResponseSnapshot_DescribeHostedConnections(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -3353,6 +3447,10 @@ func TestCheckResponseSnapshot_DescribeHostedConnections(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3588,6 +3686,10 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 							TotalBandwidth: ptr.String("__TotalBandwidth__"),
 						},
 						PartnerInterconnectMacSecCapable: ptr.Bool(true),
+						PrefixPoolSizeIpv4:               ptr.Int32(1),
+						PrefixPoolSizeIpv6:               ptr.Int32(1),
+						PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+						PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 					},
 					{
 						OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -3641,6 +3743,10 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 							TotalBandwidth: ptr.String("__TotalBandwidth__"),
 						},
 						PartnerInterconnectMacSecCapable: ptr.Bool(true),
+						PrefixPoolSizeIpv4:               ptr.Int32(1),
+						PrefixPoolSizeIpv6:               ptr.Int32(1),
+						PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+						PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 					},
 				},
 				AllowsHostedConnections: true,
@@ -3673,6 +3779,10 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 						StartOn:   ptr.String("__StartOn__"),
 					},
 				},
+				PrefixPoolSizeIpv4:             ptr.Int32(1),
+				PrefixPoolSizeIpv6:             ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4: ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6: ptr.Int32(1),
 				RateLimiterStatus: &types.RateLimiterStatus{
 					MaxAllowed:     1,
 					InUse:          1,
@@ -3746,6 +3856,10 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 							TotalBandwidth: ptr.String("__TotalBandwidth__"),
 						},
 						PartnerInterconnectMacSecCapable: ptr.Bool(true),
+						PrefixPoolSizeIpv4:               ptr.Int32(1),
+						PrefixPoolSizeIpv6:               ptr.Int32(1),
+						PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+						PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 					},
 					{
 						OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -3799,6 +3913,10 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 							TotalBandwidth: ptr.String("__TotalBandwidth__"),
 						},
 						PartnerInterconnectMacSecCapable: ptr.Bool(true),
+						PrefixPoolSizeIpv4:               ptr.Int32(1),
+						PrefixPoolSizeIpv6:               ptr.Int32(1),
+						PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+						PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 					},
 				},
 				AllowsHostedConnections: true,
@@ -3831,6 +3949,10 @@ func TestCheckResponseSnapshot_DescribeLags(t *testing.T) {
 						StartOn:   ptr.String("__StartOn__"),
 					},
 				},
+				PrefixPoolSizeIpv4:             ptr.Int32(1),
+				PrefixPoolSizeIpv6:             ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4: ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6: ptr.Int32(1),
 				RateLimiterStatus: &types.RateLimiterStatus{
 					MaxAllowed:     1,
 					InUse:          1,
@@ -4134,8 +4256,10 @@ func TestCheckResponseSnapshot_DescribeVirtualInterfaces(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				SiteLinkEnabled: ptr.Bool(true),
-				RateLimit:       ptr.String("__RateLimit__"),
+				SiteLinkEnabled:              ptr.Bool(true),
+				PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+				PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+				RateLimit:                    ptr.String("__RateLimit__"),
 			},
 			{
 				OwnerAccount:           ptr.String("__OwnerAccount__"),
@@ -4207,8 +4331,10 @@ func TestCheckResponseSnapshot_DescribeVirtualInterfaces(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				SiteLinkEnabled: ptr.Bool(true),
-				RateLimit:       ptr.String("__RateLimit__"),
+				SiteLinkEnabled:              ptr.Bool(true),
+				PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+				PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+				RateLimit:                    ptr.String("__RateLimit__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4288,6 +4414,10 @@ func TestCheckResponseSnapshot_DisassociateConnectionFromLag(t *testing.T) {
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
 		PartnerInterconnectMacSecCapable: ptr.Bool(true),
+		PrefixPoolSizeIpv4:               ptr.Int32(1),
+		PrefixPoolSizeIpv6:               ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DisassociateConnectionFromLag.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4688,6 +4818,10 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 			TotalBandwidth: ptr.String("__TotalBandwidth__"),
 		},
 		PartnerInterconnectMacSecCapable: ptr.Bool(true),
+		PrefixPoolSizeIpv4:               ptr.Int32(1),
+		PrefixPoolSizeIpv6:               ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateConnection.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4713,12 +4847,13 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 func TestCheckResponseSnapshot_UpdateDirectConnectGateway(t *testing.T) {
 	want := &UpdateDirectConnectGatewayOutput{
 		DirectConnectGateway: &types.DirectConnectGateway{
-			DirectConnectGatewayId:    ptr.String("__DirectConnectGatewayId__"),
-			DirectConnectGatewayName:  ptr.String("__DirectConnectGatewayName__"),
-			AmazonSideAsn:             ptr.Int64(1),
-			OwnerAccount:              ptr.String("__OwnerAccount__"),
-			DirectConnectGatewayState: types.DirectConnectGatewayState("pending"),
-			StateChangeError:          ptr.String("__StateChangeError__"),
+			DirectConnectGatewayId:     ptr.String("__DirectConnectGatewayId__"),
+			DirectConnectGatewayName:   ptr.String("__DirectConnectGatewayName__"),
+			AmazonSideAsn:              ptr.Int64(1),
+			OwnerAccount:               ptr.String("__OwnerAccount__"),
+			DirectConnectGatewayState:  types.DirectConnectGatewayState("pending"),
+			StateChangeError:           ptr.String("__StateChangeError__"),
+			TotalPrefixPoolAllocations: ptr.Int32(1),
 			Tags: []types.Tag{
 				{
 					Key:   ptr.String("__Key__"),
@@ -4885,6 +5020,10 @@ func TestCheckResponseSnapshot_UpdateLag(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 			{
 				OwnerAccount:         ptr.String("__OwnerAccount__"),
@@ -4938,6 +5077,10 @@ func TestCheckResponseSnapshot_UpdateLag(t *testing.T) {
 					TotalBandwidth: ptr.String("__TotalBandwidth__"),
 				},
 				PartnerInterconnectMacSecCapable: ptr.Bool(true),
+				PrefixPoolSizeIpv4:               ptr.Int32(1),
+				PrefixPoolSizeIpv6:               ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv4:   ptr.Int32(1),
+				PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 			},
 		},
 		AllowsHostedConnections: true,
@@ -4970,6 +5113,10 @@ func TestCheckResponseSnapshot_UpdateLag(t *testing.T) {
 				StartOn:   ptr.String("__StartOn__"),
 			},
 		},
+		PrefixPoolSizeIpv4:             ptr.Int32(1),
+		PrefixPoolSizeIpv6:             ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolUnallocatedCountIpv6: ptr.Int32(1),
 		RateLimiterStatus: &types.RateLimiterStatus{
 			MaxAllowed:     1,
 			InUse:          1,
@@ -5070,8 +5217,10 @@ func TestCheckResponseSnapshot_UpdateVirtualInterfaceAttributes(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		SiteLinkEnabled: ptr.Bool(true),
-		RateLimit:       ptr.String("__RateLimit__"),
+		SiteLinkEnabled:              ptr.Bool(true),
+		PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+		RateLimit:                    ptr.String("__RateLimit__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateVirtualInterfaceAttributes.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -5082,11 +5231,13 @@ func TestCheckResponseSnapshot_UpdateVirtualInterfaceAttributes(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.UpdateVirtualInterfaceAttributes(context.Background(), &UpdateVirtualInterfaceAttributesInput{
-		VirtualInterfaceId:   ptr.String("__VirtualInterfaceId__"),
-		Mtu:                  ptr.Int32(1),
-		EnableSiteLink:       ptr.Bool(true),
-		VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
-		RateLimit:            ptr.String("__RateLimit__"),
+		VirtualInterfaceId:           ptr.String("__VirtualInterfaceId__"),
+		Mtu:                          ptr.Int32(1),
+		EnableSiteLink:               ptr.Bool(true),
+		VirtualInterfaceName:         ptr.String("__VirtualInterfaceName__"),
+		PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+		RateLimit:                    ptr.String("__RateLimit__"),
 	})
 	if err != nil {
 		t.Fatal(err)

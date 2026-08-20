@@ -50,6 +50,11 @@ type SendEmailInput struct {
 	// This member is required.
 	Content *types.EmailContent
 
+	// An object that overrides, for this message only, settings that would otherwise
+	// apply to it. Each setting that you don't override keeps the value that already
+	// applies.
+	ConfigurationOverrides *types.ConfigurationOverrides
+
 	// The name of the configuration set to use when sending the email.
 	ConfigurationSetName *string
 

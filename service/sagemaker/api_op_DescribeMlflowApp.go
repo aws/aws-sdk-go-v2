@@ -55,6 +55,11 @@ type DescribeMlflowAppOutput struct {
 	// List of SageMaker Domain IDs for which this MLflow App is the default.
 	DefaultDomainIdList []string
 
+	// The ID of the Amazon Web Services KMS key used to encrypt the data at rest
+	// associated with the MLflow App. This field is absent if the MLflow App is not
+	// encrypted with a customer-managed key.
+	KmsKeyId *string
+
 	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *types.UserContext
 

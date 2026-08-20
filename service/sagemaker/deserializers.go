@@ -71839,6 +71839,55 @@ func awsAwsjson11_deserializeDocumentIamPolicyConstraints(v **types.IamPolicyCon
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIdcConfigOutput(v **types.IdcConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdcConfigOutput
+	if *v == nil {
+		sv = &types.IdcConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationArn to be of type string, got %T instead", value)
+				}
+				sv.ApplicationArn = ptr.String(jtv)
+			}
+
+		case "InstanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceArn to be of type string, got %T instead", value)
+				}
+				sv.InstanceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentIdentityProviderOAuthSetting(v **types.IdentityProviderOAuthSetting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -116585,6 +116634,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeMlflowAppOutput(v **DescribeMlflo
 				return err
 			}
 
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
 		case "LastModifiedBy":
 			if err := awsAwsjson11_deserializeDocumentUserContext(&sv.LastModifiedBy, value); err != nil {
 				return err
@@ -118734,6 +118792,11 @@ func awsAwsjson11_deserializeOpDocumentDescribePartnerAppOutput(v **DescribePart
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
+			}
+
+		case "IdcConfig":
+			if err := awsAwsjson11_deserializeDocumentIdcConfigOutput(&sv.IdcConfig, value); err != nil {
+				return err
 			}
 
 		case "KmsKeyId":

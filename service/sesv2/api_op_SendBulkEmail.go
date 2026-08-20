@@ -41,6 +41,12 @@ type SendBulkEmailInput struct {
 	// This member is required.
 	DefaultContent *types.BulkEmailContent
 
+	// An object that overrides, for the messages in this request only, settings that
+	// would otherwise apply to them. The overrides apply to every message in the
+	// request. Each setting that you don't override keeps the value that already
+	// applies.
+	ConfigurationOverrides *types.ConfigurationOverrides
+
 	// The name of the configuration set to use when sending the email.
 	ConfigurationSetName *string
 

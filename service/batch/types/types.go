@@ -185,6 +185,26 @@ type CapacityLimit struct {
 	noSmithyDocumentSerde
 }
 
+// The capacity reservation configuration for Amazon ECS Managed Instances. Use
+// this to target On-Demand Capacity Reservations or Reserved Instances.
+type CapacityReservationRequest struct {
+
+	// The Amazon Resource Name (ARN) of the capacity reservation group to target.
+	ReservationGroupArn *string
+
+	// The capacity reservation preference. Valid values:
+	//
+	//   - RESERVATIONS_ONLY — Use only capacity reservations.
+	//
+	//   - RESERVATIONS_FIRST — Prefer capacity reservations but fall back to On-Demand
+	//   if unavailable.
+	//
+	//   - RESERVATIONS_EXCLUDED — Do not use capacity reservations.
+	ReservationPreference *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that represents an Batch compute environment.
 type ComputeEnvironmentDetail struct {
 
@@ -334,15 +354,23 @@ type ComputeResource struct {
 	// This member is required.
 	MaxvCpus *int32
 
-	// The type of compute environment: EC2 , SPOT , FARGATE , or FARGATE_SPOT . For
-	// more information, see [Compute environments]in the Batch User Guide.
+	// The type of compute environment: EC2 , SPOT , FARGATE , FARGATE_SPOT , or
+	// ECS_MANAGED_INSTANCES . For more information, see [Compute environments] in the Batch User Guide.
 	//
 	// If you choose SPOT , you must also specify an Amazon EC2 Spot Fleet role with
 	// the spotIamFleetRole parameter. For more information, see [Amazon EC2 spot fleet role] in the Batch User
 	// Guide.
 	//
-	// Multi-node parallel jobs aren't supported on Spot Instances.
+	// If you choose ECS_MANAGED_INSTANCES , you must also specify a
+	// managedInstancesProvider configuration. To use Spot capacity, set
+	// capacityOptionType to SPOT in the
+	// managedInstancesProvider.instanceLaunchTemplate configuration. For more
+	// information, see [Amazon ECS Managed Instances compute environments]in the Batch User Guide.
 	//
+	// Multi-node parallel jobs aren't supported on Spot Instances or Amazon ECS
+	// Managed Instances.
+	//
+	// [Amazon ECS Managed Instances compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html
 	// [Amazon EC2 spot fleet role]: https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html
 	// [Compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
 	//
@@ -448,6 +476,16 @@ type ComputeResource struct {
 	// This parameter isn't applicable to jobs that are running on Fargate resources.
 	// Don't specify it.
 	BidPercentage *int32
+
+	// The tags to apply to the Amazon ECS capacity provider and Amazon EC2 instances
+	// launched by the compute environment. These tags are separate from the compute
+	// environment resource tags (the top-level tags parameter). Use capacityTags for
+	// cost allocation and organization of the underlying infrastructure resources.
+	//
+	// This parameter is only valid for ECS_MANAGED_INSTANCES compute environments.
+	// You must have the batch:SetCapacityTags permission on the compute environment
+	// resource to use this parameter.
+	CapacityTags map[string]string
 
 	// The desired number of vCPUS in the compute environment. Batch modifies this
 	// value between the minimum and maximum values based on job queue demand.
@@ -565,6 +603,15 @@ type ComputeResource struct {
 	// [CreateComputeEnvironment]: https://docs.aws.amazon.com/batch/latest/APIReference/API_CreateComputeEnvironment.html
 	// [Launch template support]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
 	LaunchTemplate *LaunchTemplateSpecification
+
+	// The configuration for the Amazon ECS Managed Instances capacity provider. This
+	// parameter is required when computeResources.type is ECS_MANAGED_INSTANCES and
+	// must not be specified for other compute environment types.
+	//
+	// For more information, see [Amazon ECS Managed Instances compute environments] in the Batch User Guide.
+	//
+	// [Amazon ECS Managed Instances compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html
+	ManagedInstancesProvider *ManagedInstancesProvider
 
 	// The minimum number of vCPUs that a compute environment should maintain (even if
 	// the compute environment is DISABLED ).
@@ -756,6 +803,12 @@ type ComputeResourceUpdate struct {
 	// [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 	BidPercentage *int32
 
+	// The updated tags to apply to the Amazon ECS capacity provider and Amazon EC2
+	// instances. This parameter is only valid for ECS_MANAGED_INSTANCES compute
+	// environments. You must have the batch:SetCapacityTags permission on the compute
+	// environment resource to use this parameter.
+	CapacityTags map[string]string
+
 	// The desired number of vCPUS in the compute environment. Batch modifies this
 	// value between the minimum and maximum values based on job queue demand.
 	//
@@ -921,6 +974,12 @@ type ComputeResourceUpdate struct {
 	// [Launch template support]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
 	LaunchTemplate *LaunchTemplateSpecification
 
+	// The updated configuration for the Amazon ECS Managed Instances capacity
+	// provider. This parameter is only valid when the compute environment type is
+	// ECS_MANAGED_INSTANCES . You cannot change capacityOptionType or fipsEnabled on
+	// update.
+	ManagedInstancesProvider *UpdateManagedInstancesProviderConfiguration
+
 	// The maximum number of Amazon EC2 vCPUs that an environment can reach.
 	//
 	// With any allocation strategy except BEST_FIT using On-Demand ( EC2 ) compute
@@ -1015,8 +1074,8 @@ type ComputeResourceUpdate struct {
 	// [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 	Tags map[string]string
 
-	// The type of compute environment: EC2 , SPOT , FARGATE , or FARGATE_SPOT . For
-	// more information, see [Compute environments]in the Batch User Guide.
+	// The type of compute environment: EC2 , SPOT , FARGATE , FARGATE_SPOT , or
+	// ECS_MANAGED_INSTANCES . For more information, see [Compute environments] in the Batch User Guide.
 	//
 	// If you choose SPOT , you must also specify an Amazon EC2 Spot Fleet role with
 	// the spotIamFleetRole parameter. For more information, see [Amazon EC2 spot fleet role] in the Batch User
@@ -1025,6 +1084,8 @@ type ComputeResourceUpdate struct {
 	// When updating a compute environment, changing the type of a compute environment
 	// requires an infrastructure update of the compute environment. For more
 	// information, see [Updating compute environments]in the Batch User Guide.
+	//
+	// You cannot change the type to or from ECS_MANAGED_INSTANCES .
 	//
 	// [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 	// [Amazon EC2 spot fleet role]: https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html
@@ -1886,6 +1947,11 @@ type EcsTaskDetails struct {
 	// that are running on Amazon EC2 resources must not specify this parameter.
 	NetworkConfiguration *NetworkConfiguration
 
+	// The network mode configured for the task. This field is populated for jobs
+	// running on Amazon ECS Managed Instances ( MANAGED_INSTANCES platform
+	// capability) and always returns host .
+	NetworkMode *string
+
 	// The process namespace to use for the containers in the task. The valid values
 	// are host , or task . For more information see pidMode in [EcsTaskProperties].
 	//
@@ -1896,7 +1962,8 @@ type EcsTaskDetails struct {
 	PlatformVersion *string
 
 	// An object that represents the compute environment architecture for Batch jobs
-	// on Fargate.
+	// on Fargate or Amazon ECS Managed Instances. Contains the operating system family
+	// and CPU architecture of the task.
 	RuntimePlatform *RuntimePlatform
 
 	// The ARN of the Amazon ECS task.
@@ -1969,8 +2036,22 @@ type EcsTaskProperties struct {
 	IpcMode *string
 
 	// The network configuration for jobs that are running on Fargate resources. Jobs
-	// that are running on Amazon EC2 resources must not specify this parameter.
+	// that are running on Amazon EC2 resources or Amazon ECS Managed Instances must
+	// not specify this parameter.
 	NetworkConfiguration *NetworkConfiguration
+
+	// The network mode to use for the task. Valid values: host . When not specified,
+	// the default is host .
+	//
+	// With host mode, the container shares the host instance's network stack
+	// directly. When running tasks that use the host network mode, do not run
+	// containers using the root user (UID 0). Running as root grants unrestricted
+	// access to host resources and increases the attack surface.
+	//
+	// This parameter only applies to jobs running on Amazon ECS Managed Instances (
+	// MANAGED_INSTANCES platform capability). It cannot be specified for Fargate or
+	// Amazon EC2 platform job definitions.
+	NetworkMode *string
 
 	// The process namespace to use for the containers in the task. The valid values
 	// are host or task . For example, monitoring sidecars might need pidMode to
@@ -1999,7 +2080,11 @@ type EcsTaskProperties struct {
 	PlatformVersion *string
 
 	// An object that represents the compute environment architecture for Batch jobs
-	// on Fargate.
+	// on Fargate or Amazon ECS Managed Instances. Use this to specify the operating
+	// system family ( operatingSystemFamily ) and CPU architecture ( cpuArchitecture ).
+	//
+	// For Amazon ECS Managed Instances, the valid value for operatingSystemFamily is
+	// LINUX (default). The valid values for cpuArchitecture are X86_64 and ARM64 .
 	RuntimePlatform *RuntimePlatform
 
 	// The Amazon Resource Name (ARN) that's associated with the Amazon ECS task.
@@ -3188,6 +3273,127 @@ type ImagePullSecret struct {
 	noSmithyDocumentSerde
 }
 
+// The infrastructure optimization configuration for an Amazon ECS Managed
+// Instances capacity provider. Specifies the idle-instance scale-in behavior.
+type InfrastructureOptimization struct {
+
+	// The number of seconds an instance can remain idle before it is terminated.
+	// Valid values are -1 or 0 to 3600 . Use -1 as a special value to disable
+	// scale-in (instances are never terminated for being idle). If not specified, a
+	// default value applies.
+	ScaleInAfter *int32
+
+	noSmithyDocumentSerde
+}
+
+// The instance launch configuration for an Amazon ECS Managed Instances capacity
+// provider. Specifies the instance profile, networking, instance selection
+// constraints, capacity pricing model, storage, and monitoring settings.
+type InstanceLaunchTemplate struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon EC2 instance profile for the
+	// managed instances. The instance profile must use the
+	// AmazonECSInstanceRolePolicyForManagedInstances managed policy with a trust
+	// policy for ec2.amazonaws.com .
+	//
+	// This member is required.
+	Ec2InstanceProfileArn *string
+
+	// The network configuration for the managed instances. Specifies the VPC subnets
+	// and security groups where instances are launched.
+	//
+	// This member is required.
+	NetworkConfiguration *ManagedInstancesNetworkConfiguration
+
+	// The capacity pricing model for the managed instances. Valid values:
+	//
+	//   - ON_DEMAND (default) — On-Demand pricing.
+	//
+	//   - SPOT — Spot Instances, which can provide significant cost savings for
+	//   fault-tolerant workloads.
+	CapacityOptionType *string
+
+	// The capacity reservation configuration for the managed instances. Use this to
+	// target On-Demand Capacity Reservations or Reserved Instances for predictable
+	// capacity and cost optimization.
+	CapacityReservations *CapacityReservationRequest
+
+	// Specifies whether FIPS 140-2 validated cryptographic modules are enabled on the
+	// managed instances. Not available in all Regions.
+	FipsEnabled *bool
+
+	// Specifies whether instance tags are accessible from the instance metadata
+	// service (IMDS). If not specified, instance tags are not accessible from IMDS.
+	InstanceMetadataTagsPropagation *bool
+
+	// The instance type requirements for the capacity provider. Use this to constrain
+	// which Amazon EC2 instance types Amazon ECS can launch. If not specified, all
+	// available instance types are eligible.
+	InstanceRequirements *InstanceRequirementsRequest
+
+	// The local storage configuration for the managed instances. If not specified,
+	// instance store volumes are not available to containers.
+	LocalStorageConfiguration *ManagedInstancesLocalStorageConfiguration
+
+	// The level of CloudWatch monitoring for the managed instances. Valid values are
+	// BASIC and DETAILED .
+	Monitoring *string
+
+	// The storage configuration for the managed instances. Configures the root EBS
+	// volume size. If not specified, the service uses the default EBS volume size for
+	// the instance type.
+	StorageConfiguration *ManagedInstancesStorageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The instance launch configuration for updating an Amazon ECS Managed Instances
+// capacity provider. You cannot change capacityOptionType or fipsEnabled after
+// the compute environment is created.
+type InstanceLaunchTemplateUpdate struct {
+
+	// The updated capacity reservation configuration.
+	CapacityReservations *CapacityReservationRequest
+
+	// The updated Amazon Resource Name (ARN) of the Amazon EC2 instance profile for
+	// the managed instances.
+	Ec2InstanceProfileArn *string
+
+	// Specifies whether instance tags are accessible from the instance metadata
+	// service (IMDS).
+	InstanceMetadataTagsPropagation *bool
+
+	// The updated instance type requirements for the capacity provider.
+	InstanceRequirements *InstanceRequirementsRequest
+
+	// The updated local storage configuration.
+	LocalStorageConfiguration *ManagedInstancesLocalStorageConfiguration
+
+	// The updated monitoring level. Valid values are BASIC and DETAILED .
+	Monitoring *string
+
+	// The updated network configuration for the managed instances.
+	NetworkConfiguration *ManagedInstancesNetworkConfiguration
+
+	// The updated storage configuration for the managed instances.
+	StorageConfiguration *ManagedInstancesStorageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The instance type requirements for the Amazon ECS Managed Instances capacity
+// provider. Use this to specify which Amazon EC2 instance types or instance
+// families Amazon ECS can launch.
+type InstanceRequirementsRequest struct {
+
+	// A list of specific instance types or instance families that Amazon ECS can
+	// launch (for example, m5.large or g5 ). When specified, only these instance types
+	// are used.
+	AllowedInstanceTypes []string
+
+	noSmithyDocumentSerde
+}
+
 // The capacity usage for a job, including the unit of measure and quantity of
 // resources being used.
 type JobCapacityUsageSummary struct {
@@ -3271,6 +3477,7 @@ type JobDefinition struct {
 
 	// The platform capabilities required by the job definition. If no value is
 	// specified, it defaults to EC2 . Jobs run on Fargate resources specify FARGATE .
+	// Jobs run on Amazon ECS Managed Instances specify MANAGED_INSTANCES .
 	PlatformCapabilities []PlatformCapability
 
 	// Specifies whether to propagate the tags from the job or job definition to the
@@ -3415,6 +3622,7 @@ type JobDetail struct {
 
 	// The platform capabilities required by the job definition. If no value is
 	// specified, it defaults to EC2 . Jobs run on Fargate resources specify FARGATE .
+	// Jobs run on Amazon ECS Managed Instances specify MANAGED_INSTANCES .
 	PlatformCapabilities []PlatformCapability
 
 	// Specifies whether to propagate the tags from the job or job definition to the
@@ -4107,6 +4315,80 @@ type LogConfiguration struct {
 	//
 	// [Specifying sensitive data]: https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html
 	SecretOptions []Secret
+
+	noSmithyDocumentSerde
+}
+
+// The local storage configuration for Amazon ECS Managed Instances.
+type ManagedInstancesLocalStorageConfiguration struct {
+
+	// Specifies whether instance store volumes (local NVMe SSDs) are available to
+	// containers. When enabled, containers can use the instance store for
+	// high-performance temporary storage.
+	UseLocalStorage *bool
+
+	noSmithyDocumentSerde
+}
+
+// The network configuration for Amazon ECS Managed Instances. Specifies the VPC
+// subnets and security groups where instances are launched.
+type ManagedInstancesNetworkConfiguration struct {
+
+	// The VPC security groups to associate with the managed instances.
+	//
+	// This member is required.
+	SecurityGroups []string
+
+	// The VPC subnets where managed instances are launched. If your subnets don't
+	// provide public IP addresses, they must have a NAT gateway for outbound internet
+	// access.
+	//
+	// This member is required.
+	Subnets []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an Amazon ECS Managed Instances capacity provider. This
+// object is required when creating a compute environment with
+// computeResources.type set to ECS_MANAGED_INSTANCES .
+type ManagedInstancesProvider struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role that Amazon ECS assumes to
+	// manage Amazon EC2 instances on your behalf. This role must have a trust policy
+	// for ecs.amazonaws.com . You must have the iam:PassRole permission for this role
+	// with the condition iam:PassedToService: ecs.amazonaws.com .
+	//
+	// This member is required.
+	InfrastructureRoleArn *string
+
+	// The instance launch configuration for the Amazon ECS Managed Instances capacity
+	// provider. Contains networking, instance profile, instance requirements, capacity
+	// type, storage, and monitoring configuration.
+	//
+	// This member is required.
+	InstanceLaunchTemplate *InstanceLaunchTemplate
+
+	// The infrastructure optimization configuration for the capacity provider.
+	// Specifies the idle-instance scale-in behavior.
+	InfrastructureOptimization *InfrastructureOptimization
+
+	// Specifies whether tags on the capacity provider are propagated to the Amazon
+	// EC2 instances it launches. Valid values:
+	//
+	//   - CAPACITY_PROVIDER — Propagates tags to instances.
+	//
+	//   - NONE (default) — Does not propagate tags to instances.
+	PropagateTags *string
+
+	noSmithyDocumentSerde
+}
+
+// The storage configuration for Amazon ECS Managed Instances.
+type ManagedInstancesStorageConfiguration struct {
+
+	// The size of the root EBS volume in GiB for the managed instances.
+	StorageSizeGiB *int32
 
 	noSmithyDocumentSerde
 }
@@ -5684,6 +5966,33 @@ type Ulimit struct {
 	//
 	// This member is required.
 	SoftLimit *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for updating an Amazon ECS Managed Instances capacity
+// provider. Used in UpdateComputeEnvironment requests. The capacityOptionType and
+// fipsEnabled fields cannot be changed on update.
+type UpdateManagedInstancesProviderConfiguration struct {
+
+	// The updated infrastructure optimization configuration.
+	InfrastructureOptimization *InfrastructureOptimization
+
+	// The updated Amazon Resource Name (ARN) of the IAM role that Amazon ECS assumes
+	// to manage Amazon EC2 instances on your behalf.
+	InfrastructureRoleArn *string
+
+	// The updated instance launch configuration for the Amazon ECS Managed Instances
+	// capacity provider.
+	InstanceLaunchTemplate *InstanceLaunchTemplateUpdate
+
+	// Specifies whether tags on the capacity provider are propagated to the Amazon
+	// EC2 instances it launches. Valid values:
+	//
+	//   - CAPACITY_PROVIDER — Propagates tags to instances.
+	//
+	//   - NONE — Does not propagate tags to instances.
+	PropagateTags *string
 
 	noSmithyDocumentSerde
 }

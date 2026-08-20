@@ -14,8 +14,8 @@ import (
 // Removes one or more resources from an existing subscription.
 //
 // For subscriptions in the CloudFront plan family, the associated resources must
-// always include exactly one Amazon CloudFront distribution and exactly one AWS
-// WAF web ACL. You cannot remove these required resources.
+// always include exactly one Amazon CloudFront distribution and exactly one WAF
+// web ACL. You cannot remove these required resources.
 func (c *Client) DisassociateResourcesFromSubscription(ctx context.Context, params *DisassociateResourcesFromSubscriptionInput, optFns ...func(*Options)) (*DisassociateResourcesFromSubscriptionOutput, error) {
 	if params == nil {
 		params = &DisassociateResourcesFromSubscriptionInput{}

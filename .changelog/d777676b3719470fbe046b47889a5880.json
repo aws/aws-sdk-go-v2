@@ -1,0 +1,8 @@
+{
+    "id": "d777676b-3719-470f-be04-6b47889a5880",
+    "type": "feature",
+    "description": "This release adds custom route prefix pool allocations for Direct Connect. You can set IPv4 and IPv6 route prefix counts on private and transit virtual interfaces, and view pool size and unallocated counts on connections and LAGs, plus direct connect gateway attachment prefix allocation totals.",
+    "modules": [
+        "service/directconnect"
+    ]
+}

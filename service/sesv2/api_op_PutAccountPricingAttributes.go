@@ -8,8 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Set the pricing plan for your Amazon SES account. Use this operation to choose
-// a billing plan that packages multiple Amazon SES features at a single rate.
+// Set the pricing plan for your Amazon SES account.
 func (c *Client) PutAccountPricingAttributes(ctx context.Context, params *PutAccountPricingAttributesInput, optFns ...func(*Options)) (*PutAccountPricingAttributesOutput, error) {
 	if params == nil {
 		params = &PutAccountPricingAttributesInput{}
@@ -28,18 +27,18 @@ func (c *Client) PutAccountPricingAttributes(ctx context.Context, params *PutAcc
 // A request to set the pricing plan for your Amazon SES account.
 type PutAccountPricingAttributesInput struct {
 
-	// The pricing plan to apply to your Amazon SES account. Can be one of the
-	// following:
+	// The pricing plan to apply to your Amazon SES account. For details about each
+	// plan, see [Amazon SES Pricing]. Can be one of the following:
 	//
-	//   - NONE – No pricing plan is applied; billing follows per-feature pricing.
+	//   - NONE
 	//
-	//   - ESSENTIALS – Baseline Amazon SES capabilities and select premium features.
+	//   - ESSENTIALS
 	//
-	//   - PRO – Includes everything in ESSENTIALS , plus additional premium features
-	//   for growing senders.
+	//   - PRO
 	//
-	//   - ENTERPRISE – Includes everything in PRO , plus features intended for
-	//   large-scale senders.
+	//   - ENTERPRISE
+	//
+	// [Amazon SES Pricing]: http://aws.amazon.com/ses/pricing/
 	//
 	// This member is required.
 	Plan types.PricingPlan

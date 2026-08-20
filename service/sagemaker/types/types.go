@@ -11484,6 +11484,36 @@ type IamPolicyConstraints struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the Amazon Web Services IAM Identity Center configuration to use for
+// a SageMaker Partner AI App that uses IDC authorization.
+type IdcConfigInput struct {
+
+	// The ARN of the Amazon Web Services IAM Identity Center instance that the
+	// SageMaker Partner AI App uses to authenticate users.
+	//
+	// This member is required.
+	InstanceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Amazon Web Services IAM Identity Center configuration of a
+// SageMaker Partner AI App that uses IDC authorization.
+type IdcConfigOutput struct {
+
+	// The ARN of the Amazon Web Services IAM Identity Center instance that the
+	// SageMaker Partner AI App uses to authenticate users.
+	//
+	// This member is required.
+	InstanceArn *string
+
+	// The ARN of the Amazon Web Services IAM Identity Center application that
+	// SageMaker creates for the SageMaker Partner AI App.
+	ApplicationArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon SageMaker Canvas application setting where you configure OAuth for
 // connecting to an external data source, such as Snowflake.
 type IdentityProviderOAuthSetting struct {

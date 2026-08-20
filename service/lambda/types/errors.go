@@ -1086,12 +1086,8 @@ func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorFault() smithy.Erro
 	return smithy.FaultClient
 }
 
-// The resource-based policy you tried to add to the Lambda function would grant
-// public access to it, and your account's BlockPublicAccess setting prevents
-// public access. For more information about blocking public access to Lambda
-// functions, see [Block public access to Lambda resources].
-//
-// [Block public access to Lambda resources]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#access-control-block-public-access
+// The resource-based policy you tried to add to the Lambda resource would grant
+// public access to it, which isn't allowed.
 type PublicPolicyException struct {
 	Message *string
 

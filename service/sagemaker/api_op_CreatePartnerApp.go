@@ -28,6 +28,14 @@ func (c *Client) CreatePartnerApp(ctx context.Context, params *CreatePartnerAppI
 type CreatePartnerAppInput struct {
 
 	// The authorization type that users use to access the SageMaker Partner AI App.
+	// Valid values:
+	//
+	//   - IAM : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM identity.
+	//
+	//   - IDC : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM Identity Center identity. Specify the Identity Center instance to
+	//   use in IdcConfig .
 	//
 	// This member is required.
 	AuthType types.PartnerAppAuthType
@@ -69,6 +77,11 @@ type CreatePartnerAppInput struct {
 	// session name or the authenticated IAM user as the identity of the SageMaker
 	// Partner AI App user.
 	EnableIamSessionBasedIdentity *bool
+
+	// Specifies the Amazon Web Services IAM Identity Center configuration for the
+	// SageMaker Partner AI App. Specify this parameter when AuthType is IDC . Apps
+	// that use IAM authorization don't use this parameter.
+	IdcConfig *types.IdcConfigInput
 
 	// SageMaker Partner AI Apps uses Amazon Web Services KMS to encrypt data at rest
 	// using an Amazon Web Services managed key by default. For more control, specify a

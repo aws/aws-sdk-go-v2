@@ -56,6 +56,9 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 	case *types.ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig:
 		_ = v.Value // Value is types.RdsPromoteReadReplicaConfiguration
 
+	case *types.ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig:
+		_ = v.Value // Value is types.RdsSwitchoverReadReplicaConfiguration
+
 	case *types.ExecutionBlockConfigurationMemberRegionSwitchPlanConfig:
 		_ = v.Value // Value is types.RegionSwitchPlanConfiguration
 
@@ -71,6 +74,7 @@ func ExampleExecutionBlockConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.RdsSwitchoverReadReplicaConfiguration
 var _ *types.RdsCreateCrossRegionReplicaConfiguration
 var _ *types.NeptuneGlobalDatabaseConfiguration
 var _ *types.DocumentDbConfiguration

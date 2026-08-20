@@ -51,6 +51,11 @@ type CreateMlflowAppInput struct {
 	// List of SageMaker domain IDs for which this MLflow App is used as the default.
 	DefaultDomainIdList []string
 
+	// The ID of the Amazon Web Services KMS key used to encrypt the data at rest
+	// associated with the MLflow App. If you don't specify a value, the MLflow App is
+	// not encrypted with a customer-managed key.
+	KmsKeyId *string
+
 	// Whether to enable or disable automatic registration of new MLflow models to the
 	// SageMaker Model Registry. To enable automatic model registration, set this value
 	// to AutoModelRegistrationEnabled . To disable automatic model registration, set

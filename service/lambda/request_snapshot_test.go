@@ -1179,6 +1179,34 @@ func TestCheckRequestSnapshot_DeleteProvisionedConcurrencyConfig(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
+	input := &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		RevisionId:  ptr.String("__RevisionId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteResourcePolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetAccountSettings(t *testing.T) {
 	input := &GetAccountSettingsInput{}
 	body := &bytes.Buffer{}
@@ -1758,6 +1786,33 @@ func TestCheckRequestSnapshot_GetProvisionedConcurrencyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProvisionedConcurrencyConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetResourcePolicy(t *testing.T) {
+	input := &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetResourcePolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2553,6 +2608,35 @@ func TestCheckRequestSnapshot_PutProvisionedConcurrencyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutProvisionedConcurrencyConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutResourcePolicy(t *testing.T) {
+	input := &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+		RevisionId:  ptr.String("__RevisionId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutResourcePolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutResourcePolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4310,6 +4394,34 @@ func TestUpdateRequestSnapshot_DeleteProvisionedConcurrencyConfig(t *testing.T) 
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteResourcePolicy(t *testing.T) {
+	input := &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		RevisionId:  ptr.String("__RevisionId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteResourcePolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetAccountSettings(t *testing.T) {
 	input := &GetAccountSettingsInput{}
 	body := &bytes.Buffer{}
@@ -4889,6 +5001,33 @@ func TestUpdateRequestSnapshot_GetProvisionedConcurrencyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProvisionedConcurrencyConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetResourcePolicy(t *testing.T) {
+	input := &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetResourcePolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5684,6 +5823,35 @@ func TestUpdateRequestSnapshot_PutProvisionedConcurrencyConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutProvisionedConcurrencyConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutResourcePolicy(t *testing.T) {
+	input := &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+		RevisionId:  ptr.String("__RevisionId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutResourcePolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutResourcePolicy"); err != nil {
 		t.Fatal(err)
 	}
 }

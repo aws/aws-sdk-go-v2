@@ -8561,6 +8561,58 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
+			}
+
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8817,6 +8869,19 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "totalPrefixPoolAllocations":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalPrefixPoolAllocations = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -9755,6 +9820,58 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "providerName":
@@ -11002,6 +11119,32 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				sv.OwnerAccount = ptr.String(jtv)
 			}
 
+		case "prefixPoolAllocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolAllocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv6 = ptr.Int32(int32(i64))
+			}
+
 		case "rateLimit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11523,6 +11666,58 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
+			}
+
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11769,6 +11964,58 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
+			}
+
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12004,6 +12251,32 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "prefixPoolAllocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolAllocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "rateLimit":
@@ -12295,6 +12568,32 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "prefixPoolAllocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolAllocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "rateLimit":
@@ -12633,6 +12932,58 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
+			}
+
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12877,6 +13228,58 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
+			}
+
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "providerName":
@@ -13159,6 +13562,32 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "prefixPoolAllocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolAllocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "rateLimit":
@@ -13695,6 +14124,58 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
+			}
+
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "providerName":
@@ -14240,6 +14721,58 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				sv.OwnerAccount = ptr.String(jtv)
 			}
 
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
+			}
+
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14462,6 +14995,32 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "prefixPoolAllocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolAllocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "rateLimit":
@@ -14753,6 +15312,32 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "prefixPoolAllocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolAllocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "rateLimit":
@@ -15125,6 +15710,58 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
 				}
 				sv.PortEncryptionStatus = ptr.String(jtv)
+			}
+
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "providerName":
@@ -15507,6 +16144,58 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "providerName":
@@ -16573,6 +17262,58 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
+			}
+
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17097,6 +17838,58 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
+			}
+
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17403,6 +18196,58 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				sv.OwnerAccount = ptr.String(jtv)
 			}
 
+		case "prefixPoolSizeIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolSizeIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolSizeIpv6 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolUnallocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolUnallocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolUnallocatedCountIpv6 = ptr.Int32(int32(i64))
+			}
+
 		case "providerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17625,6 +18470,32 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
 				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "prefixPoolAllocatedCountIpv4":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv4 = ptr.Int32(int32(i64))
+			}
+
+		case "prefixPoolAllocatedCountIpv6":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrefixPoolAllocatedCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PrefixPoolAllocatedCountIpv6 = ptr.Int32(int32(i64))
 			}
 
 		case "rateLimit":

@@ -161,6 +161,26 @@ type AllocateConnectionOnInterconnectOutput struct {
 	// Connection Key Name, or Encryption Down .
 	PortEncryptionStatus *string
 
+	// The total number of inbound IPv4 route prefixes you can allocate across the
+	// virtual interfaces on the connection. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolSizeIpv4 *int32
+
+	// The total number of inbound IPv6 route prefixes you can allocate across the
+	// virtual interfaces on the connection. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolSizeIpv6 *int32
+
+	// The number of inbound IPv4 route prefixes in the connection prefix pool not yet
+	// allocated to a virtual interface. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolUnallocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes in the connection prefix pool not yet
+	// allocated to a virtual interface. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolUnallocatedCountIpv6 *int32
+
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 

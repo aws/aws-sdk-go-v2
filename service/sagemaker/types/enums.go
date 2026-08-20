@@ -6889,6 +6889,7 @@ type PartnerAppAuthType string
 // Enum values for PartnerAppAuthType
 const (
 	PartnerAppAuthTypeIam PartnerAppAuthType = "IAM"
+	PartnerAppAuthTypeIdc PartnerAppAuthType = "IDC"
 )
 
 // Values returns all known values for PartnerAppAuthType. Note that this can be
@@ -6898,6 +6899,7 @@ const (
 func (PartnerAppAuthType) Values() []PartnerAppAuthType {
 	return []PartnerAppAuthType{
 		"IAM",
+		"IDC",
 	}
 }
 

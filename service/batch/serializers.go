@@ -4479,6 +4479,23 @@ func awsRestjson1_serializeDocumentCapacityLimits(v []types.CapacityLimit, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCapacityReservationRequest(v *types.CapacityReservationRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ReservationGroupArn != nil {
+		ok := object.Key("reservationGroupArn")
+		ok.String(*v.ReservationGroupArn)
+	}
+
+	if v.ReservationPreference != nil {
+		ok := object.Key("reservationPreference")
+		ok.String(*v.ReservationPreference)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComputeEnvironmentOrder(v *types.ComputeEnvironmentOrder, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4523,6 +4540,13 @@ func awsRestjson1_serializeDocumentComputeResource(v *types.ComputeResource, val
 		ok.Integer(*v.BidPercentage)
 	}
 
+	if v.CapacityTags != nil {
+		ok := object.Key("capacityTags")
+		if err := awsRestjson1_serializeDocumentTagrisTagsMap(v.CapacityTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DesiredvCpus != nil {
 		ok := object.Key("desiredvCpus")
 		ok.Integer(*v.DesiredvCpus)
@@ -4560,6 +4584,13 @@ func awsRestjson1_serializeDocumentComputeResource(v *types.ComputeResource, val
 	if v.LaunchTemplate != nil {
 		ok := object.Key("launchTemplate")
 		if err := awsRestjson1_serializeDocumentLaunchTemplateSpecification(v.LaunchTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ManagedInstancesProvider != nil {
+		ok := object.Key("managedInstancesProvider")
+		if err := awsRestjson1_serializeDocumentManagedInstancesProvider(v.ManagedInstancesProvider, ok); err != nil {
 			return err
 		}
 	}
@@ -4634,6 +4665,13 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 		ok.Integer(*v.BidPercentage)
 	}
 
+	if v.CapacityTags != nil {
+		ok := object.Key("capacityTags")
+		if err := awsRestjson1_serializeDocumentTagrisTagsMap(v.CapacityTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DesiredvCpus != nil {
 		ok := object.Key("desiredvCpus")
 		ok.Integer(*v.DesiredvCpus)
@@ -4671,6 +4709,13 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 	if v.LaunchTemplate != nil {
 		ok := object.Key("launchTemplate")
 		if err := awsRestjson1_serializeDocumentLaunchTemplateSpecification(v.LaunchTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ManagedInstancesProvider != nil {
+		ok := object.Key("managedInstancesProvider")
+		if err := awsRestjson1_serializeDocumentUpdateManagedInstancesProviderConfiguration(v.ManagedInstancesProvider, ok); err != nil {
 			return err
 		}
 	}
@@ -5151,6 +5196,11 @@ func awsRestjson1_serializeDocumentEcsTaskProperties(v *types.EcsTaskProperties,
 		if err := awsRestjson1_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.NetworkMode != nil {
+		ok := object.Key("networkMode")
+		ok.String(*v.NetworkMode)
 	}
 
 	if v.PidMode != nil {
@@ -5988,6 +6038,156 @@ func awsRestjson1_serializeDocumentImagePullSecrets(v []types.ImagePullSecret, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInfrastructureOptimization(v *types.InfrastructureOptimization, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ScaleInAfter != nil {
+		ok := object.Key("scaleInAfter")
+		ok.Integer(*v.ScaleInAfter)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInstanceLaunchTemplate(v *types.InstanceLaunchTemplate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CapacityOptionType != nil {
+		ok := object.Key("capacityOptionType")
+		ok.String(*v.CapacityOptionType)
+	}
+
+	if v.CapacityReservations != nil {
+		ok := object.Key("capacityReservations")
+		if err := awsRestjson1_serializeDocumentCapacityReservationRequest(v.CapacityReservations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ec2InstanceProfileArn != nil {
+		ok := object.Key("ec2InstanceProfileArn")
+		ok.String(*v.Ec2InstanceProfileArn)
+	}
+
+	if v.FipsEnabled != nil {
+		ok := object.Key("fipsEnabled")
+		ok.Boolean(*v.FipsEnabled)
+	}
+
+	if v.InstanceMetadataTagsPropagation != nil {
+		ok := object.Key("instanceMetadataTagsPropagation")
+		ok.Boolean(*v.InstanceMetadataTagsPropagation)
+	}
+
+	if v.InstanceRequirements != nil {
+		ok := object.Key("instanceRequirements")
+		if err := awsRestjson1_serializeDocumentInstanceRequirementsRequest(v.InstanceRequirements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LocalStorageConfiguration != nil {
+		ok := object.Key("localStorageConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedInstancesLocalStorageConfiguration(v.LocalStorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Monitoring != nil {
+		ok := object.Key("monitoring")
+		ok.String(*v.Monitoring)
+	}
+
+	if v.NetworkConfiguration != nil {
+		ok := object.Key("networkConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedInstancesNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StorageConfiguration != nil {
+		ok := object.Key("storageConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedInstancesStorageConfiguration(v.StorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInstanceLaunchTemplateUpdate(v *types.InstanceLaunchTemplateUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CapacityReservations != nil {
+		ok := object.Key("capacityReservations")
+		if err := awsRestjson1_serializeDocumentCapacityReservationRequest(v.CapacityReservations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ec2InstanceProfileArn != nil {
+		ok := object.Key("ec2InstanceProfileArn")
+		ok.String(*v.Ec2InstanceProfileArn)
+	}
+
+	if v.InstanceMetadataTagsPropagation != nil {
+		ok := object.Key("instanceMetadataTagsPropagation")
+		ok.Boolean(*v.InstanceMetadataTagsPropagation)
+	}
+
+	if v.InstanceRequirements != nil {
+		ok := object.Key("instanceRequirements")
+		if err := awsRestjson1_serializeDocumentInstanceRequirementsRequest(v.InstanceRequirements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LocalStorageConfiguration != nil {
+		ok := object.Key("localStorageConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedInstancesLocalStorageConfiguration(v.LocalStorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Monitoring != nil {
+		ok := object.Key("monitoring")
+		ok.String(*v.Monitoring)
+	}
+
+	if v.NetworkConfiguration != nil {
+		ok := object.Key("networkConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedInstancesNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StorageConfiguration != nil {
+		ok := object.Key("storageConfiguration")
+		if err := awsRestjson1_serializeDocumentManagedInstancesStorageConfiguration(v.StorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInstanceRequirementsRequest(v *types.InstanceRequirementsRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedInstanceTypes != nil {
+		ok := object.Key("allowedInstanceTypes")
+		if err := awsRestjson1_serializeDocumentStringList(v.AllowedInstanceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentJobDependency(v *types.JobDependency, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6353,6 +6553,82 @@ func awsRestjson1_serializeDocumentLogConfigurationOptionsMap(v map[string]strin
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManagedInstancesLocalStorageConfiguration(v *types.ManagedInstancesLocalStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UseLocalStorage != nil {
+		ok := object.Key("useLocalStorage")
+		ok.Boolean(*v.UseLocalStorage)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManagedInstancesNetworkConfiguration(v *types.ManagedInstancesNetworkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroups != nil {
+		ok := object.Key("securityGroups")
+		if err := awsRestjson1_serializeDocumentStringList(v.SecurityGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subnets != nil {
+		ok := object.Key("subnets")
+		if err := awsRestjson1_serializeDocumentStringList(v.Subnets, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManagedInstancesProvider(v *types.ManagedInstancesProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InfrastructureOptimization != nil {
+		ok := object.Key("infrastructureOptimization")
+		if err := awsRestjson1_serializeDocumentInfrastructureOptimization(v.InfrastructureOptimization, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InfrastructureRoleArn != nil {
+		ok := object.Key("infrastructureRoleArn")
+		ok.String(*v.InfrastructureRoleArn)
+	}
+
+	if v.InstanceLaunchTemplate != nil {
+		ok := object.Key("instanceLaunchTemplate")
+		if err := awsRestjson1_serializeDocumentInstanceLaunchTemplate(v.InstanceLaunchTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PropagateTags != nil {
+		ok := object.Key("propagateTags")
+		ok.String(*v.PropagateTags)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentManagedInstancesStorageConfiguration(v *types.ManagedInstancesStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StorageSizeGiB != nil {
+		ok := object.Key("storageSizeGiB")
+		ok.Integer(*v.StorageSizeGiB)
+	}
+
 	return nil
 }
 
@@ -7243,6 +7519,37 @@ func awsRestjson1_serializeDocumentUlimits(v []types.Ulimit, value smithyjson.Va
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateManagedInstancesProviderConfiguration(v *types.UpdateManagedInstancesProviderConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InfrastructureOptimization != nil {
+		ok := object.Key("infrastructureOptimization")
+		if err := awsRestjson1_serializeDocumentInfrastructureOptimization(v.InfrastructureOptimization, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InfrastructureRoleArn != nil {
+		ok := object.Key("infrastructureRoleArn")
+		ok.String(*v.InfrastructureRoleArn)
+	}
+
+	if v.InstanceLaunchTemplate != nil {
+		ok := object.Key("instanceLaunchTemplate")
+		if err := awsRestjson1_serializeDocumentInstanceLaunchTemplateUpdate(v.InstanceLaunchTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PropagateTags != nil {
+		ok := object.Key("propagateTags")
+		ok.String(*v.PropagateTags)
+	}
+
 	return nil
 }
 

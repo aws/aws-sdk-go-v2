@@ -1040,8 +1040,10 @@ func TestCheckRequestSnapshot_CreatePrivateVirtualInterface(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			EnableSiteLink: ptr.Bool(true),
-			RateLimit:      ptr.String("__RateLimit__"),
+			EnableSiteLink:               ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1147,8 +1149,10 @@ func TestCheckRequestSnapshot_CreateTransitVirtualInterface(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			EnableSiteLink: ptr.Bool(true),
-			RateLimit:      ptr.String("__RateLimit__"),
+			EnableSiteLink:               ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2306,11 +2310,13 @@ func TestCheckRequestSnapshot_UpdateLag(t *testing.T) {
 
 func TestCheckRequestSnapshot_UpdateVirtualInterfaceAttributes(t *testing.T) {
 	input := &UpdateVirtualInterfaceAttributesInput{
-		VirtualInterfaceId:   ptr.String("__VirtualInterfaceId__"),
-		Mtu:                  ptr.Int32(1),
-		EnableSiteLink:       ptr.Bool(true),
-		VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
-		RateLimit:            ptr.String("__RateLimit__"),
+		VirtualInterfaceId:           ptr.String("__VirtualInterfaceId__"),
+		Mtu:                          ptr.Int32(1),
+		EnableSiteLink:               ptr.Bool(true),
+		VirtualInterfaceName:         ptr.String("__VirtualInterfaceName__"),
+		PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+		RateLimit:                    ptr.String("__RateLimit__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3169,8 +3175,10 @@ func TestUpdateRequestSnapshot_CreatePrivateVirtualInterface(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			EnableSiteLink: ptr.Bool(true),
-			RateLimit:      ptr.String("__RateLimit__"),
+			EnableSiteLink:               ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3276,8 +3284,10 @@ func TestUpdateRequestSnapshot_CreateTransitVirtualInterface(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			EnableSiteLink: ptr.Bool(true),
-			RateLimit:      ptr.String("__RateLimit__"),
+			EnableSiteLink:               ptr.Bool(true),
+			PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+			PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4435,11 +4445,13 @@ func TestUpdateRequestSnapshot_UpdateLag(t *testing.T) {
 
 func TestUpdateRequestSnapshot_UpdateVirtualInterfaceAttributes(t *testing.T) {
 	input := &UpdateVirtualInterfaceAttributesInput{
-		VirtualInterfaceId:   ptr.String("__VirtualInterfaceId__"),
-		Mtu:                  ptr.Int32(1),
-		EnableSiteLink:       ptr.Bool(true),
-		VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
-		RateLimit:            ptr.String("__RateLimit__"),
+		VirtualInterfaceId:           ptr.String("__VirtualInterfaceId__"),
+		Mtu:                          ptr.Int32(1),
+		EnableSiteLink:               ptr.Bool(true),
+		VirtualInterfaceName:         ptr.String("__VirtualInterfaceName__"),
+		PrefixPoolAllocatedCountIpv4: ptr.Int32(1),
+		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
+		RateLimit:                    ptr.String("__RateLimit__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

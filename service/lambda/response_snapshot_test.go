@@ -1702,6 +1702,28 @@ func TestCheckResponseSnapshot_DeleteProvisionedConcurrencyConfig(t *testing.T) 
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
+	want := &DeleteResourcePolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteResourcePolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		RevisionId:  ptr.String("__RevisionId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteResourcePolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetAccountSettings(t *testing.T) {
 	want := &GetAccountSettingsOutput{
 		AccountLimit: &types.AccountLimit{
@@ -3486,6 +3508,30 @@ func TestCheckResponseSnapshot_GetProvisionedConcurrencyConfig(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetProvisionedConcurrencyConfig.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
+	want := &GetResourcePolicyOutput{
+		Policy:     ptr.String("__Policy__"),
+		RevisionId: ptr.String("__RevisionId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetResourcePolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetResourcePolicy.response", err)
 	}
 }
 
@@ -5586,6 +5632,32 @@ func TestCheckResponseSnapshot_PutProvisionedConcurrencyConfig(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutProvisionedConcurrencyConfig.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
+	want := &PutResourcePolicyOutput{
+		Policy:     ptr.String("__Policy__"),
+		RevisionId: ptr.String("__RevisionId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutResourcePolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+		RevisionId:  ptr.String("__RevisionId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutResourcePolicy.response", err)
 	}
 }
 

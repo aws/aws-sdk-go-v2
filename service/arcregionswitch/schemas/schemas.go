@@ -590,7 +590,7 @@ var ExecutionApprovalConfiguration_approvalRole *smithy.Schema
 var ExecutionBlockConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ExecutionBlockConfiguration",
-}, smithy.ShapeTypeUnion, 17)
+}, smithy.ShapeTypeUnion, 18)
 var ExecutionBlockConfiguration_customActionLambdaConfig *smithy.Schema
 
 var ExecutionBlockConfiguration_ec2AsgCapacityIncreaseConfig *smithy.Schema
@@ -625,10 +625,12 @@ var ExecutionBlockConfiguration_auroraProvisionedScalingConfig *smithy.Schema
 
 var ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig *smithy.Schema
 
+var ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig *smithy.Schema
+
 var ExecutionBlockType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ExecutionBlockType",
-}, smithy.ShapeTypeEnum, 17)
+}, smithy.ShapeTypeEnum, 18)
 var ExecutionBlockType_CUSTOM_ACTION_LAMBDA *smithy.Schema
 
 var ExecutionBlockType_EXECUTION_APPROVAL *smithy.Schema
@@ -662,6 +664,8 @@ var ExecutionBlockType_AURORA_SERVERLESS_SCALING *smithy.Schema
 var ExecutionBlockType_AURORA_PROVISIONED_SCALING *smithy.Schema
 
 var ExecutionBlockType_NEPTUNE *smithy.Schema
+
+var ExecutionBlockType_RDS_SWITCHOVER_READ_REPLICA *smithy.Schema
 
 var _ExecutionComment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -1162,6 +1166,32 @@ var RdsPromoteReadReplicaConfiguration_crossAccountRole *smithy.Schema
 var RdsPromoteReadReplicaConfiguration_externalId *smithy.Schema
 
 var RdsPromoteReadReplicaConfiguration_dbInstanceArnMap *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RdsSwitchoverReadReplicaConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var RdsSwitchoverReadReplicaConfiguration_timeoutMinutes *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration_crossAccountRole *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration_externalId *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration_dbInstanceArnMap *smithy.Schema
+
+var RdsSwitchoverReadReplicaConfiguration_ungraceful *smithy.Schema
+
+var RdsUngraceful = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RdsUngraceful",
+}, smithy.ShapeTypeStructure, 1)
+var RdsUngraceful_ungraceful *smithy.Schema
+
+var RdsUngracefulBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RdsUngracefulBehavior",
+}, smithy.ShapeTypeEnum, 1)
+var RdsUngracefulBehavior_PROMOTE_READ_REPLICA *smithy.Schema
 
 var RecoveryApproach = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -2465,6 +2495,8 @@ func init() {
 
 	ExecutionBlockType_NEPTUNE = ExecutionBlockType.AddMember("NEPTUNE", smithyprelude.Unit)
 
+	ExecutionBlockType_RDS_SWITCHOVER_READ_REPLICA = ExecutionBlockType.AddMember("RDS_SWITCHOVER_READ_REPLICA", smithyprelude.Unit)
+
 	Step_name = Step.AddMember("name", _StepName)
 
 	Step_description = Step.AddMember("description", smithyprelude.String)
@@ -2563,6 +2595,20 @@ func init() {
 
 	NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns = NeptuneGlobalDatabaseConfiguration.AddMember("regionDatabaseClusterArns", _RegionNeptuneClusterArnMap)
 
+	RdsUngracefulBehavior_PROMOTE_READ_REPLICA = RdsUngracefulBehavior.AddMember("PROMOTE_READ_REPLICA", smithyprelude.Unit)
+
+	RdsUngraceful_ungraceful = RdsUngraceful.AddMember("ungraceful", RdsUngracefulBehavior)
+
+	RdsSwitchoverReadReplicaConfiguration_timeoutMinutes = RdsSwitchoverReadReplicaConfiguration.AddMember("timeoutMinutes", smithyprelude.Integer)
+
+	RdsSwitchoverReadReplicaConfiguration_crossAccountRole = RdsSwitchoverReadReplicaConfiguration.AddMember("crossAccountRole", _IamRoleArn)
+
+	RdsSwitchoverReadReplicaConfiguration_externalId = RdsSwitchoverReadReplicaConfiguration.AddMember("externalId", smithyprelude.String)
+
+	RdsSwitchoverReadReplicaConfiguration_dbInstanceArnMap = RdsSwitchoverReadReplicaConfiguration.AddMember("dbInstanceArnMap", _RdsDbInstanceArnMap)
+
+	RdsSwitchoverReadReplicaConfiguration_ungraceful = RdsSwitchoverReadReplicaConfiguration.AddMember("ungraceful", RdsUngraceful)
+
 	ExecutionBlockConfiguration_customActionLambdaConfig = ExecutionBlockConfiguration.AddMember("customActionLambdaConfig", CustomActionLambdaConfiguration)
 
 	ExecutionBlockConfiguration_ec2AsgCapacityIncreaseConfig = ExecutionBlockConfiguration.AddMember("ec2AsgCapacityIncreaseConfig", Ec2AsgCapacityIncreaseConfiguration)
@@ -2596,6 +2642,8 @@ func init() {
 	ExecutionBlockConfiguration_auroraProvisionedScalingConfig = ExecutionBlockConfiguration.AddMember("auroraProvisionedScalingConfig", AuroraProvisionedScalingConfiguration)
 
 	ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig = ExecutionBlockConfiguration.AddMember("neptuneGlobalDatabaseConfig", NeptuneGlobalDatabaseConfiguration)
+
+	ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig = ExecutionBlockConfiguration.AddMember("rdsSwitchoverReadReplicaConfig", RdsSwitchoverReadReplicaConfiguration)
 
 	ExecutionEventType_UNKNOWN = ExecutionEventType.AddMember("UNKNOWN", smithyprelude.Unit)
 

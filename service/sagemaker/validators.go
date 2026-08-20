@@ -12009,6 +12009,21 @@ func validateHyperParameterTuningResourceConfig(v *types.HyperParameterTuningRes
 	}
 }
 
+func validateIdcConfigInput(v *types.IdcConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdcConfigInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImageConfig(v *types.ImageConfig) error {
 	if v == nil {
 		return nil
@@ -18391,6 +18406,11 @@ func validateOpCreatePartnerAppInput(v *CreatePartnerAppInput) error {
 			invalidParams.AddNested("ApplicationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.IdcConfig != nil {
+		if err := validateIdcConfigInput(v.IdcConfig); err != nil {
+			invalidParams.AddNested("IdcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if len(v.AuthType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
 	}
@@ -22995,6 +23015,11 @@ func validateOpUpdatePartnerAppInput(v *UpdatePartnerAppInput) error {
 	if v.ApplicationConfig != nil {
 		if err := validatePartnerAppConfig(v.ApplicationConfig); err != nil {
 			invalidParams.AddNested("ApplicationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IdcConfig != nil {
+		if err := validateIdcConfigInput(v.IdcConfig); err != nil {
+			invalidParams.AddNested("IdcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {

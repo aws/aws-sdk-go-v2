@@ -40,6 +40,18 @@ type UpdatePartnerAppInput struct {
 	// Configuration settings for the SageMaker Partner AI App.
 	ApplicationConfig *types.PartnerAppConfig
 
+	// The authorization type that users use to access the SageMaker Partner AI App.
+	// Use this parameter to migrate an existing SageMaker Partner AI App from IAM
+	// authorization to IDC authorization. Valid values:
+	//
+	//   - IAM : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM identity.
+	//
+	//   - IDC : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM Identity Center identity. Specify the Identity Center instance to
+	//   use in IdcConfig .
+	AuthType types.PartnerAppAuthType
+
 	// A unique token that guarantees that the call to this API is idempotent.
 	ClientToken *string
 
@@ -52,6 +64,11 @@ type UpdatePartnerAppInput struct {
 	// session name or the authenticated IAM user as the identity of the SageMaker
 	// Partner AI App user.
 	EnableIamSessionBasedIdentity *bool
+
+	// Specifies the Amazon Web Services IAM Identity Center configuration for the
+	// SageMaker Partner AI App. Specify this parameter when AuthType is IDC . Apps
+	// that use IAM authorization don't use this parameter.
+	IdcConfig *types.IdcConfigInput
 
 	// Maintenance configuration settings for the SageMaker Partner AI App.
 	MaintenanceConfig *types.PartnerAppMaintenanceConfig

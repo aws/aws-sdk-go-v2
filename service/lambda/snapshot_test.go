@@ -302,6 +302,18 @@ func TestCheckSnapshot_DeleteProvisionedConcurrencyConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAccountSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
@@ -547,6 +559,18 @@ func TestCheckSnapshot_GetProvisionedConcurrencyConfig(t *testing.T) {
 	_, err := svc.GetProvisionedConcurrencyConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetProvisionedConcurrencyConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -871,6 +895,18 @@ func TestCheckSnapshot_PutProvisionedConcurrencyConfig(t *testing.T) {
 	_, err := svc.PutProvisionedConcurrencyConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutProvisionedConcurrencyConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1321,6 +1357,18 @@ func TestUpdateSnapshot_DeleteProvisionedConcurrencyConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAccountSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
@@ -1566,6 +1614,18 @@ func TestUpdateSnapshot_GetProvisionedConcurrencyConfig(t *testing.T) {
 	_, err := svc.GetProvisionedConcurrencyConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetProvisionedConcurrencyConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1890,6 +1950,18 @@ func TestUpdateSnapshot_PutProvisionedConcurrencyConfig(t *testing.T) {
 	_, err := svc.PutProvisionedConcurrencyConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutProvisionedConcurrencyConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

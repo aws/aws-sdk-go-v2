@@ -6069,6 +6069,7 @@ func TestCheckResponseSnapshot_CreateMlflowApp(t *testing.T) {
 		Name:                         ptr.String("__Name__"),
 		ArtifactStoreUri:             ptr.String("__ArtifactStoreUri__"),
 		RoleArn:                      ptr.String("__RoleArn__"),
+		KmsKeyId:                     ptr.String("__KmsKeyId__"),
 		ModelRegistrationMode:        types.ModelRegistrationMode("AutoModelRegistrationEnabled"),
 		WeeklyMaintenanceWindowStart: ptr.String("__WeeklyMaintenanceWindowStart__"),
 		AccountDefaultStatus:         types.AccountDefaultStatus("ENABLED"),
@@ -8224,6 +8225,9 @@ func TestCheckResponseSnapshot_CreatePartnerApp(t *testing.T) {
 					},
 				},
 			},
+		},
+		IdcConfig: &types.IdcConfigInput{
+			InstanceArn: ptr.String("__InstanceArn__"),
 		},
 		AuthType:                      types.PartnerAppAuthType("IAM"),
 		EnableIamSessionBasedIdentity: ptr.Bool(true),
@@ -18461,6 +18465,7 @@ func TestCheckResponseSnapshot_DescribeMlflowApp(t *testing.T) {
 		ArtifactStoreUri:      ptr.String("__ArtifactStoreUri__"),
 		MlflowVersion:         ptr.String("__MlflowVersion__"),
 		RoleArn:               ptr.String("__RoleArn__"),
+		KmsKeyId:              ptr.String("__KmsKeyId__"),
 		Status:                types.MlflowAppStatus("Creating"),
 		ModelRegistrationMode: types.ModelRegistrationMode("AutoModelRegistrationEnabled"),
 		AccountDefaultStatus:  types.AccountDefaultStatus("ENABLED"),
@@ -20724,6 +20729,10 @@ func TestCheckResponseSnapshot_DescribePartnerApp(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+		},
+		IdcConfig: &types.IdcConfigOutput{
+			InstanceArn:    ptr.String("__InstanceArn__"),
+			ApplicationArn: ptr.String("__ApplicationArn__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribePartnerApp.response")
@@ -43314,6 +43323,10 @@ func TestCheckResponseSnapshot_UpdatePartnerApp(t *testing.T) {
 				},
 			},
 		},
+		IdcConfig: &types.IdcConfigInput{
+			InstanceArn: ptr.String("__InstanceArn__"),
+		},
+		AuthType:                      types.PartnerAppAuthType("IAM"),
 		EnableIamSessionBasedIdentity: ptr.Bool(true),
 		EnableAutoMinorVersionUpgrade: ptr.Bool(true),
 		AppVersion:                    ptr.String("__AppVersion__"),

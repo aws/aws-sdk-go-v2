@@ -7658,6 +7658,55 @@ func awsRestjson1_deserializeDocumentCapacityLimits(v *[]types.CapacityLimit, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCapacityReservationRequest(v **types.CapacityReservationRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CapacityReservationRequest
+	if *v == nil {
+		sv = &types.CapacityReservationRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "reservationGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReservationGroupArn = ptr.String(jtv)
+			}
+
+		case "reservationPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ReservationPreference = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentClientException(v **types.ClientException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8031,6 +8080,11 @@ func awsRestjson1_deserializeDocumentComputeResource(v **types.ComputeResource, 
 				sv.BidPercentage = ptr.Int32(int32(i64))
 			}
 
+		case "capacityTags":
+			if err := awsRestjson1_deserializeDocumentTagrisTagsMap(&sv.CapacityTags, value); err != nil {
+				return err
+			}
+
 		case "desiredvCpus":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8083,6 +8137,11 @@ func awsRestjson1_deserializeDocumentComputeResource(v **types.ComputeResource, 
 
 		case "launchTemplate":
 			if err := awsRestjson1_deserializeDocumentLaunchTemplateSpecification(&sv.LaunchTemplate, value); err != nil {
+				return err
+			}
+
+		case "managedInstancesProvider":
+			if err := awsRestjson1_deserializeDocumentManagedInstancesProvider(&sv.ManagedInstancesProvider, value); err != nil {
 				return err
 			}
 
@@ -9368,6 +9427,15 @@ func awsRestjson1_deserializeDocumentEcsTaskDetails(v **types.EcsTaskDetails, va
 				return err
 			}
 
+		case "networkMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NetworkMode = ptr.String(jtv)
+			}
+
 		case "pidMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9485,6 +9553,15 @@ func awsRestjson1_deserializeDocumentEcsTaskProperties(v **types.EcsTaskProperti
 		case "networkConfiguration":
 			if err := awsRestjson1_deserializeDocumentNetworkConfiguration(&sv.NetworkConfiguration, value); err != nil {
 				return err
+			}
+
+		case "networkMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NetworkMode = ptr.String(jtv)
 			}
 
 		case "pidMode":
@@ -12309,6 +12386,187 @@ func awsRestjson1_deserializeDocumentImagePullSecrets(v *[]types.ImagePullSecret
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInfrastructureOptimization(v **types.InfrastructureOptimization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InfrastructureOptimization
+	if *v == nil {
+		sv = &types.InfrastructureOptimization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "scaleInAfter":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScaleInAfter = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInstanceLaunchTemplate(v **types.InstanceLaunchTemplate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceLaunchTemplate
+	if *v == nil {
+		sv = &types.InstanceLaunchTemplate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "capacityOptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CapacityOptionType = ptr.String(jtv)
+			}
+
+		case "capacityReservations":
+			if err := awsRestjson1_deserializeDocumentCapacityReservationRequest(&sv.CapacityReservations, value); err != nil {
+				return err
+			}
+
+		case "ec2InstanceProfileArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Ec2InstanceProfileArn = ptr.String(jtv)
+			}
+
+		case "fipsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.FipsEnabled = ptr.Bool(jtv)
+			}
+
+		case "instanceMetadataTagsPropagation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.InstanceMetadataTagsPropagation = ptr.Bool(jtv)
+			}
+
+		case "instanceRequirements":
+			if err := awsRestjson1_deserializeDocumentInstanceRequirementsRequest(&sv.InstanceRequirements, value); err != nil {
+				return err
+			}
+
+		case "localStorageConfiguration":
+			if err := awsRestjson1_deserializeDocumentManagedInstancesLocalStorageConfiguration(&sv.LocalStorageConfiguration, value); err != nil {
+				return err
+			}
+
+		case "monitoring":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Monitoring = ptr.String(jtv)
+			}
+
+		case "networkConfiguration":
+			if err := awsRestjson1_deserializeDocumentManagedInstancesNetworkConfiguration(&sv.NetworkConfiguration, value); err != nil {
+				return err
+			}
+
+		case "storageConfiguration":
+			if err := awsRestjson1_deserializeDocumentManagedInstancesStorageConfiguration(&sv.StorageConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInstanceRequirementsRequest(v **types.InstanceRequirementsRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceRequirementsRequest
+	if *v == nil {
+		sv = &types.InstanceRequirementsRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedInstanceTypes":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.AllowedInstanceTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentJobCapacityUsageSummary(v **types.JobCapacityUsageSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14307,6 +14565,190 @@ func awsRestjson1_deserializeDocumentLogConfigurationOptionsMap(v *map[string]st
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentManagedInstancesLocalStorageConfiguration(v **types.ManagedInstancesLocalStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedInstancesLocalStorageConfiguration
+	if *v == nil {
+		sv = &types.ManagedInstancesLocalStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "useLocalStorage":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseLocalStorage = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentManagedInstancesNetworkConfiguration(v **types.ManagedInstancesNetworkConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedInstancesNetworkConfiguration
+	if *v == nil {
+		sv = &types.ManagedInstancesNetworkConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "securityGroups":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.SecurityGroups, value); err != nil {
+				return err
+			}
+
+		case "subnets":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.Subnets, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentManagedInstancesProvider(v **types.ManagedInstancesProvider, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedInstancesProvider
+	if *v == nil {
+		sv = &types.ManagedInstancesProvider{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "infrastructureOptimization":
+			if err := awsRestjson1_deserializeDocumentInfrastructureOptimization(&sv.InfrastructureOptimization, value); err != nil {
+				return err
+			}
+
+		case "infrastructureRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.InfrastructureRoleArn = ptr.String(jtv)
+			}
+
+		case "instanceLaunchTemplate":
+			if err := awsRestjson1_deserializeDocumentInstanceLaunchTemplate(&sv.InstanceLaunchTemplate, value); err != nil {
+				return err
+			}
+
+		case "propagateTags":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PropagateTags = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentManagedInstancesStorageConfiguration(v **types.ManagedInstancesStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedInstancesStorageConfiguration
+	if *v == nil {
+		sv = &types.ManagedInstancesStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "storageSizeGiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StorageSizeGiB = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

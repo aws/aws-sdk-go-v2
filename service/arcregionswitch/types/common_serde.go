@@ -99,6 +99,12 @@ func serializeExecutionBlockConfiguration(s smithy.ShapeSerializer, schema *smit
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig:
+		s.WriteUnion(schema, schemas.ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig)
+		s.WriteStruct(schemas.ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ExecutionBlockConfigurationMemberRegionSwitchPlanConfig:
 		s.WriteUnion(schema, schemas.ExecutionBlockConfiguration_regionSwitchPlanConfig)
 		s.WriteStruct(schemas.ExecutionBlockConfiguration_regionSwitchPlanConfig)
@@ -203,6 +209,10 @@ func deserializeExecutionBlockConfiguration(d smithy.ShapeDeserializer, s *smith
 			return vv.Deserialize(d)
 		case schemas.ExecutionBlockConfiguration_rdsPromoteReadReplicaConfig:
 			vv := &ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ExecutionBlockConfiguration_rdsSwitchoverReadReplicaConfig:
+			vv := &ExecutionBlockConfigurationMemberRdsSwitchoverReadReplicaConfig{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.ExecutionBlockConfiguration_regionSwitchPlanConfig:

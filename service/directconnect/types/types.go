@@ -243,6 +243,26 @@ type Connection struct {
 	// Connection Key Name, or Encryption Down .
 	PortEncryptionStatus *string
 
+	// The total number of inbound IPv4 route prefixes you can allocate across the
+	// virtual interfaces on the connection. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolSizeIpv4 *int32
+
+	// The total number of inbound IPv6 route prefixes you can allocate across the
+	// virtual interfaces on the connection. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolSizeIpv6 *int32
+
+	// The number of inbound IPv4 route prefixes in the connection prefix pool not yet
+	// allocated to a virtual interface. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolUnallocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes in the connection prefix pool not yet
+	// allocated to a virtual interface. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolUnallocatedCountIpv6 *int32
+
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
@@ -306,6 +326,10 @@ type DirectConnectGateway struct {
 
 	// Information about a tag.
 	Tags []Tag
+
+	// The total number of inbound route prefixes allocated to the attachments on the
+	// Direct Connect gateway. The count combines the IPv4 and IPv6 address families.
+	TotalPrefixPoolAllocations *int32
 
 	noSmithyDocumentSerde
 }
@@ -616,6 +640,26 @@ type Lag struct {
 	// The ID of the Amazon Web Services account that owns the LAG.
 	OwnerAccount *string
 
+	// The total number of inbound IPv4 route prefixes you can allocate across the
+	// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and
+	// support hosted connections.
+	PrefixPoolSizeIpv4 *int32
+
+	// The total number of inbound IPv6 route prefixes you can allocate across the
+	// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects and
+	// support hosted connections.
+	PrefixPoolSizeIpv6 *int32
+
+	// The number of inbound IPv4 route prefixes in the LAG prefix pool not yet
+	// allocated to a virtual interface. Not applicable to LAGs that are interconnects
+	// and support hosted connections.
+	PrefixPoolUnallocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes in the LAG prefix pool not yet
+	// allocated to a virtual interface. Not applicable to LAGs that are interconnects
+	// and support hosted connections.
+	PrefixPoolUnallocatedCountIpv6 *int32
+
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 
@@ -807,6 +851,12 @@ type NewPrivateVirtualInterface struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 8500. The default value is 1500.
 	Mtu *int32
+
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface.
+	PrefixPoolAllocatedCountIpv6 *int32
 
 	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
 	// rate limit restricts the maximum bandwidth that the virtual interface can use on
@@ -1128,6 +1178,12 @@ type NewTransitVirtualInterface struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 8500. The default value is 1500.
 	Mtu *int32
+
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface.
+	PrefixPoolAllocatedCountIpv6 *int32
 
 	// The rate limit (bandwidth allocation) to apply to the virtual interface. The
 	// rate limit restricts the maximum bandwidth that the virtual interface can use on
@@ -1475,6 +1531,14 @@ type VirtualInterface struct {
 
 	// The ID of the Amazon Web Services account that owns the virtual interface.
 	OwnerAccount *string
+
+	// The number of inbound IPv4 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv6 *int32
 
 	// The rate limit (bandwidth allocation) applied to the virtual interface. The
 	// value must be one of the supported bandwidth values and cannot exceed the

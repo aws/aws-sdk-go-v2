@@ -45,6 +45,14 @@ type UpdateVirtualInterfaceAttributesInput struct {
 	// and 8500. The default value is 1500.
 	Mtu *int32
 
+	// The number of inbound IPv4 route prefixes to allocate to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes to allocate to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv6 *int32
+
 	// The rate limit (bandwidth allocation) to apply to the virtual interface. Use
 	// this to update the bandwidth allocation on an existing virtual interface.
 	RateLimit *string
@@ -142,6 +150,14 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 
 	// The ID of the Amazon Web Services account that owns the virtual interface.
 	OwnerAccount *string
+
+	// The number of inbound IPv4 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv6 *int32
 
 	// The rate limit (bandwidth allocation) applied to the virtual interface. The
 	// value must be one of the supported bandwidth values and cannot exceed the
