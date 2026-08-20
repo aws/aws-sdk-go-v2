@@ -1,3 +1,37 @@
+# Release (2026-08-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.43.7
+  * **Bug Fix**: Make x-amz-checksum-* headers on presigner always show up as headers
+* `github.com/aws/aws-sdk-go-v2/feature/s3/manager`: [v1.22.44](feature/s3/manager/CHANGELOG.md#v12244-2026-08-20)
+  * **Bug Fix**: Fix flaky test from feature/s3/manager upload retry
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.42.0](service/amplify/CHANGELOG.md#v1420-2026-08-20)
+  * **Feature**: Increased the maximum allowed length from 255 to 4,096 characters to support longer access tokens.
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.14.0](service/arcregionswitch/CHANGELOG.md#v1140-2026-08-20)
+  * **Feature**: Adds support for Rds switchover read replica for Oracle databases in Region switch plans
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.70.0](service/batch/CHANGELOG.md#v1700-2026-08-20)
+  * **Feature**: AWS Batch now supports a new compute environment type that provides fully managed EC2 capacity with broader compute flexibility than Fargate, including GPU instances, bare metal, and specific instance type selection, without infrastructure management overhead.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.68.0](service/cloudfront/CHANGELOG.md#v1680-2026-08-20)
+  * **Feature**: Added SigV4a as a supported signing protocol for Origin Access Control (OAC), enabling CloudFront to sign requests to Amazon S3 Multi-Region Access Point (S3-MRAP) origins.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.45.0](service/directconnect/CHANGELOG.md#v1450-2026-08-20)
+  * **Feature**: This release adds custom route prefix pool allocations for Direct Connect. You can set IPv4 and IPv6 route prefix counts on private and transit virtual interfaces, and view pool size and unallocated counts on connections and LAGs, plus direct connect gateway attachment prefix allocation totals.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.322.0](service/ec2/CHANGELOG.md#v13220-2026-08-20)
+  * **Feature**: EC2 marks UEFI instance metadata field as sensitive.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.102.0](service/lambda/CHANGELOG.md#v11020-2026-08-20)
+  * **Feature**: Adds support for full JSON resource-based policies, enabling customers to create, retrieve, update, and delete function resource policies as complete JSON documents.
+* `github.com/aws/aws-sdk-go-v2/service/pricingplanmanager`: [v1.0.5](service/pricingplanmanager/CHANGELOG.md#v105-2026-08-20)
+  * **Documentation**: Documentation update for the CreateSubscription API to correct the default value of the approval mode parameter. The default value for paid subscriptions is MANUAL, not IMMEDIATE as previously documented. The default value remains IMMEDIATE for FREE tier subscriptions.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.107.3](service/s3/CHANGELOG.md#v11073-2026-08-20)
+  * **Bug Fix**: Expand S3 operations that check for an error inside an HTTP 200 response (wave 2/4)
+  * **Bug Fix**: Forward the original response body's `Closer` in S3 200-error handling instead of wrapping it in `io.NopCloser`, to avoid issues with TCP connection reuse (observed on CompleteMultipartUpload).
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.268.0](service/sagemaker/CHANGELOG.md#v12680-2026-08-20)
+  * **Feature**: Added IAM Identity Center (IdC) support to CreatePartnerApp and UpdatePartnerApp APIs. Added Customer Managed Key (CMK) support to CreateMlflowApp and DescribeMlflowApp.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.67.0](service/sesv2/CHANGELOG.md#v1670-2026-08-20)
+  * **Feature**: Amazon SES now supports per-message tracking overrides. You can use the new ConfigurationOverrides parameter in SendEmail and SendBulkEmail to enable or disable open and click tracking for individual messages without changing your account-level or configuration set settings.
+
 # Release (2026-08-19)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "572dba28-3670-47c1-b6e8-2585a5d843f4",
-    "type": "feature",
-    "description": "EC2 marks UEFI instance metadata field as sensitive.",
-    "modules": [
-        "service/ec2"
-    ]
-}

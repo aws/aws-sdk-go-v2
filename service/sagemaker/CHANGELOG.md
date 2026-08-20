@@ -1,3 +1,8 @@
+# v1.268.0 (2026-08-20)
+
+* **Feature**: Added IAM Identity Center (IdC) support to CreatePartnerApp and UpdatePartnerApp APIs. Added Customer Managed Key (CMK) support to CreateMlflowApp and DescribeMlflowApp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.267.0 (2026-08-14)
 
 * **Feature**: Release support for g7.2xlarge, g7.4xlarge, g7.8xlarge, g7.12xlarge, g7.24xlarge, and g7.48xlarge instance types for SageMaker HyperPod

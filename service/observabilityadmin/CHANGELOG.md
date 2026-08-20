@@ -1,3 +1,7 @@
+# v1.23.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2026-08-14)
 
 * **Feature**: CloudWatch Logs centralization rules now support tag propagation. You can configure a TagPropagationConfiguration on your centralization rule to automatically sync resource tags from source to destination log groups, with configurable conflict resolution strategies.

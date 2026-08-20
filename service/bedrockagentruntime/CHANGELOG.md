@@ -1,3 +1,7 @@
+# v1.58.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2026-08-17)
 
 * **Feature**: AgenticRetrieveStream API now supports Amazon Bedrock AgentCore Memory. Use the new memoryConfiguration parameter to continue a session from short-term memory and retrieve from long-term memory.

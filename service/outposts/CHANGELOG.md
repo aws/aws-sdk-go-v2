@@ -1,3 +1,7 @@
+# v1.67.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2026-08-18)
 
 * **Feature**: AWS Outposts now supports VPC Endpoint configuration in CreatePrivateConnectivityConfig, enabling scoped private connectivity with provisioning role creation for secure outpost installations

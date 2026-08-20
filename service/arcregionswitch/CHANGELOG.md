@@ -1,3 +1,8 @@
+# v1.14.0 (2026-08-20)
+
+* **Feature**: Adds support for Rds switchover read replica for Oracle databases in Region switch plans
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.5 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

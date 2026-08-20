@@ -1,3 +1,8 @@
+# v1.45.0 (2026-08-20)
+
+* **Feature**: This release adds custom route prefix pool allocations for Direct Connect. You can set IPv4 and IPv6 route prefix counts on private and transit virtual interfaces, and view pool size and unallocated counts on connections and LAGs, plus direct connect gateway attachment prefix allocation totals.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.3 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

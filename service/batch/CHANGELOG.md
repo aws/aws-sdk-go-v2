@@ -1,3 +1,8 @@
+# v1.70.0 (2026-08-20)
+
+* **Feature**: AWS Batch now supports a new compute environment type that provides fully managed EC2 capacity with broader compute flexibility than Fargate, including GPU instances, bare metal, and specific instance type selection, without infrastructure management overhead.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.69.0 (2026-08-19)
 
 * **Feature**: AWS Batch now supports managing CloudWatch Container Insights on compute environments via CreateComputeEnvironment and UpdateComputeEnvironment.

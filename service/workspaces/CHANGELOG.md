@@ -1,3 +1,7 @@
+# v1.74.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.74.0 (2026-08-18)
 
 * **Feature**: Amazon WorkSpaces now supports nested virtualization, allowing you to run hypervisors and virtualization-based workloads within your WorkSpaces. You can enable or disable nested virtualization when creating a WorkSpace or by modifying an existing WorkSpace's properties.

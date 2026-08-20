@@ -1,8 +1,0 @@
-{
-    "id": "a2a2fa15-48c7-41a8-a3b3-a7862bfe1eb6",
-    "type": "feature",
-    "description": "Amazon SES now supports per-message tracking overrides. You can use the new ConfigurationOverrides parameter in SendEmail and SendBulkEmail to enable or disable open and click tracking for individual messages without changing your account-level or configuration set settings.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "0c34c7ad-433d-48a1-a2a4-64ac118d3507",
-    "type": "feature",
-    "description": "Added SigV4a as a supported signing protocol for Origin Access Control (OAC), enabling CloudFront to sign requests to Amazon S3 Multi-Region Access Point (S3-MRAP) origins.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

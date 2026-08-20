@@ -1,8 +1,0 @@
-{
-    "id": "c529dfeb-e600-4972-b40d-04aa17e0c2e0",
-    "type": "feature",
-    "description": "Increased the maximum allowed length from 255 to 4,096 characters to support longer access tokens.",
-    "modules": [
-        "service/amplify"
-    ]
-}

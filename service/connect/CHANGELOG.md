@@ -1,3 +1,7 @@
+# v1.189.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.189.0 (2026-08-17)
 
 * **Feature**: This release adds new APIs to create, describe, update, delete, and list extraction definitions, enabling customers to manage lifecycle of extraction definition resources. Additionally, this release adds new event sources for Rules related to ACW and new action to Extract Information.

@@ -1,3 +1,7 @@
+# v1.4.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2026-08-14)
 
 * **Feature**: Adds support for Consuming code for MWAA Serverless

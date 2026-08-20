@@ -1,3 +1,7 @@
+# v1.40.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2026-08-19)
 
 * **Feature**: AgentCore Memory now supports Flexible Namespaces and Non-Conversational Payloads in CreateEvent API

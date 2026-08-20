@@ -1,8 +1,0 @@
-{
-    "id": "31c809bd-6d84-469b-89c3-c5f4928151b4",
-    "type": "feature",
-    "description": "Added IAM Identity Center (IdC) support to CreatePartnerApp and UpdatePartnerApp APIs. Added Customer Managed Key (CMK) support to CreateMlflowApp and DescribeMlflowApp.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.153.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.153.0 (2026-08-14)
 
 * **Feature**: Added support for associating glossary terms with iterable form items, such as table columns.

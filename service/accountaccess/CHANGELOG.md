@@ -1,3 +1,7 @@
+# v1.1.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2026-08-19)
 
 * **Feature**: Adds throttling exceptions to operation outputs that were previously inconsistent with other operations.

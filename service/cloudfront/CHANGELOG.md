@@ -1,3 +1,8 @@
+# v1.68.0 (2026-08-20)
+
+* **Feature**: Added SigV4a as a supported signing protocol for Origin Access Control (OAC), enabling CloudFront to sign requests to Amazon S3 Multi-Region Access Point (S3-MRAP) origins.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.6 (2026-08-14)
 
 * **Dependency Update**: Update to smithy-go v1.27.8.

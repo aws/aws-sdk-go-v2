@@ -1,8 +1,0 @@
-{
-    "id": "5c7a35cb-e870-42a3-8d52-2069b3bbc958",
-    "type": "feature",
-    "description": "Adds support for Rds switchover read replica for Oracle databases in Region switch plans",
-    "modules": [
-        "service/arcregionswitch"
-    ]
-}

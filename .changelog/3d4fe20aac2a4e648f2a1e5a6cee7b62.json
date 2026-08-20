@@ -1,8 +1,0 @@
-{
-    "id": "3d4fe20a-ac2a-4e64-8f2a-1e5a6cee7b62",
-    "type": "feature",
-    "description": "Adds support for full JSON resource-based policies, enabling customers to create, retrieve, update, and delete function resource policies as complete JSON documents.",
-    "modules": [
-        "service/lambda"
-    ]
-}

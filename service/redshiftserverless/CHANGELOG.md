@@ -1,3 +1,7 @@
+# v1.39.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2026-08-19)
 
 * **Feature**: Amazon Redshift Enhanced System Table Retention that allows customers to store their system table data directly in S3 Tables in customer's account instead of Redshift Managed Storage
