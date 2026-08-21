@@ -406,6 +406,30 @@ var ReaderPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.Get
 	}, nil
 }
 
+// UnequalPartGetObjectFn mocks getobject behavior of s3 client to return
+// object parts of unequal sizes, as a multipart upload may produce. Unlike
+// ReaderPartGetObjectFn it also returns the Content-Range of each part,
+// which is what S3 includes in part-number GetObject responses.
+var UnequalPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	index := aws.ToInt32(params.PartNumber) - 1
+	total := 0
+	for _, p := range c.PartsData {
+		total += len(p)
+	}
+	start := 0
+	for _, p := range c.PartsData[:index] {
+		start += len(p)
+	}
+	part := c.PartsData[index]
+	return &s3.GetObjectOutput{
+		Body:          io.NopCloser(bytes.NewReader(part)),
+		ContentLength: aws.Int64(int64(len(part))),
+		ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, start+len(part)-1, total)),
+		PartsCount:    aws.Int32(c.PartsCount),
+		ETag:          aws.String(etag),
+	}, nil
+}
+
 // CompositePartGetObjectFn mocks getobject behavior of s3 client to return object with composite checksum type and checksum value
 var CompositePartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	return &s3.GetObjectOutput{

@@ -799,6 +799,19 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		}
 	}
 
+	if params.PartNumber != nil && out.ContentRange != nil {
+		// The parts of a multipart object may have unequal sizes, so the
+		// queue-time chunk start — computed by advancing part 1's size once
+		// per part — can point at the wrong offset. The part's absolute
+		// offset in the assembled object is authoritative in the response
+		// Content-Range; correct the write offset from it.
+		respStart, _, err := getRespRange(aws.ToString(out.ContentRange))
+		if err != nil {
+			return nil, err
+		}
+		chunk.start = respStart
+	}
+
 	d.totalBytesOnce.Do(func() {
 		d.setTotalBytes(out)
 		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
