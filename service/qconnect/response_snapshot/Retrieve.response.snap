@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"results":[{"associationId":"__AssociationId__","contentText":"__ContentText__","referenceType":"WEB_CRAWLER","sourceId":"__SourceId__"},{"associationId":"__AssociationId__","contentText":"__ContentText__","referenceType":"WEB_CRAWLER","sourceId":"__SourceId__"}]}

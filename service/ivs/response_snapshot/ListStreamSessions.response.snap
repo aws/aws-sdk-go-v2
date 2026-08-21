@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","streamSessions":[{"endTime":"2000-01-01T00:00:00Z","hasErrorEvent":true,"startTime":"2000-01-01T00:00:00Z","streamId":"__StreamId__"},{"endTime":"2000-01-01T00:00:00Z","hasErrorEvent":true,"startTime":"2000-01-01T00:00:00Z","streamId":"__StreamId__"}]}

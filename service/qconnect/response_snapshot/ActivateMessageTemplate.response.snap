@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"messageTemplateArn":"__MessageTemplateArn__","messageTemplateId":"__MessageTemplateId__","versionNumber":1}

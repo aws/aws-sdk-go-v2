@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.PutResourcePolicy
+
+{"__type":"PublicPolicyException","Message":"__Message__"}

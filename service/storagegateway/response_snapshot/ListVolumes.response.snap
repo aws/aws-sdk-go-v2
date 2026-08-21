@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.ListVolumes
+
+{"GatewayARN":"__GatewayARN__","Marker":"__Marker__","VolumeInfos":[{"GatewayARN":"__GatewayARN__","GatewayId":"__GatewayId__","VolumeARN":"__VolumeARN__","VolumeAttachmentStatus":"__VolumeAttachmentStatus__","VolumeId":"__VolumeId__","VolumeSizeInBytes":1,"VolumeType":"__VolumeType__"},{"GatewayARN":"__GatewayARN__","GatewayId":"__GatewayId__","VolumeARN":"__VolumeARN__","VolumeAttachmentStatus":"__VolumeAttachmentStatus__","VolumeId":"__VolumeId__","VolumeSizeInBytes":1,"VolumeType":"__VolumeType__"}]}

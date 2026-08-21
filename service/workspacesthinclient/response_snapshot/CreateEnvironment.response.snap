@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"environment":{"activationCode":"__ActivationCode__","arn":"__Arn__","createdAt":946684800,"desiredSoftwareSetId":"__DesiredSoftwareSetId__","desktopArn":"__DesktopArn__","desktopEndpoint":"__DesktopEndpoint__","desktopType":"workspaces","id":"__Id__","maintenanceWindow":{"applyTimeOf":"UTC","daysOfTheWeek":["MONDAY","MONDAY"],"endTimeHour":1,"endTimeMinute":1,"startTimeHour":1,"startTimeMinute":1,"type":"SYSTEM"},"name":"__Name__","pendingSoftwareSetId":"__PendingSoftwareSetId__","softwareSetUpdateMode":"USE_LATEST","softwareSetUpdateSchedule":"USE_MAINTENANCE_WINDOW","updatedAt":946684800}}

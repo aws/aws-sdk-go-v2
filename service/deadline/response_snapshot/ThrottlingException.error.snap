@@ -1,0 +1,5 @@
+429
+Content-Type: application/json
+Retry-After: 1
+
+{"__type":"ThrottlingException","context":{"key0":"__Value__"},"message":"__Message__","quotaCode":"__QuotaCode__","serviceCode":"__ServiceCode__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"recoveryPlanExecution":{"completedAt":"__CompletedAt__","errorDetail":{"code":"__Code__","message":"__Message__"},"mode":"DRILL","recoveryPlanArn":"__RecoveryPlanArn__","recoveryPlanExecutionArn":"__RecoveryPlanExecutionArn__","startedAt":"__StartedAt__","status":"CREATED","tags":{"key0":"__Value__"}}}

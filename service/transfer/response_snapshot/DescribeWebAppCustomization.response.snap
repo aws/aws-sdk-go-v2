@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.DescribeWebAppCustomization
+
+{"WebAppCustomization":{"Arn":"__Arn__","FaviconFile":"YmxvYg==","LogoFile":"YmxvYg==","Title":"__Title__","WebAppId":"__WebAppId__"}}

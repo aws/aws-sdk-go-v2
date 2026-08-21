@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","AssetType":"S3_SNAPSHOT","CreatedAt":"2000-01-01T00:00:00Z","Description":"__Description__","Id":"__Id__","Name":"__Name__","Origin":"OWNED","OriginDetails":{"DataGrantId":"__DataGrantId__","ProductId":"__ProductId__"},"SourceId":"__SourceId__","UpdatedAt":"2000-01-01T00:00:00Z"}

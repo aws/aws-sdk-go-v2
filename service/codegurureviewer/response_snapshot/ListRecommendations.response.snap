@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RecommendationSummaries":[{"Description":"__Description__","EndLine":1,"FilePath":"__FilePath__","RecommendationCategory":"AWSBestPractices","RecommendationId":"__RecommendationId__","RuleMetadata":{"LongDescription":"__LongDescription__","RuleId":"__RuleId__","RuleName":"__RuleName__","RuleTags":["__Member__","__Member__"],"ShortDescription":"__ShortDescription__"},"Severity":"Info","StartLine":1},{"Description":"__Description__","EndLine":1,"FilePath":"__FilePath__","RecommendationCategory":"AWSBestPractices","RecommendationId":"__RecommendationId__","RuleMetadata":{"LongDescription":"__LongDescription__","RuleId":"__RuleId__","RuleName":"__RuleName__","RuleTags":["__Member__","__Member__"],"ShortDescription":"__ShortDescription__"},"Severity":"Info","StartLine":1}]}

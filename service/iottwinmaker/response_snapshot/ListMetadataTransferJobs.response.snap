@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"metadataTransferJobSummaries":[{"arn":"__Arn__","creationDateTime":946684800,"metadataTransferJobId":"__MetadataTransferJobId__","progress":{"failedCount":1,"skippedCount":1,"succeededCount":1,"totalCount":1},"status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"queuedPosition":1,"state":"VALIDATING"},"updateDateTime":946684800},{"arn":"__Arn__","creationDateTime":946684800,"metadataTransferJobId":"__MetadataTransferJobId__","progress":{"failedCount":1,"skippedCount":1,"succeededCount":1,"totalCount":1},"status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"queuedPosition":1,"state":"VALIDATING"},"updateDateTime":946684800}],"nextToken":"__NextToken__"}

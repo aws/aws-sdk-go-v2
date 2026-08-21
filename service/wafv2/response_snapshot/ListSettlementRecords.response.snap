@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.ListSettlementRecords
+
+{"NextMarker":"__NextMarker__","Settlements":[{"Amount":"__Amount__","ContentPath":"__ContentPath__","Currency":"USDC","Intent":"__Intent__","Network":"__Network__","Organization":"__Organization__","PayerAddress":"__PayerAddress__","RequestId":"__RequestId__","RequestTimestamp":946684800,"SourceCategory":"__SourceCategory__","SourceName":"__SourceName__","Status":"SETTLED","Timestamp":946684800,"TransactionId":"__TransactionId__","Verified":true,"WalletAddress":"__WalletAddress__","WebAclArn":"__WebAclArn__"},{"Amount":"__Amount__","ContentPath":"__ContentPath__","Currency":"USDC","Intent":"__Intent__","Network":"__Network__","Organization":"__Organization__","PayerAddress":"__PayerAddress__","RequestId":"__RequestId__","RequestTimestamp":946684800,"SourceCategory":"__SourceCategory__","SourceName":"__SourceName__","Status":"SETTLED","Timestamp":946684800,"TransactionId":"__TransactionId__","Verified":true,"WalletAddress":"__WalletAddress__","WebAclArn":"__WebAclArn__"}]}

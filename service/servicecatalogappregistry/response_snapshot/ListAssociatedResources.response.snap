@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","resources":[{"arn":"__Arn__","name":"__Name__","options":["APPLY_APPLICATION_TAG","APPLY_APPLICATION_TAG"],"resourceDetails":{"tagValue":"__TagValue__"},"resourceType":"CFN_STACK"},{"arn":"__Arn__","name":"__Name__","options":["APPLY_APPLICATION_TAG","APPLY_APPLICATION_TAG"],"resourceDetails":{"tagValue":"__TagValue__"},"resourceType":"CFN_STACK"}]}
