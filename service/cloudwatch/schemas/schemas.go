@@ -1328,7 +1328,7 @@ var _ListMetricStreamsMaxResults = smithy.NewSchema(smithy.ShapeID{
 var LogAlarm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "LogAlarm",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var LogAlarm_AlarmName *smithy.Schema
 
 var LogAlarm_AlarmArn *smithy.Schema
@@ -1372,6 +1372,8 @@ var LogAlarm_EvaluationState *smithy.Schema
 var LogAlarm_ActionLogLineCount *smithy.Schema
 
 var LogAlarm_ActionLogLineRoleArn *smithy.Schema
+
+var LogAlarm_WarmUpConfiguration *smithy.Schema
 
 var _LogAlarms = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -1471,7 +1473,7 @@ var Metric_Dimensions *smithy.Schema
 var MetricAlarm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "MetricAlarm",
-}, smithy.ShapeTypeStructure, 32)
+}, smithy.ShapeTypeStructure, 33)
 var MetricAlarm_AlarmName *smithy.Schema
 
 var MetricAlarm_AlarmArn *smithy.Schema
@@ -1531,6 +1533,8 @@ var MetricAlarm_EvaluationState *smithy.Schema
 var MetricAlarm_StateTransitionedTimestamp *smithy.Schema
 
 var MetricAlarm_EvaluationWindow *smithy.Schema
+
+var MetricAlarm_WarmUpConfiguration *smithy.Schema
 
 var MetricAlarm_EvaluationCriteria *smithy.Schema
 
@@ -1830,6 +1834,11 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "NextToken",
 }, smithy.ShapeTypeString, 0)
+
+var _OnlyStartEvaluatingAfterWarmUpPeriodEnds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "OnlyStartEvaluatingAfterWarmUpPeriodEnds",
+}, smithy.ShapeTypeBoolean, 0)
 
 var OTelEnrichmentStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -2275,6 +2284,19 @@ var WallClockWindow = smithy.NewSchema(smithy.ShapeID{
 	Name:      "WallClockWindow",
 }, smithy.ShapeTypeStructure, 1)
 var WallClockWindow_Timezone *smithy.Schema
+
+var WarmUpConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "WarmUpConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var WarmUpConfiguration_WarmUpPeriodDurationInMinutes *smithy.Schema
+
+var WarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds *smithy.Schema
+
+var _WarmUpPeriodDurationInMinutes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "WarmUpPeriodDurationInMinutes",
+}, smithy.ShapeTypeInteger, 0)
 
 var AssociateDatasetKmsKeyInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -2982,7 +3004,7 @@ var PutInsightRuleOutput = smithy.NewSchema(smithy.ShapeID{
 var PutLogAlarmInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "PutLogAlarmInput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var PutLogAlarmInput_AlarmName *smithy.Schema
 
 var PutLogAlarmInput_AlarmDescription *smithy.Schema
@@ -3013,6 +3035,8 @@ var PutLogAlarmInput_TreatMissingData *smithy.Schema
 
 var PutLogAlarmInput_Tags *smithy.Schema
 
+var PutLogAlarmInput_WarmUpConfiguration *smithy.Schema
+
 var PutManagedInsightRulesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "PutManagedInsightRulesInput",
@@ -3028,7 +3052,7 @@ var PutManagedInsightRulesOutput_Failures *smithy.Schema
 var PutMetricAlarmInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "PutMetricAlarmInput",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var PutMetricAlarmInput_AlarmName *smithy.Schema
 
 var PutMetricAlarmInput_AlarmDescription *smithy.Schema
@@ -3074,6 +3098,8 @@ var PutMetricAlarmInput_Tags *smithy.Schema
 var PutMetricAlarmInput_ThresholdMetricId *smithy.Schema
 
 var PutMetricAlarmInput_EvaluationWindow *smithy.Schema
+
+var PutMetricAlarmInput_WarmUpConfiguration *smithy.Schema
 
 var PutMetricAlarmInput_EvaluationCriteria *smithy.Schema
 
@@ -3736,6 +3762,10 @@ func init() {
 
 	ScheduledQueryConfiguration_Tags = ScheduledQueryConfiguration.AddMember("Tags", _TagList)
 
+	WarmUpConfiguration_WarmUpPeriodDurationInMinutes = WarmUpConfiguration.AddMember("WarmUpPeriodDurationInMinutes", _WarmUpPeriodDurationInMinutes)
+
+	WarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds = WarmUpConfiguration.AddMember("OnlyStartEvaluatingAfterWarmUpPeriodEnds", _OnlyStartEvaluatingAfterWarmUpPeriodEnds)
+
 	LogAlarm_AlarmName = LogAlarm.AddMember("AlarmName", _AlarmName)
 
 	LogAlarm_AlarmArn = LogAlarm.AddMember("AlarmArn", _AlarmArn)
@@ -3779,6 +3809,8 @@ func init() {
 	LogAlarm_ActionLogLineCount = LogAlarm.AddMember("ActionLogLineCount", _ActionLogLineCount)
 
 	LogAlarm_ActionLogLineRoleArn = LogAlarm.AddMember("ActionLogLineRoleArn", _ActionLogLineRoleArn)
+
+	LogAlarm_WarmUpConfiguration = LogAlarm.AddMember("WarmUpConfiguration", WarmUpConfiguration)
 
 	_LogAlarms_member = _LogAlarms.AddMember("member", LogAlarm)
 
@@ -3875,6 +3907,8 @@ func init() {
 	MetricAlarm_StateTransitionedTimestamp = MetricAlarm.AddMember("StateTransitionedTimestamp", _Timestamp)
 
 	MetricAlarm_EvaluationWindow = MetricAlarm.AddMember("EvaluationWindow", EvaluationWindow)
+
+	MetricAlarm_WarmUpConfiguration = MetricAlarm.AddMember("WarmUpConfiguration", WarmUpConfiguration)
 
 	MetricAlarm_EvaluationCriteria = MetricAlarm.AddMember("EvaluationCriteria", EvaluationCriteria)
 
@@ -4442,6 +4476,8 @@ func init() {
 
 	PutLogAlarmInput_Tags = PutLogAlarmInput.AddMember("Tags", _TagList)
 
+	PutLogAlarmInput_WarmUpConfiguration = PutLogAlarmInput.AddMember("WarmUpConfiguration", WarmUpConfiguration)
+
 	PutManagedInsightRulesInput_ManagedRules = PutManagedInsightRulesInput.AddMember("ManagedRules", _ManagedRules)
 
 	PutManagedInsightRulesOutput_Failures = PutManagedInsightRulesOutput.AddMember("Failures", _BatchFailures)
@@ -4491,6 +4527,8 @@ func init() {
 	PutMetricAlarmInput_ThresholdMetricId = PutMetricAlarmInput.AddMember("ThresholdMetricId", _MetricId)
 
 	PutMetricAlarmInput_EvaluationWindow = PutMetricAlarmInput.AddMember("EvaluationWindow", EvaluationWindow)
+
+	PutMetricAlarmInput_WarmUpConfiguration = PutMetricAlarmInput.AddMember("WarmUpConfiguration", WarmUpConfiguration)
 
 	PutMetricAlarmInput_EvaluationCriteria = PutMetricAlarmInput.AddMember("EvaluationCriteria", EvaluationCriteria)
 

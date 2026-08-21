@@ -391,6 +391,9 @@ func TestCheckRequestSnapshot_CreateRemoteAccessSession(t *testing.T) {
 				Host: ptr.String("__Host__"),
 				Port: ptr.Int32(1),
 			},
+			Parameters: map[string]string{
+				"key0": "__Value__",
+			},
 		},
 		InteractionMode: types.InteractionMode("INTERACTIVE"),
 		SkipAppResign:   ptr.Bool(true),
@@ -2883,6 +2886,9 @@ func TestUpdateRequestSnapshot_CreateRemoteAccessSession(t *testing.T) {
 			DeviceProxy: &types.DeviceProxy{
 				Host: ptr.String("__Host__"),
 				Port: ptr.Int32(1),
+			},
+			Parameters: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		InteractionMode: types.InteractionMode("INTERACTIVE"),

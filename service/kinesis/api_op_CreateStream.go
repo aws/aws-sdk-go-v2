@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Creates a Kinesis data stream. A stream captures and transports data records
@@ -123,6 +124,11 @@ type CreateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *CreateStreamInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.OperationType = ptr.String("control")
+}
+
 type CreateStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -150,6 +156,9 @@ func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

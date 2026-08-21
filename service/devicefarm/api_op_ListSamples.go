@@ -10,6 +10,8 @@ import (
 )
 
 // Gets information about samples, given an AWS Device Farm job ARN.
+//
+// Device Farm does not support performance data samples during test executions.
 func (c *Client) ListSamples(ctx context.Context, params *ListSamplesInput, optFns ...func(*Options)) (*ListSamplesOutput, error) {
 	if params == nil {
 		params = &ListSamplesInput{}

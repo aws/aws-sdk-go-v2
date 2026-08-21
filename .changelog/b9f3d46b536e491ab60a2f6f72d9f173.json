@@ -1,0 +1,8 @@
+{
+    "id": "b9f3d46b-536e-491a-b60a-2f6f72d9f173",
+    "type": "documentation",
+    "description": "Updating CLI Docs for Backup Audit Manager List Job Summaries APIs.",
+    "modules": [
+        "service/backup"
+    ]
+}

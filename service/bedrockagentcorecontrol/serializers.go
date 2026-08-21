@@ -16366,6 +16366,17 @@ func awsRestjson1_serializeDocumentComponentConfigurationMap(v map[string]types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCompositeIdentifierList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComputeConfiguration(v types.ComputeConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -21309,6 +21320,18 @@ func awsRestjson1_serializeDocumentPassthroughTargetConfiguration(v *types.Passt
 		}
 	}
 
+	if len(v.StaticQueryParameterConflictResolution) > 0 {
+		ok := object.Key("staticQueryParameterConflictResolution")
+		ok.String(string(v.StaticQueryParameterConflictResolution))
+	}
+
+	if v.StaticQueryParameters != nil {
+		ok := object.Key("staticQueryParameters")
+		if err := awsRestjson1_serializeDocumentStaticQueryParameters(v.StaticQueryParameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StickinessConfiguration != nil {
 		ok := object.Key("stickinessConfiguration")
 		if err := awsRestjson1_serializeDocumentStickinessConfiguration(v.StickinessConfiguration, ok); err != nil {
@@ -22570,6 +22593,17 @@ func awsRestjson1_serializeDocumentStaticOverride(v *types.StaticOverride, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentStaticQueryParameters(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentStaticRoute(v *types.StaticRoute, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22585,6 +22619,13 @@ func awsRestjson1_serializeDocumentStaticRoute(v *types.StaticRoute, value smith
 func awsRestjson1_serializeDocumentStickinessConfiguration(v *types.StickinessConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CompositeIdentifier != nil {
+		ok := object.Key("compositeIdentifier")
+		if err := awsRestjson1_serializeDocumentCompositeIdentifierList(v.CompositeIdentifier, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Identifier != nil {
 		ok := object.Key("identifier")

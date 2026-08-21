@@ -5,6 +5,7 @@ package kinesis
 import (
 	"context"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Describes the shard limits and usage for the account.
@@ -30,6 +31,11 @@ func (c *Client) DescribeLimits(ctx context.Context, params *DescribeLimitsInput
 
 type DescribeLimitsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (in *DescribeLimitsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.OperationType = ptr.String("control")
 }
 
 type DescribeLimitsOutput struct {
@@ -80,6 +86,9 @@ func (c *Client) addOperationDescribeLimitsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

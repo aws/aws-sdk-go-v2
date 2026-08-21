@@ -1612,6 +1612,21 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateWarmUpConfiguration(v *types.WarmUpConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WarmUpConfiguration"}
+	if v.WarmUpPeriodDurationInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WarmUpPeriodDurationInMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateDatasetKmsKeyInput(v *AssociateDatasetKmsKeyInput) error {
 	if v == nil {
 		return nil
@@ -2230,6 +2245,11 @@ func validateOpPutLogAlarmInput(v *PutLogAlarmInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.WarmUpConfiguration != nil {
+		if err := validateWarmUpConfiguration(v.WarmUpConfiguration); err != nil {
+			invalidParams.AddNested("WarmUpConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2277,6 +2297,11 @@ func validateOpPutMetricAlarmInput(v *PutMetricAlarmInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WarmUpConfiguration != nil {
+		if err := validateWarmUpConfiguration(v.WarmUpConfiguration); err != nil {
+			invalidParams.AddNested("WarmUpConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EvaluationCriteria != nil {

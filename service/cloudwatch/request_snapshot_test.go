@@ -1749,6 +1749,10 @@ func TestCheckRequestSnapshot_PutLogAlarm(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		WarmUpConfiguration: &types.WarmUpConfiguration{
+			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1939,6 +1943,10 @@ func TestCheckRequestSnapshot_PutMetricAlarm(t *testing.T) {
 			Value: types.WallClockWindow{
 				Timezone: ptr.String("__Timezone__"),
 			},
+		},
+		WarmUpConfiguration: &types.WarmUpConfiguration{
+			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
 		},
 		EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
 			Value: types.AlarmPromQLCriteria{
@@ -4084,6 +4092,10 @@ func TestUpdateRequestSnapshot_PutLogAlarm(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		WarmUpConfiguration: &types.WarmUpConfiguration{
+			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4274,6 +4286,10 @@ func TestUpdateRequestSnapshot_PutMetricAlarm(t *testing.T) {
 			Value: types.WallClockWindow{
 				Timezone: ptr.String("__Timezone__"),
 			},
+		},
+		WarmUpConfiguration: &types.WarmUpConfiguration{
+			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
 		},
 		EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
 			Value: types.AlarmPromQLCriteria{

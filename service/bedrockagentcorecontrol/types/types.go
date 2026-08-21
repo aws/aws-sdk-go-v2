@@ -6448,6 +6448,23 @@ type PassthroughTargetConfiguration struct {
 	// target's API.
 	Schema *HttpApiSchemaConfiguration
 
+	// Controls precedence when a client request supplies a query parameter whose name
+	// matches a configured static query parameter. If not set, defaults to
+	// CLIENT_OVERRIDE :
+	//
+	//   - CLIENT_OVERRIDE - The client-supplied value overrides the configured static
+	//   value for that parameter name.
+	//
+	//   - STATIC_OVERRIDE - The configured static value is retained, overriding the
+	//   client-supplied value for that parameter name.
+	StaticQueryParameterConflictResolution StaticQueryParameterConflictResolution
+
+	// A map of static query parameters that the gateway always appends to the
+	// outbound URL when forwarding requests to the target. The total outbound URL
+	// length, which includes the endpoint and the percent-encoded query parameters, is
+	// enforced by the service.
+	StaticQueryParameters map[string]string
+
 	// The session stickiness configuration for the passthrough target. This
 	// configuration routes requests within the same session to the same target.
 	StickinessConfiguration *StickinessConfiguration
@@ -8294,6 +8311,11 @@ type StickinessConfiguration struct {
 	//
 	// This member is required.
 	Identifier *string
+
+	// Additional headers to include in session affinity routing. When set, requests
+	// are only considered part of the same session if both the identifier and all
+	// composite identifier values match.
+	CompositeIdentifier []string
 
 	// The session stickiness timeout, in seconds. After this duration of inactivity,
 	// the session affinity expires. Valid values range from 1 to 86400.

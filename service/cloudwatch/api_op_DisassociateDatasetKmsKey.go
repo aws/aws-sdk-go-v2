@@ -18,19 +18,25 @@ import (
 // currently have a customer managed KMS key associated with it. If the dataset has
 // no associated KMS key, the operation fails with ResourceNotFoundException .
 //
-// Amazon CloudWatch performs a dry-run kms:Decrypt call on the key as part of
-// this operation. This verifies that the caller is authorized to use the currently
-// associated key. The caller must have kms:Decrypt permission on the currently
-// associated key, and the key must be enabled and accessible. If the key has been
-// disabled or scheduled for deletion, you must first re-enable or restore it
-// before you can disassociate it from the dataset.
+// Amazon CloudWatch performs a dry-run kms:Decrypt call on the currently
+// associated key as part of this operation. The caller must have kms:Decrypt
+// permission on the currently associated key. If the key is accessible but the
+// caller lacks kms:Decrypt permission, the operation fails with
+// AccessDeniedException .
+//
+// If the currently associated key has been deleted, is scheduled for deletion, is
+// pending import, is unavailable, or has been disabled, Amazon CloudWatch does not
+// require kms:Decrypt permission on that key and the disassociation proceeds. If
+// the key was only disabled, consider re-enabling it instead of disassociating,
+// because re-enabling allows Amazon CloudWatch to resume decrypting your existing
+// metric data.
 //
 // Disassociating a KMS key from a dataset does not immediately remove the
 // kms:Decrypt requirement on data plane operations. For up to three hours after
 // disassociation, callers must continue to have kms:Decrypt permission on the
-// previously associated key. Some data may still be encrypted with that key during
-// this window. After this enforcement window elapses, the kms:Decrypt requirement
-// is lifted.
+// previously associated key. Some data might still be encrypted with that key
+// during this window. After this enforcement window elapses, the kms:Decrypt
+// requirement is lifted.
 //
 // For more information about using customer managed keys with Amazon CloudWatch,
 // see [Encryption at rest with customer managed keys]in the Amazon CloudWatch User Guide.

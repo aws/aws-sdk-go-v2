@@ -486,6 +486,16 @@ type PutMetricAlarmInput struct {
 	// stuck in the INSUFFICIENT DATA state.
 	Unit types.StandardUnit
 
+	// The warm-up configuration for the alarm. A warm-up period delays alarm
+	// evaluation after you create or update the alarm. The warm-up period reduces
+	// alarm noise from missing data while a new resource or service starts publishing
+	// metrics.
+	//
+	// For more information, see [Alarm warm-up periods] in the Amazon CloudWatch User Guide.
+	//
+	// [Alarm warm-up periods]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+	WarmUpConfiguration *types.WarmUpConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -554,6 +564,11 @@ func (v *PutMetricAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Unit != "" {
 		s.WriteString(schemas.PutMetricAlarmInput_Unit, string(v.Unit))
+	}
+	if v.WarmUpConfiguration != nil {
+		s.WriteStruct(schemas.PutMetricAlarmInput_WarmUpConfiguration)
+		v.WarmUpConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 }
 

@@ -10,9 +10,10 @@ import (
 )
 
 // Updates the warm throughput configuration for the specified Amazon Kinesis Data
-// Streams on-demand data stream. This operation allows you to proactively scale
-// your on-demand data stream to a specified throughput level, enabling better
-// performance for sudden traffic spikes.
+// Streams on-demand data stream. Updates the warm throughput configuration for the
+// specified on-demand data stream. Use this operation to scale your stream to a
+// specified throughput level before anticipated traffic spikes, or to release
+// excess capacity after traffic has decreased.
 //
 // When invoking this API, you must use either the StreamARN or the StreamName
 // parameter, or both. It is recommended that you use the StreamARN input
@@ -28,6 +29,9 @@ import (
 // This operation is only supported for data streams with the on-demand capacity
 // mode in accounts that have MinimumThroughputBillingCommitment enabled.
 // Provisioned capacity mode streams do not support warm throughput configuration.
+//
+// To release excess capacity, call the API again and set the warm throughput to
+// the same or a lower value.
 //
 // This operation has the following default limits. By default, you cannot do the
 // following:
@@ -124,6 +128,9 @@ func (c *Client) addOperationUpdateStreamWarmThroughputMiddlewares(stack *middle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

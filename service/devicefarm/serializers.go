@@ -4770,6 +4770,13 @@ func awsAwsjson11_serializeDocumentCreateRemoteAccessSessionConfiguration(v *typ
 		}
 	}
 
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsAwsjson11_serializeDocumentRemoteAccessParameters(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VpceConfigurationArns != nil {
 		ok := object.Key("vpceConfigurationArns")
 		if err := awsAwsjson11_serializeDocumentAmazonResourceNames(v.VpceConfigurationArns, ok); err != nil {
@@ -5076,6 +5083,17 @@ func awsAwsjson11_serializeDocumentRadios(v *types.Radios, value smithyjson.Valu
 		ok.Boolean(*v.Wifi)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRemoteAccessParameters(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

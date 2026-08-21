@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Updates the account-level settings for Amazon Kinesis Data Streams.
@@ -49,6 +50,11 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *UpdateAccountSettingsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.OperationType = ptr.String("control")
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// The updated configuration of the minimum throughput billing commitment for your
@@ -81,6 +87,9 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

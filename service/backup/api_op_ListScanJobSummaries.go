@@ -10,7 +10,7 @@ import (
 )
 
 // This is a request for a summary of scan jobs created or running within the most
-// recent 30 days.
+// recent 14 days.
 func (c *Client) ListScanJobSummaries(ctx context.Context, params *ListScanJobSummariesInput, optFns ...func(*Options)) (*ListScanJobSummariesOutput, error) {
 	if params == nil {
 		params = &ListScanJobSummariesInput{}

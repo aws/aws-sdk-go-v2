@@ -1655,6 +1655,15 @@ type LogAlarm struct {
 	// notBreaching , ignore , and missing .
 	TreatMissingData *string
 
+	// The warm-up configuration for the alarm. A warm-up period delays alarm
+	// evaluation after you create or update the alarm. During the warm-up period, the
+	// alarm stays in INSUFFICIENT_DATA and does not perform alarm actions.
+	//
+	// For more information, see [Alarm warm-up periods] in the Amazon CloudWatch User Guide.
+	//
+	// [Alarm warm-up periods]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+	WarmUpConfiguration *WarmUpConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1726,6 +1735,11 @@ func (v *LogAlarm) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.TreatMissingData != nil {
 		s.WriteString(schemas.LogAlarm_TreatMissingData, *v.TreatMissingData)
+	}
+	if v.WarmUpConfiguration != nil {
+		s.WriteStruct(schemas.LogAlarm_WarmUpConfiguration)
+		v.WarmUpConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 }
 func (v *LogAlarm) Deserialize(d smithy.ShapeDeserializer) error {
@@ -1806,6 +1820,9 @@ func (v *LogAlarm) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LogAlarm_TreatMissingData:
 			v.TreatMissingData = new(string)
 			return d.ReadString(schemas.LogAlarm_TreatMissingData, v.TreatMissingData)
+		case schemas.LogAlarm_WarmUpConfiguration:
+			v.WarmUpConfiguration = &WarmUpConfiguration{}
+			return v.WarmUpConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -2204,6 +2221,15 @@ type MetricAlarm struct {
 	// The unit of the metric associated with the alarm.
 	Unit StandardUnit
 
+	// The warm-up configuration for the alarm. A warm-up period delays alarm
+	// evaluation after you create or update the alarm. During the warm-up period, the
+	// alarm stays in INSUFFICIENT_DATA and does not perform alarm actions.
+	//
+	// For more information, see [Alarm warm-up periods] in the Amazon CloudWatch User Guide.
+	//
+	// [Alarm warm-up periods]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
+	WarmUpConfiguration *WarmUpConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -2295,6 +2321,11 @@ func (v *MetricAlarm) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Unit != "" {
 		s.WriteString(schemas.MetricAlarm_Unit, string(v.Unit))
+	}
+	if v.WarmUpConfiguration != nil {
+		s.WriteStruct(schemas.MetricAlarm_WarmUpConfiguration)
+		v.WarmUpConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 }
 func (v *MetricAlarm) Deserialize(d smithy.ShapeDeserializer) error {
@@ -2409,6 +2440,9 @@ func (v *MetricAlarm) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Unit = StandardUnit(ev)
 			return nil
+		case schemas.MetricAlarm_WarmUpConfiguration:
+			v.WarmUpConfiguration = &WarmUpConfiguration{}
+			return v.WarmUpConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -3116,7 +3150,7 @@ func (v *MetricStreamFilter) Deserialize(d smithy.ShapeDeserializer) error {
 // for one metric that includes additional statistics in the stream. For more
 // information about statistics, see CloudWatch, listed in [CloudWatch statistics definitions].
 //
-// [CloudWatch statistics definitions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+// [CloudWatch statistics definitions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
 type MetricStreamStatisticsConfiguration struct {
 
 	// The list of additional statistics that are to be streamed for the metrics
@@ -3130,7 +3164,7 @@ type MetricStreamStatisticsConfiguration struct {
 	// abbreviations for all of the statistics listed in [CloudWatch statistics definitions]. For example, this includes
 	// tm98, wm90 , PR(:300) , and so on.
 	//
-	// [CloudWatch statistics definitions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+	// [CloudWatch statistics definitions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
 	//
 	// This member is required.
 	AdditionalStatistics []string
@@ -3942,6 +3976,65 @@ func (v *WallClockWindow) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WallClockWindow_Timezone:
 			v.Timezone = new(string)
 			return d.ReadString(schemas.WallClockWindow_Timezone, v.Timezone)
+		}
+		return nil
+	})
+}
+
+// The configuration settings that define the warm-up behavior for an alarm. Use
+// these settings to delay alarm evaluation after you create or update the alarm,
+// which reduces alarm noise while a new resource or service starts publishing
+// data.
+//
+// During the warm-up period, the alarm stays in INSUFFICIENT_DATA and does not
+// perform alarm actions.
+type WarmUpConfiguration struct {
+
+	// The length of the warm-up period, in minutes. After you create or update the
+	// alarm, the alarm stays in INSUFFICIENT_DATA for this duration. During this
+	// time, the alarm does not perform alarm actions.
+	//
+	// You can change this value at any time, including after the warm-up period ends.
+	// If you change it after the warm-up period ends, the new value does not restart
+	// the warm-up period.
+	//
+	// This member is required.
+	WarmUpPeriodDurationInMinutes *int32
+
+	// Specifies whether the alarm waits for the full warm-up period before it starts
+	// to evaluate. The default is false . If true , the alarm waits the entire
+	// WarmUpPeriodDurationInMinutes before it starts to evaluate, even if metric data
+	// arrives earlier. If false , the alarm ends the warm-up period early. Evaluation
+	// begins as soon as the alarm has enough metric data to fill its evaluation
+	// window.
+	OnlyStartEvaluatingAfterWarmUpPeriodEnds *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *WarmUpConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WarmUpConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WarmUpConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OnlyStartEvaluatingAfterWarmUpPeriodEnds != nil {
+		s.WriteBool(schemas.WarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds, *v.OnlyStartEvaluatingAfterWarmUpPeriodEnds)
+	}
+	if v.WarmUpPeriodDurationInMinutes != nil {
+		s.WriteInt32(schemas.WarmUpConfiguration_WarmUpPeriodDurationInMinutes, *v.WarmUpPeriodDurationInMinutes)
+	}
+}
+func (v *WarmUpConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WarmUpConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds:
+			v.OnlyStartEvaluatingAfterWarmUpPeriodEnds = new(bool)
+			return d.ReadBool(schemas.WarmUpConfiguration_OnlyStartEvaluatingAfterWarmUpPeriodEnds, v.OnlyStartEvaluatingAfterWarmUpPeriodEnds)
+		case schemas.WarmUpConfiguration_WarmUpPeriodDurationInMinutes:
+			v.WarmUpPeriodDurationInMinutes = new(int32)
+			return d.ReadInt32(schemas.WarmUpConfiguration_WarmUpPeriodDurationInMinutes, v.WarmUpPeriodDurationInMinutes)
 		}
 		return nil
 	})

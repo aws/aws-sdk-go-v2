@@ -33,12 +33,15 @@ import (
 // the shard iterator reaches the record with the sequence number or other
 // attribute that marks it as the last record to process.
 //
-// Each data record can be up to 1 MiB in size, and each shard can read up to 2
-// MiB per second. You can ensure that your calls don't exceed the maximum
-// supported size or throughput by using the Limit parameter to specify the
-// maximum number of records that GetRecordscan return. Consider your average record size
-// when determining this limit. The maximum number of records that can be returned
-// per call is 10,000.
+// Each data record can be up to 1 MiB in size by default. Amazon Kinesis Data
+// Streams supports large records up to 10 MiB in size, but the average throughput
+// for your stream cannot exceed 1 MiB per second. For more information about how
+// large records are handled, see [Large records]. Each shard can read up to 2 MiB per second.
+// You can ensure that your calls don't exceed the maximum supported size or
+// throughput by using the Limit parameter to specify the maximum number of
+// records that GetRecordscan return. Consider your average record size when determining
+// this limit. The maximum number of records that can be returned per call is
+// 10,000.
 //
 // The size of the data returned by GetRecords varies depending on the utilization of the
 // shard. It is recommended that consumer applications retrieve records via the
@@ -71,6 +74,7 @@ import (
 // This operation has a limit of five transactions per second per shard.
 //
 // [Amazon Kinesis Data Streams Limits]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+// [Large records]: https://docs.aws.amazon.com/streams/latest/dev/large-records.html
 // [Monitoring]: https://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html
 func (c *Client) GetRecords(ctx context.Context, params *GetRecordsInput, optFns ...func(*Options)) (*GetRecordsOutput, error) {
 	if params == nil {
@@ -167,6 +171,9 @@ func (c *Client) addOperationGetRecordsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Describes the account-level settings for Amazon Kinesis Data Streams. This
@@ -31,6 +32,11 @@ func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAc
 
 type DescribeAccountSettingsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (in *DescribeAccountSettingsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.OperationType = ptr.String("control")
 }
 
 type DescribeAccountSettingsOutput struct {
@@ -65,6 +71,9 @@ func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

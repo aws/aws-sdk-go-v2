@@ -38710,6 +38710,42 @@ func awsRestjson1_deserializeDocumentComponentConfigurationMap(v *map[string]typ
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCompositeIdentifierList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CompositeIdentifierEntry to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentComputeConfiguration(v *types.ComputeConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51972,6 +52008,20 @@ func awsRestjson1_deserializeDocumentPassthroughTargetConfiguration(v **types.Pa
 				return err
 			}
 
+		case "staticQueryParameterConflictResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StaticQueryParameterConflictResolution to be of type string, got %T instead", value)
+				}
+				sv.StaticQueryParameterConflictResolution = types.StaticQueryParameterConflictResolution(jtv)
+			}
+
+		case "staticQueryParameters":
+			if err := awsRestjson1_deserializeDocumentStaticQueryParameters(&sv.StaticQueryParameters, value); err != nil {
+				return err
+			}
+
 		case "stickinessConfiguration":
 			if err := awsRestjson1_deserializeDocumentStickinessConfiguration(&sv.StickinessConfiguration, value); err != nil {
 				return err
@@ -56958,6 +57008,42 @@ func awsRestjson1_deserializeDocumentStaticOverride(v **types.StaticOverride, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentStaticQueryParameters(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StaticQueryParameterValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentStaticRoute(v **types.StaticRoute, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -57056,6 +57142,11 @@ func awsRestjson1_deserializeDocumentStickinessConfiguration(v **types.Stickines
 
 	for key, value := range shape {
 		switch key {
+		case "compositeIdentifier":
+			if err := awsRestjson1_deserializeDocumentCompositeIdentifierList(&sv.CompositeIdentifier, value); err != nil {
+				return err
+			}
+
 		case "identifier":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -641,6 +641,10 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 						Timezone: ptr.String("__Timezone__"),
 					},
 				},
+				WarmUpConfiguration: &types.WarmUpConfiguration{
+					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+				},
 				EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
 					Value: types.AlarmPromQLCriteria{
 						Query:          ptr.String("__Query__"),
@@ -758,6 +762,10 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 						Timezone: ptr.String("__Timezone__"),
 					},
 				},
+				WarmUpConfiguration: &types.WarmUpConfiguration{
+					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+				},
 				EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
 					Value: types.AlarmPromQLCriteria{
 						Query:          ptr.String("__Query__"),
@@ -825,6 +833,10 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 				EvaluationState:            types.EvaluationState("PARTIAL_DATA"),
 				ActionLogLineCount:         ptr.Int32(1),
 				ActionLogLineRoleArn:       ptr.String("__ActionLogLineRoleArn__"),
+				WarmUpConfiguration: &types.WarmUpConfiguration{
+					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+				},
 			},
 			{
 				AlarmName:                          ptr.String("__AlarmName__"),
@@ -882,6 +894,10 @@ func TestCheckResponseSnapshot_DescribeAlarms(t *testing.T) {
 				EvaluationState:            types.EvaluationState("PARTIAL_DATA"),
 				ActionLogLineCount:         ptr.Int32(1),
 				ActionLogLineRoleArn:       ptr.String("__ActionLogLineRoleArn__"),
+				WarmUpConfiguration: &types.WarmUpConfiguration{
+					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1030,6 +1046,10 @@ func TestCheckResponseSnapshot_DescribeAlarmsForMetric(t *testing.T) {
 						Timezone: ptr.String("__Timezone__"),
 					},
 				},
+				WarmUpConfiguration: &types.WarmUpConfiguration{
+					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+				},
 				EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
 					Value: types.AlarmPromQLCriteria{
 						Query:          ptr.String("__Query__"),
@@ -1146,6 +1166,10 @@ func TestCheckResponseSnapshot_DescribeAlarmsForMetric(t *testing.T) {
 					Value: types.WallClockWindow{
 						Timezone: ptr.String("__Timezone__"),
 					},
+				},
+				WarmUpConfiguration: &types.WarmUpConfiguration{
+					WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+					OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
 				},
 				EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
 					Value: types.AlarmPromQLCriteria{
@@ -2828,6 +2852,10 @@ func TestCheckResponseSnapshot_PutLogAlarm(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		WarmUpConfiguration: &types.WarmUpConfiguration{
+			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3021,6 +3049,10 @@ func TestCheckResponseSnapshot_PutMetricAlarm(t *testing.T) {
 			Value: types.WallClockWindow{
 				Timezone: ptr.String("__Timezone__"),
 			},
+		},
+		WarmUpConfiguration: &types.WarmUpConfiguration{
+			WarmUpPeriodDurationInMinutes:            ptr.Int32(1),
+			OnlyStartEvaluatingAfterWarmUpPeriodEnds: ptr.Bool(true),
 		},
 		EvaluationCriteria: &types.EvaluationCriteriaMemberPromQLCriteria{
 			Value: types.AlarmPromQLCriteria{

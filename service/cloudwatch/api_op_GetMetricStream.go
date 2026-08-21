@@ -99,7 +99,7 @@ type GetMetricStreamOutput struct {
 	// include additional statistics in the metric stream. For more information about
 	// the additional statistics, see [CloudWatch statistics definitions].
 	//
-	// [CloudWatch statistics definitions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+	// [CloudWatch statistics definitions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html
 	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 
 	// Metadata pertaining to the operation's result.

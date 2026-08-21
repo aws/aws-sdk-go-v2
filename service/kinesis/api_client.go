@@ -16,6 +16,7 @@ import (
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	smithy "github.com/aws/smithy-go"
+	smithyauth "github.com/aws/smithy-go/auth"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/metrics"
@@ -473,6 +474,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		ClientLogMode:              cfg.ClientLogMode,
 		AppID:                      cfg.AppID,
 		DisableClockSkewCorrection: cfg.DisableClockSkewCorrection,
+		AccountIDEndpointMode:      cfg.AccountIDEndpointMode,
 		AuthSchemePreference:       cfg.AuthSchemePreference,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
@@ -785,8 +787,39 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 	return nil
 }
 
+func resolveAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMode) *string {
+	if mode == aws.AccountIDEndpointModeDisabled {
+		return nil
+	}
+
+	if ca, ok := identity.(*internalauthsmithy.CredentialsAdapter); ok && ca.Credentials.AccountID != "" {
+		return aws.String(ca.Credentials.AccountID)
+	}
+
+	return nil
+}
+
 func initializeTimeOffsetResolver(c *Client) {
 	c.timeOffset = new(atomic.Int64)
+}
+
+func checkAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMode) error {
+	switch mode {
+	case aws.AccountIDEndpointModeUnset:
+	case aws.AccountIDEndpointModePreferred:
+	case aws.AccountIDEndpointModeDisabled:
+	case aws.AccountIDEndpointModeRequired:
+		if ca, ok := identity.(*internalauthsmithy.CredentialsAdapter); !ok {
+			return fmt.Errorf("accountID is required but not set")
+		} else if ca.Credentials.AccountID == "" {
+			return fmt.Errorf("accountID is required but not set")
+		}
+	// default check in case invalid mode is configured through request config
+	default:
+		return fmt.Errorf("invalid accountID endpoint mode %s, must be preferred/required/disabled", mode)
+	}
+
+	return nil
 }
 
 func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
@@ -800,6 +833,23 @@ func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
 		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeStandard)
 	case *retry.AdaptiveMode:
 		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeAdaptive)
+	}
+	return nil
+}
+
+func addUserAgentAccountIDEndpointMode(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	switch options.AccountIDEndpointMode {
+	case aws.AccountIDEndpointModePreferred:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureAccountIDModePreferred)
+	case aws.AccountIDEndpointModeRequired:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureAccountIDModeRequired)
+	case aws.AccountIDEndpointModeDisabled:
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureAccountIDModeDisabled)
 	}
 	return nil
 }

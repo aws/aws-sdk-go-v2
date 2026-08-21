@@ -588,9 +588,9 @@ const (
 	//  AgentCore simulated evaluation schema, version 1. Dataset for synthetic data
 	// generation where each example is a scenario used to generate full conversations.
 	DatasetSchemaTypeAgentcoreEvaluationSimulatedV1 DatasetSchemaType = "AGENTCORE_EVALUATION_SIMULATED_V1"
-	//  Unified generic evaluation schema, version 1. Supports single-turn (string
-	// input) and multi-turn (message list input) across all evaluation frameworks.
-	DatasetSchemaTypeGenericEvaluationPredefinedV1 DatasetSchemaType = "GENERIC_EVALUATION_PREDEFINED_V1"
+	//  Third-party evaluation schema, version 1. Supports single-turn (string input)
+	// and multi-turn (message list input) across third-party evaluation frameworks.
+	DatasetSchemaTypeThirdPartyEvaluationV1 DatasetSchemaType = "THIRD_PARTY_EVALUATION_V1"
 )
 
 // Values returns all known values for DatasetSchemaType. Note that this can be
@@ -601,7 +601,7 @@ func (DatasetSchemaType) Values() []DatasetSchemaType {
 	return []DatasetSchemaType{
 		"AGENTCORE_EVALUATION_PREDEFINED_V1",
 		"AGENTCORE_EVALUATION_SIMULATED_V1",
-		"GENERIC_EVALUATION_PREDEFINED_V1",
+		"THIRD_PARTY_EVALUATION_V1",
 	}
 }
 
@@ -2211,6 +2211,26 @@ func (SigningAlgorithm) Values() []SigningAlgorithm {
 		"RS256",
 		"PS256",
 		"ES256",
+	}
+}
+
+type StaticQueryParameterConflictResolution string
+
+// Enum values for StaticQueryParameterConflictResolution
+const (
+	StaticQueryParameterConflictResolutionClientOverride StaticQueryParameterConflictResolution = "CLIENT_OVERRIDE"
+	StaticQueryParameterConflictResolutionStaticOverride StaticQueryParameterConflictResolution = "STATIC_OVERRIDE"
+)
+
+// Values returns all known values for StaticQueryParameterConflictResolution.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StaticQueryParameterConflictResolution) Values() []StaticQueryParameterConflictResolution {
+	return []StaticQueryParameterConflictResolution{
+		"CLIENT_OVERRIDE",
+		"STATIC_OVERRIDE",
 	}
 }
 

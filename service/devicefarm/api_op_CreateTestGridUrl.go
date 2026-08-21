@@ -42,10 +42,11 @@ type CreateTestGridUrlInput struct {
 
 type CreateTestGridUrlOutput struct {
 
-	// The number of seconds the URL from CreateTestGridUrlResult$url stays active.
+	// The number of seconds the URL stays active from creation.
 	Expires *time.Time
 
-	// A signed URL, expiring in CreateTestGridUrlRequest$expiresInSeconds seconds, to be passed to a RemoteWebDriver .
+	// A signed URL, expiring in the time specified by the CreateTestGridUrlRequest ,
+	// to be passed to a RemoteWebDriver .
 	Url *string
 
 	// Metadata pertaining to the operation's result.

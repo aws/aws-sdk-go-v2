@@ -172,6 +172,14 @@ type CreateRemoteAccessSessionConfiguration struct {
 	// The device proxy to be configured on the device for the remote access session.
 	DeviceProxy *DeviceProxy
 
+	// The name-value string pairs that specify additional settings for the remote
+	// access session.
+	//
+	//   - appium:version : The major version of the Appium server to use for the
+	//   session (for example, 2 or 3). The service may reject the selected version if it
+	//   is not available for the selected device.
+	Parameters map[string]string
+
 	// An array of ARNs included in the VPC endpoint configuration.
 	VpceConfigurationArns []string
 
@@ -1621,6 +1629,8 @@ type RunInsights struct {
 }
 
 // Represents a sample of performance data.
+//
+// Device Farm does not support performance data samples during test executions.
 type Sample struct {
 
 	// The sample's ARN.
@@ -1777,24 +1787,6 @@ type ScheduleRunTest struct {
 
 	// The test's parameters, such as test framework parameters and fixture settings.
 	// Parameters are represented by name-value pairs of strings.
-	//
-	// For all tests:
-	//
-	//   - app_performance_monitoring : Performance monitoring is enabled by default.
-	//   Set this parameter to false to disable it.
-	//
-	// For Appium tests (all types):
-	//
-	//   - appium_version: The Appium version. Currently supported values are 1.6.5
-	//   (and later), latest, and default.
-	//
-	//   - latest runs the latest Appium version supported by Device Farm (1.9.1).
-	//
-	//   - For default, Device Farm selects a compatible version of Appium for the
-	//   device. The current behavior is to run 1.7.2 on Android devices and iOS 9 and
-	//   earlier and 1.7.2 for iOS 10 and later.
-	//
-	//   - This behavior is subject to change.
 	//
 	// For fuzz tests (Android only):
 	//

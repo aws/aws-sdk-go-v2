@@ -9,7 +9,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes an Amazon Bedrock AgentCore Memory resource.
+// Deletes an Amazon Bedrock AgentCore Memory resource. When you delete a memory
+// resource, it is permanently removed.
 func (c *Client) DeleteMemory(ctx context.Context, params *DeleteMemoryInput, optFns ...func(*Options)) (*DeleteMemoryOutput, error) {
 	if params == nil {
 		params = &DeleteMemoryInput{}

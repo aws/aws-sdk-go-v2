@@ -55,8 +55,8 @@ type UpdateMemoryInput struct {
 	MemoryStrategies *types.ModifyMemoryStrategies
 
 	// The namespace variable key definitions with validation rules for this memory.
-	// Use this parameter to update existing namespaceKey validation rules or add new
-	// keys when namespace templates change.
+	// This value fully replaces the existing set — any key you omit is removed. Any
+	// referenced namespaceKey omission will throw ValidationException.
 	NamespaceKeys []types.NamespaceKeyEntry
 
 	// Configuration for streaming memory record data to external resources.

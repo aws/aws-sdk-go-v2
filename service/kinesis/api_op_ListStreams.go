@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 )
 
 // Lists your Kinesis data streams.
@@ -56,6 +57,11 @@ type ListStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (in *ListStreamsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.OperationType = ptr.String("control")
+}
+
 // Represents the output for ListStreams .
 type ListStreamsOutput struct {
 
@@ -102,6 +108,9 @@ func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
