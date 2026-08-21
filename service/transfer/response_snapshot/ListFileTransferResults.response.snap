@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.ListFileTransferResults
+
+{"FileTransferResults":[{"FailureCode":"__FailureCode__","FailureMessage":"__FailureMessage__","FilePath":"__FilePath__","StatusCode":"QUEUED"},{"FailureCode":"__FailureCode__","FailureMessage":"__FailureMessage__","FilePath":"__FilePath__","StatusCode":"QUEUED"}],"NextToken":"__NextToken__"}

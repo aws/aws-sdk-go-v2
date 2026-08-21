@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ingestConfigurations":[{"arn":"__Arn__","ingestProtocol":"RTMP","name":"__Name__","participantId":"__ParticipantId__","redundantIngest":true,"stageArn":"__StageArn__","state":"ACTIVE","userId":"__UserId__"},{"arn":"__Arn__","ingestProtocol":"RTMP","name":"__Name__","participantId":"__ParticipantId__","redundantIngest":true,"stageArn":"__StageArn__","state":"ACTIVE","userId":"__UserId__"}],"nextToken":"__NextToken__"}

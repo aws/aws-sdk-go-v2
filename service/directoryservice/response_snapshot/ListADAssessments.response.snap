@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.ListADAssessments
+
+{"Assessments":[{"AssessmentId":"__AssessmentId__","CustomerDnsIps":["__Member__","__Member__"],"DirectoryId":"__DirectoryId__","DnsName":"__DnsName__","LastUpdateDateTime":946684800,"ReportType":"__ReportType__","StartTime":946684800,"Status":"__Status__"},{"AssessmentId":"__AssessmentId__","CustomerDnsIps":["__Member__","__Member__"],"DirectoryId":"__DirectoryId__","DnsName":"__DnsName__","LastUpdateDateTime":946684800,"ReportType":"__ReportType__","StartTime":946684800,"Status":"__Status__"}],"NextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","recoveryPlanExecutionSteps":[{"configuration":{"executionServerStepConfiguration":{"servers":[{"impactLevel":"CRITICAL","jobID":"__JobID__","serverArn":"__ServerArn__"},{"impactLevel":"CRITICAL","jobID":"__JobID__","serverArn":"__ServerArn__"}]}},"errorDetail":{"code":"__Code__","message":"__Message__"},"recoveryPlanExecutionStepArn":"__RecoveryPlanExecutionStepArn__","status":"NOT_STARTED","stepIndex":1,"stepName":"__StepName__"},{"configuration":{"executionServerStepConfiguration":{"servers":[{"impactLevel":"CRITICAL","jobID":"__JobID__","serverArn":"__ServerArn__"},{"impactLevel":"CRITICAL","jobID":"__JobID__","serverArn":"__ServerArn__"}]}},"errorDetail":{"code":"__Code__","message":"__Message__"},"recoveryPlanExecutionStepArn":"__RecoveryPlanExecutionStepArn__","status":"NOT_STARTED","stepIndex":1,"stepName":"__StepName__"}]}

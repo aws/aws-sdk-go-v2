@@ -1,0 +1,5 @@
+500
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.BatchCreateVariable
+
+{"__type":"InternalServerException","message":"__Message__"}

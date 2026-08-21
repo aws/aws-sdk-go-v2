@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.ListRuleNamesByTarget
+
+{"NextToken":"__NextToken__","RuleNames":["__Member__","__Member__"]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assistantArn":"__AssistantArn__","assistantId":"__AssistantId__","contentFeedback":{"generativeContentFeedbackData":{"relevance":"HELPFUL"}},"targetId":"__TargetId__","targetType":"RECOMMENDATION"}

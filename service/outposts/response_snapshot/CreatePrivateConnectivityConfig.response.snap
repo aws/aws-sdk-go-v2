@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"OutpostId":"__OutpostId__","PrivateConnectivityConfig":{"PrivateConnectivityStatus":"ENABLED","ProvisioningRoleArn":"__ProvisioningRoleArn__","RoleArn":"__RoleArn__","VpcInformationList":[{"SubnetIds":["__Member__","__Member__"],"VpcEndpointId":"__VpcEndpointId__","VpcId":"__VpcId__"},{"SubnetIds":["__Member__","__Member__"],"VpcEndpointId":"__VpcEndpointId__","VpcId":"__VpcId__"}]}}

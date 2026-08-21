@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"modelSummaries":[{"crossRegionStatus":"NONE","displayName":"__DisplayName__","endOfLifeTimestamp":946684800,"legacyTimestamp":946684800,"modelId":"__ModelId__","modelLifecycle":"ACTIVE","supportedAIPromptTypes":["ANSWER_GENERATION","ANSWER_GENERATION"],"supportsPromptCaching":true},{"crossRegionStatus":"NONE","displayName":"__DisplayName__","endOfLifeTimestamp":946684800,"legacyTimestamp":946684800,"modelId":"__ModelId__","modelLifecycle":"ACTIVE","supportedAIPromptTypes":["ANSWER_GENERATION","ANSWER_GENERATION"],"supportsPromptCaching":true}],"nextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"virtualCluster":{"arn":"__Arn__","containerProvider":{"id":"__Id__","info":{"eksInfo":{"namespace":"__Namespace__","nodeLabel":"__NodeLabel__"}},"type":"EKS"},"createdAt":"2000-01-01T00:00:00Z","id":"__Id__","name":"__Name__","schedulerConfiguration":{"maxConcurrentJobRuns":1,"maxInQueueJobRuns":1},"schedulerStatus":{"currentConcurrentJobRuns":1,"currentInQueueJobRuns":1},"securityConfigurationId":"__SecurityConfigurationId__","sessionEnabled":true,"state":"RUNNING","tags":{"key0":"__Value__"}}}
