@@ -6294,7 +6294,7 @@
                 "FieldKeys": {
                     "target": "com.amazonaws.wafv2#FieldToProtectKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the keys to protect for the specified field type. If you don't specify any key, then all keys for the field type are protected.  </p>"
+                        "smithy.api#documentation": "<p>Specifies the keys to protect for the specified field type.</p>\n         <p>Required for <code>SINGLE_HEADER</code>, <code>SINGLE_COOKIE</code>, and\n         <code>SINGLE_QUERY_ARGUMENT</code>: provide a non-empty array naming the specific headers,\n         cookies, or query arguments to protect. There is no option to protect all keys of these\n         field types, so enumerate each key you intend to protect.</p>\n         <p>Must be omitted for <code>QUERY_STRING</code> and <code>BODY</code>: the entire\n         component is protected and these field types take no keys. Supplying\n         <code>FieldKeys</code> for them is rejected.</p>"
                     }
                 }
             },

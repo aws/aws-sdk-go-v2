@@ -320,7 +320,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Kinesis data stream. A stream captures and transports data records that are\n            continuously emitted from different data sources or <i>producers</i>.\n            Scale-out within a stream is explicitly supported by means of shards, which are uniquely\n            identified groups of data records in a stream.</p>\n         <p>You can create your data stream using either on-demand or provisioned capacity mode. Data streams with an on-demand mode require no capacity planning and automatically scale to handle gigabytes of write and read throughput per minute. With the on-demand mode, Kinesis Data Streams automatically manages the shards in order to provide the necessary throughput.</p>\n         <p>If you'd still like to proactively scale your on-demand data stream’s capacity, you can unlock the warm throughput feature for on-demand data streams by enabling <code>MinimumThroughputBillingCommitment</code> for your account. Once your account has <code>MinimumThroughputBillingCommitment</code> enabled, you can specify the warm throughput in MiB per second that your stream can support in writes.</p>\n         <p>For the data streams with a provisioned mode, you must specify the number of shards for the data stream. Each shard can support reads up to five transactions per second, up to a maximum data read total of 2 MiB per second. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per second. If the amount of data input increases or decreases, you can add or remove shards.</p>\n         <p>The stream name identifies the stream. The name is scoped to the Amazon Web Services\n            account used by the application. It is also scoped by Amazon Web Services Region. That\n            is, two streams in two different accounts can have the same name, and two streams in the\n            same account, but in two different Regions, can have the same name.</p>\n         <p>\n            <code>CreateStream</code> is an asynchronous operation. Upon receiving a\n                <code>CreateStream</code> request, Kinesis Data Streams immediately returns and sets\n            the stream status to <code>CREATING</code>. After the stream is created, Kinesis Data\n            Streams sets the stream status to <code>ACTIVE</code>. You should perform read and write\n            operations only on an <code>ACTIVE</code> stream. </p>\n         <p>You receive a <code>LimitExceededException</code> when making a\n                <code>CreateStream</code> request when you try to do one of the following:</p>\n         <ul>\n            <li>\n               <p>Have more than five streams in the <code>CREATING</code> state at any point in\n                    time.</p>\n            </li>\n            <li>\n               <p>Create more shards than are authorized for your account.</p>\n            </li>\n         </ul>\n         <p>For the default shard or on-demand throughput limits for an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Amazon Kinesis Data Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>. To increase this limit, <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact Amazon Web Services Support</a>.</p>\n         <p>You can use <a>DescribeStreamSummary</a> to check the stream status, which\n            is returned in <code>StreamStatus</code>.</p>\n         <p>\n            <a>CreateStream</a> has a limit of five transactions per second per\n            account.</p>\n         <p>You can add tags to the stream when making a <code>CreateStream</code> request by setting the <code>Tags</code> parameter. If you pass the <code>Tags</code> parameter, in addition to having the <code>kinesis:CreateStream</code> permission, you must also have the <code>kinesis:AddTagsToStream</code> permission for the stream that will be created. The <code>kinesis:TagResource</code> permission won’t work to tag streams on creation. Tags will take effect from the <code>CREATING</code> status of the stream, but you can't make any updates to the tags until the stream is in <code>ACTIVE</code> state.</p>"
+                "smithy.api#documentation": "<p>Creates a Kinesis data stream. A stream captures and transports data records that are\n            continuously emitted from different data sources or <i>producers</i>.\n            Scale-out within a stream is explicitly supported by means of shards, which are uniquely\n            identified groups of data records in a stream.</p>\n         <p>You can create your data stream using either on-demand or provisioned capacity mode. Data streams with an on-demand mode require no capacity planning and automatically scale to handle gigabytes of write and read throughput per minute. With the on-demand mode, Kinesis Data Streams automatically manages the shards in order to provide the necessary throughput.</p>\n         <p>If you'd still like to proactively scale your on-demand data stream’s capacity, you can unlock the warm throughput feature for on-demand data streams by enabling <code>MinimumThroughputBillingCommitment</code> for your account. Once your account has <code>MinimumThroughputBillingCommitment</code> enabled, you can specify the warm throughput in MiB per second that your stream can support in writes.</p>\n         <p>For the data streams with a provisioned mode, you must specify the number of shards for the data stream. Each shard can support reads up to five transactions per second, up to a maximum data read total of 2 MiB per second. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per second. If the amount of data input increases or decreases, you can add or remove shards.</p>\n         <p>The stream name identifies the stream. The name is scoped to the Amazon Web Services\n            account used by the application. It is also scoped by Amazon Web Services Region. That\n            is, two streams in two different accounts can have the same name, and two streams in the\n            same account, but in two different Regions, can have the same name.</p>\n         <p>\n            <code>CreateStream</code> is an asynchronous operation. Upon receiving a\n                <code>CreateStream</code> request, Kinesis Data Streams immediately returns and sets\n            the stream status to <code>CREATING</code>. After the stream is created, Kinesis Data\n            Streams sets the stream status to <code>ACTIVE</code>. You should perform read and write\n            operations only on an <code>ACTIVE</code> stream. </p>\n         <p>You receive a <code>LimitExceededException</code> when making a\n                <code>CreateStream</code> request when you try to do one of the following:</p>\n         <ul>\n            <li>\n               <p>Have more than five streams in the <code>CREATING</code> state at any point in\n                    time.</p>\n            </li>\n            <li>\n               <p>Create more shards than are authorized for your account.</p>\n            </li>\n         </ul>\n         <p>For the default shard or on-demand throughput limits for an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Amazon Kinesis Data Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>. To increase this limit, <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">contact Amazon Web Services Support</a>.</p>\n         <p>You can use <a>DescribeStreamSummary</a> to check the stream status, which\n            is returned in <code>StreamStatus</code>.</p>\n         <p>\n            <a>CreateStream</a> has a limit of five transactions per second per\n            account.</p>\n         <p>You can add tags to the stream when making a <code>CreateStream</code> request by setting the <code>Tags</code> parameter. If you pass the <code>Tags</code> parameter, in addition to having the <code>kinesis:CreateStream</code> permission, you must also have the <code>kinesis:AddTagsToStream</code> permission for the stream that will be created. The <code>kinesis:TagResource</code> permission won’t work to tag streams on creation. Tags will take effect from the <code>CREATING</code> status of the stream, but you can't make any updates to the tags until the stream is in <code>ACTIVE</code> state.</p>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
             }
         },
         "com.amazonaws.kinesis#CreateStreamInput": {
@@ -669,7 +674,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the account-level settings for Amazon Kinesis Data Streams. This operation returns information about the minimum throughput billing commitments and other account-level configurations.</p>\n         <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. TPS over 5 will initiate the <code>LimitExceededException</code>.</p>"
+                "smithy.api#documentation": "<p>Describes the account-level settings for Amazon Kinesis Data Streams. This operation returns information about the minimum throughput billing commitments and other account-level configurations.</p>\n         <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. TPS over 5 will initiate the <code>LimitExceededException</code>.</p>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
             }
         },
         "com.amazonaws.kinesis#DescribeAccountSettingsInput": {
@@ -707,7 +717,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the shard limits and usage for the account.</p>\n         <p>If you update your account limits, the old limits might be returned for a few\n            minutes.</p>\n         <p>This operation has a limit of one transaction per second per account.</p>"
+                "smithy.api#documentation": "<p>Describes the shard limits and usage for the account.</p>\n         <p>If you update your account limits, the old limits might be returned for a few\n            minutes.</p>\n         <p>This operation has a limit of one transaction per second per account.</p>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
             }
         },
         "com.amazonaws.kinesis#DescribeLimitsInput": {
@@ -1356,7 +1371,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets data records from a Kinesis data stream's shard.</p>\n         <note>\n            <p>When invoking this API, you must use either the <code>StreamARN</code> or the\n                    <code>StreamName</code> parameter, or both. It is recommended that you use the\n                    <code>StreamARN</code> input parameter when you invoke this API.</p>\n         </note>\n         <p>Specify a shard iterator using the <code>ShardIterator</code> parameter. The shard\n            iterator specifies the position in the shard from which you want to start reading data\n            records sequentially. If there are no records available in the portion of the shard that\n            the iterator points to, <a>GetRecords</a> returns an empty list. It might\n            take multiple calls to get to a portion of the shard that contains records.</p>\n         <p>You can scale by provisioning multiple shards per stream while considering service\n            limits (for more information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Amazon Kinesis Data Streams\n                Limits</a> in the <i>Amazon Kinesis Data Streams Developer\n                Guide</i>). Your application should have one thread per shard, each reading\n            continuously from its stream. To read from a stream continually, call <a>GetRecords</a> in a loop. Use <a>GetShardIterator</a> to get the\n            shard iterator to specify in the first <a>GetRecords</a> call. <a>GetRecords</a> returns a new shard iterator in\n                <code>NextShardIterator</code>. Specify the shard iterator returned in\n                <code>NextShardIterator</code> in subsequent calls to <a>GetRecords</a>.\n            If the shard has been closed, the shard iterator can't return more data and <a>GetRecords</a> returns <code>null</code> in <code>NextShardIterator</code>.\n            You can terminate the loop when the shard is closed, or when the shard iterator reaches\n            the record with the sequence number or other attribute that marks it as the last record\n            to process.</p>\n         <p>Each data record can be up to 1 MiB in size, and each shard can read up to 2 MiB per\n            second. You can ensure that your calls don't exceed the maximum supported size or\n            throughput by using the <code>Limit</code> parameter to specify the maximum number of\n            records that <a>GetRecords</a> can return. Consider your average record size\n            when determining this limit. The maximum number of records that can be returned per call\n            is 10,000.</p>\n         <p>The size of the data returned by <a>GetRecords</a> varies depending on the\n            utilization of the shard. It is recommended that consumer applications retrieve records\n            via the <code>GetRecords</code> command using the 5 TPS limit to remain caught up.\n            Retrieving records less frequently can lead to consumer applications falling behind. The\n            maximum size of data that <a>GetRecords</a> can return is 10 MiB. If a call\n            returns this amount of data, subsequent calls made within the next 5 seconds throw\n                <code>ProvisionedThroughputExceededException</code>. If there is insufficient\n            provisioned throughput on the stream, subsequent calls made within the next 1 second\n            throw <code>ProvisionedThroughputExceededException</code>. <a>GetRecords</a>\n            doesn't return any data when it throws an exception. For this reason, we recommend that\n            you wait 1 second between calls to <a>GetRecords</a>. However, it's possible\n            that the application will get exceptions for longer than 1 second.</p>\n         <p>To detect whether the application is falling behind in processing, you can use the\n                <code>MillisBehindLatest</code> response attribute. You can also monitor the stream\n            using CloudWatch metrics and other mechanisms (see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html\">Monitoring</a> in the <i>Amazon\n                Kinesis Data Streams Developer Guide</i>).</p>\n         <p>Each Amazon Kinesis record includes a value, <code>ApproximateArrivalTimestamp</code>,\n            that is set when a stream successfully receives and stores a record. This is commonly\n            referred to as a server-side time stamp, whereas a client-side time stamp is set when a\n            data producer creates or sends the record to a stream (a data producer is any data\n            source putting data records into a stream, for example with <a>PutRecords</a>). The time stamp has millisecond precision. There are no guarantees about the time\n            stamp accuracy, or that the time stamp is always increasing. For example, records in a\n            shard or across a stream might have time stamps that are out of order.</p>\n         <p>This operation has a limit of five transactions per second per shard.</p>",
+                "smithy.api#documentation": "<p>Gets data records from a Kinesis data stream's shard.</p>\n         <note>\n            <p>When invoking this API, you must use either the <code>StreamARN</code> or the\n                    <code>StreamName</code> parameter, or both. It is recommended that you use the\n                    <code>StreamARN</code> input parameter when you invoke this API.</p>\n         </note>\n         <p>Specify a shard iterator using the <code>ShardIterator</code> parameter. The shard\n            iterator specifies the position in the shard from which you want to start reading data\n            records sequentially. If there are no records available in the portion of the shard that\n            the iterator points to, <a>GetRecords</a> returns an empty list. It might\n            take multiple calls to get to a portion of the shard that contains records.</p>\n         <p>You can scale by provisioning multiple shards per stream while considering service\n            limits (for more information, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Amazon Kinesis Data Streams\n                Limits</a> in the <i>Amazon Kinesis Data Streams Developer\n                Guide</i>). Your application should have one thread per shard, each reading\n            continuously from its stream. To read from a stream continually, call <a>GetRecords</a> in a loop. Use <a>GetShardIterator</a> to get the\n            shard iterator to specify in the first <a>GetRecords</a> call. <a>GetRecords</a> returns a new shard iterator in\n                <code>NextShardIterator</code>. Specify the shard iterator returned in\n                <code>NextShardIterator</code> in subsequent calls to <a>GetRecords</a>.\n            If the shard has been closed, the shard iterator can't return more data and <a>GetRecords</a> returns <code>null</code> in <code>NextShardIterator</code>.\n            You can terminate the loop when the shard is closed, or when the shard iterator reaches\n            the record with the sequence number or other attribute that marks it as the last record\n            to process.</p>\n         <p>Each data record can be up to 1 MiB in size by default. Amazon Kinesis Data Streams supports \n            large records up to 10 MiB in size, but the average throughput for your stream cannot exceed \n            1 MiB per second. For more information about how large records are handled, see \n            <a href=\"https://docs.aws.amazon.com/streams/latest/dev/large-records.html\">Large records</a>. \n            Each shard can read up to 2 MiB per second. You can ensure that your calls don't exceed \n            the maximum supported size or throughput by using the <code>Limit</code> parameter to \n            specify the maximum number of records that <a>GetRecords</a> can return. \n            Consider your average record size when determining this limit. The maximum number of records \n            that can be returned per call is 10,000.</p>\n         <p>The size of the data returned by <a>GetRecords</a> varies depending on the\n            utilization of the shard. It is recommended that consumer applications retrieve records\n            via the <code>GetRecords</code> command using the 5 TPS limit to remain caught up.\n            Retrieving records less frequently can lead to consumer applications falling behind. The\n            maximum size of data that <a>GetRecords</a> can return is 10 MiB. If a call\n            returns this amount of data, subsequent calls made within the next 5 seconds throw\n                <code>ProvisionedThroughputExceededException</code>. If there is insufficient\n            provisioned throughput on the stream, subsequent calls made within the next 1 second\n            throw <code>ProvisionedThroughputExceededException</code>. <a>GetRecords</a>\n            doesn't return any data when it throws an exception. For this reason, we recommend that\n            you wait 1 second between calls to <a>GetRecords</a>. However, it's possible\n            that the application will get exceptions for longer than 1 second.</p>\n         <p>To detect whether the application is falling behind in processing, you can use the\n                <code>MillisBehindLatest</code> response attribute. You can also monitor the stream\n            using CloudWatch metrics and other mechanisms (see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html\">Monitoring</a> in the <i>Amazon\n                Kinesis Data Streams Developer Guide</i>).</p>\n         <p>Each Amazon Kinesis record includes a value, <code>ApproximateArrivalTimestamp</code>,\n            that is set when a stream successfully receives and stores a record. This is commonly\n            referred to as a server-side time stamp, whereas a client-side time stamp is set when a\n            data producer creates or sends the record to a stream (a data producer is any data\n            source putting data records into a stream, for example with <a>PutRecords</a>). The time stamp has millisecond precision. There are no guarantees about the time\n            stamp accuracy, or that the time stamp is always increasing. For example, records in a\n            shard or across a stream might have time stamps that are out of order.</p>\n         <p>This operation has a limit of five transactions per second per shard.</p>",
                 "smithy.rules#staticContextParams": {
                     "OperationType": {
                         "value": "data"
@@ -2035,6 +2050,11 @@
                             "documentation": "Override the endpoint used to send this request",
                             "type": "string"
                         },
+                        "OperationType": {
+                            "required": false,
+                            "documentation": "Internal parameter to distinguish between Control/Data plane API and accordingly generate control/data plane endpoint",
+                            "type": "string"
+                        },
                         "StreamId": {
                             "required": false,
                             "documentation": "The unique identifier of the Kinesis stream",
@@ -2045,11 +2065,6 @@
                             "documentation": "The ARN of the Kinesis stream",
                             "type": "string"
                         },
-                        "OperationType": {
-                            "required": false,
-                            "documentation": "Internal parameter to distinguish between Control/Data plane API and accordingly generate control/data plane endpoint",
-                            "type": "string"
-                        },
                         "ConsumerARN": {
                             "required": false,
                             "documentation": "The ARN of the Kinesis consumer",
@@ -2058,6 +2073,18 @@
                         "ResourceARN": {
                             "required": false,
                             "documentation": "The ARN of the Kinesis resource",
+                            "type": "string"
+                        },
+                        "AccountId": {
+                            "builtIn": "AWS::Auth::AccountId",
+                            "required": false,
+                            "documentation": "The AWS AccountId used for the request.",
+                            "type": "string"
+                        },
+                        "AccountIdEndpointMode": {
+                            "builtIn": "AWS::Auth::AccountIdEndpointMode",
+                            "required": false,
+                            "documentation": "The AccountId Endpoint Mode.",
                             "type": "string"
                         }
                     },
@@ -2196,6 +2223,76 @@
                             ]
                         },
                         {
+                            "fn": "substring",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                },
+                                15,
+                                20,
+                                false
+                            ],
+                            "assign": "HttpsCustomEndpointSuffixValue"
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "coalesce",
+                                    "argv": [
+                                        {
+                                            "fn": "substring",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                },
+                                                15,
+                                                16,
+                                                false
+                                            ]
+                                        },
+                                        ""
+                                    ]
+                                },
+                                "-"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "coalesce",
+                                    "argv": [
+                                        {
+                                            "fn": "substring",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                },
+                                                20,
+                                                21,
+                                                false
+                                            ]
+                                        },
+                                        ""
+                                    ]
+                                },
+                                "."
+                            ]
+                        },
+                        {
+                            "fn": "substring",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                },
+                                7,
+                                12,
+                                false
+                            ],
+                            "assign": "PlainCustomEndpointSuffixValue"
+                        },
+                        {
                             "fn": "isSet",
                             "argv": [
                                 {
@@ -2243,76 +2340,6 @@
                             ]
                         },
                         {
-                            "fn": "substring",
-                            "argv": [
-                                {
-                                    "ref": "Endpoint"
-                                },
-                                15,
-                                20,
-                                false
-                            ],
-                            "assign": "HttpsCustomEndpointSuffixValue"
-                        },
-                        {
-                            "fn": "stringEquals",
-                            "argv": [
-                                {
-                                    "fn": "coalesce",
-                                    "argv": [
-                                        {
-                                            "fn": "substring",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                },
-                                                20,
-                                                21,
-                                                false
-                                            ]
-                                        },
-                                        ""
-                                    ]
-                                },
-                                "."
-                            ]
-                        },
-                        {
-                            "fn": "stringEquals",
-                            "argv": [
-                                {
-                                    "fn": "coalesce",
-                                    "argv": [
-                                        {
-                                            "fn": "substring",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                },
-                                                15,
-                                                16,
-                                                false
-                                            ]
-                                        },
-                                        ""
-                                    ]
-                                },
-                                "-"
-                            ]
-                        },
-                        {
-                            "fn": "substring",
-                            "argv": [
-                                {
-                                    "ref": "Endpoint"
-                                },
-                                7,
-                                12,
-                                false
-                            ],
-                            "assign": "PlainCustomEndpointSuffixValue"
-                        },
-                        {
                             "fn": "stringEquals",
                             "argv": [
                                 {
@@ -2328,34 +2355,6 @@
                             ]
                         },
                         {
-                            "fn": "getAttr",
-                            "argv": [
-                                {
-                                    "ref": "arn_ssa_3"
-                                },
-                                "resourceId[0]"
-                            ],
-                            "assign": "arnType_ssa_1"
-                        },
-                        {
-                            "fn": "stringEquals",
-                            "argv": [
-                                {
-                                    "ref": "arnType_ssa_1"
-                                },
-                                ""
-                            ]
-                        },
-                        {
-                            "fn": "stringEquals",
-                            "argv": [
-                                {
-                                    "ref": "arnType_ssa_1"
-                                },
-                                "stream"
-                            ]
-                        },
-                        {
                             "fn": "isSet",
                             "argv": [
                                 {
@@ -2364,117 +2363,14 @@
                             ]
                         },
                         {
-                            "fn": "isSet",
-                            "argv": [
-                                {
-                                    "ref": "ResourceARN"
-                                }
-                            ]
-                        },
-                        {
-                            "fn": "aws.parseArn",
-                            "argv": [
-                                {
-                                    "ref": "ResourceARN"
-                                }
-                            ],
-                            "assign": "arn_ssa_2"
-                        },
-                        {
-                            "fn": "isValidHostLabel",
-                            "argv": [
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "arn_ssa_2"
-                                        },
-                                        "accountId"
-                                    ]
-                                },
-                                false
-                            ]
-                        },
-                        {
-                            "fn": "isValidHostLabel",
-                            "argv": [
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "arn_ssa_2"
-                                        },
-                                        "region"
-                                    ]
-                                },
-                                false
-                            ]
-                        },
-                        {
-                            "fn": "stringEquals",
-                            "argv": [
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "arn_ssa_2"
-                                        },
-                                        "service"
-                                    ]
-                                },
-                                "kinesis"
-                            ]
-                        },
-                        {
                             "fn": "getAttr",
                             "argv": [
                                 {
-                                    "ref": "arn_ssa_2"
+                                    "ref": "arn_ssa_3"
                                 },
                                 "resourceId[0]"
                             ],
-                            "assign": "arnType_ssa_3"
-                        },
-                        {
-                            "fn": "stringEquals",
-                            "argv": [
-                                {
-                                    "ref": "arnType_ssa_3"
-                                },
-                                ""
-                            ]
-                        },
-                        {
-                            "fn": "stringEquals",
-                            "argv": [
-                                {
-                                    "ref": "arnType_ssa_3"
-                                },
-                                "stream"
-                            ]
-                        },
-                        {
-                            "fn": "stringEquals",
-                            "argv": [
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "PartitionResult"
-                                        },
-                                        "name"
-                                    ]
-                                },
-                                {
-                                    "fn": "getAttr",
-                                    "argv": [
-                                        {
-                                            "ref": "arn_ssa_2"
-                                        },
-                                        "partition"
-                                    ]
-                                }
-                            ]
+                            "assign": "arnType_ssa_1"
                         },
                         {
                             "fn": "aws.parseArn",
@@ -2579,6 +2475,180 @@
                                         "partition"
                                     ]
                                 }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "ResourceARN"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.parseArn",
+                            "argv": [
+                                {
+                                    "ref": "ResourceARN"
+                                }
+                            ],
+                            "assign": "arn_ssa_2"
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "AccountIdEndpointMode"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isValidHostLabel",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "arn_ssa_2"
+                                        },
+                                        "accountId"
+                                    ]
+                                },
+                                false
+                            ]
+                        },
+                        {
+                            "fn": "isValidHostLabel",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "arn_ssa_2"
+                                        },
+                                        "region"
+                                    ]
+                                },
+                                false
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "arn_ssa_2"
+                                        },
+                                        "service"
+                                    ]
+                                },
+                                "kinesis"
+                            ]
+                        },
+                        {
+                            "fn": "getAttr",
+                            "argv": [
+                                {
+                                    "ref": "arn_ssa_2"
+                                },
+                                "resourceId[0]"
+                            ],
+                            "assign": "arnType_ssa_3"
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "arnType_ssa_3"
+                                },
+                                ""
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "arnType_ssa_3"
+                                },
+                                "stream"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "arn_ssa_2"
+                                        },
+                                        "partition"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "AccountId"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "AccountIdEndpointMode"
+                                },
+                                "disabled"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "AccountIdEndpointMode"
+                                },
+                                "required"
+                            ]
+                        },
+                        {
+                            "fn": "isValidHostLabel",
+                            "argv": [
+                                {
+                                    "ref": "AccountId"
+                                },
+                                false
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "arnType_ssa_1"
+                                },
+                                ""
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "arnType_ssa_1"
+                                },
+                                "stream"
                             ]
                         },
                         {
@@ -2687,15 +2757,15 @@
                                                 {
                                                     "ref": "Endpoint"
                                                 },
-                                                7,
-                                                8,
+                                                12,
+                                                13,
                                                 false
                                             ]
                                         },
                                         ""
                                     ]
                                 },
-                                "-"
+                                "."
                             ]
                         },
                         {
@@ -2710,15 +2780,15 @@
                                                 {
                                                     "ref": "Endpoint"
                                                 },
-                                                12,
-                                                13,
+                                                7,
+                                                8,
                                                 false
                                             ]
                                         },
                                         ""
                                     ]
                                 },
-                                "."
+                                "-"
                             ]
                         }
                     ],
@@ -3031,6 +3101,73 @@
                         },
                         {
                             "conditions": [],
+                            "endpoint": {
+                                "url": "https://{AccountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "metricValues": [
+                                        "O"
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{AccountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "metricValues": [
+                                        "O"
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{AccountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "metricValues": [
+                                        "O"
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{AccountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "metricValues": [
+                                        "O"
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid account id.",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
                             "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
                             "type": "error"
                         },
@@ -3107,8 +3244,8 @@
                         }
                     ],
                     "root": 2,
-                    "nodeCount": 106,
-                    "nodes": "/////wAAAAH/////AAAAAAAAAAMAAAAEAAAAAQAAAAUAAAAEAAAACQAAAGkF9eE0AAAAAgAAAGAAAAAGAAAAAwAAAGAAAAAHAAAABAAAAAgAAAAMAAAABQAAAAkAAAAMAAAABgAAAAoAAAAMAAAABwAAAAsAAAAMAAAACAAAAD0AAAAMAAAACQAAAGkAAAANAAAACgAAAC4AAAAOAAAAFgAAAB8AAAAPAAAAFwAAABAAAABhAAAAGAAAABEF9eEcAAAAGQAAABIF9eEbAAAAGgAAABMF9eEaAAAAGwAAABQF9eEqAAAAHAAAABUF9eEYAAAAHQX14RgAAAAWAAAAHgAAABcF9eEpAAAAHwAAABgF9eEoAAAAKQAAABkF9eERAAAAKgAAABwAAAAaAAAALAAAABsF9eEnAAAALQX14SYF9eEHAAAAKwAAAB0AAABdAAAALAAAAB4F9eElAAAALQX14SQF9eECAAAAIAAAACAF9eEcAAAAIQAAACEF9eEbAAAAIgAAACIF9eEaAAAAIwAAACMF9eEjAAAAJAAAACQF9eEYAAAAJQX14RgAAAAlAAAAJgAAACYF9eEiAAAAJwAAACcF9eEhAAAAKQAAACgF9eERAAAAKgAAACsAAAApAAAALAAAACoF9eEgAAAALQX14R8F9eEHAAAAKwAAACwAAABdAAAALAAAAC0F9eEeAAAALQX14R0F9eECAAAACwAAAC8F9eEcAAAADAAAADAF9eEbAAAADQAAADEF9eEaAAAAEgAAADIF9eEZAAAAEwAAADMF9eEYAAAAFAX14RgAAAA0AAAAFQAAADUF9eEXAAAAKAAAADYF9eEWAAAAKQAAADcF9eERAAAAKgAAADoAAAA4AAAALAAAADkF9eEVAAAALQX14RQF9eEHAAAAKwAAADsAAABdAAAALAAAADwF9eETAAAALQX14RIF9eECAAAACQAAAD4AAABCAAAADgAAAD8AAABBAAAADwAAAEAAAABBAAAAEAAAAFgAAABBAAAAEQAAAEkAAABCAAAAKQAAAEMF9eERAAAAKgAAAEYAAABEAAAALAAAAEUF9eEQAAAALQX14Q8F9eEHAAAAKwAAAEcAAABdAAAALAAAAEgF9eEOAAAALQX14Q0F9eECAAAAKQAAAEoF9eERAAAAKgAAAFEAAABLAAAALAAAAE4AAABMAAAALwAAAE0F9eEQAAAAMAX14QwF9eEQAAAALQAAAE8F9eEHAAAALwAAAFAF9eEPAAAAMAX14QsF9eEPAAAAKwAAAFIAAABdAAAALAAAAFUAAABTAAAALwAAAFQF9eEOAAAAMAX14QoF9eEOAAAALQAAAFYF9eECAAAALwAAAFcF9eENAAAAMAX14QkF9eENAAAAKQAAAFkF9eERAAAAKgAAAFwAAABaAAAALAAAAFsF9eEIAAAALQX14QYF9eEHAAAAKwAAAF4AAABdAAAALAX14QMF9eEFAAAALAAAAF8F9eEEAAAALQX14QEF9eECAAAACQAAAGkAAABhAAAAKgAAAGQAAABiAAAALAAAAGMF9eEzAAAALQX14TIF9eEHAAAAKwAAAGYAAABlAAAALAX14S8F9eEFAAAALAAAAGgAAABnAAAALgX14TAF9eExAAAALQX14S4F9eEvAAAAKgX14SsAAABqAAAALAX14SwF9eEt"
+                    "nodeCount": 120,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAMAAAAEAAAAAQAAAAUAAAAEAAAACQAAAHcF9eE7AAAAAgAAAGwAAAAGAAAAAwAAAGwAAAAHAAAABAAAAAgAAAAMAAAABQAAAAkAAAAMAAAABgAAAAoAAAAMAAAABwAAAAsAAAAMAAAACAAAAEkAAAAMAAAACQAAAHcAAAANAAAADgAAADoAAAAOAAAAEwAAACsAAAAPAAAAHQAAABwAAAAQAAAAHwAAABEAAABvAAAAJwAAABIAAAAbAAAAKAAAABsAAAATAAAAKgAAABQF9eEvAAAALgAAABUF9eERAAAALwAAABgAAAAWAAAAMQAAABcF9eEuAAAAMgX14S0F9eEHAAAAMAAAABkAAABpAAAAMQAAABoF9eEsAAAAMgX14SsF9eECAAAAKQX14TAAAABvAAAAHgAAAB0F9eEcAAAAIAAAAB4F9eEbAAAAIQAAAB8F9eEaAAAAIgAAACAF9eEqAAAAIwAAACEF9eEYAAAAJAX14RgAAAAiAAAAJQAAACMF9eEpAAAAJgAAACQF9eEoAAAALgAAACUF9eERAAAALwAAACgAAAAmAAAAMQAAACcF9eEnAAAAMgX14SYF9eEHAAAAMAAAACkAAABpAAAAMQAAACoF9eElAAAAMgX14SQF9eECAAAAFQAAACwF9eEcAAAAFgAAAC0F9eEbAAAAFwAAAC4F9eEaAAAAGAAAAC8F9eEjAAAAGQAAADAF9eEYAAAAGgX14RgAAAAxAAAAGwAAADIF9eEiAAAAHAAAADMF9eEhAAAALgAAADQF9eERAAAALwAAADcAAAA1AAAAMQAAADYF9eEgAAAAMgX14R8F9eEHAAAAMAAAADgAAABpAAAAMQAAADkF9eEeAAAAMgX14R0F9eECAAAADwAAADsF9eEcAAAAEAAAADwF9eEbAAAAEQAAAD0F9eEaAAAAEgAAAD4F9eEZAAAAFAAAAD8F9eEYAAAAKwX14RgAAABAAAAALAAAAEEF9eEXAAAALQAAAEIF9eEWAAAALgAAAEMF9eERAAAALwAAAEYAAABEAAAAMQAAAEUF9eEVAAAAMgX14RQF9eEHAAAAMAAAAEcAAABpAAAAMQAAAEgF9eETAAAAMgX14RIF9eECAAAACQAAAEoAAABOAAAACgAAAEsAAABNAAAACwAAAEwAAABNAAAADAAAAGQAAABNAAAADQAAAFUAAABOAAAALgAAAE8F9eERAAAALwAAAFIAAABQAAAAMQAAAFEF9eEQAAAAMgX14Q8F9eEHAAAAMAAAAFMAAABpAAAAMQAAAFQF9eEOAAAAMgX14Q0F9eECAAAALgAAAFYF9eERAAAALwAAAF0AAABXAAAAMQAAAFoAAABYAAAANAAAAFkF9eEQAAAANQX14QwF9eEQAAAAMgAAAFsF9eEHAAAANAAAAFwF9eEPAAAANQX14QsF9eEPAAAAMAAAAF4AAABpAAAAMQAAAGEAAABfAAAANAAAAGAF9eEOAAAANQX14QoF9eEOAAAAMgAAAGIF9eECAAAANAAAAGMF9eENAAAANQX14QkF9eENAAAALgAAAGUF9eERAAAALwAAAGgAAABmAAAAMQAAAGcF9eEIAAAAMgX14QYF9eEHAAAAMAAAAGoAAABpAAAAMQX14QMF9eEFAAAAMQAAAGsF9eEEAAAAMgX14QEF9eECAAAACQAAAHcAAABtAAAAHwAAAG4AAABvAAAAKQX14TEAAABvAAAALwAAAHIAAABwAAAAMQAAAHEF9eE6AAAAMgX14TkF9eEHAAAAMAAAAHQAAABzAAAAMQX14TYF9eEFAAAAMQAAAHYAAAB1AAAAMwX14TcF9eE4AAAAMgX14TUF9eE2AAAALwX14TIAAAB4AAAAMQX14TMF9eE0"
                 },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3139,6 +3276,11 @@
                             "documentation": "Override the endpoint used to send this request",
                             "type": "string"
                         },
+                        "OperationType": {
+                            "required": false,
+                            "documentation": "Internal parameter to distinguish between Control/Data plane API and accordingly generate control/data plane endpoint",
+                            "type": "string"
+                        },
                         "StreamId": {
                             "required": false,
                             "documentation": "The unique identifier of the Kinesis stream",
@@ -3149,11 +3291,6 @@
                             "documentation": "The ARN of the Kinesis stream",
                             "type": "string"
                         },
-                        "OperationType": {
-                            "required": false,
-                            "documentation": "Internal parameter to distinguish between Control/Data plane API and accordingly generate control/data plane endpoint",
-                            "type": "string"
-                        },
                         "ConsumerARN": {
                             "required": false,
                             "documentation": "The ARN of the Kinesis consumer",
@@ -3162,6 +3299,18 @@
                         "ResourceARN": {
                             "required": false,
                             "documentation": "The ARN of the Kinesis resource",
+                            "type": "string"
+                        },
+                        "AccountId": {
+                            "builtIn": "AWS::Auth::AccountId",
+                            "required": false,
+                            "documentation": "The AWS AccountId used for the request.",
+                            "type": "string"
+                        },
+                        "AccountIdEndpointMode": {
+                            "builtIn": "AWS::Auth::AccountIdEndpointMode",
+                            "required": false,
+                            "documentation": "The AccountId Endpoint Mode.",
                             "type": "string"
                         }
                     },
@@ -5536,6 +5685,482 @@
                                 {
                                     "conditions": [],
                                     "error": "Invalid ARN: Failed to parse ARN.",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "AccountIdEndpointMode"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "AccountIdEndpointMode"
+                                                },
+                                                "disabled"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "AccountId"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "fn": "getAttr",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "PartitionResult"
+                                                        },
+                                                        "name"
+                                                    ]
+                                                },
+                                                "aws-iso"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "fn": "getAttr",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "PartitionResult"
+                                                        },
+                                                        "name"
+                                                    ]
+                                                },
+                                                "aws-iso-b"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isValidHostLabel",
+                                            "argv": [
+                                                {
+                                                    "ref": "AccountId"
+                                                },
+                                                false
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "isSet",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "OperationType"
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [
+                                                                        {
+                                                                            "fn": "booleanEquals",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "fn": "getAttr",
+                                                                                    "argv": [
+                                                                                        {
+                                                                                            "ref": "PartitionResult"
+                                                                                        },
+                                                                                        "supportsDualStack"
+                                                                                    ]
+                                                                                },
+                                                                                true
+                                                                            ]
+                                                                        }
+                                                                    ],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://{AccountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {
+                                                                                    "metricValues": [
+                                                                                        "O"
+                                                                                    ]
+                                                                                },
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                },
+                                                                {
+                                                                    "conditions": [],
+                                                                    "error": "DualStack is enabled, but this partition does not support DualStack.",
+                                                                    "type": "error"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled, but this partition does not support FIPS.",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://{AccountId}.{OperationType}-kinesis-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {
+                                                                            "metricValues": [
+                                                                                "O"
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://{AccountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {
+                                                                            "metricValues": [
+                                                                                "O"
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://{AccountId}.{OperationType}-kinesis.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {
+                                                            "metricValues": [
+                                                                "O"
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "Operation Type is not set. Please contact service team for resolution.",
+                                            "type": "error"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid account id.",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "not",
+                                    "argv": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "AccountIdEndpointMode"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "stringEquals",
+                                    "argv": [
+                                        {
+                                            "ref": "AccountIdEndpointMode"
+                                        },
+                                        "required"
+                                    ]
+                                },
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "not",
+                                            "argv": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        },
+                                                        "aws-iso"
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "not",
+                                            "argv": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        },
+                                                        "aws-iso-b"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [],
+                                            "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded",
+                                            "type": "error"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition",
                                     "type": "error"
                                 }
                             ],
@@ -8530,6 +9155,1012 @@
                                 "StreamId": "af4lwng4k01746835071-yz",
                                 "ResourceARN": "arn:aws:kinesis:us-east-1:123:stream/test-stream"
                             }
+                        },
+                        {
+                            "documentation": "AccountId test: Account Id present",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://012345678901.data-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountId": "012345678901",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred"
+                                    },
+                                    "operationName": "GetShardIterator",
+                                    "operationParams": {
+                                        "ShardId": "shardId-000000000001",
+                                        "ShardIteratorType": "LATEST",
+                                        "StreamName": "test-stream"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "data",
+                                "AccountId": "012345678901",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "AccountId test: Account Id present with fips",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123.control-kinesis-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountId": "123",
+                                        "AWS::Auth::AccountIdEndpointMode": "required",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "ListShards",
+                                    "operationParams": {
+                                        "StreamName": "testStream"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "required"
+                            }
+                        },
+                        {
+                            "documentation": "AccountId test: Account Id present with dual stack",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123.control-kinesis.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "OperationType": "control",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "AccountId test: Account Id present with fips and dual stack",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123.control-kinesis-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "OperationType": "control",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id present with streamId",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://af4lwng4k01746835071.xyz.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "StreamId": "af4lwng4k01746835071-xyz",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id present with stream ARN",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://123.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "StreamARN": "arn:aws:kinesis:us-east-1:123:stream/test-stream",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id present with consumer ARN",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://123.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "ConsumerARN": "arn:aws:kinesis:us-west-2:123:stream/testStream/consumer/test-consumer:1525898737",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id present with resource ARN",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://123.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "ResourceARN": "arn:aws:kinesis:us-west-2:123:stream/testStream/consumer/test-consumer:1525898737",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id present and stream ARN with different accountId",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://456.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "ResourceARN": "arn:aws:kinesis:us-west-2:456:stream/testStream",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id present and consumer ARN with different accountId",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://456.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "ResourceARN": "arn:aws:kinesis:us-west-2:456:stream/testStream/consumer/test-consumer:1525898737",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id, streamId and resource ARN with different accountId",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://af4lwng4k01746835071.xyz.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "StreamId": "af4lwng4k01746835071-xyz",
+                                "ResourceARN": "arn:aws:kinesis:us-west-2:456:stream/testStream/consumer/test-consumer:1525898737",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id with account id endpoint mode disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountId": "123",
+                                        "AWS::Auth::AccountIdEndpointMode": "disabled"
+                                    },
+                                    "operationName": "ListShards",
+                                    "operationParams": {
+                                        "StreamName": "testStream"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id and StreamArn with account id endpoint mode disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://456.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "StreamARN": "arn:aws:kinesis:us-west-2:456:stream/testStream",
+                                "AccountId": "123",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id missing with account id endpoint mode required",
+                            "expect": {
+                                "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountIdEndpointMode": "required"
+                                    },
+                                    "operationName": "ListShards",
+                                    "operationParams": {
+                                        "StreamName": "testStream"
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountIdEndpointMode": "required"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id missing with account id endpoint mode required, fips and dual stack enabled",
+                            "expect": {
+                                "error": "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "OperationType": "control",
+                                "AccountIdEndpointMode": "required"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id missing with account id endpoint mode required in ADC region",
+                            "expect": {
+                                "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountIdEndpointMode": "required"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id present with account id endpoint mode required in ADC region",
+                            "expect": {
+                                "error": "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "required"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id present with account id endpoint mode preferred in ADC region",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id missing with account id endpoint mode required and endpoint override",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis-pod1.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "Endpoint": "https://kinesis-pod1.us-west-2.amazonaws.com",
+                                "AccountIdEndpointMode": "required"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id missing with StreamArn and account id endpoint mode required",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://456.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "StreamARN": "arn:aws:kinesis:us-west-2:456:stream/testStream",
+                                "AccountIdEndpointMode": "required"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id missing with StreamId and account id endpoint mode required",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://af4lwng4k01746835071.xyz.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "StreamId": "af4lwng4k01746835071-xyz",
+                                "AccountIdEndpointMode": "required"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id missing with account id endpoint mode preferred",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "Account Id missing with account id endpoint mode disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "CreateStream: control operation type with AccountId",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred"
+                                    },
+                                    "operationName": "CreateStream",
+                                    "operationParams": {
+                                        "StreamName": "test-stream",
+                                        "ShardCount": 1
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "CreateStream: control operation type with FIPS and AccountId",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "CreateStream",
+                                    "operationParams": {
+                                        "StreamName": "test-stream",
+                                        "ShardCount": 1
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "ListStreams: control operation type with AccountId",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred"
+                                    },
+                                    "operationName": "ListStreams"
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "ListStreams: control operation type with FIPS and DualStack",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred",
+                                        "AWS::UseFIPS": true,
+                                        "AWS::UseDualStack": true
+                                    },
+                                    "operationName": "ListStreams"
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "DescribeLimits: control operation type with AccountId",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred"
+                                    },
+                                    "operationName": "DescribeLimits"
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "DescribeLimits: control operation type with FIPS",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "DescribeLimits"
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "DescribeAccountSettings: control operation type with AccountId",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred"
+                                    },
+                                    "operationName": "DescribeAccountSettings"
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "DescribeAccountSettings: control operation type with FIPS and DualStack",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred",
+                                        "AWS::UseFIPS": true,
+                                        "AWS::UseDualStack": true
+                                    },
+                                    "operationName": "DescribeAccountSettings"
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "UpdateAccountSettings: control operation type with AccountId",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred"
+                                    },
+                                    "operationName": "UpdateAccountSettings",
+                                    "operationParams": {
+                                        "MinimumThroughputBillingCommitment": {
+                                            "Status": "ENABLED"
+                                        }
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "UpdateAccountSettings: control operation type with FIPS",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "metricValues": [
+                                            "O"
+                                        ]
+                                    },
+                                    "url": "https://123456789012.control-kinesis-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "preferred",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "UpdateAccountSettings",
+                                    "operationParams": {
+                                        "MinimumThroughputBillingCommitment": {
+                                            "Status": "ENABLED"
+                                        }
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "preferred"
+                            }
+                        },
+                        {
+                            "documentation": "CreateStream: account id endpoint mode disabled falls back to regional endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "disabled"
+                                    },
+                                    "operationName": "CreateStream",
+                                    "operationParams": {
+                                        "StreamName": "test-stream",
+                                        "ShardCount": 1
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "ListStreams: account id endpoint mode disabled falls back to regional endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "disabled"
+                                    },
+                                    "operationName": "ListStreams"
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "DescribeLimits: account id endpoint mode disabled falls back to regional endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "disabled"
+                                    },
+                                    "operationName": "DescribeLimits"
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "DescribeAccountSettings: account id endpoint mode disabled falls back to regional endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-west-2",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "disabled"
+                                    },
+                                    "operationName": "DescribeAccountSettings"
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "UpdateAccountSettings: account id endpoint mode disabled falls back to regional endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "disabled"
+                                    },
+                                    "operationName": "UpdateAccountSettings",
+                                    "operationParams": {
+                                        "MinimumThroughputBillingCommitment": {
+                                            "Status": "ENABLED"
+                                        }
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "CreateStream: account id endpoint mode disabled with FIPS falls back to regional FIPS endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "disabled",
+                                        "AWS::UseFIPS": true
+                                    },
+                                    "operationName": "CreateStream",
+                                    "operationParams": {
+                                        "StreamName": "test-stream",
+                                        "ShardCount": 1
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "CreateStream: account id endpoint mode disabled with DualStack falls back to regional DualStack endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis.us-east-1.api.aws"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "disabled",
+                                        "AWS::UseDualStack": true
+                                    },
+                                    "operationName": "CreateStream",
+                                    "operationParams": {
+                                        "StreamName": "test-stream",
+                                        "ShardCount": 1
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "disabled"
+                            }
+                        },
+                        {
+                            "documentation": "CreateStream: account id endpoint mode disabled with FIPS and DualStack falls back to regional FIPS DualStack endpoint",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kinesis-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "operationInputs": [
+                                {
+                                    "builtInParams": {
+                                        "AWS::Region": "us-east-1",
+                                        "AWS::Auth::AccountId": "123456789012",
+                                        "AWS::Auth::AccountIdEndpointMode": "disabled",
+                                        "AWS::UseFIPS": true,
+                                        "AWS::UseDualStack": true
+                                    },
+                                    "operationName": "CreateStream",
+                                    "operationParams": {
+                                        "StreamName": "test-stream",
+                                        "ShardCount": 1
+                                    }
+                                }
+                            ],
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "OperationType": "control",
+                                "AccountId": "123456789012",
+                                "AccountIdEndpointMode": "disabled"
+                            }
                         }
                     ],
                     "version": "1.0"
@@ -8817,6 +10448,11 @@
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "pageSize": "Limit"
+                },
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
                 },
                 "smithy.test#smokeTests": [
                     {
@@ -9842,7 +11478,7 @@
                 "Data": {
                     "target": "com.amazonaws.kinesis#Data",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data blob. The data in the blob is both opaque and immutable to Kinesis Data\n            Streams, which does not inspect, interpret, or change the data in the blob in any way.\n            When the data blob (the payload before base64-encoding) is added to the partition key\n            size, the total size must not exceed the maximum record size (1 MiB).</p>",
+                        "smithy.api#documentation": "<p>The data blob. The data in the blob is both opaque and immutable to Kinesis Data\n            Streams, which does not inspect, interpret, or change the data in the blob in any way.\n            When the data blob (the payload before base64-encoding) is added to the partition key\n            size, the total size must not exceed the maximum record size (10 MiB).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11313,7 +12949,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the account-level settings for Amazon Kinesis Data Streams.</p>\n         <p>Updating account settings is a synchronous operation. Upon receiving the request, Kinesis Data Streams will return immediately with your account’s updated settings.</p>\n         <p>\n            <b>API limits</b>\n         </p>\n         <ul>\n            <li>\n               <p>Certain account configurations have minimum commitment windows. Attempting to update your settings prior to the end of the minimum commitment window might have certain restrictions.</p>\n            </li>\n            <li>\n               <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. TPS over 5 will initiate the <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Updates the account-level settings for Amazon Kinesis Data Streams.</p>\n         <p>Updating account settings is a synchronous operation. Upon receiving the request, Kinesis Data Streams will return immediately with your account’s updated settings.</p>\n         <p>\n            <b>API limits</b>\n         </p>\n         <ul>\n            <li>\n               <p>Certain account configurations have minimum commitment windows. Attempting to update your settings prior to the end of the minimum commitment window might have certain restrictions.</p>\n            </li>\n            <li>\n               <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. TPS over 5 will initiate the <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>",
+                "smithy.rules#staticContextParams": {
+                    "OperationType": {
+                        "value": "control"
+                    }
+                }
             }
         },
         "com.amazonaws.kinesis#UpdateAccountSettingsInput": {
@@ -11633,7 +13274,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the warm throughput configuration for the specified Amazon Kinesis Data Streams on-demand data stream. This operation allows you to proactively scale your on-demand data stream to a specified throughput level, enabling better performance for sudden traffic spikes. </p>\n         <note>\n            <p>When invoking this API, you must use either the <code>StreamARN</code> or the <code>StreamName</code> parameter, or both. It is recommended that you use the <code>StreamARN</code> input parameter when you invoke this API.</p>\n         </note>\n         <p>Updating the warm throughput is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Kinesis Data Streams sets the status of the stream back to <code>ACTIVE</code>. Depending on the size of the stream, the scaling action could take a few minutes to complete. You can continue to read and write data to your stream while its status is <code>UPDATING</code>.</p>\n         <p>This operation is only supported for data streams with the on-demand capacity mode in accounts that have <code>MinimumThroughputBillingCommitment</code> enabled. Provisioned capacity mode streams do not support warm throughput configuration.</p>\n         <p>This operation has the following default limits. By default, you cannot do the following:</p>\n         <ul>\n            <li>\n               <p>Scale to more than 10 GiBps for an on-demand stream.</p>\n            </li>\n            <li>\n               <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. TPS over 5 will initiate the <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>For the default limits for an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer\n                    Guide</i>. To request an increase in the call rate limit, the shard limit for this API, or your overall shard limit, use the <a href=\"https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&limitType=service-code-kinesis\">limits form</a>.</p>",
+                "smithy.api#documentation": "<p>Updates the warm throughput configuration for the specified Amazon Kinesis Data Streams on-demand data stream. Updates the warm throughput configuration for the specified on-demand data stream. Use this operation to scale your stream to a specified throughput level before anticipated traffic spikes, or to release excess capacity after traffic has decreased. </p>\n         <note>\n            <p>When invoking this API, you must use either the <code>StreamARN</code> or the <code>StreamName</code> parameter, or both. It is recommended that you use the <code>StreamARN</code> input parameter when you invoke this API.</p>\n         </note>\n         <p>Updating the warm throughput is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <code>UPDATING</code>. After the update is complete, Kinesis Data Streams sets the status of the stream back to <code>ACTIVE</code>. Depending on the size of the stream, the scaling action could take a few minutes to complete. You can continue to read and write data to your stream while its status is <code>UPDATING</code>.</p>\n         <p>This operation is only supported for data streams with the on-demand capacity mode in accounts that have <code>MinimumThroughputBillingCommitment</code> enabled. Provisioned capacity mode streams do not support warm throughput configuration.</p>\n         <p>To release excess capacity, call the API again and set the warm throughput to the same or a lower value.</p>\n         <p>This operation has the following default limits. By default, you cannot do the following:</p>\n         <ul>\n            <li>\n               <p>Scale to more than 10 GiBps for an on-demand stream.</p>\n            </li>\n            <li>\n               <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. TPS over 5 will initiate the <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>For the default limits for an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html\">Streams Limits</a> in the <i>Amazon Kinesis Data Streams Developer\n                    Guide</i>. To request an increase in the call rate limit, the shard limit for this API, or your overall shard limit, use the <a href=\"https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&limitType=service-code-kinesis\">limits form</a>.</p>",
                 "smithy.rules#staticContextParams": {
                     "OperationType": {
                         "value": "control"

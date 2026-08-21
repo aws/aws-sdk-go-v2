@@ -971,6 +971,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The device proxy to be configured on the device for the remote access session.</p>"
                     }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.devicefarm#RemoteAccessParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name-value string pairs that specify additional settings for the remote access\n            session.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>appium:version</code>: The major version of the Appium server to use for\n                    the session (for example, 2 or 3). The service may reject the selected version\n                    if it is not available for the selected device.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -1170,13 +1176,13 @@
                 "url": {
                     "target": "com.amazonaws.devicefarm#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A signed URL, expiring in <a>CreateTestGridUrlRequest$expiresInSeconds</a> seconds, to be passed\n         to a <code>RemoteWebDriver</code>. </p>"
+                        "smithy.api#documentation": "<p>A signed URL, expiring in the time specified by the <code>CreateTestGridUrlRequest</code>, to be passed\n         to a <code>RemoteWebDriver</code>. </p>"
                     }
                 },
                 "expires": {
                     "target": "com.amazonaws.devicefarm#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds the URL from <a>CreateTestGridUrlResult$url</a> stays active.</p>"
+                        "smithy.api#documentation": "<p>The number of seconds the URL stays active from creation.</p>"
                     }
                 }
             },
@@ -4825,7 +4831,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A session is an instance of a browser created through a <code>RemoteWebDriver</code> with the URL from <a>CreateTestGridUrlResult$url</a>. You can use the following to look up sessions:</p>\n         <ul>\n            <li>\n               <p>The session ARN (<a>GetTestGridSessionRequest$sessionArn</a>).</p>\n            </li>\n            <li>\n               <p>The project ARN and a session ID (<a>GetTestGridSessionRequest$projectArn</a> and <a>GetTestGridSessionRequest$sessionId</a>).</p>\n            </li>\n         </ul>\n         <p></p>"
+                "smithy.api#documentation": "<p>A session is an instance of a browser created through a <code>RemoteWebDriver</code> with the URL from <code>\n            CreateTestGridUrlResult</code>. You can use the following to look up sessions:</p>\n         <ul>\n            <li>\n               <p>The session ARN.</p>\n            </li>\n            <li>\n               <p>The project ARN and a session ID.</p>\n            </li>\n         </ul>\n         <p></p>"
             }
         },
         "com.amazonaws.devicefarm#GetTestGridSessionRequest": {
@@ -6668,7 +6674,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about samples, given an AWS Device Farm job ARN.</p>",
+                "smithy.api#documentation": "<p>Gets information about samples, given an AWS Device Farm job ARN.</p>\n         <important>\n            <p>Device Farm does not support performance data samples during test executions.</p>\n         </important>",
                 "smithy.api#examples": [
                     {
                         "title": "To get information about samples",
@@ -8292,6 +8298,41 @@
                 "smithy.api#documentation": "<p>Represents the remote endpoints for viewing and controlling a device during a remote access session.</p>"
             }
         },
+        "com.amazonaws.devicefarm#RemoteAccessParameterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:_]+$"
+            }
+        },
+        "com.amazonaws.devicefarm#RemoteAccessParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.]+$"
+            }
+        },
+        "com.amazonaws.devicefarm#RemoteAccessParameters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.devicefarm#RemoteAccessParameterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.devicefarm#RemoteAccessParameterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.devicefarm#RemoteAccessSession": {
             "type": "structure",
             "members": {
@@ -8959,7 +9000,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a sample of performance data.</p>"
+                "smithy.api#documentation": "<p>Represents a sample of performance data.</p>\n         <important>\n            <p>Device Farm does not support performance data samples during test executions.</p>\n         </important>"
             }
         },
         "com.amazonaws.devicefarm#SampleType": {
@@ -9313,7 +9354,7 @@
                 "parameters": {
                     "target": "com.amazonaws.devicefarm#TestParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The test's parameters, such as test framework parameters and fixture settings.\n            Parameters are represented by name-value pairs of strings.</p>\n         <p>For all tests:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>app_performance_monitoring</code>: Performance monitoring is enabled by default.\n                    Set this parameter to false to disable it.</p>\n            </li>\n         </ul>\n         <p>For Appium tests (all types):</p>\n         <ul>\n            <li>\n               <p>appium_version: The Appium version. Currently supported values are 1.6.5\n                    (and later), latest, and default.</p>\n               <ul>\n                  <li>\n                     <p>latest runs the latest Appium version supported by Device\n                            Farm (1.9.1).</p>\n                  </li>\n                  <li>\n                     <p>For default, Device Farm selects a compatible version of\n                            Appium for the device. The current behavior is to run 1.7.2 on Android\n                            devices and iOS 9 and earlier and 1.7.2 for iOS 10 and later.</p>\n                  </li>\n                  <li>\n                     <p>This behavior is subject to change.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For fuzz tests (Android only):</p>\n         <ul>\n            <li>\n               <p>event_count: The number of events, between 1 and 10000, that the UI fuzz\n                    test should perform.</p>\n            </li>\n            <li>\n               <p>throttle: The time, in ms, between 0 and 1000, that the UI fuzz test should\n                    wait between events.</p>\n            </li>\n            <li>\n               <p>seed: A seed to use for randomizing the UI fuzz test. Using the same seed\n                    value between tests ensures identical event sequences.</p>\n            </li>\n         </ul>\n         <p>For Instrumentation:</p>\n         <ul>\n            <li>\n               <p>filter: A test filter string. Examples:</p>\n               <ul>\n                  <li>\n                     <p>Running a single test case: <code>com.android.abc.Test1</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running a single test: <code>com.android.abc.Test1#smoke</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running multiple tests:\n                            <code>com.android.abc.Test1,com.android.abc.Test2</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For XCTest and XCTestUI:</p>\n         <ul>\n            <li>\n               <p>filter: A test filter string. Examples:</p>\n               <ul>\n                  <li>\n                     <p>Running a single test class: <code>LoginTests</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running a multiple test classes: <code>LoginTests,SmokeTests</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running a single test: <code>LoginTests/testValid</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running multiple tests:\n                            <code>LoginTests/testValid,LoginTests/testInvalid</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The test's parameters, such as test framework parameters and fixture settings.\n            Parameters are represented by name-value pairs of strings.</p>\n         <p>For fuzz tests (Android only):</p>\n         <ul>\n            <li>\n               <p>event_count: The number of events, between 1 and 10000, that the UI fuzz\n                    test should perform.</p>\n            </li>\n            <li>\n               <p>throttle: The time, in ms, between 0 and 1000, that the UI fuzz test should\n                    wait between events.</p>\n            </li>\n            <li>\n               <p>seed: A seed to use for randomizing the UI fuzz test. Using the same seed\n                    value between tests ensures identical event sequences.</p>\n            </li>\n         </ul>\n         <p>For Instrumentation:</p>\n         <ul>\n            <li>\n               <p>filter: A test filter string. Examples:</p>\n               <ul>\n                  <li>\n                     <p>Running a single test case: <code>com.android.abc.Test1</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running a single test: <code>com.android.abc.Test1#smoke</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running multiple tests:\n                            <code>com.android.abc.Test1,com.android.abc.Test2</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For XCTest and XCTestUI:</p>\n         <ul>\n            <li>\n               <p>filter: A test filter string. Examples:</p>\n               <ul>\n                  <li>\n                     <p>Running a single test class: <code>LoginTests</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running a multiple test classes: <code>LoginTests,SmokeTests</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running a single test: <code>LoginTests/testValid</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Running multiple tests:\n                            <code>LoginTests/testValid,LoginTests/testInvalid</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
