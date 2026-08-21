@@ -113,9 +113,6 @@ func (c *Client) addOperationCreateNodeMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

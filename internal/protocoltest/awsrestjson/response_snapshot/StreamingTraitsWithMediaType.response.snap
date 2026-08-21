@@ -1,0 +1,5 @@
+200
+Content-Type: text/plain
+X-Foo: __Foo__
+
+__Blob__

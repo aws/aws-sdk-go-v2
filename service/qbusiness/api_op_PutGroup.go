@@ -100,9 +100,6 @@ func (c *Client) addOperationPutGroupMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

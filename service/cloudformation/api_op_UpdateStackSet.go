@@ -342,9 +342,6 @@ func (c *Client) addOperationUpdateStackSetMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

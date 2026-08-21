@@ -1,0 +1,5 @@
+403
+Content-Type: application/json
+X-Header: __Header__
+
+{"__type":"ComplexError","Nested":{"Fooooo":"__Foo__"},"TopLevel":"__TopLevel__"}

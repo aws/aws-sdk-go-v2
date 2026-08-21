@@ -6,7 +6,6 @@ GetEc2DeepInspectionConfiguration
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection

@@ -1,0 +1,7 @@
+POST /service/RpcV2Protocol/operation/SparseNullsOperation
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿psparseStringListŸj__Member__j__Member__ÿosparseStringMap¿dkey0i__Value__ÿÿ

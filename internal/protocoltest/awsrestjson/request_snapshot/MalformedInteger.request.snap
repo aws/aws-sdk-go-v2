@@ -1,0 +1,6 @@
+POST /MalformedInteger/1?integerInQuery=1
+
+Content-Type: application/json
+Integerinheader: 1
+
+{"integerInBody":1}

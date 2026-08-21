@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nested":{"foo":"__Foo__","nested":{"bar":"__Bar__"}}}

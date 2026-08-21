@@ -1,0 +1,5 @@
+PUT /XmlAttributesInMiddle
+
+Content-Type: application/xml
+
+<XmlAttributesInMiddlePayloadRequest test="__Attr__"><baz>__Baz__</baz><foo>__Foo__</foo></XmlAttributesInMiddlePayloadRequest>

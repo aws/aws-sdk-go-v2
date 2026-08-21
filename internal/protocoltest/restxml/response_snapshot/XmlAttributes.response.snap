@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<XmlAttributesResponse test="__Attr__"><foo>__Foo__</foo></XmlAttributesResponse>

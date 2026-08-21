@@ -1,0 +1,6 @@
+POST /HttpChecksumRequired
+
+Content-Md5: 67F6+POeGEJvUYhCltN6Fw==
+Content-Type: application/json
+
+{"foo":"__Foo__"}

@@ -1,0 +1,5 @@
+POST /FlattenedXmlMapWithXmlName
+
+Content-Type: application/xml
+
+<FlattenedXmlMapWithXmlNameRequest><KVP><K>key0</K><V>__Value__</V></KVP></FlattenedXmlMapWithXmlNameRequest>
