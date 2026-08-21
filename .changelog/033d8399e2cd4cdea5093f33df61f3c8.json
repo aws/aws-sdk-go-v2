@@ -1,8 +1,0 @@
-{
-    "id": "033d8399-e2cd-4cde-a509-3f33df61f3c8",
-    "type": "feature",
-    "description": "Update Dataset schema to THIRDPARTYEVALUATIONV1",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

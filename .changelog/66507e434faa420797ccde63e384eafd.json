@@ -1,8 +1,0 @@
-{
-    "id": "66507e43-4faa-4207-97cc-de63e384eafd",
-    "type": "feature",
-    "description": "Generate account endpoint for Kinesis Data Streams requests when the account ID is available",
-    "modules": [
-        "service/kinesis"
-    ]
-}

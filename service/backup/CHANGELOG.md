@@ -1,3 +1,7 @@
+# v1.60.4 (2026-08-21)
+
+* **Documentation**: Updating CLI Docs for Backup Audit Manager List Job Summaries APIs.
+
 # v1.60.3 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

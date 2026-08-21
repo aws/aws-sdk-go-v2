@@ -1,3 +1,7 @@
+# v1.59.0 (2026-08-21)
+
+* **Feature**: Update Dataset schema to THIRDPARTYEVALUATIONV1
+
 # v1.58.1 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

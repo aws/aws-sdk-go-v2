@@ -1,3 +1,7 @@
+# v1.47.0 (2026-08-21)
+
+* **Feature**: Generate account endpoint for Kinesis Data Streams requests when the account ID is available
+
 # v1.46.7 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.43.0 (2026-08-21)
+
+* **Feature**: Added support to CreateRemoveAccessSession for selecting a server version on the mobile WebDriver endpoint.
+
 # v1.42.3 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

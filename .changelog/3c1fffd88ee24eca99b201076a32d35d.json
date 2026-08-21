@@ -1,8 +1,0 @@
-{
-    "id": "3c1fffd8-8ee2-4eca-99b2-01076a32d35d",
-    "type": "feature",
-    "description": "Added support to CreateRemoveAccessSession for selecting a server version on the mobile WebDriver endpoint.",
-    "modules": [
-        "service/devicefarm"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.77.7 (2026-08-21)
+
+* **Documentation**: DataProtectionConfig field Key Documentation Update
+
 # v1.77.6 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

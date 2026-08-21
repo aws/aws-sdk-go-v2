@@ -1,8 +1,0 @@
-{
-    "id": "d2bec30d-5826-44dd-9a72-c8a489d7155c",
-    "type": "documentation",
-    "description": "DataProtectionConfig field Key Documentation Update",
-    "modules": [
-        "service/wafv2"
-    ]
-}

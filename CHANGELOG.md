@@ -1,3 +1,19 @@
+# Release (2026-08-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.60.4](service/backup/CHANGELOG.md#v1604-2026-08-21)
+  * **Documentation**: Updating CLI Docs for Backup Audit Manager List Job Summaries APIs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.59.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1590-2026-08-21)
+  * **Feature**: Update Dataset schema to THIRDPARTYEVALUATIONV1
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.67.0](service/cloudwatch/CHANGELOG.md#v1670-2026-08-21)
+  * **Feature**: Allows customers to specify an initial warm up period to wait for metrics to arrive when creating metric or log alarms
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.43.0](service/devicefarm/CHANGELOG.md#v1430-2026-08-21)
+  * **Feature**: Added support to CreateRemoveAccessSession for selecting a server version on the mobile WebDriver endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.47.0](service/kinesis/CHANGELOG.md#v1470-2026-08-21)
+  * **Feature**: Generate account endpoint for Kinesis Data Streams requests when the account ID is available
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.77.7](service/wafv2/CHANGELOG.md#v1777-2026-08-21)
+  * **Documentation**: DataProtectionConfig field Key Documentation Update
+
 # Release (2026-08-20)
 
 ## General Highlights

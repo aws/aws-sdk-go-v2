@@ -1,3 +1,7 @@
+# v1.67.0 (2026-08-21)
+
+* **Feature**: Allows customers to specify an initial warm up period to wait for metrics to arrive when creating metric or log alarms
+
 # v1.66.6 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

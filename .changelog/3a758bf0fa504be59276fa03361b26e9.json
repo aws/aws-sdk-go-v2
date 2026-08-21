@@ -1,8 +1,0 @@
-{
-    "id": "3a758bf0-fa50-4be5-9276-fa03361b26e9",
-    "type": "feature",
-    "description": "Increase spans count from 1k to 20k",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}
