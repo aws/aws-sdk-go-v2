@@ -283,6 +283,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func deserializeAttendeeIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -296,6 +297,7 @@ func deserializeAttendeeIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeCategoryNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -309,6 +311,7 @@ func deserializeCategoryNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeChannelDefinitions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelDefinition) error {
+	*v = make([]ChannelDefinition, 0)
 	var vv ChannelDefinition
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelDefinition{}
@@ -322,6 +325,7 @@ func deserializeChannelDefinitions(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeConcatenationSinkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConcatenationSink) error {
+	*v = make([]ConcatenationSink, 0)
 	var vv ConcatenationSink
 	return smithy.ReadList(d, s, func() error {
 		vv = ConcatenationSink{}
@@ -335,6 +339,7 @@ func deserializeConcatenationSinkList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeConcatenationSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConcatenationSource) error {
+	*v = make([]ConcatenationSource, 0)
 	var vv ConcatenationSource
 	return smithy.ReadList(d, s, func() error {
 		vv = ConcatenationSource{}
@@ -348,6 +353,7 @@ func deserializeConcatenationSourceList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeExternalUserIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -361,6 +367,7 @@ func deserializeExternalUserIdList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeKeywordMatchWordList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -374,6 +381,7 @@ func deserializeKeywordMatchWordList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeKinesisVideoStreamPoolSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]KinesisVideoStreamPoolSummary) error {
+	*v = make([]KinesisVideoStreamPoolSummary, 0)
 	var vv KinesisVideoStreamPoolSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = KinesisVideoStreamPoolSummary{}
@@ -387,6 +395,7 @@ func deserializeKinesisVideoStreamPoolSummaryList(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeLiveConnectorSinkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LiveConnectorSinkConfiguration) error {
+	*v = make([]LiveConnectorSinkConfiguration, 0)
 	var vv LiveConnectorSinkConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = LiveConnectorSinkConfiguration{}
@@ -400,6 +409,7 @@ func deserializeLiveConnectorSinkList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeLiveConnectorSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LiveConnectorSourceConfiguration) error {
+	*v = make([]LiveConnectorSourceConfiguration, 0)
 	var vv LiveConnectorSourceConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = LiveConnectorSourceConfiguration{}
@@ -413,6 +423,7 @@ func deserializeLiveConnectorSourceList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeMediaCapturePipelineSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MediaCapturePipelineSummary) error {
+	*v = make([]MediaCapturePipelineSummary, 0)
 	var vv MediaCapturePipelineSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = MediaCapturePipelineSummary{}
@@ -426,6 +437,7 @@ func deserializeMediaCapturePipelineSummaryList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeMediaInsightsPipelineConfigurationElements(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MediaInsightsPipelineConfigurationElement) error {
+	*v = make([]MediaInsightsPipelineConfigurationElement, 0)
 	var vv MediaInsightsPipelineConfigurationElement
 	return smithy.ReadList(d, s, func() error {
 		vv = MediaInsightsPipelineConfigurationElement{}
@@ -439,6 +451,7 @@ func deserializeMediaInsightsPipelineConfigurationElements(d smithy.ShapeDeseria
 }
 
 func deserializeMediaInsightsPipelineConfigurationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MediaInsightsPipelineConfigurationSummary) error {
+	*v = make([]MediaInsightsPipelineConfigurationSummary, 0)
 	var vv MediaInsightsPipelineConfigurationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = MediaInsightsPipelineConfigurationSummary{}
@@ -452,6 +465,7 @@ func deserializeMediaInsightsPipelineConfigurationSummaryList(d smithy.ShapeDese
 }
 
 func deserializeMediaInsightsPipelineElementStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MediaInsightsPipelineElementStatus) error {
+	*v = make([]MediaInsightsPipelineElementStatus, 0)
 	var vv MediaInsightsPipelineElementStatus
 	return smithy.ReadList(d, s, func() error {
 		vv = MediaInsightsPipelineElementStatus{}
@@ -465,6 +479,7 @@ func deserializeMediaInsightsPipelineElementStatuses(d smithy.ShapeDeserializer,
 }
 
 func deserializeMediaPipelineList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MediaPipelineSummary) error {
+	*v = make([]MediaPipelineSummary, 0)
 	var vv MediaPipelineSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = MediaPipelineSummary{}
@@ -478,6 +493,7 @@ func deserializeMediaPipelineList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeMediaStreamSinkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MediaStreamSink) error {
+	*v = make([]MediaStreamSink, 0)
 	var vv MediaStreamSink
 	return smithy.ReadList(d, s, func() error {
 		vv = MediaStreamSink{}
@@ -491,6 +507,7 @@ func deserializeMediaStreamSinkList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeMediaStreamSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MediaStreamSource) error {
+	*v = make([]MediaStreamSource, 0)
 	var vv MediaStreamSource
 	return smithy.ReadList(d, s, func() error {
 		vv = MediaStreamSource{}
@@ -504,6 +521,7 @@ func deserializeMediaStreamSourceList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeRealTimeAlertRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RealTimeAlertRule) error {
+	*v = make([]RealTimeAlertRule, 0)
 	var vv RealTimeAlertRule
 	return smithy.ReadList(d, s, func() error {
 		vv = RealTimeAlertRule{}
@@ -517,6 +535,7 @@ func deserializeRealTimeAlertRuleList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeRecordingStreamList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RecordingStreamConfiguration) error {
+	*v = make([]RecordingStreamConfiguration, 0)
 	var vv RecordingStreamConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = RecordingStreamConfiguration{}
@@ -530,6 +549,7 @@ func deserializeRecordingStreamList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeStreams(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]StreamConfiguration) error {
+	*v = make([]StreamConfiguration, 0)
 	var vv StreamConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = StreamConfiguration{}
@@ -543,6 +563,7 @@ func deserializeStreams(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Strea
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -556,6 +577,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}

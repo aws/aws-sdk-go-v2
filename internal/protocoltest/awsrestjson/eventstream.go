@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"sync"
 )
 
 // EventStreamWriter provides the interface for writing events to a stream.
@@ -71,10 +72,17 @@ func (w *eventStreamWriter) Err() error {
 	return w.writer.Err()
 }
 
+func (w *eventStreamWriter) ErrorSet() <-chan struct{} {
+	return w.writer.ErrorSet()
+}
+
 type eventStreamReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.EventStream
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ EventStreamReader = (*eventStreamReader)(nil)
@@ -84,12 +92,14 @@ func newEventStreamReader(reader *smithyhttp.EventStreamReader) *eventStreamRead
 		reader: reader,
 		ch:     make(chan types.EventStream),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *eventStreamReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.EventStream
@@ -126,12 +136,18 @@ func (r *eventStreamReader) Events() <-chan types.EventStream {
 }
 
 func (r *eventStreamReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
 func (r *eventStreamReader) Err() error {
 	return r.reader.Err()
+}
+
+func (r *eventStreamReader) Closed() <-chan struct{} {
+	return r.closed
 }
 
 type deserializeOpEventStreamDuplexStream struct {

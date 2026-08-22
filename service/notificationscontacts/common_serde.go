@@ -45,6 +45,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeEmailContacts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EmailContact) error {
+	*v = make([]types.EmailContact, 0)
 	var vv types.EmailContact
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EmailContact{}
@@ -58,6 +59,7 @@ func deserializeEmailContacts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -71,6 +73,7 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionField) error {
+	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ValidationExceptionField{}

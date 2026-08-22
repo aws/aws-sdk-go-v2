@@ -120,6 +120,7 @@ func serializeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []float6
 }
 
 func deserializeCounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]float64) error {
+	*v = make([]float64, 0)
 	var vv float64
 	return smithy.ReadList(d, s, func() error {
 
@@ -133,6 +134,7 @@ func deserializeCounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]float6
 }
 
 func deserializeDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Dimension) error {
+	*v = make([]types.Dimension, 0)
 	var vv types.Dimension
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Dimension{}
@@ -146,6 +148,7 @@ func deserializeDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeEntityMetricDataList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EntityMetricDatum) error {
+	*v = make([]types.EntityMetricDatum, 0)
 	var vv types.EntityMetricDatum
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EntityMetricDatum{}
@@ -159,6 +162,7 @@ func deserializeEntityMetricDataList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeMetricData(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricDatum) error {
+	*v = make([]types.MetricDatum, 0)
 	var vv types.MetricDatum
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MetricDatum{}
@@ -172,6 +176,7 @@ func deserializeMetricData(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeMetricDataQueries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricDataQuery) error {
+	*v = make([]types.MetricDataQuery, 0)
 	var vv types.MetricDataQuery
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MetricDataQuery{}
@@ -185,6 +190,7 @@ func deserializeMetricDataQueries(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeMetricDataResultMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MessageData) error {
+	*v = make([]types.MessageData, 0)
 	var vv types.MessageData
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MessageData{}
@@ -198,6 +204,7 @@ func deserializeMetricDataResultMessages(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeMetricDataResults(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricDataResult) error {
+	*v = make([]types.MetricDataResult, 0)
 	var vv types.MetricDataResult
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MetricDataResult{}
@@ -211,6 +218,7 @@ func deserializeMetricDataResults(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeTimestamps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]time.Time) error {
+	*v = make([]time.Time, 0)
 	var vv time.Time
 	return smithy.ReadList(d, s, func() error {
 
@@ -224,6 +232,7 @@ func deserializeTimestamps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ti
 }
 
 func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]float64) error {
+	*v = make([]float64, 0)
 	var vv float64
 	return smithy.ReadList(d, s, func() error {
 

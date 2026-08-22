@@ -261,6 +261,7 @@ func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func deserializeApplicationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ApplicationSummary) error {
+	*v = make([]types.ApplicationSummary, 0)
 	var vv types.ApplicationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ApplicationSummary{}
@@ -274,6 +275,7 @@ func deserializeApplicationList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeEntitlementsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EntitlementsListMember) error {
+	*v = make([]types.EntitlementsListMember, 0)
 	var vv types.EntitlementsListMember
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EntitlementsListMember{}
@@ -287,6 +289,7 @@ func deserializeEntitlementsList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

@@ -160,6 +160,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeAccountDetailsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AccountDetails) error {
+	*v = make([]types.AccountDetails, 0)
 	var vv types.AccountDetails
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AccountDetails{}
@@ -173,6 +174,7 @@ func deserializeAccountDetailsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeAccountIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -186,6 +188,7 @@ func deserializeAccountIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeAuthorities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Authority) error {
+	*v = make([]types.Authority, 0)
 	var vv types.Authority
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Authority{}
@@ -199,6 +202,7 @@ func deserializeAuthorities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeBatchDeleteTaxRegistrationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchDeleteTaxRegistrationError) error {
+	*v = make([]types.BatchDeleteTaxRegistrationError, 0)
 	var vv types.BatchDeleteTaxRegistrationError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchDeleteTaxRegistrationError{}
@@ -212,6 +216,7 @@ func deserializeBatchDeleteTaxRegistrationErrors(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeBatchPutTaxRegistrationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchPutTaxRegistrationError) error {
+	*v = make([]types.BatchPutTaxRegistrationError, 0)
 	var vv types.BatchPutTaxRegistrationError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchPutTaxRegistrationError{}
@@ -225,6 +230,7 @@ func deserializeBatchPutTaxRegistrationErrors(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeMalaysiaServiceTaxCodesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MalaysiaServiceTaxCode) error {
+	*v = make([]types.MalaysiaServiceTaxCode, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -238,6 +244,7 @@ func deserializeMalaysiaServiceTaxCodesList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeSupplementalTaxRegistrationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SupplementalTaxRegistration) error {
+	*v = make([]types.SupplementalTaxRegistration, 0)
 	var vv types.SupplementalTaxRegistration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SupplementalTaxRegistration{}
@@ -251,6 +258,7 @@ func deserializeSupplementalTaxRegistrationList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeTaxDocumentMetadatas(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TaxDocumentMetadata) error {
+	*v = make([]types.TaxDocumentMetadata, 0)
 	var vv types.TaxDocumentMetadata
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TaxDocumentMetadata{}
@@ -264,6 +272,7 @@ func deserializeTaxDocumentMetadatas(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeTaxExemptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TaxExemption) error {
+	*v = make([]types.TaxExemption, 0)
 	var vv types.TaxExemption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TaxExemption{}
@@ -277,6 +286,7 @@ func deserializeTaxExemptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeTaxExemptionTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TaxExemptionType) error {
+	*v = make([]types.TaxExemptionType, 0)
 	var vv types.TaxExemptionType
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TaxExemptionType{}
@@ -290,6 +300,7 @@ func deserializeTaxExemptionTypes(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeTaxRegistrationDocuments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TaxRegistrationDocument) error {
+	*v = make([]types.TaxRegistrationDocument, 0)
 	var vv types.TaxRegistrationDocument
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TaxRegistrationDocument{}
@@ -303,6 +314,7 @@ func deserializeTaxRegistrationDocuments(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionField) error {
+	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ValidationExceptionField{}

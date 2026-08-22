@@ -1137,6 +1137,7 @@ func serializeWeightedTargets(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func deserializeAwsCloudMapInstanceAttributes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AwsCloudMapInstanceAttribute) error {
+	*v = make([]types.AwsCloudMapInstanceAttribute, 0)
 	var vv types.AwsCloudMapInstanceAttribute
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AwsCloudMapInstanceAttribute{}
@@ -1150,6 +1151,7 @@ func deserializeAwsCloudMapInstanceAttributes(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeBackends(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Backend) error {
+	*v = make([]types.Backend, 0)
 	var vv types.Backend
 	return smithy.ReadList(d, s, func() error {
 
@@ -1163,6 +1165,7 @@ func deserializeBackends(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 }
 
 func deserializeCertificateAuthorityArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1176,6 +1179,7 @@ func deserializeCertificateAuthorityArns(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeGatewayRouteList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GatewayRouteRef) error {
+	*v = make([]types.GatewayRouteRef, 0)
 	var vv types.GatewayRouteRef
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GatewayRouteRef{}
@@ -1189,6 +1193,7 @@ func deserializeGatewayRouteList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeGrpcGatewayRouteMetadataList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GrpcGatewayRouteMetadata) error {
+	*v = make([]types.GrpcGatewayRouteMetadata, 0)
 	var vv types.GrpcGatewayRouteMetadata
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GrpcGatewayRouteMetadata{}
@@ -1202,6 +1207,7 @@ func deserializeGrpcGatewayRouteMetadataList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeGrpcRetryPolicyEvents(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GrpcRetryPolicyEvent) error {
+	*v = make([]types.GrpcRetryPolicyEvent, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1215,6 +1221,7 @@ func deserializeGrpcRetryPolicyEvents(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeGrpcRouteMetadataList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GrpcRouteMetadata) error {
+	*v = make([]types.GrpcRouteMetadata, 0)
 	var vv types.GrpcRouteMetadata
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GrpcRouteMetadata{}
@@ -1228,6 +1235,7 @@ func deserializeGrpcRouteMetadataList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeHttpGatewayRouteHeaders(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.HttpGatewayRouteHeader) error {
+	*v = make([]types.HttpGatewayRouteHeader, 0)
 	var vv types.HttpGatewayRouteHeader
 	return smithy.ReadList(d, s, func() error {
 		vv = types.HttpGatewayRouteHeader{}
@@ -1241,6 +1249,7 @@ func deserializeHttpGatewayRouteHeaders(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeHttpQueryParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.HttpQueryParameter) error {
+	*v = make([]types.HttpQueryParameter, 0)
 	var vv types.HttpQueryParameter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.HttpQueryParameter{}
@@ -1254,6 +1263,7 @@ func deserializeHttpQueryParameters(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeHttpRetryPolicyEvents(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1267,6 +1277,7 @@ func deserializeHttpRetryPolicyEvents(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeHttpRouteHeaders(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.HttpRouteHeader) error {
+	*v = make([]types.HttpRouteHeader, 0)
 	var vv types.HttpRouteHeader
 	return smithy.ReadList(d, s, func() error {
 		vv = types.HttpRouteHeader{}
@@ -1280,6 +1291,7 @@ func deserializeHttpRouteHeaders(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeJsonFormat(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.JsonFormatRef) error {
+	*v = make([]types.JsonFormatRef, 0)
 	var vv types.JsonFormatRef
 	return smithy.ReadList(d, s, func() error {
 		vv = types.JsonFormatRef{}
@@ -1293,6 +1305,7 @@ func deserializeJsonFormat(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeListeners(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Listener) error {
+	*v = make([]types.Listener, 0)
 	var vv types.Listener
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Listener{}
@@ -1306,6 +1319,7 @@ func deserializeListeners(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeMeshList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MeshRef) error {
+	*v = make([]types.MeshRef, 0)
 	var vv types.MeshRef
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MeshRef{}
@@ -1319,6 +1333,7 @@ func deserializeMeshList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 }
 
 func deserializePortSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32) error {
+	*v = make([]int32, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
 
@@ -1332,6 +1347,7 @@ func deserializePortSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32
 }
 
 func deserializeRouteList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteRef) error {
+	*v = make([]types.RouteRef, 0)
 	var vv types.RouteRef
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RouteRef{}
@@ -1345,6 +1361,7 @@ func deserializeRouteList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeSubjectAlternativeNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1358,6 +1375,7 @@ func deserializeSubjectAlternativeNameList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1371,6 +1389,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TagRef) error {
+	*v = make([]types.TagRef, 0)
 	var vv types.TagRef
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TagRef{}
@@ -1384,6 +1403,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeTcpRetryPolicyEvents(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TcpRetryPolicyEvent) error {
+	*v = make([]types.TcpRetryPolicyEvent, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1397,6 +1417,7 @@ func deserializeTcpRetryPolicyEvents(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeVirtualGatewayCertificateAuthorityArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1410,6 +1431,7 @@ func deserializeVirtualGatewayCertificateAuthorityArns(d smithy.ShapeDeserialize
 }
 
 func deserializeVirtualGatewayList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VirtualGatewayRef) error {
+	*v = make([]types.VirtualGatewayRef, 0)
 	var vv types.VirtualGatewayRef
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VirtualGatewayRef{}
@@ -1423,6 +1445,7 @@ func deserializeVirtualGatewayList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeVirtualGatewayListeners(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VirtualGatewayListener) error {
+	*v = make([]types.VirtualGatewayListener, 0)
 	var vv types.VirtualGatewayListener
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VirtualGatewayListener{}
@@ -1436,6 +1459,7 @@ func deserializeVirtualGatewayListeners(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeVirtualNodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VirtualNodeRef) error {
+	*v = make([]types.VirtualNodeRef, 0)
 	var vv types.VirtualNodeRef
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VirtualNodeRef{}
@@ -1449,6 +1473,7 @@ func deserializeVirtualNodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeVirtualRouterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VirtualRouterRef) error {
+	*v = make([]types.VirtualRouterRef, 0)
 	var vv types.VirtualRouterRef
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VirtualRouterRef{}
@@ -1462,6 +1487,7 @@ func deserializeVirtualRouterList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeVirtualRouterListeners(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VirtualRouterListener) error {
+	*v = make([]types.VirtualRouterListener, 0)
 	var vv types.VirtualRouterListener
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VirtualRouterListener{}
@@ -1475,6 +1501,7 @@ func deserializeVirtualRouterListeners(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeVirtualServiceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VirtualServiceRef) error {
+	*v = make([]types.VirtualServiceRef, 0)
 	var vv types.VirtualServiceRef
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VirtualServiceRef{}
@@ -1488,6 +1515,7 @@ func deserializeVirtualServiceList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeWeightedTargets(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.WeightedTarget) error {
+	*v = make([]types.WeightedTarget, 0)
 	var vv types.WeightedTarget
 	return smithy.ReadList(d, s, func() error {
 		vv = types.WeightedTarget{}

@@ -10,6 +10,7 @@ import (
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"sync"
 )
 
 // AgenticRetrieveStreamResponseOutputReader provides the interface for reading
@@ -74,6 +75,9 @@ type agenticRetrieveStreamResponseOutputReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.AgenticRetrieveStreamResponseOutput
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ AgenticRetrieveStreamResponseOutputReader = (*agenticRetrieveStreamResponseOutputReader)(nil)
@@ -83,12 +87,14 @@ func newAgenticRetrieveStreamResponseOutputReader(reader *smithyhttp.EventStream
 		reader: reader,
 		ch:     make(chan types.AgenticRetrieveStreamResponseOutput),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *agenticRetrieveStreamResponseOutputReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.AgenticRetrieveStreamResponseOutput
@@ -117,7 +123,9 @@ func (r *agenticRetrieveStreamResponseOutputReader) Events() <-chan types.Agenti
 }
 
 func (r *agenticRetrieveStreamResponseOutputReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
@@ -125,10 +133,17 @@ func (r *agenticRetrieveStreamResponseOutputReader) Err() error {
 	return r.reader.Err()
 }
 
+func (r *agenticRetrieveStreamResponseOutputReader) Closed() <-chan struct{} {
+	return r.closed
+}
+
 type flowResponseStreamReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.FlowResponseStream
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ FlowResponseStreamReader = (*flowResponseStreamReader)(nil)
@@ -138,12 +153,14 @@ func newFlowResponseStreamReader(reader *smithyhttp.EventStreamReader) *flowResp
 		reader: reader,
 		ch:     make(chan types.FlowResponseStream),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *flowResponseStreamReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.FlowResponseStream
@@ -174,7 +191,9 @@ func (r *flowResponseStreamReader) Events() <-chan types.FlowResponseStream {
 }
 
 func (r *flowResponseStreamReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
@@ -182,10 +201,17 @@ func (r *flowResponseStreamReader) Err() error {
 	return r.reader.Err()
 }
 
+func (r *flowResponseStreamReader) Closed() <-chan struct{} {
+	return r.closed
+}
+
 type inlineAgentResponseStreamReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.InlineAgentResponseStream
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ InlineAgentResponseStreamReader = (*inlineAgentResponseStreamReader)(nil)
@@ -195,12 +221,14 @@ func newInlineAgentResponseStreamReader(reader *smithyhttp.EventStreamReader) *i
 		reader: reader,
 		ch:     make(chan types.InlineAgentResponseStream),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *inlineAgentResponseStreamReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.InlineAgentResponseStream
@@ -231,7 +259,9 @@ func (r *inlineAgentResponseStreamReader) Events() <-chan types.InlineAgentRespo
 }
 
 func (r *inlineAgentResponseStreamReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
@@ -239,10 +269,17 @@ func (r *inlineAgentResponseStreamReader) Err() error {
 	return r.reader.Err()
 }
 
+func (r *inlineAgentResponseStreamReader) Closed() <-chan struct{} {
+	return r.closed
+}
+
 type optimizedPromptStreamReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.OptimizedPromptStream
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ OptimizedPromptStreamReader = (*optimizedPromptStreamReader)(nil)
@@ -252,12 +289,14 @@ func newOptimizedPromptStreamReader(reader *smithyhttp.EventStreamReader) *optim
 		reader: reader,
 		ch:     make(chan types.OptimizedPromptStream),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *optimizedPromptStreamReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.OptimizedPromptStream
@@ -284,7 +323,9 @@ func (r *optimizedPromptStreamReader) Events() <-chan types.OptimizedPromptStrea
 }
 
 func (r *optimizedPromptStreamReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
@@ -292,10 +333,17 @@ func (r *optimizedPromptStreamReader) Err() error {
 	return r.reader.Err()
 }
 
+func (r *optimizedPromptStreamReader) Closed() <-chan struct{} {
+	return r.closed
+}
+
 type responseStreamReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.ResponseStream
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ ResponseStreamReader = (*responseStreamReader)(nil)
@@ -305,12 +353,14 @@ func newResponseStreamReader(reader *smithyhttp.EventStreamReader) *responseStre
 		reader: reader,
 		ch:     make(chan types.ResponseStream),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *responseStreamReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.ResponseStream
@@ -341,7 +391,9 @@ func (r *responseStreamReader) Events() <-chan types.ResponseStream {
 }
 
 func (r *responseStreamReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
@@ -349,10 +401,17 @@ func (r *responseStreamReader) Err() error {
 	return r.reader.Err()
 }
 
+func (r *responseStreamReader) Closed() <-chan struct{} {
+	return r.closed
+}
+
 type retrieveAndGenerateStreamResponseOutputReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.RetrieveAndGenerateStreamResponseOutput
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ RetrieveAndGenerateStreamResponseOutputReader = (*retrieveAndGenerateStreamResponseOutputReader)(nil)
@@ -362,12 +421,14 @@ func newRetrieveAndGenerateStreamResponseOutputReader(reader *smithyhttp.EventSt
 		reader: reader,
 		ch:     make(chan types.RetrieveAndGenerateStreamResponseOutput),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *retrieveAndGenerateStreamResponseOutputReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.RetrieveAndGenerateStreamResponseOutput
@@ -396,12 +457,18 @@ func (r *retrieveAndGenerateStreamResponseOutputReader) Events() <-chan types.Re
 }
 
 func (r *retrieveAndGenerateStreamResponseOutputReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
 func (r *retrieveAndGenerateStreamResponseOutputReader) Err() error {
 	return r.reader.Err()
+}
+
+func (r *retrieveAndGenerateStreamResponseOutputReader) Closed() <-chan struct{} {
+	return r.closed
 }
 
 type deserializeOpEventStreamAgenticRetrieveStream struct {

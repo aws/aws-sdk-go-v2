@@ -31,6 +31,7 @@ func serializeSubscriptionSummaryList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func deserializeResourceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -44,6 +45,7 @@ func deserializeResourceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeSubscriptionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SubscriptionSummary) error {
+	*v = make([]SubscriptionSummary, 0)
 	var vv SubscriptionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = SubscriptionSummary{}

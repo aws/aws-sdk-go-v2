@@ -118,6 +118,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeBatchGetDiscoverableRegistryRecordErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchGetDiscoverableRegistryRecordError) error {
+	*v = make([]BatchGetDiscoverableRegistryRecordError, 0)
 	var vv BatchGetDiscoverableRegistryRecordError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchGetDiscoverableRegistryRecordError{}
@@ -131,6 +132,7 @@ func deserializeBatchGetDiscoverableRegistryRecordErrorList(d smithy.ShapeDeseri
 }
 
 func deserializeDiscoverableFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -144,6 +146,7 @@ func deserializeDiscoverableFilterValues(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeDiscoverableRegistryRecordSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DiscoverableRegistryRecordSummary) error {
+	*v = make([]DiscoverableRegistryRecordSummary, 0)
 	var vv DiscoverableRegistryRecordSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = DiscoverableRegistryRecordSummary{}
@@ -157,6 +160,7 @@ func deserializeDiscoverableRegistryRecordSummaryList(d smithy.ShapeDeserializer
 }
 
 func deserializeRegistryIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -170,6 +174,7 @@ func deserializeRegistryIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeRegistryRecordFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RegistryRecordFilter) error {
+	*v = make([]RegistryRecordFilter, 0)
 	var vv RegistryRecordFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = RegistryRecordFilter{}
@@ -183,6 +188,7 @@ func deserializeRegistryRecordFilterList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeRegistryRecordIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -196,6 +202,7 @@ func deserializeRegistryRecordIdList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeRegistryRecordsEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RegistryRecordsEntry) error {
+	*v = make([]RegistryRecordsEntry, 0)
 	var vv RegistryRecordsEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = RegistryRecordsEntry{}
@@ -209,6 +216,7 @@ func deserializeRegistryRecordsEntryList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeRegistryRecordSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RegistryRecordSummary) error {
+	*v = make([]RegistryRecordSummary, 0)
 	var vv RegistryRecordSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = RegistryRecordSummary{}
@@ -222,6 +230,7 @@ func deserializeRegistryRecordSummaryList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
+	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = ValidationExceptionField{}

@@ -209,6 +209,7 @@ func serializeTargetOnDeviceServiceList(s smithy.ShapeSerializer, schema *smithy
 }
 
 func deserializeAddressList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Address) error {
+	*v = make([]Address, 0)
 	var vv Address
 	return smithy.ReadList(d, s, func() error {
 		vv = Address{}
@@ -222,6 +223,7 @@ func deserializeAddressList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]A
 }
 
 func deserializeClusterListEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ClusterListEntry) error {
+	*v = make([]ClusterListEntry, 0)
 	var vv ClusterListEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = ClusterListEntry{}
@@ -235,6 +237,7 @@ func deserializeClusterListEntryList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeCompatibleImageList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CompatibleImage) error {
+	*v = make([]CompatibleImage, 0)
 	var vv CompatibleImage
 	return smithy.ReadList(d, s, func() error {
 		vv = CompatibleImage{}
@@ -248,6 +251,7 @@ func deserializeCompatibleImageList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeDependentServiceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DependentService) error {
+	*v = make([]DependentService, 0)
 	var vv DependentService
 	return smithy.ReadList(d, s, func() error {
 		vv = DependentService{}
@@ -261,6 +265,7 @@ func deserializeDependentServiceList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeEc2AmiResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Ec2AmiResource) error {
+	*v = make([]Ec2AmiResource, 0)
 	var vv Ec2AmiResource
 	return smithy.ReadList(d, s, func() error {
 		vv = Ec2AmiResource{}
@@ -274,6 +279,7 @@ func deserializeEc2AmiResourceList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeEventTriggerDefinitionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EventTriggerDefinition) error {
+	*v = make([]EventTriggerDefinition, 0)
 	var vv EventTriggerDefinition
 	return smithy.ReadList(d, s, func() error {
 		vv = EventTriggerDefinition{}
@@ -287,6 +293,7 @@ func deserializeEventTriggerDefinitionList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeJobListEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]JobListEntry) error {
+	*v = make([]JobListEntry, 0)
 	var vv JobListEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = JobListEntry{}
@@ -300,6 +307,7 @@ func deserializeJobListEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeJobMetadataList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]JobMetadata) error {
+	*v = make([]JobMetadata, 0)
 	var vv JobMetadata
 	return smithy.ReadList(d, s, func() error {
 		vv = JobMetadata{}
@@ -313,6 +321,7 @@ func deserializeJobMetadataList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeJobStateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]JobState) error {
+	*v = make([]JobState, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -326,6 +335,7 @@ func deserializeJobStateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeLambdaResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LambdaResource) error {
+	*v = make([]LambdaResource, 0)
 	var vv LambdaResource
 	return smithy.ReadList(d, s, func() error {
 		vv = LambdaResource{}
@@ -339,6 +349,7 @@ func deserializeLambdaResourceList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeLongTermPricingAssociatedJobIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -352,6 +363,7 @@ func deserializeLongTermPricingAssociatedJobIdList(d smithy.ShapeDeserializer, s
 }
 
 func deserializeLongTermPricingEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LongTermPricingListEntry) error {
+	*v = make([]LongTermPricingListEntry, 0)
 	var vv LongTermPricingListEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = LongTermPricingListEntry{}
@@ -365,6 +377,7 @@ func deserializeLongTermPricingEntryList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeLongTermPricingIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -378,6 +391,7 @@ func deserializeLongTermPricingIdList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeS3ResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]S3Resource) error {
+	*v = make([]S3Resource, 0)
 	var vv S3Resource
 	return smithy.ReadList(d, s, func() error {
 		vv = S3Resource{}
@@ -391,6 +405,7 @@ func deserializeS3ResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeServiceVersionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ServiceVersion) error {
+	*v = make([]ServiceVersion, 0)
 	var vv ServiceVersion
 	return smithy.ReadList(d, s, func() error {
 		vv = ServiceVersion{}
@@ -404,6 +419,7 @@ func deserializeServiceVersionList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeTargetOnDeviceServiceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TargetOnDeviceService) error {
+	*v = make([]TargetOnDeviceService, 0)
 	var vv TargetOnDeviceService
 	return smithy.ReadList(d, s, func() error {
 		vv = TargetOnDeviceService{}

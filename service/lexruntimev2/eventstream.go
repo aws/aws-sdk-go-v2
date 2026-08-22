@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"sync"
 )
 
 // StartConversationRequestEventStreamWriter provides the interface for writing
@@ -71,10 +72,17 @@ func (w *startConversationRequestEventStreamWriter) Err() error {
 	return w.writer.Err()
 }
 
+func (w *startConversationRequestEventStreamWriter) ErrorSet() <-chan struct{} {
+	return w.writer.ErrorSet()
+}
+
 type startConversationResponseEventStreamReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.StartConversationResponseEventStream
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ StartConversationResponseEventStreamReader = (*startConversationResponseEventStreamReader)(nil)
@@ -84,12 +92,14 @@ func newStartConversationResponseEventStreamReader(reader *smithyhttp.EventStrea
 		reader: reader,
 		ch:     make(chan types.StartConversationResponseEventStream),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *startConversationResponseEventStreamReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.StartConversationResponseEventStream
@@ -124,12 +134,18 @@ func (r *startConversationResponseEventStreamReader) Events() <-chan types.Start
 }
 
 func (r *startConversationResponseEventStreamReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
 func (r *startConversationResponseEventStreamReader) Err() error {
 	return r.reader.Err()
+}
+
+func (r *startConversationResponseEventStreamReader) Closed() <-chan struct{} {
+	return r.closed
 }
 
 type deserializeOpEventStreamStartConversation struct {

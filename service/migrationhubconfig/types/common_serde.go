@@ -20,6 +20,7 @@ func serializeHomeRegionControls(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func deserializeHomeRegionControls(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]HomeRegionControl) error {
+	*v = make([]HomeRegionControl, 0)
 	var vv HomeRegionControl
 	return smithy.ReadList(d, s, func() error {
 		vv = HomeRegionControl{}
