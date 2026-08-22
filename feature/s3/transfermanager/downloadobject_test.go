@@ -339,9 +339,11 @@ func TestDownloadObject(t *testing.T) {
 				bytes.Repeat([]byte{'B'}, megabyte),
 				bytes.Repeat([]byte{'C'}, 3*megabyte),
 			},
-			getObjectFn:       s3testing.UnequalPartGetObjectFn,
-			partsCount:        3,
-			expectInvocations: 3,
+			getObjectFn: s3testing.UnequalPartGetObjectFn,
+			// default concurrency (5) exercises the multi-goroutine path
+			optFn:           func(o *Options) {},
+			partsCount:      3,
+			expectParts:     []int32{1, 2, 3},
 			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
 				expect := bytes.Join([][]byte{
 					bytes.Repeat([]byte{'A'}, 2*megabyte),
