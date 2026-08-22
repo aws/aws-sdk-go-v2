@@ -4,6 +4,8 @@ package marketplacecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type CancelChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelChangeSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelChangeSetRequest_Catalog, *v.Catalog)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.CancelChangeSetRequest_ChangeSetId, *v.ChangeSetId)
+	}
+}
+
 type CancelChangeSetOutput struct {
 
 	// The ARN associated with the change set referenced in this request.
@@ -56,13 +73,38 @@ type CancelChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelChangeSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetArn != nil {
+		s.WriteString(schemas.CancelChangeSetResponse_ChangeSetArn, *v.ChangeSetArn)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.CancelChangeSetResponse_ChangeSetId, *v.ChangeSetId)
+	}
+}
+func (v *CancelChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelChangeSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelChangeSetResponse_ChangeSetArn:
+			v.ChangeSetArn = new(string)
+			return d.ReadString(schemas.CancelChangeSetResponse_ChangeSetArn, v.ChangeSetArn)
+		case schemas.CancelChangeSetResponse_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.CancelChangeSetResponse_ChangeSetId, v.ChangeSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelChangeSet, schemas.CancelChangeSetRequest, schemas.CancelChangeSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelChangeSet, schemas.CancelChangeSetRequest, schemas.CancelChangeSetResponse), output: &CancelChangeSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

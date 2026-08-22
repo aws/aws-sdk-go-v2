@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,28 @@ type DeleteServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceIdentifier != nil {
+		s.WriteString(schemas.DeleteServiceRequest_serviceIdentifier, *v.ServiceIdentifier)
+	}
+}
+func (v *DeleteServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceRequest_serviceIdentifier:
+			v.ServiceIdentifier = new(string)
+			return d.ReadString(schemas.DeleteServiceRequest_serviceIdentifier, v.ServiceIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteServiceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the service.
@@ -62,13 +86,54 @@ type DeleteServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteServiceResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteServiceResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteServiceResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteServiceResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteServiceResponse_arn, v.Arn)
+		case schemas.DeleteServiceResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteServiceResponse_id, v.Id)
+		case schemas.DeleteServiceResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteServiceResponse_name, v.Name)
+		case schemas.DeleteServiceResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteServiceResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteService, schemas.DeleteServiceRequest, schemas.DeleteServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteService, schemas.DeleteServiceRequest, schemas.DeleteServiceResponse), output: &DeleteServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

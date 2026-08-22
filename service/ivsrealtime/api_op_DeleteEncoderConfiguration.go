@@ -4,6 +4,8 @@ package ivsrealtime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteEncoderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEncoderConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEncoderConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEncoderConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteEncoderConfigurationRequest_arn, *v.Arn)
+	}
+}
+
 type DeleteEncoderConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteEncoderConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEncoderConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEncoderConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEncoderConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEncoderConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEncoderConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEncoderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEncoderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEncoderConfiguration, schemas.DeleteEncoderConfigurationRequest, schemas.DeleteEncoderConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEncoderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEncoderConfiguration, schemas.DeleteEncoderConfigurationRequest, schemas.DeleteEncoderConfigurationResponse), output: &DeleteEncoderConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

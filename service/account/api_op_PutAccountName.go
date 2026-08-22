@@ -4,6 +4,8 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type PutAccountNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PutAccountNameRequest_AccountId, *v.AccountId)
+	}
+	if v.AccountName != nil {
+		s.WriteString(schemas.PutAccountNameRequest_AccountName, *v.AccountName)
+	}
+}
+
 type PutAccountNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +83,26 @@ type PutAccountNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountName, schemas.PutAccountNameRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountName, schemas.PutAccountNameRequest, nil), output: &PutAccountNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

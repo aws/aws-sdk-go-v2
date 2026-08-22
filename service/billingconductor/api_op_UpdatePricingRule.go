@@ -4,7 +4,9 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,64 @@ type UpdatePricingRuleInput struct {
 	Type types.PricingRuleType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdatePricingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePricingRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePricingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePricingRuleInput_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePricingRuleInput_Description, *v.Description)
+	}
+	if v.ModifierPercentage != nil {
+		s.WriteFloat64(schemas.UpdatePricingRuleInput_ModifierPercentage, *v.ModifierPercentage)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePricingRuleInput_Name, *v.Name)
+	}
+	if v.Tiering != nil {
+		s.WriteStruct(schemas.UpdatePricingRuleInput_Tiering)
+		v.Tiering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdatePricingRuleInput_Type, string(v.Type))
+	}
+}
+func (v *UpdatePricingRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePricingRuleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePricingRuleInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleInput_Arn, v.Arn)
+		case schemas.UpdatePricingRuleInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleInput_Description, v.Description)
+		case schemas.UpdatePricingRuleInput_ModifierPercentage:
+			v.ModifierPercentage = new(float64)
+			return d.ReadFloat64(schemas.UpdatePricingRuleInput_ModifierPercentage, v.ModifierPercentage)
+		case schemas.UpdatePricingRuleInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleInput_Name, v.Name)
+		case schemas.UpdatePricingRuleInput_Tiering:
+			v.Tiering = &types.UpdateTieringInput{}
+			return v.Tiering.Deserialize(d)
+		case schemas.UpdatePricingRuleInput_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePricingRuleInput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PricingRuleType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type UpdatePricingRuleOutput struct {
@@ -112,13 +172,112 @@ type UpdatePricingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePricingRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePricingRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePricingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePricingRuleOutput_Arn, *v.Arn)
+	}
+	if v.AssociatedPricingPlanCount != 0 {
+		s.WriteInt64(schemas.UpdatePricingRuleOutput_AssociatedPricingPlanCount, v.AssociatedPricingPlanCount)
+	}
+	if v.BillingEntity != nil {
+		s.WriteString(schemas.UpdatePricingRuleOutput_BillingEntity, *v.BillingEntity)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePricingRuleOutput_Description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.UpdatePricingRuleOutput_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.ModifierPercentage != nil {
+		s.WriteFloat64(schemas.UpdatePricingRuleOutput_ModifierPercentage, *v.ModifierPercentage)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePricingRuleOutput_Name, *v.Name)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.UpdatePricingRuleOutput_Operation, *v.Operation)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.UpdatePricingRuleOutput_Scope, string(v.Scope))
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.UpdatePricingRuleOutput_Service, *v.Service)
+	}
+	if v.Tiering != nil {
+		s.WriteStruct(schemas.UpdatePricingRuleOutput_Tiering)
+		v.Tiering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdatePricingRuleOutput_Type, string(v.Type))
+	}
+	if v.UsageType != nil {
+		s.WriteString(schemas.UpdatePricingRuleOutput_UsageType, *v.UsageType)
+	}
+}
+func (v *UpdatePricingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePricingRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePricingRuleOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleOutput_Arn, v.Arn)
+		case schemas.UpdatePricingRuleOutput_AssociatedPricingPlanCount:
+			return d.ReadInt64(schemas.UpdatePricingRuleOutput_AssociatedPricingPlanCount, &v.AssociatedPricingPlanCount)
+		case schemas.UpdatePricingRuleOutput_BillingEntity:
+			v.BillingEntity = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleOutput_BillingEntity, v.BillingEntity)
+		case schemas.UpdatePricingRuleOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleOutput_Description, v.Description)
+		case schemas.UpdatePricingRuleOutput_LastModifiedTime:
+			return d.ReadInt64(schemas.UpdatePricingRuleOutput_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.UpdatePricingRuleOutput_ModifierPercentage:
+			v.ModifierPercentage = new(float64)
+			return d.ReadFloat64(schemas.UpdatePricingRuleOutput_ModifierPercentage, v.ModifierPercentage)
+		case schemas.UpdatePricingRuleOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleOutput_Name, v.Name)
+		case schemas.UpdatePricingRuleOutput_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleOutput_Operation, v.Operation)
+		case schemas.UpdatePricingRuleOutput_Scope:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePricingRuleOutput_Scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = types.PricingRuleScope(ev)
+			return nil
+		case schemas.UpdatePricingRuleOutput_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleOutput_Service, v.Service)
+		case schemas.UpdatePricingRuleOutput_Tiering:
+			v.Tiering = &types.UpdateTieringInput{}
+			return v.Tiering.Deserialize(d)
+		case schemas.UpdatePricingRuleOutput_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePricingRuleOutput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PricingRuleType(ev)
+			return nil
+		case schemas.UpdatePricingRuleOutput_UsageType:
+			v.UsageType = new(string)
+			return d.ReadString(schemas.UpdatePricingRuleOutput_UsageType, v.UsageType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePricingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePricingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePricingRule, schemas.UpdatePricingRuleInput, schemas.UpdatePricingRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePricingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePricingRule, schemas.UpdatePricingRuleInput, schemas.UpdatePricingRuleOutput), output: &UpdatePricingRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,40 @@ type CreateModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalEventsDetail != nil {
+		s.WriteStruct(schemas.CreateModelVersionRequest_externalEventsDetail)
+		v.ExternalEventsDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngestedEventsDetail != nil {
+		s.WriteStruct(schemas.CreateModelVersionRequest_ingestedEventsDetail)
+		v.IngestedEventsDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.CreateModelVersionRequest_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.CreateModelVersionRequest_modelType, string(v.ModelType))
+	}
+	serializetagList(s, schemas.CreateModelVersionRequest_tags, v.Tags)
+	if v.TrainingDataSchema != nil {
+		s.WriteStruct(schemas.CreateModelVersionRequest_trainingDataSchema)
+		v.TrainingDataSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingDataSource != "" {
+		s.WriteString(schemas.CreateModelVersionRequest_trainingDataSource, string(v.TrainingDataSource))
+	}
+}
+
 type CreateModelVersionOutput struct {
 
 	// The model ID.
@@ -80,13 +116,54 @@ type CreateModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.CreateModelVersionResult_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.CreateModelVersionResult_modelType, string(v.ModelType))
+	}
+	if v.ModelVersionNumber != nil {
+		s.WriteString(schemas.CreateModelVersionResult_modelVersionNumber, *v.ModelVersionNumber)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.CreateModelVersionResult_status, *v.Status)
+	}
+}
+func (v *CreateModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelVersionResult_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.CreateModelVersionResult_modelId, v.ModelId)
+		case schemas.CreateModelVersionResult_modelType:
+			var ev string
+			if err := d.ReadString(schemas.CreateModelVersionResult_modelType, &ev); err != nil {
+				return err
+			}
+			v.ModelType = types.ModelTypeEnum(ev)
+			return nil
+		case schemas.CreateModelVersionResult_modelVersionNumber:
+			v.ModelVersionNumber = new(string)
+			return d.ReadString(schemas.CreateModelVersionResult_modelVersionNumber, v.ModelVersionNumber)
+		case schemas.CreateModelVersionResult_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CreateModelVersionResult_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelVersion, schemas.CreateModelVersionRequest, schemas.CreateModelVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelVersion, schemas.CreateModelVersionRequest, schemas.CreateModelVersionResult), output: &CreateModelVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

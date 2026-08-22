@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type DescribeLDAPSSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLDAPSSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLDAPSSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLDAPSSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeLDAPSSettingsRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeLDAPSSettingsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLDAPSSettingsRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeLDAPSSettingsRequest_Type, string(v.Type))
+	}
+}
+
 type DescribeLDAPSSettingsOutput struct {
 
 	// Information about LDAP security for the specified directory, including status
@@ -61,13 +84,35 @@ type DescribeLDAPSSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLDAPSSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLDAPSSettingsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLDAPSSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLDAPSSettingsInfo(s, schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo, v.LDAPSSettingsInfo)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLDAPSSettingsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLDAPSSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLDAPSSettingsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo:
+			return deserializeLDAPSSettingsInfo(d, schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo, &v.LDAPSSettingsInfo)
+		case schemas.DescribeLDAPSSettingsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeLDAPSSettingsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLDAPSSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLDAPSSettings, schemas.DescribeLDAPSSettingsRequest, schemas.DescribeLDAPSSettingsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLDAPSSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLDAPSSettings, schemas.DescribeLDAPSSettingsRequest, schemas.DescribeLDAPSSettingsResult), output: &DescribeLDAPSSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,16 @@ type BatchGetStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetStepIdentifiers(s, schemas.BatchGetStepRequest_identifiers, v.Identifiers)
+}
+
 type BatchGetStepOutput struct {
 
 	// A list of errors for steps that could not be retrieved.
@@ -61,13 +73,32 @@ type BatchGetStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetStepErrors(s, schemas.BatchGetStepResponse_errors, v.Errors)
+	serializeBatchGetStepItems(s, schemas.BatchGetStepResponse_steps, v.Steps)
+}
+func (v *BatchGetStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetStepResponse_errors:
+			return deserializeBatchGetStepErrors(d, schemas.BatchGetStepResponse_errors, &v.Errors)
+		case schemas.BatchGetStepResponse_steps:
+			return deserializeBatchGetStepItems(d, schemas.BatchGetStepResponse_steps, &v.Steps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetStep, schemas.BatchGetStepRequest, schemas.BatchGetStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetStep, schemas.BatchGetStepRequest, schemas.BatchGetStepResponse), output: &BatchGetStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

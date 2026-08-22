@@ -4,6 +4,8 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteSshPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSshPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSshPublicKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSshPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.DeleteSshPublicKeyRequest_ServerId, *v.ServerId)
+	}
+	if v.SshPublicKeyId != nil {
+		s.WriteString(schemas.DeleteSshPublicKeyRequest_SshPublicKeyId, *v.SshPublicKeyId)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.DeleteSshPublicKeyRequest_UserName, *v.UserName)
+	}
+}
+
 type DeleteSshPublicKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DeleteSshPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSshPublicKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSshPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSshPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSshPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSshPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSshPublicKey, schemas.DeleteSshPublicKeyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSshPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSshPublicKey, schemas.DeleteSshPublicKeyRequest, nil), output: &DeleteSshPublicKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,36 @@ type CreateLicenseManagerReportGeneratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseManagerReportGeneratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseManagerReportGeneratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseManagerReportGeneratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLicenseManagerReportGeneratorRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateLicenseManagerReportGeneratorRequest_Description, *v.Description)
+	}
+	if v.ReportContext != nil {
+		s.WriteStruct(schemas.CreateLicenseManagerReportGeneratorRequest_ReportContext)
+		v.ReportContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportFrequency != nil {
+		s.WriteStruct(schemas.CreateLicenseManagerReportGeneratorRequest_ReportFrequency)
+		v.ReportFrequency.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportGeneratorName != nil {
+		s.WriteString(schemas.CreateLicenseManagerReportGeneratorRequest_ReportGeneratorName, *v.ReportGeneratorName)
+	}
+	serializeTagList(s, schemas.CreateLicenseManagerReportGeneratorRequest_Tags, v.Tags)
+	serializeReportTypeList(s, schemas.CreateLicenseManagerReportGeneratorRequest_Type, v.Type)
+}
+
 type CreateLicenseManagerReportGeneratorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new report generator.
@@ -79,13 +111,32 @@ type CreateLicenseManagerReportGeneratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseManagerReportGeneratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseManagerReportGeneratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseManagerReportGeneratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseManagerReportGeneratorArn != nil {
+		s.WriteString(schemas.CreateLicenseManagerReportGeneratorResponse_LicenseManagerReportGeneratorArn, *v.LicenseManagerReportGeneratorArn)
+	}
+}
+func (v *CreateLicenseManagerReportGeneratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLicenseManagerReportGeneratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLicenseManagerReportGeneratorResponse_LicenseManagerReportGeneratorArn:
+			v.LicenseManagerReportGeneratorArn = new(string)
+			return d.ReadString(schemas.CreateLicenseManagerReportGeneratorResponse_LicenseManagerReportGeneratorArn, v.LicenseManagerReportGeneratorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLicenseManagerReportGenerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseManagerReportGenerator, schemas.CreateLicenseManagerReportGeneratorRequest, schemas.CreateLicenseManagerReportGeneratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLicenseManagerReportGenerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseManagerReportGenerator, schemas.CreateLicenseManagerReportGeneratorRequest, schemas.CreateLicenseManagerReportGeneratorResponse), output: &CreateLicenseManagerReportGeneratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

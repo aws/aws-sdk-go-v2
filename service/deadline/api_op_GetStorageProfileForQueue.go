@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type GetStorageProfileForQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStorageProfileForQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStorageProfileForQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStorageProfileForQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetStorageProfileForQueueRequest_farmId, *v.FarmId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetStorageProfileForQueueRequest_queueId, *v.QueueId)
+	}
+	if v.StorageProfileId != nil {
+		s.WriteString(schemas.GetStorageProfileForQueueRequest_storageProfileId, *v.StorageProfileId)
+	}
+}
+
 type GetStorageProfileForQueueOutput struct {
 
 	// The display name of the storage profile connected to a queue.
@@ -76,13 +96,51 @@ type GetStorageProfileForQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStorageProfileForQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStorageProfileForQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStorageProfileForQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetStorageProfileForQueueResponse_displayName, *v.DisplayName)
+	}
+	serializeFileSystemLocationsList(s, schemas.GetStorageProfileForQueueResponse_fileSystemLocations, v.FileSystemLocations)
+	if v.OsFamily != "" {
+		s.WriteString(schemas.GetStorageProfileForQueueResponse_osFamily, string(v.OsFamily))
+	}
+	if v.StorageProfileId != nil {
+		s.WriteString(schemas.GetStorageProfileForQueueResponse_storageProfileId, *v.StorageProfileId)
+	}
+}
+func (v *GetStorageProfileForQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStorageProfileForQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStorageProfileForQueueResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetStorageProfileForQueueResponse_displayName, v.DisplayName)
+		case schemas.GetStorageProfileForQueueResponse_fileSystemLocations:
+			return deserializeFileSystemLocationsList(d, schemas.GetStorageProfileForQueueResponse_fileSystemLocations, &v.FileSystemLocations)
+		case schemas.GetStorageProfileForQueueResponse_osFamily:
+			var ev string
+			if err := d.ReadString(schemas.GetStorageProfileForQueueResponse_osFamily, &ev); err != nil {
+				return err
+			}
+			v.OsFamily = types.StorageProfileOperatingSystemFamily(ev)
+			return nil
+		case schemas.GetStorageProfileForQueueResponse_storageProfileId:
+			v.StorageProfileId = new(string)
+			return d.ReadString(schemas.GetStorageProfileForQueueResponse_storageProfileId, v.StorageProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStorageProfileForQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStorageProfileForQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStorageProfileForQueue, schemas.GetStorageProfileForQueueRequest, schemas.GetStorageProfileForQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStorageProfileForQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStorageProfileForQueue, schemas.GetStorageProfileForQueueRequest, schemas.GetStorageProfileForQueueResponse), output: &GetStorageProfileForQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

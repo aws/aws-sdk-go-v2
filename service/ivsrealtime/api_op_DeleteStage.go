@@ -4,6 +4,8 @@ package ivsrealtime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DeleteStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteStageRequest_arn, *v.Arn)
+	}
+}
+func (v *DeleteStageInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStageRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteStageRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteStageRequest_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DeleteStageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +66,26 @@ type DeleteStageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStageResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStage, schemas.DeleteStageRequest, schemas.DeleteStageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStage, schemas.DeleteStageRequest, schemas.DeleteStageResponse), output: &DeleteStageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

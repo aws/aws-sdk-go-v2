@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,27 @@ type UpdateFarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFarmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostScaleFactor != nil {
+		s.WriteFloat32(schemas.UpdateFarmRequest_costScaleFactor, *v.CostScaleFactor)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFarmRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateFarmRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateFarmRequest_farmId, *v.FarmId)
+	}
+}
+
 type UpdateFarmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +84,26 @@ type UpdateFarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFarmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFarmResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFarmResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFarm, schemas.UpdateFarmRequest, schemas.UpdateFarmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFarm, schemas.UpdateFarmRequest, schemas.UpdateFarmResponse), output: &UpdateFarmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

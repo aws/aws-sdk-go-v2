@@ -4,7 +4,9 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type GetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.GetSessionRequest_assistantId, *v.AssistantId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionRequest_sessionId, *v.SessionId)
+	}
+}
+func (v *GetSessionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionRequest_assistantId:
+			v.AssistantId = new(string)
+			return d.ReadString(schemas.GetSessionRequest_assistantId, v.AssistantId)
+		case schemas.GetSessionRequest_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetSessionRequest_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
+
 type GetSessionOutput struct {
 
 	// The session.
@@ -52,13 +82,34 @@ type GetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Session != nil {
+		s.WriteStruct(schemas.GetSessionResponse_session)
+		v.Session.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionResponse_session:
+			v.Session = &types.SessionData{}
+			return v.Session.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse), output: &GetSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

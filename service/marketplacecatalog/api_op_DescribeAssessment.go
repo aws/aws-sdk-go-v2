@@ -5,7 +5,9 @@ package marketplacecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type DescribeAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentIdentifier != nil {
+		s.WriteString(schemas.DescribeAssessmentRequest_AssessmentIdentifier, *v.AssessmentIdentifier)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.DescribeAssessmentRequest_Catalog, *v.Catalog)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAssessmentRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAssessmentRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAssessmentOutput struct {
 
 	// The ARN associated with the assessment.
@@ -99,13 +122,86 @@ type DescribeAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.DescribeAssessmentResponse_AssessmentArn, *v.AssessmentArn)
+	}
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.DescribeAssessmentResponse_AssessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentResult != "" {
+		s.WriteString(schemas.DescribeAssessmentResponse_AssessmentResult, string(v.AssessmentResult))
+	}
+	if v.AssessmentTargetSummary != nil {
+		s.WriteStruct(schemas.DescribeAssessmentResponse_AssessmentTargetSummary)
+		v.AssessmentTargetSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeControlAssessmentList(s, schemas.DescribeAssessmentResponse_ControlAssessments, v.ControlAssessments)
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.DescribeAssessmentResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteString(schemas.DescribeAssessmentResponse_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.FrameworkId != nil {
+		s.WriteString(schemas.DescribeAssessmentResponse_FrameworkId, *v.FrameworkId)
+	}
+	serializeFrameworkSummary(s, schemas.DescribeAssessmentResponse_FrameworkSummary, v.FrameworkSummary)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAssessmentResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssessmentResponse_AssessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.DescribeAssessmentResponse_AssessmentArn, v.AssessmentArn)
+		case schemas.DescribeAssessmentResponse_AssessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.DescribeAssessmentResponse_AssessmentId, v.AssessmentId)
+		case schemas.DescribeAssessmentResponse_AssessmentResult:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAssessmentResponse_AssessmentResult, &ev); err != nil {
+				return err
+			}
+			v.AssessmentResult = types.AssessmentResult(ev)
+			return nil
+		case schemas.DescribeAssessmentResponse_AssessmentTargetSummary:
+			v.AssessmentTargetSummary = &types.AssessmentTargetSummary{}
+			return v.AssessmentTargetSummary.Deserialize(d)
+		case schemas.DescribeAssessmentResponse_ControlAssessments:
+			return deserializeControlAssessmentList(d, schemas.DescribeAssessmentResponse_ControlAssessments, &v.ControlAssessments)
+		case schemas.DescribeAssessmentResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.DescribeAssessmentResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeAssessmentResponse_ExpiresAt:
+			v.ExpiresAt = new(string)
+			return d.ReadString(schemas.DescribeAssessmentResponse_ExpiresAt, v.ExpiresAt)
+		case schemas.DescribeAssessmentResponse_FrameworkId:
+			v.FrameworkId = new(string)
+			return d.ReadString(schemas.DescribeAssessmentResponse_FrameworkId, v.FrameworkId)
+		case schemas.DescribeAssessmentResponse_FrameworkSummary:
+			return deserializeFrameworkSummary(d, schemas.DescribeAssessmentResponse_FrameworkSummary, &v.FrameworkSummary)
+		case schemas.DescribeAssessmentResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAssessmentResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssessment, schemas.DescribeAssessmentRequest, schemas.DescribeAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssessment, schemas.DescribeAssessmentRequest, schemas.DescribeAssessmentResponse), output: &DescribeAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type DeleteFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteFleetRequest_clientToken, *v.ClientToken)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.DeleteFleetRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DeleteFleetRequest_fleetId, *v.FleetId)
+	}
+}
+
 type DeleteFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type DeleteFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFleet, schemas.DeleteFleetRequest, schemas.DeleteFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFleet, schemas.DeleteFleetRequest, schemas.DeleteFleetResponse), output: &DeleteFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListCustomRoutingEndpointGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomRoutingEndpointGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomRoutingEndpointGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomRoutingEndpointGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.ListCustomRoutingEndpointGroupsRequest_ListenerArn, *v.ListenerArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomRoutingEndpointGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomRoutingEndpointGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCustomRoutingEndpointGroupsOutput struct {
 
 	// The list of the endpoint groups associated with a listener for a custom routing
@@ -60,13 +80,35 @@ type ListCustomRoutingEndpointGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomRoutingEndpointGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomRoutingEndpointGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomRoutingEndpointGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomRoutingEndpointGroups(s, schemas.ListCustomRoutingEndpointGroupsResponse_EndpointGroups, v.EndpointGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomRoutingEndpointGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomRoutingEndpointGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomRoutingEndpointGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomRoutingEndpointGroupsResponse_EndpointGroups:
+			return deserializeCustomRoutingEndpointGroups(d, schemas.ListCustomRoutingEndpointGroupsResponse_EndpointGroups, &v.EndpointGroups)
+		case schemas.ListCustomRoutingEndpointGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomRoutingEndpointGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomRoutingEndpointGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomRoutingEndpointGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomRoutingEndpointGroups, schemas.ListCustomRoutingEndpointGroupsRequest, schemas.ListCustomRoutingEndpointGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCustomRoutingEndpointGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomRoutingEndpointGroups, schemas.ListCustomRoutingEndpointGroupsRequest, schemas.ListCustomRoutingEndpointGroupsResponse), output: &ListCustomRoutingEndpointGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

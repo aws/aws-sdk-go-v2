@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -16,6 +18,28 @@ type AuthenticationConfiguration struct {
 	AcceptanceThreshold *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AuthenticationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthenticationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthenticationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceThreshold != nil {
+		s.WriteInt32(schemas.AuthenticationConfiguration_AcceptanceThreshold, *v.AcceptanceThreshold)
+	}
+}
+func (v *AuthenticationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthenticationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthenticationConfiguration_AcceptanceThreshold:
+			v.AcceptanceThreshold = new(int32)
+			return d.ReadInt32(schemas.AuthenticationConfiguration_AcceptanceThreshold, v.AcceptanceThreshold)
+		}
+		return nil
+	})
 }
 
 // The authentication result produced by Voice ID, processed against the current
@@ -59,6 +83,76 @@ type AuthenticationResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthenticationResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthenticationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthenticationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioAggregationEndedAt != nil {
+		s.WriteTime(schemas.AuthenticationResult_AudioAggregationEndedAt, *v.AudioAggregationEndedAt)
+	}
+	if v.AudioAggregationStartedAt != nil {
+		s.WriteTime(schemas.AuthenticationResult_AudioAggregationStartedAt, *v.AudioAggregationStartedAt)
+	}
+	if v.AuthenticationResultId != nil {
+		s.WriteString(schemas.AuthenticationResult_AuthenticationResultId, *v.AuthenticationResultId)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.AuthenticationResult_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomerSpeakerId != nil {
+		s.WriteString(schemas.AuthenticationResult_CustomerSpeakerId, *v.CustomerSpeakerId)
+	}
+	if v.Decision != "" {
+		s.WriteString(schemas.AuthenticationResult_Decision, string(v.Decision))
+	}
+	if v.GeneratedSpeakerId != nil {
+		s.WriteString(schemas.AuthenticationResult_GeneratedSpeakerId, *v.GeneratedSpeakerId)
+	}
+	if v.Score != nil {
+		s.WriteInt32(schemas.AuthenticationResult_Score, *v.Score)
+	}
+}
+func (v *AuthenticationResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthenticationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthenticationResult_AudioAggregationEndedAt:
+			v.AudioAggregationEndedAt = new(time.Time)
+			return d.ReadTime(schemas.AuthenticationResult_AudioAggregationEndedAt, v.AudioAggregationEndedAt)
+		case schemas.AuthenticationResult_AudioAggregationStartedAt:
+			v.AudioAggregationStartedAt = new(time.Time)
+			return d.ReadTime(schemas.AuthenticationResult_AudioAggregationStartedAt, v.AudioAggregationStartedAt)
+		case schemas.AuthenticationResult_AuthenticationResultId:
+			v.AuthenticationResultId = new(string)
+			return d.ReadString(schemas.AuthenticationResult_AuthenticationResultId, v.AuthenticationResultId)
+		case schemas.AuthenticationResult_Configuration:
+			v.Configuration = &AuthenticationConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.AuthenticationResult_CustomerSpeakerId:
+			v.CustomerSpeakerId = new(string)
+			return d.ReadString(schemas.AuthenticationResult_CustomerSpeakerId, v.CustomerSpeakerId)
+		case schemas.AuthenticationResult_Decision:
+			var ev string
+			if err := d.ReadString(schemas.AuthenticationResult_Decision, &ev); err != nil {
+				return err
+			}
+			v.Decision = AuthenticationDecision(ev)
+			return nil
+		case schemas.AuthenticationResult_GeneratedSpeakerId:
+			v.GeneratedSpeakerId = new(string)
+			return d.ReadString(schemas.AuthenticationResult_GeneratedSpeakerId, v.GeneratedSpeakerId)
+		case schemas.AuthenticationResult_Score:
+			v.Score = new(int32)
+			return d.ReadInt32(schemas.AuthenticationResult_Score, v.Score)
+		}
+		return nil
+	})
+}
+
 // Contains all the information about a domain.
 type Domain struct {
 
@@ -98,6 +192,92 @@ type Domain struct {
 	WatchlistDetails *WatchlistDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *Domain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Domain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Domain) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Domain_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Domain_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Domain_Description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.Domain_DomainId, *v.DomainId)
+	}
+	if v.DomainStatus != "" {
+		s.WriteString(schemas.Domain_DomainStatus, string(v.DomainStatus))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Domain_Name, *v.Name)
+	}
+	if v.ServerSideEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.Domain_ServerSideEncryptionConfiguration)
+		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerSideEncryptionUpdateDetails != nil {
+		s.WriteStruct(schemas.Domain_ServerSideEncryptionUpdateDetails)
+		v.ServerSideEncryptionUpdateDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Domain_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.WatchlistDetails != nil {
+		s.WriteStruct(schemas.Domain_WatchlistDetails)
+		v.WatchlistDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Domain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Domain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Domain_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Domain_Arn, v.Arn)
+		case schemas.Domain_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Domain_CreatedAt, v.CreatedAt)
+		case schemas.Domain_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Domain_Description, v.Description)
+		case schemas.Domain_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.Domain_DomainId, v.DomainId)
+		case schemas.Domain_DomainStatus:
+			var ev string
+			if err := d.ReadString(schemas.Domain_DomainStatus, &ev); err != nil {
+				return err
+			}
+			v.DomainStatus = DomainStatus(ev)
+			return nil
+		case schemas.Domain_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Domain_Name, v.Name)
+		case schemas.Domain_ServerSideEncryptionConfiguration:
+			v.ServerSideEncryptionConfiguration = &ServerSideEncryptionConfiguration{}
+			return v.ServerSideEncryptionConfiguration.Deserialize(d)
+		case schemas.Domain_ServerSideEncryptionUpdateDetails:
+			v.ServerSideEncryptionUpdateDetails = &ServerSideEncryptionUpdateDetails{}
+			return v.ServerSideEncryptionUpdateDetails.Deserialize(d)
+		case schemas.Domain_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Domain_UpdatedAt, v.UpdatedAt)
+		case schemas.Domain_WatchlistDetails:
+			v.WatchlistDetails = &WatchlistDetails{}
+			return v.WatchlistDetails.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains a summary of information about a domain.
@@ -140,6 +320,92 @@ type DomainSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DomainSummary_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DomainSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DomainSummary_Description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DomainSummary_DomainId, *v.DomainId)
+	}
+	if v.DomainStatus != "" {
+		s.WriteString(schemas.DomainSummary_DomainStatus, string(v.DomainStatus))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DomainSummary_Name, *v.Name)
+	}
+	if v.ServerSideEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DomainSummary_ServerSideEncryptionConfiguration)
+		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerSideEncryptionUpdateDetails != nil {
+		s.WriteStruct(schemas.DomainSummary_ServerSideEncryptionUpdateDetails)
+		v.ServerSideEncryptionUpdateDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DomainSummary_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.WatchlistDetails != nil {
+		s.WriteStruct(schemas.DomainSummary_WatchlistDetails)
+		v.WatchlistDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DomainSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DomainSummary_Arn, v.Arn)
+		case schemas.DomainSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DomainSummary_CreatedAt, v.CreatedAt)
+		case schemas.DomainSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DomainSummary_Description, v.Description)
+		case schemas.DomainSummary_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DomainSummary_DomainId, v.DomainId)
+		case schemas.DomainSummary_DomainStatus:
+			var ev string
+			if err := d.ReadString(schemas.DomainSummary_DomainStatus, &ev); err != nil {
+				return err
+			}
+			v.DomainStatus = DomainStatus(ev)
+			return nil
+		case schemas.DomainSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DomainSummary_Name, v.Name)
+		case schemas.DomainSummary_ServerSideEncryptionConfiguration:
+			v.ServerSideEncryptionConfiguration = &ServerSideEncryptionConfiguration{}
+			return v.ServerSideEncryptionConfiguration.Deserialize(d)
+		case schemas.DomainSummary_ServerSideEncryptionUpdateDetails:
+			v.ServerSideEncryptionUpdateDetails = &ServerSideEncryptionUpdateDetails{}
+			return v.ServerSideEncryptionUpdateDetails.Deserialize(d)
+		case schemas.DomainSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DomainSummary_UpdatedAt, v.UpdatedAt)
+		case schemas.DomainSummary_WatchlistDetails:
+			v.WatchlistDetails = &WatchlistDetails{}
+			return v.WatchlistDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains configurations defining enrollment behavior for the batch job.
 type EnrollmentConfig struct {
 
@@ -154,6 +420,40 @@ type EnrollmentConfig struct {
 	FraudDetectionConfig *EnrollmentJobFraudDetectionConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnrollmentConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnrollmentConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnrollmentConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExistingEnrollmentAction != "" {
+		s.WriteString(schemas.EnrollmentConfig_ExistingEnrollmentAction, string(v.ExistingEnrollmentAction))
+	}
+	if v.FraudDetectionConfig != nil {
+		s.WriteStruct(schemas.EnrollmentConfig_FraudDetectionConfig)
+		v.FraudDetectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnrollmentConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnrollmentConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnrollmentConfig_ExistingEnrollmentAction:
+			var ev string
+			if err := d.ReadString(schemas.EnrollmentConfig_ExistingEnrollmentAction, &ev); err != nil {
+				return err
+			}
+			v.ExistingEnrollmentAction = ExistingEnrollmentAction(ev)
+			return nil
+		case schemas.EnrollmentConfig_FraudDetectionConfig:
+			v.FraudDetectionConfig = &EnrollmentJobFraudDetectionConfig{}
+			return v.FraudDetectionConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The fraud detection configuration to be used during the batch speaker
@@ -177,6 +477,41 @@ type EnrollmentJobFraudDetectionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnrollmentJobFraudDetectionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnrollmentJobFraudDetectionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnrollmentJobFraudDetectionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FraudDetectionAction != "" {
+		s.WriteString(schemas.EnrollmentJobFraudDetectionConfig_FraudDetectionAction, string(v.FraudDetectionAction))
+	}
+	if v.RiskThreshold != nil {
+		s.WriteInt32(schemas.EnrollmentJobFraudDetectionConfig_RiskThreshold, *v.RiskThreshold)
+	}
+	serializeEnrollmentJobFraudDetectionConfigWatchlistIds(s, schemas.EnrollmentJobFraudDetectionConfig_WatchlistIds, v.WatchlistIds)
+}
+func (v *EnrollmentJobFraudDetectionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnrollmentJobFraudDetectionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnrollmentJobFraudDetectionConfig_FraudDetectionAction:
+			var ev string
+			if err := d.ReadString(schemas.EnrollmentJobFraudDetectionConfig_FraudDetectionAction, &ev); err != nil {
+				return err
+			}
+			v.FraudDetectionAction = FraudDetectionAction(ev)
+			return nil
+		case schemas.EnrollmentJobFraudDetectionConfig_RiskThreshold:
+			v.RiskThreshold = new(int32)
+			return d.ReadInt32(schemas.EnrollmentJobFraudDetectionConfig_RiskThreshold, v.RiskThreshold)
+		case schemas.EnrollmentJobFraudDetectionConfig_WatchlistIds:
+			return deserializeEnrollmentJobFraudDetectionConfigWatchlistIds(d, schemas.EnrollmentJobFraudDetectionConfig_WatchlistIds, &v.WatchlistIds)
+		}
+		return nil
+	})
+}
+
 // Contains error details for a failed batch job.
 type FailureDetails struct {
 
@@ -187,6 +522,34 @@ type FailureDetails struct {
 	StatusCode *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FailureDetails_Message, *v.Message)
+	}
+	if v.StatusCode != nil {
+		s.WriteInt32(schemas.FailureDetails_StatusCode, *v.StatusCode)
+	}
+}
+func (v *FailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FailureDetails_Message, v.Message)
+		case schemas.FailureDetails_StatusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.FailureDetails_StatusCode, v.StatusCode)
+		}
+		return nil
+	})
 }
 
 // The configuration used for performing fraud detection over a speaker during a
@@ -202,6 +565,34 @@ type FraudDetectionConfiguration struct {
 	WatchlistId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FraudDetectionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FraudDetectionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FraudDetectionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RiskThreshold != nil {
+		s.WriteInt32(schemas.FraudDetectionConfiguration_RiskThreshold, *v.RiskThreshold)
+	}
+	if v.WatchlistId != nil {
+		s.WriteString(schemas.FraudDetectionConfiguration_WatchlistId, *v.WatchlistId)
+	}
+}
+func (v *FraudDetectionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FraudDetectionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FraudDetectionConfiguration_RiskThreshold:
+			v.RiskThreshold = new(int32)
+			return d.ReadInt32(schemas.FraudDetectionConfiguration_RiskThreshold, v.RiskThreshold)
+		case schemas.FraudDetectionConfiguration_WatchlistId:
+			v.WatchlistId = new(string)
+			return d.ReadString(schemas.FraudDetectionConfiguration_WatchlistId, v.WatchlistId)
+		}
+		return nil
+	})
 }
 
 // The fraud detection result produced by Voice ID, processed against the current
@@ -240,6 +631,69 @@ type FraudDetectionResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FraudDetectionResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FraudDetectionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FraudDetectionResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioAggregationEndedAt != nil {
+		s.WriteTime(schemas.FraudDetectionResult_AudioAggregationEndedAt, *v.AudioAggregationEndedAt)
+	}
+	if v.AudioAggregationStartedAt != nil {
+		s.WriteTime(schemas.FraudDetectionResult_AudioAggregationStartedAt, *v.AudioAggregationStartedAt)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.FraudDetectionResult_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Decision != "" {
+		s.WriteString(schemas.FraudDetectionResult_Decision, string(v.Decision))
+	}
+	if v.FraudDetectionResultId != nil {
+		s.WriteString(schemas.FraudDetectionResult_FraudDetectionResultId, *v.FraudDetectionResultId)
+	}
+	serializeFraudDetectionReasons(s, schemas.FraudDetectionResult_Reasons, v.Reasons)
+	if v.RiskDetails != nil {
+		s.WriteStruct(schemas.FraudDetectionResult_RiskDetails)
+		v.RiskDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FraudDetectionResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FraudDetectionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FraudDetectionResult_AudioAggregationEndedAt:
+			v.AudioAggregationEndedAt = new(time.Time)
+			return d.ReadTime(schemas.FraudDetectionResult_AudioAggregationEndedAt, v.AudioAggregationEndedAt)
+		case schemas.FraudDetectionResult_AudioAggregationStartedAt:
+			v.AudioAggregationStartedAt = new(time.Time)
+			return d.ReadTime(schemas.FraudDetectionResult_AudioAggregationStartedAt, v.AudioAggregationStartedAt)
+		case schemas.FraudDetectionResult_Configuration:
+			v.Configuration = &FraudDetectionConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.FraudDetectionResult_Decision:
+			var ev string
+			if err := d.ReadString(schemas.FraudDetectionResult_Decision, &ev); err != nil {
+				return err
+			}
+			v.Decision = FraudDetectionDecision(ev)
+			return nil
+		case schemas.FraudDetectionResult_FraudDetectionResultId:
+			v.FraudDetectionResultId = new(string)
+			return d.ReadString(schemas.FraudDetectionResult_FraudDetectionResultId, v.FraudDetectionResultId)
+		case schemas.FraudDetectionResult_Reasons:
+			return deserializeFraudDetectionReasons(d, schemas.FraudDetectionResult_Reasons, &v.Reasons)
+		case schemas.FraudDetectionResult_RiskDetails:
+			v.RiskDetails = &FraudRiskDetails{}
+			return v.RiskDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details regarding various fraud risk analyses performed against the current
 // session state and streamed audio of the speaker.
 type FraudRiskDetails struct {
@@ -255,6 +709,38 @@ type FraudRiskDetails struct {
 	VoiceSpoofingRisk *VoiceSpoofingRisk
 
 	noSmithyDocumentSerde
+}
+
+func (v *FraudRiskDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FraudRiskDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FraudRiskDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnownFraudsterRisk != nil {
+		s.WriteStruct(schemas.FraudRiskDetails_KnownFraudsterRisk)
+		v.KnownFraudsterRisk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceSpoofingRisk != nil {
+		s.WriteStruct(schemas.FraudRiskDetails_VoiceSpoofingRisk)
+		v.VoiceSpoofingRisk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FraudRiskDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FraudRiskDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FraudRiskDetails_KnownFraudsterRisk:
+			v.KnownFraudsterRisk = &KnownFraudsterRisk{}
+			return v.KnownFraudsterRisk.Deserialize(d)
+		case schemas.FraudRiskDetails_VoiceSpoofingRisk:
+			v.VoiceSpoofingRisk = &VoiceSpoofingRisk{}
+			return v.VoiceSpoofingRisk.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains all the information about a fraudster.
@@ -273,6 +759,43 @@ type Fraudster struct {
 	WatchlistIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Fraudster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Fraudster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Fraudster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Fraudster_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.Fraudster_DomainId, *v.DomainId)
+	}
+	if v.GeneratedFraudsterId != nil {
+		s.WriteString(schemas.Fraudster_GeneratedFraudsterId, *v.GeneratedFraudsterId)
+	}
+	serializeResponseWatchlistIds(s, schemas.Fraudster_WatchlistIds, v.WatchlistIds)
+}
+func (v *Fraudster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Fraudster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Fraudster_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Fraudster_CreatedAt, v.CreatedAt)
+		case schemas.Fraudster_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.Fraudster_DomainId, v.DomainId)
+		case schemas.Fraudster_GeneratedFraudsterId:
+			v.GeneratedFraudsterId = new(string)
+			return d.ReadString(schemas.Fraudster_GeneratedFraudsterId, v.GeneratedFraudsterId)
+		case schemas.Fraudster_WatchlistIds:
+			return deserializeResponseWatchlistIds(d, schemas.Fraudster_WatchlistIds, &v.WatchlistIds)
+		}
+		return nil
+	})
 }
 
 // Contains all the information about a fraudster registration job.
@@ -328,6 +851,108 @@ type FraudsterRegistrationJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FraudsterRegistrationJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FraudsterRegistrationJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FraudsterRegistrationJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.FraudsterRegistrationJob_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.FraudsterRegistrationJob_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.FraudsterRegistrationJob_DomainId, *v.DomainId)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.FraudsterRegistrationJob_EndedAt, *v.EndedAt)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.FraudsterRegistrationJob_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.FraudsterRegistrationJob_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.FraudsterRegistrationJob_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.FraudsterRegistrationJob_JobName, *v.JobName)
+	}
+	if v.JobProgress != nil {
+		s.WriteStruct(schemas.FraudsterRegistrationJob_JobProgress)
+		v.JobProgress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.FraudsterRegistrationJob_JobStatus, string(v.JobStatus))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.FraudsterRegistrationJob_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistrationConfig != nil {
+		s.WriteStruct(schemas.FraudsterRegistrationJob_RegistrationConfig)
+		v.RegistrationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FraudsterRegistrationJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FraudsterRegistrationJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FraudsterRegistrationJob_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.FraudsterRegistrationJob_CreatedAt, v.CreatedAt)
+		case schemas.FraudsterRegistrationJob_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.FraudsterRegistrationJob_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.FraudsterRegistrationJob_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.FraudsterRegistrationJob_DomainId, v.DomainId)
+		case schemas.FraudsterRegistrationJob_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.FraudsterRegistrationJob_EndedAt, v.EndedAt)
+		case schemas.FraudsterRegistrationJob_FailureDetails:
+			v.FailureDetails = &FailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.FraudsterRegistrationJob_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.FraudsterRegistrationJob_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.FraudsterRegistrationJob_JobId, v.JobId)
+		case schemas.FraudsterRegistrationJob_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.FraudsterRegistrationJob_JobName, v.JobName)
+		case schemas.FraudsterRegistrationJob_JobProgress:
+			v.JobProgress = &JobProgress{}
+			return v.JobProgress.Deserialize(d)
+		case schemas.FraudsterRegistrationJob_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.FraudsterRegistrationJob_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = FraudsterRegistrationJobStatus(ev)
+			return nil
+		case schemas.FraudsterRegistrationJob_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.FraudsterRegistrationJob_RegistrationConfig:
+			v.RegistrationConfig = &RegistrationConfig{}
+			return v.RegistrationConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains a summary of information about a fraudster registration job.
 type FraudsterRegistrationJobSummary struct {
 
@@ -362,6 +987,78 @@ type FraudsterRegistrationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FraudsterRegistrationJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FraudsterRegistrationJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FraudsterRegistrationJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.FraudsterRegistrationJobSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.FraudsterRegistrationJobSummary_DomainId, *v.DomainId)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.FraudsterRegistrationJobSummary_EndedAt, *v.EndedAt)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.FraudsterRegistrationJobSummary_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.FraudsterRegistrationJobSummary_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.FraudsterRegistrationJobSummary_JobName, *v.JobName)
+	}
+	if v.JobProgress != nil {
+		s.WriteStruct(schemas.FraudsterRegistrationJobSummary_JobProgress)
+		v.JobProgress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.FraudsterRegistrationJobSummary_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *FraudsterRegistrationJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FraudsterRegistrationJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FraudsterRegistrationJobSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.FraudsterRegistrationJobSummary_CreatedAt, v.CreatedAt)
+		case schemas.FraudsterRegistrationJobSummary_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.FraudsterRegistrationJobSummary_DomainId, v.DomainId)
+		case schemas.FraudsterRegistrationJobSummary_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.FraudsterRegistrationJobSummary_EndedAt, v.EndedAt)
+		case schemas.FraudsterRegistrationJobSummary_FailureDetails:
+			v.FailureDetails = &FailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.FraudsterRegistrationJobSummary_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.FraudsterRegistrationJobSummary_JobId, v.JobId)
+		case schemas.FraudsterRegistrationJobSummary_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.FraudsterRegistrationJobSummary_JobName, v.JobName)
+		case schemas.FraudsterRegistrationJobSummary_JobProgress:
+			v.JobProgress = &JobProgress{}
+			return v.JobProgress.Deserialize(d)
+		case schemas.FraudsterRegistrationJobSummary_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.FraudsterRegistrationJobSummary_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = FraudsterRegistrationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains a summary of information about a fraudster.
 type FraudsterSummary struct {
 
@@ -380,6 +1077,43 @@ type FraudsterSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FraudsterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FraudsterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FraudsterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.FraudsterSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.FraudsterSummary_DomainId, *v.DomainId)
+	}
+	if v.GeneratedFraudsterId != nil {
+		s.WriteString(schemas.FraudsterSummary_GeneratedFraudsterId, *v.GeneratedFraudsterId)
+	}
+	serializeResponseWatchlistIds(s, schemas.FraudsterSummary_WatchlistIds, v.WatchlistIds)
+}
+func (v *FraudsterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FraudsterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FraudsterSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.FraudsterSummary_CreatedAt, v.CreatedAt)
+		case schemas.FraudsterSummary_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.FraudsterSummary_DomainId, v.DomainId)
+		case schemas.FraudsterSummary_GeneratedFraudsterId:
+			v.GeneratedFraudsterId = new(string)
+			return d.ReadString(schemas.FraudsterSummary_GeneratedFraudsterId, v.GeneratedFraudsterId)
+		case schemas.FraudsterSummary_WatchlistIds:
+			return deserializeResponseWatchlistIds(d, schemas.FraudsterSummary_WatchlistIds, &v.WatchlistIds)
+		}
+		return nil
+	})
+}
+
 // The configuration containing input file information for a batch job.
 type InputDataConfig struct {
 
@@ -392,6 +1126,28 @@ type InputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.InputDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.InputDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // Indicates the completion progress for a batch job.
 type JobProgress struct {
 
@@ -400,6 +1156,28 @@ type JobProgress struct {
 	PercentComplete *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobProgress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobProgress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobProgress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PercentComplete != nil {
+		s.WriteInt32(schemas.JobProgress_PercentComplete, *v.PercentComplete)
+	}
+}
+func (v *JobProgress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobProgress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobProgress_PercentComplete:
+			v.PercentComplete = new(int32)
+			return d.ReadInt32(schemas.JobProgress_PercentComplete, v.PercentComplete)
+		}
+		return nil
+	})
 }
 
 // Contains details produced as a result of performing known fraudster risk
@@ -419,6 +1197,34 @@ type KnownFraudsterRisk struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KnownFraudsterRisk) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnownFraudsterRisk)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KnownFraudsterRisk) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeneratedFraudsterId != nil {
+		s.WriteString(schemas.KnownFraudsterRisk_GeneratedFraudsterId, *v.GeneratedFraudsterId)
+	}
+	if v.RiskScore != nil {
+		s.WriteInt32(schemas.KnownFraudsterRisk_RiskScore, *v.RiskScore)
+	}
+}
+func (v *KnownFraudsterRisk) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KnownFraudsterRisk, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KnownFraudsterRisk_GeneratedFraudsterId:
+			v.GeneratedFraudsterId = new(string)
+			return d.ReadString(schemas.KnownFraudsterRisk_GeneratedFraudsterId, v.GeneratedFraudsterId)
+		case schemas.KnownFraudsterRisk_RiskScore:
+			v.RiskScore = new(int32)
+			return d.ReadInt32(schemas.KnownFraudsterRisk_RiskScore, v.RiskScore)
+		}
+		return nil
+	})
+}
+
 // The configuration containing output file information for a batch job.
 type OutputDataConfig struct {
 
@@ -435,6 +1241,34 @@ type OutputDataConfig struct {
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.OutputDataConfig_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.OutputDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *OutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputDataConfig_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.OutputDataConfig_KmsKeyId, v.KmsKeyId)
+		case schemas.OutputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.OutputDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // The registration configuration to be used during the batch fraudster
@@ -458,6 +1292,41 @@ type RegistrationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegistrationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegistrationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegistrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DuplicateRegistrationAction != "" {
+		s.WriteString(schemas.RegistrationConfig_DuplicateRegistrationAction, string(v.DuplicateRegistrationAction))
+	}
+	if v.FraudsterSimilarityThreshold != nil {
+		s.WriteInt32(schemas.RegistrationConfig_FraudsterSimilarityThreshold, *v.FraudsterSimilarityThreshold)
+	}
+	serializeRegistrationConfigWatchlistIds(s, schemas.RegistrationConfig_WatchlistIds, v.WatchlistIds)
+}
+func (v *RegistrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegistrationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegistrationConfig_DuplicateRegistrationAction:
+			var ev string
+			if err := d.ReadString(schemas.RegistrationConfig_DuplicateRegistrationAction, &ev); err != nil {
+				return err
+			}
+			v.DuplicateRegistrationAction = DuplicateRegistrationAction(ev)
+			return nil
+		case schemas.RegistrationConfig_FraudsterSimilarityThreshold:
+			v.FraudsterSimilarityThreshold = new(int32)
+			return d.ReadInt32(schemas.RegistrationConfig_FraudsterSimilarityThreshold, v.FraudsterSimilarityThreshold)
+		case schemas.RegistrationConfig_WatchlistIds:
+			return deserializeRegistrationConfigWatchlistIds(d, schemas.RegistrationConfig_WatchlistIds, &v.WatchlistIds)
+		}
+		return nil
+	})
+}
+
 // The configuration containing information about the customer managed key used
 // for encrypting customer data.
 type ServerSideEncryptionConfiguration struct {
@@ -469,6 +1338,28 @@ type ServerSideEncryptionConfiguration struct {
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServerSideEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerSideEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerSideEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ServerSideEncryptionConfiguration_KmsKeyId, *v.KmsKeyId)
+	}
+}
+func (v *ServerSideEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerSideEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerSideEncryptionConfiguration_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.ServerSideEncryptionConfiguration_KmsKeyId, v.KmsKeyId)
+		}
+		return nil
+	})
 }
 
 // Details about the most recent server-side encryption configuration update. When
@@ -493,6 +1384,44 @@ type ServerSideEncryptionUpdateDetails struct {
 	UpdateStatus ServerSideEncryptionUpdateStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServerSideEncryptionUpdateDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerSideEncryptionUpdateDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerSideEncryptionUpdateDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServerSideEncryptionUpdateDetails_Message, *v.Message)
+	}
+	if v.OldKmsKeyId != nil {
+		s.WriteString(schemas.ServerSideEncryptionUpdateDetails_OldKmsKeyId, *v.OldKmsKeyId)
+	}
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.ServerSideEncryptionUpdateDetails_UpdateStatus, string(v.UpdateStatus))
+	}
+}
+func (v *ServerSideEncryptionUpdateDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerSideEncryptionUpdateDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerSideEncryptionUpdateDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServerSideEncryptionUpdateDetails_Message, v.Message)
+		case schemas.ServerSideEncryptionUpdateDetails_OldKmsKeyId:
+			v.OldKmsKeyId = new(string)
+			return d.ReadString(schemas.ServerSideEncryptionUpdateDetails_OldKmsKeyId, v.OldKmsKeyId)
+		case schemas.ServerSideEncryptionUpdateDetails_UpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.ServerSideEncryptionUpdateDetails_UpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.UpdateStatus = ServerSideEncryptionUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains all the information about a speaker.
@@ -522,6 +1451,68 @@ type Speaker struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *Speaker) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Speaker)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Speaker) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Speaker_CreatedAt, *v.CreatedAt)
+	}
+	if v.CustomerSpeakerId != nil {
+		s.WriteString(schemas.Speaker_CustomerSpeakerId, *v.CustomerSpeakerId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.Speaker_DomainId, *v.DomainId)
+	}
+	if v.GeneratedSpeakerId != nil {
+		s.WriteString(schemas.Speaker_GeneratedSpeakerId, *v.GeneratedSpeakerId)
+	}
+	if v.LastAccessedAt != nil {
+		s.WriteTime(schemas.Speaker_LastAccessedAt, *v.LastAccessedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Speaker_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Speaker_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *Speaker) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Speaker, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Speaker_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Speaker_CreatedAt, v.CreatedAt)
+		case schemas.Speaker_CustomerSpeakerId:
+			v.CustomerSpeakerId = new(string)
+			return d.ReadString(schemas.Speaker_CustomerSpeakerId, v.CustomerSpeakerId)
+		case schemas.Speaker_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.Speaker_DomainId, v.DomainId)
+		case schemas.Speaker_GeneratedSpeakerId:
+			v.GeneratedSpeakerId = new(string)
+			return d.ReadString(schemas.Speaker_GeneratedSpeakerId, v.GeneratedSpeakerId)
+		case schemas.Speaker_LastAccessedAt:
+			v.LastAccessedAt = new(time.Time)
+			return d.ReadTime(schemas.Speaker_LastAccessedAt, v.LastAccessedAt)
+		case schemas.Speaker_Status:
+			var ev string
+			if err := d.ReadString(schemas.Speaker_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SpeakerStatus(ev)
+			return nil
+		case schemas.Speaker_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Speaker_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // Contains all the information about a speaker enrollment job.
@@ -575,6 +1566,108 @@ type SpeakerEnrollmentJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SpeakerEnrollmentJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpeakerEnrollmentJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpeakerEnrollmentJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SpeakerEnrollmentJob_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.SpeakerEnrollmentJob_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.SpeakerEnrollmentJob_DomainId, *v.DomainId)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.SpeakerEnrollmentJob_EndedAt, *v.EndedAt)
+	}
+	if v.EnrollmentConfig != nil {
+		s.WriteStruct(schemas.SpeakerEnrollmentJob_EnrollmentConfig)
+		v.EnrollmentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.SpeakerEnrollmentJob_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.SpeakerEnrollmentJob_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.SpeakerEnrollmentJob_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.SpeakerEnrollmentJob_JobName, *v.JobName)
+	}
+	if v.JobProgress != nil {
+		s.WriteStruct(schemas.SpeakerEnrollmentJob_JobProgress)
+		v.JobProgress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.SpeakerEnrollmentJob_JobStatus, string(v.JobStatus))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.SpeakerEnrollmentJob_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SpeakerEnrollmentJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpeakerEnrollmentJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpeakerEnrollmentJob_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SpeakerEnrollmentJob_CreatedAt, v.CreatedAt)
+		case schemas.SpeakerEnrollmentJob_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.SpeakerEnrollmentJob_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.SpeakerEnrollmentJob_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.SpeakerEnrollmentJob_DomainId, v.DomainId)
+		case schemas.SpeakerEnrollmentJob_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.SpeakerEnrollmentJob_EndedAt, v.EndedAt)
+		case schemas.SpeakerEnrollmentJob_EnrollmentConfig:
+			v.EnrollmentConfig = &EnrollmentConfig{}
+			return v.EnrollmentConfig.Deserialize(d)
+		case schemas.SpeakerEnrollmentJob_FailureDetails:
+			v.FailureDetails = &FailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.SpeakerEnrollmentJob_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.SpeakerEnrollmentJob_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.SpeakerEnrollmentJob_JobId, v.JobId)
+		case schemas.SpeakerEnrollmentJob_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.SpeakerEnrollmentJob_JobName, v.JobName)
+		case schemas.SpeakerEnrollmentJob_JobProgress:
+			v.JobProgress = &JobProgress{}
+			return v.JobProgress.Deserialize(d)
+		case schemas.SpeakerEnrollmentJob_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.SpeakerEnrollmentJob_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = SpeakerEnrollmentJobStatus(ev)
+			return nil
+		case schemas.SpeakerEnrollmentJob_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains a summary of information about a speaker enrollment job.
 type SpeakerEnrollmentJobSummary struct {
 
@@ -609,6 +1702,78 @@ type SpeakerEnrollmentJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SpeakerEnrollmentJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpeakerEnrollmentJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpeakerEnrollmentJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SpeakerEnrollmentJobSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.SpeakerEnrollmentJobSummary_DomainId, *v.DomainId)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.SpeakerEnrollmentJobSummary_EndedAt, *v.EndedAt)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.SpeakerEnrollmentJobSummary_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.SpeakerEnrollmentJobSummary_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.SpeakerEnrollmentJobSummary_JobName, *v.JobName)
+	}
+	if v.JobProgress != nil {
+		s.WriteStruct(schemas.SpeakerEnrollmentJobSummary_JobProgress)
+		v.JobProgress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.SpeakerEnrollmentJobSummary_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *SpeakerEnrollmentJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpeakerEnrollmentJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpeakerEnrollmentJobSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SpeakerEnrollmentJobSummary_CreatedAt, v.CreatedAt)
+		case schemas.SpeakerEnrollmentJobSummary_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.SpeakerEnrollmentJobSummary_DomainId, v.DomainId)
+		case schemas.SpeakerEnrollmentJobSummary_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.SpeakerEnrollmentJobSummary_EndedAt, v.EndedAt)
+		case schemas.SpeakerEnrollmentJobSummary_FailureDetails:
+			v.FailureDetails = &FailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.SpeakerEnrollmentJobSummary_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.SpeakerEnrollmentJobSummary_JobId, v.JobId)
+		case schemas.SpeakerEnrollmentJobSummary_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.SpeakerEnrollmentJobSummary_JobName, v.JobName)
+		case schemas.SpeakerEnrollmentJobSummary_JobProgress:
+			v.JobProgress = &JobProgress{}
+			return v.JobProgress.Deserialize(d)
+		case schemas.SpeakerEnrollmentJobSummary_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.SpeakerEnrollmentJobSummary_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = SpeakerEnrollmentJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains a summary of information about a speaker.
 type SpeakerSummary struct {
 
@@ -637,6 +1802,68 @@ type SpeakerSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SpeakerSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpeakerSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpeakerSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SpeakerSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.CustomerSpeakerId != nil {
+		s.WriteString(schemas.SpeakerSummary_CustomerSpeakerId, *v.CustomerSpeakerId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.SpeakerSummary_DomainId, *v.DomainId)
+	}
+	if v.GeneratedSpeakerId != nil {
+		s.WriteString(schemas.SpeakerSummary_GeneratedSpeakerId, *v.GeneratedSpeakerId)
+	}
+	if v.LastAccessedAt != nil {
+		s.WriteTime(schemas.SpeakerSummary_LastAccessedAt, *v.LastAccessedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SpeakerSummary_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.SpeakerSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *SpeakerSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpeakerSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpeakerSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SpeakerSummary_CreatedAt, v.CreatedAt)
+		case schemas.SpeakerSummary_CustomerSpeakerId:
+			v.CustomerSpeakerId = new(string)
+			return d.ReadString(schemas.SpeakerSummary_CustomerSpeakerId, v.CustomerSpeakerId)
+		case schemas.SpeakerSummary_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.SpeakerSummary_DomainId, v.DomainId)
+		case schemas.SpeakerSummary_GeneratedSpeakerId:
+			v.GeneratedSpeakerId = new(string)
+			return d.ReadString(schemas.SpeakerSummary_GeneratedSpeakerId, v.GeneratedSpeakerId)
+		case schemas.SpeakerSummary_LastAccessedAt:
+			v.LastAccessedAt = new(time.Time)
+			return d.ReadTime(schemas.SpeakerSummary_LastAccessedAt, v.LastAccessedAt)
+		case schemas.SpeakerSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.SpeakerSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SpeakerStatus(ev)
+			return nil
+		case schemas.SpeakerSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.SpeakerSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The tags used to organize, track, or control access for this resource. For
 // example, { "tags": {"key1":"value1", "key2":"value2"} }.
 type Tag struct {
@@ -656,6 +1883,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The details resulting from 'Voice Spoofing Risk' analysis of the speaker.
 type VoiceSpoofingRisk struct {
 
@@ -665,6 +1920,28 @@ type VoiceSpoofingRisk struct {
 	RiskScore *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VoiceSpoofingRisk) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceSpoofingRisk)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceSpoofingRisk) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RiskScore != nil {
+		s.WriteInt32(schemas.VoiceSpoofingRisk_RiskScore, *v.RiskScore)
+	}
+}
+func (v *VoiceSpoofingRisk) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceSpoofingRisk, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceSpoofingRisk_RiskScore:
+			v.RiskScore = new(int32)
+			return d.ReadInt32(schemas.VoiceSpoofingRisk_RiskScore, v.RiskScore)
+		}
+		return nil
+	})
 }
 
 // Contains all the information about a watchlist.
@@ -694,6 +1971,63 @@ type Watchlist struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Watchlist) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Watchlist)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Watchlist) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Watchlist_CreatedAt, *v.CreatedAt)
+	}
+	if v.DefaultWatchlist != false {
+		s.WriteBool(schemas.Watchlist_DefaultWatchlist, v.DefaultWatchlist)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Watchlist_Description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.Watchlist_DomainId, *v.DomainId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Watchlist_Name, *v.Name)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Watchlist_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.WatchlistId != nil {
+		s.WriteString(schemas.Watchlist_WatchlistId, *v.WatchlistId)
+	}
+}
+func (v *Watchlist) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Watchlist, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Watchlist_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Watchlist_CreatedAt, v.CreatedAt)
+		case schemas.Watchlist_DefaultWatchlist:
+			return d.ReadBool(schemas.Watchlist_DefaultWatchlist, &v.DefaultWatchlist)
+		case schemas.Watchlist_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Watchlist_Description, v.Description)
+		case schemas.Watchlist_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.Watchlist_DomainId, v.DomainId)
+		case schemas.Watchlist_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Watchlist_Name, v.Name)
+		case schemas.Watchlist_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Watchlist_UpdatedAt, v.UpdatedAt)
+		case schemas.Watchlist_WatchlistId:
+			v.WatchlistId = new(string)
+			return d.ReadString(schemas.Watchlist_WatchlistId, v.WatchlistId)
+		}
+		return nil
+	})
+}
+
 // Details of the watchlists in a domain.
 type WatchlistDetails struct {
 
@@ -703,6 +2037,28 @@ type WatchlistDetails struct {
 	DefaultWatchlistId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WatchlistDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WatchlistDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WatchlistDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultWatchlistId != nil {
+		s.WriteString(schemas.WatchlistDetails_DefaultWatchlistId, *v.DefaultWatchlistId)
+	}
+}
+func (v *WatchlistDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WatchlistDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WatchlistDetails_DefaultWatchlistId:
+			v.DefaultWatchlistId = new(string)
+			return d.ReadString(schemas.WatchlistDetails_DefaultWatchlistId, v.DefaultWatchlistId)
+		}
+		return nil
+	})
 }
 
 // Contains a summary of information about a watchlist.
@@ -730,6 +2086,63 @@ type WatchlistSummary struct {
 	WatchlistId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WatchlistSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WatchlistSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WatchlistSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.WatchlistSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DefaultWatchlist != false {
+		s.WriteBool(schemas.WatchlistSummary_DefaultWatchlist, v.DefaultWatchlist)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WatchlistSummary_Description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.WatchlistSummary_DomainId, *v.DomainId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WatchlistSummary_Name, *v.Name)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.WatchlistSummary_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.WatchlistId != nil {
+		s.WriteString(schemas.WatchlistSummary_WatchlistId, *v.WatchlistId)
+	}
+}
+func (v *WatchlistSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WatchlistSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WatchlistSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.WatchlistSummary_CreatedAt, v.CreatedAt)
+		case schemas.WatchlistSummary_DefaultWatchlist:
+			return d.ReadBool(schemas.WatchlistSummary_DefaultWatchlist, &v.DefaultWatchlist)
+		case schemas.WatchlistSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WatchlistSummary_Description, v.Description)
+		case schemas.WatchlistSummary_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.WatchlistSummary_DomainId, v.DomainId)
+		case schemas.WatchlistSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WatchlistSummary_Name, v.Name)
+		case schemas.WatchlistSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.WatchlistSummary_UpdatedAt, v.UpdatedAt)
+		case schemas.WatchlistSummary_WatchlistId:
+			v.WatchlistId = new(string)
+			return d.ReadString(schemas.WatchlistSummary_WatchlistId, v.WatchlistId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

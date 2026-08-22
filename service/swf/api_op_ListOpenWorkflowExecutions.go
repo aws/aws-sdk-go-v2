@@ -5,7 +5,9 @@ package swf
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -111,6 +113,47 @@ type ListOpenWorkflowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpenWorkflowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpenWorkflowExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpenWorkflowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.ListOpenWorkflowExecutionsInput_domain, *v.Domain)
+	}
+	if v.ExecutionFilter != nil {
+		s.WriteStruct(schemas.ListOpenWorkflowExecutionsInput_executionFilter)
+		v.ExecutionFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumPageSize != 0 {
+		s.WriteInt32(schemas.ListOpenWorkflowExecutionsInput_maximumPageSize, v.MaximumPageSize)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListOpenWorkflowExecutionsInput_nextPageToken, *v.NextPageToken)
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.ListOpenWorkflowExecutionsInput_reverseOrder, v.ReverseOrder)
+	}
+	if v.StartTimeFilter != nil {
+		s.WriteStruct(schemas.ListOpenWorkflowExecutionsInput_startTimeFilter)
+		v.StartTimeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TagFilter != nil {
+		s.WriteStruct(schemas.ListOpenWorkflowExecutionsInput_tagFilter)
+		v.TagFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeFilter != nil {
+		s.WriteStruct(schemas.ListOpenWorkflowExecutionsInput_typeFilter)
+		v.TypeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains a paginated list of information about workflow executions.
 type ListOpenWorkflowExecutionsOutput struct {
 
@@ -133,13 +176,35 @@ type ListOpenWorkflowExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpenWorkflowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionInfos)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpenWorkflowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkflowExecutionInfoList(s, schemas.WorkflowExecutionInfos_executionInfos, v.ExecutionInfos)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.WorkflowExecutionInfos_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *ListOpenWorkflowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionInfos, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionInfos_executionInfos:
+			return deserializeWorkflowExecutionInfoList(d, schemas.WorkflowExecutionInfos_executionInfos, &v.ExecutionInfos)
+		case schemas.WorkflowExecutionInfos_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.WorkflowExecutionInfos_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOpenWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListOpenWorkflowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpenWorkflowExecutions, schemas.ListOpenWorkflowExecutionsInput, schemas.WorkflowExecutionInfos)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListOpenWorkflowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpenWorkflowExecutions, schemas.ListOpenWorkflowExecutionsInput, schemas.WorkflowExecutionInfos), output: &ListOpenWorkflowExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

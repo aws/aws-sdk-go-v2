@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -18,6 +20,38 @@ type ConnectionState struct {
 	Status ConnectionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectionState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ConnectionState_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ConnectionState_status, string(v.Status))
+	}
+}
+func (v *ConnectionState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionState_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectionState_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ConnectionState_status:
+			var ev string
+			if err := d.ReadString(schemas.ConnectionState_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ConnectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The destination configuration.
@@ -37,6 +71,31 @@ type DestinationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DestinationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceList(s, schemas.DestinationConfig_services, v.Services)
+	if v.ThingName != nil {
+		s.WriteString(schemas.DestinationConfig_thingName, *v.ThingName)
+	}
+}
+func (v *DestinationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationConfig_services:
+			return deserializeServiceList(d, schemas.DestinationConfig_services, &v.Services)
+		case schemas.DestinationConfig_thingName:
+			v.ThingName = new(string)
+			return d.ReadString(schemas.DestinationConfig_thingName, v.ThingName)
+		}
+		return nil
+	})
+}
+
 // An arbitary key/value pair used to add searchable metadata to secure tunnel
 // resources.
 type Tag struct {
@@ -54,6 +113,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Tunnel timeout configuration.
 type TimeoutConfig struct {
 
@@ -63,6 +150,28 @@ type TimeoutConfig struct {
 	MaxLifetimeTimeoutMinutes *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeoutConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeoutConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeoutConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxLifetimeTimeoutMinutes != nil {
+		s.WriteInt32(schemas.TimeoutConfig_maxLifetimeTimeoutMinutes, *v.MaxLifetimeTimeoutMinutes)
+	}
+}
+func (v *TimeoutConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeoutConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeoutConfig_maxLifetimeTimeoutMinutes:
+			v.MaxLifetimeTimeoutMinutes = new(int32)
+			return d.ReadInt32(schemas.TimeoutConfig_maxLifetimeTimeoutMinutes, v.MaxLifetimeTimeoutMinutes)
+		}
+		return nil
+	})
 }
 
 // A connection between a source computer and a destination device.
@@ -106,6 +215,97 @@ type Tunnel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tunnel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tunnel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tunnel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Tunnel_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Tunnel_description, *v.Description)
+	}
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.Tunnel_destinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationConnectionState != nil {
+		s.WriteStruct(schemas.Tunnel_destinationConnectionState)
+		v.DestinationConnectionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.Tunnel_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.SourceConnectionState != nil {
+		s.WriteStruct(schemas.Tunnel_sourceConnectionState)
+		v.SourceConnectionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Tunnel_status, string(v.Status))
+	}
+	serializeTagList(s, schemas.Tunnel_tags, v.Tags)
+	if v.TimeoutConfig != nil {
+		s.WriteStruct(schemas.Tunnel_timeoutConfig)
+		v.TimeoutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TunnelArn != nil {
+		s.WriteString(schemas.Tunnel_tunnelArn, *v.TunnelArn)
+	}
+	if v.TunnelId != nil {
+		s.WriteString(schemas.Tunnel_tunnelId, *v.TunnelId)
+	}
+}
+func (v *Tunnel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tunnel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tunnel_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Tunnel_createdAt, v.CreatedAt)
+		case schemas.Tunnel_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Tunnel_description, v.Description)
+		case schemas.Tunnel_destinationConfig:
+			v.DestinationConfig = &DestinationConfig{}
+			return v.DestinationConfig.Deserialize(d)
+		case schemas.Tunnel_destinationConnectionState:
+			v.DestinationConnectionState = &ConnectionState{}
+			return v.DestinationConnectionState.Deserialize(d)
+		case schemas.Tunnel_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Tunnel_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.Tunnel_sourceConnectionState:
+			v.SourceConnectionState = &ConnectionState{}
+			return v.SourceConnectionState.Deserialize(d)
+		case schemas.Tunnel_status:
+			var ev string
+			if err := d.ReadString(schemas.Tunnel_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TunnelStatus(ev)
+			return nil
+		case schemas.Tunnel_tags:
+			return deserializeTagList(d, schemas.Tunnel_tags, &v.Tags)
+		case schemas.Tunnel_timeoutConfig:
+			v.TimeoutConfig = &TimeoutConfig{}
+			return v.TimeoutConfig.Deserialize(d)
+		case schemas.Tunnel_tunnelArn:
+			v.TunnelArn = new(string)
+			return d.ReadString(schemas.Tunnel_tunnelArn, v.TunnelArn)
+		case schemas.Tunnel_tunnelId:
+			v.TunnelId = new(string)
+			return d.ReadString(schemas.Tunnel_tunnelId, v.TunnelId)
+		}
+		return nil
+	})
+}
+
 // Information about the tunnel.
 type TunnelSummary struct {
 
@@ -128,6 +328,62 @@ type TunnelSummary struct {
 	TunnelId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TunnelSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TunnelSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TunnelSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.TunnelSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TunnelSummary_description, *v.Description)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.TunnelSummary_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TunnelSummary_status, string(v.Status))
+	}
+	if v.TunnelArn != nil {
+		s.WriteString(schemas.TunnelSummary_tunnelArn, *v.TunnelArn)
+	}
+	if v.TunnelId != nil {
+		s.WriteString(schemas.TunnelSummary_tunnelId, *v.TunnelId)
+	}
+}
+func (v *TunnelSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TunnelSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TunnelSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.TunnelSummary_createdAt, v.CreatedAt)
+		case schemas.TunnelSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TunnelSummary_description, v.Description)
+		case schemas.TunnelSummary_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.TunnelSummary_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.TunnelSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.TunnelSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TunnelStatus(ev)
+			return nil
+		case schemas.TunnelSummary_tunnelArn:
+			v.TunnelArn = new(string)
+			return d.ReadString(schemas.TunnelSummary_tunnelArn, v.TunnelArn)
+		case schemas.TunnelSummary_tunnelId:
+			v.TunnelId = new(string)
+			return d.ReadString(schemas.TunnelSummary_tunnelId, v.TunnelId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,30 @@ type GetEventPredictionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventPredictionMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventPredictionMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventPredictionMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataRequest_detectorId, *v.DetectorId)
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataRequest_detectorVersionId, *v.DetectorVersionId)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataRequest_eventId, *v.EventId)
+	}
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataRequest_eventTypeName, *v.EventTypeName)
+	}
+	if v.PredictionTimestamp != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataRequest_predictionTimestamp, *v.PredictionTimestamp)
+	}
+}
+
 type GetEventPredictionMetadataOutput struct {
 
 	//  The detector ID.
@@ -119,13 +145,105 @@ type GetEventPredictionMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventPredictionMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventPredictionMetadataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventPredictionMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_detectorId, *v.DetectorId)
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_detectorVersionId, *v.DetectorVersionId)
+	}
+	if v.DetectorVersionStatus != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_detectorVersionStatus, *v.DetectorVersionStatus)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_entityId, *v.EntityId)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_entityType, *v.EntityType)
+	}
+	serializeListOfEvaluatedExternalModels(s, schemas.GetEventPredictionMetadataResult_evaluatedExternalModels, v.EvaluatedExternalModels)
+	serializeListOfEvaluatedModelVersions(s, schemas.GetEventPredictionMetadataResult_evaluatedModelVersions, v.EvaluatedModelVersions)
+	if v.EventId != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_eventId, *v.EventId)
+	}
+	if v.EventTimestamp != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_eventTimestamp, *v.EventTimestamp)
+	}
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_eventTypeName, *v.EventTypeName)
+	}
+	serializeListOfEventVariableSummaries(s, schemas.GetEventPredictionMetadataResult_eventVariables, v.EventVariables)
+	serializeListOfStrings(s, schemas.GetEventPredictionMetadataResult_outcomes, v.Outcomes)
+	if v.PredictionTimestamp != nil {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_predictionTimestamp, *v.PredictionTimestamp)
+	}
+	if v.RuleExecutionMode != "" {
+		s.WriteString(schemas.GetEventPredictionMetadataResult_ruleExecutionMode, string(v.RuleExecutionMode))
+	}
+	serializeEvaluatedRuleList(s, schemas.GetEventPredictionMetadataResult_rules, v.Rules)
+}
+func (v *GetEventPredictionMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEventPredictionMetadataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEventPredictionMetadataResult_detectorId:
+			v.DetectorId = new(string)
+			return d.ReadString(schemas.GetEventPredictionMetadataResult_detectorId, v.DetectorId)
+		case schemas.GetEventPredictionMetadataResult_detectorVersionId:
+			v.DetectorVersionId = new(string)
+			return d.ReadString(schemas.GetEventPredictionMetadataResult_detectorVersionId, v.DetectorVersionId)
+		case schemas.GetEventPredictionMetadataResult_detectorVersionStatus:
+			v.DetectorVersionStatus = new(string)
+			return d.ReadString(schemas.GetEventPredictionMetadataResult_detectorVersionStatus, v.DetectorVersionStatus)
+		case schemas.GetEventPredictionMetadataResult_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.GetEventPredictionMetadataResult_entityId, v.EntityId)
+		case schemas.GetEventPredictionMetadataResult_entityType:
+			v.EntityType = new(string)
+			return d.ReadString(schemas.GetEventPredictionMetadataResult_entityType, v.EntityType)
+		case schemas.GetEventPredictionMetadataResult_evaluatedExternalModels:
+			return deserializeListOfEvaluatedExternalModels(d, schemas.GetEventPredictionMetadataResult_evaluatedExternalModels, &v.EvaluatedExternalModels)
+		case schemas.GetEventPredictionMetadataResult_evaluatedModelVersions:
+			return deserializeListOfEvaluatedModelVersions(d, schemas.GetEventPredictionMetadataResult_evaluatedModelVersions, &v.EvaluatedModelVersions)
+		case schemas.GetEventPredictionMetadataResult_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.GetEventPredictionMetadataResult_eventId, v.EventId)
+		case schemas.GetEventPredictionMetadataResult_eventTimestamp:
+			v.EventTimestamp = new(string)
+			return d.ReadString(schemas.GetEventPredictionMetadataResult_eventTimestamp, v.EventTimestamp)
+		case schemas.GetEventPredictionMetadataResult_eventTypeName:
+			v.EventTypeName = new(string)
+			return d.ReadString(schemas.GetEventPredictionMetadataResult_eventTypeName, v.EventTypeName)
+		case schemas.GetEventPredictionMetadataResult_eventVariables:
+			return deserializeListOfEventVariableSummaries(d, schemas.GetEventPredictionMetadataResult_eventVariables, &v.EventVariables)
+		case schemas.GetEventPredictionMetadataResult_outcomes:
+			return deserializeListOfStrings(d, schemas.GetEventPredictionMetadataResult_outcomes, &v.Outcomes)
+		case schemas.GetEventPredictionMetadataResult_predictionTimestamp:
+			v.PredictionTimestamp = new(string)
+			return d.ReadString(schemas.GetEventPredictionMetadataResult_predictionTimestamp, v.PredictionTimestamp)
+		case schemas.GetEventPredictionMetadataResult_ruleExecutionMode:
+			var ev string
+			if err := d.ReadString(schemas.GetEventPredictionMetadataResult_ruleExecutionMode, &ev); err != nil {
+				return err
+			}
+			v.RuleExecutionMode = types.RuleExecutionMode(ev)
+			return nil
+		case schemas.GetEventPredictionMetadataResult_rules:
+			return deserializeEvaluatedRuleList(d, schemas.GetEventPredictionMetadataResult_rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventPredictionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEventPredictionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventPredictionMetadata, schemas.GetEventPredictionMetadataRequest, schemas.GetEventPredictionMetadataResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetEventPredictionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventPredictionMetadata, schemas.GetEventPredictionMetadataRequest, schemas.GetEventPredictionMetadataResult), output: &GetEventPredictionMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

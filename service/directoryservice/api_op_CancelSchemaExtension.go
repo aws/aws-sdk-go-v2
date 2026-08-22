@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type CancelSchemaExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSchemaExtensionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSchemaExtensionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSchemaExtensionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CancelSchemaExtensionRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.SchemaExtensionId != nil {
+		s.WriteString(schemas.CancelSchemaExtensionRequest_SchemaExtensionId, *v.SchemaExtensionId)
+	}
+}
+
 type CancelSchemaExtensionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type CancelSchemaExtensionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSchemaExtensionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSchemaExtensionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSchemaExtensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelSchemaExtensionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelSchemaExtensionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelSchemaExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelSchemaExtension{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSchemaExtension, schemas.CancelSchemaExtensionRequest, schemas.CancelSchemaExtensionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelSchemaExtension{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSchemaExtension, schemas.CancelSchemaExtensionRequest, schemas.CancelSchemaExtensionResult), output: &CancelSchemaExtensionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

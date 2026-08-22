@@ -4,6 +4,8 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteDomainVerificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainVerificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainVerificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainVerificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainVerificationIdentifier != nil {
+		s.WriteString(schemas.DeleteDomainVerificationRequest_domainVerificationIdentifier, *v.DomainVerificationIdentifier)
+	}
+}
+
 type DeleteDomainVerificationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteDomainVerificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainVerificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainVerificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainVerificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDomainVerificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDomainVerificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDomainVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomainVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainVerification, schemas.DeleteDomainVerificationRequest, schemas.DeleteDomainVerificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDomainVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainVerification, schemas.DeleteDomainVerificationRequest, schemas.DeleteDomainVerificationResponse), output: &DeleteDomainVerificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

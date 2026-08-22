@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -81,6 +83,24 @@ type GetParametersForImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersForImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersForImportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersForImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyMaterialType != "" {
+		s.WriteString(schemas.GetParametersForImportInput_KeyMaterialType, string(v.KeyMaterialType))
+	}
+	if v.ReuseLastGeneratedToken != nil {
+		s.WriteBool(schemas.GetParametersForImportInput_ReuseLastGeneratedToken, *v.ReuseLastGeneratedToken)
+	}
+	if v.WrappingKeyAlgorithm != "" {
+		s.WriteString(schemas.GetParametersForImportInput_WrappingKeyAlgorithm, string(v.WrappingKeyAlgorithm))
+	}
+}
+
 type GetParametersForImportOutput struct {
 
 	// The import token to initiate key import into Amazon Web Services Payment
@@ -119,13 +139,60 @@ type GetParametersForImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersForImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersForImportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersForImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportToken != nil {
+		s.WriteString(schemas.GetParametersForImportOutput_ImportToken, *v.ImportToken)
+	}
+	if v.ParametersValidUntilTimestamp != nil {
+		s.WriteTime(schemas.GetParametersForImportOutput_ParametersValidUntilTimestamp, *v.ParametersValidUntilTimestamp)
+	}
+	if v.WrappingKeyAlgorithm != "" {
+		s.WriteString(schemas.GetParametersForImportOutput_WrappingKeyAlgorithm, string(v.WrappingKeyAlgorithm))
+	}
+	if v.WrappingKeyCertificate != nil {
+		s.WriteString(schemas.GetParametersForImportOutput_WrappingKeyCertificate, *v.WrappingKeyCertificate)
+	}
+	if v.WrappingKeyCertificateChain != nil {
+		s.WriteString(schemas.GetParametersForImportOutput_WrappingKeyCertificateChain, *v.WrappingKeyCertificateChain)
+	}
+}
+func (v *GetParametersForImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParametersForImportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParametersForImportOutput_ImportToken:
+			v.ImportToken = new(string)
+			return d.ReadString(schemas.GetParametersForImportOutput_ImportToken, v.ImportToken)
+		case schemas.GetParametersForImportOutput_ParametersValidUntilTimestamp:
+			v.ParametersValidUntilTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetParametersForImportOutput_ParametersValidUntilTimestamp, v.ParametersValidUntilTimestamp)
+		case schemas.GetParametersForImportOutput_WrappingKeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.GetParametersForImportOutput_WrappingKeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.WrappingKeyAlgorithm = types.KeyAlgorithm(ev)
+			return nil
+		case schemas.GetParametersForImportOutput_WrappingKeyCertificate:
+			v.WrappingKeyCertificate = new(string)
+			return d.ReadString(schemas.GetParametersForImportOutput_WrappingKeyCertificate, v.WrappingKeyCertificate)
+		case schemas.GetParametersForImportOutput_WrappingKeyCertificateChain:
+			v.WrappingKeyCertificateChain = new(string)
+			return d.ReadString(schemas.GetParametersForImportOutput_WrappingKeyCertificateChain, v.WrappingKeyCertificateChain)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParametersForImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetParametersForImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersForImport, schemas.GetParametersForImportInput, schemas.GetParametersForImportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetParametersForImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersForImport, schemas.GetParametersForImportInput, schemas.GetParametersForImportOutput), output: &GetParametersForImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type PutLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLifecyclePolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.PutLifecyclePolicyInput_ContainerName, *v.ContainerName)
+	}
+	if v.LifecyclePolicy != nil {
+		s.WriteString(schemas.PutLifecyclePolicyInput_LifecyclePolicy, *v.LifecyclePolicy)
+	}
+}
+
 type PutLifecyclePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +69,26 @@ type PutLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLifecyclePolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLifecyclePolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecyclePolicy, schemas.PutLifecyclePolicyInput, schemas.PutLifecyclePolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecyclePolicy, schemas.PutLifecyclePolicyInput, schemas.PutLifecyclePolicyOutput), output: &PutLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

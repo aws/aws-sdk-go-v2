@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,22 @@ type DescribeFileSystemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileSystemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileSystemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileSystemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileSystemIds(s, schemas.DescribeFileSystemsRequest_FileSystemIds, v.FileSystemIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeFileSystemsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFileSystemsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // The response object for DescribeFileSystems operation.
 type DescribeFileSystemsOutput struct {
 
@@ -84,13 +102,35 @@ type DescribeFileSystemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileSystemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileSystemsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileSystemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileSystems(s, schemas.DescribeFileSystemsResponse_FileSystems, v.FileSystems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFileSystemsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFileSystemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFileSystemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFileSystemsResponse_FileSystems:
+			return deserializeFileSystems(d, schemas.DescribeFileSystemsResponse_FileSystems, &v.FileSystems)
+		case schemas.DescribeFileSystemsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFileSystemsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFileSystems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileSystems, schemas.DescribeFileSystemsRequest, schemas.DescribeFileSystemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFileSystems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileSystems, schemas.DescribeFileSystemsRequest, schemas.DescribeFileSystemsResponse), output: &DescribeFileSystemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

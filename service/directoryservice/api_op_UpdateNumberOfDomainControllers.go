@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type UpdateNumberOfDomainControllersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNumberOfDomainControllersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNumberOfDomainControllersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNumberOfDomainControllersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredNumber != nil {
+		s.WriteInt32(schemas.UpdateNumberOfDomainControllersRequest_DesiredNumber, *v.DesiredNumber)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateNumberOfDomainControllersRequest_DirectoryId, *v.DirectoryId)
+	}
+}
+
 type UpdateNumberOfDomainControllersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type UpdateNumberOfDomainControllersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNumberOfDomainControllersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNumberOfDomainControllersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNumberOfDomainControllersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateNumberOfDomainControllersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNumberOfDomainControllersResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNumberOfDomainControllersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNumberOfDomainControllers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNumberOfDomainControllers, schemas.UpdateNumberOfDomainControllersRequest, schemas.UpdateNumberOfDomainControllersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateNumberOfDomainControllers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNumberOfDomainControllers, schemas.UpdateNumberOfDomainControllersRequest, schemas.UpdateNumberOfDomainControllersResult), output: &UpdateNumberOfDomainControllersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

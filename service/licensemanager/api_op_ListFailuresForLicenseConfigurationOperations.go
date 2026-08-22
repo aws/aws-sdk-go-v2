@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListFailuresForLicenseConfigurationOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFailuresForLicenseConfigurationOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFailuresForLicenseConfigurationOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFailuresForLicenseConfigurationOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseConfigurationArn != nil {
+		s.WriteString(schemas.ListFailuresForLicenseConfigurationOperationsRequest_LicenseConfigurationArn, *v.LicenseConfigurationArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFailuresForLicenseConfigurationOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFailuresForLicenseConfigurationOperationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFailuresForLicenseConfigurationOperationsOutput struct {
 
 	// License configuration operations that failed.
@@ -54,13 +74,35 @@ type ListFailuresForLicenseConfigurationOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFailuresForLicenseConfigurationOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFailuresForLicenseConfigurationOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFailuresForLicenseConfigurationOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLicenseOperationFailureList(s, schemas.ListFailuresForLicenseConfigurationOperationsResponse_LicenseOperationFailureList, v.LicenseOperationFailureList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFailuresForLicenseConfigurationOperationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFailuresForLicenseConfigurationOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFailuresForLicenseConfigurationOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFailuresForLicenseConfigurationOperationsResponse_LicenseOperationFailureList:
+			return deserializeLicenseOperationFailureList(d, schemas.ListFailuresForLicenseConfigurationOperationsResponse_LicenseOperationFailureList, &v.LicenseOperationFailureList)
+		case schemas.ListFailuresForLicenseConfigurationOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFailuresForLicenseConfigurationOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFailuresForLicenseConfigurationOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFailuresForLicenseConfigurationOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailuresForLicenseConfigurationOperations, schemas.ListFailuresForLicenseConfigurationOperationsRequest, schemas.ListFailuresForLicenseConfigurationOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFailuresForLicenseConfigurationOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailuresForLicenseConfigurationOperations, schemas.ListFailuresForLicenseConfigurationOperationsRequest, schemas.ListFailuresForLicenseConfigurationOperationsResponse), output: &ListFailuresForLicenseConfigurationOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

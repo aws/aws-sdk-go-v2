@@ -4,7 +4,9 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetSubscriptionStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetSubscriptionStateOutput struct {
 
 	// The status of the subscription.
@@ -41,13 +52,36 @@ type GetSubscriptionStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionStateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionState != "" {
+		s.WriteString(schemas.GetSubscriptionStateResponse_SubscriptionState, string(v.SubscriptionState))
+	}
+}
+func (v *GetSubscriptionStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSubscriptionStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSubscriptionStateResponse_SubscriptionState:
+			var ev string
+			if err := d.ReadString(schemas.GetSubscriptionStateResponse_SubscriptionState, &ev); err != nil {
+				return err
+			}
+			v.SubscriptionState = types.SubscriptionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSubscriptionStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSubscriptionState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionState, schemas.GetSubscriptionStateRequest, schemas.GetSubscriptionStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSubscriptionState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionState, schemas.GetSubscriptionStateRequest, schemas.GetSubscriptionStateResponse), output: &GetSubscriptionStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

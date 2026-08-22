@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,25 @@ type GetConnectPeerAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectPeerAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectPeerAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectPeerAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectPeerIdList(s, schemas.GetConnectPeerAssociationsRequest_ConnectPeerIds, v.ConnectPeerIds)
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetConnectPeerAssociationsRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetConnectPeerAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetConnectPeerAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetConnectPeerAssociationsOutput struct {
 
 	// Displays a list of Connect peer associations.
@@ -58,13 +79,35 @@ type GetConnectPeerAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectPeerAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectPeerAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectPeerAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectPeerAssociationList(s, schemas.GetConnectPeerAssociationsResponse_ConnectPeerAssociations, v.ConnectPeerAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetConnectPeerAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetConnectPeerAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectPeerAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectPeerAssociationsResponse_ConnectPeerAssociations:
+			return deserializeConnectPeerAssociationList(d, schemas.GetConnectPeerAssociationsResponse_ConnectPeerAssociations, &v.ConnectPeerAssociations)
+		case schemas.GetConnectPeerAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetConnectPeerAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectPeerAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectPeerAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectPeerAssociations, schemas.GetConnectPeerAssociationsRequest, schemas.GetConnectPeerAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnectPeerAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectPeerAssociations, schemas.GetConnectPeerAssociationsRequest, schemas.GetConnectPeerAssociationsResponse), output: &GetConnectPeerAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

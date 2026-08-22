@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteExternalModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExternalModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExternalModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExternalModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelEndpoint != nil {
+		s.WriteString(schemas.DeleteExternalModelRequest_modelEndpoint, *v.ModelEndpoint)
+	}
+}
+
 type DeleteExternalModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteExternalModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExternalModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExternalModelResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExternalModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteExternalModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteExternalModelResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExternalModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteExternalModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExternalModel, schemas.DeleteExternalModelRequest, schemas.DeleteExternalModelResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteExternalModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExternalModel, schemas.DeleteExternalModelRequest, schemas.DeleteExternalModelResult), output: &DeleteExternalModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

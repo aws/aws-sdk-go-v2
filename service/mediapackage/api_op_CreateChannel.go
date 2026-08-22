@@ -4,7 +4,9 @@ package mediapackage
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type CreateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateChannelRequest_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateChannelRequest_Id, *v.Id)
+	}
+	serializeTags(s, schemas.CreateChannelRequest_Tags, v.Tags)
+}
+
 type CreateChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the Channel.
@@ -74,13 +92,77 @@ type CreateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateChannelResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.CreateChannelResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateChannelResponse_Description, *v.Description)
+	}
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.CreateChannelResponse_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HlsIngest != nil {
+		s.WriteStruct(schemas.CreateChannelResponse_HlsIngest)
+		v.HlsIngest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateChannelResponse_Id, *v.Id)
+	}
+	if v.IngressAccessLogs != nil {
+		s.WriteStruct(schemas.CreateChannelResponse_IngressAccessLogs)
+		v.IngressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateChannelResponse_Tags, v.Tags)
+}
+func (v *CreateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_Arn, v.Arn)
+		case schemas.CreateChannelResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateChannelResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_Description, v.Description)
+		case schemas.CreateChannelResponse_EgressAccessLogs:
+			v.EgressAccessLogs = &types.EgressAccessLogs{}
+			return v.EgressAccessLogs.Deserialize(d)
+		case schemas.CreateChannelResponse_HlsIngest:
+			v.HlsIngest = &types.HlsIngest{}
+			return v.HlsIngest.Deserialize(d)
+		case schemas.CreateChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_Id, v.Id)
+		case schemas.CreateChannelResponse_IngressAccessLogs:
+			v.IngressAccessLogs = &types.IngressAccessLogs{}
+			return v.IngressAccessLogs.Deserialize(d)
+		case schemas.CreateChannelResponse_Tags:
+			return deserializeTags(d, schemas.CreateChannelResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse), output: &CreateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

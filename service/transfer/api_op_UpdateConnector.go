@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -99,6 +101,44 @@ type UpdateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRole != nil {
+		s.WriteString(schemas.UpdateConnectorRequest_AccessRole, *v.AccessRole)
+	}
+	if v.As2Config != nil {
+		s.WriteStruct(schemas.UpdateConnectorRequest_As2Config)
+		v.As2Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.UpdateConnectorRequest_ConnectorId, *v.ConnectorId)
+	}
+	serializeUpdateConnectorEgressConfig(s, schemas.UpdateConnectorRequest_EgressConfig, v.EgressConfig)
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.UpdateConnectorRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.LoggingRole != nil {
+		s.WriteString(schemas.UpdateConnectorRequest_LoggingRole, *v.LoggingRole)
+	}
+	if v.SecurityPolicyName != nil {
+		s.WriteString(schemas.UpdateConnectorRequest_SecurityPolicyName, *v.SecurityPolicyName)
+	}
+	if v.SftpConfig != nil {
+		s.WriteStruct(schemas.UpdateConnectorRequest_SftpConfig)
+		v.SftpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.UpdateConnectorRequest_Url, *v.Url)
+	}
+}
+
 type UpdateConnectorOutput struct {
 
 	// Returns the identifier of the connector object that you are updating.
@@ -112,13 +152,32 @@ type UpdateConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.UpdateConnectorResponse_ConnectorId, *v.ConnectorId)
+	}
+}
+func (v *UpdateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectorResponse_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.UpdateConnectorResponse_ConnectorId, v.ConnectorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnector, schemas.UpdateConnectorRequest, schemas.UpdateConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnector, schemas.UpdateConnectorRequest, schemas.UpdateConnectorResponse), output: &UpdateConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

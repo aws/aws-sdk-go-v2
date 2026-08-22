@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,30 @@ type ListQueueLimitAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueLimitAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueLimitAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueLimitAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListQueueLimitAssociationsRequest_farmId, *v.FarmId)
+	}
+	if v.LimitId != nil {
+		s.WriteString(schemas.ListQueueLimitAssociationsRequest_limitId, *v.LimitId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueueLimitAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueLimitAssociationsRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListQueueLimitAssociationsRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListQueueLimitAssociationsOutput struct {
 
@@ -76,13 +102,35 @@ type ListQueueLimitAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueLimitAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueLimitAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueLimitAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueLimitAssociationsResponse_nextToken, *v.NextToken)
+	}
+	serializeQueueLimitAssociationSummaries(s, schemas.ListQueueLimitAssociationsResponse_queueLimitAssociations, v.QueueLimitAssociations)
+}
+func (v *ListQueueLimitAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueueLimitAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueueLimitAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueueLimitAssociationsResponse_nextToken, v.NextToken)
+		case schemas.ListQueueLimitAssociationsResponse_queueLimitAssociations:
+			return deserializeQueueLimitAssociationSummaries(d, schemas.ListQueueLimitAssociationsResponse_queueLimitAssociations, &v.QueueLimitAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueueLimitAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueueLimitAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueLimitAssociations, schemas.ListQueueLimitAssociationsRequest, schemas.ListQueueLimitAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueueLimitAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueLimitAssociations, schemas.ListQueueLimitAssociationsRequest, schemas.ListQueueLimitAssociationsResponse), output: &ListQueueLimitAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package drs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,29 @@ type ListLaunchActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLaunchActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLaunchActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLaunchActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListLaunchActionsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLaunchActionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLaunchActionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ListLaunchActionsRequest_resourceId, *v.ResourceId)
+	}
+}
+
 type ListLaunchActionsOutput struct {
 
 	// List of resource launch actions.
@@ -58,13 +83,35 @@ type ListLaunchActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLaunchActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLaunchActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLaunchActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLaunchActions(s, schemas.ListLaunchActionsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLaunchActionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLaunchActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLaunchActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLaunchActionsResponse_items:
+			return deserializeLaunchActions(d, schemas.ListLaunchActionsResponse_items, &v.Items)
+		case schemas.ListLaunchActionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLaunchActionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLaunchActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLaunchActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLaunchActions, schemas.ListLaunchActionsRequest, schemas.ListLaunchActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLaunchActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLaunchActions, schemas.ListLaunchActionsRequest, schemas.ListLaunchActionsResponse), output: &ListLaunchActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

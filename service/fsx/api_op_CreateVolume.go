@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,35 @@ type CreateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateVolumeRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVolumeRequest_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.CreateVolumeRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.CreateVolumeRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateVolumeRequest_Tags, v.Tags)
+	if v.VolumeType != "" {
+		s.WriteString(schemas.CreateVolumeRequest_VolumeType, string(v.VolumeType))
+	}
+}
+
 type CreateVolumeOutput struct {
 
 	// Returned after a successful CreateVolume API operation, describing the volume
@@ -67,13 +98,34 @@ type CreateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Volume != nil {
+		s.WriteStruct(schemas.CreateVolumeResponse_Volume)
+		v.Volume.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVolumeResponse_Volume:
+			v.Volume = &types.Volume{}
+			return v.Volume.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolume, schemas.CreateVolumeRequest, schemas.CreateVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolume, schemas.CreateVolumeRequest, schemas.CreateVolumeResponse), output: &CreateVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

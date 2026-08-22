@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,28 @@ type CreateQuoteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQuoteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQuoteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQuoteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CountryCode != nil {
+		s.WriteString(schemas.CreateQuoteInput_CountryCode, *v.CountryCode)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateQuoteInput_Description, *v.Description)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.CreateQuoteInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+	serializeQuoteCapacityList(s, schemas.CreateQuoteInput_RequestedCapacities, v.RequestedCapacities)
+	serializeQuoteConstraintList(s, schemas.CreateQuoteInput_RequestedConstraints, v.RequestedConstraints)
+	serializePaymentOptionList(s, schemas.CreateQuoteInput_RequestedPaymentOptions, v.RequestedPaymentOptions)
+	serializePaymentTermList(s, schemas.CreateQuoteInput_RequestedPaymentTerms, v.RequestedPaymentTerms)
+}
+
 type CreateQuoteOutput struct {
 
 	// Information about the quote.
@@ -75,13 +99,34 @@ type CreateQuoteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQuoteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQuoteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQuoteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Quote != nil {
+		s.WriteStruct(schemas.CreateQuoteOutput_Quote)
+		v.Quote.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateQuoteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateQuoteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateQuoteOutput_Quote:
+			v.Quote = &types.Quote{}
+			return v.Quote.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateQuoteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateQuote{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuote, schemas.CreateQuoteInput, schemas.CreateQuoteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateQuote{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuote, schemas.CreateQuoteInput, schemas.CreateQuoteOutput), output: &CreateQuoteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

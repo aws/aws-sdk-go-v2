@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeConnectionInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeConnectionRequest_Name, *v.Name)
+	}
 }
 
 type DescribeConnectionOutput struct {
@@ -93,13 +107,116 @@ type DescribeConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthParameters != nil {
+		s.WriteStruct(schemas.DescribeConnectionResponse_AuthParameters)
+		v.AuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthorizationType != "" {
+		s.WriteString(schemas.DescribeConnectionResponse_AuthorizationType, string(v.AuthorizationType))
+	}
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.DescribeConnectionResponse_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.DescribeConnectionResponse_ConnectionState, string(v.ConnectionState))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeConnectionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeConnectionResponse_Description, *v.Description)
+	}
+	if v.InvocationConnectivityParameters != nil {
+		s.WriteStruct(schemas.DescribeConnectionResponse_InvocationConnectivityParameters)
+		v.InvocationConnectivityParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.DescribeConnectionResponse_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LastAuthorizedTime != nil {
+		s.WriteTime(schemas.DescribeConnectionResponse_LastAuthorizedTime, *v.LastAuthorizedTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeConnectionResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeConnectionResponse_Name, *v.Name)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.DescribeConnectionResponse_SecretArn, *v.SecretArn)
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.DescribeConnectionResponse_StateReason, *v.StateReason)
+	}
+}
+func (v *DescribeConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectionResponse_AuthParameters:
+			v.AuthParameters = &types.ConnectionAuthResponseParameters{}
+			return v.AuthParameters.Deserialize(d)
+		case schemas.DescribeConnectionResponse_AuthorizationType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeConnectionResponse_AuthorizationType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizationType = types.ConnectionAuthorizationType(ev)
+			return nil
+		case schemas.DescribeConnectionResponse_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.DescribeConnectionResponse_ConnectionArn, v.ConnectionArn)
+		case schemas.DescribeConnectionResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeConnectionResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.ConnectionState(ev)
+			return nil
+		case schemas.DescribeConnectionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeConnectionResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeConnectionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeConnectionResponse_Description, v.Description)
+		case schemas.DescribeConnectionResponse_InvocationConnectivityParameters:
+			v.InvocationConnectivityParameters = &types.DescribeConnectionConnectivityParameters{}
+			return v.InvocationConnectivityParameters.Deserialize(d)
+		case schemas.DescribeConnectionResponse_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.DescribeConnectionResponse_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.DescribeConnectionResponse_LastAuthorizedTime:
+			v.LastAuthorizedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeConnectionResponse_LastAuthorizedTime, v.LastAuthorizedTime)
+		case schemas.DescribeConnectionResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeConnectionResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeConnectionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeConnectionResponse_Name, v.Name)
+		case schemas.DescribeConnectionResponse_SecretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.DescribeConnectionResponse_SecretArn, v.SecretArn)
+		case schemas.DescribeConnectionResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.DescribeConnectionResponse_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnection, schemas.DescribeConnectionRequest, schemas.DescribeConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnection, schemas.DescribeConnectionRequest, schemas.DescribeConnectionResponse), output: &DescribeConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

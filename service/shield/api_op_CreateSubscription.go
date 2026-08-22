@@ -4,6 +4,8 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,15 @@ type CreateSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type CreateSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +53,26 @@ type CreateSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscription, schemas.CreateSubscriptionRequest, schemas.CreateSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscription, schemas.CreateSubscriptionRequest, schemas.CreateSubscriptionResponse), output: &CreateSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

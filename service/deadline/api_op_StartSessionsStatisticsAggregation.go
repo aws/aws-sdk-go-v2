@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -74,6 +76,33 @@ type StartSessionsStatisticsAggregationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionsStatisticsAggregationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionsStatisticsAggregationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionsStatisticsAggregationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.StartSessionsStatisticsAggregationRequest_endTime, *v.EndTime)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.StartSessionsStatisticsAggregationRequest_farmId, *v.FarmId)
+	}
+	serializeUsageGroupBy(s, schemas.StartSessionsStatisticsAggregationRequest_groupBy, v.GroupBy)
+	if v.Period != "" {
+		s.WriteString(schemas.StartSessionsStatisticsAggregationRequest_period, string(v.Period))
+	}
+	serializeSessionsStatisticsResources(s, schemas.StartSessionsStatisticsAggregationRequest_resourceIds, v.ResourceIds)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartSessionsStatisticsAggregationRequest_startTime, *v.StartTime)
+	}
+	serializeUsageStatistics(s, schemas.StartSessionsStatisticsAggregationRequest_statistics, v.Statistics)
+	if v.Timezone != nil {
+		s.WriteString(schemas.StartSessionsStatisticsAggregationRequest_timezone, *v.Timezone)
+	}
+}
+
 type StartSessionsStatisticsAggregationOutput struct {
 
 	// A unique identifier for the aggregated statistics. Use this identifier with the
@@ -88,13 +117,32 @@ type StartSessionsStatisticsAggregationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionsStatisticsAggregationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionsStatisticsAggregationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionsStatisticsAggregationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationId != nil {
+		s.WriteString(schemas.StartSessionsStatisticsAggregationResponse_aggregationId, *v.AggregationId)
+	}
+}
+func (v *StartSessionsStatisticsAggregationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSessionsStatisticsAggregationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSessionsStatisticsAggregationResponse_aggregationId:
+			v.AggregationId = new(string)
+			return d.ReadString(schemas.StartSessionsStatisticsAggregationResponse_aggregationId, v.AggregationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSessionsStatisticsAggregationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSessionsStatisticsAggregation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSessionsStatisticsAggregation, schemas.StartSessionsStatisticsAggregationRequest, schemas.StartSessionsStatisticsAggregationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSessionsStatisticsAggregation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSessionsStatisticsAggregation, schemas.StartSessionsStatisticsAggregationRequest, schemas.StartSessionsStatisticsAggregationResponse), output: &StartSessionsStatisticsAggregationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

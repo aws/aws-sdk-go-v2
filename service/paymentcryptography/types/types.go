@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,6 +25,34 @@ type Alias struct {
 	KeyArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Alias) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Alias)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Alias) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.Alias_AliasName, *v.AliasName)
+	}
+	if v.KeyArn != nil {
+		s.WriteString(schemas.Alias_KeyArn, *v.KeyArn)
+	}
+}
+func (v *Alias) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Alias, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Alias_AliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.Alias_AliasName, v.AliasName)
+		case schemas.Alias_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.Alias_KeyArn, v.KeyArn)
+		}
+		return nil
+	})
 }
 
 // The metadata used to create the certificate signing request.
@@ -54,6 +84,64 @@ type CertificateSubjectType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CertificateSubjectType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateSubjectType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateSubjectType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.City != nil {
+		s.WriteString(schemas.CertificateSubjectType_City, *v.City)
+	}
+	if v.CommonName != nil {
+		s.WriteString(schemas.CertificateSubjectType_CommonName, *v.CommonName)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.CertificateSubjectType_Country, *v.Country)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.CertificateSubjectType_EmailAddress, *v.EmailAddress)
+	}
+	if v.Organization != nil {
+		s.WriteString(schemas.CertificateSubjectType_Organization, *v.Organization)
+	}
+	if v.OrganizationUnit != nil {
+		s.WriteString(schemas.CertificateSubjectType_OrganizationUnit, *v.OrganizationUnit)
+	}
+	if v.StateOrProvince != nil {
+		s.WriteString(schemas.CertificateSubjectType_StateOrProvince, *v.StateOrProvince)
+	}
+}
+func (v *CertificateSubjectType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateSubjectType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateSubjectType_City:
+			v.City = new(string)
+			return d.ReadString(schemas.CertificateSubjectType_City, v.City)
+		case schemas.CertificateSubjectType_CommonName:
+			v.CommonName = new(string)
+			return d.ReadString(schemas.CertificateSubjectType_CommonName, v.CommonName)
+		case schemas.CertificateSubjectType_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.CertificateSubjectType_Country, v.Country)
+		case schemas.CertificateSubjectType_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.CertificateSubjectType_EmailAddress, v.EmailAddress)
+		case schemas.CertificateSubjectType_Organization:
+			v.Organization = new(string)
+			return d.ReadString(schemas.CertificateSubjectType_Organization, v.Organization)
+		case schemas.CertificateSubjectType_OrganizationUnit:
+			v.OrganizationUnit = new(string)
+			return d.ReadString(schemas.CertificateSubjectType_OrganizationUnit, v.OrganizationUnit)
+		case schemas.CertificateSubjectType_StateOrProvince:
+			v.StateOrProvince = new(string)
+			return d.ReadString(schemas.CertificateSubjectType_StateOrProvince, v.StateOrProvince)
+		}
+		return nil
+	})
+}
+
 // The shared information used when deriving a key using ECDH.
 //
 // The following types satisfy this interface:
@@ -78,6 +166,12 @@ type DiffieHellmanDerivationDataMemberSharedInformation struct {
 }
 
 func (*DiffieHellmanDerivationDataMemberSharedInformation) isDiffieHellmanDerivationData() {}
+func (v *DiffieHellmanDerivationDataMemberSharedInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.DiffieHellmanDerivationData_SharedInformation, v.Value)
+}
+func (v *DiffieHellmanDerivationDataMemberSharedInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.DiffieHellmanDerivationData_SharedInformation, &v.Value)
+}
 
 // Parameter information for key material export using AS2805 key cryptogram
 // format.
@@ -105,6 +199,38 @@ type ExportAs2805KeyCryptogram struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportAs2805KeyCryptogram) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportAs2805KeyCryptogram)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportAs2805KeyCryptogram) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.As2805KeyVariant != "" {
+		s.WriteString(schemas.ExportAs2805KeyCryptogram_As2805KeyVariant, string(v.As2805KeyVariant))
+	}
+	if v.WrappingKeyIdentifier != nil {
+		s.WriteString(schemas.ExportAs2805KeyCryptogram_WrappingKeyIdentifier, *v.WrappingKeyIdentifier)
+	}
+}
+func (v *ExportAs2805KeyCryptogram) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportAs2805KeyCryptogram, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportAs2805KeyCryptogram_As2805KeyVariant:
+			var ev string
+			if err := d.ReadString(schemas.ExportAs2805KeyCryptogram_As2805KeyVariant, &ev); err != nil {
+				return err
+			}
+			v.As2805KeyVariant = As2805KeyVariant(ev)
+			return nil
+		case schemas.ExportAs2805KeyCryptogram_WrappingKeyIdentifier:
+			v.WrappingKeyIdentifier = new(string)
+			return d.ReadString(schemas.ExportAs2805KeyCryptogram_WrappingKeyIdentifier, v.WrappingKeyIdentifier)
+		}
+		return nil
+	})
+}
+
 // The attributes for IPEK generation during export.
 type ExportAttributes struct {
 
@@ -124,6 +250,40 @@ type ExportAttributes struct {
 	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportDukptInitialKey != nil {
+		s.WriteStruct(schemas.ExportAttributes_ExportDukptInitialKey)
+		v.ExportDukptInitialKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyCheckValueAlgorithm != "" {
+		s.WriteString(schemas.ExportAttributes_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
+	}
+}
+func (v *ExportAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportAttributes_ExportDukptInitialKey:
+			v.ExportDukptInitialKey = &ExportDukptInitialKey{}
+			return v.ExportDukptInitialKey.Deserialize(d)
+		case schemas.ExportAttributes_KeyCheckValueAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.ExportAttributes_KeyCheckValueAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyCheckValueAlgorithm = KeyCheckValueAlgorithm(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Key derivation parameter information for key material export using asymmetric
@@ -175,6 +335,81 @@ type ExportDiffieHellmanTr31KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportDiffieHellmanTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportDiffieHellmanTr31KeyBlock)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportDiffieHellmanTr31KeyBlock) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		s.WriteString(schemas.ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
+	}
+	serializeDiffieHellmanDerivationData(s, schemas.ExportDiffieHellmanTr31KeyBlock_DerivationData, v.DerivationData)
+	if v.DeriveKeyAlgorithm != "" {
+		s.WriteString(schemas.ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, string(v.DeriveKeyAlgorithm))
+	}
+	if v.KeyBlockHeaders != nil {
+		s.WriteStruct(schemas.ExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders)
+		v.KeyBlockHeaders.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyDerivationFunction != "" {
+		s.WriteString(schemas.ExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction, string(v.KeyDerivationFunction))
+	}
+	if v.KeyDerivationHashAlgorithm != "" {
+		s.WriteString(schemas.ExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm, string(v.KeyDerivationHashAlgorithm))
+	}
+	if v.PrivateKeyIdentifier != nil {
+		s.WriteString(schemas.ExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier, *v.PrivateKeyIdentifier)
+	}
+	if v.PublicKeyCertificate != nil {
+		s.WriteString(schemas.ExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate, *v.PublicKeyCertificate)
+	}
+}
+func (v *ExportDiffieHellmanTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportDiffieHellmanTr31KeyBlock, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier:
+			v.CertificateAuthorityPublicKeyIdentifier = new(string)
+			return d.ReadString(schemas.ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, v.CertificateAuthorityPublicKeyIdentifier)
+		case schemas.ExportDiffieHellmanTr31KeyBlock_DerivationData:
+			return deserializeDiffieHellmanDerivationData(d, schemas.ExportDiffieHellmanTr31KeyBlock_DerivationData, &v.DerivationData)
+		case schemas.ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.DeriveKeyAlgorithm = SymmetricKeyAlgorithm(ev)
+			return nil
+		case schemas.ExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders:
+			v.KeyBlockHeaders = &KeyBlockHeaders{}
+			return v.KeyBlockHeaders.Deserialize(d)
+		case schemas.ExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction:
+			var ev string
+			if err := d.ReadString(schemas.ExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction, &ev); err != nil {
+				return err
+			}
+			v.KeyDerivationFunction = KeyDerivationFunction(ev)
+			return nil
+		case schemas.ExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.ExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyDerivationHashAlgorithm = KeyDerivationHashAlgorithm(ev)
+			return nil
+		case schemas.ExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier:
+			v.PrivateKeyIdentifier = new(string)
+			return d.ReadString(schemas.ExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier, v.PrivateKeyIdentifier)
+		case schemas.ExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate:
+			v.PublicKeyCertificate = new(string)
+			return d.ReadString(schemas.ExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate, v.PublicKeyCertificate)
+		}
+		return nil
+	})
+}
+
 // Parameter information for IPEK generation during export.
 type ExportDukptInitialKey struct {
 
@@ -187,6 +422,28 @@ type ExportDukptInitialKey struct {
 	KeySerialNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportDukptInitialKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportDukptInitialKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportDukptInitialKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeySerialNumber != nil {
+		s.WriteString(schemas.ExportDukptInitialKey_KeySerialNumber, *v.KeySerialNumber)
+	}
+}
+func (v *ExportDukptInitialKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportDukptInitialKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportDukptInitialKey_KeySerialNumber:
+			v.KeySerialNumber = new(string)
+			return d.ReadString(schemas.ExportDukptInitialKey_KeySerialNumber, v.KeySerialNumber)
+		}
+		return nil
+	})
 }
 
 // Parameter information for key material export using asymmetric RSA wrap and
@@ -212,6 +469,44 @@ type ExportKeyCryptogram struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportKeyCryptogram) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyCryptogram)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportKeyCryptogram) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		s.WriteString(schemas.ExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
+	}
+	if v.WrappingKeyCertificate != nil {
+		s.WriteString(schemas.ExportKeyCryptogram_WrappingKeyCertificate, *v.WrappingKeyCertificate)
+	}
+	if v.WrappingSpec != "" {
+		s.WriteString(schemas.ExportKeyCryptogram_WrappingSpec, string(v.WrappingSpec))
+	}
+}
+func (v *ExportKeyCryptogram) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportKeyCryptogram, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier:
+			v.CertificateAuthorityPublicKeyIdentifier = new(string)
+			return d.ReadString(schemas.ExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier, v.CertificateAuthorityPublicKeyIdentifier)
+		case schemas.ExportKeyCryptogram_WrappingKeyCertificate:
+			v.WrappingKeyCertificate = new(string)
+			return d.ReadString(schemas.ExportKeyCryptogram_WrappingKeyCertificate, v.WrappingKeyCertificate)
+		case schemas.ExportKeyCryptogram_WrappingSpec:
+			var ev string
+			if err := d.ReadString(schemas.ExportKeyCryptogram_WrappingSpec, &ev); err != nil {
+				return err
+			}
+			v.WrappingSpec = WrappingKeySpec(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Parameter information for key material export from Amazon Web Services Payment
 // Cryptography using TR-31 or TR-34 or RSA wrap and unwrap key exchange method.
 //
@@ -235,6 +530,14 @@ type ExportKeyMaterialMemberAs2805KeyCryptogram struct {
 }
 
 func (*ExportKeyMaterialMemberAs2805KeyCryptogram) isExportKeyMaterial() {}
+func (v *ExportKeyMaterialMemberAs2805KeyCryptogram) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyMaterial_As2805KeyCryptogram)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExportKeyMaterialMemberAs2805KeyCryptogram) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Key derivation parameter information for key material export using asymmetric
 // ECDH key exchange method.
@@ -245,6 +548,14 @@ type ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock struct {
 }
 
 func (*ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock) isExportKeyMaterial() {}
+func (v *ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyMaterial_DiffieHellmanTr31KeyBlock)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExportKeyMaterialMemberDiffieHellmanTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for key material export using asymmetric RSA wrap and
 // unwrap key exchange method
@@ -255,6 +566,14 @@ type ExportKeyMaterialMemberKeyCryptogram struct {
 }
 
 func (*ExportKeyMaterialMemberKeyCryptogram) isExportKeyMaterial() {}
+func (v *ExportKeyMaterialMemberKeyCryptogram) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyMaterial_KeyCryptogram)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExportKeyMaterialMemberKeyCryptogram) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for key material export using symmetric TR-31 key
 // exchange method.
@@ -265,6 +584,14 @@ type ExportKeyMaterialMemberTr31KeyBlock struct {
 }
 
 func (*ExportKeyMaterialMemberTr31KeyBlock) isExportKeyMaterial() {}
+func (v *ExportKeyMaterialMemberTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyMaterial_Tr31KeyBlock)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExportKeyMaterialMemberTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for key material export using the asymmetric TR-34 key
 // exchange method.
@@ -275,6 +602,14 @@ type ExportKeyMaterialMemberTr34KeyBlock struct {
 }
 
 func (*ExportKeyMaterialMemberTr34KeyBlock) isExportKeyMaterial() {}
+func (v *ExportKeyMaterialMemberTr34KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyMaterial_Tr34KeyBlock)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExportKeyMaterialMemberTr34KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for key material export using symmetric TR-31 key
 // exchange method.
@@ -291,6 +626,36 @@ type ExportTr31KeyBlock struct {
 	KeyBlockHeaders *KeyBlockHeaders
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportTr31KeyBlock)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportTr31KeyBlock) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyBlockHeaders != nil {
+		s.WriteStruct(schemas.ExportTr31KeyBlock_KeyBlockHeaders)
+		v.KeyBlockHeaders.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WrappingKeyIdentifier != nil {
+		s.WriteString(schemas.ExportTr31KeyBlock_WrappingKeyIdentifier, *v.WrappingKeyIdentifier)
+	}
+}
+func (v *ExportTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportTr31KeyBlock, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportTr31KeyBlock_KeyBlockHeaders:
+			v.KeyBlockHeaders = &KeyBlockHeaders{}
+			return v.KeyBlockHeaders.Deserialize(d)
+		case schemas.ExportTr31KeyBlock_WrappingKeyIdentifier:
+			v.WrappingKeyIdentifier = new(string)
+			return d.ReadString(schemas.ExportTr31KeyBlock_WrappingKeyIdentifier, v.WrappingKeyIdentifier)
+		}
+		return nil
+	})
 }
 
 // Parameter information for key material export using the asymmetric TR-34 key
@@ -342,6 +707,76 @@ type ExportTr34KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportTr34KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportTr34KeyBlock)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportTr34KeyBlock) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		s.WriteString(schemas.ExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
+	}
+	if v.ExportToken != nil {
+		s.WriteString(schemas.ExportTr34KeyBlock_ExportToken, *v.ExportToken)
+	}
+	if v.KeyBlockFormat != "" {
+		s.WriteString(schemas.ExportTr34KeyBlock_KeyBlockFormat, string(v.KeyBlockFormat))
+	}
+	if v.KeyBlockHeaders != nil {
+		s.WriteStruct(schemas.ExportTr34KeyBlock_KeyBlockHeaders)
+		v.KeyBlockHeaders.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RandomNonce != nil {
+		s.WriteString(schemas.ExportTr34KeyBlock_RandomNonce, *v.RandomNonce)
+	}
+	if v.SigningKeyCertificate != nil {
+		s.WriteString(schemas.ExportTr34KeyBlock_SigningKeyCertificate, *v.SigningKeyCertificate)
+	}
+	if v.SigningKeyIdentifier != nil {
+		s.WriteString(schemas.ExportTr34KeyBlock_SigningKeyIdentifier, *v.SigningKeyIdentifier)
+	}
+	if v.WrappingKeyCertificate != nil {
+		s.WriteString(schemas.ExportTr34KeyBlock_WrappingKeyCertificate, *v.WrappingKeyCertificate)
+	}
+}
+func (v *ExportTr34KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportTr34KeyBlock, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier:
+			v.CertificateAuthorityPublicKeyIdentifier = new(string)
+			return d.ReadString(schemas.ExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier, v.CertificateAuthorityPublicKeyIdentifier)
+		case schemas.ExportTr34KeyBlock_ExportToken:
+			v.ExportToken = new(string)
+			return d.ReadString(schemas.ExportTr34KeyBlock_ExportToken, v.ExportToken)
+		case schemas.ExportTr34KeyBlock_KeyBlockFormat:
+			var ev string
+			if err := d.ReadString(schemas.ExportTr34KeyBlock_KeyBlockFormat, &ev); err != nil {
+				return err
+			}
+			v.KeyBlockFormat = Tr34KeyBlockFormat(ev)
+			return nil
+		case schemas.ExportTr34KeyBlock_KeyBlockHeaders:
+			v.KeyBlockHeaders = &KeyBlockHeaders{}
+			return v.KeyBlockHeaders.Deserialize(d)
+		case schemas.ExportTr34KeyBlock_RandomNonce:
+			v.RandomNonce = new(string)
+			return d.ReadString(schemas.ExportTr34KeyBlock_RandomNonce, v.RandomNonce)
+		case schemas.ExportTr34KeyBlock_SigningKeyCertificate:
+			v.SigningKeyCertificate = new(string)
+			return d.ReadString(schemas.ExportTr34KeyBlock_SigningKeyCertificate, v.SigningKeyCertificate)
+		case schemas.ExportTr34KeyBlock_SigningKeyIdentifier:
+			v.SigningKeyIdentifier = new(string)
+			return d.ReadString(schemas.ExportTr34KeyBlock_SigningKeyIdentifier, v.SigningKeyIdentifier)
+		case schemas.ExportTr34KeyBlock_WrappingKeyCertificate:
+			v.WrappingKeyCertificate = new(string)
+			return d.ReadString(schemas.ExportTr34KeyBlock_WrappingKeyCertificate, v.WrappingKeyCertificate)
+		}
+		return nil
+	})
+}
+
 // Parameter information for key material import using AS2805 key cryptogram
 // format.
 type ImportAs2805KeyCryptogram struct {
@@ -388,6 +823,68 @@ type ImportAs2805KeyCryptogram struct {
 	WrappingKeyIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportAs2805KeyCryptogram) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAs2805KeyCryptogram)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAs2805KeyCryptogram) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.As2805KeyVariant != "" {
+		s.WriteString(schemas.ImportAs2805KeyCryptogram_As2805KeyVariant, string(v.As2805KeyVariant))
+	}
+	if v.Exportable != nil {
+		s.WriteBool(schemas.ImportAs2805KeyCryptogram_Exportable, *v.Exportable)
+	}
+	if v.KeyAlgorithm != "" {
+		s.WriteString(schemas.ImportAs2805KeyCryptogram_KeyAlgorithm, string(v.KeyAlgorithm))
+	}
+	if v.KeyModesOfUse != nil {
+		s.WriteStruct(schemas.ImportAs2805KeyCryptogram_KeyModesOfUse)
+		v.KeyModesOfUse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WrappedKeyCryptogram != nil {
+		s.WriteString(schemas.ImportAs2805KeyCryptogram_WrappedKeyCryptogram, *v.WrappedKeyCryptogram)
+	}
+	if v.WrappingKeyIdentifier != nil {
+		s.WriteString(schemas.ImportAs2805KeyCryptogram_WrappingKeyIdentifier, *v.WrappingKeyIdentifier)
+	}
+}
+func (v *ImportAs2805KeyCryptogram) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAs2805KeyCryptogram, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAs2805KeyCryptogram_As2805KeyVariant:
+			var ev string
+			if err := d.ReadString(schemas.ImportAs2805KeyCryptogram_As2805KeyVariant, &ev); err != nil {
+				return err
+			}
+			v.As2805KeyVariant = As2805KeyVariant(ev)
+			return nil
+		case schemas.ImportAs2805KeyCryptogram_Exportable:
+			v.Exportable = new(bool)
+			return d.ReadBool(schemas.ImportAs2805KeyCryptogram_Exportable, v.Exportable)
+		case schemas.ImportAs2805KeyCryptogram_KeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.ImportAs2805KeyCryptogram_KeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyAlgorithm = KeyAlgorithm(ev)
+			return nil
+		case schemas.ImportAs2805KeyCryptogram_KeyModesOfUse:
+			v.KeyModesOfUse = &KeyModesOfUse{}
+			return v.KeyModesOfUse.Deserialize(d)
+		case schemas.ImportAs2805KeyCryptogram_WrappedKeyCryptogram:
+			v.WrappedKeyCryptogram = new(string)
+			return d.ReadString(schemas.ImportAs2805KeyCryptogram_WrappedKeyCryptogram, v.WrappedKeyCryptogram)
+		case schemas.ImportAs2805KeyCryptogram_WrappingKeyIdentifier:
+			v.WrappingKeyIdentifier = new(string)
+			return d.ReadString(schemas.ImportAs2805KeyCryptogram_WrappingKeyIdentifier, v.WrappingKeyIdentifier)
+		}
+		return nil
+	})
 }
 
 // Key derivation parameter information for key material import using asymmetric
@@ -440,6 +937,79 @@ type ImportDiffieHellmanTr31KeyBlock struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDiffieHellmanTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDiffieHellmanTr31KeyBlock)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDiffieHellmanTr31KeyBlock) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		s.WriteString(schemas.ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
+	}
+	serializeDiffieHellmanDerivationData(s, schemas.ImportDiffieHellmanTr31KeyBlock_DerivationData, v.DerivationData)
+	if v.DeriveKeyAlgorithm != "" {
+		s.WriteString(schemas.ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, string(v.DeriveKeyAlgorithm))
+	}
+	if v.KeyDerivationFunction != "" {
+		s.WriteString(schemas.ImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction, string(v.KeyDerivationFunction))
+	}
+	if v.KeyDerivationHashAlgorithm != "" {
+		s.WriteString(schemas.ImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm, string(v.KeyDerivationHashAlgorithm))
+	}
+	if v.PrivateKeyIdentifier != nil {
+		s.WriteString(schemas.ImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier, *v.PrivateKeyIdentifier)
+	}
+	if v.PublicKeyCertificate != nil {
+		s.WriteString(schemas.ImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate, *v.PublicKeyCertificate)
+	}
+	if v.WrappedKeyBlock != nil {
+		s.WriteString(schemas.ImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock, *v.WrappedKeyBlock)
+	}
+}
+func (v *ImportDiffieHellmanTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportDiffieHellmanTr31KeyBlock, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier:
+			v.CertificateAuthorityPublicKeyIdentifier = new(string)
+			return d.ReadString(schemas.ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, v.CertificateAuthorityPublicKeyIdentifier)
+		case schemas.ImportDiffieHellmanTr31KeyBlock_DerivationData:
+			return deserializeDiffieHellmanDerivationData(d, schemas.ImportDiffieHellmanTr31KeyBlock_DerivationData, &v.DerivationData)
+		case schemas.ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.DeriveKeyAlgorithm = SymmetricKeyAlgorithm(ev)
+			return nil
+		case schemas.ImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction:
+			var ev string
+			if err := d.ReadString(schemas.ImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction, &ev); err != nil {
+				return err
+			}
+			v.KeyDerivationFunction = KeyDerivationFunction(ev)
+			return nil
+		case schemas.ImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.ImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyDerivationHashAlgorithm = KeyDerivationHashAlgorithm(ev)
+			return nil
+		case schemas.ImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier:
+			v.PrivateKeyIdentifier = new(string)
+			return d.ReadString(schemas.ImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier, v.PrivateKeyIdentifier)
+		case schemas.ImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate:
+			v.PublicKeyCertificate = new(string)
+			return d.ReadString(schemas.ImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate, v.PublicKeyCertificate)
+		case schemas.ImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock:
+			v.WrappedKeyBlock = new(string)
+			return d.ReadString(schemas.ImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock, v.WrappedKeyBlock)
+		}
+		return nil
+	})
+}
+
 // Parameter information for key material import using asymmetric RSA wrap and
 // unwrap key exchange method.
 type ImportKeyCryptogram struct {
@@ -475,6 +1045,58 @@ type ImportKeyCryptogram struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportKeyCryptogram) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyCryptogram)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportKeyCryptogram) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Exportable != nil {
+		s.WriteBool(schemas.ImportKeyCryptogram_Exportable, *v.Exportable)
+	}
+	if v.ImportToken != nil {
+		s.WriteString(schemas.ImportKeyCryptogram_ImportToken, *v.ImportToken)
+	}
+	if v.KeyAttributes != nil {
+		s.WriteStruct(schemas.ImportKeyCryptogram_KeyAttributes)
+		v.KeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WrappedKeyCryptogram != nil {
+		s.WriteString(schemas.ImportKeyCryptogram_WrappedKeyCryptogram, *v.WrappedKeyCryptogram)
+	}
+	if v.WrappingSpec != "" {
+		s.WriteString(schemas.ImportKeyCryptogram_WrappingSpec, string(v.WrappingSpec))
+	}
+}
+func (v *ImportKeyCryptogram) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportKeyCryptogram, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportKeyCryptogram_Exportable:
+			v.Exportable = new(bool)
+			return d.ReadBool(schemas.ImportKeyCryptogram_Exportable, v.Exportable)
+		case schemas.ImportKeyCryptogram_ImportToken:
+			v.ImportToken = new(string)
+			return d.ReadString(schemas.ImportKeyCryptogram_ImportToken, v.ImportToken)
+		case schemas.ImportKeyCryptogram_KeyAttributes:
+			v.KeyAttributes = &KeyAttributes{}
+			return v.KeyAttributes.Deserialize(d)
+		case schemas.ImportKeyCryptogram_WrappedKeyCryptogram:
+			v.WrappedKeyCryptogram = new(string)
+			return d.ReadString(schemas.ImportKeyCryptogram_WrappedKeyCryptogram, v.WrappedKeyCryptogram)
+		case schemas.ImportKeyCryptogram_WrappingSpec:
+			var ev string
+			if err := d.ReadString(schemas.ImportKeyCryptogram_WrappingSpec, &ev); err != nil {
+				return err
+			}
+			v.WrappingSpec = WrappingKeySpec(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Parameter information for key material import into Amazon Web Services Payment
 // Cryptography using TR-31 or TR-34 or RSA wrap and unwrap key exchange method.
 //
@@ -500,6 +1122,14 @@ type ImportKeyMaterialMemberAs2805KeyCryptogram struct {
 }
 
 func (*ImportKeyMaterialMemberAs2805KeyCryptogram) isImportKeyMaterial() {}
+func (v *ImportKeyMaterialMemberAs2805KeyCryptogram) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyMaterial_As2805KeyCryptogram)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ImportKeyMaterialMemberAs2805KeyCryptogram) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Key derivation parameter information for key material import using asymmetric
 // ECDH key exchange method.
@@ -510,6 +1140,14 @@ type ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock struct {
 }
 
 func (*ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock) isImportKeyMaterial() {}
+func (v *ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyMaterial_DiffieHellmanTr31KeyBlock)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ImportKeyMaterialMemberDiffieHellmanTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for key material import using asymmetric RSA wrap and
 // unwrap key exchange method.
@@ -520,6 +1158,14 @@ type ImportKeyMaterialMemberKeyCryptogram struct {
 }
 
 func (*ImportKeyMaterialMemberKeyCryptogram) isImportKeyMaterial() {}
+func (v *ImportKeyMaterialMemberKeyCryptogram) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyMaterial_KeyCryptogram)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ImportKeyMaterialMemberKeyCryptogram) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for root public key certificate import.
 type ImportKeyMaterialMemberRootCertificatePublicKey struct {
@@ -529,6 +1175,14 @@ type ImportKeyMaterialMemberRootCertificatePublicKey struct {
 }
 
 func (*ImportKeyMaterialMemberRootCertificatePublicKey) isImportKeyMaterial() {}
+func (v *ImportKeyMaterialMemberRootCertificatePublicKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyMaterial_RootCertificatePublicKey)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ImportKeyMaterialMemberRootCertificatePublicKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for key material import using symmetric TR-31 key
 // exchange method.
@@ -539,6 +1193,14 @@ type ImportKeyMaterialMemberTr31KeyBlock struct {
 }
 
 func (*ImportKeyMaterialMemberTr31KeyBlock) isImportKeyMaterial() {}
+func (v *ImportKeyMaterialMemberTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyMaterial_Tr31KeyBlock)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ImportKeyMaterialMemberTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for key material import using the asymmetric TR-34 key
 // exchange method.
@@ -549,6 +1211,14 @@ type ImportKeyMaterialMemberTr34KeyBlock struct {
 }
 
 func (*ImportKeyMaterialMemberTr34KeyBlock) isImportKeyMaterial() {}
+func (v *ImportKeyMaterialMemberTr34KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyMaterial_Tr34KeyBlock)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ImportKeyMaterialMemberTr34KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for trusted public key certificate import.
 type ImportKeyMaterialMemberTrustedCertificatePublicKey struct {
@@ -558,6 +1228,14 @@ type ImportKeyMaterialMemberTrustedCertificatePublicKey struct {
 }
 
 func (*ImportKeyMaterialMemberTrustedCertificatePublicKey) isImportKeyMaterial() {}
+func (v *ImportKeyMaterialMemberTrustedCertificatePublicKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyMaterial_TrustedCertificatePublicKey)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ImportKeyMaterialMemberTrustedCertificatePublicKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameter information for key material import using symmetric TR-31 key
 // exchange method.
@@ -575,6 +1253,34 @@ type ImportTr31KeyBlock struct {
 	WrappingKeyIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportTr31KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportTr31KeyBlock)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportTr31KeyBlock) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WrappedKeyBlock != nil {
+		s.WriteString(schemas.ImportTr31KeyBlock_WrappedKeyBlock, *v.WrappedKeyBlock)
+	}
+	if v.WrappingKeyIdentifier != nil {
+		s.WriteString(schemas.ImportTr31KeyBlock_WrappingKeyIdentifier, *v.WrappingKeyIdentifier)
+	}
+}
+func (v *ImportTr31KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportTr31KeyBlock, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportTr31KeyBlock_WrappedKeyBlock:
+			v.WrappedKeyBlock = new(string)
+			return d.ReadString(schemas.ImportTr31KeyBlock_WrappedKeyBlock, v.WrappedKeyBlock)
+		case schemas.ImportTr31KeyBlock_WrappingKeyIdentifier:
+			v.WrappingKeyIdentifier = new(string)
+			return d.ReadString(schemas.ImportTr31KeyBlock_WrappingKeyIdentifier, v.WrappingKeyIdentifier)
+		}
+		return nil
+	})
 }
 
 // Parameter information for key material import using the asymmetric TR-34 key
@@ -622,6 +1328,74 @@ type ImportTr34KeyBlock struct {
 	WrappingKeyIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportTr34KeyBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportTr34KeyBlock)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportTr34KeyBlock) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		s.WriteString(schemas.ImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
+	}
+	if v.ImportToken != nil {
+		s.WriteString(schemas.ImportTr34KeyBlock_ImportToken, *v.ImportToken)
+	}
+	if v.KeyBlockFormat != "" {
+		s.WriteString(schemas.ImportTr34KeyBlock_KeyBlockFormat, string(v.KeyBlockFormat))
+	}
+	if v.RandomNonce != nil {
+		s.WriteString(schemas.ImportTr34KeyBlock_RandomNonce, *v.RandomNonce)
+	}
+	if v.SigningKeyCertificate != nil {
+		s.WriteString(schemas.ImportTr34KeyBlock_SigningKeyCertificate, *v.SigningKeyCertificate)
+	}
+	if v.WrappedKeyBlock != nil {
+		s.WriteString(schemas.ImportTr34KeyBlock_WrappedKeyBlock, *v.WrappedKeyBlock)
+	}
+	if v.WrappingKeyCertificate != nil {
+		s.WriteString(schemas.ImportTr34KeyBlock_WrappingKeyCertificate, *v.WrappingKeyCertificate)
+	}
+	if v.WrappingKeyIdentifier != nil {
+		s.WriteString(schemas.ImportTr34KeyBlock_WrappingKeyIdentifier, *v.WrappingKeyIdentifier)
+	}
+}
+func (v *ImportTr34KeyBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportTr34KeyBlock, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier:
+			v.CertificateAuthorityPublicKeyIdentifier = new(string)
+			return d.ReadString(schemas.ImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier, v.CertificateAuthorityPublicKeyIdentifier)
+		case schemas.ImportTr34KeyBlock_ImportToken:
+			v.ImportToken = new(string)
+			return d.ReadString(schemas.ImportTr34KeyBlock_ImportToken, v.ImportToken)
+		case schemas.ImportTr34KeyBlock_KeyBlockFormat:
+			var ev string
+			if err := d.ReadString(schemas.ImportTr34KeyBlock_KeyBlockFormat, &ev); err != nil {
+				return err
+			}
+			v.KeyBlockFormat = Tr34KeyBlockFormat(ev)
+			return nil
+		case schemas.ImportTr34KeyBlock_RandomNonce:
+			v.RandomNonce = new(string)
+			return d.ReadString(schemas.ImportTr34KeyBlock_RandomNonce, v.RandomNonce)
+		case schemas.ImportTr34KeyBlock_SigningKeyCertificate:
+			v.SigningKeyCertificate = new(string)
+			return d.ReadString(schemas.ImportTr34KeyBlock_SigningKeyCertificate, v.SigningKeyCertificate)
+		case schemas.ImportTr34KeyBlock_WrappedKeyBlock:
+			v.WrappedKeyBlock = new(string)
+			return d.ReadString(schemas.ImportTr34KeyBlock_WrappedKeyBlock, v.WrappedKeyBlock)
+		case schemas.ImportTr34KeyBlock_WrappingKeyCertificate:
+			v.WrappingKeyCertificate = new(string)
+			return d.ReadString(schemas.ImportTr34KeyBlock_WrappingKeyCertificate, v.WrappingKeyCertificate)
+		case schemas.ImportTr34KeyBlock_WrappingKeyIdentifier:
+			v.WrappingKeyIdentifier = new(string)
+			return d.ReadString(schemas.ImportTr34KeyBlock_WrappingKeyIdentifier, v.WrappingKeyIdentifier)
+		}
+		return nil
+	})
 }
 
 // Metadata about an Amazon Web Services Payment Cryptography key.
@@ -752,6 +1526,157 @@ type Key struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Key) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Key)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Key) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTimestamp != nil {
+		s.WriteTime(schemas.Key_CreateTimestamp, *v.CreateTimestamp)
+	}
+	if v.DeletePendingTimestamp != nil {
+		s.WriteTime(schemas.Key_DeletePendingTimestamp, *v.DeletePendingTimestamp)
+	}
+	if v.DeleteTimestamp != nil {
+		s.WriteTime(schemas.Key_DeleteTimestamp, *v.DeleteTimestamp)
+	}
+	if v.DeriveKeyUsage != "" {
+		s.WriteString(schemas.Key_DeriveKeyUsage, string(v.DeriveKeyUsage))
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.Key_Enabled, *v.Enabled)
+	}
+	if v.Exportable != nil {
+		s.WriteBool(schemas.Key_Exportable, *v.Exportable)
+	}
+	if v.KeyArn != nil {
+		s.WriteString(schemas.Key_KeyArn, *v.KeyArn)
+	}
+	if v.KeyAttributes != nil {
+		s.WriteStruct(schemas.Key_KeyAttributes)
+		v.KeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.Key_KeyCheckValue, *v.KeyCheckValue)
+	}
+	if v.KeyCheckValueAlgorithm != "" {
+		s.WriteString(schemas.Key_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
+	}
+	if v.KeyOrigin != "" {
+		s.WriteString(schemas.Key_KeyOrigin, string(v.KeyOrigin))
+	}
+	if v.KeyState != "" {
+		s.WriteString(schemas.Key_KeyState, string(v.KeyState))
+	}
+	if v.MpaStatus != nil {
+		s.WriteStruct(schemas.Key_MpaStatus)
+		v.MpaStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiRegionKeyType != "" {
+		s.WriteString(schemas.Key_MultiRegionKeyType, string(v.MultiRegionKeyType))
+	}
+	if v.PrimaryRegion != nil {
+		s.WriteString(schemas.Key_PrimaryRegion, *v.PrimaryRegion)
+	}
+	serializeReplicationStatus(s, schemas.Key_ReplicationStatus, v.ReplicationStatus)
+	if v.UsageStartTimestamp != nil {
+		s.WriteTime(schemas.Key_UsageStartTimestamp, *v.UsageStartTimestamp)
+	}
+	if v.UsageStopTimestamp != nil {
+		s.WriteTime(schemas.Key_UsageStopTimestamp, *v.UsageStopTimestamp)
+	}
+	if v.UsingDefaultReplicationRegions != nil {
+		s.WriteBool(schemas.Key_UsingDefaultReplicationRegions, *v.UsingDefaultReplicationRegions)
+	}
+}
+func (v *Key) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Key, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Key_CreateTimestamp:
+			v.CreateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Key_CreateTimestamp, v.CreateTimestamp)
+		case schemas.Key_DeletePendingTimestamp:
+			v.DeletePendingTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Key_DeletePendingTimestamp, v.DeletePendingTimestamp)
+		case schemas.Key_DeleteTimestamp:
+			v.DeleteTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Key_DeleteTimestamp, v.DeleteTimestamp)
+		case schemas.Key_DeriveKeyUsage:
+			var ev string
+			if err := d.ReadString(schemas.Key_DeriveKeyUsage, &ev); err != nil {
+				return err
+			}
+			v.DeriveKeyUsage = DeriveKeyUsage(ev)
+			return nil
+		case schemas.Key_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.Key_Enabled, v.Enabled)
+		case schemas.Key_Exportable:
+			v.Exportable = new(bool)
+			return d.ReadBool(schemas.Key_Exportable, v.Exportable)
+		case schemas.Key_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.Key_KeyArn, v.KeyArn)
+		case schemas.Key_KeyAttributes:
+			v.KeyAttributes = &KeyAttributes{}
+			return v.KeyAttributes.Deserialize(d)
+		case schemas.Key_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.Key_KeyCheckValue, v.KeyCheckValue)
+		case schemas.Key_KeyCheckValueAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.Key_KeyCheckValueAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyCheckValueAlgorithm = KeyCheckValueAlgorithm(ev)
+			return nil
+		case schemas.Key_KeyOrigin:
+			var ev string
+			if err := d.ReadString(schemas.Key_KeyOrigin, &ev); err != nil {
+				return err
+			}
+			v.KeyOrigin = KeyOrigin(ev)
+			return nil
+		case schemas.Key_KeyState:
+			var ev string
+			if err := d.ReadString(schemas.Key_KeyState, &ev); err != nil {
+				return err
+			}
+			v.KeyState = KeyState(ev)
+			return nil
+		case schemas.Key_MpaStatus:
+			v.MpaStatus = &MpaStatus{}
+			return v.MpaStatus.Deserialize(d)
+		case schemas.Key_MultiRegionKeyType:
+			var ev string
+			if err := d.ReadString(schemas.Key_MultiRegionKeyType, &ev); err != nil {
+				return err
+			}
+			v.MultiRegionKeyType = MultiRegionKeyType(ev)
+			return nil
+		case schemas.Key_PrimaryRegion:
+			v.PrimaryRegion = new(string)
+			return d.ReadString(schemas.Key_PrimaryRegion, v.PrimaryRegion)
+		case schemas.Key_ReplicationStatus:
+			return deserializeReplicationStatus(d, schemas.Key_ReplicationStatus, &v.ReplicationStatus)
+		case schemas.Key_UsageStartTimestamp:
+			v.UsageStartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Key_UsageStartTimestamp, v.UsageStartTimestamp)
+		case schemas.Key_UsageStopTimestamp:
+			v.UsageStopTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Key_UsageStopTimestamp, v.UsageStopTimestamp)
+		case schemas.Key_UsingDefaultReplicationRegions:
+			v.UsingDefaultReplicationRegions = new(bool)
+			return d.ReadBool(schemas.Key_UsingDefaultReplicationRegions, v.UsingDefaultReplicationRegions)
+		}
+		return nil
+	})
+}
+
 // The role of the key, the algorithm it supports, and the cryptographic
 // operations allowed with the key. This data is immutable after the key is
 // created.
@@ -787,6 +1712,60 @@ type KeyAttributes struct {
 	KeyUsage KeyUsage
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyAlgorithm != "" {
+		s.WriteString(schemas.KeyAttributes_KeyAlgorithm, string(v.KeyAlgorithm))
+	}
+	if v.KeyClass != "" {
+		s.WriteString(schemas.KeyAttributes_KeyClass, string(v.KeyClass))
+	}
+	if v.KeyModesOfUse != nil {
+		s.WriteStruct(schemas.KeyAttributes_KeyModesOfUse)
+		v.KeyModesOfUse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyUsage != "" {
+		s.WriteString(schemas.KeyAttributes_KeyUsage, string(v.KeyUsage))
+	}
+}
+func (v *KeyAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyAttributes_KeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.KeyAttributes_KeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyAlgorithm = KeyAlgorithm(ev)
+			return nil
+		case schemas.KeyAttributes_KeyClass:
+			var ev string
+			if err := d.ReadString(schemas.KeyAttributes_KeyClass, &ev); err != nil {
+				return err
+			}
+			v.KeyClass = KeyClass(ev)
+			return nil
+		case schemas.KeyAttributes_KeyModesOfUse:
+			v.KeyModesOfUse = &KeyModesOfUse{}
+			return v.KeyModesOfUse.Deserialize(d)
+		case schemas.KeyAttributes_KeyUsage:
+			var ev string
+			if err := d.ReadString(schemas.KeyAttributes_KeyUsage, &ev); err != nil {
+				return err
+			}
+			v.KeyUsage = KeyUsage(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Optional metadata for export associated with the key material. This data is
@@ -830,6 +1809,49 @@ type KeyBlockHeaders struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeyBlockHeaders) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyBlockHeaders)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyBlockHeaders) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyExportability != "" {
+		s.WriteString(schemas.KeyBlockHeaders_KeyExportability, string(v.KeyExportability))
+	}
+	if v.KeyModesOfUse != nil {
+		s.WriteStruct(schemas.KeyBlockHeaders_KeyModesOfUse)
+		v.KeyModesOfUse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyVersion != nil {
+		s.WriteString(schemas.KeyBlockHeaders_KeyVersion, *v.KeyVersion)
+	}
+	serializeOptionalBlocks(s, schemas.KeyBlockHeaders_OptionalBlocks, v.OptionalBlocks)
+}
+func (v *KeyBlockHeaders) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyBlockHeaders, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyBlockHeaders_KeyExportability:
+			var ev string
+			if err := d.ReadString(schemas.KeyBlockHeaders_KeyExportability, &ev); err != nil {
+				return err
+			}
+			v.KeyExportability = KeyExportability(ev)
+			return nil
+		case schemas.KeyBlockHeaders_KeyModesOfUse:
+			v.KeyModesOfUse = &KeyModesOfUse{}
+			return v.KeyModesOfUse.Deserialize(d)
+		case schemas.KeyBlockHeaders_KeyVersion:
+			v.KeyVersion = new(string)
+			return d.ReadString(schemas.KeyBlockHeaders_KeyVersion, v.KeyVersion)
+		case schemas.KeyBlockHeaders_OptionalBlocks:
+			return deserializeOptionalBlocks(d, schemas.KeyBlockHeaders_OptionalBlocks, &v.OptionalBlocks)
+		}
+		return nil
+	})
+}
+
 // The list of cryptographic operations that you can perform using the key. The
 // modes of use are deﬁned in section A.5.3 of the TR-31 spec.
 type KeyModesOfUse struct {
@@ -871,6 +1893,67 @@ type KeyModesOfUse struct {
 	Wrap bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyModesOfUse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyModesOfUse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyModesOfUse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Decrypt != false {
+		s.WriteBool(schemas.KeyModesOfUse_Decrypt, v.Decrypt)
+	}
+	if v.DeriveKey != false {
+		s.WriteBool(schemas.KeyModesOfUse_DeriveKey, v.DeriveKey)
+	}
+	if v.Encrypt != false {
+		s.WriteBool(schemas.KeyModesOfUse_Encrypt, v.Encrypt)
+	}
+	if v.Generate != false {
+		s.WriteBool(schemas.KeyModesOfUse_Generate, v.Generate)
+	}
+	if v.NoRestrictions != false {
+		s.WriteBool(schemas.KeyModesOfUse_NoRestrictions, v.NoRestrictions)
+	}
+	if v.Sign != false {
+		s.WriteBool(schemas.KeyModesOfUse_Sign, v.Sign)
+	}
+	if v.Unwrap != false {
+		s.WriteBool(schemas.KeyModesOfUse_Unwrap, v.Unwrap)
+	}
+	if v.Verify != false {
+		s.WriteBool(schemas.KeyModesOfUse_Verify, v.Verify)
+	}
+	if v.Wrap != false {
+		s.WriteBool(schemas.KeyModesOfUse_Wrap, v.Wrap)
+	}
+}
+func (v *KeyModesOfUse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyModesOfUse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyModesOfUse_Decrypt:
+			return d.ReadBool(schemas.KeyModesOfUse_Decrypt, &v.Decrypt)
+		case schemas.KeyModesOfUse_DeriveKey:
+			return d.ReadBool(schemas.KeyModesOfUse_DeriveKey, &v.DeriveKey)
+		case schemas.KeyModesOfUse_Encrypt:
+			return d.ReadBool(schemas.KeyModesOfUse_Encrypt, &v.Encrypt)
+		case schemas.KeyModesOfUse_Generate:
+			return d.ReadBool(schemas.KeyModesOfUse_Generate, &v.Generate)
+		case schemas.KeyModesOfUse_NoRestrictions:
+			return d.ReadBool(schemas.KeyModesOfUse_NoRestrictions, &v.NoRestrictions)
+		case schemas.KeyModesOfUse_Sign:
+			return d.ReadBool(schemas.KeyModesOfUse_Sign, &v.Sign)
+		case schemas.KeyModesOfUse_Unwrap:
+			return d.ReadBool(schemas.KeyModesOfUse_Unwrap, &v.Unwrap)
+		case schemas.KeyModesOfUse_Verify:
+			return d.ReadBool(schemas.KeyModesOfUse_Verify, &v.Verify)
+		case schemas.KeyModesOfUse_Wrap:
+			return d.ReadBool(schemas.KeyModesOfUse_Wrap, &v.Wrap)
+		}
+		return nil
+	})
 }
 
 // Metadata about an Amazon Web Services Payment Cryptography key.
@@ -934,6 +2017,80 @@ type KeySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.KeySummary_Enabled, *v.Enabled)
+	}
+	if v.Exportable != nil {
+		s.WriteBool(schemas.KeySummary_Exportable, *v.Exportable)
+	}
+	if v.KeyArn != nil {
+		s.WriteString(schemas.KeySummary_KeyArn, *v.KeyArn)
+	}
+	if v.KeyAttributes != nil {
+		s.WriteStruct(schemas.KeySummary_KeyAttributes)
+		v.KeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.KeySummary_KeyCheckValue, *v.KeyCheckValue)
+	}
+	if v.KeyState != "" {
+		s.WriteString(schemas.KeySummary_KeyState, string(v.KeyState))
+	}
+	if v.MultiRegionKeyType != "" {
+		s.WriteString(schemas.KeySummary_MultiRegionKeyType, string(v.MultiRegionKeyType))
+	}
+	if v.PrimaryRegion != nil {
+		s.WriteString(schemas.KeySummary_PrimaryRegion, *v.PrimaryRegion)
+	}
+}
+func (v *KeySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeySummary_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.KeySummary_Enabled, v.Enabled)
+		case schemas.KeySummary_Exportable:
+			v.Exportable = new(bool)
+			return d.ReadBool(schemas.KeySummary_Exportable, v.Exportable)
+		case schemas.KeySummary_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.KeySummary_KeyArn, v.KeyArn)
+		case schemas.KeySummary_KeyAttributes:
+			v.KeyAttributes = &KeyAttributes{}
+			return v.KeyAttributes.Deserialize(d)
+		case schemas.KeySummary_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.KeySummary_KeyCheckValue, v.KeyCheckValue)
+		case schemas.KeySummary_KeyState:
+			var ev string
+			if err := d.ReadString(schemas.KeySummary_KeyState, &ev); err != nil {
+				return err
+			}
+			v.KeyState = KeyState(ev)
+			return nil
+		case schemas.KeySummary_MultiRegionKeyType:
+			var ev string
+			if err := d.ReadString(schemas.KeySummary_MultiRegionKeyType, &ev); err != nil {
+				return err
+			}
+			v.MultiRegionKeyType = MultiRegionKeyType(ev)
+			return nil
+		case schemas.KeySummary_PrimaryRegion:
+			v.PrimaryRegion = new(string)
+			return d.ReadString(schemas.KeySummary_PrimaryRegion, v.PrimaryRegion)
+		}
+		return nil
+	})
+}
+
 // The status of an MPA session.
 type MpaStatus struct {
 
@@ -958,6 +2115,50 @@ type MpaStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MpaStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MpaStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MpaStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitiationDate != nil {
+		s.WriteTime(schemas.MpaStatus_InitiationDate, *v.InitiationDate)
+	}
+	if v.MpaSessionArn != nil {
+		s.WriteString(schemas.MpaStatus_MpaSessionArn, *v.MpaSessionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MpaStatus_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.MpaStatus_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *MpaStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MpaStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MpaStatus_InitiationDate:
+			v.InitiationDate = new(time.Time)
+			return d.ReadTime(schemas.MpaStatus_InitiationDate, v.InitiationDate)
+		case schemas.MpaStatus_MpaSessionArn:
+			v.MpaSessionArn = new(string)
+			return d.ReadString(schemas.MpaStatus_MpaSessionArn, v.MpaSessionArn)
+		case schemas.MpaStatus_Status:
+			var ev string
+			if err := d.ReadString(schemas.MpaStatus_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SessionStatus(ev)
+			return nil
+		case schemas.MpaStatus_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.MpaStatus_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // The details of an MPA team association with a protected operation.
 type MpaTeamAssociation struct {
 
@@ -980,6 +2181,56 @@ type MpaTeamAssociation struct {
 	MpaStatus *MpaStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *MpaTeamAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MpaTeamAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MpaTeamAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.MpaTeamAssociation_Action, string(v.Action))
+	}
+	if v.AssociationState != "" {
+		s.WriteString(schemas.MpaTeamAssociation_AssociationState, string(v.AssociationState))
+	}
+	if v.MpaStatus != nil {
+		s.WriteStruct(schemas.MpaTeamAssociation_MpaStatus)
+		v.MpaStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MpaTeamArn != nil {
+		s.WriteString(schemas.MpaTeamAssociation_MpaTeamArn, *v.MpaTeamArn)
+	}
+}
+func (v *MpaTeamAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MpaTeamAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MpaTeamAssociation_Action:
+			var ev string
+			if err := d.ReadString(schemas.MpaTeamAssociation_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = MpaOperation(ev)
+			return nil
+		case schemas.MpaTeamAssociation_AssociationState:
+			var ev string
+			if err := d.ReadString(schemas.MpaTeamAssociation_AssociationState, &ev); err != nil {
+				return err
+			}
+			v.AssociationState = AssociationState(ev)
+			return nil
+		case schemas.MpaTeamAssociation_MpaStatus:
+			v.MpaStatus = &MpaStatus{}
+			return v.MpaStatus.Deserialize(d)
+		case schemas.MpaTeamAssociation_MpaTeamArn:
+			v.MpaTeamArn = new(string)
+			return d.ReadString(schemas.MpaTeamAssociation_MpaTeamArn, v.MpaTeamArn)
+		}
+		return nil
+	})
 }
 
 // Represents the replication status information for a key in a replication region
@@ -1014,6 +2265,38 @@ type ReplicationStatusType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicationStatusType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationStatusType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationStatusType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.ReplicationStatusType_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ReplicationStatusType_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ReplicationStatusType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationStatusType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationStatusType_Status:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationStatusType_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = KeyReplicationState(ev)
+			return nil
+		case schemas.ReplicationStatusType_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ReplicationStatusType_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Parameter information for root public key certificate import.
 type RootCertificatePublicKey struct {
 
@@ -1032,6 +2315,36 @@ type RootCertificatePublicKey struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RootCertificatePublicKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RootCertificatePublicKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RootCertificatePublicKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyAttributes != nil {
+		s.WriteStruct(schemas.RootCertificatePublicKey_KeyAttributes)
+		v.KeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PublicKeyCertificate != nil {
+		s.WriteString(schemas.RootCertificatePublicKey_PublicKeyCertificate, *v.PublicKeyCertificate)
+	}
+}
+func (v *RootCertificatePublicKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RootCertificatePublicKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RootCertificatePublicKey_KeyAttributes:
+			v.KeyAttributes = &KeyAttributes{}
+			return v.KeyAttributes.Deserialize(d)
+		case schemas.RootCertificatePublicKey_PublicKeyCertificate:
+			v.PublicKeyCertificate = new(string)
+			return d.ReadString(schemas.RootCertificatePublicKey_PublicKeyCertificate, v.PublicKeyCertificate)
+		}
+		return nil
+	})
+}
+
 // A structure that contains information about a tag.
 type Tag struct {
 
@@ -1046,6 +2359,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Parameter information for trusted public key certificate import.
@@ -1070,6 +2411,42 @@ type TrustedCertificatePublicKey struct {
 	PublicKeyCertificate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrustedCertificatePublicKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrustedCertificatePublicKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrustedCertificatePublicKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		s.WriteString(schemas.TrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
+	}
+	if v.KeyAttributes != nil {
+		s.WriteStruct(schemas.TrustedCertificatePublicKey_KeyAttributes)
+		v.KeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PublicKeyCertificate != nil {
+		s.WriteString(schemas.TrustedCertificatePublicKey_PublicKeyCertificate, *v.PublicKeyCertificate)
+	}
+}
+func (v *TrustedCertificatePublicKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrustedCertificatePublicKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier:
+			v.CertificateAuthorityPublicKeyIdentifier = new(string)
+			return d.ReadString(schemas.TrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier, v.CertificateAuthorityPublicKeyIdentifier)
+		case schemas.TrustedCertificatePublicKey_KeyAttributes:
+			v.KeyAttributes = &KeyAttributes{}
+			return v.KeyAttributes.Deserialize(d)
+		case schemas.TrustedCertificatePublicKey_PublicKeyCertificate:
+			v.PublicKeyCertificate = new(string)
+			return d.ReadString(schemas.TrustedCertificatePublicKey_PublicKeyCertificate, v.PublicKeyCertificate)
+		}
+		return nil
+	})
 }
 
 // Parameter information for generating a WrappedKeyBlock for key exchange.
@@ -1107,6 +2484,60 @@ type WrappedKey struct {
 	KeyCheckValueAlgorithm KeyCheckValueAlgorithm
 
 	noSmithyDocumentSerde
+}
+
+func (v *WrappedKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WrappedKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WrappedKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.WrappedKey_KeyCheckValue, *v.KeyCheckValue)
+	}
+	if v.KeyCheckValueAlgorithm != "" {
+		s.WriteString(schemas.WrappedKey_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
+	}
+	if v.KeyMaterial != nil {
+		s.WriteString(schemas.WrappedKey_KeyMaterial, *v.KeyMaterial)
+	}
+	if v.WrappedKeyMaterialFormat != "" {
+		s.WriteString(schemas.WrappedKey_WrappedKeyMaterialFormat, string(v.WrappedKeyMaterialFormat))
+	}
+	if v.WrappingKeyArn != nil {
+		s.WriteString(schemas.WrappedKey_WrappingKeyArn, *v.WrappingKeyArn)
+	}
+}
+func (v *WrappedKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WrappedKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WrappedKey_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.WrappedKey_KeyCheckValue, v.KeyCheckValue)
+		case schemas.WrappedKey_KeyCheckValueAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.WrappedKey_KeyCheckValueAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyCheckValueAlgorithm = KeyCheckValueAlgorithm(ev)
+			return nil
+		case schemas.WrappedKey_KeyMaterial:
+			v.KeyMaterial = new(string)
+			return d.ReadString(schemas.WrappedKey_KeyMaterial, v.KeyMaterial)
+		case schemas.WrappedKey_WrappedKeyMaterialFormat:
+			var ev string
+			if err := d.ReadString(schemas.WrappedKey_WrappedKeyMaterialFormat, &ev); err != nil {
+				return err
+			}
+			v.WrappedKeyMaterialFormat = WrappedKeyMaterialFormat(ev)
+			return nil
+		case schemas.WrappedKey_WrappingKeyArn:
+			v.WrappingKeyArn = new(string)
+			return d.ReadString(schemas.WrappedKey_WrappingKeyArn, v.WrappingKeyArn)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

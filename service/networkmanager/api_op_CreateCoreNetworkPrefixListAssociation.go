@@ -5,6 +5,8 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type CreateCoreNetworkPrefixListAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCoreNetworkPrefixListAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCoreNetworkPrefixListAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCoreNetworkPrefixListAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCoreNetworkPrefixListAssociationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CreateCoreNetworkPrefixListAssociationRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PrefixListAlias != nil {
+		s.WriteString(schemas.CreateCoreNetworkPrefixListAssociationRequest_PrefixListAlias, *v.PrefixListAlias)
+	}
+	if v.PrefixListArn != nil {
+		s.WriteString(schemas.CreateCoreNetworkPrefixListAssociationRequest_PrefixListArn, *v.PrefixListArn)
+	}
+}
+
 type CreateCoreNetworkPrefixListAssociationOutput struct {
 
 	// The ID of the core network associated with the prefix list.
@@ -66,13 +89,44 @@ type CreateCoreNetworkPrefixListAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCoreNetworkPrefixListAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCoreNetworkPrefixListAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCoreNetworkPrefixListAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CreateCoreNetworkPrefixListAssociationResponse_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PrefixListAlias != nil {
+		s.WriteString(schemas.CreateCoreNetworkPrefixListAssociationResponse_PrefixListAlias, *v.PrefixListAlias)
+	}
+	if v.PrefixListArn != nil {
+		s.WriteString(schemas.CreateCoreNetworkPrefixListAssociationResponse_PrefixListArn, *v.PrefixListArn)
+	}
+}
+func (v *CreateCoreNetworkPrefixListAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCoreNetworkPrefixListAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCoreNetworkPrefixListAssociationResponse_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.CreateCoreNetworkPrefixListAssociationResponse_CoreNetworkId, v.CoreNetworkId)
+		case schemas.CreateCoreNetworkPrefixListAssociationResponse_PrefixListAlias:
+			v.PrefixListAlias = new(string)
+			return d.ReadString(schemas.CreateCoreNetworkPrefixListAssociationResponse_PrefixListAlias, v.PrefixListAlias)
+		case schemas.CreateCoreNetworkPrefixListAssociationResponse_PrefixListArn:
+			v.PrefixListArn = new(string)
+			return d.ReadString(schemas.CreateCoreNetworkPrefixListAssociationResponse_PrefixListArn, v.PrefixListArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCoreNetworkPrefixListAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCoreNetworkPrefixListAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCoreNetworkPrefixListAssociation, schemas.CreateCoreNetworkPrefixListAssociationRequest, schemas.CreateCoreNetworkPrefixListAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCoreNetworkPrefixListAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCoreNetworkPrefixListAssociation, schemas.CreateCoreNetworkPrefixListAssociationRequest, schemas.CreateCoreNetworkPrefixListAssociationResponse), output: &CreateCoreNetworkPrefixListAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

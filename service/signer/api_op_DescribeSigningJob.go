@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -38,6 +40,18 @@ type DescribeSigningJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeSigningJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSigningJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSigningJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeSigningJobRequest_jobId, *v.JobId)
+	}
 }
 
 type DescribeSigningJobOutput struct {
@@ -109,13 +123,151 @@ type DescribeSigningJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSigningJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSigningJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSigningJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.DescribeSigningJobResponse_completedAt, *v.CompletedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeSigningJobResponse_createdAt, *v.CreatedAt)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeSigningJobResponse_jobId, *v.JobId)
+	}
+	if v.JobInvoker != nil {
+		s.WriteString(schemas.DescribeSigningJobResponse_jobInvoker, *v.JobInvoker)
+	}
+	if v.JobOwner != nil {
+		s.WriteString(schemas.DescribeSigningJobResponse_jobOwner, *v.JobOwner)
+	}
+	if v.Overrides != nil {
+		s.WriteStruct(schemas.DescribeSigningJobResponse_overrides)
+		v.Overrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlatformDisplayName != nil {
+		s.WriteString(schemas.DescribeSigningJobResponse_platformDisplayName, *v.PlatformDisplayName)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.DescribeSigningJobResponse_platformId, *v.PlatformId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.DescribeSigningJobResponse_profileName, *v.ProfileName)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.DescribeSigningJobResponse_profileVersion, *v.ProfileVersion)
+	}
+	if v.RequestedBy != nil {
+		s.WriteString(schemas.DescribeSigningJobResponse_requestedBy, *v.RequestedBy)
+	}
+	if v.RevocationRecord != nil {
+		s.WriteStruct(schemas.DescribeSigningJobResponse_revocationRecord)
+		v.RevocationRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SignatureExpiresAt != nil {
+		s.WriteTime(schemas.DescribeSigningJobResponse_signatureExpiresAt, *v.SignatureExpiresAt)
+	}
+	if v.SignedObject != nil {
+		s.WriteStruct(schemas.DescribeSigningJobResponse_signedObject)
+		v.SignedObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningMaterial != nil {
+		s.WriteStruct(schemas.DescribeSigningJobResponse_signingMaterial)
+		v.SigningMaterial.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSigningParameters(s, schemas.DescribeSigningJobResponse_signingParameters, v.SigningParameters)
+	if v.Source != nil {
+		s.WriteStruct(schemas.DescribeSigningJobResponse_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeSigningJobResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeSigningJobResponse_statusReason, *v.StatusReason)
+	}
+}
+func (v *DescribeSigningJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSigningJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSigningJobResponse_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeSigningJobResponse_completedAt, v.CompletedAt)
+		case schemas.DescribeSigningJobResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeSigningJobResponse_createdAt, v.CreatedAt)
+		case schemas.DescribeSigningJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DescribeSigningJobResponse_jobId, v.JobId)
+		case schemas.DescribeSigningJobResponse_jobInvoker:
+			v.JobInvoker = new(string)
+			return d.ReadString(schemas.DescribeSigningJobResponse_jobInvoker, v.JobInvoker)
+		case schemas.DescribeSigningJobResponse_jobOwner:
+			v.JobOwner = new(string)
+			return d.ReadString(schemas.DescribeSigningJobResponse_jobOwner, v.JobOwner)
+		case schemas.DescribeSigningJobResponse_overrides:
+			v.Overrides = &types.SigningPlatformOverrides{}
+			return v.Overrides.Deserialize(d)
+		case schemas.DescribeSigningJobResponse_platformDisplayName:
+			v.PlatformDisplayName = new(string)
+			return d.ReadString(schemas.DescribeSigningJobResponse_platformDisplayName, v.PlatformDisplayName)
+		case schemas.DescribeSigningJobResponse_platformId:
+			v.PlatformId = new(string)
+			return d.ReadString(schemas.DescribeSigningJobResponse_platformId, v.PlatformId)
+		case schemas.DescribeSigningJobResponse_profileName:
+			v.ProfileName = new(string)
+			return d.ReadString(schemas.DescribeSigningJobResponse_profileName, v.ProfileName)
+		case schemas.DescribeSigningJobResponse_profileVersion:
+			v.ProfileVersion = new(string)
+			return d.ReadString(schemas.DescribeSigningJobResponse_profileVersion, v.ProfileVersion)
+		case schemas.DescribeSigningJobResponse_requestedBy:
+			v.RequestedBy = new(string)
+			return d.ReadString(schemas.DescribeSigningJobResponse_requestedBy, v.RequestedBy)
+		case schemas.DescribeSigningJobResponse_revocationRecord:
+			v.RevocationRecord = &types.SigningJobRevocationRecord{}
+			return v.RevocationRecord.Deserialize(d)
+		case schemas.DescribeSigningJobResponse_signatureExpiresAt:
+			v.SignatureExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeSigningJobResponse_signatureExpiresAt, v.SignatureExpiresAt)
+		case schemas.DescribeSigningJobResponse_signedObject:
+			v.SignedObject = &types.SignedObject{}
+			return v.SignedObject.Deserialize(d)
+		case schemas.DescribeSigningJobResponse_signingMaterial:
+			v.SigningMaterial = &types.SigningMaterial{}
+			return v.SigningMaterial.Deserialize(d)
+		case schemas.DescribeSigningJobResponse_signingParameters:
+			return deserializeSigningParameters(d, schemas.DescribeSigningJobResponse_signingParameters, &v.SigningParameters)
+		case schemas.DescribeSigningJobResponse_source:
+			v.Source = &types.Source{}
+			return v.Source.Deserialize(d)
+		case schemas.DescribeSigningJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeSigningJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SigningStatus(ev)
+			return nil
+		case schemas.DescribeSigningJobResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeSigningJobResponse_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSigningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSigningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSigningJob, schemas.DescribeSigningJobRequest, schemas.DescribeSigningJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSigningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSigningJob, schemas.DescribeSigningJobRequest, schemas.DescribeSigningJobResponse), output: &DescribeSigningJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

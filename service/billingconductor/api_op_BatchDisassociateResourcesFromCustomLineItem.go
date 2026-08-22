@@ -4,7 +4,9 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,39 @@ type BatchDisassociateResourcesFromCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateResourcesFromCustomLineItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateResourcesFromCustomLineItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateResourcesFromCustomLineItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriodRange != nil {
+		s.WriteStruct(schemas.BatchDisassociateResourcesFromCustomLineItemInput_BillingPeriodRange)
+		v.BillingPeriodRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCustomLineItemBatchDisassociationsList(s, schemas.BatchDisassociateResourcesFromCustomLineItemInput_ResourceArns, v.ResourceArns)
+	if v.TargetArn != nil {
+		s.WriteString(schemas.BatchDisassociateResourcesFromCustomLineItemInput_TargetArn, *v.TargetArn)
+	}
+}
+func (v *BatchDisassociateResourcesFromCustomLineItemInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateResourcesFromCustomLineItemInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateResourcesFromCustomLineItemInput_BillingPeriodRange:
+			v.BillingPeriodRange = &types.CustomLineItemBillingPeriodRange{}
+			return v.BillingPeriodRange.Deserialize(d)
+		case schemas.BatchDisassociateResourcesFromCustomLineItemInput_ResourceArns:
+			return deserializeCustomLineItemBatchDisassociationsList(d, schemas.BatchDisassociateResourcesFromCustomLineItemInput_ResourceArns, &v.ResourceArns)
+		case schemas.BatchDisassociateResourcesFromCustomLineItemInput_TargetArn:
+			v.TargetArn = new(string)
+			return d.ReadString(schemas.BatchDisassociateResourcesFromCustomLineItemInput_TargetArn, v.TargetArn)
+		}
+		return nil
+	})
+}
+
 type BatchDisassociateResourcesFromCustomLineItemOutput struct {
 
 	//  A list of DisassociateResourceResponseElement for each resource that failed
@@ -58,13 +93,32 @@ type BatchDisassociateResourcesFromCustomLineItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateResourcesFromCustomLineItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateResourcesFromCustomLineItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateResourcesFromCustomLineItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDisassociateResourcesResponseList(s, schemas.BatchDisassociateResourcesFromCustomLineItemOutput_FailedDisassociatedResources, v.FailedDisassociatedResources)
+	serializeDisassociateResourcesResponseList(s, schemas.BatchDisassociateResourcesFromCustomLineItemOutput_SuccessfullyDisassociatedResources, v.SuccessfullyDisassociatedResources)
+}
+func (v *BatchDisassociateResourcesFromCustomLineItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateResourcesFromCustomLineItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateResourcesFromCustomLineItemOutput_FailedDisassociatedResources:
+			return deserializeDisassociateResourcesResponseList(d, schemas.BatchDisassociateResourcesFromCustomLineItemOutput_FailedDisassociatedResources, &v.FailedDisassociatedResources)
+		case schemas.BatchDisassociateResourcesFromCustomLineItemOutput_SuccessfullyDisassociatedResources:
+			return deserializeDisassociateResourcesResponseList(d, schemas.BatchDisassociateResourcesFromCustomLineItemOutput_SuccessfullyDisassociatedResources, &v.SuccessfullyDisassociatedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateResourcesFromCustomLineItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateResourcesFromCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateResourcesFromCustomLineItem, schemas.BatchDisassociateResourcesFromCustomLineItemInput, schemas.BatchDisassociateResourcesFromCustomLineItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDisassociateResourcesFromCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateResourcesFromCustomLineItem, schemas.BatchDisassociateResourcesFromCustomLineItemInput, schemas.BatchDisassociateResourcesFromCustomLineItemOutput), output: &BatchDisassociateResourcesFromCustomLineItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

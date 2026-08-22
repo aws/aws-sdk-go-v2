@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,34 @@ type GetLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLinksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetLinksRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	serializeLinkIdList(s, schemas.GetLinksRequest_LinkIds, v.LinkIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetLinksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLinksRequest_NextToken, *v.NextToken)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.GetLinksRequest_Provider, *v.Provider)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.GetLinksRequest_SiteId, *v.SiteId)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.GetLinksRequest_Type, *v.Type)
+	}
+}
+
 type GetLinksOutput struct {
 
 	// The links.
@@ -70,13 +100,35 @@ type GetLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLinksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinkList(s, schemas.GetLinksResponse_Links, v.Links)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLinksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLinksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLinksResponse_Links:
+			return deserializeLinkList(d, schemas.GetLinksResponse_Links, &v.Links)
+		case schemas.GetLinksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetLinksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinks, schemas.GetLinksRequest, schemas.GetLinksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinks, schemas.GetLinksRequest, schemas.GetLinksResponse), output: &GetLinksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

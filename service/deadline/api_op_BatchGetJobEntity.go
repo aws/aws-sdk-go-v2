@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,25 @@ type BatchGetJobEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetJobEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetJobEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetJobEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.BatchGetJobEntityRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.BatchGetJobEntityRequest_fleetId, *v.FleetId)
+	}
+	serializeJobEntityIdentifiers(s, schemas.BatchGetJobEntityRequest_identifiers, v.Identifiers)
+	if v.WorkerId != nil {
+		s.WriteString(schemas.BatchGetJobEntityRequest_workerId, *v.WorkerId)
+	}
+}
+
 type BatchGetJobEntityOutput struct {
 
 	// A list of the job entities, or details, in the batch.
@@ -71,13 +92,32 @@ type BatchGetJobEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetJobEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetJobEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetJobEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetJobEntityList(s, schemas.BatchGetJobEntityResponse_entities, v.Entities)
+	serializeBatchGetJobEntityErrors(s, schemas.BatchGetJobEntityResponse_errors, v.Errors)
+}
+func (v *BatchGetJobEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetJobEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetJobEntityResponse_entities:
+			return deserializeBatchGetJobEntityList(d, schemas.BatchGetJobEntityResponse_entities, &v.Entities)
+		case schemas.BatchGetJobEntityResponse_errors:
+			return deserializeBatchGetJobEntityErrors(d, schemas.BatchGetJobEntityResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetJobEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetJobEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetJobEntity, schemas.BatchGetJobEntityRequest, schemas.BatchGetJobEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetJobEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetJobEntity, schemas.BatchGetJobEntityRequest, schemas.BatchGetJobEntityResponse), output: &BatchGetJobEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

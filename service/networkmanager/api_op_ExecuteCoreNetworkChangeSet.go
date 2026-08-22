@@ -4,6 +4,8 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ExecuteCoreNetworkChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteCoreNetworkChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteCoreNetworkChangeSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteCoreNetworkChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ExecuteCoreNetworkChangeSetRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteInt32(schemas.ExecuteCoreNetworkChangeSetRequest_PolicyVersionId, *v.PolicyVersionId)
+	}
+}
+
 type ExecuteCoreNetworkChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type ExecuteCoreNetworkChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteCoreNetworkChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteCoreNetworkChangeSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteCoreNetworkChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ExecuteCoreNetworkChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteCoreNetworkChangeSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteCoreNetworkChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteCoreNetworkChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteCoreNetworkChangeSet, schemas.ExecuteCoreNetworkChangeSetRequest, schemas.ExecuteCoreNetworkChangeSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteCoreNetworkChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteCoreNetworkChangeSet, schemas.ExecuteCoreNetworkChangeSetRequest, schemas.ExecuteCoreNetworkChangeSetResponse), output: &ExecuteCoreNetworkChangeSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,34 @@ type CheckoutLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckoutLicenseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckoutLicenseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckoutLicenseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Beneficiary != nil {
+		s.WriteString(schemas.CheckoutLicenseRequest_Beneficiary, *v.Beneficiary)
+	}
+	if v.CheckoutType != "" {
+		s.WriteString(schemas.CheckoutLicenseRequest_CheckoutType, string(v.CheckoutType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CheckoutLicenseRequest_ClientToken, *v.ClientToken)
+	}
+	serializeEntitlementDataList(s, schemas.CheckoutLicenseRequest_Entitlements, v.Entitlements)
+	if v.KeyFingerprint != nil {
+		s.WriteString(schemas.CheckoutLicenseRequest_KeyFingerprint, *v.KeyFingerprint)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.CheckoutLicenseRequest_NodeId, *v.NodeId)
+	}
+	if v.ProductSKU != nil {
+		s.WriteString(schemas.CheckoutLicenseRequest_ProductSKU, *v.ProductSKU)
+	}
+}
+
 type CheckoutLicenseOutput struct {
 
 	// Checkout type.
@@ -96,13 +126,75 @@ type CheckoutLicenseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckoutLicenseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckoutLicenseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckoutLicenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckoutType != "" {
+		s.WriteString(schemas.CheckoutLicenseResponse_CheckoutType, string(v.CheckoutType))
+	}
+	serializeEntitlementDataList(s, schemas.CheckoutLicenseResponse_EntitlementsAllowed, v.EntitlementsAllowed)
+	if v.Expiration != nil {
+		s.WriteString(schemas.CheckoutLicenseResponse_Expiration, *v.Expiration)
+	}
+	if v.IssuedAt != nil {
+		s.WriteString(schemas.CheckoutLicenseResponse_IssuedAt, *v.IssuedAt)
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CheckoutLicenseResponse_LicenseArn, *v.LicenseArn)
+	}
+	if v.LicenseConsumptionToken != nil {
+		s.WriteString(schemas.CheckoutLicenseResponse_LicenseConsumptionToken, *v.LicenseConsumptionToken)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.CheckoutLicenseResponse_NodeId, *v.NodeId)
+	}
+	if v.SignedToken != nil {
+		s.WriteString(schemas.CheckoutLicenseResponse_SignedToken, *v.SignedToken)
+	}
+}
+func (v *CheckoutLicenseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckoutLicenseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckoutLicenseResponse_CheckoutType:
+			var ev string
+			if err := d.ReadString(schemas.CheckoutLicenseResponse_CheckoutType, &ev); err != nil {
+				return err
+			}
+			v.CheckoutType = types.CheckoutType(ev)
+			return nil
+		case schemas.CheckoutLicenseResponse_EntitlementsAllowed:
+			return deserializeEntitlementDataList(d, schemas.CheckoutLicenseResponse_EntitlementsAllowed, &v.EntitlementsAllowed)
+		case schemas.CheckoutLicenseResponse_Expiration:
+			v.Expiration = new(string)
+			return d.ReadString(schemas.CheckoutLicenseResponse_Expiration, v.Expiration)
+		case schemas.CheckoutLicenseResponse_IssuedAt:
+			v.IssuedAt = new(string)
+			return d.ReadString(schemas.CheckoutLicenseResponse_IssuedAt, v.IssuedAt)
+		case schemas.CheckoutLicenseResponse_LicenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.CheckoutLicenseResponse_LicenseArn, v.LicenseArn)
+		case schemas.CheckoutLicenseResponse_LicenseConsumptionToken:
+			v.LicenseConsumptionToken = new(string)
+			return d.ReadString(schemas.CheckoutLicenseResponse_LicenseConsumptionToken, v.LicenseConsumptionToken)
+		case schemas.CheckoutLicenseResponse_NodeId:
+			v.NodeId = new(string)
+			return d.ReadString(schemas.CheckoutLicenseResponse_NodeId, v.NodeId)
+		case schemas.CheckoutLicenseResponse_SignedToken:
+			v.SignedToken = new(string)
+			return d.ReadString(schemas.CheckoutLicenseResponse_SignedToken, v.SignedToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckoutLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckoutLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckoutLicense, schemas.CheckoutLicenseRequest, schemas.CheckoutLicenseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCheckoutLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckoutLicense, schemas.CheckoutLicenseRequest, schemas.CheckoutLicenseResponse), output: &CheckoutLicenseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

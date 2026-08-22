@@ -5,7 +5,9 @@ package dataexchange
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,45 @@ type ListRevisionAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRevisionAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRevisionAssetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRevisionAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ListRevisionAssetsRequest_DataSetId, *v.DataSetId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListRevisionAssetsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRevisionAssetsRequest_NextToken, *v.NextToken)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ListRevisionAssetsRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ListRevisionAssetsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRevisionAssetsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRevisionAssetsRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ListRevisionAssetsRequest_DataSetId, v.DataSetId)
+		case schemas.ListRevisionAssetsRequest_MaxResults:
+			return d.ReadInt32(schemas.ListRevisionAssetsRequest_MaxResults, &v.MaxResults)
+		case schemas.ListRevisionAssetsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRevisionAssetsRequest_NextToken, v.NextToken)
+		case schemas.ListRevisionAssetsRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ListRevisionAssetsRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 type ListRevisionAssetsOutput struct {
 
 	// The asset objects listed by the request.
@@ -63,13 +104,35 @@ type ListRevisionAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRevisionAssetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRevisionAssetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRevisionAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfAssetEntry(s, schemas.ListRevisionAssetsResponse_Assets, v.Assets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRevisionAssetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListRevisionAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRevisionAssetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRevisionAssetsResponse_Assets:
+			return deserializeListOfAssetEntry(d, schemas.ListRevisionAssetsResponse_Assets, &v.Assets)
+		case schemas.ListRevisionAssetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRevisionAssetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRevisionAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRevisionAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRevisionAssets, schemas.ListRevisionAssetsRequest, schemas.ListRevisionAssetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRevisionAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRevisionAssets, schemas.ListRevisionAssetsRequest, schemas.ListRevisionAssetsResponse), output: &ListRevisionAssetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

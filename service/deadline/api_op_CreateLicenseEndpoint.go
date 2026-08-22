@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,24 @@ type CreateLicenseEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLicenseEndpointRequest_clientToken, *v.ClientToken)
+	}
+	serializeSecurityGroupIdList(s, schemas.CreateLicenseEndpointRequest_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.CreateLicenseEndpointRequest_subnetIds, v.SubnetIds)
+	serializeTags(s, schemas.CreateLicenseEndpointRequest_tags, v.Tags)
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateLicenseEndpointRequest_vpcId, *v.VpcId)
+	}
+}
+
 // Mixin that adds an optional ARN field to response structures. Apply to
 // SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateLicenseEndpointOutput struct {
@@ -68,13 +88,32 @@ type CreateLicenseEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseEndpointId != nil {
+		s.WriteString(schemas.CreateLicenseEndpointResponse_licenseEndpointId, *v.LicenseEndpointId)
+	}
+}
+func (v *CreateLicenseEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLicenseEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLicenseEndpointResponse_licenseEndpointId:
+			v.LicenseEndpointId = new(string)
+			return d.ReadString(schemas.CreateLicenseEndpointResponse_licenseEndpointId, v.LicenseEndpointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLicenseEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLicenseEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseEndpoint, schemas.CreateLicenseEndpointRequest, schemas.CreateLicenseEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLicenseEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseEndpoint, schemas.CreateLicenseEndpointRequest, schemas.CreateLicenseEndpointResponse), output: &CreateLicenseEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

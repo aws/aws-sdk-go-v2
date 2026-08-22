@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,46 @@ type ExecuteQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ExecuteQueryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExecuteQueryRequest_nextToken, *v.NextToken)
+	}
+	if v.QueryStatement != nil {
+		s.WriteString(schemas.ExecuteQueryRequest_queryStatement, *v.QueryStatement)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ExecuteQueryRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ExecuteQueryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteQueryRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteQueryRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ExecuteQueryRequest_maxResults, v.MaxResults)
+		case schemas.ExecuteQueryRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExecuteQueryRequest_nextToken, v.NextToken)
+		case schemas.ExecuteQueryRequest_queryStatement:
+			v.QueryStatement = new(string)
+			return d.ReadString(schemas.ExecuteQueryRequest_queryStatement, v.QueryStatement)
+		case schemas.ExecuteQueryRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ExecuteQueryRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type ExecuteQueryOutput struct {
 
 	// A list of ColumnDescription objects.
@@ -70,13 +112,38 @@ type ExecuteQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnDescriptions(s, schemas.ExecuteQueryResponse_columnDescriptions, v.ColumnDescriptions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExecuteQueryResponse_nextToken, *v.NextToken)
+	}
+	serializeRows(s, schemas.ExecuteQueryResponse_rows, v.Rows)
+}
+func (v *ExecuteQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteQueryResponse_columnDescriptions:
+			return deserializeColumnDescriptions(d, schemas.ExecuteQueryResponse_columnDescriptions, &v.ColumnDescriptions)
+		case schemas.ExecuteQueryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExecuteQueryResponse_nextToken, v.NextToken)
+		case schemas.ExecuteQueryResponse_rows:
+			return deserializeRows(d, schemas.ExecuteQueryResponse_rows, &v.Rows)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteQuery, schemas.ExecuteQueryRequest, schemas.ExecuteQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteQuery, schemas.ExecuteQueryRequest, schemas.ExecuteQueryResponse), output: &ExecuteQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

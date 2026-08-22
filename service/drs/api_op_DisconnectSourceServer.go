@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,28 @@ type DisconnectSourceServerInput struct {
 	SourceServerID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DisconnectSourceServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisconnectSourceServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisconnectSourceServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.DisconnectSourceServerRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *DisconnectSourceServerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisconnectSourceServerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisconnectSourceServerRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.DisconnectSourceServerRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
 }
 
 type DisconnectSourceServerOutput struct {
@@ -97,13 +121,125 @@ type DisconnectSourceServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisconnectSourceServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceServer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisconnectSourceServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.SourceServer_agentVersion, *v.AgentVersion)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.SourceServer_arn, *v.Arn)
+	}
+	if v.DataReplicationInfo != nil {
+		s.WriteStruct(schemas.SourceServer_dataReplicationInfo)
+		v.DataReplicationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastLaunchResult != "" {
+		s.WriteString(schemas.SourceServer_lastLaunchResult, string(v.LastLaunchResult))
+	}
+	if v.LifeCycle != nil {
+		s.WriteStruct(schemas.SourceServer_lifeCycle)
+		v.LifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecoveryInstanceId != nil {
+		s.WriteString(schemas.SourceServer_recoveryInstanceId, *v.RecoveryInstanceId)
+	}
+	if v.ReplicationDirection != "" {
+		s.WriteString(schemas.SourceServer_replicationDirection, string(v.ReplicationDirection))
+	}
+	if v.ReversedDirectionSourceServerArn != nil {
+		s.WriteString(schemas.SourceServer_reversedDirectionSourceServerArn, *v.ReversedDirectionSourceServerArn)
+	}
+	if v.SourceCloudProperties != nil {
+		s.WriteStruct(schemas.SourceServer_sourceCloudProperties)
+		v.SourceCloudProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceNetworkID != nil {
+		s.WriteString(schemas.SourceServer_sourceNetworkID, *v.SourceNetworkID)
+	}
+	if v.SourceProperties != nil {
+		s.WriteStruct(schemas.SourceServer_sourceProperties)
+		v.SourceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.SourceServer_sourceServerID, *v.SourceServerID)
+	}
+	if v.StagingArea != nil {
+		s.WriteStruct(schemas.SourceServer_stagingArea)
+		v.StagingArea.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+}
+func (v *DisconnectSourceServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceServer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceServer_agentVersion:
+			v.AgentVersion = new(string)
+			return d.ReadString(schemas.SourceServer_agentVersion, v.AgentVersion)
+		case schemas.SourceServer_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SourceServer_arn, v.Arn)
+		case schemas.SourceServer_dataReplicationInfo:
+			v.DataReplicationInfo = &types.DataReplicationInfo{}
+			return v.DataReplicationInfo.Deserialize(d)
+		case schemas.SourceServer_lastLaunchResult:
+			var ev string
+			if err := d.ReadString(schemas.SourceServer_lastLaunchResult, &ev); err != nil {
+				return err
+			}
+			v.LastLaunchResult = types.LastLaunchResult(ev)
+			return nil
+		case schemas.SourceServer_lifeCycle:
+			v.LifeCycle = &types.LifeCycle{}
+			return v.LifeCycle.Deserialize(d)
+		case schemas.SourceServer_recoveryInstanceId:
+			v.RecoveryInstanceId = new(string)
+			return d.ReadString(schemas.SourceServer_recoveryInstanceId, v.RecoveryInstanceId)
+		case schemas.SourceServer_replicationDirection:
+			var ev string
+			if err := d.ReadString(schemas.SourceServer_replicationDirection, &ev); err != nil {
+				return err
+			}
+			v.ReplicationDirection = types.ReplicationDirection(ev)
+			return nil
+		case schemas.SourceServer_reversedDirectionSourceServerArn:
+			v.ReversedDirectionSourceServerArn = new(string)
+			return d.ReadString(schemas.SourceServer_reversedDirectionSourceServerArn, v.ReversedDirectionSourceServerArn)
+		case schemas.SourceServer_sourceCloudProperties:
+			v.SourceCloudProperties = &types.SourceCloudProperties{}
+			return v.SourceCloudProperties.Deserialize(d)
+		case schemas.SourceServer_sourceNetworkID:
+			v.SourceNetworkID = new(string)
+			return d.ReadString(schemas.SourceServer_sourceNetworkID, v.SourceNetworkID)
+		case schemas.SourceServer_sourceProperties:
+			v.SourceProperties = &types.SourceProperties{}
+			return v.SourceProperties.Deserialize(d)
+		case schemas.SourceServer_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.SourceServer_sourceServerID, v.SourceServerID)
+		case schemas.SourceServer_stagingArea:
+			v.StagingArea = &types.StagingArea{}
+			return v.StagingArea.Deserialize(d)
+		case schemas.SourceServer_tags:
+			return deserializeTagsMap(d, schemas.SourceServer_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisconnectSourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisconnectSourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisconnectSourceServer, schemas.DisconnectSourceServerRequest, schemas.SourceServer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisconnectSourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisconnectSourceServer, schemas.DisconnectSourceServerRequest, schemas.SourceServer), output: &DisconnectSourceServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

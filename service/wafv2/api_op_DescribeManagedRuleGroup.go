@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type DescribeManagedRuleGroupInput struct {
 	VersionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeManagedRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeManagedRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeManagedRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeManagedRuleGroupRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.DescribeManagedRuleGroupRequest_Scope, string(v.Scope))
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.DescribeManagedRuleGroupRequest_VendorName, *v.VendorName)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.DescribeManagedRuleGroupRequest_VersionName, *v.VersionName)
+	}
 }
 
 type DescribeManagedRuleGroupOutput struct {
@@ -122,13 +145,59 @@ type DescribeManagedRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeManagedRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeManagedRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeManagedRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLabelSummaries(s, schemas.DescribeManagedRuleGroupResponse_AvailableLabels, v.AvailableLabels)
+	if v.Capacity != nil {
+		s.WriteInt64(schemas.DescribeManagedRuleGroupResponse_Capacity, *v.Capacity)
+	}
+	serializeLabelSummaries(s, schemas.DescribeManagedRuleGroupResponse_ConsumedLabels, v.ConsumedLabels)
+	if v.LabelNamespace != nil {
+		s.WriteString(schemas.DescribeManagedRuleGroupResponse_LabelNamespace, *v.LabelNamespace)
+	}
+	serializeRuleSummaries(s, schemas.DescribeManagedRuleGroupResponse_Rules, v.Rules)
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.DescribeManagedRuleGroupResponse_SnsTopicArn, *v.SnsTopicArn)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.DescribeManagedRuleGroupResponse_VersionName, *v.VersionName)
+	}
+}
+func (v *DescribeManagedRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeManagedRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeManagedRuleGroupResponse_AvailableLabels:
+			return deserializeLabelSummaries(d, schemas.DescribeManagedRuleGroupResponse_AvailableLabels, &v.AvailableLabels)
+		case schemas.DescribeManagedRuleGroupResponse_Capacity:
+			v.Capacity = new(int64)
+			return d.ReadInt64(schemas.DescribeManagedRuleGroupResponse_Capacity, v.Capacity)
+		case schemas.DescribeManagedRuleGroupResponse_ConsumedLabels:
+			return deserializeLabelSummaries(d, schemas.DescribeManagedRuleGroupResponse_ConsumedLabels, &v.ConsumedLabels)
+		case schemas.DescribeManagedRuleGroupResponse_LabelNamespace:
+			v.LabelNamespace = new(string)
+			return d.ReadString(schemas.DescribeManagedRuleGroupResponse_LabelNamespace, v.LabelNamespace)
+		case schemas.DescribeManagedRuleGroupResponse_Rules:
+			return deserializeRuleSummaries(d, schemas.DescribeManagedRuleGroupResponse_Rules, &v.Rules)
+		case schemas.DescribeManagedRuleGroupResponse_SnsTopicArn:
+			v.SnsTopicArn = new(string)
+			return d.ReadString(schemas.DescribeManagedRuleGroupResponse_SnsTopicArn, v.SnsTopicArn)
+		case schemas.DescribeManagedRuleGroupResponse_VersionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.DescribeManagedRuleGroupResponse_VersionName, v.VersionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeManagedRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeManagedRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeManagedRuleGroup, schemas.DescribeManagedRuleGroupRequest, schemas.DescribeManagedRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeManagedRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeManagedRuleGroup, schemas.DescribeManagedRuleGroupRequest, schemas.DescribeManagedRuleGroupResponse), output: &DescribeManagedRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

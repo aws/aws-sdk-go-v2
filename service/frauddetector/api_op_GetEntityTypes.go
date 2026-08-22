@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetEntityTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEntityTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEntityTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEntityTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetEntityTypesRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetEntityTypesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEntityTypesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetEntityTypesOutput struct {
 
 	// An array of entity types.
@@ -58,13 +78,35 @@ type GetEntityTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEntityTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEntityTypesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEntityTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeentityTypeList(s, schemas.GetEntityTypesResult_entityTypes, v.EntityTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEntityTypesResult_nextToken, *v.NextToken)
+	}
+}
+func (v *GetEntityTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEntityTypesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEntityTypesResult_entityTypes:
+			return deserializeentityTypeList(d, schemas.GetEntityTypesResult_entityTypes, &v.EntityTypes)
+		case schemas.GetEntityTypesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEntityTypesResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEntityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEntityTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEntityTypes, schemas.GetEntityTypesRequest, schemas.GetEntityTypesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetEntityTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEntityTypes, schemas.GetEntityTypesRequest, schemas.GetEntityTypesResult), output: &GetEntityTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

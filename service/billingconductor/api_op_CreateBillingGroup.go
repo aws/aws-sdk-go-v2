@@ -5,7 +5,9 @@ package billingconductor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,65 @@ type CreateBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBillingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBillingGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBillingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountGrouping != nil {
+		s.WriteStruct(schemas.CreateBillingGroupInput_AccountGrouping)
+		v.AccountGrouping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBillingGroupInput_ClientToken, *v.ClientToken)
+	}
+	if v.ComputationPreference != nil {
+		s.WriteStruct(schemas.CreateBillingGroupInput_ComputationPreference)
+		v.ComputationPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBillingGroupInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBillingGroupInput_Name, *v.Name)
+	}
+	if v.PrimaryAccountId != nil {
+		s.WriteString(schemas.CreateBillingGroupInput_PrimaryAccountId, *v.PrimaryAccountId)
+	}
+	serializeTagMap(s, schemas.CreateBillingGroupInput_Tags, v.Tags)
+}
+func (v *CreateBillingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBillingGroupInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBillingGroupInput_AccountGrouping:
+			v.AccountGrouping = &types.AccountGrouping{}
+			return v.AccountGrouping.Deserialize(d)
+		case schemas.CreateBillingGroupInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateBillingGroupInput_ClientToken, v.ClientToken)
+		case schemas.CreateBillingGroupInput_ComputationPreference:
+			v.ComputationPreference = &types.ComputationPreference{}
+			return v.ComputationPreference.Deserialize(d)
+		case schemas.CreateBillingGroupInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateBillingGroupInput_Description, v.Description)
+		case schemas.CreateBillingGroupInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateBillingGroupInput_Name, v.Name)
+		case schemas.CreateBillingGroupInput_PrimaryAccountId:
+			v.PrimaryAccountId = new(string)
+			return d.ReadString(schemas.CreateBillingGroupInput_PrimaryAccountId, v.PrimaryAccountId)
+		case schemas.CreateBillingGroupInput_Tags:
+			return deserializeTagMap(d, schemas.CreateBillingGroupInput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateBillingGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created billing group.
@@ -78,13 +139,32 @@ type CreateBillingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBillingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBillingGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBillingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateBillingGroupOutput_Arn, *v.Arn)
+	}
+}
+func (v *CreateBillingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBillingGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBillingGroupOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateBillingGroupOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillingGroup, schemas.CreateBillingGroupInput, schemas.CreateBillingGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillingGroup, schemas.CreateBillingGroupInput, schemas.CreateBillingGroupOutput), output: &CreateBillingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

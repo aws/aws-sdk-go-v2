@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListAcceleratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcceleratorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAcceleratorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAcceleratorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAcceleratorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAcceleratorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAcceleratorsOutput struct {
 
 	// The list of accelerators for a customer account.
@@ -53,13 +70,35 @@ type ListAcceleratorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcceleratorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAcceleratorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAcceleratorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccelerators(s, schemas.ListAcceleratorsResponse_Accelerators, v.Accelerators)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAcceleratorsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAcceleratorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAcceleratorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAcceleratorsResponse_Accelerators:
+			return deserializeAccelerators(d, schemas.ListAcceleratorsResponse_Accelerators, &v.Accelerators)
+		case schemas.ListAcceleratorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAcceleratorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAcceleratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccelerators{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccelerators, schemas.ListAcceleratorsRequest, schemas.ListAcceleratorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccelerators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccelerators, schemas.ListAcceleratorsRequest, schemas.ListAcceleratorsResponse), output: &ListAcceleratorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

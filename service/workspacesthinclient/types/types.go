@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -79,6 +81,164 @@ type Device struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Device) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Device)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Device) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Device_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Device_createdAt, *v.CreatedAt)
+	}
+	if v.CurrentSoftwareSetId != nil {
+		s.WriteString(schemas.Device_currentSoftwareSetId, *v.CurrentSoftwareSetId)
+	}
+	if v.CurrentSoftwareSetVersion != nil {
+		s.WriteString(schemas.Device_currentSoftwareSetVersion, *v.CurrentSoftwareSetVersion)
+	}
+	if v.DesiredSoftwareSetId != nil {
+		s.WriteString(schemas.Device_desiredSoftwareSetId, *v.DesiredSoftwareSetId)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.Device_environmentId, *v.EnvironmentId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Device_id, *v.Id)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.Device_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LastConnectedAt != nil {
+		s.WriteTime(schemas.Device_lastConnectedAt, *v.LastConnectedAt)
+	}
+	if v.LastPostureAt != nil {
+		s.WriteTime(schemas.Device_lastPostureAt, *v.LastPostureAt)
+	}
+	if v.LastUserId != nil {
+		s.WriteString(schemas.Device_lastUserId, *v.LastUserId)
+	}
+	if v.Model != nil {
+		s.WriteString(schemas.Device_model, *v.Model)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Device_name, *v.Name)
+	}
+	if v.PendingSoftwareSetId != nil {
+		s.WriteString(schemas.Device_pendingSoftwareSetId, *v.PendingSoftwareSetId)
+	}
+	if v.PendingSoftwareSetVersion != nil {
+		s.WriteString(schemas.Device_pendingSoftwareSetVersion, *v.PendingSoftwareSetVersion)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.Device_serialNumber, *v.SerialNumber)
+	}
+	if v.SoftwareSetComplianceStatus != "" {
+		s.WriteString(schemas.Device_softwareSetComplianceStatus, string(v.SoftwareSetComplianceStatus))
+	}
+	if v.SoftwareSetUpdateSchedule != "" {
+		s.WriteString(schemas.Device_softwareSetUpdateSchedule, string(v.SoftwareSetUpdateSchedule))
+	}
+	if v.SoftwareSetUpdateStatus != "" {
+		s.WriteString(schemas.Device_softwareSetUpdateStatus, string(v.SoftwareSetUpdateStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Device_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Device_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *Device) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Device, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Device_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Device_arn, v.Arn)
+		case schemas.Device_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Device_createdAt, v.CreatedAt)
+		case schemas.Device_currentSoftwareSetId:
+			v.CurrentSoftwareSetId = new(string)
+			return d.ReadString(schemas.Device_currentSoftwareSetId, v.CurrentSoftwareSetId)
+		case schemas.Device_currentSoftwareSetVersion:
+			v.CurrentSoftwareSetVersion = new(string)
+			return d.ReadString(schemas.Device_currentSoftwareSetVersion, v.CurrentSoftwareSetVersion)
+		case schemas.Device_desiredSoftwareSetId:
+			v.DesiredSoftwareSetId = new(string)
+			return d.ReadString(schemas.Device_desiredSoftwareSetId, v.DesiredSoftwareSetId)
+		case schemas.Device_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.Device_environmentId, v.EnvironmentId)
+		case schemas.Device_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Device_id, v.Id)
+		case schemas.Device_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.Device_kmsKeyArn, v.KmsKeyArn)
+		case schemas.Device_lastConnectedAt:
+			v.LastConnectedAt = new(time.Time)
+			return d.ReadTime(schemas.Device_lastConnectedAt, v.LastConnectedAt)
+		case schemas.Device_lastPostureAt:
+			v.LastPostureAt = new(time.Time)
+			return d.ReadTime(schemas.Device_lastPostureAt, v.LastPostureAt)
+		case schemas.Device_lastUserId:
+			v.LastUserId = new(string)
+			return d.ReadString(schemas.Device_lastUserId, v.LastUserId)
+		case schemas.Device_model:
+			v.Model = new(string)
+			return d.ReadString(schemas.Device_model, v.Model)
+		case schemas.Device_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Device_name, v.Name)
+		case schemas.Device_pendingSoftwareSetId:
+			v.PendingSoftwareSetId = new(string)
+			return d.ReadString(schemas.Device_pendingSoftwareSetId, v.PendingSoftwareSetId)
+		case schemas.Device_pendingSoftwareSetVersion:
+			v.PendingSoftwareSetVersion = new(string)
+			return d.ReadString(schemas.Device_pendingSoftwareSetVersion, v.PendingSoftwareSetVersion)
+		case schemas.Device_serialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.Device_serialNumber, v.SerialNumber)
+		case schemas.Device_softwareSetComplianceStatus:
+			var ev string
+			if err := d.ReadString(schemas.Device_softwareSetComplianceStatus, &ev); err != nil {
+				return err
+			}
+			v.SoftwareSetComplianceStatus = DeviceSoftwareSetComplianceStatus(ev)
+			return nil
+		case schemas.Device_softwareSetUpdateSchedule:
+			var ev string
+			if err := d.ReadString(schemas.Device_softwareSetUpdateSchedule, &ev); err != nil {
+				return err
+			}
+			v.SoftwareSetUpdateSchedule = SoftwareSetUpdateSchedule(ev)
+			return nil
+		case schemas.Device_softwareSetUpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.Device_softwareSetUpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.SoftwareSetUpdateStatus = SoftwareSetUpdateStatus(ev)
+			return nil
+		case schemas.Device_status:
+			var ev string
+			if err := d.ReadString(schemas.Device_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DeviceStatus(ev)
+			return nil
+		case schemas.Device_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Device_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Describes a thin client device.
 type DeviceSummary struct {
 
@@ -132,6 +292,126 @@ type DeviceSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeviceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeviceSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DeviceSummary_createdAt, *v.CreatedAt)
+	}
+	if v.CurrentSoftwareSetId != nil {
+		s.WriteString(schemas.DeviceSummary_currentSoftwareSetId, *v.CurrentSoftwareSetId)
+	}
+	if v.DesiredSoftwareSetId != nil {
+		s.WriteString(schemas.DeviceSummary_desiredSoftwareSetId, *v.DesiredSoftwareSetId)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DeviceSummary_environmentId, *v.EnvironmentId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeviceSummary_id, *v.Id)
+	}
+	if v.LastConnectedAt != nil {
+		s.WriteTime(schemas.DeviceSummary_lastConnectedAt, *v.LastConnectedAt)
+	}
+	if v.LastPostureAt != nil {
+		s.WriteTime(schemas.DeviceSummary_lastPostureAt, *v.LastPostureAt)
+	}
+	if v.LastUserId != nil {
+		s.WriteString(schemas.DeviceSummary_lastUserId, *v.LastUserId)
+	}
+	if v.Model != nil {
+		s.WriteString(schemas.DeviceSummary_model, *v.Model)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeviceSummary_name, *v.Name)
+	}
+	if v.PendingSoftwareSetId != nil {
+		s.WriteString(schemas.DeviceSummary_pendingSoftwareSetId, *v.PendingSoftwareSetId)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.DeviceSummary_serialNumber, *v.SerialNumber)
+	}
+	if v.SoftwareSetUpdateSchedule != "" {
+		s.WriteString(schemas.DeviceSummary_softwareSetUpdateSchedule, string(v.SoftwareSetUpdateSchedule))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeviceSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DeviceSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DeviceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeviceSummary_arn, v.Arn)
+		case schemas.DeviceSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeviceSummary_createdAt, v.CreatedAt)
+		case schemas.DeviceSummary_currentSoftwareSetId:
+			v.CurrentSoftwareSetId = new(string)
+			return d.ReadString(schemas.DeviceSummary_currentSoftwareSetId, v.CurrentSoftwareSetId)
+		case schemas.DeviceSummary_desiredSoftwareSetId:
+			v.DesiredSoftwareSetId = new(string)
+			return d.ReadString(schemas.DeviceSummary_desiredSoftwareSetId, v.DesiredSoftwareSetId)
+		case schemas.DeviceSummary_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.DeviceSummary_environmentId, v.EnvironmentId)
+		case schemas.DeviceSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeviceSummary_id, v.Id)
+		case schemas.DeviceSummary_lastConnectedAt:
+			v.LastConnectedAt = new(time.Time)
+			return d.ReadTime(schemas.DeviceSummary_lastConnectedAt, v.LastConnectedAt)
+		case schemas.DeviceSummary_lastPostureAt:
+			v.LastPostureAt = new(time.Time)
+			return d.ReadTime(schemas.DeviceSummary_lastPostureAt, v.LastPostureAt)
+		case schemas.DeviceSummary_lastUserId:
+			v.LastUserId = new(string)
+			return d.ReadString(schemas.DeviceSummary_lastUserId, v.LastUserId)
+		case schemas.DeviceSummary_model:
+			v.Model = new(string)
+			return d.ReadString(schemas.DeviceSummary_model, v.Model)
+		case schemas.DeviceSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeviceSummary_name, v.Name)
+		case schemas.DeviceSummary_pendingSoftwareSetId:
+			v.PendingSoftwareSetId = new(string)
+			return d.ReadString(schemas.DeviceSummary_pendingSoftwareSetId, v.PendingSoftwareSetId)
+		case schemas.DeviceSummary_serialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.DeviceSummary_serialNumber, v.SerialNumber)
+		case schemas.DeviceSummary_softwareSetUpdateSchedule:
+			var ev string
+			if err := d.ReadString(schemas.DeviceSummary_softwareSetUpdateSchedule, &ev); err != nil {
+				return err
+			}
+			v.SoftwareSetUpdateSchedule = SoftwareSetUpdateSchedule(ev)
+			return nil
+		case schemas.DeviceSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DeviceSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DeviceStatus(ev)
+			return nil
+		case schemas.DeviceSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeviceSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // Describes an environment.
@@ -203,6 +483,151 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Environment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Environment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationCode != nil {
+		s.WriteString(schemas.Environment_activationCode, *v.ActivationCode)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Environment_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Environment_createdAt, *v.CreatedAt)
+	}
+	if v.DesiredSoftwareSetId != nil {
+		s.WriteString(schemas.Environment_desiredSoftwareSetId, *v.DesiredSoftwareSetId)
+	}
+	if v.DesktopArn != nil {
+		s.WriteString(schemas.Environment_desktopArn, *v.DesktopArn)
+	}
+	if v.DesktopEndpoint != nil {
+		s.WriteString(schemas.Environment_desktopEndpoint, *v.DesktopEndpoint)
+	}
+	if v.DesktopType != "" {
+		s.WriteString(schemas.Environment_desktopType, string(v.DesktopType))
+	}
+	serializeDeviceCreationTagsMap(s, schemas.Environment_deviceCreationTags, v.DeviceCreationTags)
+	if v.Id != nil {
+		s.WriteString(schemas.Environment_id, *v.Id)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.Environment_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.MaintenanceWindow != nil {
+		s.WriteStruct(schemas.Environment_maintenanceWindow)
+		v.MaintenanceWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Environment_name, *v.Name)
+	}
+	if v.PendingSoftwareSetId != nil {
+		s.WriteString(schemas.Environment_pendingSoftwareSetId, *v.PendingSoftwareSetId)
+	}
+	if v.PendingSoftwareSetVersion != nil {
+		s.WriteString(schemas.Environment_pendingSoftwareSetVersion, *v.PendingSoftwareSetVersion)
+	}
+	if v.RegisteredDevicesCount != nil {
+		s.WriteInt32(schemas.Environment_registeredDevicesCount, *v.RegisteredDevicesCount)
+	}
+	if v.SoftwareSetComplianceStatus != "" {
+		s.WriteString(schemas.Environment_softwareSetComplianceStatus, string(v.SoftwareSetComplianceStatus))
+	}
+	if v.SoftwareSetUpdateMode != "" {
+		s.WriteString(schemas.Environment_softwareSetUpdateMode, string(v.SoftwareSetUpdateMode))
+	}
+	if v.SoftwareSetUpdateSchedule != "" {
+		s.WriteString(schemas.Environment_softwareSetUpdateSchedule, string(v.SoftwareSetUpdateSchedule))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Environment_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Environment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Environment_activationCode:
+			v.ActivationCode = new(string)
+			return d.ReadString(schemas.Environment_activationCode, v.ActivationCode)
+		case schemas.Environment_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Environment_arn, v.Arn)
+		case schemas.Environment_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Environment_createdAt, v.CreatedAt)
+		case schemas.Environment_desiredSoftwareSetId:
+			v.DesiredSoftwareSetId = new(string)
+			return d.ReadString(schemas.Environment_desiredSoftwareSetId, v.DesiredSoftwareSetId)
+		case schemas.Environment_desktopArn:
+			v.DesktopArn = new(string)
+			return d.ReadString(schemas.Environment_desktopArn, v.DesktopArn)
+		case schemas.Environment_desktopEndpoint:
+			v.DesktopEndpoint = new(string)
+			return d.ReadString(schemas.Environment_desktopEndpoint, v.DesktopEndpoint)
+		case schemas.Environment_desktopType:
+			var ev string
+			if err := d.ReadString(schemas.Environment_desktopType, &ev); err != nil {
+				return err
+			}
+			v.DesktopType = DesktopType(ev)
+			return nil
+		case schemas.Environment_deviceCreationTags:
+			return deserializeDeviceCreationTagsMap(d, schemas.Environment_deviceCreationTags, &v.DeviceCreationTags)
+		case schemas.Environment_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Environment_id, v.Id)
+		case schemas.Environment_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.Environment_kmsKeyArn, v.KmsKeyArn)
+		case schemas.Environment_maintenanceWindow:
+			v.MaintenanceWindow = &MaintenanceWindow{}
+			return v.MaintenanceWindow.Deserialize(d)
+		case schemas.Environment_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Environment_name, v.Name)
+		case schemas.Environment_pendingSoftwareSetId:
+			v.PendingSoftwareSetId = new(string)
+			return d.ReadString(schemas.Environment_pendingSoftwareSetId, v.PendingSoftwareSetId)
+		case schemas.Environment_pendingSoftwareSetVersion:
+			v.PendingSoftwareSetVersion = new(string)
+			return d.ReadString(schemas.Environment_pendingSoftwareSetVersion, v.PendingSoftwareSetVersion)
+		case schemas.Environment_registeredDevicesCount:
+			v.RegisteredDevicesCount = new(int32)
+			return d.ReadInt32(schemas.Environment_registeredDevicesCount, v.RegisteredDevicesCount)
+		case schemas.Environment_softwareSetComplianceStatus:
+			var ev string
+			if err := d.ReadString(schemas.Environment_softwareSetComplianceStatus, &ev); err != nil {
+				return err
+			}
+			v.SoftwareSetComplianceStatus = EnvironmentSoftwareSetComplianceStatus(ev)
+			return nil
+		case schemas.Environment_softwareSetUpdateMode:
+			var ev string
+			if err := d.ReadString(schemas.Environment_softwareSetUpdateMode, &ev); err != nil {
+				return err
+			}
+			v.SoftwareSetUpdateMode = SoftwareSetUpdateMode(ev)
+			return nil
+		case schemas.Environment_softwareSetUpdateSchedule:
+			var ev string
+			if err := d.ReadString(schemas.Environment_softwareSetUpdateSchedule, &ev); err != nil {
+				return err
+			}
+			v.SoftwareSetUpdateSchedule = SoftwareSetUpdateSchedule(ev)
+			return nil
+		case schemas.Environment_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Environment_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Describes an environment.
 type EnvironmentSummary struct {
 
@@ -254,6 +679,120 @@ type EnvironmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnvironmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnvironmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationCode != nil {
+		s.WriteString(schemas.EnvironmentSummary_activationCode, *v.ActivationCode)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.EnvironmentSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.EnvironmentSummary_createdAt, *v.CreatedAt)
+	}
+	if v.DesiredSoftwareSetId != nil {
+		s.WriteString(schemas.EnvironmentSummary_desiredSoftwareSetId, *v.DesiredSoftwareSetId)
+	}
+	if v.DesktopArn != nil {
+		s.WriteString(schemas.EnvironmentSummary_desktopArn, *v.DesktopArn)
+	}
+	if v.DesktopEndpoint != nil {
+		s.WriteString(schemas.EnvironmentSummary_desktopEndpoint, *v.DesktopEndpoint)
+	}
+	if v.DesktopType != "" {
+		s.WriteString(schemas.EnvironmentSummary_desktopType, string(v.DesktopType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.EnvironmentSummary_id, *v.Id)
+	}
+	if v.MaintenanceWindow != nil {
+		s.WriteStruct(schemas.EnvironmentSummary_maintenanceWindow)
+		v.MaintenanceWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.EnvironmentSummary_name, *v.Name)
+	}
+	if v.PendingSoftwareSetId != nil {
+		s.WriteString(schemas.EnvironmentSummary_pendingSoftwareSetId, *v.PendingSoftwareSetId)
+	}
+	if v.SoftwareSetUpdateMode != "" {
+		s.WriteString(schemas.EnvironmentSummary_softwareSetUpdateMode, string(v.SoftwareSetUpdateMode))
+	}
+	if v.SoftwareSetUpdateSchedule != "" {
+		s.WriteString(schemas.EnvironmentSummary_softwareSetUpdateSchedule, string(v.SoftwareSetUpdateSchedule))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.EnvironmentSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *EnvironmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentSummary_activationCode:
+			v.ActivationCode = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_activationCode, v.ActivationCode)
+		case schemas.EnvironmentSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_arn, v.Arn)
+		case schemas.EnvironmentSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.EnvironmentSummary_createdAt, v.CreatedAt)
+		case schemas.EnvironmentSummary_desiredSoftwareSetId:
+			v.DesiredSoftwareSetId = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_desiredSoftwareSetId, v.DesiredSoftwareSetId)
+		case schemas.EnvironmentSummary_desktopArn:
+			v.DesktopArn = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_desktopArn, v.DesktopArn)
+		case schemas.EnvironmentSummary_desktopEndpoint:
+			v.DesktopEndpoint = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_desktopEndpoint, v.DesktopEndpoint)
+		case schemas.EnvironmentSummary_desktopType:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentSummary_desktopType, &ev); err != nil {
+				return err
+			}
+			v.DesktopType = DesktopType(ev)
+			return nil
+		case schemas.EnvironmentSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_id, v.Id)
+		case schemas.EnvironmentSummary_maintenanceWindow:
+			v.MaintenanceWindow = &MaintenanceWindow{}
+			return v.MaintenanceWindow.Deserialize(d)
+		case schemas.EnvironmentSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_name, v.Name)
+		case schemas.EnvironmentSummary_pendingSoftwareSetId:
+			v.PendingSoftwareSetId = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_pendingSoftwareSetId, v.PendingSoftwareSetId)
+		case schemas.EnvironmentSummary_softwareSetUpdateMode:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentSummary_softwareSetUpdateMode, &ev); err != nil {
+				return err
+			}
+			v.SoftwareSetUpdateMode = SoftwareSetUpdateMode(ev)
+			return nil
+		case schemas.EnvironmentSummary_softwareSetUpdateSchedule:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentSummary_softwareSetUpdateSchedule, &ev); err != nil {
+				return err
+			}
+			v.SoftwareSetUpdateSchedule = SoftwareSetUpdateSchedule(ev)
+			return nil
+		case schemas.EnvironmentSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.EnvironmentSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Describes the maintenance window for a thin client device.
 type MaintenanceWindow struct {
 
@@ -284,6 +823,69 @@ type MaintenanceWindow struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MaintenanceWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MaintenanceWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MaintenanceWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyTimeOf != "" {
+		s.WriteString(schemas.MaintenanceWindow_applyTimeOf, string(v.ApplyTimeOf))
+	}
+	serializeDayOfWeekList(s, schemas.MaintenanceWindow_daysOfTheWeek, v.DaysOfTheWeek)
+	if v.EndTimeHour != nil {
+		s.WriteInt32(schemas.MaintenanceWindow_endTimeHour, *v.EndTimeHour)
+	}
+	if v.EndTimeMinute != nil {
+		s.WriteInt32(schemas.MaintenanceWindow_endTimeMinute, *v.EndTimeMinute)
+	}
+	if v.StartTimeHour != nil {
+		s.WriteInt32(schemas.MaintenanceWindow_startTimeHour, *v.StartTimeHour)
+	}
+	if v.StartTimeMinute != nil {
+		s.WriteInt32(schemas.MaintenanceWindow_startTimeMinute, *v.StartTimeMinute)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MaintenanceWindow_type, string(v.Type))
+	}
+}
+func (v *MaintenanceWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MaintenanceWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MaintenanceWindow_applyTimeOf:
+			var ev string
+			if err := d.ReadString(schemas.MaintenanceWindow_applyTimeOf, &ev); err != nil {
+				return err
+			}
+			v.ApplyTimeOf = ApplyTimeOf(ev)
+			return nil
+		case schemas.MaintenanceWindow_daysOfTheWeek:
+			return deserializeDayOfWeekList(d, schemas.MaintenanceWindow_daysOfTheWeek, &v.DaysOfTheWeek)
+		case schemas.MaintenanceWindow_endTimeHour:
+			v.EndTimeHour = new(int32)
+			return d.ReadInt32(schemas.MaintenanceWindow_endTimeHour, v.EndTimeHour)
+		case schemas.MaintenanceWindow_endTimeMinute:
+			v.EndTimeMinute = new(int32)
+			return d.ReadInt32(schemas.MaintenanceWindow_endTimeMinute, v.EndTimeMinute)
+		case schemas.MaintenanceWindow_startTimeHour:
+			v.StartTimeHour = new(int32)
+			return d.ReadInt32(schemas.MaintenanceWindow_startTimeHour, v.StartTimeHour)
+		case schemas.MaintenanceWindow_startTimeMinute:
+			v.StartTimeMinute = new(int32)
+			return d.ReadInt32(schemas.MaintenanceWindow_startTimeMinute, v.StartTimeMinute)
+		case schemas.MaintenanceWindow_type:
+			var ev string
+			if err := d.ReadString(schemas.MaintenanceWindow_type, &ev); err != nil {
+				return err
+			}
+			v.Type = MaintenanceWindowType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes software.
 type Software struct {
 
@@ -294,6 +896,34 @@ type Software struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Software) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Software)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Software) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Software_name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.Software_version, *v.Version)
+	}
+}
+func (v *Software) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Software, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Software_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Software_name, v.Name)
+		case schemas.Software_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Software_version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Describes a software set.
@@ -323,6 +953,65 @@ type SoftwareSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SoftwareSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SoftwareSet_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SoftwareSet_id, *v.Id)
+	}
+	if v.ReleasedAt != nil {
+		s.WriteTime(schemas.SoftwareSet_releasedAt, *v.ReleasedAt)
+	}
+	serializeSoftwareList(s, schemas.SoftwareSet_software, v.Software)
+	if v.SupportedUntil != nil {
+		s.WriteTime(schemas.SoftwareSet_supportedUntil, *v.SupportedUntil)
+	}
+	if v.ValidationStatus != "" {
+		s.WriteString(schemas.SoftwareSet_validationStatus, string(v.ValidationStatus))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.SoftwareSet_version, *v.Version)
+	}
+}
+func (v *SoftwareSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareSet_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SoftwareSet_arn, v.Arn)
+		case schemas.SoftwareSet_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SoftwareSet_id, v.Id)
+		case schemas.SoftwareSet_releasedAt:
+			v.ReleasedAt = new(time.Time)
+			return d.ReadTime(schemas.SoftwareSet_releasedAt, v.ReleasedAt)
+		case schemas.SoftwareSet_software:
+			return deserializeSoftwareList(d, schemas.SoftwareSet_software, &v.Software)
+		case schemas.SoftwareSet_supportedUntil:
+			v.SupportedUntil = new(time.Time)
+			return d.ReadTime(schemas.SoftwareSet_supportedUntil, v.SupportedUntil)
+		case schemas.SoftwareSet_validationStatus:
+			var ev string
+			if err := d.ReadString(schemas.SoftwareSet_validationStatus, &ev); err != nil {
+				return err
+			}
+			v.ValidationStatus = SoftwareSetValidationStatus(ev)
+			return nil
+		case schemas.SoftwareSet_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.SoftwareSet_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Describes a software set.
 type SoftwareSetSummary struct {
 
@@ -347,6 +1036,62 @@ type SoftwareSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SoftwareSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SoftwareSetSummary_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SoftwareSetSummary_id, *v.Id)
+	}
+	if v.ReleasedAt != nil {
+		s.WriteTime(schemas.SoftwareSetSummary_releasedAt, *v.ReleasedAt)
+	}
+	if v.SupportedUntil != nil {
+		s.WriteTime(schemas.SoftwareSetSummary_supportedUntil, *v.SupportedUntil)
+	}
+	if v.ValidationStatus != "" {
+		s.WriteString(schemas.SoftwareSetSummary_validationStatus, string(v.ValidationStatus))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.SoftwareSetSummary_version, *v.Version)
+	}
+}
+func (v *SoftwareSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareSetSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SoftwareSetSummary_arn, v.Arn)
+		case schemas.SoftwareSetSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SoftwareSetSummary_id, v.Id)
+		case schemas.SoftwareSetSummary_releasedAt:
+			v.ReleasedAt = new(time.Time)
+			return d.ReadTime(schemas.SoftwareSetSummary_releasedAt, v.ReleasedAt)
+		case schemas.SoftwareSetSummary_supportedUntil:
+			v.SupportedUntil = new(time.Time)
+			return d.ReadTime(schemas.SoftwareSetSummary_supportedUntil, v.SupportedUntil)
+		case schemas.SoftwareSetSummary_validationStatus:
+			var ev string
+			if err := d.ReadString(schemas.SoftwareSetSummary_validationStatus, &ev); err != nil {
+				return err
+			}
+			v.ValidationStatus = SoftwareSetValidationStatus(ev)
+			return nil
+		case schemas.SoftwareSetSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.SoftwareSetSummary_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Describes a validation exception.
 type ValidationExceptionField struct {
 
@@ -361,6 +1106,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -5,7 +5,9 @@ package translate
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,35 @@ type CreateParallelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateParallelDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateParallelDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateParallelDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateParallelDataRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateParallelDataRequest_Description, *v.Description)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteStruct(schemas.CreateParallelDataRequest_EncryptionKey)
+		v.EncryptionKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateParallelDataRequest_Name, *v.Name)
+	}
+	if v.ParallelDataConfig != nil {
+		s.WriteStruct(schemas.CreateParallelDataRequest_ParallelDataConfig)
+		v.ParallelDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateParallelDataRequest_Tags, v.Tags)
+}
+
 type CreateParallelDataOutput struct {
 
 	// The custom name that you assigned to the parallel data resource.
@@ -78,13 +109,42 @@ type CreateParallelDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateParallelDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateParallelDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateParallelDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateParallelDataResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateParallelDataResponse_Status, string(v.Status))
+	}
+}
+func (v *CreateParallelDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateParallelDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateParallelDataResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateParallelDataResponse_Name, v.Name)
+		case schemas.CreateParallelDataResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateParallelDataResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ParallelDataStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateParallelData, schemas.CreateParallelDataRequest, schemas.CreateParallelDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateParallelData, schemas.CreateParallelDataRequest, schemas.CreateParallelDataResponse), output: &CreateParallelDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type AssignTapePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssignTapePoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssignTapePoolInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssignTapePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BypassGovernanceRetention != false {
+		s.WriteBool(schemas.AssignTapePoolInput_BypassGovernanceRetention, v.BypassGovernanceRetention)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.AssignTapePoolInput_PoolId, *v.PoolId)
+	}
+	if v.TapeARN != nil {
+		s.WriteString(schemas.AssignTapePoolInput_TapeARN, *v.TapeARN)
+	}
+}
+
 type AssignTapePoolOutput struct {
 
 	// The unique Amazon Resource Names (ARN) of the virtual tape that was added to
@@ -69,13 +89,32 @@ type AssignTapePoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssignTapePoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssignTapePoolOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssignTapePoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TapeARN != nil {
+		s.WriteString(schemas.AssignTapePoolOutput_TapeARN, *v.TapeARN)
+	}
+}
+func (v *AssignTapePoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssignTapePoolOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssignTapePoolOutput_TapeARN:
+			v.TapeARN = new(string)
+			return d.ReadString(schemas.AssignTapePoolOutput_TapeARN, v.TapeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssignTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssignTapePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssignTapePool, schemas.AssignTapePoolInput, schemas.AssignTapePoolOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssignTapePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssignTapePool, schemas.AssignTapePoolInput, schemas.AssignTapePoolOutput), output: &AssignTapePoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

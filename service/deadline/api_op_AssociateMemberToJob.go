@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,6 +75,39 @@ type AssociateMemberToJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberToJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.AssociateMemberToJobRequest_farmId, *v.FarmId)
+	}
+	if v.IdentityCenterRegion != nil {
+		s.WriteString(schemas.AssociateMemberToJobRequest_identityCenterRegion, *v.IdentityCenterRegion)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.AssociateMemberToJobRequest_identityStoreId, *v.IdentityStoreId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.AssociateMemberToJobRequest_jobId, *v.JobId)
+	}
+	if v.MembershipLevel != "" {
+		s.WriteString(schemas.AssociateMemberToJobRequest_membershipLevel, string(v.MembershipLevel))
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.AssociateMemberToJobRequest_principalId, *v.PrincipalId)
+	}
+	if v.PrincipalType != "" {
+		s.WriteString(schemas.AssociateMemberToJobRequest_principalType, string(v.PrincipalType))
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.AssociateMemberToJobRequest_queueId, *v.QueueId)
+	}
+}
+
 type AssociateMemberToJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,13 +115,26 @@ type AssociateMemberToJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberToJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateMemberToJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateMemberToJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateMemberToJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateMemberToJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToJob, schemas.AssociateMemberToJobRequest, schemas.AssociateMemberToJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateMemberToJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToJob, schemas.AssociateMemberToJobRequest, schemas.AssociateMemberToJobResponse), output: &AssociateMemberToJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

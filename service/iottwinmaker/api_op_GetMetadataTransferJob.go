@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -35,6 +37,18 @@ type GetMetadataTransferJobInput struct {
 	MetadataTransferJobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMetadataTransferJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetadataTransferJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetadataTransferJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataTransferJobId != nil {
+		s.WriteString(schemas.GetMetadataTransferJobRequest_metadataTransferJobId, *v.MetadataTransferJobId)
+	}
 }
 
 type GetMetadataTransferJobOutput struct {
@@ -94,13 +108,95 @@ type GetMetadataTransferJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetadataTransferJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetadataTransferJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetadataTransferJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetMetadataTransferJobResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.GetMetadataTransferJobResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetMetadataTransferJobResponse_description, *v.Description)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.GetMetadataTransferJobResponse_destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetadataTransferJobId != nil {
+		s.WriteString(schemas.GetMetadataTransferJobResponse_metadataTransferJobId, *v.MetadataTransferJobId)
+	}
+	if v.MetadataTransferJobRole != nil {
+		s.WriteString(schemas.GetMetadataTransferJobResponse_metadataTransferJobRole, *v.MetadataTransferJobRole)
+	}
+	if v.Progress != nil {
+		s.WriteStruct(schemas.GetMetadataTransferJobResponse_progress)
+		v.Progress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportUrl != nil {
+		s.WriteString(schemas.GetMetadataTransferJobResponse_reportUrl, *v.ReportUrl)
+	}
+	serializeSourceConfigurations(s, schemas.GetMetadataTransferJobResponse_sources, v.Sources)
+	if v.Status != nil {
+		s.WriteStruct(schemas.GetMetadataTransferJobResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.GetMetadataTransferJobResponse_updateDateTime, *v.UpdateDateTime)
+	}
+}
+func (v *GetMetadataTransferJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetadataTransferJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetadataTransferJobResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetMetadataTransferJobResponse_arn, v.Arn)
+		case schemas.GetMetadataTransferJobResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetMetadataTransferJobResponse_creationDateTime, v.CreationDateTime)
+		case schemas.GetMetadataTransferJobResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetMetadataTransferJobResponse_description, v.Description)
+		case schemas.GetMetadataTransferJobResponse_destination:
+			v.Destination = &types.DestinationConfiguration{}
+			return v.Destination.Deserialize(d)
+		case schemas.GetMetadataTransferJobResponse_metadataTransferJobId:
+			v.MetadataTransferJobId = new(string)
+			return d.ReadString(schemas.GetMetadataTransferJobResponse_metadataTransferJobId, v.MetadataTransferJobId)
+		case schemas.GetMetadataTransferJobResponse_metadataTransferJobRole:
+			v.MetadataTransferJobRole = new(string)
+			return d.ReadString(schemas.GetMetadataTransferJobResponse_metadataTransferJobRole, v.MetadataTransferJobRole)
+		case schemas.GetMetadataTransferJobResponse_progress:
+			v.Progress = &types.MetadataTransferJobProgress{}
+			return v.Progress.Deserialize(d)
+		case schemas.GetMetadataTransferJobResponse_reportUrl:
+			v.ReportUrl = new(string)
+			return d.ReadString(schemas.GetMetadataTransferJobResponse_reportUrl, v.ReportUrl)
+		case schemas.GetMetadataTransferJobResponse_sources:
+			return deserializeSourceConfigurations(d, schemas.GetMetadataTransferJobResponse_sources, &v.Sources)
+		case schemas.GetMetadataTransferJobResponse_status:
+			v.Status = &types.MetadataTransferJobStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.GetMetadataTransferJobResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetMetadataTransferJobResponse_updateDateTime, v.UpdateDateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetadataTransferJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMetadataTransferJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetadataTransferJob, schemas.GetMetadataTransferJobRequest, schemas.GetMetadataTransferJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMetadataTransferJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetadataTransferJob, schemas.GetMetadataTransferJobRequest, schemas.GetMetadataTransferJobResponse), output: &GetMetadataTransferJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

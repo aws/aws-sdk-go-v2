@@ -4,6 +4,8 @@ package signer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type SignPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignPayloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignPayloadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignPayloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteBlob(schemas.SignPayloadRequest_payload, v.Payload)
+	}
+	if v.PayloadFormat != nil {
+		s.WriteString(schemas.SignPayloadRequest_payloadFormat, *v.PayloadFormat)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.SignPayloadRequest_profileName, *v.ProfileName)
+	}
+	if v.ProfileOwner != nil {
+		s.WriteString(schemas.SignPayloadRequest_profileOwner, *v.ProfileOwner)
+	}
+}
+
 type SignPayloadOutput struct {
 
 	// Unique identifier of the signing job.
@@ -67,13 +90,46 @@ type SignPayloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignPayloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignPayloadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignPayloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.SignPayloadResponse_jobId, *v.JobId)
+	}
+	if v.JobOwner != nil {
+		s.WriteString(schemas.SignPayloadResponse_jobOwner, *v.JobOwner)
+	}
+	serializeMetadata(s, schemas.SignPayloadResponse_metadata, v.Metadata)
+	if v.Signature != nil {
+		s.WriteBlob(schemas.SignPayloadResponse_signature, v.Signature)
+	}
+}
+func (v *SignPayloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignPayloadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignPayloadResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.SignPayloadResponse_jobId, v.JobId)
+		case schemas.SignPayloadResponse_jobOwner:
+			v.JobOwner = new(string)
+			return d.ReadString(schemas.SignPayloadResponse_jobOwner, v.JobOwner)
+		case schemas.SignPayloadResponse_metadata:
+			return deserializeMetadata(d, schemas.SignPayloadResponse_metadata, &v.Metadata)
+		case schemas.SignPayloadResponse_signature:
+			return d.ReadBlob(schemas.SignPayloadResponse_signature, &v.Signature)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSignPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSignPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignPayload, schemas.SignPayloadRequest, schemas.SignPayloadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSignPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignPayload, schemas.SignPayloadRequest, schemas.SignPayloadResponse), output: &SignPayloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

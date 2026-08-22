@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -60,6 +62,60 @@ type UpdateEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComponentUpdatesMapRequest(s, schemas.UpdateEntityRequest_componentUpdates, v.ComponentUpdates)
+	serializeCompositeComponentUpdatesMapRequest(s, schemas.UpdateEntityRequest_compositeComponentUpdates, v.CompositeComponentUpdates)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEntityRequest_description, *v.Description)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.UpdateEntityRequest_entityId, *v.EntityId)
+	}
+	if v.EntityName != nil {
+		s.WriteString(schemas.UpdateEntityRequest_entityName, *v.EntityName)
+	}
+	if v.ParentEntityUpdate != nil {
+		s.WriteStruct(schemas.UpdateEntityRequest_parentEntityUpdate)
+		v.ParentEntityUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateEntityRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *UpdateEntityInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEntityRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEntityRequest_componentUpdates:
+			return deserializeComponentUpdatesMapRequest(d, schemas.UpdateEntityRequest_componentUpdates, &v.ComponentUpdates)
+		case schemas.UpdateEntityRequest_compositeComponentUpdates:
+			return deserializeCompositeComponentUpdatesMapRequest(d, schemas.UpdateEntityRequest_compositeComponentUpdates, &v.CompositeComponentUpdates)
+		case schemas.UpdateEntityRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateEntityRequest_description, v.Description)
+		case schemas.UpdateEntityRequest_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.UpdateEntityRequest_entityId, v.EntityId)
+		case schemas.UpdateEntityRequest_entityName:
+			v.EntityName = new(string)
+			return d.ReadString(schemas.UpdateEntityRequest_entityName, v.EntityName)
+		case schemas.UpdateEntityRequest_parentEntityUpdate:
+			v.ParentEntityUpdate = &types.ParentEntityUpdateRequest{}
+			return v.ParentEntityUpdate.Deserialize(d)
+		case schemas.UpdateEntityRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.UpdateEntityRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type UpdateEntityOutput struct {
 
 	// The current state of the entity update.
@@ -78,13 +134,42 @@ type UpdateEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.UpdateEntityResponse_state, string(v.State))
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.UpdateEntityResponse_updateDateTime, *v.UpdateDateTime)
+	}
+}
+func (v *UpdateEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEntityResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEntityResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.State(ev)
+			return nil
+		case schemas.UpdateEntityResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateEntityResponse_updateDateTime, v.UpdateDateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEntity, schemas.UpdateEntityRequest, schemas.UpdateEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEntity, schemas.UpdateEntityRequest, schemas.UpdateEntityResponse), output: &UpdateEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

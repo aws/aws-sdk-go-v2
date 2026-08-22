@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,49 @@ type ListSyncResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSyncResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSyncResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSyncResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSyncResourceFilters(s, schemas.ListSyncResourcesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSyncResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSyncResourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.SyncSource != nil {
+		s.WriteString(schemas.ListSyncResourcesRequest_syncSource, *v.SyncSource)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListSyncResourcesRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ListSyncResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSyncResourcesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSyncResourcesRequest_filters:
+			return deserializeSyncResourceFilters(d, schemas.ListSyncResourcesRequest_filters, &v.Filters)
+		case schemas.ListSyncResourcesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSyncResourcesRequest_maxResults, v.MaxResults)
+		case schemas.ListSyncResourcesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSyncResourcesRequest_nextToken, v.NextToken)
+		case schemas.ListSyncResourcesRequest_syncSource:
+			v.SyncSource = new(string)
+			return d.ReadString(schemas.ListSyncResourcesRequest_syncSource, v.SyncSource)
+		case schemas.ListSyncResourcesRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ListSyncResourcesRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type ListSyncResourcesOutput struct {
 
 	// The string that specifies the next page of results.
@@ -76,13 +121,35 @@ type ListSyncResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSyncResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSyncResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSyncResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSyncResourcesResponse_nextToken, *v.NextToken)
+	}
+	serializeSyncResourceSummaries(s, schemas.ListSyncResourcesResponse_syncResources, v.SyncResources)
+}
+func (v *ListSyncResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSyncResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSyncResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSyncResourcesResponse_nextToken, v.NextToken)
+		case schemas.ListSyncResourcesResponse_syncResources:
+			return deserializeSyncResourceSummaries(d, schemas.ListSyncResourcesResponse_syncResources, &v.SyncResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSyncResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSyncResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSyncResources, schemas.ListSyncResourcesRequest, schemas.ListSyncResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSyncResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSyncResources, schemas.ListSyncResourcesRequest, schemas.ListSyncResourcesResponse), output: &ListSyncResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

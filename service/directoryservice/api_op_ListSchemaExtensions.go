@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListSchemaExtensionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemaExtensionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemaExtensionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemaExtensionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ListSchemaExtensionsRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListSchemaExtensionsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemaExtensionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListSchemaExtensionsOutput struct {
 
 	// If not null, more results are available. Pass this value for the NextToken
@@ -59,13 +79,35 @@ type ListSchemaExtensionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemaExtensionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemaExtensionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemaExtensionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemaExtensionsResult_NextToken, *v.NextToken)
+	}
+	serializeSchemaExtensionsInfo(s, schemas.ListSchemaExtensionsResult_SchemaExtensionsInfo, v.SchemaExtensionsInfo)
+}
+func (v *ListSchemaExtensionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchemaExtensionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchemaExtensionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchemaExtensionsResult_NextToken, v.NextToken)
+		case schemas.ListSchemaExtensionsResult_SchemaExtensionsInfo:
+			return deserializeSchemaExtensionsInfo(d, schemas.ListSchemaExtensionsResult_SchemaExtensionsInfo, &v.SchemaExtensionsInfo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSchemaExtensionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSchemaExtensions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaExtensions, schemas.ListSchemaExtensionsRequest, schemas.ListSchemaExtensionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSchemaExtensions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaExtensions, schemas.ListSchemaExtensionsRequest, schemas.ListSchemaExtensionsResult), output: &ListSchemaExtensionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

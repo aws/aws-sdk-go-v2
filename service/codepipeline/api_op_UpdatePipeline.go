@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,20 @@ type UpdatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pipeline != nil {
+		s.WriteStruct(schemas.UpdatePipelineInput_pipeline)
+		v.Pipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Represents the output of an UpdatePipeline action.
 type UpdatePipelineOutput struct {
 
@@ -50,13 +66,34 @@ type UpdatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pipeline != nil {
+		s.WriteStruct(schemas.UpdatePipelineOutput_pipeline)
+		v.Pipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipelineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipelineOutput_pipeline:
+			v.Pipeline = &types.PipelineDeclaration{}
+			return v.Pipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipeline, schemas.UpdatePipelineInput, schemas.UpdatePipelineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipeline, schemas.UpdatePipelineInput, schemas.UpdatePipelineOutput), output: &UpdatePipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

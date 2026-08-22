@@ -4,7 +4,9 @@ package servicediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type GetOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOperationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.GetOperationRequest_OperationId, *v.OperationId)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.GetOperationRequest_OwnerAccount, *v.OwnerAccount)
+	}
+}
+
 type GetOperationOutput struct {
 
 	// A complex type that contains information about the operation.
@@ -56,13 +73,34 @@ type GetOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOperationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.GetOperationResponse_Operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOperationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOperationResponse_Operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOperation, schemas.GetOperationRequest, schemas.GetOperationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOperation, schemas.GetOperationRequest, schemas.GetOperationResponse), output: &GetOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,21 @@ type CreatePartnerEventSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerEventSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerEventSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerEventSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteString(schemas.CreatePartnerEventSourceRequest_Account, *v.Account)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePartnerEventSourceRequest_Name, *v.Name)
+	}
+}
+
 type CreatePartnerEventSourceOutput struct {
 
 	// The ARN of the partner event source.
@@ -89,13 +106,32 @@ type CreatePartnerEventSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerEventSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerEventSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerEventSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.CreatePartnerEventSourceResponse_EventSourceArn, *v.EventSourceArn)
+	}
+}
+func (v *CreatePartnerEventSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePartnerEventSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePartnerEventSourceResponse_EventSourceArn:
+			v.EventSourceArn = new(string)
+			return d.ReadString(schemas.CreatePartnerEventSourceResponse_EventSourceArn, v.EventSourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePartnerEventSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerEventSource, schemas.CreatePartnerEventSourceRequest, schemas.CreatePartnerEventSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePartnerEventSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerEventSource, schemas.CreatePartnerEventSourceRequest, schemas.CreatePartnerEventSourceResponse), output: &CreatePartnerEventSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

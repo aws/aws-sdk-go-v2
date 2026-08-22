@@ -5,7 +5,9 @@ package servicecatalogappregistry
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListAssociatedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.ListAssociatedResourcesRequest_application, *v.Application)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssociatedResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedResourcesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssociatedResourcesOutput struct {
 
 	// The token to use to get the next page of results after a previous API call.
@@ -62,13 +82,35 @@ type ListAssociatedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedResourcesResponse_nextToken, *v.NextToken)
+	}
+	serializeResources(s, schemas.ListAssociatedResourcesResponse_resources, v.Resources)
+}
+func (v *ListAssociatedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociatedResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociatedResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociatedResourcesResponse_nextToken, v.NextToken)
+		case schemas.ListAssociatedResourcesResponse_resources:
+			return deserializeResources(d, schemas.ListAssociatedResourcesResponse_resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociatedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociatedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedResources, schemas.ListAssociatedResourcesRequest, schemas.ListAssociatedResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssociatedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedResources, schemas.ListAssociatedResourcesRequest, schemas.ListAssociatedResourcesResponse), output: &ListAssociatedResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

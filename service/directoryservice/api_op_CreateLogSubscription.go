@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type CreateLogSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLogSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLogSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLogSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateLogSubscriptionRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.CreateLogSubscriptionRequest_LogGroupName, *v.LogGroupName)
+	}
+}
+
 type CreateLogSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type CreateLogSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLogSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLogSubscriptionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLogSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateLogSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLogSubscriptionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLogSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLogSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLogSubscription, schemas.CreateLogSubscriptionRequest, schemas.CreateLogSubscriptionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLogSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLogSubscription, schemas.CreateLogSubscriptionRequest, schemas.CreateLogSubscriptionResult), output: &CreateLogSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

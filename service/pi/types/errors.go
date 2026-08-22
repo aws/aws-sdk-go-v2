@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *InternalServiceError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServiceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServiceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServiceError_Message, *v.Message)
+	}
+}
+func (v *InternalServiceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServiceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServiceError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServiceError_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One of the arguments provided is invalid for this request.
 type InvalidArgumentException struct {
@@ -58,6 +80,27 @@ func (e *InvalidArgumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidArgumentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidArgumentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidArgumentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidArgumentException_Message, *v.Message)
+	}
+}
+func (v *InvalidArgumentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidArgumentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidArgumentException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidArgumentException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The user is not authorized to perform this request.
 type NotAuthorizedException struct {
@@ -84,3 +127,24 @@ func (e *NotAuthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotAuthorizedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotAuthorizedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotAuthorizedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotAuthorizedException_Message, *v.Message)
+	}
+}
+func (v *NotAuthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotAuthorizedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotAuthorizedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotAuthorizedException_Message, v.Message)
+		}
+		return nil
+	})
+}

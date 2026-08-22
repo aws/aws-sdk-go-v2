@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type UpdateOutpostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOutpostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutpostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutpostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateOutpostInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateOutpostInput_Name, *v.Name)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.UpdateOutpostInput_OutpostId, *v.OutpostId)
+	}
+	if v.SupportedHardwareType != "" {
+		s.WriteString(schemas.UpdateOutpostInput_SupportedHardwareType, string(v.SupportedHardwareType))
+	}
+}
+
 type UpdateOutpostOutput struct {
 
 	// Information about an Outpost.
@@ -54,13 +77,34 @@ type UpdateOutpostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOutpostOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutpostOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutpostOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Outpost != nil {
+		s.WriteStruct(schemas.UpdateOutpostOutput_Outpost)
+		v.Outpost.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateOutpostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOutpostOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOutpostOutput_Outpost:
+			v.Outpost = &types.Outpost{}
+			return v.Outpost.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOutpost{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOutpost, schemas.UpdateOutpostInput, schemas.UpdateOutpostOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateOutpost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOutpost, schemas.UpdateOutpostInput, schemas.UpdateOutpostOutput), output: &UpdateOutpostOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

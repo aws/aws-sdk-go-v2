@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,27 @@ type ListStorageProfilesForQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStorageProfilesForQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStorageProfilesForQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStorageProfilesForQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListStorageProfilesForQueueRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStorageProfilesForQueueRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStorageProfilesForQueueRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListStorageProfilesForQueueRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListStorageProfilesForQueueOutput struct {
 
@@ -71,13 +94,35 @@ type ListStorageProfilesForQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStorageProfilesForQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStorageProfilesForQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStorageProfilesForQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStorageProfilesForQueueResponse_nextToken, *v.NextToken)
+	}
+	serializeStorageProfileSummaries(s, schemas.ListStorageProfilesForQueueResponse_storageProfiles, v.StorageProfiles)
+}
+func (v *ListStorageProfilesForQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStorageProfilesForQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStorageProfilesForQueueResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStorageProfilesForQueueResponse_nextToken, v.NextToken)
+		case schemas.ListStorageProfilesForQueueResponse_storageProfiles:
+			return deserializeStorageProfileSummaries(d, schemas.ListStorageProfilesForQueueResponse_storageProfiles, &v.StorageProfiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStorageProfilesForQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStorageProfilesForQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStorageProfilesForQueue, schemas.ListStorageProfilesForQueueRequest, schemas.ListStorageProfilesForQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStorageProfilesForQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStorageProfilesForQueue, schemas.ListStorageProfilesForQueueRequest, schemas.ListStorageProfilesForQueueResponse), output: &ListStorageProfilesForQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package xray
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetSamplingStatisticSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSamplingStatisticSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSamplingStatisticSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSamplingStatisticSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSamplingStatisticSummariesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetSamplingStatisticSummariesOutput struct {
 
 	// Pagination token.
@@ -47,13 +61,35 @@ type GetSamplingStatisticSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSamplingStatisticSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSamplingStatisticSummariesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSamplingStatisticSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSamplingStatisticSummariesResult_NextToken, *v.NextToken)
+	}
+	serializeSamplingStatisticSummaryList(s, schemas.GetSamplingStatisticSummariesResult_SamplingStatisticSummaries, v.SamplingStatisticSummaries)
+}
+func (v *GetSamplingStatisticSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSamplingStatisticSummariesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSamplingStatisticSummariesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSamplingStatisticSummariesResult_NextToken, v.NextToken)
+		case schemas.GetSamplingStatisticSummariesResult_SamplingStatisticSummaries:
+			return deserializeSamplingStatisticSummaryList(d, schemas.GetSamplingStatisticSummariesResult_SamplingStatisticSummaries, &v.SamplingStatisticSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSamplingStatisticSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSamplingStatisticSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSamplingStatisticSummaries, schemas.GetSamplingStatisticSummariesRequest, schemas.GetSamplingStatisticSummariesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSamplingStatisticSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSamplingStatisticSummaries, schemas.GetSamplingStatisticSummariesRequest, schemas.GetSamplingStatisticSummariesResult), output: &GetSamplingStatisticSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

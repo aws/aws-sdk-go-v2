@@ -4,7 +4,9 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeContainerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContainerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContainerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContainerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.DescribeContainerInput_ContainerName, *v.ContainerName)
+	}
+}
+
 type DescribeContainerOutput struct {
 
 	// The name of the queried container.
@@ -48,13 +62,34 @@ type DescribeContainerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContainerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContainerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContainerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Container != nil {
+		s.WriteStruct(schemas.DescribeContainerOutput_Container)
+		v.Container.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeContainerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContainerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContainerOutput_Container:
+			v.Container = &types.Container{}
+			return v.Container.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContainerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeContainer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContainer, schemas.DescribeContainerInput, schemas.DescribeContainerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeContainer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContainer, schemas.DescribeContainerInput, schemas.DescribeContainerOutput), output: &DescribeContainerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

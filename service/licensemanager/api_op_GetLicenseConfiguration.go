@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetLicenseConfigurationInput struct {
 	LicenseConfigurationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLicenseConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseConfigurationArn != nil {
+		s.WriteString(schemas.GetLicenseConfigurationRequest_LicenseConfigurationArn, *v.LicenseConfigurationArn)
+	}
 }
 
 type GetLicenseConfigurationOutput struct {
@@ -96,13 +110,125 @@ type GetLicenseConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLicenseConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomatedDiscoveryInformation != nil {
+		s.WriteStruct(schemas.GetLicenseConfigurationResponse_AutomatedDiscoveryInformation)
+		v.AutomatedDiscoveryInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeConsumedLicenseSummaryList(s, schemas.GetLicenseConfigurationResponse_ConsumedLicenseSummaryList, v.ConsumedLicenseSummaryList)
+	if v.ConsumedLicenses != nil {
+		s.WriteInt64(schemas.GetLicenseConfigurationResponse_ConsumedLicenses, *v.ConsumedLicenses)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetLicenseConfigurationResponse_Description, *v.Description)
+	}
+	if v.DisassociateWhenNotFound != nil {
+		s.WriteBool(schemas.GetLicenseConfigurationResponse_DisassociateWhenNotFound, *v.DisassociateWhenNotFound)
+	}
+	if v.LicenseConfigurationArn != nil {
+		s.WriteString(schemas.GetLicenseConfigurationResponse_LicenseConfigurationArn, *v.LicenseConfigurationArn)
+	}
+	if v.LicenseConfigurationId != nil {
+		s.WriteString(schemas.GetLicenseConfigurationResponse_LicenseConfigurationId, *v.LicenseConfigurationId)
+	}
+	if v.LicenseCount != nil {
+		s.WriteInt64(schemas.GetLicenseConfigurationResponse_LicenseCount, *v.LicenseCount)
+	}
+	if v.LicenseCountHardLimit != nil {
+		s.WriteBool(schemas.GetLicenseConfigurationResponse_LicenseCountHardLimit, *v.LicenseCountHardLimit)
+	}
+	if v.LicenseCountingType != "" {
+		s.WriteString(schemas.GetLicenseConfigurationResponse_LicenseCountingType, string(v.LicenseCountingType))
+	}
+	if v.LicenseExpiry != nil {
+		s.WriteInt64(schemas.GetLicenseConfigurationResponse_LicenseExpiry, *v.LicenseExpiry)
+	}
+	serializeStringList(s, schemas.GetLicenseConfigurationResponse_LicenseRules, v.LicenseRules)
+	serializeManagedResourceSummaryList(s, schemas.GetLicenseConfigurationResponse_ManagedResourceSummaryList, v.ManagedResourceSummaryList)
+	if v.Name != nil {
+		s.WriteString(schemas.GetLicenseConfigurationResponse_Name, *v.Name)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.GetLicenseConfigurationResponse_OwnerAccountId, *v.OwnerAccountId)
+	}
+	serializeProductInformationList(s, schemas.GetLicenseConfigurationResponse_ProductInformationList, v.ProductInformationList)
+	if v.Status != nil {
+		s.WriteString(schemas.GetLicenseConfigurationResponse_Status, *v.Status)
+	}
+	serializeTagList(s, schemas.GetLicenseConfigurationResponse_Tags, v.Tags)
+}
+func (v *GetLicenseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLicenseConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLicenseConfigurationResponse_AutomatedDiscoveryInformation:
+			v.AutomatedDiscoveryInformation = &types.AutomatedDiscoveryInformation{}
+			return v.AutomatedDiscoveryInformation.Deserialize(d)
+		case schemas.GetLicenseConfigurationResponse_ConsumedLicenseSummaryList:
+			return deserializeConsumedLicenseSummaryList(d, schemas.GetLicenseConfigurationResponse_ConsumedLicenseSummaryList, &v.ConsumedLicenseSummaryList)
+		case schemas.GetLicenseConfigurationResponse_ConsumedLicenses:
+			v.ConsumedLicenses = new(int64)
+			return d.ReadInt64(schemas.GetLicenseConfigurationResponse_ConsumedLicenses, v.ConsumedLicenses)
+		case schemas.GetLicenseConfigurationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetLicenseConfigurationResponse_Description, v.Description)
+		case schemas.GetLicenseConfigurationResponse_DisassociateWhenNotFound:
+			v.DisassociateWhenNotFound = new(bool)
+			return d.ReadBool(schemas.GetLicenseConfigurationResponse_DisassociateWhenNotFound, v.DisassociateWhenNotFound)
+		case schemas.GetLicenseConfigurationResponse_LicenseConfigurationArn:
+			v.LicenseConfigurationArn = new(string)
+			return d.ReadString(schemas.GetLicenseConfigurationResponse_LicenseConfigurationArn, v.LicenseConfigurationArn)
+		case schemas.GetLicenseConfigurationResponse_LicenseConfigurationId:
+			v.LicenseConfigurationId = new(string)
+			return d.ReadString(schemas.GetLicenseConfigurationResponse_LicenseConfigurationId, v.LicenseConfigurationId)
+		case schemas.GetLicenseConfigurationResponse_LicenseCount:
+			v.LicenseCount = new(int64)
+			return d.ReadInt64(schemas.GetLicenseConfigurationResponse_LicenseCount, v.LicenseCount)
+		case schemas.GetLicenseConfigurationResponse_LicenseCountHardLimit:
+			v.LicenseCountHardLimit = new(bool)
+			return d.ReadBool(schemas.GetLicenseConfigurationResponse_LicenseCountHardLimit, v.LicenseCountHardLimit)
+		case schemas.GetLicenseConfigurationResponse_LicenseCountingType:
+			var ev string
+			if err := d.ReadString(schemas.GetLicenseConfigurationResponse_LicenseCountingType, &ev); err != nil {
+				return err
+			}
+			v.LicenseCountingType = types.LicenseCountingType(ev)
+			return nil
+		case schemas.GetLicenseConfigurationResponse_LicenseExpiry:
+			v.LicenseExpiry = new(int64)
+			return d.ReadInt64(schemas.GetLicenseConfigurationResponse_LicenseExpiry, v.LicenseExpiry)
+		case schemas.GetLicenseConfigurationResponse_LicenseRules:
+			return deserializeStringList(d, schemas.GetLicenseConfigurationResponse_LicenseRules, &v.LicenseRules)
+		case schemas.GetLicenseConfigurationResponse_ManagedResourceSummaryList:
+			return deserializeManagedResourceSummaryList(d, schemas.GetLicenseConfigurationResponse_ManagedResourceSummaryList, &v.ManagedResourceSummaryList)
+		case schemas.GetLicenseConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetLicenseConfigurationResponse_Name, v.Name)
+		case schemas.GetLicenseConfigurationResponse_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.GetLicenseConfigurationResponse_OwnerAccountId, v.OwnerAccountId)
+		case schemas.GetLicenseConfigurationResponse_ProductInformationList:
+			return deserializeProductInformationList(d, schemas.GetLicenseConfigurationResponse_ProductInformationList, &v.ProductInformationList)
+		case schemas.GetLicenseConfigurationResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetLicenseConfigurationResponse_Status, v.Status)
+		case schemas.GetLicenseConfigurationResponse_Tags:
+			return deserializeTagList(d, schemas.GetLicenseConfigurationResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLicenseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseConfiguration, schemas.GetLicenseConfigurationRequest, schemas.GetLicenseConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLicenseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseConfiguration, schemas.GetLicenseConfigurationRequest, schemas.GetLicenseConfigurationResponse), output: &GetLicenseConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DescribeSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeSettingsRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSettingsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeSettingsRequest_Status, string(v.Status))
+	}
+}
+
 type DescribeSettingsOutput struct {
 
 	// The identifier of the directory.
@@ -66,13 +86,41 @@ type DescribeSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSettingsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeSettingsResult_DirectoryId, *v.DirectoryId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSettingsResult_NextToken, *v.NextToken)
+	}
+	serializeSettingEntries(s, schemas.DescribeSettingsResult_SettingEntries, v.SettingEntries)
+}
+func (v *DescribeSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSettingsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSettingsResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.DescribeSettingsResult_DirectoryId, v.DirectoryId)
+		case schemas.DescribeSettingsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSettingsResult_NextToken, v.NextToken)
+		case schemas.DescribeSettingsResult_SettingEntries:
+			return deserializeSettingEntries(d, schemas.DescribeSettingsResult_SettingEntries, &v.SettingEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSettings, schemas.DescribeSettingsRequest, schemas.DescribeSettingsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSettings, schemas.DescribeSettingsRequest, schemas.DescribeSettingsResult), output: &DescribeSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

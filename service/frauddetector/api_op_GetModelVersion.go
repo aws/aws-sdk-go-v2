@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type GetModelVersionInput struct {
 	ModelVersionNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetModelVersionRequest_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.GetModelVersionRequest_modelType, string(v.ModelType))
+	}
+	if v.ModelVersionNumber != nil {
+		s.WriteString(schemas.GetModelVersionRequest_modelVersionNumber, *v.ModelVersionNumber)
+	}
 }
 
 type GetModelVersionOutput struct {
@@ -101,13 +121,94 @@ type GetModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetModelVersionResult_arn, *v.Arn)
+	}
+	if v.ExternalEventsDetail != nil {
+		s.WriteStruct(schemas.GetModelVersionResult_externalEventsDetail)
+		v.ExternalEventsDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngestedEventsDetail != nil {
+		s.WriteStruct(schemas.GetModelVersionResult_ingestedEventsDetail)
+		v.IngestedEventsDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetModelVersionResult_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.GetModelVersionResult_modelType, string(v.ModelType))
+	}
+	if v.ModelVersionNumber != nil {
+		s.WriteString(schemas.GetModelVersionResult_modelVersionNumber, *v.ModelVersionNumber)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetModelVersionResult_status, *v.Status)
+	}
+	if v.TrainingDataSchema != nil {
+		s.WriteStruct(schemas.GetModelVersionResult_trainingDataSchema)
+		v.TrainingDataSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingDataSource != "" {
+		s.WriteString(schemas.GetModelVersionResult_trainingDataSource, string(v.TrainingDataSource))
+	}
+}
+func (v *GetModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelVersionResult_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetModelVersionResult_arn, v.Arn)
+		case schemas.GetModelVersionResult_externalEventsDetail:
+			v.ExternalEventsDetail = &types.ExternalEventsDetail{}
+			return v.ExternalEventsDetail.Deserialize(d)
+		case schemas.GetModelVersionResult_ingestedEventsDetail:
+			v.IngestedEventsDetail = &types.IngestedEventsDetail{}
+			return v.IngestedEventsDetail.Deserialize(d)
+		case schemas.GetModelVersionResult_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.GetModelVersionResult_modelId, v.ModelId)
+		case schemas.GetModelVersionResult_modelType:
+			var ev string
+			if err := d.ReadString(schemas.GetModelVersionResult_modelType, &ev); err != nil {
+				return err
+			}
+			v.ModelType = types.ModelTypeEnum(ev)
+			return nil
+		case schemas.GetModelVersionResult_modelVersionNumber:
+			v.ModelVersionNumber = new(string)
+			return d.ReadString(schemas.GetModelVersionResult_modelVersionNumber, v.ModelVersionNumber)
+		case schemas.GetModelVersionResult_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetModelVersionResult_status, v.Status)
+		case schemas.GetModelVersionResult_trainingDataSchema:
+			v.TrainingDataSchema = &types.TrainingDataSchema{}
+			return v.TrainingDataSchema.Deserialize(d)
+		case schemas.GetModelVersionResult_trainingDataSource:
+			var ev string
+			if err := d.ReadString(schemas.GetModelVersionResult_trainingDataSource, &ev); err != nil {
+				return err
+			}
+			v.TrainingDataSource = types.TrainingDataSourceEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelVersion, schemas.GetModelVersionRequest, schemas.GetModelVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelVersion, schemas.GetModelVersionRequest, schemas.GetModelVersionResult), output: &GetModelVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

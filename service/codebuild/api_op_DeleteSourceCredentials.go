@@ -4,6 +4,8 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteSourceCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSourceCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSourceCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSourceCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteSourceCredentialsInput_arn, *v.Arn)
+	}
+}
+
 type DeleteSourceCredentialsOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the token.
@@ -44,13 +58,32 @@ type DeleteSourceCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSourceCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSourceCredentialsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSourceCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteSourceCredentialsOutput_arn, *v.Arn)
+	}
+}
+func (v *DeleteSourceCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSourceCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSourceCredentialsOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteSourceCredentialsOutput_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSourceCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceCredentials, schemas.DeleteSourceCredentialsInput, schemas.DeleteSourceCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSourceCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceCredentials, schemas.DeleteSourceCredentialsInput, schemas.DeleteSourceCredentialsOutput), output: &DeleteSourceCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

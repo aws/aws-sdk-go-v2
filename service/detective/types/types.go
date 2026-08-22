@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,6 +27,34 @@ type Account struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Account) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Account)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Account) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Account_AccountId, *v.AccountId)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.Account_EmailAddress, *v.EmailAddress)
+	}
+}
+func (v *Account) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Account, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Account_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Account_AccountId, v.AccountId)
+		case schemas.Account_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.Account_EmailAddress, v.EmailAddress)
+		}
+		return nil
+	})
+}
+
 // Information about the Detective administrator account for an organization.
 type Administrator struct {
 
@@ -42,6 +72,40 @@ type Administrator struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Administrator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Administrator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Administrator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Administrator_AccountId, *v.AccountId)
+	}
+	if v.DelegationTime != nil {
+		s.WriteTime(schemas.Administrator_DelegationTime, *v.DelegationTime)
+	}
+	if v.GraphArn != nil {
+		s.WriteString(schemas.Administrator_GraphArn, *v.GraphArn)
+	}
+}
+func (v *Administrator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Administrator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Administrator_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Administrator_AccountId, v.AccountId)
+		case schemas.Administrator_DelegationTime:
+			v.DelegationTime = new(time.Time)
+			return d.ReadTime(schemas.Administrator_DelegationTime, v.DelegationTime)
+		case schemas.Administrator_GraphArn:
+			v.GraphArn = new(string)
+			return d.ReadString(schemas.Administrator_GraphArn, v.GraphArn)
+		}
+		return nil
+	})
+}
+
 // Details about the data source packages ingested by your behavior graph.
 type DatasourcePackageIngestDetail struct {
 
@@ -52,6 +116,35 @@ type DatasourcePackageIngestDetail struct {
 	LastIngestStateChange map[string]TimestampForCollection
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasourcePackageIngestDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasourcePackageIngestDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasourcePackageIngestDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasourcePackageIngestState != "" {
+		s.WriteString(schemas.DatasourcePackageIngestDetail_DatasourcePackageIngestState, string(v.DatasourcePackageIngestState))
+	}
+	serializeLastIngestStateChangeDates(s, schemas.DatasourcePackageIngestDetail_LastIngestStateChange, v.LastIngestStateChange)
+}
+func (v *DatasourcePackageIngestDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasourcePackageIngestDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasourcePackageIngestDetail_DatasourcePackageIngestState:
+			var ev string
+			if err := d.ReadString(schemas.DatasourcePackageIngestDetail_DatasourcePackageIngestState, &ev); err != nil {
+				return err
+			}
+			v.DatasourcePackageIngestState = DatasourcePackageIngestState(ev)
+			return nil
+		case schemas.DatasourcePackageIngestDetail_LastIngestStateChange:
+			return deserializeLastIngestStateChangeDates(d, schemas.DatasourcePackageIngestDetail_LastIngestStateChange, &v.LastIngestStateChange)
+		}
+		return nil
+	})
 }
 
 // Information on the usage of a data source package in the behavior graph.
@@ -65,6 +158,34 @@ type DatasourcePackageUsageInfo struct {
 	VolumeUsageUpdateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasourcePackageUsageInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasourcePackageUsageInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasourcePackageUsageInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VolumeUsageInBytes != nil {
+		s.WriteInt64(schemas.DatasourcePackageUsageInfo_VolumeUsageInBytes, *v.VolumeUsageInBytes)
+	}
+	if v.VolumeUsageUpdateTime != nil {
+		s.WriteTime(schemas.DatasourcePackageUsageInfo_VolumeUsageUpdateTime, *v.VolumeUsageUpdateTime)
+	}
+}
+func (v *DatasourcePackageUsageInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasourcePackageUsageInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasourcePackageUsageInfo_VolumeUsageInBytes:
+			v.VolumeUsageInBytes = new(int64)
+			return d.ReadInt64(schemas.DatasourcePackageUsageInfo_VolumeUsageInBytes, v.VolumeUsageInBytes)
+		case schemas.DatasourcePackageUsageInfo_VolumeUsageUpdateTime:
+			v.VolumeUsageUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.DatasourcePackageUsageInfo_VolumeUsageUpdateTime, v.VolumeUsageUpdateTime)
+		}
+		return nil
+	})
 }
 
 // Contains details on the time range used to filter data.
@@ -83,6 +204,34 @@ type DateFilter struct {
 	StartInclusive *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndInclusive != nil {
+		s.WriteTime(schemas.DateFilter_EndInclusive, *v.EndInclusive)
+	}
+	if v.StartInclusive != nil {
+		s.WriteTime(schemas.DateFilter_StartInclusive, *v.StartInclusive)
+	}
+}
+func (v *DateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateFilter_EndInclusive:
+			v.EndInclusive = new(time.Time)
+			return d.ReadTime(schemas.DateFilter_EndInclusive, v.EndInclusive)
+		case schemas.DateFilter_StartInclusive:
+			v.StartInclusive = new(time.Time)
+			return d.ReadTime(schemas.DateFilter_StartInclusive, v.StartInclusive)
+		}
+		return nil
+	})
 }
 
 // Details on the criteria used to define the filter for investigation results.
@@ -107,6 +256,62 @@ type FilterCriteria struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FilterCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterCriteria)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTime != nil {
+		s.WriteStruct(schemas.FilterCriteria_CreatedTime)
+		v.CreatedTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityArn != nil {
+		s.WriteStruct(schemas.FilterCriteria_EntityArn)
+		v.EntityArn.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Severity != nil {
+		s.WriteStruct(schemas.FilterCriteria_Severity)
+		v.Severity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.FilterCriteria_State)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.FilterCriteria_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterCriteria, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterCriteria_CreatedTime:
+			v.CreatedTime = &DateFilter{}
+			return v.CreatedTime.Deserialize(d)
+		case schemas.FilterCriteria_EntityArn:
+			v.EntityArn = &StringFilter{}
+			return v.EntityArn.Deserialize(d)
+		case schemas.FilterCriteria_Severity:
+			v.Severity = &StringFilter{}
+			return v.Severity.Deserialize(d)
+		case schemas.FilterCriteria_State:
+			v.State = &StringFilter{}
+			return v.State.Deserialize(d)
+		case schemas.FilterCriteria_Status:
+			v.Status = &StringFilter{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains information on suspicious IP addresses identified as indicators of
 // compromise. This indicator is derived from Amazon Web Services threat
 // intelligence.
@@ -121,6 +326,38 @@ type FlaggedIpAddressDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlaggedIpAddressDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlaggedIpAddressDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlaggedIpAddressDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteString(schemas.FlaggedIpAddressDetail_IpAddress, *v.IpAddress)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.FlaggedIpAddressDetail_Reason, string(v.Reason))
+	}
+}
+func (v *FlaggedIpAddressDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlaggedIpAddressDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlaggedIpAddressDetail_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.FlaggedIpAddressDetail_IpAddress, v.IpAddress)
+		case schemas.FlaggedIpAddressDetail_Reason:
+			var ev string
+			if err := d.ReadString(schemas.FlaggedIpAddressDetail_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = Reason(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A behavior graph in Detective.
 type Graph struct {
 
@@ -132,6 +369,34 @@ type Graph struct {
 	CreatedTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *Graph) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Graph)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Graph) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Graph_Arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.Graph_CreatedTime, *v.CreatedTime)
+	}
+}
+func (v *Graph) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Graph, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Graph_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Graph_Arn, v.Arn)
+		case schemas.Graph_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.Graph_CreatedTime, v.CreatedTime)
+		}
+		return nil
+	})
 }
 
 // Contains information on unusual and impossible travel in an account.
@@ -156,6 +421,52 @@ type ImpossibleTravelDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImpossibleTravelDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImpossibleTravelDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImpossibleTravelDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndingIpAddress != nil {
+		s.WriteString(schemas.ImpossibleTravelDetail_EndingIpAddress, *v.EndingIpAddress)
+	}
+	if v.EndingLocation != nil {
+		s.WriteString(schemas.ImpossibleTravelDetail_EndingLocation, *v.EndingLocation)
+	}
+	if v.HourlyTimeDelta != nil {
+		s.WriteInt32(schemas.ImpossibleTravelDetail_HourlyTimeDelta, *v.HourlyTimeDelta)
+	}
+	if v.StartingIpAddress != nil {
+		s.WriteString(schemas.ImpossibleTravelDetail_StartingIpAddress, *v.StartingIpAddress)
+	}
+	if v.StartingLocation != nil {
+		s.WriteString(schemas.ImpossibleTravelDetail_StartingLocation, *v.StartingLocation)
+	}
+}
+func (v *ImpossibleTravelDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImpossibleTravelDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImpossibleTravelDetail_EndingIpAddress:
+			v.EndingIpAddress = new(string)
+			return d.ReadString(schemas.ImpossibleTravelDetail_EndingIpAddress, v.EndingIpAddress)
+		case schemas.ImpossibleTravelDetail_EndingLocation:
+			v.EndingLocation = new(string)
+			return d.ReadString(schemas.ImpossibleTravelDetail_EndingLocation, v.EndingLocation)
+		case schemas.ImpossibleTravelDetail_HourlyTimeDelta:
+			v.HourlyTimeDelta = new(int32)
+			return d.ReadInt32(schemas.ImpossibleTravelDetail_HourlyTimeDelta, v.HourlyTimeDelta)
+		case schemas.ImpossibleTravelDetail_StartingIpAddress:
+			v.StartingIpAddress = new(string)
+			return d.ReadString(schemas.ImpossibleTravelDetail_StartingIpAddress, v.StartingIpAddress)
+		case schemas.ImpossibleTravelDetail_StartingLocation:
+			v.StartingLocation = new(string)
+			return d.ReadString(schemas.ImpossibleTravelDetail_StartingLocation, v.StartingLocation)
+		}
+		return nil
+	})
+}
+
 // Detective investigations triages indicators of compromises such as a finding
 // and surfaces only the most critical and suspicious issues, so you can focus on
 // high-level investigations. An Indicator lets you determine if an Amazon Web
@@ -173,6 +484,40 @@ type Indicator struct {
 	IndicatorType IndicatorType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Indicator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Indicator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Indicator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndicatorDetail != nil {
+		s.WriteStruct(schemas.Indicator_IndicatorDetail)
+		v.IndicatorDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndicatorType != "" {
+		s.WriteString(schemas.Indicator_IndicatorType, string(v.IndicatorType))
+	}
+}
+func (v *Indicator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Indicator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Indicator_IndicatorDetail:
+			v.IndicatorDetail = &IndicatorDetail{}
+			return v.IndicatorDetail.Deserialize(d)
+		case schemas.Indicator_IndicatorType:
+			var ev string
+			if err := d.ReadString(schemas.Indicator_IndicatorType, &ev); err != nil {
+				return err
+			}
+			v.IndicatorType = IndicatorType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about the indicators of compromise which are used to determine if a
@@ -214,6 +559,86 @@ type IndicatorDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndicatorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndicatorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndicatorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlaggedIpAddressDetail != nil {
+		s.WriteStruct(schemas.IndicatorDetail_FlaggedIpAddressDetail)
+		v.FlaggedIpAddressDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImpossibleTravelDetail != nil {
+		s.WriteStruct(schemas.IndicatorDetail_ImpossibleTravelDetail)
+		v.ImpossibleTravelDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NewAsoDetail != nil {
+		s.WriteStruct(schemas.IndicatorDetail_NewAsoDetail)
+		v.NewAsoDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NewGeolocationDetail != nil {
+		s.WriteStruct(schemas.IndicatorDetail_NewGeolocationDetail)
+		v.NewGeolocationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NewUserAgentDetail != nil {
+		s.WriteStruct(schemas.IndicatorDetail_NewUserAgentDetail)
+		v.NewUserAgentDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedFindingDetail != nil {
+		s.WriteStruct(schemas.IndicatorDetail_RelatedFindingDetail)
+		v.RelatedFindingDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedFindingGroupDetail != nil {
+		s.WriteStruct(schemas.IndicatorDetail_RelatedFindingGroupDetail)
+		v.RelatedFindingGroupDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TTPsObservedDetail != nil {
+		s.WriteStruct(schemas.IndicatorDetail_TTPsObservedDetail)
+		v.TTPsObservedDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IndicatorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndicatorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndicatorDetail_FlaggedIpAddressDetail:
+			v.FlaggedIpAddressDetail = &FlaggedIpAddressDetail{}
+			return v.FlaggedIpAddressDetail.Deserialize(d)
+		case schemas.IndicatorDetail_ImpossibleTravelDetail:
+			v.ImpossibleTravelDetail = &ImpossibleTravelDetail{}
+			return v.ImpossibleTravelDetail.Deserialize(d)
+		case schemas.IndicatorDetail_NewAsoDetail:
+			v.NewAsoDetail = &NewAsoDetail{}
+			return v.NewAsoDetail.Deserialize(d)
+		case schemas.IndicatorDetail_NewGeolocationDetail:
+			v.NewGeolocationDetail = &NewGeolocationDetail{}
+			return v.NewGeolocationDetail.Deserialize(d)
+		case schemas.IndicatorDetail_NewUserAgentDetail:
+			v.NewUserAgentDetail = &NewUserAgentDetail{}
+			return v.NewUserAgentDetail.Deserialize(d)
+		case schemas.IndicatorDetail_RelatedFindingDetail:
+			v.RelatedFindingDetail = &RelatedFindingDetail{}
+			return v.RelatedFindingDetail.Deserialize(d)
+		case schemas.IndicatorDetail_RelatedFindingGroupDetail:
+			v.RelatedFindingGroupDetail = &RelatedFindingGroupDetail{}
+			return v.RelatedFindingGroupDetail.Deserialize(d)
+		case schemas.IndicatorDetail_TTPsObservedDetail:
+			v.TTPsObservedDetail = &TTPsObservedDetail{}
+			return v.TTPsObservedDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details about the investigation related to a potential security event
 // identified by Detective.
 type InvestigationDetail struct {
@@ -244,6 +669,80 @@ type InvestigationDetail struct {
 	Status Status
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvestigationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvestigationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvestigationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.InvestigationDetail_CreatedTime, *v.CreatedTime)
+	}
+	if v.EntityArn != nil {
+		s.WriteString(schemas.InvestigationDetail_EntityArn, *v.EntityArn)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.InvestigationDetail_EntityType, string(v.EntityType))
+	}
+	if v.InvestigationId != nil {
+		s.WriteString(schemas.InvestigationDetail_InvestigationId, *v.InvestigationId)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.InvestigationDetail_Severity, string(v.Severity))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.InvestigationDetail_State, string(v.State))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InvestigationDetail_Status, string(v.Status))
+	}
+}
+func (v *InvestigationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvestigationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvestigationDetail_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.InvestigationDetail_CreatedTime, v.CreatedTime)
+		case schemas.InvestigationDetail_EntityArn:
+			v.EntityArn = new(string)
+			return d.ReadString(schemas.InvestigationDetail_EntityArn, v.EntityArn)
+		case schemas.InvestigationDetail_EntityType:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationDetail_EntityType, &ev); err != nil {
+				return err
+			}
+			v.EntityType = EntityType(ev)
+			return nil
+		case schemas.InvestigationDetail_InvestigationId:
+			v.InvestigationId = new(string)
+			return d.ReadString(schemas.InvestigationDetail_InvestigationId, v.InvestigationId)
+		case schemas.InvestigationDetail_Severity:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationDetail_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = Severity(ev)
+			return nil
+		case schemas.InvestigationDetail_State:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationDetail_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		case schemas.InvestigationDetail_Status:
+			var ev string
+			if err := d.ReadString(schemas.InvestigationDetail_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about a member account in a behavior graph.
@@ -377,6 +876,124 @@ type MemberDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemberDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MemberDetail_AccountId, *v.AccountId)
+	}
+	if v.AdministratorId != nil {
+		s.WriteString(schemas.MemberDetail_AdministratorId, *v.AdministratorId)
+	}
+	serializeDatasourcePackageIngestStates(s, schemas.MemberDetail_DatasourcePackageIngestStates, v.DatasourcePackageIngestStates)
+	if v.DisabledReason != "" {
+		s.WriteString(schemas.MemberDetail_DisabledReason, string(v.DisabledReason))
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.MemberDetail_EmailAddress, *v.EmailAddress)
+	}
+	if v.GraphArn != nil {
+		s.WriteString(schemas.MemberDetail_GraphArn, *v.GraphArn)
+	}
+	if v.InvitationType != "" {
+		s.WriteString(schemas.MemberDetail_InvitationType, string(v.InvitationType))
+	}
+	if v.InvitedTime != nil {
+		s.WriteTime(schemas.MemberDetail_InvitedTime, *v.InvitedTime)
+	}
+	if v.MasterId != nil {
+		s.WriteString(schemas.MemberDetail_MasterId, *v.MasterId)
+	}
+	if v.PercentOfGraphUtilization != nil {
+		s.WriteFloat64(schemas.MemberDetail_PercentOfGraphUtilization, *v.PercentOfGraphUtilization)
+	}
+	if v.PercentOfGraphUtilizationUpdatedTime != nil {
+		s.WriteTime(schemas.MemberDetail_PercentOfGraphUtilizationUpdatedTime, *v.PercentOfGraphUtilizationUpdatedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MemberDetail_Status, string(v.Status))
+	}
+	if v.UpdatedTime != nil {
+		s.WriteTime(schemas.MemberDetail_UpdatedTime, *v.UpdatedTime)
+	}
+	serializeVolumeUsageByDatasourcePackage(s, schemas.MemberDetail_VolumeUsageByDatasourcePackage, v.VolumeUsageByDatasourcePackage)
+	if v.VolumeUsageInBytes != nil {
+		s.WriteInt64(schemas.MemberDetail_VolumeUsageInBytes, *v.VolumeUsageInBytes)
+	}
+	if v.VolumeUsageUpdatedTime != nil {
+		s.WriteTime(schemas.MemberDetail_VolumeUsageUpdatedTime, *v.VolumeUsageUpdatedTime)
+	}
+}
+func (v *MemberDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberDetail_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.MemberDetail_AccountId, v.AccountId)
+		case schemas.MemberDetail_AdministratorId:
+			v.AdministratorId = new(string)
+			return d.ReadString(schemas.MemberDetail_AdministratorId, v.AdministratorId)
+		case schemas.MemberDetail_DatasourcePackageIngestStates:
+			return deserializeDatasourcePackageIngestStates(d, schemas.MemberDetail_DatasourcePackageIngestStates, &v.DatasourcePackageIngestStates)
+		case schemas.MemberDetail_DisabledReason:
+			var ev string
+			if err := d.ReadString(schemas.MemberDetail_DisabledReason, &ev); err != nil {
+				return err
+			}
+			v.DisabledReason = MemberDisabledReason(ev)
+			return nil
+		case schemas.MemberDetail_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.MemberDetail_EmailAddress, v.EmailAddress)
+		case schemas.MemberDetail_GraphArn:
+			v.GraphArn = new(string)
+			return d.ReadString(schemas.MemberDetail_GraphArn, v.GraphArn)
+		case schemas.MemberDetail_InvitationType:
+			var ev string
+			if err := d.ReadString(schemas.MemberDetail_InvitationType, &ev); err != nil {
+				return err
+			}
+			v.InvitationType = InvitationType(ev)
+			return nil
+		case schemas.MemberDetail_InvitedTime:
+			v.InvitedTime = new(time.Time)
+			return d.ReadTime(schemas.MemberDetail_InvitedTime, v.InvitedTime)
+		case schemas.MemberDetail_MasterId:
+			v.MasterId = new(string)
+			return d.ReadString(schemas.MemberDetail_MasterId, v.MasterId)
+		case schemas.MemberDetail_PercentOfGraphUtilization:
+			v.PercentOfGraphUtilization = new(float64)
+			return d.ReadFloat64(schemas.MemberDetail_PercentOfGraphUtilization, v.PercentOfGraphUtilization)
+		case schemas.MemberDetail_PercentOfGraphUtilizationUpdatedTime:
+			v.PercentOfGraphUtilizationUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.MemberDetail_PercentOfGraphUtilizationUpdatedTime, v.PercentOfGraphUtilizationUpdatedTime)
+		case schemas.MemberDetail_Status:
+			var ev string
+			if err := d.ReadString(schemas.MemberDetail_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MemberStatus(ev)
+			return nil
+		case schemas.MemberDetail_UpdatedTime:
+			v.UpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.MemberDetail_UpdatedTime, v.UpdatedTime)
+		case schemas.MemberDetail_VolumeUsageByDatasourcePackage:
+			return deserializeVolumeUsageByDatasourcePackage(d, schemas.MemberDetail_VolumeUsageByDatasourcePackage, &v.VolumeUsageByDatasourcePackage)
+		case schemas.MemberDetail_VolumeUsageInBytes:
+			v.VolumeUsageInBytes = new(int64)
+			return d.ReadInt64(schemas.MemberDetail_VolumeUsageInBytes, v.VolumeUsageInBytes)
+		case schemas.MemberDetail_VolumeUsageUpdatedTime:
+			v.VolumeUsageUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.MemberDetail_VolumeUsageUpdatedTime, v.VolumeUsageUpdatedTime)
+		}
+		return nil
+	})
+}
+
 // Details on data source packages for members of the behavior graph.
 type MembershipDatasources struct {
 
@@ -392,6 +1009,37 @@ type MembershipDatasources struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MembershipDatasources) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MembershipDatasources)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MembershipDatasources) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MembershipDatasources_AccountId, *v.AccountId)
+	}
+	serializeDatasourcePackageIngestHistory(s, schemas.MembershipDatasources_DatasourcePackageIngestHistory, v.DatasourcePackageIngestHistory)
+	if v.GraphArn != nil {
+		s.WriteString(schemas.MembershipDatasources_GraphArn, *v.GraphArn)
+	}
+}
+func (v *MembershipDatasources) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MembershipDatasources, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MembershipDatasources_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.MembershipDatasources_AccountId, v.AccountId)
+		case schemas.MembershipDatasources_DatasourcePackageIngestHistory:
+			return deserializeDatasourcePackageIngestHistory(d, schemas.MembershipDatasources_DatasourcePackageIngestHistory, &v.DatasourcePackageIngestHistory)
+		case schemas.MembershipDatasources_GraphArn:
+			v.GraphArn = new(string)
+			return d.ReadString(schemas.MembershipDatasources_GraphArn, v.GraphArn)
+		}
+		return nil
+	})
+}
+
 // Details new Autonomous System Organizations (ASOs) used either at the resource
 // or account level.
 type NewAsoDetail struct {
@@ -404,6 +1052,33 @@ type NewAsoDetail struct {
 	IsNewForEntireAccount bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *NewAsoDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewAsoDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewAsoDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Aso != nil {
+		s.WriteString(schemas.NewAsoDetail_Aso, *v.Aso)
+	}
+	if v.IsNewForEntireAccount != false {
+		s.WriteBool(schemas.NewAsoDetail_IsNewForEntireAccount, v.IsNewForEntireAccount)
+	}
+}
+func (v *NewAsoDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewAsoDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewAsoDetail_Aso:
+			v.Aso = new(string)
+			return d.ReadString(schemas.NewAsoDetail_Aso, v.Aso)
+		case schemas.NewAsoDetail_IsNewForEntireAccount:
+			return d.ReadBool(schemas.NewAsoDetail_IsNewForEntireAccount, &v.IsNewForEntireAccount)
+		}
+		return nil
+	})
 }
 
 // Details new geolocations used either at the resource or account level. For
@@ -423,6 +1098,39 @@ type NewGeolocationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NewGeolocationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewGeolocationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewGeolocationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteString(schemas.NewGeolocationDetail_IpAddress, *v.IpAddress)
+	}
+	if v.IsNewForEntireAccount != false {
+		s.WriteBool(schemas.NewGeolocationDetail_IsNewForEntireAccount, v.IsNewForEntireAccount)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.NewGeolocationDetail_Location, *v.Location)
+	}
+}
+func (v *NewGeolocationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewGeolocationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewGeolocationDetail_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.NewGeolocationDetail_IpAddress, v.IpAddress)
+		case schemas.NewGeolocationDetail_IsNewForEntireAccount:
+			return d.ReadBool(schemas.NewGeolocationDetail_IsNewForEntireAccount, &v.IsNewForEntireAccount)
+		case schemas.NewGeolocationDetail_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.NewGeolocationDetail_Location, v.Location)
+		}
+		return nil
+	})
+}
+
 // Details new user agents used either at the resource or account level.
 type NewUserAgentDetail struct {
 
@@ -433,6 +1141,33 @@ type NewUserAgentDetail struct {
 	UserAgent *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NewUserAgentDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewUserAgentDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewUserAgentDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsNewForEntireAccount != false {
+		s.WriteBool(schemas.NewUserAgentDetail_IsNewForEntireAccount, v.IsNewForEntireAccount)
+	}
+	if v.UserAgent != nil {
+		s.WriteString(schemas.NewUserAgentDetail_UserAgent, *v.UserAgent)
+	}
+}
+func (v *NewUserAgentDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewUserAgentDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewUserAgentDetail_IsNewForEntireAccount:
+			return d.ReadBool(schemas.NewUserAgentDetail_IsNewForEntireAccount, &v.IsNewForEntireAccount)
+		case schemas.NewUserAgentDetail_UserAgent:
+			v.UserAgent = new(string)
+			return d.ReadString(schemas.NewUserAgentDetail_UserAgent, v.UserAgent)
+		}
+		return nil
+	})
 }
 
 // Details related activities associated with a potential security event. Lists
@@ -452,6 +1187,40 @@ type RelatedFindingDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RelatedFindingDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedFindingDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedFindingDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RelatedFindingDetail_Arn, *v.Arn)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.RelatedFindingDetail_IpAddress, *v.IpAddress)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.RelatedFindingDetail_Type, *v.Type)
+	}
+}
+func (v *RelatedFindingDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedFindingDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedFindingDetail_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RelatedFindingDetail_Arn, v.Arn)
+		case schemas.RelatedFindingDetail_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.RelatedFindingDetail_IpAddress, v.IpAddress)
+		case schemas.RelatedFindingDetail_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RelatedFindingDetail_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Details multiple activities as they related to a potential security event.
 // Detective uses graph analysis technique that infers relationships between
 // findings and entities, and groups them together as a finding group.
@@ -461,6 +1230,28 @@ type RelatedFindingGroupDetail struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RelatedFindingGroupDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedFindingGroupDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedFindingGroupDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.RelatedFindingGroupDetail_Id, *v.Id)
+	}
+}
+func (v *RelatedFindingGroupDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedFindingGroupDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedFindingGroupDetail_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RelatedFindingGroupDetail_Id, v.Id)
+		}
+		return nil
+	})
 }
 
 // Details about the criteria used for sorting investigations.
@@ -475,6 +1266,42 @@ type SortCriteria struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SortCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SortCriteria)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SortCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Field != "" {
+		s.WriteString(schemas.SortCriteria_Field, string(v.Field))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SortCriteria_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *SortCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SortCriteria, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SortCriteria_Field:
+			var ev string
+			if err := d.ReadString(schemas.SortCriteria_Field, &ev); err != nil {
+				return err
+			}
+			v.Field = Field(ev)
+			return nil
+		case schemas.SortCriteria_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.SortCriteria_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A string for filtering Detective investigations.
 type StringFilter struct {
 
@@ -486,6 +1313,28 @@ type StringFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StringFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StringFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StringFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.StringFilter_Value, *v.Value)
+	}
+}
+func (v *StringFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StringFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StringFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.StringFilter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Details on when data collection began for a source package.
 type TimestampForCollection struct {
 
@@ -494,6 +1343,28 @@ type TimestampForCollection struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimestampForCollection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestampForCollection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestampForCollection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.TimestampForCollection_Timestamp, *v.Timestamp)
+	}
+}
+func (v *TimestampForCollection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestampForCollection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestampForCollection_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.TimestampForCollection_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // Details tactics, techniques, and procedures (TTPs) used in a potential security
@@ -527,6 +1398,62 @@ type TTPsObservedDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TTPsObservedDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TTPsObservedDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TTPsObservedDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APIFailureCount != 0 {
+		s.WriteInt64(schemas.TTPsObservedDetail_APIFailureCount, v.APIFailureCount)
+	}
+	if v.APIName != nil {
+		s.WriteString(schemas.TTPsObservedDetail_APIName, *v.APIName)
+	}
+	if v.APISuccessCount != 0 {
+		s.WriteInt64(schemas.TTPsObservedDetail_APISuccessCount, v.APISuccessCount)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.TTPsObservedDetail_IpAddress, *v.IpAddress)
+	}
+	if v.Procedure != nil {
+		s.WriteString(schemas.TTPsObservedDetail_Procedure, *v.Procedure)
+	}
+	if v.Tactic != nil {
+		s.WriteString(schemas.TTPsObservedDetail_Tactic, *v.Tactic)
+	}
+	if v.Technique != nil {
+		s.WriteString(schemas.TTPsObservedDetail_Technique, *v.Technique)
+	}
+}
+func (v *TTPsObservedDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TTPsObservedDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TTPsObservedDetail_APIFailureCount:
+			return d.ReadInt64(schemas.TTPsObservedDetail_APIFailureCount, &v.APIFailureCount)
+		case schemas.TTPsObservedDetail_APIName:
+			v.APIName = new(string)
+			return d.ReadString(schemas.TTPsObservedDetail_APIName, v.APIName)
+		case schemas.TTPsObservedDetail_APISuccessCount:
+			return d.ReadInt64(schemas.TTPsObservedDetail_APISuccessCount, &v.APISuccessCount)
+		case schemas.TTPsObservedDetail_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.TTPsObservedDetail_IpAddress, v.IpAddress)
+		case schemas.TTPsObservedDetail_Procedure:
+			v.Procedure = new(string)
+			return d.ReadString(schemas.TTPsObservedDetail_Procedure, v.Procedure)
+		case schemas.TTPsObservedDetail_Tactic:
+			v.Tactic = new(string)
+			return d.ReadString(schemas.TTPsObservedDetail_Tactic, v.Tactic)
+		case schemas.TTPsObservedDetail_Technique:
+			v.Technique = new(string)
+			return d.ReadString(schemas.TTPsObservedDetail_Technique, v.Technique)
+		}
+		return nil
+	})
+}
+
 // A member account that was included in a request but for which the request could
 // not be processed.
 type UnprocessedAccount struct {
@@ -541,6 +1468,34 @@ type UnprocessedAccount struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnprocessedAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnprocessedAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnprocessedAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UnprocessedAccount_AccountId, *v.AccountId)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.UnprocessedAccount_Reason, *v.Reason)
+	}
+}
+func (v *UnprocessedAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessedAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessedAccount_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.UnprocessedAccount_AccountId, v.AccountId)
+		case schemas.UnprocessedAccount_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.UnprocessedAccount_Reason, v.Reason)
+		}
+		return nil
+	})
+}
+
 // Behavior graphs that could not be processed in the request.
 type UnprocessedGraph struct {
 
@@ -552,6 +1507,34 @@ type UnprocessedGraph struct {
 	Reason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UnprocessedGraph) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnprocessedGraph)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnprocessedGraph) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.UnprocessedGraph_GraphArn, *v.GraphArn)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.UnprocessedGraph_Reason, *v.Reason)
+	}
+}
+func (v *UnprocessedGraph) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessedGraph, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessedGraph_GraphArn:
+			v.GraphArn = new(string)
+			return d.ReadString(schemas.UnprocessedGraph_GraphArn, v.GraphArn)
+		case schemas.UnprocessedGraph_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.UnprocessedGraph_Reason, v.Reason)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

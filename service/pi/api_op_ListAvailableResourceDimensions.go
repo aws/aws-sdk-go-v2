@@ -5,7 +5,9 @@ package pi
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,29 @@ type ListAvailableResourceDimensionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableResourceDimensionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableResourceDimensionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableResourceDimensionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizedActionsList(s, schemas.ListAvailableResourceDimensionsRequest_AuthorizedActions, v.AuthorizedActions)
+	if v.Identifier != nil {
+		s.WriteString(schemas.ListAvailableResourceDimensionsRequest_Identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAvailableResourceDimensionsRequest_MaxResults, *v.MaxResults)
+	}
+	serializeDimensionsMetricList(s, schemas.ListAvailableResourceDimensionsRequest_Metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableResourceDimensionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.ListAvailableResourceDimensionsRequest_ServiceType, string(v.ServiceType))
+	}
+}
+
 type ListAvailableResourceDimensionsOutput struct {
 
 	// The dimension information returned for requested metric types.
@@ -85,13 +110,35 @@ type ListAvailableResourceDimensionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableResourceDimensionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableResourceDimensionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableResourceDimensionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricDimensionsList(s, schemas.ListAvailableResourceDimensionsResponse_MetricDimensions, v.MetricDimensions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableResourceDimensionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAvailableResourceDimensionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableResourceDimensionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableResourceDimensionsResponse_MetricDimensions:
+			return deserializeMetricDimensionsList(d, schemas.ListAvailableResourceDimensionsResponse_MetricDimensions, &v.MetricDimensions)
+		case schemas.ListAvailableResourceDimensionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAvailableResourceDimensionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableResourceDimensionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableResourceDimensions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableResourceDimensions, schemas.ListAvailableResourceDimensionsRequest, schemas.ListAvailableResourceDimensionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableResourceDimensions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableResourceDimensions, schemas.ListAvailableResourceDimensionsRequest, schemas.ListAvailableResourceDimensionsResponse), output: &ListAvailableResourceDimensionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

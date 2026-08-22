@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,30 @@ type RespondDecisionTaskCompletedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RespondDecisionTaskCompletedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RespondDecisionTaskCompletedInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RespondDecisionTaskCompletedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDecisionList(s, schemas.RespondDecisionTaskCompletedInput_decisions, v.Decisions)
+	if v.ExecutionContext != nil {
+		s.WriteString(schemas.RespondDecisionTaskCompletedInput_executionContext, *v.ExecutionContext)
+	}
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.RespondDecisionTaskCompletedInput_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskListScheduleToStartTimeout != nil {
+		s.WriteString(schemas.RespondDecisionTaskCompletedInput_taskListScheduleToStartTimeout, *v.TaskListScheduleToStartTimeout)
+	}
+	if v.TaskToken != nil {
+		s.WriteString(schemas.RespondDecisionTaskCompletedInput_taskToken, *v.TaskToken)
+	}
+}
+
 type RespondDecisionTaskCompletedOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -88,13 +114,26 @@ type RespondDecisionTaskCompletedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RespondDecisionTaskCompletedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RespondDecisionTaskCompletedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RespondDecisionTaskCompletedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRespondDecisionTaskCompletedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRespondDecisionTaskCompleted{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RespondDecisionTaskCompleted, schemas.RespondDecisionTaskCompletedInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRespondDecisionTaskCompleted{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RespondDecisionTaskCompleted, schemas.RespondDecisionTaskCompletedInput, nil), output: &RespondDecisionTaskCompletedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,25 @@ type CreateTransitGatewayPeeringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTransitGatewayPeeringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTransitGatewayPeeringRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTransitGatewayPeeringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTransitGatewayPeeringRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CreateTransitGatewayPeeringRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	serializeTagList(s, schemas.CreateTransitGatewayPeeringRequest_Tags, v.Tags)
+	if v.TransitGatewayArn != nil {
+		s.WriteString(schemas.CreateTransitGatewayPeeringRequest_TransitGatewayArn, *v.TransitGatewayArn)
+	}
+}
+
 type CreateTransitGatewayPeeringOutput struct {
 
 	// Returns information about the transit gateway peering connection request.
@@ -57,13 +78,34 @@ type CreateTransitGatewayPeeringOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTransitGatewayPeeringOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTransitGatewayPeeringResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTransitGatewayPeeringOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransitGatewayPeering != nil {
+		s.WriteStruct(schemas.CreateTransitGatewayPeeringResponse_TransitGatewayPeering)
+		v.TransitGatewayPeering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTransitGatewayPeeringOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTransitGatewayPeeringResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTransitGatewayPeeringResponse_TransitGatewayPeering:
+			v.TransitGatewayPeering = &types.TransitGatewayPeering{}
+			return v.TransitGatewayPeering.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTransitGatewayPeeringMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTransitGatewayPeering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTransitGatewayPeering, schemas.CreateTransitGatewayPeeringRequest, schemas.CreateTransitGatewayPeeringResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTransitGatewayPeering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTransitGatewayPeering, schemas.CreateTransitGatewayPeeringRequest, schemas.CreateTransitGatewayPeeringResponse), output: &CreateTransitGatewayPeeringOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,19 @@ type AddCustomRoutingEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddCustomRoutingEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddCustomRoutingEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddCustomRoutingEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomRoutingEndpointConfigurations(s, schemas.AddCustomRoutingEndpointsRequest_EndpointConfigurations, v.EndpointConfigurations)
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.AddCustomRoutingEndpointsRequest_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+}
+
 type AddCustomRoutingEndpointsOutput struct {
 
 	// The endpoint objects added to the custom routing accelerator.
@@ -71,13 +86,35 @@ type AddCustomRoutingEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddCustomRoutingEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddCustomRoutingEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddCustomRoutingEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomRoutingEndpointDescriptions(s, schemas.AddCustomRoutingEndpointsResponse_EndpointDescriptions, v.EndpointDescriptions)
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.AddCustomRoutingEndpointsResponse_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+}
+func (v *AddCustomRoutingEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddCustomRoutingEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddCustomRoutingEndpointsResponse_EndpointDescriptions:
+			return deserializeCustomRoutingEndpointDescriptions(d, schemas.AddCustomRoutingEndpointsResponse_EndpointDescriptions, &v.EndpointDescriptions)
+		case schemas.AddCustomRoutingEndpointsResponse_EndpointGroupArn:
+			v.EndpointGroupArn = new(string)
+			return d.ReadString(schemas.AddCustomRoutingEndpointsResponse_EndpointGroupArn, v.EndpointGroupArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddCustomRoutingEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddCustomRoutingEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddCustomRoutingEndpoints, schemas.AddCustomRoutingEndpointsRequest, schemas.AddCustomRoutingEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddCustomRoutingEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddCustomRoutingEndpoints, schemas.AddCustomRoutingEndpointsRequest, schemas.AddCustomRoutingEndpointsResponse), output: &AddCustomRoutingEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

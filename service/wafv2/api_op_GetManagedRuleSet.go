@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,24 @@ type GetManagedRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetManagedRuleSetRequest_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetManagedRuleSetRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetManagedRuleSetRequest_Scope, string(v.Scope))
+	}
+}
+
 type GetManagedRuleSetOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list
@@ -87,13 +107,40 @@ type GetManagedRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedRuleSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LockToken != nil {
+		s.WriteString(schemas.GetManagedRuleSetResponse_LockToken, *v.LockToken)
+	}
+	if v.ManagedRuleSet != nil {
+		s.WriteStruct(schemas.GetManagedRuleSetResponse_ManagedRuleSet)
+		v.ManagedRuleSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetManagedRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedRuleSetResponse_LockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.GetManagedRuleSetResponse_LockToken, v.LockToken)
+		case schemas.GetManagedRuleSetResponse_ManagedRuleSet:
+			v.ManagedRuleSet = &types.ManagedRuleSet{}
+			return v.ManagedRuleSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetManagedRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedRuleSet, schemas.GetManagedRuleSetRequest, schemas.GetManagedRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetManagedRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedRuleSet, schemas.GetManagedRuleSetRequest, schemas.GetManagedRuleSetResponse), output: &GetManagedRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

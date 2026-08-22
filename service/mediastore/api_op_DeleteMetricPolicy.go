@@ -4,6 +4,8 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteMetricPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMetricPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMetricPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMetricPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.DeleteMetricPolicyInput_ContainerName, *v.ContainerName)
+	}
+}
+
 type DeleteMetricPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteMetricPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMetricPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMetricPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMetricPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMetricPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMetricPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMetricPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMetricPolicy, schemas.DeleteMetricPolicyInput, schemas.DeleteMetricPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMetricPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMetricPolicy, schemas.DeleteMetricPolicyInput, schemas.DeleteMetricPolicyOutput), output: &DeleteMetricPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

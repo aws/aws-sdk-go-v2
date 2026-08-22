@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,29 @@ type CreateDirectConnectGatewayAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDirectConnectGatewayAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDirectConnectGatewayAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDirectConnectGatewayAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.DirectConnectGatewayArn != nil {
+		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn, *v.DirectConnectGatewayArn)
+	}
+	serializeExternalRegionCodeList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_EdgeLocations, v.EdgeLocations)
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+	serializeTagList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_Tags, v.Tags)
+}
+
 type CreateDirectConnectGatewayAttachmentOutput struct {
 
 	// Describes the details of a CreateDirectConnectGatewayAttachment request.
@@ -69,13 +94,34 @@ type CreateDirectConnectGatewayAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDirectConnectGatewayAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDirectConnectGatewayAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDirectConnectGatewayAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectConnectGatewayAttachment != nil {
+		s.WriteStruct(schemas.CreateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment)
+		v.DirectConnectGatewayAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDirectConnectGatewayAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDirectConnectGatewayAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment:
+			v.DirectConnectGatewayAttachment = &types.DirectConnectGatewayAttachment{}
+			return v.DirectConnectGatewayAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDirectConnectGatewayAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDirectConnectGatewayAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDirectConnectGatewayAttachment, schemas.CreateDirectConnectGatewayAttachmentRequest, schemas.CreateDirectConnectGatewayAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDirectConnectGatewayAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDirectConnectGatewayAttachment, schemas.CreateDirectConnectGatewayAttachmentRequest, schemas.CreateDirectConnectGatewayAttachmentResponse), output: &CreateDirectConnectGatewayAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

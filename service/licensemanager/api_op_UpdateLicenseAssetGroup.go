@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,33 @@ type UpdateLicenseAssetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLicenseAssetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLicenseAssetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLicenseAssetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLicenseAssetRulesetArnList(s, schemas.UpdateLicenseAssetGroupRequest_AssociatedLicenseAssetRulesetARNs, v.AssociatedLicenseAssetRulesetARNs)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateLicenseAssetGroupRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLicenseAssetGroupRequest_Description, *v.Description)
+	}
+	if v.LicenseAssetGroupArn != nil {
+		s.WriteString(schemas.UpdateLicenseAssetGroupRequest_LicenseAssetGroupArn, *v.LicenseAssetGroupArn)
+	}
+	serializeLicenseAssetGroupConfigurationList(s, schemas.UpdateLicenseAssetGroupRequest_LicenseAssetGroupConfigurations, v.LicenseAssetGroupConfigurations)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateLicenseAssetGroupRequest_Name, *v.Name)
+	}
+	serializeLicenseAssetGroupPropertyList(s, schemas.UpdateLicenseAssetGroupRequest_Properties, v.Properties)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateLicenseAssetGroupRequest_Status, string(v.Status))
+	}
+}
+
 type UpdateLicenseAssetGroupOutput struct {
 
 	// Amazon Resource Name (ARN) of the license asset group.
@@ -78,13 +107,38 @@ type UpdateLicenseAssetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLicenseAssetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLicenseAssetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLicenseAssetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseAssetGroupArn != nil {
+		s.WriteString(schemas.UpdateLicenseAssetGroupResponse_LicenseAssetGroupArn, *v.LicenseAssetGroupArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UpdateLicenseAssetGroupResponse_Status, *v.Status)
+	}
+}
+func (v *UpdateLicenseAssetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLicenseAssetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLicenseAssetGroupResponse_LicenseAssetGroupArn:
+			v.LicenseAssetGroupArn = new(string)
+			return d.ReadString(schemas.UpdateLicenseAssetGroupResponse_LicenseAssetGroupArn, v.LicenseAssetGroupArn)
+		case schemas.UpdateLicenseAssetGroupResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UpdateLicenseAssetGroupResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLicenseAssetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLicenseAssetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLicenseAssetGroup, schemas.UpdateLicenseAssetGroupRequest, schemas.UpdateLicenseAssetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLicenseAssetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLicenseAssetGroup, schemas.UpdateLicenseAssetGroupRequest, schemas.UpdateLicenseAssetGroupResponse), output: &UpdateLicenseAssetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

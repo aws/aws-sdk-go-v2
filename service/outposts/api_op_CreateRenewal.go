@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type CreateRenewalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRenewalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRenewalInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRenewalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRenewalInput_ClientToken, *v.ClientToken)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.CreateRenewalInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.CreateRenewalInput_PaymentOption, string(v.PaymentOption))
+	}
+	if v.PaymentTerm != "" {
+		s.WriteString(schemas.CreateRenewalInput_PaymentTerm, string(v.PaymentTerm))
+	}
+}
+
 type CreateRenewalOutput struct {
 
 	// The currency of the renewal price.
@@ -75,13 +98,74 @@ type CreateRenewalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRenewalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRenewalOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRenewalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.CreateRenewalOutput_Currency, string(v.Currency))
+	}
+	if v.MonthlyRecurringPrice != nil {
+		s.WriteFloat32(schemas.CreateRenewalOutput_MonthlyRecurringPrice, *v.MonthlyRecurringPrice)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.CreateRenewalOutput_OutpostId, *v.OutpostId)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.CreateRenewalOutput_PaymentOption, string(v.PaymentOption))
+	}
+	if v.PaymentTerm != "" {
+		s.WriteString(schemas.CreateRenewalOutput_PaymentTerm, string(v.PaymentTerm))
+	}
+	if v.UpfrontPrice != nil {
+		s.WriteFloat32(schemas.CreateRenewalOutput_UpfrontPrice, *v.UpfrontPrice)
+	}
+}
+func (v *CreateRenewalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRenewalOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRenewalOutput_Currency:
+			var ev string
+			if err := d.ReadString(schemas.CreateRenewalOutput_Currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = types.CurrencyCode(ev)
+			return nil
+		case schemas.CreateRenewalOutput_MonthlyRecurringPrice:
+			v.MonthlyRecurringPrice = new(float32)
+			return d.ReadFloat32(schemas.CreateRenewalOutput_MonthlyRecurringPrice, v.MonthlyRecurringPrice)
+		case schemas.CreateRenewalOutput_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.CreateRenewalOutput_OutpostId, v.OutpostId)
+		case schemas.CreateRenewalOutput_PaymentOption:
+			var ev string
+			if err := d.ReadString(schemas.CreateRenewalOutput_PaymentOption, &ev); err != nil {
+				return err
+			}
+			v.PaymentOption = types.PaymentOption(ev)
+			return nil
+		case schemas.CreateRenewalOutput_PaymentTerm:
+			var ev string
+			if err := d.ReadString(schemas.CreateRenewalOutput_PaymentTerm, &ev); err != nil {
+				return err
+			}
+			v.PaymentTerm = types.PaymentTerm(ev)
+			return nil
+		case schemas.CreateRenewalOutput_UpfrontPrice:
+			v.UpfrontPrice = new(float32)
+			return d.ReadFloat32(schemas.CreateRenewalOutput_UpfrontPrice, v.UpfrontPrice)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRenewalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRenewal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRenewal, schemas.CreateRenewalInput, schemas.CreateRenewalOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRenewal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRenewal, schemas.CreateRenewalInput, schemas.CreateRenewalOutput), output: &CreateRenewalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

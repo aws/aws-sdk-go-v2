@@ -4,6 +4,8 @@ package mediapackagevod
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeletePackagingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackagingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePackagingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePackagingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeletePackagingConfigurationRequest_Id, *v.Id)
+	}
+}
+
 type DeletePackagingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeletePackagingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackagingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePackagingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePackagingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePackagingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePackagingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePackagingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePackagingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackagingConfiguration, schemas.DeletePackagingConfigurationRequest, schemas.DeletePackagingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePackagingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackagingConfiguration, schemas.DeletePackagingConfigurationRequest, schemas.DeletePackagingConfigurationResponse), output: &DeletePackagingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

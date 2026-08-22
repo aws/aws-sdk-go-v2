@@ -4,7 +4,9 @@ package servicediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetServiceAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceId != nil {
+		s.WriteString(schemas.GetServiceAttributesRequest_ServiceId, *v.ServiceId)
+	}
+}
+
 type GetServiceAttributesOutput struct {
 
 	// A complex type that contains the service ARN and a list of attribute key-value
@@ -51,13 +65,34 @@ type GetServiceAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceAttributes != nil {
+		s.WriteStruct(schemas.GetServiceAttributesResponse_ServiceAttributes)
+		v.ServiceAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceAttributesResponse_ServiceAttributes:
+			v.ServiceAttributes = &types.ServiceAttributes{}
+			return v.ServiceAttributes.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetServiceAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceAttributes, schemas.GetServiceAttributesRequest, schemas.GetServiceAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetServiceAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceAttributes, schemas.GetServiceAttributesRequest, schemas.GetServiceAttributesResponse), output: &GetServiceAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

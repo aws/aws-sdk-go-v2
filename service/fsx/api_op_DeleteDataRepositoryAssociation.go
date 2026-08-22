@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type DeleteDataRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataRepositoryAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataRepositoryAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataRepositoryAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DeleteDataRepositoryAssociationRequest_AssociationId, *v.AssociationId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteDataRepositoryAssociationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DeleteDataInFileSystem != nil {
+		s.WriteBool(schemas.DeleteDataRepositoryAssociationRequest_DeleteDataInFileSystem, *v.DeleteDataInFileSystem)
+	}
+}
+
 type DeleteDataRepositoryAssociationOutput struct {
 
 	// The ID of the data repository association being deleted.
@@ -67,13 +87,48 @@ type DeleteDataRepositoryAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataRepositoryAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataRepositoryAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataRepositoryAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DeleteDataRepositoryAssociationResponse_AssociationId, *v.AssociationId)
+	}
+	if v.DeleteDataInFileSystem != nil {
+		s.WriteBool(schemas.DeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem, *v.DeleteDataInFileSystem)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DeleteDataRepositoryAssociationResponse_Lifecycle, string(v.Lifecycle))
+	}
+}
+func (v *DeleteDataRepositoryAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataRepositoryAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataRepositoryAssociationResponse_AssociationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.DeleteDataRepositoryAssociationResponse_AssociationId, v.AssociationId)
+		case schemas.DeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem:
+			v.DeleteDataInFileSystem = new(bool)
+			return d.ReadBool(schemas.DeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem, v.DeleteDataInFileSystem)
+		case schemas.DeleteDataRepositoryAssociationResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDataRepositoryAssociationResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.DataRepositoryLifecycle(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataRepositoryAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDataRepositoryAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataRepositoryAssociation, schemas.DeleteDataRepositoryAssociationRequest, schemas.DeleteDataRepositoryAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDataRepositoryAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataRepositoryAssociation, schemas.DeleteDataRepositoryAssociationRequest, schemas.DeleteDataRepositoryAssociationResponse), output: &DeleteDataRepositoryAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

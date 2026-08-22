@@ -5,7 +5,9 @@ package transfer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListAgreementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgreementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgreementsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgreementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgreementsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgreementsRequest_NextToken, *v.NextToken)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.ListAgreementsRequest_ServerId, *v.ServerId)
+	}
+}
+
 type ListAgreementsOutput struct {
 
 	// Returns an array, where each item contains the details of an agreement.
@@ -64,13 +84,35 @@ type ListAgreementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgreementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgreementsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgreementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListedAgreements(s, schemas.ListAgreementsResponse_Agreements, v.Agreements)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgreementsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAgreementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgreementsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgreementsResponse_Agreements:
+			return deserializeListedAgreements(d, schemas.ListAgreementsResponse_Agreements, &v.Agreements)
+		case schemas.ListAgreementsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgreementsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgreementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAgreements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgreements, schemas.ListAgreementsRequest, schemas.ListAgreementsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAgreements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgreements, schemas.ListAgreementsRequest, schemas.ListAgreementsResponse), output: &ListAgreementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

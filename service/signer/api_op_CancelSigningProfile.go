@@ -4,6 +4,8 @@ package signer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type CancelSigningProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSigningProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSigningProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSigningProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileName != nil {
+		s.WriteString(schemas.CancelSigningProfileRequest_profileName, *v.ProfileName)
+	}
+}
+
 type CancelSigningProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type CancelSigningProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSigningProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSigningProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelSigningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelSigningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSigningProfile, schemas.CancelSigningProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelSigningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSigningProfile, schemas.CancelSigningProfileRequest, nil), output: &CancelSigningProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

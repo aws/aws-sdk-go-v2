@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type StartDomainVerificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDomainVerificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDomainVerificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDomainVerificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDomainVerificationRequest_clientToken, *v.ClientToken)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.StartDomainVerificationRequest_domainName, *v.DomainName)
+	}
+	serializeTagMap(s, schemas.StartDomainVerificationRequest_tags, v.Tags)
+}
+
 type StartDomainVerificationOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the domain verification.
@@ -75,13 +93,62 @@ type StartDomainVerificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDomainVerificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDomainVerificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDomainVerificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartDomainVerificationResponse_arn, *v.Arn)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.StartDomainVerificationResponse_domainName, *v.DomainName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartDomainVerificationResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartDomainVerificationResponse_status, string(v.Status))
+	}
+	if v.TxtMethodConfig != nil {
+		s.WriteStruct(schemas.StartDomainVerificationResponse_txtMethodConfig)
+		v.TxtMethodConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartDomainVerificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDomainVerificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDomainVerificationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartDomainVerificationResponse_arn, v.Arn)
+		case schemas.StartDomainVerificationResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.StartDomainVerificationResponse_domainName, v.DomainName)
+		case schemas.StartDomainVerificationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartDomainVerificationResponse_id, v.Id)
+		case schemas.StartDomainVerificationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartDomainVerificationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VerificationStatus(ev)
+			return nil
+		case schemas.StartDomainVerificationResponse_txtMethodConfig:
+			v.TxtMethodConfig = &types.TxtMethodConfig{}
+			return v.TxtMethodConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDomainVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDomainVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDomainVerification, schemas.StartDomainVerificationRequest, schemas.StartDomainVerificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDomainVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDomainVerification, schemas.StartDomainVerificationRequest, schemas.StartDomainVerificationResponse), output: &StartDomainVerificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

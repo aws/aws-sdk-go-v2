@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,56 @@ type CreateLicenseVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConsumptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateLicenseVersionRequest_ConsumptionConfiguration)
+		v.ConsumptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEntitlementList(s, schemas.CreateLicenseVersionRequest_Entitlements, v.Entitlements)
+	if v.HomeRegion != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_HomeRegion, *v.HomeRegion)
+	}
+	if v.Issuer != nil {
+		s.WriteStruct(schemas.CreateLicenseVersionRequest_Issuer)
+		v.Issuer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_LicenseArn, *v.LicenseArn)
+	}
+	serializeMetadataList(s, schemas.CreateLicenseVersionRequest_LicenseMetadata, v.LicenseMetadata)
+	if v.LicenseName != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_LicenseName, *v.LicenseName)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_ProductName, *v.ProductName)
+	}
+	if v.ResetUsage != false {
+		s.WriteBool(schemas.CreateLicenseVersionRequest_ResetUsage, v.ResetUsage)
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_SourceVersion, *v.SourceVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateLicenseVersionRequest_Status, string(v.Status))
+	}
+	if v.Validity != nil {
+		s.WriteStruct(schemas.CreateLicenseVersionRequest_Validity)
+		v.Validity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateLicenseVersionOutput struct {
 
 	// License ARN.
@@ -109,13 +161,48 @@ type CreateLicenseVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CreateLicenseVersionResponse_LicenseArn, *v.LicenseArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateLicenseVersionResponse_Status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateLicenseVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateLicenseVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLicenseVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLicenseVersionResponse_LicenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.CreateLicenseVersionResponse_LicenseArn, v.LicenseArn)
+		case schemas.CreateLicenseVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateLicenseVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LicenseStatus(ev)
+			return nil
+		case schemas.CreateLicenseVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateLicenseVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLicenseVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLicenseVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseVersion, schemas.CreateLicenseVersionRequest, schemas.CreateLicenseVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLicenseVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseVersion, schemas.CreateLicenseVersionRequest, schemas.CreateLicenseVersionResponse), output: &CreateLicenseVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

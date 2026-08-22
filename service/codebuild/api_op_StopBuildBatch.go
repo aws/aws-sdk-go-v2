@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StopBuildBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBuildBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBuildBatchInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBuildBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StopBuildBatchInput_id, *v.Id)
+	}
+}
+
 type StopBuildBatchOutput struct {
 
 	// Contains information about a batch build.
@@ -45,13 +59,34 @@ type StopBuildBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBuildBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBuildBatchOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBuildBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildBatch != nil {
+		s.WriteStruct(schemas.StopBuildBatchOutput_buildBatch)
+		v.BuildBatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopBuildBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopBuildBatchOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopBuildBatchOutput_buildBatch:
+			v.BuildBatch = &types.BuildBatch{}
+			return v.BuildBatch.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopBuildBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBuildBatch, schemas.StopBuildBatchInput, schemas.StopBuildBatchOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopBuildBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBuildBatch, schemas.StopBuildBatchInput, schemas.StopBuildBatchOutput), output: &StopBuildBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

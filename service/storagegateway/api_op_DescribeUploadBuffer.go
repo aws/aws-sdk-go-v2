@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DescribeUploadBufferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUploadBufferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUploadBufferInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUploadBufferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeUploadBufferInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type DescribeUploadBufferOutput struct {
 
 	// An array of the gateway's local disk IDs that are configured as working
@@ -62,13 +76,45 @@ type DescribeUploadBufferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUploadBufferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUploadBufferOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUploadBufferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiskIds(s, schemas.DescribeUploadBufferOutput_DiskIds, v.DiskIds)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeUploadBufferOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.UploadBufferAllocatedInBytes != 0 {
+		s.WriteInt64(schemas.DescribeUploadBufferOutput_UploadBufferAllocatedInBytes, v.UploadBufferAllocatedInBytes)
+	}
+	if v.UploadBufferUsedInBytes != 0 {
+		s.WriteInt64(schemas.DescribeUploadBufferOutput_UploadBufferUsedInBytes, v.UploadBufferUsedInBytes)
+	}
+}
+func (v *DescribeUploadBufferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUploadBufferOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUploadBufferOutput_DiskIds:
+			return deserializeDiskIds(d, schemas.DescribeUploadBufferOutput_DiskIds, &v.DiskIds)
+		case schemas.DescribeUploadBufferOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DescribeUploadBufferOutput_GatewayARN, v.GatewayARN)
+		case schemas.DescribeUploadBufferOutput_UploadBufferAllocatedInBytes:
+			return d.ReadInt64(schemas.DescribeUploadBufferOutput_UploadBufferAllocatedInBytes, &v.UploadBufferAllocatedInBytes)
+		case schemas.DescribeUploadBufferOutput_UploadBufferUsedInBytes:
+			return d.ReadInt64(schemas.DescribeUploadBufferOutput_UploadBufferUsedInBytes, &v.UploadBufferUsedInBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUploadBufferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUploadBuffer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUploadBuffer, schemas.DescribeUploadBufferInput, schemas.DescribeUploadBufferOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUploadBuffer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUploadBuffer, schemas.DescribeUploadBufferInput, schemas.DescribeUploadBufferOutput), output: &DescribeUploadBufferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

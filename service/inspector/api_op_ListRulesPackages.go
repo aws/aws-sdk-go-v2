@@ -5,6 +5,8 @@ package inspector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListRulesPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesPackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesPackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRulesPackagesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesPackagesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListRulesPackagesOutput struct {
 
 	// The list of ARNs that specifies the rules packages returned by the action.
@@ -58,13 +75,35 @@ type ListRulesPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesPackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesPackagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesPackagesResponse_nextToken, *v.NextToken)
+	}
+	serializeListReturnedArnList(s, schemas.ListRulesPackagesResponse_rulesPackageArns, v.RulesPackageArns)
+}
+func (v *ListRulesPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRulesPackagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRulesPackagesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRulesPackagesResponse_nextToken, v.NextToken)
+		case schemas.ListRulesPackagesResponse_rulesPackageArns:
+			return deserializeListReturnedArnList(d, schemas.ListRulesPackagesResponse_rulesPackageArns, &v.RulesPackageArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRulesPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRulesPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRulesPackages, schemas.ListRulesPackagesRequest, schemas.ListRulesPackagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRulesPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRulesPackages, schemas.ListRulesPackagesRequest, schemas.ListRulesPackagesResponse), output: &ListRulesPackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

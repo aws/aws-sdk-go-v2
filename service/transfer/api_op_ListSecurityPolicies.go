@@ -5,6 +5,8 @@ package transfer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListSecurityPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityPoliciesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityPoliciesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListSecurityPoliciesOutput struct {
 
 	// An array of security policies that were listed.
@@ -61,13 +78,35 @@ type ListSecurityPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityPoliciesResponse_NextToken, *v.NextToken)
+	}
+	serializeSecurityPolicyNames(s, schemas.ListSecurityPoliciesResponse_SecurityPolicyNames, v.SecurityPolicyNames)
+}
+func (v *ListSecurityPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityPoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityPoliciesResponse_NextToken, v.NextToken)
+		case schemas.ListSecurityPoliciesResponse_SecurityPolicyNames:
+			return deserializeSecurityPolicyNames(d, schemas.ListSecurityPoliciesResponse_SecurityPolicyNames, &v.SecurityPolicyNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSecurityPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityPolicies, schemas.ListSecurityPoliciesRequest, schemas.ListSecurityPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSecurityPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityPolicies, schemas.ListSecurityPoliciesRequest, schemas.ListSecurityPoliciesResponse), output: &ListSecurityPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

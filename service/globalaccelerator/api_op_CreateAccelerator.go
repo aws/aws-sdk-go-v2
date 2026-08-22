@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,29 @@ type CreateAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAcceleratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAcceleratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAcceleratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CreateAcceleratorRequest_Enabled, *v.Enabled)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateAcceleratorRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateAcceleratorRequest_IpAddressType, string(v.IpAddressType))
+	}
+	serializeIpAddresses(s, schemas.CreateAcceleratorRequest_IpAddresses, v.IpAddresses)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAcceleratorRequest_Name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateAcceleratorRequest_Tags, v.Tags)
+}
+
 type CreateAcceleratorOutput struct {
 
 	// The accelerator that is created by specifying a listener and the supported IP
@@ -103,13 +128,34 @@ type CreateAcceleratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAcceleratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAcceleratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAcceleratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accelerator != nil {
+		s.WriteStruct(schemas.CreateAcceleratorResponse_Accelerator)
+		v.Accelerator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAcceleratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAcceleratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAcceleratorResponse_Accelerator:
+			v.Accelerator = &types.Accelerator{}
+			return v.Accelerator.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAccelerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccelerator, schemas.CreateAcceleratorRequest, schemas.CreateAcceleratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAccelerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccelerator, schemas.CreateAcceleratorRequest, schemas.CreateAcceleratorResponse), output: &CreateAcceleratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

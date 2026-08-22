@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -161,6 +163,85 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Artifacts != nil {
+		s.WriteStruct(schemas.CreateProjectInput_artifacts)
+		v.Artifacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoRetryLimit != nil {
+		s.WriteInt32(schemas.CreateProjectInput_autoRetryLimit, *v.AutoRetryLimit)
+	}
+	if v.BadgeEnabled != nil {
+		s.WriteBool(schemas.CreateProjectInput_badgeEnabled, *v.BadgeEnabled)
+	}
+	if v.BuildBatchConfig != nil {
+		s.WriteStruct(schemas.CreateProjectInput_buildBatchConfig)
+		v.BuildBatchConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Cache != nil {
+		s.WriteStruct(schemas.CreateProjectInput_cache)
+		v.Cache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConcurrentBuildLimit != nil {
+		s.WriteInt32(schemas.CreateProjectInput_concurrentBuildLimit, *v.ConcurrentBuildLimit)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateProjectInput_description, *v.Description)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.CreateProjectInput_encryptionKey, *v.EncryptionKey)
+	}
+	if v.Environment != nil {
+		s.WriteStruct(schemas.CreateProjectInput_environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProjectFileSystemLocations(s, schemas.CreateProjectInput_fileSystemLocations, v.FileSystemLocations)
+	if v.LogsConfig != nil {
+		s.WriteStruct(schemas.CreateProjectInput_logsConfig)
+		v.LogsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProjectInput_name, *v.Name)
+	}
+	if v.QueuedTimeoutInMinutes != nil {
+		s.WriteInt32(schemas.CreateProjectInput_queuedTimeoutInMinutes, *v.QueuedTimeoutInMinutes)
+	}
+	serializeProjectArtifactsList(s, schemas.CreateProjectInput_secondaryArtifacts, v.SecondaryArtifacts)
+	serializeProjectSecondarySourceVersions(s, schemas.CreateProjectInput_secondarySourceVersions, v.SecondarySourceVersions)
+	serializeProjectSources(s, schemas.CreateProjectInput_secondarySources, v.SecondarySources)
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.CreateProjectInput_serviceRole, *v.ServiceRole)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.CreateProjectInput_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.CreateProjectInput_sourceVersion, *v.SourceVersion)
+	}
+	serializeTagList(s, schemas.CreateProjectInput_tags, v.Tags)
+	if v.TimeoutInMinutes != nil {
+		s.WriteInt32(schemas.CreateProjectInput_timeoutInMinutes, *v.TimeoutInMinutes)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateProjectInput_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateProjectOutput struct {
 
 	// Information about the build project that was created.
@@ -172,13 +253,34 @@ type CreateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Project != nil {
+		s.WriteStruct(schemas.CreateProjectOutput_project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProjectOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProjectOutput_project:
+			v.Project = &types.Project{}
+			return v.Project.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectInput, schemas.CreateProjectOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectInput, schemas.CreateProjectOutput), output: &CreateProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

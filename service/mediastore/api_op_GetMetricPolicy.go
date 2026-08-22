@@ -4,7 +4,9 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetMetricPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.GetMetricPolicyInput_ContainerName, *v.ContainerName)
+	}
+}
+
 type GetMetricPolicyOutput struct {
 
 	// The metric policy that is associated with the specific container.
@@ -47,13 +61,34 @@ type GetMetricPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricPolicy != nil {
+		s.WriteStruct(schemas.GetMetricPolicyOutput_MetricPolicy)
+		v.MetricPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMetricPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetricPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetricPolicyOutput_MetricPolicy:
+			v.MetricPolicy = &types.MetricPolicy{}
+			return v.MetricPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMetricPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricPolicy, schemas.GetMetricPolicyInput, schemas.GetMetricPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMetricPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricPolicy, schemas.GetMetricPolicyInput, schemas.GetMetricPolicyOutput), output: &GetMetricPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

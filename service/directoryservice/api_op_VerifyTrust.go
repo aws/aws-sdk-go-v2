@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type VerifyTrustInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyTrustInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyTrustRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyTrustInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustId != nil {
+		s.WriteString(schemas.VerifyTrustRequest_TrustId, *v.TrustId)
+	}
+}
+
 // Result of a VerifyTrust request.
 type VerifyTrustOutput struct {
 
@@ -51,13 +65,32 @@ type VerifyTrustOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyTrustOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyTrustResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyTrustOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustId != nil {
+		s.WriteString(schemas.VerifyTrustResult_TrustId, *v.TrustId)
+	}
+}
+func (v *VerifyTrustOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyTrustResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyTrustResult_TrustId:
+			v.TrustId = new(string)
+			return d.ReadString(schemas.VerifyTrustResult_TrustId, v.TrustId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpVerifyTrust{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyTrust, schemas.VerifyTrustRequest, schemas.VerifyTrustResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpVerifyTrust{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyTrust, schemas.VerifyTrustRequest, schemas.VerifyTrustResult), output: &VerifyTrustOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

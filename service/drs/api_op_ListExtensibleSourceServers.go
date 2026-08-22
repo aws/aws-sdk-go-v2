@@ -5,7 +5,9 @@ package drs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,40 @@ type ListExtensibleSourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExtensibleSourceServersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExtensibleSourceServersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExtensibleSourceServersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExtensibleSourceServersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExtensibleSourceServersRequest_nextToken, *v.NextToken)
+	}
+	if v.StagingAccountID != nil {
+		s.WriteString(schemas.ListExtensibleSourceServersRequest_stagingAccountID, *v.StagingAccountID)
+	}
+}
+func (v *ListExtensibleSourceServersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExtensibleSourceServersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExtensibleSourceServersRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListExtensibleSourceServersRequest_maxResults, v.MaxResults)
+		case schemas.ListExtensibleSourceServersRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExtensibleSourceServersRequest_nextToken, v.NextToken)
+		case schemas.ListExtensibleSourceServersRequest_stagingAccountID:
+			v.StagingAccountID = new(string)
+			return d.ReadString(schemas.ListExtensibleSourceServersRequest_stagingAccountID, v.StagingAccountID)
+		}
+		return nil
+	})
+}
+
 type ListExtensibleSourceServersOutput struct {
 
 	// A list of source servers on a staging Account that are extensible.
@@ -58,13 +94,35 @@ type ListExtensibleSourceServersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExtensibleSourceServersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExtensibleSourceServersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExtensibleSourceServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStagingSourceServersList(s, schemas.ListExtensibleSourceServersResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExtensibleSourceServersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExtensibleSourceServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExtensibleSourceServersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExtensibleSourceServersResponse_items:
+			return deserializeStagingSourceServersList(d, schemas.ListExtensibleSourceServersResponse_items, &v.Items)
+		case schemas.ListExtensibleSourceServersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExtensibleSourceServersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExtensibleSourceServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExtensibleSourceServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExtensibleSourceServers, schemas.ListExtensibleSourceServersRequest, schemas.ListExtensibleSourceServersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExtensibleSourceServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExtensibleSourceServers, schemas.ListExtensibleSourceServersRequest, schemas.ListExtensibleSourceServersResponse), output: &ListExtensibleSourceServersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

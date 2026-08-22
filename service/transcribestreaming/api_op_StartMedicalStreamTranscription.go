@@ -4,8 +4,9 @@ package transcribestreaming
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -143,6 +144,48 @@ type StartMedicalStreamTranscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMedicalStreamTranscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMedicalStreamTranscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMedicalStreamTranscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionRequest_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.EnableChannelIdentification != false {
+		s.WriteBool(schemas.StartMedicalStreamTranscriptionRequest_EnableChannelIdentification, v.EnableChannelIdentification)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MediaEncoding != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionRequest_MediaEncoding, string(v.MediaEncoding))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.StartMedicalStreamTranscriptionRequest_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.NumberOfChannels != nil {
+		s.WriteInt32(schemas.StartMedicalStreamTranscriptionRequest_NumberOfChannels, *v.NumberOfChannels)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionRequest_SessionId, *v.SessionId)
+	}
+	if v.ShowSpeakerLabel != false {
+		s.WriteBool(schemas.StartMedicalStreamTranscriptionRequest_ShowSpeakerLabel, v.ShowSpeakerLabel)
+	}
+	if v.Specialty != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionRequest_Specialty, string(v.Specialty))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionRequest_Type, string(v.Type))
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionRequest_VocabularyName, *v.VocabularyName)
+	}
+}
+
 type StartMedicalStreamTranscriptionOutput struct {
 
 	// Shows whether content identification was enabled for your transcription.
@@ -190,27 +233,131 @@ type StartMedicalStreamTranscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMedicalStreamTranscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMedicalStreamTranscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMedicalStreamTranscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionResponse_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.EnableChannelIdentification != false {
+		s.WriteBool(schemas.StartMedicalStreamTranscriptionResponse_EnableChannelIdentification, v.EnableChannelIdentification)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MediaEncoding != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionResponse_MediaEncoding, string(v.MediaEncoding))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.StartMedicalStreamTranscriptionResponse_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.NumberOfChannels != nil {
+		s.WriteInt32(schemas.StartMedicalStreamTranscriptionResponse_NumberOfChannels, *v.NumberOfChannels)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionResponse_RequestId, *v.RequestId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionResponse_SessionId, *v.SessionId)
+	}
+	if v.ShowSpeakerLabel != false {
+		s.WriteBool(schemas.StartMedicalStreamTranscriptionResponse_ShowSpeakerLabel, v.ShowSpeakerLabel)
+	}
+	if v.Specialty != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionResponse_Specialty, string(v.Specialty))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionResponse_Type, string(v.Type))
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.StartMedicalStreamTranscriptionResponse_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *StartMedicalStreamTranscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMedicalStreamTranscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMedicalStreamTranscriptionResponse_ContentIdentificationType:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalStreamTranscriptionResponse_ContentIdentificationType, &ev); err != nil {
+				return err
+			}
+			v.ContentIdentificationType = types.MedicalContentIdentificationType(ev)
+			return nil
+		case schemas.StartMedicalStreamTranscriptionResponse_EnableChannelIdentification:
+			return d.ReadBool(schemas.StartMedicalStreamTranscriptionResponse_EnableChannelIdentification, &v.EnableChannelIdentification)
+		case schemas.StartMedicalStreamTranscriptionResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalStreamTranscriptionResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.LanguageCode(ev)
+			return nil
+		case schemas.StartMedicalStreamTranscriptionResponse_MediaEncoding:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalStreamTranscriptionResponse_MediaEncoding, &ev); err != nil {
+				return err
+			}
+			v.MediaEncoding = types.MediaEncoding(ev)
+			return nil
+		case schemas.StartMedicalStreamTranscriptionResponse_MediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.StartMedicalStreamTranscriptionResponse_MediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.StartMedicalStreamTranscriptionResponse_NumberOfChannels:
+			v.NumberOfChannels = new(int32)
+			return d.ReadInt32(schemas.StartMedicalStreamTranscriptionResponse_NumberOfChannels, v.NumberOfChannels)
+		case schemas.StartMedicalStreamTranscriptionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartMedicalStreamTranscriptionResponse_RequestId, v.RequestId)
+		case schemas.StartMedicalStreamTranscriptionResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StartMedicalStreamTranscriptionResponse_SessionId, v.SessionId)
+		case schemas.StartMedicalStreamTranscriptionResponse_ShowSpeakerLabel:
+			return d.ReadBool(schemas.StartMedicalStreamTranscriptionResponse_ShowSpeakerLabel, &v.ShowSpeakerLabel)
+		case schemas.StartMedicalStreamTranscriptionResponse_Specialty:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalStreamTranscriptionResponse_Specialty, &ev); err != nil {
+				return err
+			}
+			v.Specialty = types.Specialty(ev)
+			return nil
+		case schemas.StartMedicalStreamTranscriptionResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalStreamTranscriptionResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.Type(ev)
+			return nil
+		case schemas.StartMedicalStreamTranscriptionResponse_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.StartMedicalStreamTranscriptionResponse_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *StartMedicalStreamTranscriptionOutput) GetStream() *StartMedicalStreamTranscriptionEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationStartMedicalStreamTranscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMedicalStreamTranscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMedicalStreamTranscription, schemas.StartMedicalStreamTranscriptionRequest, schemas.StartMedicalStreamTranscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMedicalStreamTranscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMedicalStreamTranscription, schemas.StartMedicalStreamTranscriptionRequest, schemas.StartMedicalStreamTranscriptionResponse), output: &StartMedicalStreamTranscriptionOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamStartMedicalStreamTranscription{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamStartMedicalStreamTranscriptionMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -221,9 +368,6 @@ func (c *Client) addOperationStartMedicalStreamTranscriptionMiddlewares(stack *m
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
-		return err
-	}
-	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

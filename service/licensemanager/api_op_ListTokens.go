@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type ListTokensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTokensInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTokensRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTokensInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListTokensRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTokensRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTokensRequest_NextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.ListTokensRequest_TokenIds, v.TokenIds)
+}
+
 type ListTokensOutput struct {
 
 	// Token for the next set of results.
@@ -57,13 +76,35 @@ type ListTokensOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTokensOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTokensResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTokensOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTokensResponse_NextToken, *v.NextToken)
+	}
+	serializeTokenList(s, schemas.ListTokensResponse_Tokens, v.Tokens)
+}
+func (v *ListTokensOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTokensResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTokensResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTokensResponse_NextToken, v.NextToken)
+		case schemas.ListTokensResponse_Tokens:
+			return deserializeTokenList(d, schemas.ListTokensResponse_Tokens, &v.Tokens)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTokensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTokens{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTokens, schemas.ListTokensRequest, schemas.ListTokensResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTokens{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTokens, schemas.ListTokensRequest, schemas.ListTokensResponse), output: &ListTokensOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type PollForJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionTypeId != nil {
+		s.WriteStruct(schemas.PollForJobsInput_actionTypeId)
+		v.ActionTypeId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxBatchSize != nil {
+		s.WriteInt32(schemas.PollForJobsInput_maxBatchSize, *v.MaxBatchSize)
+	}
+	serializeQueryParamMap(s, schemas.PollForJobsInput_queryParam, v.QueryParam)
+}
+
 // Represents the output of a PollForJobs action.
 type PollForJobsOutput struct {
 
@@ -64,13 +84,29 @@ type PollForJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobList(s, schemas.PollForJobsOutput_jobs, v.Jobs)
+}
+func (v *PollForJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PollForJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PollForJobsOutput_jobs:
+			return deserializeJobList(d, schemas.PollForJobsOutput_jobs, &v.Jobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPollForJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPollForJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForJobs, schemas.PollForJobsInput, schemas.PollForJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPollForJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForJobs, schemas.PollForJobsInput, schemas.PollForJobsOutput), output: &PollForJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

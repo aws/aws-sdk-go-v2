@@ -4,7 +4,9 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,47 @@ type CreateDataSetInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetType != "" {
+		s.WriteString(schemas.CreateDataSetRequest_AssetType, string(v.AssetType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataSetRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataSetRequest_Name, *v.Name)
+	}
+	serializeMapOf__string(s, schemas.CreateDataSetRequest_Tags, v.Tags)
+}
+func (v *CreateDataSetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSetRequest_AssetType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDataSetRequest_AssetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = types.AssetType(ev)
+			return nil
+		case schemas.CreateDataSetRequest_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateDataSetRequest_Description, v.Description)
+		case schemas.CreateDataSetRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDataSetRequest_Name, v.Name)
+		case schemas.CreateDataSetRequest_Tags:
+			return deserializeMapOf__string(d, schemas.CreateDataSetRequest_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 type CreateDataSetOutput struct {
@@ -96,13 +139,99 @@ type CreateDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDataSetResponse_Arn, *v.Arn)
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.CreateDataSetResponse_AssetType, string(v.AssetType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateDataSetResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataSetResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateDataSetResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataSetResponse_Name, *v.Name)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.CreateDataSetResponse_Origin, string(v.Origin))
+	}
+	if v.OriginDetails != nil {
+		s.WriteStruct(schemas.CreateDataSetResponse_OriginDetails)
+		v.OriginDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.CreateDataSetResponse_SourceId, *v.SourceId)
+	}
+	serializeMapOf__string(s, schemas.CreateDataSetResponse_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateDataSetResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSetResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDataSetResponse_Arn, v.Arn)
+		case schemas.CreateDataSetResponse_AssetType:
+			var ev string
+			if err := d.ReadString(schemas.CreateDataSetResponse_AssetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = types.AssetType(ev)
+			return nil
+		case schemas.CreateDataSetResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDataSetResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateDataSetResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateDataSetResponse_Description, v.Description)
+		case schemas.CreateDataSetResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDataSetResponse_Id, v.Id)
+		case schemas.CreateDataSetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDataSetResponse_Name, v.Name)
+		case schemas.CreateDataSetResponse_Origin:
+			var ev string
+			if err := d.ReadString(schemas.CreateDataSetResponse_Origin, &ev); err != nil {
+				return err
+			}
+			v.Origin = types.Origin(ev)
+			return nil
+		case schemas.CreateDataSetResponse_OriginDetails:
+			v.OriginDetails = &types.OriginDetails{}
+			return v.OriginDetails.Deserialize(d)
+		case schemas.CreateDataSetResponse_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.CreateDataSetResponse_SourceId, v.SourceId)
+		case schemas.CreateDataSetResponse_Tags:
+			return deserializeMapOf__string(d, schemas.CreateDataSetResponse_Tags, &v.Tags)
+		case schemas.CreateDataSetResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateDataSetResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSet, schemas.CreateDataSetRequest, schemas.CreateDataSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSet, schemas.CreateDataSetRequest, schemas.CreateDataSetResponse), output: &CreateDataSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

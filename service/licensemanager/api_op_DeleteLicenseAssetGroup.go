@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteLicenseAssetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseAssetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseAssetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseAssetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseAssetGroupArn != nil {
+		s.WriteString(schemas.DeleteLicenseAssetGroupRequest_LicenseAssetGroupArn, *v.LicenseAssetGroupArn)
+	}
+}
+
 type DeleteLicenseAssetGroupOutput struct {
 
 	// License asset group status.
@@ -47,13 +61,36 @@ type DeleteLicenseAssetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseAssetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseAssetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseAssetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteLicenseAssetGroupResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteLicenseAssetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLicenseAssetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLicenseAssetGroupResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteLicenseAssetGroupResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LicenseAssetGroupStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLicenseAssetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLicenseAssetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseAssetGroup, schemas.DeleteLicenseAssetGroupRequest, schemas.DeleteLicenseAssetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLicenseAssetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseAssetGroup, schemas.DeleteLicenseAssetGroupRequest, schemas.DeleteLicenseAssetGroupResponse), output: &DeleteLicenseAssetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

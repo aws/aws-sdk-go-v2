@@ -4,6 +4,8 @@ package mediapackagevod
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeletePackagingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackagingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePackagingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePackagingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeletePackagingGroupRequest_Id, *v.Id)
+	}
+}
+
 type DeletePackagingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeletePackagingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackagingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePackagingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePackagingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePackagingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePackagingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePackagingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackagingGroup, schemas.DeletePackagingGroupRequest, schemas.DeletePackagingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePackagingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackagingGroup, schemas.DeletePackagingGroupRequest, schemas.DeletePackagingGroupResponse), output: &DeletePackagingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

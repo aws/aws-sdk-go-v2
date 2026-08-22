@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetResourceGatewayInput struct {
 	ResourceGatewayIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetResourceGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceGatewayIdentifier != nil {
+		s.WriteString(schemas.GetResourceGatewayRequest_resourceGatewayIdentifier, *v.ResourceGatewayIdentifier)
+	}
 }
 
 type GetResourceGatewayOutput struct {
@@ -88,13 +102,116 @@ type GetResourceGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetResourceGatewayResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetResourceGatewayResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetResourceGatewayResponse_id, *v.Id)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.GetResourceGatewayResponse_ipAddressType, string(v.IpAddressType))
+	}
+	if v.Ipv4AddressesPerEni != nil {
+		s.WriteInt32(schemas.GetResourceGatewayResponse_ipv4AddressesPerEni, *v.Ipv4AddressesPerEni)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetResourceGatewayResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ManagedBy != nil {
+		s.WriteString(schemas.GetResourceGatewayResponse_managedBy, *v.ManagedBy)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetResourceGatewayResponse_name, *v.Name)
+	}
+	if v.ResourceConfigDnsResolution != "" {
+		s.WriteString(schemas.GetResourceGatewayResponse_resourceConfigDnsResolution, string(v.ResourceConfigDnsResolution))
+	}
+	serializeSecurityGroupList(s, schemas.GetResourceGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.ServiceManaged != nil {
+		s.WriteBool(schemas.GetResourceGatewayResponse_serviceManaged, *v.ServiceManaged)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetResourceGatewayResponse_status, string(v.Status))
+	}
+	serializeSubnetList(s, schemas.GetResourceGatewayResponse_subnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.GetResourceGatewayResponse_vpcId, *v.VpcId)
+	}
+}
+func (v *GetResourceGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceGatewayResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetResourceGatewayResponse_arn, v.Arn)
+		case schemas.GetResourceGatewayResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetResourceGatewayResponse_createdAt, v.CreatedAt)
+		case schemas.GetResourceGatewayResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetResourceGatewayResponse_id, v.Id)
+		case schemas.GetResourceGatewayResponse_ipAddressType:
+			var ev string
+			if err := d.ReadString(schemas.GetResourceGatewayResponse_ipAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.ResourceGatewayIpAddressType(ev)
+			return nil
+		case schemas.GetResourceGatewayResponse_ipv4AddressesPerEni:
+			v.Ipv4AddressesPerEni = new(int32)
+			return d.ReadInt32(schemas.GetResourceGatewayResponse_ipv4AddressesPerEni, v.Ipv4AddressesPerEni)
+		case schemas.GetResourceGatewayResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetResourceGatewayResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetResourceGatewayResponse_managedBy:
+			v.ManagedBy = new(string)
+			return d.ReadString(schemas.GetResourceGatewayResponse_managedBy, v.ManagedBy)
+		case schemas.GetResourceGatewayResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetResourceGatewayResponse_name, v.Name)
+		case schemas.GetResourceGatewayResponse_resourceConfigDnsResolution:
+			var ev string
+			if err := d.ReadString(schemas.GetResourceGatewayResponse_resourceConfigDnsResolution, &ev); err != nil {
+				return err
+			}
+			v.ResourceConfigDnsResolution = types.ResourceConfigDnsResolution(ev)
+			return nil
+		case schemas.GetResourceGatewayResponse_securityGroupIds:
+			return deserializeSecurityGroupList(d, schemas.GetResourceGatewayResponse_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.GetResourceGatewayResponse_serviceManaged:
+			v.ServiceManaged = new(bool)
+			return d.ReadBool(schemas.GetResourceGatewayResponse_serviceManaged, v.ServiceManaged)
+		case schemas.GetResourceGatewayResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetResourceGatewayResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceGatewayStatus(ev)
+			return nil
+		case schemas.GetResourceGatewayResponse_subnetIds:
+			return deserializeSubnetList(d, schemas.GetResourceGatewayResponse_subnetIds, &v.SubnetIds)
+		case schemas.GetResourceGatewayResponse_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.GetResourceGatewayResponse_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceGateway, schemas.GetResourceGatewayRequest, schemas.GetResourceGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceGateway, schemas.GetResourceGatewayRequest, schemas.GetResourceGatewayResponse), output: &GetResourceGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

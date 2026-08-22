@@ -5,7 +5,9 @@ package wisdom
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wisdom/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,49 @@ type CreateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.CreateSessionRequest_assistantId, *v.AssistantId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSessionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSessionRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSessionRequest_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateSessionRequest_tags, v.Tags)
+}
+func (v *CreateSessionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSessionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSessionRequest_assistantId:
+			v.AssistantId = new(string)
+			return d.ReadString(schemas.CreateSessionRequest_assistantId, v.AssistantId)
+		case schemas.CreateSessionRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateSessionRequest_clientToken, v.ClientToken)
+		case schemas.CreateSessionRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSessionRequest_description, v.Description)
+		case schemas.CreateSessionRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSessionRequest_name, v.Name)
+		case schemas.CreateSessionRequest_tags:
+			return deserializeTags(d, schemas.CreateSessionRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateSessionOutput struct {
 
 	// The session.
@@ -67,13 +112,34 @@ type CreateSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Session != nil {
+		s.WriteStruct(schemas.CreateSessionResponse_session)
+		v.Session.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSessionResponse_session:
+			v.Session = &types.SessionData{}
+			return v.Session.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSession, schemas.CreateSessionRequest, schemas.CreateSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSession, schemas.CreateSessionRequest, schemas.CreateSessionResponse), output: &CreateSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

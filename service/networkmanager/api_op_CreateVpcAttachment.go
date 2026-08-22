@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,34 @@ type CreateVpcAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVpcAttachmentRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CreateVpcAttachmentRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.CreateVpcAttachmentRequest_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.CreateVpcAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+	serializeSubnetArnList(s, schemas.CreateVpcAttachmentRequest_SubnetArns, v.SubnetArns)
+	serializeTagList(s, schemas.CreateVpcAttachmentRequest_Tags, v.Tags)
+	if v.VpcArn != nil {
+		s.WriteString(schemas.CreateVpcAttachmentRequest_VpcArn, *v.VpcArn)
+	}
+}
+
 type CreateVpcAttachmentOutput struct {
 
 	// Provides details about the VPC attachment.
@@ -69,13 +99,34 @@ type CreateVpcAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcAttachment != nil {
+		s.WriteStruct(schemas.CreateVpcAttachmentResponse_VpcAttachment)
+		v.VpcAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVpcAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcAttachmentResponse_VpcAttachment:
+			v.VpcAttachment = &types.VpcAttachment{}
+			return v.VpcAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVpcAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVpcAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcAttachment, schemas.CreateVpcAttachmentRequest, schemas.CreateVpcAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVpcAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcAttachment, schemas.CreateVpcAttachmentRequest, schemas.CreateVpcAttachmentResponse), output: &CreateVpcAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

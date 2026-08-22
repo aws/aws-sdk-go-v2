@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type RetrieveTapeArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveTapeArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveTapeArchiveInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveTapeArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.RetrieveTapeArchiveInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.TapeARN != nil {
+		s.WriteString(schemas.RetrieveTapeArchiveInput_TapeARN, *v.TapeARN)
+	}
+}
+
 // RetrieveTapeArchiveOutput
 type RetrieveTapeArchiveOutput struct {
 
@@ -66,13 +83,32 @@ type RetrieveTapeArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveTapeArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveTapeArchiveOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveTapeArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TapeARN != nil {
+		s.WriteString(schemas.RetrieveTapeArchiveOutput_TapeARN, *v.TapeARN)
+	}
+}
+func (v *RetrieveTapeArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveTapeArchiveOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveTapeArchiveOutput_TapeARN:
+			v.TapeARN = new(string)
+			return d.ReadString(schemas.RetrieveTapeArchiveOutput_TapeARN, v.TapeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveTapeArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetrieveTapeArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveTapeArchive, schemas.RetrieveTapeArchiveInput, schemas.RetrieveTapeArchiveOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRetrieveTapeArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveTapeArchive, schemas.RetrieveTapeArchiveInput, schemas.RetrieveTapeArchiveOutput), output: &RetrieveTapeArchiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

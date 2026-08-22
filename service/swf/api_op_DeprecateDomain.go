@@ -4,6 +4,8 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,18 @@ type DeprecateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprecateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprecateDomainInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeprecateDomainInput_name, *v.Name)
+	}
+}
+
 type DeprecateDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +80,26 @@ type DeprecateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprecateDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeprecateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeprecateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeprecateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprecateDomain, schemas.DeprecateDomainInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeprecateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprecateDomain, schemas.DeprecateDomainInput, nil), output: &DeprecateDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,27 @@ type ListLoggingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLoggingConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLoggingConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLoggingConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListLoggingConfigurationsRequest_Limit, *v.Limit)
+	}
+	if v.LogScope != "" {
+		s.WriteString(schemas.ListLoggingConfigurationsRequest_LogScope, string(v.LogScope))
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListLoggingConfigurationsRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.ListLoggingConfigurationsRequest_Scope, string(v.Scope))
+	}
+}
+
 type ListLoggingConfigurationsOutput struct {
 
 	// Array of logging configurations. If you specified a Limit in your request, this
@@ -90,13 +113,35 @@ type ListLoggingConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLoggingConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLoggingConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLoggingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLoggingConfigurations(s, schemas.ListLoggingConfigurationsResponse_LoggingConfigurations, v.LoggingConfigurations)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListLoggingConfigurationsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListLoggingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLoggingConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLoggingConfigurationsResponse_LoggingConfigurations:
+			return deserializeLoggingConfigurations(d, schemas.ListLoggingConfigurationsResponse_LoggingConfigurations, &v.LoggingConfigurations)
+		case schemas.ListLoggingConfigurationsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListLoggingConfigurationsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLoggingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLoggingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoggingConfigurations, schemas.ListLoggingConfigurationsRequest, schemas.ListLoggingConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLoggingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoggingConfigurations, schemas.ListLoggingConfigurationsRequest, schemas.ListLoggingConfigurationsResponse), output: &ListLoggingConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListOrganizationServiceAccessStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrganizationServiceAccessStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrganizationServiceAccessStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrganizationServiceAccessStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOrganizationServiceAccessStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrganizationServiceAccessStatusRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListOrganizationServiceAccessStatusOutput struct {
 
 	// The token for the next page of results.
@@ -50,13 +67,40 @@ type ListOrganizationServiceAccessStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrganizationServiceAccessStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrganizationServiceAccessStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrganizationServiceAccessStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrganizationServiceAccessStatusResponse_NextToken, *v.NextToken)
+	}
+	if v.OrganizationStatus != nil {
+		s.WriteStruct(schemas.ListOrganizationServiceAccessStatusResponse_OrganizationStatus)
+		v.OrganizationStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListOrganizationServiceAccessStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOrganizationServiceAccessStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOrganizationServiceAccessStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOrganizationServiceAccessStatusResponse_NextToken, v.NextToken)
+		case schemas.ListOrganizationServiceAccessStatusResponse_OrganizationStatus:
+			v.OrganizationStatus = &types.OrganizationStatus{}
+			return v.OrganizationStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOrganizationServiceAccessStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOrganizationServiceAccessStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationServiceAccessStatus, schemas.ListOrganizationServiceAccessStatusRequest, schemas.ListOrganizationServiceAccessStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOrganizationServiceAccessStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationServiceAccessStatus, schemas.ListOrganizationServiceAccessStatusRequest, schemas.ListOrganizationServiceAccessStatusResponse), output: &ListOrganizationServiceAccessStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

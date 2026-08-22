@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,34 @@ type StartRecoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRecoveryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRecoveryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRecoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsDrill != nil {
+		s.WriteBool(schemas.StartRecoveryRequest_isDrill, *v.IsDrill)
+	}
+	serializeStartRecoveryRequestSourceServers(s, schemas.StartRecoveryRequest_sourceServers, v.SourceServers)
+	serializeTagsMap(s, schemas.StartRecoveryRequest_tags, v.Tags)
+}
+func (v *StartRecoveryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRecoveryRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRecoveryRequest_isDrill:
+			v.IsDrill = new(bool)
+			return d.ReadBool(schemas.StartRecoveryRequest_isDrill, v.IsDrill)
+		case schemas.StartRecoveryRequest_sourceServers:
+			return deserializeStartRecoveryRequestSourceServers(d, schemas.StartRecoveryRequest_sourceServers, &v.SourceServers)
+		case schemas.StartRecoveryRequest_tags:
+			return deserializeTagsMap(d, schemas.StartRecoveryRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type StartRecoveryOutput struct {
 
 	// The Recovery Job.
@@ -53,13 +83,34 @@ type StartRecoveryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRecoveryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRecoveryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRecoveryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.StartRecoveryResponse_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartRecoveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRecoveryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRecoveryResponse_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRecoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRecovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecovery, schemas.StartRecoveryRequest, schemas.StartRecoveryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRecovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecovery, schemas.StartRecoveryRequest, schemas.StartRecoveryResponse), output: &StartRecoveryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

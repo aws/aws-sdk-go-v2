@@ -4,7 +4,9 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,56 @@ type UpdateCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomLineItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomLineItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomLineItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateCustomLineItemInput_Arn, *v.Arn)
+	}
+	if v.BillingPeriodRange != nil {
+		s.WriteStruct(schemas.UpdateCustomLineItemInput_BillingPeriodRange)
+		v.BillingPeriodRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChargeDetails != nil {
+		s.WriteStruct(schemas.UpdateCustomLineItemInput_ChargeDetails)
+		v.ChargeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCustomLineItemInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCustomLineItemInput_Name, *v.Name)
+	}
+}
+func (v *UpdateCustomLineItemInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCustomLineItemInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCustomLineItemInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateCustomLineItemInput_Arn, v.Arn)
+		case schemas.UpdateCustomLineItemInput_BillingPeriodRange:
+			v.BillingPeriodRange = &types.CustomLineItemBillingPeriodRange{}
+			return v.BillingPeriodRange.Deserialize(d)
+		case schemas.UpdateCustomLineItemInput_ChargeDetails:
+			v.ChargeDetails = &types.UpdateCustomLineItemChargeDetails{}
+			return v.ChargeDetails.Deserialize(d)
+		case schemas.UpdateCustomLineItemInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCustomLineItemInput_Description, v.Description)
+		case schemas.UpdateCustomLineItemInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCustomLineItemInput_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type UpdateCustomLineItemOutput struct {
 
 	//  The ARN of the successfully updated custom line item.
@@ -77,13 +129,68 @@ type UpdateCustomLineItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomLineItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomLineItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomLineItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateCustomLineItemOutput_Arn, *v.Arn)
+	}
+	if v.AssociationSize != 0 {
+		s.WriteInt64(schemas.UpdateCustomLineItemOutput_AssociationSize, v.AssociationSize)
+	}
+	if v.BillingGroupArn != nil {
+		s.WriteString(schemas.UpdateCustomLineItemOutput_BillingGroupArn, *v.BillingGroupArn)
+	}
+	if v.ChargeDetails != nil {
+		s.WriteStruct(schemas.UpdateCustomLineItemOutput_ChargeDetails)
+		v.ChargeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCustomLineItemOutput_Description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.UpdateCustomLineItemOutput_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCustomLineItemOutput_Name, *v.Name)
+	}
+}
+func (v *UpdateCustomLineItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCustomLineItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCustomLineItemOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateCustomLineItemOutput_Arn, v.Arn)
+		case schemas.UpdateCustomLineItemOutput_AssociationSize:
+			return d.ReadInt64(schemas.UpdateCustomLineItemOutput_AssociationSize, &v.AssociationSize)
+		case schemas.UpdateCustomLineItemOutput_BillingGroupArn:
+			v.BillingGroupArn = new(string)
+			return d.ReadString(schemas.UpdateCustomLineItemOutput_BillingGroupArn, v.BillingGroupArn)
+		case schemas.UpdateCustomLineItemOutput_ChargeDetails:
+			v.ChargeDetails = &types.ListCustomLineItemChargeDetails{}
+			return v.ChargeDetails.Deserialize(d)
+		case schemas.UpdateCustomLineItemOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCustomLineItemOutput_Description, v.Description)
+		case schemas.UpdateCustomLineItemOutput_LastModifiedTime:
+			return d.ReadInt64(schemas.UpdateCustomLineItemOutput_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.UpdateCustomLineItemOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCustomLineItemOutput_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCustomLineItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomLineItem, schemas.UpdateCustomLineItemInput, schemas.UpdateCustomLineItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomLineItem, schemas.UpdateCustomLineItemInput, schemas.UpdateCustomLineItemOutput), output: &UpdateCustomLineItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,40 @@ type GetAssetInput struct {
 	RevisionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.GetAssetRequest_AssetId, *v.AssetId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.GetAssetRequest_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.GetAssetRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *GetAssetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetRequest_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.GetAssetRequest_AssetId, v.AssetId)
+		case schemas.GetAssetRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.GetAssetRequest_DataSetId, v.DataSetId)
+		case schemas.GetAssetRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.GetAssetRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 type GetAssetOutput struct {
@@ -94,13 +130,95 @@ type GetAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetAssetResponse_Arn, *v.Arn)
+	}
+	if v.AssetDetails != nil {
+		s.WriteStruct(schemas.GetAssetResponse_AssetDetails)
+		v.AssetDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.GetAssetResponse_AssetType, string(v.AssetType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAssetResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.GetAssetResponse_DataSetId, *v.DataSetId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetAssetResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAssetResponse_Name, *v.Name)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.GetAssetResponse_RevisionId, *v.RevisionId)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.GetAssetResponse_SourceId, *v.SourceId)
+	}
+	serializeMapOf__string(s, schemas.GetAssetResponse_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetAssetResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetAssetResponse_Arn, v.Arn)
+		case schemas.GetAssetResponse_AssetDetails:
+			v.AssetDetails = &types.AssetDetails{}
+			return v.AssetDetails.Deserialize(d)
+		case schemas.GetAssetResponse_AssetType:
+			var ev string
+			if err := d.ReadString(schemas.GetAssetResponse_AssetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = types.AssetType(ev)
+			return nil
+		case schemas.GetAssetResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAssetResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetAssetResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.GetAssetResponse_DataSetId, v.DataSetId)
+		case schemas.GetAssetResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAssetResponse_Id, v.Id)
+		case schemas.GetAssetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAssetResponse_Name, v.Name)
+		case schemas.GetAssetResponse_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.GetAssetResponse_RevisionId, v.RevisionId)
+		case schemas.GetAssetResponse_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.GetAssetResponse_SourceId, v.SourceId)
+		case schemas.GetAssetResponse_Tags:
+			return deserializeMapOf__string(d, schemas.GetAssetResponse_Tags, &v.Tags)
+		case schemas.GetAssetResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAssetResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsset, schemas.GetAssetRequest, schemas.GetAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsset, schemas.GetAssetRequest, schemas.GetAssetResponse), output: &GetAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

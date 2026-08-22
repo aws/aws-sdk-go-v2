@@ -4,6 +4,8 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteWebAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWebAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWebAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWebAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebAppId != nil {
+		s.WriteString(schemas.DeleteWebAppRequest_WebAppId, *v.WebAppId)
+	}
+}
+
 type DeleteWebAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteWebAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWebAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWebAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWebAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWebAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWebApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWebApp, schemas.DeleteWebAppRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWebApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWebApp, schemas.DeleteWebAppRequest, nil), output: &DeleteWebAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

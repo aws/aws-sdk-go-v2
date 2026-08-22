@@ -4,7 +4,9 @@ package servicediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type GetInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetInstanceRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.GetInstanceRequest_ServiceId, *v.ServiceId)
+	}
+}
+
 type GetInstanceOutput struct {
 
 	// A complex type that contains information about a specified instance.
@@ -61,13 +78,40 @@ type GetInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instance != nil {
+		s.WriteStruct(schemas.GetInstanceResponse_Instance)
+		v.Instance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceOwner != nil {
+		s.WriteString(schemas.GetInstanceResponse_ResourceOwner, *v.ResourceOwner)
+	}
+}
+func (v *GetInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstanceResponse_Instance:
+			v.Instance = &types.Instance{}
+			return v.Instance.Deserialize(d)
+		case schemas.GetInstanceResponse_ResourceOwner:
+			v.ResourceOwner = new(string)
+			return d.ReadString(schemas.GetInstanceResponse_ResourceOwner, v.ResourceOwner)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstance, schemas.GetInstanceRequest, schemas.GetInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstance, schemas.GetInstanceRequest, schemas.GetInstanceResponse), output: &GetInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

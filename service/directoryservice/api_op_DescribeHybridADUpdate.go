@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -48,6 +50,24 @@ type DescribeHybridADUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHybridADUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHybridADUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHybridADUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeHybridADUpdateRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeHybridADUpdateRequest_NextToken, *v.NextToken)
+	}
+	if v.UpdateType != "" {
+		s.WriteString(schemas.DescribeHybridADUpdateRequest_UpdateType, string(v.UpdateType))
+	}
+}
+
 type DescribeHybridADUpdateOutput struct {
 
 	// If not null, more results are available. Pass this value for the NextToken
@@ -64,13 +84,40 @@ type DescribeHybridADUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHybridADUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHybridADUpdateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHybridADUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeHybridADUpdateResult_NextToken, *v.NextToken)
+	}
+	if v.UpdateActivities != nil {
+		s.WriteStruct(schemas.DescribeHybridADUpdateResult_UpdateActivities)
+		v.UpdateActivities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeHybridADUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHybridADUpdateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHybridADUpdateResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeHybridADUpdateResult_NextToken, v.NextToken)
+		case schemas.DescribeHybridADUpdateResult_UpdateActivities:
+			v.UpdateActivities = &types.HybridUpdateActivities{}
+			return v.UpdateActivities.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHybridADUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHybridADUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHybridADUpdate, schemas.DescribeHybridADUpdateRequest, schemas.DescribeHybridADUpdateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHybridADUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHybridADUpdate, schemas.DescribeHybridADUpdateRequest, schemas.DescribeHybridADUpdateResult), output: &DescribeHybridADUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

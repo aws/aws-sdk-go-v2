@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type DeleteQueueEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQueueEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQueueEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQueueEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.DeleteQueueEnvironmentRequest_farmId, *v.FarmId)
+	}
+	if v.QueueEnvironmentId != nil {
+		s.WriteString(schemas.DeleteQueueEnvironmentRequest_queueEnvironmentId, *v.QueueEnvironmentId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.DeleteQueueEnvironmentRequest_queueId, *v.QueueId)
+	}
+}
+
 type DeleteQueueEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +72,26 @@ type DeleteQueueEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQueueEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQueueEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQueueEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteQueueEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteQueueEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteQueueEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteQueueEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQueueEnvironment, schemas.DeleteQueueEnvironmentRequest, schemas.DeleteQueueEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteQueueEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQueueEnvironment, schemas.DeleteQueueEnvironmentRequest, schemas.DeleteQueueEnvironmentResponse), output: &DeleteQueueEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

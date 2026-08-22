@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,21 @@ type GetDecryptedAPIKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDecryptedAPIKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDecryptedAPIKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDecryptedAPIKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APIKey != nil {
+		s.WriteString(schemas.GetDecryptedAPIKeyRequest_APIKey, *v.APIKey)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetDecryptedAPIKeyRequest_Scope, string(v.Scope))
+	}
+}
+
 type GetDecryptedAPIKeyOutput struct {
 
 	// The date and time that the key was created.
@@ -71,13 +88,35 @@ type GetDecryptedAPIKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDecryptedAPIKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDecryptedAPIKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDecryptedAPIKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.GetDecryptedAPIKeyResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	serializeTokenDomains(s, schemas.GetDecryptedAPIKeyResponse_TokenDomains, v.TokenDomains)
+}
+func (v *GetDecryptedAPIKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDecryptedAPIKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDecryptedAPIKeyResponse_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetDecryptedAPIKeyResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetDecryptedAPIKeyResponse_TokenDomains:
+			return deserializeTokenDomains(d, schemas.GetDecryptedAPIKeyResponse_TokenDomains, &v.TokenDomains)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDecryptedAPIKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDecryptedAPIKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDecryptedAPIKey, schemas.GetDecryptedAPIKeyRequest, schemas.GetDecryptedAPIKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDecryptedAPIKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDecryptedAPIKey, schemas.GetDecryptedAPIKeyRequest, schemas.GetDecryptedAPIKeyResponse), output: &GetDecryptedAPIKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

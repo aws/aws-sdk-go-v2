@@ -4,7 +4,9 @@ package mediapackagevod
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,23 @@ type ConfigureLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureLogsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureLogsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureLogsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.ConfigureLogsRequest_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigureLogsRequest_Id, *v.Id)
+	}
+}
+
 type ConfigureLogsOutput struct {
 
 	// The ARN of the PackagingGroup.
@@ -67,13 +86,69 @@ type ConfigureLogsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureLogsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureLogsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureLogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ConfigureLogsResponse_Arn, *v.Arn)
+	}
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.ConfigureLogsResponse_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.ConfigureLogsResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.ConfigureLogsResponse_DomainName, *v.DomainName)
+	}
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.ConfigureLogsResponse_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigureLogsResponse_Id, *v.Id)
+	}
+	serializeTags(s, schemas.ConfigureLogsResponse_Tags, v.Tags)
+}
+func (v *ConfigureLogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureLogsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureLogsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ConfigureLogsResponse_Arn, v.Arn)
+		case schemas.ConfigureLogsResponse_Authorization:
+			v.Authorization = &types.Authorization{}
+			return v.Authorization.Deserialize(d)
+		case schemas.ConfigureLogsResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.ConfigureLogsResponse_CreatedAt, v.CreatedAt)
+		case schemas.ConfigureLogsResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ConfigureLogsResponse_DomainName, v.DomainName)
+		case schemas.ConfigureLogsResponse_EgressAccessLogs:
+			v.EgressAccessLogs = &types.EgressAccessLogs{}
+			return v.EgressAccessLogs.Deserialize(d)
+		case schemas.ConfigureLogsResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigureLogsResponse_Id, v.Id)
+		case schemas.ConfigureLogsResponse_Tags:
+			return deserializeTags(d, schemas.ConfigureLogsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfigureLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpConfigureLogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureLogs, schemas.ConfigureLogsRequest, schemas.ConfigureLogsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConfigureLogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureLogs, schemas.ConfigureLogsRequest, schemas.ConfigureLogsResponse), output: &ConfigureLogsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

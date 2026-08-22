@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListAvailableMeteredProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableMeteredProductsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableMeteredProductsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableMeteredProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAvailableMeteredProductsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableMeteredProductsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListAvailableMeteredProductsOutput struct {
 
@@ -61,13 +78,35 @@ type ListAvailableMeteredProductsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableMeteredProductsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableMeteredProductsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableMeteredProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMeteredProductSummaryList(s, schemas.ListAvailableMeteredProductsResponse_meteredProducts, v.MeteredProducts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableMeteredProductsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAvailableMeteredProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableMeteredProductsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableMeteredProductsResponse_meteredProducts:
+			return deserializeMeteredProductSummaryList(d, schemas.ListAvailableMeteredProductsResponse_meteredProducts, &v.MeteredProducts)
+		case schemas.ListAvailableMeteredProductsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAvailableMeteredProductsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableMeteredProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAvailableMeteredProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableMeteredProducts, schemas.ListAvailableMeteredProductsRequest, schemas.ListAvailableMeteredProductsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAvailableMeteredProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableMeteredProducts, schemas.ListAvailableMeteredProductsRequest, schemas.ListAvailableMeteredProductsResponse), output: &ListAvailableMeteredProductsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

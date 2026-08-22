@@ -5,7 +5,9 @@ package qconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,35 @@ type CreateAIAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.CreateAIAgentRequest_assistantId, *v.AssistantId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAIAgentRequest_clientToken, *v.ClientToken)
+	}
+	serializeAIAgentConfiguration(s, schemas.CreateAIAgentRequest_configuration, v.Configuration)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAIAgentRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAIAgentRequest_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateAIAgentRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateAIAgentRequest_type, string(v.Type))
+	}
+	if v.VisibilityStatus != "" {
+		s.WriteString(schemas.CreateAIAgentRequest_visibilityStatus, string(v.VisibilityStatus))
+	}
+}
+
 type CreateAIAgentOutput struct {
 
 	// The data of the created AI Agent.
@@ -80,13 +111,34 @@ type CreateAIAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiAgent != nil {
+		s.WriteStruct(schemas.CreateAIAgentResponse_aiAgent)
+		v.AiAgent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAIAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAIAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAIAgentResponse_aiAgent:
+			v.AiAgent = &types.AIAgentData{}
+			return v.AiAgent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAIAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAIAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIAgent, schemas.CreateAIAgentRequest, schemas.CreateAIAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAIAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIAgent, schemas.CreateAIAgentRequest, schemas.CreateAIAgentResponse), output: &CreateAIAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

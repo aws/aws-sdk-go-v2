@@ -4,6 +4,8 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.DescribeOrganizationConfigurationRequest_GraphArn, *v.GraphArn)
+	}
+}
+
 type DescribeOrganizationConfigurationOutput struct {
 
 	// Indicates whether to automatically enable new organization accounts as member
@@ -49,13 +63,31 @@ type DescribeOrganizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnable != false {
+		s.WriteBool(schemas.DescribeOrganizationConfigurationResponse_AutoEnable, v.AutoEnable)
+	}
+}
+func (v *DescribeOrganizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrganizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrganizationConfigurationResponse_AutoEnable:
+			return d.ReadBool(schemas.DescribeOrganizationConfigurationResponse_AutoEnable, &v.AutoEnable)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfiguration, schemas.DescribeOrganizationConfigurationRequest, schemas.DescribeOrganizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfiguration, schemas.DescribeOrganizationConfigurationRequest, schemas.DescribeOrganizationConfigurationResponse), output: &DescribeOrganizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

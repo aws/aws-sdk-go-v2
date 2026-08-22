@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetSnapshotLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSnapshotLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSnapshotLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSnapshotLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.GetSnapshotLimitsRequest_DirectoryId, *v.DirectoryId)
+	}
+}
+
 // Contains the results of the GetSnapshotLimits operation.
 type GetSnapshotLimitsOutput struct {
 
@@ -47,13 +61,34 @@ type GetSnapshotLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSnapshotLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSnapshotLimitsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSnapshotLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotLimits != nil {
+		s.WriteStruct(schemas.GetSnapshotLimitsResult_SnapshotLimits)
+		v.SnapshotLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSnapshotLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSnapshotLimitsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSnapshotLimitsResult_SnapshotLimits:
+			v.SnapshotLimits = &types.SnapshotLimits{}
+			return v.SnapshotLimits.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSnapshotLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSnapshotLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSnapshotLimits, schemas.GetSnapshotLimitsRequest, schemas.GetSnapshotLimitsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSnapshotLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSnapshotLimits, schemas.GetSnapshotLimitsRequest, schemas.GetSnapshotLimitsResult), output: &GetSnapshotLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

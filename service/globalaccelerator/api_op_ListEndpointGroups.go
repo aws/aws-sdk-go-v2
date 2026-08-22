@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListEndpointGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.ListEndpointGroupsRequest_ListenerArn, *v.ListenerArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEndpointGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEndpointGroupsOutput struct {
 
 	// The list of the endpoint groups associated with a listener.
@@ -58,13 +78,35 @@ type ListEndpointGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointGroups(s, schemas.ListEndpointGroupsResponse_EndpointGroups, v.EndpointGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEndpointGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEndpointGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEndpointGroupsResponse_EndpointGroups:
+			return deserializeEndpointGroups(d, schemas.ListEndpointGroupsResponse_EndpointGroups, &v.EndpointGroups)
+		case schemas.ListEndpointGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEndpointGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEndpointGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEndpointGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpointGroups, schemas.ListEndpointGroupsRequest, schemas.ListEndpointGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEndpointGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpointGroups, schemas.ListEndpointGroupsRequest, schemas.ListEndpointGroupsResponse), output: &ListEndpointGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

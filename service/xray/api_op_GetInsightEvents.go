@@ -5,7 +5,9 @@ package xray
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type GetInsightEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightId != nil {
+		s.WriteString(schemas.GetInsightEventsRequest_InsightId, *v.InsightId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetInsightEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInsightEventsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetInsightEventsOutput struct {
 
 	// A detailed description of the event. This includes the time of the event,
@@ -61,13 +81,35 @@ type GetInsightEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightEventsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInsightEventList(s, schemas.GetInsightEventsResult_InsightEvents, v.InsightEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInsightEventsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *GetInsightEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInsightEventsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInsightEventsResult_InsightEvents:
+			return deserializeInsightEventList(d, schemas.GetInsightEventsResult_InsightEvents, &v.InsightEvents)
+		case schemas.GetInsightEventsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetInsightEventsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInsightEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInsightEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightEvents, schemas.GetInsightEventsRequest, schemas.GetInsightEventsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInsightEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightEvents, schemas.GetInsightEventsRequest, schemas.GetInsightEventsResult), output: &GetInsightEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

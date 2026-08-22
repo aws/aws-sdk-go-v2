@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,23 @@ type DescribeVolumesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVolumesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVolumesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVolumesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVolumeFilters(s, schemas.DescribeVolumesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeVolumesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeVolumesRequest_NextToken, *v.NextToken)
+	}
+	serializeVolumeIds(s, schemas.DescribeVolumesRequest_VolumeIds, v.VolumeIds)
+}
+
 type DescribeVolumesOutput struct {
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).
@@ -62,13 +81,35 @@ type DescribeVolumesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVolumesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVolumesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVolumesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeVolumesResponse_NextToken, *v.NextToken)
+	}
+	serializeVolumes(s, schemas.DescribeVolumesResponse_Volumes, v.Volumes)
+}
+func (v *DescribeVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVolumesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVolumesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeVolumesResponse_NextToken, v.NextToken)
+		case schemas.DescribeVolumesResponse_Volumes:
+			return deserializeVolumes(d, schemas.DescribeVolumesResponse_Volumes, &v.Volumes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeVolumes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVolumes, schemas.DescribeVolumesRequest, schemas.DescribeVolumesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeVolumes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVolumes, schemas.DescribeVolumesRequest, schemas.DescribeVolumesResponse), output: &DescribeVolumesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

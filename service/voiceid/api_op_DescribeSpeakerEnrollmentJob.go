@@ -4,7 +4,9 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type DescribeSpeakerEnrollmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSpeakerEnrollmentJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSpeakerEnrollmentJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSpeakerEnrollmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeSpeakerEnrollmentJobRequest_DomainId, *v.DomainId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeSpeakerEnrollmentJobRequest_JobId, *v.JobId)
+	}
+}
+func (v *DescribeSpeakerEnrollmentJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSpeakerEnrollmentJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSpeakerEnrollmentJobRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DescribeSpeakerEnrollmentJobRequest_DomainId, v.DomainId)
+		case schemas.DescribeSpeakerEnrollmentJobRequest_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DescribeSpeakerEnrollmentJobRequest_JobId, v.JobId)
+		}
+		return nil
+	})
+}
+
 type DescribeSpeakerEnrollmentJobOutput struct {
 
 	// Contains details about the specified speaker enrollment job.
@@ -50,13 +80,34 @@ type DescribeSpeakerEnrollmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSpeakerEnrollmentJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSpeakerEnrollmentJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSpeakerEnrollmentJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.DescribeSpeakerEnrollmentJobResponse_Job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSpeakerEnrollmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSpeakerEnrollmentJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSpeakerEnrollmentJobResponse_Job:
+			v.Job = &types.SpeakerEnrollmentJob{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSpeakerEnrollmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeSpeakerEnrollmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpeakerEnrollmentJob, schemas.DescribeSpeakerEnrollmentJobRequest, schemas.DescribeSpeakerEnrollmentJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeSpeakerEnrollmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpeakerEnrollmentJob, schemas.DescribeSpeakerEnrollmentJobRequest, schemas.DescribeSpeakerEnrollmentJobResponse), output: &DescribeSpeakerEnrollmentJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

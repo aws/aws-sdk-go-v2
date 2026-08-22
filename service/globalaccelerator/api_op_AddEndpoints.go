@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,19 @@ type AddEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointConfigurations(s, schemas.AddEndpointsRequest_EndpointConfigurations, v.EndpointConfigurations)
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.AddEndpointsRequest_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+}
+
 type AddEndpointsOutput struct {
 
 	// The list of endpoint objects.
@@ -73,13 +88,35 @@ type AddEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointDescriptions(s, schemas.AddEndpointsResponse_EndpointDescriptions, v.EndpointDescriptions)
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.AddEndpointsResponse_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+}
+func (v *AddEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddEndpointsResponse_EndpointDescriptions:
+			return deserializeEndpointDescriptions(d, schemas.AddEndpointsResponse_EndpointDescriptions, &v.EndpointDescriptions)
+		case schemas.AddEndpointsResponse_EndpointGroupArn:
+			v.EndpointGroupArn = new(string)
+			return d.ReadString(schemas.AddEndpointsResponse_EndpointGroupArn, v.EndpointGroupArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddEndpoints, schemas.AddEndpointsRequest, schemas.AddEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddEndpoints, schemas.AddEndpointsRequest, schemas.AddEndpointsResponse), output: &AddEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

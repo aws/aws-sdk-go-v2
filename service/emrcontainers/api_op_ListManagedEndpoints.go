@@ -5,7 +5,9 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -56,6 +58,32 @@ type ListManagedEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListManagedEndpointsRequest_createdAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListManagedEndpointsRequest_createdBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedEndpointsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedEndpointsRequest_nextToken, *v.NextToken)
+	}
+	serializeEndpointStates(s, schemas.ListManagedEndpointsRequest_states, v.States)
+	serializeEndpointTypes(s, schemas.ListManagedEndpointsRequest_types, v.Types)
+	if v.VirtualClusterId != nil {
+		s.WriteString(schemas.ListManagedEndpointsRequest_virtualClusterId, *v.VirtualClusterId)
+	}
+}
+
 type ListManagedEndpointsOutput struct {
 
 	// The managed endpoints to be listed.
@@ -70,13 +98,35 @@ type ListManagedEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpoints(s, schemas.ListManagedEndpointsResponse_endpoints, v.Endpoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedEndpointsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedEndpointsResponse_endpoints:
+			return deserializeEndpoints(d, schemas.ListManagedEndpointsResponse_endpoints, &v.Endpoints)
+		case schemas.ListManagedEndpointsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedEndpointsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedEndpoints, schemas.ListManagedEndpointsRequest, schemas.ListManagedEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedEndpoints, schemas.ListManagedEndpointsRequest, schemas.ListManagedEndpointsResponse), output: &ListManagedEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

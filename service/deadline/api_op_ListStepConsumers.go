@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,33 @@ type ListStepConsumersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStepConsumersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStepConsumersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStepConsumersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStepConsumersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_queueId, *v.QueueId)
+	}
+	if v.StepId != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_stepId, *v.StepId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListStepConsumersOutput struct {
 
@@ -80,13 +109,35 @@ type ListStepConsumersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStepConsumersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStepConsumersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStepConsumersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStepConsumers(s, schemas.ListStepConsumersResponse_consumers, v.Consumers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStepConsumersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListStepConsumersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStepConsumersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStepConsumersResponse_consumers:
+			return deserializeStepConsumers(d, schemas.ListStepConsumersResponse_consumers, &v.Consumers)
+		case schemas.ListStepConsumersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStepConsumersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStepConsumersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStepConsumers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStepConsumers, schemas.ListStepConsumersRequest, schemas.ListStepConsumersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStepConsumers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStepConsumers, schemas.ListStepConsumersRequest, schemas.ListStepConsumersResponse), output: &ListStepConsumersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

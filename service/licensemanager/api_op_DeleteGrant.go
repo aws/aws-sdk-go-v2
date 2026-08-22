@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DeleteGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGrantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrantArn != nil {
+		s.WriteString(schemas.DeleteGrantRequest_GrantArn, *v.GrantArn)
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DeleteGrantRequest_StatusReason, *v.StatusReason)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DeleteGrantRequest_Version, *v.Version)
+	}
+}
+
 type DeleteGrantOutput struct {
 
 	// Grant ARN.
@@ -59,13 +79,48 @@ type DeleteGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGrantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGrantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrantArn != nil {
+		s.WriteString(schemas.DeleteGrantResponse_GrantArn, *v.GrantArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteGrantResponse_Status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DeleteGrantResponse_Version, *v.Version)
+	}
+}
+func (v *DeleteGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGrantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGrantResponse_GrantArn:
+			v.GrantArn = new(string)
+			return d.ReadString(schemas.DeleteGrantResponse_GrantArn, v.GrantArn)
+		case schemas.DeleteGrantResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteGrantResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GrantStatus(ev)
+			return nil
+		case schemas.DeleteGrantResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DeleteGrantResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGrant, schemas.DeleteGrantRequest, schemas.DeleteGrantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGrant, schemas.DeleteGrantRequest, schemas.DeleteGrantResponse), output: &DeleteGrantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

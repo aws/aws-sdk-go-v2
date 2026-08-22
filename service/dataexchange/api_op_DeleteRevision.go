@@ -4,6 +4,8 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type DeleteRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRevisionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.DeleteRevisionRequest_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.DeleteRevisionRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *DeleteRevisionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRevisionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRevisionRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.DeleteRevisionRequest_DataSetId, v.DataSetId)
+		case schemas.DeleteRevisionRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.DeleteRevisionRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 type DeleteRevisionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +75,26 @@ type DeleteRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRevision, schemas.DeleteRevisionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRevision, schemas.DeleteRevisionRequest, nil), output: &DeleteRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

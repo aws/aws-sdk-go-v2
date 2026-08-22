@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListResourceGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceGatewaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceGatewaysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceGatewaysRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceGatewaysRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListResourceGatewaysOutput struct {
 
 	// Information about the resource gateways.
@@ -52,13 +69,35 @@ type ListResourceGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceGatewaysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceGatewayList(s, schemas.ListResourceGatewaysResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceGatewaysResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListResourceGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceGatewaysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceGatewaysResponse_items:
+			return deserializeResourceGatewayList(d, schemas.ListResourceGatewaysResponse_items, &v.Items)
+		case schemas.ListResourceGatewaysResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceGatewaysResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceGateways, schemas.ListResourceGatewaysRequest, schemas.ListResourceGatewaysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourceGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceGateways, schemas.ListResourceGatewaysRequest, schemas.ListResourceGatewaysResponse), output: &ListResourceGatewaysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type DescribeUpdateDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUpdateDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUpdateDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUpdateDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeUpdateDirectoryRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUpdateDirectoryRequest_NextToken, *v.NextToken)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.DescribeUpdateDirectoryRequest_RegionName, *v.RegionName)
+	}
+	if v.UpdateType != "" {
+		s.WriteString(schemas.DescribeUpdateDirectoryRequest_UpdateType, string(v.UpdateType))
+	}
+}
+
 type DescribeUpdateDirectoryOutput struct {
 
 	//  If not null, more results are available. Pass this value for the NextToken
@@ -62,13 +85,35 @@ type DescribeUpdateDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUpdateDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUpdateDirectoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUpdateDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUpdateDirectoryResult_NextToken, *v.NextToken)
+	}
+	serializeUpdateActivities(s, schemas.DescribeUpdateDirectoryResult_UpdateActivities, v.UpdateActivities)
+}
+func (v *DescribeUpdateDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUpdateDirectoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUpdateDirectoryResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeUpdateDirectoryResult_NextToken, v.NextToken)
+		case schemas.DescribeUpdateDirectoryResult_UpdateActivities:
+			return deserializeUpdateActivities(d, schemas.DescribeUpdateDirectoryResult_UpdateActivities, &v.UpdateActivities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUpdateDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUpdateDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUpdateDirectory, schemas.DescribeUpdateDirectoryRequest, schemas.DescribeUpdateDirectoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUpdateDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUpdateDirectory, schemas.DescribeUpdateDirectoryRequest, schemas.DescribeUpdateDirectoryResult), output: &DescribeUpdateDirectoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

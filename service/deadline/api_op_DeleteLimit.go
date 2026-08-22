@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type DeleteLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLimitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.DeleteLimitRequest_farmId, *v.FarmId)
+	}
+	if v.LimitId != nil {
+		s.WriteString(schemas.DeleteLimitRequest_limitId, *v.LimitId)
+	}
+}
+
 type DeleteLimitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLimitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLimitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLimitResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLimit, schemas.DeleteLimitRequest, schemas.DeleteLimitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLimit, schemas.DeleteLimitRequest, schemas.DeleteLimitResponse), output: &DeleteLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

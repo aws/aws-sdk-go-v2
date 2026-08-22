@@ -5,7 +5,9 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,22 @@ type ListNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNamespacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNamespacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNamespacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNamespaceFilters(s, schemas.ListNamespacesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNamespacesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNamespacesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListNamespacesOutput struct {
 
 	// An array that contains one NamespaceSummary object for each namespace that
@@ -78,13 +96,35 @@ type ListNamespacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNamespacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNamespaceSummariesList(s, schemas.ListNamespacesResponse_Namespaces, v.Namespaces)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNamespacesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNamespacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNamespacesResponse_Namespaces:
+			return deserializeNamespaceSummariesList(d, schemas.ListNamespacesResponse_Namespaces, &v.Namespaces)
+		case schemas.ListNamespacesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNamespacesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNamespaces, schemas.ListNamespacesRequest, schemas.ListNamespacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNamespaces, schemas.ListNamespacesRequest, schemas.ListNamespacesResponse), output: &ListNamespacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

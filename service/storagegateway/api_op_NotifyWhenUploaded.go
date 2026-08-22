@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type NotifyWhenUploadedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyWhenUploadedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyWhenUploadedInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyWhenUploadedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.NotifyWhenUploadedInput_FileShareARN, *v.FileShareARN)
+	}
+}
+
 type NotifyWhenUploadedOutput struct {
 
 	// The Amazon Resource Name (ARN) of the file share.
@@ -61,13 +75,38 @@ type NotifyWhenUploadedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyWhenUploadedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyWhenUploadedOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyWhenUploadedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.NotifyWhenUploadedOutput_FileShareARN, *v.FileShareARN)
+	}
+	if v.NotificationId != nil {
+		s.WriteString(schemas.NotifyWhenUploadedOutput_NotificationId, *v.NotificationId)
+	}
+}
+func (v *NotifyWhenUploadedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyWhenUploadedOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotifyWhenUploadedOutput_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.NotifyWhenUploadedOutput_FileShareARN, v.FileShareARN)
+		case schemas.NotifyWhenUploadedOutput_NotificationId:
+			v.NotificationId = new(string)
+			return d.ReadString(schemas.NotifyWhenUploadedOutput_NotificationId, v.NotificationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNotifyWhenUploadedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyWhenUploaded{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyWhenUploaded, schemas.NotifyWhenUploadedInput, schemas.NotifyWhenUploadedOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpNotifyWhenUploaded{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyWhenUploaded, schemas.NotifyWhenUploadedInput, schemas.NotifyWhenUploadedOutput), output: &NotifyWhenUploadedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

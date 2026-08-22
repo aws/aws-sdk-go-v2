@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type GetModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetModelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetModelsRequest_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.GetModelsRequest_modelType, string(v.ModelType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetModelsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetModelsOutput struct {
 
 	// The array of models.
@@ -66,13 +89,35 @@ type GetModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializemodelList(s, schemas.GetModelsResult_models, v.Models)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetModelsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *GetModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelsResult_models:
+			return deserializemodelList(d, schemas.GetModelsResult_models, &v.Models)
+		case schemas.GetModelsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetModelsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModels, schemas.GetModelsRequest, schemas.GetModelsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModels, schemas.GetModelsRequest, schemas.GetModelsResult), output: &GetModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

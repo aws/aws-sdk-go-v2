@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,34 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectedDeviceId != nil {
+		s.WriteString(schemas.CreateConnectionRequest_ConnectedDeviceId, *v.ConnectedDeviceId)
+	}
+	if v.ConnectedLinkId != nil {
+		s.WriteString(schemas.CreateConnectionRequest_ConnectedLinkId, *v.ConnectedLinkId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConnectionRequest_Description, *v.Description)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.CreateConnectionRequest_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.CreateConnectionRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.CreateConnectionRequest_LinkId, *v.LinkId)
+	}
+	serializeTagList(s, schemas.CreateConnectionRequest_Tags, v.Tags)
+}
+
 type CreateConnectionOutput struct {
 
 	// Information about the connection.
@@ -72,13 +102,34 @@ type CreateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connection != nil {
+		s.WriteStruct(schemas.CreateConnectionResponse_Connection)
+		v.Connection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionResponse_Connection:
+			v.Connection = &types.Connection{}
+			return v.Connection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionRequest, schemas.CreateConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionRequest, schemas.CreateConnectionResponse), output: &CreateConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

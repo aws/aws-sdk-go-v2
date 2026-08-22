@@ -4,7 +4,9 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,23 @@ type PutMetricPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetricPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMetricPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.PutMetricPolicyInput_ContainerName, *v.ContainerName)
+	}
+	if v.MetricPolicy != nil {
+		s.WriteStruct(schemas.PutMetricPolicyInput_MetricPolicy)
+		v.MetricPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutMetricPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +81,26 @@ type PutMetricPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetricPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMetricPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutMetricPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutMetricPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutMetricPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricPolicy, schemas.PutMetricPolicyInput, schemas.PutMetricPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutMetricPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricPolicy, schemas.PutMetricPolicyInput, schemas.PutMetricPolicyOutput), output: &PutMetricPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

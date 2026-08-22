@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,55 @@ type CreateTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTargetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTargetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTargetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTargetGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.Config != nil {
+		s.WriteStruct(schemas.CreateTargetGroupRequest_config)
+		v.Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTargetGroupRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateTargetGroupRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateTargetGroupRequest_type, string(v.Type))
+	}
+}
+func (v *CreateTargetGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTargetGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTargetGroupRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateTargetGroupRequest_clientToken, v.ClientToken)
+		case schemas.CreateTargetGroupRequest_config:
+			v.Config = &types.TargetGroupConfig{}
+			return v.Config.Deserialize(d)
+		case schemas.CreateTargetGroupRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateTargetGroupRequest_name, v.Name)
+		case schemas.CreateTargetGroupRequest_tags:
+			return deserializeTagMap(d, schemas.CreateTargetGroupRequest_tags, &v.Tags)
+		case schemas.CreateTargetGroupRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateTargetGroupRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.TargetGroupType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateTargetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the target group.
@@ -88,13 +139,72 @@ type CreateTargetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTargetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTargetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTargetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateTargetGroupResponse_arn, *v.Arn)
+	}
+	if v.Config != nil {
+		s.WriteStruct(schemas.CreateTargetGroupResponse_config)
+		v.Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateTargetGroupResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTargetGroupResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateTargetGroupResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateTargetGroupResponse_type, string(v.Type))
+	}
+}
+func (v *CreateTargetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTargetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTargetGroupResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateTargetGroupResponse_arn, v.Arn)
+		case schemas.CreateTargetGroupResponse_config:
+			v.Config = &types.TargetGroupConfig{}
+			return v.Config.Deserialize(d)
+		case schemas.CreateTargetGroupResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateTargetGroupResponse_id, v.Id)
+		case schemas.CreateTargetGroupResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateTargetGroupResponse_name, v.Name)
+		case schemas.CreateTargetGroupResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateTargetGroupResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TargetGroupStatus(ev)
+			return nil
+		case schemas.CreateTargetGroupResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateTargetGroupResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.TargetGroupType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTargetGroup, schemas.CreateTargetGroupRequest, schemas.CreateTargetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTargetGroup, schemas.CreateTargetGroupRequest, schemas.CreateTargetGroupResponse), output: &CreateTargetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

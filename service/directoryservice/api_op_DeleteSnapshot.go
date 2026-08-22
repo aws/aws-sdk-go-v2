@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.DeleteSnapshotRequest_SnapshotId, *v.SnapshotId)
+	}
+}
+
 // Contains the results of the DeleteSnapshot operation.
 type DeleteSnapshotOutput struct {
 
@@ -46,13 +60,32 @@ type DeleteSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.DeleteSnapshotResult_SnapshotId, *v.SnapshotId)
+	}
+}
+func (v *DeleteSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSnapshotResult_SnapshotId:
+			v.SnapshotId = new(string)
+			return d.ReadString(schemas.DeleteSnapshotResult_SnapshotId, v.SnapshotId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSnapshot, schemas.DeleteSnapshotRequest, schemas.DeleteSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSnapshot, schemas.DeleteSnapshotRequest, schemas.DeleteSnapshotResult), output: &DeleteSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

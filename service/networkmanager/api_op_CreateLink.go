@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,36 @@ type CreateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bandwidth != nil {
+		s.WriteStruct(schemas.CreateLinkRequest_Bandwidth)
+		v.Bandwidth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateLinkRequest_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.CreateLinkRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.CreateLinkRequest_Provider, *v.Provider)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.CreateLinkRequest_SiteId, *v.SiteId)
+	}
+	serializeTagList(s, schemas.CreateLinkRequest_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.CreateLinkRequest_Type, *v.Type)
+	}
+}
+
 type CreateLinkOutput struct {
 
 	// Information about the link.
@@ -75,13 +107,34 @@ type CreateLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Link != nil {
+		s.WriteStruct(schemas.CreateLinkResponse_Link)
+		v.Link.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLinkResponse_Link:
+			v.Link = &types.Link{}
+			return v.Link.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLink, schemas.CreateLinkRequest, schemas.CreateLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLink, schemas.CreateLinkRequest, schemas.CreateLinkResponse), output: &CreateLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

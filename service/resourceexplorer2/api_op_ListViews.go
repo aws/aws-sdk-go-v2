@@ -5,6 +5,8 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,34 @@ type ListViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListViewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListViewsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListViewsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListViewsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListViewsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListViewsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListViewsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListViewsInput_MaxResults, v.MaxResults)
+		case schemas.ListViewsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListViewsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListViewsOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -75,13 +105,35 @@ type ListViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListViewsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListViewsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListViewsOutput_NextToken, *v.NextToken)
+	}
+	serializeViewArnList(s, schemas.ListViewsOutput_Views, v.Views)
+}
+func (v *ListViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListViewsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListViewsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListViewsOutput_NextToken, v.NextToken)
+		case schemas.ListViewsOutput_Views:
+			return deserializeViewArnList(d, schemas.ListViewsOutput_Views, &v.Views)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListViews, schemas.ListViewsInput, schemas.ListViewsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListViews, schemas.ListViewsInput, schemas.ListViewsOutput), output: &ListViewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

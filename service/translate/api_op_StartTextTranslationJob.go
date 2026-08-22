@@ -5,7 +5,9 @@ package translate
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -138,6 +140,45 @@ type StartTextTranslationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTextTranslationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTextTranslationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTextTranslationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartTextTranslationJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartTextTranslationJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartTextTranslationJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartTextTranslationJobRequest_JobName, *v.JobName)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartTextTranslationJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceNameList(s, schemas.StartTextTranslationJobRequest_ParallelDataNames, v.ParallelDataNames)
+	if v.Settings != nil {
+		s.WriteStruct(schemas.StartTextTranslationJobRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceLanguageCode != nil {
+		s.WriteString(schemas.StartTextTranslationJobRequest_SourceLanguageCode, *v.SourceLanguageCode)
+	}
+	serializeTargetLanguageCodeStringList(s, schemas.StartTextTranslationJobRequest_TargetLanguageCodes, v.TargetLanguageCodes)
+	serializeResourceNameList(s, schemas.StartTextTranslationJobRequest_TerminologyNames, v.TerminologyNames)
+}
+
 type StartTextTranslationJobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this ID
@@ -169,13 +210,42 @@ type StartTextTranslationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTextTranslationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTextTranslationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTextTranslationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartTextTranslationJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartTextTranslationJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartTextTranslationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTextTranslationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTextTranslationJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartTextTranslationJobResponse_JobId, v.JobId)
+		case schemas.StartTextTranslationJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartTextTranslationJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTextTranslationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTextTranslationJob, schemas.StartTextTranslationJobRequest, schemas.StartTextTranslationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTextTranslationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTextTranslationJob, schemas.StartTextTranslationJobRequest, schemas.StartTextTranslationJobResponse), output: &StartTextTranslationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

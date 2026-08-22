@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetServiceInput struct {
 	ServiceIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceIdentifier != nil {
+		s.WriteString(schemas.GetServiceRequest_serviceIdentifier, *v.ServiceIdentifier)
+	}
+}
+func (v *GetServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceRequest_serviceIdentifier:
+			v.ServiceIdentifier = new(string)
+			return d.ReadString(schemas.GetServiceRequest_serviceIdentifier, v.ServiceIdentifier)
+		}
+		return nil
+	})
 }
 
 type GetServiceOutput struct {
@@ -83,13 +107,114 @@ type GetServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetServiceResponse_arn, *v.Arn)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.GetServiceResponse_authType, string(v.AuthType))
+	}
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.GetServiceResponse_certificateArn, *v.CertificateArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetServiceResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.GetServiceResponse_customDomainName, *v.CustomDomainName)
+	}
+	if v.DnsEntry != nil {
+		s.WriteStruct(schemas.GetServiceResponse_dnsEntry)
+		v.DnsEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.GetServiceResponse_failureCode, *v.FailureCode)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetServiceResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetServiceResponse_id, *v.Id)
+	}
+	if v.IdleTimeoutSeconds != nil {
+		s.WriteInt32(schemas.GetServiceResponse_idleTimeoutSeconds, *v.IdleTimeoutSeconds)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetServiceResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetServiceResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetServiceResponse_status, string(v.Status))
+	}
+}
+func (v *GetServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetServiceResponse_arn, v.Arn)
+		case schemas.GetServiceResponse_authType:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceResponse_authType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.AuthType(ev)
+			return nil
+		case schemas.GetServiceResponse_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.GetServiceResponse_certificateArn, v.CertificateArn)
+		case schemas.GetServiceResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetServiceResponse_createdAt, v.CreatedAt)
+		case schemas.GetServiceResponse_customDomainName:
+			v.CustomDomainName = new(string)
+			return d.ReadString(schemas.GetServiceResponse_customDomainName, v.CustomDomainName)
+		case schemas.GetServiceResponse_dnsEntry:
+			v.DnsEntry = &types.DnsEntry{}
+			return v.DnsEntry.Deserialize(d)
+		case schemas.GetServiceResponse_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.GetServiceResponse_failureCode, v.FailureCode)
+		case schemas.GetServiceResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetServiceResponse_failureMessage, v.FailureMessage)
+		case schemas.GetServiceResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetServiceResponse_id, v.Id)
+		case schemas.GetServiceResponse_idleTimeoutSeconds:
+			v.IdleTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.GetServiceResponse_idleTimeoutSeconds, v.IdleTimeoutSeconds)
+		case schemas.GetServiceResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetServiceResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetServiceResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetServiceResponse_name, v.Name)
+		case schemas.GetServiceResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceRequest, schemas.GetServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceRequest, schemas.GetServiceResponse), output: &GetServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

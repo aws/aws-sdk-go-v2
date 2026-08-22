@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DisassociateConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConnectPeerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateConnectPeerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConnectPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectPeerId != nil {
+		s.WriteString(schemas.DisassociateConnectPeerRequest_ConnectPeerId, *v.ConnectPeerId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.DisassociateConnectPeerRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+}
+
 type DisassociateConnectPeerOutput struct {
 
 	// Describes the Connect peer association.
@@ -50,13 +67,34 @@ type DisassociateConnectPeerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConnectPeerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateConnectPeerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConnectPeerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectPeerAssociation != nil {
+		s.WriteStruct(schemas.DisassociateConnectPeerResponse_ConnectPeerAssociation)
+		v.ConnectPeerAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateConnectPeerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateConnectPeerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateConnectPeerResponse_ConnectPeerAssociation:
+			v.ConnectPeerAssociation = &types.ConnectPeerAssociation{}
+			return v.ConnectPeerAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateConnectPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConnectPeer, schemas.DisassociateConnectPeerRequest, schemas.DisassociateConnectPeerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateConnectPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConnectPeer, schemas.DisassociateConnectPeerRequest, schemas.DisassociateConnectPeerResponse), output: &DisassociateConnectPeerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

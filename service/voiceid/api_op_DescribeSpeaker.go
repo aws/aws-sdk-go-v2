@@ -4,7 +4,9 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type DescribeSpeakerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSpeakerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSpeakerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSpeakerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeSpeakerRequest_DomainId, *v.DomainId)
+	}
+	if v.SpeakerId != nil {
+		s.WriteString(schemas.DescribeSpeakerRequest_SpeakerId, *v.SpeakerId)
+	}
+}
+func (v *DescribeSpeakerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSpeakerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSpeakerRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DescribeSpeakerRequest_DomainId, v.DomainId)
+		case schemas.DescribeSpeakerRequest_SpeakerId:
+			v.SpeakerId = new(string)
+			return d.ReadString(schemas.DescribeSpeakerRequest_SpeakerId, v.SpeakerId)
+		}
+		return nil
+	})
+}
+
 type DescribeSpeakerOutput struct {
 
 	// Information about the specified speaker.
@@ -50,13 +80,34 @@ type DescribeSpeakerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSpeakerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSpeakerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSpeakerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Speaker != nil {
+		s.WriteStruct(schemas.DescribeSpeakerResponse_Speaker)
+		v.Speaker.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSpeakerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSpeakerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSpeakerResponse_Speaker:
+			v.Speaker = &types.Speaker{}
+			return v.Speaker.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSpeakerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeSpeaker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpeaker, schemas.DescribeSpeakerRequest, schemas.DescribeSpeakerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeSpeaker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpeaker, schemas.DescribeSpeakerRequest, schemas.DescribeSpeakerResponse), output: &DescribeSpeakerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

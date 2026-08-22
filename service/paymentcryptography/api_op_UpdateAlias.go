@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type UpdateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAliasInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.UpdateAliasInput_AliasName, *v.AliasName)
+	}
+	if v.KeyArn != nil {
+		s.WriteString(schemas.UpdateAliasInput_KeyArn, *v.KeyArn)
+	}
+}
+
 type UpdateAliasOutput struct {
 
 	// The alias name.
@@ -72,13 +89,34 @@ type UpdateAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAliasOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteStruct(schemas.UpdateAliasOutput_Alias)
+		v.Alias.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAliasOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAliasOutput_Alias:
+			v.Alias = &types.Alias{}
+			return v.Alias.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAlias, schemas.UpdateAliasInput, schemas.UpdateAliasOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAlias, schemas.UpdateAliasInput, schemas.UpdateAliasOutput), output: &UpdateAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

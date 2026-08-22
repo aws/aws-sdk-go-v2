@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,6 +76,34 @@ type CreateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMonitorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMonitorRequest_clientToken, *v.ClientToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateMonitorRequest_displayName, *v.DisplayName)
+	}
+	if v.IdentityCenterInstanceArn != nil {
+		s.WriteString(schemas.CreateMonitorRequest_identityCenterInstanceArn, *v.IdentityCenterInstanceArn)
+	}
+	if v.IdentityCenterRegion != nil {
+		s.WriteString(schemas.CreateMonitorRequest_identityCenterRegion, *v.IdentityCenterRegion)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateMonitorRequest_roleArn, *v.RoleArn)
+	}
+	if v.Subdomain != nil {
+		s.WriteString(schemas.CreateMonitorRequest_subdomain, *v.Subdomain)
+	}
+	serializeTags(s, schemas.CreateMonitorRequest_tags, v.Tags)
+}
+
 // Mixin that adds an optional ARN field to response structures. Apply to
 // SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateMonitorOutput struct {
@@ -94,13 +124,38 @@ type CreateMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMonitorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityCenterApplicationArn != nil {
+		s.WriteString(schemas.CreateMonitorResponse_identityCenterApplicationArn, *v.IdentityCenterApplicationArn)
+	}
+	if v.MonitorId != nil {
+		s.WriteString(schemas.CreateMonitorResponse_monitorId, *v.MonitorId)
+	}
+}
+func (v *CreateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMonitorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMonitorResponse_identityCenterApplicationArn:
+			v.IdentityCenterApplicationArn = new(string)
+			return d.ReadString(schemas.CreateMonitorResponse_identityCenterApplicationArn, v.IdentityCenterApplicationArn)
+		case schemas.CreateMonitorResponse_monitorId:
+			v.MonitorId = new(string)
+			return d.ReadString(schemas.CreateMonitorResponse_monitorId, v.MonitorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMonitor, schemas.CreateMonitorRequest, schemas.CreateMonitorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMonitor, schemas.CreateMonitorRequest, schemas.CreateMonitorResponse), output: &CreateMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

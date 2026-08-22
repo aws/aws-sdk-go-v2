@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -50,6 +52,27 @@ type GetStepInput struct {
 	StepId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetStepRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetStepRequest_jobId, *v.JobId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetStepRequest_queueId, *v.QueueId)
+	}
+	if v.StepId != nil {
+		s.WriteString(schemas.GetStepRequest_stepId, *v.StepId)
+	}
 }
 
 type GetStepOutput struct {
@@ -132,13 +155,149 @@ type GetStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetStepResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetStepResponse_createdBy, *v.CreatedBy)
+	}
+	if v.DependencyCounts != nil {
+		s.WriteStruct(schemas.GetStepResponse_dependencyCounts)
+		v.DependencyCounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetStepResponse_description, *v.Description)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetStepResponse_endedAt, *v.EndedAt)
+	}
+	if v.LifecycleStatus != "" {
+		s.WriteString(schemas.GetStepResponse_lifecycleStatus, string(v.LifecycleStatus))
+	}
+	if v.LifecycleStatusMessage != nil {
+		s.WriteString(schemas.GetStepResponse_lifecycleStatusMessage, *v.LifecycleStatusMessage)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetStepResponse_name, *v.Name)
+	}
+	if v.ParameterSpace != nil {
+		s.WriteStruct(schemas.GetStepResponse_parameterSpace)
+		v.ParameterSpace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequiredCapabilities != nil {
+		s.WriteStruct(schemas.GetStepResponse_requiredCapabilities)
+		v.RequiredCapabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetStepResponse_startedAt, *v.StartedAt)
+	}
+	if v.StepId != nil {
+		s.WriteString(schemas.GetStepResponse_stepId, *v.StepId)
+	}
+	if v.TargetTaskRunStatus != "" {
+		s.WriteString(schemas.GetStepResponse_targetTaskRunStatus, string(v.TargetTaskRunStatus))
+	}
+	if v.TaskFailureRetryCount != nil {
+		s.WriteInt32(schemas.GetStepResponse_taskFailureRetryCount, *v.TaskFailureRetryCount)
+	}
+	if v.TaskRunStatus != "" {
+		s.WriteString(schemas.GetStepResponse_taskRunStatus, string(v.TaskRunStatus))
+	}
+	serializeTaskRunStatusCounts(s, schemas.GetStepResponse_taskRunStatusCounts, v.TaskRunStatusCounts)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetStepResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetStepResponse_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStepResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStepResponse_createdAt, v.CreatedAt)
+		case schemas.GetStepResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetStepResponse_createdBy, v.CreatedBy)
+		case schemas.GetStepResponse_dependencyCounts:
+			v.DependencyCounts = &types.DependencyCounts{}
+			return v.DependencyCounts.Deserialize(d)
+		case schemas.GetStepResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetStepResponse_description, v.Description)
+		case schemas.GetStepResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStepResponse_endedAt, v.EndedAt)
+		case schemas.GetStepResponse_lifecycleStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetStepResponse_lifecycleStatus, &ev); err != nil {
+				return err
+			}
+			v.LifecycleStatus = types.StepLifecycleStatus(ev)
+			return nil
+		case schemas.GetStepResponse_lifecycleStatusMessage:
+			v.LifecycleStatusMessage = new(string)
+			return d.ReadString(schemas.GetStepResponse_lifecycleStatusMessage, v.LifecycleStatusMessage)
+		case schemas.GetStepResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetStepResponse_name, v.Name)
+		case schemas.GetStepResponse_parameterSpace:
+			v.ParameterSpace = &types.ParameterSpace{}
+			return v.ParameterSpace.Deserialize(d)
+		case schemas.GetStepResponse_requiredCapabilities:
+			v.RequiredCapabilities = &types.StepRequiredCapabilities{}
+			return v.RequiredCapabilities.Deserialize(d)
+		case schemas.GetStepResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStepResponse_startedAt, v.StartedAt)
+		case schemas.GetStepResponse_stepId:
+			v.StepId = new(string)
+			return d.ReadString(schemas.GetStepResponse_stepId, v.StepId)
+		case schemas.GetStepResponse_targetTaskRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetStepResponse_targetTaskRunStatus, &ev); err != nil {
+				return err
+			}
+			v.TargetTaskRunStatus = types.StepTargetTaskRunStatus(ev)
+			return nil
+		case schemas.GetStepResponse_taskFailureRetryCount:
+			v.TaskFailureRetryCount = new(int32)
+			return d.ReadInt32(schemas.GetStepResponse_taskFailureRetryCount, v.TaskFailureRetryCount)
+		case schemas.GetStepResponse_taskRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetStepResponse_taskRunStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskRunStatus = types.TaskRunStatus(ev)
+			return nil
+		case schemas.GetStepResponse_taskRunStatusCounts:
+			return deserializeTaskRunStatusCounts(d, schemas.GetStepResponse_taskRunStatusCounts, &v.TaskRunStatusCounts)
+		case schemas.GetStepResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStepResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetStepResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetStepResponse_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStep, schemas.GetStepRequest, schemas.GetStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStep, schemas.GetStepRequest, schemas.GetStepResponse), output: &GetStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,39 @@ type ListSettlementRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSettlementRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSettlementRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSettlementRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.ListSettlementRecordsRequest_Currency, string(v.Currency))
+	}
+	serializeMonetizationFilterList(s, schemas.ListSettlementRecordsRequest_Filters, v.Filters)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListSettlementRecordsRequest_Limit, *v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListSettlementRecordsRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.ListSettlementRecordsRequest_Scope, string(v.Scope))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListSettlementRecordsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListSettlementRecordsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.ListSettlementRecordsRequest_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListSettlementRecordsOutput struct {
 
 	// When you get a paginated response, this marker indicates that additional
@@ -82,13 +117,35 @@ type ListSettlementRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSettlementRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSettlementRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSettlementRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListSettlementRecordsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeSettlementRecordList(s, schemas.ListSettlementRecordsResponse_Settlements, v.Settlements)
+}
+func (v *ListSettlementRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSettlementRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSettlementRecordsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListSettlementRecordsResponse_NextMarker, v.NextMarker)
+		case schemas.ListSettlementRecordsResponse_Settlements:
+			return deserializeSettlementRecordList(d, schemas.ListSettlementRecordsResponse_Settlements, &v.Settlements)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSettlementRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSettlementRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSettlementRecords, schemas.ListSettlementRecordsRequest, schemas.ListSettlementRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSettlementRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSettlementRecords, schemas.ListSettlementRecordsRequest, schemas.ListSettlementRecordsResponse), output: &ListSettlementRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

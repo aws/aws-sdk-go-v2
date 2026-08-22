@@ -5,6 +5,8 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type GetListElementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetListElementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetListElementsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetListElementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetListElementsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetListElementsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetListElementsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetListElementsOutput struct {
 
 	//  The list elements.
@@ -54,13 +74,35 @@ type GetListElementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetListElementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetListElementsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetListElementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeElementsList(s, schemas.GetListElementsResult_elements, v.Elements)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetListElementsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *GetListElementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetListElementsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetListElementsResult_elements:
+			return deserializeElementsList(d, schemas.GetListElementsResult_elements, &v.Elements)
+		case schemas.GetListElementsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetListElementsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetListElementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetListElements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListElements, schemas.GetListElementsRequest, schemas.GetListElementsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetListElements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListElements, schemas.GetListElementsRequest, schemas.GetListElementsResult), output: &GetListElementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

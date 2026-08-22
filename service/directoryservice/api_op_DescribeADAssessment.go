@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeADAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeADAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeADAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeADAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.DescribeADAssessmentRequest_AssessmentId, *v.AssessmentId)
+	}
+}
+
 type DescribeADAssessmentOutput struct {
 
 	// Detailed information about the self-managed instance settings (IDs and DNS IPs).
@@ -52,13 +66,37 @@ type DescribeADAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeADAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeADAssessmentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeADAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assessment != nil {
+		s.WriteStruct(schemas.DescribeADAssessmentResult_Assessment)
+		v.Assessment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAssessmentReports(s, schemas.DescribeADAssessmentResult_AssessmentReports, v.AssessmentReports)
+}
+func (v *DescribeADAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeADAssessmentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeADAssessmentResult_Assessment:
+			v.Assessment = &types.Assessment{}
+			return v.Assessment.Deserialize(d)
+		case schemas.DescribeADAssessmentResult_AssessmentReports:
+			return deserializeAssessmentReports(d, schemas.DescribeADAssessmentResult_AssessmentReports, &v.AssessmentReports)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeADAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeADAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeADAssessment, schemas.DescribeADAssessmentRequest, schemas.DescribeADAssessmentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeADAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeADAssessment, schemas.DescribeADAssessmentRequest, schemas.DescribeADAssessmentResult), output: &DescribeADAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

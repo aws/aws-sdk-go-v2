@@ -5,7 +5,9 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,32 @@ type CreateSecurityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContainerProvider != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigurationRequest_containerProvider)
+		v.ContainerProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationRequest_name, *v.Name)
+	}
+	if v.SecurityConfigurationData != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigurationRequest_securityConfigurationData)
+		v.SecurityConfigurationData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateSecurityConfigurationRequest_tags, v.Tags)
+}
+
 type CreateSecurityConfigurationOutput struct {
 
 	// The ARN (Amazon Resource Name) of the security configuration.
@@ -72,13 +100,44 @@ type CreateSecurityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationResponse_name, *v.Name)
+	}
+}
+func (v *CreateSecurityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigurationResponse_arn, v.Arn)
+		case schemas.CreateSecurityConfigurationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigurationResponse_id, v.Id)
+		case schemas.CreateSecurityConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigurationResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSecurityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfiguration, schemas.CreateSecurityConfigurationRequest, schemas.CreateSecurityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSecurityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfiguration, schemas.CreateSecurityConfigurationRequest, schemas.CreateSecurityConfigurationResponse), output: &CreateSecurityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

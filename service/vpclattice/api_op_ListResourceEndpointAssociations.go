@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,33 @@ type ListResourceEndpointAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceEndpointAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceEndpointAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceEndpointAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceEndpointAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceConfigurationIdentifier != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_resourceConfigurationIdentifier, *v.ResourceConfigurationIdentifier)
+	}
+	if v.ResourceEndpointAssociationIdentifier != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_resourceEndpointAssociationIdentifier, *v.ResourceEndpointAssociationIdentifier)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_vpcEndpointId, *v.VpcEndpointId)
+	}
+	if v.VpcEndpointOwner != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_vpcEndpointOwner, *v.VpcEndpointOwner)
+	}
+}
+
 type ListResourceEndpointAssociationsOutput struct {
 
 	// Information about the VPC endpoint associations.
@@ -67,13 +96,35 @@ type ListResourceEndpointAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceEndpointAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceEndpointAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceEndpointAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceEndpointAssociationList(s, schemas.ListResourceEndpointAssociationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListResourceEndpointAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceEndpointAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceEndpointAssociationsResponse_items:
+			return deserializeResourceEndpointAssociationList(d, schemas.ListResourceEndpointAssociationsResponse_items, &v.Items)
+		case schemas.ListResourceEndpointAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceEndpointAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceEndpointAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceEndpointAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceEndpointAssociations, schemas.ListResourceEndpointAssociationsRequest, schemas.ListResourceEndpointAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourceEndpointAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceEndpointAssociations, schemas.ListResourceEndpointAssociationsRequest, schemas.ListResourceEndpointAssociationsResponse), output: &ListResourceEndpointAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

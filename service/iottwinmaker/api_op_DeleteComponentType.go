@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,34 @@ type DeleteComponentTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteComponentTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComponentTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComponentTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentTypeId != nil {
+		s.WriteString(schemas.DeleteComponentTypeRequest_componentTypeId, *v.ComponentTypeId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteComponentTypeRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteComponentTypeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteComponentTypeRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteComponentTypeRequest_componentTypeId:
+			v.ComponentTypeId = new(string)
+			return d.ReadString(schemas.DeleteComponentTypeRequest_componentTypeId, v.ComponentTypeId)
+		case schemas.DeleteComponentTypeRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteComponentTypeRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DeleteComponentTypeOutput struct {
 
 	// The current state of the component type to be deleted.
@@ -54,13 +84,36 @@ type DeleteComponentTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteComponentTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComponentTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComponentTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.DeleteComponentTypeResponse_state, string(v.State))
+	}
+}
+func (v *DeleteComponentTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteComponentTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteComponentTypeResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.DeleteComponentTypeResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.State(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteComponentTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteComponentType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComponentType, schemas.DeleteComponentTypeRequest, schemas.DeleteComponentTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteComponentType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComponentType, schemas.DeleteComponentTypeRequest, schemas.DeleteComponentTypeResponse), output: &DeleteComponentTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

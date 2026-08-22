@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DisassociateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.DisassociateLinkRequest_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.DisassociateLinkRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.DisassociateLinkRequest_LinkId, *v.LinkId)
+	}
+}
+
 type DisassociateLinkOutput struct {
 
 	// Information about the link association.
@@ -56,13 +76,34 @@ type DisassociateLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LinkAssociation != nil {
+		s.WriteStruct(schemas.DisassociateLinkResponse_LinkAssociation)
+		v.LinkAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateLinkResponse_LinkAssociation:
+			v.LinkAssociation = &types.LinkAssociation{}
+			return v.LinkAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateLink, schemas.DisassociateLinkRequest, schemas.DisassociateLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateLink, schemas.DisassociateLinkRequest, schemas.DisassociateLinkResponse), output: &DisassociateLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

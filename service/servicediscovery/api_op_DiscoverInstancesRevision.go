@@ -5,6 +5,8 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,24 @@ type DiscoverInstancesRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverInstancesRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverInstancesRevisionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverInstancesRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.DiscoverInstancesRevisionRequest_NamespaceName, *v.NamespaceName)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.DiscoverInstancesRevisionRequest_OwnerAccount, *v.OwnerAccount)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.DiscoverInstancesRevisionRequest_ServiceName, *v.ServiceName)
+	}
+}
+
 type DiscoverInstancesRevisionOutput struct {
 
 	// The increasing revision associated to the response Instances list. If a new
@@ -63,13 +83,32 @@ type DiscoverInstancesRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverInstancesRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverInstancesRevisionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverInstancesRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstancesRevision != nil {
+		s.WriteInt64(schemas.DiscoverInstancesRevisionResponse_InstancesRevision, *v.InstancesRevision)
+	}
+}
+func (v *DiscoverInstancesRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscoverInstancesRevisionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscoverInstancesRevisionResponse_InstancesRevision:
+			v.InstancesRevision = new(int64)
+			return d.ReadInt64(schemas.DiscoverInstancesRevisionResponse_InstancesRevision, v.InstancesRevision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDiscoverInstancesRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDiscoverInstancesRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverInstancesRevision, schemas.DiscoverInstancesRevisionRequest, schemas.DiscoverInstancesRevisionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDiscoverInstancesRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverInstancesRevision, schemas.DiscoverInstancesRevisionRequest, schemas.DiscoverInstancesRevisionResponse), output: &DiscoverInstancesRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

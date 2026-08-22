@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,23 @@ type DescribeActivityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActivityTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActivityTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivityTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityType != nil {
+		s.WriteStruct(schemas.DescribeActivityTypeInput_activityType)
+		v.ActivityType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeActivityTypeInput_domain, *v.Domain)
+	}
+}
+
 // Detailed information about an activity type.
 type DescribeActivityTypeOutput struct {
 
@@ -96,13 +115,42 @@ type DescribeActivityTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActivityTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTypeDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivityTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.ActivityTypeDetail_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeInfo != nil {
+		s.WriteStruct(schemas.ActivityTypeDetail_typeInfo)
+		v.TypeInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeActivityTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTypeDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTypeDetail_configuration:
+			v.Configuration = &types.ActivityTypeConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.ActivityTypeDetail_typeInfo:
+			v.TypeInfo = &types.ActivityTypeInfo{}
+			return v.TypeInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeActivityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivityType, schemas.DescribeActivityTypeInput, schemas.ActivityTypeDetail)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeActivityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivityType, schemas.DescribeActivityTypeInput, schemas.ActivityTypeDetail), output: &DescribeActivityTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

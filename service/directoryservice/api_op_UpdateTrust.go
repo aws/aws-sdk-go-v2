@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type UpdateTrustInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrustInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrustRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrustInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SelectiveAuth != "" {
+		s.WriteString(schemas.UpdateTrustRequest_SelectiveAuth, string(v.SelectiveAuth))
+	}
+	if v.TrustId != nil {
+		s.WriteString(schemas.UpdateTrustRequest_TrustId, *v.TrustId)
+	}
+}
+
 type UpdateTrustOutput struct {
 
 	// The Amazon Web Services request identifier.
@@ -52,13 +69,38 @@ type UpdateTrustOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrustOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrustResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrustOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateTrustResult_RequestId, *v.RequestId)
+	}
+	if v.TrustId != nil {
+		s.WriteString(schemas.UpdateTrustResult_TrustId, *v.TrustId)
+	}
+}
+func (v *UpdateTrustOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTrustResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTrustResult_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateTrustResult_RequestId, v.RequestId)
+		case schemas.UpdateTrustResult_TrustId:
+			v.TrustId = new(string)
+			return d.ReadString(schemas.UpdateTrustResult_TrustId, v.TrustId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTrust{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrust, schemas.UpdateTrustRequest, schemas.UpdateTrustResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTrust{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrust, schemas.UpdateTrustRequest, schemas.UpdateTrustResult), output: &UpdateTrustOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

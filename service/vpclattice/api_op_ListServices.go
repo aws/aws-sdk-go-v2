@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,34 @@ type ListServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServicesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServicesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServicesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServicesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServicesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListServicesRequest_maxResults, v.MaxResults)
+		case schemas.ListServicesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServicesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListServicesOutput struct {
 
 	// Information about the services.
@@ -52,13 +82,35 @@ type ListServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceList(s, schemas.ListServicesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServicesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServicesResponse_items:
+			return deserializeServiceList(d, schemas.ListServicesResponse_items, &v.Items)
+		case schemas.ListServicesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServicesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServices, schemas.ListServicesRequest, schemas.ListServicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServices, schemas.ListServicesRequest, schemas.ListServicesResponse), output: &ListServicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

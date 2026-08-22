@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ListCertificatesRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListCertificatesRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificatesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCertificatesOutput struct {
 
 	// A list of certificates with basic details including certificate ID, certificate
@@ -61,13 +81,35 @@ type ListCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificatesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificatesInfo(s, schemas.ListCertificatesResult_CertificatesInfo, v.CertificatesInfo)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificatesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCertificatesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCertificatesResult_CertificatesInfo:
+			return deserializeCertificatesInfo(d, schemas.ListCertificatesResult_CertificatesInfo, &v.CertificatesInfo)
+		case schemas.ListCertificatesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCertificatesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificates, schemas.ListCertificatesRequest, schemas.ListCertificatesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificates, schemas.ListCertificatesRequest, schemas.ListCertificatesResult), output: &ListCertificatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

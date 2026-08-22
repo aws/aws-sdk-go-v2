@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type DescribeRulesPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRulesPackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRulesPackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRulesPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != "" {
+		s.WriteString(schemas.DescribeRulesPackagesRequest_locale, string(v.Locale))
+	}
+	serializeBatchDescribeArnList(s, schemas.DescribeRulesPackagesRequest_rulesPackageArns, v.RulesPackageArns)
+}
+
 type DescribeRulesPackagesOutput struct {
 
 	// Rules package details that cannot be described. An error code is provided for
@@ -57,13 +72,32 @@ type DescribeRulesPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRulesPackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRulesPackagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRulesPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedItems(s, schemas.DescribeRulesPackagesResponse_failedItems, v.FailedItems)
+	serializeRulesPackageList(s, schemas.DescribeRulesPackagesResponse_rulesPackages, v.RulesPackages)
+}
+func (v *DescribeRulesPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRulesPackagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRulesPackagesResponse_failedItems:
+			return deserializeFailedItems(d, schemas.DescribeRulesPackagesResponse_failedItems, &v.FailedItems)
+		case schemas.DescribeRulesPackagesResponse_rulesPackages:
+			return deserializeRulesPackageList(d, schemas.DescribeRulesPackagesResponse_rulesPackages, &v.RulesPackages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRulesPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRulesPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRulesPackages, schemas.DescribeRulesPackagesRequest, schemas.DescribeRulesPackagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRulesPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRulesPackages, schemas.DescribeRulesPackagesRequest, schemas.DescribeRulesPackagesResponse), output: &DescribeRulesPackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

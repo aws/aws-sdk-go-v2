@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetTransitGatewayPeeringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTransitGatewayPeeringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTransitGatewayPeeringRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTransitGatewayPeeringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PeeringId != nil {
+		s.WriteString(schemas.GetTransitGatewayPeeringRequest_PeeringId, *v.PeeringId)
+	}
+}
+
 type GetTransitGatewayPeeringOutput struct {
 
 	// Returns information about a transit gateway peering.
@@ -45,13 +59,34 @@ type GetTransitGatewayPeeringOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTransitGatewayPeeringOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTransitGatewayPeeringResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTransitGatewayPeeringOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransitGatewayPeering != nil {
+		s.WriteStruct(schemas.GetTransitGatewayPeeringResponse_TransitGatewayPeering)
+		v.TransitGatewayPeering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTransitGatewayPeeringOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTransitGatewayPeeringResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTransitGatewayPeeringResponse_TransitGatewayPeering:
+			v.TransitGatewayPeering = &types.TransitGatewayPeering{}
+			return v.TransitGatewayPeering.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTransitGatewayPeeringMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTransitGatewayPeering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransitGatewayPeering, schemas.GetTransitGatewayPeeringRequest, schemas.GetTransitGatewayPeeringResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTransitGatewayPeering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransitGatewayPeering, schemas.GetTransitGatewayPeeringRequest, schemas.GetTransitGatewayPeeringResponse), output: &GetTransitGatewayPeeringOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

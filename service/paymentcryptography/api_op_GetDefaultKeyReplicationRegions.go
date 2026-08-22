@@ -4,6 +4,8 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,15 @@ type GetDefaultKeyReplicationRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultKeyReplicationRegionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDefaultKeyReplicationRegionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultKeyReplicationRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Output containing the account's current default key replication configuration.
 type GetDefaultKeyReplicationRegionsOutput struct {
 
@@ -65,13 +76,29 @@ type GetDefaultKeyReplicationRegionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultKeyReplicationRegionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDefaultKeyReplicationRegionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultKeyReplicationRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegions(s, schemas.GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions, v.EnabledReplicationRegions)
+}
+func (v *GetDefaultKeyReplicationRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDefaultKeyReplicationRegionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions:
+			return deserializeRegions(d, schemas.GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions, &v.EnabledReplicationRegions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDefaultKeyReplicationRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDefaultKeyReplicationRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultKeyReplicationRegions, schemas.GetDefaultKeyReplicationRegionsInput, schemas.GetDefaultKeyReplicationRegionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDefaultKeyReplicationRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultKeyReplicationRegions, schemas.GetDefaultKeyReplicationRegionsInput, schemas.GetDefaultKeyReplicationRegionsOutput), output: &GetDefaultKeyReplicationRegionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

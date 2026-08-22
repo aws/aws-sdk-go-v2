@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,24 @@ type ListFarmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFarmsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFarmsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFarmsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFarmsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFarmsRequest_nextToken, *v.NextToken)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.ListFarmsRequest_principalId, *v.PrincipalId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListFarmsOutput struct {
 
@@ -64,13 +84,35 @@ type ListFarmsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFarmsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFarmsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFarmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFarmSummaries(s, schemas.ListFarmsResponse_farms, v.Farms)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFarmsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFarmsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFarmsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFarmsResponse_farms:
+			return deserializeFarmSummaries(d, schemas.ListFarmsResponse_farms, &v.Farms)
+		case schemas.ListFarmsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFarmsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFarms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFarms, schemas.ListFarmsRequest, schemas.ListFarmsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFarms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFarms, schemas.ListFarmsRequest, schemas.ListFarmsResponse), output: &ListFarmsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type PollForThirdPartyJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForThirdPartyJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForThirdPartyJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForThirdPartyJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionTypeId != nil {
+		s.WriteStruct(schemas.PollForThirdPartyJobsInput_actionTypeId)
+		v.ActionTypeId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxBatchSize != nil {
+		s.WriteInt32(schemas.PollForThirdPartyJobsInput_maxBatchSize, *v.MaxBatchSize)
+	}
+}
+
 // Represents the output of a PollForThirdPartyJobs action.
 type PollForThirdPartyJobsOutput struct {
 
@@ -55,13 +74,29 @@ type PollForThirdPartyJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForThirdPartyJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForThirdPartyJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForThirdPartyJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeThirdPartyJobList(s, schemas.PollForThirdPartyJobsOutput_jobs, v.Jobs)
+}
+func (v *PollForThirdPartyJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PollForThirdPartyJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PollForThirdPartyJobsOutput_jobs:
+			return deserializeThirdPartyJobList(d, schemas.PollForThirdPartyJobsOutput_jobs, &v.Jobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPollForThirdPartyJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPollForThirdPartyJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForThirdPartyJobs, schemas.PollForThirdPartyJobsInput, schemas.PollForThirdPartyJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPollForThirdPartyJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForThirdPartyJobs, schemas.PollForThirdPartyJobsInput, schemas.PollForThirdPartyJobsOutput), output: &PollForThirdPartyJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

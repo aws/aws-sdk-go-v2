@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,20 @@ type UpdateActionTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActionTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActionTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActionTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != nil {
+		s.WriteStruct(schemas.UpdateActionTypeInput_actionType)
+		v.ActionType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateActionTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +60,26 @@ type UpdateActionTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActionTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActionTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateActionTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateActionType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActionType, schemas.UpdateActionTypeInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateActionType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActionType, schemas.UpdateActionTypeInput, nil), output: &UpdateActionTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

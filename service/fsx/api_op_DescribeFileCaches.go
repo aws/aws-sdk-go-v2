@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,22 @@ type DescribeFileCachesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileCachesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileCachesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileCachesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileCacheIds(s, schemas.DescribeFileCachesRequest_FileCacheIds, v.FileCacheIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeFileCachesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFileCachesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFileCachesOutput struct {
 
 	// The response object for the DescribeFileCaches operation.
@@ -81,13 +99,35 @@ type DescribeFileCachesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileCachesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileCachesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileCachesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileCaches(s, schemas.DescribeFileCachesResponse_FileCaches, v.FileCaches)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFileCachesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFileCachesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFileCachesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFileCachesResponse_FileCaches:
+			return deserializeFileCaches(d, schemas.DescribeFileCachesResponse_FileCaches, &v.FileCaches)
+		case schemas.DescribeFileCachesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFileCachesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFileCachesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFileCaches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileCaches, schemas.DescribeFileCachesRequest, schemas.DescribeFileCachesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFileCaches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileCaches, schemas.DescribeFileCachesRequest, schemas.DescribeFileCachesResponse), output: &DescribeFileCachesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

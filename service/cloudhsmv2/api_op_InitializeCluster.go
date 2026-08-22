@@ -4,7 +4,9 @@ package cloudhsmv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type InitializeClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitializeClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitializeClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitializeClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.InitializeClusterRequest_ClusterId, *v.ClusterId)
+	}
+	if v.SignedCert != nil {
+		s.WriteString(schemas.InitializeClusterRequest_SignedCert, *v.SignedCert)
+	}
+	if v.TrustAnchor != nil {
+		s.WriteString(schemas.InitializeClusterRequest_TrustAnchor, *v.TrustAnchor)
+	}
+}
+
 type InitializeClusterOutput struct {
 
 	// The cluster's state.
@@ -71,13 +91,42 @@ type InitializeClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitializeClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitializeClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitializeClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.InitializeClusterResponse_State, string(v.State))
+	}
+	if v.StateMessage != nil {
+		s.WriteString(schemas.InitializeClusterResponse_StateMessage, *v.StateMessage)
+	}
+}
+func (v *InitializeClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitializeClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InitializeClusterResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.InitializeClusterResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ClusterState(ev)
+			return nil
+		case schemas.InitializeClusterResponse_StateMessage:
+			v.StateMessage = new(string)
+			return d.ReadString(schemas.InitializeClusterResponse_StateMessage, v.StateMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInitializeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInitializeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitializeCluster, schemas.InitializeClusterRequest, schemas.InitializeClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpInitializeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitializeCluster, schemas.InitializeClusterRequest, schemas.InitializeClusterResponse), output: &InitializeClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

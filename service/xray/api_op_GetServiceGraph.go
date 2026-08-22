@@ -5,7 +5,9 @@ package xray
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,30 @@ type GetServiceGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceGraphRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetServiceGraphRequest_EndTime, *v.EndTime)
+	}
+	if v.GroupARN != nil {
+		s.WriteString(schemas.GetServiceGraphRequest_GroupARN, *v.GroupARN)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GetServiceGraphRequest_GroupName, *v.GroupName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetServiceGraphRequest_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetServiceGraphRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetServiceGraphOutput struct {
 
 	// A flag indicating whether the group's filter expression has been consistent, or
@@ -83,13 +109,52 @@ type GetServiceGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceGraphResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainsOldGroupVersions != false {
+		s.WriteBool(schemas.GetServiceGraphResult_ContainsOldGroupVersions, v.ContainsOldGroupVersions)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetServiceGraphResult_EndTime, *v.EndTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetServiceGraphResult_NextToken, *v.NextToken)
+	}
+	serializeServiceList(s, schemas.GetServiceGraphResult_Services, v.Services)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetServiceGraphResult_StartTime, *v.StartTime)
+	}
+}
+func (v *GetServiceGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceGraphResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceGraphResult_ContainsOldGroupVersions:
+			return d.ReadBool(schemas.GetServiceGraphResult_ContainsOldGroupVersions, &v.ContainsOldGroupVersions)
+		case schemas.GetServiceGraphResult_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetServiceGraphResult_EndTime, v.EndTime)
+		case schemas.GetServiceGraphResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetServiceGraphResult_NextToken, v.NextToken)
+		case schemas.GetServiceGraphResult_Services:
+			return deserializeServiceList(d, schemas.GetServiceGraphResult_Services, &v.Services)
+		case schemas.GetServiceGraphResult_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetServiceGraphResult_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceGraph, schemas.GetServiceGraphRequest, schemas.GetServiceGraphResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceGraph, schemas.GetServiceGraphRequest, schemas.GetServiceGraphResult), output: &GetServiceGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

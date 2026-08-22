@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteEntityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntityTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntityTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntityTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteEntityTypeRequest_name, *v.Name)
+	}
+}
+
 type DeleteEntityTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteEntityTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntityTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntityTypeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntityTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEntityTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEntityTypeResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEntityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEntityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntityType, schemas.DeleteEntityTypeRequest, schemas.DeleteEntityTypeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEntityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntityType, schemas.DeleteEntityTypeRequest, schemas.DeleteEntityTypeResult), output: &DeleteEntityTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

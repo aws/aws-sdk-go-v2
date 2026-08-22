@@ -4,7 +4,9 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,18 @@ type GetAccountInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountInformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountInformationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAccountInformationRequest_AccountId, *v.AccountId)
+	}
+}
+
 type GetAccountInformationOutput struct {
 
 	// The date and time the account was created.
@@ -96,13 +110,54 @@ type GetAccountInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountInformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountInformationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountCreatedDate != nil {
+		s.WriteTime(schemas.GetAccountInformationResponse_AccountCreatedDate, *v.AccountCreatedDate)
+	}
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAccountInformationResponse_AccountId, *v.AccountId)
+	}
+	if v.AccountName != nil {
+		s.WriteString(schemas.GetAccountInformationResponse_AccountName, *v.AccountName)
+	}
+	if v.AccountState != "" {
+		s.WriteString(schemas.GetAccountInformationResponse_AccountState, string(v.AccountState))
+	}
+}
+func (v *GetAccountInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountInformationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountInformationResponse_AccountCreatedDate:
+			v.AccountCreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetAccountInformationResponse_AccountCreatedDate, v.AccountCreatedDate)
+		case schemas.GetAccountInformationResponse_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.GetAccountInformationResponse_AccountId, v.AccountId)
+		case schemas.GetAccountInformationResponse_AccountName:
+			v.AccountName = new(string)
+			return d.ReadString(schemas.GetAccountInformationResponse_AccountName, v.AccountName)
+		case schemas.GetAccountInformationResponse_AccountState:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountInformationResponse_AccountState, &ev); err != nil {
+				return err
+			}
+			v.AccountState = types.AccountState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountInformation, schemas.GetAccountInformationRequest, schemas.GetAccountInformationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountInformation, schemas.GetAccountInformationRequest, schemas.GetAccountInformationResponse), output: &GetAccountInformationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

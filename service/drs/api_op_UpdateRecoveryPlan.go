@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type UpdateRecoveryPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRecoveryPlanRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRecoveryPlanRequest_name, *v.Name)
+	}
+	if v.RecoveryPlanArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPlanRequest_recoveryPlanArn, *v.RecoveryPlanArn)
+	}
+}
+
 type UpdateRecoveryPlanOutput struct {
 
 	// A Recovery Plan resource.
@@ -53,13 +73,34 @@ type UpdateRecoveryPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryPlan != nil {
+		s.WriteStruct(schemas.UpdateRecoveryPlanResponse_recoveryPlan)
+		v.RecoveryPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRecoveryPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecoveryPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecoveryPlanResponse_recoveryPlan:
+			v.RecoveryPlan = &types.RecoveryPlan{}
+			return v.RecoveryPlan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecoveryPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecoveryPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryPlan, schemas.UpdateRecoveryPlanRequest, schemas.UpdateRecoveryPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecoveryPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryPlan, schemas.UpdateRecoveryPlanRequest, schemas.UpdateRecoveryPlanResponse), output: &UpdateRecoveryPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

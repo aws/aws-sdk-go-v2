@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,21 @@ type UpdateSMBSecurityStrategyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSMBSecurityStrategyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSMBSecurityStrategyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSMBSecurityStrategyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateSMBSecurityStrategyInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.SMBSecurityStrategy != "" {
+		s.WriteString(schemas.UpdateSMBSecurityStrategyInput_SMBSecurityStrategy, string(v.SMBSecurityStrategy))
+	}
+}
+
 type UpdateSMBSecurityStrategyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -80,13 +97,32 @@ type UpdateSMBSecurityStrategyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSMBSecurityStrategyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSMBSecurityStrategyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSMBSecurityStrategyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateSMBSecurityStrategyOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *UpdateSMBSecurityStrategyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSMBSecurityStrategyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSMBSecurityStrategyOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.UpdateSMBSecurityStrategyOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSMBSecurityStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSMBSecurityStrategy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSMBSecurityStrategy, schemas.UpdateSMBSecurityStrategyInput, schemas.UpdateSMBSecurityStrategyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSMBSecurityStrategy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSMBSecurityStrategy, schemas.UpdateSMBSecurityStrategyInput, schemas.UpdateSMBSecurityStrategyOutput), output: &UpdateSMBSecurityStrategyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

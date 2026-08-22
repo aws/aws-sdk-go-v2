@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type UpdateFileCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFileCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateFileCacheRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileCacheId != nil {
+		s.WriteString(schemas.UpdateFileCacheRequest_FileCacheId, *v.FileCacheId)
+	}
+	if v.LustreConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileCacheRequest_LustreConfiguration)
+		v.LustreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateFileCacheOutput struct {
 
 	// A description of the cache that was updated.
@@ -55,13 +77,34 @@ type UpdateFileCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFileCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileCache != nil {
+		s.WriteStruct(schemas.UpdateFileCacheResponse_FileCache)
+		v.FileCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFileCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFileCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFileCacheResponse_FileCache:
+			v.FileCache = &types.FileCache{}
+			return v.FileCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFileCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFileCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFileCache, schemas.UpdateFileCacheRequest, schemas.UpdateFileCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateFileCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFileCache, schemas.UpdateFileCacheRequest, schemas.UpdateFileCacheResponse), output: &UpdateFileCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

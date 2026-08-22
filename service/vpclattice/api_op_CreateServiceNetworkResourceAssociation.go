@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type CreateServiceNetworkResourceAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceNetworkResourceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceNetworkResourceAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceNetworkResourceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateServiceNetworkResourceAssociationRequest_clientToken, *v.ClientToken)
+	}
+	if v.PrivateDnsEnabled != nil {
+		s.WriteBool(schemas.CreateServiceNetworkResourceAssociationRequest_privateDnsEnabled, *v.PrivateDnsEnabled)
+	}
+	if v.ResourceConfigurationIdentifier != nil {
+		s.WriteString(schemas.CreateServiceNetworkResourceAssociationRequest_resourceConfigurationIdentifier, *v.ResourceConfigurationIdentifier)
+	}
+	if v.ServiceNetworkIdentifier != nil {
+		s.WriteString(schemas.CreateServiceNetworkResourceAssociationRequest_serviceNetworkIdentifier, *v.ServiceNetworkIdentifier)
+	}
+	serializeTagMap(s, schemas.CreateServiceNetworkResourceAssociationRequest_tags, v.Tags)
+}
+
 type CreateServiceNetworkResourceAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the association.
@@ -79,13 +103,60 @@ type CreateServiceNetworkResourceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceNetworkResourceAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceNetworkResourceAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceNetworkResourceAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateServiceNetworkResourceAssociationResponse_arn, *v.Arn)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.CreateServiceNetworkResourceAssociationResponse_createdBy, *v.CreatedBy)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateServiceNetworkResourceAssociationResponse_id, *v.Id)
+	}
+	if v.PrivateDnsEnabled != nil {
+		s.WriteBool(schemas.CreateServiceNetworkResourceAssociationResponse_privateDnsEnabled, *v.PrivateDnsEnabled)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateServiceNetworkResourceAssociationResponse_status, string(v.Status))
+	}
+}
+func (v *CreateServiceNetworkResourceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceNetworkResourceAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceNetworkResourceAssociationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateServiceNetworkResourceAssociationResponse_arn, v.Arn)
+		case schemas.CreateServiceNetworkResourceAssociationResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CreateServiceNetworkResourceAssociationResponse_createdBy, v.CreatedBy)
+		case schemas.CreateServiceNetworkResourceAssociationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateServiceNetworkResourceAssociationResponse_id, v.Id)
+		case schemas.CreateServiceNetworkResourceAssociationResponse_privateDnsEnabled:
+			v.PrivateDnsEnabled = new(bool)
+			return d.ReadBool(schemas.CreateServiceNetworkResourceAssociationResponse_privateDnsEnabled, v.PrivateDnsEnabled)
+		case schemas.CreateServiceNetworkResourceAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateServiceNetworkResourceAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceNetworkResourceAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceNetworkResourceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateServiceNetworkResourceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceNetworkResourceAssociation, schemas.CreateServiceNetworkResourceAssociationRequest, schemas.CreateServiceNetworkResourceAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateServiceNetworkResourceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceNetworkResourceAssociation, schemas.CreateServiceNetworkResourceAssociationRequest, schemas.CreateServiceNetworkResourceAssociationResponse), output: &CreateServiceNetworkResourceAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

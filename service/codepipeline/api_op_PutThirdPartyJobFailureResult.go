@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,26 @@ type PutThirdPartyJobFailureResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutThirdPartyJobFailureResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutThirdPartyJobFailureResultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutThirdPartyJobFailureResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutThirdPartyJobFailureResultInput_clientToken, *v.ClientToken)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.PutThirdPartyJobFailureResultInput_failureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.PutThirdPartyJobFailureResultInput_jobId, *v.JobId)
+	}
+}
+
 type PutThirdPartyJobFailureResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +77,26 @@ type PutThirdPartyJobFailureResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutThirdPartyJobFailureResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutThirdPartyJobFailureResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutThirdPartyJobFailureResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutThirdPartyJobFailureResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutThirdPartyJobFailureResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutThirdPartyJobFailureResult, schemas.PutThirdPartyJobFailureResultInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutThirdPartyJobFailureResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutThirdPartyJobFailureResult, schemas.PutThirdPartyJobFailureResultInput, nil), output: &PutThirdPartyJobFailureResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

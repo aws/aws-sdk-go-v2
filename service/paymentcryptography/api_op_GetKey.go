@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,18 @@ type GetKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.GetKeyInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+}
+
 type GetKeyOutput struct {
 
 	// Contains the key metadata, including both immutable and mutable attributes for
@@ -67,13 +81,34 @@ type GetKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.GetKeyOutput_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetKeyOutput_Key:
+			v.Key = &types.Key{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKey, schemas.GetKeyInput, schemas.GetKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKey, schemas.GetKeyInput, schemas.GetKeyOutput), output: &GetKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

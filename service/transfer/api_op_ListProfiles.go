@@ -5,7 +5,9 @@ package transfer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfilesRequest_NextToken, *v.NextToken)
+	}
+	if v.ProfileType != "" {
+		s.WriteString(schemas.ListProfilesRequest_ProfileType, string(v.ProfileType))
+	}
+}
+
 type ListProfilesOutput struct {
 
 	// Returns an array, where each item contains the details of a profile.
@@ -63,13 +83,35 @@ type ListProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeListedProfiles(s, schemas.ListProfilesResponse_Profiles, v.Profiles)
+}
+func (v *ListProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfilesResponse_NextToken, v.NextToken)
+		case schemas.ListProfilesResponse_Profiles:
+			return deserializeListedProfiles(d, schemas.ListProfilesResponse_Profiles, &v.Profiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfiles, schemas.ListProfilesRequest, schemas.ListProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfiles, schemas.ListProfilesRequest, schemas.ListProfilesResponse), output: &ListProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type AcknowledgeThirdPartyJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcknowledgeThirdPartyJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeThirdPartyJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeThirdPartyJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AcknowledgeThirdPartyJobInput_clientToken, *v.ClientToken)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.AcknowledgeThirdPartyJobInput_jobId, *v.JobId)
+	}
+	if v.Nonce != nil {
+		s.WriteString(schemas.AcknowledgeThirdPartyJobInput_nonce, *v.Nonce)
+	}
+}
+
 // Represents the output of an AcknowledgeThirdPartyJob action.
 type AcknowledgeThirdPartyJobOutput struct {
 
@@ -61,13 +81,36 @@ type AcknowledgeThirdPartyJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcknowledgeThirdPartyJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeThirdPartyJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeThirdPartyJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.AcknowledgeThirdPartyJobOutput_status, string(v.Status))
+	}
+}
+func (v *AcknowledgeThirdPartyJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcknowledgeThirdPartyJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcknowledgeThirdPartyJobOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.AcknowledgeThirdPartyJobOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcknowledgeThirdPartyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcknowledgeThirdPartyJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcknowledgeThirdPartyJob, schemas.AcknowledgeThirdPartyJobInput, schemas.AcknowledgeThirdPartyJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAcknowledgeThirdPartyJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcknowledgeThirdPartyJob, schemas.AcknowledgeThirdPartyJobInput, schemas.AcknowledgeThirdPartyJobOutput), output: &AcknowledgeThirdPartyJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

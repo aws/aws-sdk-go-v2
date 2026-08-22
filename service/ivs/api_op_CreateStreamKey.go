@@ -4,7 +4,9 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,31 @@ type CreateStreamKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.CreateStreamKeyRequest_channelArn, *v.ChannelArn)
+	}
+	serializeTags(s, schemas.CreateStreamKeyRequest_tags, v.Tags)
+}
+func (v *CreateStreamKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamKeyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamKeyRequest_channelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.CreateStreamKeyRequest_channelArn, v.ChannelArn)
+		case schemas.CreateStreamKeyRequest_tags:
+			return deserializeTags(d, schemas.CreateStreamKeyRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateStreamKeyOutput struct {
 
 	// Stream key used to authenticate an RTMPS stream for ingestion.
@@ -58,13 +85,34 @@ type CreateStreamKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamKey != nil {
+		s.WriteStruct(schemas.CreateStreamKeyResponse_streamKey)
+		v.StreamKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateStreamKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamKeyResponse_streamKey:
+			v.StreamKey = &types.StreamKey{}
+			return v.StreamKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamKey, schemas.CreateStreamKeyRequest, schemas.CreateStreamKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamKey, schemas.CreateStreamKeyRequest, schemas.CreateStreamKeyResponse), output: &CreateStreamKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,35 @@ type CreateTrustInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrustInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrustRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrustInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDnsIpAddrs(s, schemas.CreateTrustRequest_ConditionalForwarderIpAddrs, v.ConditionalForwarderIpAddrs)
+	serializeDnsIpv6Addrs(s, schemas.CreateTrustRequest_ConditionalForwarderIpv6Addrs, v.ConditionalForwarderIpv6Addrs)
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateTrustRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.RemoteDomainName != nil {
+		s.WriteString(schemas.CreateTrustRequest_RemoteDomainName, *v.RemoteDomainName)
+	}
+	if v.SelectiveAuth != "" {
+		s.WriteString(schemas.CreateTrustRequest_SelectiveAuth, string(v.SelectiveAuth))
+	}
+	if v.TrustDirection != "" {
+		s.WriteString(schemas.CreateTrustRequest_TrustDirection, string(v.TrustDirection))
+	}
+	if v.TrustPassword != nil {
+		s.WriteString(schemas.CreateTrustRequest_TrustPassword, *v.TrustPassword)
+	}
+	if v.TrustType != "" {
+		s.WriteString(schemas.CreateTrustRequest_TrustType, string(v.TrustType))
+	}
+}
+
 // The result of a CreateTrust request.
 type CreateTrustOutput struct {
 
@@ -92,13 +123,32 @@ type CreateTrustOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrustOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrustResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrustOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustId != nil {
+		s.WriteString(schemas.CreateTrustResult_TrustId, *v.TrustId)
+	}
+}
+func (v *CreateTrustOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrustResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrustResult_TrustId:
+			v.TrustId = new(string)
+			return d.ReadString(schemas.CreateTrustResult_TrustId, v.TrustId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrustMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrust{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrust, schemas.CreateTrustRequest, schemas.CreateTrustResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTrust{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrust, schemas.CreateTrustRequest, schemas.CreateTrustResult), output: &CreateTrustOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

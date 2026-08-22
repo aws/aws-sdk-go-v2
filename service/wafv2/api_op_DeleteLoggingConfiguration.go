@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,24 @@ type DeleteLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogScope != "" {
+		s.WriteString(schemas.DeleteLoggingConfigurationRequest_LogScope, string(v.LogScope))
+	}
+	if v.LogType != "" {
+		s.WriteString(schemas.DeleteLoggingConfigurationRequest_LogType, string(v.LogType))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteLoggingConfigurationRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type DeleteLoggingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +86,26 @@ type DeleteLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLoggingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLoggingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoggingConfiguration, schemas.DeleteLoggingConfigurationRequest, schemas.DeleteLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoggingConfiguration, schemas.DeleteLoggingConfigurationRequest, schemas.DeleteLoggingConfigurationResponse), output: &DeleteLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

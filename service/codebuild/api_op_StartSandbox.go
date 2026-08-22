@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,21 @@ type StartSandboxInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSandboxInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSandboxInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSandboxInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartSandboxInput_idempotencyToken, *v.IdempotencyToken)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.StartSandboxInput_projectName, *v.ProjectName)
+	}
+}
+
 type StartSandboxOutput struct {
 
 	// Information about the requested sandbox.
@@ -46,13 +63,34 @@ type StartSandboxOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSandboxOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSandboxOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSandboxOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sandbox != nil {
+		s.WriteStruct(schemas.StartSandboxOutput_sandbox)
+		v.Sandbox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartSandboxOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSandboxOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSandboxOutput_sandbox:
+			v.Sandbox = &types.Sandbox{}
+			return v.Sandbox.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSandboxMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSandbox{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSandbox, schemas.StartSandboxInput, schemas.StartSandboxOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSandbox{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSandbox, schemas.StartSandboxInput, schemas.StartSandboxOutput), output: &StartSandboxOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

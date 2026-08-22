@@ -4,6 +4,8 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type RollbackStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackStageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackStageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackStageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineName != nil {
+		s.WriteString(schemas.RollbackStageInput_pipelineName, *v.PipelineName)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.RollbackStageInput_stageName, *v.StageName)
+	}
+	if v.TargetPipelineExecutionId != nil {
+		s.WriteString(schemas.RollbackStageInput_targetPipelineExecutionId, *v.TargetPipelineExecutionId)
+	}
+}
+
 type RollbackStageOutput struct {
 
 	// The execution ID of the pipeline execution for the stage that has been rolled
@@ -57,13 +77,32 @@ type RollbackStageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackStageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackStageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.RollbackStageOutput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+}
+func (v *RollbackStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackStageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackStageOutput_pipelineExecutionId:
+			v.PipelineExecutionId = new(string)
+			return d.ReadString(schemas.RollbackStageOutput_pipelineExecutionId, v.PipelineExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRollbackStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRollbackStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackStage, schemas.RollbackStageInput, schemas.RollbackStageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRollbackStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackStage, schemas.RollbackStageInput, schemas.RollbackStageOutput), output: &RollbackStageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

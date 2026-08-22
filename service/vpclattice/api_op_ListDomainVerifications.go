@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListDomainVerificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainVerificationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainVerificationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainVerificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDomainVerificationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainVerificationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDomainVerificationsOutput struct {
 
 	//  Information about the domain verifications.
@@ -52,13 +69,35 @@ type ListDomainVerificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainVerificationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainVerificationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainVerificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainVerificationList(s, schemas.ListDomainVerificationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainVerificationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDomainVerificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainVerificationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainVerificationsResponse_items:
+			return deserializeDomainVerificationList(d, schemas.ListDomainVerificationsResponse_items, &v.Items)
+		case schemas.ListDomainVerificationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDomainVerificationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainVerificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainVerifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainVerifications, schemas.ListDomainVerificationsRequest, schemas.ListDomainVerificationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainVerifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainVerifications, schemas.ListDomainVerificationsRequest, schemas.ListDomainVerificationsResponse), output: &ListDomainVerificationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

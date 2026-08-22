@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type DescribeFileSystemAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileSystemAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileSystemAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileSystemAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DescribeFileSystemAliasesRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DescribeFileSystemAliasesRequest_FileSystemId, *v.FileSystemId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeFileSystemAliasesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFileSystemAliasesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // The response object for DescribeFileSystemAliases operation.
 type DescribeFileSystemAliasesOutput struct {
 
@@ -73,13 +96,35 @@ type DescribeFileSystemAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileSystemAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileSystemAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileSystemAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAliases(s, schemas.DescribeFileSystemAliasesResponse_Aliases, v.Aliases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFileSystemAliasesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFileSystemAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFileSystemAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFileSystemAliasesResponse_Aliases:
+			return deserializeAliases(d, schemas.DescribeFileSystemAliasesResponse_Aliases, &v.Aliases)
+		case schemas.DescribeFileSystemAliasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFileSystemAliasesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFileSystemAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileSystemAliases, schemas.DescribeFileSystemAliasesRequest, schemas.DescribeFileSystemAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFileSystemAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileSystemAliases, schemas.DescribeFileSystemAliasesRequest, schemas.DescribeFileSystemAliasesResponse), output: &DescribeFileSystemAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

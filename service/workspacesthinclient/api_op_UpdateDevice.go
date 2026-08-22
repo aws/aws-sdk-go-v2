@@ -5,7 +5,9 @@ package workspacesthinclient
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,27 @@ type UpdateDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredSoftwareSetId != nil {
+		s.WriteString(schemas.UpdateDeviceRequest_desiredSoftwareSetId, *v.DesiredSoftwareSetId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateDeviceRequest_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDeviceRequest_name, *v.Name)
+	}
+	if v.SoftwareSetUpdateSchedule != "" {
+		s.WriteString(schemas.UpdateDeviceRequest_softwareSetUpdateSchedule, string(v.SoftwareSetUpdateSchedule))
+	}
+}
+
 type UpdateDeviceOutput struct {
 
 	// Describes a device.
@@ -57,13 +80,34 @@ type UpdateDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Device != nil {
+		s.WriteStruct(schemas.UpdateDeviceResponse_device)
+		v.Device.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDeviceResponse_device:
+			v.Device = &types.DeviceSummary{}
+			return v.Device.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDevice, schemas.UpdateDeviceRequest, schemas.UpdateDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDevice, schemas.UpdateDeviceRequest, schemas.UpdateDeviceResponse), output: &UpdateDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

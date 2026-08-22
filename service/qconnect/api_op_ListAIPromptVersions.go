@@ -5,7 +5,9 @@ package qconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type ListAIPromptVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIPromptVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIPromptVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIPromptVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiPromptId != nil {
+		s.WriteString(schemas.ListAIPromptVersionsRequest_aiPromptId, *v.AiPromptId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.ListAIPromptVersionsRequest_assistantId, *v.AssistantId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAIPromptVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIPromptVersionsRequest_nextToken, *v.NextToken)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.ListAIPromptVersionsRequest_origin, string(v.Origin))
+	}
+}
+
 type ListAIPromptVersionsOutput struct {
 
 	// The summaries of the AI Prompt versions.
@@ -71,13 +97,35 @@ type ListAIPromptVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIPromptVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIPromptVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIPromptVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAIPromptVersionSummariesList(s, schemas.ListAIPromptVersionsResponse_aiPromptVersionSummaries, v.AiPromptVersionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIPromptVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAIPromptVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAIPromptVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAIPromptVersionsResponse_aiPromptVersionSummaries:
+			return deserializeAIPromptVersionSummariesList(d, schemas.ListAIPromptVersionsResponse_aiPromptVersionSummaries, &v.AiPromptVersionSummaries)
+		case schemas.ListAIPromptVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAIPromptVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAIPromptVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAIPromptVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIPromptVersions, schemas.ListAIPromptVersionsRequest, schemas.ListAIPromptVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAIPromptVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIPromptVersions, schemas.ListAIPromptVersionsRequest, schemas.ListAIPromptVersionsResponse), output: &ListAIPromptVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

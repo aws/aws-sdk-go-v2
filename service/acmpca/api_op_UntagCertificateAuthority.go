@@ -4,7 +4,9 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,19 @@ type UntagCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagCertificateAuthorityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagCertificateAuthorityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.UntagCertificateAuthorityRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	serializeTagList(s, schemas.UntagCertificateAuthorityRequest_Tags, v.Tags)
+}
+
 type UntagCertificateAuthorityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +74,26 @@ type UntagCertificateAuthorityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagCertificateAuthorityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagCertificateAuthorityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UntagCertificateAuthorityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUntagCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagCertificateAuthority, schemas.UntagCertificateAuthorityRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUntagCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagCertificateAuthority, schemas.UntagCertificateAuthorityRequest, nil), output: &UntagCertificateAuthorityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

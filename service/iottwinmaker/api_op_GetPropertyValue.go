@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +73,81 @@ type GetPropertyValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPropertyValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPropertyValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPropertyValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.GetPropertyValueRequest_componentName, *v.ComponentName)
+	}
+	if v.ComponentPath != nil {
+		s.WriteString(schemas.GetPropertyValueRequest_componentPath, *v.ComponentPath)
+	}
+	if v.ComponentTypeId != nil {
+		s.WriteString(schemas.GetPropertyValueRequest_componentTypeId, *v.ComponentTypeId)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.GetPropertyValueRequest_entityId, *v.EntityId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetPropertyValueRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPropertyValueRequest_nextToken, *v.NextToken)
+	}
+	if v.PropertyGroupName != nil {
+		s.WriteString(schemas.GetPropertyValueRequest_propertyGroupName, *v.PropertyGroupName)
+	}
+	serializeSelectedPropertyList(s, schemas.GetPropertyValueRequest_selectedProperties, v.SelectedProperties)
+	if v.TabularConditions != nil {
+		s.WriteStruct(schemas.GetPropertyValueRequest_tabularConditions)
+		v.TabularConditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetPropertyValueRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetPropertyValueInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPropertyValueRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPropertyValueRequest_componentName:
+			v.ComponentName = new(string)
+			return d.ReadString(schemas.GetPropertyValueRequest_componentName, v.ComponentName)
+		case schemas.GetPropertyValueRequest_componentPath:
+			v.ComponentPath = new(string)
+			return d.ReadString(schemas.GetPropertyValueRequest_componentPath, v.ComponentPath)
+		case schemas.GetPropertyValueRequest_componentTypeId:
+			v.ComponentTypeId = new(string)
+			return d.ReadString(schemas.GetPropertyValueRequest_componentTypeId, v.ComponentTypeId)
+		case schemas.GetPropertyValueRequest_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.GetPropertyValueRequest_entityId, v.EntityId)
+		case schemas.GetPropertyValueRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.GetPropertyValueRequest_maxResults, v.MaxResults)
+		case schemas.GetPropertyValueRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetPropertyValueRequest_nextToken, v.NextToken)
+		case schemas.GetPropertyValueRequest_propertyGroupName:
+			v.PropertyGroupName = new(string)
+			return d.ReadString(schemas.GetPropertyValueRequest_propertyGroupName, v.PropertyGroupName)
+		case schemas.GetPropertyValueRequest_selectedProperties:
+			return deserializeSelectedPropertyList(d, schemas.GetPropertyValueRequest_selectedProperties, &v.SelectedProperties)
+		case schemas.GetPropertyValueRequest_tabularConditions:
+			v.TabularConditions = &types.TabularConditions{}
+			return v.TabularConditions.Deserialize(d)
+		case schemas.GetPropertyValueRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetPropertyValueRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type GetPropertyValueOutput struct {
 
 	// The string that specifies the next page of results.
@@ -89,13 +166,38 @@ type GetPropertyValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPropertyValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPropertyValueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPropertyValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPropertyValueResponse_nextToken, *v.NextToken)
+	}
+	serializePropertyLatestValueMap(s, schemas.GetPropertyValueResponse_propertyValues, v.PropertyValues)
+	serializeTabularPropertyValues(s, schemas.GetPropertyValueResponse_tabularPropertyValues, v.TabularPropertyValues)
+}
+func (v *GetPropertyValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPropertyValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPropertyValueResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetPropertyValueResponse_nextToken, v.NextToken)
+		case schemas.GetPropertyValueResponse_propertyValues:
+			return deserializePropertyLatestValueMap(d, schemas.GetPropertyValueResponse_propertyValues, &v.PropertyValues)
+		case schemas.GetPropertyValueResponse_tabularPropertyValues:
+			return deserializeTabularPropertyValues(d, schemas.GetPropertyValueResponse_tabularPropertyValues, &v.TabularPropertyValues)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPropertyValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPropertyValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertyValue, schemas.GetPropertyValueRequest, schemas.GetPropertyValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPropertyValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertyValue, schemas.GetPropertyValueRequest, schemas.GetPropertyValueResponse), output: &GetPropertyValueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,15 @@ type DescribeAttackStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAttackStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAttackStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAttackStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeAttackStatisticsOutput struct {
 
 	// The data that describes the attacks detected during the time period.
@@ -56,13 +67,37 @@ type DescribeAttackStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAttackStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAttackStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAttackStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttackStatisticsDataList(s, schemas.DescribeAttackStatisticsResponse_DataItems, v.DataItems)
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.DescribeAttackStatisticsResponse_TimeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAttackStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAttackStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAttackStatisticsResponse_DataItems:
+			return deserializeAttackStatisticsDataList(d, schemas.DescribeAttackStatisticsResponse_DataItems, &v.DataItems)
+		case schemas.DescribeAttackStatisticsResponse_TimeRange:
+			v.TimeRange = &types.TimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAttackStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAttackStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAttackStatistics, schemas.DescribeAttackStatisticsRequest, schemas.DescribeAttackStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAttackStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAttackStatistics, schemas.DescribeAttackStatisticsRequest, schemas.DescribeAttackStatisticsResponse), output: &DescribeAttackStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,33 @@ type ListPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.ListPropertiesRequest_componentName, *v.ComponentName)
+	}
+	if v.ComponentPath != nil {
+		s.WriteString(schemas.ListPropertiesRequest_componentPath, *v.ComponentPath)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.ListPropertiesRequest_entityId, *v.EntityId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPropertiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPropertiesRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListPropertiesRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type ListPropertiesOutput struct {
 
 	// A list of objects that contain information about the properties.
@@ -71,13 +100,35 @@ type ListPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPropertiesResponse_nextToken, *v.NextToken)
+	}
+	serializePropertySummaries(s, schemas.ListPropertiesResponse_propertySummaries, v.PropertySummaries)
+}
+func (v *ListPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPropertiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPropertiesResponse_nextToken, v.NextToken)
+		case schemas.ListPropertiesResponse_propertySummaries:
+			return deserializePropertySummaries(d, schemas.ListPropertiesResponse_propertySummaries, &v.PropertySummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProperties, schemas.ListPropertiesRequest, schemas.ListPropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProperties, schemas.ListPropertiesRequest, schemas.ListPropertiesResponse), output: &ListPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

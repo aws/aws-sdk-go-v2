@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetSiteToSiteVpnAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSiteToSiteVpnAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSiteToSiteVpnAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSiteToSiteVpnAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.GetSiteToSiteVpnAttachmentRequest_AttachmentId, *v.AttachmentId)
+	}
+}
+
 type GetSiteToSiteVpnAttachmentOutput struct {
 
 	// Describes the site-to-site attachment.
@@ -45,13 +59,34 @@ type GetSiteToSiteVpnAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSiteToSiteVpnAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSiteToSiteVpnAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSiteToSiteVpnAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SiteToSiteVpnAttachment != nil {
+		s.WriteStruct(schemas.GetSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment)
+		v.SiteToSiteVpnAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSiteToSiteVpnAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSiteToSiteVpnAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment:
+			v.SiteToSiteVpnAttachment = &types.SiteToSiteVpnAttachment{}
+			return v.SiteToSiteVpnAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSiteToSiteVpnAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSiteToSiteVpnAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSiteToSiteVpnAttachment, schemas.GetSiteToSiteVpnAttachmentRequest, schemas.GetSiteToSiteVpnAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSiteToSiteVpnAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSiteToSiteVpnAttachment, schemas.GetSiteToSiteVpnAttachmentRequest, schemas.GetSiteToSiteVpnAttachmentResponse), output: &GetSiteToSiteVpnAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

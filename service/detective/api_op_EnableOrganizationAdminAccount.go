@@ -4,6 +4,8 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,18 @@ type EnableOrganizationAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableOrganizationAdminAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableOrganizationAdminAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableOrganizationAdminAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.EnableOrganizationAdminAccountRequest_AccountId, *v.AccountId)
+	}
+}
+
 type EnableOrganizationAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +72,26 @@ type EnableOrganizationAdminAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableOrganizationAdminAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableOrganizationAdminAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableOrganizationAdminAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableOrganizationAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableOrganizationAdminAccount, schemas.EnableOrganizationAdminAccountRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableOrganizationAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableOrganizationAdminAccount, schemas.EnableOrganizationAdminAccountRequest, nil), output: &EnableOrganizationAdminAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

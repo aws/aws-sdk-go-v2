@@ -4,6 +4,8 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteProtectionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProtectionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProtectionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProtectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectionGroupId != nil {
+		s.WriteString(schemas.DeleteProtectionGroupRequest_ProtectionGroupId, *v.ProtectionGroupId)
+	}
+}
+
 type DeleteProtectionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteProtectionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProtectionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProtectionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProtectionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProtectionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProtectionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProtectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProtectionGroup, schemas.DeleteProtectionGroupRequest, schemas.DeleteProtectionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProtectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProtectionGroup, schemas.DeleteProtectionGroupRequest, schemas.DeleteProtectionGroupResponse), output: &DeleteProtectionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type SetLocalConsolePasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetLocalConsolePasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetLocalConsolePasswordInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetLocalConsolePasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.SetLocalConsolePasswordInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.LocalConsolePassword != nil {
+		s.WriteString(schemas.SetLocalConsolePasswordInput_LocalConsolePassword, *v.LocalConsolePassword)
+	}
+}
+
 type SetLocalConsolePasswordOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -55,13 +72,32 @@ type SetLocalConsolePasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetLocalConsolePasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetLocalConsolePasswordOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetLocalConsolePasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.SetLocalConsolePasswordOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *SetLocalConsolePasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetLocalConsolePasswordOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetLocalConsolePasswordOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.SetLocalConsolePasswordOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetLocalConsolePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetLocalConsolePassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetLocalConsolePassword, schemas.SetLocalConsolePasswordInput, schemas.SetLocalConsolePasswordOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetLocalConsolePassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetLocalConsolePassword, schemas.SetLocalConsolePasswordInput, schemas.SetLocalConsolePasswordOutput), output: &SetLocalConsolePasswordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

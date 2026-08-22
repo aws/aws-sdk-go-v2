@@ -5,7 +5,9 @@ package dataexchange
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type ListReceivedDataGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceivedDataGrantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceivedDataGrantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceivedDataGrantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcceptanceStateFilterValues(s, schemas.ListReceivedDataGrantsRequest_AcceptanceState, v.AcceptanceState)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReceivedDataGrantsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceivedDataGrantsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListReceivedDataGrantsOutput struct {
 
 	// An object that contains a list of received data grant information.
@@ -55,13 +73,35 @@ type ListReceivedDataGrantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceivedDataGrantsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceivedDataGrantsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceivedDataGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfReceivedDataGrantSummariesEntry(s, schemas.ListReceivedDataGrantsResponse_DataGrantSummaries, v.DataGrantSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceivedDataGrantsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListReceivedDataGrantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReceivedDataGrantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReceivedDataGrantsResponse_DataGrantSummaries:
+			return deserializeListOfReceivedDataGrantSummariesEntry(d, schemas.ListReceivedDataGrantsResponse_DataGrantSummaries, &v.DataGrantSummaries)
+		case schemas.ListReceivedDataGrantsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReceivedDataGrantsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReceivedDataGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReceivedDataGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceivedDataGrants, schemas.ListReceivedDataGrantsRequest, schemas.ListReceivedDataGrantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReceivedDataGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceivedDataGrants, schemas.ListReceivedDataGrantsRequest, schemas.ListReceivedDataGrantsResponse), output: &ListReceivedDataGrantsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

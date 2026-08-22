@@ -5,7 +5,9 @@ package xray
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -78,6 +80,38 @@ type GetTraceSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTraceSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTraceSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTraceSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetTraceSummariesRequest_EndTime, *v.EndTime)
+	}
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.GetTraceSummariesRequest_FilterExpression, *v.FilterExpression)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTraceSummariesRequest_NextToken, *v.NextToken)
+	}
+	if v.Sampling != nil {
+		s.WriteBool(schemas.GetTraceSummariesRequest_Sampling, *v.Sampling)
+	}
+	if v.SamplingStrategy != nil {
+		s.WriteStruct(schemas.GetTraceSummariesRequest_SamplingStrategy)
+		v.SamplingStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetTraceSummariesRequest_StartTime, *v.StartTime)
+	}
+	if v.TimeRangeType != "" {
+		s.WriteString(schemas.GetTraceSummariesRequest_TimeRangeType, string(v.TimeRangeType))
+	}
+}
+
 type GetTraceSummariesOutput struct {
 
 	// The start time of this page of results.
@@ -102,13 +136,47 @@ type GetTraceSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTraceSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTraceSummariesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTraceSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTime != nil {
+		s.WriteTime(schemas.GetTraceSummariesResult_ApproximateTime, *v.ApproximateTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTraceSummariesResult_NextToken, *v.NextToken)
+	}
+	serializeTraceSummaryList(s, schemas.GetTraceSummariesResult_TraceSummaries, v.TraceSummaries)
+	if v.TracesProcessedCount != nil {
+		s.WriteInt64(schemas.GetTraceSummariesResult_TracesProcessedCount, *v.TracesProcessedCount)
+	}
+}
+func (v *GetTraceSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTraceSummariesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTraceSummariesResult_ApproximateTime:
+			v.ApproximateTime = new(time.Time)
+			return d.ReadTime(schemas.GetTraceSummariesResult_ApproximateTime, v.ApproximateTime)
+		case schemas.GetTraceSummariesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTraceSummariesResult_NextToken, v.NextToken)
+		case schemas.GetTraceSummariesResult_TraceSummaries:
+			return deserializeTraceSummaryList(d, schemas.GetTraceSummariesResult_TraceSummaries, &v.TraceSummaries)
+		case schemas.GetTraceSummariesResult_TracesProcessedCount:
+			v.TracesProcessedCount = new(int64)
+			return d.ReadInt64(schemas.GetTraceSummariesResult_TracesProcessedCount, v.TracesProcessedCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTraceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTraceSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTraceSummaries, schemas.GetTraceSummariesRequest, schemas.GetTraceSummariesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTraceSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTraceSummaries, schemas.GetTraceSummariesRequest, schemas.GetTraceSummariesResult), output: &GetTraceSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

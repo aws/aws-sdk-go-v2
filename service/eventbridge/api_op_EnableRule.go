@@ -4,6 +4,8 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type EnableRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBusName != nil {
+		s.WriteString(schemas.EnableRuleRequest_EventBusName, *v.EventBusName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.EnableRuleRequest_Name, *v.Name)
+	}
+}
+
 type EnableRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type EnableRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableRule, schemas.EnableRuleRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableRule, schemas.EnableRuleRequest, nil), output: &EnableRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

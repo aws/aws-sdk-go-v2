@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,18 @@ type UpdateGatewaySoftwareNowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewaySoftwareNowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewaySoftwareNowInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewaySoftwareNowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateGatewaySoftwareNowInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
 // updated.
 type UpdateGatewaySoftwareNowOutput struct {
@@ -63,13 +77,32 @@ type UpdateGatewaySoftwareNowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewaySoftwareNowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewaySoftwareNowOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewaySoftwareNowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateGatewaySoftwareNowOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *UpdateGatewaySoftwareNowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewaySoftwareNowOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewaySoftwareNowOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.UpdateGatewaySoftwareNowOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGatewaySoftwareNowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGatewaySoftwareNow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewaySoftwareNow, schemas.UpdateGatewaySoftwareNowInput, schemas.UpdateGatewaySoftwareNowOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateGatewaySoftwareNow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewaySoftwareNow, schemas.UpdateGatewaySoftwareNowInput, schemas.UpdateGatewaySoftwareNowOutput), output: &UpdateGatewaySoftwareNowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

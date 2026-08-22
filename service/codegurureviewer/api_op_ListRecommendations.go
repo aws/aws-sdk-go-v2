@@ -5,7 +5,9 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReviewArn != nil {
+		s.WriteString(schemas.ListRecommendationsRequest_CodeReviewArn, *v.CodeReviewArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRecommendationsOutput struct {
 
 	// Pagination token.
@@ -57,13 +77,35 @@ type ListRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationsResponse_NextToken, *v.NextToken)
+	}
+	serializeRecommendationSummaries(s, schemas.ListRecommendationsResponse_RecommendationSummaries, v.RecommendationSummaries)
+}
+func (v *ListRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationsResponse_NextToken, v.NextToken)
+		case schemas.ListRecommendationsResponse_RecommendationSummaries:
+			return deserializeRecommendationSummaries(d, schemas.ListRecommendationsResponse_RecommendationSummaries, &v.RecommendationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendations, schemas.ListRecommendationsRequest, schemas.ListRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendations, schemas.ListRecommendationsRequest, schemas.ListRecommendationsResponse), output: &ListRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

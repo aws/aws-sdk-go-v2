@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,28 @@ type GetLaunchConfigurationInput struct {
 	SourceServerID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLaunchConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLaunchConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLaunchConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.GetLaunchConfigurationRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *GetLaunchConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLaunchConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLaunchConfigurationRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.GetLaunchConfigurationRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
 }
 
 type GetLaunchConfigurationOutput struct {
@@ -78,13 +102,108 @@ type GetLaunchConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLaunchConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLaunchConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyPrivateIp != nil {
+		s.WriteBool(schemas.LaunchConfiguration_copyPrivateIp, *v.CopyPrivateIp)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.LaunchConfiguration_copyTags, *v.CopyTags)
+	}
+	if v.Ec2LaunchTemplateID != nil {
+		s.WriteString(schemas.LaunchConfiguration_ec2LaunchTemplateID, *v.Ec2LaunchTemplateID)
+	}
+	if v.LaunchDisposition != "" {
+		s.WriteString(schemas.LaunchConfiguration_launchDisposition, string(v.LaunchDisposition))
+	}
+	if v.LaunchIntoInstanceProperties != nil {
+		s.WriteStruct(schemas.LaunchConfiguration_launchIntoInstanceProperties)
+		v.LaunchIntoInstanceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Licensing != nil {
+		s.WriteStruct(schemas.LaunchConfiguration_licensing)
+		v.Licensing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LaunchConfiguration_name, *v.Name)
+	}
+	if v.PostLaunchEnabled != nil {
+		s.WriteBool(schemas.LaunchConfiguration_postLaunchEnabled, *v.PostLaunchEnabled)
+	}
+	if v.RecoveryMode != "" {
+		s.WriteString(schemas.LaunchConfiguration_recoveryMode, string(v.RecoveryMode))
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.LaunchConfiguration_sourceServerID, *v.SourceServerID)
+	}
+	if v.TargetInstanceTypeRightSizingMethod != "" {
+		s.WriteString(schemas.LaunchConfiguration_targetInstanceTypeRightSizingMethod, string(v.TargetInstanceTypeRightSizingMethod))
+	}
+}
+func (v *GetLaunchConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchConfiguration_copyPrivateIp:
+			v.CopyPrivateIp = new(bool)
+			return d.ReadBool(schemas.LaunchConfiguration_copyPrivateIp, v.CopyPrivateIp)
+		case schemas.LaunchConfiguration_copyTags:
+			v.CopyTags = new(bool)
+			return d.ReadBool(schemas.LaunchConfiguration_copyTags, v.CopyTags)
+		case schemas.LaunchConfiguration_ec2LaunchTemplateID:
+			v.Ec2LaunchTemplateID = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_ec2LaunchTemplateID, v.Ec2LaunchTemplateID)
+		case schemas.LaunchConfiguration_launchDisposition:
+			var ev string
+			if err := d.ReadString(schemas.LaunchConfiguration_launchDisposition, &ev); err != nil {
+				return err
+			}
+			v.LaunchDisposition = types.LaunchDisposition(ev)
+			return nil
+		case schemas.LaunchConfiguration_launchIntoInstanceProperties:
+			v.LaunchIntoInstanceProperties = &types.LaunchIntoInstanceProperties{}
+			return v.LaunchIntoInstanceProperties.Deserialize(d)
+		case schemas.LaunchConfiguration_licensing:
+			v.Licensing = &types.Licensing{}
+			return v.Licensing.Deserialize(d)
+		case schemas.LaunchConfiguration_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_name, v.Name)
+		case schemas.LaunchConfiguration_postLaunchEnabled:
+			v.PostLaunchEnabled = new(bool)
+			return d.ReadBool(schemas.LaunchConfiguration_postLaunchEnabled, v.PostLaunchEnabled)
+		case schemas.LaunchConfiguration_recoveryMode:
+			var ev string
+			if err := d.ReadString(schemas.LaunchConfiguration_recoveryMode, &ev); err != nil {
+				return err
+			}
+			v.RecoveryMode = types.RecoveryMode(ev)
+			return nil
+		case schemas.LaunchConfiguration_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_sourceServerID, v.SourceServerID)
+		case schemas.LaunchConfiguration_targetInstanceTypeRightSizingMethod:
+			var ev string
+			if err := d.ReadString(schemas.LaunchConfiguration_targetInstanceTypeRightSizingMethod, &ev); err != nil {
+				return err
+			}
+			v.TargetInstanceTypeRightSizingMethod = types.TargetInstanceTypeRightSizingMethod(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLaunchConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLaunchConfiguration, schemas.GetLaunchConfigurationRequest, schemas.LaunchConfiguration)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLaunchConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLaunchConfiguration, schemas.GetLaunchConfigurationRequest, schemas.LaunchConfiguration), output: &GetLaunchConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

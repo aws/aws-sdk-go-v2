@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetCatalogItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCatalogItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCatalogItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCatalogItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogItemId != nil {
+		s.WriteString(schemas.GetCatalogItemInput_CatalogItemId, *v.CatalogItemId)
+	}
+}
+
 type GetCatalogItemOutput struct {
 
 	// Information about this catalog item.
@@ -45,13 +59,34 @@ type GetCatalogItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCatalogItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCatalogItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCatalogItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogItem != nil {
+		s.WriteStruct(schemas.GetCatalogItemOutput_CatalogItem)
+		v.CatalogItem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCatalogItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCatalogItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCatalogItemOutput_CatalogItem:
+			v.CatalogItem = &types.CatalogItem{}
+			return v.CatalogItem.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCatalogItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCatalogItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCatalogItem, schemas.GetCatalogItemInput, schemas.GetCatalogItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCatalogItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCatalogItem, schemas.GetCatalogItemInput, schemas.GetCatalogItemOutput), output: &GetCatalogItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

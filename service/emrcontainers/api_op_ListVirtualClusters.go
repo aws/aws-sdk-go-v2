@@ -5,7 +5,9 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,37 @@ type ListVirtualClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualClustersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualClustersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerProviderId != nil {
+		s.WriteString(schemas.ListVirtualClustersRequest_containerProviderId, *v.ContainerProviderId)
+	}
+	if v.ContainerProviderType != "" {
+		s.WriteString(schemas.ListVirtualClustersRequest_containerProviderType, string(v.ContainerProviderType))
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListVirtualClustersRequest_createdAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListVirtualClustersRequest_createdBefore, *v.CreatedBefore)
+	}
+	if v.EksAccessEntryIntegrated != nil {
+		s.WriteBool(schemas.ListVirtualClustersRequest_eksAccessEntryIntegrated, *v.EksAccessEntryIntegrated)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVirtualClustersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualClustersRequest_nextToken, *v.NextToken)
+	}
+	serializeVirtualClusterStates(s, schemas.ListVirtualClustersRequest_states, v.States)
+}
+
 type ListVirtualClustersOutput struct {
 
 	// This output displays the token for the next set of virtual clusters.
@@ -77,13 +110,35 @@ type ListVirtualClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualClustersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualClustersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualClustersResponse_nextToken, *v.NextToken)
+	}
+	serializeVirtualClusters(s, schemas.ListVirtualClustersResponse_virtualClusters, v.VirtualClusters)
+}
+func (v *ListVirtualClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualClustersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualClustersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualClustersResponse_nextToken, v.NextToken)
+		case schemas.ListVirtualClustersResponse_virtualClusters:
+			return deserializeVirtualClusters(d, schemas.ListVirtualClustersResponse_virtualClusters, &v.VirtualClusters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVirtualClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVirtualClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualClusters, schemas.ListVirtualClustersRequest, schemas.ListVirtualClustersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVirtualClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualClusters, schemas.ListVirtualClustersRequest, schemas.ListVirtualClustersResponse), output: &ListVirtualClustersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

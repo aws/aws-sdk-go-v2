@@ -4,6 +4,8 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ActivateMessageTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateMessageTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateMessageTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateMessageTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.ActivateMessageTemplateRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MessageTemplateId != nil {
+		s.WriteString(schemas.ActivateMessageTemplateRequest_messageTemplateId, *v.MessageTemplateId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.ActivateMessageTemplateRequest_versionNumber, *v.VersionNumber)
+	}
+}
+
 type ActivateMessageTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the message template.
@@ -71,13 +91,44 @@ type ActivateMessageTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateMessageTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateMessageTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateMessageTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageTemplateArn != nil {
+		s.WriteString(schemas.ActivateMessageTemplateResponse_messageTemplateArn, *v.MessageTemplateArn)
+	}
+	if v.MessageTemplateId != nil {
+		s.WriteString(schemas.ActivateMessageTemplateResponse_messageTemplateId, *v.MessageTemplateId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.ActivateMessageTemplateResponse_versionNumber, *v.VersionNumber)
+	}
+}
+func (v *ActivateMessageTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivateMessageTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivateMessageTemplateResponse_messageTemplateArn:
+			v.MessageTemplateArn = new(string)
+			return d.ReadString(schemas.ActivateMessageTemplateResponse_messageTemplateArn, v.MessageTemplateArn)
+		case schemas.ActivateMessageTemplateResponse_messageTemplateId:
+			v.MessageTemplateId = new(string)
+			return d.ReadString(schemas.ActivateMessageTemplateResponse_messageTemplateId, v.MessageTemplateId)
+		case schemas.ActivateMessageTemplateResponse_versionNumber:
+			v.VersionNumber = new(int64)
+			return d.ReadInt64(schemas.ActivateMessageTemplateResponse_versionNumber, v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationActivateMessageTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpActivateMessageTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateMessageTemplate, schemas.ActivateMessageTemplateRequest, schemas.ActivateMessageTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpActivateMessageTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateMessageTemplate, schemas.ActivateMessageTemplateRequest, schemas.ActivateMessageTemplateResponse), output: &ActivateMessageTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

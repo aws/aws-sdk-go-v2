@@ -4,6 +4,8 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type StopPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopPipelineExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopPipelineExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopPipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Abandon != false {
+		s.WriteBool(schemas.StopPipelineExecutionInput_abandon, v.Abandon)
+	}
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.StopPipelineExecutionInput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.StopPipelineExecutionInput_pipelineName, *v.PipelineName)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.StopPipelineExecutionInput_reason, *v.Reason)
+	}
+}
+
 type StopPipelineExecutionOutput struct {
 
 	// The unique system-generated ID of the pipeline execution that was stopped.
@@ -64,13 +87,32 @@ type StopPipelineExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopPipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopPipelineExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopPipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.StopPipelineExecutionOutput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+}
+func (v *StopPipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopPipelineExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopPipelineExecutionOutput_pipelineExecutionId:
+			v.PipelineExecutionId = new(string)
+			return d.ReadString(schemas.StopPipelineExecutionOutput_pipelineExecutionId, v.PipelineExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopPipelineExecution, schemas.StopPipelineExecutionInput, schemas.StopPipelineExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopPipelineExecution, schemas.StopPipelineExecutionInput, schemas.StopPipelineExecutionOutput), output: &StopPipelineExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

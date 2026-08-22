@@ -4,6 +4,8 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteWebAppCustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWebAppCustomizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWebAppCustomizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWebAppCustomizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebAppId != nil {
+		s.WriteString(schemas.DeleteWebAppCustomizationRequest_WebAppId, *v.WebAppId)
+	}
+}
+
 type DeleteWebAppCustomizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteWebAppCustomizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWebAppCustomizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWebAppCustomizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWebAppCustomizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWebAppCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWebAppCustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWebAppCustomization, schemas.DeleteWebAppCustomizationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWebAppCustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWebAppCustomization, schemas.DeleteWebAppCustomizationRequest, nil), output: &DeleteWebAppCustomizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package fsx
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type CancelDataRepositoryTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDataRepositoryTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDataRepositoryTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDataRepositoryTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.CancelDataRepositoryTaskRequest_TaskId, *v.TaskId)
+	}
+}
+
 type CancelDataRepositoryTaskOutput struct {
 
 	// The lifecycle status of the data repository task, as follows:
@@ -75,13 +89,42 @@ type CancelDataRepositoryTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDataRepositoryTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDataRepositoryTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDataRepositoryTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.CancelDataRepositoryTaskResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.CancelDataRepositoryTaskResponse_TaskId, *v.TaskId)
+	}
+}
+func (v *CancelDataRepositoryTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelDataRepositoryTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelDataRepositoryTaskResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.CancelDataRepositoryTaskResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.DataRepositoryTaskLifecycle(ev)
+			return nil
+		case schemas.CancelDataRepositoryTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CancelDataRepositoryTaskResponse_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelDataRepositoryTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDataRepositoryTask, schemas.CancelDataRepositoryTaskRequest, schemas.CancelDataRepositoryTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelDataRepositoryTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDataRepositoryTask, schemas.CancelDataRepositoryTaskRequest, schemas.CancelDataRepositoryTaskResponse), output: &CancelDataRepositoryTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectPeerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectPeerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectPeerId != nil {
+		s.WriteString(schemas.DeleteConnectPeerRequest_ConnectPeerId, *v.ConnectPeerId)
+	}
+}
+
 type DeleteConnectPeerOutput struct {
 
 	// Information about the deleted Connect peer.
@@ -45,13 +59,34 @@ type DeleteConnectPeerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectPeerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectPeerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectPeerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectPeer != nil {
+		s.WriteStruct(schemas.DeleteConnectPeerResponse_ConnectPeer)
+		v.ConnectPeer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteConnectPeerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConnectPeerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConnectPeerResponse_ConnectPeer:
+			v.ConnectPeer = &types.ConnectPeer{}
+			return v.ConnectPeer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConnectPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectPeer, schemas.DeleteConnectPeerRequest, schemas.DeleteConnectPeerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConnectPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectPeer, schemas.DeleteConnectPeerRequest, schemas.DeleteConnectPeerResponse), output: &DeleteConnectPeerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,28 @@ type CopySnapshotAndUpdateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopySnapshotAndUpdateVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopySnapshotAndUpdateVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopySnapshotAndUpdateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CopyStrategy != "" {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_CopyStrategy, string(v.CopyStrategy))
+	}
+	serializeUpdateOpenZFSVolumeOptions(s, schemas.CopySnapshotAndUpdateVolumeRequest_Options, v.Options)
+	if v.SourceSnapshotARN != nil {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_SourceSnapshotARN, *v.SourceSnapshotARN)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_VolumeId, *v.VolumeId)
+	}
+}
+
 type CopySnapshotAndUpdateVolumeOutput struct {
 
 	// A list of administrative actions for the file system that are in process or
@@ -102,13 +126,45 @@ type CopySnapshotAndUpdateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopySnapshotAndUpdateVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopySnapshotAndUpdateVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopySnapshotAndUpdateVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdministrativeActions(s, schemas.CopySnapshotAndUpdateVolumeResponse_AdministrativeActions, v.AdministrativeActions)
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.CopySnapshotAndUpdateVolumeResponse_VolumeId, *v.VolumeId)
+	}
+}
+func (v *CopySnapshotAndUpdateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopySnapshotAndUpdateVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopySnapshotAndUpdateVolumeResponse_AdministrativeActions:
+			return deserializeAdministrativeActions(d, schemas.CopySnapshotAndUpdateVolumeResponse_AdministrativeActions, &v.AdministrativeActions)
+		case schemas.CopySnapshotAndUpdateVolumeResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.CopySnapshotAndUpdateVolumeResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.VolumeLifecycle(ev)
+			return nil
+		case schemas.CopySnapshotAndUpdateVolumeResponse_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.CopySnapshotAndUpdateVolumeResponse_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopySnapshotAndUpdateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopySnapshotAndUpdateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopySnapshotAndUpdateVolume, schemas.CopySnapshotAndUpdateVolumeRequest, schemas.CopySnapshotAndUpdateVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopySnapshotAndUpdateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopySnapshotAndUpdateVolume, schemas.CopySnapshotAndUpdateVolumeRequest, schemas.CopySnapshotAndUpdateVolumeResponse), output: &CopySnapshotAndUpdateVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

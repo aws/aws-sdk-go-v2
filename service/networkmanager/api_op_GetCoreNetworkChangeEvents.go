@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type GetCoreNetworkChangeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoreNetworkChangeEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreNetworkChangeEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreNetworkChangeEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.GetCoreNetworkChangeEventsRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCoreNetworkChangeEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCoreNetworkChangeEventsRequest_NextToken, *v.NextToken)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteInt32(schemas.GetCoreNetworkChangeEventsRequest_PolicyVersionId, *v.PolicyVersionId)
+	}
+}
+
 type GetCoreNetworkChangeEventsOutput struct {
 
 	// The response to GetCoreNetworkChangeEventsRequest .
@@ -60,13 +83,35 @@ type GetCoreNetworkChangeEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoreNetworkChangeEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreNetworkChangeEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreNetworkChangeEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCoreNetworkChangeEventList(s, schemas.GetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents, v.CoreNetworkChangeEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCoreNetworkChangeEventsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetCoreNetworkChangeEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCoreNetworkChangeEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents:
+			return deserializeCoreNetworkChangeEventList(d, schemas.GetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents, &v.CoreNetworkChangeEvents)
+		case schemas.GetCoreNetworkChangeEventsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCoreNetworkChangeEventsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCoreNetworkChangeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoreNetworkChangeEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreNetworkChangeEvents, schemas.GetCoreNetworkChangeEventsRequest, schemas.GetCoreNetworkChangeEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCoreNetworkChangeEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreNetworkChangeEvents, schemas.GetCoreNetworkChangeEventsRequest, schemas.GetCoreNetworkChangeEventsResponse), output: &GetCoreNetworkChangeEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

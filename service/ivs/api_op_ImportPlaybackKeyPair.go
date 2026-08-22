@@ -4,7 +4,9 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,37 @@ type ImportPlaybackKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportPlaybackKeyPairInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportPlaybackKeyPairRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportPlaybackKeyPairInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ImportPlaybackKeyPairRequest_name, *v.Name)
+	}
+	if v.PublicKeyMaterial != nil {
+		s.WriteString(schemas.ImportPlaybackKeyPairRequest_publicKeyMaterial, *v.PublicKeyMaterial)
+	}
+	serializeTags(s, schemas.ImportPlaybackKeyPairRequest_tags, v.Tags)
+}
+func (v *ImportPlaybackKeyPairInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportPlaybackKeyPairRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportPlaybackKeyPairRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImportPlaybackKeyPairRequest_name, v.Name)
+		case schemas.ImportPlaybackKeyPairRequest_publicKeyMaterial:
+			v.PublicKeyMaterial = new(string)
+			return d.ReadString(schemas.ImportPlaybackKeyPairRequest_publicKeyMaterial, v.PublicKeyMaterial)
+		case schemas.ImportPlaybackKeyPairRequest_tags:
+			return deserializeTags(d, schemas.ImportPlaybackKeyPairRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type ImportPlaybackKeyPairOutput struct {
 
 	//
@@ -61,13 +94,34 @@ type ImportPlaybackKeyPairOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportPlaybackKeyPairOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportPlaybackKeyPairResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportPlaybackKeyPairOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyPair != nil {
+		s.WriteStruct(schemas.ImportPlaybackKeyPairResponse_keyPair)
+		v.KeyPair.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportPlaybackKeyPairOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportPlaybackKeyPairResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportPlaybackKeyPairResponse_keyPair:
+			v.KeyPair = &types.PlaybackKeyPair{}
+			return v.KeyPair.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportPlaybackKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportPlaybackKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportPlaybackKeyPair, schemas.ImportPlaybackKeyPairRequest, schemas.ImportPlaybackKeyPairResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportPlaybackKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportPlaybackKeyPair, schemas.ImportPlaybackKeyPairRequest, schemas.ImportPlaybackKeyPairResponse), output: &ImportPlaybackKeyPairOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

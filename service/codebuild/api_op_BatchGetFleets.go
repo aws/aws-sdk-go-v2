@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchGetFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFleetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFleetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetNames(s, schemas.BatchGetFleetsInput_names, v.Names)
+}
+
 type BatchGetFleetsOutput struct {
 
 	// Information about the requested compute fleets.
@@ -48,13 +60,32 @@ type BatchGetFleetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFleetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFleetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleets(s, schemas.BatchGetFleetsOutput_fleets, v.Fleets)
+	serializeFleetNames(s, schemas.BatchGetFleetsOutput_fleetsNotFound, v.FleetsNotFound)
+}
+func (v *BatchGetFleetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFleetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFleetsOutput_fleets:
+			return deserializeFleets(d, schemas.BatchGetFleetsOutput_fleets, &v.Fleets)
+		case schemas.BatchGetFleetsOutput_fleetsNotFound:
+			return deserializeFleetNames(d, schemas.BatchGetFleetsOutput_fleetsNotFound, &v.FleetsNotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFleets, schemas.BatchGetFleetsInput, schemas.BatchGetFleetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFleets, schemas.BatchGetFleetsInput, schemas.BatchGetFleetsOutput), output: &BatchGetFleetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

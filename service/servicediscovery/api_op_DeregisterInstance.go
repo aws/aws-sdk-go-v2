@@ -4,6 +4,8 @@ package servicediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DeregisterInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeregisterInstanceRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.DeregisterInstanceRequest_ServiceId, *v.ServiceId)
+	}
+}
+
 type DeregisterInstanceOutput struct {
 
 	// A value that you can use to determine whether the request completed
@@ -60,13 +77,32 @@ type DeregisterInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.DeregisterInstanceResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *DeregisterInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterInstanceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.DeregisterInstanceResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterInstance, schemas.DeregisterInstanceRequest, schemas.DeregisterInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterInstance, schemas.DeregisterInstanceRequest, schemas.DeregisterInstanceResponse), output: &DeregisterInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

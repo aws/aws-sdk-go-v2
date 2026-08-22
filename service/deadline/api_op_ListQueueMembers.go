@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,27 @@ type ListQueueMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListQueueMembersRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueueMembersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueMembersRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListQueueMembersRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListQueueMembersOutput struct {
 
@@ -71,13 +94,35 @@ type ListQueueMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQueueMemberList(s, schemas.ListQueueMembersResponse_members, v.Members)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueMembersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListQueueMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueueMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueueMembersResponse_members:
+			return deserializeQueueMemberList(d, schemas.ListQueueMembersResponse_members, &v.Members)
+		case schemas.ListQueueMembersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueueMembersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueueMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueueMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueMembers, schemas.ListQueueMembersRequest, schemas.ListQueueMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueueMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueMembers, schemas.ListQueueMembersRequest, schemas.ListQueueMembersResponse), output: &ListQueueMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

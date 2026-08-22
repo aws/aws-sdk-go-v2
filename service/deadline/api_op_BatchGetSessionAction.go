@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,16 @@ type BatchGetSessionActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSessionActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSessionActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSessionActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetSessionActionIdentifiers(s, schemas.BatchGetSessionActionRequest_identifiers, v.Identifiers)
+}
+
 type BatchGetSessionActionOutput struct {
 
 	// A list of errors for session actions that could not be retrieved.
@@ -61,13 +73,32 @@ type BatchGetSessionActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSessionActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSessionActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSessionActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetSessionActionErrors(s, schemas.BatchGetSessionActionResponse_errors, v.Errors)
+	serializeBatchGetSessionActionItems(s, schemas.BatchGetSessionActionResponse_sessionActions, v.SessionActions)
+}
+func (v *BatchGetSessionActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSessionActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSessionActionResponse_errors:
+			return deserializeBatchGetSessionActionErrors(d, schemas.BatchGetSessionActionResponse_errors, &v.Errors)
+		case schemas.BatchGetSessionActionResponse_sessionActions:
+			return deserializeBatchGetSessionActionItems(d, schemas.BatchGetSessionActionResponse_sessionActions, &v.SessionActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetSessionActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSessionAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSessionAction, schemas.BatchGetSessionActionRequest, schemas.BatchGetSessionActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSessionAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSessionAction, schemas.BatchGetSessionActionRequest, schemas.BatchGetSessionActionResponse), output: &BatchGetSessionActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

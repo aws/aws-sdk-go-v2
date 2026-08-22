@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,31 @@ type BatchPutPropertyValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutPropertyValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutPropertyValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutPropertyValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntries(s, schemas.BatchPutPropertyValuesRequest_entries, v.Entries)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.BatchPutPropertyValuesRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *BatchPutPropertyValuesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutPropertyValuesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutPropertyValuesRequest_entries:
+			return deserializeEntries(d, schemas.BatchPutPropertyValuesRequest_entries, &v.Entries)
+		case schemas.BatchPutPropertyValuesRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.BatchPutPropertyValuesRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type BatchPutPropertyValuesOutput struct {
 
 	// Entries that caused errors in the batch put operation.
@@ -55,13 +82,29 @@ type BatchPutPropertyValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutPropertyValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutPropertyValuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutPropertyValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeErrorEntries(s, schemas.BatchPutPropertyValuesResponse_errorEntries, v.ErrorEntries)
+}
+func (v *BatchPutPropertyValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutPropertyValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutPropertyValuesResponse_errorEntries:
+			return deserializeErrorEntries(d, schemas.BatchPutPropertyValuesResponse_errorEntries, &v.ErrorEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutPropertyValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutPropertyValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutPropertyValues, schemas.BatchPutPropertyValuesRequest, schemas.BatchPutPropertyValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutPropertyValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutPropertyValues, schemas.BatchPutPropertyValuesRequest, schemas.BatchPutPropertyValuesResponse), output: &BatchPutPropertyValuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

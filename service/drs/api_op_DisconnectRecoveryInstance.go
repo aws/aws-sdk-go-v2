@@ -4,6 +4,8 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,28 @@ type DisconnectRecoveryInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisconnectRecoveryInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisconnectRecoveryInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisconnectRecoveryInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryInstanceID != nil {
+		s.WriteString(schemas.DisconnectRecoveryInstanceRequest_recoveryInstanceID, *v.RecoveryInstanceID)
+	}
+}
+func (v *DisconnectRecoveryInstanceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisconnectRecoveryInstanceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisconnectRecoveryInstanceRequest_recoveryInstanceID:
+			v.RecoveryInstanceID = new(string)
+			return d.ReadString(schemas.DisconnectRecoveryInstanceRequest_recoveryInstanceID, v.RecoveryInstanceID)
+		}
+		return nil
+	})
+}
+
 type DisconnectRecoveryInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +74,26 @@ type DisconnectRecoveryInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisconnectRecoveryInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisconnectRecoveryInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisconnectRecoveryInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisconnectRecoveryInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisconnectRecoveryInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisconnectRecoveryInstance, schemas.DisconnectRecoveryInstanceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisconnectRecoveryInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisconnectRecoveryInstance, schemas.DisconnectRecoveryInstanceRequest, nil), output: &DisconnectRecoveryInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

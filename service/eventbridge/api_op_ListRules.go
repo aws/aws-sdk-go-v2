@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type ListRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBusName != nil {
+		s.WriteString(schemas.ListRulesRequest_EventBusName, *v.EventBusName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListRulesRequest_Limit, *v.Limit)
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListRulesRequest_NamePrefix, *v.NamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRulesOutput struct {
 
 	// A token indicating there are more results available. If there are no more
@@ -78,13 +101,35 @@ type ListRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesResponse_NextToken, *v.NextToken)
+	}
+	serializeRuleResponseList(s, schemas.ListRulesResponse_Rules, v.Rules)
+}
+func (v *ListRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRulesResponse_NextToken, v.NextToken)
+		case schemas.ListRulesResponse_Rules:
+			return deserializeRuleResponseList(d, schemas.ListRulesResponse_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse), output: &ListRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

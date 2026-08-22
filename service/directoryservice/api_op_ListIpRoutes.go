@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListIpRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIpRoutesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIpRoutesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIpRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ListIpRoutesRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListIpRoutesRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIpRoutesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIpRoutesOutput struct {
 
 	// A list of IpRoutes.
@@ -59,13 +79,35 @@ type ListIpRoutesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIpRoutesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIpRoutesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIpRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpRoutesInfo(s, schemas.ListIpRoutesResult_IpRoutesInfo, v.IpRoutesInfo)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIpRoutesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIpRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIpRoutesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIpRoutesResult_IpRoutesInfo:
+			return deserializeIpRoutesInfo(d, schemas.ListIpRoutesResult_IpRoutesInfo, &v.IpRoutesInfo)
+		case schemas.ListIpRoutesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIpRoutesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIpRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIpRoutes, schemas.ListIpRoutesRequest, schemas.ListIpRoutesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListIpRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIpRoutes, schemas.ListIpRoutesRequest, schemas.ListIpRoutesResult), output: &ListIpRoutesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

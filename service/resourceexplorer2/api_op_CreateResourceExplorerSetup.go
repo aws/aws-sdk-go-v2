@@ -4,6 +4,8 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,20 @@ type CreateResourceExplorerSetupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceExplorerSetupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceExplorerSetupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceExplorerSetupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionList(s, schemas.CreateResourceExplorerSetupInput_AggregatorRegions, v.AggregatorRegions)
+	serializeRegionList(s, schemas.CreateResourceExplorerSetupInput_RegionList, v.RegionList)
+	if v.ViewName != nil {
+		s.WriteString(schemas.CreateResourceExplorerSetupInput_ViewName, *v.ViewName)
+	}
+}
+
 type CreateResourceExplorerSetupOutput struct {
 
 	// The unique identifier for the setup task. Use this ID with
@@ -62,13 +78,32 @@ type CreateResourceExplorerSetupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceExplorerSetupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceExplorerSetupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceExplorerSetupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.CreateResourceExplorerSetupOutput_TaskId, *v.TaskId)
+	}
+}
+func (v *CreateResourceExplorerSetupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceExplorerSetupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceExplorerSetupOutput_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CreateResourceExplorerSetupOutput_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceExplorerSetupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResourceExplorerSetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceExplorerSetup, schemas.CreateResourceExplorerSetupInput, schemas.CreateResourceExplorerSetupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateResourceExplorerSetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceExplorerSetup, schemas.CreateResourceExplorerSetupInput, schemas.CreateResourceExplorerSetupOutput), output: &CreateResourceExplorerSetupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

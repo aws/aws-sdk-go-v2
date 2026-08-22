@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -193,6 +195,50 @@ type StartWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkflowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWorkflowExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkflowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildPolicy != "" {
+		s.WriteString(schemas.StartWorkflowExecutionInput_childPolicy, string(v.ChildPolicy))
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.StartWorkflowExecutionInput_domain, *v.Domain)
+	}
+	if v.ExecutionStartToCloseTimeout != nil {
+		s.WriteString(schemas.StartWorkflowExecutionInput_executionStartToCloseTimeout, *v.ExecutionStartToCloseTimeout)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.StartWorkflowExecutionInput_input, *v.Input)
+	}
+	if v.LambdaRole != nil {
+		s.WriteString(schemas.StartWorkflowExecutionInput_lambdaRole, *v.LambdaRole)
+	}
+	serializeTagList(s, schemas.StartWorkflowExecutionInput_tagList, v.TagList)
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.StartWorkflowExecutionInput_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.StartWorkflowExecutionInput_taskPriority, *v.TaskPriority)
+	}
+	if v.TaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.StartWorkflowExecutionInput_taskStartToCloseTimeout, *v.TaskStartToCloseTimeout)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.StartWorkflowExecutionInput_workflowId, *v.WorkflowId)
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.StartWorkflowExecutionInput_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Specifies the runId of a workflow execution.
 type StartWorkflowExecutionOutput struct {
 
@@ -206,13 +252,32 @@ type StartWorkflowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkflowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Run)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkflowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.Run_runId, *v.RunId)
+	}
+}
+func (v *StartWorkflowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Run, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Run_runId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.Run_runId, v.RunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkflowExecution, schemas.StartWorkflowExecutionInput, schemas.Run)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkflowExecution, schemas.StartWorkflowExecutionInput, schemas.Run), output: &StartWorkflowExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

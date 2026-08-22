@@ -5,7 +5,9 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -45,6 +47,18 @@ type DescribeRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoryAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRepositoryAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRepositoryAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationArn != nil {
+		s.WriteString(schemas.DescribeRepositoryAssociationRequest_AssociationArn, *v.AssociationArn)
+	}
+}
+
 type DescribeRepositoryAssociationOutput struct {
 
 	// Information about the repository association.
@@ -67,13 +81,37 @@ type DescribeRepositoryAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoryAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRepositoryAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRepositoryAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryAssociation != nil {
+		s.WriteStruct(schemas.DescribeRepositoryAssociationResponse_RepositoryAssociation)
+		v.RepositoryAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.DescribeRepositoryAssociationResponse_Tags, v.Tags)
+}
+func (v *DescribeRepositoryAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRepositoryAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRepositoryAssociationResponse_RepositoryAssociation:
+			v.RepositoryAssociation = &types.RepositoryAssociation{}
+			return v.RepositoryAssociation.Deserialize(d)
+		case schemas.DescribeRepositoryAssociationResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeRepositoryAssociationResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRepositoryAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRepositoryAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepositoryAssociation, schemas.DescribeRepositoryAssociationRequest, schemas.DescribeRepositoryAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRepositoryAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepositoryAssociation, schemas.DescribeRepositoryAssociationRequest, schemas.DescribeRepositoryAssociationResponse), output: &DescribeRepositoryAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

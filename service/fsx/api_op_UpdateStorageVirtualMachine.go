@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,29 @@ type UpdateStorageVirtualMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStorageVirtualMachineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStorageVirtualMachineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStorageVirtualMachineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateStorageVirtualMachineRequest_ActiveDirectoryConfiguration)
+		v.ActiveDirectoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateStorageVirtualMachineRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.UpdateStorageVirtualMachineRequest_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+	if v.SvmAdminPassword != nil {
+		s.WriteString(schemas.UpdateStorageVirtualMachineRequest_SvmAdminPassword, *v.SvmAdminPassword)
+	}
+}
+
 type UpdateStorageVirtualMachineOutput struct {
 
 	// Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM)
@@ -58,13 +83,34 @@ type UpdateStorageVirtualMachineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStorageVirtualMachineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStorageVirtualMachineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStorageVirtualMachineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageVirtualMachine != nil {
+		s.WriteStruct(schemas.UpdateStorageVirtualMachineResponse_StorageVirtualMachine)
+		v.StorageVirtualMachine.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateStorageVirtualMachineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStorageVirtualMachineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStorageVirtualMachineResponse_StorageVirtualMachine:
+			v.StorageVirtualMachine = &types.StorageVirtualMachine{}
+			return v.StorageVirtualMachine.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStorageVirtualMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStorageVirtualMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStorageVirtualMachine, schemas.UpdateStorageVirtualMachineRequest, schemas.UpdateStorageVirtualMachineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateStorageVirtualMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStorageVirtualMachine, schemas.UpdateStorageVirtualMachineRequest, schemas.UpdateStorageVirtualMachineResponse), output: &UpdateStorageVirtualMachineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

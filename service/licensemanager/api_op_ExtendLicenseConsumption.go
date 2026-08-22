@@ -4,6 +4,8 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ExtendLicenseConsumptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtendLicenseConsumptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendLicenseConsumptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendLicenseConsumptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != false {
+		s.WriteBool(schemas.ExtendLicenseConsumptionRequest_DryRun, v.DryRun)
+	}
+	if v.LicenseConsumptionToken != nil {
+		s.WriteString(schemas.ExtendLicenseConsumptionRequest_LicenseConsumptionToken, *v.LicenseConsumptionToken)
+	}
+}
+
 type ExtendLicenseConsumptionOutput struct {
 
 	// Date and time at which the license consumption expires.
@@ -52,13 +69,38 @@ type ExtendLicenseConsumptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtendLicenseConsumptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendLicenseConsumptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendLicenseConsumptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expiration != nil {
+		s.WriteString(schemas.ExtendLicenseConsumptionResponse_Expiration, *v.Expiration)
+	}
+	if v.LicenseConsumptionToken != nil {
+		s.WriteString(schemas.ExtendLicenseConsumptionResponse_LicenseConsumptionToken, *v.LicenseConsumptionToken)
+	}
+}
+func (v *ExtendLicenseConsumptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtendLicenseConsumptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtendLicenseConsumptionResponse_Expiration:
+			v.Expiration = new(string)
+			return d.ReadString(schemas.ExtendLicenseConsumptionResponse_Expiration, v.Expiration)
+		case schemas.ExtendLicenseConsumptionResponse_LicenseConsumptionToken:
+			v.LicenseConsumptionToken = new(string)
+			return d.ReadString(schemas.ExtendLicenseConsumptionResponse_LicenseConsumptionToken, v.LicenseConsumptionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExtendLicenseConsumptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExtendLicenseConsumption{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExtendLicenseConsumption, schemas.ExtendLicenseConsumptionRequest, schemas.ExtendLicenseConsumptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpExtendLicenseConsumption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExtendLicenseConsumption, schemas.ExtendLicenseConsumptionRequest, schemas.ExtendLicenseConsumptionResponse), output: &ExtendLicenseConsumptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

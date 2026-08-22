@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,24 @@ type ListRetrievedTracesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRetrievedTracesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRetrievedTracesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRetrievedTracesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRetrievedTracesRequest_NextToken, *v.NextToken)
+	}
+	if v.RetrievalToken != nil {
+		s.WriteString(schemas.ListRetrievedTracesRequest_RetrievalToken, *v.RetrievalToken)
+	}
+	if v.TraceFormat != "" {
+		s.WriteString(schemas.ListRetrievedTracesRequest_TraceFormat, string(v.TraceFormat))
+	}
+}
+
 type ListRetrievedTracesOutput struct {
 
 	//  Specify the pagination token returned by a previous request to retrieve the
@@ -82,13 +102,55 @@ type ListRetrievedTracesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRetrievedTracesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRetrievedTracesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRetrievedTracesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRetrievedTracesResult_NextToken, *v.NextToken)
+	}
+	if v.RetrievalStatus != "" {
+		s.WriteString(schemas.ListRetrievedTracesResult_RetrievalStatus, string(v.RetrievalStatus))
+	}
+	if v.TraceFormat != "" {
+		s.WriteString(schemas.ListRetrievedTracesResult_TraceFormat, string(v.TraceFormat))
+	}
+	serializeTraceSpanList(s, schemas.ListRetrievedTracesResult_Traces, v.Traces)
+}
+func (v *ListRetrievedTracesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRetrievedTracesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRetrievedTracesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRetrievedTracesResult_NextToken, v.NextToken)
+		case schemas.ListRetrievedTracesResult_RetrievalStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListRetrievedTracesResult_RetrievalStatus, &ev); err != nil {
+				return err
+			}
+			v.RetrievalStatus = types.RetrievalStatus(ev)
+			return nil
+		case schemas.ListRetrievedTracesResult_TraceFormat:
+			var ev string
+			if err := d.ReadString(schemas.ListRetrievedTracesResult_TraceFormat, &ev); err != nil {
+				return err
+			}
+			v.TraceFormat = types.TraceFormatType(ev)
+			return nil
+		case schemas.ListRetrievedTracesResult_Traces:
+			return deserializeTraceSpanList(d, schemas.ListRetrievedTracesResult_Traces, &v.Traces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRetrievedTracesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRetrievedTraces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRetrievedTraces, schemas.ListRetrievedTracesRequest, schemas.ListRetrievedTracesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRetrievedTraces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRetrievedTraces, schemas.ListRetrievedTracesRequest, schemas.ListRetrievedTracesResult), output: &ListRetrievedTracesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

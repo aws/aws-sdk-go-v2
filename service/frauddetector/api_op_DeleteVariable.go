@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DeleteVariableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVariableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVariableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVariableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteVariableRequest_name, *v.Name)
+	}
+}
+
 type DeleteVariableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +64,26 @@ type DeleteVariableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVariableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVariableResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVariableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVariableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVariableResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVariable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVariable, schemas.DeleteVariableRequest, schemas.DeleteVariableResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteVariable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVariable, schemas.DeleteVariableRequest, schemas.DeleteVariableResult), output: &DeleteVariableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

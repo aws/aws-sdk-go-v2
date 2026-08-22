@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,23 @@ type DescribeWorkflowTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkflowTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkflowTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkflowTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeWorkflowTypeInput_domain, *v.Domain)
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.DescribeWorkflowTypeInput_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains details about a workflow type.
 type DescribeWorkflowTypeOutput struct {
 
@@ -95,13 +114,42 @@ type DescribeWorkflowTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkflowTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowTypeDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkflowTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.WorkflowTypeDetail_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeInfo != nil {
+		s.WriteStruct(schemas.WorkflowTypeDetail_typeInfo)
+		v.TypeInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWorkflowTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowTypeDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowTypeDetail_configuration:
+			v.Configuration = &types.WorkflowTypeConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.WorkflowTypeDetail_typeInfo:
+			v.TypeInfo = &types.WorkflowTypeInfo{}
+			return v.TypeInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeWorkflowType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkflowType, schemas.DescribeWorkflowTypeInput, schemas.WorkflowTypeDetail)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeWorkflowType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkflowType, schemas.DescribeWorkflowTypeInput, schemas.WorkflowTypeDetail), output: &DescribeWorkflowTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

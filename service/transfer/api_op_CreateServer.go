@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -301,6 +303,73 @@ type CreateServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteString(schemas.CreateServerRequest_Certificate, *v.Certificate)
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.CreateServerRequest_Domain, string(v.Domain))
+	}
+	if v.EndpointDetails != nil {
+		s.WriteStruct(schemas.CreateServerRequest_EndpointDetails)
+		v.EndpointDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointType != "" {
+		s.WriteString(schemas.CreateServerRequest_EndpointType, string(v.EndpointType))
+	}
+	if v.HostKey != nil {
+		s.WriteString(schemas.CreateServerRequest_HostKey, *v.HostKey)
+	}
+	if v.IdentityProviderDetails != nil {
+		s.WriteStruct(schemas.CreateServerRequest_IdentityProviderDetails)
+		v.IdentityProviderDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityProviderType != "" {
+		s.WriteString(schemas.CreateServerRequest_IdentityProviderType, string(v.IdentityProviderType))
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateServerRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.LoggingRole != nil {
+		s.WriteString(schemas.CreateServerRequest_LoggingRole, *v.LoggingRole)
+	}
+	if v.PostAuthenticationLoginBanner != nil {
+		s.WriteString(schemas.CreateServerRequest_PostAuthenticationLoginBanner, *v.PostAuthenticationLoginBanner)
+	}
+	if v.PreAuthenticationLoginBanner != nil {
+		s.WriteString(schemas.CreateServerRequest_PreAuthenticationLoginBanner, *v.PreAuthenticationLoginBanner)
+	}
+	if v.ProtocolDetails != nil {
+		s.WriteStruct(schemas.CreateServerRequest_ProtocolDetails)
+		v.ProtocolDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProtocols(s, schemas.CreateServerRequest_Protocols, v.Protocols)
+	if v.S3StorageOptions != nil {
+		s.WriteStruct(schemas.CreateServerRequest_S3StorageOptions)
+		v.S3StorageOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityPolicyName != nil {
+		s.WriteString(schemas.CreateServerRequest_SecurityPolicyName, *v.SecurityPolicyName)
+	}
+	serializeStructuredLogDestinations(s, schemas.CreateServerRequest_StructuredLogDestinations, v.StructuredLogDestinations)
+	serializeTags(s, schemas.CreateServerRequest_Tags, v.Tags)
+	if v.WorkflowDetails != nil {
+		s.WriteStruct(schemas.CreateServerRequest_WorkflowDetails)
+		v.WorkflowDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateServerOutput struct {
 
 	// The service-assigned identifier of the server that is created.
@@ -314,13 +383,32 @@ type CreateServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.CreateServerResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *CreateServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServerResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.CreateServerResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServer, schemas.CreateServerRequest, schemas.CreateServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServer, schemas.CreateServerRequest, schemas.CreateServerResponse), output: &CreateServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

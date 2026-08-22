@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type GetMonitorSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMonitorSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMonitorSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMonitorSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorId != nil {
+		s.WriteString(schemas.GetMonitorSettingsRequest_monitorId, *v.MonitorId)
+	}
+}
+
 type GetMonitorSettingsOutput struct {
 
 	// The monitor settings as key-value pairs.
@@ -49,13 +63,29 @@ type GetMonitorSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMonitorSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMonitorSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMonitorSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSettingsMap(s, schemas.GetMonitorSettingsResponse_settings, v.Settings)
+}
+func (v *GetMonitorSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMonitorSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMonitorSettingsResponse_settings:
+			return deserializeSettingsMap(d, schemas.GetMonitorSettingsResponse_settings, &v.Settings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMonitorSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMonitorSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMonitorSettings, schemas.GetMonitorSettingsRequest, schemas.GetMonitorSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMonitorSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMonitorSettings, schemas.GetMonitorSettingsRequest, schemas.GetMonitorSettingsResponse), output: &GetMonitorSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

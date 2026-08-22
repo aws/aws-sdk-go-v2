@@ -5,7 +5,9 @@ package shield
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,32 @@ type ListAttacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttacksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteStruct(schemas.ListAttacksRequest_EndTime)
+		v.EndTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAttacksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttacksRequest_NextToken, *v.NextToken)
+	}
+	serializeResourceArnFilterList(s, schemas.ListAttacksRequest_ResourceArns, v.ResourceArns)
+	if v.StartTime != nil {
+		s.WriteStruct(schemas.ListAttacksRequest_StartTime)
+		v.StartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListAttacksOutput struct {
 
 	// The attack information for the specified time range.
@@ -101,13 +129,35 @@ type ListAttacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttacksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttackSummaries(s, schemas.ListAttacksResponse_AttackSummaries, v.AttackSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttacksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAttacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttacksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttacksResponse_AttackSummaries:
+			return deserializeAttackSummaries(d, schemas.ListAttacksResponse_AttackSummaries, &v.AttackSummaries)
+		case schemas.ListAttacksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAttacksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAttacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttacks, schemas.ListAttacksRequest, schemas.ListAttacksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAttacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttacks, schemas.ListAttacksRequest, schemas.ListAttacksResponse), output: &ListAttacksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

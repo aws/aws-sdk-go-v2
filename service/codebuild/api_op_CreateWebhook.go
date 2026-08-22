@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,38 @@ type CreateWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebhookInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebhookInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebhookInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchFilter != nil {
+		s.WriteString(schemas.CreateWebhookInput_branchFilter, *v.BranchFilter)
+	}
+	if v.BuildType != "" {
+		s.WriteString(schemas.CreateWebhookInput_buildType, string(v.BuildType))
+	}
+	serializeFilterGroups(s, schemas.CreateWebhookInput_filterGroups, v.FilterGroups)
+	if v.ManualCreation != nil {
+		s.WriteBool(schemas.CreateWebhookInput_manualCreation, *v.ManualCreation)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.CreateWebhookInput_projectName, *v.ProjectName)
+	}
+	if v.PullRequestBuildPolicy != nil {
+		s.WriteStruct(schemas.CreateWebhookInput_pullRequestBuildPolicy)
+		v.PullRequestBuildPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScopeConfiguration != nil {
+		s.WriteStruct(schemas.CreateWebhookInput_scopeConfiguration)
+		v.ScopeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateWebhookOutput struct {
 
 	// Information about a webhook that connects repository events to a build project
@@ -102,13 +136,34 @@ type CreateWebhookOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebhookOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebhookOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebhookOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Webhook != nil {
+		s.WriteStruct(schemas.CreateWebhookOutput_webhook)
+		v.Webhook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWebhookOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWebhookOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWebhookOutput_webhook:
+			v.Webhook = &types.Webhook{}
+			return v.Webhook.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWebhook{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebhook, schemas.CreateWebhookInput, schemas.CreateWebhookOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWebhook{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebhook, schemas.CreateWebhookInput, schemas.CreateWebhookOutput), output: &CreateWebhookOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

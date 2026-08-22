@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,40 @@ type ListScenesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScenesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScenesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScenesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListScenesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScenesRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListScenesRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ListScenesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScenesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScenesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListScenesRequest_maxResults, v.MaxResults)
+		case schemas.ListScenesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScenesRequest_nextToken, v.NextToken)
+		case schemas.ListScenesRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ListScenesRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type ListScenesOutput struct {
 
 	// The string that specifies the next page of results.
@@ -56,13 +92,35 @@ type ListScenesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScenesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScenesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScenesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScenesResponse_nextToken, *v.NextToken)
+	}
+	serializeSceneSummaries(s, schemas.ListScenesResponse_sceneSummaries, v.SceneSummaries)
+}
+func (v *ListScenesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScenesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScenesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScenesResponse_nextToken, v.NextToken)
+		case schemas.ListScenesResponse_sceneSummaries:
+			return deserializeSceneSummaries(d, schemas.ListScenesResponse_sceneSummaries, &v.SceneSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListScenesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScenes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScenes, schemas.ListScenesRequest, schemas.ListScenesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListScenes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScenes, schemas.ListScenesRequest, schemas.ListScenesResponse), output: &ListScenesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

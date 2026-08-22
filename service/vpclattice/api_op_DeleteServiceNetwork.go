@@ -4,6 +4,8 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,28 @@ type DeleteServiceNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceNetworkIdentifier != nil {
+		s.WriteString(schemas.DeleteServiceNetworkRequest_serviceNetworkIdentifier, *v.ServiceNetworkIdentifier)
+	}
+}
+func (v *DeleteServiceNetworkInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceNetworkRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceNetworkRequest_serviceNetworkIdentifier:
+			v.ServiceNetworkIdentifier = new(string)
+			return d.ReadString(schemas.DeleteServiceNetworkRequest_serviceNetworkIdentifier, v.ServiceNetworkIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteServiceNetworkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +70,26 @@ type DeleteServiceNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteServiceNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteServiceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceNetwork, schemas.DeleteServiceNetworkRequest, schemas.DeleteServiceNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteServiceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceNetwork, schemas.DeleteServiceNetworkRequest, schemas.DeleteServiceNetworkResponse), output: &DeleteServiceNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

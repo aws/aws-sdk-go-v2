@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetAccessLogSubscriptionInput struct {
 	AccessLogSubscriptionIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAccessLogSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessLogSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessLogSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLogSubscriptionIdentifier != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionRequest_accessLogSubscriptionIdentifier, *v.AccessLogSubscriptionIdentifier)
+	}
+}
+func (v *GetAccessLogSubscriptionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessLogSubscriptionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessLogSubscriptionRequest_accessLogSubscriptionIdentifier:
+			v.AccessLogSubscriptionIdentifier = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionRequest_accessLogSubscriptionIdentifier, v.AccessLogSubscriptionIdentifier)
+		}
+		return nil
+	})
 }
 
 type GetAccessLogSubscriptionOutput struct {
@@ -83,13 +107,78 @@ type GetAccessLogSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessLogSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessLogSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessLogSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAccessLogSubscriptionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_destinationArn, *v.DestinationArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetAccessLogSubscriptionResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_resourceId, *v.ResourceId)
+	}
+	if v.ServiceNetworkLogType != "" {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_serviceNetworkLogType, string(v.ServiceNetworkLogType))
+	}
+}
+func (v *GetAccessLogSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessLogSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessLogSubscriptionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_arn, v.Arn)
+		case schemas.GetAccessLogSubscriptionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAccessLogSubscriptionResponse_createdAt, v.CreatedAt)
+		case schemas.GetAccessLogSubscriptionResponse_destinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_destinationArn, v.DestinationArn)
+		case schemas.GetAccessLogSubscriptionResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_id, v.Id)
+		case schemas.GetAccessLogSubscriptionResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAccessLogSubscriptionResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetAccessLogSubscriptionResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_resourceArn, v.ResourceArn)
+		case schemas.GetAccessLogSubscriptionResponse_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_resourceId, v.ResourceId)
+		case schemas.GetAccessLogSubscriptionResponse_serviceNetworkLogType:
+			var ev string
+			if err := d.ReadString(schemas.GetAccessLogSubscriptionResponse_serviceNetworkLogType, &ev); err != nil {
+				return err
+			}
+			v.ServiceNetworkLogType = types.ServiceNetworkLogType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccessLogSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccessLogSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessLogSubscription, schemas.GetAccessLogSubscriptionRequest, schemas.GetAccessLogSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccessLogSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessLogSubscription, schemas.GetAccessLogSubscriptionRequest, schemas.GetAccessLogSubscriptionResponse), output: &GetAccessLogSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

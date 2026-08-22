@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,28 @@ type UpdateSnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSnapshotScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSnapshotScheduleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSnapshotScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSnapshotScheduleInput_Description, *v.Description)
+	}
+	if v.RecurrenceInHours != nil {
+		s.WriteInt32(schemas.UpdateSnapshotScheduleInput_RecurrenceInHours, *v.RecurrenceInHours)
+	}
+	if v.StartAt != nil {
+		s.WriteInt32(schemas.UpdateSnapshotScheduleInput_StartAt, *v.StartAt)
+	}
+	serializeTags(s, schemas.UpdateSnapshotScheduleInput_Tags, v.Tags)
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.UpdateSnapshotScheduleInput_VolumeARN, *v.VolumeARN)
+	}
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the updated storage
 // volume.
 type UpdateSnapshotScheduleOutput struct {
@@ -91,13 +115,32 @@ type UpdateSnapshotScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSnapshotScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSnapshotScheduleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSnapshotScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.UpdateSnapshotScheduleOutput_VolumeARN, *v.VolumeARN)
+	}
+}
+func (v *UpdateSnapshotScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSnapshotScheduleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSnapshotScheduleOutput_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.UpdateSnapshotScheduleOutput_VolumeARN, v.VolumeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSnapshotSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSnapshotSchedule, schemas.UpdateSnapshotScheduleInput, schemas.UpdateSnapshotScheduleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSnapshotSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSnapshotSchedule, schemas.UpdateSnapshotScheduleInput, schemas.UpdateSnapshotScheduleOutput), output: &UpdateSnapshotScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

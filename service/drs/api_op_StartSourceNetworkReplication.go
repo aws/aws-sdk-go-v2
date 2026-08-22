@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type StartSourceNetworkReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSourceNetworkReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSourceNetworkReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSourceNetworkReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceNetworkID != nil {
+		s.WriteString(schemas.StartSourceNetworkReplicationRequest_sourceNetworkID, *v.SourceNetworkID)
+	}
+}
+
 type StartSourceNetworkReplicationOutput struct {
 
 	// Source Network which was requested for replication.
@@ -46,13 +60,34 @@ type StartSourceNetworkReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSourceNetworkReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSourceNetworkReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSourceNetworkReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceNetwork != nil {
+		s.WriteStruct(schemas.StartSourceNetworkReplicationResponse_sourceNetwork)
+		v.SourceNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartSourceNetworkReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSourceNetworkReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSourceNetworkReplicationResponse_sourceNetwork:
+			v.SourceNetwork = &types.SourceNetwork{}
+			return v.SourceNetwork.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSourceNetworkReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSourceNetworkReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSourceNetworkReplication, schemas.StartSourceNetworkReplicationRequest, schemas.StartSourceNetworkReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSourceNetworkReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSourceNetworkReplication, schemas.StartSourceNetworkReplicationRequest, schemas.StartSourceNetworkReplicationResponse), output: &StartSourceNetworkReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

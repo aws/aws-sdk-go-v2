@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,23 @@ type DescribeDataRepositoryAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataRepositoryAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataRepositoryAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataRepositoryAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataRepositoryAssociationIds(s, schemas.DescribeDataRepositoryAssociationsRequest_AssociationIds, v.AssociationIds)
+	serializeFilters(s, schemas.DescribeDataRepositoryAssociationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDataRepositoryAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataRepositoryAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeDataRepositoryAssociationsOutput struct {
 
 	// An array of one or more data repository association descriptions.
@@ -82,13 +101,35 @@ type DescribeDataRepositoryAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataRepositoryAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataRepositoryAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataRepositoryAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataRepositoryAssociations(s, schemas.DescribeDataRepositoryAssociationsResponse_Associations, v.Associations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataRepositoryAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDataRepositoryAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataRepositoryAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataRepositoryAssociationsResponse_Associations:
+			return deserializeDataRepositoryAssociations(d, schemas.DescribeDataRepositoryAssociationsResponse_Associations, &v.Associations)
+		case schemas.DescribeDataRepositoryAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDataRepositoryAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataRepositoryAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataRepositoryAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataRepositoryAssociations, schemas.DescribeDataRepositoryAssociationsRequest, schemas.DescribeDataRepositoryAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataRepositoryAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataRepositoryAssociations, schemas.DescribeDataRepositoryAssociationsRequest, schemas.DescribeDataRepositoryAssociationsResponse), output: &DescribeDataRepositoryAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

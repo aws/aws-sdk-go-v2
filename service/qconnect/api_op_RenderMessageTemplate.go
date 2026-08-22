@@ -4,7 +4,9 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,26 @@ type RenderMessageTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenderMessageTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenderMessageTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenderMessageTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		s.WriteStruct(schemas.RenderMessageTemplateRequest_attributes)
+		v.Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.RenderMessageTemplateRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MessageTemplateId != nil {
+		s.WriteString(schemas.RenderMessageTemplateRequest_messageTemplateId, *v.MessageTemplateId)
+	}
+}
+
 type RenderMessageTemplateOutput struct {
 
 	// The message template attachments.
@@ -73,13 +95,38 @@ type RenderMessageTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenderMessageTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenderMessageTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenderMessageTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMessageTemplateAttachmentList(s, schemas.RenderMessageTemplateResponse_attachments, v.Attachments)
+	serializeMessageTemplateAttributeKeyList(s, schemas.RenderMessageTemplateResponse_attributesNotInterpolated, v.AttributesNotInterpolated)
+	serializeMessageTemplateContentProvider(s, schemas.RenderMessageTemplateResponse_content, v.Content)
+	serializeMessageTemplateSourceConfigurationSummary(s, schemas.RenderMessageTemplateResponse_sourceConfigurationSummary, v.SourceConfigurationSummary)
+}
+func (v *RenderMessageTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenderMessageTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenderMessageTemplateResponse_attachments:
+			return deserializeMessageTemplateAttachmentList(d, schemas.RenderMessageTemplateResponse_attachments, &v.Attachments)
+		case schemas.RenderMessageTemplateResponse_attributesNotInterpolated:
+			return deserializeMessageTemplateAttributeKeyList(d, schemas.RenderMessageTemplateResponse_attributesNotInterpolated, &v.AttributesNotInterpolated)
+		case schemas.RenderMessageTemplateResponse_content:
+			return deserializeMessageTemplateContentProvider(d, schemas.RenderMessageTemplateResponse_content, &v.Content)
+		case schemas.RenderMessageTemplateResponse_sourceConfigurationSummary:
+			return deserializeMessageTemplateSourceConfigurationSummary(d, schemas.RenderMessageTemplateResponse_sourceConfigurationSummary, &v.SourceConfigurationSummary)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRenderMessageTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRenderMessageTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenderMessageTemplate, schemas.RenderMessageTemplateRequest, schemas.RenderMessageTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRenderMessageTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenderMessageTemplate, schemas.RenderMessageTemplateRequest, schemas.RenderMessageTemplateResponse), output: &RenderMessageTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

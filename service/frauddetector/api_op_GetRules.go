@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type GetRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetRulesRequest_detectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetRulesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRulesRequest_nextToken, *v.NextToken)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.GetRulesRequest_ruleId, *v.RuleId)
+	}
+	if v.RuleVersion != nil {
+		s.WriteString(schemas.GetRulesRequest_ruleVersion, *v.RuleVersion)
+	}
+}
+
 type GetRulesOutput struct {
 
 	// The next page token to be used in subsequent requests.
@@ -70,13 +96,35 @@ type GetRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRulesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRulesResult_nextToken, *v.NextToken)
+	}
+	serializeRuleDetailList(s, schemas.GetRulesResult_ruleDetails, v.RuleDetails)
+}
+func (v *GetRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRulesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRulesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetRulesResult_nextToken, v.NextToken)
+		case schemas.GetRulesResult_ruleDetails:
+			return deserializeRuleDetailList(d, schemas.GetRulesResult_ruleDetails, &v.RuleDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRules, schemas.GetRulesRequest, schemas.GetRulesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRules, schemas.GetRulesRequest, schemas.GetRulesResult), output: &GetRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

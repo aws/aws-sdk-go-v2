@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type GetLinkAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinkAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLinkAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLinkAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.GetLinkAssociationsRequest_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetLinkAssociationsRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.GetLinkAssociationsRequest_LinkId, *v.LinkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetLinkAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLinkAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetLinkAssociationsOutput struct {
 
 	// The link associations.
@@ -62,13 +88,35 @@ type GetLinkAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinkAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLinkAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLinkAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinkAssociationList(s, schemas.GetLinkAssociationsResponse_LinkAssociations, v.LinkAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLinkAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetLinkAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLinkAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLinkAssociationsResponse_LinkAssociations:
+			return deserializeLinkAssociationList(d, schemas.GetLinkAssociationsResponse_LinkAssociations, &v.LinkAssociations)
+		case schemas.GetLinkAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetLinkAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLinkAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLinkAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkAssociations, schemas.GetLinkAssociationsRequest, schemas.GetLinkAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLinkAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkAssociations, schemas.GetLinkAssociationsRequest, schemas.GetLinkAssociationsResponse), output: &GetLinkAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

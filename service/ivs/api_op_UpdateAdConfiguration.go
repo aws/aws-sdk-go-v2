@@ -4,7 +4,9 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type UpdateAdConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAdConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAdConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAdConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateAdConfigurationRequest_arn, *v.Arn)
+	}
+	serializeMediaTailorPlaybackConfigurationsList(s, schemas.UpdateAdConfigurationRequest_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAdConfigurationRequest_name, *v.Name)
+	}
+	if v.PostRollConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAdConfigurationRequest_postRollConfiguration)
+		v.PostRollConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAdConfigurationOutput struct {
 
 	// Object specifying the updated ad configuration.
@@ -60,13 +83,34 @@ type UpdateAdConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAdConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAdConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAdConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAdConfigurationResponse_adConfiguration)
+		v.AdConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAdConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAdConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAdConfigurationResponse_adConfiguration:
+			v.AdConfiguration = &types.AdConfiguration{}
+			return v.AdConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAdConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAdConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAdConfiguration, schemas.UpdateAdConfigurationRequest, schemas.UpdateAdConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAdConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAdConfiguration, schemas.UpdateAdConfigurationRequest, schemas.UpdateAdConfigurationResponse), output: &UpdateAdConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

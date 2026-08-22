@@ -4,7 +4,9 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type UpdateAttributeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAttributeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAttributeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAttributeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeGroup != nil {
+		s.WriteString(schemas.UpdateAttributeGroupRequest_attributeGroup, *v.AttributeGroup)
+	}
+	if v.Attributes != nil {
+		s.WriteString(schemas.UpdateAttributeGroupRequest_attributes, *v.Attributes)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAttributeGroupRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAttributeGroupRequest_name, *v.Name)
+	}
+}
+
 type UpdateAttributeGroupOutput struct {
 
 	// The updated information of the attribute group.
@@ -60,13 +83,34 @@ type UpdateAttributeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAttributeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAttributeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAttributeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeGroup != nil {
+		s.WriteStruct(schemas.UpdateAttributeGroupResponse_attributeGroup)
+		v.AttributeGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAttributeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAttributeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAttributeGroupResponse_attributeGroup:
+			v.AttributeGroup = &types.AttributeGroup{}
+			return v.AttributeGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAttributeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAttributeGroup, schemas.UpdateAttributeGroupRequest, schemas.UpdateAttributeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAttributeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAttributeGroup, schemas.UpdateAttributeGroupRequest, schemas.UpdateAttributeGroupResponse), output: &UpdateAttributeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

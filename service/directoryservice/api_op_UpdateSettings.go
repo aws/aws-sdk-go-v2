@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type UpdateSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateSettingsRequest_DirectoryId, *v.DirectoryId)
+	}
+	serializeSettings(s, schemas.UpdateSettingsRequest_Settings, v.Settings)
+}
+
 type UpdateSettingsOutput struct {
 
 	// The identifier of the directory.
@@ -50,13 +65,32 @@ type UpdateSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSettingsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateSettingsResult_DirectoryId, *v.DirectoryId)
+	}
+}
+func (v *UpdateSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSettingsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSettingsResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.UpdateSettingsResult_DirectoryId, v.DirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSettings, schemas.UpdateSettingsRequest, schemas.UpdateSettingsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSettings, schemas.UpdateSettingsRequest, schemas.UpdateSettingsResult), output: &UpdateSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,30 @@ type UpdateServiceSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableCrossAccountsDiscovery != nil {
+		s.WriteBool(schemas.UpdateServiceSettingsRequest_EnableCrossAccountsDiscovery, *v.EnableCrossAccountsDiscovery)
+	}
+	serializeStringList(s, schemas.UpdateServiceSettingsRequest_EnabledDiscoverySourceRegions, v.EnabledDiscoverySourceRegions)
+	if v.OrganizationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceSettingsRequest_OrganizationConfiguration)
+		v.OrganizationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.UpdateServiceSettingsRequest_S3BucketArn, *v.S3BucketArn)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.UpdateServiceSettingsRequest_SnsTopicArn, *v.SnsTopicArn)
+	}
+}
+
 type UpdateServiceSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +79,26 @@ type UpdateServiceSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateServiceSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateServiceSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSettings, schemas.UpdateServiceSettingsRequest, schemas.UpdateServiceSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateServiceSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSettings, schemas.UpdateServiceSettingsRequest, schemas.UpdateServiceSettingsResponse), output: &UpdateServiceSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

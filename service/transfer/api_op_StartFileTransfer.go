@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,27 @@ type StartFileTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFileTransferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFileTransferRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFileTransferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.StartFileTransferRequest_ConnectorId, *v.ConnectorId)
+	}
+	serializeCustomHttpHeaders(s, schemas.StartFileTransferRequest_CustomHttpHeaders, v.CustomHttpHeaders)
+	if v.LocalDirectoryPath != nil {
+		s.WriteString(schemas.StartFileTransferRequest_LocalDirectoryPath, *v.LocalDirectoryPath)
+	}
+	if v.RemoteDirectoryPath != nil {
+		s.WriteString(schemas.StartFileTransferRequest_RemoteDirectoryPath, *v.RemoteDirectoryPath)
+	}
+	serializeFilePaths(s, schemas.StartFileTransferRequest_RetrieveFilePaths, v.RetrieveFilePaths)
+	serializeFilePaths(s, schemas.StartFileTransferRequest_SendFilePaths, v.SendFilePaths)
+}
+
 type StartFileTransferOutput struct {
 
 	// Returns the unique identifier for the file transfer.
@@ -91,13 +114,32 @@ type StartFileTransferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFileTransferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFileTransferResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFileTransferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransferId != nil {
+		s.WriteString(schemas.StartFileTransferResponse_TransferId, *v.TransferId)
+	}
+}
+func (v *StartFileTransferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFileTransferResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFileTransferResponse_TransferId:
+			v.TransferId = new(string)
+			return d.ReadString(schemas.StartFileTransferResponse_TransferId, v.TransferId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFileTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartFileTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFileTransfer, schemas.StartFileTransferRequest, schemas.StartFileTransferResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartFileTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFileTransfer, schemas.StartFileTransferRequest, schemas.StartFileTransferResponse), output: &StartFileTransferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

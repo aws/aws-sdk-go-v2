@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,34 @@ type JoinDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JoinDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JoinDomainInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JoinDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHosts(s, schemas.JoinDomainInput_DomainControllers, v.DomainControllers)
+	if v.DomainName != nil {
+		s.WriteString(schemas.JoinDomainInput_DomainName, *v.DomainName)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.JoinDomainInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.OrganizationalUnit != nil {
+		s.WriteString(schemas.JoinDomainInput_OrganizationalUnit, *v.OrganizationalUnit)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.JoinDomainInput_Password, *v.Password)
+	}
+	if v.TimeoutInSeconds != nil {
+		s.WriteInt32(schemas.JoinDomainInput_TimeoutInSeconds, *v.TimeoutInSeconds)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.JoinDomainInput_UserName, *v.UserName)
+	}
+}
+
 // JoinDomainOutput
 type JoinDomainOutput struct {
 
@@ -124,13 +154,42 @@ type JoinDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JoinDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JoinDomainOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JoinDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryStatus != "" {
+		s.WriteString(schemas.JoinDomainOutput_ActiveDirectoryStatus, string(v.ActiveDirectoryStatus))
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.JoinDomainOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *JoinDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JoinDomainOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JoinDomainOutput_ActiveDirectoryStatus:
+			var ev string
+			if err := d.ReadString(schemas.JoinDomainOutput_ActiveDirectoryStatus, &ev); err != nil {
+				return err
+			}
+			v.ActiveDirectoryStatus = types.ActiveDirectoryStatus(ev)
+			return nil
+		case schemas.JoinDomainOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.JoinDomainOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJoinDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpJoinDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JoinDomain, schemas.JoinDomainInput, schemas.JoinDomainOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpJoinDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JoinDomain, schemas.JoinDomainInput, schemas.JoinDomainOutput), output: &JoinDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

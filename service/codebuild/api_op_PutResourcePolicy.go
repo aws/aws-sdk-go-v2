@@ -4,6 +4,8 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type PutResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourcePolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.PutResourcePolicyInput_policy, *v.Policy)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PutResourcePolicyInput_resourceArn, *v.ResourceArn)
+	}
+}
+
 type PutResourcePolicyOutput struct {
 
 	//  The ARN of the Project or ReportGroup resource that is associated with a
@@ -55,13 +72,32 @@ type PutResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourcePolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PutResourcePolicyOutput_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *PutResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutResourcePolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutResourcePolicyOutput_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.PutResourcePolicyOutput_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyInput, schemas.PutResourcePolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyInput, schemas.PutResourcePolicyOutput), output: &PutResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

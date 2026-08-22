@@ -4,6 +4,8 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type StartRemoteMoveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemoteMoveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemoteMoveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemoteMoveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.StartRemoteMoveRequest_ConnectorId, *v.ConnectorId)
+	}
+	if v.SourcePath != nil {
+		s.WriteString(schemas.StartRemoteMoveRequest_SourcePath, *v.SourcePath)
+	}
+	if v.TargetPath != nil {
+		s.WriteString(schemas.StartRemoteMoveRequest_TargetPath, *v.TargetPath)
+	}
+}
+
 type StartRemoteMoveOutput struct {
 
 	// Returns a unique identifier for the move/rename operation.
@@ -57,13 +77,32 @@ type StartRemoteMoveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemoteMoveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemoteMoveResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemoteMoveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MoveId != nil {
+		s.WriteString(schemas.StartRemoteMoveResponse_MoveId, *v.MoveId)
+	}
+}
+func (v *StartRemoteMoveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRemoteMoveResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRemoteMoveResponse_MoveId:
+			v.MoveId = new(string)
+			return d.ReadString(schemas.StartRemoteMoveResponse_MoveId, v.MoveId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRemoteMoveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartRemoteMove{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemoteMove, schemas.StartRemoteMoveRequest, schemas.StartRemoteMoveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartRemoteMove{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemoteMove, schemas.StartRemoteMoveRequest, schemas.StartRemoteMoveResponse), output: &StartRemoteMoveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

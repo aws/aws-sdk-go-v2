@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type GetCoreNetworkPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoreNetworkPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreNetworkPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreNetworkPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != "" {
+		s.WriteString(schemas.GetCoreNetworkPolicyRequest_Alias, string(v.Alias))
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.GetCoreNetworkPolicyRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteInt32(schemas.GetCoreNetworkPolicyRequest_PolicyVersionId, *v.PolicyVersionId)
+	}
+}
+
 type GetCoreNetworkPolicyOutput struct {
 
 	// The details about a core network policy.
@@ -52,13 +72,34 @@ type GetCoreNetworkPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoreNetworkPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreNetworkPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreNetworkPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkPolicy != nil {
+		s.WriteStruct(schemas.GetCoreNetworkPolicyResponse_CoreNetworkPolicy)
+		v.CoreNetworkPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCoreNetworkPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCoreNetworkPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCoreNetworkPolicyResponse_CoreNetworkPolicy:
+			v.CoreNetworkPolicy = &types.CoreNetworkPolicy{}
+			return v.CoreNetworkPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCoreNetworkPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoreNetworkPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreNetworkPolicy, schemas.GetCoreNetworkPolicyRequest, schemas.GetCoreNetworkPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCoreNetworkPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreNetworkPolicy, schemas.GetCoreNetworkPolicyRequest, schemas.GetCoreNetworkPolicyResponse), output: &GetCoreNetworkPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

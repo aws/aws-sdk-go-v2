@@ -4,6 +4,8 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteAIPromptVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIPromptVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIPromptVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIPromptVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiPromptId != nil {
+		s.WriteString(schemas.DeleteAIPromptVersionRequest_aiPromptId, *v.AiPromptId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.DeleteAIPromptVersionRequest_assistantId, *v.AssistantId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DeleteAIPromptVersionRequest_versionNumber, *v.VersionNumber)
+	}
+}
+
 type DeleteAIPromptVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DeleteAIPromptVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIPromptVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIPromptVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIPromptVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAIPromptVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAIPromptVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAIPromptVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAIPromptVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIPromptVersion, schemas.DeleteAIPromptVersionRequest, schemas.DeleteAIPromptVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAIPromptVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIPromptVersion, schemas.DeleteAIPromptVersionRequest, schemas.DeleteAIPromptVersionResponse), output: &DeleteAIPromptVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

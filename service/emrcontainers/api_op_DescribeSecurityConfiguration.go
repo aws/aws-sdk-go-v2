@@ -4,7 +4,9 @@ package emrcontainers
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DescribeSecurityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeSecurityConfigurationRequest_id, *v.Id)
+	}
+}
+
 type DescribeSecurityConfigurationOutput struct {
 
 	// Details of the security configuration.
@@ -49,13 +63,34 @@ type DescribeSecurityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityConfiguration != nil {
+		s.WriteStruct(schemas.DescribeSecurityConfigurationResponse_securityConfiguration)
+		v.SecurityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSecurityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSecurityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSecurityConfigurationResponse_securityConfiguration:
+			v.SecurityConfiguration = &types.SecurityConfiguration{}
+			return v.SecurityConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSecurityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityConfiguration, schemas.DescribeSecurityConfigurationRequest, schemas.DescribeSecurityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSecurityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityConfiguration, schemas.DescribeSecurityConfigurationRequest, schemas.DescribeSecurityConfigurationResponse), output: &DescribeSecurityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

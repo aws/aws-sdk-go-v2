@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DescribeSecurityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityPolicyName != nil {
+		s.WriteString(schemas.DescribeSecurityPolicyRequest_SecurityPolicyName, *v.SecurityPolicyName)
+	}
+}
+
 type DescribeSecurityPolicyOutput struct {
 
 	// An array containing the properties of the security policy.
@@ -52,13 +66,34 @@ type DescribeSecurityPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityPolicy != nil {
+		s.WriteStruct(schemas.DescribeSecurityPolicyResponse_SecurityPolicy)
+		v.SecurityPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSecurityPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSecurityPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSecurityPolicyResponse_SecurityPolicy:
+			v.SecurityPolicy = &types.DescribedSecurityPolicy{}
+			return v.SecurityPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSecurityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSecurityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityPolicy, schemas.DescribeSecurityPolicyRequest, schemas.DescribeSecurityPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSecurityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityPolicy, schemas.DescribeSecurityPolicyRequest, schemas.DescribeSecurityPolicyResponse), output: &DescribeSecurityPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

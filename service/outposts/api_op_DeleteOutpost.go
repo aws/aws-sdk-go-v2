@@ -4,6 +4,8 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteOutpostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOutpostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOutpostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOutpostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostId != nil {
+		s.WriteString(schemas.DeleteOutpostInput_OutpostId, *v.OutpostId)
+	}
+}
+
 type DeleteOutpostOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteOutpostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOutpostOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOutpostOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOutpostOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteOutpostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOutpostOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOutpost{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOutpost, schemas.DeleteOutpostInput, schemas.DeleteOutpostOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteOutpost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOutpost, schemas.DeleteOutpostInput, schemas.DeleteOutpostOutput), output: &DeleteOutpostOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

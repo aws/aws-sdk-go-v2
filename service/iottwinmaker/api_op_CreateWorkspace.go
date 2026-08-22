@@ -5,6 +5,8 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -49,6 +51,49 @@ type CreateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_description, *v.Description)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_role, *v.Role)
+	}
+	if v.S3Location != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_s3Location, *v.S3Location)
+	}
+	serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateWorkspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_description, v.Description)
+		case schemas.CreateWorkspaceRequest_role:
+			v.Role = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_role, v.Role)
+		case schemas.CreateWorkspaceRequest_s3Location:
+			v.S3Location = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_s3Location, v.S3Location)
+		case schemas.CreateWorkspaceRequest_tags:
+			return deserializeTagMap(d, schemas.CreateWorkspaceRequest_tags, &v.Tags)
+		case schemas.CreateWorkspaceRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type CreateWorkspaceOutput struct {
 
 	// The ARN of the workspace.
@@ -67,13 +112,38 @@ type CreateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateWorkspaceResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateWorkspaceResponse_creationDateTime, *v.CreationDateTime)
+	}
+}
+func (v *CreateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateWorkspaceResponse_arn, v.Arn)
+		case schemas.CreateWorkspaceResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateWorkspaceResponse_creationDateTime, v.CreationDateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspace, schemas.CreateWorkspaceRequest, schemas.CreateWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspace, schemas.CreateWorkspaceRequest, schemas.CreateWorkspaceResponse), output: &CreateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

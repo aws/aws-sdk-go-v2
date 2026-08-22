@@ -4,6 +4,8 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type DeleteSpeakerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSpeakerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSpeakerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSpeakerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteSpeakerRequest_DomainId, *v.DomainId)
+	}
+	if v.SpeakerId != nil {
+		s.WriteString(schemas.DeleteSpeakerRequest_SpeakerId, *v.SpeakerId)
+	}
+}
+func (v *DeleteSpeakerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSpeakerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSpeakerRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DeleteSpeakerRequest_DomainId, v.DomainId)
+		case schemas.DeleteSpeakerRequest_SpeakerId:
+			v.SpeakerId = new(string)
+			return d.ReadString(schemas.DeleteSpeakerRequest_SpeakerId, v.SpeakerId)
+		}
+		return nil
+	})
+}
+
 type DeleteSpeakerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +75,26 @@ type DeleteSpeakerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSpeakerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSpeakerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSpeakerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSpeakerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteSpeaker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSpeaker, schemas.DeleteSpeakerRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteSpeaker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSpeaker, schemas.DeleteSpeakerRequest, nil), output: &DeleteSpeakerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

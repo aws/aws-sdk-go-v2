@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,16 @@ type PutTraceSegmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTraceSegmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTraceSegmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTraceSegmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTraceSegmentDocumentList(s, schemas.PutTraceSegmentsRequest_TraceSegmentDocuments, v.TraceSegmentDocuments)
+}
+
 type PutTraceSegmentsOutput struct {
 
 	// Segments that failed processing.
@@ -99,13 +111,29 @@ type PutTraceSegmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTraceSegmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTraceSegmentsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTraceSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnprocessedTraceSegmentList(s, schemas.PutTraceSegmentsResult_UnprocessedTraceSegments, v.UnprocessedTraceSegments)
+}
+func (v *PutTraceSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTraceSegmentsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutTraceSegmentsResult_UnprocessedTraceSegments:
+			return deserializeUnprocessedTraceSegmentList(d, schemas.PutTraceSegmentsResult_UnprocessedTraceSegments, &v.UnprocessedTraceSegments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTraceSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTraceSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTraceSegments, schemas.PutTraceSegmentsRequest, schemas.PutTraceSegmentsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTraceSegments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTraceSegments, schemas.PutTraceSegmentsRequest, schemas.PutTraceSegmentsResult), output: &PutTraceSegmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,32 @@ type ActionCondition struct {
 	Action ActionValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActionCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ActionCondition_Action, string(v.Action))
+	}
+}
+func (v *ActionCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionCondition_Action:
+			var ev string
+			if err := d.ReadString(schemas.ActionCondition_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ActionValue(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The name of a field in the request payload that contains part or all of your
@@ -58,6 +86,28 @@ type AddressField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddressField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddressField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddressField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.AddressField_Identifier, *v.Identifier)
+	}
+}
+func (v *AddressField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddressField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddressField_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.AddressField_Identifier, v.Identifier)
+		}
+		return nil
+	})
+}
+
 // Inspect all of the elements that WAF has parsed and extracted from the web
 // request component that you've identified in your FieldToMatchspecifications.
 //
@@ -66,6 +116,22 @@ type AddressField struct {
 // JSON specification: "All": {}
 type All struct {
 	noSmithyDocumentSerde
+}
+
+func (v *All) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.All)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *All) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *All) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.All, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Specifies that WAF should allow the request and optionally defines additional
@@ -86,6 +152,30 @@ type AllowAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AllowAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllowAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllowAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomRequestHandling != nil {
+		s.WriteStruct(schemas.AllowAction_CustomRequestHandling)
+		v.CustomRequestHandling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AllowAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AllowAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AllowAction_CustomRequestHandling:
+			v.CustomRequestHandling = &CustomRequestHandling{}
+			return v.CustomRequestHandling.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Inspect all query arguments of the web request.
 //
 // This is used in the FieldToMatch specification for some web request component types.
@@ -93,6 +183,22 @@ type AllowAction struct {
 // JSON specification: "AllQueryArguments": {}
 type AllQueryArguments struct {
 	noSmithyDocumentSerde
+}
+
+func (v *AllQueryArguments) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllQueryArguments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllQueryArguments) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AllQueryArguments) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AllQueryArguments, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // A logical rule statement used to combine other rule statements with AND logic.
@@ -106,6 +212,25 @@ type AndStatement struct {
 	Statements []Statement
 
 	noSmithyDocumentSerde
+}
+
+func (v *AndStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AndStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AndStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStatements(s, schemas.AndStatement_Statements, v.Statements)
+}
+func (v *AndStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AndStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AndStatement_Statements:
+			return deserializeStatements(d, schemas.AndStatement_Statements, &v.Statements)
+		}
+		return nil
+	})
 }
 
 // Information for a single API key.
@@ -134,6 +259,42 @@ type APIKeySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *APIKeySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.APIKeySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *APIKeySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APIKey != nil {
+		s.WriteString(schemas.APIKeySummary_APIKey, *v.APIKey)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.APIKeySummary_CreationTimestamp, *v.CreationTimestamp)
+	}
+	serializeTokenDomains(s, schemas.APIKeySummary_TokenDomains, v.TokenDomains)
+	if v.Version != 0 {
+		s.WriteInt32(schemas.APIKeySummary_Version, v.Version)
+	}
+}
+func (v *APIKeySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.APIKeySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.APIKeySummary_APIKey:
+			v.APIKey = new(string)
+			return d.ReadString(schemas.APIKeySummary_APIKey, v.APIKey)
+		case schemas.APIKeySummary_CreationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.APIKeySummary_CreationTimestamp, v.CreationTimestamp)
+		case schemas.APIKeySummary_TokenDomains:
+			return deserializeTokenDomains(d, schemas.APIKeySummary_TokenDomains, &v.TokenDomains)
+		case schemas.APIKeySummary_Version:
+			return d.ReadInt32(schemas.APIKeySummary_Version, &v.Version)
+		}
+		return nil
+	})
+}
+
 // Application details defined during the web ACL creation process. Application
 // attributes help WAF give recommendations for protection packs.
 type ApplicationAttribute struct {
@@ -147,6 +308,31 @@ type ApplicationAttribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ApplicationAttribute_Name, *v.Name)
+	}
+	serializeAttributeValues(s, schemas.ApplicationAttribute_Values, v.Values)
+}
+func (v *ApplicationAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationAttribute_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ApplicationAttribute_Name, v.Name)
+		case schemas.ApplicationAttribute_Values:
+			return deserializeAttributeValues(d, schemas.ApplicationAttribute_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A list of ApplicationAttribute s that contains information about the application.
 type ApplicationConfig struct {
 
@@ -154,6 +340,25 @@ type ApplicationConfig struct {
 	Attributes []ApplicationAttribute
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationAttributes(s, schemas.ApplicationConfig_Attributes, v.Attributes)
+}
+func (v *ApplicationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationConfig_Attributes:
+			return deserializeApplicationAttributes(d, schemas.ApplicationConfig_Attributes, &v.Attributes)
+		}
+		return nil
+	})
 }
 
 // A rule statement that inspects web traffic based on the Autonomous System
@@ -179,6 +384,33 @@ type AsnMatchStatement struct {
 	ForwardedIPConfig *ForwardedIPConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *AsnMatchStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AsnMatchStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AsnMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAsnList(s, schemas.AsnMatchStatement_AsnList, v.AsnList)
+	if v.ForwardedIPConfig != nil {
+		s.WriteStruct(schemas.AsnMatchStatement_ForwardedIPConfig)
+		v.ForwardedIPConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AsnMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AsnMatchStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AsnMatchStatement_AsnList:
+			return deserializeAsnList(d, schemas.AsnMatchStatement_AsnList, &v.AsnList)
+		case schemas.AsnMatchStatement_ForwardedIPConfig:
+			v.ForwardedIPConfig = &ForwardedIPConfig{}
+			return v.ForwardedIPConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies custom configurations for the associations between the web ACL and
@@ -215,6 +447,25 @@ type AssociationConfig struct {
 	RequestBody map[string]RequestBodyAssociatedResourceTypeConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssociationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRequestBody(s, schemas.AssociationConfig_RequestBody, v.RequestBody)
+}
+func (v *AssociationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociationConfig_RequestBody:
+			return deserializeRequestBody(d, schemas.AssociationConfig_RequestBody, &v.RequestBody)
+		}
+		return nil
+	})
 }
 
 // Details for your use of the account creation fraud prevention managed rule
@@ -284,6 +535,55 @@ type AWSManagedRulesACFPRuleSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AWSManagedRulesACFPRuleSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AWSManagedRulesACFPRuleSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AWSManagedRulesACFPRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationPath != nil {
+		s.WriteString(schemas.AWSManagedRulesACFPRuleSet_CreationPath, *v.CreationPath)
+	}
+	if v.EnableRegexInPath != false {
+		s.WriteBool(schemas.AWSManagedRulesACFPRuleSet_EnableRegexInPath, v.EnableRegexInPath)
+	}
+	if v.RegistrationPagePath != nil {
+		s.WriteString(schemas.AWSManagedRulesACFPRuleSet_RegistrationPagePath, *v.RegistrationPagePath)
+	}
+	if v.RequestInspection != nil {
+		s.WriteStruct(schemas.AWSManagedRulesACFPRuleSet_RequestInspection)
+		v.RequestInspection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResponseInspection != nil {
+		s.WriteStruct(schemas.AWSManagedRulesACFPRuleSet_ResponseInspection)
+		v.ResponseInspection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AWSManagedRulesACFPRuleSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AWSManagedRulesACFPRuleSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AWSManagedRulesACFPRuleSet_CreationPath:
+			v.CreationPath = new(string)
+			return d.ReadString(schemas.AWSManagedRulesACFPRuleSet_CreationPath, v.CreationPath)
+		case schemas.AWSManagedRulesACFPRuleSet_EnableRegexInPath:
+			return d.ReadBool(schemas.AWSManagedRulesACFPRuleSet_EnableRegexInPath, &v.EnableRegexInPath)
+		case schemas.AWSManagedRulesACFPRuleSet_RegistrationPagePath:
+			v.RegistrationPagePath = new(string)
+			return d.ReadString(schemas.AWSManagedRulesACFPRuleSet_RegistrationPagePath, v.RegistrationPagePath)
+		case schemas.AWSManagedRulesACFPRuleSet_RequestInspection:
+			v.RequestInspection = &RequestInspectionACFP{}
+			return v.RequestInspection.Deserialize(d)
+		case schemas.AWSManagedRulesACFPRuleSet_ResponseInspection:
+			v.ResponseInspection = &ResponseInspection{}
+			return v.ResponseInspection.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configures the use of the anti-DDoS managed rule group,
 // AWSManagedRulesAntiDDoSRuleSet . This configuration is used in
 // ManagedRuleGroupConfig .
@@ -325,6 +625,40 @@ type AWSManagedRulesAntiDDoSRuleSet struct {
 	SensitivityToBlock SensitivityToAct
 
 	noSmithyDocumentSerde
+}
+
+func (v *AWSManagedRulesAntiDDoSRuleSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AWSManagedRulesAntiDDoSRuleSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AWSManagedRulesAntiDDoSRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSideActionConfig != nil {
+		s.WriteStruct(schemas.AWSManagedRulesAntiDDoSRuleSet_ClientSideActionConfig)
+		v.ClientSideActionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SensitivityToBlock != "" {
+		s.WriteString(schemas.AWSManagedRulesAntiDDoSRuleSet_SensitivityToBlock, string(v.SensitivityToBlock))
+	}
+}
+func (v *AWSManagedRulesAntiDDoSRuleSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AWSManagedRulesAntiDDoSRuleSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AWSManagedRulesAntiDDoSRuleSet_ClientSideActionConfig:
+			v.ClientSideActionConfig = &ClientSideActionConfig{}
+			return v.ClientSideActionConfig.Deserialize(d)
+		case schemas.AWSManagedRulesAntiDDoSRuleSet_SensitivityToBlock:
+			var ev string
+			if err := d.ReadString(schemas.AWSManagedRulesAntiDDoSRuleSet_SensitivityToBlock, &ev); err != nil {
+				return err
+			}
+			v.SensitivityToBlock = SensitivityToAct(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details for your use of the account takeover prevention managed rule group,
@@ -374,6 +708,49 @@ type AWSManagedRulesATPRuleSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AWSManagedRulesATPRuleSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AWSManagedRulesATPRuleSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AWSManagedRulesATPRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableRegexInPath != false {
+		s.WriteBool(schemas.AWSManagedRulesATPRuleSet_EnableRegexInPath, v.EnableRegexInPath)
+	}
+	if v.LoginPath != nil {
+		s.WriteString(schemas.AWSManagedRulesATPRuleSet_LoginPath, *v.LoginPath)
+	}
+	if v.RequestInspection != nil {
+		s.WriteStruct(schemas.AWSManagedRulesATPRuleSet_RequestInspection)
+		v.RequestInspection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResponseInspection != nil {
+		s.WriteStruct(schemas.AWSManagedRulesATPRuleSet_ResponseInspection)
+		v.ResponseInspection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AWSManagedRulesATPRuleSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AWSManagedRulesATPRuleSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AWSManagedRulesATPRuleSet_EnableRegexInPath:
+			return d.ReadBool(schemas.AWSManagedRulesATPRuleSet_EnableRegexInPath, &v.EnableRegexInPath)
+		case schemas.AWSManagedRulesATPRuleSet_LoginPath:
+			v.LoginPath = new(string)
+			return d.ReadString(schemas.AWSManagedRulesATPRuleSet_LoginPath, v.LoginPath)
+		case schemas.AWSManagedRulesATPRuleSet_RequestInspection:
+			v.RequestInspection = &RequestInspection{}
+			return v.RequestInspection.Deserialize(d)
+		case schemas.AWSManagedRulesATPRuleSet_ResponseInspection:
+			v.ResponseInspection = &ResponseInspection{}
+			return v.ResponseInspection.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details for your use of the Bot Control managed rule group,
 // AWSManagedRulesBotControlRuleSet . This configuration is used in
 // ManagedRuleGroupConfig .
@@ -414,6 +791,38 @@ type AWSManagedRulesBotControlRuleSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AWSManagedRulesBotControlRuleSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AWSManagedRulesBotControlRuleSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AWSManagedRulesBotControlRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableMachineLearning != nil {
+		s.WriteBool(schemas.AWSManagedRulesBotControlRuleSet_EnableMachineLearning, *v.EnableMachineLearning)
+	}
+	if v.InspectionLevel != "" {
+		s.WriteString(schemas.AWSManagedRulesBotControlRuleSet_InspectionLevel, string(v.InspectionLevel))
+	}
+}
+func (v *AWSManagedRulesBotControlRuleSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AWSManagedRulesBotControlRuleSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AWSManagedRulesBotControlRuleSet_EnableMachineLearning:
+			v.EnableMachineLearning = new(bool)
+			return d.ReadBool(schemas.AWSManagedRulesBotControlRuleSet_EnableMachineLearning, v.EnableMachineLearning)
+		case schemas.AWSManagedRulesBotControlRuleSet_InspectionLevel:
+			var ev string
+			if err := d.ReadString(schemas.AWSManagedRulesBotControlRuleSet_InspectionLevel, &ev); err != nil {
+				return err
+			}
+			v.InspectionLevel = InspectionLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies that WAF should block the request and optionally defines additional
 // custom handling for the response to the web request.
 //
@@ -430,6 +839,30 @@ type BlockAction struct {
 	CustomResponse *CustomResponse
 
 	noSmithyDocumentSerde
+}
+
+func (v *BlockAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlockAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlockAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomResponse != nil {
+		s.WriteStruct(schemas.BlockAction_CustomResponse)
+		v.CustomResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BlockAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlockAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlockAction_CustomResponse:
+			v.CustomResponse = &CustomResponse{}
+			return v.CustomResponse.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Inspect the body of the web request. The body immediately follows the request
@@ -476,6 +909,32 @@ type Body struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Body) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Body)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Body) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OversizeHandling != "" {
+		s.WriteString(schemas.Body_OversizeHandling, string(v.OversizeHandling))
+	}
+}
+func (v *Body) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Body, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Body_OversizeHandling:
+			var ev string
+			if err := d.ReadString(schemas.Body_OversizeHandling, &ev); err != nil {
+				return err
+			}
+			v.OversizeHandling = OversizeHandling(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Statistics about a specific bot's traffic to a path, including the bot name,
 // request count, and percentage of traffic.
 type BotStatistics struct {
@@ -497,6 +956,34 @@ type BotStatistics struct {
 	RequestCount int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *BotStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BotStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BotStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotName != nil {
+		s.WriteString(schemas.BotStatistics_BotName, *v.BotName)
+	}
+	s.WriteFloat64(schemas.BotStatistics_Percentage, v.Percentage)
+	s.WriteInt64(schemas.BotStatistics_RequestCount, v.RequestCount)
+}
+func (v *BotStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BotStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BotStatistics_BotName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.BotStatistics_BotName, v.BotName)
+		case schemas.BotStatistics_Percentage:
+			return d.ReadFloat64(schemas.BotStatistics_Percentage, &v.Percentage)
+		case schemas.BotStatistics_RequestCount:
+			return d.ReadInt64(schemas.BotStatistics_RequestCount, &v.RequestCount)
+		}
+		return nil
+	})
 }
 
 // A rule statement that defines a string match search for WAF to apply to web
@@ -626,6 +1113,51 @@ type ByteMatchStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ByteMatchStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByteMatchStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByteMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.ByteMatchStatement_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PositionalConstraint != "" {
+		s.WriteString(schemas.ByteMatchStatement_PositionalConstraint, string(v.PositionalConstraint))
+	}
+	serializePreParseTextTransformations(s, schemas.ByteMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	if v.SearchString != nil {
+		s.WriteBlob(schemas.ByteMatchStatement_SearchString, v.SearchString)
+	}
+	serializeTextTransformations(s, schemas.ByteMatchStatement_TextTransformations, v.TextTransformations)
+}
+func (v *ByteMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByteMatchStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByteMatchStatement_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.ByteMatchStatement_PositionalConstraint:
+			var ev string
+			if err := d.ReadString(schemas.ByteMatchStatement_PositionalConstraint, &ev); err != nil {
+				return err
+			}
+			v.PositionalConstraint = PositionalConstraint(ev)
+			return nil
+		case schemas.ByteMatchStatement_PreParseTextTransformations:
+			return deserializePreParseTextTransformations(d, schemas.ByteMatchStatement_PreParseTextTransformations, &v.PreParseTextTransformations)
+		case schemas.ByteMatchStatement_SearchString:
+			return d.ReadBlob(schemas.ByteMatchStatement_SearchString, &v.SearchString)
+		case schemas.ByteMatchStatement_TextTransformations:
+			return deserializeTextTransformations(d, schemas.ByteMatchStatement_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
+}
+
 // Specifies that WAF should run a CAPTCHA check against the request:
 //
 //   - If the request includes a valid, unexpired CAPTCHA token, WAF applies any
@@ -667,6 +1199,30 @@ type CaptchaAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CaptchaAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptchaAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptchaAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomRequestHandling != nil {
+		s.WriteStruct(schemas.CaptchaAction_CustomRequestHandling)
+		v.CustomRequestHandling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CaptchaAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptchaAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptchaAction_CustomRequestHandling:
+			v.CustomRequestHandling = &CustomRequestHandling{}
+			return v.CustomRequestHandling.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies how WAF should handle CAPTCHA evaluations. This is available at the
 // web ACL level and in each rule.
 type CaptchaConfig struct {
@@ -676,6 +1232,30 @@ type CaptchaConfig struct {
 	ImmunityTimeProperty *ImmunityTimeProperty
 
 	noSmithyDocumentSerde
+}
+
+func (v *CaptchaConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptchaConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptchaConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImmunityTimeProperty != nil {
+		s.WriteStruct(schemas.CaptchaConfig_ImmunityTimeProperty)
+		v.ImmunityTimeProperty.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CaptchaConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptchaConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptchaConfig_ImmunityTimeProperty:
+			v.ImmunityTimeProperty = &ImmunityTimeProperty{}
+			return v.ImmunityTimeProperty.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The result from the inspection of the web request for a valid CAPTCHA token.
@@ -693,6 +1273,44 @@ type CaptchaResponse struct {
 	SolveTimestamp *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *CaptchaResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptchaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptchaResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != "" {
+		s.WriteString(schemas.CaptchaResponse_FailureReason, string(v.FailureReason))
+	}
+	if v.ResponseCode != nil {
+		s.WriteInt32(schemas.CaptchaResponse_ResponseCode, *v.ResponseCode)
+	}
+	if v.SolveTimestamp != nil {
+		s.WriteInt64(schemas.CaptchaResponse_SolveTimestamp, *v.SolveTimestamp)
+	}
+}
+func (v *CaptchaResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptchaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptchaResponse_FailureReason:
+			var ev string
+			if err := d.ReadString(schemas.CaptchaResponse_FailureReason, &ev); err != nil {
+				return err
+			}
+			v.FailureReason = FailureReason(ev)
+			return nil
+		case schemas.CaptchaResponse_ResponseCode:
+			v.ResponseCode = new(int32)
+			return d.ReadInt32(schemas.CaptchaResponse_ResponseCode, v.ResponseCode)
+		case schemas.CaptchaResponse_SolveTimestamp:
+			v.SolveTimestamp = new(int64)
+			return d.ReadInt64(schemas.CaptchaResponse_SolveTimestamp, v.SolveTimestamp)
+		}
+		return nil
+	})
 }
 
 // Specifies that WAF should run a Challenge check against the request to verify
@@ -752,6 +1370,30 @@ type ChallengeAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChallengeAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChallengeAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChallengeAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomRequestHandling != nil {
+		s.WriteStruct(schemas.ChallengeAction_CustomRequestHandling)
+		v.CustomRequestHandling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChallengeAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChallengeAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChallengeAction_CustomRequestHandling:
+			v.CustomRequestHandling = &CustomRequestHandling{}
+			return v.CustomRequestHandling.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies how WAF should handle Challenge evaluations. This is available at the
 // web ACL level and in each rule.
 type ChallengeConfig struct {
@@ -761,6 +1403,30 @@ type ChallengeConfig struct {
 	ImmunityTimeProperty *ImmunityTimeProperty
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChallengeConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChallengeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChallengeConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImmunityTimeProperty != nil {
+		s.WriteStruct(schemas.ChallengeConfig_ImmunityTimeProperty)
+		v.ImmunityTimeProperty.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChallengeConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChallengeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChallengeConfig_ImmunityTimeProperty:
+			v.ImmunityTimeProperty = &ImmunityTimeProperty{}
+			return v.ImmunityTimeProperty.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The result from the inspection of the web request for a valid challenge token.
@@ -778,6 +1444,44 @@ type ChallengeResponse struct {
 	SolveTimestamp *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChallengeResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChallengeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChallengeResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != "" {
+		s.WriteString(schemas.ChallengeResponse_FailureReason, string(v.FailureReason))
+	}
+	if v.ResponseCode != nil {
+		s.WriteInt32(schemas.ChallengeResponse_ResponseCode, *v.ResponseCode)
+	}
+	if v.SolveTimestamp != nil {
+		s.WriteInt64(schemas.ChallengeResponse_SolveTimestamp, *v.SolveTimestamp)
+	}
+}
+func (v *ChallengeResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChallengeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChallengeResponse_FailureReason:
+			var ev string
+			if err := d.ReadString(schemas.ChallengeResponse_FailureReason, &ev); err != nil {
+				return err
+			}
+			v.FailureReason = FailureReason(ev)
+			return nil
+		case schemas.ChallengeResponse_ResponseCode:
+			v.ResponseCode = new(int32)
+			return d.ReadInt32(schemas.ChallengeResponse_ResponseCode, v.ResponseCode)
+		case schemas.ChallengeResponse_SolveTimestamp:
+			v.SolveTimestamp = new(int64)
+			return d.ReadInt64(schemas.ChallengeResponse_SolveTimestamp, v.SolveTimestamp)
+		}
+		return nil
+	})
 }
 
 // This is part of the AWSManagedRulesAntiDDoSRuleSet ClientSideActionConfig
@@ -868,6 +1572,45 @@ type ClientSideAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClientSideAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientSideAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientSideAction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegularExpressionList(s, schemas.ClientSideAction_ExemptUriRegularExpressions, v.ExemptUriRegularExpressions)
+	if v.Sensitivity != "" {
+		s.WriteString(schemas.ClientSideAction_Sensitivity, string(v.Sensitivity))
+	}
+	if v.UsageOfAction != "" {
+		s.WriteString(schemas.ClientSideAction_UsageOfAction, string(v.UsageOfAction))
+	}
+}
+func (v *ClientSideAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientSideAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientSideAction_ExemptUriRegularExpressions:
+			return deserializeRegularExpressionList(d, schemas.ClientSideAction_ExemptUriRegularExpressions, &v.ExemptUriRegularExpressions)
+		case schemas.ClientSideAction_Sensitivity:
+			var ev string
+			if err := d.ReadString(schemas.ClientSideAction_Sensitivity, &ev); err != nil {
+				return err
+			}
+			v.Sensitivity = SensitivityToAct(ev)
+			return nil
+		case schemas.ClientSideAction_UsageOfAction:
+			var ev string
+			if err := d.ReadString(schemas.ClientSideAction_UsageOfAction, &ev); err != nil {
+				return err
+			}
+			v.UsageOfAction = UsageOfAction(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is part of the configuration for the managed rules
 // AWSManagedRulesAntiDDoSRuleSet in ManagedRuleGroupConfig .
 type ClientSideActionConfig struct {
@@ -887,6 +1630,30 @@ type ClientSideActionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClientSideActionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientSideActionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientSideActionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Challenge != nil {
+		s.WriteStruct(schemas.ClientSideActionConfig_Challenge)
+		v.Challenge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClientSideActionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientSideActionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientSideActionConfig_Challenge:
+			v.Challenge = &ClientSideAction{}
+			return v.Challenge.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A single match condition for a Filter.
 type Condition struct {
 
@@ -901,6 +1668,38 @@ type Condition struct {
 	LabelNameCondition *LabelNameCondition
 
 	noSmithyDocumentSerde
+}
+
+func (v *Condition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Condition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Condition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionCondition != nil {
+		s.WriteStruct(schemas.Condition_ActionCondition)
+		v.ActionCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LabelNameCondition != nil {
+		s.WriteStruct(schemas.Condition_LabelNameCondition)
+		v.LabelNameCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Condition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Condition_ActionCondition:
+			v.ActionCondition = &ActionCondition{}
+			return v.ActionCondition.Deserialize(d)
+		case schemas.Condition_LabelNameCondition:
+			v.LabelNameCondition = &LabelNameCondition{}
+			return v.LabelNameCondition.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The filter to use to identify the subset of cookies to inspect in a web
@@ -925,6 +1724,36 @@ type CookieMatchPattern struct {
 	IncludedCookies []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CookieMatchPattern) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CookieMatchPattern)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CookieMatchPattern) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.All != nil {
+		s.WriteStruct(schemas.CookieMatchPattern_All)
+		v.All.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCookieNames(s, schemas.CookieMatchPattern_ExcludedCookies, v.ExcludedCookies)
+	serializeCookieNames(s, schemas.CookieMatchPattern_IncludedCookies, v.IncludedCookies)
+}
+func (v *CookieMatchPattern) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CookieMatchPattern, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CookieMatchPattern_All:
+			v.All = &All{}
+			return v.All.Deserialize(d)
+		case schemas.CookieMatchPattern_ExcludedCookies:
+			return deserializeCookieNames(d, schemas.CookieMatchPattern_ExcludedCookies, &v.ExcludedCookies)
+		case schemas.CookieMatchPattern_IncludedCookies:
+			return deserializeCookieNames(d, schemas.CookieMatchPattern_IncludedCookies, &v.IncludedCookies)
+		}
+		return nil
+	})
 }
 
 // Inspect the cookies in the web request. You can specify the parts of the
@@ -984,6 +1813,50 @@ type Cookies struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Cookies) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Cookies)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Cookies) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchPattern != nil {
+		s.WriteStruct(schemas.Cookies_MatchPattern)
+		v.MatchPattern.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MatchScope != "" {
+		s.WriteString(schemas.Cookies_MatchScope, string(v.MatchScope))
+	}
+	if v.OversizeHandling != "" {
+		s.WriteString(schemas.Cookies_OversizeHandling, string(v.OversizeHandling))
+	}
+}
+func (v *Cookies) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Cookies, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Cookies_MatchPattern:
+			v.MatchPattern = &CookieMatchPattern{}
+			return v.MatchPattern.Deserialize(d)
+		case schemas.Cookies_MatchScope:
+			var ev string
+			if err := d.ReadString(schemas.Cookies_MatchScope, &ev); err != nil {
+				return err
+			}
+			v.MatchScope = MapMatchScope(ev)
+			return nil
+		case schemas.Cookies_OversizeHandling:
+			var ev string
+			if err := d.ReadString(schemas.Cookies_OversizeHandling, &ev); err != nil {
+				return err
+			}
+			v.OversizeHandling = OversizeHandling(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies that WAF should count the request. Optionally defines additional
 // custom handling for the request.
 //
@@ -1002,6 +1875,30 @@ type CountAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CountAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CountAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomRequestHandling != nil {
+		s.WriteStruct(schemas.CountAction_CustomRequestHandling)
+		v.CustomRequestHandling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CountAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CountAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CountAction_CustomRequestHandling:
+			v.CustomRequestHandling = &CustomRequestHandling{}
+			return v.CustomRequestHandling.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The cryptocurrency payment configuration for AI bot monetization. Contains the
 // list of blockchain payment networks where you receive payments.
 type CryptoConfig struct {
@@ -1015,6 +1912,25 @@ type CryptoConfig struct {
 	PaymentNetworks []PaymentNetwork
 
 	noSmithyDocumentSerde
+}
+
+func (v *CryptoConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CryptoConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CryptoConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePaymentNetworks(s, schemas.CryptoConfig_PaymentNetworks, v.PaymentNetworks)
+}
+func (v *CryptoConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CryptoConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CryptoConfig_PaymentNetworks:
+			return deserializePaymentNetworks(d, schemas.CryptoConfig_PaymentNetworks, &v.PaymentNetworks)
+		}
+		return nil
+	})
 }
 
 // A custom header for custom request and response handling. This is used in CustomResponse and CustomRequestHandling.
@@ -1036,6 +1952,34 @@ type CustomHTTPHeader struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomHTTPHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomHTTPHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomHTTPHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CustomHTTPHeader_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CustomHTTPHeader_Value, *v.Value)
+	}
+}
+func (v *CustomHTTPHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomHTTPHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomHTTPHeader_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CustomHTTPHeader_Name, v.Name)
+		case schemas.CustomHTTPHeader_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CustomHTTPHeader_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Custom request handling behavior that inserts custom headers into a web
@@ -1061,6 +2005,25 @@ type CustomRequestHandling struct {
 	InsertHeaders []CustomHTTPHeader
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomRequestHandling) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRequestHandling)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRequestHandling) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomHTTPHeaders(s, schemas.CustomRequestHandling_InsertHeaders, v.InsertHeaders)
+}
+func (v *CustomRequestHandling) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRequestHandling, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRequestHandling_InsertHeaders:
+			return deserializeCustomHTTPHeaders(d, schemas.CustomRequestHandling_InsertHeaders, &v.InsertHeaders)
+		}
+		return nil
+	})
 }
 
 // A custom response to send to the client. You can define a custom response for
@@ -1102,6 +2065,37 @@ type CustomResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomResponseBodyKey != nil {
+		s.WriteString(schemas.CustomResponse_CustomResponseBodyKey, *v.CustomResponseBodyKey)
+	}
+	if v.ResponseCode != nil {
+		s.WriteInt32(schemas.CustomResponse_ResponseCode, *v.ResponseCode)
+	}
+	serializeCustomHTTPHeaders(s, schemas.CustomResponse_ResponseHeaders, v.ResponseHeaders)
+}
+func (v *CustomResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomResponse_CustomResponseBodyKey:
+			v.CustomResponseBodyKey = new(string)
+			return d.ReadString(schemas.CustomResponse_CustomResponseBodyKey, v.CustomResponseBodyKey)
+		case schemas.CustomResponse_ResponseCode:
+			v.ResponseCode = new(int32)
+			return d.ReadInt32(schemas.CustomResponse_ResponseCode, v.ResponseCode)
+		case schemas.CustomResponse_ResponseHeaders:
+			return deserializeCustomHTTPHeaders(d, schemas.CustomResponse_ResponseHeaders, &v.ResponseHeaders)
+		}
+		return nil
+	})
+}
+
 // The response body to use in a custom response to a web request. This is
 // referenced by key from CustomResponseCustomResponseBodyKey .
 type CustomResponseBody struct {
@@ -1125,6 +2119,38 @@ type CustomResponseBody struct {
 	ContentType ResponseContentType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomResponseBody) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomResponseBody)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomResponseBody) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.CustomResponseBody_Content, *v.Content)
+	}
+	if v.ContentType != "" {
+		s.WriteString(schemas.CustomResponseBody_ContentType, string(v.ContentType))
+	}
+}
+func (v *CustomResponseBody) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomResponseBody, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomResponseBody_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.CustomResponseBody_Content, v.Content)
+		case schemas.CustomResponseBody_ContentType:
+			var ev string
+			if err := d.ReadString(schemas.CustomResponseBody_ContentType, &ev); err != nil {
+				return err
+			}
+			v.ContentType = ResponseContentType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A single data point in a revenue time series, representing aggregated
@@ -1153,6 +2179,62 @@ type DataPointEntry struct {
 	TotalAmount *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataPointEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataPointEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataPointEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteString(schemas.DataPointEntry_Category, *v.Category)
+	}
+	if v.Date != nil {
+		s.WriteTime(schemas.DataPointEntry_Date, *v.Date)
+	}
+	if v.GroupByValue != nil {
+		s.WriteString(schemas.DataPointEntry_GroupByValue, *v.GroupByValue)
+	}
+	if v.Intent != nil {
+		s.WriteString(schemas.DataPointEntry_Intent, *v.Intent)
+	}
+	if v.MonetizeServedCount != 0 {
+		s.WriteInt64(schemas.DataPointEntry_MonetizeServedCount, v.MonetizeServedCount)
+	}
+	if v.SettledCount != 0 {
+		s.WriteInt64(schemas.DataPointEntry_SettledCount, v.SettledCount)
+	}
+	if v.TotalAmount != nil {
+		s.WriteString(schemas.DataPointEntry_TotalAmount, *v.TotalAmount)
+	}
+}
+func (v *DataPointEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataPointEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataPointEntry_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.DataPointEntry_Category, v.Category)
+		case schemas.DataPointEntry_Date:
+			v.Date = new(time.Time)
+			return d.ReadTime(schemas.DataPointEntry_Date, v.Date)
+		case schemas.DataPointEntry_GroupByValue:
+			v.GroupByValue = new(string)
+			return d.ReadString(schemas.DataPointEntry_GroupByValue, v.GroupByValue)
+		case schemas.DataPointEntry_Intent:
+			v.Intent = new(string)
+			return d.ReadString(schemas.DataPointEntry_Intent, v.Intent)
+		case schemas.DataPointEntry_MonetizeServedCount:
+			return d.ReadInt64(schemas.DataPointEntry_MonetizeServedCount, &v.MonetizeServedCount)
+		case schemas.DataPointEntry_SettledCount:
+			return d.ReadInt64(schemas.DataPointEntry_SettledCount, &v.SettledCount)
+		case schemas.DataPointEntry_TotalAmount:
+			v.TotalAmount = new(string)
+			return d.ReadString(schemas.DataPointEntry_TotalAmount, v.TotalAmount)
+		}
+		return nil
+	})
 }
 
 // Specifies the protection behavior for a field type. This is part of the data
@@ -1198,6 +2280,50 @@ type DataProtection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataProtection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProtection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProtection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.DataProtection_Action, string(v.Action))
+	}
+	if v.ExcludeRateBasedDetails != false {
+		s.WriteBool(schemas.DataProtection_ExcludeRateBasedDetails, v.ExcludeRateBasedDetails)
+	}
+	if v.ExcludeRuleMatchDetails != false {
+		s.WriteBool(schemas.DataProtection_ExcludeRuleMatchDetails, v.ExcludeRuleMatchDetails)
+	}
+	if v.Field != nil {
+		s.WriteStruct(schemas.DataProtection_Field)
+		v.Field.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataProtection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProtection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProtection_Action:
+			var ev string
+			if err := d.ReadString(schemas.DataProtection_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = DataProtectionAction(ev)
+			return nil
+		case schemas.DataProtection_ExcludeRateBasedDetails:
+			return d.ReadBool(schemas.DataProtection_ExcludeRateBasedDetails, &v.ExcludeRateBasedDetails)
+		case schemas.DataProtection_ExcludeRuleMatchDetails:
+			return d.ReadBool(schemas.DataProtection_ExcludeRuleMatchDetails, &v.ExcludeRuleMatchDetails)
+		case schemas.DataProtection_Field:
+			v.Field = &FieldToProtect{}
+			return v.Field.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies data protection to apply to the web request data for the web ACL.
 // This is a web ACL level data protection option.
 //
@@ -1220,6 +2346,25 @@ type DataProtectionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataProtectionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProtectionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProtectionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataProtections(s, schemas.DataProtectionConfig_DataProtections, v.DataProtections)
+}
+func (v *DataProtectionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProtectionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProtectionConfig_DataProtections:
+			return deserializeDataProtections(d, schemas.DataProtectionConfig_DataProtections, &v.DataProtections)
+		}
+		return nil
+	})
+}
+
 // In a WebACL, this is the action that you want WAF to perform when a web request
 // doesn't match any of the rules in the WebACL . The default action must be a
 // terminating action.
@@ -1234,6 +2379,38 @@ type DefaultAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DefaultAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Allow != nil {
+		s.WriteStruct(schemas.DefaultAction_Allow)
+		v.Allow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Block != nil {
+		s.WriteStruct(schemas.DefaultAction_Block)
+		v.Block.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DefaultAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultAction_Allow:
+			v.Allow = &AllowAction{}
+			return v.Allow.Deserialize(d)
+		case schemas.DefaultAction_Block:
+			v.Block = &BlockAction{}
+			return v.Block.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A WAF feature that is not supported by the CloudFront pricing plan associated
 // with the web ACL.
 type DisallowedFeature struct {
@@ -1245,6 +2422,34 @@ type DisallowedFeature struct {
 	RequiredPricingPlan *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DisallowedFeature) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisallowedFeature)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisallowedFeature) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Feature != nil {
+		s.WriteString(schemas.DisallowedFeature_Feature, *v.Feature)
+	}
+	if v.RequiredPricingPlan != nil {
+		s.WriteString(schemas.DisallowedFeature_RequiredPricingPlan, *v.RequiredPricingPlan)
+	}
+}
+func (v *DisallowedFeature) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisallowedFeature, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisallowedFeature_Feature:
+			v.Feature = new(string)
+			return d.ReadString(schemas.DisallowedFeature_Feature, v.Feature)
+		case schemas.DisallowedFeature_RequiredPricingPlan:
+			v.RequiredPricingPlan = new(string)
+			return d.ReadString(schemas.DisallowedFeature_RequiredPricingPlan, v.RequiredPricingPlan)
+		}
+		return nil
+	})
 }
 
 // The name of the field in the request payload that contains your customer's
@@ -1277,6 +2482,28 @@ type EmailField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmailField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.EmailField_Identifier, *v.Identifier)
+	}
+}
+func (v *EmailField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailField_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.EmailField_Identifier, v.Identifier)
+		}
+		return nil
+	})
+}
+
 // Specifies a single rule in a rule group whose action you want to override to
 // Count .
 //
@@ -1290,6 +2517,28 @@ type ExcludedRule struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExcludedRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExcludedRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExcludedRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ExcludedRule_Name, *v.Name)
+	}
+}
+func (v *ExcludedRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExcludedRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExcludedRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ExcludedRule_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Specifies a web request component to be used in a rule match statement or in a
@@ -1493,6 +2742,134 @@ type FieldToMatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FieldToMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldToMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldToMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllQueryArguments != nil {
+		s.WriteStruct(schemas.FieldToMatch_AllQueryArguments)
+		v.AllQueryArguments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Body != nil {
+		s.WriteStruct(schemas.FieldToMatch_Body)
+		v.Body.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Cookies != nil {
+		s.WriteStruct(schemas.FieldToMatch_Cookies)
+		v.Cookies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HeaderOrder != nil {
+		s.WriteStruct(schemas.FieldToMatch_HeaderOrder)
+		v.HeaderOrder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Headers != nil {
+		s.WriteStruct(schemas.FieldToMatch_Headers)
+		v.Headers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JA3Fingerprint != nil {
+		s.WriteStruct(schemas.FieldToMatch_JA3Fingerprint)
+		v.JA3Fingerprint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JA4Fingerprint != nil {
+		s.WriteStruct(schemas.FieldToMatch_JA4Fingerprint)
+		v.JA4Fingerprint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JsonBody != nil {
+		s.WriteStruct(schemas.FieldToMatch_JsonBody)
+		v.JsonBody.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Method != nil {
+		s.WriteStruct(schemas.FieldToMatch_Method)
+		v.Method.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryString != nil {
+		s.WriteStruct(schemas.FieldToMatch_QueryString)
+		v.QueryString.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SingleHeader != nil {
+		s.WriteStruct(schemas.FieldToMatch_SingleHeader)
+		v.SingleHeader.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SingleQueryArgument != nil {
+		s.WriteStruct(schemas.FieldToMatch_SingleQueryArgument)
+		v.SingleQueryArgument.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UriFragment != nil {
+		s.WriteStruct(schemas.FieldToMatch_UriFragment)
+		v.UriFragment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UriPath != nil {
+		s.WriteStruct(schemas.FieldToMatch_UriPath)
+		v.UriPath.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FieldToMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldToMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldToMatch_AllQueryArguments:
+			v.AllQueryArguments = &AllQueryArguments{}
+			return v.AllQueryArguments.Deserialize(d)
+		case schemas.FieldToMatch_Body:
+			v.Body = &Body{}
+			return v.Body.Deserialize(d)
+		case schemas.FieldToMatch_Cookies:
+			v.Cookies = &Cookies{}
+			return v.Cookies.Deserialize(d)
+		case schemas.FieldToMatch_HeaderOrder:
+			v.HeaderOrder = &HeaderOrder{}
+			return v.HeaderOrder.Deserialize(d)
+		case schemas.FieldToMatch_Headers:
+			v.Headers = &Headers{}
+			return v.Headers.Deserialize(d)
+		case schemas.FieldToMatch_JA3Fingerprint:
+			v.JA3Fingerprint = &JA3Fingerprint{}
+			return v.JA3Fingerprint.Deserialize(d)
+		case schemas.FieldToMatch_JA4Fingerprint:
+			v.JA4Fingerprint = &JA4Fingerprint{}
+			return v.JA4Fingerprint.Deserialize(d)
+		case schemas.FieldToMatch_JsonBody:
+			v.JsonBody = &JsonBody{}
+			return v.JsonBody.Deserialize(d)
+		case schemas.FieldToMatch_Method:
+			v.Method = &Method{}
+			return v.Method.Deserialize(d)
+		case schemas.FieldToMatch_QueryString:
+			v.QueryString = &QueryString{}
+			return v.QueryString.Deserialize(d)
+		case schemas.FieldToMatch_SingleHeader:
+			v.SingleHeader = &SingleHeader{}
+			return v.SingleHeader.Deserialize(d)
+		case schemas.FieldToMatch_SingleQueryArgument:
+			v.SingleQueryArgument = &SingleQueryArgument{}
+			return v.SingleQueryArgument.Deserialize(d)
+		case schemas.FieldToMatch_UriFragment:
+			v.UriFragment = &UriFragment{}
+			return v.UriFragment.Deserialize(d)
+		case schemas.FieldToMatch_UriPath:
+			v.UriPath = &UriPath{}
+			return v.UriPath.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies a field type and keys to protect in stored web request data. This is
 // part of the data protection configuration for a web ACL.
 type FieldToProtect struct {
@@ -1514,6 +2891,35 @@ type FieldToProtect struct {
 	FieldKeys []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FieldToProtect) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldToProtect)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldToProtect) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldToProtectKeys(s, schemas.FieldToProtect_FieldKeys, v.FieldKeys)
+	if v.FieldType != "" {
+		s.WriteString(schemas.FieldToProtect_FieldType, string(v.FieldType))
+	}
+}
+func (v *FieldToProtect) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldToProtect, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldToProtect_FieldKeys:
+			return deserializeFieldToProtectKeys(d, schemas.FieldToProtect_FieldKeys, &v.FieldKeys)
+		case schemas.FieldToProtect_FieldType:
+			var ev string
+			if err := d.ReadString(schemas.FieldToProtect_FieldType, &ev); err != nil {
+				return err
+			}
+			v.FieldType = FieldToProtectType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A single logging filter, used in LoggingFilter.
@@ -1539,6 +2945,45 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Behavior != "" {
+		s.WriteString(schemas.Filter_Behavior, string(v.Behavior))
+	}
+	serializeConditions(s, schemas.Filter_Conditions, v.Conditions)
+	if v.Requirement != "" {
+		s.WriteString(schemas.Filter_Requirement, string(v.Requirement))
+	}
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Behavior:
+			var ev string
+			if err := d.ReadString(schemas.Filter_Behavior, &ev); err != nil {
+				return err
+			}
+			v.Behavior = FilterBehavior(ev)
+			return nil
+		case schemas.Filter_Conditions:
+			return deserializeConditions(d, schemas.Filter_Conditions, &v.Conditions)
+		case schemas.Filter_Requirement:
+			var ev string
+			if err := d.ReadString(schemas.Filter_Requirement, &ev); err != nil {
+				return err
+			}
+			v.Requirement = FilterRequirement(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the bot filter that was applied to the request. This
 // structure is populated in the response when you filter by bot category,
 // organization, or name.
@@ -1557,6 +3002,40 @@ type FilterSource struct {
 	BotOrganization *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FilterSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotCategory != nil {
+		s.WriteString(schemas.FilterSource_BotCategory, *v.BotCategory)
+	}
+	if v.BotName != nil {
+		s.WriteString(schemas.FilterSource_BotName, *v.BotName)
+	}
+	if v.BotOrganization != nil {
+		s.WriteString(schemas.FilterSource_BotOrganization, *v.BotOrganization)
+	}
+}
+func (v *FilterSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterSource_BotCategory:
+			v.BotCategory = new(string)
+			return d.ReadString(schemas.FilterSource_BotCategory, v.BotCategory)
+		case schemas.FilterSource_BotName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.FilterSource_BotName, v.BotName)
+		case schemas.FilterSource_BotOrganization:
+			v.BotOrganization = new(string)
+			return d.ReadString(schemas.FilterSource_BotOrganization, v.BotOrganization)
+		}
+		return nil
+	})
 }
 
 // A rule group that's defined for an Firewall Manager WAF policy.
@@ -1606,6 +3085,55 @@ type FirewallManagerRuleGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallManagerRuleGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallManagerRuleGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallManagerRuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallManagerStatement != nil {
+		s.WriteStruct(schemas.FirewallManagerRuleGroup_FirewallManagerStatement)
+		v.FirewallManagerStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FirewallManagerRuleGroup_Name, *v.Name)
+	}
+	if v.OverrideAction != nil {
+		s.WriteStruct(schemas.FirewallManagerRuleGroup_OverrideAction)
+		v.OverrideAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.WriteInt32(schemas.FirewallManagerRuleGroup_Priority, v.Priority)
+	if v.VisibilityConfig != nil {
+		s.WriteStruct(schemas.FirewallManagerRuleGroup_VisibilityConfig)
+		v.VisibilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FirewallManagerRuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallManagerRuleGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallManagerRuleGroup_FirewallManagerStatement:
+			v.FirewallManagerStatement = &FirewallManagerStatement{}
+			return v.FirewallManagerStatement.Deserialize(d)
+		case schemas.FirewallManagerRuleGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FirewallManagerRuleGroup_Name, v.Name)
+		case schemas.FirewallManagerRuleGroup_OverrideAction:
+			v.OverrideAction = &OverrideAction{}
+			return v.OverrideAction.Deserialize(d)
+		case schemas.FirewallManagerRuleGroup_Priority:
+			return d.ReadInt32(schemas.FirewallManagerRuleGroup_Priority, &v.Priority)
+		case schemas.FirewallManagerRuleGroup_VisibilityConfig:
+			v.VisibilityConfig = &VisibilityConfig{}
+			return v.VisibilityConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The processing guidance for an Firewall Manager rule. This is like a regular
 // rule Statement, but it can only contain a single rule group reference.
 type FirewallManagerStatement struct {
@@ -1621,6 +3149,38 @@ type FirewallManagerStatement struct {
 	RuleGroupReferenceStatement *RuleGroupReferenceStatement
 
 	noSmithyDocumentSerde
+}
+
+func (v *FirewallManagerStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallManagerStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallManagerStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedRuleGroupStatement != nil {
+		s.WriteStruct(schemas.FirewallManagerStatement_ManagedRuleGroupStatement)
+		v.ManagedRuleGroupStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleGroupReferenceStatement != nil {
+		s.WriteStruct(schemas.FirewallManagerStatement_RuleGroupReferenceStatement)
+		v.RuleGroupReferenceStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FirewallManagerStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallManagerStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallManagerStatement_ManagedRuleGroupStatement:
+			v.ManagedRuleGroupStatement = &ManagedRuleGroupStatement{}
+			return v.ManagedRuleGroupStatement.Deserialize(d)
+		case schemas.FirewallManagerStatement_RuleGroupReferenceStatement:
+			v.RuleGroupReferenceStatement = &RuleGroupReferenceStatement{}
+			return v.RuleGroupReferenceStatement.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration for inspecting IP addresses in an HTTP header that you
@@ -1662,6 +3222,38 @@ type ForwardedIPConfig struct {
 	HeaderName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ForwardedIPConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForwardedIPConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForwardedIPConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FallbackBehavior != "" {
+		s.WriteString(schemas.ForwardedIPConfig_FallbackBehavior, string(v.FallbackBehavior))
+	}
+	if v.HeaderName != nil {
+		s.WriteString(schemas.ForwardedIPConfig_HeaderName, *v.HeaderName)
+	}
+}
+func (v *ForwardedIPConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForwardedIPConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForwardedIPConfig_FallbackBehavior:
+			var ev string
+			if err := d.ReadString(schemas.ForwardedIPConfig_FallbackBehavior, &ev); err != nil {
+				return err
+			}
+			v.FallbackBehavior = FallbackBehavior(ev)
+			return nil
+		case schemas.ForwardedIPConfig_HeaderName:
+			v.HeaderName = new(string)
+			return d.ReadString(schemas.ForwardedIPConfig_HeaderName, v.HeaderName)
+		}
+		return nil
+	})
 }
 
 // A rule statement that labels web requests by country and region and that
@@ -1718,6 +3310,33 @@ type GeoMatchStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeoMatchStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeoMatchStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeoMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCountryCodes(s, schemas.GeoMatchStatement_CountryCodes, v.CountryCodes)
+	if v.ForwardedIPConfig != nil {
+		s.WriteStruct(schemas.GeoMatchStatement_ForwardedIPConfig)
+		v.ForwardedIPConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GeoMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeoMatchStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeoMatchStatement_CountryCodes:
+			return deserializeCountryCodes(d, schemas.GeoMatchStatement_CountryCodes, &v.CountryCodes)
+		case schemas.GeoMatchStatement_ForwardedIPConfig:
+			v.ForwardedIPConfig = &ForwardedIPConfig{}
+			return v.ForwardedIPConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The filter to use to identify the subset of headers to inspect in a web
 // request.
 //
@@ -1740,6 +3359,36 @@ type HeaderMatchPattern struct {
 	IncludedHeaders []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HeaderMatchPattern) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HeaderMatchPattern)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HeaderMatchPattern) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.All != nil {
+		s.WriteStruct(schemas.HeaderMatchPattern_All)
+		v.All.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHeaderNames(s, schemas.HeaderMatchPattern_ExcludedHeaders, v.ExcludedHeaders)
+	serializeHeaderNames(s, schemas.HeaderMatchPattern_IncludedHeaders, v.IncludedHeaders)
+}
+func (v *HeaderMatchPattern) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HeaderMatchPattern, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HeaderMatchPattern_All:
+			v.All = &All{}
+			return v.All.Deserialize(d)
+		case schemas.HeaderMatchPattern_ExcludedHeaders:
+			return deserializeHeaderNames(d, schemas.HeaderMatchPattern_ExcludedHeaders, &v.ExcludedHeaders)
+		case schemas.HeaderMatchPattern_IncludedHeaders:
+			return deserializeHeaderNames(d, schemas.HeaderMatchPattern_IncludedHeaders, &v.IncludedHeaders)
+		}
+		return nil
+	})
 }
 
 // Inspect a string containing the list of the request's header names, ordered as
@@ -1769,6 +3418,32 @@ type HeaderOrder struct {
 	OversizeHandling OversizeHandling
 
 	noSmithyDocumentSerde
+}
+
+func (v *HeaderOrder) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HeaderOrder)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HeaderOrder) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OversizeHandling != "" {
+		s.WriteString(schemas.HeaderOrder_OversizeHandling, string(v.OversizeHandling))
+	}
+}
+func (v *HeaderOrder) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HeaderOrder, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HeaderOrder_OversizeHandling:
+			var ev string
+			if err := d.ReadString(schemas.HeaderOrder_OversizeHandling, &ev); err != nil {
+				return err
+			}
+			v.OversizeHandling = OversizeHandling(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Inspect all headers in the web request. You can specify the parts of the
@@ -1831,6 +3506,50 @@ type Headers struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Headers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Headers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Headers) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchPattern != nil {
+		s.WriteStruct(schemas.Headers_MatchPattern)
+		v.MatchPattern.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MatchScope != "" {
+		s.WriteString(schemas.Headers_MatchScope, string(v.MatchScope))
+	}
+	if v.OversizeHandling != "" {
+		s.WriteString(schemas.Headers_OversizeHandling, string(v.OversizeHandling))
+	}
+}
+func (v *Headers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Headers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Headers_MatchPattern:
+			v.MatchPattern = &HeaderMatchPattern{}
+			return v.MatchPattern.Deserialize(d)
+		case schemas.Headers_MatchScope:
+			var ev string
+			if err := d.ReadString(schemas.Headers_MatchScope, &ev); err != nil {
+				return err
+			}
+			v.MatchScope = MapMatchScope(ev)
+			return nil
+		case schemas.Headers_OversizeHandling:
+			var ev string
+			if err := d.ReadString(schemas.Headers_OversizeHandling, &ev); err != nil {
+				return err
+			}
+			v.OversizeHandling = OversizeHandling(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Part of the response from GetSampledRequests. This is a complex type that appears as Headers in
 // the response syntax. HTTPHeader contains the names and values of all of the
 // headers that appear in one of the web requests.
@@ -1843,6 +3562,34 @@ type HTTPHeader struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HTTPHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HTTPHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HTTPHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.HTTPHeader_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.HTTPHeader_Value, *v.Value)
+	}
+}
+func (v *HTTPHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HTTPHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HTTPHeader_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.HTTPHeader_Name, v.Name)
+		case schemas.HTTPHeader_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.HTTPHeader_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Part of the response from GetSampledRequests. This is a complex type that appears as Request in
@@ -1884,6 +3631,55 @@ type HTTPRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HTTPRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HTTPRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HTTPRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientIP != nil {
+		s.WriteString(schemas.HTTPRequest_ClientIP, *v.ClientIP)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.HTTPRequest_Country, *v.Country)
+	}
+	if v.HTTPVersion != nil {
+		s.WriteString(schemas.HTTPRequest_HTTPVersion, *v.HTTPVersion)
+	}
+	serializeHTTPHeaders(s, schemas.HTTPRequest_Headers, v.Headers)
+	if v.Method != nil {
+		s.WriteString(schemas.HTTPRequest_Method, *v.Method)
+	}
+	if v.URI != nil {
+		s.WriteString(schemas.HTTPRequest_URI, *v.URI)
+	}
+}
+func (v *HTTPRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HTTPRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HTTPRequest_ClientIP:
+			v.ClientIP = new(string)
+			return d.ReadString(schemas.HTTPRequest_ClientIP, v.ClientIP)
+		case schemas.HTTPRequest_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.HTTPRequest_Country, v.Country)
+		case schemas.HTTPRequest_HTTPVersion:
+			v.HTTPVersion = new(string)
+			return d.ReadString(schemas.HTTPRequest_HTTPVersion, v.HTTPVersion)
+		case schemas.HTTPRequest_Headers:
+			return deserializeHTTPHeaders(d, schemas.HTTPRequest_Headers, &v.Headers)
+		case schemas.HTTPRequest_Method:
+			v.Method = new(string)
+			return d.ReadString(schemas.HTTPRequest_Method, v.Method)
+		case schemas.HTTPRequest_URI:
+			v.URI = new(string)
+			return d.ReadString(schemas.HTTPRequest_URI, v.URI)
+		}
+		return nil
+	})
+}
+
 // Used for CAPTCHA and challenge token settings. Determines how long a CAPTCHA or
 // challenge timestamp remains valid after WAF updates it for a successful CAPTCHA
 // or challenge response.
@@ -1898,6 +3694,28 @@ type ImmunityTimeProperty struct {
 	ImmunityTime *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImmunityTimeProperty) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImmunityTimeProperty)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImmunityTimeProperty) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImmunityTime != nil {
+		s.WriteInt64(schemas.ImmunityTimeProperty_ImmunityTime, *v.ImmunityTime)
+	}
+}
+func (v *ImmunityTimeProperty) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImmunityTimeProperty, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImmunityTimeProperty_ImmunityTime:
+			v.ImmunityTime = new(int64)
+			return d.ReadInt64(schemas.ImmunityTimeProperty_ImmunityTime, v.ImmunityTime)
+		}
+		return nil
+	})
 }
 
 // Contains zero or more IP addresses or blocks of IP addresses specified in
@@ -1979,6 +3797,59 @@ type IPSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IPSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IPSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IPSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.IPSet_ARN, *v.ARN)
+	}
+	serializeIPAddresses(s, schemas.IPSet_Addresses, v.Addresses)
+	if v.Description != nil {
+		s.WriteString(schemas.IPSet_Description, *v.Description)
+	}
+	if v.IPAddressVersion != "" {
+		s.WriteString(schemas.IPSet_IPAddressVersion, string(v.IPAddressVersion))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.IPSet_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.IPSet_Name, *v.Name)
+	}
+}
+func (v *IPSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IPSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IPSet_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.IPSet_ARN, v.ARN)
+		case schemas.IPSet_Addresses:
+			return deserializeIPAddresses(d, schemas.IPSet_Addresses, &v.Addresses)
+		case schemas.IPSet_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.IPSet_Description, v.Description)
+		case schemas.IPSet_IPAddressVersion:
+			var ev string
+			if err := d.ReadString(schemas.IPSet_IPAddressVersion, &ev); err != nil {
+				return err
+			}
+			v.IPAddressVersion = IPAddressVersion(ev)
+			return nil
+		case schemas.IPSet_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.IPSet_Id, v.Id)
+		case schemas.IPSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.IPSet_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // The configuration for inspecting IP addresses in an HTTP header that you
 // specify, instead of using the IP address that's reported by the web request
 // origin. Commonly, this is the X-Forwarded-For (XFF) header, but you can specify
@@ -2038,6 +3909,48 @@ type IPSetForwardedIPConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IPSetForwardedIPConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IPSetForwardedIPConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IPSetForwardedIPConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FallbackBehavior != "" {
+		s.WriteString(schemas.IPSetForwardedIPConfig_FallbackBehavior, string(v.FallbackBehavior))
+	}
+	if v.HeaderName != nil {
+		s.WriteString(schemas.IPSetForwardedIPConfig_HeaderName, *v.HeaderName)
+	}
+	if v.Position != "" {
+		s.WriteString(schemas.IPSetForwardedIPConfig_Position, string(v.Position))
+	}
+}
+func (v *IPSetForwardedIPConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IPSetForwardedIPConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IPSetForwardedIPConfig_FallbackBehavior:
+			var ev string
+			if err := d.ReadString(schemas.IPSetForwardedIPConfig_FallbackBehavior, &ev); err != nil {
+				return err
+			}
+			v.FallbackBehavior = FallbackBehavior(ev)
+			return nil
+		case schemas.IPSetForwardedIPConfig_HeaderName:
+			v.HeaderName = new(string)
+			return d.ReadString(schemas.IPSetForwardedIPConfig_HeaderName, v.HeaderName)
+		case schemas.IPSetForwardedIPConfig_Position:
+			var ev string
+			if err := d.ReadString(schemas.IPSetForwardedIPConfig_Position, &ev); err != nil {
+				return err
+			}
+			v.Position = ForwardedIPPosition(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A rule statement used to detect web requests coming from particular IP
 // addresses or address ranges. To use this, create an IPSetthat specifies the
 // addresses you want to detect, then use the ARN of that set in this statement. To
@@ -2064,6 +3977,36 @@ type IPSetReferenceStatement struct {
 	IPSetForwardedIPConfig *IPSetForwardedIPConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *IPSetReferenceStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IPSetReferenceStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IPSetReferenceStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.IPSetReferenceStatement_ARN, *v.ARN)
+	}
+	if v.IPSetForwardedIPConfig != nil {
+		s.WriteStruct(schemas.IPSetReferenceStatement_IPSetForwardedIPConfig)
+		v.IPSetForwardedIPConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IPSetReferenceStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IPSetReferenceStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IPSetReferenceStatement_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.IPSetReferenceStatement_ARN, v.ARN)
+		case schemas.IPSetReferenceStatement_IPSetForwardedIPConfig:
+			v.IPSetForwardedIPConfig = &IPSetForwardedIPConfig{}
+			return v.IPSetForwardedIPConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // High-level information about an IPSet, returned by operations like create and list.
@@ -2095,6 +4038,52 @@ type IPSetSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IPSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IPSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IPSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.IPSetSummary_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.IPSetSummary_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.IPSetSummary_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.IPSetSummary_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.IPSetSummary_Name, *v.Name)
+	}
+}
+func (v *IPSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IPSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IPSetSummary_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.IPSetSummary_ARN, v.ARN)
+		case schemas.IPSetSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.IPSetSummary_Description, v.Description)
+		case schemas.IPSetSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.IPSetSummary_Id, v.Id)
+		case schemas.IPSetSummary_LockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.IPSetSummary_LockToken, v.LockToken)
+		case schemas.IPSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.IPSetSummary_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Available for use with Amazon CloudFront distributions and Application Load
@@ -2135,6 +4124,32 @@ type JA3Fingerprint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JA3Fingerprint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JA3Fingerprint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JA3Fingerprint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FallbackBehavior != "" {
+		s.WriteString(schemas.JA3Fingerprint_FallbackBehavior, string(v.FallbackBehavior))
+	}
+}
+func (v *JA3Fingerprint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JA3Fingerprint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JA3Fingerprint_FallbackBehavior:
+			var ev string
+			if err := d.ReadString(schemas.JA3Fingerprint_FallbackBehavior, &ev); err != nil {
+				return err
+			}
+			v.FallbackBehavior = FallbackBehavior(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Available for use with Amazon CloudFront distributions and Application Load
 // Balancers. Match against the request's JA4 fingerprint. The JA4 fingerprint is a
 // 36-character hash derived from the TLS Client Hello of an incoming request. This
@@ -2171,6 +4186,32 @@ type JA4Fingerprint struct {
 	FallbackBehavior FallbackBehavior
 
 	noSmithyDocumentSerde
+}
+
+func (v *JA4Fingerprint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JA4Fingerprint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JA4Fingerprint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FallbackBehavior != "" {
+		s.WriteString(schemas.JA4Fingerprint_FallbackBehavior, string(v.FallbackBehavior))
+	}
+}
+func (v *JA4Fingerprint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JA4Fingerprint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JA4Fingerprint_FallbackBehavior:
+			var ev string
+			if err := d.ReadString(schemas.JA4Fingerprint_FallbackBehavior, &ev); err != nil {
+				return err
+			}
+			v.FallbackBehavior = FallbackBehavior(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Inspect the body of the web request as JSON. The body immediately follows the
@@ -2268,6 +4309,60 @@ type JsonBody struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonBody) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonBody)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonBody) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidFallbackBehavior != "" {
+		s.WriteString(schemas.JsonBody_InvalidFallbackBehavior, string(v.InvalidFallbackBehavior))
+	}
+	if v.MatchPattern != nil {
+		s.WriteStruct(schemas.JsonBody_MatchPattern)
+		v.MatchPattern.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MatchScope != "" {
+		s.WriteString(schemas.JsonBody_MatchScope, string(v.MatchScope))
+	}
+	if v.OversizeHandling != "" {
+		s.WriteString(schemas.JsonBody_OversizeHandling, string(v.OversizeHandling))
+	}
+}
+func (v *JsonBody) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonBody, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonBody_InvalidFallbackBehavior:
+			var ev string
+			if err := d.ReadString(schemas.JsonBody_InvalidFallbackBehavior, &ev); err != nil {
+				return err
+			}
+			v.InvalidFallbackBehavior = BodyParsingFallbackBehavior(ev)
+			return nil
+		case schemas.JsonBody_MatchPattern:
+			v.MatchPattern = &JsonMatchPattern{}
+			return v.MatchPattern.Deserialize(d)
+		case schemas.JsonBody_MatchScope:
+			var ev string
+			if err := d.ReadString(schemas.JsonBody_MatchScope, &ev); err != nil {
+				return err
+			}
+			v.MatchScope = JsonMatchScope(ev)
+			return nil
+		case schemas.JsonBody_OversizeHandling:
+			var ev string
+			if err := d.ReadString(schemas.JsonBody_OversizeHandling, &ev); err != nil {
+				return err
+			}
+			v.OversizeHandling = OversizeHandling(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The patterns to look for in the JSON body. WAF inspects the results of these
 // pattern matches against the rule inspection criteria. This is used with the FieldToMatch
 // option JsonBody .
@@ -2294,6 +4389,33 @@ type JsonMatchPattern struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonMatchPattern) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonMatchPattern)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonMatchPattern) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.All != nil {
+		s.WriteStruct(schemas.JsonMatchPattern_All)
+		v.All.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeJsonPointerPaths(s, schemas.JsonMatchPattern_IncludedPaths, v.IncludedPaths)
+}
+func (v *JsonMatchPattern) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonMatchPattern, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonMatchPattern_All:
+			v.All = &All{}
+			return v.All.Deserialize(d)
+		case schemas.JsonMatchPattern_IncludedPaths:
+			return deserializeJsonPointerPaths(d, schemas.JsonMatchPattern_IncludedPaths, &v.IncludedPaths)
+		}
+		return nil
+	})
+}
+
 // A single label container. This is used as an element of a label array in
 // multiple contexts, for example, in RuleLabels inside a Rule and in Labels inside a SampledHTTPRequest
 // .
@@ -2305,6 +4427,28 @@ type Label struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Label) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Label)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Label) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Label_Name, *v.Name)
+	}
+}
+func (v *Label) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Label, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Label_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Label_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A rule statement to match against labels that have been added to the web
@@ -2344,6 +4488,38 @@ type LabelMatchStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LabelMatchStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelMatchStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.LabelMatchStatement_Key, *v.Key)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.LabelMatchStatement_Scope, string(v.Scope))
+	}
+}
+func (v *LabelMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelMatchStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelMatchStatement_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.LabelMatchStatement_Key, v.Key)
+		case schemas.LabelMatchStatement_Scope:
+			var ev string
+			if err := d.ReadString(schemas.LabelMatchStatement_Scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = LabelMatchScope(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A single label name condition for a Condition in a logging filter.
 type LabelNameCondition struct {
 
@@ -2356,6 +4532,28 @@ type LabelNameCondition struct {
 	LabelName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LabelNameCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelNameCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelNameCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LabelName != nil {
+		s.WriteString(schemas.LabelNameCondition_LabelName, *v.LabelName)
+	}
+}
+func (v *LabelNameCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelNameCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelNameCondition_LabelName:
+			v.LabelName = new(string)
+			return d.ReadString(schemas.LabelNameCondition_LabelName, v.LabelName)
+		}
+		return nil
+	})
 }
 
 // List of labels used by one or more of the rules of a RuleGroup. This summary object is
@@ -2372,6 +4570,28 @@ type LabelSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LabelSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.LabelSummary_Name, *v.Name)
+	}
+}
+func (v *LabelSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LabelSummary_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Defines an association between logging destinations and a web ACL resource, for
@@ -2496,6 +4716,67 @@ type LoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogDestinationConfigs(s, schemas.LoggingConfiguration_LogDestinationConfigs, v.LogDestinationConfigs)
+	if v.LogScope != "" {
+		s.WriteString(schemas.LoggingConfiguration_LogScope, string(v.LogScope))
+	}
+	if v.LogType != "" {
+		s.WriteString(schemas.LoggingConfiguration_LogType, string(v.LogType))
+	}
+	if v.LoggingFilter != nil {
+		s.WriteStruct(schemas.LoggingConfiguration_LoggingFilter)
+		v.LoggingFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedByFirewallManager != false {
+		s.WriteBool(schemas.LoggingConfiguration_ManagedByFirewallManager, v.ManagedByFirewallManager)
+	}
+	serializeRedactedFields(s, schemas.LoggingConfiguration_RedactedFields, v.RedactedFields)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.LoggingConfiguration_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *LoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfiguration_LogDestinationConfigs:
+			return deserializeLogDestinationConfigs(d, schemas.LoggingConfiguration_LogDestinationConfigs, &v.LogDestinationConfigs)
+		case schemas.LoggingConfiguration_LogScope:
+			var ev string
+			if err := d.ReadString(schemas.LoggingConfiguration_LogScope, &ev); err != nil {
+				return err
+			}
+			v.LogScope = LogScope(ev)
+			return nil
+		case schemas.LoggingConfiguration_LogType:
+			var ev string
+			if err := d.ReadString(schemas.LoggingConfiguration_LogType, &ev); err != nil {
+				return err
+			}
+			v.LogType = LogType(ev)
+			return nil
+		case schemas.LoggingConfiguration_LoggingFilter:
+			v.LoggingFilter = &LoggingFilter{}
+			return v.LoggingFilter.Deserialize(d)
+		case schemas.LoggingConfiguration_ManagedByFirewallManager:
+			return d.ReadBool(schemas.LoggingConfiguration_ManagedByFirewallManager, &v.ManagedByFirewallManager)
+		case schemas.LoggingConfiguration_RedactedFields:
+			return deserializeRedactedFields(d, schemas.LoggingConfiguration_RedactedFields, &v.RedactedFields)
+		case schemas.LoggingConfiguration_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.LoggingConfiguration_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
 // Filtering that specifies which web requests are kept in the logs and which are
 // dropped, defined for a web ACL's LoggingConfiguration.
 //
@@ -2515,6 +4796,35 @@ type LoggingFilter struct {
 	Filters []Filter
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoggingFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultBehavior != "" {
+		s.WriteString(schemas.LoggingFilter_DefaultBehavior, string(v.DefaultBehavior))
+	}
+	serializeFilters(s, schemas.LoggingFilter_Filters, v.Filters)
+}
+func (v *LoggingFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingFilter_DefaultBehavior:
+			var ev string
+			if err := d.ReadString(schemas.LoggingFilter_DefaultBehavior, &ev); err != nil {
+				return err
+			}
+			v.DefaultBehavior = FilterBehavior(ev)
+			return nil
+		case schemas.LoggingFilter_Filters:
+			return deserializeFilters(d, schemas.LoggingFilter_Filters, &v.Filters)
+		}
+		return nil
+	})
 }
 
 // The properties of a managed product, such as an Amazon Web Services Managed
@@ -2562,6 +4872,74 @@ type ManagedProductDescriptor struct {
 	VendorName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedProductDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedProductDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedProductDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsAdvancedManagedRuleSet != false {
+		s.WriteBool(schemas.ManagedProductDescriptor_IsAdvancedManagedRuleSet, v.IsAdvancedManagedRuleSet)
+	}
+	if v.IsVersioningSupported != false {
+		s.WriteBool(schemas.ManagedProductDescriptor_IsVersioningSupported, v.IsVersioningSupported)
+	}
+	if v.ManagedRuleSetName != nil {
+		s.WriteString(schemas.ManagedProductDescriptor_ManagedRuleSetName, *v.ManagedRuleSetName)
+	}
+	if v.ProductDescription != nil {
+		s.WriteString(schemas.ManagedProductDescriptor_ProductDescription, *v.ProductDescription)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.ManagedProductDescriptor_ProductId, *v.ProductId)
+	}
+	if v.ProductLink != nil {
+		s.WriteString(schemas.ManagedProductDescriptor_ProductLink, *v.ProductLink)
+	}
+	if v.ProductTitle != nil {
+		s.WriteString(schemas.ManagedProductDescriptor_ProductTitle, *v.ProductTitle)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.ManagedProductDescriptor_SnsTopicArn, *v.SnsTopicArn)
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.ManagedProductDescriptor_VendorName, *v.VendorName)
+	}
+}
+func (v *ManagedProductDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedProductDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedProductDescriptor_IsAdvancedManagedRuleSet:
+			return d.ReadBool(schemas.ManagedProductDescriptor_IsAdvancedManagedRuleSet, &v.IsAdvancedManagedRuleSet)
+		case schemas.ManagedProductDescriptor_IsVersioningSupported:
+			return d.ReadBool(schemas.ManagedProductDescriptor_IsVersioningSupported, &v.IsVersioningSupported)
+		case schemas.ManagedProductDescriptor_ManagedRuleSetName:
+			v.ManagedRuleSetName = new(string)
+			return d.ReadString(schemas.ManagedProductDescriptor_ManagedRuleSetName, v.ManagedRuleSetName)
+		case schemas.ManagedProductDescriptor_ProductDescription:
+			v.ProductDescription = new(string)
+			return d.ReadString(schemas.ManagedProductDescriptor_ProductDescription, v.ProductDescription)
+		case schemas.ManagedProductDescriptor_ProductId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.ManagedProductDescriptor_ProductId, v.ProductId)
+		case schemas.ManagedProductDescriptor_ProductLink:
+			v.ProductLink = new(string)
+			return d.ReadString(schemas.ManagedProductDescriptor_ProductLink, v.ProductLink)
+		case schemas.ManagedProductDescriptor_ProductTitle:
+			v.ProductTitle = new(string)
+			return d.ReadString(schemas.ManagedProductDescriptor_ProductTitle, v.ProductTitle)
+		case schemas.ManagedProductDescriptor_SnsTopicArn:
+			v.SnsTopicArn = new(string)
+			return d.ReadString(schemas.ManagedProductDescriptor_SnsTopicArn, v.SnsTopicArn)
+		case schemas.ManagedProductDescriptor_VendorName:
+			v.VendorName = new(string)
+			return d.ReadString(schemas.ManagedProductDescriptor_VendorName, v.VendorName)
+		}
+		return nil
+	})
 }
 
 // Additional information that's used by a managed rule group. Many managed rule
@@ -2674,6 +5052,86 @@ type ManagedRuleGroupConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedRuleGroupConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRuleGroupConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRuleGroupConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSManagedRulesACFPRuleSet != nil {
+		s.WriteStruct(schemas.ManagedRuleGroupConfig_AWSManagedRulesACFPRuleSet)
+		v.AWSManagedRulesACFPRuleSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AWSManagedRulesATPRuleSet != nil {
+		s.WriteStruct(schemas.ManagedRuleGroupConfig_AWSManagedRulesATPRuleSet)
+		v.AWSManagedRulesATPRuleSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AWSManagedRulesAntiDDoSRuleSet != nil {
+		s.WriteStruct(schemas.ManagedRuleGroupConfig_AWSManagedRulesAntiDDoSRuleSet)
+		v.AWSManagedRulesAntiDDoSRuleSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AWSManagedRulesBotControlRuleSet != nil {
+		s.WriteStruct(schemas.ManagedRuleGroupConfig_AWSManagedRulesBotControlRuleSet)
+		v.AWSManagedRulesBotControlRuleSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoginPath != nil {
+		s.WriteString(schemas.ManagedRuleGroupConfig_LoginPath, *v.LoginPath)
+	}
+	if v.PasswordField != nil {
+		s.WriteStruct(schemas.ManagedRuleGroupConfig_PasswordField)
+		v.PasswordField.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PayloadType != "" {
+		s.WriteString(schemas.ManagedRuleGroupConfig_PayloadType, string(v.PayloadType))
+	}
+	if v.UsernameField != nil {
+		s.WriteStruct(schemas.ManagedRuleGroupConfig_UsernameField)
+		v.UsernameField.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ManagedRuleGroupConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleGroupConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleGroupConfig_AWSManagedRulesACFPRuleSet:
+			v.AWSManagedRulesACFPRuleSet = &AWSManagedRulesACFPRuleSet{}
+			return v.AWSManagedRulesACFPRuleSet.Deserialize(d)
+		case schemas.ManagedRuleGroupConfig_AWSManagedRulesATPRuleSet:
+			v.AWSManagedRulesATPRuleSet = &AWSManagedRulesATPRuleSet{}
+			return v.AWSManagedRulesATPRuleSet.Deserialize(d)
+		case schemas.ManagedRuleGroupConfig_AWSManagedRulesAntiDDoSRuleSet:
+			v.AWSManagedRulesAntiDDoSRuleSet = &AWSManagedRulesAntiDDoSRuleSet{}
+			return v.AWSManagedRulesAntiDDoSRuleSet.Deserialize(d)
+		case schemas.ManagedRuleGroupConfig_AWSManagedRulesBotControlRuleSet:
+			v.AWSManagedRulesBotControlRuleSet = &AWSManagedRulesBotControlRuleSet{}
+			return v.AWSManagedRulesBotControlRuleSet.Deserialize(d)
+		case schemas.ManagedRuleGroupConfig_LoginPath:
+			v.LoginPath = new(string)
+			return d.ReadString(schemas.ManagedRuleGroupConfig_LoginPath, v.LoginPath)
+		case schemas.ManagedRuleGroupConfig_PasswordField:
+			v.PasswordField = &PasswordField{}
+			return v.PasswordField.Deserialize(d)
+		case schemas.ManagedRuleGroupConfig_PayloadType:
+			var ev string
+			if err := d.ReadString(schemas.ManagedRuleGroupConfig_PayloadType, &ev); err != nil {
+				return err
+			}
+			v.PayloadType = PayloadType(ev)
+			return nil
+		case schemas.ManagedRuleGroupConfig_UsernameField:
+			v.UsernameField = &UsernameField{}
+			return v.UsernameField.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A rule statement used to run the rules that are defined in a managed rule
 // group. To use this, provide the vendor name and the name of the rule group in
 // this statement. You can retrieve the required names by calling ListAvailableManagedRuleGroups.
@@ -2769,6 +5227,57 @@ type ManagedRuleGroupStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedRuleGroupStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRuleGroupStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRuleGroupStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExcludedRules(s, schemas.ManagedRuleGroupStatement_ExcludedRules, v.ExcludedRules)
+	serializeManagedRuleGroupConfigs(s, schemas.ManagedRuleGroupStatement_ManagedRuleGroupConfigs, v.ManagedRuleGroupConfigs)
+	if v.Name != nil {
+		s.WriteString(schemas.ManagedRuleGroupStatement_Name, *v.Name)
+	}
+	serializeRuleActionOverrides(s, schemas.ManagedRuleGroupStatement_RuleActionOverrides, v.RuleActionOverrides)
+	if v.ScopeDownStatement != nil {
+		s.WriteStruct(schemas.ManagedRuleGroupStatement_ScopeDownStatement)
+		v.ScopeDownStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.ManagedRuleGroupStatement_VendorName, *v.VendorName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.ManagedRuleGroupStatement_Version, *v.Version)
+	}
+}
+func (v *ManagedRuleGroupStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleGroupStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleGroupStatement_ExcludedRules:
+			return deserializeExcludedRules(d, schemas.ManagedRuleGroupStatement_ExcludedRules, &v.ExcludedRules)
+		case schemas.ManagedRuleGroupStatement_ManagedRuleGroupConfigs:
+			return deserializeManagedRuleGroupConfigs(d, schemas.ManagedRuleGroupStatement_ManagedRuleGroupConfigs, &v.ManagedRuleGroupConfigs)
+		case schemas.ManagedRuleGroupStatement_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ManagedRuleGroupStatement_Name, v.Name)
+		case schemas.ManagedRuleGroupStatement_RuleActionOverrides:
+			return deserializeRuleActionOverrides(d, schemas.ManagedRuleGroupStatement_RuleActionOverrides, &v.RuleActionOverrides)
+		case schemas.ManagedRuleGroupStatement_ScopeDownStatement:
+			v.ScopeDownStatement = &Statement{}
+			return v.ScopeDownStatement.Deserialize(d)
+		case schemas.ManagedRuleGroupStatement_VendorName:
+			v.VendorName = new(string)
+			return d.ReadString(schemas.ManagedRuleGroupStatement_VendorName, v.VendorName)
+		case schemas.ManagedRuleGroupStatement_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ManagedRuleGroupStatement_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // High-level information about a managed rule group, returned by ListAvailableManagedRuleGroups. This provides
 // information like the name and vendor name, that you provide when you add a ManagedRuleGroupStatementto a
 // web ACL. Managed rule groups include Amazon Web Services Managed Rules rule
@@ -2796,6 +5305,45 @@ type ManagedRuleGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedRuleGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRuleGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRuleGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ManagedRuleGroupSummary_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ManagedRuleGroupSummary_Name, *v.Name)
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.ManagedRuleGroupSummary_VendorName, *v.VendorName)
+	}
+	if v.VersioningSupported != false {
+		s.WriteBool(schemas.ManagedRuleGroupSummary_VersioningSupported, v.VersioningSupported)
+	}
+}
+func (v *ManagedRuleGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleGroupSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ManagedRuleGroupSummary_Description, v.Description)
+		case schemas.ManagedRuleGroupSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ManagedRuleGroupSummary_Name, v.Name)
+		case schemas.ManagedRuleGroupSummary_VendorName:
+			v.VendorName = new(string)
+			return d.ReadString(schemas.ManagedRuleGroupSummary_VendorName, v.VendorName)
+		case schemas.ManagedRuleGroupSummary_VersioningSupported:
+			return d.ReadBool(schemas.ManagedRuleGroupSummary_VersioningSupported, &v.VersioningSupported)
+		}
+		return nil
+	})
+}
+
 // Describes a single version of a managed rule group.
 type ManagedRuleGroupVersion struct {
 
@@ -2807,6 +5355,34 @@ type ManagedRuleGroupVersion struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedRuleGroupVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRuleGroupVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRuleGroupVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdateTimestamp != nil {
+		s.WriteTime(schemas.ManagedRuleGroupVersion_LastUpdateTimestamp, *v.LastUpdateTimestamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ManagedRuleGroupVersion_Name, *v.Name)
+	}
+}
+func (v *ManagedRuleGroupVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleGroupVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleGroupVersion_LastUpdateTimestamp:
+			v.LastUpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ManagedRuleGroupVersion_LastUpdateTimestamp, v.LastUpdateTimestamp)
+		case schemas.ManagedRuleGroupVersion_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ManagedRuleGroupVersion_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A set of rules that is managed by Amazon Web Services and Amazon Web Services
@@ -2872,6 +5448,61 @@ type ManagedRuleSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedRuleSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRuleSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.ManagedRuleSet_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ManagedRuleSet_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ManagedRuleSet_Id, *v.Id)
+	}
+	if v.LabelNamespace != nil {
+		s.WriteString(schemas.ManagedRuleSet_LabelNamespace, *v.LabelNamespace)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ManagedRuleSet_Name, *v.Name)
+	}
+	serializePublishedVersions(s, schemas.ManagedRuleSet_PublishedVersions, v.PublishedVersions)
+	if v.RecommendedVersion != nil {
+		s.WriteString(schemas.ManagedRuleSet_RecommendedVersion, *v.RecommendedVersion)
+	}
+}
+func (v *ManagedRuleSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleSet_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.ManagedRuleSet_ARN, v.ARN)
+		case schemas.ManagedRuleSet_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ManagedRuleSet_Description, v.Description)
+		case schemas.ManagedRuleSet_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ManagedRuleSet_Id, v.Id)
+		case schemas.ManagedRuleSet_LabelNamespace:
+			v.LabelNamespace = new(string)
+			return d.ReadString(schemas.ManagedRuleSet_LabelNamespace, v.LabelNamespace)
+		case schemas.ManagedRuleSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ManagedRuleSet_Name, v.Name)
+		case schemas.ManagedRuleSet_PublishedVersions:
+			return deserializePublishedVersions(d, schemas.ManagedRuleSet_PublishedVersions, &v.PublishedVersions)
+		case schemas.ManagedRuleSet_RecommendedVersion:
+			v.RecommendedVersion = new(string)
+			return d.ReadString(schemas.ManagedRuleSet_RecommendedVersion, v.RecommendedVersion)
+		}
+		return nil
+	})
+}
+
 // High-level information for a managed rule set.
 //
 // This is intended for use only by vendors of managed rule sets. Vendors are
@@ -2930,6 +5561,58 @@ type ManagedRuleSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedRuleSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRuleSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRuleSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.ManagedRuleSetSummary_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ManagedRuleSetSummary_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ManagedRuleSetSummary_Id, *v.Id)
+	}
+	if v.LabelNamespace != nil {
+		s.WriteString(schemas.ManagedRuleSetSummary_LabelNamespace, *v.LabelNamespace)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.ManagedRuleSetSummary_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ManagedRuleSetSummary_Name, *v.Name)
+	}
+}
+func (v *ManagedRuleSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleSetSummary_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.ManagedRuleSetSummary_ARN, v.ARN)
+		case schemas.ManagedRuleSetSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ManagedRuleSetSummary_Description, v.Description)
+		case schemas.ManagedRuleSetSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ManagedRuleSetSummary_Id, v.Id)
+		case schemas.ManagedRuleSetSummary_LabelNamespace:
+			v.LabelNamespace = new(string)
+			return d.ReadString(schemas.ManagedRuleSetSummary_LabelNamespace, v.LabelNamespace)
+		case schemas.ManagedRuleSetSummary_LockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.ManagedRuleSetSummary_LockToken, v.LockToken)
+		case schemas.ManagedRuleSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ManagedRuleSetSummary_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Information for a single version of a managed rule set.
 //
 // This is intended for use only by vendors of managed rule sets. Vendors are
@@ -2983,6 +5666,58 @@ type ManagedRuleSetVersion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedRuleSetVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRuleSetVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRuleSetVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedRuleGroupArn != nil {
+		s.WriteString(schemas.ManagedRuleSetVersion_AssociatedRuleGroupArn, *v.AssociatedRuleGroupArn)
+	}
+	if v.Capacity != nil {
+		s.WriteInt64(schemas.ManagedRuleSetVersion_Capacity, *v.Capacity)
+	}
+	if v.ExpiryTimestamp != nil {
+		s.WriteTime(schemas.ManagedRuleSetVersion_ExpiryTimestamp, *v.ExpiryTimestamp)
+	}
+	if v.ForecastedLifetime != nil {
+		s.WriteInt32(schemas.ManagedRuleSetVersion_ForecastedLifetime, *v.ForecastedLifetime)
+	}
+	if v.LastUpdateTimestamp != nil {
+		s.WriteTime(schemas.ManagedRuleSetVersion_LastUpdateTimestamp, *v.LastUpdateTimestamp)
+	}
+	if v.PublishTimestamp != nil {
+		s.WriteTime(schemas.ManagedRuleSetVersion_PublishTimestamp, *v.PublishTimestamp)
+	}
+}
+func (v *ManagedRuleSetVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleSetVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleSetVersion_AssociatedRuleGroupArn:
+			v.AssociatedRuleGroupArn = new(string)
+			return d.ReadString(schemas.ManagedRuleSetVersion_AssociatedRuleGroupArn, v.AssociatedRuleGroupArn)
+		case schemas.ManagedRuleSetVersion_Capacity:
+			v.Capacity = new(int64)
+			return d.ReadInt64(schemas.ManagedRuleSetVersion_Capacity, v.Capacity)
+		case schemas.ManagedRuleSetVersion_ExpiryTimestamp:
+			v.ExpiryTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ManagedRuleSetVersion_ExpiryTimestamp, v.ExpiryTimestamp)
+		case schemas.ManagedRuleSetVersion_ForecastedLifetime:
+			v.ForecastedLifetime = new(int32)
+			return d.ReadInt32(schemas.ManagedRuleSetVersion_ForecastedLifetime, v.ForecastedLifetime)
+		case schemas.ManagedRuleSetVersion_LastUpdateTimestamp:
+			v.LastUpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ManagedRuleSetVersion_LastUpdateTimestamp, v.LastUpdateTimestamp)
+		case schemas.ManagedRuleSetVersion_PublishTimestamp:
+			v.PublishTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ManagedRuleSetVersion_PublishTimestamp, v.PublishTimestamp)
+		}
+		return nil
+	})
+}
+
 // Inspect the HTTP method of the web request. The method indicates the type of
 // operation that the request is asking the origin to perform.
 //
@@ -2991,6 +5726,22 @@ type ManagedRuleSetVersion struct {
 // JSON specification: "Method": {}
 type Method struct {
 	noSmithyDocumentSerde
+}
+
+func (v *Method) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Method)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Method) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Method) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Method, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Information for a release of the mobile SDK, including release notes and tags.
@@ -3018,6 +5769,43 @@ type MobileSdkRelease struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MobileSdkRelease) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MobileSdkRelease)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MobileSdkRelease) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.MobileSdkRelease_ReleaseNotes, *v.ReleaseNotes)
+	}
+	if v.ReleaseVersion != nil {
+		s.WriteString(schemas.MobileSdkRelease_ReleaseVersion, *v.ReleaseVersion)
+	}
+	serializeTagList(s, schemas.MobileSdkRelease_Tags, v.Tags)
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.MobileSdkRelease_Timestamp, *v.Timestamp)
+	}
+}
+func (v *MobileSdkRelease) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MobileSdkRelease, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MobileSdkRelease_ReleaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.MobileSdkRelease_ReleaseNotes, v.ReleaseNotes)
+		case schemas.MobileSdkRelease_ReleaseVersion:
+			v.ReleaseVersion = new(string)
+			return d.ReadString(schemas.MobileSdkRelease_ReleaseVersion, v.ReleaseVersion)
+		case schemas.MobileSdkRelease_Tags:
+			return deserializeTagList(d, schemas.MobileSdkRelease_Tags, &v.Tags)
+		case schemas.MobileSdkRelease_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.MobileSdkRelease_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // The monetization configuration for a web ACL or rule group. Specifies the
 // cryptocurrency payment networks and currency mode for AI bot monetization. You
 // must provide this configuration when any rule in the web ACL or rule group uses
@@ -3035,6 +5823,40 @@ type MonetizationConfig struct {
 	CurrencyMode CurrencyMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *MonetizationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonetizationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonetizationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CryptoConfig != nil {
+		s.WriteStruct(schemas.MonetizationConfig_CryptoConfig)
+		v.CryptoConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrencyMode != "" {
+		s.WriteString(schemas.MonetizationConfig_CurrencyMode, string(v.CurrencyMode))
+	}
+}
+func (v *MonetizationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonetizationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonetizationConfig_CryptoConfig:
+			v.CryptoConfig = &CryptoConfig{}
+			return v.CryptoConfig.Deserialize(d)
+		case schemas.MonetizationConfig_CurrencyMode:
+			var ev string
+			if err := d.ReadString(schemas.MonetizationConfig_CurrencyMode, &ev); err != nil {
+				return err
+			}
+			v.CurrencyMode = CurrencyMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A filter for narrowing monetization statistics and settlement record results.
@@ -3112,6 +5934,31 @@ type MonetizationFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonetizationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonetizationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonetizationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.MonetizationFilter_Name, *v.Name)
+	}
+	serializeMonetizationFilterValueList(s, schemas.MonetizationFilter_Values, v.Values)
+}
+func (v *MonetizationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonetizationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonetizationFilter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MonetizationFilter_Name, v.Name)
+		case schemas.MonetizationFilter_Values:
+			return deserializeMonetizationFilterValueList(d, schemas.MonetizationFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Specifies the monetize action settings for a rule. When WAF applies this
 // action, it returns an HTTP 402 Payment Required response containing pricing
 // information that the requesting client uses to complete payment and gain access
@@ -3130,6 +5977,28 @@ type MonetizeAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonetizeAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonetizeAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonetizeAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PriceMultiplier != nil {
+		s.WriteString(schemas.MonetizeAction_PriceMultiplier, *v.PriceMultiplier)
+	}
+}
+func (v *MonetizeAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonetizeAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonetizeAction_PriceMultiplier:
+			v.PriceMultiplier = new(string)
+			return d.ReadString(schemas.MonetizeAction_PriceMultiplier, v.PriceMultiplier)
+		}
+		return nil
+	})
+}
+
 // Specifies that WAF should do nothing. This is used for the OverrideAction
 // setting on a Rulewhen the rule uses a rule group reference statement.
 //
@@ -3139,6 +6008,22 @@ type MonetizeAction struct {
 // JSON specification: "None": {}
 type NoneAction struct {
 	noSmithyDocumentSerde
+}
+
+func (v *NoneAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoneAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoneAction) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *NoneAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoneAction, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // A logical rule statement used to negate the results of another rule statement.
@@ -3151,6 +6036,30 @@ type NotStatement struct {
 	Statement *Statement
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Statement != nil {
+		s.WriteStruct(schemas.NotStatement_Statement)
+		v.Statement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NotStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotStatement_Statement:
+			v.Statement = &Statement{}
+			return v.Statement.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Configures the level of DDoS protection that applies to web ACLs associated
@@ -3174,6 +6083,32 @@ type OnSourceDDoSProtectionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OnSourceDDoSProtectionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnSourceDDoSProtectionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnSourceDDoSProtectionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ALBLowReputationMode != "" {
+		s.WriteString(schemas.OnSourceDDoSProtectionConfig_ALBLowReputationMode, string(v.ALBLowReputationMode))
+	}
+}
+func (v *OnSourceDDoSProtectionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnSourceDDoSProtectionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnSourceDDoSProtectionConfig_ALBLowReputationMode:
+			var ev string
+			if err := d.ReadString(schemas.OnSourceDDoSProtectionConfig_ALBLowReputationMode, &ev); err != nil {
+				return err
+			}
+			v.ALBLowReputationMode = LowReputationMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A logical rule statement used to combine other rule statements with OR logic.
 // You provide more than one Statementwithin the OrStatement .
 type OrStatement struct {
@@ -3185,6 +6120,25 @@ type OrStatement struct {
 	Statements []Statement
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStatements(s, schemas.OrStatement_Statements, v.Statements)
+}
+func (v *OrStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrStatement_Statements:
+			return deserializeStatements(d, schemas.OrStatement_Statements, &v.Statements)
+		}
+		return nil
+	})
 }
 
 // The action to use in the place of the action that results from the rule group
@@ -3213,6 +6167,38 @@ type OverrideAction struct {
 	None *NoneAction
 
 	noSmithyDocumentSerde
+}
+
+func (v *OverrideAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OverrideAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OverrideAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteStruct(schemas.OverrideAction_Count)
+		v.Count.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.None != nil {
+		s.WriteStruct(schemas.OverrideAction_None)
+		v.None.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OverrideAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OverrideAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OverrideAction_Count:
+			v.Count = &CountAction{}
+			return v.Count.Deserialize(d)
+		case schemas.OverrideAction_None:
+			v.None = &NoneAction{}
+			return v.None.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The name of the field in the request payload that contains your customer's
@@ -3244,6 +6230,28 @@ type PasswordField struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PasswordField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PasswordField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PasswordField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.PasswordField_Identifier, *v.Identifier)
+	}
+}
+func (v *PasswordField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PasswordField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PasswordField_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.PasswordField_Identifier, v.Identifier)
+		}
+		return nil
+	})
 }
 
 // Statistics about bot traffic to a specific URI path, including the path,
@@ -3279,6 +6287,45 @@ type PathStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PathStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PathStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PathStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.PathStatistics_Path, *v.Path)
+	}
+	s.WriteFloat64(schemas.PathStatistics_Percentage, v.Percentage)
+	s.WriteInt64(schemas.PathStatistics_RequestCount, v.RequestCount)
+	if v.Source != nil {
+		s.WriteStruct(schemas.PathStatistics_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBotStatisticsList(s, schemas.PathStatistics_TopBots, v.TopBots)
+}
+func (v *PathStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PathStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PathStatistics_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.PathStatistics_Path, v.Path)
+		case schemas.PathStatistics_Percentage:
+			return d.ReadFloat64(schemas.PathStatistics_Percentage, &v.Percentage)
+		case schemas.PathStatistics_RequestCount:
+			return d.ReadInt64(schemas.PathStatistics_RequestCount, &v.RequestCount)
+		case schemas.PathStatistics_Source:
+			v.Source = &FilterSource{}
+			return v.Source.Deserialize(d)
+		case schemas.PathStatistics_TopBots:
+			return deserializeBotStatisticsList(d, schemas.PathStatistics_TopBots, &v.TopBots)
+		}
+		return nil
+	})
+}
+
 // A blockchain payment network configuration for receiving AI bot monetization
 // payments. Specifies the blockchain chain, your wallet address on that chain, and
 // the price per request.
@@ -3310,6 +6357,41 @@ type PaymentNetwork struct {
 	WalletAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PaymentNetwork) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentNetwork)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentNetwork) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Chain != "" {
+		s.WriteString(schemas.PaymentNetwork_Chain, string(v.Chain))
+	}
+	serializePrices(s, schemas.PaymentNetwork_Prices, v.Prices)
+	if v.WalletAddress != nil {
+		s.WriteString(schemas.PaymentNetwork_WalletAddress, *v.WalletAddress)
+	}
+}
+func (v *PaymentNetwork) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentNetwork, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentNetwork_Chain:
+			var ev string
+			if err := d.ReadString(schemas.PaymentNetwork_Chain, &ev); err != nil {
+				return err
+			}
+			v.Chain = BlockchainChain(ev)
+			return nil
+		case schemas.PaymentNetwork_Prices:
+			return deserializePrices(d, schemas.PaymentNetwork_Prices, &v.Prices)
+		case schemas.PaymentNetwork_WalletAddress:
+			v.WalletAddress = new(string)
+			return d.ReadString(schemas.PaymentNetwork_WalletAddress, v.WalletAddress)
+		}
+		return nil
+	})
 }
 
 // The name of a field in the request payload that contains part or all of your
@@ -3347,6 +6429,28 @@ type PhoneNumberField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PhoneNumberField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumberField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumberField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.PhoneNumberField_Identifier, *v.Identifier)
+	}
+}
+func (v *PhoneNumberField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumberField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumberField_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.PhoneNumberField_Identifier, v.Identifier)
+		}
+		return nil
+	})
+}
+
 // A pre-parse text transformation that normalizes the raw query string before WAF
 // parses it into individual query arguments. Pre-parse text transformations are
 // only supported when FieldToMatch is SingleQueryArgument or AllQueryArguments .
@@ -3367,6 +6471,35 @@ type PreParseTextTransformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreParseTextTransformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreParseTextTransformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreParseTextTransformation) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.PreParseTextTransformation_Priority, v.Priority)
+	if v.Type != "" {
+		s.WriteString(schemas.PreParseTextTransformation_Type, string(v.Type))
+	}
+}
+func (v *PreParseTextTransformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreParseTextTransformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreParseTextTransformation_Priority:
+			return d.ReadInt32(schemas.PreParseTextTransformation_Priority, &v.Priority)
+		case schemas.PreParseTextTransformation_Type:
+			var ev string
+			if err := d.ReadString(schemas.PreParseTextTransformation_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = PreParseTextTransformationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The price per request for a payment network, specifying the amount and
 // cryptocurrency.
 type Price struct {
@@ -3385,6 +6518,38 @@ type Price struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Price) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Price)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Price) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.Price_Amount, *v.Amount)
+	}
+	if v.Currency != "" {
+		s.WriteString(schemas.Price_Currency, string(v.Currency))
+	}
+}
+func (v *Price) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Price, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Price_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.Price_Amount, v.Amount)
+		case schemas.Price_Currency:
+			var ev string
+			if err := d.ReadString(schemas.Price_Currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = CryptoCurrency(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Inspect the query string of the web request. This is the part of a URL that
 // appears after a ? character, if any.
 //
@@ -3393,6 +6558,22 @@ type Price struct {
 // JSON specification: "QueryString": {}
 type QueryString struct {
 	noSmithyDocumentSerde
+}
+
+func (v *QueryString) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryString)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryString) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *QueryString) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryString, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // A rate-based rule counts incoming requests and rate limits requests when they
@@ -3582,6 +6763,62 @@ type RateBasedStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateBasedStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateBasedStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateBasedStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateKeyType != "" {
+		s.WriteString(schemas.RateBasedStatement_AggregateKeyType, string(v.AggregateKeyType))
+	}
+	serializeRateBasedStatementCustomKeys(s, schemas.RateBasedStatement_CustomKeys, v.CustomKeys)
+	if v.EvaluationWindowSec != 0 {
+		s.WriteInt64(schemas.RateBasedStatement_EvaluationWindowSec, v.EvaluationWindowSec)
+	}
+	if v.ForwardedIPConfig != nil {
+		s.WriteStruct(schemas.RateBasedStatement_ForwardedIPConfig)
+		v.ForwardedIPConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != nil {
+		s.WriteInt64(schemas.RateBasedStatement_Limit, *v.Limit)
+	}
+	if v.ScopeDownStatement != nil {
+		s.WriteStruct(schemas.RateBasedStatement_ScopeDownStatement)
+		v.ScopeDownStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RateBasedStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateBasedStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateBasedStatement_AggregateKeyType:
+			var ev string
+			if err := d.ReadString(schemas.RateBasedStatement_AggregateKeyType, &ev); err != nil {
+				return err
+			}
+			v.AggregateKeyType = RateBasedStatementAggregateKeyType(ev)
+			return nil
+		case schemas.RateBasedStatement_CustomKeys:
+			return deserializeRateBasedStatementCustomKeys(d, schemas.RateBasedStatement_CustomKeys, &v.CustomKeys)
+		case schemas.RateBasedStatement_EvaluationWindowSec:
+			return d.ReadInt64(schemas.RateBasedStatement_EvaluationWindowSec, &v.EvaluationWindowSec)
+		case schemas.RateBasedStatement_ForwardedIPConfig:
+			v.ForwardedIPConfig = &ForwardedIPConfig{}
+			return v.ForwardedIPConfig.Deserialize(d)
+		case schemas.RateBasedStatement_Limit:
+			v.Limit = new(int64)
+			return d.ReadInt64(schemas.RateBasedStatement_Limit, v.Limit)
+		case schemas.RateBasedStatement_ScopeDownStatement:
+			v.ScopeDownStatement = &Statement{}
+			return v.ScopeDownStatement.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies a single custom aggregate key for a rate-base rule.
 //
 // Web requests that are missing any of the components specified in the
@@ -3673,6 +6910,118 @@ type RateBasedStatementCustomKey struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateBasedStatementCustomKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateBasedStatementCustomKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateBasedStatementCustomKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ASN != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_ASN)
+		v.ASN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Cookie != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_Cookie)
+		v.Cookie.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ForwardedIP != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_ForwardedIP)
+		v.ForwardedIP.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HTTPMethod != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_HTTPMethod)
+		v.HTTPMethod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Header != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_Header)
+		v.Header.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IP != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_IP)
+		v.IP.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JA3Fingerprint != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_JA3Fingerprint)
+		v.JA3Fingerprint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JA4Fingerprint != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_JA4Fingerprint)
+		v.JA4Fingerprint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LabelNamespace != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_LabelNamespace)
+		v.LabelNamespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryArgument != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_QueryArgument)
+		v.QueryArgument.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryString != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_QueryString)
+		v.QueryString.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UriPath != nil {
+		s.WriteStruct(schemas.RateBasedStatementCustomKey_UriPath)
+		v.UriPath.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RateBasedStatementCustomKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateBasedStatementCustomKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateBasedStatementCustomKey_ASN:
+			v.ASN = &RateLimitAsn{}
+			return v.ASN.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_Cookie:
+			v.Cookie = &RateLimitCookie{}
+			return v.Cookie.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_ForwardedIP:
+			v.ForwardedIP = &RateLimitForwardedIP{}
+			return v.ForwardedIP.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_HTTPMethod:
+			v.HTTPMethod = &RateLimitHTTPMethod{}
+			return v.HTTPMethod.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_Header:
+			v.Header = &RateLimitHeader{}
+			return v.Header.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_IP:
+			v.IP = &RateLimitIP{}
+			return v.IP.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_JA3Fingerprint:
+			v.JA3Fingerprint = &RateLimitJA3Fingerprint{}
+			return v.JA3Fingerprint.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_JA4Fingerprint:
+			v.JA4Fingerprint = &RateLimitJA4Fingerprint{}
+			return v.JA4Fingerprint.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_LabelNamespace:
+			v.LabelNamespace = &RateLimitLabelNamespace{}
+			return v.LabelNamespace.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_QueryArgument:
+			v.QueryArgument = &RateLimitQueryArgument{}
+			return v.QueryArgument.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_QueryString:
+			v.QueryString = &RateLimitQueryString{}
+			return v.QueryString.Deserialize(d)
+		case schemas.RateBasedStatementCustomKey_UriPath:
+			v.UriPath = &RateLimitUriPath{}
+			return v.UriPath.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The set of IP addresses that are currently blocked for a RateBasedStatement. This is only
 // available for rate-based rules that aggregate on just the IP address, with the
 // AggregateKeyType set to IP or FORWARDED_IP .
@@ -3698,12 +7047,57 @@ type RateBasedStatementManagedKeysIPSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateBasedStatementManagedKeysIPSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateBasedStatementManagedKeysIPSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateBasedStatementManagedKeysIPSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIPAddresses(s, schemas.RateBasedStatementManagedKeysIPSet_Addresses, v.Addresses)
+	if v.IPAddressVersion != "" {
+		s.WriteString(schemas.RateBasedStatementManagedKeysIPSet_IPAddressVersion, string(v.IPAddressVersion))
+	}
+}
+func (v *RateBasedStatementManagedKeysIPSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateBasedStatementManagedKeysIPSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateBasedStatementManagedKeysIPSet_Addresses:
+			return deserializeIPAddresses(d, schemas.RateBasedStatementManagedKeysIPSet_Addresses, &v.Addresses)
+		case schemas.RateBasedStatementManagedKeysIPSet_IPAddressVersion:
+			var ev string
+			if err := d.ReadString(schemas.RateBasedStatementManagedKeysIPSet_IPAddressVersion, &ev); err != nil {
+				return err
+			}
+			v.IPAddressVersion = IPAddressVersion(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies an Autonomous System Number (ASN) derived from the request's
 // originating or forwarded IP address as an aggregate key for a rate-based rule.
 // Each distinct ASN contributes to the aggregation instance. If you use a single
 // ASN as your custom key, then each ASN fully defines an aggregation instance.
 type RateLimitAsn struct {
 	noSmithyDocumentSerde
+}
+
+func (v *RateLimitAsn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitAsn)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitAsn) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RateLimitAsn) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitAsn, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Specifies a cookie as an aggregate key for a rate-based rule. Each distinct
@@ -3732,6 +7126,31 @@ type RateLimitCookie struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateLimitCookie) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitCookie)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitCookie) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RateLimitCookie_Name, *v.Name)
+	}
+	serializeTextTransformations(s, schemas.RateLimitCookie_TextTransformations, v.TextTransformations)
+}
+func (v *RateLimitCookie) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitCookie, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimitCookie_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RateLimitCookie_Name, v.Name)
+		case schemas.RateLimitCookie_TextTransformations:
+			return deserializeTextTransformations(d, schemas.RateLimitCookie_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
+}
+
 // Specifies the first IP address in an HTTP header as an aggregate key for a
 // rate-based rule. Each distinct forwarded IP address contributes to the
 // aggregation instance.
@@ -3753,6 +7172,22 @@ type RateLimitCookie struct {
 // address in the rate-based statement's ForwardedIPConfig .
 type RateLimitForwardedIP struct {
 	noSmithyDocumentSerde
+}
+
+func (v *RateLimitForwardedIP) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitForwardedIP)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitForwardedIP) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RateLimitForwardedIP) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitForwardedIP, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Specifies a header as an aggregate key for a rate-based rule. Each distinct
@@ -3781,6 +7216,31 @@ type RateLimitHeader struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateLimitHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RateLimitHeader_Name, *v.Name)
+	}
+	serializeTextTransformations(s, schemas.RateLimitHeader_TextTransformations, v.TextTransformations)
+}
+func (v *RateLimitHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimitHeader_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RateLimitHeader_Name, v.Name)
+		case schemas.RateLimitHeader_TextTransformations:
+			return deserializeTextTransformations(d, schemas.RateLimitHeader_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
+}
+
 // Specifies the request's HTTP method as an aggregate key for a rate-based rule.
 // Each distinct HTTP method contributes to the aggregation instance. If you use
 // just the HTTP method as your custom key, then each method fully defines an
@@ -3789,6 +7249,22 @@ type RateLimitHeader struct {
 // JSON specification: "RateLimitHTTPMethod": {}
 type RateLimitHTTPMethod struct {
 	noSmithyDocumentSerde
+}
+
+func (v *RateLimitHTTPMethod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitHTTPMethod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitHTTPMethod) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RateLimitHTTPMethod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitHTTPMethod, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Specifies the IP address in the web request as an aggregate key for a
@@ -3804,6 +7280,22 @@ type RateLimitHTTPMethod struct {
 // JSON specification: "RateLimitIP": {}
 type RateLimitIP struct {
 	noSmithyDocumentSerde
+}
+
+func (v *RateLimitIP) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitIP)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitIP) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RateLimitIP) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitIP, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 //	Use the request's JA3 fingerprint derived from the TLS Client Hello of an
@@ -3828,6 +7320,32 @@ type RateLimitJA3Fingerprint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateLimitJA3Fingerprint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitJA3Fingerprint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitJA3Fingerprint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FallbackBehavior != "" {
+		s.WriteString(schemas.RateLimitJA3Fingerprint_FallbackBehavior, string(v.FallbackBehavior))
+	}
+}
+func (v *RateLimitJA3Fingerprint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitJA3Fingerprint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimitJA3Fingerprint_FallbackBehavior:
+			var ev string
+			if err := d.ReadString(schemas.RateLimitJA3Fingerprint_FallbackBehavior, &ev); err != nil {
+				return err
+			}
+			v.FallbackBehavior = FallbackBehavior(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Use the request's JA4 fingerprint derived from the TLS Client Hello of an
 // incoming request as an aggregate key. If you use a single JA4 fingerprint as
 // your custom key, then each value fully defines an aggregation instance.
@@ -3847,6 +7365,32 @@ type RateLimitJA4Fingerprint struct {
 	FallbackBehavior FallbackBehavior
 
 	noSmithyDocumentSerde
+}
+
+func (v *RateLimitJA4Fingerprint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitJA4Fingerprint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitJA4Fingerprint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FallbackBehavior != "" {
+		s.WriteString(schemas.RateLimitJA4Fingerprint_FallbackBehavior, string(v.FallbackBehavior))
+	}
+}
+func (v *RateLimitJA4Fingerprint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitJA4Fingerprint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimitJA4Fingerprint_FallbackBehavior:
+			var ev string
+			if err := d.ReadString(schemas.RateLimitJA4Fingerprint_FallbackBehavior, &ev); err != nil {
+				return err
+			}
+			v.FallbackBehavior = FallbackBehavior(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies a label namespace to use as an aggregate key for a rate-based rule.
@@ -3869,6 +7413,28 @@ type RateLimitLabelNamespace struct {
 	Namespace *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RateLimitLabelNamespace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitLabelNamespace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitLabelNamespace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Namespace != nil {
+		s.WriteString(schemas.RateLimitLabelNamespace_Namespace, *v.Namespace)
+	}
+}
+func (v *RateLimitLabelNamespace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitLabelNamespace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimitLabelNamespace_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.RateLimitLabelNamespace_Namespace, v.Namespace)
+		}
+		return nil
+	})
 }
 
 // Specifies a query argument in the request as an aggregate key for a rate-based
@@ -3897,6 +7463,31 @@ type RateLimitQueryArgument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateLimitQueryArgument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitQueryArgument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitQueryArgument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RateLimitQueryArgument_Name, *v.Name)
+	}
+	serializeTextTransformations(s, schemas.RateLimitQueryArgument_TextTransformations, v.TextTransformations)
+}
+func (v *RateLimitQueryArgument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitQueryArgument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimitQueryArgument_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RateLimitQueryArgument_Name, v.Name)
+		case schemas.RateLimitQueryArgument_TextTransformations:
+			return deserializeTextTransformations(d, schemas.RateLimitQueryArgument_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
+}
+
 // Specifies the request's query string as an aggregate key for a rate-based rule.
 // Each distinct string contributes to the aggregation instance. If you use just
 // the query string as your custom key, then each string fully defines an
@@ -3916,6 +7507,25 @@ type RateLimitQueryString struct {
 	TextTransformations []TextTransformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *RateLimitQueryString) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitQueryString)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitQueryString) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTextTransformations(s, schemas.RateLimitQueryString_TextTransformations, v.TextTransformations)
+}
+func (v *RateLimitQueryString) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitQueryString, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimitQueryString_TextTransformations:
+			return deserializeTextTransformations(d, schemas.RateLimitQueryString_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
 }
 
 // Specifies the request's URI path as an aggregate key for a rate-based rule.
@@ -3939,6 +7549,25 @@ type RateLimitUriPath struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateLimitUriPath) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateLimitUriPath)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateLimitUriPath) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTextTransformations(s, schemas.RateLimitUriPath_TextTransformations, v.TextTransformations)
+}
+func (v *RateLimitUriPath) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitUriPath, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimitUriPath_TextTransformations:
+			return deserializeTextTransformations(d, schemas.RateLimitUriPath_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
+}
+
 // A single regular expression. This is used in a RegexPatternSet and also in the configuration
 // for the Amazon Web Services Managed Rules rule group
 // AWSManagedRulesAntiDDoSRuleSet .
@@ -3952,6 +7581,28 @@ type Regex struct {
 	RegexString *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Regex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Regex)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Regex) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegexString != nil {
+		s.WriteString(schemas.Regex_RegexString, *v.RegexString)
+	}
+}
+func (v *Regex) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Regex, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Regex_RegexString:
+			v.RegexString = new(string)
+			return d.ReadString(schemas.Regex_RegexString, v.RegexString)
+		}
+		return nil
+	})
 }
 
 // A rule statement used to search web request components for a match against a
@@ -3994,6 +7645,42 @@ type RegexMatchStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegexMatchStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexMatchStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.RegexMatchStatement_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePreParseTextTransformations(s, schemas.RegexMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	if v.RegexString != nil {
+		s.WriteString(schemas.RegexMatchStatement_RegexString, *v.RegexString)
+	}
+	serializeTextTransformations(s, schemas.RegexMatchStatement_TextTransformations, v.TextTransformations)
+}
+func (v *RegexMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexMatchStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexMatchStatement_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.RegexMatchStatement_PreParseTextTransformations:
+			return deserializePreParseTextTransformations(d, schemas.RegexMatchStatement_PreParseTextTransformations, &v.PreParseTextTransformations)
+		case schemas.RegexMatchStatement_RegexString:
+			v.RegexString = new(string)
+			return d.ReadString(schemas.RegexMatchStatement_RegexString, v.RegexString)
+		case schemas.RegexMatchStatement_TextTransformations:
+			return deserializeTextTransformations(d, schemas.RegexMatchStatement_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
+}
+
 // Contains one or more regular expressions.
 //
 // WAF assigns an ARN to each RegexPatternSet that you create. To use a set in a
@@ -4017,6 +7704,49 @@ type RegexPatternSet struct {
 	RegularExpressionList []Regex
 
 	noSmithyDocumentSerde
+}
+
+func (v *RegexPatternSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexPatternSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexPatternSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RegexPatternSet_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RegexPatternSet_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RegexPatternSet_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RegexPatternSet_Name, *v.Name)
+	}
+	serializeRegularExpressionList(s, schemas.RegexPatternSet_RegularExpressionList, v.RegularExpressionList)
+}
+func (v *RegexPatternSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexPatternSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexPatternSet_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RegexPatternSet_ARN, v.ARN)
+		case schemas.RegexPatternSet_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RegexPatternSet_Description, v.Description)
+		case schemas.RegexPatternSet_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RegexPatternSet_Id, v.Id)
+		case schemas.RegexPatternSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RegexPatternSet_Name, v.Name)
+		case schemas.RegexPatternSet_RegularExpressionList:
+			return deserializeRegularExpressionList(d, schemas.RegexPatternSet_RegularExpressionList, &v.RegularExpressionList)
+		}
+		return nil
+	})
 }
 
 // A rule statement used to search web request components for matches with regular
@@ -4063,6 +7793,42 @@ type RegexPatternSetReferenceStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegexPatternSetReferenceStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexPatternSetReferenceStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexPatternSetReferenceStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RegexPatternSetReferenceStatement_ARN, *v.ARN)
+	}
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.RegexPatternSetReferenceStatement_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePreParseTextTransformations(s, schemas.RegexPatternSetReferenceStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	serializeTextTransformations(s, schemas.RegexPatternSetReferenceStatement_TextTransformations, v.TextTransformations)
+}
+func (v *RegexPatternSetReferenceStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexPatternSetReferenceStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexPatternSetReferenceStatement_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RegexPatternSetReferenceStatement_ARN, v.ARN)
+		case schemas.RegexPatternSetReferenceStatement_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.RegexPatternSetReferenceStatement_PreParseTextTransformations:
+			return deserializePreParseTextTransformations(d, schemas.RegexPatternSetReferenceStatement_PreParseTextTransformations, &v.PreParseTextTransformations)
+		case schemas.RegexPatternSetReferenceStatement_TextTransformations:
+			return deserializeTextTransformations(d, schemas.RegexPatternSetReferenceStatement_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
+}
+
 // High-level information about a RegexPatternSet, returned by operations like create and list.
 // This provides information like the ID, that you can use to retrieve and manage a
 // RegexPatternSet , and the ARN, that you provide to the RegexPatternSetReferenceStatement to use the pattern set
@@ -4095,6 +7861,52 @@ type RegexPatternSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegexPatternSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexPatternSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexPatternSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RegexPatternSetSummary_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RegexPatternSetSummary_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RegexPatternSetSummary_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.RegexPatternSetSummary_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RegexPatternSetSummary_Name, *v.Name)
+	}
+}
+func (v *RegexPatternSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexPatternSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexPatternSetSummary_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RegexPatternSetSummary_ARN, v.ARN)
+		case schemas.RegexPatternSetSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RegexPatternSetSummary_Description, v.Description)
+		case schemas.RegexPatternSetSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RegexPatternSetSummary_Id, v.Id)
+		case schemas.RegexPatternSetSummary_LockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.RegexPatternSetSummary_LockToken, v.LockToken)
+		case schemas.RegexPatternSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RegexPatternSetSummary_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // High level information for an SDK release.
 type ReleaseSummary struct {
 
@@ -4105,6 +7917,34 @@ type ReleaseSummary struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReleaseSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReleaseSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReleaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReleaseVersion != nil {
+		s.WriteString(schemas.ReleaseSummary_ReleaseVersion, *v.ReleaseVersion)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.ReleaseSummary_Timestamp, *v.Timestamp)
+	}
+}
+func (v *ReleaseSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReleaseSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReleaseSummary_ReleaseVersion:
+			v.ReleaseVersion = new(string)
+			return d.ReadString(schemas.ReleaseSummary_ReleaseVersion, v.ReleaseVersion)
+		case schemas.ReleaseSummary_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.ReleaseSummary_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // Customizes the maximum size of the request body that your protected CloudFront,
@@ -4136,6 +7976,32 @@ type RequestBodyAssociatedResourceTypeConfig struct {
 	DefaultSizeInspectionLimit SizeInspectionLimit
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestBodyAssociatedResourceTypeConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestBodyAssociatedResourceTypeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestBodyAssociatedResourceTypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultSizeInspectionLimit != "" {
+		s.WriteString(schemas.RequestBodyAssociatedResourceTypeConfig_DefaultSizeInspectionLimit, string(v.DefaultSizeInspectionLimit))
+	}
+}
+func (v *RequestBodyAssociatedResourceTypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestBodyAssociatedResourceTypeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestBodyAssociatedResourceTypeConfig_DefaultSizeInspectionLimit:
+			var ev string
+			if err := d.ReadString(schemas.RequestBodyAssociatedResourceTypeConfig_DefaultSizeInspectionLimit, &ev); err != nil {
+				return err
+			}
+			v.DefaultSizeInspectionLimit = SizeInspectionLimit(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The criteria for inspecting login requests, used by the ATP rule group to
@@ -4199,6 +8065,48 @@ type RequestInspection struct {
 	UsernameField *UsernameField
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestInspection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestInspection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestInspection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PasswordField != nil {
+		s.WriteStruct(schemas.RequestInspection_PasswordField)
+		v.PasswordField.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PayloadType != "" {
+		s.WriteString(schemas.RequestInspection_PayloadType, string(v.PayloadType))
+	}
+	if v.UsernameField != nil {
+		s.WriteStruct(schemas.RequestInspection_UsernameField)
+		v.UsernameField.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RequestInspection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestInspection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestInspection_PasswordField:
+			v.PasswordField = &PasswordField{}
+			return v.PasswordField.Deserialize(d)
+		case schemas.RequestInspection_PayloadType:
+			var ev string
+			if err := d.ReadString(schemas.RequestInspection_PayloadType, &ev); err != nil {
+				return err
+			}
+			v.PayloadType = PayloadType(ev)
+			return nil
+		case schemas.RequestInspection_UsernameField:
+			v.UsernameField = &UsernameField{}
+			return v.UsernameField.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The criteria for inspecting account creation requests, used by the ACFP rule
@@ -4337,6 +8245,62 @@ type RequestInspectionACFP struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestInspectionACFP) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestInspectionACFP)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestInspectionACFP) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddressFields(s, schemas.RequestInspectionACFP_AddressFields, v.AddressFields)
+	if v.EmailField != nil {
+		s.WriteStruct(schemas.RequestInspectionACFP_EmailField)
+		v.EmailField.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PasswordField != nil {
+		s.WriteStruct(schemas.RequestInspectionACFP_PasswordField)
+		v.PasswordField.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PayloadType != "" {
+		s.WriteString(schemas.RequestInspectionACFP_PayloadType, string(v.PayloadType))
+	}
+	serializePhoneNumberFields(s, schemas.RequestInspectionACFP_PhoneNumberFields, v.PhoneNumberFields)
+	if v.UsernameField != nil {
+		s.WriteStruct(schemas.RequestInspectionACFP_UsernameField)
+		v.UsernameField.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RequestInspectionACFP) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestInspectionACFP, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestInspectionACFP_AddressFields:
+			return deserializeAddressFields(d, schemas.RequestInspectionACFP_AddressFields, &v.AddressFields)
+		case schemas.RequestInspectionACFP_EmailField:
+			v.EmailField = &EmailField{}
+			return v.EmailField.Deserialize(d)
+		case schemas.RequestInspectionACFP_PasswordField:
+			v.PasswordField = &PasswordField{}
+			return v.PasswordField.Deserialize(d)
+		case schemas.RequestInspectionACFP_PayloadType:
+			var ev string
+			if err := d.ReadString(schemas.RequestInspectionACFP_PayloadType, &ev); err != nil {
+				return err
+			}
+			v.PayloadType = PayloadType(ev)
+			return nil
+		case schemas.RequestInspectionACFP_PhoneNumberFields:
+			return deserializePhoneNumberFields(d, schemas.RequestInspectionACFP_PhoneNumberFields, &v.PhoneNumberFields)
+		case schemas.RequestInspectionACFP_UsernameField:
+			v.UsernameField = &UsernameField{}
+			return v.UsernameField.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The criteria for inspecting responses to login requests and account creation
 // requests, used by the ATP and ACFP rule groups to track login and account
 // creation success and failure rates.
@@ -4378,6 +8342,54 @@ type ResponseInspection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseInspection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseInspection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseInspection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BodyContains != nil {
+		s.WriteStruct(schemas.ResponseInspection_BodyContains)
+		v.BodyContains.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Header != nil {
+		s.WriteStruct(schemas.ResponseInspection_Header)
+		v.Header.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Json != nil {
+		s.WriteStruct(schemas.ResponseInspection_Json)
+		v.Json.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StatusCode != nil {
+		s.WriteStruct(schemas.ResponseInspection_StatusCode)
+		v.StatusCode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResponseInspection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseInspection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseInspection_BodyContains:
+			v.BodyContains = &ResponseInspectionBodyContains{}
+			return v.BodyContains.Deserialize(d)
+		case schemas.ResponseInspection_Header:
+			v.Header = &ResponseInspectionHeader{}
+			return v.Header.Deserialize(d)
+		case schemas.ResponseInspection_Json:
+			v.Json = &ResponseInspectionJson{}
+			return v.Json.Deserialize(d)
+		case schemas.ResponseInspection_StatusCode:
+			v.StatusCode = &ResponseInspectionStatusCode{}
+			return v.StatusCode.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configures inspection of the response body. WAF can inspect the first 65,536
 // bytes (64 KB) of the response body. This is part of the ResponseInspection
 // configuration for AWSManagedRulesATPRuleSet and AWSManagedRulesACFPRuleSet .
@@ -4408,6 +8420,28 @@ type ResponseInspectionBodyContains struct {
 	SuccessStrings []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResponseInspectionBodyContains) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseInspectionBodyContains)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseInspectionBodyContains) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResponseInspectionBodyContainsFailureStrings(s, schemas.ResponseInspectionBodyContains_FailureStrings, v.FailureStrings)
+	serializeResponseInspectionBodyContainsSuccessStrings(s, schemas.ResponseInspectionBodyContains_SuccessStrings, v.SuccessStrings)
+}
+func (v *ResponseInspectionBodyContains) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseInspectionBodyContains, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseInspectionBodyContains_FailureStrings:
+			return deserializeResponseInspectionBodyContainsFailureStrings(d, schemas.ResponseInspectionBodyContains_FailureStrings, &v.FailureStrings)
+		case schemas.ResponseInspectionBodyContains_SuccessStrings:
+			return deserializeResponseInspectionBodyContainsSuccessStrings(d, schemas.ResponseInspectionBodyContains_SuccessStrings, &v.SuccessStrings)
+		}
+		return nil
+	})
 }
 
 // Configures inspection of the response header. This is part of the
@@ -4451,6 +8485,34 @@ type ResponseInspectionHeader struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseInspectionHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseInspectionHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseInspectionHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResponseInspectionHeaderFailureValues(s, schemas.ResponseInspectionHeader_FailureValues, v.FailureValues)
+	if v.Name != nil {
+		s.WriteString(schemas.ResponseInspectionHeader_Name, *v.Name)
+	}
+	serializeResponseInspectionHeaderSuccessValues(s, schemas.ResponseInspectionHeader_SuccessValues, v.SuccessValues)
+}
+func (v *ResponseInspectionHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseInspectionHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseInspectionHeader_FailureValues:
+			return deserializeResponseInspectionHeaderFailureValues(d, schemas.ResponseInspectionHeader_FailureValues, &v.FailureValues)
+		case schemas.ResponseInspectionHeader_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResponseInspectionHeader_Name, v.Name)
+		case schemas.ResponseInspectionHeader_SuccessValues:
+			return deserializeResponseInspectionHeaderSuccessValues(d, schemas.ResponseInspectionHeader_SuccessValues, &v.SuccessValues)
+		}
+		return nil
+	})
+}
+
 // Configures inspection of the response JSON. WAF can inspect the first 65,536
 // bytes (64 KB) of the response JSON. This is part of the ResponseInspection
 // configuration for AWSManagedRulesATPRuleSet and AWSManagedRulesACFPRuleSet .
@@ -4491,6 +8553,34 @@ type ResponseInspectionJson struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseInspectionJson) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseInspectionJson)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseInspectionJson) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResponseInspectionJsonFailureValues(s, schemas.ResponseInspectionJson_FailureValues, v.FailureValues)
+	if v.Identifier != nil {
+		s.WriteString(schemas.ResponseInspectionJson_Identifier, *v.Identifier)
+	}
+	serializeResponseInspectionJsonSuccessValues(s, schemas.ResponseInspectionJson_SuccessValues, v.SuccessValues)
+}
+func (v *ResponseInspectionJson) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseInspectionJson, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseInspectionJson_FailureValues:
+			return deserializeResponseInspectionJsonFailureValues(d, schemas.ResponseInspectionJson_FailureValues, &v.FailureValues)
+		case schemas.ResponseInspectionJson_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.ResponseInspectionJson_Identifier, v.Identifier)
+		case schemas.ResponseInspectionJson_SuccessValues:
+			return deserializeResponseInspectionJsonSuccessValues(d, schemas.ResponseInspectionJson_SuccessValues, &v.SuccessValues)
+		}
+		return nil
+	})
+}
+
 // Configures inspection of the response status code. This is part of the
 // ResponseInspection configuration for AWSManagedRulesATPRuleSet and
 // AWSManagedRulesACFPRuleSet .
@@ -4521,6 +8611,28 @@ type ResponseInspectionStatusCode struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseInspectionStatusCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseInspectionStatusCode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseInspectionStatusCode) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResponseInspectionStatusCodeFailureCodes(s, schemas.ResponseInspectionStatusCode_FailureCodes, v.FailureCodes)
+	serializeResponseInspectionStatusCodeSuccessCodes(s, schemas.ResponseInspectionStatusCode_SuccessCodes, v.SuccessCodes)
+}
+func (v *ResponseInspectionStatusCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseInspectionStatusCode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseInspectionStatusCode_FailureCodes:
+			return deserializeResponseInspectionStatusCodeFailureCodes(d, schemas.ResponseInspectionStatusCode_FailureCodes, &v.FailureCodes)
+		case schemas.ResponseInspectionStatusCode_SuccessCodes:
+			return deserializeResponseInspectionStatusCodeSuccessCodes(d, schemas.ResponseInspectionStatusCode_SuccessCodes, &v.SuccessCodes)
+		}
+		return nil
+	})
+}
+
 // A summary of AI bot monetization revenue, including total revenue, revenue by
 // verification tier, and request counts.
 type RevenueBreakdown struct {
@@ -4544,6 +8656,60 @@ type RevenueBreakdown struct {
 	VerifiedAmount *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RevenueBreakdown) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevenueBreakdown)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevenueBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.RevenueBreakdown_Currency, string(v.Currency))
+	}
+	if v.TotalAmount != nil {
+		s.WriteString(schemas.RevenueBreakdown_TotalAmount, *v.TotalAmount)
+	}
+	if v.TotalMonetizeServed != 0 {
+		s.WriteInt64(schemas.RevenueBreakdown_TotalMonetizeServed, v.TotalMonetizeServed)
+	}
+	if v.TotalSettled != 0 {
+		s.WriteInt64(schemas.RevenueBreakdown_TotalSettled, v.TotalSettled)
+	}
+	if v.UnverifiedAmount != nil {
+		s.WriteString(schemas.RevenueBreakdown_UnverifiedAmount, *v.UnverifiedAmount)
+	}
+	if v.VerifiedAmount != nil {
+		s.WriteString(schemas.RevenueBreakdown_VerifiedAmount, *v.VerifiedAmount)
+	}
+}
+func (v *RevenueBreakdown) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevenueBreakdown, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevenueBreakdown_Currency:
+			var ev string
+			if err := d.ReadString(schemas.RevenueBreakdown_Currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.RevenueBreakdown_TotalAmount:
+			v.TotalAmount = new(string)
+			return d.ReadString(schemas.RevenueBreakdown_TotalAmount, v.TotalAmount)
+		case schemas.RevenueBreakdown_TotalMonetizeServed:
+			return d.ReadInt64(schemas.RevenueBreakdown_TotalMonetizeServed, &v.TotalMonetizeServed)
+		case schemas.RevenueBreakdown_TotalSettled:
+			return d.ReadInt64(schemas.RevenueBreakdown_TotalSettled, &v.TotalSettled)
+		case schemas.RevenueBreakdown_UnverifiedAmount:
+			v.UnverifiedAmount = new(string)
+			return d.ReadString(schemas.RevenueBreakdown_UnverifiedAmount, v.UnverifiedAmount)
+		case schemas.RevenueBreakdown_VerifiedAmount:
+			v.VerifiedAmount = new(string)
+			return d.ReadString(schemas.RevenueBreakdown_VerifiedAmount, v.VerifiedAmount)
+		}
+		return nil
+	})
 }
 
 // Revenue statistics for a single content path, including the path, revenue
@@ -4571,6 +8737,40 @@ type RevenuePathStatistics struct {
 	RequestCount int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RevenuePathStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevenuePathStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevenuePathStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.RevenuePathStatistics_Amount, *v.Amount)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.RevenuePathStatistics_Path, *v.Path)
+	}
+	s.WriteFloat64(schemas.RevenuePathStatistics_Percentage, v.Percentage)
+	s.WriteInt64(schemas.RevenuePathStatistics_RequestCount, v.RequestCount)
+}
+func (v *RevenuePathStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevenuePathStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevenuePathStatistics_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.RevenuePathStatistics_Amount, v.Amount)
+		case schemas.RevenuePathStatistics_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.RevenuePathStatistics_Path, v.Path)
+		case schemas.RevenuePathStatistics_Percentage:
+			return d.ReadFloat64(schemas.RevenuePathStatistics_Percentage, &v.Percentage)
+		case schemas.RevenuePathStatistics_RequestCount:
+			return d.ReadInt64(schemas.RevenuePathStatistics_RequestCount, &v.RequestCount)
+		}
+		return nil
+	})
 }
 
 // A single rule, which you can use in a WebACL or RuleGroup to identify web requests that you
@@ -4678,6 +8878,82 @@ type Rule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Rule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.Rule_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CaptchaConfig != nil {
+		s.WriteStruct(schemas.Rule_CaptchaConfig)
+		v.CaptchaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChallengeConfig != nil {
+		s.WriteStruct(schemas.Rule_ChallengeConfig)
+		v.ChallengeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Rule_Name, *v.Name)
+	}
+	if v.OverrideAction != nil {
+		s.WriteStruct(schemas.Rule_OverrideAction)
+		v.OverrideAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.WriteInt32(schemas.Rule_Priority, v.Priority)
+	serializeLabels(s, schemas.Rule_RuleLabels, v.RuleLabels)
+	if v.Statement != nil {
+		s.WriteStruct(schemas.Rule_Statement)
+		v.Statement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VisibilityConfig != nil {
+		s.WriteStruct(schemas.Rule_VisibilityConfig)
+		v.VisibilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Rule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Rule_Action:
+			v.Action = &RuleAction{}
+			return v.Action.Deserialize(d)
+		case schemas.Rule_CaptchaConfig:
+			v.CaptchaConfig = &CaptchaConfig{}
+			return v.CaptchaConfig.Deserialize(d)
+		case schemas.Rule_ChallengeConfig:
+			v.ChallengeConfig = &ChallengeConfig{}
+			return v.ChallengeConfig.Deserialize(d)
+		case schemas.Rule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Rule_Name, v.Name)
+		case schemas.Rule_OverrideAction:
+			v.OverrideAction = &OverrideAction{}
+			return v.OverrideAction.Deserialize(d)
+		case schemas.Rule_Priority:
+			return d.ReadInt32(schemas.Rule_Priority, &v.Priority)
+		case schemas.Rule_RuleLabels:
+			return deserializeLabels(d, schemas.Rule_RuleLabels, &v.RuleLabels)
+		case schemas.Rule_Statement:
+			v.Statement = &Statement{}
+			return v.Statement.Deserialize(d)
+		case schemas.Rule_VisibilityConfig:
+			v.VisibilityConfig = &VisibilityConfig{}
+			return v.VisibilityConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The action that WAF should take on a web request when it matches a rule's
 // statement. Settings at the web ACL level can override the rule action setting.
 type RuleAction struct {
@@ -4706,6 +8982,70 @@ type RuleAction struct {
 	Monetize *MonetizeAction
 
 	noSmithyDocumentSerde
+}
+
+func (v *RuleAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Allow != nil {
+		s.WriteStruct(schemas.RuleAction_Allow)
+		v.Allow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Block != nil {
+		s.WriteStruct(schemas.RuleAction_Block)
+		v.Block.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Captcha != nil {
+		s.WriteStruct(schemas.RuleAction_Captcha)
+		v.Captcha.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Challenge != nil {
+		s.WriteStruct(schemas.RuleAction_Challenge)
+		v.Challenge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Count != nil {
+		s.WriteStruct(schemas.RuleAction_Count)
+		v.Count.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Monetize != nil {
+		s.WriteStruct(schemas.RuleAction_Monetize)
+		v.Monetize.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RuleAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleAction_Allow:
+			v.Allow = &AllowAction{}
+			return v.Allow.Deserialize(d)
+		case schemas.RuleAction_Block:
+			v.Block = &BlockAction{}
+			return v.Block.Deserialize(d)
+		case schemas.RuleAction_Captcha:
+			v.Captcha = &CaptchaAction{}
+			return v.Captcha.Deserialize(d)
+		case schemas.RuleAction_Challenge:
+			v.Challenge = &ChallengeAction{}
+			return v.Challenge.Deserialize(d)
+		case schemas.RuleAction_Count:
+			v.Count = &CountAction{}
+			return v.Count.Deserialize(d)
+		case schemas.RuleAction_Monetize:
+			v.Monetize = &MonetizeAction{}
+			return v.Monetize.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Action setting to use in the place of a rule action that is configured inside
@@ -4742,6 +9082,36 @@ type RuleActionOverride struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RuleActionOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleActionOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleActionOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionToUse != nil {
+		s.WriteStruct(schemas.RuleActionOverride_ActionToUse)
+		v.ActionToUse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuleActionOverride_Name, *v.Name)
+	}
+}
+func (v *RuleActionOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleActionOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleActionOverride_ActionToUse:
+			v.ActionToUse = &RuleAction{}
+			return v.ActionToUse.Deserialize(d)
+		case schemas.RuleActionOverride_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleActionOverride_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 //	A rule group defines a collection of rules to inspect and control web requests
@@ -4851,6 +9221,86 @@ type RuleGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RuleGroup_ARN, *v.ARN)
+	}
+	serializeLabelSummaries(s, schemas.RuleGroup_AvailableLabels, v.AvailableLabels)
+	if v.Capacity != nil {
+		s.WriteInt64(schemas.RuleGroup_Capacity, *v.Capacity)
+	}
+	serializeLabelSummaries(s, schemas.RuleGroup_ConsumedLabels, v.ConsumedLabels)
+	serializeCustomResponseBodies(s, schemas.RuleGroup_CustomResponseBodies, v.CustomResponseBodies)
+	if v.Description != nil {
+		s.WriteString(schemas.RuleGroup_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RuleGroup_Id, *v.Id)
+	}
+	if v.LabelNamespace != nil {
+		s.WriteString(schemas.RuleGroup_LabelNamespace, *v.LabelNamespace)
+	}
+	if v.MonetizationConfig != nil {
+		s.WriteStruct(schemas.RuleGroup_MonetizationConfig)
+		v.MonetizationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuleGroup_Name, *v.Name)
+	}
+	serializeRules(s, schemas.RuleGroup_Rules, v.Rules)
+	if v.VisibilityConfig != nil {
+		s.WriteStruct(schemas.RuleGroup_VisibilityConfig)
+		v.VisibilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleGroup_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RuleGroup_ARN, v.ARN)
+		case schemas.RuleGroup_AvailableLabels:
+			return deserializeLabelSummaries(d, schemas.RuleGroup_AvailableLabels, &v.AvailableLabels)
+		case schemas.RuleGroup_Capacity:
+			v.Capacity = new(int64)
+			return d.ReadInt64(schemas.RuleGroup_Capacity, v.Capacity)
+		case schemas.RuleGroup_ConsumedLabels:
+			return deserializeLabelSummaries(d, schemas.RuleGroup_ConsumedLabels, &v.ConsumedLabels)
+		case schemas.RuleGroup_CustomResponseBodies:
+			return deserializeCustomResponseBodies(d, schemas.RuleGroup_CustomResponseBodies, &v.CustomResponseBodies)
+		case schemas.RuleGroup_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RuleGroup_Description, v.Description)
+		case schemas.RuleGroup_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RuleGroup_Id, v.Id)
+		case schemas.RuleGroup_LabelNamespace:
+			v.LabelNamespace = new(string)
+			return d.ReadString(schemas.RuleGroup_LabelNamespace, v.LabelNamespace)
+		case schemas.RuleGroup_MonetizationConfig:
+			v.MonetizationConfig = &MonetizationConfig{}
+			return v.MonetizationConfig.Deserialize(d)
+		case schemas.RuleGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleGroup_Name, v.Name)
+		case schemas.RuleGroup_Rules:
+			return deserializeRules(d, schemas.RuleGroup_Rules, &v.Rules)
+		case schemas.RuleGroup_VisibilityConfig:
+			v.VisibilityConfig = &VisibilityConfig{}
+			return v.VisibilityConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A rule statement used to run the rules that are defined in a RuleGroup. To use this,
 // create a rule group with your rules, then provide the ARN of the rule group in
 // this statement.
@@ -4891,6 +9341,34 @@ type RuleGroupReferenceStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleGroupReferenceStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleGroupReferenceStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleGroupReferenceStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RuleGroupReferenceStatement_ARN, *v.ARN)
+	}
+	serializeExcludedRules(s, schemas.RuleGroupReferenceStatement_ExcludedRules, v.ExcludedRules)
+	serializeRuleActionOverrides(s, schemas.RuleGroupReferenceStatement_RuleActionOverrides, v.RuleActionOverrides)
+}
+func (v *RuleGroupReferenceStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleGroupReferenceStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleGroupReferenceStatement_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RuleGroupReferenceStatement_ARN, v.ARN)
+		case schemas.RuleGroupReferenceStatement_ExcludedRules:
+			return deserializeExcludedRules(d, schemas.RuleGroupReferenceStatement_ExcludedRules, &v.ExcludedRules)
+		case schemas.RuleGroupReferenceStatement_RuleActionOverrides:
+			return deserializeRuleActionOverrides(d, schemas.RuleGroupReferenceStatement_RuleActionOverrides, &v.RuleActionOverrides)
+		}
+		return nil
+	})
+}
+
 // High-level information about a RuleGroup, returned by operations like create and list.
 // This provides information like the ID, that you can use to retrieve and manage a
 // RuleGroup , and the ARN, that you provide to the RuleGroupReferenceStatement to use the rule group in a Rule.
@@ -4922,6 +9400,52 @@ type RuleGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RuleGroupSummary_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RuleGroupSummary_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RuleGroupSummary_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.RuleGroupSummary_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuleGroupSummary_Name, *v.Name)
+	}
+}
+func (v *RuleGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleGroupSummary_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RuleGroupSummary_ARN, v.ARN)
+		case schemas.RuleGroupSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RuleGroupSummary_Description, v.Description)
+		case schemas.RuleGroupSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RuleGroupSummary_Id, v.Id)
+		case schemas.RuleGroupSummary_LockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.RuleGroupSummary_LockToken, v.LockToken)
+		case schemas.RuleGroupSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleGroupSummary_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // High-level information about a Rule, returned by operations like DescribeManagedRuleGroup. This provides
 // information like the ID, that you can use to retrieve and manage a RuleGroup ,
 // and the ARN, that you provide to the RuleGroupReferenceStatementto use the rule group in a Rule.
@@ -4935,6 +9459,36 @@ type RuleSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RuleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.RuleSummary_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuleSummary_Name, *v.Name)
+	}
+}
+func (v *RuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleSummary_Action:
+			v.Action = &RuleAction{}
+			return v.Action.Deserialize(d)
+		case schemas.RuleSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleSummary_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Represents a single sampled web request. The response from GetSampledRequests includes a
@@ -4998,6 +9552,85 @@ type SampledHTTPRequest struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *SampledHTTPRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SampledHTTPRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SampledHTTPRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.SampledHTTPRequest_Action, *v.Action)
+	}
+	if v.CaptchaResponse != nil {
+		s.WriteStruct(schemas.SampledHTTPRequest_CaptchaResponse)
+		v.CaptchaResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChallengeResponse != nil {
+		s.WriteStruct(schemas.SampledHTTPRequest_ChallengeResponse)
+		v.ChallengeResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLabels(s, schemas.SampledHTTPRequest_Labels, v.Labels)
+	if v.OverriddenAction != nil {
+		s.WriteString(schemas.SampledHTTPRequest_OverriddenAction, *v.OverriddenAction)
+	}
+	if v.Request != nil {
+		s.WriteStruct(schemas.SampledHTTPRequest_Request)
+		v.Request.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHTTPHeaders(s, schemas.SampledHTTPRequest_RequestHeadersInserted, v.RequestHeadersInserted)
+	if v.ResponseCodeSent != nil {
+		s.WriteInt32(schemas.SampledHTTPRequest_ResponseCodeSent, *v.ResponseCodeSent)
+	}
+	if v.RuleNameWithinRuleGroup != nil {
+		s.WriteString(schemas.SampledHTTPRequest_RuleNameWithinRuleGroup, *v.RuleNameWithinRuleGroup)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.SampledHTTPRequest_Timestamp, *v.Timestamp)
+	}
+	s.WriteInt64(schemas.SampledHTTPRequest_Weight, v.Weight)
+}
+func (v *SampledHTTPRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SampledHTTPRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SampledHTTPRequest_Action:
+			v.Action = new(string)
+			return d.ReadString(schemas.SampledHTTPRequest_Action, v.Action)
+		case schemas.SampledHTTPRequest_CaptchaResponse:
+			v.CaptchaResponse = &CaptchaResponse{}
+			return v.CaptchaResponse.Deserialize(d)
+		case schemas.SampledHTTPRequest_ChallengeResponse:
+			v.ChallengeResponse = &ChallengeResponse{}
+			return v.ChallengeResponse.Deserialize(d)
+		case schemas.SampledHTTPRequest_Labels:
+			return deserializeLabels(d, schemas.SampledHTTPRequest_Labels, &v.Labels)
+		case schemas.SampledHTTPRequest_OverriddenAction:
+			v.OverriddenAction = new(string)
+			return d.ReadString(schemas.SampledHTTPRequest_OverriddenAction, v.OverriddenAction)
+		case schemas.SampledHTTPRequest_Request:
+			v.Request = &HTTPRequest{}
+			return v.Request.Deserialize(d)
+		case schemas.SampledHTTPRequest_RequestHeadersInserted:
+			return deserializeHTTPHeaders(d, schemas.SampledHTTPRequest_RequestHeadersInserted, &v.RequestHeadersInserted)
+		case schemas.SampledHTTPRequest_ResponseCodeSent:
+			v.ResponseCodeSent = new(int32)
+			return d.ReadInt32(schemas.SampledHTTPRequest_ResponseCodeSent, v.ResponseCodeSent)
+		case schemas.SampledHTTPRequest_RuleNameWithinRuleGroup:
+			v.RuleNameWithinRuleGroup = new(string)
+			return d.ReadString(schemas.SampledHTTPRequest_RuleNameWithinRuleGroup, v.RuleNameWithinRuleGroup)
+		case schemas.SampledHTTPRequest_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.SampledHTTPRequest_Timestamp, v.Timestamp)
+		case schemas.SampledHTTPRequest_Weight:
+			return d.ReadInt64(schemas.SampledHTTPRequest_Weight, &v.Weight)
+		}
+		return nil
+	})
 }
 
 // A single settlement transaction record for AI bot monetization. Contains
@@ -5092,6 +9725,131 @@ type SettlementRecord struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SettlementRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SettlementRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SettlementRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.SettlementRecord_Amount, *v.Amount)
+	}
+	if v.ContentPath != nil {
+		s.WriteString(schemas.SettlementRecord_ContentPath, *v.ContentPath)
+	}
+	if v.Currency != "" {
+		s.WriteString(schemas.SettlementRecord_Currency, string(v.Currency))
+	}
+	if v.Intent != nil {
+		s.WriteString(schemas.SettlementRecord_Intent, *v.Intent)
+	}
+	if v.Network != nil {
+		s.WriteString(schemas.SettlementRecord_Network, *v.Network)
+	}
+	if v.Organization != nil {
+		s.WriteString(schemas.SettlementRecord_Organization, *v.Organization)
+	}
+	if v.PayerAddress != nil {
+		s.WriteString(schemas.SettlementRecord_PayerAddress, *v.PayerAddress)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.SettlementRecord_RequestId, *v.RequestId)
+	}
+	if v.RequestTimestamp != nil {
+		s.WriteTime(schemas.SettlementRecord_RequestTimestamp, *v.RequestTimestamp)
+	}
+	if v.SourceCategory != nil {
+		s.WriteString(schemas.SettlementRecord_SourceCategory, *v.SourceCategory)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.SettlementRecord_SourceName, *v.SourceName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SettlementRecord_Status, string(v.Status))
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.SettlementRecord_Timestamp, *v.Timestamp)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.SettlementRecord_TransactionId, *v.TransactionId)
+	}
+	if v.Verified != false {
+		s.WriteBool(schemas.SettlementRecord_Verified, v.Verified)
+	}
+	if v.WalletAddress != nil {
+		s.WriteString(schemas.SettlementRecord_WalletAddress, *v.WalletAddress)
+	}
+	if v.WebAclArn != nil {
+		s.WriteString(schemas.SettlementRecord_WebAclArn, *v.WebAclArn)
+	}
+}
+func (v *SettlementRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SettlementRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SettlementRecord_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.SettlementRecord_Amount, v.Amount)
+		case schemas.SettlementRecord_ContentPath:
+			v.ContentPath = new(string)
+			return d.ReadString(schemas.SettlementRecord_ContentPath, v.ContentPath)
+		case schemas.SettlementRecord_Currency:
+			var ev string
+			if err := d.ReadString(schemas.SettlementRecord_Currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = Currency(ev)
+			return nil
+		case schemas.SettlementRecord_Intent:
+			v.Intent = new(string)
+			return d.ReadString(schemas.SettlementRecord_Intent, v.Intent)
+		case schemas.SettlementRecord_Network:
+			v.Network = new(string)
+			return d.ReadString(schemas.SettlementRecord_Network, v.Network)
+		case schemas.SettlementRecord_Organization:
+			v.Organization = new(string)
+			return d.ReadString(schemas.SettlementRecord_Organization, v.Organization)
+		case schemas.SettlementRecord_PayerAddress:
+			v.PayerAddress = new(string)
+			return d.ReadString(schemas.SettlementRecord_PayerAddress, v.PayerAddress)
+		case schemas.SettlementRecord_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SettlementRecord_RequestId, v.RequestId)
+		case schemas.SettlementRecord_RequestTimestamp:
+			v.RequestTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SettlementRecord_RequestTimestamp, v.RequestTimestamp)
+		case schemas.SettlementRecord_SourceCategory:
+			v.SourceCategory = new(string)
+			return d.ReadString(schemas.SettlementRecord_SourceCategory, v.SourceCategory)
+		case schemas.SettlementRecord_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.SettlementRecord_SourceName, v.SourceName)
+		case schemas.SettlementRecord_Status:
+			var ev string
+			if err := d.ReadString(schemas.SettlementRecord_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SettlementStatus(ev)
+			return nil
+		case schemas.SettlementRecord_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.SettlementRecord_Timestamp, v.Timestamp)
+		case schemas.SettlementRecord_TransactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.SettlementRecord_TransactionId, v.TransactionId)
+		case schemas.SettlementRecord_Verified:
+			return d.ReadBool(schemas.SettlementRecord_Verified, &v.Verified)
+		case schemas.SettlementRecord_WalletAddress:
+			v.WalletAddress = new(string)
+			return d.ReadString(schemas.SettlementRecord_WalletAddress, v.WalletAddress)
+		case schemas.SettlementRecord_WebAclArn:
+			v.WebAclArn = new(string)
+			return d.ReadString(schemas.SettlementRecord_WebAclArn, v.WebAclArn)
+		}
+		return nil
+	})
+}
+
 // Inspect one of the headers in the web request, identified by name, for example,
 // User-Agent or Referer . The name isn't case sensitive.
 //
@@ -5111,6 +9869,28 @@ type SingleHeader struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SingleHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingleHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingleHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SingleHeader_Name, *v.Name)
+	}
+}
+func (v *SingleHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingleHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SingleHeader_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SingleHeader_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Inspect one query argument in the web request, identified by name, for example
 // UserName or SalesRegion. The name isn't case sensitive.
 //
@@ -5126,6 +9906,28 @@ type SingleQueryArgument struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SingleQueryArgument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingleQueryArgument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingleQueryArgument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SingleQueryArgument_Name, *v.Name)
+	}
+}
+func (v *SingleQueryArgument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingleQueryArgument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SingleQueryArgument_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SingleQueryArgument_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A rule statement that compares a number of bytes against the size of a request
@@ -5183,6 +9985,49 @@ type SizeConstraintStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SizeConstraintStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SizeConstraintStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SizeConstraintStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.SizeConstraintStatement_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.SizeConstraintStatement_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePreParseTextTransformations(s, schemas.SizeConstraintStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	s.WriteInt64(schemas.SizeConstraintStatement_Size, v.Size)
+	serializeTextTransformations(s, schemas.SizeConstraintStatement_TextTransformations, v.TextTransformations)
+}
+func (v *SizeConstraintStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SizeConstraintStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SizeConstraintStatement_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.SizeConstraintStatement_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperator(ev)
+			return nil
+		case schemas.SizeConstraintStatement_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.SizeConstraintStatement_PreParseTextTransformations:
+			return deserializePreParseTextTransformations(d, schemas.SizeConstraintStatement_PreParseTextTransformations, &v.PreParseTextTransformations)
+		case schemas.SizeConstraintStatement_Size:
+			return d.ReadInt64(schemas.SizeConstraintStatement_Size, &v.Size)
+		case schemas.SizeConstraintStatement_TextTransformations:
+			return deserializeTextTransformations(d, schemas.SizeConstraintStatement_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
+}
+
 // Revenue statistics for a single AI bot source, including the bot name, revenue
 // amount, request count, and verification status.
 type SourceStatistics struct {
@@ -5232,6 +10077,69 @@ type SourceStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.SourceStatistics_Amount, *v.Amount)
+	}
+	if v.GroupByValue != nil {
+		s.WriteString(schemas.SourceStatistics_GroupByValue, *v.GroupByValue)
+	}
+	if v.Intent != nil {
+		s.WriteString(schemas.SourceStatistics_Intent, *v.Intent)
+	}
+	if v.Organization != nil {
+		s.WriteString(schemas.SourceStatistics_Organization, *v.Organization)
+	}
+	s.WriteFloat64(schemas.SourceStatistics_Percentage, v.Percentage)
+	s.WriteInt64(schemas.SourceStatistics_RequestCount, v.RequestCount)
+	if v.SourceCategory != nil {
+		s.WriteString(schemas.SourceStatistics_SourceCategory, *v.SourceCategory)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.SourceStatistics_SourceName, *v.SourceName)
+	}
+	if v.Verified != false {
+		s.WriteBool(schemas.SourceStatistics_Verified, v.Verified)
+	}
+}
+func (v *SourceStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceStatistics_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.SourceStatistics_Amount, v.Amount)
+		case schemas.SourceStatistics_GroupByValue:
+			v.GroupByValue = new(string)
+			return d.ReadString(schemas.SourceStatistics_GroupByValue, v.GroupByValue)
+		case schemas.SourceStatistics_Intent:
+			v.Intent = new(string)
+			return d.ReadString(schemas.SourceStatistics_Intent, v.Intent)
+		case schemas.SourceStatistics_Organization:
+			v.Organization = new(string)
+			return d.ReadString(schemas.SourceStatistics_Organization, v.Organization)
+		case schemas.SourceStatistics_Percentage:
+			return d.ReadFloat64(schemas.SourceStatistics_Percentage, &v.Percentage)
+		case schemas.SourceStatistics_RequestCount:
+			return d.ReadInt64(schemas.SourceStatistics_RequestCount, &v.RequestCount)
+		case schemas.SourceStatistics_SourceCategory:
+			v.SourceCategory = new(string)
+			return d.ReadString(schemas.SourceStatistics_SourceCategory, v.SourceCategory)
+		case schemas.SourceStatistics_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.SourceStatistics_SourceName, v.SourceName)
+		case schemas.SourceStatistics_Verified:
+			return d.ReadBool(schemas.SourceStatistics_Verified, &v.Verified)
+		}
+		return nil
+	})
+}
+
 // A rule statement that inspects for malicious SQL code. Attackers insert
 // malicious SQL code into web requests to do things like modify your database or
 // extract data from it.
@@ -5277,6 +10185,46 @@ type SqliMatchStatement struct {
 	SensitivityLevel SensitivityLevel
 
 	noSmithyDocumentSerde
+}
+
+func (v *SqliMatchStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqliMatchStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqliMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.SqliMatchStatement_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePreParseTextTransformations(s, schemas.SqliMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	if v.SensitivityLevel != "" {
+		s.WriteString(schemas.SqliMatchStatement_SensitivityLevel, string(v.SensitivityLevel))
+	}
+	serializeTextTransformations(s, schemas.SqliMatchStatement_TextTransformations, v.TextTransformations)
+}
+func (v *SqliMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqliMatchStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqliMatchStatement_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.SqliMatchStatement_PreParseTextTransformations:
+			return deserializePreParseTextTransformations(d, schemas.SqliMatchStatement_PreParseTextTransformations, &v.PreParseTextTransformations)
+		case schemas.SqliMatchStatement_SensitivityLevel:
+			var ev string
+			if err := d.ReadString(schemas.SqliMatchStatement_SensitivityLevel, &ev); err != nil {
+				return err
+			}
+			v.SensitivityLevel = SensitivityLevel(ev)
+			return nil
+		case schemas.SqliMatchStatement_TextTransformations:
+			return deserializeTextTransformations(d, schemas.SqliMatchStatement_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
 }
 
 // The processing guidance for a Rule, used by WAF to determine whether a web request
@@ -5535,6 +10483,150 @@ type Statement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Statement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Statement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Statement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AndStatement != nil {
+		s.WriteStruct(schemas.Statement_AndStatement)
+		v.AndStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AsnMatchStatement != nil {
+		s.WriteStruct(schemas.Statement_AsnMatchStatement)
+		v.AsnMatchStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ByteMatchStatement != nil {
+		s.WriteStruct(schemas.Statement_ByteMatchStatement)
+		v.ByteMatchStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GeoMatchStatement != nil {
+		s.WriteStruct(schemas.Statement_GeoMatchStatement)
+		v.GeoMatchStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IPSetReferenceStatement != nil {
+		s.WriteStruct(schemas.Statement_IPSetReferenceStatement)
+		v.IPSetReferenceStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LabelMatchStatement != nil {
+		s.WriteStruct(schemas.Statement_LabelMatchStatement)
+		v.LabelMatchStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedRuleGroupStatement != nil {
+		s.WriteStruct(schemas.Statement_ManagedRuleGroupStatement)
+		v.ManagedRuleGroupStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotStatement != nil {
+		s.WriteStruct(schemas.Statement_NotStatement)
+		v.NotStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrStatement != nil {
+		s.WriteStruct(schemas.Statement_OrStatement)
+		v.OrStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RateBasedStatement != nil {
+		s.WriteStruct(schemas.Statement_RateBasedStatement)
+		v.RateBasedStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegexMatchStatement != nil {
+		s.WriteStruct(schemas.Statement_RegexMatchStatement)
+		v.RegexMatchStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegexPatternSetReferenceStatement != nil {
+		s.WriteStruct(schemas.Statement_RegexPatternSetReferenceStatement)
+		v.RegexPatternSetReferenceStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleGroupReferenceStatement != nil {
+		s.WriteStruct(schemas.Statement_RuleGroupReferenceStatement)
+		v.RuleGroupReferenceStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SizeConstraintStatement != nil {
+		s.WriteStruct(schemas.Statement_SizeConstraintStatement)
+		v.SizeConstraintStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqliMatchStatement != nil {
+		s.WriteStruct(schemas.Statement_SqliMatchStatement)
+		v.SqliMatchStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.XssMatchStatement != nil {
+		s.WriteStruct(schemas.Statement_XssMatchStatement)
+		v.XssMatchStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Statement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Statement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Statement_AndStatement:
+			v.AndStatement = &AndStatement{}
+			return v.AndStatement.Deserialize(d)
+		case schemas.Statement_AsnMatchStatement:
+			v.AsnMatchStatement = &AsnMatchStatement{}
+			return v.AsnMatchStatement.Deserialize(d)
+		case schemas.Statement_ByteMatchStatement:
+			v.ByteMatchStatement = &ByteMatchStatement{}
+			return v.ByteMatchStatement.Deserialize(d)
+		case schemas.Statement_GeoMatchStatement:
+			v.GeoMatchStatement = &GeoMatchStatement{}
+			return v.GeoMatchStatement.Deserialize(d)
+		case schemas.Statement_IPSetReferenceStatement:
+			v.IPSetReferenceStatement = &IPSetReferenceStatement{}
+			return v.IPSetReferenceStatement.Deserialize(d)
+		case schemas.Statement_LabelMatchStatement:
+			v.LabelMatchStatement = &LabelMatchStatement{}
+			return v.LabelMatchStatement.Deserialize(d)
+		case schemas.Statement_ManagedRuleGroupStatement:
+			v.ManagedRuleGroupStatement = &ManagedRuleGroupStatement{}
+			return v.ManagedRuleGroupStatement.Deserialize(d)
+		case schemas.Statement_NotStatement:
+			v.NotStatement = &NotStatement{}
+			return v.NotStatement.Deserialize(d)
+		case schemas.Statement_OrStatement:
+			v.OrStatement = &OrStatement{}
+			return v.OrStatement.Deserialize(d)
+		case schemas.Statement_RateBasedStatement:
+			v.RateBasedStatement = &RateBasedStatement{}
+			return v.RateBasedStatement.Deserialize(d)
+		case schemas.Statement_RegexMatchStatement:
+			v.RegexMatchStatement = &RegexMatchStatement{}
+			return v.RegexMatchStatement.Deserialize(d)
+		case schemas.Statement_RegexPatternSetReferenceStatement:
+			v.RegexPatternSetReferenceStatement = &RegexPatternSetReferenceStatement{}
+			return v.RegexPatternSetReferenceStatement.Deserialize(d)
+		case schemas.Statement_RuleGroupReferenceStatement:
+			v.RuleGroupReferenceStatement = &RuleGroupReferenceStatement{}
+			return v.RuleGroupReferenceStatement.Deserialize(d)
+		case schemas.Statement_SizeConstraintStatement:
+			v.SizeConstraintStatement = &SizeConstraintStatement{}
+			return v.SizeConstraintStatement.Deserialize(d)
+		case schemas.Statement_SqliMatchStatement:
+			v.SqliMatchStatement = &SqliMatchStatement{}
+			return v.SqliMatchStatement.Deserialize(d)
+		case schemas.Statement_XssMatchStatement:
+			v.XssMatchStatement = &XssMatchStatement{}
+			return v.XssMatchStatement.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A tag associated with an Amazon Web Services resource. Tags are key:value pairs
 // that you can use to categorize and manage your resources, for purposes like
 // billing or other management. Typically, the tag key represents a category, such
@@ -5566,6 +10658,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The collection of tagging definitions for an Amazon Web Services resource. Tags
 // are key:value pairs that you can use to categorize and manage your resources,
 // for purposes like billing or other management. Typically, the tag key represents
@@ -5589,6 +10709,31 @@ type TagInfoForResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagInfoForResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagInfoForResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagInfoForResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.TagInfoForResource_ResourceARN, *v.ResourceARN)
+	}
+	serializeTagList(s, schemas.TagInfoForResource_TagList, v.TagList)
+}
+func (v *TagInfoForResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagInfoForResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagInfoForResource_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.TagInfoForResource_ResourceARN, v.ResourceARN)
+		case schemas.TagInfoForResource_TagList:
+			return deserializeTagList(d, schemas.TagInfoForResource_TagList, &v.TagList)
+		}
+		return nil
+	})
+}
+
 // Text transformations eliminate some of the unusual formatting that attackers
 // use in web requests in an effort to bypass detection.
 type TextTransformation struct {
@@ -5610,6 +10755,35 @@ type TextTransformation struct {
 	Type TextTransformationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *TextTransformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextTransformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextTransformation) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.TextTransformation_Priority, v.Priority)
+	if v.Type != "" {
+		s.WriteString(schemas.TextTransformation_Type, string(v.Type))
+	}
+}
+func (v *TextTransformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextTransformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextTransformation_Priority:
+			return d.ReadInt32(schemas.TextTransformation_Priority, &v.Priority)
+		case schemas.TextTransformation_Type:
+			var ev string
+			if err := d.ReadString(schemas.TextTransformation_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = TextTransformationType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // In a GetSampledRequests request, the StartTime and EndTime objects specify the time range for
@@ -5647,6 +10821,34 @@ type TimeWindow struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TimeWindow_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.TimeWindow_StartTime, *v.StartTime)
+	}
+}
+func (v *TimeWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeWindow_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TimeWindow_EndTime, v.EndTime)
+		case schemas.TimeWindow_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.TimeWindow_StartTime, v.StartTime)
+		}
+		return nil
+	})
 }
 
 // Inspect fragments of the request URI. You can specify the parts of the URI
@@ -5687,6 +10889,32 @@ type UriFragment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UriFragment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UriFragment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UriFragment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FallbackBehavior != "" {
+		s.WriteString(schemas.UriFragment_FallbackBehavior, string(v.FallbackBehavior))
+	}
+}
+func (v *UriFragment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UriFragment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UriFragment_FallbackBehavior:
+			var ev string
+			if err := d.ReadString(schemas.UriFragment_FallbackBehavior, &ev); err != nil {
+				return err
+			}
+			v.FallbackBehavior = FallbackBehavior(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Inspect the path component of the URI of the web request. This is the part of
 // the web request that identifies a resource. For example, /images/daily-ad.jpg .
 //
@@ -5695,6 +10923,22 @@ type UriFragment struct {
 // JSON specification: "UriPath": {}
 type UriPath struct {
 	noSmithyDocumentSerde
+}
+
+func (v *UriPath) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UriPath)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UriPath) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UriPath) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UriPath, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The name of the field in the request payload that contains your customer's
@@ -5728,6 +10972,28 @@ type UsernameField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UsernameField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsernameField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsernameField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.UsernameField_Identifier, *v.Identifier)
+	}
+}
+func (v *UsernameField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsernameField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsernameField_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.UsernameField_Identifier, v.Identifier)
+		}
+		return nil
+	})
+}
+
 // A version of the named managed rule group, that the rule group's vendor
 // publishes for use by customers.
 //
@@ -5749,6 +11015,34 @@ type VersionToPublish struct {
 	ForecastedLifetime *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VersionToPublish) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VersionToPublish)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VersionToPublish) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedRuleGroupArn != nil {
+		s.WriteString(schemas.VersionToPublish_AssociatedRuleGroupArn, *v.AssociatedRuleGroupArn)
+	}
+	if v.ForecastedLifetime != nil {
+		s.WriteInt32(schemas.VersionToPublish_ForecastedLifetime, *v.ForecastedLifetime)
+	}
+}
+func (v *VersionToPublish) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VersionToPublish, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VersionToPublish_AssociatedRuleGroupArn:
+			v.AssociatedRuleGroupArn = new(string)
+			return d.ReadString(schemas.VersionToPublish_AssociatedRuleGroupArn, v.AssociatedRuleGroupArn)
+		case schemas.VersionToPublish_ForecastedLifetime:
+			v.ForecastedLifetime = new(int32)
+			return d.ReadInt32(schemas.VersionToPublish_ForecastedLifetime, v.ForecastedLifetime)
+		}
+		return nil
+	})
 }
 
 // Defines and enables Amazon CloudWatch metrics and web request sample
@@ -5793,6 +11087,34 @@ type VisibilityConfig struct {
 	SampledRequestsEnabled bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *VisibilityConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VisibilityConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VisibilityConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.VisibilityConfig_CloudWatchMetricsEnabled, v.CloudWatchMetricsEnabled)
+	if v.MetricName != nil {
+		s.WriteString(schemas.VisibilityConfig_MetricName, *v.MetricName)
+	}
+	s.WriteBool(schemas.VisibilityConfig_SampledRequestsEnabled, v.SampledRequestsEnabled)
+}
+func (v *VisibilityConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VisibilityConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VisibilityConfig_CloudWatchMetricsEnabled:
+			return d.ReadBool(schemas.VisibilityConfig_CloudWatchMetricsEnabled, &v.CloudWatchMetricsEnabled)
+		case schemas.VisibilityConfig_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.VisibilityConfig_MetricName, v.MetricName)
+		case schemas.VisibilityConfig_SampledRequestsEnabled:
+			return d.ReadBool(schemas.VisibilityConfig_SampledRequestsEnabled, &v.SampledRequestsEnabled)
+		}
+		return nil
+	})
 }
 
 //	A web ACL defines a collection of rules to use to inspect and control web
@@ -5988,6 +11310,154 @@ type WebACL struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WebACL) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebACL)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebACL) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.WebACL_ARN, *v.ARN)
+	}
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.WebACL_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssociationConfig != nil {
+		s.WriteStruct(schemas.WebACL_AssociationConfig)
+		v.AssociationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Capacity != 0 {
+		s.WriteInt64(schemas.WebACL_Capacity, v.Capacity)
+	}
+	if v.CaptchaConfig != nil {
+		s.WriteStruct(schemas.WebACL_CaptchaConfig)
+		v.CaptchaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChallengeConfig != nil {
+		s.WriteStruct(schemas.WebACL_ChallengeConfig)
+		v.ChallengeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCustomResponseBodies(s, schemas.WebACL_CustomResponseBodies, v.CustomResponseBodies)
+	if v.DataProtectionConfig != nil {
+		s.WriteStruct(schemas.WebACL_DataProtectionConfig)
+		v.DataProtectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultAction != nil {
+		s.WriteStruct(schemas.WebACL_DefaultAction)
+		v.DefaultAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WebACL_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.WebACL_Id, *v.Id)
+	}
+	if v.LabelNamespace != nil {
+		s.WriteString(schemas.WebACL_LabelNamespace, *v.LabelNamespace)
+	}
+	if v.ManagedByFirewallManager != false {
+		s.WriteBool(schemas.WebACL_ManagedByFirewallManager, v.ManagedByFirewallManager)
+	}
+	if v.MonetizationConfig != nil {
+		s.WriteStruct(schemas.WebACL_MonetizationConfig)
+		v.MonetizationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WebACL_Name, *v.Name)
+	}
+	if v.OnSourceDDoSProtectionConfig != nil {
+		s.WriteStruct(schemas.WebACL_OnSourceDDoSProtectionConfig)
+		v.OnSourceDDoSProtectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFirewallManagerRuleGroups(s, schemas.WebACL_PostProcessFirewallManagerRuleGroups, v.PostProcessFirewallManagerRuleGroups)
+	serializeFirewallManagerRuleGroups(s, schemas.WebACL_PreProcessFirewallManagerRuleGroups, v.PreProcessFirewallManagerRuleGroups)
+	if v.RetrofittedByFirewallManager != false {
+		s.WriteBool(schemas.WebACL_RetrofittedByFirewallManager, v.RetrofittedByFirewallManager)
+	}
+	serializeRules(s, schemas.WebACL_Rules, v.Rules)
+	serializeTokenDomains(s, schemas.WebACL_TokenDomains, v.TokenDomains)
+	if v.VisibilityConfig != nil {
+		s.WriteStruct(schemas.WebACL_VisibilityConfig)
+		v.VisibilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WebACL) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebACL, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebACL_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.WebACL_ARN, v.ARN)
+		case schemas.WebACL_ApplicationConfig:
+			v.ApplicationConfig = &ApplicationConfig{}
+			return v.ApplicationConfig.Deserialize(d)
+		case schemas.WebACL_AssociationConfig:
+			v.AssociationConfig = &AssociationConfig{}
+			return v.AssociationConfig.Deserialize(d)
+		case schemas.WebACL_Capacity:
+			return d.ReadInt64(schemas.WebACL_Capacity, &v.Capacity)
+		case schemas.WebACL_CaptchaConfig:
+			v.CaptchaConfig = &CaptchaConfig{}
+			return v.CaptchaConfig.Deserialize(d)
+		case schemas.WebACL_ChallengeConfig:
+			v.ChallengeConfig = &ChallengeConfig{}
+			return v.ChallengeConfig.Deserialize(d)
+		case schemas.WebACL_CustomResponseBodies:
+			return deserializeCustomResponseBodies(d, schemas.WebACL_CustomResponseBodies, &v.CustomResponseBodies)
+		case schemas.WebACL_DataProtectionConfig:
+			v.DataProtectionConfig = &DataProtectionConfig{}
+			return v.DataProtectionConfig.Deserialize(d)
+		case schemas.WebACL_DefaultAction:
+			v.DefaultAction = &DefaultAction{}
+			return v.DefaultAction.Deserialize(d)
+		case schemas.WebACL_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WebACL_Description, v.Description)
+		case schemas.WebACL_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WebACL_Id, v.Id)
+		case schemas.WebACL_LabelNamespace:
+			v.LabelNamespace = new(string)
+			return d.ReadString(schemas.WebACL_LabelNamespace, v.LabelNamespace)
+		case schemas.WebACL_ManagedByFirewallManager:
+			return d.ReadBool(schemas.WebACL_ManagedByFirewallManager, &v.ManagedByFirewallManager)
+		case schemas.WebACL_MonetizationConfig:
+			v.MonetizationConfig = &MonetizationConfig{}
+			return v.MonetizationConfig.Deserialize(d)
+		case schemas.WebACL_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WebACL_Name, v.Name)
+		case schemas.WebACL_OnSourceDDoSProtectionConfig:
+			v.OnSourceDDoSProtectionConfig = &OnSourceDDoSProtectionConfig{}
+			return v.OnSourceDDoSProtectionConfig.Deserialize(d)
+		case schemas.WebACL_PostProcessFirewallManagerRuleGroups:
+			return deserializeFirewallManagerRuleGroups(d, schemas.WebACL_PostProcessFirewallManagerRuleGroups, &v.PostProcessFirewallManagerRuleGroups)
+		case schemas.WebACL_PreProcessFirewallManagerRuleGroups:
+			return deserializeFirewallManagerRuleGroups(d, schemas.WebACL_PreProcessFirewallManagerRuleGroups, &v.PreProcessFirewallManagerRuleGroups)
+		case schemas.WebACL_RetrofittedByFirewallManager:
+			return d.ReadBool(schemas.WebACL_RetrofittedByFirewallManager, &v.RetrofittedByFirewallManager)
+		case schemas.WebACL_Rules:
+			return deserializeRules(d, schemas.WebACL_Rules, &v.Rules)
+		case schemas.WebACL_TokenDomains:
+			return deserializeTokenDomains(d, schemas.WebACL_TokenDomains, &v.TokenDomains)
+		case schemas.WebACL_VisibilityConfig:
+			v.VisibilityConfig = &VisibilityConfig{}
+			return v.VisibilityConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // High-level information about a WebACL, returned by operations like create and list.
 // This provides information like the ID, that you can use to retrieve and manage a
 // WebACL , and the ARN, that you provide to operations like AssociateWebACL.
@@ -6017,6 +11487,52 @@ type WebACLSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WebACLSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebACLSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebACLSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.WebACLSummary_ARN, *v.ARN)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WebACLSummary_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.WebACLSummary_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.WebACLSummary_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WebACLSummary_Name, *v.Name)
+	}
+}
+func (v *WebACLSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebACLSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebACLSummary_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.WebACLSummary_ARN, v.ARN)
+		case schemas.WebACLSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WebACLSummary_Description, v.Description)
+		case schemas.WebACLSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WebACLSummary_Id, v.Id)
+		case schemas.WebACLSummary_LockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.WebACLSummary_LockToken, v.LockToken)
+		case schemas.WebACLSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WebACLSummary_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A rule statement that inspects for cross-site scripting (XSS) attacks. In XSS
@@ -6049,6 +11565,36 @@ type XssMatchStatement struct {
 	PreParseTextTransformations []PreParseTextTransformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *XssMatchStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XssMatchStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XssMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.XssMatchStatement_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePreParseTextTransformations(s, schemas.XssMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	serializeTextTransformations(s, schemas.XssMatchStatement_TextTransformations, v.TextTransformations)
+}
+func (v *XssMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XssMatchStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XssMatchStatement_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.XssMatchStatement_PreParseTextTransformations:
+			return deserializePreParseTextTransformations(d, schemas.XssMatchStatement_PreParseTextTransformations, &v.PreParseTextTransformations)
+		case schemas.XssMatchStatement_TextTransformations:
+			return deserializeTextTransformations(d, schemas.XssMatchStatement_TextTransformations, &v.TextTransformations)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

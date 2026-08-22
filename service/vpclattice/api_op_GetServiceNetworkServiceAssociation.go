@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,28 @@ type GetServiceNetworkServiceAssociationInput struct {
 	ServiceNetworkServiceAssociationIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetServiceNetworkServiceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceNetworkServiceAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceNetworkServiceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceNetworkServiceAssociationIdentifier != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationRequest_serviceNetworkServiceAssociationIdentifier, *v.ServiceNetworkServiceAssociationIdentifier)
+	}
+}
+func (v *GetServiceNetworkServiceAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceNetworkServiceAssociationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceNetworkServiceAssociationRequest_serviceNetworkServiceAssociationIdentifier:
+			v.ServiceNetworkServiceAssociationIdentifier = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationRequest_serviceNetworkServiceAssociationIdentifier, v.ServiceNetworkServiceAssociationIdentifier)
+		}
+		return nil
+	})
 }
 
 type GetServiceNetworkServiceAssociationOutput struct {
@@ -89,13 +113,122 @@ type GetServiceNetworkServiceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceNetworkServiceAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceNetworkServiceAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceNetworkServiceAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetServiceNetworkServiceAssociationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_createdBy, *v.CreatedBy)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_customDomainName, *v.CustomDomainName)
+	}
+	if v.DnsEntry != nil {
+		s.WriteStruct(schemas.GetServiceNetworkServiceAssociationResponse_dnsEntry)
+		v.DnsEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_failureCode, *v.FailureCode)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_id, *v.Id)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_serviceArn, *v.ServiceArn)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_serviceId, *v.ServiceId)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_serviceName, *v.ServiceName)
+	}
+	if v.ServiceNetworkArn != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_serviceNetworkArn, *v.ServiceNetworkArn)
+	}
+	if v.ServiceNetworkId != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_serviceNetworkId, *v.ServiceNetworkId)
+	}
+	if v.ServiceNetworkName != nil {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_serviceNetworkName, *v.ServiceNetworkName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetServiceNetworkServiceAssociationResponse_status, string(v.Status))
+	}
+}
+func (v *GetServiceNetworkServiceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceNetworkServiceAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceNetworkServiceAssociationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_arn, v.Arn)
+		case schemas.GetServiceNetworkServiceAssociationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetServiceNetworkServiceAssociationResponse_createdAt, v.CreatedAt)
+		case schemas.GetServiceNetworkServiceAssociationResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_createdBy, v.CreatedBy)
+		case schemas.GetServiceNetworkServiceAssociationResponse_customDomainName:
+			v.CustomDomainName = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_customDomainName, v.CustomDomainName)
+		case schemas.GetServiceNetworkServiceAssociationResponse_dnsEntry:
+			v.DnsEntry = &types.DnsEntry{}
+			return v.DnsEntry.Deserialize(d)
+		case schemas.GetServiceNetworkServiceAssociationResponse_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_failureCode, v.FailureCode)
+		case schemas.GetServiceNetworkServiceAssociationResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_failureMessage, v.FailureMessage)
+		case schemas.GetServiceNetworkServiceAssociationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_id, v.Id)
+		case schemas.GetServiceNetworkServiceAssociationResponse_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_serviceArn, v.ServiceArn)
+		case schemas.GetServiceNetworkServiceAssociationResponse_serviceId:
+			v.ServiceId = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_serviceId, v.ServiceId)
+		case schemas.GetServiceNetworkServiceAssociationResponse_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_serviceName, v.ServiceName)
+		case schemas.GetServiceNetworkServiceAssociationResponse_serviceNetworkArn:
+			v.ServiceNetworkArn = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_serviceNetworkArn, v.ServiceNetworkArn)
+		case schemas.GetServiceNetworkServiceAssociationResponse_serviceNetworkId:
+			v.ServiceNetworkId = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_serviceNetworkId, v.ServiceNetworkId)
+		case schemas.GetServiceNetworkServiceAssociationResponse_serviceNetworkName:
+			v.ServiceNetworkName = new(string)
+			return d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_serviceNetworkName, v.ServiceNetworkName)
+		case schemas.GetServiceNetworkServiceAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceNetworkServiceAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceNetworkServiceAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceNetworkServiceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceNetworkServiceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceNetworkServiceAssociation, schemas.GetServiceNetworkServiceAssociationRequest, schemas.GetServiceNetworkServiceAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceNetworkServiceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceNetworkServiceAssociation, schemas.GetServiceNetworkServiceAssociationRequest, schemas.GetServiceNetworkServiceAssociationResponse), output: &GetServiceNetworkServiceAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

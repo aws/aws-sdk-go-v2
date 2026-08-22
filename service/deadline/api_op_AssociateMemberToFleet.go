@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,36 @@ type AssociateMemberToFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberToFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_fleetId, *v.FleetId)
+	}
+	if v.IdentityCenterRegion != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_identityCenterRegion, *v.IdentityCenterRegion)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_identityStoreId, *v.IdentityStoreId)
+	}
+	if v.MembershipLevel != "" {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_membershipLevel, string(v.MembershipLevel))
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_principalId, *v.PrincipalId)
+	}
+	if v.PrincipalType != "" {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_principalType, string(v.PrincipalType))
+	}
+}
+
 type AssociateMemberToFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,13 +107,26 @@ type AssociateMemberToFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberToFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateMemberToFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateMemberToFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateMemberToFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateMemberToFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToFleet, schemas.AssociateMemberToFleetRequest, schemas.AssociateMemberToFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateMemberToFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToFleet, schemas.AssociateMemberToFleetRequest, schemas.AssociateMemberToFleetResponse), output: &AssociateMemberToFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type DescribeFraudsterRegistrationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFraudsterRegistrationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFraudsterRegistrationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFraudsterRegistrationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeFraudsterRegistrationJobRequest_DomainId, *v.DomainId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeFraudsterRegistrationJobRequest_JobId, *v.JobId)
+	}
+}
+func (v *DescribeFraudsterRegistrationJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFraudsterRegistrationJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFraudsterRegistrationJobRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DescribeFraudsterRegistrationJobRequest_DomainId, v.DomainId)
+		case schemas.DescribeFraudsterRegistrationJobRequest_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DescribeFraudsterRegistrationJobRequest_JobId, v.JobId)
+		}
+		return nil
+	})
+}
+
 type DescribeFraudsterRegistrationJobOutput struct {
 
 	// Contains details about the specified fraudster registration job.
@@ -50,13 +80,34 @@ type DescribeFraudsterRegistrationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFraudsterRegistrationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFraudsterRegistrationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFraudsterRegistrationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.DescribeFraudsterRegistrationJobResponse_Job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFraudsterRegistrationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFraudsterRegistrationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFraudsterRegistrationJobResponse_Job:
+			v.Job = &types.FraudsterRegistrationJob{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFraudsterRegistrationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFraudsterRegistrationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFraudsterRegistrationJob, schemas.DescribeFraudsterRegistrationJobRequest, schemas.DescribeFraudsterRegistrationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFraudsterRegistrationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFraudsterRegistrationJob, schemas.DescribeFraudsterRegistrationJobRequest, schemas.DescribeFraudsterRegistrationJobResponse), output: &DescribeFraudsterRegistrationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

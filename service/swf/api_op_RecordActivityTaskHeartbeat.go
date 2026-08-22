@@ -4,6 +4,8 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,21 @@ type RecordActivityTaskHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordActivityTaskHeartbeatInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordActivityTaskHeartbeatInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordActivityTaskHeartbeatInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.RecordActivityTaskHeartbeatInput_details, *v.Details)
+	}
+	if v.TaskToken != nil {
+		s.WriteString(schemas.RecordActivityTaskHeartbeatInput_taskToken, *v.TaskToken)
+	}
+}
+
 // Status information about an activity task.
 type RecordActivityTaskHeartbeatOutput struct {
 
@@ -98,13 +115,29 @@ type RecordActivityTaskHeartbeatOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordActivityTaskHeartbeatOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTaskStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordActivityTaskHeartbeatOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.ActivityTaskStatus_cancelRequested, v.CancelRequested)
+}
+func (v *RecordActivityTaskHeartbeatOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTaskStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTaskStatus_cancelRequested:
+			return d.ReadBool(schemas.ActivityTaskStatus_cancelRequested, &v.CancelRequested)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRecordActivityTaskHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRecordActivityTaskHeartbeat{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecordActivityTaskHeartbeat, schemas.RecordActivityTaskHeartbeatInput, schemas.ActivityTaskStatus)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRecordActivityTaskHeartbeat{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecordActivityTaskHeartbeat, schemas.RecordActivityTaskHeartbeatInput, schemas.ActivityTaskStatus), output: &RecordActivityTaskHeartbeatOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

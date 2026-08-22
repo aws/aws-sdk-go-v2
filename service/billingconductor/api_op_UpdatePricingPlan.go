@@ -4,6 +4,8 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,40 @@ type UpdatePricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePricingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePricingPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePricingPlanInput_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePricingPlanInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePricingPlanInput_Name, *v.Name)
+	}
+}
+func (v *UpdatePricingPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePricingPlanInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePricingPlanInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanInput_Arn, v.Arn)
+		case schemas.UpdatePricingPlanInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanInput_Description, v.Description)
+		case schemas.UpdatePricingPlanInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanInput_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type UpdatePricingPlanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated pricing plan.
@@ -63,13 +99,54 @@ type UpdatePricingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePricingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePricingPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePricingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePricingPlanOutput_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePricingPlanOutput_Description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.UpdatePricingPlanOutput_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePricingPlanOutput_Name, *v.Name)
+	}
+	if v.Size != 0 {
+		s.WriteInt64(schemas.UpdatePricingPlanOutput_Size, v.Size)
+	}
+}
+func (v *UpdatePricingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePricingPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePricingPlanOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanOutput_Arn, v.Arn)
+		case schemas.UpdatePricingPlanOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanOutput_Description, v.Description)
+		case schemas.UpdatePricingPlanOutput_LastModifiedTime:
+			return d.ReadInt64(schemas.UpdatePricingPlanOutput_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.UpdatePricingPlanOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdatePricingPlanOutput_Name, v.Name)
+		case schemas.UpdatePricingPlanOutput_Size:
+			return d.ReadInt64(schemas.UpdatePricingPlanOutput_Size, &v.Size)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePricingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePricingPlan, schemas.UpdatePricingPlanInput, schemas.UpdatePricingPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePricingPlan, schemas.UpdatePricingPlanInput, schemas.UpdatePricingPlanOutput), output: &UpdatePricingPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

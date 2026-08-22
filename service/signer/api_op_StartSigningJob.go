@@ -5,7 +5,9 @@ package signer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,34 @@ type StartSigningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSigningJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSigningJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSigningJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartSigningJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.StartSigningJobRequest_destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.StartSigningJobRequest_profileName, *v.ProfileName)
+	}
+	if v.ProfileOwner != nil {
+		s.WriteString(schemas.StartSigningJobRequest_profileOwner, *v.ProfileOwner)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.StartSigningJobRequest_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartSigningJobOutput struct {
 
 	// The ID of your signing job.
@@ -95,13 +125,38 @@ type StartSigningJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSigningJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSigningJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSigningJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartSigningJobResponse_jobId, *v.JobId)
+	}
+	if v.JobOwner != nil {
+		s.WriteString(schemas.StartSigningJobResponse_jobOwner, *v.JobOwner)
+	}
+}
+func (v *StartSigningJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSigningJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSigningJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartSigningJobResponse_jobId, v.JobId)
+		case schemas.StartSigningJobResponse_jobOwner:
+			v.JobOwner = new(string)
+			return d.ReadString(schemas.StartSigningJobResponse_jobOwner, v.JobOwner)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSigningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSigningJob, schemas.StartSigningJobRequest, schemas.StartSigningJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSigningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSigningJob, schemas.StartSigningJobRequest, schemas.StartSigningJobResponse), output: &StartSigningJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

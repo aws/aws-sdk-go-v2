@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,30 @@ type CreateGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGrantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedOperationList(s, schemas.CreateGrantRequest_AllowedOperations, v.AllowedOperations)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateGrantRequest_ClientToken, *v.ClientToken)
+	}
+	if v.GrantName != nil {
+		s.WriteString(schemas.CreateGrantRequest_GrantName, *v.GrantName)
+	}
+	if v.HomeRegion != nil {
+		s.WriteString(schemas.CreateGrantRequest_HomeRegion, *v.HomeRegion)
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CreateGrantRequest_LicenseArn, *v.LicenseArn)
+	}
+	serializePrincipalArnList(s, schemas.CreateGrantRequest_Principals, v.Principals)
+	serializeTagList(s, schemas.CreateGrantRequest_Tags, v.Tags)
+}
+
 type CreateGrantOutput struct {
 
 	// Grant ARN.
@@ -95,13 +121,48 @@ type CreateGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGrantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGrantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrantArn != nil {
+		s.WriteString(schemas.CreateGrantResponse_GrantArn, *v.GrantArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateGrantResponse_Status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateGrantResponse_Version, *v.Version)
+	}
+}
+func (v *CreateGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGrantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGrantResponse_GrantArn:
+			v.GrantArn = new(string)
+			return d.ReadString(schemas.CreateGrantResponse_GrantArn, v.GrantArn)
+		case schemas.CreateGrantResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateGrantResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GrantStatus(ev)
+			return nil
+		case schemas.CreateGrantResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateGrantResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGrant, schemas.CreateGrantRequest, schemas.CreateGrantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGrant, schemas.CreateGrantRequest, schemas.CreateGrantResponse), output: &CreateGrantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

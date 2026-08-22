@@ -5,7 +5,9 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -138,6 +140,46 @@ type CreateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateServiceRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateServiceRequest_Description, *v.Description)
+	}
+	if v.DnsConfig != nil {
+		s.WriteStruct(schemas.CreateServiceRequest_DnsConfig)
+		v.DnsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthCheckConfig != nil {
+		s.WriteStruct(schemas.CreateServiceRequest_HealthCheckConfig)
+		v.HealthCheckConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthCheckCustomConfig != nil {
+		s.WriteStruct(schemas.CreateServiceRequest_HealthCheckCustomConfig)
+		v.HealthCheckCustomConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceRequest_Name, *v.Name)
+	}
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.CreateServiceRequest_NamespaceId, *v.NamespaceId)
+	}
+	serializeTagList(s, schemas.CreateServiceRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateServiceRequest_Type, string(v.Type))
+	}
+}
+
 type CreateServiceOutput struct {
 
 	// A complex type that contains information about the new service.
@@ -149,13 +191,34 @@ type CreateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.CreateServiceResponse_Service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceResponse_Service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateService, schemas.CreateServiceRequest, schemas.CreateServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateService, schemas.CreateServiceRequest, schemas.CreateServiceResponse), output: &CreateServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

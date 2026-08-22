@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -104,6 +106,112 @@ type GetPropertyValueHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPropertyValueHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPropertyValueHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPropertyValueHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.GetPropertyValueHistoryRequest_componentName, *v.ComponentName)
+	}
+	if v.ComponentPath != nil {
+		s.WriteString(schemas.GetPropertyValueHistoryRequest_componentPath, *v.ComponentPath)
+	}
+	if v.ComponentTypeId != nil {
+		s.WriteString(schemas.GetPropertyValueHistoryRequest_componentTypeId, *v.ComponentTypeId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.GetPropertyValueHistoryRequest_endDateTime, *v.EndDateTime)
+	}
+	if v.EndTime != nil {
+		s.WriteString(schemas.GetPropertyValueHistoryRequest_endTime, *v.EndTime)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.GetPropertyValueHistoryRequest_entityId, *v.EntityId)
+	}
+	if v.Interpolation != nil {
+		s.WriteStruct(schemas.GetPropertyValueHistoryRequest_interpolation)
+		v.Interpolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetPropertyValueHistoryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPropertyValueHistoryRequest_nextToken, *v.NextToken)
+	}
+	if v.OrderByTime != "" {
+		s.WriteString(schemas.GetPropertyValueHistoryRequest_orderByTime, string(v.OrderByTime))
+	}
+	serializePropertyFilters(s, schemas.GetPropertyValueHistoryRequest_propertyFilters, v.PropertyFilters)
+	serializeSelectedPropertyList(s, schemas.GetPropertyValueHistoryRequest_selectedProperties, v.SelectedProperties)
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.GetPropertyValueHistoryRequest_startDateTime, *v.StartDateTime)
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.GetPropertyValueHistoryRequest_startTime, *v.StartTime)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetPropertyValueHistoryRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetPropertyValueHistoryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPropertyValueHistoryRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPropertyValueHistoryRequest_componentName:
+			v.ComponentName = new(string)
+			return d.ReadString(schemas.GetPropertyValueHistoryRequest_componentName, v.ComponentName)
+		case schemas.GetPropertyValueHistoryRequest_componentPath:
+			v.ComponentPath = new(string)
+			return d.ReadString(schemas.GetPropertyValueHistoryRequest_componentPath, v.ComponentPath)
+		case schemas.GetPropertyValueHistoryRequest_componentTypeId:
+			v.ComponentTypeId = new(string)
+			return d.ReadString(schemas.GetPropertyValueHistoryRequest_componentTypeId, v.ComponentTypeId)
+		case schemas.GetPropertyValueHistoryRequest_endDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetPropertyValueHistoryRequest_endDateTime, v.EndDateTime)
+		case schemas.GetPropertyValueHistoryRequest_endTime:
+			v.EndTime = new(string)
+			return d.ReadString(schemas.GetPropertyValueHistoryRequest_endTime, v.EndTime)
+		case schemas.GetPropertyValueHistoryRequest_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.GetPropertyValueHistoryRequest_entityId, v.EntityId)
+		case schemas.GetPropertyValueHistoryRequest_interpolation:
+			v.Interpolation = &types.InterpolationParameters{}
+			return v.Interpolation.Deserialize(d)
+		case schemas.GetPropertyValueHistoryRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.GetPropertyValueHistoryRequest_maxResults, v.MaxResults)
+		case schemas.GetPropertyValueHistoryRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetPropertyValueHistoryRequest_nextToken, v.NextToken)
+		case schemas.GetPropertyValueHistoryRequest_orderByTime:
+			var ev string
+			if err := d.ReadString(schemas.GetPropertyValueHistoryRequest_orderByTime, &ev); err != nil {
+				return err
+			}
+			v.OrderByTime = types.OrderByTime(ev)
+			return nil
+		case schemas.GetPropertyValueHistoryRequest_propertyFilters:
+			return deserializePropertyFilters(d, schemas.GetPropertyValueHistoryRequest_propertyFilters, &v.PropertyFilters)
+		case schemas.GetPropertyValueHistoryRequest_selectedProperties:
+			return deserializeSelectedPropertyList(d, schemas.GetPropertyValueHistoryRequest_selectedProperties, &v.SelectedProperties)
+		case schemas.GetPropertyValueHistoryRequest_startDateTime:
+			v.StartDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetPropertyValueHistoryRequest_startDateTime, v.StartDateTime)
+		case schemas.GetPropertyValueHistoryRequest_startTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.GetPropertyValueHistoryRequest_startTime, v.StartTime)
+		case schemas.GetPropertyValueHistoryRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetPropertyValueHistoryRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type GetPropertyValueHistoryOutput struct {
 
 	// An object that maps strings to the property definitions in the component type.
@@ -121,13 +229,35 @@ type GetPropertyValueHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPropertyValueHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPropertyValueHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPropertyValueHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPropertyValueHistoryResponse_nextToken, *v.NextToken)
+	}
+	serializePropertyValueList(s, schemas.GetPropertyValueHistoryResponse_propertyValues, v.PropertyValues)
+}
+func (v *GetPropertyValueHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPropertyValueHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPropertyValueHistoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetPropertyValueHistoryResponse_nextToken, v.NextToken)
+		case schemas.GetPropertyValueHistoryResponse_propertyValues:
+			return deserializePropertyValueList(d, schemas.GetPropertyValueHistoryResponse_propertyValues, &v.PropertyValues)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPropertyValueHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPropertyValueHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertyValueHistory, schemas.GetPropertyValueHistoryRequest, schemas.GetPropertyValueHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPropertyValueHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPropertyValueHistory, schemas.GetPropertyValueHistoryRequest, schemas.GetPropertyValueHistoryResponse), output: &GetPropertyValueHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

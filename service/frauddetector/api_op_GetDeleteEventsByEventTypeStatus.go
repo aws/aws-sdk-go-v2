@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetDeleteEventsByEventTypeStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeleteEventsByEventTypeStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeleteEventsByEventTypeStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeleteEventsByEventTypeStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.GetDeleteEventsByEventTypeStatusRequest_eventTypeName, *v.EventTypeName)
+	}
+}
+
 type GetDeleteEventsByEventTypeStatusOutput struct {
 
 	// The event type name.
@@ -48,13 +62,42 @@ type GetDeleteEventsByEventTypeStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeleteEventsByEventTypeStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeleteEventsByEventTypeStatusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeleteEventsByEventTypeStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.GetDeleteEventsByEventTypeStatusResult_eventTypeName, *v.EventTypeName)
+	}
+	if v.EventsDeletionStatus != "" {
+		s.WriteString(schemas.GetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus, string(v.EventsDeletionStatus))
+	}
+}
+func (v *GetDeleteEventsByEventTypeStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeleteEventsByEventTypeStatusResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeleteEventsByEventTypeStatusResult_eventTypeName:
+			v.EventTypeName = new(string)
+			return d.ReadString(schemas.GetDeleteEventsByEventTypeStatusResult_eventTypeName, v.EventTypeName)
+		case schemas.GetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetDeleteEventsByEventTypeStatusResult_eventsDeletionStatus, &ev); err != nil {
+				return err
+			}
+			v.EventsDeletionStatus = types.AsyncJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeleteEventsByEventTypeStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDeleteEventsByEventTypeStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeleteEventsByEventTypeStatus, schemas.GetDeleteEventsByEventTypeStatusRequest, schemas.GetDeleteEventsByEventTypeStatusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDeleteEventsByEventTypeStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeleteEventsByEventTypeStatus, schemas.GetDeleteEventsByEventTypeStatusRequest, schemas.GetDeleteEventsByEventTypeStatusResult), output: &GetDeleteEventsByEventTypeStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

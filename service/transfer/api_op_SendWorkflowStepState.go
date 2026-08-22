@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type SendWorkflowStepStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendWorkflowStepStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendWorkflowStepStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendWorkflowStepStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.SendWorkflowStepStateRequest_ExecutionId, *v.ExecutionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SendWorkflowStepStateRequest_Status, string(v.Status))
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.SendWorkflowStepStateRequest_Token, *v.Token)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.SendWorkflowStepStateRequest_WorkflowId, *v.WorkflowId)
+	}
+}
+
 type SendWorkflowStepStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +84,26 @@ type SendWorkflowStepStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendWorkflowStepStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendWorkflowStepStateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendWorkflowStepStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendWorkflowStepStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendWorkflowStepStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendWorkflowStepStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendWorkflowStepState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWorkflowStepState, schemas.SendWorkflowStepStateRequest, schemas.SendWorkflowStepStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSendWorkflowStepState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWorkflowStepState, schemas.SendWorkflowStepStateRequest, schemas.SendWorkflowStepStateResponse), output: &SendWorkflowStepStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

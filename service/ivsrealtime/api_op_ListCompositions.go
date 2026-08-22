@@ -5,7 +5,9 @@ package ivsrealtime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListCompositionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCompositionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCompositionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCompositionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterByEncoderConfigurationArn != nil {
+		s.WriteString(schemas.ListCompositionsRequest_filterByEncoderConfigurationArn, *v.FilterByEncoderConfigurationArn)
+	}
+	if v.FilterByStageArn != nil {
+		s.WriteString(schemas.ListCompositionsRequest_filterByStageArn, *v.FilterByStageArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCompositionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCompositionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCompositionsOutput struct {
 
 	// List of the matching Compositions (summary information only).
@@ -62,13 +85,35 @@ type ListCompositionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCompositionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCompositionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCompositionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompositionSummaryList(s, schemas.ListCompositionsResponse_compositions, v.Compositions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCompositionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCompositionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCompositionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCompositionsResponse_compositions:
+			return deserializeCompositionSummaryList(d, schemas.ListCompositionsResponse_compositions, &v.Compositions)
+		case schemas.ListCompositionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCompositionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCompositionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCompositions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCompositions, schemas.ListCompositionsRequest, schemas.ListCompositionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCompositions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCompositions, schemas.ListCompositionsRequest, schemas.ListCompositionsResponse), output: &ListCompositionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

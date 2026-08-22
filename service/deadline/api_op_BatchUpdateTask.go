@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,19 @@ type BatchUpdateTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchUpdateTaskRequest_clientToken, *v.ClientToken)
+	}
+	serializeBatchUpdateTaskItems(s, schemas.BatchUpdateTaskRequest_tasks, v.Tasks)
+}
+
 type BatchUpdateTaskOutput struct {
 
 	// A list of errors for tasks that could not be updated.
@@ -58,13 +73,29 @@ type BatchUpdateTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchUpdateTaskErrors(s, schemas.BatchUpdateTaskResponse_errors, v.Errors)
+}
+func (v *BatchUpdateTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateTaskResponse_errors:
+			return deserializeBatchUpdateTaskErrors(d, schemas.BatchUpdateTaskResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateTask, schemas.BatchUpdateTaskRequest, schemas.BatchUpdateTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateTask, schemas.BatchUpdateTaskRequest, schemas.BatchUpdateTaskResponse), output: &BatchUpdateTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ResetUserPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetUserPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetUserPasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetUserPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ResetUserPasswordRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.NewPassword != nil {
+		s.WriteString(schemas.ResetUserPasswordRequest_NewPassword, *v.NewPassword)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ResetUserPasswordRequest_UserName, *v.UserName)
+	}
+}
+
 type ResetUserPasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +89,26 @@ type ResetUserPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetUserPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetUserPasswordResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetUserPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResetUserPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetUserPasswordResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResetUserPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetUserPassword, schemas.ResetUserPasswordRequest, schemas.ResetUserPasswordResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResetUserPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetUserPassword, schemas.ResetUserPasswordRequest, schemas.ResetUserPasswordResult), output: &ResetUserPasswordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

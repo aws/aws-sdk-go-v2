@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,51 @@ type CreateLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Beneficiary != nil {
+		s.WriteString(schemas.CreateLicenseRequest_Beneficiary, *v.Beneficiary)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLicenseRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConsumptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateLicenseRequest_ConsumptionConfiguration)
+		v.ConsumptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEntitlementList(s, schemas.CreateLicenseRequest_Entitlements, v.Entitlements)
+	if v.HomeRegion != nil {
+		s.WriteString(schemas.CreateLicenseRequest_HomeRegion, *v.HomeRegion)
+	}
+	if v.Issuer != nil {
+		s.WriteStruct(schemas.CreateLicenseRequest_Issuer)
+		v.Issuer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetadataList(s, schemas.CreateLicenseRequest_LicenseMetadata, v.LicenseMetadata)
+	if v.LicenseName != nil {
+		s.WriteString(schemas.CreateLicenseRequest_LicenseName, *v.LicenseName)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.CreateLicenseRequest_ProductName, *v.ProductName)
+	}
+	if v.ProductSKU != nil {
+		s.WriteString(schemas.CreateLicenseRequest_ProductSKU, *v.ProductSKU)
+	}
+	serializeTagList(s, schemas.CreateLicenseRequest_Tags, v.Tags)
+	if v.Validity != nil {
+		s.WriteStruct(schemas.CreateLicenseRequest_Validity)
+		v.Validity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateLicenseOutput struct {
 
 	// Amazon Resource Name (ARN) of the license.
@@ -108,13 +155,48 @@ type CreateLicenseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CreateLicenseResponse_LicenseArn, *v.LicenseArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateLicenseResponse_Status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateLicenseResponse_Version, *v.Version)
+	}
+}
+func (v *CreateLicenseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLicenseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLicenseResponse_LicenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.CreateLicenseResponse_LicenseArn, v.LicenseArn)
+		case schemas.CreateLicenseResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateLicenseResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LicenseStatus(ev)
+			return nil
+		case schemas.CreateLicenseResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateLicenseResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicense, schemas.CreateLicenseRequest, schemas.CreateLicenseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicense, schemas.CreateLicenseRequest, schemas.CreateLicenseResponse), output: &CreateLicenseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

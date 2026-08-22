@@ -5,7 +5,9 @@ package transfer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListAccessesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccessesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessesRequest_NextToken, *v.NextToken)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.ListAccessesRequest_ServerId, *v.ServerId)
+	}
+}
+
 type ListAccessesOutput struct {
 
 	// Returns the accesses and their properties for the ServerId value that you
@@ -67,13 +87,41 @@ type ListAccessesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListedAccesses(s, schemas.ListAccessesResponse_Accesses, v.Accesses)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessesResponse_NextToken, *v.NextToken)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.ListAccessesResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *ListAccessesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessesResponse_Accesses:
+			return deserializeListedAccesses(d, schemas.ListAccessesResponse_Accesses, &v.Accesses)
+		case schemas.ListAccessesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessesResponse_NextToken, v.NextToken)
+		case schemas.ListAccessesResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.ListAccessesResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccesses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccesses, schemas.ListAccessesRequest, schemas.ListAccessesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccesses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccesses, schemas.ListAccessesRequest, schemas.ListAccessesResponse), output: &ListAccessesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

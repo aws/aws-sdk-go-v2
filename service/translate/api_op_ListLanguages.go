@@ -5,7 +5,9 @@ package translate
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListLanguagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLanguagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLanguagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLanguagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayLanguageCode != "" {
+		s.WriteString(schemas.ListLanguagesRequest_DisplayLanguageCode, string(v.DisplayLanguageCode))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLanguagesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLanguagesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLanguagesOutput struct {
 
 	// The language code passed in with the request.
@@ -59,13 +79,45 @@ type ListLanguagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLanguagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLanguagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLanguagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayLanguageCode != "" {
+		s.WriteString(schemas.ListLanguagesResponse_DisplayLanguageCode, string(v.DisplayLanguageCode))
+	}
+	serializeLanguagesList(s, schemas.ListLanguagesResponse_Languages, v.Languages)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLanguagesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLanguagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLanguagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLanguagesResponse_DisplayLanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.ListLanguagesResponse_DisplayLanguageCode, &ev); err != nil {
+				return err
+			}
+			v.DisplayLanguageCode = types.DisplayLanguageCode(ev)
+			return nil
+		case schemas.ListLanguagesResponse_Languages:
+			return deserializeLanguagesList(d, schemas.ListLanguagesResponse_Languages, &v.Languages)
+		case schemas.ListLanguagesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLanguagesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLanguagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLanguages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLanguages, schemas.ListLanguagesRequest, schemas.ListLanguagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLanguages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLanguages, schemas.ListLanguagesRequest, schemas.ListLanguagesResponse), output: &ListLanguagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

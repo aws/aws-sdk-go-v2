@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,25 @@ type CreateWebAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEndpoint != nil {
+		s.WriteString(schemas.CreateWebAppRequest_AccessEndpoint, *v.AccessEndpoint)
+	}
+	serializeWebAppEndpointDetails(s, schemas.CreateWebAppRequest_EndpointDetails, v.EndpointDetails)
+	serializeWebAppIdentityProviderDetails(s, schemas.CreateWebAppRequest_IdentityProviderDetails, v.IdentityProviderDetails)
+	serializeTags(s, schemas.CreateWebAppRequest_Tags, v.Tags)
+	if v.WebAppEndpointPolicy != "" {
+		s.WriteString(schemas.CreateWebAppRequest_WebAppEndpointPolicy, string(v.WebAppEndpointPolicy))
+	}
+	serializeWebAppUnits(s, schemas.CreateWebAppRequest_WebAppUnits, v.WebAppUnits)
+}
+
 type CreateWebAppOutput struct {
 
 	// Returns a unique identifier for the web app.
@@ -86,13 +107,32 @@ type CreateWebAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebAppId != nil {
+		s.WriteString(schemas.CreateWebAppResponse_WebAppId, *v.WebAppId)
+	}
+}
+func (v *CreateWebAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWebAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWebAppResponse_WebAppId:
+			v.WebAppId = new(string)
+			return d.ReadString(schemas.CreateWebAppResponse_WebAppId, v.WebAppId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWebAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWebApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebApp, schemas.CreateWebAppRequest, schemas.CreateWebAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWebApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebApp, schemas.CreateWebAppRequest, schemas.CreateWebAppResponse), output: &CreateWebAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

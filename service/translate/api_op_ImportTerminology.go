@@ -4,7 +4,9 @@ package translate
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,35 @@ type ImportTerminologyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportTerminologyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportTerminologyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportTerminologyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ImportTerminologyRequest_Description, *v.Description)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteStruct(schemas.ImportTerminologyRequest_EncryptionKey)
+		v.EncryptionKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MergeStrategy != "" {
+		s.WriteString(schemas.ImportTerminologyRequest_MergeStrategy, string(v.MergeStrategy))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportTerminologyRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.ImportTerminologyRequest_Tags, v.Tags)
+	if v.TerminologyData != nil {
+		s.WriteStruct(schemas.ImportTerminologyRequest_TerminologyData)
+		v.TerminologyData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ImportTerminologyOutput struct {
 
 	// The Amazon S3 location of a file that provides any errors or warnings that were
@@ -84,13 +115,42 @@ type ImportTerminologyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportTerminologyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportTerminologyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportTerminologyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuxiliaryDataLocation != nil {
+		s.WriteStruct(schemas.ImportTerminologyResponse_AuxiliaryDataLocation)
+		v.AuxiliaryDataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TerminologyProperties != nil {
+		s.WriteStruct(schemas.ImportTerminologyResponse_TerminologyProperties)
+		v.TerminologyProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportTerminologyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportTerminologyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportTerminologyResponse_AuxiliaryDataLocation:
+			v.AuxiliaryDataLocation = &types.TerminologyDataLocation{}
+			return v.AuxiliaryDataLocation.Deserialize(d)
+		case schemas.ImportTerminologyResponse_TerminologyProperties:
+			v.TerminologyProperties = &types.TerminologyProperties{}
+			return v.TerminologyProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportTerminology{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportTerminology, schemas.ImportTerminologyRequest, schemas.ImportTerminologyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportTerminology{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportTerminology, schemas.ImportTerminologyRequest, schemas.ImportTerminologyResponse), output: &ImportTerminologyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

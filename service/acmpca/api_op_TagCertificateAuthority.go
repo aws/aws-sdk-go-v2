@@ -4,7 +4,9 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,19 @@ type TagCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagCertificateAuthorityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagCertificateAuthorityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.TagCertificateAuthorityRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	serializeTagList(s, schemas.TagCertificateAuthorityRequest_Tags, v.Tags)
+}
+
 type TagCertificateAuthorityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +83,26 @@ type TagCertificateAuthorityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagCertificateAuthorityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagCertificateAuthorityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TagCertificateAuthorityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTagCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTagCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagCertificateAuthority, schemas.TagCertificateAuthorityRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTagCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagCertificateAuthority, schemas.TagCertificateAuthorityRequest, nil), output: &TagCertificateAuthorityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

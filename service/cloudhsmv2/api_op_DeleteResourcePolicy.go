@@ -4,6 +4,8 @@ package cloudhsmv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePolicyRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type DeleteResourcePolicyOutput struct {
 
 	// The policy previously attached to the resource.
@@ -53,13 +67,38 @@ type DeleteResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.DeleteResourcePolicyResponse_Policy, *v.Policy)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePolicyResponse_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *DeleteResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourcePolicyResponse_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.DeleteResourcePolicyResponse_Policy, v.Policy)
+		case schemas.DeleteResourcePolicyResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DeleteResourcePolicyResponse_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyRequest, schemas.DeleteResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyRequest, schemas.DeleteResourcePolicyResponse), output: &DeleteResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

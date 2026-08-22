@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DeleteServiceNetworkServiceAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceNetworkServiceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceNetworkServiceAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceNetworkServiceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceNetworkServiceAssociationIdentifier != nil {
+		s.WriteString(schemas.DeleteServiceNetworkServiceAssociationRequest_serviceNetworkServiceAssociationIdentifier, *v.ServiceNetworkServiceAssociationIdentifier)
+	}
+}
+func (v *DeleteServiceNetworkServiceAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceNetworkServiceAssociationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceNetworkServiceAssociationRequest_serviceNetworkServiceAssociationIdentifier:
+			v.ServiceNetworkServiceAssociationIdentifier = new(string)
+			return d.ReadString(schemas.DeleteServiceNetworkServiceAssociationRequest_serviceNetworkServiceAssociationIdentifier, v.ServiceNetworkServiceAssociationIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteServiceNetworkServiceAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the association.
@@ -54,13 +78,48 @@ type DeleteServiceNetworkServiceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceNetworkServiceAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceNetworkServiceAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceNetworkServiceAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteServiceNetworkServiceAssociationResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteServiceNetworkServiceAssociationResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteServiceNetworkServiceAssociationResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteServiceNetworkServiceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceNetworkServiceAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceNetworkServiceAssociationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteServiceNetworkServiceAssociationResponse_arn, v.Arn)
+		case schemas.DeleteServiceNetworkServiceAssociationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteServiceNetworkServiceAssociationResponse_id, v.Id)
+		case schemas.DeleteServiceNetworkServiceAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteServiceNetworkServiceAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceNetworkServiceAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceNetworkServiceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteServiceNetworkServiceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceNetworkServiceAssociation, schemas.DeleteServiceNetworkServiceAssociationRequest, schemas.DeleteServiceNetworkServiceAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteServiceNetworkServiceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceNetworkServiceAssociation, schemas.DeleteServiceNetworkServiceAssociationRequest, schemas.DeleteServiceNetworkServiceAssociationResponse), output: &DeleteServiceNetworkServiceAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package translate
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteParallelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteParallelDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteParallelDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteParallelDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteParallelDataRequest_Name, *v.Name)
+	}
+}
+
 type DeleteParallelDataOutput struct {
 
 	// The name of the parallel data resource that is being deleted.
@@ -48,13 +62,42 @@ type DeleteParallelDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteParallelDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteParallelDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteParallelDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteParallelDataResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteParallelDataResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteParallelDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteParallelDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteParallelDataResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteParallelDataResponse_Name, v.Name)
+		case schemas.DeleteParallelDataResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteParallelDataResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ParallelDataStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteParallelData, schemas.DeleteParallelDataRequest, schemas.DeleteParallelDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteParallelData, schemas.DeleteParallelDataRequest, schemas.DeleteParallelDataResponse), output: &DeleteParallelDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
