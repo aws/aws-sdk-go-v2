@@ -906,8 +906,18 @@ func (e *InvalidMarshalError) Error() string {
 }
 
 func defaultEncodeTime(t time.Time) (types.AttributeValue, error) {
+	s := t.Format(time.RFC3339Nano)
+
+	// Validate the time string can be parsed back using the same
+	// function the decoder uses. We want to fail inserting data
+	// into the DB early long before it will be decoded.
+	if _, err := parseTimeS(s); err != nil {
+		return nil, &InvalidMarshalError{
+			msg: fmt.Sprintf("time value %v does not marshal to a valid timestamp: %s", t, s),
+		}
+	}
 	return &types.AttributeValueMemberS{
-		Value: t.Format(time.RFC3339Nano),
+		Value: s,
 	}, nil
 }
 
