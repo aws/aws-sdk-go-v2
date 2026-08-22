@@ -339,10 +339,7 @@ func TestDownloadObject(t *testing.T) {
 				bytes.Repeat([]byte{'B'}, megabyte),
 				bytes.Repeat([]byte{'C'}, 3*megabyte),
 			},
-			getObjectFn: s3testing.UnequalPartGetObjectFn,
-			optFn: func(o *Options) {
-				o.Concurrency = 3
-			},
+			getObjectFn:       s3testing.UnequalPartGetObjectFn,
 			partsCount:        3,
 			expectInvocations: 3,
 			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
