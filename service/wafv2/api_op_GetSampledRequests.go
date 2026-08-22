@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,32 @@ type GetSampledRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSampledRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSampledRequestsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSampledRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxItems != nil {
+		s.WriteInt64(schemas.GetSampledRequestsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.RuleMetricName != nil {
+		s.WriteString(schemas.GetSampledRequestsRequest_RuleMetricName, *v.RuleMetricName)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetSampledRequestsRequest_Scope, string(v.Scope))
+	}
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.GetSampledRequestsRequest_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebAclArn != nil {
+		s.WriteString(schemas.GetSampledRequestsRequest_WebAclArn, *v.WebAclArn)
+	}
+}
+
 type GetSampledRequestsOutput struct {
 
 	// The total number of requests from which GetSampledRequests got a sample of
@@ -108,13 +136,42 @@ type GetSampledRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSampledRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSampledRequestsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSampledRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PopulationSize != 0 {
+		s.WriteInt64(schemas.GetSampledRequestsResponse_PopulationSize, v.PopulationSize)
+	}
+	serializeSampledHTTPRequests(s, schemas.GetSampledRequestsResponse_SampledRequests, v.SampledRequests)
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.GetSampledRequestsResponse_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSampledRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSampledRequestsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSampledRequestsResponse_PopulationSize:
+			return d.ReadInt64(schemas.GetSampledRequestsResponse_PopulationSize, &v.PopulationSize)
+		case schemas.GetSampledRequestsResponse_SampledRequests:
+			return deserializeSampledHTTPRequests(d, schemas.GetSampledRequestsResponse_SampledRequests, &v.SampledRequests)
+		case schemas.GetSampledRequestsResponse_TimeWindow:
+			v.TimeWindow = &types.TimeWindow{}
+			return v.TimeWindow.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSampledRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSampledRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSampledRequests, schemas.GetSampledRequestsRequest, schemas.GetSampledRequestsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSampledRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSampledRequests, schemas.GetSampledRequestsRequest, schemas.GetSampledRequestsResponse), output: &GetSampledRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

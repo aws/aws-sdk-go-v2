@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type CreateResourceGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceGroupTags(s, schemas.CreateResourceGroupRequest_resourceGroupTags, v.ResourceGroupTags)
+}
+
 type CreateResourceGroupOutput struct {
 
 	// The ARN that specifies the resource group that is created.
@@ -53,13 +65,32 @@ type CreateResourceGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceGroupArn != nil {
+		s.WriteString(schemas.CreateResourceGroupResponse_resourceGroupArn, *v.ResourceGroupArn)
+	}
+}
+func (v *CreateResourceGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceGroupResponse_resourceGroupArn:
+			v.ResourceGroupArn = new(string)
+			return d.ReadString(schemas.CreateResourceGroupResponse_resourceGroupArn, v.ResourceGroupArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResourceGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceGroup, schemas.CreateResourceGroupRequest, schemas.CreateResourceGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateResourceGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceGroup, schemas.CreateResourceGroupRequest, schemas.CreateResourceGroupResponse), output: &CreateResourceGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package drs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,42 @@ type DescribeRecoveryInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecoveryInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecoveryInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecoveryInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeRecoveryInstancesRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRecoveryInstancesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRecoveryInstancesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeRecoveryInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecoveryInstancesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecoveryInstancesRequest_filters:
+			v.Filters = &types.DescribeRecoveryInstancesRequestFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.DescribeRecoveryInstancesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.DescribeRecoveryInstancesRequest_maxResults, v.MaxResults)
+		case schemas.DescribeRecoveryInstancesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRecoveryInstancesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeRecoveryInstancesOutput struct {
 
 	// An array of Recovery Instances.
@@ -53,13 +91,35 @@ type DescribeRecoveryInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecoveryInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecoveryInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecoveryInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDescribeRecoveryInstancesItems(s, schemas.DescribeRecoveryInstancesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRecoveryInstancesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeRecoveryInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecoveryInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecoveryInstancesResponse_items:
+			return deserializeDescribeRecoveryInstancesItems(d, schemas.DescribeRecoveryInstancesResponse_items, &v.Items)
+		case schemas.DescribeRecoveryInstancesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRecoveryInstancesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRecoveryInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRecoveryInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecoveryInstances, schemas.DescribeRecoveryInstancesRequest, schemas.DescribeRecoveryInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRecoveryInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecoveryInstances, schemas.DescribeRecoveryInstancesRequest, schemas.DescribeRecoveryInstancesResponse), output: &DescribeRecoveryInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

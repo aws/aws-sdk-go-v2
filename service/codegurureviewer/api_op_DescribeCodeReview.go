@@ -5,7 +5,9 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -40,6 +42,18 @@ type DescribeCodeReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCodeReviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCodeReviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCodeReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReviewArn != nil {
+		s.WriteString(schemas.DescribeCodeReviewRequest_CodeReviewArn, *v.CodeReviewArn)
+	}
+}
+
 type DescribeCodeReviewOutput struct {
 
 	// Information about the code review.
@@ -51,13 +65,34 @@ type DescribeCodeReviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCodeReviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCodeReviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCodeReviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReview != nil {
+		s.WriteStruct(schemas.DescribeCodeReviewResponse_CodeReview)
+		v.CodeReview.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCodeReviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCodeReviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCodeReviewResponse_CodeReview:
+			v.CodeReview = &types.CodeReview{}
+			return v.CodeReview.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCodeReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCodeReview, schemas.DescribeCodeReviewRequest, schemas.DescribeCodeReviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCodeReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCodeReview, schemas.DescribeCodeReviewRequest, schemas.DescribeCodeReviewResponse), output: &DescribeCodeReviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

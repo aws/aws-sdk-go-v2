@@ -5,7 +5,9 @@ package codebuild
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,36 @@ type DescribeCodeCoveragesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCodeCoveragesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCodeCoveragesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCodeCoveragesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxLineCoveragePercentage != nil {
+		s.WriteFloat64(schemas.DescribeCodeCoveragesInput_maxLineCoveragePercentage, *v.MaxLineCoveragePercentage)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeCodeCoveragesInput_maxResults, *v.MaxResults)
+	}
+	if v.MinLineCoveragePercentage != nil {
+		s.WriteFloat64(schemas.DescribeCodeCoveragesInput_minLineCoveragePercentage, *v.MinLineCoveragePercentage)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeCodeCoveragesInput_nextToken, *v.NextToken)
+	}
+	if v.ReportArn != nil {
+		s.WriteString(schemas.DescribeCodeCoveragesInput_reportArn, *v.ReportArn)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.DescribeCodeCoveragesInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.DescribeCodeCoveragesInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type DescribeCodeCoveragesOutput struct {
 
 	// An array of CodeCoverage objects that contain the results.
@@ -75,13 +107,35 @@ type DescribeCodeCoveragesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCodeCoveragesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCodeCoveragesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCodeCoveragesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeCoverages(s, schemas.DescribeCodeCoveragesOutput_codeCoverages, v.CodeCoverages)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeCodeCoveragesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeCodeCoveragesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCodeCoveragesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCodeCoveragesOutput_codeCoverages:
+			return deserializeCodeCoverages(d, schemas.DescribeCodeCoveragesOutput_codeCoverages, &v.CodeCoverages)
+		case schemas.DescribeCodeCoveragesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeCodeCoveragesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCodeCoveragesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCodeCoverages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCodeCoverages, schemas.DescribeCodeCoveragesInput, schemas.DescribeCodeCoveragesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCodeCoverages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCodeCoverages, schemas.DescribeCodeCoveragesInput, schemas.DescribeCodeCoveragesOutput), output: &DescribeCodeCoveragesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

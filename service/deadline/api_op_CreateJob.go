@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -105,6 +107,64 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attachments != nil {
+		s.WriteStruct(schemas.CreateJobRequest_attachments)
+		v.Attachments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.DescriptionOverride != nil {
+		s.WriteString(schemas.CreateJobRequest_descriptionOverride, *v.DescriptionOverride)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.CreateJobRequest_farmId, *v.FarmId)
+	}
+	if v.MaxFailedTasksCount != nil {
+		s.WriteInt32(schemas.CreateJobRequest_maxFailedTasksCount, *v.MaxFailedTasksCount)
+	}
+	if v.MaxRetriesPerTask != nil {
+		s.WriteInt32(schemas.CreateJobRequest_maxRetriesPerTask, *v.MaxRetriesPerTask)
+	}
+	if v.MaxWorkerCount != nil {
+		s.WriteInt32(schemas.CreateJobRequest_maxWorkerCount, *v.MaxWorkerCount)
+	}
+	if v.NameOverride != nil {
+		s.WriteString(schemas.CreateJobRequest_nameOverride, *v.NameOverride)
+	}
+	serializeJobParameters(s, schemas.CreateJobRequest_parameters, v.Parameters)
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateJobRequest_priority, *v.Priority)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.CreateJobRequest_queueId, *v.QueueId)
+	}
+	if v.SourceJobId != nil {
+		s.WriteString(schemas.CreateJobRequest_sourceJobId, *v.SourceJobId)
+	}
+	if v.StorageProfileId != nil {
+		s.WriteString(schemas.CreateJobRequest_storageProfileId, *v.StorageProfileId)
+	}
+	serializeTags(s, schemas.CreateJobRequest_tags, v.Tags)
+	if v.TargetTaskRunStatus != "" {
+		s.WriteString(schemas.CreateJobRequest_targetTaskRunStatus, string(v.TargetTaskRunStatus))
+	}
+	if v.Template != nil {
+		s.WriteString(schemas.CreateJobRequest_template, *v.Template)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.CreateJobRequest_templateType, string(v.TemplateType))
+	}
+}
+
 // Mixin that adds an optional ARN field to response structures. Apply to
 // SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateJobOutput struct {
@@ -120,13 +180,32 @@ type CreateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateJobResponse_jobId, *v.JobId)
+	}
+}
+func (v *CreateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateJobResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse), output: &CreateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

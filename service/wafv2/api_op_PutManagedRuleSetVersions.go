@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -96,6 +98,31 @@ type PutManagedRuleSetVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutManagedRuleSetVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutManagedRuleSetVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutManagedRuleSetVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_Name, *v.Name)
+	}
+	if v.RecommendedVersion != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_RecommendedVersion, *v.RecommendedVersion)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_Scope, string(v.Scope))
+	}
+	serializeVersionsToPublish(s, schemas.PutManagedRuleSetVersionsRequest_VersionsToPublish, v.VersionsToPublish)
+}
+
 type PutManagedRuleSetVersionsOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list
@@ -113,13 +140,32 @@ type PutManagedRuleSetVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutManagedRuleSetVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutManagedRuleSetVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutManagedRuleSetVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextLockToken != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsResponse_NextLockToken, *v.NextLockToken)
+	}
+}
+func (v *PutManagedRuleSetVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutManagedRuleSetVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutManagedRuleSetVersionsResponse_NextLockToken:
+			v.NextLockToken = new(string)
+			return d.ReadString(schemas.PutManagedRuleSetVersionsResponse_NextLockToken, v.NextLockToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutManagedRuleSetVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutManagedRuleSetVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutManagedRuleSetVersions, schemas.PutManagedRuleSetVersionsRequest, schemas.PutManagedRuleSetVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutManagedRuleSetVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutManagedRuleSetVersions, schemas.PutManagedRuleSetVersionsRequest, schemas.PutManagedRuleSetVersionsResponse), output: &PutManagedRuleSetVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

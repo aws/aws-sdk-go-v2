@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type GetOutpostInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutpostInstanceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutpostInstanceTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutpostInstanceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetOutpostInstanceTypesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesInput_OutpostId, *v.OutpostId)
+	}
+}
+
 type GetOutpostInstanceTypesOutput struct {
 
 	// Information about the instance types.
@@ -61,13 +81,47 @@ type GetOutpostInstanceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutpostInstanceTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutpostInstanceTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutpostInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceTypeListDefinition(s, schemas.GetOutpostInstanceTypesOutput_InstanceTypes, v.InstanceTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesOutput_NextToken, *v.NextToken)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesOutput_OutpostArn, *v.OutpostArn)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesOutput_OutpostId, *v.OutpostId)
+	}
+}
+func (v *GetOutpostInstanceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOutpostInstanceTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOutpostInstanceTypesOutput_InstanceTypes:
+			return deserializeInstanceTypeListDefinition(d, schemas.GetOutpostInstanceTypesOutput_InstanceTypes, &v.InstanceTypes)
+		case schemas.GetOutpostInstanceTypesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetOutpostInstanceTypesOutput_NextToken, v.NextToken)
+		case schemas.GetOutpostInstanceTypesOutput_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.GetOutpostInstanceTypesOutput_OutpostArn, v.OutpostArn)
+		case schemas.GetOutpostInstanceTypesOutput_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.GetOutpostInstanceTypesOutput_OutpostId, v.OutpostId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOutpostInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOutpostInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutpostInstanceTypes, schemas.GetOutpostInstanceTypesInput, schemas.GetOutpostInstanceTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOutpostInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutpostInstanceTypes, schemas.GetOutpostInstanceTypesInput, schemas.GetOutpostInstanceTypesOutput), output: &GetOutpostInstanceTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

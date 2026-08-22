@@ -4,6 +4,8 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,26 @@ type DenyCustomRoutingTrafficInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DenyCustomRoutingTrafficInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DenyCustomRoutingTrafficRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DenyCustomRoutingTrafficInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DenyAllTrafficToEndpoint != nil {
+		s.WriteBool(schemas.DenyCustomRoutingTrafficRequest_DenyAllTrafficToEndpoint, *v.DenyAllTrafficToEndpoint)
+	}
+	serializeDestinationAddresses(s, schemas.DenyCustomRoutingTrafficRequest_DestinationAddresses, v.DestinationAddresses)
+	serializeDestinationPorts(s, schemas.DenyCustomRoutingTrafficRequest_DestinationPorts, v.DestinationPorts)
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.DenyCustomRoutingTrafficRequest_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.DenyCustomRoutingTrafficRequest_EndpointId, *v.EndpointId)
+	}
+}
+
 type DenyCustomRoutingTrafficOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,13 +103,26 @@ type DenyCustomRoutingTrafficOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DenyCustomRoutingTrafficOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DenyCustomRoutingTrafficOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DenyCustomRoutingTrafficOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDenyCustomRoutingTrafficMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDenyCustomRoutingTraffic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DenyCustomRoutingTraffic, schemas.DenyCustomRoutingTrafficRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDenyCustomRoutingTraffic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DenyCustomRoutingTraffic, schemas.DenyCustomRoutingTrafficRequest, nil), output: &DenyCustomRoutingTrafficOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

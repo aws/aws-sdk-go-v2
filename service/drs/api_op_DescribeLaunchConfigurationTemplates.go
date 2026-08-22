@@ -5,7 +5,9 @@ package drs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,37 @@ type DescribeLaunchConfigurationTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLaunchConfigurationTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLaunchConfigurationTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLaunchConfigurationTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLaunchConfigurationTemplateIDs(s, schemas.DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs, v.LaunchConfigurationTemplateIDs)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeLaunchConfigurationTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLaunchConfigurationTemplatesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLaunchConfigurationTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLaunchConfigurationTemplatesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs:
+			return deserializeLaunchConfigurationTemplateIDs(d, schemas.DescribeLaunchConfigurationTemplatesRequest_launchConfigurationTemplateIDs, &v.LaunchConfigurationTemplateIDs)
+		case schemas.DescribeLaunchConfigurationTemplatesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.DescribeLaunchConfigurationTemplatesRequest_maxResults, v.MaxResults)
+		case schemas.DescribeLaunchConfigurationTemplatesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeLaunchConfigurationTemplatesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeLaunchConfigurationTemplatesOutput struct {
 
 	// List of items returned by DescribeLaunchConfigurationTemplates.
@@ -55,13 +88,35 @@ type DescribeLaunchConfigurationTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLaunchConfigurationTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLaunchConfigurationTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLaunchConfigurationTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLaunchConfigurationTemplates(s, schemas.DescribeLaunchConfigurationTemplatesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLaunchConfigurationTemplatesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLaunchConfigurationTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLaunchConfigurationTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLaunchConfigurationTemplatesResponse_items:
+			return deserializeLaunchConfigurationTemplates(d, schemas.DescribeLaunchConfigurationTemplatesResponse_items, &v.Items)
+		case schemas.DescribeLaunchConfigurationTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeLaunchConfigurationTemplatesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLaunchConfigurationTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeLaunchConfigurationTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLaunchConfigurationTemplates, schemas.DescribeLaunchConfigurationTemplatesRequest, schemas.DescribeLaunchConfigurationTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeLaunchConfigurationTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLaunchConfigurationTemplates, schemas.DescribeLaunchConfigurationTemplatesRequest, schemas.DescribeLaunchConfigurationTemplatesResponse), output: &DescribeLaunchConfigurationTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

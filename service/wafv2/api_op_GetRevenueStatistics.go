@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,45 @@ type GetRevenueStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevenueStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevenueStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevenueStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.GetRevenueStatisticsRequest_Currency, string(v.Currency))
+	}
+	serializeMonetizationFilterList(s, schemas.GetRevenueStatisticsRequest_Filters, v.Filters)
+	if v.GroupBy != "" {
+		s.WriteString(schemas.GetRevenueStatisticsRequest_GroupBy, string(v.GroupBy))
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetRevenueStatisticsRequest_Limit, *v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.GetRevenueStatisticsRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetRevenueStatisticsRequest_Scope, string(v.Scope))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.GetRevenueStatisticsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.GetRevenueStatisticsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatisticType != "" {
+		s.WriteString(schemas.GetRevenueStatisticsRequest_StatisticType, string(v.StatisticType))
+	}
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.GetRevenueStatisticsRequest_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetRevenueStatisticsOutput struct {
 
 	// When you get a paginated response, this marker indicates that additional
@@ -102,13 +143,38 @@ type GetRevenueStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevenueStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevenueStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevenueStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.GetRevenueStatisticsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeRevenuePathStatisticsList(s, schemas.GetRevenueStatisticsResponse_RevenuePathStatistics, v.RevenuePathStatistics)
+	serializeSourceStatisticsList(s, schemas.GetRevenueStatisticsResponse_SourceStatistics, v.SourceStatistics)
+}
+func (v *GetRevenueStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRevenueStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRevenueStatisticsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.GetRevenueStatisticsResponse_NextMarker, v.NextMarker)
+		case schemas.GetRevenueStatisticsResponse_RevenuePathStatistics:
+			return deserializeRevenuePathStatisticsList(d, schemas.GetRevenueStatisticsResponse_RevenuePathStatistics, &v.RevenuePathStatistics)
+		case schemas.GetRevenueStatisticsResponse_SourceStatistics:
+			return deserializeSourceStatisticsList(d, schemas.GetRevenueStatisticsResponse_SourceStatistics, &v.SourceStatistics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRevenueStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRevenueStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevenueStatistics, schemas.GetRevenueStatisticsRequest, schemas.GetRevenueStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRevenueStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevenueStatistics, schemas.GetRevenueStatisticsRequest, schemas.GetRevenueStatisticsResponse), output: &GetRevenueStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

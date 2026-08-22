@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type DisableSsoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSsoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSsoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSsoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DisableSsoRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.DisableSsoRequest_Password, *v.Password)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.DisableSsoRequest_UserName, *v.UserName)
+	}
+}
+
 // Contains the results of the DisableSso operation.
 type DisableSsoOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -58,13 +78,26 @@ type DisableSsoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSsoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSsoResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSsoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableSsoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableSsoResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableSsoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableSso{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSso, schemas.DisableSsoRequest, schemas.DisableSsoResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableSso{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSso, schemas.DisableSsoRequest, schemas.DisableSsoResult), output: &DisableSsoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

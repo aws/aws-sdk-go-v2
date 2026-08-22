@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StopBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBuildInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBuildInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBuildInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StopBuildInput_id, *v.Id)
+	}
+}
+
 type StopBuildOutput struct {
 
 	// Information about the build.
@@ -45,13 +59,34 @@ type StopBuildOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBuildOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBuildOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBuildOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Build != nil {
+		s.WriteStruct(schemas.StopBuildOutput_build)
+		v.Build.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopBuildOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopBuildOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopBuildOutput_build:
+			v.Build = &types.Build{}
+			return v.Build.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopBuild{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBuild, schemas.StopBuildInput, schemas.StopBuildOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopBuild{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBuild, schemas.StopBuildInput, schemas.StopBuildOutput), output: &StopBuildOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

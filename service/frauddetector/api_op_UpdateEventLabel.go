@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type UpdateEventLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventLabelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventLabelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignedLabel != nil {
+		s.WriteString(schemas.UpdateEventLabelRequest_assignedLabel, *v.AssignedLabel)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.UpdateEventLabelRequest_eventId, *v.EventId)
+	}
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.UpdateEventLabelRequest_eventTypeName, *v.EventTypeName)
+	}
+	if v.LabelTimestamp != nil {
+		s.WriteString(schemas.UpdateEventLabelRequest_labelTimestamp, *v.LabelTimestamp)
+	}
+}
+
 type UpdateEventLabelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +79,26 @@ type UpdateEventLabelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventLabelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventLabelResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventLabelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateEventLabelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventLabelResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEventLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventLabel, schemas.UpdateEventLabelRequest, schemas.UpdateEventLabelResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEventLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventLabel, schemas.UpdateEventLabelRequest, schemas.UpdateEventLabelResult), output: &UpdateEventLabelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,27 @@ type UpdateChapCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChapCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChapCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChapCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitiatorName != nil {
+		s.WriteString(schemas.UpdateChapCredentialsInput_InitiatorName, *v.InitiatorName)
+	}
+	if v.SecretToAuthenticateInitiator != nil {
+		s.WriteString(schemas.UpdateChapCredentialsInput_SecretToAuthenticateInitiator, *v.SecretToAuthenticateInitiator)
+	}
+	if v.SecretToAuthenticateTarget != nil {
+		s.WriteString(schemas.UpdateChapCredentialsInput_SecretToAuthenticateTarget, *v.SecretToAuthenticateTarget)
+	}
+	if v.TargetARN != nil {
+		s.WriteString(schemas.UpdateChapCredentialsInput_TargetARN, *v.TargetARN)
+	}
+}
+
 // A JSON object containing the following fields:
 type UpdateChapCredentialsOutput struct {
 
@@ -87,13 +110,38 @@ type UpdateChapCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChapCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChapCredentialsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChapCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitiatorName != nil {
+		s.WriteString(schemas.UpdateChapCredentialsOutput_InitiatorName, *v.InitiatorName)
+	}
+	if v.TargetARN != nil {
+		s.WriteString(schemas.UpdateChapCredentialsOutput_TargetARN, *v.TargetARN)
+	}
+}
+func (v *UpdateChapCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChapCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChapCredentialsOutput_InitiatorName:
+			v.InitiatorName = new(string)
+			return d.ReadString(schemas.UpdateChapCredentialsOutput_InitiatorName, v.InitiatorName)
+		case schemas.UpdateChapCredentialsOutput_TargetARN:
+			v.TargetARN = new(string)
+			return d.ReadString(schemas.UpdateChapCredentialsOutput_TargetARN, v.TargetARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateChapCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChapCredentials, schemas.UpdateChapCredentialsInput, schemas.UpdateChapCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateChapCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChapCredentials, schemas.UpdateChapCredentialsInput, schemas.UpdateChapCredentialsOutput), output: &UpdateChapCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

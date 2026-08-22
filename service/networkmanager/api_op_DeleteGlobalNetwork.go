@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteGlobalNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlobalNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlobalNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlobalNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.DeleteGlobalNetworkRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+}
+
 type DeleteGlobalNetworkOutput struct {
 
 	// Information about the global network.
@@ -47,13 +61,34 @@ type DeleteGlobalNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlobalNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlobalNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlobalNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetwork != nil {
+		s.WriteStruct(schemas.DeleteGlobalNetworkResponse_GlobalNetwork)
+		v.GlobalNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteGlobalNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGlobalNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGlobalNetworkResponse_GlobalNetwork:
+			v.GlobalNetwork = &types.GlobalNetwork{}
+			return v.GlobalNetwork.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGlobalNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalNetwork, schemas.DeleteGlobalNetworkRequest, schemas.DeleteGlobalNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGlobalNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalNetwork, schemas.DeleteGlobalNetworkRequest, schemas.DeleteGlobalNetworkResponse), output: &DeleteGlobalNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type AcknowledgeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcknowledgeJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.AcknowledgeJobInput_jobId, *v.JobId)
+	}
+	if v.Nonce != nil {
+		s.WriteString(schemas.AcknowledgeJobInput_nonce, *v.Nonce)
+	}
+}
+
 // Represents the output of an AcknowledgeJob action.
 type AcknowledgeJobOutput struct {
 
@@ -55,13 +72,36 @@ type AcknowledgeJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcknowledgeJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.AcknowledgeJobOutput_status, string(v.Status))
+	}
+}
+func (v *AcknowledgeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcknowledgeJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcknowledgeJobOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.AcknowledgeJobOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcknowledgeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcknowledgeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcknowledgeJob, schemas.AcknowledgeJobInput, schemas.AcknowledgeJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAcknowledgeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcknowledgeJob, schemas.AcknowledgeJobInput, schemas.AcknowledgeJobOutput), output: &AcknowledgeJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

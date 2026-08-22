@@ -4,6 +4,8 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,28 @@ type DeleteChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteChannelRequest_arn, *v.Arn)
+	}
+}
+func (v *DeleteChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteChannelRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteChannelRequest_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DeleteChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +71,26 @@ type DeleteChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelRequest, nil), output: &DeleteChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

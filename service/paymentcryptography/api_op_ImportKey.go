@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -270,6 +272,27 @@ type ImportKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ImportKeyInput_Enabled, *v.Enabled)
+	}
+	if v.KeyCheckValueAlgorithm != "" {
+		s.WriteString(schemas.ImportKeyInput_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
+	}
+	serializeImportKeyMaterial(s, schemas.ImportKeyInput_KeyMaterial, v.KeyMaterial)
+	serializeRegions(s, schemas.ImportKeyInput_ReplicationRegions, v.ReplicationRegions)
+	if v.RequesterComment != nil {
+		s.WriteString(schemas.ImportKeyInput_RequesterComment, *v.RequesterComment)
+	}
+	serializeTags(s, schemas.ImportKeyInput_Tags, v.Tags)
+}
+
 type ImportKeyOutput struct {
 
 	// The KeyARN of the key material imported within Amazon Web Services Payment
@@ -284,13 +307,34 @@ type ImportKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.ImportKeyOutput_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportKeyOutput_Key:
+			v.Key = &types.Key{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpImportKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportKey, schemas.ImportKeyInput, schemas.ImportKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpImportKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportKey, schemas.ImportKeyInput, schemas.ImportKeyOutput), output: &ImportKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

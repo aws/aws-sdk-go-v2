@@ -4,6 +4,8 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteLicenseAssetRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseAssetRulesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseAssetRulesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseAssetRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseAssetRulesetArn != nil {
+		s.WriteString(schemas.DeleteLicenseAssetRulesetRequest_LicenseAssetRulesetArn, *v.LicenseAssetRulesetArn)
+	}
+}
+
 type DeleteLicenseAssetRulesetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteLicenseAssetRulesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseAssetRulesetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseAssetRulesetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseAssetRulesetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLicenseAssetRulesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLicenseAssetRulesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLicenseAssetRulesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLicenseAssetRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseAssetRuleset, schemas.DeleteLicenseAssetRulesetRequest, schemas.DeleteLicenseAssetRulesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLicenseAssetRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseAssetRuleset, schemas.DeleteLicenseAssetRulesetRequest, schemas.DeleteLicenseAssetRulesetResponse), output: &DeleteLicenseAssetRulesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

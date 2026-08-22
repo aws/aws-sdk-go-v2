@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type GetDirectoryLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDirectoryLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDirectoryLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDirectoryLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Contains the results of the GetDirectoryLimits operation.
 type GetDirectoryLimitsOutput struct {
 
@@ -41,13 +52,34 @@ type GetDirectoryLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDirectoryLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDirectoryLimitsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDirectoryLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryLimits != nil {
+		s.WriteStruct(schemas.GetDirectoryLimitsResult_DirectoryLimits)
+		v.DirectoryLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDirectoryLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDirectoryLimitsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDirectoryLimitsResult_DirectoryLimits:
+			v.DirectoryLimits = &types.DirectoryLimits{}
+			return v.DirectoryLimits.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDirectoryLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDirectoryLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDirectoryLimits, schemas.GetDirectoryLimitsRequest, schemas.GetDirectoryLimitsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDirectoryLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDirectoryLimits, schemas.GetDirectoryLimitsRequest, schemas.GetDirectoryLimitsResult), output: &GetDirectoryLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

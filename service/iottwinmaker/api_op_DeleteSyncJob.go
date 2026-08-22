@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,34 @@ type DeleteSyncJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSyncJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSyncJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSyncJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SyncSource != nil {
+		s.WriteString(schemas.DeleteSyncJobRequest_syncSource, *v.SyncSource)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteSyncJobRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteSyncJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSyncJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSyncJobRequest_syncSource:
+			v.SyncSource = new(string)
+			return d.ReadString(schemas.DeleteSyncJobRequest_syncSource, v.SyncSource)
+		case schemas.DeleteSyncJobRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteSyncJobRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DeleteSyncJobOutput struct {
 
 	// The SyncJob response state.
@@ -56,13 +86,36 @@ type DeleteSyncJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSyncJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSyncJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSyncJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.DeleteSyncJobResponse_state, string(v.State))
+	}
+}
+func (v *DeleteSyncJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSyncJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSyncJobResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.DeleteSyncJobResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.SyncJobState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSyncJob, schemas.DeleteSyncJobRequest, schemas.DeleteSyncJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSyncJob, schemas.DeleteSyncJobRequest, schemas.DeleteSyncJobResponse), output: &DeleteSyncJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

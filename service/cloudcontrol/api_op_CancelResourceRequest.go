@@ -4,7 +4,9 @@ package cloudcontrol
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,28 @@ type CancelResourceRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelResourceRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelResourceRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelResourceRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestToken != nil {
+		s.WriteString(schemas.CancelResourceRequestInput_RequestToken, *v.RequestToken)
+	}
+}
+func (v *CancelResourceRequestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelResourceRequestInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelResourceRequestInput_RequestToken:
+			v.RequestToken = new(string)
+			return d.ReadString(schemas.CancelResourceRequestInput_RequestToken, v.RequestToken)
+		}
+		return nil
+	})
+}
+
 type CancelResourceRequestOutput struct {
 
 	// Represents the current status of a resource operation request. For more
@@ -55,13 +79,34 @@ type CancelResourceRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelResourceRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelResourceRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelResourceRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProgressEvent != nil {
+		s.WriteStruct(schemas.CancelResourceRequestOutput_ProgressEvent)
+		v.ProgressEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelResourceRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelResourceRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelResourceRequestOutput_ProgressEvent:
+			v.ProgressEvent = &types.ProgressEvent{}
+			return v.ProgressEvent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelResourceRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelResourceRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelResourceRequest, schemas.CancelResourceRequestInput, schemas.CancelResourceRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelResourceRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelResourceRequest, schemas.CancelResourceRequestInput, schemas.CancelResourceRequestOutput), output: &CancelResourceRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

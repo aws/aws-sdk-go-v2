@@ -5,7 +5,9 @@ package ivsrealtime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListEncoderConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEncoderConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEncoderConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEncoderConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEncoderConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEncoderConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEncoderConfigurationsOutput struct {
 
 	// List of the matching EncoderConfigurations (summary information only).
@@ -55,13 +72,35 @@ type ListEncoderConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEncoderConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEncoderConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEncoderConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEncoderConfigurationSummaryList(s, schemas.ListEncoderConfigurationsResponse_encoderConfigurations, v.EncoderConfigurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEncoderConfigurationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEncoderConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEncoderConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEncoderConfigurationsResponse_encoderConfigurations:
+			return deserializeEncoderConfigurationSummaryList(d, schemas.ListEncoderConfigurationsResponse_encoderConfigurations, &v.EncoderConfigurations)
+		case schemas.ListEncoderConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEncoderConfigurationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEncoderConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEncoderConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEncoderConfigurations, schemas.ListEncoderConfigurationsRequest, schemas.ListEncoderConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEncoderConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEncoderConfigurations, schemas.ListEncoderConfigurationsRequest, schemas.ListEncoderConfigurationsResponse), output: &ListEncoderConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

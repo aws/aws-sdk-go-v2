@@ -4,7 +4,9 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteAttributeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttributeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttributeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttributeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeGroup != nil {
+		s.WriteString(schemas.DeleteAttributeGroupRequest_attributeGroup, *v.AttributeGroup)
+	}
+}
+
 type DeleteAttributeGroupOutput struct {
 
 	// Information about the deleted attribute group.
@@ -47,13 +61,34 @@ type DeleteAttributeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttributeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttributeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttributeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeGroup != nil {
+		s.WriteStruct(schemas.DeleteAttributeGroupResponse_attributeGroup)
+		v.AttributeGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAttributeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAttributeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAttributeGroupResponse_attributeGroup:
+			v.AttributeGroup = &types.AttributeGroupSummary{}
+			return v.AttributeGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAttributeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttributeGroup, schemas.DeleteAttributeGroupRequest, schemas.DeleteAttributeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAttributeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttributeGroup, schemas.DeleteAttributeGroupRequest, schemas.DeleteAttributeGroupResponse), output: &DeleteAttributeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

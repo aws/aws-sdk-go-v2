@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type ListCoreNetworkPrefixListAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworkPrefixListAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworkPrefixListAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworkPrefixListAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ListCoreNetworkPrefixListAssociationsRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCoreNetworkPrefixListAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworkPrefixListAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.PrefixListArn != nil {
+		s.WriteString(schemas.ListCoreNetworkPrefixListAssociationsRequest_PrefixListArn, *v.PrefixListArn)
+	}
+}
+
 type ListCoreNetworkPrefixListAssociationsOutput struct {
 
 	// The token for the next page of results.
@@ -58,13 +81,35 @@ type ListCoreNetworkPrefixListAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworkPrefixListAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworkPrefixListAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworkPrefixListAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworkPrefixListAssociationsResponse_NextToken, *v.NextToken)
+	}
+	serializePrefixListAssociationList(s, schemas.ListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations, v.PrefixListAssociations)
+}
+func (v *ListCoreNetworkPrefixListAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoreNetworkPrefixListAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoreNetworkPrefixListAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoreNetworkPrefixListAssociationsResponse_NextToken, v.NextToken)
+		case schemas.ListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations:
+			return deserializePrefixListAssociationList(d, schemas.ListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations, &v.PrefixListAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoreNetworkPrefixListAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoreNetworkPrefixListAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworkPrefixListAssociations, schemas.ListCoreNetworkPrefixListAssociationsRequest, schemas.ListCoreNetworkPrefixListAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoreNetworkPrefixListAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworkPrefixListAssociations, schemas.ListCoreNetworkPrefixListAssociationsRequest, schemas.ListCoreNetworkPrefixListAssociationsResponse), output: &ListCoreNetworkPrefixListAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

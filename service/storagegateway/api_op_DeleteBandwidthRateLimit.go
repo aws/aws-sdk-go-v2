@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DeleteBandwidthRateLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBandwidthRateLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBandwidthRateLimitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBandwidthRateLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BandwidthType != nil {
+		s.WriteString(schemas.DeleteBandwidthRateLimitInput_BandwidthType, *v.BandwidthType)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DeleteBandwidthRateLimitInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
 // bandwidth rate information was deleted.
 type DeleteBandwidthRateLimitOutput struct {
@@ -64,13 +81,32 @@ type DeleteBandwidthRateLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBandwidthRateLimitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBandwidthRateLimitOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBandwidthRateLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DeleteBandwidthRateLimitOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *DeleteBandwidthRateLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBandwidthRateLimitOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBandwidthRateLimitOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DeleteBandwidthRateLimitOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBandwidthRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBandwidthRateLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBandwidthRateLimit, schemas.DeleteBandwidthRateLimitInput, schemas.DeleteBandwidthRateLimitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBandwidthRateLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBandwidthRateLimit, schemas.DeleteBandwidthRateLimitInput, schemas.DeleteBandwidthRateLimitOutput), output: &DeleteBandwidthRateLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

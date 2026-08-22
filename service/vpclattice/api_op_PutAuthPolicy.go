@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,34 @@ type PutAuthPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAuthPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAuthPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAuthPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.PutAuthPolicyRequest_policy, *v.Policy)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.PutAuthPolicyRequest_resourceIdentifier, *v.ResourceIdentifier)
+	}
+}
+func (v *PutAuthPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAuthPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAuthPolicyRequest_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.PutAuthPolicyRequest_policy, v.Policy)
+		case schemas.PutAuthPolicyRequest_resourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.PutAuthPolicyRequest_resourceIdentifier, v.ResourceIdentifier)
+		}
+		return nil
+	})
+}
+
 type PutAuthPolicyOutput struct {
 
 	// The auth policy. The policy string in JSON must not contain newlines or blank
@@ -67,13 +97,42 @@ type PutAuthPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAuthPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAuthPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAuthPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.PutAuthPolicyResponse_policy, *v.Policy)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.PutAuthPolicyResponse_state, string(v.State))
+	}
+}
+func (v *PutAuthPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAuthPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAuthPolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.PutAuthPolicyResponse_policy, v.Policy)
+		case schemas.PutAuthPolicyResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.PutAuthPolicyResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.AuthPolicyState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAuthPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAuthPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAuthPolicy, schemas.PutAuthPolicyRequest, schemas.PutAuthPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAuthPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAuthPolicy, schemas.PutAuthPolicyRequest, schemas.PutAuthPolicyResponse), output: &PutAuthPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

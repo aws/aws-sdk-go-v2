@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,30 @@ type ListAvailableManagedRuleGroupVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableManagedRuleGroupVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableManagedRuleGroupVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableManagedRuleGroupVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListAvailableManagedRuleGroupVersionsRequest_Limit, *v.Limit)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsRequest_Name, *v.Name)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsRequest_Scope, string(v.Scope))
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsRequest_VendorName, *v.VendorName)
+	}
+}
+
 type ListAvailableManagedRuleGroupVersionsOutput struct {
 
 	// The name of the version that's currently set as the default.
@@ -87,13 +113,41 @@ type ListAvailableManagedRuleGroupVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableManagedRuleGroupVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableManagedRuleGroupVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableManagedRuleGroupVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentDefaultVersion != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsResponse_CurrentDefaultVersion, *v.CurrentDefaultVersion)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeManagedRuleGroupVersions(s, schemas.ListAvailableManagedRuleGroupVersionsResponse_Versions, v.Versions)
+}
+func (v *ListAvailableManagedRuleGroupVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableManagedRuleGroupVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableManagedRuleGroupVersionsResponse_CurrentDefaultVersion:
+			v.CurrentDefaultVersion = new(string)
+			return d.ReadString(schemas.ListAvailableManagedRuleGroupVersionsResponse_CurrentDefaultVersion, v.CurrentDefaultVersion)
+		case schemas.ListAvailableManagedRuleGroupVersionsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListAvailableManagedRuleGroupVersionsResponse_NextMarker, v.NextMarker)
+		case schemas.ListAvailableManagedRuleGroupVersionsResponse_Versions:
+			return deserializeManagedRuleGroupVersions(d, schemas.ListAvailableManagedRuleGroupVersionsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableManagedRuleGroupVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableManagedRuleGroupVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableManagedRuleGroupVersions, schemas.ListAvailableManagedRuleGroupVersionsRequest, schemas.ListAvailableManagedRuleGroupVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableManagedRuleGroupVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableManagedRuleGroupVersions, schemas.ListAvailableManagedRuleGroupVersionsRequest, schemas.ListAvailableManagedRuleGroupVersionsResponse), output: &ListAvailableManagedRuleGroupVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type ResetCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetCacheInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ResetCacheInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type ResetCacheOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -57,13 +71,32 @@ type ResetCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetCacheOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ResetCacheOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *ResetCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetCacheOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetCacheOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.ResetCacheOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResetCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetCache, schemas.ResetCacheInput, schemas.ResetCacheOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResetCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetCache, schemas.ResetCacheInput, schemas.ResetCacheOutput), output: &ResetCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

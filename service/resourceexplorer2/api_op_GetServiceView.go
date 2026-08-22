@@ -4,7 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetServiceViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceViewArn != nil {
+		s.WriteString(schemas.GetServiceViewInput_ServiceViewArn, *v.ServiceViewArn)
+	}
+}
+
 type GetServiceViewOutput struct {
 
 	// A ServiceView object that contains the details and configuration of the
@@ -49,13 +63,34 @@ type GetServiceViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.View != nil {
+		s.WriteStruct(schemas.GetServiceViewOutput_View)
+		v.View.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceViewOutput_View:
+			v.View = &types.ServiceView{}
+			return v.View.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceView, schemas.GetServiceViewInput, schemas.GetServiceViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceView, schemas.GetServiceViewInput, schemas.GetServiceViewOutput), output: &GetServiceViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

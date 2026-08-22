@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,35 @@ type UpdateModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalEventsDetail != nil {
+		s.WriteStruct(schemas.UpdateModelVersionRequest_externalEventsDetail)
+		v.ExternalEventsDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngestedEventsDetail != nil {
+		s.WriteStruct(schemas.UpdateModelVersionRequest_ingestedEventsDetail)
+		v.IngestedEventsDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MajorVersionNumber != nil {
+		s.WriteString(schemas.UpdateModelVersionRequest_majorVersionNumber, *v.MajorVersionNumber)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.UpdateModelVersionRequest_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.UpdateModelVersionRequest_modelType, string(v.ModelType))
+	}
+	serializetagList(s, schemas.UpdateModelVersionRequest_tags, v.Tags)
+}
+
 type UpdateModelVersionOutput struct {
 
 	// The model ID.
@@ -79,13 +110,54 @@ type UpdateModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.UpdateModelVersionResult_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.UpdateModelVersionResult_modelType, string(v.ModelType))
+	}
+	if v.ModelVersionNumber != nil {
+		s.WriteString(schemas.UpdateModelVersionResult_modelVersionNumber, *v.ModelVersionNumber)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UpdateModelVersionResult_status, *v.Status)
+	}
+}
+func (v *UpdateModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateModelVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateModelVersionResult_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.UpdateModelVersionResult_modelId, v.ModelId)
+		case schemas.UpdateModelVersionResult_modelType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateModelVersionResult_modelType, &ev); err != nil {
+				return err
+			}
+			v.ModelType = types.ModelTypeEnum(ev)
+			return nil
+		case schemas.UpdateModelVersionResult_modelVersionNumber:
+			v.ModelVersionNumber = new(string)
+			return d.ReadString(schemas.UpdateModelVersionResult_modelVersionNumber, v.ModelVersionNumber)
+		case schemas.UpdateModelVersionResult_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UpdateModelVersionResult_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelVersion, schemas.UpdateModelVersionRequest, schemas.UpdateModelVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelVersion, schemas.UpdateModelVersionRequest, schemas.UpdateModelVersionResult), output: &UpdateModelVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

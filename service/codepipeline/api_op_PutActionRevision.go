@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,29 @@ type PutActionRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutActionRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutActionRevisionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutActionRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.PutActionRevisionInput_actionName, *v.ActionName)
+	}
+	if v.ActionRevision != nil {
+		s.WriteStruct(schemas.PutActionRevisionInput_actionRevision)
+		v.ActionRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.PutActionRevisionInput_pipelineName, *v.PipelineName)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.PutActionRevisionInput_stageName, *v.StageName)
+	}
+}
+
 // Represents the output of a PutActionRevision action.
 type PutActionRevisionOutput struct {
 
@@ -66,13 +91,37 @@ type PutActionRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutActionRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutActionRevisionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutActionRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NewRevision != false {
+		s.WriteBool(schemas.PutActionRevisionOutput_newRevision, v.NewRevision)
+	}
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.PutActionRevisionOutput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+}
+func (v *PutActionRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutActionRevisionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutActionRevisionOutput_newRevision:
+			return d.ReadBool(schemas.PutActionRevisionOutput_newRevision, &v.NewRevision)
+		case schemas.PutActionRevisionOutput_pipelineExecutionId:
+			v.PipelineExecutionId = new(string)
+			return d.ReadString(schemas.PutActionRevisionOutput_pipelineExecutionId, v.PipelineExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutActionRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutActionRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutActionRevision, schemas.PutActionRevisionInput, schemas.PutActionRevisionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutActionRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutActionRevision, schemas.PutActionRevisionInput, schemas.PutActionRevisionOutput), output: &PutActionRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetAttributeGroupInput struct {
 	AttributeGroup *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAttributeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttributeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttributeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeGroup != nil {
+		s.WriteString(schemas.GetAttributeGroupRequest_attributeGroup, *v.AttributeGroup)
+	}
 }
 
 type GetAttributeGroupOutput struct {
@@ -76,13 +90,77 @@ type GetAttributeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttributeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttributeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttributeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetAttributeGroupResponse_arn, *v.Arn)
+	}
+	if v.Attributes != nil {
+		s.WriteString(schemas.GetAttributeGroupResponse_attributes, *v.Attributes)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetAttributeGroupResponse_createdBy, *v.CreatedBy)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetAttributeGroupResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetAttributeGroupResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetAttributeGroupResponse_id, *v.Id)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.GetAttributeGroupResponse_lastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAttributeGroupResponse_name, *v.Name)
+	}
+	serializeTags(s, schemas.GetAttributeGroupResponse_tags, v.Tags)
+}
+func (v *GetAttributeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAttributeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAttributeGroupResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetAttributeGroupResponse_arn, v.Arn)
+		case schemas.GetAttributeGroupResponse_attributes:
+			v.Attributes = new(string)
+			return d.ReadString(schemas.GetAttributeGroupResponse_attributes, v.Attributes)
+		case schemas.GetAttributeGroupResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetAttributeGroupResponse_createdBy, v.CreatedBy)
+		case schemas.GetAttributeGroupResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetAttributeGroupResponse_creationTime, v.CreationTime)
+		case schemas.GetAttributeGroupResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAttributeGroupResponse_description, v.Description)
+		case schemas.GetAttributeGroupResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAttributeGroupResponse_id, v.Id)
+		case schemas.GetAttributeGroupResponse_lastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetAttributeGroupResponse_lastUpdateTime, v.LastUpdateTime)
+		case schemas.GetAttributeGroupResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAttributeGroupResponse_name, v.Name)
+		case schemas.GetAttributeGroupResponse_tags:
+			return deserializeTags(d, schemas.GetAttributeGroupResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAttributeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttributeGroup, schemas.GetAttributeGroupRequest, schemas.GetAttributeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAttributeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttributeGroup, schemas.GetAttributeGroupRequest, schemas.GetAttributeGroupResponse), output: &GetAttributeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

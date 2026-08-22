@@ -4,6 +4,8 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteRecoveryPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecoveryPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecoveryPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecoveryPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryPlanArn != nil {
+		s.WriteString(schemas.DeleteRecoveryPlanRequest_recoveryPlanArn, *v.RecoveryPlanArn)
+	}
+}
+
 type DeleteRecoveryPlanOutput struct {
 
 	// The ARN of the deleted Recovery Plan.
@@ -47,13 +61,32 @@ type DeleteRecoveryPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecoveryPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecoveryPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecoveryPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryPlanArn != nil {
+		s.WriteString(schemas.DeleteRecoveryPlanResponse_recoveryPlanArn, *v.RecoveryPlanArn)
+	}
+}
+func (v *DeleteRecoveryPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecoveryPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRecoveryPlanResponse_recoveryPlanArn:
+			v.RecoveryPlanArn = new(string)
+			return d.ReadString(schemas.DeleteRecoveryPlanResponse_recoveryPlanArn, v.RecoveryPlanArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecoveryPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecoveryPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecoveryPlan, schemas.DeleteRecoveryPlanRequest, schemas.DeleteRecoveryPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRecoveryPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecoveryPlan, schemas.DeleteRecoveryPlanRequest, schemas.DeleteRecoveryPlanResponse), output: &DeleteRecoveryPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

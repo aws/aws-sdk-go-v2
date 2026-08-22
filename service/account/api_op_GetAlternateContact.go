@@ -4,7 +4,9 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,21 @@ type GetAlternateContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAlternateContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAlternateContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAlternateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAlternateContactRequest_AccountId, *v.AccountId)
+	}
+	if v.AlternateContactType != "" {
+		s.WriteString(schemas.GetAlternateContactRequest_AlternateContactType, string(v.AlternateContactType))
+	}
+}
+
 type GetAlternateContactOutput struct {
 
 	// A structure that contains the details for the specified alternate contact.
@@ -81,13 +98,34 @@ type GetAlternateContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAlternateContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAlternateContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAlternateContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlternateContact != nil {
+		s.WriteStruct(schemas.GetAlternateContactResponse_AlternateContact)
+		v.AlternateContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAlternateContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAlternateContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAlternateContactResponse_AlternateContact:
+			v.AlternateContact = &types.AlternateContact{}
+			return v.AlternateContact.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAlternateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAlternateContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAlternateContact, schemas.GetAlternateContactRequest, schemas.GetAlternateContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAlternateContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAlternateContact, schemas.GetAlternateContactRequest, schemas.GetAlternateContactResponse), output: &GetAlternateContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

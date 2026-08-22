@@ -4,6 +4,8 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type DeleteContentAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContentAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContentAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContentAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentAssociationId != nil {
+		s.WriteString(schemas.DeleteContentAssociationRequest_contentAssociationId, *v.ContentAssociationId)
+	}
+	if v.ContentId != nil {
+		s.WriteString(schemas.DeleteContentAssociationRequest_contentId, *v.ContentId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteContentAssociationRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type DeleteContentAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +76,26 @@ type DeleteContentAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContentAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContentAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContentAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteContentAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContentAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContentAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContentAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContentAssociation, schemas.DeleteContentAssociationRequest, schemas.DeleteContentAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteContentAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContentAssociation, schemas.DeleteContentAssociationRequest, schemas.DeleteContentAssociationResponse), output: &DeleteContentAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloudhsmv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type CopyBackupToRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyBackupToRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyBackupToRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyBackupToRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.CopyBackupToRegionRequest_BackupId, *v.BackupId)
+	}
+	if v.DestinationRegion != nil {
+		s.WriteString(schemas.CopyBackupToRegionRequest_DestinationRegion, *v.DestinationRegion)
+	}
+	serializeTagList(s, schemas.CopyBackupToRegionRequest_TagList, v.TagList)
+}
+
 type CopyBackupToRegionOutput struct {
 
 	// Information on the backup that will be copied to the destination region,
@@ -64,13 +82,34 @@ type CopyBackupToRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyBackupToRegionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyBackupToRegionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyBackupToRegionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationBackup != nil {
+		s.WriteStruct(schemas.CopyBackupToRegionResponse_DestinationBackup)
+		v.DestinationBackup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopyBackupToRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyBackupToRegionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyBackupToRegionResponse_DestinationBackup:
+			v.DestinationBackup = &types.DestinationBackup{}
+			return v.DestinationBackup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyBackupToRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyBackupToRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyBackupToRegion, schemas.CopyBackupToRegionRequest, schemas.CopyBackupToRegionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopyBackupToRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyBackupToRegion, schemas.CopyBackupToRegionRequest, schemas.CopyBackupToRegionResponse), output: &CopyBackupToRegionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

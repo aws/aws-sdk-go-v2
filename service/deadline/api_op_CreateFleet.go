@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -95,6 +97,43 @@ type CreateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateFleetRequest_clientToken, *v.ClientToken)
+	}
+	serializeFleetConfiguration(s, schemas.CreateFleetRequest_configuration, v.Configuration)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFleetRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateFleetRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.CreateFleetRequest_farmId, *v.FarmId)
+	}
+	if v.HostConfiguration != nil {
+		s.WriteStruct(schemas.CreateFleetRequest_hostConfiguration)
+		v.HostConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxWorkerCount != nil {
+		s.WriteInt32(schemas.CreateFleetRequest_maxWorkerCount, *v.MaxWorkerCount)
+	}
+	if v.MinWorkerCount != 0 {
+		s.WriteInt32(schemas.CreateFleetRequest_minWorkerCount, v.MinWorkerCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateFleetRequest_roleArn, *v.RoleArn)
+	}
+	serializeTags(s, schemas.CreateFleetRequest_tags, v.Tags)
+}
+
 // Mixin that adds an optional ARN field to response structures. Apply to
 // SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateFleetOutput struct {
@@ -110,13 +149,32 @@ type CreateFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.CreateFleetResponse_fleetId, *v.FleetId)
+	}
+}
+func (v *CreateFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFleetResponse_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.CreateFleetResponse_fleetId, v.FleetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleet, schemas.CreateFleetRequest, schemas.CreateFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleet, schemas.CreateFleetRequest, schemas.CreateFleetResponse), output: &CreateFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

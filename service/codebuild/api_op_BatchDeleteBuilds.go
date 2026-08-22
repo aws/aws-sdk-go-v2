@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchDeleteBuildsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteBuildsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteBuildsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteBuildsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuildIds(s, schemas.BatchDeleteBuildsInput_ids, v.Ids)
+}
+
 type BatchDeleteBuildsOutput struct {
 
 	// The IDs of the builds that were successfully deleted.
@@ -48,13 +60,32 @@ type BatchDeleteBuildsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteBuildsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteBuildsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteBuildsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuildIds(s, schemas.BatchDeleteBuildsOutput_buildsDeleted, v.BuildsDeleted)
+	serializeBuildsNotDeleted(s, schemas.BatchDeleteBuildsOutput_buildsNotDeleted, v.BuildsNotDeleted)
+}
+func (v *BatchDeleteBuildsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteBuildsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteBuildsOutput_buildsDeleted:
+			return deserializeBuildIds(d, schemas.BatchDeleteBuildsOutput_buildsDeleted, &v.BuildsDeleted)
+		case schemas.BatchDeleteBuildsOutput_buildsNotDeleted:
+			return deserializeBuildsNotDeleted(d, schemas.BatchDeleteBuildsOutput_buildsNotDeleted, &v.BuildsNotDeleted)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteBuildsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteBuilds{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteBuilds, schemas.BatchDeleteBuildsInput, schemas.BatchDeleteBuildsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteBuilds{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteBuilds, schemas.BatchDeleteBuildsInput, schemas.BatchDeleteBuildsOutput), output: &BatchDeleteBuildsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

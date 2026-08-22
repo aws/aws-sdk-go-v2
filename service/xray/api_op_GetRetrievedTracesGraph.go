@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,21 @@ type GetRetrievedTracesGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRetrievedTracesGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRetrievedTracesGraphRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRetrievedTracesGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRetrievedTracesGraphRequest_NextToken, *v.NextToken)
+	}
+	if v.RetrievalToken != nil {
+		s.WriteString(schemas.GetRetrievedTracesGraphRequest_RetrievalToken, *v.RetrievalToken)
+	}
+}
+
 type GetRetrievedTracesGraphOutput struct {
 
 	//  Specify the pagination token returned by a previous request to retrieve the
@@ -76,13 +93,45 @@ type GetRetrievedTracesGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRetrievedTracesGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRetrievedTracesGraphResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRetrievedTracesGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRetrievedTracesGraphResult_NextToken, *v.NextToken)
+	}
+	if v.RetrievalStatus != "" {
+		s.WriteString(schemas.GetRetrievedTracesGraphResult_RetrievalStatus, string(v.RetrievalStatus))
+	}
+	serializeRetrievedServicesList(s, schemas.GetRetrievedTracesGraphResult_Services, v.Services)
+}
+func (v *GetRetrievedTracesGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRetrievedTracesGraphResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRetrievedTracesGraphResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetRetrievedTracesGraphResult_NextToken, v.NextToken)
+		case schemas.GetRetrievedTracesGraphResult_RetrievalStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetRetrievedTracesGraphResult_RetrievalStatus, &ev); err != nil {
+				return err
+			}
+			v.RetrievalStatus = types.RetrievalStatus(ev)
+			return nil
+		case schemas.GetRetrievedTracesGraphResult_Services:
+			return deserializeRetrievedServicesList(d, schemas.GetRetrievedTracesGraphResult_Services, &v.Services)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRetrievedTracesGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRetrievedTracesGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRetrievedTracesGraph, schemas.GetRetrievedTracesGraphRequest, schemas.GetRetrievedTracesGraphResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRetrievedTracesGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRetrievedTracesGraph, schemas.GetRetrievedTracesGraphRequest, schemas.GetRetrievedTracesGraphResult), output: &GetRetrievedTracesGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

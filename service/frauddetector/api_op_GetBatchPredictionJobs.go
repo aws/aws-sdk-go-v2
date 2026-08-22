@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetBatchPredictionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBatchPredictionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchPredictionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchPredictionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetBatchPredictionJobsRequest_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetBatchPredictionJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBatchPredictionJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetBatchPredictionJobsOutput struct {
 
 	// An array containing the details of each batch prediction job.
@@ -58,13 +78,35 @@ type GetBatchPredictionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBatchPredictionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchPredictionJobsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchPredictionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchPredictionList(s, schemas.GetBatchPredictionJobsResult_batchPredictions, v.BatchPredictions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBatchPredictionJobsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *GetBatchPredictionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBatchPredictionJobsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBatchPredictionJobsResult_batchPredictions:
+			return deserializeBatchPredictionList(d, schemas.GetBatchPredictionJobsResult_batchPredictions, &v.BatchPredictions)
+		case schemas.GetBatchPredictionJobsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetBatchPredictionJobsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBatchPredictionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBatchPredictionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchPredictionJobs, schemas.GetBatchPredictionJobsRequest, schemas.GetBatchPredictionJobsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBatchPredictionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatchPredictionJobs, schemas.GetBatchPredictionJobsRequest, schemas.GetBatchPredictionJobsResult), output: &GetBatchPredictionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

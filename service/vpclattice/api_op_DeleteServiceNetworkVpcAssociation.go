@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DeleteServiceNetworkVpcAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceNetworkVpcAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceNetworkVpcAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceNetworkVpcAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceNetworkVpcAssociationIdentifier != nil {
+		s.WriteString(schemas.DeleteServiceNetworkVpcAssociationRequest_serviceNetworkVpcAssociationIdentifier, *v.ServiceNetworkVpcAssociationIdentifier)
+	}
+}
+func (v *DeleteServiceNetworkVpcAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceNetworkVpcAssociationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceNetworkVpcAssociationRequest_serviceNetworkVpcAssociationIdentifier:
+			v.ServiceNetworkVpcAssociationIdentifier = new(string)
+			return d.ReadString(schemas.DeleteServiceNetworkVpcAssociationRequest_serviceNetworkVpcAssociationIdentifier, v.ServiceNetworkVpcAssociationIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteServiceNetworkVpcAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the association.
@@ -54,13 +78,48 @@ type DeleteServiceNetworkVpcAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceNetworkVpcAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceNetworkVpcAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceNetworkVpcAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteServiceNetworkVpcAssociationResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteServiceNetworkVpcAssociationResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteServiceNetworkVpcAssociationResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteServiceNetworkVpcAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceNetworkVpcAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceNetworkVpcAssociationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteServiceNetworkVpcAssociationResponse_arn, v.Arn)
+		case schemas.DeleteServiceNetworkVpcAssociationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteServiceNetworkVpcAssociationResponse_id, v.Id)
+		case schemas.DeleteServiceNetworkVpcAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteServiceNetworkVpcAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceNetworkVpcAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceNetworkVpcAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteServiceNetworkVpcAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceNetworkVpcAssociation, schemas.DeleteServiceNetworkVpcAssociationRequest, schemas.DeleteServiceNetworkVpcAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteServiceNetworkVpcAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceNetworkVpcAssociation, schemas.DeleteServiceNetworkVpcAssociationRequest, schemas.DeleteServiceNetworkVpcAssociationResponse), output: &DeleteServiceNetworkVpcAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,24 @@ type GetReportGroupTrendInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReportGroupTrendInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReportGroupTrendInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReportGroupTrendInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NumOfReports != nil {
+		s.WriteInt32(schemas.GetReportGroupTrendInput_numOfReports, *v.NumOfReports)
+	}
+	if v.ReportGroupArn != nil {
+		s.WriteString(schemas.GetReportGroupTrendInput_reportGroupArn, *v.ReportGroupArn)
+	}
+	if v.TrendField != "" {
+		s.WriteString(schemas.GetReportGroupTrendInput_trendField, string(v.TrendField))
+	}
+}
+
 type GetReportGroupTrendOutput struct {
 
 	// An array that contains the raw data for each report.
@@ -84,13 +104,37 @@ type GetReportGroupTrendOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReportGroupTrendOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReportGroupTrendOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReportGroupTrendOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReportGroupTrendRawDataList(s, schemas.GetReportGroupTrendOutput_rawData, v.RawData)
+	if v.Stats != nil {
+		s.WriteStruct(schemas.GetReportGroupTrendOutput_stats)
+		v.Stats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetReportGroupTrendOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReportGroupTrendOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReportGroupTrendOutput_rawData:
+			return deserializeReportGroupTrendRawDataList(d, schemas.GetReportGroupTrendOutput_rawData, &v.RawData)
+		case schemas.GetReportGroupTrendOutput_stats:
+			v.Stats = &types.ReportGroupTrendStats{}
+			return v.Stats.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReportGroupTrendMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReportGroupTrend{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReportGroupTrend, schemas.GetReportGroupTrendInput, schemas.GetReportGroupTrendOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetReportGroupTrend{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReportGroupTrend, schemas.GetReportGroupTrendInput, schemas.GetReportGroupTrendOutput), output: &GetReportGroupTrendOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,26 @@ type CreateTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTokenRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ExpirationInDays != nil {
+		s.WriteInt32(schemas.CreateTokenRequest_ExpirationInDays, *v.ExpirationInDays)
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CreateTokenRequest_LicenseArn, *v.LicenseArn)
+	}
+	serializeArnList(s, schemas.CreateTokenRequest_RoleArns, v.RoleArns)
+	serializeMaxSize3StringList(s, schemas.CreateTokenRequest_TokenProperties, v.TokenProperties)
+}
+
 type CreateTokenOutput struct {
 
 	// Refresh token, encoded as a JWT token.
@@ -72,13 +94,48 @@ type CreateTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Token != nil {
+		s.WriteString(schemas.CreateTokenResponse_Token, *v.Token)
+	}
+	if v.TokenId != nil {
+		s.WriteString(schemas.CreateTokenResponse_TokenId, *v.TokenId)
+	}
+	if v.TokenType != "" {
+		s.WriteString(schemas.CreateTokenResponse_TokenType, string(v.TokenType))
+	}
+}
+func (v *CreateTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTokenResponse_Token:
+			v.Token = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_Token, v.Token)
+		case schemas.CreateTokenResponse_TokenId:
+			v.TokenId = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_TokenId, v.TokenId)
+		case schemas.CreateTokenResponse_TokenType:
+			var ev string
+			if err := d.ReadString(schemas.CreateTokenResponse_TokenType, &ev); err != nil {
+				return err
+			}
+			v.TokenType = types.TokenType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateToken, schemas.CreateTokenRequest, schemas.CreateTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateToken, schemas.CreateTokenRequest, schemas.CreateTokenResponse), output: &CreateTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

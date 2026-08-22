@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetCapacityTaskInput struct {
 	OutpostIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCapacityTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCapacityTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCapacityTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityTaskId != nil {
+		s.WriteString(schemas.GetCapacityTaskInput_CapacityTaskId, *v.CapacityTaskId)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.GetCapacityTaskInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
 }
 
 type GetCapacityTaskOutput struct {
@@ -116,13 +133,112 @@ type GetCapacityTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCapacityTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCapacityTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCapacityTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.GetCapacityTaskOutput_AssetId, *v.AssetId)
+	}
+	if v.CapacityTaskId != nil {
+		s.WriteString(schemas.GetCapacityTaskOutput_CapacityTaskId, *v.CapacityTaskId)
+	}
+	if v.CapacityTaskStatus != "" {
+		s.WriteString(schemas.GetCapacityTaskOutput_CapacityTaskStatus, string(v.CapacityTaskStatus))
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.GetCapacityTaskOutput_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetCapacityTaskOutput_CreationDate, *v.CreationDate)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.GetCapacityTaskOutput_DryRun, v.DryRun)
+	}
+	if v.Failed != nil {
+		s.WriteStruct(schemas.GetCapacityTaskOutput_Failed)
+		v.Failed.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstancesToExclude != nil {
+		s.WriteStruct(schemas.GetCapacityTaskOutput_InstancesToExclude)
+		v.InstancesToExclude.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.GetCapacityTaskOutput_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.OrderId != nil {
+		s.WriteString(schemas.GetCapacityTaskOutput_OrderId, *v.OrderId)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.GetCapacityTaskOutput_OutpostId, *v.OutpostId)
+	}
+	serializeRequestedInstancePools(s, schemas.GetCapacityTaskOutput_RequestedInstancePools, v.RequestedInstancePools)
+	if v.TaskActionOnBlockingInstances != "" {
+		s.WriteString(schemas.GetCapacityTaskOutput_TaskActionOnBlockingInstances, string(v.TaskActionOnBlockingInstances))
+	}
+}
+func (v *GetCapacityTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCapacityTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCapacityTaskOutput_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.GetCapacityTaskOutput_AssetId, v.AssetId)
+		case schemas.GetCapacityTaskOutput_CapacityTaskId:
+			v.CapacityTaskId = new(string)
+			return d.ReadString(schemas.GetCapacityTaskOutput_CapacityTaskId, v.CapacityTaskId)
+		case schemas.GetCapacityTaskOutput_CapacityTaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetCapacityTaskOutput_CapacityTaskStatus, &ev); err != nil {
+				return err
+			}
+			v.CapacityTaskStatus = types.CapacityTaskStatus(ev)
+			return nil
+		case schemas.GetCapacityTaskOutput_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.GetCapacityTaskOutput_CompletionDate, v.CompletionDate)
+		case schemas.GetCapacityTaskOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetCapacityTaskOutput_CreationDate, v.CreationDate)
+		case schemas.GetCapacityTaskOutput_DryRun:
+			return d.ReadBool(schemas.GetCapacityTaskOutput_DryRun, &v.DryRun)
+		case schemas.GetCapacityTaskOutput_Failed:
+			v.Failed = &types.CapacityTaskFailure{}
+			return v.Failed.Deserialize(d)
+		case schemas.GetCapacityTaskOutput_InstancesToExclude:
+			v.InstancesToExclude = &types.InstancesToExclude{}
+			return v.InstancesToExclude.Deserialize(d)
+		case schemas.GetCapacityTaskOutput_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.GetCapacityTaskOutput_LastModifiedDate, v.LastModifiedDate)
+		case schemas.GetCapacityTaskOutput_OrderId:
+			v.OrderId = new(string)
+			return d.ReadString(schemas.GetCapacityTaskOutput_OrderId, v.OrderId)
+		case schemas.GetCapacityTaskOutput_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.GetCapacityTaskOutput_OutpostId, v.OutpostId)
+		case schemas.GetCapacityTaskOutput_RequestedInstancePools:
+			return deserializeRequestedInstancePools(d, schemas.GetCapacityTaskOutput_RequestedInstancePools, &v.RequestedInstancePools)
+		case schemas.GetCapacityTaskOutput_TaskActionOnBlockingInstances:
+			var ev string
+			if err := d.ReadString(schemas.GetCapacityTaskOutput_TaskActionOnBlockingInstances, &ev); err != nil {
+				return err
+			}
+			v.TaskActionOnBlockingInstances = types.TaskActionOnBlockingInstances(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCapacityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCapacityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapacityTask, schemas.GetCapacityTaskInput, schemas.GetCapacityTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCapacityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapacityTask, schemas.GetCapacityTaskInput, schemas.GetCapacityTaskOutput), output: &GetCapacityTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -50,6 +52,27 @@ type GetSessionInput struct {
 	SessionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetSessionRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetSessionRequest_jobId, *v.JobId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetSessionRequest_queueId, *v.QueueId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionRequest_sessionId, *v.SessionId)
+	}
 }
 
 // Session lifecycle/status fields, ordered after IDs in session shapes.
@@ -109,13 +132,112 @@ type GetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetSessionResponse_endedAt, *v.EndedAt)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetSessionResponse_fleetId, *v.FleetId)
+	}
+	if v.HostProperties != nil {
+		s.WriteStruct(schemas.GetSessionResponse_hostProperties)
+		v.HostProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifecycleStatus != "" {
+		s.WriteString(schemas.GetSessionResponse_lifecycleStatus, string(v.LifecycleStatus))
+	}
+	if v.Log != nil {
+		s.WriteStruct(schemas.GetSessionResponse_log)
+		v.Log.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetSessionResponse_startedAt, *v.StartedAt)
+	}
+	if v.TargetLifecycleStatus != "" {
+		s.WriteString(schemas.GetSessionResponse_targetLifecycleStatus, string(v.TargetLifecycleStatus))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetSessionResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetSessionResponse_updatedBy, *v.UpdatedBy)
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.GetSessionResponse_workerId, *v.WorkerId)
+	}
+	if v.WorkerLog != nil {
+		s.WriteStruct(schemas.GetSessionResponse_workerLog)
+		v.WorkerLog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSessionResponse_endedAt, v.EndedAt)
+		case schemas.GetSessionResponse_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GetSessionResponse_fleetId, v.FleetId)
+		case schemas.GetSessionResponse_hostProperties:
+			v.HostProperties = &types.HostPropertiesResponse{}
+			return v.HostProperties.Deserialize(d)
+		case schemas.GetSessionResponse_lifecycleStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionResponse_lifecycleStatus, &ev); err != nil {
+				return err
+			}
+			v.LifecycleStatus = types.SessionLifecycleStatus(ev)
+			return nil
+		case schemas.GetSessionResponse_log:
+			v.Log = &types.LogConfiguration{}
+			return v.Log.Deserialize(d)
+		case schemas.GetSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetSessionResponse_sessionId, v.SessionId)
+		case schemas.GetSessionResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSessionResponse_startedAt, v.StartedAt)
+		case schemas.GetSessionResponse_targetLifecycleStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionResponse_targetLifecycleStatus, &ev); err != nil {
+				return err
+			}
+			v.TargetLifecycleStatus = types.SessionLifecycleTargetStatus(ev)
+			return nil
+		case schemas.GetSessionResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSessionResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetSessionResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetSessionResponse_updatedBy, v.UpdatedBy)
+		case schemas.GetSessionResponse_workerId:
+			v.WorkerId = new(string)
+			return d.ReadString(schemas.GetSessionResponse_workerId, v.WorkerId)
+		case schemas.GetSessionResponse_workerLog:
+			v.WorkerLog = &types.LogConfiguration{}
+			return v.WorkerLog.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse), output: &GetSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

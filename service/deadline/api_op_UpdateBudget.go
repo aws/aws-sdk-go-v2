@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -79,6 +81,39 @@ type UpdateBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBudgetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBudgetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBudgetActionsToAdd(s, schemas.UpdateBudgetRequest_actionsToAdd, v.ActionsToAdd)
+	serializeBudgetActionsToRemove(s, schemas.UpdateBudgetRequest_actionsToRemove, v.ActionsToRemove)
+	if v.ApproximateDollarLimit != nil {
+		s.WriteFloat32(schemas.UpdateBudgetRequest_approximateDollarLimit, *v.ApproximateDollarLimit)
+	}
+	if v.BudgetId != nil {
+		s.WriteString(schemas.UpdateBudgetRequest_budgetId, *v.BudgetId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateBudgetRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBudgetRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateBudgetRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateBudgetRequest_farmId, *v.FarmId)
+	}
+	serializeBudgetSchedule(s, schemas.UpdateBudgetRequest_schedule, v.Schedule)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateBudgetRequest_status, string(v.Status))
+	}
+}
+
 type UpdateBudgetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -86,13 +121,26 @@ type UpdateBudgetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBudgetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBudgetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBudgetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateBudgetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBudgetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBudget, schemas.UpdateBudgetRequest, schemas.UpdateBudgetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBudget, schemas.UpdateBudgetRequest, schemas.UpdateBudgetResponse), output: &UpdateBudgetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

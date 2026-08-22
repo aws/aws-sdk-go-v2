@@ -5,7 +5,9 @@ package signer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type ListSigningPlatformsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningPlatformsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningPlatformsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningPlatformsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteString(schemas.ListSigningPlatformsRequest_category, *v.Category)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSigningPlatformsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningPlatformsRequest_nextToken, *v.NextToken)
+	}
+	if v.Partner != nil {
+		s.WriteString(schemas.ListSigningPlatformsRequest_partner, *v.Partner)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.ListSigningPlatformsRequest_target, *v.Target)
+	}
+}
+
 type ListSigningPlatformsOutput struct {
 
 	// Value for specifying the next set of paginated results to return.
@@ -67,13 +93,35 @@ type ListSigningPlatformsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningPlatformsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningPlatformsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningPlatformsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningPlatformsResponse_nextToken, *v.NextToken)
+	}
+	serializeSigningPlatforms(s, schemas.ListSigningPlatformsResponse_platforms, v.Platforms)
+}
+func (v *ListSigningPlatformsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSigningPlatformsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSigningPlatformsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSigningPlatformsResponse_nextToken, v.NextToken)
+		case schemas.ListSigningPlatformsResponse_platforms:
+			return deserializeSigningPlatforms(d, schemas.ListSigningPlatformsResponse_platforms, &v.Platforms)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSigningPlatformsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSigningPlatforms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningPlatforms, schemas.ListSigningPlatformsRequest, schemas.ListSigningPlatformsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSigningPlatforms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningPlatforms, schemas.ListSigningPlatformsRequest, schemas.ListSigningPlatformsResponse), output: &ListSigningPlatformsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

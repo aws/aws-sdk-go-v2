@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeDirectoryDataAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectoryDataAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectoryDataAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectoryDataAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeDirectoryDataAccessRequest_DirectoryId, *v.DirectoryId)
+	}
+}
+
 type DescribeDirectoryDataAccessOutput struct {
 
 	// The current status of data access through the Directory Service Data API.
@@ -46,13 +60,36 @@ type DescribeDirectoryDataAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectoryDataAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectoryDataAccessResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectoryDataAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessStatus != "" {
+		s.WriteString(schemas.DescribeDirectoryDataAccessResult_DataAccessStatus, string(v.DataAccessStatus))
+	}
+}
+func (v *DescribeDirectoryDataAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDirectoryDataAccessResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDirectoryDataAccessResult_DataAccessStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDirectoryDataAccessResult_DataAccessStatus, &ev); err != nil {
+				return err
+			}
+			v.DataAccessStatus = types.DataAccessStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDirectoryDataAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDirectoryDataAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectoryDataAccess, schemas.DescribeDirectoryDataAccessRequest, schemas.DescribeDirectoryDataAccessResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDirectoryDataAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectoryDataAccess, schemas.DescribeDirectoryDataAccessRequest, schemas.DescribeDirectoryDataAccessResult), output: &DescribeDirectoryDataAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

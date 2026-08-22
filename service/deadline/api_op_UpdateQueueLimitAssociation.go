@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,27 @@ type UpdateQueueLimitAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueLimitAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueLimitAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueLimitAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateQueueLimitAssociationRequest_farmId, *v.FarmId)
+	}
+	if v.LimitId != nil {
+		s.WriteString(schemas.UpdateQueueLimitAssociationRequest_limitId, *v.LimitId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.UpdateQueueLimitAssociationRequest_queueId, *v.QueueId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateQueueLimitAssociationRequest_status, string(v.Status))
+	}
+}
+
 type UpdateQueueLimitAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +86,26 @@ type UpdateQueueLimitAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueLimitAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueLimitAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueLimitAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateQueueLimitAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQueueLimitAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQueueLimitAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueLimitAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueLimitAssociation, schemas.UpdateQueueLimitAssociationRequest, schemas.UpdateQueueLimitAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQueueLimitAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueLimitAssociation, schemas.UpdateQueueLimitAssociationRequest, schemas.UpdateQueueLimitAssociationResponse), output: &UpdateQueueLimitAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

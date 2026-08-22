@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,23 @@ type DescribeWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkflowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkflowExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkflowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeWorkflowExecutionInput_domain, *v.Domain)
+	}
+	if v.Execution != nil {
+		s.WriteStruct(schemas.DescribeWorkflowExecutionInput_execution)
+		v.Execution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains details about a workflow execution.
 type DescribeWorkflowExecutionOutput struct {
 
@@ -99,13 +118,62 @@ type DescribeWorkflowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkflowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkflowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionConfiguration != nil {
+		s.WriteStruct(schemas.WorkflowExecutionDetail_executionConfiguration)
+		v.ExecutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionInfo != nil {
+		s.WriteStruct(schemas.WorkflowExecutionDetail_executionInfo)
+		v.ExecutionInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestActivityTaskTimestamp != nil {
+		s.WriteTime(schemas.WorkflowExecutionDetail_latestActivityTaskTimestamp, *v.LatestActivityTaskTimestamp)
+	}
+	if v.LatestExecutionContext != nil {
+		s.WriteString(schemas.WorkflowExecutionDetail_latestExecutionContext, *v.LatestExecutionContext)
+	}
+	if v.OpenCounts != nil {
+		s.WriteStruct(schemas.WorkflowExecutionDetail_openCounts)
+		v.OpenCounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWorkflowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionDetail_executionConfiguration:
+			v.ExecutionConfiguration = &types.WorkflowExecutionConfiguration{}
+			return v.ExecutionConfiguration.Deserialize(d)
+		case schemas.WorkflowExecutionDetail_executionInfo:
+			v.ExecutionInfo = &types.WorkflowExecutionInfo{}
+			return v.ExecutionInfo.Deserialize(d)
+		case schemas.WorkflowExecutionDetail_latestActivityTaskTimestamp:
+			v.LatestActivityTaskTimestamp = new(time.Time)
+			return d.ReadTime(schemas.WorkflowExecutionDetail_latestActivityTaskTimestamp, v.LatestActivityTaskTimestamp)
+		case schemas.WorkflowExecutionDetail_latestExecutionContext:
+			v.LatestExecutionContext = new(string)
+			return d.ReadString(schemas.WorkflowExecutionDetail_latestExecutionContext, v.LatestExecutionContext)
+		case schemas.WorkflowExecutionDetail_openCounts:
+			v.OpenCounts = &types.WorkflowExecutionOpenCounts{}
+			return v.OpenCounts.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkflowExecution, schemas.DescribeWorkflowExecutionInput, schemas.WorkflowExecutionDetail)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkflowExecution, schemas.DescribeWorkflowExecutionInput, schemas.WorkflowExecutionDetail), output: &DescribeWorkflowExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

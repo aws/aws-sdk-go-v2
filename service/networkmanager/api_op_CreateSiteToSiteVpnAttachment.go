@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,28 @@ type CreateSiteToSiteVpnAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSiteToSiteVpnAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSiteToSiteVpnAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSiteToSiteVpnAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+	serializeTagList(s, schemas.CreateSiteToSiteVpnAttachmentRequest_Tags, v.Tags)
+	if v.VpnConnectionArn != nil {
+		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_VpnConnectionArn, *v.VpnConnectionArn)
+	}
+}
+
 type CreateSiteToSiteVpnAttachmentOutput struct {
 
 	// Details about a site-to-site VPN attachment.
@@ -62,13 +86,34 @@ type CreateSiteToSiteVpnAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSiteToSiteVpnAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSiteToSiteVpnAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSiteToSiteVpnAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SiteToSiteVpnAttachment != nil {
+		s.WriteStruct(schemas.CreateSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment)
+		v.SiteToSiteVpnAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSiteToSiteVpnAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSiteToSiteVpnAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment:
+			v.SiteToSiteVpnAttachment = &types.SiteToSiteVpnAttachment{}
+			return v.SiteToSiteVpnAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSiteToSiteVpnAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSiteToSiteVpnAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSiteToSiteVpnAttachment, schemas.CreateSiteToSiteVpnAttachmentRequest, schemas.CreateSiteToSiteVpnAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSiteToSiteVpnAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSiteToSiteVpnAttachment, schemas.CreateSiteToSiteVpnAttachmentRequest, schemas.CreateSiteToSiteVpnAttachmentResponse), output: &CreateSiteToSiteVpnAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

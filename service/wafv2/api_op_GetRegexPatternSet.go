@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type GetRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegexPatternSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegexPatternSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegexPatternSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetRegexPatternSetRequest_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetRegexPatternSetRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetRegexPatternSetRequest_Scope, string(v.Scope))
+	}
+}
+
 type GetRegexPatternSetOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list
@@ -74,13 +94,40 @@ type GetRegexPatternSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegexPatternSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegexPatternSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegexPatternSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LockToken != nil {
+		s.WriteString(schemas.GetRegexPatternSetResponse_LockToken, *v.LockToken)
+	}
+	if v.RegexPatternSet != nil {
+		s.WriteStruct(schemas.GetRegexPatternSetResponse_RegexPatternSet)
+		v.RegexPatternSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRegexPatternSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRegexPatternSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRegexPatternSetResponse_LockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.GetRegexPatternSetResponse_LockToken, v.LockToken)
+		case schemas.GetRegexPatternSetResponse_RegexPatternSet:
+			v.RegexPatternSet = &types.RegexPatternSet{}
+			return v.RegexPatternSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegexPatternSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegexPatternSet, schemas.GetRegexPatternSetRequest, schemas.GetRegexPatternSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRegexPatternSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegexPatternSet, schemas.GetRegexPatternSetRequest, schemas.GetRegexPatternSetResponse), output: &GetRegexPatternSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

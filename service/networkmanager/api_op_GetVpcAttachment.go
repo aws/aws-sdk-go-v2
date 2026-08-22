@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetVpcAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVpcAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVpcAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVpcAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.GetVpcAttachmentRequest_AttachmentId, *v.AttachmentId)
+	}
+}
+
 type GetVpcAttachmentOutput struct {
 
 	// Returns details about a VPC attachment.
@@ -45,13 +59,34 @@ type GetVpcAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVpcAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVpcAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVpcAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcAttachment != nil {
+		s.WriteStruct(schemas.GetVpcAttachmentResponse_VpcAttachment)
+		v.VpcAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetVpcAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVpcAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVpcAttachmentResponse_VpcAttachment:
+			v.VpcAttachment = &types.VpcAttachment{}
+			return v.VpcAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVpcAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVpcAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVpcAttachment, schemas.GetVpcAttachmentRequest, schemas.GetVpcAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVpcAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVpcAttachment, schemas.GetVpcAttachmentRequest, schemas.GetVpcAttachmentResponse), output: &GetVpcAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

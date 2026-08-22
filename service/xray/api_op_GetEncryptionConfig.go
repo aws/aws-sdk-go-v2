@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetEncryptionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEncryptionConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEncryptionConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEncryptionConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetEncryptionConfigOutput struct {
 
 	// The encryption configuration document.
@@ -39,13 +50,34 @@ type GetEncryptionConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEncryptionConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEncryptionConfigResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEncryptionConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.GetEncryptionConfigResult_EncryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEncryptionConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEncryptionConfigResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEncryptionConfigResult_EncryptionConfig:
+			v.EncryptionConfig = &types.EncryptionConfig{}
+			return v.EncryptionConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEncryptionConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEncryptionConfig, schemas.GetEncryptionConfigRequest, schemas.GetEncryptionConfigResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEncryptionConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEncryptionConfig, schemas.GetEncryptionConfigRequest, schemas.GetEncryptionConfigResult), output: &GetEncryptionConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

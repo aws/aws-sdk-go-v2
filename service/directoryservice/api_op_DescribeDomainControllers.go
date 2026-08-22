@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type DescribeDomainControllersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainControllersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainControllersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainControllersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeDomainControllersRequest_DirectoryId, *v.DirectoryId)
+	}
+	serializeDomainControllerIds(s, schemas.DescribeDomainControllersRequest_DomainControllerIds, v.DomainControllerIds)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeDomainControllersRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDomainControllersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeDomainControllersOutput struct {
 
 	// List of the DomainController objects that were retrieved.
@@ -62,13 +83,35 @@ type DescribeDomainControllersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainControllersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainControllersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainControllersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainControllers(s, schemas.DescribeDomainControllersResult_DomainControllers, v.DomainControllers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDomainControllersResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDomainControllersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDomainControllersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDomainControllersResult_DomainControllers:
+			return deserializeDomainControllers(d, schemas.DescribeDomainControllersResult_DomainControllers, &v.DomainControllers)
+		case schemas.DescribeDomainControllersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDomainControllersResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDomainControllersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDomainControllers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainControllers, schemas.DescribeDomainControllersRequest, schemas.DescribeDomainControllersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDomainControllers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainControllers, schemas.DescribeDomainControllersRequest, schemas.DescribeDomainControllersResult), output: &DescribeDomainControllersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

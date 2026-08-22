@@ -5,7 +5,9 @@ package codepipeline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,29 @@ type ListPipelineExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListPipelineExecutionsInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPipelineExecutionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineExecutionsInput_nextToken, *v.NextToken)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.ListPipelineExecutionsInput_pipelineName, *v.PipelineName)
+	}
+}
+
 // Represents the output of a ListPipelineExecutions action.
 type ListPipelineExecutionsOutput struct {
 
@@ -71,13 +96,35 @@ type ListPipelineExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineExecutionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineExecutionsOutput_nextToken, *v.NextToken)
+	}
+	serializePipelineExecutionSummaryList(s, schemas.ListPipelineExecutionsOutput_pipelineExecutionSummaries, v.PipelineExecutionSummaries)
+}
+func (v *ListPipelineExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPipelineExecutionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPipelineExecutionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPipelineExecutionsOutput_nextToken, v.NextToken)
+		case schemas.ListPipelineExecutionsOutput_pipelineExecutionSummaries:
+			return deserializePipelineExecutionSummaryList(d, schemas.ListPipelineExecutionsOutput_pipelineExecutionSummaries, &v.PipelineExecutionSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPipelineExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPipelineExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineExecutions, schemas.ListPipelineExecutionsInput, schemas.ListPipelineExecutionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPipelineExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineExecutions, schemas.ListPipelineExecutionsInput, schemas.ListPipelineExecutionsOutput), output: &ListPipelineExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

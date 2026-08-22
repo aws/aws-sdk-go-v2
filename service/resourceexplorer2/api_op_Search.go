@@ -5,7 +5,9 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,46 @@ type SearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchInput_NextToken, *v.NextToken)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.SearchInput_QueryString, *v.QueryString)
+	}
+	if v.ViewArn != nil {
+		s.WriteString(schemas.SearchInput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *SearchInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.SearchInput_MaxResults, v.MaxResults)
+		case schemas.SearchInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchInput_NextToken, v.NextToken)
+		case schemas.SearchInput_QueryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.SearchInput_QueryString, v.QueryString)
+		case schemas.SearchInput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.SearchInput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
+
 type SearchOutput struct {
 
 	// The number of resources that match the query.
@@ -116,13 +158,49 @@ type SearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteStruct(schemas.SearchOutput_Count)
+		v.Count.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchOutput_NextToken, *v.NextToken)
+	}
+	serializeResourceList(s, schemas.SearchOutput_Resources, v.Resources)
+	if v.ViewArn != nil {
+		s.WriteString(schemas.SearchOutput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *SearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchOutput_Count:
+			v.Count = &types.ResourceCount{}
+			return v.Count.Deserialize(d)
+		case schemas.SearchOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchOutput_NextToken, v.NextToken)
+		case schemas.SearchOutput_Resources:
+			return deserializeResourceList(d, schemas.SearchOutput_Resources, &v.Resources)
+		case schemas.SearchOutput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.SearchOutput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Search, schemas.SearchInput, schemas.SearchOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Search, schemas.SearchInput, schemas.SearchOutput), output: &SearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

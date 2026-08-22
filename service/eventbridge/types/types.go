@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -40,6 +42,84 @@ type ApiDestination struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApiDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiDestinationArn != nil {
+		s.WriteString(schemas.ApiDestination_ApiDestinationArn, *v.ApiDestinationArn)
+	}
+	if v.ApiDestinationState != "" {
+		s.WriteString(schemas.ApiDestination_ApiDestinationState, string(v.ApiDestinationState))
+	}
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.ApiDestination_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ApiDestination_CreationTime, *v.CreationTime)
+	}
+	if v.HttpMethod != "" {
+		s.WriteString(schemas.ApiDestination_HttpMethod, string(v.HttpMethod))
+	}
+	if v.InvocationEndpoint != nil {
+		s.WriteString(schemas.ApiDestination_InvocationEndpoint, *v.InvocationEndpoint)
+	}
+	if v.InvocationRateLimitPerSecond != nil {
+		s.WriteInt32(schemas.ApiDestination_InvocationRateLimitPerSecond, *v.InvocationRateLimitPerSecond)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ApiDestination_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ApiDestination_Name, *v.Name)
+	}
+}
+func (v *ApiDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiDestination_ApiDestinationArn:
+			v.ApiDestinationArn = new(string)
+			return d.ReadString(schemas.ApiDestination_ApiDestinationArn, v.ApiDestinationArn)
+		case schemas.ApiDestination_ApiDestinationState:
+			var ev string
+			if err := d.ReadString(schemas.ApiDestination_ApiDestinationState, &ev); err != nil {
+				return err
+			}
+			v.ApiDestinationState = ApiDestinationState(ev)
+			return nil
+		case schemas.ApiDestination_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.ApiDestination_ConnectionArn, v.ConnectionArn)
+		case schemas.ApiDestination_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ApiDestination_CreationTime, v.CreationTime)
+		case schemas.ApiDestination_HttpMethod:
+			var ev string
+			if err := d.ReadString(schemas.ApiDestination_HttpMethod, &ev); err != nil {
+				return err
+			}
+			v.HttpMethod = ApiDestinationHttpMethod(ev)
+			return nil
+		case schemas.ApiDestination_InvocationEndpoint:
+			v.InvocationEndpoint = new(string)
+			return d.ReadString(schemas.ApiDestination_InvocationEndpoint, v.InvocationEndpoint)
+		case schemas.ApiDestination_InvocationRateLimitPerSecond:
+			v.InvocationRateLimitPerSecond = new(int32)
+			return d.ReadInt32(schemas.ApiDestination_InvocationRateLimitPerSecond, v.InvocationRateLimitPerSecond)
+		case schemas.ApiDestination_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ApiDestination_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ApiDestination_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ApiDestination_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Contains the GraphQL operation to be parsed and executed, if the event target
 // is an AppSync API.
 type AppSyncParameters struct {
@@ -53,6 +133,28 @@ type AppSyncParameters struct {
 	GraphQLOperation *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AppSyncParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AppSyncParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AppSyncParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphQLOperation != nil {
+		s.WriteString(schemas.AppSyncParameters_GraphQLOperation, *v.GraphQLOperation)
+	}
+}
+func (v *AppSyncParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AppSyncParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AppSyncParameters_GraphQLOperation:
+			v.GraphQLOperation = new(string)
+			return d.ReadString(schemas.AppSyncParameters_GraphQLOperation, v.GraphQLOperation)
+		}
+		return nil
+	})
 }
 
 // An Archive object that contains details about an archive.
@@ -86,6 +188,72 @@ type Archive struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Archive) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Archive)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Archive) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveName != nil {
+		s.WriteString(schemas.Archive_ArchiveName, *v.ArchiveName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Archive_CreationTime, *v.CreationTime)
+	}
+	if v.EventCount != 0 {
+		s.WriteInt64(schemas.Archive_EventCount, v.EventCount)
+	}
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.Archive_EventSourceArn, *v.EventSourceArn)
+	}
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.Archive_RetentionDays, *v.RetentionDays)
+	}
+	if v.SizeBytes != 0 {
+		s.WriteInt64(schemas.Archive_SizeBytes, v.SizeBytes)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Archive_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.Archive_StateReason, *v.StateReason)
+	}
+}
+func (v *Archive) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Archive, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Archive_ArchiveName:
+			v.ArchiveName = new(string)
+			return d.ReadString(schemas.Archive_ArchiveName, v.ArchiveName)
+		case schemas.Archive_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Archive_CreationTime, v.CreationTime)
+		case schemas.Archive_EventCount:
+			return d.ReadInt64(schemas.Archive_EventCount, &v.EventCount)
+		case schemas.Archive_EventSourceArn:
+			v.EventSourceArn = new(string)
+			return d.ReadString(schemas.Archive_EventSourceArn, v.EventSourceArn)
+		case schemas.Archive_RetentionDays:
+			v.RetentionDays = new(int32)
+			return d.ReadInt32(schemas.Archive_RetentionDays, v.RetentionDays)
+		case schemas.Archive_SizeBytes:
+			return d.ReadInt64(schemas.Archive_SizeBytes, &v.SizeBytes)
+		case schemas.Archive_State:
+			var ev string
+			if err := d.ReadString(schemas.Archive_State, &ev); err != nil {
+				return err
+			}
+			v.State = ArchiveState(ev)
+			return nil
+		case schemas.Archive_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.Archive_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
+
 // This structure specifies the VPC subnets and security groups for the task, and
 // whether a public IP address is to be used. This structure is relevant only for
 // ECS tasks that use the awsvpc network mode.
@@ -111,6 +279,38 @@ type AwsVpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsVpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsVpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignPublicIp != "" {
+		s.WriteString(schemas.AwsVpcConfiguration_AssignPublicIp, string(v.AssignPublicIp))
+	}
+	serializeStringList(s, schemas.AwsVpcConfiguration_SecurityGroups, v.SecurityGroups)
+	serializeStringList(s, schemas.AwsVpcConfiguration_Subnets, v.Subnets)
+}
+func (v *AwsVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsVpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsVpcConfiguration_AssignPublicIp:
+			var ev string
+			if err := d.ReadString(schemas.AwsVpcConfiguration_AssignPublicIp, &ev); err != nil {
+				return err
+			}
+			v.AssignPublicIp = AssignPublicIp(ev)
+			return nil
+		case schemas.AwsVpcConfiguration_SecurityGroups:
+			return deserializeStringList(d, schemas.AwsVpcConfiguration_SecurityGroups, &v.SecurityGroups)
+		case schemas.AwsVpcConfiguration_Subnets:
+			return deserializeStringList(d, schemas.AwsVpcConfiguration_Subnets, &v.Subnets)
+		}
+		return nil
+	})
+}
+
 // The array properties for the submitted job, such as the size of the array. The
 // array size can be between 2 and 10,000. If you specify array properties for a
 // job, it becomes an array job. This parameter is used only if the target is an
@@ -122,6 +322,27 @@ type BatchArrayProperties struct {
 	Size int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchArrayProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchArrayProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchArrayProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Size != 0 {
+		s.WriteInt32(schemas.BatchArrayProperties_Size, v.Size)
+	}
+}
+func (v *BatchArrayProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchArrayProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchArrayProperties_Size:
+			return d.ReadInt32(schemas.BatchArrayProperties_Size, &v.Size)
+		}
+		return nil
+	})
 }
 
 // The custom parameters to be used when the target is an Batch job.
@@ -153,6 +374,50 @@ type BatchParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArrayProperties != nil {
+		s.WriteStruct(schemas.BatchParameters_ArrayProperties)
+		v.ArrayProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobDefinition != nil {
+		s.WriteString(schemas.BatchParameters_JobDefinition, *v.JobDefinition)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.BatchParameters_JobName, *v.JobName)
+	}
+	if v.RetryStrategy != nil {
+		s.WriteStruct(schemas.BatchParameters_RetryStrategy)
+		v.RetryStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchParameters_ArrayProperties:
+			v.ArrayProperties = &BatchArrayProperties{}
+			return v.ArrayProperties.Deserialize(d)
+		case schemas.BatchParameters_JobDefinition:
+			v.JobDefinition = new(string)
+			return d.ReadString(schemas.BatchParameters_JobDefinition, v.JobDefinition)
+		case schemas.BatchParameters_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.BatchParameters_JobName, v.JobName)
+		case schemas.BatchParameters_RetryStrategy:
+			v.RetryStrategy = &BatchRetryStrategy{}
+			return v.RetryStrategy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The retry strategy to use for failed jobs, if the target is an Batch job. If
 // you specify a retry strategy here, it overrides the retry strategy defined in
 // the job definition.
@@ -163,6 +428,27 @@ type BatchRetryStrategy struct {
 	Attempts int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchRetryStrategy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRetryStrategy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRetryStrategy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attempts != 0 {
+		s.WriteInt32(schemas.BatchRetryStrategy_Attempts, v.Attempts)
+	}
+}
+func (v *BatchRetryStrategy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchRetryStrategy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchRetryStrategy_Attempts:
+			return d.ReadInt32(schemas.BatchRetryStrategy_Attempts, &v.Attempts)
+		}
+		return nil
+	})
 }
 
 // The details of a capacity provider strategy. To learn more, see [CapacityProviderStrategyItem] in the Amazon
@@ -188,6 +474,38 @@ type CapacityProviderStrategyItem struct {
 	Weight int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CapacityProviderStrategyItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityProviderStrategyItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityProviderStrategyItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Base != 0 {
+		s.WriteInt32(schemas.CapacityProviderStrategyItem_base, v.Base)
+	}
+	if v.CapacityProvider != nil {
+		s.WriteString(schemas.CapacityProviderStrategyItem_capacityProvider, *v.CapacityProvider)
+	}
+	if v.Weight != 0 {
+		s.WriteInt32(schemas.CapacityProviderStrategyItem_weight, v.Weight)
+	}
+}
+func (v *CapacityProviderStrategyItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityProviderStrategyItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityProviderStrategyItem_base:
+			return d.ReadInt32(schemas.CapacityProviderStrategyItem_base, &v.Base)
+		case schemas.CapacityProviderStrategyItem_capacityProvider:
+			v.CapacityProvider = new(string)
+			return d.ReadString(schemas.CapacityProviderStrategyItem_capacityProvider, v.CapacityProvider)
+		case schemas.CapacityProviderStrategyItem_weight:
+			return d.ReadInt32(schemas.CapacityProviderStrategyItem_weight, &v.Weight)
+		}
+		return nil
+	})
 }
 
 // A JSON string which you can use to limit the event bus permissions you are
@@ -222,6 +540,40 @@ type Condition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Condition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Condition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Condition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Condition_Key, *v.Key)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Condition_Type, *v.Type)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Condition_Value, *v.Value)
+	}
+}
+func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Condition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Condition_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Condition_Key, v.Key)
+		case schemas.Condition_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Condition_Type, v.Type)
+		case schemas.Condition_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Condition_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Contains information about a connection.
 type Connection struct {
 
@@ -254,6 +606,78 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Connection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationType != "" {
+		s.WriteString(schemas.Connection_AuthorizationType, string(v.AuthorizationType))
+	}
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.Connection_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.Connection_ConnectionState, string(v.ConnectionState))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Connection_CreationTime, *v.CreationTime)
+	}
+	if v.LastAuthorizedTime != nil {
+		s.WriteTime(schemas.Connection_LastAuthorizedTime, *v.LastAuthorizedTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.Connection_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Connection_Name, *v.Name)
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.Connection_StateReason, *v.StateReason)
+	}
+}
+func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connection_AuthorizationType:
+			var ev string
+			if err := d.ReadString(schemas.Connection_AuthorizationType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizationType = ConnectionAuthorizationType(ev)
+			return nil
+		case schemas.Connection_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.Connection_ConnectionArn, v.ConnectionArn)
+		case schemas.Connection_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.Connection_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = ConnectionState(ev)
+			return nil
+		case schemas.Connection_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Connection_CreationTime, v.CreationTime)
+		case schemas.Connection_LastAuthorizedTime:
+			v.LastAuthorizedTime = new(time.Time)
+			return d.ReadTime(schemas.Connection_LastAuthorizedTime, v.LastAuthorizedTime)
+		case schemas.Connection_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.Connection_LastModifiedTime, v.LastModifiedTime)
+		case schemas.Connection_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Connection_Name, v.Name)
+		case schemas.Connection_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.Connection_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
+
 // Contains the authorization parameters for the connection if API Key is
 // specified as the authorization type.
 type ConnectionApiKeyAuthResponseParameters struct {
@@ -262,6 +686,28 @@ type ConnectionApiKeyAuthResponseParameters struct {
 	ApiKeyName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectionApiKeyAuthResponseParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionApiKeyAuthResponseParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionApiKeyAuthResponseParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeyName != nil {
+		s.WriteString(schemas.ConnectionApiKeyAuthResponseParameters_ApiKeyName, *v.ApiKeyName)
+	}
+}
+func (v *ConnectionApiKeyAuthResponseParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionApiKeyAuthResponseParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionApiKeyAuthResponseParameters_ApiKeyName:
+			v.ApiKeyName = new(string)
+			return d.ReadString(schemas.ConnectionApiKeyAuthResponseParameters_ApiKeyName, v.ApiKeyName)
+		}
+		return nil
+	})
 }
 
 // Tthe authorization parameters to use for the connection.
@@ -291,6 +737,62 @@ type ConnectionAuthResponseParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionAuthResponseParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionAuthResponseParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionAuthResponseParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeyAuthParameters != nil {
+		s.WriteStruct(schemas.ConnectionAuthResponseParameters_ApiKeyAuthParameters)
+		v.ApiKeyAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BasicAuthParameters != nil {
+		s.WriteStruct(schemas.ConnectionAuthResponseParameters_BasicAuthParameters)
+		v.BasicAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectivityParameters != nil {
+		s.WriteStruct(schemas.ConnectionAuthResponseParameters_ConnectivityParameters)
+		v.ConnectivityParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvocationHttpParameters != nil {
+		s.WriteStruct(schemas.ConnectionAuthResponseParameters_InvocationHttpParameters)
+		v.InvocationHttpParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OAuthParameters != nil {
+		s.WriteStruct(schemas.ConnectionAuthResponseParameters_OAuthParameters)
+		v.OAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectionAuthResponseParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionAuthResponseParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionAuthResponseParameters_ApiKeyAuthParameters:
+			v.ApiKeyAuthParameters = &ConnectionApiKeyAuthResponseParameters{}
+			return v.ApiKeyAuthParameters.Deserialize(d)
+		case schemas.ConnectionAuthResponseParameters_BasicAuthParameters:
+			v.BasicAuthParameters = &ConnectionBasicAuthResponseParameters{}
+			return v.BasicAuthParameters.Deserialize(d)
+		case schemas.ConnectionAuthResponseParameters_ConnectivityParameters:
+			v.ConnectivityParameters = &DescribeConnectionConnectivityParameters{}
+			return v.ConnectivityParameters.Deserialize(d)
+		case schemas.ConnectionAuthResponseParameters_InvocationHttpParameters:
+			v.InvocationHttpParameters = &ConnectionHttpParameters{}
+			return v.InvocationHttpParameters.Deserialize(d)
+		case schemas.ConnectionAuthResponseParameters_OAuthParameters:
+			v.OAuthParameters = &ConnectionOAuthResponseParameters{}
+			return v.OAuthParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The authorization parameters for the connection if Basic is specified as the
 // authorization type.
 type ConnectionBasicAuthResponseParameters struct {
@@ -299,6 +801,28 @@ type ConnectionBasicAuthResponseParameters struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectionBasicAuthResponseParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionBasicAuthResponseParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionBasicAuthResponseParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Username != nil {
+		s.WriteString(schemas.ConnectionBasicAuthResponseParameters_Username, *v.Username)
+	}
+}
+func (v *ConnectionBasicAuthResponseParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionBasicAuthResponseParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionBasicAuthResponseParameters_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.ConnectionBasicAuthResponseParameters_Username, v.Username)
+		}
+		return nil
+	})
 }
 
 // Additional parameter included in the body. You can include up to 100 additional
@@ -317,6 +841,39 @@ type ConnectionBodyParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionBodyParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionBodyParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionBodyParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsValueSecret != false {
+		s.WriteBool(schemas.ConnectionBodyParameter_IsValueSecret, v.IsValueSecret)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.ConnectionBodyParameter_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ConnectionBodyParameter_Value, *v.Value)
+	}
+}
+func (v *ConnectionBodyParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionBodyParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionBodyParameter_IsValueSecret:
+			return d.ReadBool(schemas.ConnectionBodyParameter_IsValueSecret, &v.IsValueSecret)
+		case schemas.ConnectionBodyParameter_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ConnectionBodyParameter_Key, v.Key)
+		case schemas.ConnectionBodyParameter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ConnectionBodyParameter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Additional parameter included in the header. You can include up to 100
 // additional header parameters per request. An event payload cannot exceed 64 KB.
 type ConnectionHeaderParameter struct {
@@ -331,6 +888,39 @@ type ConnectionHeaderParameter struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectionHeaderParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionHeaderParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionHeaderParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsValueSecret != false {
+		s.WriteBool(schemas.ConnectionHeaderParameter_IsValueSecret, v.IsValueSecret)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.ConnectionHeaderParameter_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ConnectionHeaderParameter_Value, *v.Value)
+	}
+}
+func (v *ConnectionHeaderParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionHeaderParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionHeaderParameter_IsValueSecret:
+			return d.ReadBool(schemas.ConnectionHeaderParameter_IsValueSecret, &v.IsValueSecret)
+		case schemas.ConnectionHeaderParameter_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ConnectionHeaderParameter_Key, v.Key)
+		case schemas.ConnectionHeaderParameter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ConnectionHeaderParameter_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Any additional parameters for the connection.
@@ -348,6 +938,31 @@ type ConnectionHttpParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionHttpParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionHttpParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionHttpParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionBodyParametersList(s, schemas.ConnectionHttpParameters_BodyParameters, v.BodyParameters)
+	serializeConnectionHeaderParametersList(s, schemas.ConnectionHttpParameters_HeaderParameters, v.HeaderParameters)
+	serializeConnectionQueryStringParametersList(s, schemas.ConnectionHttpParameters_QueryStringParameters, v.QueryStringParameters)
+}
+func (v *ConnectionHttpParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionHttpParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionHttpParameters_BodyParameters:
+			return deserializeConnectionBodyParametersList(d, schemas.ConnectionHttpParameters_BodyParameters, &v.BodyParameters)
+		case schemas.ConnectionHttpParameters_HeaderParameters:
+			return deserializeConnectionHeaderParametersList(d, schemas.ConnectionHttpParameters_HeaderParameters, &v.HeaderParameters)
+		case schemas.ConnectionHttpParameters_QueryStringParameters:
+			return deserializeConnectionQueryStringParametersList(d, schemas.ConnectionHttpParameters_QueryStringParameters, &v.QueryStringParameters)
+		}
+		return nil
+	})
+}
+
 // The client response parameters for the connection when OAuth is specified as
 // the authorization type.
 type ConnectionOAuthClientResponseParameters struct {
@@ -356,6 +971,28 @@ type ConnectionOAuthClientResponseParameters struct {
 	ClientID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectionOAuthClientResponseParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionOAuthClientResponseParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionOAuthClientResponseParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientID != nil {
+		s.WriteString(schemas.ConnectionOAuthClientResponseParameters_ClientID, *v.ClientID)
+	}
+}
+func (v *ConnectionOAuthClientResponseParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionOAuthClientResponseParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionOAuthClientResponseParameters_ClientID:
+			v.ClientID = new(string)
+			return d.ReadString(schemas.ConnectionOAuthClientResponseParameters_ClientID, v.ClientID)
+		}
+		return nil
+	})
 }
 
 // The response parameters when OAuth is specified as the authorization type.
@@ -377,6 +1014,54 @@ type ConnectionOAuthResponseParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionOAuthResponseParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionOAuthResponseParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionOAuthResponseParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationEndpoint != nil {
+		s.WriteString(schemas.ConnectionOAuthResponseParameters_AuthorizationEndpoint, *v.AuthorizationEndpoint)
+	}
+	if v.ClientParameters != nil {
+		s.WriteStruct(schemas.ConnectionOAuthResponseParameters_ClientParameters)
+		v.ClientParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpMethod != "" {
+		s.WriteString(schemas.ConnectionOAuthResponseParameters_HttpMethod, string(v.HttpMethod))
+	}
+	if v.OAuthHttpParameters != nil {
+		s.WriteStruct(schemas.ConnectionOAuthResponseParameters_OAuthHttpParameters)
+		v.OAuthHttpParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectionOAuthResponseParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionOAuthResponseParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionOAuthResponseParameters_AuthorizationEndpoint:
+			v.AuthorizationEndpoint = new(string)
+			return d.ReadString(schemas.ConnectionOAuthResponseParameters_AuthorizationEndpoint, v.AuthorizationEndpoint)
+		case schemas.ConnectionOAuthResponseParameters_ClientParameters:
+			v.ClientParameters = &ConnectionOAuthClientResponseParameters{}
+			return v.ClientParameters.Deserialize(d)
+		case schemas.ConnectionOAuthResponseParameters_HttpMethod:
+			var ev string
+			if err := d.ReadString(schemas.ConnectionOAuthResponseParameters_HttpMethod, &ev); err != nil {
+				return err
+			}
+			v.HttpMethod = ConnectionOAuthHttpMethod(ev)
+			return nil
+		case schemas.ConnectionOAuthResponseParameters_OAuthHttpParameters:
+			v.OAuthHttpParameters = &ConnectionHttpParameters{}
+			return v.OAuthHttpParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Any additional query string parameter for the connection. You can include up to
 // 100 additional query string parameters per request. Each additional parameter
 // counts towards the event payload size, which cannot exceed 64 KB.
@@ -394,6 +1079,39 @@ type ConnectionQueryStringParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionQueryStringParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionQueryStringParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionQueryStringParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsValueSecret != false {
+		s.WriteBool(schemas.ConnectionQueryStringParameter_IsValueSecret, v.IsValueSecret)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.ConnectionQueryStringParameter_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ConnectionQueryStringParameter_Value, *v.Value)
+	}
+}
+func (v *ConnectionQueryStringParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionQueryStringParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionQueryStringParameter_IsValueSecret:
+			return d.ReadBool(schemas.ConnectionQueryStringParameter_IsValueSecret, &v.IsValueSecret)
+		case schemas.ConnectionQueryStringParameter_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ConnectionQueryStringParameter_Key, v.Key)
+		case schemas.ConnectionQueryStringParameter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ConnectionQueryStringParameter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The Amazon Resource Name (ARN) of the Amazon VPC Lattice resource configuration
 // for the resource endpoint.
 type ConnectivityResourceConfigurationArn struct {
@@ -407,6 +1125,28 @@ type ConnectivityResourceConfigurationArn struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectivityResourceConfigurationArn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectivityResourceConfigurationArn)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectivityResourceConfigurationArn) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceConfigurationArn != nil {
+		s.WriteString(schemas.ConnectivityResourceConfigurationArn_ResourceConfigurationArn, *v.ResourceConfigurationArn)
+	}
+}
+func (v *ConnectivityResourceConfigurationArn) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectivityResourceConfigurationArn, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectivityResourceConfigurationArn_ResourceConfigurationArn:
+			v.ResourceConfigurationArn = new(string)
+			return d.ReadString(schemas.ConnectivityResourceConfigurationArn_ResourceConfigurationArn, v.ResourceConfigurationArn)
+		}
+		return nil
+	})
+}
+
 // The parameters for EventBridge to use when invoking the resource endpoint.
 type ConnectivityResourceParameters struct {
 
@@ -416,6 +1156,30 @@ type ConnectivityResourceParameters struct {
 	ResourceParameters *ConnectivityResourceConfigurationArn
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectivityResourceParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectivityResourceParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectivityResourceParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceParameters != nil {
+		s.WriteStruct(schemas.ConnectivityResourceParameters_ResourceParameters)
+		v.ResourceParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectivityResourceParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectivityResourceParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectivityResourceParameters_ResourceParameters:
+			v.ResourceParameters = &ConnectivityResourceConfigurationArn{}
+			return v.ResourceParameters.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The API key authorization parameters for the connection.
@@ -432,6 +1196,34 @@ type CreateConnectionApiKeyAuthRequestParameters struct {
 	ApiKeyValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateConnectionApiKeyAuthRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionApiKeyAuthRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionApiKeyAuthRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeyName != nil {
+		s.WriteString(schemas.CreateConnectionApiKeyAuthRequestParameters_ApiKeyName, *v.ApiKeyName)
+	}
+	if v.ApiKeyValue != nil {
+		s.WriteString(schemas.CreateConnectionApiKeyAuthRequestParameters_ApiKeyValue, *v.ApiKeyValue)
+	}
+}
+func (v *CreateConnectionApiKeyAuthRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionApiKeyAuthRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionApiKeyAuthRequestParameters_ApiKeyName:
+			v.ApiKeyName = new(string)
+			return d.ReadString(schemas.CreateConnectionApiKeyAuthRequestParameters_ApiKeyName, v.ApiKeyName)
+		case schemas.CreateConnectionApiKeyAuthRequestParameters_ApiKeyValue:
+			v.ApiKeyValue = new(string)
+			return d.ReadString(schemas.CreateConnectionApiKeyAuthRequestParameters_ApiKeyValue, v.ApiKeyValue)
+		}
+		return nil
+	})
 }
 
 // The authorization parameters for the connection.
@@ -466,6 +1258,62 @@ type CreateConnectionAuthRequestParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionAuthRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionAuthRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionAuthRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeyAuthParameters != nil {
+		s.WriteStruct(schemas.CreateConnectionAuthRequestParameters_ApiKeyAuthParameters)
+		v.ApiKeyAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BasicAuthParameters != nil {
+		s.WriteStruct(schemas.CreateConnectionAuthRequestParameters_BasicAuthParameters)
+		v.BasicAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectivityParameters != nil {
+		s.WriteStruct(schemas.CreateConnectionAuthRequestParameters_ConnectivityParameters)
+		v.ConnectivityParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvocationHttpParameters != nil {
+		s.WriteStruct(schemas.CreateConnectionAuthRequestParameters_InvocationHttpParameters)
+		v.InvocationHttpParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OAuthParameters != nil {
+		s.WriteStruct(schemas.CreateConnectionAuthRequestParameters_OAuthParameters)
+		v.OAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConnectionAuthRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionAuthRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionAuthRequestParameters_ApiKeyAuthParameters:
+			v.ApiKeyAuthParameters = &CreateConnectionApiKeyAuthRequestParameters{}
+			return v.ApiKeyAuthParameters.Deserialize(d)
+		case schemas.CreateConnectionAuthRequestParameters_BasicAuthParameters:
+			v.BasicAuthParameters = &CreateConnectionBasicAuthRequestParameters{}
+			return v.BasicAuthParameters.Deserialize(d)
+		case schemas.CreateConnectionAuthRequestParameters_ConnectivityParameters:
+			v.ConnectivityParameters = &ConnectivityResourceParameters{}
+			return v.ConnectivityParameters.Deserialize(d)
+		case schemas.CreateConnectionAuthRequestParameters_InvocationHttpParameters:
+			v.InvocationHttpParameters = &ConnectionHttpParameters{}
+			return v.InvocationHttpParameters.Deserialize(d)
+		case schemas.CreateConnectionAuthRequestParameters_OAuthParameters:
+			v.OAuthParameters = &CreateConnectionOAuthRequestParameters{}
+			return v.OAuthParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the Basic authorization parameters to use for the connection.
 type CreateConnectionBasicAuthRequestParameters struct {
 
@@ -480,6 +1328,34 @@ type CreateConnectionBasicAuthRequestParameters struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateConnectionBasicAuthRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionBasicAuthRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionBasicAuthRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.CreateConnectionBasicAuthRequestParameters_Password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.CreateConnectionBasicAuthRequestParameters_Username, *v.Username)
+	}
+}
+func (v *CreateConnectionBasicAuthRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionBasicAuthRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionBasicAuthRequestParameters_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.CreateConnectionBasicAuthRequestParameters_Password, v.Password)
+		case schemas.CreateConnectionBasicAuthRequestParameters_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.CreateConnectionBasicAuthRequestParameters_Username, v.Username)
+		}
+		return nil
+	})
 }
 
 // The Basic authorization parameters to use for the connection.
@@ -497,6 +1373,34 @@ type CreateConnectionOAuthClientRequestParameters struct {
 	ClientSecret *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateConnectionOAuthClientRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionOAuthClientRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionOAuthClientRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientID != nil {
+		s.WriteString(schemas.CreateConnectionOAuthClientRequestParameters_ClientID, *v.ClientID)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.CreateConnectionOAuthClientRequestParameters_ClientSecret, *v.ClientSecret)
+	}
+}
+func (v *CreateConnectionOAuthClientRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionOAuthClientRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionOAuthClientRequestParameters_ClientID:
+			v.ClientID = new(string)
+			return d.ReadString(schemas.CreateConnectionOAuthClientRequestParameters_ClientID, v.ClientID)
+		case schemas.CreateConnectionOAuthClientRequestParameters_ClientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.CreateConnectionOAuthClientRequestParameters_ClientSecret, v.ClientSecret)
+		}
+		return nil
+	})
 }
 
 // Contains the OAuth authorization parameters to use for the connection.
@@ -524,6 +1428,54 @@ type CreateConnectionOAuthRequestParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionOAuthRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionOAuthRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionOAuthRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationEndpoint != nil {
+		s.WriteString(schemas.CreateConnectionOAuthRequestParameters_AuthorizationEndpoint, *v.AuthorizationEndpoint)
+	}
+	if v.ClientParameters != nil {
+		s.WriteStruct(schemas.CreateConnectionOAuthRequestParameters_ClientParameters)
+		v.ClientParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpMethod != "" {
+		s.WriteString(schemas.CreateConnectionOAuthRequestParameters_HttpMethod, string(v.HttpMethod))
+	}
+	if v.OAuthHttpParameters != nil {
+		s.WriteStruct(schemas.CreateConnectionOAuthRequestParameters_OAuthHttpParameters)
+		v.OAuthHttpParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConnectionOAuthRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionOAuthRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionOAuthRequestParameters_AuthorizationEndpoint:
+			v.AuthorizationEndpoint = new(string)
+			return d.ReadString(schemas.CreateConnectionOAuthRequestParameters_AuthorizationEndpoint, v.AuthorizationEndpoint)
+		case schemas.CreateConnectionOAuthRequestParameters_ClientParameters:
+			v.ClientParameters = &CreateConnectionOAuthClientRequestParameters{}
+			return v.ClientParameters.Deserialize(d)
+		case schemas.CreateConnectionOAuthRequestParameters_HttpMethod:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectionOAuthRequestParameters_HttpMethod, &ev); err != nil {
+				return err
+			}
+			v.HttpMethod = ConnectionOAuthHttpMethod(ev)
+			return nil
+		case schemas.CreateConnectionOAuthRequestParameters_OAuthHttpParameters:
+			v.OAuthHttpParameters = &ConnectionHttpParameters{}
+			return v.OAuthHttpParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration details of the Amazon SQS queue for EventBridge to use as a
 // dead-letter queue (DLQ).
 //
@@ -536,6 +1488,28 @@ type DeadLetterConfig struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeadLetterConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeadLetterConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeadLetterConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeadLetterConfig_Arn, *v.Arn)
+	}
+}
+func (v *DeadLetterConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeadLetterConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeadLetterConfig_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeadLetterConfig_Arn, v.Arn)
+		}
+		return nil
+	})
 }
 
 // If the connection uses a private OAuth endpoint, the parameters for EventBridge
@@ -552,6 +1526,30 @@ type DescribeConnectionConnectivityParameters struct {
 	ResourceParameters *DescribeConnectionResourceParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeConnectionConnectivityParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionConnectivityParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionConnectivityParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceParameters != nil {
+		s.WriteStruct(schemas.DescribeConnectionConnectivityParameters_ResourceParameters)
+		v.ResourceParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeConnectionConnectivityParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectionConnectivityParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectionConnectivityParameters_ResourceParameters:
+			v.ResourceParameters = &DescribeConnectionResourceParameters{}
+			return v.ResourceParameters.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The parameters for EventBridge to use when invoking the resource endpoint.
@@ -575,6 +1573,34 @@ type DescribeConnectionResourceParameters struct {
 	ResourceConfigurationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeConnectionResourceParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionResourceParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionResourceParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceAssociationArn != nil {
+		s.WriteString(schemas.DescribeConnectionResourceParameters_ResourceAssociationArn, *v.ResourceAssociationArn)
+	}
+	if v.ResourceConfigurationArn != nil {
+		s.WriteString(schemas.DescribeConnectionResourceParameters_ResourceConfigurationArn, *v.ResourceConfigurationArn)
+	}
+}
+func (v *DescribeConnectionResourceParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectionResourceParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectionResourceParameters_ResourceAssociationArn:
+			v.ResourceAssociationArn = new(string)
+			return d.ReadString(schemas.DescribeConnectionResourceParameters_ResourceAssociationArn, v.ResourceAssociationArn)
+		case schemas.DescribeConnectionResourceParameters_ResourceConfigurationArn:
+			v.ResourceConfigurationArn = new(string)
+			return d.ReadString(schemas.DescribeConnectionResourceParameters_ResourceConfigurationArn, v.ResourceConfigurationArn)
+		}
+		return nil
+	})
 }
 
 // The custom parameters to be used when the target is an Amazon ECS task.
@@ -666,6 +1692,102 @@ type EcsParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EcsParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EcsParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EcsParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityProviderStrategy(s, schemas.EcsParameters_CapacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.EnableECSManagedTags != false {
+		s.WriteBool(schemas.EcsParameters_EnableECSManagedTags, v.EnableECSManagedTags)
+	}
+	if v.EnableExecuteCommand != false {
+		s.WriteBool(schemas.EcsParameters_EnableExecuteCommand, v.EnableExecuteCommand)
+	}
+	if v.Group != nil {
+		s.WriteString(schemas.EcsParameters_Group, *v.Group)
+	}
+	if v.LaunchType != "" {
+		s.WriteString(schemas.EcsParameters_LaunchType, string(v.LaunchType))
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.EcsParameters_NetworkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePlacementConstraints(s, schemas.EcsParameters_PlacementConstraints, v.PlacementConstraints)
+	serializePlacementStrategies(s, schemas.EcsParameters_PlacementStrategy, v.PlacementStrategy)
+	if v.PlatformVersion != nil {
+		s.WriteString(schemas.EcsParameters_PlatformVersion, *v.PlatformVersion)
+	}
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.EcsParameters_PropagateTags, string(v.PropagateTags))
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.EcsParameters_ReferenceId, *v.ReferenceId)
+	}
+	serializeTagList(s, schemas.EcsParameters_Tags, v.Tags)
+	if v.TaskCount != nil {
+		s.WriteInt32(schemas.EcsParameters_TaskCount, *v.TaskCount)
+	}
+	if v.TaskDefinitionArn != nil {
+		s.WriteString(schemas.EcsParameters_TaskDefinitionArn, *v.TaskDefinitionArn)
+	}
+}
+func (v *EcsParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EcsParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EcsParameters_CapacityProviderStrategy:
+			return deserializeCapacityProviderStrategy(d, schemas.EcsParameters_CapacityProviderStrategy, &v.CapacityProviderStrategy)
+		case schemas.EcsParameters_EnableECSManagedTags:
+			return d.ReadBool(schemas.EcsParameters_EnableECSManagedTags, &v.EnableECSManagedTags)
+		case schemas.EcsParameters_EnableExecuteCommand:
+			return d.ReadBool(schemas.EcsParameters_EnableExecuteCommand, &v.EnableExecuteCommand)
+		case schemas.EcsParameters_Group:
+			v.Group = new(string)
+			return d.ReadString(schemas.EcsParameters_Group, v.Group)
+		case schemas.EcsParameters_LaunchType:
+			var ev string
+			if err := d.ReadString(schemas.EcsParameters_LaunchType, &ev); err != nil {
+				return err
+			}
+			v.LaunchType = LaunchType(ev)
+			return nil
+		case schemas.EcsParameters_NetworkConfiguration:
+			v.NetworkConfiguration = &NetworkConfiguration{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.EcsParameters_PlacementConstraints:
+			return deserializePlacementConstraints(d, schemas.EcsParameters_PlacementConstraints, &v.PlacementConstraints)
+		case schemas.EcsParameters_PlacementStrategy:
+			return deserializePlacementStrategies(d, schemas.EcsParameters_PlacementStrategy, &v.PlacementStrategy)
+		case schemas.EcsParameters_PlatformVersion:
+			v.PlatformVersion = new(string)
+			return d.ReadString(schemas.EcsParameters_PlatformVersion, v.PlatformVersion)
+		case schemas.EcsParameters_PropagateTags:
+			var ev string
+			if err := d.ReadString(schemas.EcsParameters_PropagateTags, &ev); err != nil {
+				return err
+			}
+			v.PropagateTags = PropagateTags(ev)
+			return nil
+		case schemas.EcsParameters_ReferenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.EcsParameters_ReferenceId, v.ReferenceId)
+		case schemas.EcsParameters_Tags:
+			return deserializeTagList(d, schemas.EcsParameters_Tags, &v.Tags)
+		case schemas.EcsParameters_TaskCount:
+			v.TaskCount = new(int32)
+			return d.ReadInt32(schemas.EcsParameters_TaskCount, v.TaskCount)
+		case schemas.EcsParameters_TaskDefinitionArn:
+			v.TaskDefinitionArn = new(string)
+			return d.ReadString(schemas.EcsParameters_TaskDefinitionArn, v.TaskDefinitionArn)
+		}
+		return nil
+	})
+}
+
 // A global endpoint used to improve your application's availability by making it
 // regional-fault tolerant. For more information about global endpoints, see [Making applications Regional-fault tolerant with global endpoints and event replication]in
 // the Amazon EventBridge User Guide .
@@ -720,6 +1842,105 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Endpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Endpoint_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Endpoint_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Endpoint_Description, *v.Description)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.Endpoint_EndpointId, *v.EndpointId)
+	}
+	if v.EndpointUrl != nil {
+		s.WriteString(schemas.Endpoint_EndpointUrl, *v.EndpointUrl)
+	}
+	serializeEndpointEventBusList(s, schemas.Endpoint_EventBuses, v.EventBuses)
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.Endpoint_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Endpoint_Name, *v.Name)
+	}
+	if v.ReplicationConfig != nil {
+		s.WriteStruct(schemas.Endpoint_ReplicationConfig)
+		v.ReplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Endpoint_RoleArn, *v.RoleArn)
+	}
+	if v.RoutingConfig != nil {
+		s.WriteStruct(schemas.Endpoint_RoutingConfig)
+		v.RoutingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Endpoint_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.Endpoint_StateReason, *v.StateReason)
+	}
+}
+func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Endpoint_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Endpoint_Arn, v.Arn)
+		case schemas.Endpoint_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Endpoint_CreationTime, v.CreationTime)
+		case schemas.Endpoint_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Endpoint_Description, v.Description)
+		case schemas.Endpoint_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.Endpoint_EndpointId, v.EndpointId)
+		case schemas.Endpoint_EndpointUrl:
+			v.EndpointUrl = new(string)
+			return d.ReadString(schemas.Endpoint_EndpointUrl, v.EndpointUrl)
+		case schemas.Endpoint_EventBuses:
+			return deserializeEndpointEventBusList(d, schemas.Endpoint_EventBuses, &v.EventBuses)
+		case schemas.Endpoint_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.Endpoint_LastModifiedTime, v.LastModifiedTime)
+		case schemas.Endpoint_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Endpoint_Name, v.Name)
+		case schemas.Endpoint_ReplicationConfig:
+			v.ReplicationConfig = &ReplicationConfig{}
+			return v.ReplicationConfig.Deserialize(d)
+		case schemas.Endpoint_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Endpoint_RoleArn, v.RoleArn)
+		case schemas.Endpoint_RoutingConfig:
+			v.RoutingConfig = &RoutingConfig{}
+			return v.RoutingConfig.Deserialize(d)
+		case schemas.Endpoint_State:
+			var ev string
+			if err := d.ReadString(schemas.Endpoint_State, &ev); err != nil {
+				return err
+			}
+			v.State = EndpointState(ev)
+			return nil
+		case schemas.Endpoint_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.Endpoint_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
+
 // The event buses the endpoint is associated with.
 type EndpointEventBus struct {
 
@@ -729,6 +1950,28 @@ type EndpointEventBus struct {
 	EventBusArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointEventBus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointEventBus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointEventBus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBusArn != nil {
+		s.WriteString(schemas.EndpointEventBus_EventBusArn, *v.EventBusArn)
+	}
+}
+func (v *EndpointEventBus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointEventBus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointEventBus_EventBusArn:
+			v.EventBusArn = new(string)
+			return d.ReadString(schemas.EndpointEventBus_EventBusArn, v.EventBusArn)
+		}
+		return nil
+	})
 }
 
 // An event bus receives events from a source, uses rules to evaluate them,
@@ -762,6 +2005,58 @@ type EventBus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventBus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventBus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventBus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EventBus_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.EventBus_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.EventBus_Description, *v.Description)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.EventBus_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.EventBus_Name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.EventBus_Policy, *v.Policy)
+	}
+}
+func (v *EventBus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventBus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventBus_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EventBus_Arn, v.Arn)
+		case schemas.EventBus_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.EventBus_CreationTime, v.CreationTime)
+		case schemas.EventBus_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.EventBus_Description, v.Description)
+		case schemas.EventBus_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.EventBus_LastModifiedTime, v.LastModifiedTime)
+		case schemas.EventBus_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EventBus_Name, v.Name)
+		case schemas.EventBus_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.EventBus_Policy, v.Policy)
+		}
+		return nil
+	})
+}
+
 // A partner event source is created by an SaaS partner. If a customer creates a
 // partner event bus that matches this event source, that Amazon Web Services
 // account can receive events from the partner's applications or services.
@@ -793,6 +2088,62 @@ type EventSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EventSource_Arn, *v.Arn)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.EventSource_CreatedBy, *v.CreatedBy)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.EventSource_CreationTime, *v.CreationTime)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.EventSource_ExpirationTime, *v.ExpirationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.EventSource_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.EventSource_State, string(v.State))
+	}
+}
+func (v *EventSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventSource_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EventSource_Arn, v.Arn)
+		case schemas.EventSource_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.EventSource_CreatedBy, v.CreatedBy)
+		case schemas.EventSource_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.EventSource_CreationTime, v.CreationTime)
+		case schemas.EventSource_ExpirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.EventSource_ExpirationTime, v.ExpirationTime)
+		case schemas.EventSource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EventSource_Name, v.Name)
+		case schemas.EventSource_State:
+			var ev string
+			if err := d.ReadString(schemas.EventSource_State, &ev); err != nil {
+				return err
+			}
+			v.State = EventSourceState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The failover configuration for an endpoint. This includes what triggers
 // failover and what happens when it's triggered.
 type FailoverConfig struct {
@@ -809,6 +2160,38 @@ type FailoverConfig struct {
 	Secondary *Secondary
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailoverConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Primary != nil {
+		s.WriteStruct(schemas.FailoverConfig_Primary)
+		v.Primary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Secondary != nil {
+		s.WriteStruct(schemas.FailoverConfig_Secondary)
+		v.Secondary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FailoverConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverConfig_Primary:
+			v.Primary = &Primary{}
+			return v.Primary.Deserialize(d)
+		case schemas.FailoverConfig_Secondary:
+			v.Secondary = &Secondary{}
+			return v.Secondary.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // These are custom parameter to be used when the target is an API Gateway APIs or
@@ -830,6 +2213,31 @@ type HttpParameters struct {
 	QueryStringParameters map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHeaderParametersMap(s, schemas.HttpParameters_HeaderParameters, v.HeaderParameters)
+	serializePathParameterList(s, schemas.HttpParameters_PathParameterValues, v.PathParameterValues)
+	serializeQueryStringParametersMap(s, schemas.HttpParameters_QueryStringParameters, v.QueryStringParameters)
+}
+func (v *HttpParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpParameters_HeaderParameters:
+			return deserializeHeaderParametersMap(d, schemas.HttpParameters_HeaderParameters, &v.HeaderParameters)
+		case schemas.HttpParameters_PathParameterValues:
+			return deserializePathParameterList(d, schemas.HttpParameters_PathParameterValues, &v.PathParameterValues)
+		case schemas.HttpParameters_QueryStringParameters:
+			return deserializeQueryStringParametersMap(d, schemas.HttpParameters_QueryStringParameters, &v.QueryStringParameters)
+		}
+		return nil
+	})
 }
 
 // Contains the parameters needed for you to provide custom input to a target
@@ -904,6 +2312,31 @@ type InputTransformer struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputTransformer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputTransformer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputTransformer) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTransformerPaths(s, schemas.InputTransformer_InputPathsMap, v.InputPathsMap)
+	if v.InputTemplate != nil {
+		s.WriteString(schemas.InputTransformer_InputTemplate, *v.InputTemplate)
+	}
+}
+func (v *InputTransformer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputTransformer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputTransformer_InputPathsMap:
+			return deserializeTransformerPaths(d, schemas.InputTransformer_InputPathsMap, &v.InputPathsMap)
+		case schemas.InputTransformer_InputTemplate:
+			v.InputTemplate = new(string)
+			return d.ReadString(schemas.InputTransformer_InputTemplate, v.InputTemplate)
+		}
+		return nil
+	})
+}
+
 // This object enables you to specify a JSON path to extract from the event and
 // use as the partition key for the Amazon Kinesis data stream, so that you can
 // control the shard to which the event goes. If you do not include this parameter,
@@ -919,6 +2352,28 @@ type KinesisParameters struct {
 	PartitionKeyPath *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartitionKeyPath != nil {
+		s.WriteString(schemas.KinesisParameters_PartitionKeyPath, *v.PartitionKeyPath)
+	}
+}
+func (v *KinesisParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisParameters_PartitionKeyPath:
+			v.PartitionKeyPath = new(string)
+			return d.ReadString(schemas.KinesisParameters_PartitionKeyPath, v.PartitionKeyPath)
+		}
+		return nil
+	})
 }
 
 // The logging configuration settings for the event bus.
@@ -948,6 +2403,42 @@ type LogConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LogConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeDetail != "" {
+		s.WriteString(schemas.LogConfig_IncludeDetail, string(v.IncludeDetail))
+	}
+	if v.Level != "" {
+		s.WriteString(schemas.LogConfig_Level, string(v.Level))
+	}
+}
+func (v *LogConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogConfig_IncludeDetail:
+			var ev string
+			if err := d.ReadString(schemas.LogConfig_IncludeDetail, &ev); err != nil {
+				return err
+			}
+			v.IncludeDetail = IncludeDetail(ev)
+			return nil
+		case schemas.LogConfig_Level:
+			var ev string
+			if err := d.ReadString(schemas.LogConfig_Level, &ev); err != nil {
+				return err
+			}
+			v.Level = Level(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This structure specifies the network configuration for an ECS task.
 type NetworkConfiguration struct {
 
@@ -957,6 +2448,30 @@ type NetworkConfiguration struct {
 	AwsvpcConfiguration *AwsVpcConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsvpcConfiguration != nil {
+		s.WriteStruct(schemas.NetworkConfiguration_awsvpcConfiguration)
+		v.AwsvpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfiguration_awsvpcConfiguration:
+			v.AwsvpcConfiguration = &AwsVpcConfiguration{}
+			return v.AwsvpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A partner event source is created by an SaaS partner. If a customer creates a
@@ -971,6 +2486,34 @@ type PartnerEventSource struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartnerEventSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartnerEventSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartnerEventSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PartnerEventSource_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PartnerEventSource_Name, *v.Name)
+	}
+}
+func (v *PartnerEventSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartnerEventSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartnerEventSource_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PartnerEventSource_Arn, v.Arn)
+		case schemas.PartnerEventSource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PartnerEventSource_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The Amazon Web Services account that a partner event source has been offered to.
@@ -996,6 +2539,50 @@ type PartnerEventSourceAccount struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PartnerEventSourceAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartnerEventSourceAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartnerEventSourceAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteString(schemas.PartnerEventSourceAccount_Account, *v.Account)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.PartnerEventSourceAccount_CreationTime, *v.CreationTime)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.PartnerEventSourceAccount_ExpirationTime, *v.ExpirationTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.PartnerEventSourceAccount_State, string(v.State))
+	}
+}
+func (v *PartnerEventSourceAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartnerEventSourceAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartnerEventSourceAccount_Account:
+			v.Account = new(string)
+			return d.ReadString(schemas.PartnerEventSourceAccount_Account, v.Account)
+		case schemas.PartnerEventSourceAccount_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.PartnerEventSourceAccount_CreationTime, v.CreationTime)
+		case schemas.PartnerEventSourceAccount_ExpirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.PartnerEventSourceAccount_ExpirationTime, v.ExpirationTime)
+		case schemas.PartnerEventSourceAccount_State:
+			var ev string
+			if err := d.ReadString(schemas.PartnerEventSourceAccount_State, &ev); err != nil {
+				return err
+			}
+			v.State = EventSourceState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An object representing a constraint on task placement. To learn more, see [Task Placement Constraints] in
 // the Amazon Elastic Container Service Developer Guide.
 //
@@ -1015,6 +2602,38 @@ type PlacementConstraint struct {
 	Type PlacementConstraintType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PlacementConstraint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlacementConstraint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlacementConstraint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.PlacementConstraint_expression, *v.Expression)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PlacementConstraint_type, string(v.Type))
+	}
+}
+func (v *PlacementConstraint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlacementConstraint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlacementConstraint_expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.PlacementConstraint_expression, v.Expression)
+		case schemas.PlacementConstraint_type:
+			var ev string
+			if err := d.ReadString(schemas.PlacementConstraint_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PlacementConstraintType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The task placement strategy for a task or service. To learn more, see [Task Placement Strategies] in the
@@ -1043,6 +2662,38 @@ type PlacementStrategy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlacementStrategy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlacementStrategy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlacementStrategy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Field != nil {
+		s.WriteString(schemas.PlacementStrategy_field, *v.Field)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PlacementStrategy_type, string(v.Type))
+	}
+}
+func (v *PlacementStrategy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlacementStrategy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlacementStrategy_field:
+			v.Field = new(string)
+			return d.ReadString(schemas.PlacementStrategy_field, v.Field)
+		case schemas.PlacementStrategy_type:
+			var ev string
+			if err := d.ReadString(schemas.PlacementStrategy_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PlacementStrategyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The primary Region of the endpoint.
 type Primary struct {
 
@@ -1053,6 +2704,28 @@ type Primary struct {
 	HealthCheck *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Primary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Primary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Primary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthCheck != nil {
+		s.WriteString(schemas.Primary_HealthCheck, *v.HealthCheck)
+	}
+}
+func (v *Primary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Primary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Primary_HealthCheck:
+			v.HealthCheck = new(string)
+			return d.ReadString(schemas.Primary_HealthCheck, v.HealthCheck)
+		}
+		return nil
+	})
 }
 
 // Represents an event to be submitted.
@@ -1118,6 +2791,61 @@ type PutEventsRequestEntry struct {
 	TraceHeader *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PutEventsRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventsRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Detail != nil {
+		s.WriteString(schemas.PutEventsRequestEntry_Detail, *v.Detail)
+	}
+	if v.DetailType != nil {
+		s.WriteString(schemas.PutEventsRequestEntry_DetailType, *v.DetailType)
+	}
+	if v.EventBusName != nil {
+		s.WriteString(schemas.PutEventsRequestEntry_EventBusName, *v.EventBusName)
+	}
+	serializeEventResourceList(s, schemas.PutEventsRequestEntry_Resources, v.Resources)
+	if v.Source != nil {
+		s.WriteString(schemas.PutEventsRequestEntry_Source, *v.Source)
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.PutEventsRequestEntry_Time, *v.Time)
+	}
+	if v.TraceHeader != nil {
+		s.WriteString(schemas.PutEventsRequestEntry_TraceHeader, *v.TraceHeader)
+	}
+}
+func (v *PutEventsRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEventsRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEventsRequestEntry_Detail:
+			v.Detail = new(string)
+			return d.ReadString(schemas.PutEventsRequestEntry_Detail, v.Detail)
+		case schemas.PutEventsRequestEntry_DetailType:
+			v.DetailType = new(string)
+			return d.ReadString(schemas.PutEventsRequestEntry_DetailType, v.DetailType)
+		case schemas.PutEventsRequestEntry_EventBusName:
+			v.EventBusName = new(string)
+			return d.ReadString(schemas.PutEventsRequestEntry_EventBusName, v.EventBusName)
+		case schemas.PutEventsRequestEntry_Resources:
+			return deserializeEventResourceList(d, schemas.PutEventsRequestEntry_Resources, &v.Resources)
+		case schemas.PutEventsRequestEntry_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.PutEventsRequestEntry_Source, v.Source)
+		case schemas.PutEventsRequestEntry_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.PutEventsRequestEntry_Time, v.Time)
+		case schemas.PutEventsRequestEntry_TraceHeader:
+			v.TraceHeader = new(string)
+			return d.ReadString(schemas.PutEventsRequestEntry_TraceHeader, v.TraceHeader)
+		}
+		return nil
+	})
 }
 
 // Represents the results of an event submitted to an event bus.
@@ -1190,6 +2918,40 @@ type PutEventsResultEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventsResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventsResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventsResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.PutEventsResultEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.PutEventsResultEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.PutEventsResultEntry_EventId, *v.EventId)
+	}
+}
+func (v *PutEventsResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEventsResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEventsResultEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.PutEventsResultEntry_ErrorCode, v.ErrorCode)
+		case schemas.PutEventsResultEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.PutEventsResultEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.PutEventsResultEntry_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.PutEventsResultEntry_EventId, v.EventId)
+		}
+		return nil
+	})
+}
+
 // The details about an event generated by an SaaS partner.
 type PutPartnerEventsRequestEntry struct {
 
@@ -1232,6 +2994,49 @@ type PutPartnerEventsRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPartnerEventsRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPartnerEventsRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPartnerEventsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Detail != nil {
+		s.WriteString(schemas.PutPartnerEventsRequestEntry_Detail, *v.Detail)
+	}
+	if v.DetailType != nil {
+		s.WriteString(schemas.PutPartnerEventsRequestEntry_DetailType, *v.DetailType)
+	}
+	serializeEventResourceList(s, schemas.PutPartnerEventsRequestEntry_Resources, v.Resources)
+	if v.Source != nil {
+		s.WriteString(schemas.PutPartnerEventsRequestEntry_Source, *v.Source)
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.PutPartnerEventsRequestEntry_Time, *v.Time)
+	}
+}
+func (v *PutPartnerEventsRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutPartnerEventsRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutPartnerEventsRequestEntry_Detail:
+			v.Detail = new(string)
+			return d.ReadString(schemas.PutPartnerEventsRequestEntry_Detail, v.Detail)
+		case schemas.PutPartnerEventsRequestEntry_DetailType:
+			v.DetailType = new(string)
+			return d.ReadString(schemas.PutPartnerEventsRequestEntry_DetailType, v.DetailType)
+		case schemas.PutPartnerEventsRequestEntry_Resources:
+			return deserializeEventResourceList(d, schemas.PutPartnerEventsRequestEntry_Resources, &v.Resources)
+		case schemas.PutPartnerEventsRequestEntry_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.PutPartnerEventsRequestEntry_Source, v.Source)
+		case schemas.PutPartnerEventsRequestEntry_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.PutPartnerEventsRequestEntry_Time, v.Time)
+		}
+		return nil
+	})
+}
+
 // The result of an event entry the partner submitted in this request. If the
 // event was successfully submitted, the entry has the event ID in it. Otherwise,
 // you can use the error code and error message to identify the problem with the
@@ -1250,6 +3055,40 @@ type PutPartnerEventsResultEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPartnerEventsResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPartnerEventsResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPartnerEventsResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.PutPartnerEventsResultEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.PutPartnerEventsResultEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.PutPartnerEventsResultEntry_EventId, *v.EventId)
+	}
+}
+func (v *PutPartnerEventsResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutPartnerEventsResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutPartnerEventsResultEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.PutPartnerEventsResultEntry_ErrorCode, v.ErrorCode)
+		case schemas.PutPartnerEventsResultEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.PutPartnerEventsResultEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.PutPartnerEventsResultEntry_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.PutPartnerEventsResultEntry_EventId, v.EventId)
+		}
+		return nil
+	})
+}
+
 // Represents a target that failed to be added to a rule.
 type PutTargetsResultEntry struct {
 
@@ -1264,6 +3103,40 @@ type PutTargetsResultEntry struct {
 	TargetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PutTargetsResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTargetsResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTargetsResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.PutTargetsResultEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.PutTargetsResultEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.PutTargetsResultEntry_TargetId, *v.TargetId)
+	}
+}
+func (v *PutTargetsResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTargetsResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutTargetsResultEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.PutTargetsResultEntry_ErrorCode, v.ErrorCode)
+		case schemas.PutTargetsResultEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.PutTargetsResultEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.PutTargetsResultEntry_TargetId:
+			v.TargetId = new(string)
+			return d.ReadString(schemas.PutTargetsResultEntry_TargetId, v.TargetId)
+		}
+		return nil
+	})
 }
 
 // These are custom parameters to be used when the target is a Amazon Redshift
@@ -1306,6 +3179,60 @@ type RedshiftDataParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedshiftDataParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDataParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDataParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteString(schemas.RedshiftDataParameters_Database, *v.Database)
+	}
+	if v.DbUser != nil {
+		s.WriteString(schemas.RedshiftDataParameters_DbUser, *v.DbUser)
+	}
+	if v.SecretManagerArn != nil {
+		s.WriteString(schemas.RedshiftDataParameters_SecretManagerArn, *v.SecretManagerArn)
+	}
+	if v.Sql != nil {
+		s.WriteString(schemas.RedshiftDataParameters_Sql, *v.Sql)
+	}
+	serializeSqls(s, schemas.RedshiftDataParameters_Sqls, v.Sqls)
+	if v.StatementName != nil {
+		s.WriteString(schemas.RedshiftDataParameters_StatementName, *v.StatementName)
+	}
+	if v.WithEvent != false {
+		s.WriteBool(schemas.RedshiftDataParameters_WithEvent, v.WithEvent)
+	}
+}
+func (v *RedshiftDataParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDataParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDataParameters_Database:
+			v.Database = new(string)
+			return d.ReadString(schemas.RedshiftDataParameters_Database, v.Database)
+		case schemas.RedshiftDataParameters_DbUser:
+			v.DbUser = new(string)
+			return d.ReadString(schemas.RedshiftDataParameters_DbUser, v.DbUser)
+		case schemas.RedshiftDataParameters_SecretManagerArn:
+			v.SecretManagerArn = new(string)
+			return d.ReadString(schemas.RedshiftDataParameters_SecretManagerArn, v.SecretManagerArn)
+		case schemas.RedshiftDataParameters_Sql:
+			v.Sql = new(string)
+			return d.ReadString(schemas.RedshiftDataParameters_Sql, v.Sql)
+		case schemas.RedshiftDataParameters_Sqls:
+			return deserializeSqls(d, schemas.RedshiftDataParameters_Sqls, &v.Sqls)
+		case schemas.RedshiftDataParameters_StatementName:
+			v.StatementName = new(string)
+			return d.ReadString(schemas.RedshiftDataParameters_StatementName, v.StatementName)
+		case schemas.RedshiftDataParameters_WithEvent:
+			return d.ReadBool(schemas.RedshiftDataParameters_WithEvent, &v.WithEvent)
+		}
+		return nil
+	})
+}
+
 // Represents a target that failed to be removed from a rule.
 type RemoveTargetsResultEntry struct {
 
@@ -1320,6 +3247,40 @@ type RemoveTargetsResultEntry struct {
 	TargetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RemoveTargetsResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTargetsResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTargetsResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.RemoveTargetsResultEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.RemoveTargetsResultEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.RemoveTargetsResultEntry_TargetId, *v.TargetId)
+	}
+}
+func (v *RemoveTargetsResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveTargetsResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveTargetsResultEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.RemoveTargetsResultEntry_ErrorCode, v.ErrorCode)
+		case schemas.RemoveTargetsResultEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.RemoveTargetsResultEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.RemoveTargetsResultEntry_TargetId:
+			v.TargetId = new(string)
+			return d.ReadString(schemas.RemoveTargetsResultEntry_TargetId, v.TargetId)
+		}
+		return nil
+	})
 }
 
 // A Replay object that contains details about a replay.
@@ -1359,6 +3320,80 @@ type Replay struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Replay) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Replay)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Replay) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventEndTime != nil {
+		s.WriteTime(schemas.Replay_EventEndTime, *v.EventEndTime)
+	}
+	if v.EventLastReplayedTime != nil {
+		s.WriteTime(schemas.Replay_EventLastReplayedTime, *v.EventLastReplayedTime)
+	}
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.Replay_EventSourceArn, *v.EventSourceArn)
+	}
+	if v.EventStartTime != nil {
+		s.WriteTime(schemas.Replay_EventStartTime, *v.EventStartTime)
+	}
+	if v.ReplayEndTime != nil {
+		s.WriteTime(schemas.Replay_ReplayEndTime, *v.ReplayEndTime)
+	}
+	if v.ReplayName != nil {
+		s.WriteString(schemas.Replay_ReplayName, *v.ReplayName)
+	}
+	if v.ReplayStartTime != nil {
+		s.WriteTime(schemas.Replay_ReplayStartTime, *v.ReplayStartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Replay_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.Replay_StateReason, *v.StateReason)
+	}
+}
+func (v *Replay) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Replay, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Replay_EventEndTime:
+			v.EventEndTime = new(time.Time)
+			return d.ReadTime(schemas.Replay_EventEndTime, v.EventEndTime)
+		case schemas.Replay_EventLastReplayedTime:
+			v.EventLastReplayedTime = new(time.Time)
+			return d.ReadTime(schemas.Replay_EventLastReplayedTime, v.EventLastReplayedTime)
+		case schemas.Replay_EventSourceArn:
+			v.EventSourceArn = new(string)
+			return d.ReadString(schemas.Replay_EventSourceArn, v.EventSourceArn)
+		case schemas.Replay_EventStartTime:
+			v.EventStartTime = new(time.Time)
+			return d.ReadTime(schemas.Replay_EventStartTime, v.EventStartTime)
+		case schemas.Replay_ReplayEndTime:
+			v.ReplayEndTime = new(time.Time)
+			return d.ReadTime(schemas.Replay_ReplayEndTime, v.ReplayEndTime)
+		case schemas.Replay_ReplayName:
+			v.ReplayName = new(string)
+			return d.ReadString(schemas.Replay_ReplayName, v.ReplayName)
+		case schemas.Replay_ReplayStartTime:
+			v.ReplayStartTime = new(time.Time)
+			return d.ReadTime(schemas.Replay_ReplayStartTime, v.ReplayStartTime)
+		case schemas.Replay_State:
+			var ev string
+			if err := d.ReadString(schemas.Replay_State, &ev); err != nil {
+				return err
+			}
+			v.State = ReplayState(ev)
+			return nil
+		case schemas.Replay_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.Replay_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
+
 // A ReplayDestination object that contains details about a replay.
 type ReplayDestination struct {
 
@@ -1374,6 +3409,31 @@ type ReplayDestination struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplayDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplayDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplayDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ReplayDestination_Arn, *v.Arn)
+	}
+	serializeReplayDestinationFilters(s, schemas.ReplayDestination_FilterArns, v.FilterArns)
+}
+func (v *ReplayDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplayDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplayDestination_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReplayDestination_Arn, v.Arn)
+		case schemas.ReplayDestination_FilterArns:
+			return deserializeReplayDestinationFilters(d, schemas.ReplayDestination_FilterArns, &v.FilterArns)
+		}
+		return nil
+	})
+}
+
 // Endpoints can replicate all events to the secondary Region.
 type ReplicationConfig struct {
 
@@ -1381,6 +3441,32 @@ type ReplicationConfig struct {
 	State ReplicationState
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReplicationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.ReplicationConfig_State, string(v.State))
+	}
+}
+func (v *ReplicationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationConfig_State:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationConfig_State, &ev); err != nil {
+				return err
+			}
+			v.State = ReplicationState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A RetryPolicy object that includes information about the retry policy settings.
@@ -1397,6 +3483,34 @@ type RetryPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumEventAgeInSeconds != nil {
+		s.WriteInt32(schemas.RetryPolicy_MaximumEventAgeInSeconds, *v.MaximumEventAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.RetryPolicy_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+}
+func (v *RetryPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryPolicy_MaximumEventAgeInSeconds:
+			v.MaximumEventAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.RetryPolicy_MaximumEventAgeInSeconds, v.MaximumEventAgeInSeconds)
+		case schemas.RetryPolicy_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.RetryPolicy_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		}
+		return nil
+	})
+}
+
 // The routing configuration of the endpoint.
 type RoutingConfig struct {
 
@@ -1407,6 +3521,30 @@ type RoutingConfig struct {
 	FailoverConfig *FailoverConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *RoutingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailoverConfig != nil {
+		s.WriteStruct(schemas.RoutingConfig_FailoverConfig)
+		v.FailoverConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RoutingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingConfig_FailoverConfig:
+			v.FailoverConfig = &FailoverConfig{}
+			return v.FailoverConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains information about a rule in Amazon EventBridge.
@@ -1481,6 +3619,80 @@ type Rule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Rule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Rule_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Rule_Description, *v.Description)
+	}
+	if v.EventBusName != nil {
+		s.WriteString(schemas.Rule_EventBusName, *v.EventBusName)
+	}
+	if v.EventPattern != nil {
+		s.WriteString(schemas.Rule_EventPattern, *v.EventPattern)
+	}
+	if v.ManagedBy != nil {
+		s.WriteString(schemas.Rule_ManagedBy, *v.ManagedBy)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Rule_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Rule_RoleArn, *v.RoleArn)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.Rule_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Rule_State, string(v.State))
+	}
+}
+func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Rule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Rule_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Rule_Arn, v.Arn)
+		case schemas.Rule_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Rule_Description, v.Description)
+		case schemas.Rule_EventBusName:
+			v.EventBusName = new(string)
+			return d.ReadString(schemas.Rule_EventBusName, v.EventBusName)
+		case schemas.Rule_EventPattern:
+			v.EventPattern = new(string)
+			return d.ReadString(schemas.Rule_EventPattern, v.EventPattern)
+		case schemas.Rule_ManagedBy:
+			v.ManagedBy = new(string)
+			return d.ReadString(schemas.Rule_ManagedBy, v.ManagedBy)
+		case schemas.Rule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Rule_Name, v.Name)
+		case schemas.Rule_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Rule_RoleArn, v.RoleArn)
+		case schemas.Rule_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.Rule_ScheduleExpression, v.ScheduleExpression)
+		case schemas.Rule_State:
+			var ev string
+			if err := d.ReadString(schemas.Rule_State, &ev); err != nil {
+				return err
+			}
+			v.State = RuleState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This parameter contains the criteria (either InstanceIds or a tag) used to
 // specify which EC2 instances are to be sent the command.
 type RunCommandParameters struct {
@@ -1492,6 +3704,25 @@ type RunCommandParameters struct {
 	RunCommandTargets []RunCommandTarget
 
 	noSmithyDocumentSerde
+}
+
+func (v *RunCommandParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunCommandParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunCommandParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRunCommandTargets(s, schemas.RunCommandParameters_RunCommandTargets, v.RunCommandTargets)
+}
+func (v *RunCommandParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunCommandParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunCommandParameters_RunCommandTargets:
+			return deserializeRunCommandTargets(d, schemas.RunCommandParameters_RunCommandTargets, &v.RunCommandTargets)
+		}
+		return nil
+	})
 }
 
 // Information about the EC2 instances that are to be sent the command, specified
@@ -1513,6 +3744,31 @@ type RunCommandTarget struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunCommandTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunCommandTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunCommandTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.RunCommandTarget_Key, *v.Key)
+	}
+	serializeRunCommandTargetValues(s, schemas.RunCommandTarget_Values, v.Values)
+}
+func (v *RunCommandTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunCommandTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunCommandTarget_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.RunCommandTarget_Key, v.Key)
+		case schemas.RunCommandTarget_Values:
+			return deserializeRunCommandTargetValues(d, schemas.RunCommandTarget_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Name/Value pair of a parameter to start execution of a SageMaker AI Model
 // Building Pipeline.
 type SageMakerPipelineParameter struct {
@@ -1530,6 +3786,34 @@ type SageMakerPipelineParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SageMakerPipelineParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerPipelineParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerPipelineParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SageMakerPipelineParameter_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.SageMakerPipelineParameter_Value, *v.Value)
+	}
+}
+func (v *SageMakerPipelineParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerPipelineParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerPipelineParameter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SageMakerPipelineParameter_Name, v.Name)
+		case schemas.SageMakerPipelineParameter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SageMakerPipelineParameter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // These are custom parameters to use when the target is a SageMaker AI Model
 // Building Pipeline that starts based on EventBridge events.
 type SageMakerPipelineParameters struct {
@@ -1539,6 +3823,25 @@ type SageMakerPipelineParameters struct {
 	PipelineParameterList []SageMakerPipelineParameter
 
 	noSmithyDocumentSerde
+}
+
+func (v *SageMakerPipelineParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerPipelineParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerPipelineParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSageMakerPipelineParameterList(s, schemas.SageMakerPipelineParameters_PipelineParameterList, v.PipelineParameterList)
+}
+func (v *SageMakerPipelineParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerPipelineParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerPipelineParameters_PipelineParameterList:
+			return deserializeSageMakerPipelineParameterList(d, schemas.SageMakerPipelineParameters_PipelineParameterList, &v.PipelineParameterList)
+		}
+		return nil
+	})
 }
 
 // The secondary Region that processes events when failover is triggered or
@@ -1553,6 +3856,28 @@ type Secondary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Secondary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Secondary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Secondary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Route != nil {
+		s.WriteString(schemas.Secondary_Route, *v.Route)
+	}
+}
+func (v *Secondary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Secondary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Secondary_Route:
+			v.Route = new(string)
+			return d.ReadString(schemas.Secondary_Route, v.Route)
+		}
+		return nil
+	})
+}
+
 // This structure includes the custom parameter to be used when the target is an
 // SQS FIFO queue.
 type SqsParameters struct {
@@ -1561,6 +3886,28 @@ type SqsParameters struct {
 	MessageGroupId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SqsParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqsParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqsParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageGroupId != nil {
+		s.WriteString(schemas.SqsParameters_MessageGroupId, *v.MessageGroupId)
+	}
+}
+func (v *SqsParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqsParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqsParameters_MessageGroupId:
+			v.MessageGroupId = new(string)
+			return d.ReadString(schemas.SqsParameters_MessageGroupId, v.MessageGroupId)
+		}
+		return nil
+	})
 }
 
 // A key-value pair associated with an Amazon Web Services resource. In
@@ -1579,6 +3926,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Targets are the resources to be invoked when a rule is triggered. For a
@@ -1696,6 +4071,148 @@ type Target struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Target) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Target)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Target) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppSyncParameters != nil {
+		s.WriteStruct(schemas.Target_AppSyncParameters)
+		v.AppSyncParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Target_Arn, *v.Arn)
+	}
+	if v.BatchParameters != nil {
+		s.WriteStruct(schemas.Target_BatchParameters)
+		v.BatchParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.Target_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcsParameters != nil {
+		s.WriteStruct(schemas.Target_EcsParameters)
+		v.EcsParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpParameters != nil {
+		s.WriteStruct(schemas.Target_HttpParameters)
+		v.HttpParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Target_Id, *v.Id)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.Target_Input, *v.Input)
+	}
+	if v.InputPath != nil {
+		s.WriteString(schemas.Target_InputPath, *v.InputPath)
+	}
+	if v.InputTransformer != nil {
+		s.WriteStruct(schemas.Target_InputTransformer)
+		v.InputTransformer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisParameters != nil {
+		s.WriteStruct(schemas.Target_KinesisParameters)
+		v.KinesisParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftDataParameters != nil {
+		s.WriteStruct(schemas.Target_RedshiftDataParameters)
+		v.RedshiftDataParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryPolicy != nil {
+		s.WriteStruct(schemas.Target_RetryPolicy)
+		v.RetryPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Target_RoleArn, *v.RoleArn)
+	}
+	if v.RunCommandParameters != nil {
+		s.WriteStruct(schemas.Target_RunCommandParameters)
+		v.RunCommandParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SageMakerPipelineParameters != nil {
+		s.WriteStruct(schemas.Target_SageMakerPipelineParameters)
+		v.SageMakerPipelineParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqsParameters != nil {
+		s.WriteStruct(schemas.Target_SqsParameters)
+		v.SqsParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Target) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Target, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Target_AppSyncParameters:
+			v.AppSyncParameters = &AppSyncParameters{}
+			return v.AppSyncParameters.Deserialize(d)
+		case schemas.Target_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Target_Arn, v.Arn)
+		case schemas.Target_BatchParameters:
+			v.BatchParameters = &BatchParameters{}
+			return v.BatchParameters.Deserialize(d)
+		case schemas.Target_DeadLetterConfig:
+			v.DeadLetterConfig = &DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.Target_EcsParameters:
+			v.EcsParameters = &EcsParameters{}
+			return v.EcsParameters.Deserialize(d)
+		case schemas.Target_HttpParameters:
+			v.HttpParameters = &HttpParameters{}
+			return v.HttpParameters.Deserialize(d)
+		case schemas.Target_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Target_Id, v.Id)
+		case schemas.Target_Input:
+			v.Input = new(string)
+			return d.ReadString(schemas.Target_Input, v.Input)
+		case schemas.Target_InputPath:
+			v.InputPath = new(string)
+			return d.ReadString(schemas.Target_InputPath, v.InputPath)
+		case schemas.Target_InputTransformer:
+			v.InputTransformer = &InputTransformer{}
+			return v.InputTransformer.Deserialize(d)
+		case schemas.Target_KinesisParameters:
+			v.KinesisParameters = &KinesisParameters{}
+			return v.KinesisParameters.Deserialize(d)
+		case schemas.Target_RedshiftDataParameters:
+			v.RedshiftDataParameters = &RedshiftDataParameters{}
+			return v.RedshiftDataParameters.Deserialize(d)
+		case schemas.Target_RetryPolicy:
+			v.RetryPolicy = &RetryPolicy{}
+			return v.RetryPolicy.Deserialize(d)
+		case schemas.Target_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Target_RoleArn, v.RoleArn)
+		case schemas.Target_RunCommandParameters:
+			v.RunCommandParameters = &RunCommandParameters{}
+			return v.RunCommandParameters.Deserialize(d)
+		case schemas.Target_SageMakerPipelineParameters:
+			v.SageMakerPipelineParameters = &SageMakerPipelineParameters{}
+			return v.SageMakerPipelineParameters.Deserialize(d)
+		case schemas.Target_SqsParameters:
+			v.SqsParameters = &SqsParameters{}
+			return v.SqsParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the API key authorization parameters to use to update the connection.
 type UpdateConnectionApiKeyAuthRequestParameters struct {
 
@@ -1706,6 +4223,34 @@ type UpdateConnectionApiKeyAuthRequestParameters struct {
 	ApiKeyValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateConnectionApiKeyAuthRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionApiKeyAuthRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionApiKeyAuthRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeyName != nil {
+		s.WriteString(schemas.UpdateConnectionApiKeyAuthRequestParameters_ApiKeyName, *v.ApiKeyName)
+	}
+	if v.ApiKeyValue != nil {
+		s.WriteString(schemas.UpdateConnectionApiKeyAuthRequestParameters_ApiKeyValue, *v.ApiKeyValue)
+	}
+}
+func (v *UpdateConnectionApiKeyAuthRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionApiKeyAuthRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionApiKeyAuthRequestParameters_ApiKeyName:
+			v.ApiKeyName = new(string)
+			return d.ReadString(schemas.UpdateConnectionApiKeyAuthRequestParameters_ApiKeyName, v.ApiKeyName)
+		case schemas.UpdateConnectionApiKeyAuthRequestParameters_ApiKeyValue:
+			v.ApiKeyValue = new(string)
+			return d.ReadString(schemas.UpdateConnectionApiKeyAuthRequestParameters_ApiKeyValue, v.ApiKeyValue)
+		}
+		return nil
+	})
 }
 
 // Contains the additional parameters to use for the connection.
@@ -1734,6 +4279,62 @@ type UpdateConnectionAuthRequestParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionAuthRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionAuthRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionAuthRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeyAuthParameters != nil {
+		s.WriteStruct(schemas.UpdateConnectionAuthRequestParameters_ApiKeyAuthParameters)
+		v.ApiKeyAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BasicAuthParameters != nil {
+		s.WriteStruct(schemas.UpdateConnectionAuthRequestParameters_BasicAuthParameters)
+		v.BasicAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectivityParameters != nil {
+		s.WriteStruct(schemas.UpdateConnectionAuthRequestParameters_ConnectivityParameters)
+		v.ConnectivityParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvocationHttpParameters != nil {
+		s.WriteStruct(schemas.UpdateConnectionAuthRequestParameters_InvocationHttpParameters)
+		v.InvocationHttpParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OAuthParameters != nil {
+		s.WriteStruct(schemas.UpdateConnectionAuthRequestParameters_OAuthParameters)
+		v.OAuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateConnectionAuthRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionAuthRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionAuthRequestParameters_ApiKeyAuthParameters:
+			v.ApiKeyAuthParameters = &UpdateConnectionApiKeyAuthRequestParameters{}
+			return v.ApiKeyAuthParameters.Deserialize(d)
+		case schemas.UpdateConnectionAuthRequestParameters_BasicAuthParameters:
+			v.BasicAuthParameters = &UpdateConnectionBasicAuthRequestParameters{}
+			return v.BasicAuthParameters.Deserialize(d)
+		case schemas.UpdateConnectionAuthRequestParameters_ConnectivityParameters:
+			v.ConnectivityParameters = &ConnectivityResourceParameters{}
+			return v.ConnectivityParameters.Deserialize(d)
+		case schemas.UpdateConnectionAuthRequestParameters_InvocationHttpParameters:
+			v.InvocationHttpParameters = &ConnectionHttpParameters{}
+			return v.InvocationHttpParameters.Deserialize(d)
+		case schemas.UpdateConnectionAuthRequestParameters_OAuthParameters:
+			v.OAuthParameters = &UpdateConnectionOAuthRequestParameters{}
+			return v.OAuthParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The Basic authorization parameters for the connection.
 type UpdateConnectionBasicAuthRequestParameters struct {
 
@@ -1746,6 +4347,34 @@ type UpdateConnectionBasicAuthRequestParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionBasicAuthRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionBasicAuthRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionBasicAuthRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.UpdateConnectionBasicAuthRequestParameters_Password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.UpdateConnectionBasicAuthRequestParameters_Username, *v.Username)
+	}
+}
+func (v *UpdateConnectionBasicAuthRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionBasicAuthRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionBasicAuthRequestParameters_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.UpdateConnectionBasicAuthRequestParameters_Password, v.Password)
+		case schemas.UpdateConnectionBasicAuthRequestParameters_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.UpdateConnectionBasicAuthRequestParameters_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 // The OAuth authorization parameters to use for the connection.
 type UpdateConnectionOAuthClientRequestParameters struct {
 
@@ -1756,6 +4385,34 @@ type UpdateConnectionOAuthClientRequestParameters struct {
 	ClientSecret *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateConnectionOAuthClientRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionOAuthClientRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionOAuthClientRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientID != nil {
+		s.WriteString(schemas.UpdateConnectionOAuthClientRequestParameters_ClientID, *v.ClientID)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.UpdateConnectionOAuthClientRequestParameters_ClientSecret, *v.ClientSecret)
+	}
+}
+func (v *UpdateConnectionOAuthClientRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionOAuthClientRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionOAuthClientRequestParameters_ClientID:
+			v.ClientID = new(string)
+			return d.ReadString(schemas.UpdateConnectionOAuthClientRequestParameters_ClientID, v.ClientID)
+		case schemas.UpdateConnectionOAuthClientRequestParameters_ClientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.UpdateConnectionOAuthClientRequestParameters_ClientSecret, v.ClientSecret)
+		}
+		return nil
+	})
 }
 
 // The OAuth request parameters to use for the connection.
@@ -1776,6 +4433,54 @@ type UpdateConnectionOAuthRequestParameters struct {
 	OAuthHttpParameters *ConnectionHttpParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateConnectionOAuthRequestParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionOAuthRequestParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionOAuthRequestParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationEndpoint != nil {
+		s.WriteString(schemas.UpdateConnectionOAuthRequestParameters_AuthorizationEndpoint, *v.AuthorizationEndpoint)
+	}
+	if v.ClientParameters != nil {
+		s.WriteStruct(schemas.UpdateConnectionOAuthRequestParameters_ClientParameters)
+		v.ClientParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpMethod != "" {
+		s.WriteString(schemas.UpdateConnectionOAuthRequestParameters_HttpMethod, string(v.HttpMethod))
+	}
+	if v.OAuthHttpParameters != nil {
+		s.WriteStruct(schemas.UpdateConnectionOAuthRequestParameters_OAuthHttpParameters)
+		v.OAuthHttpParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateConnectionOAuthRequestParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionOAuthRequestParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionOAuthRequestParameters_AuthorizationEndpoint:
+			v.AuthorizationEndpoint = new(string)
+			return d.ReadString(schemas.UpdateConnectionOAuthRequestParameters_AuthorizationEndpoint, v.AuthorizationEndpoint)
+		case schemas.UpdateConnectionOAuthRequestParameters_ClientParameters:
+			v.ClientParameters = &UpdateConnectionOAuthClientRequestParameters{}
+			return v.ClientParameters.Deserialize(d)
+		case schemas.UpdateConnectionOAuthRequestParameters_HttpMethod:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConnectionOAuthRequestParameters_HttpMethod, &ev); err != nil {
+				return err
+			}
+			v.HttpMethod = ConnectionOAuthHttpMethod(ev)
+			return nil
+		case schemas.UpdateConnectionOAuthRequestParameters_OAuthHttpParameters:
+			v.OAuthHttpParameters = &ConnectionHttpParameters{}
+			return v.OAuthHttpParameters.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

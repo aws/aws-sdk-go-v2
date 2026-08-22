@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,24 @@ type GetVolumeInput struct {
 	VolumeId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetVolumeRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetVolumeRequest_fleetId, *v.FleetId)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.GetVolumeRequest_volumeId, *v.VolumeId)
+	}
 }
 
 // Mixin that adds an optional ARN field to response structures. Apply to
@@ -115,13 +135,118 @@ type GetVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachedWorkerId != nil {
+		s.WriteString(schemas.GetVolumeResponse_attachedWorkerId, *v.AttachedWorkerId)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.GetVolumeResponse_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetVolumeResponse_createdAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.GetVolumeResponse_expiresAt, *v.ExpiresAt)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetVolumeResponse_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetVolumeResponse_fleetId, *v.FleetId)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.GetVolumeResponse_iops, *v.Iops)
+	}
+	if v.LastAssignedAt != nil {
+		s.WriteTime(schemas.GetVolumeResponse_lastAssignedAt, *v.LastAssignedAt)
+	}
+	if v.LastReleasedAt != nil {
+		s.WriteTime(schemas.GetVolumeResponse_lastReleasedAt, *v.LastReleasedAt)
+	}
+	if v.SizeGiB != nil {
+		s.WriteInt32(schemas.GetVolumeResponse_sizeGiB, *v.SizeGiB)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GetVolumeResponse_state, string(v.State))
+	}
+	if v.ThroughputMiB != nil {
+		s.WriteInt32(schemas.GetVolumeResponse_throughputMiB, *v.ThroughputMiB)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.GetVolumeResponse_volumeId, *v.VolumeId)
+	}
+	if v.VolumeType != "" {
+		s.WriteString(schemas.GetVolumeResponse_volumeType, string(v.VolumeType))
+	}
+}
+func (v *GetVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVolumeResponse_attachedWorkerId:
+			v.AttachedWorkerId = new(string)
+			return d.ReadString(schemas.GetVolumeResponse_attachedWorkerId, v.AttachedWorkerId)
+		case schemas.GetVolumeResponse_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.GetVolumeResponse_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.GetVolumeResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetVolumeResponse_createdAt, v.CreatedAt)
+		case schemas.GetVolumeResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.GetVolumeResponse_expiresAt, v.ExpiresAt)
+		case schemas.GetVolumeResponse_farmId:
+			v.FarmId = new(string)
+			return d.ReadString(schemas.GetVolumeResponse_farmId, v.FarmId)
+		case schemas.GetVolumeResponse_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GetVolumeResponse_fleetId, v.FleetId)
+		case schemas.GetVolumeResponse_iops:
+			v.Iops = new(int32)
+			return d.ReadInt32(schemas.GetVolumeResponse_iops, v.Iops)
+		case schemas.GetVolumeResponse_lastAssignedAt:
+			v.LastAssignedAt = new(time.Time)
+			return d.ReadTime(schemas.GetVolumeResponse_lastAssignedAt, v.LastAssignedAt)
+		case schemas.GetVolumeResponse_lastReleasedAt:
+			v.LastReleasedAt = new(time.Time)
+			return d.ReadTime(schemas.GetVolumeResponse_lastReleasedAt, v.LastReleasedAt)
+		case schemas.GetVolumeResponse_sizeGiB:
+			v.SizeGiB = new(int32)
+			return d.ReadInt32(schemas.GetVolumeResponse_sizeGiB, v.SizeGiB)
+		case schemas.GetVolumeResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.GetVolumeResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.VolumeState(ev)
+			return nil
+		case schemas.GetVolumeResponse_throughputMiB:
+			v.ThroughputMiB = new(int32)
+			return d.ReadInt32(schemas.GetVolumeResponse_throughputMiB, v.ThroughputMiB)
+		case schemas.GetVolumeResponse_volumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.GetVolumeResponse_volumeId, v.VolumeId)
+		case schemas.GetVolumeResponse_volumeType:
+			var ev string
+			if err := d.ReadString(schemas.GetVolumeResponse_volumeType, &ev); err != nil {
+				return err
+			}
+			v.VolumeType = types.EbsVolumeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVolume, schemas.GetVolumeRequest, schemas.GetVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVolume, schemas.GetVolumeRequest, schemas.GetVolumeResponse), output: &GetVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListListenersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListListenersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListListenersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListListenersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.ListListenersRequest_AcceleratorArn, *v.AcceleratorArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListListenersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListListenersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListListenersOutput struct {
 
 	// The list of listeners for an accelerator.
@@ -59,13 +79,35 @@ type ListListenersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListListenersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListListenersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListListenersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListeners(s, schemas.ListListenersResponse_Listeners, v.Listeners)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListListenersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListListenersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListListenersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListListenersResponse_Listeners:
+			return deserializeListeners(d, schemas.ListListenersResponse_Listeners, &v.Listeners)
+		case schemas.ListListenersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListListenersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListListeners{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListListeners, schemas.ListListenersRequest, schemas.ListListenersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListListeners{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListListeners, schemas.ListListenersRequest, schemas.ListListenersResponse), output: &ListListenersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

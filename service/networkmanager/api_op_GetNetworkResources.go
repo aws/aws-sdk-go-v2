@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,42 @@ type GetNetworkResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetNetworkResourcesRequest_AccountId, *v.AccountId)
+	}
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.GetNetworkResourcesRequest_AwsRegion, *v.AwsRegion)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.GetNetworkResourcesRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetNetworkResourcesRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetNetworkResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkResourcesRequest_NextToken, *v.NextToken)
+	}
+	if v.RegisteredGatewayArn != nil {
+		s.WriteString(schemas.GetNetworkResourcesRequest_RegisteredGatewayArn, *v.RegisteredGatewayArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetNetworkResourcesRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetNetworkResourcesRequest_ResourceType, *v.ResourceType)
+	}
+}
+
 type GetNetworkResourcesOutput struct {
 
 	// The network resources.
@@ -116,13 +154,35 @@ type GetNetworkResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkResourceList(s, schemas.GetNetworkResourcesResponse_NetworkResources, v.NetworkResources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkResourcesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetNetworkResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkResourcesResponse_NetworkResources:
+			return deserializeNetworkResourceList(d, schemas.GetNetworkResourcesResponse_NetworkResources, &v.NetworkResources)
+		case schemas.GetNetworkResourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetNetworkResourcesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkResources, schemas.GetNetworkResourcesRequest, schemas.GetNetworkResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkResources, schemas.GetNetworkResourcesRequest, schemas.GetNetworkResourcesResponse), output: &GetNetworkResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

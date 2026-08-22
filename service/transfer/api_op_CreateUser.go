@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -155,6 +157,43 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HomeDirectory != nil {
+		s.WriteString(schemas.CreateUserRequest_HomeDirectory, *v.HomeDirectory)
+	}
+	serializeHomeDirectoryMappings(s, schemas.CreateUserRequest_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	if v.HomeDirectoryType != "" {
+		s.WriteString(schemas.CreateUserRequest_HomeDirectoryType, string(v.HomeDirectoryType))
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.CreateUserRequest_Policy, *v.Policy)
+	}
+	if v.PosixProfile != nil {
+		s.WriteStruct(schemas.CreateUserRequest_PosixProfile)
+		v.PosixProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateUserRequest_Role, *v.Role)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.CreateUserRequest_ServerId, *v.ServerId)
+	}
+	if v.SshPublicKeyBody != nil {
+		s.WriteString(schemas.CreateUserRequest_SshPublicKeyBody, *v.SshPublicKeyBody)
+	}
+	serializeTags(s, schemas.CreateUserRequest_Tags, v.Tags)
+	if v.UserName != nil {
+		s.WriteString(schemas.CreateUserRequest_UserName, *v.UserName)
+	}
+}
+
 type CreateUserOutput struct {
 
 	// The identifier of the server that the user is attached to.
@@ -173,13 +212,38 @@ type CreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.CreateUserResponse_ServerId, *v.ServerId)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.CreateUserResponse_UserName, *v.UserName)
+	}
+}
+func (v *CreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.CreateUserResponse_ServerId, v.ServerId)
+		case schemas.CreateUserResponse_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.CreateUserResponse_UserName, v.UserName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse), output: &CreateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,27 @@ type ListQueueEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueEnvironmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListQueueEnvironmentsRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueueEnvironmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueEnvironmentsRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListQueueEnvironmentsRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListQueueEnvironmentsOutput struct {
 
@@ -71,13 +94,35 @@ type ListQueueEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueEnvironmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQueueEnvironmentSummaries(s, schemas.ListQueueEnvironmentsResponse_environments, v.Environments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueEnvironmentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListQueueEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueueEnvironmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueueEnvironmentsResponse_environments:
+			return deserializeQueueEnvironmentSummaries(d, schemas.ListQueueEnvironmentsResponse_environments, &v.Environments)
+		case schemas.ListQueueEnvironmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueueEnvironmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueueEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueueEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueEnvironments, schemas.ListQueueEnvironmentsRequest, schemas.ListQueueEnvironmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueueEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueEnvironments, schemas.ListQueueEnvironmentsRequest, schemas.ListQueueEnvironmentsResponse), output: &ListQueueEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

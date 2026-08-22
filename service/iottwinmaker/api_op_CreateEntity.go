@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -63,6 +65,61 @@ type CreateEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComponentsMapRequest(s, schemas.CreateEntityRequest_components, v.Components)
+	serializeCompositeComponentsMapRequest(s, schemas.CreateEntityRequest_compositeComponents, v.CompositeComponents)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEntityRequest_description, *v.Description)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.CreateEntityRequest_entityId, *v.EntityId)
+	}
+	if v.EntityName != nil {
+		s.WriteString(schemas.CreateEntityRequest_entityName, *v.EntityName)
+	}
+	if v.ParentEntityId != nil {
+		s.WriteString(schemas.CreateEntityRequest_parentEntityId, *v.ParentEntityId)
+	}
+	serializeTagMap(s, schemas.CreateEntityRequest_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateEntityRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateEntityInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEntityRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEntityRequest_components:
+			return deserializeComponentsMapRequest(d, schemas.CreateEntityRequest_components, &v.Components)
+		case schemas.CreateEntityRequest_compositeComponents:
+			return deserializeCompositeComponentsMapRequest(d, schemas.CreateEntityRequest_compositeComponents, &v.CompositeComponents)
+		case schemas.CreateEntityRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateEntityRequest_description, v.Description)
+		case schemas.CreateEntityRequest_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.CreateEntityRequest_entityId, v.EntityId)
+		case schemas.CreateEntityRequest_entityName:
+			v.EntityName = new(string)
+			return d.ReadString(schemas.CreateEntityRequest_entityName, v.EntityName)
+		case schemas.CreateEntityRequest_parentEntityId:
+			v.ParentEntityId = new(string)
+			return d.ReadString(schemas.CreateEntityRequest_parentEntityId, v.ParentEntityId)
+		case schemas.CreateEntityRequest_tags:
+			return deserializeTagMap(d, schemas.CreateEntityRequest_tags, &v.Tags)
+		case schemas.CreateEntityRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateEntityRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type CreateEntityOutput struct {
 
 	// The ARN of the entity.
@@ -91,13 +148,54 @@ type CreateEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateEntityResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateEntityResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.CreateEntityResponse_entityId, *v.EntityId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateEntityResponse_state, string(v.State))
+	}
+}
+func (v *CreateEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEntityResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateEntityResponse_arn, v.Arn)
+		case schemas.CreateEntityResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateEntityResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateEntityResponse_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.CreateEntityResponse_entityId, v.EntityId)
+		case schemas.CreateEntityResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.CreateEntityResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.State(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEntity, schemas.CreateEntityRequest, schemas.CreateEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEntity, schemas.CreateEntityRequest, schemas.CreateEntityResponse), output: &CreateEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

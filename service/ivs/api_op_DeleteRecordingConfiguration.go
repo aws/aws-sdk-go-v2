@@ -4,6 +4,8 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,28 @@ type DeleteRecordingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecordingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecordingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecordingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteRecordingConfigurationRequest_arn, *v.Arn)
+	}
+}
+func (v *DeleteRecordingConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecordingConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRecordingConfigurationRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteRecordingConfigurationRequest_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DeleteRecordingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +70,26 @@ type DeleteRecordingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecordingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecordingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRecordingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecordingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecordingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecordingConfiguration, schemas.DeleteRecordingConfigurationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRecordingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecordingConfiguration, schemas.DeleteRecordingConfigurationRequest, nil), output: &DeleteRecordingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

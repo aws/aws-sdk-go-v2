@@ -4,7 +4,9 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetStreamKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStreamKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetStreamKeyRequest_arn, *v.Arn)
+	}
+}
+func (v *GetStreamKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStreamKeyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStreamKeyRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetStreamKeyRequest_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type GetStreamKeyOutput struct {
 
 	//
@@ -45,13 +69,34 @@ type GetStreamKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStreamKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamKey != nil {
+		s.WriteStruct(schemas.GetStreamKeyResponse_streamKey)
+		v.StreamKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetStreamKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStreamKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStreamKeyResponse_streamKey:
+			v.StreamKey = &types.StreamKey{}
+			return v.StreamKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamKey, schemas.GetStreamKeyRequest, schemas.GetStreamKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamKey, schemas.GetStreamKeyRequest, schemas.GetStreamKeyResponse), output: &GetStreamKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

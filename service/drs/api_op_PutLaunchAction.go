@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,46 @@ type PutLaunchActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLaunchActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLaunchActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLaunchActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionCode != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_actionCode, *v.ActionCode)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_actionId, *v.ActionId)
+	}
+	if v.ActionVersion != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_actionVersion, *v.ActionVersion)
+	}
+	if v.Active != nil {
+		s.WriteBool(schemas.PutLaunchActionRequest_active, *v.Active)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.PutLaunchActionRequest_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_name, *v.Name)
+	}
+	if v.Optional != nil {
+		s.WriteBool(schemas.PutLaunchActionRequest_optional, *v.Optional)
+	}
+	if v.Order != nil {
+		s.WriteInt32(schemas.PutLaunchActionRequest_order, *v.Order)
+	}
+	serializeLaunchActionParameters(s, schemas.PutLaunchActionRequest_parameters, v.Parameters)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_resourceId, *v.ResourceId)
+	}
+}
+
 type PutLaunchActionOutput struct {
 
 	// Launch action code.
@@ -126,13 +168,103 @@ type PutLaunchActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLaunchActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLaunchActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLaunchActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionCode != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_actionCode, *v.ActionCode)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_actionId, *v.ActionId)
+	}
+	if v.ActionVersion != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_actionVersion, *v.ActionVersion)
+	}
+	if v.Active != nil {
+		s.WriteBool(schemas.PutLaunchActionResponse_active, *v.Active)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.PutLaunchActionResponse_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_name, *v.Name)
+	}
+	if v.Optional != nil {
+		s.WriteBool(schemas.PutLaunchActionResponse_optional, *v.Optional)
+	}
+	if v.Order != nil {
+		s.WriteInt32(schemas.PutLaunchActionResponse_order, *v.Order)
+	}
+	serializeLaunchActionParameters(s, schemas.PutLaunchActionResponse_parameters, v.Parameters)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_resourceId, *v.ResourceId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PutLaunchActionResponse_type, string(v.Type))
+	}
+}
+func (v *PutLaunchActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLaunchActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutLaunchActionResponse_actionCode:
+			v.ActionCode = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_actionCode, v.ActionCode)
+		case schemas.PutLaunchActionResponse_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_actionId, v.ActionId)
+		case schemas.PutLaunchActionResponse_actionVersion:
+			v.ActionVersion = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_actionVersion, v.ActionVersion)
+		case schemas.PutLaunchActionResponse_active:
+			v.Active = new(bool)
+			return d.ReadBool(schemas.PutLaunchActionResponse_active, v.Active)
+		case schemas.PutLaunchActionResponse_category:
+			var ev string
+			if err := d.ReadString(schemas.PutLaunchActionResponse_category, &ev); err != nil {
+				return err
+			}
+			v.Category = types.LaunchActionCategory(ev)
+			return nil
+		case schemas.PutLaunchActionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_description, v.Description)
+		case schemas.PutLaunchActionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_name, v.Name)
+		case schemas.PutLaunchActionResponse_optional:
+			v.Optional = new(bool)
+			return d.ReadBool(schemas.PutLaunchActionResponse_optional, v.Optional)
+		case schemas.PutLaunchActionResponse_order:
+			v.Order = new(int32)
+			return d.ReadInt32(schemas.PutLaunchActionResponse_order, v.Order)
+		case schemas.PutLaunchActionResponse_parameters:
+			return deserializeLaunchActionParameters(d, schemas.PutLaunchActionResponse_parameters, &v.Parameters)
+		case schemas.PutLaunchActionResponse_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_resourceId, v.ResourceId)
+		case schemas.PutLaunchActionResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.PutLaunchActionResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.LaunchActionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLaunchActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutLaunchAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLaunchAction, schemas.PutLaunchActionRequest, schemas.PutLaunchActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutLaunchAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLaunchAction, schemas.PutLaunchActionRequest, schemas.PutLaunchActionResponse), output: &PutLaunchActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

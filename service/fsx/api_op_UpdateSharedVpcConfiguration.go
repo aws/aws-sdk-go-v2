@@ -5,6 +5,8 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type UpdateSharedVpcConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSharedVpcConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSharedVpcConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSharedVpcConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateSharedVpcConfigurationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.EnableFsxRouteTableUpdatesFromParticipantAccounts != nil {
+		s.WriteString(schemas.UpdateSharedVpcConfigurationRequest_EnableFsxRouteTableUpdatesFromParticipantAccounts, *v.EnableFsxRouteTableUpdatesFromParticipantAccounts)
+	}
+}
+
 type UpdateSharedVpcConfigurationOutput struct {
 
 	// Indicates whether participant accounts can create FSx for ONTAP Multi-AZ file
@@ -60,13 +77,32 @@ type UpdateSharedVpcConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSharedVpcConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSharedVpcConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSharedVpcConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableFsxRouteTableUpdatesFromParticipantAccounts != nil {
+		s.WriteString(schemas.UpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts, *v.EnableFsxRouteTableUpdatesFromParticipantAccounts)
+	}
+}
+func (v *UpdateSharedVpcConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSharedVpcConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts:
+			v.EnableFsxRouteTableUpdatesFromParticipantAccounts = new(string)
+			return d.ReadString(schemas.UpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts, v.EnableFsxRouteTableUpdatesFromParticipantAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSharedVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSharedVpcConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSharedVpcConfiguration, schemas.UpdateSharedVpcConfigurationRequest, schemas.UpdateSharedVpcConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSharedVpcConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSharedVpcConfiguration, schemas.UpdateSharedVpcConfigurationRequest, schemas.UpdateSharedVpcConfigurationResponse), output: &UpdateSharedVpcConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

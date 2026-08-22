@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgreementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgreementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgreementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.DescribeAgreementRequest_AgreementId, *v.AgreementId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.DescribeAgreementRequest_ServerId, *v.ServerId)
+	}
+}
+
 type DescribeAgreementOutput struct {
 
 	// The details for the specified agreement, returned as a DescribedAgreement
@@ -54,13 +71,34 @@ type DescribeAgreementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgreementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgreementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgreementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Agreement != nil {
+		s.WriteStruct(schemas.DescribeAgreementResponse_Agreement)
+		v.Agreement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAgreementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAgreementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAgreementResponse_Agreement:
+			v.Agreement = &types.DescribedAgreement{}
+			return v.Agreement.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAgreementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgreement, schemas.DescribeAgreementRequest, schemas.DescribeAgreementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgreement, schemas.DescribeAgreementRequest, schemas.DescribeAgreementResponse), output: &DescribeAgreementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

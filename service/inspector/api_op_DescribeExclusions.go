@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type DescribeExclusionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExclusionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExclusionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExclusionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDescribeExclusionsArnList(s, schemas.DescribeExclusionsRequest_exclusionArns, v.ExclusionArns)
+	if v.Locale != "" {
+		s.WriteString(schemas.DescribeExclusionsRequest_locale, string(v.Locale))
+	}
+}
+
 type DescribeExclusionsOutput struct {
 
 	// Information about the exclusions.
@@ -57,13 +72,32 @@ type DescribeExclusionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExclusionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExclusionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExclusionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExclusionMap(s, schemas.DescribeExclusionsResponse_exclusions, v.Exclusions)
+	serializeFailedItems(s, schemas.DescribeExclusionsResponse_failedItems, v.FailedItems)
+}
+func (v *DescribeExclusionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExclusionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExclusionsResponse_exclusions:
+			return deserializeExclusionMap(d, schemas.DescribeExclusionsResponse_exclusions, &v.Exclusions)
+		case schemas.DescribeExclusionsResponse_failedItems:
+			return deserializeFailedItems(d, schemas.DescribeExclusionsResponse_failedItems, &v.FailedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExclusionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExclusions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExclusions, schemas.DescribeExclusionsRequest, schemas.DescribeExclusionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExclusions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExclusions, schemas.DescribeExclusionsRequest, schemas.DescribeExclusionsResponse), output: &DescribeExclusionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

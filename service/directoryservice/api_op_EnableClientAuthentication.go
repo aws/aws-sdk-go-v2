@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type EnableClientAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableClientAuthenticationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableClientAuthenticationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableClientAuthenticationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.EnableClientAuthenticationRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EnableClientAuthenticationRequest_Type, string(v.Type))
+	}
+}
+
 type EnableClientAuthenticationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type EnableClientAuthenticationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableClientAuthenticationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableClientAuthenticationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableClientAuthenticationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableClientAuthenticationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableClientAuthenticationResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableClientAuthenticationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableClientAuthentication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableClientAuthentication, schemas.EnableClientAuthenticationRequest, schemas.EnableClientAuthenticationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableClientAuthentication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableClientAuthentication, schemas.EnableClientAuthenticationRequest, schemas.EnableClientAuthenticationResult), output: &EnableClientAuthenticationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

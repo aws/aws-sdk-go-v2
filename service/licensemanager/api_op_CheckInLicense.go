@@ -4,6 +4,8 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type CheckInLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckInLicenseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckInLicenseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckInLicenseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Beneficiary != nil {
+		s.WriteString(schemas.CheckInLicenseRequest_Beneficiary, *v.Beneficiary)
+	}
+	if v.LicenseConsumptionToken != nil {
+		s.WriteString(schemas.CheckInLicenseRequest_LicenseConsumptionToken, *v.LicenseConsumptionToken)
+	}
+}
+
 type CheckInLicenseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +60,26 @@ type CheckInLicenseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckInLicenseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckInLicenseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckInLicenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CheckInLicenseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckInLicenseResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckInLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckInLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckInLicense, schemas.CheckInLicenseRequest, schemas.CheckInLicenseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCheckInLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckInLicense, schemas.CheckInLicenseRequest, schemas.CheckInLicenseResponse), output: &CheckInLicenseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

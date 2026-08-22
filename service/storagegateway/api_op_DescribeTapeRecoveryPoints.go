@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type DescribeTapeRecoveryPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTapeRecoveryPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTapeRecoveryPointsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTapeRecoveryPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeTapeRecoveryPointsInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeTapeRecoveryPointsInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTapeRecoveryPointsInput_Marker, *v.Marker)
+	}
+}
+
 // DescribeTapeRecoveryPointsOutput
 type DescribeTapeRecoveryPointsOutput struct {
 
@@ -75,13 +95,41 @@ type DescribeTapeRecoveryPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTapeRecoveryPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTapeRecoveryPointsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTapeRecoveryPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeTapeRecoveryPointsOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTapeRecoveryPointsOutput_Marker, *v.Marker)
+	}
+	serializeTapeRecoveryPointInfos(s, schemas.DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos, v.TapeRecoveryPointInfos)
+}
+func (v *DescribeTapeRecoveryPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTapeRecoveryPointsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTapeRecoveryPointsOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DescribeTapeRecoveryPointsOutput_GatewayARN, v.GatewayARN)
+		case schemas.DescribeTapeRecoveryPointsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeTapeRecoveryPointsOutput_Marker, v.Marker)
+		case schemas.DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos:
+			return deserializeTapeRecoveryPointInfos(d, schemas.DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos, &v.TapeRecoveryPointInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTapeRecoveryPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTapeRecoveryPoints, schemas.DescribeTapeRecoveryPointsInput, schemas.DescribeTapeRecoveryPointsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTapeRecoveryPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTapeRecoveryPoints, schemas.DescribeTapeRecoveryPointsInput, schemas.DescribeTapeRecoveryPointsOutput), output: &DescribeTapeRecoveryPointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetVariablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVariablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVariablesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVariablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetVariablesRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetVariablesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetVariablesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetVariablesOutput struct {
 
 	// The next page token to be used in subsequent requests.
@@ -58,13 +78,35 @@ type GetVariablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVariablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVariablesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVariablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetVariablesResult_nextToken, *v.NextToken)
+	}
+	serializeVariableList(s, schemas.GetVariablesResult_variables, v.Variables)
+}
+func (v *GetVariablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVariablesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVariablesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetVariablesResult_nextToken, v.NextToken)
+		case schemas.GetVariablesResult_variables:
+			return deserializeVariableList(d, schemas.GetVariablesResult_variables, &v.Variables)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVariablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetVariables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVariables, schemas.GetVariablesRequest, schemas.GetVariablesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetVariables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVariables, schemas.GetVariablesRequest, schemas.GetVariablesResult), output: &GetVariablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeHostKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHostKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHostKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHostKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostKeyId != nil {
+		s.WriteString(schemas.DescribeHostKeyRequest_HostKeyId, *v.HostKeyId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.DescribeHostKeyRequest_ServerId, *v.ServerId)
+	}
+}
+
 type DescribeHostKeyOutput struct {
 
 	// Returns the details for the specified host key.
@@ -53,13 +70,34 @@ type DescribeHostKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHostKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHostKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHostKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostKey != nil {
+		s.WriteStruct(schemas.DescribeHostKeyResponse_HostKey)
+		v.HostKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeHostKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHostKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHostKeyResponse_HostKey:
+			v.HostKey = &types.DescribedHostKey{}
+			return v.HostKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHostKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHostKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHostKey, schemas.DescribeHostKeyRequest, schemas.DescribeHostKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHostKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHostKey, schemas.DescribeHostKeyRequest, schemas.DescribeHostKeyResponse), output: &DescribeHostKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

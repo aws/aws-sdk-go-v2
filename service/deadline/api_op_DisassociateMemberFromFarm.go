@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type DisassociateMemberFromFarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberFromFarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberFromFarmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberFromFarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.DisassociateMemberFromFarmRequest_farmId, *v.FarmId)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.DisassociateMemberFromFarmRequest_principalId, *v.PrincipalId)
+	}
+}
+
 type DisassociateMemberFromFarmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DisassociateMemberFromFarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberFromFarmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberFromFarmResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberFromFarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateMemberFromFarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateMemberFromFarmResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateMemberFromFarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateMemberFromFarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMemberFromFarm, schemas.DisassociateMemberFromFarmRequest, schemas.DisassociateMemberFromFarmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateMemberFromFarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMemberFromFarm, schemas.DisassociateMemberFromFarmRequest, schemas.DisassociateMemberFromFarmResponse), output: &DisassociateMemberFromFarmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

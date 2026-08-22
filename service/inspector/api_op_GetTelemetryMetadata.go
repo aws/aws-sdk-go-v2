@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetTelemetryMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTelemetryMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTelemetryMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTelemetryMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.GetTelemetryMetadataRequest_assessmentRunArn, *v.AssessmentRunArn)
+	}
+}
+
 type GetTelemetryMetadataOutput struct {
 
 	// Telemetry details.
@@ -48,13 +62,29 @@ type GetTelemetryMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTelemetryMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTelemetryMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTelemetryMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTelemetryMetadataList(s, schemas.GetTelemetryMetadataResponse_telemetryMetadata, v.TelemetryMetadata)
+}
+func (v *GetTelemetryMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTelemetryMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTelemetryMetadataResponse_telemetryMetadata:
+			return deserializeTelemetryMetadataList(d, schemas.GetTelemetryMetadataResponse_telemetryMetadata, &v.TelemetryMetadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTelemetryMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTelemetryMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryMetadata, schemas.GetTelemetryMetadataRequest, schemas.GetTelemetryMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTelemetryMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryMetadata, schemas.GetTelemetryMetadataRequest, schemas.GetTelemetryMetadataResponse), output: &GetTelemetryMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

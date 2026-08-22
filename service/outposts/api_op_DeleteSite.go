@@ -4,6 +4,8 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSiteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSiteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSiteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SiteId != nil {
+		s.WriteString(schemas.DeleteSiteInput_SiteId, *v.SiteId)
+	}
+}
+
 type DeleteSiteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteSiteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSiteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSiteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSiteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSiteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSiteOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSite{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSite, schemas.DeleteSiteInput, schemas.DeleteSiteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSite{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSite, schemas.DeleteSiteInput, schemas.DeleteSiteOutput), output: &DeleteSiteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

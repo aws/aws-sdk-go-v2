@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type GetRevenueStatisticsSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevenueStatisticsSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevenueStatisticsSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevenueStatisticsSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.GetRevenueStatisticsSummaryRequest_Currency, string(v.Currency))
+	}
+	serializeMonetizationFilterList(s, schemas.GetRevenueStatisticsSummaryRequest_Filters, v.Filters)
+	if v.Scope != "" {
+		s.WriteString(schemas.GetRevenueStatisticsSummaryRequest_Scope, string(v.Scope))
+	}
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.GetRevenueStatisticsSummaryRequest_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetRevenueStatisticsSummaryOutput struct {
 
 	// The revenue breakdown summary for the specified time window and filters.
@@ -68,13 +91,34 @@ type GetRevenueStatisticsSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevenueStatisticsSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevenueStatisticsSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevenueStatisticsSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RevenueBreakdown != nil {
+		s.WriteStruct(schemas.GetRevenueStatisticsSummaryResponse_RevenueBreakdown)
+		v.RevenueBreakdown.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRevenueStatisticsSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRevenueStatisticsSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRevenueStatisticsSummaryResponse_RevenueBreakdown:
+			v.RevenueBreakdown = &types.RevenueBreakdown{}
+			return v.RevenueBreakdown.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRevenueStatisticsSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRevenueStatisticsSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevenueStatisticsSummary, schemas.GetRevenueStatisticsSummaryRequest, schemas.GetRevenueStatisticsSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRevenueStatisticsSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevenueStatisticsSummary, schemas.GetRevenueStatisticsSummaryRequest, schemas.GetRevenueStatisticsSummaryResponse), output: &GetRevenueStatisticsSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

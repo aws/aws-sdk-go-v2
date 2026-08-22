@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,30 @@ type DescribeModelVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeModelVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.DescribeModelVersionsRequest_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.DescribeModelVersionsRequest_modelType, string(v.ModelType))
+	}
+	if v.ModelVersionNumber != nil {
+		s.WriteString(schemas.DescribeModelVersionsRequest_modelVersionNumber, *v.ModelVersionNumber)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeModelVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeModelVersionsOutput struct {
 
 	// The model version details.
@@ -61,13 +87,35 @@ type DescribeModelVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelVersionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializemodelVersionDetailList(s, schemas.DescribeModelVersionsResult_modelVersionDetails, v.ModelVersionDetails)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeModelVersionsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeModelVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeModelVersionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeModelVersionsResult_modelVersionDetails:
+			return deserializemodelVersionDetailList(d, schemas.DescribeModelVersionsResult_modelVersionDetails, &v.ModelVersionDetails)
+		case schemas.DescribeModelVersionsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeModelVersionsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeModelVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelVersions, schemas.DescribeModelVersionsRequest, schemas.DescribeModelVersionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeModelVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelVersions, schemas.DescribeModelVersionsRequest, schemas.DescribeModelVersionsResult), output: &DescribeModelVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package billingconductor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,48 @@ type ListCustomLineItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomLineItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListCustomLineItemsInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListCustomLineItemsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomLineItemsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomLineItemsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomLineItemsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemsInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListCustomLineItemsInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListCustomLineItemsInput_Filters:
+			v.Filters = &types.ListCustomLineItemsFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListCustomLineItemsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListCustomLineItemsInput_MaxResults, v.MaxResults)
+		case schemas.ListCustomLineItemsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomLineItemsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListCustomLineItemsOutput struct {
 
 	//  A list of FreeFormLineItemListElements received.
@@ -62,13 +106,35 @@ type ListCustomLineItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomLineItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomLineItemList(s, schemas.ListCustomLineItemsOutput_CustomLineItems, v.CustomLineItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomLineItemsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomLineItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemsOutput_CustomLineItems:
+			return deserializeCustomLineItemList(d, schemas.ListCustomLineItemsOutput_CustomLineItems, &v.CustomLineItems)
+		case schemas.ListCustomLineItemsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomLineItemsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomLineItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomLineItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomLineItems, schemas.ListCustomLineItemsInput, schemas.ListCustomLineItemsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomLineItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomLineItems, schemas.ListCustomLineItemsInput, schemas.ListCustomLineItemsOutput), output: &ListCustomLineItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

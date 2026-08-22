@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,24 @@ type ListAPIKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAPIKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAPIKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAPIKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListAPIKeysRequest_Limit, *v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListAPIKeysRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.ListAPIKeysRequest_Scope, string(v.Scope))
+	}
+}
+
 type ListAPIKeysOutput struct {
 
 	// The array of key summaries. If you specified a Limit in your request, this
@@ -83,13 +103,41 @@ type ListAPIKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAPIKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAPIKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAPIKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAPIKeySummaries(s, schemas.ListAPIKeysResponse_APIKeySummaries, v.APIKeySummaries)
+	if v.ApplicationIntegrationURL != nil {
+		s.WriteString(schemas.ListAPIKeysResponse_ApplicationIntegrationURL, *v.ApplicationIntegrationURL)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListAPIKeysResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListAPIKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAPIKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAPIKeysResponse_APIKeySummaries:
+			return deserializeAPIKeySummaries(d, schemas.ListAPIKeysResponse_APIKeySummaries, &v.APIKeySummaries)
+		case schemas.ListAPIKeysResponse_ApplicationIntegrationURL:
+			v.ApplicationIntegrationURL = new(string)
+			return d.ReadString(schemas.ListAPIKeysResponse_ApplicationIntegrationURL, v.ApplicationIntegrationURL)
+		case schemas.ListAPIKeysResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListAPIKeysResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAPIKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAPIKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAPIKeys, schemas.ListAPIKeysRequest, schemas.ListAPIKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAPIKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAPIKeys, schemas.ListAPIKeysRequest, schemas.ListAPIKeysResponse), output: &ListAPIKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,31 @@ type DisassociateAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAccountsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.DisassociateAccountsInput_AccountIds, v.AccountIds)
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociateAccountsInput_Arn, *v.Arn)
+	}
+}
+func (v *DisassociateAccountsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAccountsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateAccountsInput_AccountIds:
+			return deserializeAccountIdList(d, schemas.DisassociateAccountsInput_AccountIds, &v.AccountIds)
+		case schemas.DisassociateAccountsInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociateAccountsInput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DisassociateAccountsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the billing group that the array of account
@@ -51,13 +78,32 @@ type DisassociateAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAccountsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociateAccountsOutput_Arn, *v.Arn)
+	}
+}
+func (v *DisassociateAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAccountsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateAccountsOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociateAccountsOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAccounts, schemas.DisassociateAccountsInput, schemas.DisassociateAccountsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAccounts, schemas.DisassociateAccountsInput, schemas.DisassociateAccountsOutput), output: &DisassociateAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

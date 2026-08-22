@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeGatewayInformationInput struct {
 	GatewayARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeGatewayInformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayInformationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeGatewayInformationInput_GatewayARN, *v.GatewayARN)
+	}
 }
 
 // A JSON object containing the following fields:
@@ -142,13 +156,157 @@ type DescribeGatewayInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGatewayInformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayInformationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogGroupARN != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_CloudWatchLogGroupARN, *v.CloudWatchLogGroupARN)
+	}
+	if v.DeprecationDate != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_DeprecationDate, *v.DeprecationDate)
+	}
+	if v.Ec2InstanceId != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_Ec2InstanceId, *v.Ec2InstanceId)
+	}
+	if v.Ec2InstanceRegion != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_Ec2InstanceRegion, *v.Ec2InstanceRegion)
+	}
+	if v.EndpointType != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_EndpointType, *v.EndpointType)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.GatewayCapacity != "" {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_GatewayCapacity, string(v.GatewayCapacity))
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_GatewayId, *v.GatewayId)
+	}
+	if v.GatewayName != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_GatewayName, *v.GatewayName)
+	}
+	serializeGatewayNetworkInterfaces(s, schemas.DescribeGatewayInformationOutput_GatewayNetworkInterfaces, v.GatewayNetworkInterfaces)
+	if v.GatewayState != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_GatewayState, *v.GatewayState)
+	}
+	if v.GatewayTimezone != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_GatewayTimezone, *v.GatewayTimezone)
+	}
+	if v.GatewayType != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_GatewayType, *v.GatewayType)
+	}
+	if v.HostEnvironment != "" {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_HostEnvironment, string(v.HostEnvironment))
+	}
+	if v.HostEnvironmentId != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_HostEnvironmentId, *v.HostEnvironmentId)
+	}
+	if v.LastSoftwareUpdate != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_LastSoftwareUpdate, *v.LastSoftwareUpdate)
+	}
+	if v.NextUpdateAvailabilityDate != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_NextUpdateAvailabilityDate, *v.NextUpdateAvailabilityDate)
+	}
+	if v.SoftwareUpdatesEndDate != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_SoftwareUpdatesEndDate, *v.SoftwareUpdatesEndDate)
+	}
+	if v.SoftwareVersion != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_SoftwareVersion, *v.SoftwareVersion)
+	}
+	serializeSupportedGatewayCapacities(s, schemas.DescribeGatewayInformationOutput_SupportedGatewayCapacities, v.SupportedGatewayCapacities)
+	serializeTags(s, schemas.DescribeGatewayInformationOutput_Tags, v.Tags)
+	if v.VPCEndpoint != nil {
+		s.WriteString(schemas.DescribeGatewayInformationOutput_VPCEndpoint, *v.VPCEndpoint)
+	}
+}
+func (v *DescribeGatewayInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGatewayInformationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGatewayInformationOutput_CloudWatchLogGroupARN:
+			v.CloudWatchLogGroupARN = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_CloudWatchLogGroupARN, v.CloudWatchLogGroupARN)
+		case schemas.DescribeGatewayInformationOutput_DeprecationDate:
+			v.DeprecationDate = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_DeprecationDate, v.DeprecationDate)
+		case schemas.DescribeGatewayInformationOutput_Ec2InstanceId:
+			v.Ec2InstanceId = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_Ec2InstanceId, v.Ec2InstanceId)
+		case schemas.DescribeGatewayInformationOutput_Ec2InstanceRegion:
+			v.Ec2InstanceRegion = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_Ec2InstanceRegion, v.Ec2InstanceRegion)
+		case schemas.DescribeGatewayInformationOutput_EndpointType:
+			v.EndpointType = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_EndpointType, v.EndpointType)
+		case schemas.DescribeGatewayInformationOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_GatewayARN, v.GatewayARN)
+		case schemas.DescribeGatewayInformationOutput_GatewayCapacity:
+			var ev string
+			if err := d.ReadString(schemas.DescribeGatewayInformationOutput_GatewayCapacity, &ev); err != nil {
+				return err
+			}
+			v.GatewayCapacity = types.GatewayCapacity(ev)
+			return nil
+		case schemas.DescribeGatewayInformationOutput_GatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_GatewayId, v.GatewayId)
+		case schemas.DescribeGatewayInformationOutput_GatewayName:
+			v.GatewayName = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_GatewayName, v.GatewayName)
+		case schemas.DescribeGatewayInformationOutput_GatewayNetworkInterfaces:
+			return deserializeGatewayNetworkInterfaces(d, schemas.DescribeGatewayInformationOutput_GatewayNetworkInterfaces, &v.GatewayNetworkInterfaces)
+		case schemas.DescribeGatewayInformationOutput_GatewayState:
+			v.GatewayState = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_GatewayState, v.GatewayState)
+		case schemas.DescribeGatewayInformationOutput_GatewayTimezone:
+			v.GatewayTimezone = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_GatewayTimezone, v.GatewayTimezone)
+		case schemas.DescribeGatewayInformationOutput_GatewayType:
+			v.GatewayType = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_GatewayType, v.GatewayType)
+		case schemas.DescribeGatewayInformationOutput_HostEnvironment:
+			var ev string
+			if err := d.ReadString(schemas.DescribeGatewayInformationOutput_HostEnvironment, &ev); err != nil {
+				return err
+			}
+			v.HostEnvironment = types.HostEnvironment(ev)
+			return nil
+		case schemas.DescribeGatewayInformationOutput_HostEnvironmentId:
+			v.HostEnvironmentId = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_HostEnvironmentId, v.HostEnvironmentId)
+		case schemas.DescribeGatewayInformationOutput_LastSoftwareUpdate:
+			v.LastSoftwareUpdate = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_LastSoftwareUpdate, v.LastSoftwareUpdate)
+		case schemas.DescribeGatewayInformationOutput_NextUpdateAvailabilityDate:
+			v.NextUpdateAvailabilityDate = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_NextUpdateAvailabilityDate, v.NextUpdateAvailabilityDate)
+		case schemas.DescribeGatewayInformationOutput_SoftwareUpdatesEndDate:
+			v.SoftwareUpdatesEndDate = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_SoftwareUpdatesEndDate, v.SoftwareUpdatesEndDate)
+		case schemas.DescribeGatewayInformationOutput_SoftwareVersion:
+			v.SoftwareVersion = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_SoftwareVersion, v.SoftwareVersion)
+		case schemas.DescribeGatewayInformationOutput_SupportedGatewayCapacities:
+			return deserializeSupportedGatewayCapacities(d, schemas.DescribeGatewayInformationOutput_SupportedGatewayCapacities, &v.SupportedGatewayCapacities)
+		case schemas.DescribeGatewayInformationOutput_Tags:
+			return deserializeTags(d, schemas.DescribeGatewayInformationOutput_Tags, &v.Tags)
+		case schemas.DescribeGatewayInformationOutput_VPCEndpoint:
+			v.VPCEndpoint = new(string)
+			return d.ReadString(schemas.DescribeGatewayInformationOutput_VPCEndpoint, v.VPCEndpoint)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGatewayInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGatewayInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGatewayInformation, schemas.DescribeGatewayInformationInput, schemas.DescribeGatewayInformationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeGatewayInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGatewayInformation, schemas.DescribeGatewayInformationInput, schemas.DescribeGatewayInformationOutput), output: &DescribeGatewayInformationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

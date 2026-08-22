@@ -4,6 +4,8 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type ImportSshPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSshPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSshPublicKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSshPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.ImportSshPublicKeyRequest_ServerId, *v.ServerId)
+	}
+	if v.SshPublicKeyBody != nil {
+		s.WriteString(schemas.ImportSshPublicKeyRequest_SshPublicKeyBody, *v.SshPublicKeyBody)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ImportSshPublicKeyRequest_UserName, *v.UserName)
+	}
+}
+
 // Identifies the user, the server they belong to, and the identifier of the SSH
 // public key associated with that user. A user can have more than one key on each
 // server that they are associated with.
@@ -76,13 +96,44 @@ type ImportSshPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSshPublicKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSshPublicKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSshPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.ImportSshPublicKeyResponse_ServerId, *v.ServerId)
+	}
+	if v.SshPublicKeyId != nil {
+		s.WriteString(schemas.ImportSshPublicKeyResponse_SshPublicKeyId, *v.SshPublicKeyId)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ImportSshPublicKeyResponse_UserName, *v.UserName)
+	}
+}
+func (v *ImportSshPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportSshPublicKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportSshPublicKeyResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.ImportSshPublicKeyResponse_ServerId, v.ServerId)
+		case schemas.ImportSshPublicKeyResponse_SshPublicKeyId:
+			v.SshPublicKeyId = new(string)
+			return d.ReadString(schemas.ImportSshPublicKeyResponse_SshPublicKeyId, v.SshPublicKeyId)
+		case schemas.ImportSshPublicKeyResponse_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.ImportSshPublicKeyResponse_UserName, v.UserName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportSshPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportSshPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSshPublicKey, schemas.ImportSshPublicKeyRequest, schemas.ImportSshPublicKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportSshPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSshPublicKey, schemas.ImportSshPublicKeyRequest, schemas.ImportSshPublicKeyResponse), output: &ImportSshPublicKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

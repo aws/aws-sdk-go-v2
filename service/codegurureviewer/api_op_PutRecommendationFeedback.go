@@ -4,7 +4,9 @@ package codegurureviewer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type PutRecommendationFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecommendationFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecommendationFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecommendationFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReviewArn != nil {
+		s.WriteString(schemas.PutRecommendationFeedbackRequest_CodeReviewArn, *v.CodeReviewArn)
+	}
+	serializeReactions(s, schemas.PutRecommendationFeedbackRequest_Reactions, v.Reactions)
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.PutRecommendationFeedbackRequest_RecommendationId, *v.RecommendationId)
+	}
+}
+
 type PutRecommendationFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +74,26 @@ type PutRecommendationFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecommendationFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecommendationFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecommendationFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutRecommendationFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRecommendationFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRecommendationFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRecommendationFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecommendationFeedback, schemas.PutRecommendationFeedbackRequest, schemas.PutRecommendationFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutRecommendationFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecommendationFeedback, schemas.PutRecommendationFeedbackRequest, schemas.PutRecommendationFeedbackResponse), output: &PutRecommendationFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

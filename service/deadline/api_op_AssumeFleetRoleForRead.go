@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type AssumeFleetRoleForReadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeFleetRoleForReadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeFleetRoleForReadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeFleetRoleForReadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.AssumeFleetRoleForReadRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.AssumeFleetRoleForReadRequest_fleetId, *v.FleetId)
+	}
+}
+
 // Shared response body for AssumeRole operations where credentials are required.
 // AssumeQueueRoleForWorkerResponse is excluded because credentials is optional
 // there because Queue.roleArn is optional, so the mixin's @required trait would be
@@ -59,13 +76,34 @@ type AssumeFleetRoleForReadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeFleetRoleForReadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeFleetRoleForReadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeFleetRoleForReadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.AssumeFleetRoleForReadResponse_credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssumeFleetRoleForReadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssumeFleetRoleForReadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssumeFleetRoleForReadResponse_credentials:
+			v.Credentials = &types.AwsCredentials{}
+			return v.Credentials.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssumeFleetRoleForReadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssumeFleetRoleForRead{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeFleetRoleForRead, schemas.AssumeFleetRoleForReadRequest, schemas.AssumeFleetRoleForReadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssumeFleetRoleForRead{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeFleetRoleForRead, schemas.AssumeFleetRoleForReadRequest, schemas.AssumeFleetRoleForReadResponse), output: &AssumeFleetRoleForReadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

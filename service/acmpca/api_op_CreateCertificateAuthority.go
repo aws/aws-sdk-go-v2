@@ -4,7 +4,9 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -131,6 +133,38 @@ type CreateCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateAuthorityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateAuthorityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityConfiguration != nil {
+		s.WriteStruct(schemas.CreateCertificateAuthorityRequest_CertificateAuthorityConfiguration)
+		v.CertificateAuthorityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CertificateAuthorityType != "" {
+		s.WriteString(schemas.CreateCertificateAuthorityRequest_CertificateAuthorityType, string(v.CertificateAuthorityType))
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateCertificateAuthorityRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.KeyStorageSecurityStandard != "" {
+		s.WriteString(schemas.CreateCertificateAuthorityRequest_KeyStorageSecurityStandard, string(v.KeyStorageSecurityStandard))
+	}
+	if v.RevocationConfiguration != nil {
+		s.WriteStruct(schemas.CreateCertificateAuthorityRequest_RevocationConfiguration)
+		v.RevocationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCertificateAuthorityRequest_Tags, v.Tags)
+	if v.UsageMode != "" {
+		s.WriteString(schemas.CreateCertificateAuthorityRequest_UsageMode, string(v.UsageMode))
+	}
+}
+
 type CreateCertificateAuthorityOutput struct {
 
 	// If successful, the Amazon Resource Name (ARN) of the certificate authority
@@ -146,13 +180,32 @@ type CreateCertificateAuthorityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateAuthorityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateAuthorityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateAuthorityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.CreateCertificateAuthorityResponse_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+}
+func (v *CreateCertificateAuthorityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCertificateAuthorityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCertificateAuthorityResponse_CertificateAuthorityArn:
+			v.CertificateAuthorityArn = new(string)
+			return d.ReadString(schemas.CreateCertificateAuthorityResponse_CertificateAuthorityArn, v.CertificateAuthorityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateAuthority, schemas.CreateCertificateAuthorityRequest, schemas.CreateCertificateAuthorityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateAuthority, schemas.CreateCertificateAuthorityRequest, schemas.CreateCertificateAuthorityResponse), output: &CreateCertificateAuthorityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

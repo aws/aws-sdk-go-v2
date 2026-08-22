@@ -4,7 +4,9 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,19 @@ type CreateContainerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.CreateContainerInput_ContainerName, *v.ContainerName)
+	}
+	serializeTagList(s, schemas.CreateContainerInput_Tags, v.Tags)
+}
+
 type CreateContainerOutput struct {
 
 	// ContainerARN: The Amazon Resource Name (ARN) of the newly created container.
@@ -75,13 +90,34 @@ type CreateContainerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Container != nil {
+		s.WriteStruct(schemas.CreateContainerOutput_Container)
+		v.Container.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateContainerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerOutput_Container:
+			v.Container = &types.Container{}
+			return v.Container.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContainer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainer, schemas.CreateContainerInput, schemas.CreateContainerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateContainer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainer, schemas.CreateContainerInput, schemas.CreateContainerOutput), output: &CreateContainerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

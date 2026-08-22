@@ -4,6 +4,8 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type DeleteWatchlistInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWatchlistInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWatchlistRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWatchlistInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteWatchlistRequest_DomainId, *v.DomainId)
+	}
+	if v.WatchlistId != nil {
+		s.WriteString(schemas.DeleteWatchlistRequest_WatchlistId, *v.WatchlistId)
+	}
+}
+func (v *DeleteWatchlistInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWatchlistRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWatchlistRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DeleteWatchlistRequest_DomainId, v.DomainId)
+		case schemas.DeleteWatchlistRequest_WatchlistId:
+			v.WatchlistId = new(string)
+			return d.ReadString(schemas.DeleteWatchlistRequest_WatchlistId, v.WatchlistId)
+		}
+		return nil
+	})
+}
+
 type DeleteWatchlistOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +78,26 @@ type DeleteWatchlistOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWatchlistOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWatchlistOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWatchlistOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWatchlistMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteWatchlist{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWatchlist, schemas.DeleteWatchlistRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteWatchlist{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWatchlist, schemas.DeleteWatchlistRequest, nil), output: &DeleteWatchlistOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

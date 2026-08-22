@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,44 @@ type AssociateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFileSystemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFileSystemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.AssociateFileSystemInput_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_ClientToken, *v.ClientToken)
+	}
+	if v.EndpointNetworkConfiguration != nil {
+		s.WriteStruct(schemas.AssociateFileSystemInput_EndpointNetworkConfiguration)
+		v.EndpointNetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.LocationARN != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_LocationARN, *v.LocationARN)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_Password, *v.Password)
+	}
+	serializeTags(s, schemas.AssociateFileSystemInput_Tags, v.Tags)
+	if v.UserName != nil {
+		s.WriteString(schemas.AssociateFileSystemInput_UserName, *v.UserName)
+	}
+}
+
 type AssociateFileSystemOutput struct {
 
 	// The ARN of the newly created file system association.
@@ -90,13 +130,32 @@ type AssociateFileSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFileSystemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFileSystemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemAssociationARN != nil {
+		s.WriteString(schemas.AssociateFileSystemOutput_FileSystemAssociationARN, *v.FileSystemAssociationARN)
+	}
+}
+func (v *AssociateFileSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFileSystemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFileSystemOutput_FileSystemAssociationARN:
+			v.FileSystemAssociationARN = new(string)
+			return d.ReadString(schemas.AssociateFileSystemOutput_FileSystemAssociationARN, v.FileSystemAssociationARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFileSystem, schemas.AssociateFileSystemInput, schemas.AssociateFileSystemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFileSystem, schemas.AssociateFileSystemInput, schemas.AssociateFileSystemOutput), output: &AssociateFileSystemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

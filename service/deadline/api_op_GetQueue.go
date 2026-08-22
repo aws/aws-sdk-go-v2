@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,6 +44,21 @@ type GetQueueInput struct {
 	QueueId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetQueueRequest_farmId, *v.FarmId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetQueueRequest_queueId, *v.QueueId)
+	}
 }
 
 // Mixin that adds an optional ARN field to response structures. Apply to
@@ -134,13 +151,135 @@ type GetQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedStorageProfileIds(s, schemas.GetQueueResponse_allowedStorageProfileIds, v.AllowedStorageProfileIds)
+	if v.BlockedReason != "" {
+		s.WriteString(schemas.GetQueueResponse_blockedReason, string(v.BlockedReason))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetQueueResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetQueueResponse_createdBy, *v.CreatedBy)
+	}
+	if v.DefaultBudgetAction != "" {
+		s.WriteString(schemas.GetQueueResponse_defaultBudgetAction, string(v.DefaultBudgetAction))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetQueueResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetQueueResponse_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetQueueResponse_farmId, *v.FarmId)
+	}
+	if v.JobAttachmentSettings != nil {
+		s.WriteStruct(schemas.GetQueueResponse_jobAttachmentSettings)
+		v.JobAttachmentSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobRunAsUser != nil {
+		s.WriteStruct(schemas.GetQueueResponse_jobRunAsUser)
+		v.JobRunAsUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetQueueResponse_queueId, *v.QueueId)
+	}
+	serializeRequiredFileSystemLocationNames(s, schemas.GetQueueResponse_requiredFileSystemLocationNames, v.RequiredFileSystemLocationNames)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetQueueResponse_roleArn, *v.RoleArn)
+	}
+	serializeSchedulingConfiguration(s, schemas.GetQueueResponse_schedulingConfiguration, v.SchedulingConfiguration)
+	if v.Status != "" {
+		s.WriteString(schemas.GetQueueResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetQueueResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetQueueResponse_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueueResponse_allowedStorageProfileIds:
+			return deserializeAllowedStorageProfileIds(d, schemas.GetQueueResponse_allowedStorageProfileIds, &v.AllowedStorageProfileIds)
+		case schemas.GetQueueResponse_blockedReason:
+			var ev string
+			if err := d.ReadString(schemas.GetQueueResponse_blockedReason, &ev); err != nil {
+				return err
+			}
+			v.BlockedReason = types.QueueBlockedReason(ev)
+			return nil
+		case schemas.GetQueueResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQueueResponse_createdAt, v.CreatedAt)
+		case schemas.GetQueueResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetQueueResponse_createdBy, v.CreatedBy)
+		case schemas.GetQueueResponse_defaultBudgetAction:
+			var ev string
+			if err := d.ReadString(schemas.GetQueueResponse_defaultBudgetAction, &ev); err != nil {
+				return err
+			}
+			v.DefaultBudgetAction = types.DefaultQueueBudgetAction(ev)
+			return nil
+		case schemas.GetQueueResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetQueueResponse_description, v.Description)
+		case schemas.GetQueueResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetQueueResponse_displayName, v.DisplayName)
+		case schemas.GetQueueResponse_farmId:
+			v.FarmId = new(string)
+			return d.ReadString(schemas.GetQueueResponse_farmId, v.FarmId)
+		case schemas.GetQueueResponse_jobAttachmentSettings:
+			v.JobAttachmentSettings = &types.JobAttachmentSettings{}
+			return v.JobAttachmentSettings.Deserialize(d)
+		case schemas.GetQueueResponse_jobRunAsUser:
+			v.JobRunAsUser = &types.JobRunAsUser{}
+			return v.JobRunAsUser.Deserialize(d)
+		case schemas.GetQueueResponse_queueId:
+			v.QueueId = new(string)
+			return d.ReadString(schemas.GetQueueResponse_queueId, v.QueueId)
+		case schemas.GetQueueResponse_requiredFileSystemLocationNames:
+			return deserializeRequiredFileSystemLocationNames(d, schemas.GetQueueResponse_requiredFileSystemLocationNames, &v.RequiredFileSystemLocationNames)
+		case schemas.GetQueueResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetQueueResponse_roleArn, v.RoleArn)
+		case schemas.GetQueueResponse_schedulingConfiguration:
+			return deserializeSchedulingConfiguration(d, schemas.GetQueueResponse_schedulingConfiguration, &v.SchedulingConfiguration)
+		case schemas.GetQueueResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetQueueResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QueueStatus(ev)
+			return nil
+		case schemas.GetQueueResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQueueResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetQueueResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetQueueResponse_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueue, schemas.GetQueueRequest, schemas.GetQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueue, schemas.GetQueueRequest, schemas.GetQueueResponse), output: &GetQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

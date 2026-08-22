@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type DescribeAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalId != nil {
+		s.WriteString(schemas.DescribeAccessRequest_ExternalId, *v.ExternalId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.DescribeAccessRequest_ServerId, *v.ServerId)
+	}
+}
+
 type DescribeAccessOutput struct {
 
 	// The external identifier of the server that the access is attached to.
@@ -77,13 +94,40 @@ type DescribeAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Access != nil {
+		s.WriteStruct(schemas.DescribeAccessResponse_Access)
+		v.Access.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.DescribeAccessResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *DescribeAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccessResponse_Access:
+			v.Access = &types.DescribedAccess{}
+			return v.Access.Deserialize(d)
+		case schemas.DescribeAccessResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.DescribeAccessResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccess, schemas.DescribeAccessRequest, schemas.DescribeAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccess, schemas.DescribeAccessRequest, schemas.DescribeAccessResponse), output: &DescribeAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

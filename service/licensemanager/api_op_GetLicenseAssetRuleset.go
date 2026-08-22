@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetLicenseAssetRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLicenseAssetRulesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseAssetRulesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseAssetRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseAssetRulesetArn != nil {
+		s.WriteString(schemas.GetLicenseAssetRulesetRequest_LicenseAssetRulesetArn, *v.LicenseAssetRulesetArn)
+	}
+}
+
 type GetLicenseAssetRulesetOutput struct {
 
 	// License asset ruleset.
@@ -47,13 +61,34 @@ type GetLicenseAssetRulesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLicenseAssetRulesetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseAssetRulesetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseAssetRulesetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseAssetRuleset != nil {
+		s.WriteStruct(schemas.GetLicenseAssetRulesetResponse_LicenseAssetRuleset)
+		v.LicenseAssetRuleset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLicenseAssetRulesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLicenseAssetRulesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLicenseAssetRulesetResponse_LicenseAssetRuleset:
+			v.LicenseAssetRuleset = &types.LicenseAssetRuleset{}
+			return v.LicenseAssetRuleset.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLicenseAssetRulesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLicenseAssetRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseAssetRuleset, schemas.GetLicenseAssetRulesetRequest, schemas.GetLicenseAssetRulesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLicenseAssetRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseAssetRuleset, schemas.GetLicenseAssetRulesetRequest, schemas.GetLicenseAssetRulesetResponse), output: &GetLicenseAssetRulesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

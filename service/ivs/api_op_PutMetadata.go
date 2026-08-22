@@ -4,6 +4,8 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,34 @@ type PutMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.PutMetadataRequest_channelArn, *v.ChannelArn)
+	}
+	if v.Metadata != nil {
+		s.WriteString(schemas.PutMetadataRequest_metadata, *v.Metadata)
+	}
+}
+func (v *PutMetadataInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutMetadataRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutMetadataRequest_channelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.PutMetadataRequest_channelArn, v.ChannelArn)
+		case schemas.PutMetadataRequest_metadata:
+			v.Metadata = new(string)
+			return d.ReadString(schemas.PutMetadataRequest_metadata, v.Metadata)
+		}
+		return nil
+	})
+}
+
 type PutMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +82,26 @@ type PutMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetadata, schemas.PutMetadataRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetadata, schemas.PutMetadataRequest, nil), output: &PutMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

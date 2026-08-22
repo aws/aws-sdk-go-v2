@@ -4,6 +4,8 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type DeleteResourceExplorerSetupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceExplorerSetupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceExplorerSetupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceExplorerSetupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteInAllRegions != nil {
+		s.WriteBool(schemas.DeleteResourceExplorerSetupInput_DeleteInAllRegions, *v.DeleteInAllRegions)
+	}
+	serializeRegionList(s, schemas.DeleteResourceExplorerSetupInput_RegionList, v.RegionList)
+}
+
 type DeleteResourceExplorerSetupOutput struct {
 
 	// The unique identifier for the deletion task. Use this ID with
@@ -55,13 +70,32 @@ type DeleteResourceExplorerSetupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceExplorerSetupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceExplorerSetupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceExplorerSetupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.DeleteResourceExplorerSetupOutput_TaskId, *v.TaskId)
+	}
+}
+func (v *DeleteResourceExplorerSetupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourceExplorerSetupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourceExplorerSetupOutput_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.DeleteResourceExplorerSetupOutput_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourceExplorerSetupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourceExplorerSetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceExplorerSetup, schemas.DeleteResourceExplorerSetupInput, schemas.DeleteResourceExplorerSetupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResourceExplorerSetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceExplorerSetup, schemas.DeleteResourceExplorerSetupInput, schemas.DeleteResourceExplorerSetupOutput), output: &DeleteResourceExplorerSetupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

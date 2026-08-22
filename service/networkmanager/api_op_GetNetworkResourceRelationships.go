@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -99,6 +101,42 @@ type GetNetworkResourceRelationshipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkResourceRelationshipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkResourceRelationshipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkResourceRelationshipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetNetworkResourceRelationshipsRequest_AccountId, *v.AccountId)
+	}
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.GetNetworkResourceRelationshipsRequest_AwsRegion, *v.AwsRegion)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.GetNetworkResourceRelationshipsRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetNetworkResourceRelationshipsRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetNetworkResourceRelationshipsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkResourceRelationshipsRequest_NextToken, *v.NextToken)
+	}
+	if v.RegisteredGatewayArn != nil {
+		s.WriteString(schemas.GetNetworkResourceRelationshipsRequest_RegisteredGatewayArn, *v.RegisteredGatewayArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetNetworkResourceRelationshipsRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetNetworkResourceRelationshipsRequest_ResourceType, *v.ResourceType)
+	}
+}
+
 type GetNetworkResourceRelationshipsOutput struct {
 
 	// The token for the next page of results.
@@ -113,13 +151,35 @@ type GetNetworkResourceRelationshipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkResourceRelationshipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkResourceRelationshipsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkResourceRelationshipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkResourceRelationshipsResponse_NextToken, *v.NextToken)
+	}
+	serializeRelationshipList(s, schemas.GetNetworkResourceRelationshipsResponse_Relationships, v.Relationships)
+}
+func (v *GetNetworkResourceRelationshipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkResourceRelationshipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkResourceRelationshipsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetNetworkResourceRelationshipsResponse_NextToken, v.NextToken)
+		case schemas.GetNetworkResourceRelationshipsResponse_Relationships:
+			return deserializeRelationshipList(d, schemas.GetNetworkResourceRelationshipsResponse_Relationships, &v.Relationships)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkResourceRelationshipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkResourceRelationships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkResourceRelationships, schemas.GetNetworkResourceRelationshipsRequest, schemas.GetNetworkResourceRelationshipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkResourceRelationships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkResourceRelationships, schemas.GetNetworkResourceRelationshipsRequest, schemas.GetNetworkResourceRelationshipsResponse), output: &GetNetworkResourceRelationshipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

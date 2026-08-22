@@ -4,7 +4,9 @@ package signer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListProfilePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfilePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfilePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfilePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfilePermissionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.ListProfilePermissionsRequest_profileName, *v.ProfileName)
+	}
+}
+
 type ListProfilePermissionsOutput struct {
 
 	// String for specifying the next set of paginated results.
@@ -57,13 +74,46 @@ type ListProfilePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfilePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfilePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfilePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfilePermissionsResponse_nextToken, *v.NextToken)
+	}
+	serializePermissions(s, schemas.ListProfilePermissionsResponse_permissions, v.Permissions)
+	if v.PolicySizeBytes != 0 {
+		s.WriteInt32(schemas.ListProfilePermissionsResponse_policySizeBytes, v.PolicySizeBytes)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ListProfilePermissionsResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *ListProfilePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfilePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfilePermissionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfilePermissionsResponse_nextToken, v.NextToken)
+		case schemas.ListProfilePermissionsResponse_permissions:
+			return deserializePermissions(d, schemas.ListProfilePermissionsResponse_permissions, &v.Permissions)
+		case schemas.ListProfilePermissionsResponse_policySizeBytes:
+			return d.ReadInt32(schemas.ListProfilePermissionsResponse_policySizeBytes, &v.PolicySizeBytes)
+		case schemas.ListProfilePermissionsResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ListProfilePermissionsResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfilePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfilePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfilePermissions, schemas.ListProfilePermissionsRequest, schemas.ListProfilePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfilePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfilePermissions, schemas.ListProfilePermissionsRequest, schemas.ListProfilePermissionsResponse), output: &ListProfilePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

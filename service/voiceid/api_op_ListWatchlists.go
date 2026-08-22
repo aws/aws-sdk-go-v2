@@ -5,7 +5,9 @@ package voiceid
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,40 @@ type ListWatchlistsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWatchlistsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWatchlistsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWatchlistsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListWatchlistsRequest_DomainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWatchlistsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWatchlistsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListWatchlistsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWatchlistsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWatchlistsRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListWatchlistsRequest_DomainId, v.DomainId)
+		case schemas.ListWatchlistsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListWatchlistsRequest_MaxResults, v.MaxResults)
+		case schemas.ListWatchlistsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWatchlistsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListWatchlistsOutput struct {
 
 	// If NextToken is returned, there are more results available. The value of
@@ -64,13 +100,35 @@ type ListWatchlistsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWatchlistsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWatchlistsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWatchlistsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWatchlistsResponse_NextToken, *v.NextToken)
+	}
+	serializeWatchlistSummaries(s, schemas.ListWatchlistsResponse_WatchlistSummaries, v.WatchlistSummaries)
+}
+func (v *ListWatchlistsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWatchlistsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWatchlistsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWatchlistsResponse_NextToken, v.NextToken)
+		case schemas.ListWatchlistsResponse_WatchlistSummaries:
+			return deserializeWatchlistSummaries(d, schemas.ListWatchlistsResponse_WatchlistSummaries, &v.WatchlistSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWatchlistsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListWatchlists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWatchlists, schemas.ListWatchlistsRequest, schemas.ListWatchlistsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListWatchlists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWatchlists, schemas.ListWatchlistsRequest, schemas.ListWatchlistsResponse), output: &ListWatchlistsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

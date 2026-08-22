@@ -5,7 +5,9 @@ package cloudcontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -44,6 +46,28 @@ type GetResourceRequestStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceRequestStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceRequestStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceRequestStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestToken != nil {
+		s.WriteString(schemas.GetResourceRequestStatusInput_RequestToken, *v.RequestToken)
+	}
+}
+func (v *GetResourceRequestStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceRequestStatusInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceRequestStatusInput_RequestToken:
+			v.RequestToken = new(string)
+			return d.ReadString(schemas.GetResourceRequestStatusInput_RequestToken, v.RequestToken)
+		}
+		return nil
+	})
+}
+
 type GetResourceRequestStatusOutput struct {
 
 	// Lists Hook invocations for the specified target in the request. This is a list
@@ -59,13 +83,37 @@ type GetResourceRequestStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceRequestStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceRequestStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceRequestStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHooksProgressEvent(s, schemas.GetResourceRequestStatusOutput_HooksProgressEvent, v.HooksProgressEvent)
+	if v.ProgressEvent != nil {
+		s.WriteStruct(schemas.GetResourceRequestStatusOutput_ProgressEvent)
+		v.ProgressEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetResourceRequestStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceRequestStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceRequestStatusOutput_HooksProgressEvent:
+			return deserializeHooksProgressEvent(d, schemas.GetResourceRequestStatusOutput_HooksProgressEvent, &v.HooksProgressEvent)
+		case schemas.GetResourceRequestStatusOutput_ProgressEvent:
+			v.ProgressEvent = &types.ProgressEvent{}
+			return v.ProgressEvent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceRequestStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetResourceRequestStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceRequestStatus, schemas.GetResourceRequestStatusInput, schemas.GetResourceRequestStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetResourceRequestStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceRequestStatus, schemas.GetResourceRequestStatusInput, schemas.GetResourceRequestStatusOutput), output: &GetResourceRequestStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

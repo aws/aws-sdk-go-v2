@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,15 @@ type GetTraceSegmentDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTraceSegmentDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTraceSegmentDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTraceSegmentDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetTraceSegmentDestinationOutput struct {
 
 	//  Retrieves the current destination.
@@ -48,13 +59,46 @@ type GetTraceSegmentDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTraceSegmentDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTraceSegmentDestinationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTraceSegmentDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != "" {
+		s.WriteString(schemas.GetTraceSegmentDestinationResult_Destination, string(v.Destination))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTraceSegmentDestinationResult_Status, string(v.Status))
+	}
+}
+func (v *GetTraceSegmentDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTraceSegmentDestinationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTraceSegmentDestinationResult_Destination:
+			var ev string
+			if err := d.ReadString(schemas.GetTraceSegmentDestinationResult_Destination, &ev); err != nil {
+				return err
+			}
+			v.Destination = types.TraceSegmentDestination(ev)
+			return nil
+		case schemas.GetTraceSegmentDestinationResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetTraceSegmentDestinationResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TraceSegmentDestinationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTraceSegmentDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTraceSegmentDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTraceSegmentDestination, schemas.GetTraceSegmentDestinationRequest, schemas.GetTraceSegmentDestinationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTraceSegmentDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTraceSegmentDestination, schemas.GetTraceSegmentDestinationRequest, schemas.GetTraceSegmentDestinationResult), output: &GetTraceSegmentDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

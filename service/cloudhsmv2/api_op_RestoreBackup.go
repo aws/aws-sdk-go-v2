@@ -4,7 +4,9 @@ package cloudhsmv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type RestoreBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreBackupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.RestoreBackupRequest_BackupId, *v.BackupId)
+	}
+}
+
 type RestoreBackupOutput struct {
 
 	// Information on the Backup object created.
@@ -50,13 +64,34 @@ type RestoreBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreBackupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Backup != nil {
+		s.WriteStruct(schemas.RestoreBackupResponse_Backup)
+		v.Backup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreBackupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreBackupResponse_Backup:
+			v.Backup = &types.Backup{}
+			return v.Backup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreBackup, schemas.RestoreBackupRequest, schemas.RestoreBackupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRestoreBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreBackup, schemas.RestoreBackupRequest, schemas.RestoreBackupResponse), output: &RestoreBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

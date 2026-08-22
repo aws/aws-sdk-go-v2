@@ -5,7 +5,9 @@ package mediapackagevod
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,24 @@ type ListAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetsRequest_NextToken, *v.NextToken)
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.ListAssetsRequest_PackagingGroupId, *v.PackagingGroupId)
+	}
+}
+
 type ListAssetsOutput struct {
 
 	// A list of MediaPackage VOD Asset resources.
@@ -53,13 +73,35 @@ type ListAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAssetShallow(s, schemas.ListAssetsResponse_Assets, v.Assets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetsResponse_Assets:
+			return deserialize__listOfAssetShallow(d, schemas.ListAssetsResponse_Assets, &v.Assets)
+		case schemas.ListAssetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssets, schemas.ListAssetsRequest, schemas.ListAssetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssets, schemas.ListAssetsRequest, schemas.ListAssetsResponse), output: &ListAssetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

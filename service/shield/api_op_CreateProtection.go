@@ -4,7 +4,9 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,22 @@ type CreateProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProtectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProtectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProtectionRequest_Name, *v.Name)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateProtectionRequest_ResourceArn, *v.ResourceArn)
+	}
+	serializeTagList(s, schemas.CreateProtectionRequest_Tags, v.Tags)
+}
+
 type CreateProtectionOutput struct {
 
 	// The unique identifier (ID) for the Protection object that is created.
@@ -85,13 +103,32 @@ type CreateProtectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProtectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProtectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProtectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectionId != nil {
+		s.WriteString(schemas.CreateProtectionResponse_ProtectionId, *v.ProtectionId)
+	}
+}
+func (v *CreateProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProtectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProtectionResponse_ProtectionId:
+			v.ProtectionId = new(string)
+			return d.ReadString(schemas.CreateProtectionResponse_ProtectionId, v.ProtectionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProtection, schemas.CreateProtectionRequest, schemas.CreateProtectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProtection, schemas.CreateProtectionRequest, schemas.CreateProtectionResponse), output: &CreateProtectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

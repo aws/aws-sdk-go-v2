@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -30,6 +32,40 @@ type ApplicationLayerAutomaticResponseConfiguration struct {
 	Status ApplicationLayerAutomaticResponseStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationLayerAutomaticResponseConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationLayerAutomaticResponseConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationLayerAutomaticResponseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.ApplicationLayerAutomaticResponseConfiguration_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ApplicationLayerAutomaticResponseConfiguration_Status, string(v.Status))
+	}
+}
+func (v *ApplicationLayerAutomaticResponseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationLayerAutomaticResponseConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationLayerAutomaticResponseConfiguration_Action:
+			v.Action = &ResponseAction{}
+			return v.Action.Deserialize(d)
+		case schemas.ApplicationLayerAutomaticResponseConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationLayerAutomaticResponseConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ApplicationLayerAutomaticResponseStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The details of a DDoS attack.
@@ -69,6 +105,58 @@ type AttackDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttackDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttackDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttackDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSummarizedCounterList(s, schemas.AttackDetail_AttackCounters, v.AttackCounters)
+	if v.AttackId != nil {
+		s.WriteString(schemas.AttackDetail_AttackId, *v.AttackId)
+	}
+	serializeAttackProperties(s, schemas.AttackDetail_AttackProperties, v.AttackProperties)
+	if v.EndTime != nil {
+		s.WriteTime(schemas.AttackDetail_EndTime, *v.EndTime)
+	}
+	serializeMitigationList(s, schemas.AttackDetail_Mitigations, v.Mitigations)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AttackDetail_ResourceArn, *v.ResourceArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AttackDetail_StartTime, *v.StartTime)
+	}
+	serializeSubResourceSummaryList(s, schemas.AttackDetail_SubResources, v.SubResources)
+}
+func (v *AttackDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttackDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttackDetail_AttackCounters:
+			return deserializeSummarizedCounterList(d, schemas.AttackDetail_AttackCounters, &v.AttackCounters)
+		case schemas.AttackDetail_AttackId:
+			v.AttackId = new(string)
+			return d.ReadString(schemas.AttackDetail_AttackId, v.AttackId)
+		case schemas.AttackDetail_AttackProperties:
+			return deserializeAttackProperties(d, schemas.AttackDetail_AttackProperties, &v.AttackProperties)
+		case schemas.AttackDetail_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.AttackDetail_EndTime, v.EndTime)
+		case schemas.AttackDetail_Mitigations:
+			return deserializeMitigationList(d, schemas.AttackDetail_Mitigations, &v.Mitigations)
+		case schemas.AttackDetail_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.AttackDetail_ResourceArn, v.ResourceArn)
+		case schemas.AttackDetail_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AttackDetail_StartTime, v.StartTime)
+		case schemas.AttackDetail_SubResources:
+			return deserializeSubResourceSummaryList(d, schemas.AttackDetail_SubResources, &v.SubResources)
+		}
+		return nil
+	})
+}
+
 // Details of a Shield event. This is provided as part of an AttackDetail.
 type AttackProperty struct {
 
@@ -101,6 +189,60 @@ type AttackProperty struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttackProperty) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttackProperty)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttackProperty) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttackLayer != "" {
+		s.WriteString(schemas.AttackProperty_AttackLayer, string(v.AttackLayer))
+	}
+	if v.AttackPropertyIdentifier != "" {
+		s.WriteString(schemas.AttackProperty_AttackPropertyIdentifier, string(v.AttackPropertyIdentifier))
+	}
+	serializeTopContributors(s, schemas.AttackProperty_TopContributors, v.TopContributors)
+	if v.Total != 0 {
+		s.WriteInt64(schemas.AttackProperty_Total, v.Total)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.AttackProperty_Unit, string(v.Unit))
+	}
+}
+func (v *AttackProperty) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttackProperty, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttackProperty_AttackLayer:
+			var ev string
+			if err := d.ReadString(schemas.AttackProperty_AttackLayer, &ev); err != nil {
+				return err
+			}
+			v.AttackLayer = AttackLayer(ev)
+			return nil
+		case schemas.AttackProperty_AttackPropertyIdentifier:
+			var ev string
+			if err := d.ReadString(schemas.AttackProperty_AttackPropertyIdentifier, &ev); err != nil {
+				return err
+			}
+			v.AttackPropertyIdentifier = AttackPropertyIdentifier(ev)
+			return nil
+		case schemas.AttackProperty_TopContributors:
+			return deserializeTopContributors(d, schemas.AttackProperty_TopContributors, &v.TopContributors)
+		case schemas.AttackProperty_Total:
+			return d.ReadInt64(schemas.AttackProperty_Total, &v.Total)
+		case schemas.AttackProperty_Unit:
+			var ev string
+			if err := d.ReadString(schemas.AttackProperty_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = Unit(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A single attack statistics data record. This is returned by DescribeAttackStatistics along with a time
 // range indicating the time period that the attack statistics apply to.
 type AttackStatisticsDataItem struct {
@@ -116,6 +258,33 @@ type AttackStatisticsDataItem struct {
 	AttackVolume *AttackVolume
 
 	noSmithyDocumentSerde
+}
+
+func (v *AttackStatisticsDataItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttackStatisticsDataItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttackStatisticsDataItem) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.AttackStatisticsDataItem_AttackCount, v.AttackCount)
+	if v.AttackVolume != nil {
+		s.WriteStruct(schemas.AttackStatisticsDataItem_AttackVolume)
+		v.AttackVolume.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AttackStatisticsDataItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttackStatisticsDataItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttackStatisticsDataItem_AttackCount:
+			return d.ReadInt64(schemas.AttackStatisticsDataItem_AttackCount, &v.AttackCount)
+		case schemas.AttackStatisticsDataItem_AttackVolume:
+			v.AttackVolume = &AttackVolume{}
+			return v.AttackVolume.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Summarizes all DDoS attacks for a specified time period.
@@ -137,6 +306,49 @@ type AttackSummary struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *AttackSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttackSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttackSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttackId != nil {
+		s.WriteString(schemas.AttackSummary_AttackId, *v.AttackId)
+	}
+	serializeAttackVectorDescriptionList(s, schemas.AttackSummary_AttackVectors, v.AttackVectors)
+	if v.EndTime != nil {
+		s.WriteTime(schemas.AttackSummary_EndTime, *v.EndTime)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AttackSummary_ResourceArn, *v.ResourceArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AttackSummary_StartTime, *v.StartTime)
+	}
+}
+func (v *AttackSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttackSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttackSummary_AttackId:
+			v.AttackId = new(string)
+			return d.ReadString(schemas.AttackSummary_AttackId, v.AttackId)
+		case schemas.AttackSummary_AttackVectors:
+			return deserializeAttackVectorDescriptionList(d, schemas.AttackSummary_AttackVectors, &v.AttackVectors)
+		case schemas.AttackSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.AttackSummary_EndTime, v.EndTime)
+		case schemas.AttackSummary_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.AttackSummary_ResourceArn, v.ResourceArn)
+		case schemas.AttackSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AttackSummary_StartTime, v.StartTime)
+		}
+		return nil
+	})
 }
 
 // Describes the attack.
@@ -186,6 +398,28 @@ type AttackVectorDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttackVectorDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttackVectorDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttackVectorDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VectorType != nil {
+		s.WriteString(schemas.AttackVectorDescription_VectorType, *v.VectorType)
+	}
+}
+func (v *AttackVectorDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttackVectorDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttackVectorDescription_VectorType:
+			v.VectorType = new(string)
+			return d.ReadString(schemas.AttackVectorDescription_VectorType, v.VectorType)
+		}
+		return nil
+	})
+}
+
 // Information about the volume of attacks during the time period, included in an AttackStatisticsDataItem
 // . If the accompanying AttackCount in the statistics object is zero, this
 // setting might be empty.
@@ -207,6 +441,46 @@ type AttackVolume struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttackVolume) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttackVolume)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttackVolume) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitsPerSecond != nil {
+		s.WriteStruct(schemas.AttackVolume_BitsPerSecond)
+		v.BitsPerSecond.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PacketsPerSecond != nil {
+		s.WriteStruct(schemas.AttackVolume_PacketsPerSecond)
+		v.PacketsPerSecond.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestsPerSecond != nil {
+		s.WriteStruct(schemas.AttackVolume_RequestsPerSecond)
+		v.RequestsPerSecond.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AttackVolume) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttackVolume, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttackVolume_BitsPerSecond:
+			v.BitsPerSecond = &AttackVolumeStatistics{}
+			return v.BitsPerSecond.Deserialize(d)
+		case schemas.AttackVolume_PacketsPerSecond:
+			v.PacketsPerSecond = &AttackVolumeStatistics{}
+			return v.PacketsPerSecond.Deserialize(d)
+		case schemas.AttackVolume_RequestsPerSecond:
+			v.RequestsPerSecond = &AttackVolumeStatistics{}
+			return v.RequestsPerSecond.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Statistics objects for the various data types in AttackVolume.
 type AttackVolumeStatistics struct {
 
@@ -218,6 +492,25 @@ type AttackVolumeStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttackVolumeStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttackVolumeStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttackVolumeStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.AttackVolumeStatistics_Max, v.Max)
+}
+func (v *AttackVolumeStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttackVolumeStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttackVolumeStatistics_Max:
+			return d.ReadFloat64(schemas.AttackVolumeStatistics_Max, &v.Max)
+		}
+		return nil
+	})
+}
+
 // Specifies that Shield Advanced should configure its WAF rules with the WAF Block
 // action.
 //
@@ -226,6 +519,22 @@ type AttackVolumeStatistics struct {
 // JSON specification: "Block": {}
 type BlockAction struct {
 	noSmithyDocumentSerde
+}
+
+func (v *BlockAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlockAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlockAction) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *BlockAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlockAction, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // A contributor to the attack and their contribution.
@@ -243,6 +552,33 @@ type Contributor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Contributor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Contributor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Contributor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Contributor_Name, *v.Name)
+	}
+	if v.Value != 0 {
+		s.WriteInt64(schemas.Contributor_Value, v.Value)
+	}
+}
+func (v *Contributor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Contributor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Contributor_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Contributor_Name, v.Name)
+		case schemas.Contributor_Value:
+			return d.ReadInt64(schemas.Contributor_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Specifies that Shield Advanced should configure its WAF rules with the WAF Count
 // action.
 //
@@ -251,6 +587,22 @@ type Contributor struct {
 // JSON specification: "Count": {}
 type CountAction struct {
 	noSmithyDocumentSerde
+}
+
+func (v *CountAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CountAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountAction) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CountAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CountAction, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Contact information that the SRT can use to contact you if you have proactive
@@ -272,6 +624,40 @@ type EmergencyContact struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmergencyContact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmergencyContact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmergencyContact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactNotes != nil {
+		s.WriteString(schemas.EmergencyContact_ContactNotes, *v.ContactNotes)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.EmergencyContact_EmailAddress, *v.EmailAddress)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.EmergencyContact_PhoneNumber, *v.PhoneNumber)
+	}
+}
+func (v *EmergencyContact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmergencyContact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmergencyContact_ContactNotes:
+			v.ContactNotes = new(string)
+			return d.ReadString(schemas.EmergencyContact_ContactNotes, v.ContactNotes)
+		case schemas.EmergencyContact_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.EmergencyContact_EmailAddress, v.EmailAddress)
+		case schemas.EmergencyContact_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.EmergencyContact_PhoneNumber, v.PhoneNumber)
+		}
+		return nil
+	})
+}
+
 // Narrows the set of protections that the call retrieves. You can retrieve a
 // single protection by providing its name or the ARN (Amazon Resource Name) of its
 // protected resource. You can also retrieve all protections for a specific
@@ -291,6 +677,31 @@ type InclusionProtectionFilters struct {
 	ResourceTypes []ProtectedResourceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *InclusionProtectionFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InclusionProtectionFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InclusionProtectionFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProtectionNameFilters(s, schemas.InclusionProtectionFilters_ProtectionNames, v.ProtectionNames)
+	serializeResourceArnFilters(s, schemas.InclusionProtectionFilters_ResourceArns, v.ResourceArns)
+	serializeProtectedResourceTypeFilters(s, schemas.InclusionProtectionFilters_ResourceTypes, v.ResourceTypes)
+}
+func (v *InclusionProtectionFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InclusionProtectionFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InclusionProtectionFilters_ProtectionNames:
+			return deserializeProtectionNameFilters(d, schemas.InclusionProtectionFilters_ProtectionNames, &v.ProtectionNames)
+		case schemas.InclusionProtectionFilters_ResourceArns:
+			return deserializeResourceArnFilters(d, schemas.InclusionProtectionFilters_ResourceArns, &v.ResourceArns)
+		case schemas.InclusionProtectionFilters_ResourceTypes:
+			return deserializeProtectedResourceTypeFilters(d, schemas.InclusionProtectionFilters_ResourceTypes, &v.ResourceTypes)
+		}
+		return nil
+	})
 }
 
 // Narrows the set of protection groups that the call retrieves. You can retrieve
@@ -318,6 +729,34 @@ type InclusionProtectionGroupFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InclusionProtectionGroupFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InclusionProtectionGroupFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InclusionProtectionGroupFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProtectionGroupAggregationFilters(s, schemas.InclusionProtectionGroupFilters_Aggregations, v.Aggregations)
+	serializeProtectionGroupPatternFilters(s, schemas.InclusionProtectionGroupFilters_Patterns, v.Patterns)
+	serializeProtectionGroupIdFilters(s, schemas.InclusionProtectionGroupFilters_ProtectionGroupIds, v.ProtectionGroupIds)
+	serializeProtectedResourceTypeFilters(s, schemas.InclusionProtectionGroupFilters_ResourceTypes, v.ResourceTypes)
+}
+func (v *InclusionProtectionGroupFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InclusionProtectionGroupFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InclusionProtectionGroupFilters_Aggregations:
+			return deserializeProtectionGroupAggregationFilters(d, schemas.InclusionProtectionGroupFilters_Aggregations, &v.Aggregations)
+		case schemas.InclusionProtectionGroupFilters_Patterns:
+			return deserializeProtectionGroupPatternFilters(d, schemas.InclusionProtectionGroupFilters_Patterns, &v.Patterns)
+		case schemas.InclusionProtectionGroupFilters_ProtectionGroupIds:
+			return deserializeProtectionGroupIdFilters(d, schemas.InclusionProtectionGroupFilters_ProtectionGroupIds, &v.ProtectionGroupIds)
+		case schemas.InclusionProtectionGroupFilters_ResourceTypes:
+			return deserializeProtectedResourceTypeFilters(d, schemas.InclusionProtectionGroupFilters_ResourceTypes, &v.ResourceTypes)
+		}
+		return nil
+	})
+}
+
 // Specifies how many protections of a given type you can create.
 type Limit struct {
 
@@ -330,6 +769,33 @@ type Limit struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Limit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Limit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Limit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != 0 {
+		s.WriteInt64(schemas.Limit_Max, v.Max)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Limit_Type, *v.Type)
+	}
+}
+func (v *Limit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Limit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Limit_Max:
+			return d.ReadInt64(schemas.Limit_Max, &v.Max)
+		case schemas.Limit_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Limit_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // The mitigation applied to a DDoS attack.
 type Mitigation struct {
 
@@ -337,6 +803,28 @@ type Mitigation struct {
 	MitigationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Mitigation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Mitigation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Mitigation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MitigationName != nil {
+		s.WriteString(schemas.Mitigation_MitigationName, *v.MitigationName)
+	}
+}
+func (v *Mitigation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Mitigation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Mitigation_MitigationName:
+			v.MitigationName = new(string)
+			return d.ReadString(schemas.Mitigation_MitigationName, v.MitigationName)
+		}
+		return nil
+	})
 }
 
 // An object that represents a resource that is under DDoS protection.
@@ -366,6 +854,57 @@ type Protection struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Protection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Protection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Protection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationLayerAutomaticResponseConfiguration != nil {
+		s.WriteStruct(schemas.Protection_ApplicationLayerAutomaticResponseConfiguration)
+		v.ApplicationLayerAutomaticResponseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHealthCheckIds(s, schemas.Protection_HealthCheckIds, v.HealthCheckIds)
+	if v.Id != nil {
+		s.WriteString(schemas.Protection_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Protection_Name, *v.Name)
+	}
+	if v.ProtectionArn != nil {
+		s.WriteString(schemas.Protection_ProtectionArn, *v.ProtectionArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.Protection_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *Protection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Protection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Protection_ApplicationLayerAutomaticResponseConfiguration:
+			v.ApplicationLayerAutomaticResponseConfiguration = &ApplicationLayerAutomaticResponseConfiguration{}
+			return v.ApplicationLayerAutomaticResponseConfiguration.Deserialize(d)
+		case schemas.Protection_HealthCheckIds:
+			return deserializeHealthCheckIds(d, schemas.Protection_HealthCheckIds, &v.HealthCheckIds)
+		case schemas.Protection_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Protection_Id, v.Id)
+		case schemas.Protection_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Protection_Name, v.Name)
+		case schemas.Protection_ProtectionArn:
+			v.ProtectionArn = new(string)
+			return d.ReadString(schemas.Protection_ProtectionArn, v.ProtectionArn)
+		case schemas.Protection_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.Protection_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // A grouping of protected resources that you and Shield Advanced can monitor as a
@@ -426,6 +965,67 @@ type ProtectionGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProtectionGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectionGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectionGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Aggregation != "" {
+		s.WriteString(schemas.ProtectionGroup_Aggregation, string(v.Aggregation))
+	}
+	serializeProtectionGroupMembers(s, schemas.ProtectionGroup_Members, v.Members)
+	if v.Pattern != "" {
+		s.WriteString(schemas.ProtectionGroup_Pattern, string(v.Pattern))
+	}
+	if v.ProtectionGroupArn != nil {
+		s.WriteString(schemas.ProtectionGroup_ProtectionGroupArn, *v.ProtectionGroupArn)
+	}
+	if v.ProtectionGroupId != nil {
+		s.WriteString(schemas.ProtectionGroup_ProtectionGroupId, *v.ProtectionGroupId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ProtectionGroup_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *ProtectionGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectionGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectionGroup_Aggregation:
+			var ev string
+			if err := d.ReadString(schemas.ProtectionGroup_Aggregation, &ev); err != nil {
+				return err
+			}
+			v.Aggregation = ProtectionGroupAggregation(ev)
+			return nil
+		case schemas.ProtectionGroup_Members:
+			return deserializeProtectionGroupMembers(d, schemas.ProtectionGroup_Members, &v.Members)
+		case schemas.ProtectionGroup_Pattern:
+			var ev string
+			if err := d.ReadString(schemas.ProtectionGroup_Pattern, &ev); err != nil {
+				return err
+			}
+			v.Pattern = ProtectionGroupPattern(ev)
+			return nil
+		case schemas.ProtectionGroup_ProtectionGroupArn:
+			v.ProtectionGroupArn = new(string)
+			return d.ReadString(schemas.ProtectionGroup_ProtectionGroupArn, v.ProtectionGroupArn)
+		case schemas.ProtectionGroup_ProtectionGroupId:
+			v.ProtectionGroupId = new(string)
+			return d.ReadString(schemas.ProtectionGroup_ProtectionGroupId, v.ProtectionGroupId)
+		case schemas.ProtectionGroup_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.ProtectionGroup_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ProtectedResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Limits settings on protection groups with arbitrary pattern type.
 type ProtectionGroupArbitraryPatternLimits struct {
 
@@ -436,6 +1036,25 @@ type ProtectionGroupArbitraryPatternLimits struct {
 	MaxMembers int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProtectionGroupArbitraryPatternLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectionGroupArbitraryPatternLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectionGroupArbitraryPatternLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.ProtectionGroupArbitraryPatternLimits_MaxMembers, v.MaxMembers)
+}
+func (v *ProtectionGroupArbitraryPatternLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectionGroupArbitraryPatternLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectionGroupArbitraryPatternLimits_MaxMembers:
+			return d.ReadInt64(schemas.ProtectionGroupArbitraryPatternLimits_MaxMembers, &v.MaxMembers)
+		}
+		return nil
+	})
 }
 
 // Limits settings on protection groups for your subscription.
@@ -454,6 +1073,33 @@ type ProtectionGroupLimits struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProtectionGroupLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectionGroupLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectionGroupLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.ProtectionGroupLimits_MaxProtectionGroups, v.MaxProtectionGroups)
+	if v.PatternTypeLimits != nil {
+		s.WriteStruct(schemas.ProtectionGroupLimits_PatternTypeLimits)
+		v.PatternTypeLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ProtectionGroupLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectionGroupLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectionGroupLimits_MaxProtectionGroups:
+			return d.ReadInt64(schemas.ProtectionGroupLimits_MaxProtectionGroups, &v.MaxProtectionGroups)
+		case schemas.ProtectionGroupLimits_PatternTypeLimits:
+			v.PatternTypeLimits = &ProtectionGroupPatternTypeLimits{}
+			return v.PatternTypeLimits.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Limits settings by pattern type in the protection groups for your subscription.
 type ProtectionGroupPatternTypeLimits struct {
 
@@ -465,6 +1111,30 @@ type ProtectionGroupPatternTypeLimits struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProtectionGroupPatternTypeLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectionGroupPatternTypeLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectionGroupPatternTypeLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArbitraryPatternLimits != nil {
+		s.WriteStruct(schemas.ProtectionGroupPatternTypeLimits_ArbitraryPatternLimits)
+		v.ArbitraryPatternLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ProtectionGroupPatternTypeLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectionGroupPatternTypeLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectionGroupPatternTypeLimits_ArbitraryPatternLimits:
+			v.ArbitraryPatternLimits = &ProtectionGroupArbitraryPatternLimits{}
+			return v.ArbitraryPatternLimits.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Limits settings on protections for your subscription.
 type ProtectionLimits struct {
 
@@ -474,6 +1144,25 @@ type ProtectionLimits struct {
 	ProtectedResourceTypeLimits []Limit
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProtectionLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectionLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectionLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLimits(s, schemas.ProtectionLimits_ProtectedResourceTypeLimits, v.ProtectedResourceTypeLimits)
+}
+func (v *ProtectionLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectionLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectionLimits_ProtectedResourceTypeLimits:
+			return deserializeLimits(d, schemas.ProtectionLimits_ProtectedResourceTypeLimits, &v.ProtectedResourceTypeLimits)
+		}
+		return nil
+	})
 }
 
 // Specifies the action setting that Shield Advanced should use in the WAF rules
@@ -499,6 +1188,38 @@ type ResponseAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Block != nil {
+		s.WriteStruct(schemas.ResponseAction_Block)
+		v.Block.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Count != nil {
+		s.WriteStruct(schemas.ResponseAction_Count)
+		v.Count.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResponseAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseAction_Block:
+			v.Block = &BlockAction{}
+			return v.Block.Deserialize(d)
+		case schemas.ResponseAction_Count:
+			v.Count = &CountAction{}
+			return v.Count.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The attack information for the specified SubResource.
 type SubResourceSummary struct {
 
@@ -515,6 +1236,44 @@ type SubResourceSummary struct {
 	Type SubResourceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubResourceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubResourceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSummarizedAttackVectorList(s, schemas.SubResourceSummary_AttackVectors, v.AttackVectors)
+	serializeSummarizedCounterList(s, schemas.SubResourceSummary_Counters, v.Counters)
+	if v.Id != nil {
+		s.WriteString(schemas.SubResourceSummary_Id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SubResourceSummary_Type, string(v.Type))
+	}
+}
+func (v *SubResourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubResourceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubResourceSummary_AttackVectors:
+			return deserializeSummarizedAttackVectorList(d, schemas.SubResourceSummary_AttackVectors, &v.AttackVectors)
+		case schemas.SubResourceSummary_Counters:
+			return deserializeSummarizedCounterList(d, schemas.SubResourceSummary_Counters, &v.Counters)
+		case schemas.SubResourceSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SubResourceSummary_Id, v.Id)
+		case schemas.SubResourceSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.SubResourceSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SubResourceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about the Shield Advanced subscription for an account.
@@ -563,6 +1322,76 @@ type Subscription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Subscription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subscription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subscription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoRenew != "" {
+		s.WriteString(schemas.Subscription_AutoRenew, string(v.AutoRenew))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Subscription_EndTime, *v.EndTime)
+	}
+	serializeLimits(s, schemas.Subscription_Limits, v.Limits)
+	if v.ProactiveEngagementStatus != "" {
+		s.WriteString(schemas.Subscription_ProactiveEngagementStatus, string(v.ProactiveEngagementStatus))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Subscription_StartTime, *v.StartTime)
+	}
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.Subscription_SubscriptionArn, *v.SubscriptionArn)
+	}
+	if v.SubscriptionLimits != nil {
+		s.WriteStruct(schemas.Subscription_SubscriptionLimits)
+		v.SubscriptionLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeCommitmentInSeconds != 0 {
+		s.WriteInt64(schemas.Subscription_TimeCommitmentInSeconds, v.TimeCommitmentInSeconds)
+	}
+}
+func (v *Subscription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subscription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subscription_AutoRenew:
+			var ev string
+			if err := d.ReadString(schemas.Subscription_AutoRenew, &ev); err != nil {
+				return err
+			}
+			v.AutoRenew = AutoRenew(ev)
+			return nil
+		case schemas.Subscription_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Subscription_EndTime, v.EndTime)
+		case schemas.Subscription_Limits:
+			return deserializeLimits(d, schemas.Subscription_Limits, &v.Limits)
+		case schemas.Subscription_ProactiveEngagementStatus:
+			var ev string
+			if err := d.ReadString(schemas.Subscription_ProactiveEngagementStatus, &ev); err != nil {
+				return err
+			}
+			v.ProactiveEngagementStatus = ProactiveEngagementStatus(ev)
+			return nil
+		case schemas.Subscription_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Subscription_StartTime, v.StartTime)
+		case schemas.Subscription_SubscriptionArn:
+			v.SubscriptionArn = new(string)
+			return d.ReadString(schemas.Subscription_SubscriptionArn, v.SubscriptionArn)
+		case schemas.Subscription_SubscriptionLimits:
+			v.SubscriptionLimits = &SubscriptionLimits{}
+			return v.SubscriptionLimits.Deserialize(d)
+		case schemas.Subscription_TimeCommitmentInSeconds:
+			return d.ReadInt64(schemas.Subscription_TimeCommitmentInSeconds, &v.TimeCommitmentInSeconds)
+		}
+		return nil
+	})
+}
+
 // Limits settings for your subscription.
 type SubscriptionLimits struct {
 
@@ -579,6 +1408,38 @@ type SubscriptionLimits struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscriptionLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscriptionLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscriptionLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectionGroupLimits != nil {
+		s.WriteStruct(schemas.SubscriptionLimits_ProtectionGroupLimits)
+		v.ProtectionGroupLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProtectionLimits != nil {
+		s.WriteStruct(schemas.SubscriptionLimits_ProtectionLimits)
+		v.ProtectionLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SubscriptionLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscriptionLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubscriptionLimits_ProtectionGroupLimits:
+			v.ProtectionGroupLimits = &ProtectionGroupLimits{}
+			return v.ProtectionGroupLimits.Deserialize(d)
+		case schemas.SubscriptionLimits_ProtectionLimits:
+			v.ProtectionLimits = &ProtectionLimits{}
+			return v.ProtectionLimits.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A summary of information about the attack.
 type SummarizedAttackVector struct {
 
@@ -591,6 +1452,31 @@ type SummarizedAttackVector struct {
 	VectorCounters []SummarizedCounter
 
 	noSmithyDocumentSerde
+}
+
+func (v *SummarizedAttackVector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SummarizedAttackVector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SummarizedAttackVector) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSummarizedCounterList(s, schemas.SummarizedAttackVector_VectorCounters, v.VectorCounters)
+	if v.VectorType != nil {
+		s.WriteString(schemas.SummarizedAttackVector_VectorType, *v.VectorType)
+	}
+}
+func (v *SummarizedAttackVector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SummarizedAttackVector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SummarizedAttackVector_VectorCounters:
+			return deserializeSummarizedCounterList(d, schemas.SummarizedAttackVector_VectorCounters, &v.VectorCounters)
+		case schemas.SummarizedAttackVector_VectorType:
+			v.VectorType = new(string)
+			return d.ReadString(schemas.SummarizedAttackVector_VectorType, v.VectorType)
+		}
+		return nil
+	})
 }
 
 // The counter that describes a DDoS attack.
@@ -617,6 +1503,54 @@ type SummarizedCounter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SummarizedCounter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SummarizedCounter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SummarizedCounter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Average != 0 {
+		s.WriteFloat64(schemas.SummarizedCounter_Average, v.Average)
+	}
+	if v.Max != 0 {
+		s.WriteFloat64(schemas.SummarizedCounter_Max, v.Max)
+	}
+	if v.N != 0 {
+		s.WriteInt32(schemas.SummarizedCounter_N, v.N)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SummarizedCounter_Name, *v.Name)
+	}
+	if v.Sum != 0 {
+		s.WriteFloat64(schemas.SummarizedCounter_Sum, v.Sum)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.SummarizedCounter_Unit, *v.Unit)
+	}
+}
+func (v *SummarizedCounter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SummarizedCounter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SummarizedCounter_Average:
+			return d.ReadFloat64(schemas.SummarizedCounter_Average, &v.Average)
+		case schemas.SummarizedCounter_Max:
+			return d.ReadFloat64(schemas.SummarizedCounter_Max, &v.Max)
+		case schemas.SummarizedCounter_N:
+			return d.ReadInt32(schemas.SummarizedCounter_N, &v.N)
+		case schemas.SummarizedCounter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SummarizedCounter_Name, v.Name)
+		case schemas.SummarizedCounter_Sum:
+			return d.ReadFloat64(schemas.SummarizedCounter_Sum, &v.Sum)
+		case schemas.SummarizedCounter_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.SummarizedCounter_Unit, v.Unit)
+		}
+		return nil
+	})
+}
+
 // A tag associated with an Amazon Web Services resource. Tags are key:value pairs
 // that you can use to categorize and manage your resources, for purposes like
 // billing or other management. Typically, the tag key represents a category, such
@@ -640,6 +1574,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The time range.
 type TimeRange struct {
 
@@ -650,6 +1612,34 @@ type TimeRange struct {
 	ToExclusive *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromInclusive != nil {
+		s.WriteTime(schemas.TimeRange_FromInclusive, *v.FromInclusive)
+	}
+	if v.ToExclusive != nil {
+		s.WriteTime(schemas.TimeRange_ToExclusive, *v.ToExclusive)
+	}
+}
+func (v *TimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeRange_FromInclusive:
+			v.FromInclusive = new(time.Time)
+			return d.ReadTime(schemas.TimeRange_FromInclusive, v.FromInclusive)
+		case schemas.TimeRange_ToExclusive:
+			v.ToExclusive = new(time.Time)
+			return d.ReadTime(schemas.TimeRange_ToExclusive, v.ToExclusive)
+		}
+		return nil
+	})
 }
 
 // Provides information about a particular parameter passed inside a request that
@@ -667,6 +1657,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

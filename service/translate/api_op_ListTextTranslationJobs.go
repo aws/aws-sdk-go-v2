@@ -5,7 +5,9 @@ package translate
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type ListTextTranslationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTextTranslationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTextTranslationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTextTranslationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListTextTranslationJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTextTranslationJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTextTranslationJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTextTranslationJobsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -56,13 +78,35 @@ type ListTextTranslationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTextTranslationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTextTranslationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTextTranslationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTextTranslationJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeTextTranslationJobPropertiesList(s, schemas.ListTextTranslationJobsResponse_TextTranslationJobPropertiesList, v.TextTranslationJobPropertiesList)
+}
+func (v *ListTextTranslationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTextTranslationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTextTranslationJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTextTranslationJobsResponse_NextToken, v.NextToken)
+		case schemas.ListTextTranslationJobsResponse_TextTranslationJobPropertiesList:
+			return deserializeTextTranslationJobPropertiesList(d, schemas.ListTextTranslationJobsResponse_TextTranslationJobPropertiesList, &v.TextTranslationJobPropertiesList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTextTranslationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTextTranslationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTextTranslationJobs, schemas.ListTextTranslationJobsRequest, schemas.ListTextTranslationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTextTranslationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTextTranslationJobs, schemas.ListTextTranslationJobsRequest, schemas.ListTextTranslationJobsResponse), output: &ListTextTranslationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

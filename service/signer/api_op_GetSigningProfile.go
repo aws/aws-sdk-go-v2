@@ -4,7 +4,9 @@ package signer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,21 @@ type GetSigningProfileInput struct {
 	ProfileOwner *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSigningProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSigningProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSigningProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileName != nil {
+		s.WriteString(schemas.GetSigningProfileRequest_profileName, *v.ProfileName)
+	}
+	if v.ProfileOwner != nil {
+		s.WriteString(schemas.GetSigningProfileRequest_profileOwner, *v.ProfileOwner)
+	}
 }
 
 type GetSigningProfileOutput struct {
@@ -90,13 +107,116 @@ type GetSigningProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSigningProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSigningProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSigningProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetSigningProfileResponse_arn, *v.Arn)
+	}
+	if v.Overrides != nil {
+		s.WriteStruct(schemas.GetSigningProfileResponse_overrides)
+		v.Overrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlatformDisplayName != nil {
+		s.WriteString(schemas.GetSigningProfileResponse_platformDisplayName, *v.PlatformDisplayName)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.GetSigningProfileResponse_platformId, *v.PlatformId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.GetSigningProfileResponse_profileName, *v.ProfileName)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.GetSigningProfileResponse_profileVersion, *v.ProfileVersion)
+	}
+	if v.ProfileVersionArn != nil {
+		s.WriteString(schemas.GetSigningProfileResponse_profileVersionArn, *v.ProfileVersionArn)
+	}
+	if v.RevocationRecord != nil {
+		s.WriteStruct(schemas.GetSigningProfileResponse_revocationRecord)
+		v.RevocationRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SignatureValidityPeriod != nil {
+		s.WriteStruct(schemas.GetSigningProfileResponse_signatureValidityPeriod)
+		v.SignatureValidityPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningMaterial != nil {
+		s.WriteStruct(schemas.GetSigningProfileResponse_signingMaterial)
+		v.SigningMaterial.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSigningParameters(s, schemas.GetSigningProfileResponse_signingParameters, v.SigningParameters)
+	if v.Status != "" {
+		s.WriteString(schemas.GetSigningProfileResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetSigningProfileResponse_statusReason, *v.StatusReason)
+	}
+	serializeTagMap(s, schemas.GetSigningProfileResponse_tags, v.Tags)
+}
+func (v *GetSigningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSigningProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSigningProfileResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetSigningProfileResponse_arn, v.Arn)
+		case schemas.GetSigningProfileResponse_overrides:
+			v.Overrides = &types.SigningPlatformOverrides{}
+			return v.Overrides.Deserialize(d)
+		case schemas.GetSigningProfileResponse_platformDisplayName:
+			v.PlatformDisplayName = new(string)
+			return d.ReadString(schemas.GetSigningProfileResponse_platformDisplayName, v.PlatformDisplayName)
+		case schemas.GetSigningProfileResponse_platformId:
+			v.PlatformId = new(string)
+			return d.ReadString(schemas.GetSigningProfileResponse_platformId, v.PlatformId)
+		case schemas.GetSigningProfileResponse_profileName:
+			v.ProfileName = new(string)
+			return d.ReadString(schemas.GetSigningProfileResponse_profileName, v.ProfileName)
+		case schemas.GetSigningProfileResponse_profileVersion:
+			v.ProfileVersion = new(string)
+			return d.ReadString(schemas.GetSigningProfileResponse_profileVersion, v.ProfileVersion)
+		case schemas.GetSigningProfileResponse_profileVersionArn:
+			v.ProfileVersionArn = new(string)
+			return d.ReadString(schemas.GetSigningProfileResponse_profileVersionArn, v.ProfileVersionArn)
+		case schemas.GetSigningProfileResponse_revocationRecord:
+			v.RevocationRecord = &types.SigningProfileRevocationRecord{}
+			return v.RevocationRecord.Deserialize(d)
+		case schemas.GetSigningProfileResponse_signatureValidityPeriod:
+			v.SignatureValidityPeriod = &types.SignatureValidityPeriod{}
+			return v.SignatureValidityPeriod.Deserialize(d)
+		case schemas.GetSigningProfileResponse_signingMaterial:
+			v.SigningMaterial = &types.SigningMaterial{}
+			return v.SigningMaterial.Deserialize(d)
+		case schemas.GetSigningProfileResponse_signingParameters:
+			return deserializeSigningParameters(d, schemas.GetSigningProfileResponse_signingParameters, &v.SigningParameters)
+		case schemas.GetSigningProfileResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSigningProfileResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SigningProfileStatus(ev)
+			return nil
+		case schemas.GetSigningProfileResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetSigningProfileResponse_statusReason, v.StatusReason)
+		case schemas.GetSigningProfileResponse_tags:
+			return deserializeTagMap(d, schemas.GetSigningProfileResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSigningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSigningProfile, schemas.GetSigningProfileRequest, schemas.GetSigningProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSigningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSigningProfile, schemas.GetSigningProfileRequest, schemas.GetSigningProfileResponse), output: &GetSigningProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package servicecatalogappregistry
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListAttributeGroupsForApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttributeGroupsForApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttributeGroupsForApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttributeGroupsForApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.ListAttributeGroupsForApplicationRequest_application, *v.Application)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAttributeGroupsForApplicationRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttributeGroupsForApplicationRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAttributeGroupsForApplicationOutput struct {
 
 	//  The details related to a specific attribute group.
@@ -57,13 +77,35 @@ type ListAttributeGroupsForApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttributeGroupsForApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttributeGroupsForApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttributeGroupsForApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeGroupDetailsList(s, schemas.ListAttributeGroupsForApplicationResponse_attributeGroupsDetails, v.AttributeGroupsDetails)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttributeGroupsForApplicationResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAttributeGroupsForApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttributeGroupsForApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttributeGroupsForApplicationResponse_attributeGroupsDetails:
+			return deserializeAttributeGroupDetailsList(d, schemas.ListAttributeGroupsForApplicationResponse_attributeGroupsDetails, &v.AttributeGroupsDetails)
+		case schemas.ListAttributeGroupsForApplicationResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAttributeGroupsForApplicationResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttributeGroupsForApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAttributeGroupsForApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttributeGroupsForApplication, schemas.ListAttributeGroupsForApplicationRequest, schemas.ListAttributeGroupsForApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAttributeGroupsForApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttributeGroupsForApplication, schemas.ListAttributeGroupsForApplicationRequest, schemas.ListAttributeGroupsForApplicationResponse), output: &ListAttributeGroupsForApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

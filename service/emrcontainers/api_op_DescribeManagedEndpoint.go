@@ -4,7 +4,9 @@ package emrcontainers
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeManagedEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeManagedEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeManagedEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeManagedEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeManagedEndpointRequest_id, *v.Id)
+	}
+	if v.VirtualClusterId != nil {
+		s.WriteString(schemas.DescribeManagedEndpointRequest_virtualClusterId, *v.VirtualClusterId)
+	}
+}
+
 type DescribeManagedEndpointOutput struct {
 
 	// This output displays information about a managed endpoint.
@@ -52,13 +69,34 @@ type DescribeManagedEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeManagedEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeManagedEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeManagedEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.DescribeManagedEndpointResponse_endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeManagedEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeManagedEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeManagedEndpointResponse_endpoint:
+			v.Endpoint = &types.Endpoint{}
+			return v.Endpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeManagedEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeManagedEndpoint, schemas.DescribeManagedEndpointRequest, schemas.DescribeManagedEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeManagedEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeManagedEndpoint, schemas.DescribeManagedEndpointRequest, schemas.DescribeManagedEndpointResponse), output: &DescribeManagedEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

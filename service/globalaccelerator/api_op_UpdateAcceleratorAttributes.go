@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type UpdateAcceleratorAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAcceleratorAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAcceleratorAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAcceleratorAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.UpdateAcceleratorAttributesRequest_AcceleratorArn, *v.AcceleratorArn)
+	}
+	if v.FlowLogsEnabled != nil {
+		s.WriteBool(schemas.UpdateAcceleratorAttributesRequest_FlowLogsEnabled, *v.FlowLogsEnabled)
+	}
+	if v.FlowLogsS3Bucket != nil {
+		s.WriteString(schemas.UpdateAcceleratorAttributesRequest_FlowLogsS3Bucket, *v.FlowLogsS3Bucket)
+	}
+	if v.FlowLogsS3Prefix != nil {
+		s.WriteString(schemas.UpdateAcceleratorAttributesRequest_FlowLogsS3Prefix, *v.FlowLogsS3Prefix)
+	}
+}
+
 type UpdateAcceleratorAttributesOutput struct {
 
 	// Updated attributes for the accelerator.
@@ -67,13 +90,34 @@ type UpdateAcceleratorAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAcceleratorAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAcceleratorAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAcceleratorAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorAttributes != nil {
+		s.WriteStruct(schemas.UpdateAcceleratorAttributesResponse_AcceleratorAttributes)
+		v.AcceleratorAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAcceleratorAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAcceleratorAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAcceleratorAttributesResponse_AcceleratorAttributes:
+			v.AcceleratorAttributes = &types.AcceleratorAttributes{}
+			return v.AcceleratorAttributes.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAcceleratorAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAcceleratorAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAcceleratorAttributes, schemas.UpdateAcceleratorAttributesRequest, schemas.UpdateAcceleratorAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAcceleratorAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAcceleratorAttributes, schemas.UpdateAcceleratorAttributesRequest, schemas.UpdateAcceleratorAttributesResponse), output: &UpdateAcceleratorAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

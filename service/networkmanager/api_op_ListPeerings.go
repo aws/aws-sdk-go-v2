@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,33 @@ type ListPeeringsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPeeringsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPeeringsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPeeringsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ListPeeringsRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.ListPeeringsRequest_EdgeLocation, *v.EdgeLocation)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPeeringsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPeeringsRequest_NextToken, *v.NextToken)
+	}
+	if v.PeeringType != "" {
+		s.WriteString(schemas.ListPeeringsRequest_PeeringType, string(v.PeeringType))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListPeeringsRequest_State, string(v.State))
+	}
+}
+
 type ListPeeringsOutput struct {
 
 	// The token for the next page of results.
@@ -62,13 +91,35 @@ type ListPeeringsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPeeringsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPeeringsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPeeringsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPeeringsResponse_NextToken, *v.NextToken)
+	}
+	serializePeeringList(s, schemas.ListPeeringsResponse_Peerings, v.Peerings)
+}
+func (v *ListPeeringsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPeeringsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPeeringsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPeeringsResponse_NextToken, v.NextToken)
+		case schemas.ListPeeringsResponse_Peerings:
+			return deserializePeeringList(d, schemas.ListPeeringsResponse_Peerings, &v.Peerings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPeeringsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPeerings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPeerings, schemas.ListPeeringsRequest, schemas.ListPeeringsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPeerings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPeerings, schemas.ListPeeringsRequest, schemas.ListPeeringsResponse), output: &ListPeeringsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

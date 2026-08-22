@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,36 @@ type UpdateQueueEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateQueueEnvironmentRequest_clientToken, *v.ClientToken)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateQueueEnvironmentRequest_farmId, *v.FarmId)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateQueueEnvironmentRequest_priority, *v.Priority)
+	}
+	if v.QueueEnvironmentId != nil {
+		s.WriteString(schemas.UpdateQueueEnvironmentRequest_queueEnvironmentId, *v.QueueEnvironmentId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.UpdateQueueEnvironmentRequest_queueId, *v.QueueId)
+	}
+	if v.Template != nil {
+		s.WriteString(schemas.UpdateQueueEnvironmentRequest_template, *v.Template)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.UpdateQueueEnvironmentRequest_templateType, string(v.TemplateType))
+	}
+}
+
 type UpdateQueueEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +97,26 @@ type UpdateQueueEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateQueueEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQueueEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQueueEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueEnvironment, schemas.UpdateQueueEnvironmentRequest, schemas.UpdateQueueEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQueueEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueEnvironment, schemas.UpdateQueueEnvironmentRequest, schemas.UpdateQueueEnvironmentResponse), output: &UpdateQueueEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

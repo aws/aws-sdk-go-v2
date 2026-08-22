@@ -4,6 +4,8 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type DeleteStreamKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStreamKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStreamKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteStreamKeyRequest_arn, *v.Arn)
+	}
+}
+func (v *DeleteStreamKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStreamKeyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteStreamKeyRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteStreamKeyRequest_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DeleteStreamKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +65,26 @@ type DeleteStreamKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStreamKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStreamKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStreamKey, schemas.DeleteStreamKeyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStreamKey, schemas.DeleteStreamKeyRequest, nil), output: &DeleteStreamKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

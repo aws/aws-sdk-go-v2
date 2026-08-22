@@ -5,7 +5,9 @@ package ivsrealtime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListStageSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStageSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStageSessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStageSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStageSessionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStageSessionsRequest_nextToken, *v.NextToken)
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.ListStageSessionsRequest_stageArn, *v.StageArn)
+	}
+}
+
 type ListStageSessionsOutput struct {
 
 	// List of matching stage sessions.
@@ -59,13 +79,35 @@ type ListStageSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStageSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStageSessionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStageSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStageSessionsResponse_nextToken, *v.NextToken)
+	}
+	serializeStageSessionList(s, schemas.ListStageSessionsResponse_stageSessions, v.StageSessions)
+}
+func (v *ListStageSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStageSessionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStageSessionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStageSessionsResponse_nextToken, v.NextToken)
+		case schemas.ListStageSessionsResponse_stageSessions:
+			return deserializeStageSessionList(d, schemas.ListStageSessionsResponse_stageSessions, &v.StageSessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStageSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStageSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStageSessions, schemas.ListStageSessionsRequest, schemas.ListStageSessionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStageSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStageSessions, schemas.ListStageSessionsRequest, schemas.ListStageSessionsResponse), output: &ListStageSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLabelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetLabelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetLabelsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLabelsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetLabelsOutput struct {
 
 	// An array of labels.
@@ -58,13 +78,35 @@ type GetLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLabelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLabelsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializelabelList(s, schemas.GetLabelsResult_labels, v.Labels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLabelsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *GetLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLabelsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLabelsResult_labels:
+			return deserializelabelList(d, schemas.GetLabelsResult_labels, &v.Labels)
+		case schemas.GetLabelsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetLabelsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLabels, schemas.GetLabelsRequest, schemas.GetLabelsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLabels, schemas.GetLabelsRequest, schemas.GetLabelsResult), output: &GetLabelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

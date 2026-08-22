@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,29 @@ type RegisterCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateData != nil {
+		s.WriteString(schemas.RegisterCertificateRequest_CertificateData, *v.CertificateData)
+	}
+	if v.ClientCertAuthSettings != nil {
+		s.WriteStruct(schemas.RegisterCertificateRequest_ClientCertAuthSettings)
+		v.ClientCertAuthSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.RegisterCertificateRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RegisterCertificateRequest_Type, string(v.Type))
+	}
+}
+
 type RegisterCertificateOutput struct {
 
 	// The identifier of the certificate.
@@ -58,13 +83,32 @@ type RegisterCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCertificateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.RegisterCertificateResult_CertificateId, *v.CertificateId)
+	}
+}
+func (v *RegisterCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterCertificateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterCertificateResult_CertificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.RegisterCertificateResult_CertificateId, v.CertificateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.RegisterCertificateRequest, schemas.RegisterCertificateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.RegisterCertificateRequest, schemas.RegisterCertificateResult), output: &RegisterCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

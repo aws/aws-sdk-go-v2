@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type GetConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.GetConnectionRequest_ConnectionId, *v.ConnectionId)
+	}
+}
+
 type GetConnectionOutput struct {
 
 	//  Information about the connection.
@@ -57,13 +71,40 @@ type GetConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionDetails != nil {
+		s.WriteStruct(schemas.GetConnectionResponse_ConnectionDetails)
+		v.ConnectionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.GetConnectionResponse_ConnectionId, *v.ConnectionId)
+	}
+}
+func (v *GetConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectionResponse_ConnectionDetails:
+			v.ConnectionDetails = &types.ConnectionDetails{}
+			return v.ConnectionDetails.Deserialize(d)
+		case schemas.GetConnectionResponse_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.GetConnectionResponse_ConnectionId, v.ConnectionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnection, schemas.GetConnectionRequest, schemas.GetConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnection, schemas.GetConnectionRequest, schemas.GetConnectionResponse), output: &GetConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -14,6 +17,25 @@ type AmiProductEntityIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmiProductEntityIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiProductEntityIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiProductEntityIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAmiProductEntityIdFilterValueList(s, schemas.AmiProductEntityIdFilter_ValueList, v.ValueList)
+}
+func (v *AmiProductEntityIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiProductEntityIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiProductEntityIdFilter_ValueList:
+			return deserializeAmiProductEntityIdFilterValueList(d, schemas.AmiProductEntityIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Object containing all the filter fields for AMI products. Client can add only
@@ -35,6 +57,54 @@ type AmiProductFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmiProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiProductFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiProductFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteStruct(schemas.AmiProductFilters_EntityId)
+		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.AmiProductFilters_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductTitle != nil {
+		s.WriteStruct(schemas.AmiProductFilters_ProductTitle)
+		v.ProductTitle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Visibility != nil {
+		s.WriteStruct(schemas.AmiProductFilters_Visibility)
+		v.Visibility.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmiProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiProductFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiProductFilters_EntityId:
+			v.EntityId = &AmiProductEntityIdFilter{}
+			return v.EntityId.Deserialize(d)
+		case schemas.AmiProductFilters_LastModifiedDate:
+			v.LastModifiedDate = &AmiProductLastModifiedDateFilter{}
+			return v.LastModifiedDate.Deserialize(d)
+		case schemas.AmiProductFilters_ProductTitle:
+			v.ProductTitle = &AmiProductTitleFilter{}
+			return v.ProductTitle.Deserialize(d)
+		case schemas.AmiProductFilters_Visibility:
+			v.Visibility = &AmiProductVisibilityFilter{}
+			return v.Visibility.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering based on the last modified date of AMI products.
 type AmiProductLastModifiedDateFilter struct {
 
@@ -42,6 +112,30 @@ type AmiProductLastModifiedDateFilter struct {
 	DateRange *AmiProductLastModifiedDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmiProductLastModifiedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiProductLastModifiedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiProductLastModifiedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.AmiProductLastModifiedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmiProductLastModifiedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiProductLastModifiedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiProductLastModifiedDateFilter_DateRange:
+			v.DateRange = &AmiProductLastModifiedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Object that contains date range of the last modified date to be filtered on.
@@ -55,6 +149,34 @@ type AmiProductLastModifiedDateFilterDateRange struct {
 	BeforeValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmiProductLastModifiedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiProductLastModifiedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiProductLastModifiedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.AmiProductLastModifiedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.AmiProductLastModifiedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *AmiProductLastModifiedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiProductLastModifiedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiProductLastModifiedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.AmiProductLastModifiedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.AmiProductLastModifiedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.AmiProductLastModifiedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
 }
 
 // Objects that allows sorting on AMI products based on certain fields and sorting
@@ -71,6 +193,42 @@ type AmiProductSort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmiProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiProductSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiProductSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.AmiProductSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.AmiProductSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *AmiProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiProductSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiProductSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.AmiProductSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = AmiProductSortBy(ev)
+			return nil
+		case schemas.AmiProductSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.AmiProductSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Object that contains summarized information about an AMI product.
 type AmiProductSummary struct {
 
@@ -81,6 +239,38 @@ type AmiProductSummary struct {
 	Visibility AmiProductVisibilityString
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmiProductSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiProductSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiProductSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductTitle != nil {
+		s.WriteString(schemas.AmiProductSummary_ProductTitle, *v.ProductTitle)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.AmiProductSummary_Visibility, string(v.Visibility))
+	}
+}
+func (v *AmiProductSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiProductSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiProductSummary_ProductTitle:
+			v.ProductTitle = new(string)
+			return d.ReadString(schemas.AmiProductSummary_ProductTitle, v.ProductTitle)
+		case schemas.AmiProductSummary_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.AmiProductSummary_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = AmiProductVisibilityString(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Object that allows filtering on product title.
@@ -96,6 +286,31 @@ type AmiProductTitleFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmiProductTitleFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiProductTitleFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiProductTitleFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAmiProductTitleFilterValueList(s, schemas.AmiProductTitleFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.AmiProductTitleFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *AmiProductTitleFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiProductTitleFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiProductTitleFilter_ValueList:
+			return deserializeAmiProductTitleFilterValueList(d, schemas.AmiProductTitleFilter_ValueList, &v.ValueList)
+		case schemas.AmiProductTitleFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.AmiProductTitleFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering on the visibility of the product in the AWS
 // Marketplace.
 type AmiProductVisibilityFilter struct {
@@ -104,6 +319,25 @@ type AmiProductVisibilityFilter struct {
 	ValueList []AmiProductVisibilityString
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmiProductVisibilityFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiProductVisibilityFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiProductVisibilityFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAmiProductVisibilityFilterValueList(s, schemas.AmiProductVisibilityFilter_ValueList, v.ValueList)
+}
+func (v *AmiProductVisibilityFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiProductVisibilityFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiProductVisibilityFilter_ValueList:
+			return deserializeAmiProductVisibilityFilterValueList(d, schemas.AmiProductVisibilityFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Filters that apply to assessments performed against the AMI Security framework.
@@ -116,6 +350,28 @@ type AMISecurityFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AMISecurityFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AMISecurityFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AMISecurityFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryOptionId != nil {
+		s.WriteString(schemas.AMISecurityFilters_DeliveryOptionId, *v.DeliveryOptionId)
+	}
+}
+func (v *AMISecurityFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AMISecurityFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AMISecurityFilters_DeliveryOptionId:
+			v.DeliveryOptionId = new(string)
+			return d.ReadString(schemas.AMISecurityFilters_DeliveryOptionId, v.DeliveryOptionId)
+		}
+		return nil
+	})
+}
+
 // The details of the resource assessed under the AMI Security framework.
 type AMISecuritySummary struct {
 
@@ -123,6 +379,28 @@ type AMISecuritySummary struct {
 	DeliveryOptionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AMISecuritySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AMISecuritySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AMISecuritySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryOptionId != nil {
+		s.WriteString(schemas.AMISecuritySummary_DeliveryOptionId, *v.DeliveryOptionId)
+	}
+}
+func (v *AMISecuritySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AMISecuritySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AMISecuritySummary_DeliveryOptionId:
+			v.DeliveryOptionId = new(string)
+			return d.ReadString(schemas.AMISecuritySummary_DeliveryOptionId, v.DeliveryOptionId)
+		}
+		return nil
+	})
 }
 
 // Summarized information about an assessment.
@@ -159,6 +437,73 @@ type AssessmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.AssessmentSummary_AssessmentArn, *v.AssessmentArn)
+	}
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.AssessmentSummary_AssessmentId, *v.AssessmentId)
+	}
+	if v.AssessmentResult != "" {
+		s.WriteString(schemas.AssessmentSummary_AssessmentResult, string(v.AssessmentResult))
+	}
+	if v.AssessmentTargetSummary != nil {
+		s.WriteStruct(schemas.AssessmentSummary_AssessmentTargetSummary)
+		v.AssessmentTargetSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.AssessmentSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteString(schemas.AssessmentSummary_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.FrameworkId != nil {
+		s.WriteString(schemas.AssessmentSummary_FrameworkId, *v.FrameworkId)
+	}
+	serializeFrameworkSummary(s, schemas.AssessmentSummary_FrameworkSummary, v.FrameworkSummary)
+}
+func (v *AssessmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentSummary_AssessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.AssessmentSummary_AssessmentArn, v.AssessmentArn)
+		case schemas.AssessmentSummary_AssessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.AssessmentSummary_AssessmentId, v.AssessmentId)
+		case schemas.AssessmentSummary_AssessmentResult:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentSummary_AssessmentResult, &ev); err != nil {
+				return err
+			}
+			v.AssessmentResult = AssessmentResult(ev)
+			return nil
+		case schemas.AssessmentSummary_AssessmentTargetSummary:
+			v.AssessmentTargetSummary = &AssessmentTargetSummary{}
+			return v.AssessmentTargetSummary.Deserialize(d)
+		case schemas.AssessmentSummary_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.AssessmentSummary_CreatedAt, v.CreatedAt)
+		case schemas.AssessmentSummary_ExpiresAt:
+			v.ExpiresAt = new(string)
+			return d.ReadString(schemas.AssessmentSummary_ExpiresAt, v.ExpiresAt)
+		case schemas.AssessmentSummary_FrameworkId:
+			v.FrameworkId = new(string)
+			return d.ReadString(schemas.AssessmentSummary_FrameworkId, v.FrameworkId)
+		case schemas.AssessmentSummary_FrameworkSummary:
+			return deserializeFrameworkSummary(d, schemas.AssessmentSummary_FrameworkSummary, &v.FrameworkSummary)
+		}
+		return nil
+	})
+}
+
 // Filters assessment list results by the resource that was assessed. Provide an
 // entity identifier, a change set identifier, or both.
 type AssessmentTargetFilter struct {
@@ -170,6 +515,34 @@ type AssessmentTargetFilter struct {
 	EntityId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentTargetFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentTargetFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentTargetFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.AssessmentTargetFilter_ChangeSetId, *v.ChangeSetId)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.AssessmentTargetFilter_EntityId, *v.EntityId)
+	}
+}
+func (v *AssessmentTargetFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentTargetFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentTargetFilter_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.AssessmentTargetFilter_ChangeSetId, v.ChangeSetId)
+		case schemas.AssessmentTargetFilter_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.AssessmentTargetFilter_EntityId, v.EntityId)
+		}
+		return nil
+	})
 }
 
 // Identifies the entity or change set that was assessed.
@@ -184,6 +557,34 @@ type AssessmentTargetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentTargetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentTargetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentTargetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.AssessmentTargetSummary_ChangeSetId, *v.ChangeSetId)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.AssessmentTargetSummary_EntityId, *v.EntityId)
+	}
+}
+func (v *AssessmentTargetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentTargetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentTargetSummary_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.AssessmentTargetSummary_ChangeSetId, v.ChangeSetId)
+		case schemas.AssessmentTargetSummary_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.AssessmentTargetSummary_EntityId, v.EntityId)
+		}
+		return nil
+	})
+}
+
 // An object that contains an error code and error message.
 type BatchDescribeErrorDetail struct {
 
@@ -194,6 +595,34 @@ type BatchDescribeErrorDetail struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDescribeErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchDescribeErrorDetail_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchDescribeErrorDetail_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchDescribeErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDescribeErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDescribeErrorDetail_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchDescribeErrorDetail_ErrorCode, v.ErrorCode)
+		case schemas.BatchDescribeErrorDetail_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchDescribeErrorDetail_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // An object that contains the ChangeType , Details , and Entity .
@@ -243,6 +672,63 @@ type Change struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Change) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Change)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Change) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeName != nil {
+		s.WriteString(schemas.Change_ChangeName, *v.ChangeName)
+	}
+	if v.ChangeType != nil {
+		s.WriteString(schemas.Change_ChangeType, *v.ChangeType)
+	}
+	if v.Details != nil {
+		s.WriteString(schemas.Change_Details, *v.Details)
+	}
+	if v.DetailsDocument != nil {
+		s.WriteDocument(schemas.Change_DetailsDocument, &smithydocument.Opaque{Value: v.DetailsDocument})
+	}
+	if v.Entity != nil {
+		s.WriteStruct(schemas.Change_Entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.Change_EntityTags, v.EntityTags)
+}
+func (v *Change) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Change, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Change_ChangeName:
+			v.ChangeName = new(string)
+			return d.ReadString(schemas.Change_ChangeName, v.ChangeName)
+		case schemas.Change_ChangeType:
+			v.ChangeType = new(string)
+			return d.ReadString(schemas.Change_ChangeType, v.ChangeType)
+		case schemas.Change_Details:
+			v.Details = new(string)
+			return d.ReadString(schemas.Change_Details, v.Details)
+		case schemas.Change_DetailsDocument:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.Change_DetailsDocument, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DetailsDocument = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.Change_Entity:
+			v.Entity = &Entity{}
+			return v.Entity.Deserialize(d)
+		case schemas.Change_EntityTags:
+			return deserializeTagList(d, schemas.Change_EntityTags, &v.EntityTags)
+		}
+		return nil
+	})
+}
+
 // A summary of a change set returned in a list of change sets when the
 // ListChangeSets action is called.
 type ChangeSetSummaryListItem struct {
@@ -282,6 +768,75 @@ type ChangeSetSummaryListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangeSetSummaryListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangeSetSummaryListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangeSetSummaryListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetArn != nil {
+		s.WriteString(schemas.ChangeSetSummaryListItem_ChangeSetArn, *v.ChangeSetArn)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.ChangeSetSummaryListItem_ChangeSetId, *v.ChangeSetId)
+	}
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.ChangeSetSummaryListItem_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.EndTime != nil {
+		s.WriteString(schemas.ChangeSetSummaryListItem_EndTime, *v.EndTime)
+	}
+	serializeResourceIdList(s, schemas.ChangeSetSummaryListItem_EntityIdList, v.EntityIdList)
+	if v.FailureCode != "" {
+		s.WriteString(schemas.ChangeSetSummaryListItem_FailureCode, string(v.FailureCode))
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.ChangeSetSummaryListItem_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ChangeSetSummaryListItem_Status, string(v.Status))
+	}
+}
+func (v *ChangeSetSummaryListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChangeSetSummaryListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChangeSetSummaryListItem_ChangeSetArn:
+			v.ChangeSetArn = new(string)
+			return d.ReadString(schemas.ChangeSetSummaryListItem_ChangeSetArn, v.ChangeSetArn)
+		case schemas.ChangeSetSummaryListItem_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.ChangeSetSummaryListItem_ChangeSetId, v.ChangeSetId)
+		case schemas.ChangeSetSummaryListItem_ChangeSetName:
+			v.ChangeSetName = new(string)
+			return d.ReadString(schemas.ChangeSetSummaryListItem_ChangeSetName, v.ChangeSetName)
+		case schemas.ChangeSetSummaryListItem_EndTime:
+			v.EndTime = new(string)
+			return d.ReadString(schemas.ChangeSetSummaryListItem_EndTime, v.EndTime)
+		case schemas.ChangeSetSummaryListItem_EntityIdList:
+			return deserializeResourceIdList(d, schemas.ChangeSetSummaryListItem_EntityIdList, &v.EntityIdList)
+		case schemas.ChangeSetSummaryListItem_FailureCode:
+			var ev string
+			if err := d.ReadString(schemas.ChangeSetSummaryListItem_FailureCode, &ev); err != nil {
+				return err
+			}
+			v.FailureCode = FailureCode(ev)
+			return nil
+		case schemas.ChangeSetSummaryListItem_StartTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.ChangeSetSummaryListItem_StartTime, v.StartTime)
+		case schemas.ChangeSetSummaryListItem_Status:
+			var ev string
+			if err := d.ReadString(schemas.ChangeSetSummaryListItem_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ChangeStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This object is a container for common summary information about the change. The
 // summary doesn't contain the whole change structure.
 type ChangeSummary struct {
@@ -314,6 +869,63 @@ type ChangeSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangeSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangeSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangeSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeName != nil {
+		s.WriteString(schemas.ChangeSummary_ChangeName, *v.ChangeName)
+	}
+	if v.ChangeType != nil {
+		s.WriteString(schemas.ChangeSummary_ChangeType, *v.ChangeType)
+	}
+	if v.Details != nil {
+		s.WriteString(schemas.ChangeSummary_Details, *v.Details)
+	}
+	if v.DetailsDocument != nil {
+		s.WriteDocument(schemas.ChangeSummary_DetailsDocument, &smithydocument.Opaque{Value: v.DetailsDocument})
+	}
+	if v.Entity != nil {
+		s.WriteStruct(schemas.ChangeSummary_Entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeErrorDetailList(s, schemas.ChangeSummary_ErrorDetailList, v.ErrorDetailList)
+}
+func (v *ChangeSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChangeSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChangeSummary_ChangeName:
+			v.ChangeName = new(string)
+			return d.ReadString(schemas.ChangeSummary_ChangeName, v.ChangeName)
+		case schemas.ChangeSummary_ChangeType:
+			v.ChangeType = new(string)
+			return d.ReadString(schemas.ChangeSummary_ChangeType, v.ChangeType)
+		case schemas.ChangeSummary_Details:
+			v.Details = new(string)
+			return d.ReadString(schemas.ChangeSummary_Details, v.Details)
+		case schemas.ChangeSummary_DetailsDocument:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ChangeSummary_DetailsDocument, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DetailsDocument = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.ChangeSummary_Entity:
+			v.Entity = &Entity{}
+			return v.Entity.Deserialize(d)
+		case schemas.ChangeSummary_ErrorDetailList:
+			return deserializeErrorDetailList(d, schemas.ChangeSummary_ErrorDetailList, &v.ErrorDetailList)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering on entity id of a container product.
 type ContainerProductEntityIdFilter struct {
 
@@ -321,6 +933,25 @@ type ContainerProductEntityIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerProductEntityIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerProductEntityIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerProductEntityIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerProductEntityIdFilterValueList(s, schemas.ContainerProductEntityIdFilter_ValueList, v.ValueList)
+}
+func (v *ContainerProductEntityIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerProductEntityIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerProductEntityIdFilter_ValueList:
+			return deserializeContainerProductEntityIdFilterValueList(d, schemas.ContainerProductEntityIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Object containing all the filter fields for container products. Client can add
@@ -343,6 +974,54 @@ type ContainerProductFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerProductFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerProductFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteStruct(schemas.ContainerProductFilters_EntityId)
+		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.ContainerProductFilters_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductTitle != nil {
+		s.WriteStruct(schemas.ContainerProductFilters_ProductTitle)
+		v.ProductTitle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Visibility != nil {
+		s.WriteStruct(schemas.ContainerProductFilters_Visibility)
+		v.Visibility.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ContainerProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerProductFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerProductFilters_EntityId:
+			v.EntityId = &ContainerProductEntityIdFilter{}
+			return v.EntityId.Deserialize(d)
+		case schemas.ContainerProductFilters_LastModifiedDate:
+			v.LastModifiedDate = &ContainerProductLastModifiedDateFilter{}
+			return v.LastModifiedDate.Deserialize(d)
+		case schemas.ContainerProductFilters_ProductTitle:
+			v.ProductTitle = &ContainerProductTitleFilter{}
+			return v.ProductTitle.Deserialize(d)
+		case schemas.ContainerProductFilters_Visibility:
+			v.Visibility = &ContainerProductVisibilityFilter{}
+			return v.Visibility.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering based on the last modified date of container
 // products.
 type ContainerProductLastModifiedDateFilter struct {
@@ -351,6 +1030,30 @@ type ContainerProductLastModifiedDateFilter struct {
 	DateRange *ContainerProductLastModifiedDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerProductLastModifiedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerProductLastModifiedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerProductLastModifiedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.ContainerProductLastModifiedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ContainerProductLastModifiedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerProductLastModifiedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerProductLastModifiedDateFilter_DateRange:
+			v.DateRange = &ContainerProductLastModifiedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Object that contains date range of the last modified date to be filtered on.
@@ -364,6 +1067,34 @@ type ContainerProductLastModifiedDateFilterDateRange struct {
 	BeforeValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerProductLastModifiedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerProductLastModifiedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerProductLastModifiedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.ContainerProductLastModifiedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.ContainerProductLastModifiedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *ContainerProductLastModifiedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerProductLastModifiedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerProductLastModifiedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.ContainerProductLastModifiedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.ContainerProductLastModifiedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.ContainerProductLastModifiedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
 }
 
 // Objects that allows sorting on container products based on certain fields and
@@ -380,6 +1111,42 @@ type ContainerProductSort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerProductSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerProductSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.ContainerProductSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ContainerProductSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *ContainerProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerProductSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerProductSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.ContainerProductSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = ContainerProductSortBy(ev)
+			return nil
+		case schemas.ContainerProductSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ContainerProductSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Object that contains summarized information about a container product.
 type ContainerProductSummary struct {
 
@@ -390,6 +1157,38 @@ type ContainerProductSummary struct {
 	Visibility ContainerProductVisibilityString
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerProductSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerProductSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerProductSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductTitle != nil {
+		s.WriteString(schemas.ContainerProductSummary_ProductTitle, *v.ProductTitle)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.ContainerProductSummary_Visibility, string(v.Visibility))
+	}
+}
+func (v *ContainerProductSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerProductSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerProductSummary_ProductTitle:
+			v.ProductTitle = new(string)
+			return d.ReadString(schemas.ContainerProductSummary_ProductTitle, v.ProductTitle)
+		case schemas.ContainerProductSummary_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.ContainerProductSummary_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = ContainerProductVisibilityString(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Object that allows filtering on product title.
@@ -405,6 +1204,31 @@ type ContainerProductTitleFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerProductTitleFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerProductTitleFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerProductTitleFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerProductTitleFilterValueList(s, schemas.ContainerProductTitleFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.ContainerProductTitleFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *ContainerProductTitleFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerProductTitleFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerProductTitleFilter_ValueList:
+			return deserializeContainerProductTitleFilterValueList(d, schemas.ContainerProductTitleFilter_ValueList, &v.ValueList)
+		case schemas.ContainerProductTitleFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.ContainerProductTitleFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering on the visibility of the product in the AWS
 // Marketplace.
 type ContainerProductVisibilityFilter struct {
@@ -413,6 +1237,25 @@ type ContainerProductVisibilityFilter struct {
 	ValueList []ContainerProductVisibilityString
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerProductVisibilityFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerProductVisibilityFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerProductVisibilityFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerProductVisibilityFilterValueList(s, schemas.ContainerProductVisibilityFilter_ValueList, v.ValueList)
+}
+func (v *ContainerProductVisibilityFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerProductVisibilityFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerProductVisibilityFilter_ValueList:
+			return deserializeContainerProductVisibilityFilterValueList(d, schemas.ContainerProductVisibilityFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Filters that apply to assessments performed against the Container Security
@@ -426,6 +1269,28 @@ type ContainerSecurityFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerSecurityFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerSecurityFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerSecurityFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryOptionId != nil {
+		s.WriteString(schemas.ContainerSecurityFilters_DeliveryOptionId, *v.DeliveryOptionId)
+	}
+}
+func (v *ContainerSecurityFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerSecurityFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerSecurityFilters_DeliveryOptionId:
+			v.DeliveryOptionId = new(string)
+			return d.ReadString(schemas.ContainerSecurityFilters_DeliveryOptionId, v.DeliveryOptionId)
+		}
+		return nil
+	})
+}
+
 // The details of the resource assessed under the Container Security framework.
 type ContainerSecuritySummary struct {
 
@@ -433,6 +1298,28 @@ type ContainerSecuritySummary struct {
 	DeliveryOptionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerSecuritySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerSecuritySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerSecuritySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryOptionId != nil {
+		s.WriteString(schemas.ContainerSecuritySummary_DeliveryOptionId, *v.DeliveryOptionId)
+	}
+}
+func (v *ContainerSecuritySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerSecuritySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerSecuritySummary_DeliveryOptionId:
+			v.DeliveryOptionId = new(string)
+			return d.ReadString(schemas.ContainerSecuritySummary_DeliveryOptionId, v.DeliveryOptionId)
+		}
+		return nil
+	})
 }
 
 // The result of evaluating a single control as part of an assessment.
@@ -448,6 +1335,41 @@ type ControlAssessment struct {
 	Errors []ControlError
 
 	noSmithyDocumentSerde
+}
+
+func (v *ControlAssessment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlAssessment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlAssessment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlAssessmentResult != "" {
+		s.WriteString(schemas.ControlAssessment_ControlAssessmentResult, string(v.ControlAssessmentResult))
+	}
+	if v.ControlId != nil {
+		s.WriteString(schemas.ControlAssessment_ControlId, *v.ControlId)
+	}
+	serializeControlErrorList(s, schemas.ControlAssessment_Errors, v.Errors)
+}
+func (v *ControlAssessment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlAssessment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlAssessment_ControlAssessmentResult:
+			var ev string
+			if err := d.ReadString(schemas.ControlAssessment_ControlAssessmentResult, &ev); err != nil {
+				return err
+			}
+			v.ControlAssessmentResult = ControlAssessmentResult(ev)
+			return nil
+		case schemas.ControlAssessment_ControlId:
+			v.ControlId = new(string)
+			return d.ReadString(schemas.ControlAssessment_ControlId, v.ControlId)
+		case schemas.ControlAssessment_Errors:
+			return deserializeControlErrorList(d, schemas.ControlAssessment_Errors, &v.Errors)
+		}
+		return nil
+	})
 }
 
 // An error reported during the evaluation of a single control.
@@ -466,6 +1388,37 @@ type ControlError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ControlError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ControlError_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ControlError_Message, *v.Message)
+	}
+	serializeErrorScopeList(s, schemas.ControlError_Scope, v.Scope)
+}
+func (v *ControlError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlError_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ControlError_Code, v.Code)
+		case schemas.ControlError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ControlError_Message, v.Message)
+		case schemas.ControlError_Scope:
+			return deserializeErrorScopeList(d, schemas.ControlError_Scope, &v.Scope)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering on entity id of a data product.
 type DataProductEntityIdFilter struct {
 
@@ -473,6 +1426,25 @@ type DataProductEntityIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataProductEntityIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProductEntityIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProductEntityIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataProductEntityIdFilterValueList(s, schemas.DataProductEntityIdFilter_ValueList, v.ValueList)
+}
+func (v *DataProductEntityIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProductEntityIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProductEntityIdFilter_ValueList:
+			return deserializeDataProductEntityIdFilterValueList(d, schemas.DataProductEntityIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Object containing all the filter fields for data products. Client can add only
@@ -494,6 +1466,54 @@ type DataProductFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProductFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProductFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteStruct(schemas.DataProductFilters_EntityId)
+		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.DataProductFilters_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductTitle != nil {
+		s.WriteStruct(schemas.DataProductFilters_ProductTitle)
+		v.ProductTitle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Visibility != nil {
+		s.WriteStruct(schemas.DataProductFilters_Visibility)
+		v.Visibility.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProductFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProductFilters_EntityId:
+			v.EntityId = &DataProductEntityIdFilter{}
+			return v.EntityId.Deserialize(d)
+		case schemas.DataProductFilters_LastModifiedDate:
+			v.LastModifiedDate = &DataProductLastModifiedDateFilter{}
+			return v.LastModifiedDate.Deserialize(d)
+		case schemas.DataProductFilters_ProductTitle:
+			v.ProductTitle = &DataProductTitleFilter{}
+			return v.ProductTitle.Deserialize(d)
+		case schemas.DataProductFilters_Visibility:
+			v.Visibility = &DataProductVisibilityFilter{}
+			return v.Visibility.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering based on the last modified date of data products.
 type DataProductLastModifiedDateFilter struct {
 
@@ -501,6 +1521,30 @@ type DataProductLastModifiedDateFilter struct {
 	DateRange *DataProductLastModifiedDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataProductLastModifiedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProductLastModifiedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProductLastModifiedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.DataProductLastModifiedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataProductLastModifiedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProductLastModifiedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProductLastModifiedDateFilter_DateRange:
+			v.DateRange = &DataProductLastModifiedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Object that contains date range of the last modified date to be filtered on.
@@ -514,6 +1558,34 @@ type DataProductLastModifiedDateFilterDateRange struct {
 	BeforeValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataProductLastModifiedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProductLastModifiedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProductLastModifiedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.DataProductLastModifiedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.DataProductLastModifiedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *DataProductLastModifiedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProductLastModifiedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProductLastModifiedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.DataProductLastModifiedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.DataProductLastModifiedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.DataProductLastModifiedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
 }
 
 // Objects that allows sorting on data products based on certain fields and
@@ -530,6 +1602,42 @@ type DataProductSort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProductSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProductSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.DataProductSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.DataProductSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *DataProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProductSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProductSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.DataProductSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = DataProductSortBy(ev)
+			return nil
+		case schemas.DataProductSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.DataProductSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Object that contains summarized information about a data product.
 type DataProductSummary struct {
 
@@ -540,6 +1648,38 @@ type DataProductSummary struct {
 	Visibility DataProductVisibilityString
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataProductSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProductSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProductSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductTitle != nil {
+		s.WriteString(schemas.DataProductSummary_ProductTitle, *v.ProductTitle)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.DataProductSummary_Visibility, string(v.Visibility))
+	}
+}
+func (v *DataProductSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProductSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProductSummary_ProductTitle:
+			v.ProductTitle = new(string)
+			return d.ReadString(schemas.DataProductSummary_ProductTitle, v.ProductTitle)
+		case schemas.DataProductSummary_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.DataProductSummary_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = DataProductVisibilityString(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Object that allows filtering on product title.
@@ -555,6 +1695,31 @@ type DataProductTitleFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataProductTitleFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProductTitleFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProductTitleFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataProductTitleFilterValueList(s, schemas.DataProductTitleFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.DataProductTitleFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *DataProductTitleFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProductTitleFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProductTitleFilter_ValueList:
+			return deserializeDataProductTitleFilterValueList(d, schemas.DataProductTitleFilter_ValueList, &v.ValueList)
+		case schemas.DataProductTitleFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.DataProductTitleFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering on the visibility of the product in the AWS
 // Marketplace.
 type DataProductVisibilityFilter struct {
@@ -563,6 +1728,25 @@ type DataProductVisibilityFilter struct {
 	ValueList []DataProductVisibilityString
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataProductVisibilityFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProductVisibilityFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProductVisibilityFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataProductVisibilityFilterValueList(s, schemas.DataProductVisibilityFilter_ValueList, v.ValueList)
+}
+func (v *DataProductVisibilityFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProductVisibilityFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProductVisibilityFilter_ValueList:
+			return deserializeDataProductVisibilityFilterValueList(d, schemas.DataProductVisibilityFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // An entity contains data that describes your product, its supported features,
@@ -578,6 +1762,34 @@ type Entity struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Entity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Entity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.Entity_Identifier, *v.Identifier)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Entity_Type, *v.Type)
+	}
+}
+func (v *Entity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Entity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Entity_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.Entity_Identifier, v.Identifier)
+		case schemas.Entity_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Entity_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // An object that contains metadata and details about the entity.
@@ -601,6 +1813,58 @@ type EntityDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetailsDocument != nil {
+		s.WriteDocument(schemas.EntityDetail_DetailsDocument, &smithydocument.Opaque{Value: v.DetailsDocument})
+	}
+	if v.EntityArn != nil {
+		s.WriteString(schemas.EntityDetail_EntityArn, *v.EntityArn)
+	}
+	if v.EntityIdentifier != nil {
+		s.WriteString(schemas.EntityDetail_EntityIdentifier, *v.EntityIdentifier)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.EntityDetail_EntityType, *v.EntityType)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.EntityDetail_LastModifiedDate, *v.LastModifiedDate)
+	}
+}
+func (v *EntityDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityDetail_DetailsDocument:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.EntityDetail_DetailsDocument, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DetailsDocument = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.EntityDetail_EntityArn:
+			v.EntityArn = new(string)
+			return d.ReadString(schemas.EntityDetail_EntityArn, v.EntityArn)
+		case schemas.EntityDetail_EntityIdentifier:
+			v.EntityIdentifier = new(string)
+			return d.ReadString(schemas.EntityDetail_EntityIdentifier, v.EntityIdentifier)
+		case schemas.EntityDetail_EntityType:
+			v.EntityType = new(string)
+			return d.ReadString(schemas.EntityDetail_EntityType, v.EntityType)
+		case schemas.EntityDetail_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.EntityDetail_LastModifiedDate, v.LastModifiedDate)
+		}
+		return nil
+	})
+}
+
 // An object that contains entity ID and the catalog in which the entity is
 // present.
 type EntityRequest struct {
@@ -617,6 +1881,34 @@ type EntityRequest struct {
 	EntityId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.EntityRequest_Catalog, *v.Catalog)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.EntityRequest_EntityId, *v.EntityId)
+	}
+}
+func (v *EntityRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRequest_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.EntityRequest_Catalog, v.Catalog)
+		case schemas.EntityRequest_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.EntityRequest_EntityId, v.EntityId)
+		}
+		return nil
+	})
 }
 
 // This object is a container for common summary information about the entity. The
@@ -673,6 +1965,122 @@ type EntitySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntitySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntitySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntitySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiProductSummary != nil {
+		s.WriteStruct(schemas.EntitySummary_AmiProductSummary)
+		v.AmiProductSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContainerProductSummary != nil {
+		s.WriteStruct(schemas.EntitySummary_ContainerProductSummary)
+		v.ContainerProductSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataProductSummary != nil {
+		s.WriteStruct(schemas.EntitySummary_DataProductSummary)
+		v.DataProductSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityArn != nil {
+		s.WriteString(schemas.EntitySummary_EntityArn, *v.EntityArn)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.EntitySummary_EntityId, *v.EntityId)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.EntitySummary_EntityType, *v.EntityType)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.EntitySummary_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.MachineLearningProductSummary != nil {
+		s.WriteStruct(schemas.EntitySummary_MachineLearningProductSummary)
+		v.MachineLearningProductSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.EntitySummary_Name, *v.Name)
+	}
+	if v.OfferSetSummary != nil {
+		s.WriteStruct(schemas.EntitySummary_OfferSetSummary)
+		v.OfferSetSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OfferSummary != nil {
+		s.WriteStruct(schemas.EntitySummary_OfferSummary)
+		v.OfferSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResaleAuthorizationSummary != nil {
+		s.WriteStruct(schemas.EntitySummary_ResaleAuthorizationSummary)
+		v.ResaleAuthorizationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SaaSProductSummary != nil {
+		s.WriteStruct(schemas.EntitySummary_SaaSProductSummary)
+		v.SaaSProductSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Visibility != nil {
+		s.WriteString(schemas.EntitySummary_Visibility, *v.Visibility)
+	}
+}
+func (v *EntitySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntitySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntitySummary_AmiProductSummary:
+			v.AmiProductSummary = &AmiProductSummary{}
+			return v.AmiProductSummary.Deserialize(d)
+		case schemas.EntitySummary_ContainerProductSummary:
+			v.ContainerProductSummary = &ContainerProductSummary{}
+			return v.ContainerProductSummary.Deserialize(d)
+		case schemas.EntitySummary_DataProductSummary:
+			v.DataProductSummary = &DataProductSummary{}
+			return v.DataProductSummary.Deserialize(d)
+		case schemas.EntitySummary_EntityArn:
+			v.EntityArn = new(string)
+			return d.ReadString(schemas.EntitySummary_EntityArn, v.EntityArn)
+		case schemas.EntitySummary_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.EntitySummary_EntityId, v.EntityId)
+		case schemas.EntitySummary_EntityType:
+			v.EntityType = new(string)
+			return d.ReadString(schemas.EntitySummary_EntityType, v.EntityType)
+		case schemas.EntitySummary_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.EntitySummary_LastModifiedDate, v.LastModifiedDate)
+		case schemas.EntitySummary_MachineLearningProductSummary:
+			v.MachineLearningProductSummary = &MachineLearningProductSummary{}
+			return v.MachineLearningProductSummary.Deserialize(d)
+		case schemas.EntitySummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EntitySummary_Name, v.Name)
+		case schemas.EntitySummary_OfferSetSummary:
+			v.OfferSetSummary = &OfferSetSummary{}
+			return v.OfferSetSummary.Deserialize(d)
+		case schemas.EntitySummary_OfferSummary:
+			v.OfferSummary = &OfferSummary{}
+			return v.OfferSummary.Deserialize(d)
+		case schemas.EntitySummary_ResaleAuthorizationSummary:
+			v.ResaleAuthorizationSummary = &ResaleAuthorizationSummary{}
+			return v.ResaleAuthorizationSummary.Deserialize(d)
+		case schemas.EntitySummary_SaaSProductSummary:
+			v.SaaSProductSummary = &SaaSProductSummary{}
+			return v.SaaSProductSummary.Deserialize(d)
+		case schemas.EntitySummary_Visibility:
+			v.Visibility = new(string)
+			return d.ReadString(schemas.EntitySummary_Visibility, v.Visibility)
+		}
+		return nil
+	})
+}
+
 // Object containing all the filter fields per entity type.
 //
 // The following types satisfy this interface:
@@ -697,6 +2105,14 @@ type EntityTypeFiltersMemberAmiProductFilters struct {
 }
 
 func (*EntityTypeFiltersMemberAmiProductFilters) isEntityTypeFilters() {}
+func (v *EntityTypeFiltersMemberAmiProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeFilters_AmiProductFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeFiltersMemberAmiProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A filter for container products.
 type EntityTypeFiltersMemberContainerProductFilters struct {
@@ -706,6 +2122,14 @@ type EntityTypeFiltersMemberContainerProductFilters struct {
 }
 
 func (*EntityTypeFiltersMemberContainerProductFilters) isEntityTypeFilters() {}
+func (v *EntityTypeFiltersMemberContainerProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeFilters_ContainerProductFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeFiltersMemberContainerProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A filter for data products.
 type EntityTypeFiltersMemberDataProductFilters struct {
@@ -715,6 +2139,14 @@ type EntityTypeFiltersMemberDataProductFilters struct {
 }
 
 func (*EntityTypeFiltersMemberDataProductFilters) isEntityTypeFilters() {}
+func (v *EntityTypeFiltersMemberDataProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeFilters_DataProductFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeFiltersMemberDataProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The filters that you can use with the ListEntities operation to filter machine
 // learning products. You can filter by EntityId , astModifiedDate , ProductTitle ,
@@ -726,6 +2158,14 @@ type EntityTypeFiltersMemberMachineLearningProductFilters struct {
 }
 
 func (*EntityTypeFiltersMemberMachineLearningProductFilters) isEntityTypeFilters() {}
+func (v *EntityTypeFiltersMemberMachineLearningProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeFilters_MachineLearningProductFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeFiltersMemberMachineLearningProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A filter for offers.
 type EntityTypeFiltersMemberOfferFilters struct {
@@ -735,6 +2175,14 @@ type EntityTypeFiltersMemberOfferFilters struct {
 }
 
 func (*EntityTypeFiltersMemberOfferFilters) isEntityTypeFilters() {}
+func (v *EntityTypeFiltersMemberOfferFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeFilters_OfferFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeFiltersMemberOfferFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A filter for offer sets.
 type EntityTypeFiltersMemberOfferSetFilters struct {
@@ -744,6 +2192,14 @@ type EntityTypeFiltersMemberOfferSetFilters struct {
 }
 
 func (*EntityTypeFiltersMemberOfferSetFilters) isEntityTypeFilters() {}
+func (v *EntityTypeFiltersMemberOfferSetFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeFilters_OfferSetFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeFiltersMemberOfferSetFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A filter for Resale Authorizations.
 type EntityTypeFiltersMemberResaleAuthorizationFilters struct {
@@ -753,6 +2209,14 @@ type EntityTypeFiltersMemberResaleAuthorizationFilters struct {
 }
 
 func (*EntityTypeFiltersMemberResaleAuthorizationFilters) isEntityTypeFilters() {}
+func (v *EntityTypeFiltersMemberResaleAuthorizationFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeFilters_ResaleAuthorizationFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeFiltersMemberResaleAuthorizationFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A filter for SaaS products.
 type EntityTypeFiltersMemberSaaSProductFilters struct {
@@ -762,6 +2226,14 @@ type EntityTypeFiltersMemberSaaSProductFilters struct {
 }
 
 func (*EntityTypeFiltersMemberSaaSProductFilters) isEntityTypeFilters() {}
+func (v *EntityTypeFiltersMemberSaaSProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeFilters_SaaSProductFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeFiltersMemberSaaSProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Object containing all the sort fields per entity type.
 //
@@ -787,6 +2259,14 @@ type EntityTypeSortMemberAmiProductSort struct {
 }
 
 func (*EntityTypeSortMemberAmiProductSort) isEntityTypeSort() {}
+func (v *EntityTypeSortMemberAmiProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeSort_AmiProductSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeSortMemberAmiProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A sort for container products.
 type EntityTypeSortMemberContainerProductSort struct {
@@ -796,6 +2276,14 @@ type EntityTypeSortMemberContainerProductSort struct {
 }
 
 func (*EntityTypeSortMemberContainerProductSort) isEntityTypeSort() {}
+func (v *EntityTypeSortMemberContainerProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeSort_ContainerProductSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeSortMemberContainerProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A sort for data products.
 type EntityTypeSortMemberDataProductSort struct {
@@ -805,6 +2293,14 @@ type EntityTypeSortMemberDataProductSort struct {
 }
 
 func (*EntityTypeSortMemberDataProductSort) isEntityTypeSort() {}
+func (v *EntityTypeSortMemberDataProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeSort_DataProductSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeSortMemberDataProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The sort options for machine learning products.
 type EntityTypeSortMemberMachineLearningProductSort struct {
@@ -814,6 +2310,14 @@ type EntityTypeSortMemberMachineLearningProductSort struct {
 }
 
 func (*EntityTypeSortMemberMachineLearningProductSort) isEntityTypeSort() {}
+func (v *EntityTypeSortMemberMachineLearningProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeSort_MachineLearningProductSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeSortMemberMachineLearningProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A sort for offer sets.
 type EntityTypeSortMemberOfferSetSort struct {
@@ -823,6 +2327,14 @@ type EntityTypeSortMemberOfferSetSort struct {
 }
 
 func (*EntityTypeSortMemberOfferSetSort) isEntityTypeSort() {}
+func (v *EntityTypeSortMemberOfferSetSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeSort_OfferSetSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeSortMemberOfferSetSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A sort for offers.
 type EntityTypeSortMemberOfferSort struct {
@@ -832,6 +2344,14 @@ type EntityTypeSortMemberOfferSort struct {
 }
 
 func (*EntityTypeSortMemberOfferSort) isEntityTypeSort() {}
+func (v *EntityTypeSortMemberOfferSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeSort_OfferSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeSortMemberOfferSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A sort for Resale Authorizations.
 type EntityTypeSortMemberResaleAuthorizationSort struct {
@@ -841,6 +2361,14 @@ type EntityTypeSortMemberResaleAuthorizationSort struct {
 }
 
 func (*EntityTypeSortMemberResaleAuthorizationSort) isEntityTypeSort() {}
+func (v *EntityTypeSortMemberResaleAuthorizationSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeSort_ResaleAuthorizationSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeSortMemberResaleAuthorizationSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A sort for SaaS products.
 type EntityTypeSortMemberSaaSProductSort struct {
@@ -850,6 +2378,14 @@ type EntityTypeSortMemberSaaSProductSort struct {
 }
 
 func (*EntityTypeSortMemberSaaSProductSort) isEntityTypeSort() {}
+func (v *EntityTypeSortMemberSaaSProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeSort_SaaSProductSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeSortMemberSaaSProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Details about the error.
 type ErrorDetail struct {
@@ -861,6 +2397,34 @@ type ErrorDetail struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.ErrorDetail_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ErrorDetail_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *ErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorDetail_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.ErrorDetail_ErrorCode, v.ErrorCode)
+		case schemas.ErrorDetail_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ErrorDetail_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // A name-value pair that identifies the resource or attribute that a ControlError
@@ -875,6 +2439,34 @@ type ErrorScope struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ErrorScope_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ErrorScope_Value, *v.Value)
+	}
+}
+func (v *ErrorScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorScope_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ErrorScope_Name, v.Name)
+		case schemas.ErrorScope_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ErrorScope_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A filter object, used to optionally filter results from calls to the
@@ -915,6 +2507,31 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Filter_Name, *v.Name)
+	}
+	serializeValueList(s, schemas.Filter_ValueList, v.ValueList)
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Filter_Name, v.Name)
+		case schemas.Filter_ValueList:
+			return deserializeValueList(d, schemas.Filter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Framework-specific filters used to scope ListAssessments results. Set exactly
 // one member, corresponding to the framework you want to filter by.
 //
@@ -934,6 +2551,14 @@ type FrameworkFiltersMemberAMISecurityFilters struct {
 }
 
 func (*FrameworkFiltersMemberAMISecurityFilters) isFrameworkFilters() {}
+func (v *FrameworkFiltersMemberAMISecurityFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameworkFilters_AMISecurityFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FrameworkFiltersMemberAMISecurityFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Filters that apply to assessments performed against the Container Security
 // framework.
@@ -944,6 +2569,14 @@ type FrameworkFiltersMemberContainerSecurityFilters struct {
 }
 
 func (*FrameworkFiltersMemberContainerSecurityFilters) isFrameworkFilters() {}
+func (v *FrameworkFiltersMemberContainerSecurityFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameworkFilters_ContainerSecurityFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FrameworkFiltersMemberContainerSecurityFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The framework-specific details of the assessed resource. Exactly one member is
 // set, corresponding to the framework that was assessed.
@@ -964,6 +2597,14 @@ type FrameworkSummaryMemberAMISecuritySummary struct {
 }
 
 func (*FrameworkSummaryMemberAMISecuritySummary) isFrameworkSummary() {}
+func (v *FrameworkSummaryMemberAMISecuritySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameworkSummary_AMISecuritySummary)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FrameworkSummaryMemberAMISecuritySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The details of the resource assessed under the Container Security framework.
 type FrameworkSummaryMemberContainerSecuritySummary struct {
@@ -973,6 +2614,14 @@ type FrameworkSummaryMemberContainerSecuritySummary struct {
 }
 
 func (*FrameworkSummaryMemberContainerSecuritySummary) isFrameworkSummary() {}
+func (v *FrameworkSummaryMemberContainerSecuritySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameworkSummary_ContainerSecuritySummary)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FrameworkSummaryMemberContainerSecuritySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The filter for machine learning product entity IDs.
 type MachineLearningProductEntityIdFilter struct {
@@ -982,6 +2631,25 @@ type MachineLearningProductEntityIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MachineLearningProductEntityIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineLearningProductEntityIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineLearningProductEntityIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMachineLearningProductEntityIdFilterValueList(s, schemas.MachineLearningProductEntityIdFilter_ValueList, v.ValueList)
+}
+func (v *MachineLearningProductEntityIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineLearningProductEntityIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineLearningProductEntityIdFilter_ValueList:
+			return deserializeMachineLearningProductEntityIdFilterValueList(d, schemas.MachineLearningProductEntityIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // The filters that you can use with the ListEntities operation to filter machine
@@ -1004,6 +2672,54 @@ type MachineLearningProductFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MachineLearningProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineLearningProductFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineLearningProductFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteStruct(schemas.MachineLearningProductFilters_EntityId)
+		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.MachineLearningProductFilters_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductTitle != nil {
+		s.WriteStruct(schemas.MachineLearningProductFilters_ProductTitle)
+		v.ProductTitle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Visibility != nil {
+		s.WriteStruct(schemas.MachineLearningProductFilters_Visibility)
+		v.Visibility.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MachineLearningProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineLearningProductFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineLearningProductFilters_EntityId:
+			v.EntityId = &MachineLearningProductEntityIdFilter{}
+			return v.EntityId.Deserialize(d)
+		case schemas.MachineLearningProductFilters_LastModifiedDate:
+			v.LastModifiedDate = &MachineLearningProductLastModifiedDateFilter{}
+			return v.LastModifiedDate.Deserialize(d)
+		case schemas.MachineLearningProductFilters_ProductTitle:
+			v.ProductTitle = &MachineLearningProductTitleFilter{}
+			return v.ProductTitle.Deserialize(d)
+		case schemas.MachineLearningProductFilters_Visibility:
+			v.Visibility = &MachineLearningProductVisibilityFilter{}
+			return v.Visibility.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The filter for machine learning product last modified date.
 type MachineLearningProductLastModifiedDateFilter struct {
 
@@ -1012,6 +2728,30 @@ type MachineLearningProductLastModifiedDateFilter struct {
 	DateRange *MachineLearningProductLastModifiedDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *MachineLearningProductLastModifiedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineLearningProductLastModifiedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineLearningProductLastModifiedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.MachineLearningProductLastModifiedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MachineLearningProductLastModifiedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineLearningProductLastModifiedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineLearningProductLastModifiedDateFilter_DateRange:
+			v.DateRange = &MachineLearningProductLastModifiedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A date range for filtering machine learning products by their last modified
@@ -1029,6 +2769,34 @@ type MachineLearningProductLastModifiedDateFilterDateRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MachineLearningProductLastModifiedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineLearningProductLastModifiedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineLearningProductLastModifiedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.MachineLearningProductLastModifiedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.MachineLearningProductLastModifiedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *MachineLearningProductLastModifiedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineLearningProductLastModifiedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineLearningProductLastModifiedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.MachineLearningProductLastModifiedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.MachineLearningProductLastModifiedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.MachineLearningProductLastModifiedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
+}
+
 // The sort options for machine learning products.
 type MachineLearningProductSort struct {
 
@@ -1042,6 +2810,42 @@ type MachineLearningProductSort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MachineLearningProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineLearningProductSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineLearningProductSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.MachineLearningProductSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.MachineLearningProductSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *MachineLearningProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineLearningProductSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineLearningProductSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.MachineLearningProductSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = MachineLearningProductSortBy(ev)
+			return nil
+		case schemas.MachineLearningProductSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.MachineLearningProductSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A summary of a machine learning product.
 type MachineLearningProductSummary struct {
 
@@ -1053,6 +2857,38 @@ type MachineLearningProductSummary struct {
 	Visibility MachineLearningProductVisibilityString
 
 	noSmithyDocumentSerde
+}
+
+func (v *MachineLearningProductSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineLearningProductSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineLearningProductSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductTitle != nil {
+		s.WriteString(schemas.MachineLearningProductSummary_ProductTitle, *v.ProductTitle)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.MachineLearningProductSummary_Visibility, string(v.Visibility))
+	}
+}
+func (v *MachineLearningProductSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineLearningProductSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineLearningProductSummary_ProductTitle:
+			v.ProductTitle = new(string)
+			return d.ReadString(schemas.MachineLearningProductSummary_ProductTitle, v.ProductTitle)
+		case schemas.MachineLearningProductSummary_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.MachineLearningProductSummary_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = MachineLearningProductVisibilityString(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The filter for machine learning product titles.
@@ -1069,6 +2905,31 @@ type MachineLearningProductTitleFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MachineLearningProductTitleFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineLearningProductTitleFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineLearningProductTitleFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMachineLearningProductTitleFilterValueList(s, schemas.MachineLearningProductTitleFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.MachineLearningProductTitleFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *MachineLearningProductTitleFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineLearningProductTitleFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineLearningProductTitleFilter_ValueList:
+			return deserializeMachineLearningProductTitleFilterValueList(d, schemas.MachineLearningProductTitleFilter_ValueList, &v.ValueList)
+		case schemas.MachineLearningProductTitleFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.MachineLearningProductTitleFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // The filter for machine learning product visibility status.
 type MachineLearningProductVisibilityFilter struct {
 
@@ -1079,6 +2940,25 @@ type MachineLearningProductVisibilityFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MachineLearningProductVisibilityFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineLearningProductVisibilityFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineLearningProductVisibilityFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMachineLearningProductVisibilityFilterValueList(s, schemas.MachineLearningProductVisibilityFilter_ValueList, v.ValueList)
+}
+func (v *MachineLearningProductVisibilityFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineLearningProductVisibilityFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineLearningProductVisibilityFilter_ValueList:
+			return deserializeMachineLearningProductVisibilityFilterValueList(d, schemas.MachineLearningProductVisibilityFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the AvailabilityEndDate of an offer.
 type OfferAvailabilityEndDateFilter struct {
 
@@ -1087,6 +2967,30 @@ type OfferAvailabilityEndDateFilter struct {
 	DateRange *OfferAvailabilityEndDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferAvailabilityEndDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferAvailabilityEndDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferAvailabilityEndDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.OfferAvailabilityEndDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferAvailabilityEndDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferAvailabilityEndDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferAvailabilityEndDateFilter_DateRange:
+			v.DateRange = &OfferAvailabilityEndDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the AvailabilityEndDate of an offer with date range as
@@ -1102,6 +3006,34 @@ type OfferAvailabilityEndDateFilterDateRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferAvailabilityEndDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferAvailabilityEndDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferAvailabilityEndDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.OfferAvailabilityEndDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.OfferAvailabilityEndDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *OfferAvailabilityEndDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferAvailabilityEndDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferAvailabilityEndDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.OfferAvailabilityEndDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.OfferAvailabilityEndDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.OfferAvailabilityEndDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the BuyerAccounts of an offer.
 type OfferBuyerAccountsFilter struct {
 
@@ -1109,6 +3041,28 @@ type OfferBuyerAccountsFilter struct {
 	WildCardValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferBuyerAccountsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferBuyerAccountsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferBuyerAccountsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.OfferBuyerAccountsFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *OfferBuyerAccountsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferBuyerAccountsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferBuyerAccountsFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.OfferBuyerAccountsFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the CreatedBySource of an offer.
@@ -1120,6 +3074,25 @@ type OfferCreatedBySourceFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferCreatedBySourceFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferCreatedBySourceFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferCreatedBySourceFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferCreatedBySourceFilterValueList(s, schemas.OfferCreatedBySourceFilter_ValueList, v.ValueList)
+}
+func (v *OfferCreatedBySourceFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferCreatedBySourceFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferCreatedBySourceFilter_ValueList:
+			return deserializeOfferCreatedBySourceFilterValueList(d, schemas.OfferCreatedBySourceFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the entity id of an offer.
 type OfferEntityIdFilter struct {
 
@@ -1127,6 +3100,25 @@ type OfferEntityIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferEntityIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferEntityIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferEntityIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferEntityIdFilterValueList(s, schemas.OfferEntityIdFilter_ValueList, v.ValueList)
+}
+func (v *OfferEntityIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferEntityIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferEntityIdFilter_ValueList:
+			return deserializeOfferEntityIdFilterValueList(d, schemas.OfferEntityIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Object containing all the filter fields for offers entity. Client can add only
@@ -1181,6 +3173,134 @@ type OfferFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityEndDate != nil {
+		s.WriteStruct(schemas.OfferFilters_AvailabilityEndDate)
+		v.AvailabilityEndDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BuyerAccounts != nil {
+		s.WriteStruct(schemas.OfferFilters_BuyerAccounts)
+		v.BuyerAccounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedBySource != nil {
+		s.WriteStruct(schemas.OfferFilters_CreatedBySource)
+		v.CreatedBySource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityId != nil {
+		s.WriteStruct(schemas.OfferFilters_EntityId)
+		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.OfferFilters_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteStruct(schemas.OfferFilters_Name)
+		v.Name.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OfferSetId != nil {
+		s.WriteStruct(schemas.OfferFilters_OfferSetId)
+		v.OfferSetId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductId != nil {
+		s.WriteStruct(schemas.OfferFilters_ProductId)
+		v.ProductId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReleaseDate != nil {
+		s.WriteStruct(schemas.OfferFilters_ReleaseDate)
+		v.ReleaseDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResaleAuthorizationId != nil {
+		s.WriteStruct(schemas.OfferFilters_ResaleAuthorizationId)
+		v.ResaleAuthorizationId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.OfferFilters_State)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetAgreementId != nil {
+		s.WriteStruct(schemas.OfferFilters_TargetAgreementId)
+		v.TargetAgreementId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetAgreementIntent != nil {
+		s.WriteStruct(schemas.OfferFilters_TargetAgreementIntent)
+		v.TargetAgreementIntent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Targeting != nil {
+		s.WriteStruct(schemas.OfferFilters_Targeting)
+		v.Targeting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferFilters_AvailabilityEndDate:
+			v.AvailabilityEndDate = &OfferAvailabilityEndDateFilter{}
+			return v.AvailabilityEndDate.Deserialize(d)
+		case schemas.OfferFilters_BuyerAccounts:
+			v.BuyerAccounts = &OfferBuyerAccountsFilter{}
+			return v.BuyerAccounts.Deserialize(d)
+		case schemas.OfferFilters_CreatedBySource:
+			v.CreatedBySource = &OfferCreatedBySourceFilter{}
+			return v.CreatedBySource.Deserialize(d)
+		case schemas.OfferFilters_EntityId:
+			v.EntityId = &OfferEntityIdFilter{}
+			return v.EntityId.Deserialize(d)
+		case schemas.OfferFilters_LastModifiedDate:
+			v.LastModifiedDate = &OfferLastModifiedDateFilter{}
+			return v.LastModifiedDate.Deserialize(d)
+		case schemas.OfferFilters_Name:
+			v.Name = &OfferNameFilter{}
+			return v.Name.Deserialize(d)
+		case schemas.OfferFilters_OfferSetId:
+			v.OfferSetId = &OfferSetIdFilter{}
+			return v.OfferSetId.Deserialize(d)
+		case schemas.OfferFilters_ProductId:
+			v.ProductId = &OfferProductIdFilter{}
+			return v.ProductId.Deserialize(d)
+		case schemas.OfferFilters_ReleaseDate:
+			v.ReleaseDate = &OfferReleaseDateFilter{}
+			return v.ReleaseDate.Deserialize(d)
+		case schemas.OfferFilters_ResaleAuthorizationId:
+			v.ResaleAuthorizationId = &OfferResaleAuthorizationIdFilter{}
+			return v.ResaleAuthorizationId.Deserialize(d)
+		case schemas.OfferFilters_State:
+			v.State = &OfferStateFilter{}
+			return v.State.Deserialize(d)
+		case schemas.OfferFilters_TargetAgreementId:
+			v.TargetAgreementId = &OfferTargetAgreementIdFilter{}
+			return v.TargetAgreementId.Deserialize(d)
+		case schemas.OfferFilters_TargetAgreementIntent:
+			v.TargetAgreementIntent = &OfferTargetAgreementIntentFilter{}
+			return v.TargetAgreementIntent.Deserialize(d)
+		case schemas.OfferFilters_Targeting:
+			v.Targeting = &OfferTargetingFilter{}
+			return v.Targeting.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the LastModifiedDate of an offer.
 type OfferLastModifiedDateFilter struct {
 
@@ -1188,6 +3308,30 @@ type OfferLastModifiedDateFilter struct {
 	DateRange *OfferLastModifiedDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferLastModifiedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferLastModifiedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferLastModifiedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.OfferLastModifiedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferLastModifiedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferLastModifiedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferLastModifiedDateFilter_DateRange:
+			v.DateRange = &OfferLastModifiedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the LastModifiedDate of an offer with date range as input.
@@ -1202,6 +3346,34 @@ type OfferLastModifiedDateFilterDateRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferLastModifiedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferLastModifiedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferLastModifiedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.OfferLastModifiedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.OfferLastModifiedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *OfferLastModifiedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferLastModifiedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferLastModifiedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.OfferLastModifiedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.OfferLastModifiedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.OfferLastModifiedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the Name of an offer.
 type OfferNameFilter struct {
 
@@ -1214,6 +3386,31 @@ type OfferNameFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferNameFilterValueList(s, schemas.OfferNameFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.OfferNameFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *OfferNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferNameFilter_ValueList:
+			return deserializeOfferNameFilterValueList(d, schemas.OfferNameFilter_ValueList, &v.ValueList)
+		case schemas.OfferNameFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.OfferNameFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the ProductId of an offer.
 type OfferProductIdFilter struct {
 
@@ -1223,6 +3420,25 @@ type OfferProductIdFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferProductIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferProductIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferProductIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferProductIdFilterValueList(s, schemas.OfferProductIdFilter_ValueList, v.ValueList)
+}
+func (v *OfferProductIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferProductIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferProductIdFilter_ValueList:
+			return deserializeOfferProductIdFilterValueList(d, schemas.OfferProductIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the ReleaseDate of an offer.
 type OfferReleaseDateFilter struct {
 
@@ -1230,6 +3446,30 @@ type OfferReleaseDateFilter struct {
 	DateRange *OfferReleaseDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferReleaseDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferReleaseDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferReleaseDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.OfferReleaseDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferReleaseDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferReleaseDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferReleaseDateFilter_DateRange:
+			v.DateRange = &OfferReleaseDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the ReleaseDate of an offer with date range as input.
@@ -1244,6 +3484,34 @@ type OfferReleaseDateFilterDateRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferReleaseDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferReleaseDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferReleaseDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.OfferReleaseDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.OfferReleaseDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *OfferReleaseDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferReleaseDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferReleaseDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.OfferReleaseDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.OfferReleaseDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.OfferReleaseDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the ResaleAuthorizationId of an offer.
 //
 // Not all offers have a ResaleAuthorizationId . The response will only include
@@ -1256,6 +3524,25 @@ type OfferResaleAuthorizationIdFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferResaleAuthorizationIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferResaleAuthorizationIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferResaleAuthorizationIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferResaleAuthorizationIdFilterValueList(s, schemas.OfferResaleAuthorizationIdFilter_ValueList, v.ValueList)
+}
+func (v *OfferResaleAuthorizationIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferResaleAuthorizationIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferResaleAuthorizationIdFilter_ValueList:
+			return deserializeOfferResaleAuthorizationIdFilterValueList(d, schemas.OfferResaleAuthorizationIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the AssociatedOfferIds of an offer set.
 type OfferSetAssociatedOfferIdsFilter struct {
 
@@ -1265,6 +3552,25 @@ type OfferSetAssociatedOfferIdsFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferSetAssociatedOfferIdsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetAssociatedOfferIdsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetAssociatedOfferIdsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferSetAssociatedOfferIdsFilterValueList(s, schemas.OfferSetAssociatedOfferIdsFilter_ValueList, v.ValueList)
+}
+func (v *OfferSetAssociatedOfferIdsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetAssociatedOfferIdsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetAssociatedOfferIdsFilter_ValueList:
+			return deserializeOfferSetAssociatedOfferIdsFilterValueList(d, schemas.OfferSetAssociatedOfferIdsFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the entity id of an offer set.
 type OfferSetEntityIdFilter struct {
 
@@ -1272,6 +3578,25 @@ type OfferSetEntityIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferSetEntityIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetEntityIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetEntityIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferSetEntityIdFilterValueList(s, schemas.OfferSetEntityIdFilter_ValueList, v.ValueList)
+}
+func (v *OfferSetEntityIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetEntityIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetEntityIdFilter_ValueList:
+			return deserializeOfferSetEntityIdFilterValueList(d, schemas.OfferSetEntityIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Object containing all the filter fields for offer sets entity. Client can add a
@@ -1302,6 +3627,78 @@ type OfferSetFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferSetFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedOfferIds != nil {
+		s.WriteStruct(schemas.OfferSetFilters_AssociatedOfferIds)
+		v.AssociatedOfferIds.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityId != nil {
+		s.WriteStruct(schemas.OfferSetFilters_EntityId)
+		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.OfferSetFilters_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteStruct(schemas.OfferSetFilters_Name)
+		v.Name.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReleaseDate != nil {
+		s.WriteStruct(schemas.OfferSetFilters_ReleaseDate)
+		v.ReleaseDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SolutionId != nil {
+		s.WriteStruct(schemas.OfferSetFilters_SolutionId)
+		v.SolutionId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.OfferSetFilters_State)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferSetFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetFilters_AssociatedOfferIds:
+			v.AssociatedOfferIds = &OfferSetAssociatedOfferIdsFilter{}
+			return v.AssociatedOfferIds.Deserialize(d)
+		case schemas.OfferSetFilters_EntityId:
+			v.EntityId = &OfferSetEntityIdFilter{}
+			return v.EntityId.Deserialize(d)
+		case schemas.OfferSetFilters_LastModifiedDate:
+			v.LastModifiedDate = &OfferSetLastModifiedDateFilter{}
+			return v.LastModifiedDate.Deserialize(d)
+		case schemas.OfferSetFilters_Name:
+			v.Name = &OfferSetNameFilter{}
+			return v.Name.Deserialize(d)
+		case schemas.OfferSetFilters_ReleaseDate:
+			v.ReleaseDate = &OfferSetReleaseDateFilter{}
+			return v.ReleaseDate.Deserialize(d)
+		case schemas.OfferSetFilters_SolutionId:
+			v.SolutionId = &OfferSetSolutionIdFilter{}
+			return v.SolutionId.Deserialize(d)
+		case schemas.OfferSetFilters_State:
+			v.State = &OfferSetStateFilter{}
+			return v.State.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the OfferSetId of an offer.
 type OfferSetIdFilter struct {
 
@@ -1309,6 +3706,25 @@ type OfferSetIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferSetIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferSetIdFilterValueList(s, schemas.OfferSetIdFilter_ValueList, v.ValueList)
+}
+func (v *OfferSetIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetIdFilter_ValueList:
+			return deserializeOfferSetIdFilterValueList(d, schemas.OfferSetIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the LastModifiedDate of an offer set.
@@ -1319,6 +3735,30 @@ type OfferSetLastModifiedDateFilter struct {
 	DateRange *OfferSetLastModifiedDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferSetLastModifiedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetLastModifiedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetLastModifiedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.OfferSetLastModifiedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferSetLastModifiedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetLastModifiedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetLastModifiedDateFilter_DateRange:
+			v.DateRange = &OfferSetLastModifiedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the LastModifiedDate of an offer set with date range as
@@ -1334,6 +3774,34 @@ type OfferSetLastModifiedDateFilterDateRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferSetLastModifiedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetLastModifiedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetLastModifiedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.OfferSetLastModifiedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.OfferSetLastModifiedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *OfferSetLastModifiedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetLastModifiedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetLastModifiedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.OfferSetLastModifiedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.OfferSetLastModifiedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.OfferSetLastModifiedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the Name of an offer set.
 type OfferSetNameFilter struct {
 
@@ -1343,6 +3811,25 @@ type OfferSetNameFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferSetNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferSetNameFilterValueList(s, schemas.OfferSetNameFilter_ValueList, v.ValueList)
+}
+func (v *OfferSetNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetNameFilter_ValueList:
+			return deserializeOfferSetNameFilterValueList(d, schemas.OfferSetNameFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the ReleaseDate of an offer set.
 type OfferSetReleaseDateFilter struct {
 
@@ -1350,6 +3837,30 @@ type OfferSetReleaseDateFilter struct {
 	DateRange *OfferSetReleaseDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferSetReleaseDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetReleaseDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetReleaseDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.OfferSetReleaseDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferSetReleaseDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetReleaseDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetReleaseDateFilter_DateRange:
+			v.DateRange = &OfferSetReleaseDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the ReleaseDate of an offer set with date range as input.
@@ -1364,6 +3875,34 @@ type OfferSetReleaseDateFilterDateRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferSetReleaseDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetReleaseDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetReleaseDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.OfferSetReleaseDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.OfferSetReleaseDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *OfferSetReleaseDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetReleaseDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetReleaseDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.OfferSetReleaseDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.OfferSetReleaseDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.OfferSetReleaseDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the SolutionId of an offer set.
 type OfferSetSolutionIdFilter struct {
 
@@ -1371,6 +3910,25 @@ type OfferSetSolutionIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferSetSolutionIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetSolutionIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetSolutionIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferSetSolutionIdFilterValueList(s, schemas.OfferSetSolutionIdFilter_ValueList, v.ValueList)
+}
+func (v *OfferSetSolutionIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetSolutionIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetSolutionIdFilter_ValueList:
+			return deserializeOfferSetSolutionIdFilterValueList(d, schemas.OfferSetSolutionIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Allows to sort offer sets.
@@ -1385,6 +3943,42 @@ type OfferSetSort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferSetSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.OfferSetSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.OfferSetSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *OfferSetSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.OfferSetSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = OfferSetSortBy(ev)
+			return nil
+		case schemas.OfferSetSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.OfferSetSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the State of an offer set.
 type OfferSetStateFilter struct {
 
@@ -1392,6 +3986,25 @@ type OfferSetStateFilter struct {
 	ValueList []OfferSetStateString
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferSetStateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetStateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetStateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferSetStateFilterValueList(s, schemas.OfferSetStateFilter_ValueList, v.ValueList)
+}
+func (v *OfferSetStateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetStateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetStateFilter_ValueList:
+			return deserializeOfferSetStateFilterValueList(d, schemas.OfferSetStateFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Summarized information about an offer set.
@@ -1415,6 +4028,53 @@ type OfferSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferSetAssociatedOfferIdsList(s, schemas.OfferSetSummary_AssociatedOfferIds, v.AssociatedOfferIds)
+	if v.Name != nil {
+		s.WriteString(schemas.OfferSetSummary_Name, *v.Name)
+	}
+	if v.ReleaseDate != nil {
+		s.WriteString(schemas.OfferSetSummary_ReleaseDate, *v.ReleaseDate)
+	}
+	if v.SolutionId != nil {
+		s.WriteString(schemas.OfferSetSummary_SolutionId, *v.SolutionId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.OfferSetSummary_State, string(v.State))
+	}
+}
+func (v *OfferSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetSummary_AssociatedOfferIds:
+			return deserializeOfferSetAssociatedOfferIdsList(d, schemas.OfferSetSummary_AssociatedOfferIds, &v.AssociatedOfferIds)
+		case schemas.OfferSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OfferSetSummary_Name, v.Name)
+		case schemas.OfferSetSummary_ReleaseDate:
+			v.ReleaseDate = new(string)
+			return d.ReadString(schemas.OfferSetSummary_ReleaseDate, v.ReleaseDate)
+		case schemas.OfferSetSummary_SolutionId:
+			v.SolutionId = new(string)
+			return d.ReadString(schemas.OfferSetSummary_SolutionId, v.SolutionId)
+		case schemas.OfferSetSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.OfferSetSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = OfferSetStateString(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Allows to sort offers.
 type OfferSort struct {
 
@@ -1427,6 +4087,42 @@ type OfferSort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.OfferSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.OfferSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *OfferSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.OfferSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = OfferSortBy(ev)
+			return nil
+		case schemas.OfferSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.OfferSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the State of an offer.
 type OfferStateFilter struct {
 
@@ -1434,6 +4130,25 @@ type OfferStateFilter struct {
 	ValueList []OfferStateString
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferStateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferStateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferStateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferStateFilterValueList(s, schemas.OfferStateFilter_ValueList, v.ValueList)
+}
+func (v *OfferStateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferStateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferStateFilter_ValueList:
+			return deserializeOfferStateFilterValueList(d, schemas.OfferStateFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Summarized information about an offer.
@@ -1478,6 +4193,100 @@ type OfferSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityEndDate != nil {
+		s.WriteString(schemas.OfferSummary_AvailabilityEndDate, *v.AvailabilityEndDate)
+	}
+	serializeOfferBuyerAccountsList(s, schemas.OfferSummary_BuyerAccounts, v.BuyerAccounts)
+	if v.CreatedBySource != "" {
+		s.WriteString(schemas.OfferSummary_CreatedBySource, string(v.CreatedBySource))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.OfferSummary_Name, *v.Name)
+	}
+	if v.OfferSetId != nil {
+		s.WriteString(schemas.OfferSummary_OfferSetId, *v.OfferSetId)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.OfferSummary_ProductId, *v.ProductId)
+	}
+	if v.ReleaseDate != nil {
+		s.WriteString(schemas.OfferSummary_ReleaseDate, *v.ReleaseDate)
+	}
+	if v.ResaleAuthorizationId != nil {
+		s.WriteString(schemas.OfferSummary_ResaleAuthorizationId, *v.ResaleAuthorizationId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.OfferSummary_State, string(v.State))
+	}
+	if v.TargetAgreementId != nil {
+		s.WriteString(schemas.OfferSummary_TargetAgreementId, *v.TargetAgreementId)
+	}
+	if v.TargetAgreementIntent != "" {
+		s.WriteString(schemas.OfferSummary_TargetAgreementIntent, string(v.TargetAgreementIntent))
+	}
+	serializeOfferTargetingList(s, schemas.OfferSummary_Targeting, v.Targeting)
+}
+func (v *OfferSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSummary_AvailabilityEndDate:
+			v.AvailabilityEndDate = new(string)
+			return d.ReadString(schemas.OfferSummary_AvailabilityEndDate, v.AvailabilityEndDate)
+		case schemas.OfferSummary_BuyerAccounts:
+			return deserializeOfferBuyerAccountsList(d, schemas.OfferSummary_BuyerAccounts, &v.BuyerAccounts)
+		case schemas.OfferSummary_CreatedBySource:
+			var ev string
+			if err := d.ReadString(schemas.OfferSummary_CreatedBySource, &ev); err != nil {
+				return err
+			}
+			v.CreatedBySource = OfferCreatedBySourceString(ev)
+			return nil
+		case schemas.OfferSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OfferSummary_Name, v.Name)
+		case schemas.OfferSummary_OfferSetId:
+			v.OfferSetId = new(string)
+			return d.ReadString(schemas.OfferSummary_OfferSetId, v.OfferSetId)
+		case schemas.OfferSummary_ProductId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.OfferSummary_ProductId, v.ProductId)
+		case schemas.OfferSummary_ReleaseDate:
+			v.ReleaseDate = new(string)
+			return d.ReadString(schemas.OfferSummary_ReleaseDate, v.ReleaseDate)
+		case schemas.OfferSummary_ResaleAuthorizationId:
+			v.ResaleAuthorizationId = new(string)
+			return d.ReadString(schemas.OfferSummary_ResaleAuthorizationId, v.ResaleAuthorizationId)
+		case schemas.OfferSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.OfferSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = OfferStateString(ev)
+			return nil
+		case schemas.OfferSummary_TargetAgreementId:
+			v.TargetAgreementId = new(string)
+			return d.ReadString(schemas.OfferSummary_TargetAgreementId, v.TargetAgreementId)
+		case schemas.OfferSummary_TargetAgreementIntent:
+			var ev string
+			if err := d.ReadString(schemas.OfferSummary_TargetAgreementIntent, &ev); err != nil {
+				return err
+			}
+			v.TargetAgreementIntent = OfferTargetAgreementIntentString(ev)
+			return nil
+		case schemas.OfferSummary_Targeting:
+			return deserializeOfferTargetingList(d, schemas.OfferSummary_Targeting, &v.Targeting)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the TargetAgreementId of an offer.
 type OfferTargetAgreementIdFilter struct {
 
@@ -1485,6 +4294,25 @@ type OfferTargetAgreementIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferTargetAgreementIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTargetAgreementIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferTargetAgreementIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferTargetAgreementIdFilterValueList(s, schemas.OfferTargetAgreementIdFilter_ValueList, v.ValueList)
+}
+func (v *OfferTargetAgreementIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferTargetAgreementIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferTargetAgreementIdFilter_ValueList:
+			return deserializeOfferTargetAgreementIdFilterValueList(d, schemas.OfferTargetAgreementIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the TargetAgreementIntent of an offer.
@@ -1496,6 +4324,25 @@ type OfferTargetAgreementIntentFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferTargetAgreementIntentFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTargetAgreementIntentFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferTargetAgreementIntentFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferTargetAgreementIntentFilterValueList(s, schemas.OfferTargetAgreementIntentFilter_ValueList, v.ValueList)
+}
+func (v *OfferTargetAgreementIntentFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferTargetAgreementIntentFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferTargetAgreementIntentFilter_ValueList:
+			return deserializeOfferTargetAgreementIntentFilterValueList(d, schemas.OfferTargetAgreementIntentFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the Targeting of an offer.
 type OfferTargetingFilter struct {
 
@@ -1503,6 +4350,25 @@ type OfferTargetingFilter struct {
 	ValueList []OfferTargetingString
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferTargetingFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTargetingFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferTargetingFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferTargetingFilterValueList(s, schemas.OfferTargetingFilter_ValueList, v.ValueList)
+}
+func (v *OfferTargetingFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferTargetingFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferTargetingFilter_ValueList:
+			return deserializeOfferTargetingFilterValueList(d, schemas.OfferTargetingFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on AvailabilityEndDate of a ResaleAuthorization.
@@ -1519,6 +4385,33 @@ type ResaleAuthorizationAvailabilityEndDateFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationAvailabilityEndDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationAvailabilityEndDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationAvailabilityEndDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationAvailabilityEndDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResaleAuthorizationAvailabilityEndDateFilterValueList(s, schemas.ResaleAuthorizationAvailabilityEndDateFilter_ValueList, v.ValueList)
+}
+func (v *ResaleAuthorizationAvailabilityEndDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationAvailabilityEndDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationAvailabilityEndDateFilter_DateRange:
+			v.DateRange = &ResaleAuthorizationAvailabilityEndDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		case schemas.ResaleAuthorizationAvailabilityEndDateFilter_ValueList:
+			return deserializeResaleAuthorizationAvailabilityEndDateFilterValueList(d, schemas.ResaleAuthorizationAvailabilityEndDateFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on AvailabilityEndDate of a ResaleAuthorization with date
 // range as input.
 type ResaleAuthorizationAvailabilityEndDateFilterDateRange struct {
@@ -1530,6 +4423,34 @@ type ResaleAuthorizationAvailabilityEndDateFilterDateRange struct {
 	BeforeValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationAvailabilityEndDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationAvailabilityEndDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationAvailabilityEndDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *ResaleAuthorizationAvailabilityEndDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationAvailabilityEndDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.ResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on CreatedDate of a ResaleAuthorization.
@@ -1546,6 +4467,33 @@ type ResaleAuthorizationCreatedDateFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationCreatedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationCreatedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationCreatedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationCreatedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResaleAuthorizationCreatedDateFilterValueList(s, schemas.ResaleAuthorizationCreatedDateFilter_ValueList, v.ValueList)
+}
+func (v *ResaleAuthorizationCreatedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationCreatedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationCreatedDateFilter_DateRange:
+			v.DateRange = &ResaleAuthorizationCreatedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		case schemas.ResaleAuthorizationCreatedDateFilter_ValueList:
+			return deserializeResaleAuthorizationCreatedDateFilterValueList(d, schemas.ResaleAuthorizationCreatedDateFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on CreatedDate of a ResaleAuthorization with date range as
 // input.
 type ResaleAuthorizationCreatedDateFilterDateRange struct {
@@ -1559,6 +4507,34 @@ type ResaleAuthorizationCreatedDateFilterDateRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationCreatedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationCreatedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationCreatedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationCreatedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationCreatedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *ResaleAuthorizationCreatedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationCreatedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationCreatedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationCreatedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.ResaleAuthorizationCreatedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationCreatedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on EntityId of a ResaleAuthorization.
 type ResaleAuthorizationEntityIdFilter struct {
 
@@ -1566,6 +4542,25 @@ type ResaleAuthorizationEntityIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationEntityIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationEntityIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationEntityIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationEntityIdFilterValueList(s, schemas.ResaleAuthorizationEntityIdFilter_ValueList, v.ValueList)
+}
+func (v *ResaleAuthorizationEntityIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationEntityIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationEntityIdFilter_ValueList:
+			return deserializeResaleAuthorizationEntityIdFilterValueList(d, schemas.ResaleAuthorizationEntityIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Object containing all the filter fields for resale authorization entity. Client
@@ -1618,6 +4613,134 @@ type ResaleAuthorizationFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityEndDate != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_AvailabilityEndDate)
+		v.AvailabilityEndDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_CreatedDate)
+		v.CreatedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityId != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_EntityId)
+		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManufacturerAccountId != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_ManufacturerAccountId)
+		v.ManufacturerAccountId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManufacturerLegalName != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_ManufacturerLegalName)
+		v.ManufacturerLegalName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_Name)
+		v.Name.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OfferExtendedStatus != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_OfferExtendedStatus)
+		v.OfferExtendedStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductId != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_ProductId)
+		v.ProductId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductName != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_ProductName)
+		v.ProductName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResellerAccountID != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_ResellerAccountID)
+		v.ResellerAccountID.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResellerLegalName != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_ResellerLegalName)
+		v.ResellerLegalName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResellerRole != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_ResellerRole)
+		v.ResellerRole.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResaleAuthorizationFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationFilters_AvailabilityEndDate:
+			v.AvailabilityEndDate = &ResaleAuthorizationAvailabilityEndDateFilter{}
+			return v.AvailabilityEndDate.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_CreatedDate:
+			v.CreatedDate = &ResaleAuthorizationCreatedDateFilter{}
+			return v.CreatedDate.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_EntityId:
+			v.EntityId = &ResaleAuthorizationEntityIdFilter{}
+			return v.EntityId.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_LastModifiedDate:
+			v.LastModifiedDate = &ResaleAuthorizationLastModifiedDateFilter{}
+			return v.LastModifiedDate.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_ManufacturerAccountId:
+			v.ManufacturerAccountId = &ResaleAuthorizationManufacturerAccountIdFilter{}
+			return v.ManufacturerAccountId.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_ManufacturerLegalName:
+			v.ManufacturerLegalName = &ResaleAuthorizationManufacturerLegalNameFilter{}
+			return v.ManufacturerLegalName.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_Name:
+			v.Name = &ResaleAuthorizationNameFilter{}
+			return v.Name.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_OfferExtendedStatus:
+			v.OfferExtendedStatus = &ResaleAuthorizationOfferExtendedStatusFilter{}
+			return v.OfferExtendedStatus.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_ProductId:
+			v.ProductId = &ResaleAuthorizationProductIdFilter{}
+			return v.ProductId.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_ProductName:
+			v.ProductName = &ResaleAuthorizationProductNameFilter{}
+			return v.ProductName.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_ResellerAccountID:
+			v.ResellerAccountID = &ResaleAuthorizationResellerAccountIDFilter{}
+			return v.ResellerAccountID.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_ResellerLegalName:
+			v.ResellerLegalName = &ResaleAuthorizationResellerLegalNameFilter{}
+			return v.ResellerLegalName.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_ResellerRole:
+			v.ResellerRole = &ResaleAuthorizationResellerRoleFilter{}
+			return v.ResellerRole.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_Status:
+			v.Status = &ResaleAuthorizationStatusFilter{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the LastModifiedDate of a ResaleAuthorization.
 type ResaleAuthorizationLastModifiedDateFilter struct {
 
@@ -1626,6 +4749,30 @@ type ResaleAuthorizationLastModifiedDateFilter struct {
 	DateRange *ResaleAuthorizationLastModifiedDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationLastModifiedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationLastModifiedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationLastModifiedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationLastModifiedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResaleAuthorizationLastModifiedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationLastModifiedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationLastModifiedDateFilter_DateRange:
+			v.DateRange = &ResaleAuthorizationLastModifiedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the LastModifiedDate of a ResaleAuthorization with date
@@ -1639,6 +4786,34 @@ type ResaleAuthorizationLastModifiedDateFilterDateRange struct {
 	BeforeValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationLastModifiedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationLastModifiedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationLastModifiedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *ResaleAuthorizationLastModifiedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationLastModifiedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.ResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the ManufacturerAccountId of a ResaleAuthorization.
@@ -1655,6 +4830,31 @@ type ResaleAuthorizationManufacturerAccountIdFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationManufacturerAccountIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationManufacturerAccountIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationManufacturerAccountIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationManufacturerAccountIdFilterValueList(s, schemas.ResaleAuthorizationManufacturerAccountIdFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationManufacturerAccountIdFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *ResaleAuthorizationManufacturerAccountIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationManufacturerAccountIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationManufacturerAccountIdFilter_ValueList:
+			return deserializeResaleAuthorizationManufacturerAccountIdFilterValueList(d, schemas.ResaleAuthorizationManufacturerAccountIdFilter_ValueList, &v.ValueList)
+		case schemas.ResaleAuthorizationManufacturerAccountIdFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationManufacturerAccountIdFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the ManufacturerLegalName of a ResaleAuthorization.
 type ResaleAuthorizationManufacturerLegalNameFilter struct {
 
@@ -1669,6 +4869,31 @@ type ResaleAuthorizationManufacturerLegalNameFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationManufacturerLegalNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationManufacturerLegalNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationManufacturerLegalNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationManufacturerLegalNameFilterValueList(s, schemas.ResaleAuthorizationManufacturerLegalNameFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationManufacturerLegalNameFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *ResaleAuthorizationManufacturerLegalNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationManufacturerLegalNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationManufacturerLegalNameFilter_ValueList:
+			return deserializeResaleAuthorizationManufacturerLegalNameFilterValueList(d, schemas.ResaleAuthorizationManufacturerLegalNameFilter_ValueList, &v.ValueList)
+		case schemas.ResaleAuthorizationManufacturerLegalNameFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationManufacturerLegalNameFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the Name of a ResaleAuthorization.
 type ResaleAuthorizationNameFilter struct {
 
@@ -1681,6 +4906,31 @@ type ResaleAuthorizationNameFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationNameFilterValueList(s, schemas.ResaleAuthorizationNameFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationNameFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *ResaleAuthorizationNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationNameFilter_ValueList:
+			return deserializeResaleAuthorizationNameFilterValueList(d, schemas.ResaleAuthorizationNameFilter_ValueList, &v.ValueList)
+		case schemas.ResaleAuthorizationNameFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationNameFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the OfferExtendedStatus of a ResaleAuthorization.
 type ResaleAuthorizationOfferExtendedStatusFilter struct {
 
@@ -1689,6 +4939,25 @@ type ResaleAuthorizationOfferExtendedStatusFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationOfferExtendedStatusFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationOfferExtendedStatusFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationOfferExtendedStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationOfferExtendedStatusFilterValueList(s, schemas.ResaleAuthorizationOfferExtendedStatusFilter_ValueList, v.ValueList)
+}
+func (v *ResaleAuthorizationOfferExtendedStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationOfferExtendedStatusFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationOfferExtendedStatusFilter_ValueList:
+			return deserializeResaleAuthorizationOfferExtendedStatusFilterValueList(d, schemas.ResaleAuthorizationOfferExtendedStatusFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the ProductId of a ResaleAuthorization.
@@ -1703,6 +4972,31 @@ type ResaleAuthorizationProductIdFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationProductIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationProductIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationProductIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationProductIdFilterValueList(s, schemas.ResaleAuthorizationProductIdFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationProductIdFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *ResaleAuthorizationProductIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationProductIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationProductIdFilter_ValueList:
+			return deserializeResaleAuthorizationProductIdFilterValueList(d, schemas.ResaleAuthorizationProductIdFilter_ValueList, &v.ValueList)
+		case schemas.ResaleAuthorizationProductIdFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationProductIdFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the ProductName of a ResaleAuthorization.
 type ResaleAuthorizationProductNameFilter struct {
 
@@ -1714,6 +5008,31 @@ type ResaleAuthorizationProductNameFilter struct {
 	WildCardValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationProductNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationProductNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationProductNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationProductNameFilterValueList(s, schemas.ResaleAuthorizationProductNameFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationProductNameFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *ResaleAuthorizationProductNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationProductNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationProductNameFilter_ValueList:
+			return deserializeResaleAuthorizationProductNameFilterValueList(d, schemas.ResaleAuthorizationProductNameFilter_ValueList, &v.ValueList)
+		case schemas.ResaleAuthorizationProductNameFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationProductNameFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
 }
 
 // Allows filtering on the ResellerAccountID of a ResaleAuthorization.
@@ -1730,6 +5049,31 @@ type ResaleAuthorizationResellerAccountIDFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationResellerAccountIDFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationResellerAccountIDFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationResellerAccountIDFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationResellerAccountIDFilterValueList(s, schemas.ResaleAuthorizationResellerAccountIDFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationResellerAccountIDFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *ResaleAuthorizationResellerAccountIDFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationResellerAccountIDFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationResellerAccountIDFilter_ValueList:
+			return deserializeResaleAuthorizationResellerAccountIDFilterValueList(d, schemas.ResaleAuthorizationResellerAccountIDFilter_ValueList, &v.ValueList)
+		case schemas.ResaleAuthorizationResellerAccountIDFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationResellerAccountIDFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the ResellerLegalName of a ResaleAuthorization.
 type ResaleAuthorizationResellerLegalNameFilter struct {
 
@@ -1744,6 +5088,31 @@ type ResaleAuthorizationResellerLegalNameFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationResellerLegalNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationResellerLegalNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationResellerLegalNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationResellerLegalNameFilterValueList(s, schemas.ResaleAuthorizationResellerLegalNameFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.ResaleAuthorizationResellerLegalNameFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *ResaleAuthorizationResellerLegalNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationResellerLegalNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationResellerLegalNameFilter_ValueList:
+			return deserializeResaleAuthorizationResellerLegalNameFilterValueList(d, schemas.ResaleAuthorizationResellerLegalNameFilter_ValueList, &v.ValueList)
+		case schemas.ResaleAuthorizationResellerLegalNameFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationResellerLegalNameFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the ResellerRole of a ResaleAuthorization.
 type ResaleAuthorizationResellerRoleFilter struct {
 
@@ -1751,6 +5120,25 @@ type ResaleAuthorizationResellerRoleFilter struct {
 	ValueList []ResaleAuthorizationResellerRoleString
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationResellerRoleFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationResellerRoleFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationResellerRoleFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationResellerRoleFilterValueList(s, schemas.ResaleAuthorizationResellerRoleFilter_ValueList, v.ValueList)
+}
+func (v *ResaleAuthorizationResellerRoleFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationResellerRoleFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationResellerRoleFilter_ValueList:
+			return deserializeResaleAuthorizationResellerRoleFilterValueList(d, schemas.ResaleAuthorizationResellerRoleFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Allows to sort ResaleAuthorization.
@@ -1765,6 +5153,42 @@ type ResaleAuthorizationSort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.ResaleAuthorizationSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ResaleAuthorizationSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *ResaleAuthorizationSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.ResaleAuthorizationSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = ResaleAuthorizationSortBy(ev)
+			return nil
+		case schemas.ResaleAuthorizationSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ResaleAuthorizationSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the Status of a ResaleAuthorization.
 type ResaleAuthorizationStatusFilter struct {
 
@@ -1772,6 +5196,25 @@ type ResaleAuthorizationStatusFilter struct {
 	ValueList []ResaleAuthorizationStatusString
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationStatusFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationStatusFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationStatusFilterValueList(s, schemas.ResaleAuthorizationStatusFilter_ValueList, v.ValueList)
+}
+func (v *ResaleAuthorizationStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationStatusFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationStatusFilter_ValueList:
+			return deserializeResaleAuthorizationStatusFilterValueList(d, schemas.ResaleAuthorizationStatusFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Summarized information about a Resale Authorization.
@@ -1816,6 +5259,102 @@ type ResaleAuthorizationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResaleAuthorizationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityEndDate != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_AvailabilityEndDate, *v.AvailabilityEndDate)
+	}
+	if v.CreatedDate != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_CreatedDate, *v.CreatedDate)
+	}
+	if v.ManufacturerAccountId != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_ManufacturerAccountId, *v.ManufacturerAccountId)
+	}
+	if v.ManufacturerLegalName != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_ManufacturerLegalName, *v.ManufacturerLegalName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_Name, *v.Name)
+	}
+	if v.OfferExtendedStatus != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_OfferExtendedStatus, *v.OfferExtendedStatus)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_ProductId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_ProductName, *v.ProductName)
+	}
+	if v.ResellerAccountID != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_ResellerAccountID, *v.ResellerAccountID)
+	}
+	if v.ResellerLegalName != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_ResellerLegalName, *v.ResellerLegalName)
+	}
+	if v.ResellerRole != "" {
+		s.WriteString(schemas.ResaleAuthorizationSummary_ResellerRole, string(v.ResellerRole))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResaleAuthorizationSummary_Status, string(v.Status))
+	}
+}
+func (v *ResaleAuthorizationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationSummary_AvailabilityEndDate:
+			v.AvailabilityEndDate = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_AvailabilityEndDate, v.AvailabilityEndDate)
+		case schemas.ResaleAuthorizationSummary_CreatedDate:
+			v.CreatedDate = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_CreatedDate, v.CreatedDate)
+		case schemas.ResaleAuthorizationSummary_ManufacturerAccountId:
+			v.ManufacturerAccountId = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_ManufacturerAccountId, v.ManufacturerAccountId)
+		case schemas.ResaleAuthorizationSummary_ManufacturerLegalName:
+			v.ManufacturerLegalName = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_ManufacturerLegalName, v.ManufacturerLegalName)
+		case schemas.ResaleAuthorizationSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_Name, v.Name)
+		case schemas.ResaleAuthorizationSummary_OfferExtendedStatus:
+			v.OfferExtendedStatus = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_OfferExtendedStatus, v.OfferExtendedStatus)
+		case schemas.ResaleAuthorizationSummary_ProductId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_ProductId, v.ProductId)
+		case schemas.ResaleAuthorizationSummary_ProductName:
+			v.ProductName = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_ProductName, v.ProductName)
+		case schemas.ResaleAuthorizationSummary_ResellerAccountID:
+			v.ResellerAccountID = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_ResellerAccountID, v.ResellerAccountID)
+		case schemas.ResaleAuthorizationSummary_ResellerLegalName:
+			v.ResellerLegalName = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_ResellerLegalName, v.ResellerLegalName)
+		case schemas.ResaleAuthorizationSummary_ResellerRole:
+			var ev string
+			if err := d.ReadString(schemas.ResaleAuthorizationSummary_ResellerRole, &ev); err != nil {
+				return err
+			}
+			v.ResellerRole = ResaleAuthorizationResellerRoleString(ev)
+			return nil
+		case schemas.ResaleAuthorizationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ResaleAuthorizationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResaleAuthorizationStatusString(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering on entity id of a SaaS product.
 type SaaSProductEntityIdFilter struct {
 
@@ -1823,6 +5362,25 @@ type SaaSProductEntityIdFilter struct {
 	ValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SaaSProductEntityIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaaSProductEntityIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaaSProductEntityIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSaaSProductEntityIdFilterValueList(s, schemas.SaaSProductEntityIdFilter_ValueList, v.ValueList)
+}
+func (v *SaaSProductEntityIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaaSProductEntityIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaaSProductEntityIdFilter_ValueList:
+			return deserializeSaaSProductEntityIdFilterValueList(d, schemas.SaaSProductEntityIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // Object containing all the filter fields for SaaS products. Client can add only
@@ -1844,6 +5402,54 @@ type SaaSProductFilters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SaaSProductFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaaSProductFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaaSProductFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteStruct(schemas.SaaSProductFilters_EntityId)
+		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.SaaSProductFilters_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductTitle != nil {
+		s.WriteStruct(schemas.SaaSProductFilters_ProductTitle)
+		v.ProductTitle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Visibility != nil {
+		s.WriteStruct(schemas.SaaSProductFilters_Visibility)
+		v.Visibility.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SaaSProductFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaaSProductFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaaSProductFilters_EntityId:
+			v.EntityId = &SaaSProductEntityIdFilter{}
+			return v.EntityId.Deserialize(d)
+		case schemas.SaaSProductFilters_LastModifiedDate:
+			v.LastModifiedDate = &SaaSProductLastModifiedDateFilter{}
+			return v.LastModifiedDate.Deserialize(d)
+		case schemas.SaaSProductFilters_ProductTitle:
+			v.ProductTitle = &SaaSProductTitleFilter{}
+			return v.ProductTitle.Deserialize(d)
+		case schemas.SaaSProductFilters_Visibility:
+			v.Visibility = &SaaSProductVisibilityFilter{}
+			return v.Visibility.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering based on the last modified date of SaaS products
 type SaaSProductLastModifiedDateFilter struct {
 
@@ -1851,6 +5457,30 @@ type SaaSProductLastModifiedDateFilter struct {
 	DateRange *SaaSProductLastModifiedDateFilterDateRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *SaaSProductLastModifiedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaaSProductLastModifiedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaaSProductLastModifiedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.SaaSProductLastModifiedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SaaSProductLastModifiedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaaSProductLastModifiedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaaSProductLastModifiedDateFilter_DateRange:
+			v.DateRange = &SaaSProductLastModifiedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Object that contains date range of the last modified date to be filtered on.
@@ -1864,6 +5494,34 @@ type SaaSProductLastModifiedDateFilterDateRange struct {
 	BeforeValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SaaSProductLastModifiedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaaSProductLastModifiedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaaSProductLastModifiedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.SaaSProductLastModifiedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.SaaSProductLastModifiedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *SaaSProductLastModifiedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaaSProductLastModifiedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaaSProductLastModifiedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.SaaSProductLastModifiedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.SaaSProductLastModifiedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.SaaSProductLastModifiedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
 }
 
 // Objects that allows sorting on SaaS products based on certain fields and
@@ -1880,6 +5538,42 @@ type SaaSProductSort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SaaSProductSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaaSProductSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaaSProductSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.SaaSProductSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SaaSProductSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *SaaSProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaaSProductSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaaSProductSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.SaaSProductSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = SaaSProductSortBy(ev)
+			return nil
+		case schemas.SaaSProductSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.SaaSProductSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Object that contains summarized information about a SaaS product.
 type SaaSProductSummary struct {
 
@@ -1890,6 +5584,38 @@ type SaaSProductSummary struct {
 	Visibility SaaSProductVisibilityString
 
 	noSmithyDocumentSerde
+}
+
+func (v *SaaSProductSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaaSProductSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaaSProductSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductTitle != nil {
+		s.WriteString(schemas.SaaSProductSummary_ProductTitle, *v.ProductTitle)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.SaaSProductSummary_Visibility, string(v.Visibility))
+	}
+}
+func (v *SaaSProductSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaaSProductSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaaSProductSummary_ProductTitle:
+			v.ProductTitle = new(string)
+			return d.ReadString(schemas.SaaSProductSummary_ProductTitle, v.ProductTitle)
+		case schemas.SaaSProductSummary_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.SaaSProductSummary_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = SaaSProductVisibilityString(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Object that allows filtering on product title.
@@ -1905,6 +5631,31 @@ type SaaSProductTitleFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SaaSProductTitleFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaaSProductTitleFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaaSProductTitleFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSaaSProductTitleFilterValueList(s, schemas.SaaSProductTitleFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.SaaSProductTitleFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *SaaSProductTitleFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaaSProductTitleFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaaSProductTitleFilter_ValueList:
+			return deserializeSaaSProductTitleFilterValueList(d, schemas.SaaSProductTitleFilter_ValueList, &v.ValueList)
+		case schemas.SaaSProductTitleFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.SaaSProductTitleFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering on the visibility of the product in the AWS
 // Marketplace.
 type SaaSProductVisibilityFilter struct {
@@ -1913,6 +5664,25 @@ type SaaSProductVisibilityFilter struct {
 	ValueList []SaaSProductVisibilityString
 
 	noSmithyDocumentSerde
+}
+
+func (v *SaaSProductVisibilityFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaaSProductVisibilityFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaaSProductVisibilityFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSaaSProductVisibilityFilterValueList(s, schemas.SaaSProductVisibilityFilter_ValueList, v.ValueList)
+}
+func (v *SaaSProductVisibilityFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaaSProductVisibilityFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaaSProductVisibilityFilter_ValueList:
+			return deserializeSaaSProductVisibilityFilterValueList(d, schemas.SaaSProductVisibilityFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
 }
 
 // An object that contains two attributes, SortBy and SortOrder .
@@ -1932,6 +5702,38 @@ type Sort struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Sort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Sort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Sort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != nil {
+		s.WriteString(schemas.Sort_SortBy, *v.SortBy)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.Sort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *Sort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Sort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Sort_SortBy:
+			v.SortBy = new(string)
+			return d.ReadString(schemas.Sort_SortBy, v.SortBy)
+		case schemas.Sort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.Sort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A list of objects specifying each key name and value.
 type Tag struct {
 
@@ -1946,6 +5748,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Detailed information about a single request field that failed validation,
@@ -1976,6 +5806,62 @@ type ValidationExceptionField struct {
 	Reason ValidationExceptionReason
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeType != nil {
+		s.WriteString(schemas.ValidationExceptionField_ChangeType, *v.ChangeType)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.ValidationExceptionField_EntityId, *v.EntityId)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.ValidationExceptionField_EntityType, *v.EntityType)
+	}
+	if v.Field != nil {
+		s.WriteString(schemas.ValidationExceptionField_Field, *v.Field)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.ValidationExceptionField_Reason, string(v.Reason))
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_ChangeType:
+			v.ChangeType = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_ChangeType, v.ChangeType)
+		case schemas.ValidationExceptionField_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_EntityId, v.EntityId)
+		case schemas.ValidationExceptionField_EntityType:
+			v.EntityType = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_EntityType, v.EntityType)
+		case schemas.ValidationExceptionField_Field:
+			v.Field = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Field, v.Field)
+		case schemas.ValidationExceptionField_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
+		case schemas.ValidationExceptionField_Reason:
+			var ev string
+			if err := d.ReadString(schemas.ValidationExceptionField_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = ValidationExceptionReason(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

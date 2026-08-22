@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,32 @@ type CreateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRuleRequest_description, *v.Description)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateRuleRequest_detectorId, *v.DetectorId)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.CreateRuleRequest_expression, *v.Expression)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.CreateRuleRequest_language, string(v.Language))
+	}
+	serializeNonEmptyListOfStrings(s, schemas.CreateRuleRequest_outcomes, v.Outcomes)
+	if v.RuleId != nil {
+		s.WriteString(schemas.CreateRuleRequest_ruleId, *v.RuleId)
+	}
+	serializetagList(s, schemas.CreateRuleRequest_tags, v.Tags)
+}
+
 type CreateRuleOutput struct {
 
 	// The created rule.
@@ -71,13 +99,34 @@ type CreateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rule != nil {
+		s.WriteStruct(schemas.CreateRuleResult_rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRuleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRuleResult_rule:
+			v.Rule = &types.Rule{}
+			return v.Rule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResult), output: &CreateRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

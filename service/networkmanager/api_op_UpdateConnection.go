@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type UpdateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectedLinkId != nil {
+		s.WriteString(schemas.UpdateConnectionRequest_ConnectedLinkId, *v.ConnectedLinkId)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.UpdateConnectionRequest_ConnectionId, *v.ConnectionId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConnectionRequest_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.UpdateConnectionRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.UpdateConnectionRequest_LinkId, *v.LinkId)
+	}
+}
+
 type UpdateConnectionOutput struct {
 
 	// Information about the connection.
@@ -62,13 +88,34 @@ type UpdateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connection != nil {
+		s.WriteStruct(schemas.UpdateConnectionResponse_Connection)
+		v.Connection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionResponse_Connection:
+			v.Connection = &types.Connection{}
+			return v.Connection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnection, schemas.UpdateConnectionRequest, schemas.UpdateConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnection, schemas.UpdateConnectionRequest, schemas.UpdateConnectionResponse), output: &UpdateConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

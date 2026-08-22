@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,23 @@ type UpdateConditionalForwarderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConditionalForwarderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConditionalForwarderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConditionalForwarderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateConditionalForwarderRequest_DirectoryId, *v.DirectoryId)
+	}
+	serializeDnsIpAddrs(s, schemas.UpdateConditionalForwarderRequest_DnsIpAddrs, v.DnsIpAddrs)
+	serializeDnsIpv6Addrs(s, schemas.UpdateConditionalForwarderRequest_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	if v.RemoteDomainName != nil {
+		s.WriteString(schemas.UpdateConditionalForwarderRequest_RemoteDomainName, *v.RemoteDomainName)
+	}
+}
+
 // The result of an UpdateConditionalForwarder request.
 type UpdateConditionalForwarderOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -58,13 +77,26 @@ type UpdateConditionalForwarderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConditionalForwarderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConditionalForwarderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConditionalForwarderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConditionalForwarderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConditionalForwarderResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConditionalForwarderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConditionalForwarder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConditionalForwarder, schemas.UpdateConditionalForwarderRequest, schemas.UpdateConditionalForwarderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateConditionalForwarder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConditionalForwarder, schemas.UpdateConditionalForwarderRequest, schemas.UpdateConditionalForwarderResult), output: &UpdateConditionalForwarderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

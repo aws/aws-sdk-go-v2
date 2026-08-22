@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.GetEventRequest_eventId, *v.EventId)
+	}
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.GetEventRequest_eventTypeName, *v.EventTypeName)
+	}
+}
+
 type GetEventOutput struct {
 
 	// The details of the event.
@@ -51,13 +68,34 @@ type GetEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != nil {
+		s.WriteStruct(schemas.GetEventResult_event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEventResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEventResult_event:
+			v.Event = &types.Event{}
+			return v.Event.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvent, schemas.GetEventRequest, schemas.GetEventResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvent, schemas.GetEventRequest, schemas.GetEventResult), output: &GetEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

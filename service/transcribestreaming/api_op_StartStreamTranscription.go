@@ -4,8 +4,9 @@ package transcribestreaming
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -358,6 +359,87 @@ type StartStreamTranscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartStreamTranscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartStreamTranscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartStreamTranscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.ContentRedactionType != "" {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_ContentRedactionType, string(v.ContentRedactionType))
+	}
+	if v.EnableChannelIdentification != false {
+		s.WriteBool(schemas.StartStreamTranscriptionRequest_EnableChannelIdentification, v.EnableChannelIdentification)
+	}
+	if v.EnablePartialResultsStabilization != false {
+		s.WriteBool(schemas.StartStreamTranscriptionRequest_EnablePartialResultsStabilization, v.EnablePartialResultsStabilization)
+	}
+	if v.IdentifyLanguage != false {
+		s.WriteBool(schemas.StartStreamTranscriptionRequest_IdentifyLanguage, v.IdentifyLanguage)
+	}
+	if v.IdentifyMultipleLanguages != false {
+		s.WriteBool(schemas.StartStreamTranscriptionRequest_IdentifyMultipleLanguages, v.IdentifyMultipleLanguages)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageModelName != nil {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_LanguageModelName, *v.LanguageModelName)
+	}
+	if v.LanguageOptions != nil {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_LanguageOptions, *v.LanguageOptions)
+	}
+	if v.MediaEncoding != "" {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_MediaEncoding, string(v.MediaEncoding))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.StartStreamTranscriptionRequest_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.NumberOfChannels != nil {
+		s.WriteInt32(schemas.StartStreamTranscriptionRequest_NumberOfChannels, *v.NumberOfChannels)
+	}
+	if v.PartialResultsStability != "" {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_PartialResultsStability, string(v.PartialResultsStability))
+	}
+	if v.PiiEntityTypes != nil {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_PiiEntityTypes, *v.PiiEntityTypes)
+	}
+	if v.PreferredLanguage != "" {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_PreferredLanguage, string(v.PreferredLanguage))
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_SessionId, *v.SessionId)
+	}
+	if v.SessionResumeWindow != nil {
+		s.WriteInt32(schemas.StartStreamTranscriptionRequest_SessionResumeWindow, *v.SessionResumeWindow)
+	}
+	if v.ShowSpeakerLabel != false {
+		s.WriteBool(schemas.StartStreamTranscriptionRequest_ShowSpeakerLabel, v.ShowSpeakerLabel)
+	}
+	if v.TranscriptFormat != "" {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_TranscriptFormat, string(v.TranscriptFormat))
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyFilterNames != nil {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_VocabularyFilterNames, *v.VocabularyFilterNames)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_VocabularyName, *v.VocabularyName)
+	}
+	if v.VocabularyNames != nil {
+		s.WriteString(schemas.StartStreamTranscriptionRequest_VocabularyNames, *v.VocabularyNames)
+	}
+}
+
 type StartStreamTranscriptionOutput struct {
 
 	// Shows whether content identification was enabled for your transcription.
@@ -450,27 +532,218 @@ type StartStreamTranscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartStreamTranscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartStreamTranscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartStreamTranscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.ContentRedactionType != "" {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_ContentRedactionType, string(v.ContentRedactionType))
+	}
+	if v.EnableChannelIdentification != false {
+		s.WriteBool(schemas.StartStreamTranscriptionResponse_EnableChannelIdentification, v.EnableChannelIdentification)
+	}
+	if v.EnablePartialResultsStabilization != false {
+		s.WriteBool(schemas.StartStreamTranscriptionResponse_EnablePartialResultsStabilization, v.EnablePartialResultsStabilization)
+	}
+	if v.IdentifyLanguage != false {
+		s.WriteBool(schemas.StartStreamTranscriptionResponse_IdentifyLanguage, v.IdentifyLanguage)
+	}
+	if v.IdentifyMultipleLanguages != false {
+		s.WriteBool(schemas.StartStreamTranscriptionResponse_IdentifyMultipleLanguages, v.IdentifyMultipleLanguages)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageModelName != nil {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_LanguageModelName, *v.LanguageModelName)
+	}
+	if v.LanguageOptions != nil {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_LanguageOptions, *v.LanguageOptions)
+	}
+	if v.MediaEncoding != "" {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_MediaEncoding, string(v.MediaEncoding))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.StartStreamTranscriptionResponse_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.NumberOfChannels != nil {
+		s.WriteInt32(schemas.StartStreamTranscriptionResponse_NumberOfChannels, *v.NumberOfChannels)
+	}
+	if v.PartialResultsStability != "" {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_PartialResultsStability, string(v.PartialResultsStability))
+	}
+	if v.PiiEntityTypes != nil {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_PiiEntityTypes, *v.PiiEntityTypes)
+	}
+	if v.PreferredLanguage != "" {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_PreferredLanguage, string(v.PreferredLanguage))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_RequestId, *v.RequestId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_SessionId, *v.SessionId)
+	}
+	if v.SessionResumeWindow != nil {
+		s.WriteInt32(schemas.StartStreamTranscriptionResponse_SessionResumeWindow, *v.SessionResumeWindow)
+	}
+	if v.ShowSpeakerLabel != false {
+		s.WriteBool(schemas.StartStreamTranscriptionResponse_ShowSpeakerLabel, v.ShowSpeakerLabel)
+	}
+	if v.TranscriptFormat != "" {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_TranscriptFormat, string(v.TranscriptFormat))
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyFilterNames != nil {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_VocabularyFilterNames, *v.VocabularyFilterNames)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_VocabularyName, *v.VocabularyName)
+	}
+	if v.VocabularyNames != nil {
+		s.WriteString(schemas.StartStreamTranscriptionResponse_VocabularyNames, *v.VocabularyNames)
+	}
+}
+func (v *StartStreamTranscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartStreamTranscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartStreamTranscriptionResponse_ContentIdentificationType:
+			var ev string
+			if err := d.ReadString(schemas.StartStreamTranscriptionResponse_ContentIdentificationType, &ev); err != nil {
+				return err
+			}
+			v.ContentIdentificationType = types.ContentIdentificationType(ev)
+			return nil
+		case schemas.StartStreamTranscriptionResponse_ContentRedactionType:
+			var ev string
+			if err := d.ReadString(schemas.StartStreamTranscriptionResponse_ContentRedactionType, &ev); err != nil {
+				return err
+			}
+			v.ContentRedactionType = types.ContentRedactionType(ev)
+			return nil
+		case schemas.StartStreamTranscriptionResponse_EnableChannelIdentification:
+			return d.ReadBool(schemas.StartStreamTranscriptionResponse_EnableChannelIdentification, &v.EnableChannelIdentification)
+		case schemas.StartStreamTranscriptionResponse_EnablePartialResultsStabilization:
+			return d.ReadBool(schemas.StartStreamTranscriptionResponse_EnablePartialResultsStabilization, &v.EnablePartialResultsStabilization)
+		case schemas.StartStreamTranscriptionResponse_IdentifyLanguage:
+			return d.ReadBool(schemas.StartStreamTranscriptionResponse_IdentifyLanguage, &v.IdentifyLanguage)
+		case schemas.StartStreamTranscriptionResponse_IdentifyMultipleLanguages:
+			return d.ReadBool(schemas.StartStreamTranscriptionResponse_IdentifyMultipleLanguages, &v.IdentifyMultipleLanguages)
+		case schemas.StartStreamTranscriptionResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.StartStreamTranscriptionResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.LanguageCode(ev)
+			return nil
+		case schemas.StartStreamTranscriptionResponse_LanguageModelName:
+			v.LanguageModelName = new(string)
+			return d.ReadString(schemas.StartStreamTranscriptionResponse_LanguageModelName, v.LanguageModelName)
+		case schemas.StartStreamTranscriptionResponse_LanguageOptions:
+			v.LanguageOptions = new(string)
+			return d.ReadString(schemas.StartStreamTranscriptionResponse_LanguageOptions, v.LanguageOptions)
+		case schemas.StartStreamTranscriptionResponse_MediaEncoding:
+			var ev string
+			if err := d.ReadString(schemas.StartStreamTranscriptionResponse_MediaEncoding, &ev); err != nil {
+				return err
+			}
+			v.MediaEncoding = types.MediaEncoding(ev)
+			return nil
+		case schemas.StartStreamTranscriptionResponse_MediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.StartStreamTranscriptionResponse_MediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.StartStreamTranscriptionResponse_NumberOfChannels:
+			v.NumberOfChannels = new(int32)
+			return d.ReadInt32(schemas.StartStreamTranscriptionResponse_NumberOfChannels, v.NumberOfChannels)
+		case schemas.StartStreamTranscriptionResponse_PartialResultsStability:
+			var ev string
+			if err := d.ReadString(schemas.StartStreamTranscriptionResponse_PartialResultsStability, &ev); err != nil {
+				return err
+			}
+			v.PartialResultsStability = types.PartialResultsStability(ev)
+			return nil
+		case schemas.StartStreamTranscriptionResponse_PiiEntityTypes:
+			v.PiiEntityTypes = new(string)
+			return d.ReadString(schemas.StartStreamTranscriptionResponse_PiiEntityTypes, v.PiiEntityTypes)
+		case schemas.StartStreamTranscriptionResponse_PreferredLanguage:
+			var ev string
+			if err := d.ReadString(schemas.StartStreamTranscriptionResponse_PreferredLanguage, &ev); err != nil {
+				return err
+			}
+			v.PreferredLanguage = types.LanguageCode(ev)
+			return nil
+		case schemas.StartStreamTranscriptionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartStreamTranscriptionResponse_RequestId, v.RequestId)
+		case schemas.StartStreamTranscriptionResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StartStreamTranscriptionResponse_SessionId, v.SessionId)
+		case schemas.StartStreamTranscriptionResponse_SessionResumeWindow:
+			v.SessionResumeWindow = new(int32)
+			return d.ReadInt32(schemas.StartStreamTranscriptionResponse_SessionResumeWindow, v.SessionResumeWindow)
+		case schemas.StartStreamTranscriptionResponse_ShowSpeakerLabel:
+			return d.ReadBool(schemas.StartStreamTranscriptionResponse_ShowSpeakerLabel, &v.ShowSpeakerLabel)
+		case schemas.StartStreamTranscriptionResponse_TranscriptFormat:
+			var ev string
+			if err := d.ReadString(schemas.StartStreamTranscriptionResponse_TranscriptFormat, &ev); err != nil {
+				return err
+			}
+			v.TranscriptFormat = types.TranscriptFormat(ev)
+			return nil
+		case schemas.StartStreamTranscriptionResponse_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.StartStreamTranscriptionResponse_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = types.VocabularyFilterMethod(ev)
+			return nil
+		case schemas.StartStreamTranscriptionResponse_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.StartStreamTranscriptionResponse_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.StartStreamTranscriptionResponse_VocabularyFilterNames:
+			v.VocabularyFilterNames = new(string)
+			return d.ReadString(schemas.StartStreamTranscriptionResponse_VocabularyFilterNames, v.VocabularyFilterNames)
+		case schemas.StartStreamTranscriptionResponse_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.StartStreamTranscriptionResponse_VocabularyName, v.VocabularyName)
+		case schemas.StartStreamTranscriptionResponse_VocabularyNames:
+			v.VocabularyNames = new(string)
+			return d.ReadString(schemas.StartStreamTranscriptionResponse_VocabularyNames, v.VocabularyNames)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *StartStreamTranscriptionOutput) GetStream() *StartStreamTranscriptionEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationStartStreamTranscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartStreamTranscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartStreamTranscription, schemas.StartStreamTranscriptionRequest, schemas.StartStreamTranscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartStreamTranscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartStreamTranscription, schemas.StartStreamTranscriptionRequest, schemas.StartStreamTranscriptionResponse), output: &StartStreamTranscriptionOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamStartStreamTranscription{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamStartStreamTranscriptionMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -481,9 +754,6 @@ func (c *Client) addOperationStartStreamTranscriptionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
-		return err
-	}
-	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

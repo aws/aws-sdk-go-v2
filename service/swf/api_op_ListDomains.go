@@ -5,7 +5,9 @@ package swf
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,27 @@ type ListDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumPageSize != 0 {
+		s.WriteInt32(schemas.ListDomainsInput_maximumPageSize, v.MaximumPageSize)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListDomainsInput_nextPageToken, *v.NextPageToken)
+	}
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.ListDomainsInput_registrationStatus, string(v.RegistrationStatus))
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.ListDomainsInput_reverseOrder, v.ReverseOrder)
+	}
+}
+
 // Contains a paginated collection of DomainInfo structures.
 type ListDomainsOutput struct {
 
@@ -101,13 +124,35 @@ type ListDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainInfos)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainInfoList(s, schemas.DomainInfos_domainInfos, v.DomainInfos)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.DomainInfos_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *ListDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainInfos, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainInfos_domainInfos:
+			return deserializeDomainInfoList(d, schemas.DomainInfos_domainInfos, &v.DomainInfos)
+		case schemas.DomainInfos_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.DomainInfos_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomains, schemas.ListDomainsInput, schemas.DomainInfos)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomains, schemas.ListDomainsInput, schemas.DomainInfos), output: &ListDomainsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,26 @@ type UpdateSiteAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSiteAddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSiteAddressInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSiteAddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.UpdateSiteAddressInput_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AddressType != "" {
+		s.WriteString(schemas.UpdateSiteAddressInput_AddressType, string(v.AddressType))
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.UpdateSiteAddressInput_SiteId, *v.SiteId)
+	}
+}
+
 type UpdateSiteAddressOutput struct {
 
 	//  Information about an address.
@@ -64,13 +86,44 @@ type UpdateSiteAddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSiteAddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSiteAddressOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSiteAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.UpdateSiteAddressOutput_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AddressType != "" {
+		s.WriteString(schemas.UpdateSiteAddressOutput_AddressType, string(v.AddressType))
+	}
+}
+func (v *UpdateSiteAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSiteAddressOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSiteAddressOutput_Address:
+			v.Address = &types.Address{}
+			return v.Address.Deserialize(d)
+		case schemas.UpdateSiteAddressOutput_AddressType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSiteAddressOutput_AddressType, &ev); err != nil {
+				return err
+			}
+			v.AddressType = types.AddressType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSiteAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSiteAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSiteAddress, schemas.UpdateSiteAddressInput, schemas.UpdateSiteAddressOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSiteAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSiteAddress, schemas.UpdateSiteAddressInput, schemas.UpdateSiteAddressOutput), output: &UpdateSiteAddressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

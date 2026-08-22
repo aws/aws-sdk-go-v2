@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,27 @@ type UpdateQueueFleetAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueFleetAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueFleetAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueFleetAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateQueueFleetAssociationRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateQueueFleetAssociationRequest_fleetId, *v.FleetId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.UpdateQueueFleetAssociationRequest_queueId, *v.QueueId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateQueueFleetAssociationRequest_status, string(v.Status))
+	}
+}
+
 type UpdateQueueFleetAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +83,26 @@ type UpdateQueueFleetAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueFleetAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueFleetAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueFleetAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateQueueFleetAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQueueFleetAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQueueFleetAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueFleetAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueFleetAssociation, schemas.UpdateQueueFleetAssociationRequest, schemas.UpdateQueueFleetAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQueueFleetAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueFleetAssociation, schemas.UpdateQueueFleetAssociationRequest, schemas.UpdateQueueFleetAssociationResponse), output: &UpdateQueueFleetAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

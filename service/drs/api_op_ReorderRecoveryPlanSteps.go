@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type ReorderRecoveryPlanStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReorderRecoveryPlanStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReorderRecoveryPlanStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReorderRecoveryPlanStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecoveryPlanStepArnList(s, schemas.ReorderRecoveryPlanStepsRequest_orderedStepArns, v.OrderedStepArns)
+	if v.RecoveryPlanArn != nil {
+		s.WriteString(schemas.ReorderRecoveryPlanStepsRequest_recoveryPlanArn, *v.RecoveryPlanArn)
+	}
+}
+
 type ReorderRecoveryPlanStepsOutput struct {
 
 	// The steps with updated order.
@@ -52,13 +67,29 @@ type ReorderRecoveryPlanStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReorderRecoveryPlanStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReorderRecoveryPlanStepsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReorderRecoveryPlanStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecoveryPlanStepList(s, schemas.ReorderRecoveryPlanStepsResponse_recoveryPlanSteps, v.RecoveryPlanSteps)
+}
+func (v *ReorderRecoveryPlanStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReorderRecoveryPlanStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReorderRecoveryPlanStepsResponse_recoveryPlanSteps:
+			return deserializeRecoveryPlanStepList(d, schemas.ReorderRecoveryPlanStepsResponse_recoveryPlanSteps, &v.RecoveryPlanSteps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReorderRecoveryPlanStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpReorderRecoveryPlanSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReorderRecoveryPlanSteps, schemas.ReorderRecoveryPlanStepsRequest, schemas.ReorderRecoveryPlanStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReorderRecoveryPlanSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReorderRecoveryPlanSteps, schemas.ReorderRecoveryPlanStepsRequest, schemas.ReorderRecoveryPlanStepsResponse), output: &ReorderRecoveryPlanStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package codepipeline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListActionTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActionTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActionTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActionTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionOwnerFilter != "" {
+		s.WriteString(schemas.ListActionTypesInput_actionOwnerFilter, string(v.ActionOwnerFilter))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActionTypesInput_nextToken, *v.NextToken)
+	}
+	if v.RegionFilter != nil {
+		s.WriteString(schemas.ListActionTypesInput_regionFilter, *v.RegionFilter)
+	}
+}
+
 // Represents the output of a ListActionTypes action.
 type ListActionTypesOutput struct {
 
@@ -60,13 +80,35 @@ type ListActionTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActionTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActionTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActionTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionTypeList(s, schemas.ListActionTypesOutput_actionTypes, v.ActionTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActionTypesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListActionTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListActionTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListActionTypesOutput_actionTypes:
+			return deserializeActionTypeList(d, schemas.ListActionTypesOutput_actionTypes, &v.ActionTypes)
+		case schemas.ListActionTypesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListActionTypesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActionTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListActionTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActionTypes, schemas.ListActionTypesInput, schemas.ListActionTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListActionTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActionTypes, schemas.ListActionTypesInput, schemas.ListActionTypesOutput), output: &ListActionTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

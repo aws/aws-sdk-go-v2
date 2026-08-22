@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,30 @@ type ImportSourceCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSourceCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSourceCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSourceCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthType != "" {
+		s.WriteString(schemas.ImportSourceCredentialsInput_authType, string(v.AuthType))
+	}
+	if v.ServerType != "" {
+		s.WriteString(schemas.ImportSourceCredentialsInput_serverType, string(v.ServerType))
+	}
+	if v.ShouldOverwrite != nil {
+		s.WriteBool(schemas.ImportSourceCredentialsInput_shouldOverwrite, *v.ShouldOverwrite)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.ImportSourceCredentialsInput_token, *v.Token)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ImportSourceCredentialsInput_username, *v.Username)
+	}
+}
+
 type ImportSourceCredentialsOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the token.
@@ -71,13 +97,32 @@ type ImportSourceCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSourceCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSourceCredentialsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSourceCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ImportSourceCredentialsOutput_arn, *v.Arn)
+	}
+}
+func (v *ImportSourceCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportSourceCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportSourceCredentialsOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ImportSourceCredentialsOutput_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportSourceCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSourceCredentials, schemas.ImportSourceCredentialsInput, schemas.ImportSourceCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportSourceCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSourceCredentials, schemas.ImportSourceCredentialsInput, schemas.ImportSourceCredentialsOutput), output: &ImportSourceCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

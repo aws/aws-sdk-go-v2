@@ -4,6 +4,8 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type ExportSourceNetworkCfnTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportSourceNetworkCfnTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportSourceNetworkCfnTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportSourceNetworkCfnTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceNetworkID != nil {
+		s.WriteString(schemas.ExportSourceNetworkCfnTemplateRequest_sourceNetworkID, *v.SourceNetworkID)
+	}
+}
+
 type ExportSourceNetworkCfnTemplateOutput struct {
 
 	// S3 bucket URL where the Source Network CloudFormation template was exported to.
@@ -44,13 +58,32 @@ type ExportSourceNetworkCfnTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportSourceNetworkCfnTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportSourceNetworkCfnTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportSourceNetworkCfnTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3DestinationUrl != nil {
+		s.WriteString(schemas.ExportSourceNetworkCfnTemplateResponse_s3DestinationUrl, *v.S3DestinationUrl)
+	}
+}
+func (v *ExportSourceNetworkCfnTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportSourceNetworkCfnTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportSourceNetworkCfnTemplateResponse_s3DestinationUrl:
+			v.S3DestinationUrl = new(string)
+			return d.ReadString(schemas.ExportSourceNetworkCfnTemplateResponse_s3DestinationUrl, v.S3DestinationUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportSourceNetworkCfnTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportSourceNetworkCfnTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportSourceNetworkCfnTemplate, schemas.ExportSourceNetworkCfnTemplateRequest, schemas.ExportSourceNetworkCfnTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportSourceNetworkCfnTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportSourceNetworkCfnTemplate, schemas.ExportSourceNetworkCfnTemplateRequest, schemas.ExportSourceNetworkCfnTemplateResponse), output: &ExportSourceNetworkCfnTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

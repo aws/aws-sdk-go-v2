@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,40 @@ type DeleteEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.DeleteEntityRequest_entityId, *v.EntityId)
+	}
+	if v.IsRecursive != nil {
+		s.WriteBool(schemas.DeleteEntityRequest_isRecursive, *v.IsRecursive)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteEntityRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteEntityInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEntityRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEntityRequest_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.DeleteEntityRequest_entityId, v.EntityId)
+		case schemas.DeleteEntityRequest_isRecursive:
+			v.IsRecursive = new(bool)
+			return d.ReadBool(schemas.DeleteEntityRequest_isRecursive, v.IsRecursive)
+		case schemas.DeleteEntityRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteEntityRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DeleteEntityOutput struct {
 
 	// The current state of the deleted entity.
@@ -57,13 +93,36 @@ type DeleteEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.DeleteEntityResponse_state, string(v.State))
+	}
+}
+func (v *DeleteEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEntityResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.DeleteEntityResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.State(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntity, schemas.DeleteEntityRequest, schemas.DeleteEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntity, schemas.DeleteEntityRequest, schemas.DeleteEntityResponse), output: &DeleteEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package inspector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListEventSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventSubscriptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventSubscriptionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventSubscriptionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListEventSubscriptionsRequest_resourceArn, *v.ResourceArn)
+	}
+}
+
 type ListEventSubscriptionsOutput struct {
 
 	// Details of the returned event subscriptions.
@@ -64,13 +84,35 @@ type ListEventSubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventSubscriptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventSubscriptionsResponse_nextToken, *v.NextToken)
+	}
+	serializeSubscriptionList(s, schemas.ListEventSubscriptionsResponse_subscriptions, v.Subscriptions)
+}
+func (v *ListEventSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventSubscriptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventSubscriptionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventSubscriptionsResponse_nextToken, v.NextToken)
+		case schemas.ListEventSubscriptionsResponse_subscriptions:
+			return deserializeSubscriptionList(d, schemas.ListEventSubscriptionsResponse_subscriptions, &v.Subscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEventSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventSubscriptions, schemas.ListEventSubscriptionsRequest, schemas.ListEventSubscriptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEventSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventSubscriptions, schemas.ListEventSubscriptionsRequest, schemas.ListEventSubscriptionsResponse), output: &ListEventSubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

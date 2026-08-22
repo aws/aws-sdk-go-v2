@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListQuotesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuotesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQuotesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuotesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQuotesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQuotesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListQuotesOutput struct {
 
 	// The pagination token.
@@ -50,13 +67,35 @@ type ListQuotesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuotesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQuotesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuotesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQuotesOutput_NextToken, *v.NextToken)
+	}
+	serializeQuoteSummaryListDefinition(s, schemas.ListQuotesOutput_Quotes, v.Quotes)
+}
+func (v *ListQuotesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQuotesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQuotesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQuotesOutput_NextToken, v.NextToken)
+		case schemas.ListQuotesOutput_Quotes:
+			return deserializeQuoteSummaryListDefinition(d, schemas.ListQuotesOutput_Quotes, &v.Quotes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQuotesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQuotes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuotes, schemas.ListQuotesInput, schemas.ListQuotesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQuotes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuotes, schemas.ListQuotesInput, schemas.ListQuotesOutput), output: &ListQuotesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

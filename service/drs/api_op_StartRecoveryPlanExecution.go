@@ -5,7 +5,9 @@ package drs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type StartRecoveryPlanExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRecoveryPlanExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRecoveryPlanExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRecoveryPlanExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartRecoveryPlanExecutionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.StartRecoveryPlanExecutionRequest_mode, string(v.Mode))
+	}
+	if v.RecoveryPlanArn != nil {
+		s.WriteString(schemas.StartRecoveryPlanExecutionRequest_recoveryPlanArn, *v.RecoveryPlanArn)
+	}
+	serializeRecoveryPlanExecutionSourceServerList(s, schemas.StartRecoveryPlanExecutionRequest_sourceServers, v.SourceServers)
+	serializeTagsMap(s, schemas.StartRecoveryPlanExecutionRequest_tags, v.Tags)
+}
+
 type StartRecoveryPlanExecutionOutput struct {
 
 	// The started Recovery Plan execution.
@@ -64,13 +86,34 @@ type StartRecoveryPlanExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRecoveryPlanExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRecoveryPlanExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRecoveryPlanExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryPlanExecution != nil {
+		s.WriteStruct(schemas.StartRecoveryPlanExecutionResponse_recoveryPlanExecution)
+		v.RecoveryPlanExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartRecoveryPlanExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRecoveryPlanExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRecoveryPlanExecutionResponse_recoveryPlanExecution:
+			v.RecoveryPlanExecution = &types.RecoveryPlanExecution{}
+			return v.RecoveryPlanExecution.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRecoveryPlanExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRecoveryPlanExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecoveryPlanExecution, schemas.StartRecoveryPlanExecutionRequest, schemas.StartRecoveryPlanExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRecoveryPlanExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecoveryPlanExecution, schemas.StartRecoveryPlanExecutionRequest, schemas.StartRecoveryPlanExecutionResponse), output: &StartRecoveryPlanExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type DescribeAllManagedProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAllManagedProductsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAllManagedProductsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAllManagedProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Scope != "" {
+		s.WriteString(schemas.DescribeAllManagedProductsRequest_Scope, string(v.Scope))
+	}
+}
+
 type DescribeAllManagedProductsOutput struct {
 
 	// High-level information for the Amazon Web Services Managed Rules rule groups
@@ -56,13 +70,29 @@ type DescribeAllManagedProductsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAllManagedProductsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAllManagedProductsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAllManagedProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedProductDescriptors(s, schemas.DescribeAllManagedProductsResponse_ManagedProducts, v.ManagedProducts)
+}
+func (v *DescribeAllManagedProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAllManagedProductsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAllManagedProductsResponse_ManagedProducts:
+			return deserializeManagedProductDescriptors(d, schemas.DescribeAllManagedProductsResponse_ManagedProducts, &v.ManagedProducts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAllManagedProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAllManagedProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAllManagedProducts, schemas.DescribeAllManagedProductsRequest, schemas.DescribeAllManagedProductsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAllManagedProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAllManagedProducts, schemas.DescribeAllManagedProductsRequest, schemas.DescribeAllManagedProductsResponse), output: &DescribeAllManagedProductsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package ivs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListAdConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAdConfigurationsOutput struct {
 
 	// List of the matching ad configurations.
@@ -56,13 +73,35 @@ type ListAdConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdConfigurationList(s, schemas.ListAdConfigurationsResponse_adConfigurations, v.AdConfigurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdConfigurationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAdConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdConfigurationsResponse_adConfigurations:
+			return deserializeAdConfigurationList(d, schemas.ListAdConfigurationsResponse_adConfigurations, &v.AdConfigurations)
+		case schemas.ListAdConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdConfigurationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAdConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdConfigurations, schemas.ListAdConfigurationsRequest, schemas.ListAdConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAdConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdConfigurations, schemas.ListAdConfigurationsRequest, schemas.ListAdConfigurationsResponse), output: &ListAdConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

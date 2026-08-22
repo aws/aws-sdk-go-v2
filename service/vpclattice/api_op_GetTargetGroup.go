@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetTargetGroupInput struct {
 	TargetGroupIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTargetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTargetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTargetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetGroupIdentifier != nil {
+		s.WriteString(schemas.GetTargetGroupRequest_targetGroupIdentifier, *v.TargetGroupIdentifier)
+	}
+}
+func (v *GetTargetGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTargetGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTargetGroupRequest_targetGroupIdentifier:
+			v.TargetGroupIdentifier = new(string)
+			return d.ReadString(schemas.GetTargetGroupRequest_targetGroupIdentifier, v.TargetGroupIdentifier)
+		}
+		return nil
+	})
 }
 
 type GetTargetGroupOutput struct {
@@ -76,13 +100,99 @@ type GetTargetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTargetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTargetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTargetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetTargetGroupResponse_arn, *v.Arn)
+	}
+	if v.Config != nil {
+		s.WriteStruct(schemas.GetTargetGroupResponse_config)
+		v.Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetTargetGroupResponse_createdAt, *v.CreatedAt)
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.GetTargetGroupResponse_failureCode, *v.FailureCode)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetTargetGroupResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetTargetGroupResponse_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetTargetGroupResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetTargetGroupResponse_name, *v.Name)
+	}
+	serializeServiceArnList(s, schemas.GetTargetGroupResponse_serviceArns, v.ServiceArns)
+	if v.Status != "" {
+		s.WriteString(schemas.GetTargetGroupResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetTargetGroupResponse_type, string(v.Type))
+	}
+}
+func (v *GetTargetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTargetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTargetGroupResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetTargetGroupResponse_arn, v.Arn)
+		case schemas.GetTargetGroupResponse_config:
+			v.Config = &types.TargetGroupConfig{}
+			return v.Config.Deserialize(d)
+		case schemas.GetTargetGroupResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTargetGroupResponse_createdAt, v.CreatedAt)
+		case schemas.GetTargetGroupResponse_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.GetTargetGroupResponse_failureCode, v.FailureCode)
+		case schemas.GetTargetGroupResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetTargetGroupResponse_failureMessage, v.FailureMessage)
+		case schemas.GetTargetGroupResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetTargetGroupResponse_id, v.Id)
+		case schemas.GetTargetGroupResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTargetGroupResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetTargetGroupResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetTargetGroupResponse_name, v.Name)
+		case schemas.GetTargetGroupResponse_serviceArns:
+			return deserializeServiceArnList(d, schemas.GetTargetGroupResponse_serviceArns, &v.ServiceArns)
+		case schemas.GetTargetGroupResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetTargetGroupResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TargetGroupStatus(ev)
+			return nil
+		case schemas.GetTargetGroupResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetTargetGroupResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.TargetGroupType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTargetGroup, schemas.GetTargetGroupRequest, schemas.GetTargetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTargetGroup, schemas.GetTargetGroupRequest, schemas.GetTargetGroupResponse), output: &GetTargetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

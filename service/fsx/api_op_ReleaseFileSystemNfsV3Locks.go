@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ReleaseFileSystemNfsV3LocksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReleaseFileSystemNfsV3LocksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReleaseFileSystemNfsV3LocksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReleaseFileSystemNfsV3LocksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.ReleaseFileSystemNfsV3LocksRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.ReleaseFileSystemNfsV3LocksRequest_FileSystemId, *v.FileSystemId)
+	}
+}
+
 type ReleaseFileSystemNfsV3LocksOutput struct {
 
 	// A description of a specific Amazon FSx file system.
@@ -51,13 +68,34 @@ type ReleaseFileSystemNfsV3LocksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReleaseFileSystemNfsV3LocksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReleaseFileSystemNfsV3LocksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReleaseFileSystemNfsV3LocksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystem != nil {
+		s.WriteStruct(schemas.ReleaseFileSystemNfsV3LocksResponse_FileSystem)
+		v.FileSystem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReleaseFileSystemNfsV3LocksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReleaseFileSystemNfsV3LocksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReleaseFileSystemNfsV3LocksResponse_FileSystem:
+			v.FileSystem = &types.FileSystem{}
+			return v.FileSystem.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReleaseFileSystemNfsV3LocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReleaseFileSystemNfsV3Locks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReleaseFileSystemNfsV3Locks, schemas.ReleaseFileSystemNfsV3LocksRequest, schemas.ReleaseFileSystemNfsV3LocksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpReleaseFileSystemNfsV3Locks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReleaseFileSystemNfsV3Locks, schemas.ReleaseFileSystemNfsV3LocksRequest, schemas.ReleaseFileSystemNfsV3LocksResponse), output: &ReleaseFileSystemNfsV3LocksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

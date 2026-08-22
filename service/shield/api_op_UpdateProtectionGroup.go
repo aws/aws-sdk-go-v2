@@ -4,7 +4,9 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,28 @@ type UpdateProtectionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProtectionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProtectionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProtectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Aggregation != "" {
+		s.WriteString(schemas.UpdateProtectionGroupRequest_Aggregation, string(v.Aggregation))
+	}
+	serializeProtectionGroupMembers(s, schemas.UpdateProtectionGroupRequest_Members, v.Members)
+	if v.Pattern != "" {
+		s.WriteString(schemas.UpdateProtectionGroupRequest_Pattern, string(v.Pattern))
+	}
+	if v.ProtectionGroupId != nil {
+		s.WriteString(schemas.UpdateProtectionGroupRequest_ProtectionGroupId, *v.ProtectionGroupId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.UpdateProtectionGroupRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type UpdateProtectionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -83,13 +107,26 @@ type UpdateProtectionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProtectionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProtectionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProtectionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateProtectionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProtectionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProtectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProtectionGroup, schemas.UpdateProtectionGroupRequest, schemas.UpdateProtectionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProtectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProtectionGroup, schemas.UpdateProtectionGroupRequest, schemas.UpdateProtectionGroupResponse), output: &UpdateProtectionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

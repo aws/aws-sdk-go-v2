@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,6 +37,18 @@ type DeleteLicenseEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseEndpointId != nil {
+		s.WriteString(schemas.DeleteLicenseEndpointRequest_licenseEndpointId, *v.LicenseEndpointId)
+	}
+}
+
 type DeleteLicenseEndpointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteLicenseEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLicenseEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLicenseEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLicenseEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLicenseEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseEndpoint, schemas.DeleteLicenseEndpointRequest, schemas.DeleteLicenseEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLicenseEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseEndpoint, schemas.DeleteLicenseEndpointRequest, schemas.DeleteLicenseEndpointResponse), output: &DeleteLicenseEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

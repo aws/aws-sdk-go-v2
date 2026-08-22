@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,28 @@ type ListAssetInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.ListAssetInstancesInput_AccountIdFilter, v.AccountIdFilter)
+	serializeAssetIdList(s, schemas.ListAssetInstancesInput_AssetIdFilter, v.AssetIdFilter)
+	serializeAWSServiceNameList(s, schemas.ListAssetInstancesInput_AwsServiceFilter, v.AwsServiceFilter)
+	serializeOutpostInstanceTypeList(s, schemas.ListAssetInstancesInput_InstanceTypeFilter, v.InstanceTypeFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetInstancesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetInstancesInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.ListAssetInstancesInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+}
+
 type ListAssetInstancesOutput struct {
 
 	// List of instances owned by all accounts on the Outpost. Does not include Amazon
@@ -69,13 +93,35 @@ type ListAssetInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetInstanceList(s, schemas.ListAssetInstancesOutput_AssetInstances, v.AssetInstances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetInstancesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetInstancesOutput_AssetInstances:
+			return deserializeAssetInstanceList(d, schemas.ListAssetInstancesOutput_AssetInstances, &v.AssetInstances)
+		case schemas.ListAssetInstancesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetInstancesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetInstances, schemas.ListAssetInstancesInput, schemas.ListAssetInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssetInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetInstances, schemas.ListAssetInstancesInput, schemas.ListAssetInstancesOutput), output: &ListAssetInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

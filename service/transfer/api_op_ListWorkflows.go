@@ -5,7 +5,9 @@ package transfer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListWorkflowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkflowsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListWorkflowsOutput struct {
 
 	// Returns the Arn , WorkflowId , and Description for each workflow.
@@ -57,13 +74,35 @@ type ListWorkflowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowsResponse_NextToken, *v.NextToken)
+	}
+	serializeListedWorkflows(s, schemas.ListWorkflowsResponse_Workflows, v.Workflows)
+}
+func (v *ListWorkflowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkflowsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkflowsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkflowsResponse_NextToken, v.NextToken)
+		case schemas.ListWorkflowsResponse_Workflows:
+			return deserializeListedWorkflows(d, schemas.ListWorkflowsResponse_Workflows, &v.Workflows)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWorkflows{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflows, schemas.ListWorkflowsRequest, schemas.ListWorkflowsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListWorkflows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflows, schemas.ListWorkflowsRequest, schemas.ListWorkflowsResponse), output: &ListWorkflowsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

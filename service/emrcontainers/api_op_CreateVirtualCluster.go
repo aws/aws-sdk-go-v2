@@ -5,7 +5,9 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,38 @@ type CreateVirtualClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVirtualClusterRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContainerProvider != nil {
+		s.WriteStruct(schemas.CreateVirtualClusterRequest_containerProvider)
+		v.ContainerProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVirtualClusterRequest_name, *v.Name)
+	}
+	if v.SchedulerConfiguration != nil {
+		s.WriteStruct(schemas.CreateVirtualClusterRequest_schedulerConfiguration)
+		v.SchedulerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityConfigurationId != nil {
+		s.WriteString(schemas.CreateVirtualClusterRequest_securityConfigurationId, *v.SecurityConfigurationId)
+	}
+	if v.SessionEnabled != nil {
+		s.WriteBool(schemas.CreateVirtualClusterRequest_sessionEnabled, *v.SessionEnabled)
+	}
+	serializeTagMap(s, schemas.CreateVirtualClusterRequest_tags, v.Tags)
+}
+
 type CreateVirtualClusterOutput struct {
 
 	// This output contains the ARN of virtual cluster.
@@ -80,13 +114,44 @@ type CreateVirtualClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateVirtualClusterResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateVirtualClusterResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVirtualClusterResponse_name, *v.Name)
+	}
+}
+func (v *CreateVirtualClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVirtualClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVirtualClusterResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateVirtualClusterResponse_arn, v.Arn)
+		case schemas.CreateVirtualClusterResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateVirtualClusterResponse_id, v.Id)
+		case schemas.CreateVirtualClusterResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateVirtualClusterResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVirtualCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualCluster, schemas.CreateVirtualClusterRequest, schemas.CreateVirtualClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVirtualCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualCluster, schemas.CreateVirtualClusterRequest, schemas.CreateVirtualClusterResponse), output: &CreateVirtualClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,38 @@ type UpdateLicenseManagerReportGeneratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLicenseManagerReportGeneratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLicenseManagerReportGeneratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLicenseManagerReportGeneratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateLicenseManagerReportGeneratorRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLicenseManagerReportGeneratorRequest_Description, *v.Description)
+	}
+	if v.LicenseManagerReportGeneratorArn != nil {
+		s.WriteString(schemas.UpdateLicenseManagerReportGeneratorRequest_LicenseManagerReportGeneratorArn, *v.LicenseManagerReportGeneratorArn)
+	}
+	if v.ReportContext != nil {
+		s.WriteStruct(schemas.UpdateLicenseManagerReportGeneratorRequest_ReportContext)
+		v.ReportContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportFrequency != nil {
+		s.WriteStruct(schemas.UpdateLicenseManagerReportGeneratorRequest_ReportFrequency)
+		v.ReportFrequency.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportGeneratorName != nil {
+		s.WriteString(schemas.UpdateLicenseManagerReportGeneratorRequest_ReportGeneratorName, *v.ReportGeneratorName)
+	}
+	serializeReportTypeList(s, schemas.UpdateLicenseManagerReportGeneratorRequest_Type, v.Type)
+}
+
 type UpdateLicenseManagerReportGeneratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,13 +113,26 @@ type UpdateLicenseManagerReportGeneratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLicenseManagerReportGeneratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLicenseManagerReportGeneratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLicenseManagerReportGeneratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLicenseManagerReportGeneratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLicenseManagerReportGeneratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLicenseManagerReportGenerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLicenseManagerReportGenerator, schemas.UpdateLicenseManagerReportGeneratorRequest, schemas.UpdateLicenseManagerReportGeneratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLicenseManagerReportGenerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLicenseManagerReportGenerator, schemas.UpdateLicenseManagerReportGeneratorRequest, schemas.UpdateLicenseManagerReportGeneratorResponse), output: &UpdateLicenseManagerReportGeneratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

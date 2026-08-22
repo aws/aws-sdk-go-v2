@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,39 @@ type CreateAndAttachS3AccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAndAttachS3AccessPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAndAttachS3AccessPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAndAttachS3AccessPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAndAttachS3AccessPointRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAndAttachS3AccessPointRequest_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3AccessPoint != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointRequest_S3AccessPoint)
+		v.S3AccessPoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateAndAttachS3AccessPointRequest_Type, string(v.Type))
+	}
+}
+
 type CreateAndAttachS3AccessPointOutput struct {
 
 	// Describes the configuration of the S3 access point created.
@@ -93,13 +128,34 @@ type CreateAndAttachS3AccessPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAndAttachS3AccessPointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAndAttachS3AccessPointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAndAttachS3AccessPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3AccessPointAttachment != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointResponse_S3AccessPointAttachment)
+		v.S3AccessPointAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAndAttachS3AccessPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAndAttachS3AccessPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAndAttachS3AccessPointResponse_S3AccessPointAttachment:
+			v.S3AccessPointAttachment = &types.S3AccessPointAttachment{}
+			return v.S3AccessPointAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAndAttachS3AccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAndAttachS3AccessPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAndAttachS3AccessPoint, schemas.CreateAndAttachS3AccessPointRequest, schemas.CreateAndAttachS3AccessPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAndAttachS3AccessPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAndAttachS3AccessPoint, schemas.CreateAndAttachS3AccessPointRequest, schemas.CreateAndAttachS3AccessPointResponse), output: &CreateAndAttachS3AccessPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

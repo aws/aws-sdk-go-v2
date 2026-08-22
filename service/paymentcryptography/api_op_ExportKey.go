@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -232,6 +234,24 @@ type ExportKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportAttributes != nil {
+		s.WriteStruct(schemas.ExportKeyInput_ExportAttributes)
+		v.ExportAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportKeyIdentifier != nil {
+		s.WriteString(schemas.ExportKeyInput_ExportKeyIdentifier, *v.ExportKeyIdentifier)
+	}
+	serializeExportKeyMaterial(s, schemas.ExportKeyInput_KeyMaterial, v.KeyMaterial)
+}
+
 type ExportKeyOutput struct {
 
 	// The key material under export as a TR-34 WrappedKeyBlock or a TR-31
@@ -244,13 +264,34 @@ type ExportKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WrappedKey != nil {
+		s.WriteStruct(schemas.ExportKeyOutput_WrappedKey)
+		v.WrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportKeyOutput_WrappedKey:
+			v.WrappedKey = &types.WrappedKey{}
+			return v.WrappedKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportKey, schemas.ExportKeyInput, schemas.ExportKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpExportKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportKey, schemas.ExportKeyInput, schemas.ExportKeyOutput), output: &ExportKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

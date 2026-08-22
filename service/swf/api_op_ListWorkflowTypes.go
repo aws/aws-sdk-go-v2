@@ -5,7 +5,9 @@ package swf
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,33 @@ type ListWorkflowTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.ListWorkflowTypesInput_domain, *v.Domain)
+	}
+	if v.MaximumPageSize != 0 {
+		s.WriteInt32(schemas.ListWorkflowTypesInput_maximumPageSize, v.MaximumPageSize)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListWorkflowTypesInput_name, *v.Name)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListWorkflowTypesInput_nextPageToken, *v.NextPageToken)
+	}
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.ListWorkflowTypesInput_registrationStatus, string(v.RegistrationStatus))
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.ListWorkflowTypesInput_reverseOrder, v.ReverseOrder)
+	}
+}
+
 // Contains a paginated list of information structures about workflow types.
 type ListWorkflowTypesOutput struct {
 
@@ -105,13 +134,35 @@ type ListWorkflowTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowTypeInfos)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.WorkflowTypeInfos_nextPageToken, *v.NextPageToken)
+	}
+	serializeWorkflowTypeInfoList(s, schemas.WorkflowTypeInfos_typeInfos, v.TypeInfos)
+}
+func (v *ListWorkflowTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowTypeInfos, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowTypeInfos_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.WorkflowTypeInfos_nextPageToken, v.NextPageToken)
+		case schemas.WorkflowTypeInfos_typeInfos:
+			return deserializeWorkflowTypeInfoList(d, schemas.WorkflowTypeInfos_typeInfos, &v.TypeInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkflowTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListWorkflowTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowTypes, schemas.ListWorkflowTypesInput, schemas.WorkflowTypeInfos)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListWorkflowTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowTypes, schemas.ListWorkflowTypesInput, schemas.WorkflowTypeInfos), output: &ListWorkflowTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

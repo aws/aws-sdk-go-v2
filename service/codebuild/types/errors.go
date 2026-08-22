@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *AccountLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccountLimitExceededException_message, *v.Message)
+	}
+}
+func (v *AccountLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountLimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The CodeBuild access has been suspended for the calling Amazon Web Services
 // account.
@@ -60,6 +82,27 @@ func (e *AccountSuspendedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountSuspendedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountSuspendedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSuspendedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSuspendedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccountSuspendedException_message, *v.Message)
+	}
+}
+func (v *AccountSuspendedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSuspendedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSuspendedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountSuspendedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The input value that was provided is not valid.
 type InvalidInputException struct {
@@ -86,6 +129,27 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInputException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidInputException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidInputException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidInputException_message, *v.Message)
+	}
+}
+func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInputException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInputException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There was a problem with the underlying OAuth provider.
 type OAuthProviderException struct {
@@ -112,6 +176,27 @@ func (e *OAuthProviderException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OAuthProviderException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OAuthProviderException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OAuthProviderException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OAuthProviderException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OAuthProviderException_message, *v.Message)
+	}
+}
+func (v *OAuthProviderException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OAuthProviderException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OAuthProviderException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OAuthProviderException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified Amazon Web Services resource cannot be created, because an Amazon
 // Web Services resource with the same settings already exists.
@@ -139,6 +224,27 @@ func (e *ResourceAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceAlreadyExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceAlreadyExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceAlreadyExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceAlreadyExistsException_message, *v.Message)
+	}
+}
+func (v *ResourceAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceAlreadyExistsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceAlreadyExistsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified Amazon Web Services resource cannot be found.
 type ResourceNotFoundException struct {
@@ -165,3 +271,24 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}

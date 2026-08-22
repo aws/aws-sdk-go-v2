@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,28 @@ type CreateListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateListenerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateListenerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.CreateListenerRequest_AcceleratorArn, *v.AcceleratorArn)
+	}
+	if v.ClientAffinity != "" {
+		s.WriteString(schemas.CreateListenerRequest_ClientAffinity, string(v.ClientAffinity))
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateListenerRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	serializePortRanges(s, schemas.CreateListenerRequest_PortRanges, v.PortRanges)
+	if v.Protocol != "" {
+		s.WriteString(schemas.CreateListenerRequest_Protocol, string(v.Protocol))
+	}
+}
+
 type CreateListenerOutput struct {
 
 	// The listener that you've created.
@@ -86,13 +110,34 @@ type CreateListenerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateListenerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateListenerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateListenerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Listener != nil {
+		s.WriteStruct(schemas.CreateListenerResponse_Listener)
+		v.Listener.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateListenerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateListenerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateListenerResponse_Listener:
+			v.Listener = &types.Listener{}
+			return v.Listener.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateListener, schemas.CreateListenerRequest, schemas.CreateListenerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateListener, schemas.CreateListenerRequest, schemas.CreateListenerResponse), output: &CreateListenerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

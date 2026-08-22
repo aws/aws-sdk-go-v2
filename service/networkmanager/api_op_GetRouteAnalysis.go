@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetRouteAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRouteAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouteAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouteAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetRouteAnalysisRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.RouteAnalysisId != nil {
+		s.WriteString(schemas.GetRouteAnalysisRequest_RouteAnalysisId, *v.RouteAnalysisId)
+	}
+}
+
 type GetRouteAnalysisOutput struct {
 
 	// The route analysis.
@@ -50,13 +67,34 @@ type GetRouteAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRouteAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouteAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouteAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouteAnalysis != nil {
+		s.WriteStruct(schemas.GetRouteAnalysisResponse_RouteAnalysis)
+		v.RouteAnalysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRouteAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRouteAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRouteAnalysisResponse_RouteAnalysis:
+			v.RouteAnalysis = &types.RouteAnalysis{}
+			return v.RouteAnalysis.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRouteAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRouteAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRouteAnalysis, schemas.GetRouteAnalysisRequest, schemas.GetRouteAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRouteAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRouteAnalysis, schemas.GetRouteAnalysisRequest, schemas.GetRouteAnalysisResponse), output: &GetRouteAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

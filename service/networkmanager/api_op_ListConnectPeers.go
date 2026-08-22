@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,27 @@ type ListConnectPeersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectPeersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectPeersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectPeersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectAttachmentId != nil {
+		s.WriteString(schemas.ListConnectPeersRequest_ConnectAttachmentId, *v.ConnectAttachmentId)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ListConnectPeersRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConnectPeersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectPeersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListConnectPeersOutput struct {
 
 	// Describes the Connect peers.
@@ -56,13 +79,35 @@ type ListConnectPeersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectPeersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectPeersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectPeersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectPeerSummaryList(s, schemas.ListConnectPeersResponse_ConnectPeers, v.ConnectPeers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectPeersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConnectPeersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConnectPeersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConnectPeersResponse_ConnectPeers:
+			return deserializeConnectPeerSummaryList(d, schemas.ListConnectPeersResponse_ConnectPeers, &v.ConnectPeers)
+		case schemas.ListConnectPeersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConnectPeersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConnectPeersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectPeers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectPeers, schemas.ListConnectPeersRequest, schemas.ListConnectPeersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnectPeers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectPeers, schemas.ListConnectPeersRequest, schemas.ListConnectPeersResponse), output: &ListConnectPeersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

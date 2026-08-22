@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -96,6 +98,33 @@ type UpdateManagedRuleSetVersionExpiryDateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateManagedRuleSetVersionExpiryDateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateManagedRuleSetVersionExpiryDateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateManagedRuleSetVersionExpiryDateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiryTimestamp != nil {
+		s.WriteTime(schemas.UpdateManagedRuleSetVersionExpiryDateRequest_ExpiryTimestamp, *v.ExpiryTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateManagedRuleSetVersionExpiryDateRequest_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.UpdateManagedRuleSetVersionExpiryDateRequest_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateManagedRuleSetVersionExpiryDateRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.UpdateManagedRuleSetVersionExpiryDateRequest_Scope, string(v.Scope))
+	}
+	if v.VersionToExpire != nil {
+		s.WriteString(schemas.UpdateManagedRuleSetVersionExpiryDateRequest_VersionToExpire, *v.VersionToExpire)
+	}
+}
+
 type UpdateManagedRuleSetVersionExpiryDateOutput struct {
 
 	// The version that is set to expire.
@@ -122,13 +151,44 @@ type UpdateManagedRuleSetVersionExpiryDateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateManagedRuleSetVersionExpiryDateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateManagedRuleSetVersionExpiryDateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateManagedRuleSetVersionExpiryDateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiringVersion != nil {
+		s.WriteString(schemas.UpdateManagedRuleSetVersionExpiryDateResponse_ExpiringVersion, *v.ExpiringVersion)
+	}
+	if v.ExpiryTimestamp != nil {
+		s.WriteTime(schemas.UpdateManagedRuleSetVersionExpiryDateResponse_ExpiryTimestamp, *v.ExpiryTimestamp)
+	}
+	if v.NextLockToken != nil {
+		s.WriteString(schemas.UpdateManagedRuleSetVersionExpiryDateResponse_NextLockToken, *v.NextLockToken)
+	}
+}
+func (v *UpdateManagedRuleSetVersionExpiryDateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateManagedRuleSetVersionExpiryDateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateManagedRuleSetVersionExpiryDateResponse_ExpiringVersion:
+			v.ExpiringVersion = new(string)
+			return d.ReadString(schemas.UpdateManagedRuleSetVersionExpiryDateResponse_ExpiringVersion, v.ExpiringVersion)
+		case schemas.UpdateManagedRuleSetVersionExpiryDateResponse_ExpiryTimestamp:
+			v.ExpiryTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateManagedRuleSetVersionExpiryDateResponse_ExpiryTimestamp, v.ExpiryTimestamp)
+		case schemas.UpdateManagedRuleSetVersionExpiryDateResponse_NextLockToken:
+			v.NextLockToken = new(string)
+			return d.ReadString(schemas.UpdateManagedRuleSetVersionExpiryDateResponse_NextLockToken, v.NextLockToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateManagedRuleSetVersionExpiryDateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateManagedRuleSetVersionExpiryDate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateManagedRuleSetVersionExpiryDate, schemas.UpdateManagedRuleSetVersionExpiryDateRequest, schemas.UpdateManagedRuleSetVersionExpiryDateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateManagedRuleSetVersionExpiryDate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateManagedRuleSetVersionExpiryDate, schemas.UpdateManagedRuleSetVersionExpiryDateRequest, schemas.UpdateManagedRuleSetVersionExpiryDateResponse), output: &UpdateManagedRuleSetVersionExpiryDateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

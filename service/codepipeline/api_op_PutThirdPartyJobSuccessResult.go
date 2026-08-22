@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,34 @@ type PutThirdPartyJobSuccessResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutThirdPartyJobSuccessResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutThirdPartyJobSuccessResultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutThirdPartyJobSuccessResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutThirdPartyJobSuccessResultInput_clientToken, *v.ClientToken)
+	}
+	if v.ContinuationToken != nil {
+		s.WriteString(schemas.PutThirdPartyJobSuccessResultInput_continuationToken, *v.ContinuationToken)
+	}
+	if v.CurrentRevision != nil {
+		s.WriteStruct(schemas.PutThirdPartyJobSuccessResultInput_currentRevision)
+		v.CurrentRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionDetails != nil {
+		s.WriteStruct(schemas.PutThirdPartyJobSuccessResultInput_executionDetails)
+		v.ExecutionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.PutThirdPartyJobSuccessResultInput_jobId, *v.JobId)
+	}
+}
+
 type PutThirdPartyJobSuccessResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +94,26 @@ type PutThirdPartyJobSuccessResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutThirdPartyJobSuccessResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutThirdPartyJobSuccessResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutThirdPartyJobSuccessResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutThirdPartyJobSuccessResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutThirdPartyJobSuccessResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutThirdPartyJobSuccessResult, schemas.PutThirdPartyJobSuccessResultInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutThirdPartyJobSuccessResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutThirdPartyJobSuccessResult, schemas.PutThirdPartyJobSuccessResultInput, nil), output: &PutThirdPartyJobSuccessResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

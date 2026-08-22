@@ -4,6 +4,8 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,28 @@ type StopStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.StopStreamRequest_channelArn, *v.ChannelArn)
+	}
+}
+func (v *StopStreamInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopStreamRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopStreamRequest_channelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.StopStreamRequest_channelArn, v.ChannelArn)
+		}
+		return nil
+	})
+}
+
 type StopStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +69,26 @@ type StopStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopStream, schemas.StopStreamRequest, schemas.StopStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopStream, schemas.StopStreamRequest, schemas.StopStreamResponse), output: &StopStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

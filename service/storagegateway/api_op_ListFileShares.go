@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListFileSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileSharesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ListFileSharesInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListFileSharesInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListFileSharesInput_Marker, *v.Marker)
+	}
+}
+
 // ListFileShareOutput
 type ListFileSharesOutput struct {
 
@@ -67,13 +87,41 @@ type ListFileSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileSharesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileShareInfoList(s, schemas.ListFileSharesOutput_FileShareInfoList, v.FileShareInfoList)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListFileSharesOutput_Marker, *v.Marker)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListFileSharesOutput_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListFileSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFileSharesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFileSharesOutput_FileShareInfoList:
+			return deserializeFileShareInfoList(d, schemas.ListFileSharesOutput_FileShareInfoList, &v.FileShareInfoList)
+		case schemas.ListFileSharesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListFileSharesOutput_Marker, v.Marker)
+		case schemas.ListFileSharesOutput_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListFileSharesOutput_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFileSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFileShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileShares, schemas.ListFileSharesInput, schemas.ListFileSharesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFileShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileShares, schemas.ListFileSharesInput, schemas.ListFileSharesOutput), output: &ListFileSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

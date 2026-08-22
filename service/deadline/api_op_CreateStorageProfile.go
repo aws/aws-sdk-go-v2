@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,28 @@ type CreateStorageProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorageProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorageProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorageProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateStorageProfileRequest_clientToken, *v.ClientToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateStorageProfileRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.CreateStorageProfileRequest_farmId, *v.FarmId)
+	}
+	serializeFileSystemLocationsList(s, schemas.CreateStorageProfileRequest_fileSystemLocations, v.FileSystemLocations)
+	if v.OsFamily != "" {
+		s.WriteString(schemas.CreateStorageProfileRequest_osFamily, string(v.OsFamily))
+	}
+}
+
 type CreateStorageProfileOutput struct {
 
 	// The storage profile ID.
@@ -70,13 +94,32 @@ type CreateStorageProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorageProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorageProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorageProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageProfileId != nil {
+		s.WriteString(schemas.CreateStorageProfileResponse_storageProfileId, *v.StorageProfileId)
+	}
+}
+func (v *CreateStorageProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStorageProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStorageProfileResponse_storageProfileId:
+			v.StorageProfileId = new(string)
+			return d.ReadString(schemas.CreateStorageProfileResponse_storageProfileId, v.StorageProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStorageProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStorageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorageProfile, schemas.CreateStorageProfileRequest, schemas.CreateStorageProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStorageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorageProfile, schemas.CreateStorageProfileRequest, schemas.CreateStorageProfileResponse), output: &CreateStorageProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

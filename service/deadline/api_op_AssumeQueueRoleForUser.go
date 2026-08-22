@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type AssumeQueueRoleForUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeQueueRoleForUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeQueueRoleForUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeQueueRoleForUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.AssumeQueueRoleForUserRequest_farmId, *v.FarmId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.AssumeQueueRoleForUserRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared response body for AssumeRole operations where credentials are required.
 // AssumeQueueRoleForWorkerResponse is excluded because credentials is optional
 // there because Queue.roleArn is optional, so the mixin's @required trait would be
@@ -58,13 +75,34 @@ type AssumeQueueRoleForUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeQueueRoleForUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeQueueRoleForUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeQueueRoleForUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.AssumeQueueRoleForUserResponse_credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssumeQueueRoleForUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssumeQueueRoleForUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssumeQueueRoleForUserResponse_credentials:
+			v.Credentials = &types.AwsCredentials{}
+			return v.Credentials.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssumeQueueRoleForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssumeQueueRoleForUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeQueueRoleForUser, schemas.AssumeQueueRoleForUserRequest, schemas.AssumeQueueRoleForUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssumeQueueRoleForUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeQueueRoleForUser, schemas.AssumeQueueRoleForUserRequest, schemas.AssumeQueueRoleForUserResponse), output: &AssumeQueueRoleForUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

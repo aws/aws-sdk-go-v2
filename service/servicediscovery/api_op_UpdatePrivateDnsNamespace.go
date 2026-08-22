@@ -5,7 +5,9 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,26 @@ type UpdatePrivateDnsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePrivateDnsNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePrivateDnsNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePrivateDnsNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdatePrivateDnsNamespaceRequest_Id, *v.Id)
+	}
+	if v.Namespace != nil {
+		s.WriteStruct(schemas.UpdatePrivateDnsNamespaceRequest_Namespace)
+		v.Namespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdaterRequestId != nil {
+		s.WriteString(schemas.UpdatePrivateDnsNamespaceRequest_UpdaterRequestId, *v.UpdaterRequestId)
+	}
+}
+
 type UpdatePrivateDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
@@ -60,13 +82,32 @@ type UpdatePrivateDnsNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePrivateDnsNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePrivateDnsNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePrivateDnsNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdatePrivateDnsNamespaceResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *UpdatePrivateDnsNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePrivateDnsNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePrivateDnsNamespaceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdatePrivateDnsNamespaceResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePrivateDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePrivateDnsNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivateDnsNamespace, schemas.UpdatePrivateDnsNamespaceRequest, schemas.UpdatePrivateDnsNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePrivateDnsNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivateDnsNamespace, schemas.UpdatePrivateDnsNamespaceRequest, schemas.UpdatePrivateDnsNamespaceResponse), output: &UpdatePrivateDnsNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

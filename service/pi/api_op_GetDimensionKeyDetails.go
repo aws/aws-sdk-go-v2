@@ -4,7 +4,9 @@ package pi
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -99,6 +101,28 @@ type GetDimensionKeyDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDimensionKeyDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDimensionKeyDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDimensionKeyDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteString(schemas.GetDimensionKeyDetailsRequest_Group, *v.Group)
+	}
+	if v.GroupIdentifier != nil {
+		s.WriteString(schemas.GetDimensionKeyDetailsRequest_GroupIdentifier, *v.GroupIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetDimensionKeyDetailsRequest_Identifier, *v.Identifier)
+	}
+	serializeRequestedDimensionList(s, schemas.GetDimensionKeyDetailsRequest_RequestedDimensions, v.RequestedDimensions)
+	if v.ServiceType != "" {
+		s.WriteString(schemas.GetDimensionKeyDetailsRequest_ServiceType, string(v.ServiceType))
+	}
+}
+
 type GetDimensionKeyDetailsOutput struct {
 
 	// The details for the requested dimensions.
@@ -110,13 +134,29 @@ type GetDimensionKeyDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDimensionKeyDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDimensionKeyDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDimensionKeyDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionKeyDetailList(s, schemas.GetDimensionKeyDetailsResponse_Dimensions, v.Dimensions)
+}
+func (v *GetDimensionKeyDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDimensionKeyDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDimensionKeyDetailsResponse_Dimensions:
+			return deserializeDimensionKeyDetailList(d, schemas.GetDimensionKeyDetailsResponse_Dimensions, &v.Dimensions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDimensionKeyDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDimensionKeyDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDimensionKeyDetails, schemas.GetDimensionKeyDetailsRequest, schemas.GetDimensionKeyDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDimensionKeyDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDimensionKeyDetails, schemas.GetDimensionKeyDetailsRequest, schemas.GetDimensionKeyDetailsResponse), output: &GetDimensionKeyDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

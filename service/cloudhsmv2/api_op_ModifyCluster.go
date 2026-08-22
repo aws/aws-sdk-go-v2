@@ -4,7 +4,9 @@ package cloudhsmv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type ModifyClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupRetentionPolicy != nil {
+		s.WriteStruct(schemas.ModifyClusterRequest_BackupRetentionPolicy)
+		v.BackupRetentionPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ModifyClusterRequest_ClusterId, *v.ClusterId)
+	}
+	if v.HsmType != nil {
+		s.WriteString(schemas.ModifyClusterRequest_HsmType, *v.HsmType)
+	}
+}
+
 type ModifyClusterOutput struct {
 
 	// Contains information about an CloudHSM cluster.
@@ -55,13 +77,34 @@ type ModifyClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.ModifyClusterResponse_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyClusterResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCluster, schemas.ModifyClusterRequest, schemas.ModifyClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCluster, schemas.ModifyClusterRequest, schemas.ModifyClusterResponse), output: &ModifyClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

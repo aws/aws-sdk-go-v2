@@ -5,7 +5,9 @@ package dataexchange
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,39 @@ type ListEventActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventSourceId != nil {
+		s.WriteString(schemas.ListEventActionsRequest_EventSourceId, *v.EventSourceId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListEventActionsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventActionsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventActionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventActionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventActionsRequest_EventSourceId:
+			v.EventSourceId = new(string)
+			return d.ReadString(schemas.ListEventActionsRequest_EventSourceId, v.EventSourceId)
+		case schemas.ListEventActionsRequest_MaxResults:
+			return d.ReadInt32(schemas.ListEventActionsRequest_MaxResults, &v.MaxResults)
+		case schemas.ListEventActionsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventActionsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListEventActionsOutput struct {
 
 	// The event action objects listed by the request.
@@ -55,13 +90,35 @@ type ListEventActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfEventActionEntry(s, schemas.ListEventActionsResponse_EventActions, v.EventActions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventActionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventActionsResponse_EventActions:
+			return deserializeListOfEventActionEntry(d, schemas.ListEventActionsResponse_EventActions, &v.EventActions)
+		case schemas.ListEventActionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventActionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventActions, schemas.ListEventActionsRequest, schemas.ListEventActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventActions, schemas.ListEventActionsRequest, schemas.ListEventActionsResponse), output: &ListEventActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,18 @@ type RestoreKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.RestoreKeyInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+}
+
 type RestoreKeyOutput struct {
 
 	// The key material of the restored key. The KeyState will change to
@@ -71,13 +85,34 @@ type RestoreKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.RestoreKeyOutput_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreKeyOutput_Key:
+			v.Key = &types.Key{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRestoreKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreKey, schemas.RestoreKeyInput, schemas.RestoreKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRestoreKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreKey, schemas.RestoreKeyInput, schemas.RestoreKeyOutput), output: &RestoreKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

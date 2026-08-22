@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type StartSchemaExtensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSchemaExtensionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSchemaExtensionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSchemaExtensionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.StartSchemaExtensionRequest_CreateSnapshotBeforeSchemaExtension, v.CreateSnapshotBeforeSchemaExtension)
+	if v.Description != nil {
+		s.WriteString(schemas.StartSchemaExtensionRequest_Description, *v.Description)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.StartSchemaExtensionRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.LdifContent != nil {
+		s.WriteString(schemas.StartSchemaExtensionRequest_LdifContent, *v.LdifContent)
+	}
+}
+
 type StartSchemaExtensionOutput struct {
 
 	// The identifier of the schema extension that will be applied.
@@ -63,13 +84,32 @@ type StartSchemaExtensionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSchemaExtensionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSchemaExtensionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSchemaExtensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaExtensionId != nil {
+		s.WriteString(schemas.StartSchemaExtensionResult_SchemaExtensionId, *v.SchemaExtensionId)
+	}
+}
+func (v *StartSchemaExtensionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSchemaExtensionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSchemaExtensionResult_SchemaExtensionId:
+			v.SchemaExtensionId = new(string)
+			return d.ReadString(schemas.StartSchemaExtensionResult_SchemaExtensionId, v.SchemaExtensionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSchemaExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSchemaExtension{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSchemaExtension, schemas.StartSchemaExtensionRequest, schemas.StartSchemaExtensionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSchemaExtension{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSchemaExtension, schemas.StartSchemaExtensionRequest, schemas.StartSchemaExtensionResult), output: &StartSchemaExtensionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DescribeChapCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChapCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChapCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChapCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetARN != nil {
+		s.WriteString(schemas.DescribeChapCredentialsInput_TargetARN, *v.TargetARN)
+	}
+}
+
 // A JSON object containing the following fields:
 type DescribeChapCredentialsOutput struct {
 
@@ -66,13 +80,29 @@ type DescribeChapCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChapCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChapCredentialsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChapCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChapCredentials(s, schemas.DescribeChapCredentialsOutput_ChapCredentials, v.ChapCredentials)
+}
+func (v *DescribeChapCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChapCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChapCredentialsOutput_ChapCredentials:
+			return deserializeChapCredentials(d, schemas.DescribeChapCredentialsOutput_ChapCredentials, &v.ChapCredentials)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeChapCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChapCredentials, schemas.DescribeChapCredentialsInput, schemas.DescribeChapCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeChapCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChapCredentials, schemas.DescribeChapCredentialsInput, schemas.DescribeChapCredentialsOutput), output: &DescribeChapCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

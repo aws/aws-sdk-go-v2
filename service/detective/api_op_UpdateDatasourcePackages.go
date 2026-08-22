@@ -4,7 +4,9 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type UpdateDatasourcePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDatasourcePackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDatasourcePackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDatasourcePackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasourcePackageList(s, schemas.UpdateDatasourcePackagesRequest_DatasourcePackages, v.DatasourcePackages)
+	if v.GraphArn != nil {
+		s.WriteString(schemas.UpdateDatasourcePackagesRequest_GraphArn, *v.GraphArn)
+	}
+}
+
 type UpdateDatasourcePackagesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +61,26 @@ type UpdateDatasourcePackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDatasourcePackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDatasourcePackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDatasourcePackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDatasourcePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDatasourcePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDatasourcePackages, schemas.UpdateDatasourcePackagesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDatasourcePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDatasourcePackages, schemas.UpdateDatasourcePackagesRequest, nil), output: &UpdateDatasourcePackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

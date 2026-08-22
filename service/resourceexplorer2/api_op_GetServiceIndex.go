@@ -4,7 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,22 @@ type GetServiceIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetServiceIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetServiceIndexOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Resource Explorer index in the current
@@ -47,13 +65,42 @@ type GetServiceIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceIndexOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetServiceIndexOutput_Arn, *v.Arn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetServiceIndexOutput_Type, string(v.Type))
+	}
+}
+func (v *GetServiceIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceIndexOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceIndexOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetServiceIndexOutput_Arn, v.Arn)
+		case schemas.GetServiceIndexOutput_Type:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceIndexOutput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IndexType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceIndex, nil, schemas.GetServiceIndexOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceIndex, nil, schemas.GetServiceIndexOutput), output: &GetServiceIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

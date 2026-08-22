@@ -5,7 +5,9 @@ package drs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,26 @@ type DescribeSourceNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSourceNetworksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSourceNetworksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSourceNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeSourceNetworksRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSourceNetworksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSourceNetworksRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeSourceNetworksOutput struct {
 
 	// An array of Source Networks.
@@ -53,13 +75,35 @@ type DescribeSourceNetworksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSourceNetworksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSourceNetworksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSourceNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSourceNetworksList(s, schemas.DescribeSourceNetworksResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSourceNetworksResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeSourceNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSourceNetworksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSourceNetworksResponse_items:
+			return deserializeSourceNetworksList(d, schemas.DescribeSourceNetworksResponse_items, &v.Items)
+		case schemas.DescribeSourceNetworksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSourceNetworksResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSourceNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSourceNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSourceNetworks, schemas.DescribeSourceNetworksRequest, schemas.DescribeSourceNetworksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSourceNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSourceNetworks, schemas.DescribeSourceNetworksRequest, schemas.DescribeSourceNetworksResponse), output: &DescribeSourceNetworksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package voiceid
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,70 @@ type StartSpeakerEnrollmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSpeakerEnrollmentJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeakerEnrollmentJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSpeakerEnrollmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartSpeakerEnrollmentJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartSpeakerEnrollmentJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.StartSpeakerEnrollmentJobRequest_DomainId, *v.DomainId)
+	}
+	if v.EnrollmentConfig != nil {
+		s.WriteStruct(schemas.StartSpeakerEnrollmentJobRequest_EnrollmentConfig)
+		v.EnrollmentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartSpeakerEnrollmentJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartSpeakerEnrollmentJobRequest_JobName, *v.JobName)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartSpeakerEnrollmentJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartSpeakerEnrollmentJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSpeakerEnrollmentJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSpeakerEnrollmentJobRequest_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartSpeakerEnrollmentJobRequest_ClientToken, v.ClientToken)
+		case schemas.StartSpeakerEnrollmentJobRequest_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.StartSpeakerEnrollmentJobRequest_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.StartSpeakerEnrollmentJobRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.StartSpeakerEnrollmentJobRequest_DomainId, v.DomainId)
+		case schemas.StartSpeakerEnrollmentJobRequest_EnrollmentConfig:
+			v.EnrollmentConfig = &types.EnrollmentConfig{}
+			return v.EnrollmentConfig.Deserialize(d)
+		case schemas.StartSpeakerEnrollmentJobRequest_InputDataConfig:
+			v.InputDataConfig = &types.InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.StartSpeakerEnrollmentJobRequest_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.StartSpeakerEnrollmentJobRequest_JobName, v.JobName)
+		case schemas.StartSpeakerEnrollmentJobRequest_OutputDataConfig:
+			v.OutputDataConfig = &types.OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type StartSpeakerEnrollmentJobOutput struct {
 
 	// Details about the started speaker enrollment job.
@@ -83,13 +149,34 @@ type StartSpeakerEnrollmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSpeakerEnrollmentJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeakerEnrollmentJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSpeakerEnrollmentJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.StartSpeakerEnrollmentJobResponse_Job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartSpeakerEnrollmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSpeakerEnrollmentJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSpeakerEnrollmentJobResponse_Job:
+			v.Job = &types.SpeakerEnrollmentJob{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSpeakerEnrollmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartSpeakerEnrollmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeakerEnrollmentJob, schemas.StartSpeakerEnrollmentJobRequest, schemas.StartSpeakerEnrollmentJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartSpeakerEnrollmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeakerEnrollmentJob, schemas.StartSpeakerEnrollmentJobRequest, schemas.StartSpeakerEnrollmentJobResponse), output: &StartSpeakerEnrollmentJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

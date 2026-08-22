@@ -4,7 +4,9 @@ package emrcontainers
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeJobRunRequest_id, *v.Id)
+	}
+	if v.VirtualClusterId != nil {
+		s.WriteString(schemas.DescribeJobRunRequest_virtualClusterId, *v.VirtualClusterId)
+	}
+}
+
 type DescribeJobRunOutput struct {
 
 	// The output displays information about a job run.
@@ -52,13 +69,34 @@ type DescribeJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobRun != nil {
+		s.WriteStruct(schemas.DescribeJobRunResponse_jobRun)
+		v.JobRun.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeJobRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeJobRunResponse_jobRun:
+			v.JobRun = &types.JobRun{}
+			return v.JobRun.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobRun, schemas.DescribeJobRunRequest, schemas.DescribeJobRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobRun, schemas.DescribeJobRunRequest, schemas.DescribeJobRunResponse), output: &DescribeJobRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

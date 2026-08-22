@@ -4,6 +4,8 @@ package wisdom
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type RemoveKnowledgeBaseTemplateUriInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveKnowledgeBaseTemplateUriInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveKnowledgeBaseTemplateUriRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveKnowledgeBaseTemplateUriInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.RemoveKnowledgeBaseTemplateUriRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+func (v *RemoveKnowledgeBaseTemplateUriInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveKnowledgeBaseTemplateUriRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveKnowledgeBaseTemplateUriRequest_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.RemoveKnowledgeBaseTemplateUriRequest_knowledgeBaseId, v.KnowledgeBaseId)
+		}
+		return nil
+	})
+}
+
 type RemoveKnowledgeBaseTemplateUriOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +66,26 @@ type RemoveKnowledgeBaseTemplateUriOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveKnowledgeBaseTemplateUriOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveKnowledgeBaseTemplateUriResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveKnowledgeBaseTemplateUriOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveKnowledgeBaseTemplateUriOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveKnowledgeBaseTemplateUriResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveKnowledgeBaseTemplateUriMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveKnowledgeBaseTemplateUri{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveKnowledgeBaseTemplateUri, schemas.RemoveKnowledgeBaseTemplateUriRequest, schemas.RemoveKnowledgeBaseTemplateUriResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveKnowledgeBaseTemplateUri{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveKnowledgeBaseTemplateUri, schemas.RemoveKnowledgeBaseTemplateUriRequest, schemas.RemoveKnowledgeBaseTemplateUriResponse), output: &RemoveKnowledgeBaseTemplateUriOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -143,6 +145,47 @@ type RegisterActivityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterActivityTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterActivityTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterActivityTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultTaskHeartbeatTimeout != nil {
+		s.WriteString(schemas.RegisterActivityTypeInput_defaultTaskHeartbeatTimeout, *v.DefaultTaskHeartbeatTimeout)
+	}
+	if v.DefaultTaskList != nil {
+		s.WriteStruct(schemas.RegisterActivityTypeInput_defaultTaskList)
+		v.DefaultTaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultTaskPriority != nil {
+		s.WriteString(schemas.RegisterActivityTypeInput_defaultTaskPriority, *v.DefaultTaskPriority)
+	}
+	if v.DefaultTaskScheduleToCloseTimeout != nil {
+		s.WriteString(schemas.RegisterActivityTypeInput_defaultTaskScheduleToCloseTimeout, *v.DefaultTaskScheduleToCloseTimeout)
+	}
+	if v.DefaultTaskScheduleToStartTimeout != nil {
+		s.WriteString(schemas.RegisterActivityTypeInput_defaultTaskScheduleToStartTimeout, *v.DefaultTaskScheduleToStartTimeout)
+	}
+	if v.DefaultTaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.RegisterActivityTypeInput_defaultTaskStartToCloseTimeout, *v.DefaultTaskStartToCloseTimeout)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RegisterActivityTypeInput_description, *v.Description)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.RegisterActivityTypeInput_domain, *v.Domain)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RegisterActivityTypeInput_name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.RegisterActivityTypeInput_version, *v.Version)
+	}
+}
+
 type RegisterActivityTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -150,13 +193,26 @@ type RegisterActivityTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterActivityTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterActivityTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterActivityTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterActivityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterActivityType, schemas.RegisterActivityTypeInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRegisterActivityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterActivityType, schemas.RegisterActivityTypeInput, nil), output: &RegisterActivityTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

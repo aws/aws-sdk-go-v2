@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DescribeRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeRegionsRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegionsRequest_NextToken, *v.NextToken)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.DescribeRegionsRequest_RegionName, *v.RegionName)
+	}
+}
+
 type DescribeRegionsOutput struct {
 
 	// If not null, more results are available. Pass this value for the NextToken
@@ -58,13 +78,35 @@ type DescribeRegionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegionsResult_NextToken, *v.NextToken)
+	}
+	serializeRegionsDescription(s, schemas.DescribeRegionsResult_RegionsDescription, v.RegionsDescription)
+}
+func (v *DescribeRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRegionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRegionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRegionsResult_NextToken, v.NextToken)
+		case schemas.DescribeRegionsResult_RegionsDescription:
+			return deserializeRegionsDescription(d, schemas.DescribeRegionsResult_RegionsDescription, &v.RegionsDescription)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegions, schemas.DescribeRegionsRequest, schemas.DescribeRegionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegions, schemas.DescribeRegionsRequest, schemas.DescribeRegionsResult), output: &DescribeRegionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

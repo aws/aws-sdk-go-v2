@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,26 @@ type CreateListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateListRequest_description, *v.Description)
+	}
+	serializeElementsList(s, schemas.CreateListRequest_elements, v.Elements)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateListRequest_name, *v.Name)
+	}
+	serializetagList(s, schemas.CreateListRequest_tags, v.Tags)
+	if v.VariableType != nil {
+		s.WriteString(schemas.CreateListRequest_variableType, *v.VariableType)
+	}
+}
+
 type CreateListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +87,26 @@ type CreateListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateListResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateListResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateList, schemas.CreateListRequest, schemas.CreateListResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateList, schemas.CreateListRequest, schemas.CreateListResult), output: &CreateListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

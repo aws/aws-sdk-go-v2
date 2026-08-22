@@ -4,7 +4,9 @@ package servicediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetNamespaceRequest_Id, *v.Id)
+	}
+}
+
 type GetNamespaceOutput struct {
 
 	// A complex type that contains information about the specified namespace.
@@ -50,13 +64,34 @@ type GetNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Namespace != nil {
+		s.WriteStruct(schemas.GetNamespaceResponse_Namespace)
+		v.Namespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNamespaceResponse_Namespace:
+			v.Namespace = &types.Namespace{}
+			return v.Namespace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamespace, schemas.GetNamespaceRequest, schemas.GetNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamespace, schemas.GetNamespaceRequest, schemas.GetNamespaceResponse), output: &GetNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

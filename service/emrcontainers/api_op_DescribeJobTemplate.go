@@ -4,7 +4,9 @@ package emrcontainers
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DescribeJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeJobTemplateRequest_id, *v.Id)
+	}
+}
+
 type DescribeJobTemplateOutput struct {
 
 	// This output displays information about the specified job template.
@@ -49,13 +63,34 @@ type DescribeJobTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobTemplate != nil {
+		s.WriteStruct(schemas.DescribeJobTemplateResponse_jobTemplate)
+		v.JobTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeJobTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeJobTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeJobTemplateResponse_jobTemplate:
+			v.JobTemplate = &types.JobTemplate{}
+			return v.JobTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobTemplate, schemas.DescribeJobTemplateRequest, schemas.DescribeJobTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobTemplate, schemas.DescribeJobTemplateRequest, schemas.DescribeJobTemplateResponse), output: &DescribeJobTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

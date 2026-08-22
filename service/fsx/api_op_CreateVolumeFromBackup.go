@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type CreateVolumeFromBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVolumeFromBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVolumeFromBackupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVolumeFromBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.CreateVolumeFromBackupRequest_BackupId, *v.BackupId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateVolumeFromBackupRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVolumeFromBackupRequest_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.CreateVolumeFromBackupRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateVolumeFromBackupRequest_Tags, v.Tags)
+}
+
 type CreateVolumeFromBackupOutput struct {
 
 	// Returned after a successful CreateVolumeFromBackup API operation, describing
@@ -64,13 +90,34 @@ type CreateVolumeFromBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVolumeFromBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVolumeFromBackupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVolumeFromBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Volume != nil {
+		s.WriteStruct(schemas.CreateVolumeFromBackupResponse_Volume)
+		v.Volume.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVolumeFromBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVolumeFromBackupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVolumeFromBackupResponse_Volume:
+			v.Volume = &types.Volume{}
+			return v.Volume.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVolumeFromBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVolumeFromBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolumeFromBackup, schemas.CreateVolumeFromBackupRequest, schemas.CreateVolumeFromBackupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateVolumeFromBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolumeFromBackup, schemas.CreateVolumeFromBackupRequest, schemas.CreateVolumeFromBackupResponse), output: &CreateVolumeFromBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

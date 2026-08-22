@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -137,6 +139,42 @@ type UpdateRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomResponseBodies(s, schemas.UpdateRuleGroupRequest_CustomResponseBodies, v.CustomResponseBodies)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRuleGroupRequest_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateRuleGroupRequest_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.UpdateRuleGroupRequest_LockToken, *v.LockToken)
+	}
+	if v.MonetizationConfig != nil {
+		s.WriteStruct(schemas.UpdateRuleGroupRequest_MonetizationConfig)
+		v.MonetizationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRuleGroupRequest_Name, *v.Name)
+	}
+	serializeRules(s, schemas.UpdateRuleGroupRequest_Rules, v.Rules)
+	if v.Scope != "" {
+		s.WriteString(schemas.UpdateRuleGroupRequest_Scope, string(v.Scope))
+	}
+	if v.VisibilityConfig != nil {
+		s.WriteStruct(schemas.UpdateRuleGroupRequest_VisibilityConfig)
+		v.VisibilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRuleGroupOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update
@@ -149,13 +187,32 @@ type UpdateRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextLockToken != nil {
+		s.WriteString(schemas.UpdateRuleGroupResponse_NextLockToken, *v.NextLockToken)
+	}
+}
+func (v *UpdateRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRuleGroupResponse_NextLockToken:
+			v.NextLockToken = new(string)
+			return d.ReadString(schemas.UpdateRuleGroupResponse_NextLockToken, v.NextLockToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleGroup, schemas.UpdateRuleGroupRequest, schemas.UpdateRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleGroup, schemas.UpdateRuleGroupRequest, schemas.UpdateRuleGroupResponse), output: &UpdateRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

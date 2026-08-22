@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,35 @@ type UpdateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEndpointRequest_Description, *v.Description)
+	}
+	serializeEndpointEventBusList(s, schemas.UpdateEndpointRequest_EventBuses, v.EventBuses)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEndpointRequest_Name, *v.Name)
+	}
+	if v.ReplicationConfig != nil {
+		s.WriteStruct(schemas.UpdateEndpointRequest_ReplicationConfig)
+		v.ReplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateEndpointRequest_RoleArn, *v.RoleArn)
+	}
+	if v.RoutingConfig != nil {
+		s.WriteStruct(schemas.UpdateEndpointRequest_RoutingConfig)
+		v.RoutingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateEndpointOutput struct {
 
 	// The ARN of the endpoint you updated in this request.
@@ -90,13 +121,85 @@ type UpdateEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_Arn, *v.Arn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_EndpointId, *v.EndpointId)
+	}
+	if v.EndpointUrl != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_EndpointUrl, *v.EndpointUrl)
+	}
+	serializeEndpointEventBusList(s, schemas.UpdateEndpointResponse_EventBuses, v.EventBuses)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_Name, *v.Name)
+	}
+	if v.ReplicationConfig != nil {
+		s.WriteStruct(schemas.UpdateEndpointResponse_ReplicationConfig)
+		v.ReplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_RoleArn, *v.RoleArn)
+	}
+	if v.RoutingConfig != nil {
+		s.WriteStruct(schemas.UpdateEndpointResponse_RoutingConfig)
+		v.RoutingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateEndpointResponse_State, string(v.State))
+	}
+}
+func (v *UpdateEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEndpointResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_Arn, v.Arn)
+		case schemas.UpdateEndpointResponse_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_EndpointId, v.EndpointId)
+		case schemas.UpdateEndpointResponse_EndpointUrl:
+			v.EndpointUrl = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_EndpointUrl, v.EndpointUrl)
+		case schemas.UpdateEndpointResponse_EventBuses:
+			return deserializeEndpointEventBusList(d, schemas.UpdateEndpointResponse_EventBuses, &v.EventBuses)
+		case schemas.UpdateEndpointResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_Name, v.Name)
+		case schemas.UpdateEndpointResponse_ReplicationConfig:
+			v.ReplicationConfig = &types.ReplicationConfig{}
+			return v.ReplicationConfig.Deserialize(d)
+		case schemas.UpdateEndpointResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_RoleArn, v.RoleArn)
+		case schemas.UpdateEndpointResponse_RoutingConfig:
+			v.RoutingConfig = &types.RoutingConfig{}
+			return v.RoutingConfig.Deserialize(d)
+		case schemas.UpdateEndpointResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEndpointResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EndpointState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpoint, schemas.UpdateEndpointRequest, schemas.UpdateEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpoint, schemas.UpdateEndpointRequest, schemas.UpdateEndpointResponse), output: &UpdateEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

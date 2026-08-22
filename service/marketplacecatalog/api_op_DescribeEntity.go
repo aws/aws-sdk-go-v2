@@ -5,6 +5,10 @@ package marketplacecatalog
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +43,21 @@ type DescribeEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.DescribeEntityRequest_Catalog, *v.Catalog)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.DescribeEntityRequest_EntityId, *v.EntityId)
+	}
+}
+
 type DescribeEntityOutput struct {
 
 	// This stringified JSON object includes the details of the entity.
@@ -71,13 +90,68 @@ type DescribeEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.DescribeEntityResponse_Details, *v.Details)
+	}
+	if v.DetailsDocument != nil {
+		s.WriteDocument(schemas.DescribeEntityResponse_DetailsDocument, &smithydocument.Opaque{Value: v.DetailsDocument})
+	}
+	if v.EntityArn != nil {
+		s.WriteString(schemas.DescribeEntityResponse_EntityArn, *v.EntityArn)
+	}
+	if v.EntityIdentifier != nil {
+		s.WriteString(schemas.DescribeEntityResponse_EntityIdentifier, *v.EntityIdentifier)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.DescribeEntityResponse_EntityType, *v.EntityType)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteString(schemas.DescribeEntityResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+}
+func (v *DescribeEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEntityResponse_Details:
+			v.Details = new(string)
+			return d.ReadString(schemas.DescribeEntityResponse_Details, v.Details)
+		case schemas.DescribeEntityResponse_DetailsDocument:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.DescribeEntityResponse_DetailsDocument, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DetailsDocument = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.DescribeEntityResponse_EntityArn:
+			v.EntityArn = new(string)
+			return d.ReadString(schemas.DescribeEntityResponse_EntityArn, v.EntityArn)
+		case schemas.DescribeEntityResponse_EntityIdentifier:
+			v.EntityIdentifier = new(string)
+			return d.ReadString(schemas.DescribeEntityResponse_EntityIdentifier, v.EntityIdentifier)
+		case schemas.DescribeEntityResponse_EntityType:
+			v.EntityType = new(string)
+			return d.ReadString(schemas.DescribeEntityResponse_EntityType, v.EntityType)
+		case schemas.DescribeEntityResponse_LastModifiedDate:
+			v.LastModifiedDate = new(string)
+			return d.ReadString(schemas.DescribeEntityResponse_LastModifiedDate, v.LastModifiedDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntity, schemas.DescribeEntityRequest, schemas.DescribeEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntity, schemas.DescribeEntityRequest, schemas.DescribeEntityResponse), output: &DescribeEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

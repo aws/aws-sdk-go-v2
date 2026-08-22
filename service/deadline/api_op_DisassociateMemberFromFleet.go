@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type DisassociateMemberFromFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberFromFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberFromFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberFromFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.DisassociateMemberFromFleetRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DisassociateMemberFromFleetRequest_fleetId, *v.FleetId)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.DisassociateMemberFromFleetRequest_principalId, *v.PrincipalId)
+	}
+}
+
 type DisassociateMemberFromFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +72,26 @@ type DisassociateMemberFromFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberFromFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberFromFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberFromFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateMemberFromFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateMemberFromFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateMemberFromFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateMemberFromFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMemberFromFleet, schemas.DisassociateMemberFromFleetRequest, schemas.DisassociateMemberFromFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateMemberFromFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMemberFromFleet, schemas.DisassociateMemberFromFleetRequest, schemas.DisassociateMemberFromFleetResponse), output: &DisassociateMemberFromFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

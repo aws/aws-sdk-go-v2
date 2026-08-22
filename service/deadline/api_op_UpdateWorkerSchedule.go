@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,25 @@ type UpdateWorkerScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkerScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkerScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkerScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateWorkerScheduleRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateWorkerScheduleRequest_fleetId, *v.FleetId)
+	}
+	serializeUpdatedSessionActions(s, schemas.UpdateWorkerScheduleRequest_updatedSessionActions, v.UpdatedSessionActions)
+	if v.WorkerId != nil {
+		s.WriteString(schemas.UpdateWorkerScheduleRequest_workerId, *v.WorkerId)
+	}
+}
+
 type UpdateWorkerScheduleOutput struct {
 
 	// The assigned sessions to update.
@@ -75,13 +96,48 @@ type UpdateWorkerScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkerScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkerScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkerScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssignedSessions(s, schemas.UpdateWorkerScheduleResponse_assignedSessions, v.AssignedSessions)
+	serializeCancelSessionActions(s, schemas.UpdateWorkerScheduleResponse_cancelSessionActions, v.CancelSessionActions)
+	if v.DesiredWorkerStatus != "" {
+		s.WriteString(schemas.UpdateWorkerScheduleResponse_desiredWorkerStatus, string(v.DesiredWorkerStatus))
+	}
+	if v.UpdateIntervalSeconds != nil {
+		s.WriteInt32(schemas.UpdateWorkerScheduleResponse_updateIntervalSeconds, *v.UpdateIntervalSeconds)
+	}
+}
+func (v *UpdateWorkerScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkerScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkerScheduleResponse_assignedSessions:
+			return deserializeAssignedSessions(d, schemas.UpdateWorkerScheduleResponse_assignedSessions, &v.AssignedSessions)
+		case schemas.UpdateWorkerScheduleResponse_cancelSessionActions:
+			return deserializeCancelSessionActions(d, schemas.UpdateWorkerScheduleResponse_cancelSessionActions, &v.CancelSessionActions)
+		case schemas.UpdateWorkerScheduleResponse_desiredWorkerStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateWorkerScheduleResponse_desiredWorkerStatus, &ev); err != nil {
+				return err
+			}
+			v.DesiredWorkerStatus = types.DesiredWorkerStatus(ev)
+			return nil
+		case schemas.UpdateWorkerScheduleResponse_updateIntervalSeconds:
+			v.UpdateIntervalSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateWorkerScheduleResponse_updateIntervalSeconds, v.UpdateIntervalSeconds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkerSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkerSchedule, schemas.UpdateWorkerScheduleRequest, schemas.UpdateWorkerScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkerSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkerSchedule, schemas.UpdateWorkerScheduleRequest, schemas.UpdateWorkerScheduleResponse), output: &UpdateWorkerScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,26 @@ type CreateAssessmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssessmentTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentTargetArn != nil {
+		s.WriteString(schemas.CreateAssessmentTemplateRequest_assessmentTargetArn, *v.AssessmentTargetArn)
+	}
+	if v.AssessmentTemplateName != nil {
+		s.WriteString(schemas.CreateAssessmentTemplateRequest_assessmentTemplateName, *v.AssessmentTemplateName)
+	}
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.CreateAssessmentTemplateRequest_durationInSeconds, *v.DurationInSeconds)
+	}
+	serializeAssessmentTemplateRulesPackageArnList(s, schemas.CreateAssessmentTemplateRequest_rulesPackageArns, v.RulesPackageArns)
+	serializeUserAttributeList(s, schemas.CreateAssessmentTemplateRequest_userAttributesForFindings, v.UserAttributesForFindings)
+}
+
 type CreateAssessmentTemplateOutput struct {
 
 	// The ARN that specifies the assessment template that is created.
@@ -78,13 +100,32 @@ type CreateAssessmentTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssessmentTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentTemplateArn != nil {
+		s.WriteString(schemas.CreateAssessmentTemplateResponse_assessmentTemplateArn, *v.AssessmentTemplateArn)
+	}
+}
+func (v *CreateAssessmentTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssessmentTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssessmentTemplateResponse_assessmentTemplateArn:
+			v.AssessmentTemplateArn = new(string)
+			return d.ReadString(schemas.CreateAssessmentTemplateResponse_assessmentTemplateArn, v.AssessmentTemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssessmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAssessmentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssessmentTemplate, schemas.CreateAssessmentTemplateRequest, schemas.CreateAssessmentTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAssessmentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssessmentTemplate, schemas.CreateAssessmentTemplateRequest, schemas.CreateAssessmentTemplateResponse), output: &CreateAssessmentTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

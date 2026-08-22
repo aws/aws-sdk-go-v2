@@ -4,6 +4,8 @@ package fsx
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,15 @@ type DescribeSharedVpcConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSharedVpcConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSharedVpcConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSharedVpcConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeSharedVpcConfigurationOutput struct {
 
 	// Indicates whether participant accounts can create FSx for ONTAP Multi-AZ file
@@ -43,13 +54,32 @@ type DescribeSharedVpcConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSharedVpcConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSharedVpcConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSharedVpcConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableFsxRouteTableUpdatesFromParticipantAccounts != nil {
+		s.WriteString(schemas.DescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts, *v.EnableFsxRouteTableUpdatesFromParticipantAccounts)
+	}
+}
+func (v *DescribeSharedVpcConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSharedVpcConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts:
+			v.EnableFsxRouteTableUpdatesFromParticipantAccounts = new(string)
+			return d.ReadString(schemas.DescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts, v.EnableFsxRouteTableUpdatesFromParticipantAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSharedVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSharedVpcConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSharedVpcConfiguration, schemas.DescribeSharedVpcConfigurationRequest, schemas.DescribeSharedVpcConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSharedVpcConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSharedVpcConfiguration, schemas.DescribeSharedVpcConfigurationRequest, schemas.DescribeSharedVpcConfigurationResponse), output: &DescribeSharedVpcConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

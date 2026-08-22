@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListADAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListADAssessmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListADAssessmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListADAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ListADAssessmentsRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListADAssessmentsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListADAssessmentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListADAssessmentsOutput struct {
 
 	// A list of assessment summaries containing basic information about each
@@ -59,13 +79,35 @@ type ListADAssessmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListADAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListADAssessmentsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListADAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessments(s, schemas.ListADAssessmentsResult_Assessments, v.Assessments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListADAssessmentsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListADAssessmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListADAssessmentsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListADAssessmentsResult_Assessments:
+			return deserializeAssessments(d, schemas.ListADAssessmentsResult_Assessments, &v.Assessments)
+		case schemas.ListADAssessmentsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListADAssessmentsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListADAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListADAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListADAssessments, schemas.ListADAssessmentsRequest, schemas.ListADAssessmentsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListADAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListADAssessments, schemas.ListADAssessmentsRequest, schemas.ListADAssessmentsResult), output: &ListADAssessmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

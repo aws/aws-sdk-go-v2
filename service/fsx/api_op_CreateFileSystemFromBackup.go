@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -183,6 +185,54 @@ type CreateFileSystemFromBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemFromBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemFromBackupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemFromBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.CreateFileSystemFromBackupRequest_BackupId, *v.BackupId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateFileSystemFromBackupRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemTypeVersion != nil {
+		s.WriteString(schemas.CreateFileSystemFromBackupRequest_FileSystemTypeVersion, *v.FileSystemTypeVersion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateFileSystemFromBackupRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LustreConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemFromBackupRequest_LustreConfiguration)
+		v.LustreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateFileSystemFromBackupRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemFromBackupRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSecurityGroupIds(s, schemas.CreateFileSystemFromBackupRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.CreateFileSystemFromBackupRequest_StorageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.CreateFileSystemFromBackupRequest_StorageType, string(v.StorageType))
+	}
+	serializeSubnetIds(s, schemas.CreateFileSystemFromBackupRequest_SubnetIds, v.SubnetIds)
+	serializeTags(s, schemas.CreateFileSystemFromBackupRequest_Tags, v.Tags)
+	if v.WindowsConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemFromBackupRequest_WindowsConfiguration)
+		v.WindowsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The response object for the CreateFileSystemFromBackup operation.
 type CreateFileSystemFromBackupOutput struct {
 
@@ -195,13 +245,34 @@ type CreateFileSystemFromBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemFromBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemFromBackupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemFromBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystem != nil {
+		s.WriteStruct(schemas.CreateFileSystemFromBackupResponse_FileSystem)
+		v.FileSystem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFileSystemFromBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileSystemFromBackupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileSystemFromBackupResponse_FileSystem:
+			v.FileSystem = &types.FileSystem{}
+			return v.FileSystem.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFileSystemFromBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFileSystemFromBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileSystemFromBackup, schemas.CreateFileSystemFromBackupRequest, schemas.CreateFileSystemFromBackupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFileSystemFromBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileSystemFromBackup, schemas.CreateFileSystemFromBackupRequest, schemas.CreateFileSystemFromBackupResponse), output: &CreateFileSystemFromBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,21 @@ type GetRegionOptStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegionOptStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegionOptStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegionOptStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetRegionOptStatusRequest_AccountId, *v.AccountId)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.GetRegionOptStatusRequest_RegionName, *v.RegionName)
+	}
+}
+
 type GetRegionOptStatusOutput struct {
 
 	// The Region code that was passed in.
@@ -73,13 +90,42 @@ type GetRegionOptStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegionOptStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegionOptStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegionOptStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionName != nil {
+		s.WriteString(schemas.GetRegionOptStatusResponse_RegionName, *v.RegionName)
+	}
+	if v.RegionOptStatus != "" {
+		s.WriteString(schemas.GetRegionOptStatusResponse_RegionOptStatus, string(v.RegionOptStatus))
+	}
+}
+func (v *GetRegionOptStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRegionOptStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRegionOptStatusResponse_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.GetRegionOptStatusResponse_RegionName, v.RegionName)
+		case schemas.GetRegionOptStatusResponse_RegionOptStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetRegionOptStatusResponse_RegionOptStatus, &ev); err != nil {
+				return err
+			}
+			v.RegionOptStatus = types.RegionOptStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRegionOptStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRegionOptStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegionOptStatus, schemas.GetRegionOptStatusRequest, schemas.GetRegionOptStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRegionOptStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegionOptStatus, schemas.GetRegionOptStatusRequest, schemas.GetRegionOptStatusResponse), output: &GetRegionOptStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

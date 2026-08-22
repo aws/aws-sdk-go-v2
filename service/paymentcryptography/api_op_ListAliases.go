@@ -5,7 +5,9 @@ package paymentcryptography
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,24 @@ type ListAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyArn != nil {
+		s.WriteString(schemas.ListAliasesInput_KeyArn, *v.KeyArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAliasesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListAliasesOutput struct {
 
 	// The list of aliases. Each alias describes the KeyArn contained within.
@@ -91,13 +111,35 @@ type ListAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAliases(s, schemas.ListAliasesOutput_Aliases, v.Aliases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAliasesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAliasesOutput_Aliases:
+			return deserializeAliases(d, schemas.ListAliasesOutput_Aliases, &v.Aliases)
+		case schemas.ListAliasesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAliasesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesInput, schemas.ListAliasesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesInput, schemas.ListAliasesOutput), output: &ListAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

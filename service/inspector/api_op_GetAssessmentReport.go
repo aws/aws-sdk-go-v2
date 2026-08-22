@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type GetAssessmentReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssessmentReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssessmentReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssessmentReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.GetAssessmentReportRequest_assessmentRunArn, *v.AssessmentRunArn)
+	}
+	if v.ReportFileFormat != "" {
+		s.WriteString(schemas.GetAssessmentReportRequest_reportFileFormat, string(v.ReportFileFormat))
+	}
+	if v.ReportType != "" {
+		s.WriteString(schemas.GetAssessmentReportRequest_reportType, string(v.ReportType))
+	}
+}
+
 type GetAssessmentReportOutput struct {
 
 	// Specifies the status of the request to generate an assessment report.
@@ -68,13 +88,42 @@ type GetAssessmentReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssessmentReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssessmentReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssessmentReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetAssessmentReportResponse_status, string(v.Status))
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.GetAssessmentReportResponse_url, *v.Url)
+	}
+}
+func (v *GetAssessmentReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssessmentReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssessmentReportResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAssessmentReportResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReportStatus(ev)
+			return nil
+		case schemas.GetAssessmentReportResponse_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.GetAssessmentReportResponse_url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssessmentReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAssessmentReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessmentReport, schemas.GetAssessmentReportRequest, schemas.GetAssessmentReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAssessmentReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessmentReport, schemas.GetAssessmentReportRequest, schemas.GetAssessmentReportResponse), output: &GetAssessmentReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

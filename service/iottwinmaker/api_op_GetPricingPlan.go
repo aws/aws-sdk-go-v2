@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,6 +32,22 @@ type GetPricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPricingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPricingPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetPricingPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPricingPlanRequest, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetPricingPlanOutput struct {
 
 	// The chosen pricing plan for the current billing cycle.
@@ -46,13 +64,42 @@ type GetPricingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPricingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPricingPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPricingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentPricingPlan != nil {
+		s.WriteStruct(schemas.GetPricingPlanResponse_currentPricingPlan)
+		v.CurrentPricingPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PendingPricingPlan != nil {
+		s.WriteStruct(schemas.GetPricingPlanResponse_pendingPricingPlan)
+		v.PendingPricingPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPricingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPricingPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPricingPlanResponse_currentPricingPlan:
+			v.CurrentPricingPlan = &types.PricingPlan{}
+			return v.CurrentPricingPlan.Deserialize(d)
+		case schemas.GetPricingPlanResponse_pendingPricingPlan:
+			v.PendingPricingPlan = &types.PricingPlan{}
+			return v.PendingPricingPlan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPricingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPricingPlan, schemas.GetPricingPlanRequest, schemas.GetPricingPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPricingPlan, schemas.GetPricingPlanRequest, schemas.GetPricingPlanResponse), output: &GetPricingPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

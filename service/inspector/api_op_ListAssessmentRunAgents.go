@@ -5,7 +5,9 @@ package inspector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,29 @@ type ListAssessmentRunAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentRunAgentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentRunAgentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentRunAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.ListAssessmentRunAgentsRequest_assessmentRunArn, *v.AssessmentRunArn)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListAssessmentRunAgentsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssessmentRunAgentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentRunAgentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssessmentRunAgentsOutput struct {
 
 	// A list of ARNs that specifies the agents returned by the action.
@@ -73,13 +98,35 @@ type ListAssessmentRunAgentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentRunAgentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentRunAgentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentRunAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentRunAgentList(s, schemas.ListAssessmentRunAgentsResponse_assessmentRunAgents, v.AssessmentRunAgents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentRunAgentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssessmentRunAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssessmentRunAgentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssessmentRunAgentsResponse_assessmentRunAgents:
+			return deserializeAssessmentRunAgentList(d, schemas.ListAssessmentRunAgentsResponse_assessmentRunAgents, &v.AssessmentRunAgents)
+		case schemas.ListAssessmentRunAgentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssessmentRunAgentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssessmentRunAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssessmentRunAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentRunAgents, schemas.ListAssessmentRunAgentsRequest, schemas.ListAssessmentRunAgentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAssessmentRunAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentRunAgents, schemas.ListAssessmentRunAgentsRequest, schemas.ListAssessmentRunAgentsResponse), output: &ListAssessmentRunAgentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

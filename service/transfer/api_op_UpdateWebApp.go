@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type UpdateWebAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEndpoint != nil {
+		s.WriteString(schemas.UpdateWebAppRequest_AccessEndpoint, *v.AccessEndpoint)
+	}
+	serializeUpdateWebAppEndpointDetails(s, schemas.UpdateWebAppRequest_EndpointDetails, v.EndpointDetails)
+	serializeUpdateWebAppIdentityProviderDetails(s, schemas.UpdateWebAppRequest_IdentityProviderDetails, v.IdentityProviderDetails)
+	if v.WebAppId != nil {
+		s.WriteString(schemas.UpdateWebAppRequest_WebAppId, *v.WebAppId)
+	}
+	serializeWebAppUnits(s, schemas.UpdateWebAppRequest_WebAppUnits, v.WebAppUnits)
+}
+
 type UpdateWebAppOutput struct {
 
 	// Returns the unique identifier for the web app being updated.
@@ -69,13 +89,32 @@ type UpdateWebAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebAppId != nil {
+		s.WriteString(schemas.UpdateWebAppResponse_WebAppId, *v.WebAppId)
+	}
+}
+func (v *UpdateWebAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWebAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWebAppResponse_WebAppId:
+			v.WebAppId = new(string)
+			return d.ReadString(schemas.UpdateWebAppResponse_WebAppId, v.WebAppId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWebAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWebApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebApp, schemas.UpdateWebAppRequest, schemas.UpdateWebAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWebApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebApp, schemas.UpdateWebAppRequest, schemas.UpdateWebAppResponse), output: &UpdateWebAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

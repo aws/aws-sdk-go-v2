@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -108,6 +110,31 @@ type CopyBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyBackupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CopyBackupRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.CopyBackupRequest_CopyTags, *v.CopyTags)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CopyBackupRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SourceBackupId != nil {
+		s.WriteString(schemas.CopyBackupRequest_SourceBackupId, *v.SourceBackupId)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.CopyBackupRequest_SourceRegion, *v.SourceRegion)
+	}
+	serializeTags(s, schemas.CopyBackupRequest_Tags, v.Tags)
+}
+
 type CopyBackupOutput struct {
 
 	// A backup of an Amazon FSx for Windows File Server, Amazon FSx for Lustre file
@@ -121,13 +148,34 @@ type CopyBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyBackupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Backup != nil {
+		s.WriteStruct(schemas.CopyBackupResponse_Backup)
+		v.Backup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopyBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyBackupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyBackupResponse_Backup:
+			v.Backup = &types.Backup{}
+			return v.Backup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyBackup, schemas.CopyBackupRequest, schemas.CopyBackupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopyBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyBackup, schemas.CopyBackupRequest, schemas.CopyBackupResponse), output: &CopyBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

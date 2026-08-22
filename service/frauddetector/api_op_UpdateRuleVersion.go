@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,31 @@ type UpdateRuleVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuleVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuleVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRuleVersionRequest_description, *v.Description)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.UpdateRuleVersionRequest_expression, *v.Expression)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.UpdateRuleVersionRequest_language, string(v.Language))
+	}
+	serializeNonEmptyListOfStrings(s, schemas.UpdateRuleVersionRequest_outcomes, v.Outcomes)
+	if v.Rule != nil {
+		s.WriteStruct(schemas.UpdateRuleVersionRequest_rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializetagList(s, schemas.UpdateRuleVersionRequest_tags, v.Tags)
+}
+
 type UpdateRuleVersionOutput struct {
 
 	// The new rule version that was created.
@@ -67,13 +94,34 @@ type UpdateRuleVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuleVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuleVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rule != nil {
+		s.WriteStruct(schemas.UpdateRuleVersionResult_rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRuleVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRuleVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRuleVersionResult_rule:
+			v.Rule = &types.Rule{}
+			return v.Rule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRuleVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRuleVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleVersion, schemas.UpdateRuleVersionRequest, schemas.UpdateRuleVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRuleVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleVersion, schemas.UpdateRuleVersionRequest, schemas.UpdateRuleVersionResult), output: &UpdateRuleVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

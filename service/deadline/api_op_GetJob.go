@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,6 +49,24 @@ type GetJobInput struct {
 	QueueId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetJobRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetJobRequest_jobId, *v.JobId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetJobRequest_queueId, *v.QueueId)
+	}
 }
 
 // Mixin that adds an optional ARN field to response structures. Apply to
@@ -152,13 +172,172 @@ type GetJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attachments != nil {
+		s.WriteStruct(schemas.GetJobResponse_attachments)
+		v.Attachments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetJobResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetJobResponse_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetJobResponse_description, *v.Description)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetJobResponse_endedAt, *v.EndedAt)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetJobResponse_jobId, *v.JobId)
+	}
+	if v.LifecycleStatus != "" {
+		s.WriteString(schemas.GetJobResponse_lifecycleStatus, string(v.LifecycleStatus))
+	}
+	if v.LifecycleStatusMessage != nil {
+		s.WriteString(schemas.GetJobResponse_lifecycleStatusMessage, *v.LifecycleStatusMessage)
+	}
+	if v.MaxFailedTasksCount != nil {
+		s.WriteInt32(schemas.GetJobResponse_maxFailedTasksCount, *v.MaxFailedTasksCount)
+	}
+	if v.MaxRetriesPerTask != nil {
+		s.WriteInt32(schemas.GetJobResponse_maxRetriesPerTask, *v.MaxRetriesPerTask)
+	}
+	if v.MaxWorkerCount != nil {
+		s.WriteInt32(schemas.GetJobResponse_maxWorkerCount, *v.MaxWorkerCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetJobResponse_name, *v.Name)
+	}
+	serializeJobParameters(s, schemas.GetJobResponse_parameters, v.Parameters)
+	if v.Priority != nil {
+		s.WriteInt32(schemas.GetJobResponse_priority, *v.Priority)
+	}
+	if v.SourceJobId != nil {
+		s.WriteString(schemas.GetJobResponse_sourceJobId, *v.SourceJobId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetJobResponse_startedAt, *v.StartedAt)
+	}
+	if v.StorageProfileId != nil {
+		s.WriteString(schemas.GetJobResponse_storageProfileId, *v.StorageProfileId)
+	}
+	if v.TargetTaskRunStatus != "" {
+		s.WriteString(schemas.GetJobResponse_targetTaskRunStatus, string(v.TargetTaskRunStatus))
+	}
+	if v.TaskFailureRetryCount != nil {
+		s.WriteInt32(schemas.GetJobResponse_taskFailureRetryCount, *v.TaskFailureRetryCount)
+	}
+	if v.TaskRunStatus != "" {
+		s.WriteString(schemas.GetJobResponse_taskRunStatus, string(v.TaskRunStatus))
+	}
+	serializeTaskRunStatusCounts(s, schemas.GetJobResponse_taskRunStatusCounts, v.TaskRunStatusCounts)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetJobResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetJobResponse_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobResponse_attachments:
+			v.Attachments = &types.Attachments{}
+			return v.Attachments.Deserialize(d)
+		case schemas.GetJobResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetJobResponse_createdAt, v.CreatedAt)
+		case schemas.GetJobResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetJobResponse_createdBy, v.CreatedBy)
+		case schemas.GetJobResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetJobResponse_description, v.Description)
+		case schemas.GetJobResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetJobResponse_endedAt, v.EndedAt)
+		case schemas.GetJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetJobResponse_jobId, v.JobId)
+		case schemas.GetJobResponse_lifecycleStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetJobResponse_lifecycleStatus, &ev); err != nil {
+				return err
+			}
+			v.LifecycleStatus = types.JobLifecycleStatus(ev)
+			return nil
+		case schemas.GetJobResponse_lifecycleStatusMessage:
+			v.LifecycleStatusMessage = new(string)
+			return d.ReadString(schemas.GetJobResponse_lifecycleStatusMessage, v.LifecycleStatusMessage)
+		case schemas.GetJobResponse_maxFailedTasksCount:
+			v.MaxFailedTasksCount = new(int32)
+			return d.ReadInt32(schemas.GetJobResponse_maxFailedTasksCount, v.MaxFailedTasksCount)
+		case schemas.GetJobResponse_maxRetriesPerTask:
+			v.MaxRetriesPerTask = new(int32)
+			return d.ReadInt32(schemas.GetJobResponse_maxRetriesPerTask, v.MaxRetriesPerTask)
+		case schemas.GetJobResponse_maxWorkerCount:
+			v.MaxWorkerCount = new(int32)
+			return d.ReadInt32(schemas.GetJobResponse_maxWorkerCount, v.MaxWorkerCount)
+		case schemas.GetJobResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetJobResponse_name, v.Name)
+		case schemas.GetJobResponse_parameters:
+			return deserializeJobParameters(d, schemas.GetJobResponse_parameters, &v.Parameters)
+		case schemas.GetJobResponse_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.GetJobResponse_priority, v.Priority)
+		case schemas.GetJobResponse_sourceJobId:
+			v.SourceJobId = new(string)
+			return d.ReadString(schemas.GetJobResponse_sourceJobId, v.SourceJobId)
+		case schemas.GetJobResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetJobResponse_startedAt, v.StartedAt)
+		case schemas.GetJobResponse_storageProfileId:
+			v.StorageProfileId = new(string)
+			return d.ReadString(schemas.GetJobResponse_storageProfileId, v.StorageProfileId)
+		case schemas.GetJobResponse_targetTaskRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetJobResponse_targetTaskRunStatus, &ev); err != nil {
+				return err
+			}
+			v.TargetTaskRunStatus = types.JobTargetTaskRunStatus(ev)
+			return nil
+		case schemas.GetJobResponse_taskFailureRetryCount:
+			v.TaskFailureRetryCount = new(int32)
+			return d.ReadInt32(schemas.GetJobResponse_taskFailureRetryCount, v.TaskFailureRetryCount)
+		case schemas.GetJobResponse_taskRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetJobResponse_taskRunStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskRunStatus = types.TaskRunStatus(ev)
+			return nil
+		case schemas.GetJobResponse_taskRunStatusCounts:
+			return deserializeTaskRunStatusCounts(d, schemas.GetJobResponse_taskRunStatusCounts, &v.TaskRunStatusCounts)
+		case schemas.GetJobResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetJobResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetJobResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetJobResponse_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJob, schemas.GetJobRequest, schemas.GetJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJob, schemas.GetJobRequest, schemas.GetJobResponse), output: &GetJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

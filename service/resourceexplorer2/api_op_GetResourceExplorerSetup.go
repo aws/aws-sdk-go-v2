@@ -5,7 +5,9 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type GetResourceExplorerSetupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceExplorerSetupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceExplorerSetupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceExplorerSetupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetResourceExplorerSetupInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourceExplorerSetupInput_NextToken, *v.NextToken)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetResourceExplorerSetupInput_TaskId, *v.TaskId)
+	}
+}
+
 type GetResourceExplorerSetupOutput struct {
 
 	// The pagination token to use in a subsequent GetResourceExplorerSetup request to
@@ -63,13 +83,35 @@ type GetResourceExplorerSetupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceExplorerSetupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceExplorerSetupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceExplorerSetupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourceExplorerSetupOutput_NextToken, *v.NextToken)
+	}
+	serializeRegionStatusList(s, schemas.GetResourceExplorerSetupOutput_Regions, v.Regions)
+}
+func (v *GetResourceExplorerSetupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceExplorerSetupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceExplorerSetupOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourceExplorerSetupOutput_NextToken, v.NextToken)
+		case schemas.GetResourceExplorerSetupOutput_Regions:
+			return deserializeRegionStatusList(d, schemas.GetResourceExplorerSetupOutput_Regions, &v.Regions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceExplorerSetupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceExplorerSetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceExplorerSetup, schemas.GetResourceExplorerSetupInput, schemas.GetResourceExplorerSetupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceExplorerSetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceExplorerSetup, schemas.GetResourceExplorerSetupInput, schemas.GetResourceExplorerSetupOutput), output: &GetResourceExplorerSetupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

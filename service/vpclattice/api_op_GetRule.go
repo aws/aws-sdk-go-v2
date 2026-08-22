@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,40 @@ type GetRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerIdentifier != nil {
+		s.WriteString(schemas.GetRuleRequest_listenerIdentifier, *v.ListenerIdentifier)
+	}
+	if v.RuleIdentifier != nil {
+		s.WriteString(schemas.GetRuleRequest_ruleIdentifier, *v.RuleIdentifier)
+	}
+	if v.ServiceIdentifier != nil {
+		s.WriteString(schemas.GetRuleRequest_serviceIdentifier, *v.ServiceIdentifier)
+	}
+}
+func (v *GetRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRuleRequest_listenerIdentifier:
+			v.ListenerIdentifier = new(string)
+			return d.ReadString(schemas.GetRuleRequest_listenerIdentifier, v.ListenerIdentifier)
+		case schemas.GetRuleRequest_ruleIdentifier:
+			v.RuleIdentifier = new(string)
+			return d.ReadString(schemas.GetRuleRequest_ruleIdentifier, v.RuleIdentifier)
+		case schemas.GetRuleRequest_serviceIdentifier:
+			v.ServiceIdentifier = new(string)
+			return d.ReadString(schemas.GetRuleRequest_serviceIdentifier, v.ServiceIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetRuleOutput struct {
 
 	// The action for the default rule.
@@ -84,13 +120,74 @@ type GetRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleAction(s, schemas.GetRuleResponse_action, v.Action)
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRuleResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetRuleResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetRuleResponse_id, *v.Id)
+	}
+	if v.IsDefault != nil {
+		s.WriteBool(schemas.GetRuleResponse_isDefault, *v.IsDefault)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetRuleResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	serializeRuleMatch(s, schemas.GetRuleResponse_match, v.Match)
+	if v.Name != nil {
+		s.WriteString(schemas.GetRuleResponse_name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.GetRuleResponse_priority, *v.Priority)
+	}
+}
+func (v *GetRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRuleResponse_action:
+			return deserializeRuleAction(d, schemas.GetRuleResponse_action, &v.Action)
+		case schemas.GetRuleResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetRuleResponse_arn, v.Arn)
+		case schemas.GetRuleResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRuleResponse_createdAt, v.CreatedAt)
+		case schemas.GetRuleResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetRuleResponse_id, v.Id)
+		case schemas.GetRuleResponse_isDefault:
+			v.IsDefault = new(bool)
+			return d.ReadBool(schemas.GetRuleResponse_isDefault, v.IsDefault)
+		case schemas.GetRuleResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRuleResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetRuleResponse_match:
+			return deserializeRuleMatch(d, schemas.GetRuleResponse_match, &v.Match)
+		case schemas.GetRuleResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetRuleResponse_name, v.Name)
+		case schemas.GetRuleResponse_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.GetRuleResponse_priority, v.Priority)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRule, schemas.GetRuleRequest, schemas.GetRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRule, schemas.GetRuleRequest, schemas.GetRuleResponse), output: &GetRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

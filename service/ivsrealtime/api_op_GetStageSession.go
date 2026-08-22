@@ -4,7 +4,9 @@ package ivsrealtime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetStageSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStageSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStageSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStageSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetStageSessionRequest_sessionId, *v.SessionId)
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.GetStageSessionRequest_stageArn, *v.StageArn)
+	}
+}
+
 type GetStageSessionOutput struct {
 
 	// The stage session that is returned.
@@ -50,13 +67,34 @@ type GetStageSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStageSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStageSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStageSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StageSession != nil {
+		s.WriteStruct(schemas.GetStageSessionResponse_stageSession)
+		v.StageSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetStageSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStageSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStageSessionResponse_stageSession:
+			v.StageSession = &types.StageSession{}
+			return v.StageSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStageSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStageSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStageSession, schemas.GetStageSessionRequest, schemas.GetStageSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStageSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStageSession, schemas.GetStageSessionRequest, schemas.GetStageSessionResponse), output: &GetStageSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetChannelRequest_arn, *v.Arn)
+	}
+}
+func (v *GetChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetChannelRequest_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type GetChannelOutput struct {
 
 	//
@@ -45,13 +69,34 @@ type GetChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != nil {
+		s.WriteStruct(schemas.GetChannelResponse_channel)
+		v.Channel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelResponse_channel:
+			v.Channel = &types.Channel{}
+			return v.Channel.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelRequest, schemas.GetChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelRequest, schemas.GetChannelResponse), output: &GetChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

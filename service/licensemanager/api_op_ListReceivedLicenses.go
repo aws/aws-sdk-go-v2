@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,23 @@ type ListReceivedLicensesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceivedLicensesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceivedLicensesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceivedLicensesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListReceivedLicensesRequest_Filters, v.Filters)
+	serializeArnList(s, schemas.ListReceivedLicensesRequest_LicenseArns, v.LicenseArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReceivedLicensesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceivedLicensesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListReceivedLicensesOutput struct {
 
 	// Received license details.
@@ -65,13 +84,35 @@ type ListReceivedLicensesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceivedLicensesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceivedLicensesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceivedLicensesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrantedLicenseList(s, schemas.ListReceivedLicensesResponse_Licenses, v.Licenses)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceivedLicensesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListReceivedLicensesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReceivedLicensesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReceivedLicensesResponse_Licenses:
+			return deserializeGrantedLicenseList(d, schemas.ListReceivedLicensesResponse_Licenses, &v.Licenses)
+		case schemas.ListReceivedLicensesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReceivedLicensesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReceivedLicensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReceivedLicenses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceivedLicenses, schemas.ListReceivedLicensesRequest, schemas.ListReceivedLicensesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReceivedLicenses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceivedLicenses, schemas.ListReceivedLicensesRequest, schemas.ListReceivedLicensesResponse), output: &ListReceivedLicensesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type UpdateBandwidthRateLimitScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBandwidthRateLimitScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBandwidthRateLimitScheduleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBandwidthRateLimitScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBandwidthRateLimitIntervals(s, schemas.UpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals, v.BandwidthRateLimitIntervals)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateBandwidthRateLimitScheduleInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type UpdateBandwidthRateLimitScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -59,13 +74,32 @@ type UpdateBandwidthRateLimitScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBandwidthRateLimitScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBandwidthRateLimitScheduleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBandwidthRateLimitScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateBandwidthRateLimitScheduleOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *UpdateBandwidthRateLimitScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBandwidthRateLimitScheduleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBandwidthRateLimitScheduleOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.UpdateBandwidthRateLimitScheduleOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBandwidthRateLimitScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBandwidthRateLimitSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBandwidthRateLimitSchedule, schemas.UpdateBandwidthRateLimitScheduleInput, schemas.UpdateBandwidthRateLimitScheduleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateBandwidthRateLimitSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBandwidthRateLimitSchedule, schemas.UpdateBandwidthRateLimitScheduleInput, schemas.UpdateBandwidthRateLimitScheduleOutput), output: &UpdateBandwidthRateLimitScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

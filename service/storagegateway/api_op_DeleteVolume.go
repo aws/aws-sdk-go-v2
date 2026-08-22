@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,18 @@ type DeleteVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.DeleteVolumeInput_VolumeARN, *v.VolumeARN)
+	}
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the storage volume
 // that was deleted.
 type DeleteVolumeOutput struct {
@@ -64,13 +78,32 @@ type DeleteVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.DeleteVolumeOutput_VolumeARN, *v.VolumeARN)
+	}
+}
+func (v *DeleteVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVolumeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVolumeOutput_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.DeleteVolumeOutput_VolumeARN, v.VolumeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVolume, schemas.DeleteVolumeInput, schemas.DeleteVolumeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVolume, schemas.DeleteVolumeInput, schemas.DeleteVolumeOutput), output: &DeleteVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

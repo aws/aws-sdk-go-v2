@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type PutEntityTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEntityTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEntityTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEntityTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PutEntityTypeRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutEntityTypeRequest_name, *v.Name)
+	}
+	serializetagList(s, schemas.PutEntityTypeRequest_tags, v.Tags)
+}
+
 type PutEntityTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +68,26 @@ type PutEntityTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEntityTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEntityTypeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEntityTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutEntityTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEntityTypeResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEntityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEntityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEntityType, schemas.PutEntityTypeRequest, schemas.PutEntityTypeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutEntityType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEntityType, schemas.PutEntityTypeRequest, schemas.PutEntityTypeResult), output: &PutEntityTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

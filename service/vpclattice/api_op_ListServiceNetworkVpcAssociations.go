@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,46 @@ type ListServiceNetworkVpcAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceNetworkVpcAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceNetworkVpcAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceNetworkVpcAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceNetworkVpcAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceNetworkVpcAssociationsRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceNetworkIdentifier != nil {
+		s.WriteString(schemas.ListServiceNetworkVpcAssociationsRequest_serviceNetworkIdentifier, *v.ServiceNetworkIdentifier)
+	}
+	if v.VpcIdentifier != nil {
+		s.WriteString(schemas.ListServiceNetworkVpcAssociationsRequest_vpcIdentifier, *v.VpcIdentifier)
+	}
+}
+func (v *ListServiceNetworkVpcAssociationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceNetworkVpcAssociationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceNetworkVpcAssociationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListServiceNetworkVpcAssociationsRequest_maxResults, v.MaxResults)
+		case schemas.ListServiceNetworkVpcAssociationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceNetworkVpcAssociationsRequest_nextToken, v.NextToken)
+		case schemas.ListServiceNetworkVpcAssociationsRequest_serviceNetworkIdentifier:
+			v.ServiceNetworkIdentifier = new(string)
+			return d.ReadString(schemas.ListServiceNetworkVpcAssociationsRequest_serviceNetworkIdentifier, v.ServiceNetworkIdentifier)
+		case schemas.ListServiceNetworkVpcAssociationsRequest_vpcIdentifier:
+			v.VpcIdentifier = new(string)
+			return d.ReadString(schemas.ListServiceNetworkVpcAssociationsRequest_vpcIdentifier, v.VpcIdentifier)
+		}
+		return nil
+	})
+}
+
 type ListServiceNetworkVpcAssociationsOutput struct {
 
 	// Information about the associations.
@@ -61,13 +103,35 @@ type ListServiceNetworkVpcAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceNetworkVpcAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceNetworkVpcAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceNetworkVpcAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceNetworkVpcAssociationList(s, schemas.ListServiceNetworkVpcAssociationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceNetworkVpcAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServiceNetworkVpcAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceNetworkVpcAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceNetworkVpcAssociationsResponse_items:
+			return deserializeServiceNetworkVpcAssociationList(d, schemas.ListServiceNetworkVpcAssociationsResponse_items, &v.Items)
+		case schemas.ListServiceNetworkVpcAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceNetworkVpcAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceNetworkVpcAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceNetworkVpcAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceNetworkVpcAssociations, schemas.ListServiceNetworkVpcAssociationsRequest, schemas.ListServiceNetworkVpcAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceNetworkVpcAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceNetworkVpcAssociations, schemas.ListServiceNetworkVpcAssociationsRequest, schemas.ListServiceNetworkVpcAssociationsResponse), output: &ListServiceNetworkVpcAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

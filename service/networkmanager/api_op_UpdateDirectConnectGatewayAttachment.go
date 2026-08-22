@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type UpdateDirectConnectGatewayAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDirectConnectGatewayAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDirectConnectGatewayAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDirectConnectGatewayAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.UpdateDirectConnectGatewayAttachmentRequest_AttachmentId, *v.AttachmentId)
+	}
+	serializeExternalRegionCodeList(s, schemas.UpdateDirectConnectGatewayAttachmentRequest_EdgeLocations, v.EdgeLocations)
+}
+
 type UpdateDirectConnectGatewayAttachmentOutput struct {
 
 	// Returns details of the Direct Connect gateway attachment with the updated edge
@@ -52,13 +67,34 @@ type UpdateDirectConnectGatewayAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDirectConnectGatewayAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDirectConnectGatewayAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDirectConnectGatewayAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectConnectGatewayAttachment != nil {
+		s.WriteStruct(schemas.UpdateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment)
+		v.DirectConnectGatewayAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDirectConnectGatewayAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDirectConnectGatewayAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment:
+			v.DirectConnectGatewayAttachment = &types.DirectConnectGatewayAttachment{}
+			return v.DirectConnectGatewayAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDirectConnectGatewayAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDirectConnectGatewayAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDirectConnectGatewayAttachment, schemas.UpdateDirectConnectGatewayAttachmentRequest, schemas.UpdateDirectConnectGatewayAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDirectConnectGatewayAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDirectConnectGatewayAttachment, schemas.UpdateDirectConnectGatewayAttachmentRequest, schemas.UpdateDirectConnectGatewayAttachmentResponse), output: &UpdateDirectConnectGatewayAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package codebuild
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type ListBuildsForProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuildsForProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuildsForProjectInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuildsForProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuildsForProjectInput_nextToken, *v.NextToken)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.ListBuildsForProjectInput_projectName, *v.ProjectName)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListBuildsForProjectInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListBuildsForProjectOutput struct {
 
 	// A list of build identifiers for the specified build project, with each build ID
@@ -76,13 +96,35 @@ type ListBuildsForProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuildsForProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuildsForProjectOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuildsForProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuildIds(s, schemas.ListBuildsForProjectOutput_ids, v.Ids)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuildsForProjectOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBuildsForProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBuildsForProjectOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBuildsForProjectOutput_ids:
+			return deserializeBuildIds(d, schemas.ListBuildsForProjectOutput_ids, &v.Ids)
+		case schemas.ListBuildsForProjectOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBuildsForProjectOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBuildsForProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBuildsForProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuildsForProject, schemas.ListBuildsForProjectInput, schemas.ListBuildsForProjectOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListBuildsForProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuildsForProject, schemas.ListBuildsForProjectInput, schemas.ListBuildsForProjectOutput), output: &ListBuildsForProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

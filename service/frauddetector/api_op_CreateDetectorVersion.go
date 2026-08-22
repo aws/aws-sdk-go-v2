@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,28 @@ type CreateDetectorVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDetectorVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDetectorVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDetectorVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDetectorVersionRequest_description, *v.Description)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateDetectorVersionRequest_detectorId, *v.DetectorId)
+	}
+	serializeListOfStrings(s, schemas.CreateDetectorVersionRequest_externalModelEndpoints, v.ExternalModelEndpoints)
+	serializeListOfModelVersions(s, schemas.CreateDetectorVersionRequest_modelVersions, v.ModelVersions)
+	if v.RuleExecutionMode != "" {
+		s.WriteString(schemas.CreateDetectorVersionRequest_ruleExecutionMode, string(v.RuleExecutionMode))
+	}
+	serializeRuleList(s, schemas.CreateDetectorVersionRequest_rules, v.Rules)
+	serializetagList(s, schemas.CreateDetectorVersionRequest_tags, v.Tags)
+}
+
 type CreateDetectorVersionOutput struct {
 
 	// The ID for the created version's parent detector.
@@ -83,13 +107,48 @@ type CreateDetectorVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDetectorVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDetectorVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDetectorVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateDetectorVersionResult_detectorId, *v.DetectorId)
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteString(schemas.CreateDetectorVersionResult_detectorVersionId, *v.DetectorVersionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateDetectorVersionResult_status, string(v.Status))
+	}
+}
+func (v *CreateDetectorVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDetectorVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDetectorVersionResult_detectorId:
+			v.DetectorId = new(string)
+			return d.ReadString(schemas.CreateDetectorVersionResult_detectorId, v.DetectorId)
+		case schemas.CreateDetectorVersionResult_detectorVersionId:
+			v.DetectorVersionId = new(string)
+			return d.ReadString(schemas.CreateDetectorVersionResult_detectorVersionId, v.DetectorVersionId)
+		case schemas.CreateDetectorVersionResult_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDetectorVersionResult_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DetectorVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDetectorVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDetectorVersion, schemas.CreateDetectorVersionRequest, schemas.CreateDetectorVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDetectorVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDetectorVersion, schemas.CreateDetectorVersionRequest, schemas.CreateDetectorVersionResult), output: &CreateDetectorVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

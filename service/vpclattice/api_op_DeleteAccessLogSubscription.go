@@ -4,6 +4,8 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteAccessLogSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessLogSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessLogSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessLogSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLogSubscriptionIdentifier != nil {
+		s.WriteString(schemas.DeleteAccessLogSubscriptionRequest_accessLogSubscriptionIdentifier, *v.AccessLogSubscriptionIdentifier)
+	}
+}
+func (v *DeleteAccessLogSubscriptionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccessLogSubscriptionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAccessLogSubscriptionRequest_accessLogSubscriptionIdentifier:
+			v.AccessLogSubscriptionIdentifier = new(string)
+			return d.ReadString(schemas.DeleteAccessLogSubscriptionRequest_accessLogSubscriptionIdentifier, v.AccessLogSubscriptionIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteAccessLogSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +64,26 @@ type DeleteAccessLogSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessLogSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessLogSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessLogSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAccessLogSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccessLogSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccessLogSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccessLogSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessLogSubscription, schemas.DeleteAccessLogSubscriptionRequest, schemas.DeleteAccessLogSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccessLogSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessLogSubscription, schemas.DeleteAccessLogSubscriptionRequest, schemas.DeleteAccessLogSubscriptionResponse), output: &DeleteAccessLogSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,26 @@ type UpdateHttpNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHttpNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHttpNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHttpNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateHttpNamespaceRequest_Id, *v.Id)
+	}
+	if v.Namespace != nil {
+		s.WriteStruct(schemas.UpdateHttpNamespaceRequest_Namespace)
+		v.Namespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdaterRequestId != nil {
+		s.WriteString(schemas.UpdateHttpNamespaceRequest_UpdaterRequestId, *v.UpdaterRequestId)
+	}
+}
+
 type UpdateHttpNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
@@ -60,13 +82,32 @@ type UpdateHttpNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHttpNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHttpNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHttpNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdateHttpNamespaceResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *UpdateHttpNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHttpNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateHttpNamespaceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdateHttpNamespaceResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHttpNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHttpNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHttpNamespace, schemas.UpdateHttpNamespaceRequest, schemas.UpdateHttpNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateHttpNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHttpNamespace, schemas.UpdateHttpNamespaceRequest, schemas.UpdateHttpNamespaceResponse), output: &UpdateHttpNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

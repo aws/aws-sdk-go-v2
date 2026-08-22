@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DisableRadiusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableRadiusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableRadiusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableRadiusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DisableRadiusRequest_DirectoryId, *v.DirectoryId)
+	}
+}
+
 // Contains the results of the DisableRadius operation.
 type DisableRadiusOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -43,13 +57,26 @@ type DisableRadiusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableRadiusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableRadiusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableRadiusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableRadiusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableRadiusResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableRadiusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableRadius{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableRadius, schemas.DisableRadiusRequest, schemas.DisableRadiusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableRadius{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableRadius, schemas.DisableRadiusRequest, schemas.DisableRadiusResult), output: &DisableRadiusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

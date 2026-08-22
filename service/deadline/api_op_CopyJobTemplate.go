@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,29 @@ type CopyJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyJobTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyJobTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.CopyJobTemplateRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CopyJobTemplateRequest_jobId, *v.JobId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.CopyJobTemplateRequest_queueId, *v.QueueId)
+	}
+	if v.TargetS3Location != nil {
+		s.WriteStruct(schemas.CopyJobTemplateRequest_targetS3Location)
+		v.TargetS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CopyJobTemplateOutput struct {
 
 	// The format of the job template, either JSON or YAML .
@@ -65,13 +90,36 @@ type CopyJobTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyJobTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyJobTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyJobTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateType != "" {
+		s.WriteString(schemas.CopyJobTemplateResponse_templateType, string(v.TemplateType))
+	}
+}
+func (v *CopyJobTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyJobTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyJobTemplateResponse_templateType:
+			var ev string
+			if err := d.ReadString(schemas.CopyJobTemplateResponse_templateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = types.JobTemplateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyJobTemplate, schemas.CopyJobTemplateRequest, schemas.CopyJobTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCopyJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyJobTemplate, schemas.CopyJobTemplateRequest, schemas.CopyJobTemplateResponse), output: &CopyJobTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

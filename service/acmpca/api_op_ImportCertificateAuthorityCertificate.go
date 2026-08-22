@@ -4,6 +4,8 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -149,6 +151,24 @@ type ImportCertificateAuthorityCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportCertificateAuthorityCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportCertificateAuthorityCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportCertificateAuthorityCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteBlob(schemas.ImportCertificateAuthorityCertificateRequest_Certificate, v.Certificate)
+	}
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.ImportCertificateAuthorityCertificateRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.CertificateChain != nil {
+		s.WriteBlob(schemas.ImportCertificateAuthorityCertificateRequest_CertificateChain, v.CertificateChain)
+	}
+}
+
 type ImportCertificateAuthorityCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -156,13 +176,26 @@ type ImportCertificateAuthorityCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportCertificateAuthorityCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportCertificateAuthorityCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ImportCertificateAuthorityCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportCertificateAuthorityCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportCertificateAuthorityCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCertificateAuthorityCertificate, schemas.ImportCertificateAuthorityCertificateRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportCertificateAuthorityCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCertificateAuthorityCertificate, schemas.ImportCertificateAuthorityCertificateRequest, nil), output: &ImportCertificateAuthorityCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

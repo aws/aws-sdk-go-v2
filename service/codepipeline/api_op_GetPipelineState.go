@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,18 @@ type GetPipelineStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPipelineStateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPipelineStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetPipelineStateInput_name, *v.Name)
+	}
+}
+
 // Represents the output of a GetPipelineState action.
 type GetPipelineStateOutput struct {
 
@@ -67,13 +81,53 @@ type GetPipelineStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPipelineStateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPipelineStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Created != nil {
+		s.WriteTime(schemas.GetPipelineStateOutput_created, *v.Created)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.GetPipelineStateOutput_pipelineName, *v.PipelineName)
+	}
+	if v.PipelineVersion != nil {
+		s.WriteInt32(schemas.GetPipelineStateOutput_pipelineVersion, *v.PipelineVersion)
+	}
+	serializeStageStateList(s, schemas.GetPipelineStateOutput_stageStates, v.StageStates)
+	if v.Updated != nil {
+		s.WriteTime(schemas.GetPipelineStateOutput_updated, *v.Updated)
+	}
+}
+func (v *GetPipelineStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPipelineStateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPipelineStateOutput_created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.GetPipelineStateOutput_created, v.Created)
+		case schemas.GetPipelineStateOutput_pipelineName:
+			v.PipelineName = new(string)
+			return d.ReadString(schemas.GetPipelineStateOutput_pipelineName, v.PipelineName)
+		case schemas.GetPipelineStateOutput_pipelineVersion:
+			v.PipelineVersion = new(int32)
+			return d.ReadInt32(schemas.GetPipelineStateOutput_pipelineVersion, v.PipelineVersion)
+		case schemas.GetPipelineStateOutput_stageStates:
+			return deserializeStageStateList(d, schemas.GetPipelineStateOutput_stageStates, &v.StageStates)
+		case schemas.GetPipelineStateOutput_updated:
+			v.Updated = new(time.Time)
+			return d.ReadTime(schemas.GetPipelineStateOutput_updated, v.Updated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPipelineStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPipelineState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineState, schemas.GetPipelineStateInput, schemas.GetPipelineStateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPipelineState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipelineState, schemas.GetPipelineStateInput, schemas.GetPipelineStateOutput), output: &GetPipelineStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

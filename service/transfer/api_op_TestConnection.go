@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type TestConnectionInput struct {
 	ConnectorId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TestConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.TestConnectionRequest_ConnectorId, *v.ConnectorId)
+	}
 }
 
 type TestConnectionOutput struct {
@@ -69,13 +83,52 @@ type TestConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.TestConnectionResponse_ConnectorId, *v.ConnectorId)
+	}
+	if v.SftpConnectionDetails != nil {
+		s.WriteStruct(schemas.TestConnectionResponse_SftpConnectionDetails)
+		v.SftpConnectionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.TestConnectionResponse_Status, *v.Status)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.TestConnectionResponse_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *TestConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestConnectionResponse_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.TestConnectionResponse_ConnectorId, v.ConnectorId)
+		case schemas.TestConnectionResponse_SftpConnectionDetails:
+			v.SftpConnectionDetails = &types.SftpConnectorConnectionDetails{}
+			return v.SftpConnectionDetails.Deserialize(d)
+		case schemas.TestConnectionResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.TestConnectionResponse_Status, v.Status)
+		case schemas.TestConnectionResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.TestConnectionResponse_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestConnection, schemas.TestConnectionRequest, schemas.TestConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTestConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestConnection, schemas.TestConnectionRequest, schemas.TestConnectionResponse), output: &TestConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

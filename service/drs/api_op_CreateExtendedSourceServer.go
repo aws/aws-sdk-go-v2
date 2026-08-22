@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,31 @@ type CreateExtendedSourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExtendedSourceServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExtendedSourceServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExtendedSourceServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceServerArn != nil {
+		s.WriteString(schemas.CreateExtendedSourceServerRequest_sourceServerArn, *v.SourceServerArn)
+	}
+	serializeTagsMap(s, schemas.CreateExtendedSourceServerRequest_tags, v.Tags)
+}
+func (v *CreateExtendedSourceServerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExtendedSourceServerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExtendedSourceServerRequest_sourceServerArn:
+			v.SourceServerArn = new(string)
+			return d.ReadString(schemas.CreateExtendedSourceServerRequest_sourceServerArn, v.SourceServerArn)
+		case schemas.CreateExtendedSourceServerRequest_tags:
+			return deserializeTagsMap(d, schemas.CreateExtendedSourceServerRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateExtendedSourceServerOutput struct {
 
 	// Created extended source server.
@@ -50,13 +77,34 @@ type CreateExtendedSourceServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExtendedSourceServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExtendedSourceServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExtendedSourceServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceServer != nil {
+		s.WriteStruct(schemas.CreateExtendedSourceServerResponse_sourceServer)
+		v.SourceServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateExtendedSourceServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExtendedSourceServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExtendedSourceServerResponse_sourceServer:
+			v.SourceServer = &types.SourceServer{}
+			return v.SourceServer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExtendedSourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateExtendedSourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExtendedSourceServer, schemas.CreateExtendedSourceServerRequest, schemas.CreateExtendedSourceServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateExtendedSourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExtendedSourceServer, schemas.CreateExtendedSourceServerRequest, schemas.CreateExtendedSourceServerResponse), output: &CreateExtendedSourceServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

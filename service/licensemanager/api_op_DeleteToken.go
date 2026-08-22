@@ -4,6 +4,8 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TokenId != nil {
+		s.WriteString(schemas.DeleteTokenRequest_TokenId, *v.TokenId)
+	}
+}
+
 type DeleteTokenOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteToken, schemas.DeleteTokenRequest, schemas.DeleteTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteToken, schemas.DeleteTokenRequest, schemas.DeleteTokenResponse), output: &DeleteTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

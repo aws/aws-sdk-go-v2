@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -26,6 +28,34 @@ type AgentAlreadyRunningAssessment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AgentAlreadyRunningAssessment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentAlreadyRunningAssessment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentAlreadyRunningAssessment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.AgentAlreadyRunningAssessment_agentId, *v.AgentId)
+	}
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.AgentAlreadyRunningAssessment_assessmentRunArn, *v.AssessmentRunArn)
+	}
+}
+func (v *AgentAlreadyRunningAssessment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentAlreadyRunningAssessment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentAlreadyRunningAssessment_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.AgentAlreadyRunningAssessment_agentId, v.AgentId)
+		case schemas.AgentAlreadyRunningAssessment_assessmentRunArn:
+			v.AssessmentRunArn = new(string)
+			return d.ReadString(schemas.AgentAlreadyRunningAssessment_assessmentRunArn, v.AssessmentRunArn)
+		}
+		return nil
+	})
+}
+
 // Contains information about an Amazon Inspector agent. This data type is used as
 // a request parameter in the ListAssessmentRunAgentsaction.
 type AgentFilter struct {
@@ -43,6 +73,28 @@ type AgentFilter struct {
 	AgentHealths []AgentHealth
 
 	noSmithyDocumentSerde
+}
+
+func (v *AgentFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentHealthCodeList(s, schemas.AgentFilter_agentHealthCodes, v.AgentHealthCodes)
+	serializeAgentHealthList(s, schemas.AgentFilter_agentHealths, v.AgentHealths)
+}
+func (v *AgentFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentFilter_agentHealthCodes:
+			return deserializeAgentHealthCodeList(d, schemas.AgentFilter_agentHealthCodes, &v.AgentHealthCodes)
+		case schemas.AgentFilter_agentHealths:
+			return deserializeAgentHealthList(d, schemas.AgentFilter_agentHealths, &v.AgentHealths)
+		}
+		return nil
+	})
 }
 
 // Used as a response element in the PreviewAgents action.
@@ -79,6 +131,74 @@ type AgentPreview struct {
 	OperatingSystem *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AgentPreview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentPreview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentPreview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentHealth != "" {
+		s.WriteString(schemas.AgentPreview_agentHealth, string(v.AgentHealth))
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.AgentPreview_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.AgentPreview_agentVersion, *v.AgentVersion)
+	}
+	if v.AutoScalingGroup != nil {
+		s.WriteString(schemas.AgentPreview_autoScalingGroup, *v.AutoScalingGroup)
+	}
+	if v.Hostname != nil {
+		s.WriteString(schemas.AgentPreview_hostname, *v.Hostname)
+	}
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.AgentPreview_ipv4Address, *v.Ipv4Address)
+	}
+	if v.KernelVersion != nil {
+		s.WriteString(schemas.AgentPreview_kernelVersion, *v.KernelVersion)
+	}
+	if v.OperatingSystem != nil {
+		s.WriteString(schemas.AgentPreview_operatingSystem, *v.OperatingSystem)
+	}
+}
+func (v *AgentPreview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentPreview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentPreview_agentHealth:
+			var ev string
+			if err := d.ReadString(schemas.AgentPreview_agentHealth, &ev); err != nil {
+				return err
+			}
+			v.AgentHealth = AgentHealth(ev)
+			return nil
+		case schemas.AgentPreview_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.AgentPreview_agentId, v.AgentId)
+		case schemas.AgentPreview_agentVersion:
+			v.AgentVersion = new(string)
+			return d.ReadString(schemas.AgentPreview_agentVersion, v.AgentVersion)
+		case schemas.AgentPreview_autoScalingGroup:
+			v.AutoScalingGroup = new(string)
+			return d.ReadString(schemas.AgentPreview_autoScalingGroup, v.AutoScalingGroup)
+		case schemas.AgentPreview_hostname:
+			v.Hostname = new(string)
+			return d.ReadString(schemas.AgentPreview_hostname, v.Hostname)
+		case schemas.AgentPreview_ipv4Address:
+			v.Ipv4Address = new(string)
+			return d.ReadString(schemas.AgentPreview_ipv4Address, v.Ipv4Address)
+		case schemas.AgentPreview_kernelVersion:
+			v.KernelVersion = new(string)
+			return d.ReadString(schemas.AgentPreview_kernelVersion, v.KernelVersion)
+		case schemas.AgentPreview_operatingSystem:
+			v.OperatingSystem = new(string)
+			return d.ReadString(schemas.AgentPreview_operatingSystem, v.OperatingSystem)
+		}
+		return nil
+	})
 }
 
 // A snapshot of an Amazon Inspector assessment run that contains the findings of
@@ -164,6 +284,101 @@ type AssessmentRun struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentRun) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentRun)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentRun) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssessmentRun_arn, *v.Arn)
+	}
+	if v.AssessmentTemplateArn != nil {
+		s.WriteString(schemas.AssessmentRun_assessmentTemplateArn, *v.AssessmentTemplateArn)
+	}
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.AssessmentRun_completedAt, *v.CompletedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AssessmentRun_createdAt, *v.CreatedAt)
+	}
+	if v.DataCollected != nil {
+		s.WriteBool(schemas.AssessmentRun_dataCollected, *v.DataCollected)
+	}
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.AssessmentRun_durationInSeconds, *v.DurationInSeconds)
+	}
+	serializeAssessmentRunFindingCounts(s, schemas.AssessmentRun_findingCounts, v.FindingCounts)
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentRun_name, *v.Name)
+	}
+	serializeAssessmentRunNotificationList(s, schemas.AssessmentRun_notifications, v.Notifications)
+	serializeAssessmentRulesPackageArnList(s, schemas.AssessmentRun_rulesPackageArns, v.RulesPackageArns)
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.AssessmentRun_startedAt, *v.StartedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.AssessmentRun_state, string(v.State))
+	}
+	if v.StateChangedAt != nil {
+		s.WriteTime(schemas.AssessmentRun_stateChangedAt, *v.StateChangedAt)
+	}
+	serializeAssessmentRunStateChangeList(s, schemas.AssessmentRun_stateChanges, v.StateChanges)
+	serializeUserAttributeList(s, schemas.AssessmentRun_userAttributesForFindings, v.UserAttributesForFindings)
+}
+func (v *AssessmentRun) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentRun, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentRun_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssessmentRun_arn, v.Arn)
+		case schemas.AssessmentRun_assessmentTemplateArn:
+			v.AssessmentTemplateArn = new(string)
+			return d.ReadString(schemas.AssessmentRun_assessmentTemplateArn, v.AssessmentTemplateArn)
+		case schemas.AssessmentRun_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentRun_completedAt, v.CompletedAt)
+		case schemas.AssessmentRun_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentRun_createdAt, v.CreatedAt)
+		case schemas.AssessmentRun_dataCollected:
+			v.DataCollected = new(bool)
+			return d.ReadBool(schemas.AssessmentRun_dataCollected, v.DataCollected)
+		case schemas.AssessmentRun_durationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.AssessmentRun_durationInSeconds, v.DurationInSeconds)
+		case schemas.AssessmentRun_findingCounts:
+			return deserializeAssessmentRunFindingCounts(d, schemas.AssessmentRun_findingCounts, &v.FindingCounts)
+		case schemas.AssessmentRun_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentRun_name, v.Name)
+		case schemas.AssessmentRun_notifications:
+			return deserializeAssessmentRunNotificationList(d, schemas.AssessmentRun_notifications, &v.Notifications)
+		case schemas.AssessmentRun_rulesPackageArns:
+			return deserializeAssessmentRulesPackageArnList(d, schemas.AssessmentRun_rulesPackageArns, &v.RulesPackageArns)
+		case schemas.AssessmentRun_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentRun_startedAt, v.StartedAt)
+		case schemas.AssessmentRun_state:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentRun_state, &ev); err != nil {
+				return err
+			}
+			v.State = AssessmentRunState(ev)
+			return nil
+		case schemas.AssessmentRun_stateChangedAt:
+			v.StateChangedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentRun_stateChangedAt, v.StateChangedAt)
+		case schemas.AssessmentRun_stateChanges:
+			return deserializeAssessmentRunStateChangeList(d, schemas.AssessmentRun_stateChanges, &v.StateChanges)
+		case schemas.AssessmentRun_userAttributesForFindings:
+			return deserializeUserAttributeList(d, schemas.AssessmentRun_userAttributesForFindings, &v.UserAttributesForFindings)
+		}
+		return nil
+	})
+}
+
 // Contains information about an Amazon Inspector agent. This data type is used as
 // a response element in the ListAssessmentRunAgentsaction.
 type AssessmentRunAgent struct {
@@ -200,6 +415,69 @@ type AssessmentRunAgent struct {
 	AutoScalingGroup *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentRunAgent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentRunAgent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentRunAgent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentHealth != "" {
+		s.WriteString(schemas.AssessmentRunAgent_agentHealth, string(v.AgentHealth))
+	}
+	if v.AgentHealthCode != "" {
+		s.WriteString(schemas.AssessmentRunAgent_agentHealthCode, string(v.AgentHealthCode))
+	}
+	if v.AgentHealthDetails != nil {
+		s.WriteString(schemas.AssessmentRunAgent_agentHealthDetails, *v.AgentHealthDetails)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.AssessmentRunAgent_agentId, *v.AgentId)
+	}
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.AssessmentRunAgent_assessmentRunArn, *v.AssessmentRunArn)
+	}
+	if v.AutoScalingGroup != nil {
+		s.WriteString(schemas.AssessmentRunAgent_autoScalingGroup, *v.AutoScalingGroup)
+	}
+	serializeTelemetryMetadataList(s, schemas.AssessmentRunAgent_telemetryMetadata, v.TelemetryMetadata)
+}
+func (v *AssessmentRunAgent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentRunAgent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentRunAgent_agentHealth:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentRunAgent_agentHealth, &ev); err != nil {
+				return err
+			}
+			v.AgentHealth = AgentHealth(ev)
+			return nil
+		case schemas.AssessmentRunAgent_agentHealthCode:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentRunAgent_agentHealthCode, &ev); err != nil {
+				return err
+			}
+			v.AgentHealthCode = AgentHealthCode(ev)
+			return nil
+		case schemas.AssessmentRunAgent_agentHealthDetails:
+			v.AgentHealthDetails = new(string)
+			return d.ReadString(schemas.AssessmentRunAgent_agentHealthDetails, v.AgentHealthDetails)
+		case schemas.AssessmentRunAgent_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.AssessmentRunAgent_agentId, v.AgentId)
+		case schemas.AssessmentRunAgent_assessmentRunArn:
+			v.AssessmentRunArn = new(string)
+			return d.ReadString(schemas.AssessmentRunAgent_assessmentRunArn, v.AssessmentRunArn)
+		case schemas.AssessmentRunAgent_autoScalingGroup:
+			v.AutoScalingGroup = new(string)
+			return d.ReadString(schemas.AssessmentRunAgent_autoScalingGroup, v.AutoScalingGroup)
+		case schemas.AssessmentRunAgent_telemetryMetadata:
+			return deserializeTelemetryMetadataList(d, schemas.AssessmentRunAgent_telemetryMetadata, &v.TelemetryMetadata)
+		}
+		return nil
+	})
 }
 
 // Used as the request parameter in the ListAssessmentRuns action.
@@ -242,6 +520,66 @@ type AssessmentRunFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentRunFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentRunFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentRunFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTimeRange != nil {
+		s.WriteStruct(schemas.AssessmentRunFilter_completionTimeRange)
+		v.CompletionTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DurationRange != nil {
+		s.WriteStruct(schemas.AssessmentRunFilter_durationRange)
+		v.DurationRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NamePattern != nil {
+		s.WriteString(schemas.AssessmentRunFilter_namePattern, *v.NamePattern)
+	}
+	serializeFilterRulesPackageArnList(s, schemas.AssessmentRunFilter_rulesPackageArns, v.RulesPackageArns)
+	if v.StartTimeRange != nil {
+		s.WriteStruct(schemas.AssessmentRunFilter_startTimeRange)
+		v.StartTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StateChangeTimeRange != nil {
+		s.WriteStruct(schemas.AssessmentRunFilter_stateChangeTimeRange)
+		v.StateChangeTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAssessmentRunStateList(s, schemas.AssessmentRunFilter_states, v.States)
+}
+func (v *AssessmentRunFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentRunFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentRunFilter_completionTimeRange:
+			v.CompletionTimeRange = &TimestampRange{}
+			return v.CompletionTimeRange.Deserialize(d)
+		case schemas.AssessmentRunFilter_durationRange:
+			v.DurationRange = &DurationRange{}
+			return v.DurationRange.Deserialize(d)
+		case schemas.AssessmentRunFilter_namePattern:
+			v.NamePattern = new(string)
+			return d.ReadString(schemas.AssessmentRunFilter_namePattern, v.NamePattern)
+		case schemas.AssessmentRunFilter_rulesPackageArns:
+			return deserializeFilterRulesPackageArnList(d, schemas.AssessmentRunFilter_rulesPackageArns, &v.RulesPackageArns)
+		case schemas.AssessmentRunFilter_startTimeRange:
+			v.StartTimeRange = &TimestampRange{}
+			return v.StartTimeRange.Deserialize(d)
+		case schemas.AssessmentRunFilter_stateChangeTimeRange:
+			v.StateChangeTimeRange = &TimestampRange{}
+			return v.StateChangeTimeRange.Deserialize(d)
+		case schemas.AssessmentRunFilter_states:
+			return deserializeAssessmentRunStateList(d, schemas.AssessmentRunFilter_states, &v.States)
+		}
+		return nil
+	})
+}
+
 // Used as one of the elements of the AssessmentRun data type.
 type AssessmentRunNotification struct {
 
@@ -272,6 +610,66 @@ type AssessmentRunNotification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentRunNotification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentRunNotification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentRunNotification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Date != nil {
+		s.WriteTime(schemas.AssessmentRunNotification_date, *v.Date)
+	}
+	if v.Error != nil {
+		s.WriteBool(schemas.AssessmentRunNotification_error, *v.Error)
+	}
+	if v.Event != "" {
+		s.WriteString(schemas.AssessmentRunNotification_event, string(v.Event))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AssessmentRunNotification_message, *v.Message)
+	}
+	if v.SnsPublishStatusCode != "" {
+		s.WriteString(schemas.AssessmentRunNotification_snsPublishStatusCode, string(v.SnsPublishStatusCode))
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.AssessmentRunNotification_snsTopicArn, *v.SnsTopicArn)
+	}
+}
+func (v *AssessmentRunNotification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentRunNotification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentRunNotification_date:
+			v.Date = new(time.Time)
+			return d.ReadTime(schemas.AssessmentRunNotification_date, v.Date)
+		case schemas.AssessmentRunNotification_error:
+			v.Error = new(bool)
+			return d.ReadBool(schemas.AssessmentRunNotification_error, v.Error)
+		case schemas.AssessmentRunNotification_event:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentRunNotification_event, &ev); err != nil {
+				return err
+			}
+			v.Event = InspectorEvent(ev)
+			return nil
+		case schemas.AssessmentRunNotification_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AssessmentRunNotification_message, v.Message)
+		case schemas.AssessmentRunNotification_snsPublishStatusCode:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentRunNotification_snsPublishStatusCode, &ev); err != nil {
+				return err
+			}
+			v.SnsPublishStatusCode = AssessmentRunNotificationSnsStatusCode(ev)
+			return nil
+		case schemas.AssessmentRunNotification_snsTopicArn:
+			v.SnsTopicArn = new(string)
+			return d.ReadString(schemas.AssessmentRunNotification_snsTopicArn, v.SnsTopicArn)
+		}
+		return nil
+	})
+}
+
 // Used as one of the elements of the AssessmentRun data type.
 type AssessmentRunStateChange struct {
 
@@ -286,6 +684,38 @@ type AssessmentRunStateChange struct {
 	StateChangedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentRunStateChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentRunStateChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentRunStateChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.AssessmentRunStateChange_state, string(v.State))
+	}
+	if v.StateChangedAt != nil {
+		s.WriteTime(schemas.AssessmentRunStateChange_stateChangedAt, *v.StateChangedAt)
+	}
+}
+func (v *AssessmentRunStateChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentRunStateChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentRunStateChange_state:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentRunStateChange_state, &ev); err != nil {
+				return err
+			}
+			v.State = AssessmentRunState(ev)
+			return nil
+		case schemas.AssessmentRunStateChange_stateChangedAt:
+			v.StateChangedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentRunStateChange_stateChangedAt, v.StateChangedAt)
+		}
+		return nil
+	})
 }
 
 // Contains information about an Amazon Inspector application. This data type is
@@ -319,6 +749,52 @@ type AssessmentTarget struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssessmentTarget_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AssessmentTarget_createdAt, *v.CreatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentTarget_name, *v.Name)
+	}
+	if v.ResourceGroupArn != nil {
+		s.WriteString(schemas.AssessmentTarget_resourceGroupArn, *v.ResourceGroupArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AssessmentTarget_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AssessmentTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentTarget_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssessmentTarget_arn, v.Arn)
+		case schemas.AssessmentTarget_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentTarget_createdAt, v.CreatedAt)
+		case schemas.AssessmentTarget_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentTarget_name, v.Name)
+		case schemas.AssessmentTarget_resourceGroupArn:
+			v.ResourceGroupArn = new(string)
+			return d.ReadString(schemas.AssessmentTarget_resourceGroupArn, v.ResourceGroupArn)
+		case schemas.AssessmentTarget_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentTarget_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Used as the request parameter in the ListAssessmentTargets action.
 type AssessmentTargetFilter struct {
 
@@ -328,6 +804,28 @@ type AssessmentTargetFilter struct {
 	AssessmentTargetNamePattern *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentTargetFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentTargetFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentTargetFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentTargetNamePattern != nil {
+		s.WriteString(schemas.AssessmentTargetFilter_assessmentTargetNamePattern, *v.AssessmentTargetNamePattern)
+	}
+}
+func (v *AssessmentTargetFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentTargetFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentTargetFilter_assessmentTargetNamePattern:
+			v.AssessmentTargetNamePattern = new(string)
+			return d.ReadString(schemas.AssessmentTargetFilter_assessmentTargetNamePattern, v.AssessmentTargetNamePattern)
+		}
+		return nil
+	})
 }
 
 // Contains information about an Amazon Inspector assessment template. This data
@@ -385,6 +883,70 @@ type AssessmentTemplate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssessmentTemplate_arn, *v.Arn)
+	}
+	if v.AssessmentRunCount != nil {
+		s.WriteInt32(schemas.AssessmentTemplate_assessmentRunCount, *v.AssessmentRunCount)
+	}
+	if v.AssessmentTargetArn != nil {
+		s.WriteString(schemas.AssessmentTemplate_assessmentTargetArn, *v.AssessmentTargetArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AssessmentTemplate_createdAt, *v.CreatedAt)
+	}
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.AssessmentTemplate_durationInSeconds, *v.DurationInSeconds)
+	}
+	if v.LastAssessmentRunArn != nil {
+		s.WriteString(schemas.AssessmentTemplate_lastAssessmentRunArn, *v.LastAssessmentRunArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentTemplate_name, *v.Name)
+	}
+	serializeAssessmentTemplateRulesPackageArnList(s, schemas.AssessmentTemplate_rulesPackageArns, v.RulesPackageArns)
+	serializeUserAttributeList(s, schemas.AssessmentTemplate_userAttributesForFindings, v.UserAttributesForFindings)
+}
+func (v *AssessmentTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentTemplate_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssessmentTemplate_arn, v.Arn)
+		case schemas.AssessmentTemplate_assessmentRunCount:
+			v.AssessmentRunCount = new(int32)
+			return d.ReadInt32(schemas.AssessmentTemplate_assessmentRunCount, v.AssessmentRunCount)
+		case schemas.AssessmentTemplate_assessmentTargetArn:
+			v.AssessmentTargetArn = new(string)
+			return d.ReadString(schemas.AssessmentTemplate_assessmentTargetArn, v.AssessmentTargetArn)
+		case schemas.AssessmentTemplate_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssessmentTemplate_createdAt, v.CreatedAt)
+		case schemas.AssessmentTemplate_durationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.AssessmentTemplate_durationInSeconds, v.DurationInSeconds)
+		case schemas.AssessmentTemplate_lastAssessmentRunArn:
+			v.LastAssessmentRunArn = new(string)
+			return d.ReadString(schemas.AssessmentTemplate_lastAssessmentRunArn, v.LastAssessmentRunArn)
+		case schemas.AssessmentTemplate_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentTemplate_name, v.Name)
+		case schemas.AssessmentTemplate_rulesPackageArns:
+			return deserializeAssessmentTemplateRulesPackageArnList(d, schemas.AssessmentTemplate_rulesPackageArns, &v.RulesPackageArns)
+		case schemas.AssessmentTemplate_userAttributesForFindings:
+			return deserializeUserAttributeList(d, schemas.AssessmentTemplate_userAttributesForFindings, &v.UserAttributesForFindings)
+		}
+		return nil
+	})
+}
+
 // Used as the request parameter in the ListAssessmentTemplates action.
 type AssessmentTemplateFilter struct {
 
@@ -404,6 +966,39 @@ type AssessmentTemplateFilter struct {
 	RulesPackageArns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentTemplateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentTemplateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentTemplateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationRange != nil {
+		s.WriteStruct(schemas.AssessmentTemplateFilter_durationRange)
+		v.DurationRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NamePattern != nil {
+		s.WriteString(schemas.AssessmentTemplateFilter_namePattern, *v.NamePattern)
+	}
+	serializeFilterRulesPackageArnList(s, schemas.AssessmentTemplateFilter_rulesPackageArns, v.RulesPackageArns)
+}
+func (v *AssessmentTemplateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentTemplateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentTemplateFilter_durationRange:
+			v.DurationRange = &DurationRange{}
+			return v.DurationRange.Deserialize(d)
+		case schemas.AssessmentTemplateFilter_namePattern:
+			v.NamePattern = new(string)
+			return d.ReadString(schemas.AssessmentTemplateFilter_namePattern, v.NamePattern)
+		case schemas.AssessmentTemplateFilter_rulesPackageArns:
+			return deserializeFilterRulesPackageArnList(d, schemas.AssessmentTemplateFilter_rulesPackageArns, &v.RulesPackageArns)
+		}
+		return nil
+	})
 }
 
 // A collection of attributes of the host from which the finding is generated.
@@ -441,6 +1036,58 @@ type AssetAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssetAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.AssetAttributes_agentId, *v.AgentId)
+	}
+	if v.AmiId != nil {
+		s.WriteString(schemas.AssetAttributes_amiId, *v.AmiId)
+	}
+	if v.AutoScalingGroup != nil {
+		s.WriteString(schemas.AssetAttributes_autoScalingGroup, *v.AutoScalingGroup)
+	}
+	if v.Hostname != nil {
+		s.WriteString(schemas.AssetAttributes_hostname, *v.Hostname)
+	}
+	serializeIpv4AddressList(s, schemas.AssetAttributes_ipv4Addresses, v.Ipv4Addresses)
+	serializeNetworkInterfaces(s, schemas.AssetAttributes_networkInterfaces, v.NetworkInterfaces)
+	s.WriteInt32(schemas.AssetAttributes_schemaVersion, v.SchemaVersion)
+	serializeTags(s, schemas.AssetAttributes_tags, v.Tags)
+}
+func (v *AssetAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetAttributes_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.AssetAttributes_agentId, v.AgentId)
+		case schemas.AssetAttributes_amiId:
+			v.AmiId = new(string)
+			return d.ReadString(schemas.AssetAttributes_amiId, v.AmiId)
+		case schemas.AssetAttributes_autoScalingGroup:
+			v.AutoScalingGroup = new(string)
+			return d.ReadString(schemas.AssetAttributes_autoScalingGroup, v.AutoScalingGroup)
+		case schemas.AssetAttributes_hostname:
+			v.Hostname = new(string)
+			return d.ReadString(schemas.AssetAttributes_hostname, v.Hostname)
+		case schemas.AssetAttributes_ipv4Addresses:
+			return deserializeIpv4AddressList(d, schemas.AssetAttributes_ipv4Addresses, &v.Ipv4Addresses)
+		case schemas.AssetAttributes_networkInterfaces:
+			return deserializeNetworkInterfaces(d, schemas.AssetAttributes_networkInterfaces, &v.NetworkInterfaces)
+		case schemas.AssetAttributes_schemaVersion:
+			return d.ReadInt32(schemas.AssetAttributes_schemaVersion, &v.SchemaVersion)
+		case schemas.AssetAttributes_tags:
+			return deserializeTags(d, schemas.AssetAttributes_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // This data type is used as a request parameter in the AddAttributesToFindings and CreateAssessmentTemplate actions.
 type Attribute struct {
 
@@ -455,6 +1102,34 @@ type Attribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Attribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Attribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Attribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Attribute_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Attribute_value, *v.Value)
+	}
+}
+func (v *Attribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Attribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Attribute_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Attribute_key, v.Key)
+		case schemas.Attribute_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Attribute_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // This data type is used in the AssessmentTemplateFilter data type.
 type DurationRange struct {
 
@@ -466,6 +1141,34 @@ type DurationRange struct {
 	MinSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DurationRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DurationRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DurationRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxSeconds != nil {
+		s.WriteInt32(schemas.DurationRange_maxSeconds, *v.MaxSeconds)
+	}
+	if v.MinSeconds != nil {
+		s.WriteInt32(schemas.DurationRange_minSeconds, *v.MinSeconds)
+	}
+}
+func (v *DurationRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DurationRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DurationRange_maxSeconds:
+			v.MaxSeconds = new(int32)
+			return d.ReadInt32(schemas.DurationRange_maxSeconds, v.MaxSeconds)
+		case schemas.DurationRange_minSeconds:
+			v.MinSeconds = new(int32)
+			return d.ReadInt32(schemas.DurationRange_minSeconds, v.MinSeconds)
+		}
+		return nil
+	})
 }
 
 // This data type is used in the Subscription data type.
@@ -483,6 +1186,38 @@ type EventSubscription struct {
 	SubscribedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventSubscription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventSubscription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventSubscription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != "" {
+		s.WriteString(schemas.EventSubscription_event, string(v.Event))
+	}
+	if v.SubscribedAt != nil {
+		s.WriteTime(schemas.EventSubscription_subscribedAt, *v.SubscribedAt)
+	}
+}
+func (v *EventSubscription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventSubscription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventSubscription_event:
+			var ev string
+			if err := d.ReadString(schemas.EventSubscription_event, &ev); err != nil {
+				return err
+			}
+			v.Event = InspectorEvent(ev)
+			return nil
+		case schemas.EventSubscription_subscribedAt:
+			v.SubscribedAt = new(time.Time)
+			return d.ReadTime(schemas.EventSubscription_subscribedAt, v.SubscribedAt)
+		}
+		return nil
+	})
 }
 
 // Contains information about what was excluded from an assessment run.
@@ -519,6 +1254,52 @@ type Exclusion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Exclusion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Exclusion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Exclusion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Exclusion_arn, *v.Arn)
+	}
+	serializeAttributeList(s, schemas.Exclusion_attributes, v.Attributes)
+	if v.Description != nil {
+		s.WriteString(schemas.Exclusion_description, *v.Description)
+	}
+	if v.Recommendation != nil {
+		s.WriteString(schemas.Exclusion_recommendation, *v.Recommendation)
+	}
+	serializeScopeList(s, schemas.Exclusion_scopes, v.Scopes)
+	if v.Title != nil {
+		s.WriteString(schemas.Exclusion_title, *v.Title)
+	}
+}
+func (v *Exclusion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Exclusion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Exclusion_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Exclusion_arn, v.Arn)
+		case schemas.Exclusion_attributes:
+			return deserializeAttributeList(d, schemas.Exclusion_attributes, &v.Attributes)
+		case schemas.Exclusion_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Exclusion_description, v.Description)
+		case schemas.Exclusion_recommendation:
+			v.Recommendation = new(string)
+			return d.ReadString(schemas.Exclusion_recommendation, v.Recommendation)
+		case schemas.Exclusion_scopes:
+			return deserializeScopeList(d, schemas.Exclusion_scopes, &v.Scopes)
+		case schemas.Exclusion_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Exclusion_title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Contains information about what is excluded from an assessment run given the
 // current state of the assessment template.
 type ExclusionPreview struct {
@@ -549,6 +1330,46 @@ type ExclusionPreview struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExclusionPreview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExclusionPreview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExclusionPreview) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeList(s, schemas.ExclusionPreview_attributes, v.Attributes)
+	if v.Description != nil {
+		s.WriteString(schemas.ExclusionPreview_description, *v.Description)
+	}
+	if v.Recommendation != nil {
+		s.WriteString(schemas.ExclusionPreview_recommendation, *v.Recommendation)
+	}
+	serializeScopeList(s, schemas.ExclusionPreview_scopes, v.Scopes)
+	if v.Title != nil {
+		s.WriteString(schemas.ExclusionPreview_title, *v.Title)
+	}
+}
+func (v *ExclusionPreview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExclusionPreview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExclusionPreview_attributes:
+			return deserializeAttributeList(d, schemas.ExclusionPreview_attributes, &v.Attributes)
+		case schemas.ExclusionPreview_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExclusionPreview_description, v.Description)
+		case schemas.ExclusionPreview_recommendation:
+			v.Recommendation = new(string)
+			return d.ReadString(schemas.ExclusionPreview_recommendation, v.Recommendation)
+		case schemas.ExclusionPreview_scopes:
+			return deserializeScopeList(d, schemas.ExclusionPreview_scopes, &v.Scopes)
+		case schemas.ExclusionPreview_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ExclusionPreview_title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Includes details about the failed items.
 type FailedItemDetails struct {
 
@@ -564,6 +1385,38 @@ type FailedItemDetails struct {
 	Retryable *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailedItemDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedItemDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedItemDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureCode != "" {
+		s.WriteString(schemas.FailedItemDetails_failureCode, string(v.FailureCode))
+	}
+	if v.Retryable != nil {
+		s.WriteBool(schemas.FailedItemDetails_retryable, *v.Retryable)
+	}
+}
+func (v *FailedItemDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedItemDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedItemDetails_failureCode:
+			var ev string
+			if err := d.ReadString(schemas.FailedItemDetails_failureCode, &ev); err != nil {
+				return err
+			}
+			v.FailureCode = FailedItemErrorCode(ev)
+			return nil
+		case schemas.FailedItemDetails_retryable:
+			v.Retryable = new(bool)
+			return d.ReadBool(schemas.FailedItemDetails_retryable, v.Retryable)
+		}
+		return nil
+	})
 }
 
 // Contains information about an Amazon Inspector finding. This data type is used
@@ -637,6 +1490,133 @@ type Finding struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Finding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Finding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Finding_arn, *v.Arn)
+	}
+	if v.AssetAttributes != nil {
+		s.WriteStruct(schemas.Finding_assetAttributes)
+		v.AssetAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.Finding_assetType, string(v.AssetType))
+	}
+	serializeAttributeList(s, schemas.Finding_attributes, v.Attributes)
+	if v.Confidence != 0 {
+		s.WriteInt32(schemas.Finding_confidence, v.Confidence)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Finding_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Finding_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Finding_id, *v.Id)
+	}
+	if v.IndicatorOfCompromise != nil {
+		s.WriteBool(schemas.Finding_indicatorOfCompromise, *v.IndicatorOfCompromise)
+	}
+	if v.NumericSeverity != 0 {
+		s.WriteFloat64(schemas.Finding_numericSeverity, v.NumericSeverity)
+	}
+	if v.Recommendation != nil {
+		s.WriteString(schemas.Finding_recommendation, *v.Recommendation)
+	}
+	if v.SchemaVersion != 0 {
+		s.WriteInt32(schemas.Finding_schemaVersion, v.SchemaVersion)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.Finding_service, *v.Service)
+	}
+	if v.ServiceAttributes != nil {
+		s.WriteStruct(schemas.Finding_serviceAttributes)
+		v.ServiceAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.Finding_severity, string(v.Severity))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.Finding_title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Finding_updatedAt, *v.UpdatedAt)
+	}
+	serializeUserAttributeList(s, schemas.Finding_userAttributes, v.UserAttributes)
+}
+func (v *Finding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Finding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Finding_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Finding_arn, v.Arn)
+		case schemas.Finding_assetAttributes:
+			v.AssetAttributes = &AssetAttributes{}
+			return v.AssetAttributes.Deserialize(d)
+		case schemas.Finding_assetType:
+			var ev string
+			if err := d.ReadString(schemas.Finding_assetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = AssetType(ev)
+			return nil
+		case schemas.Finding_attributes:
+			return deserializeAttributeList(d, schemas.Finding_attributes, &v.Attributes)
+		case schemas.Finding_confidence:
+			return d.ReadInt32(schemas.Finding_confidence, &v.Confidence)
+		case schemas.Finding_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Finding_createdAt, v.CreatedAt)
+		case schemas.Finding_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Finding_description, v.Description)
+		case schemas.Finding_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Finding_id, v.Id)
+		case schemas.Finding_indicatorOfCompromise:
+			v.IndicatorOfCompromise = new(bool)
+			return d.ReadBool(schemas.Finding_indicatorOfCompromise, v.IndicatorOfCompromise)
+		case schemas.Finding_numericSeverity:
+			return d.ReadFloat64(schemas.Finding_numericSeverity, &v.NumericSeverity)
+		case schemas.Finding_recommendation:
+			v.Recommendation = new(string)
+			return d.ReadString(schemas.Finding_recommendation, v.Recommendation)
+		case schemas.Finding_schemaVersion:
+			return d.ReadInt32(schemas.Finding_schemaVersion, &v.SchemaVersion)
+		case schemas.Finding_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.Finding_service, v.Service)
+		case schemas.Finding_serviceAttributes:
+			v.ServiceAttributes = &InspectorServiceAttributes{}
+			return v.ServiceAttributes.Deserialize(d)
+		case schemas.Finding_severity:
+			var ev string
+			if err := d.ReadString(schemas.Finding_severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = Severity(ev)
+			return nil
+		case schemas.Finding_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Finding_title, v.Title)
+		case schemas.Finding_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Finding_updatedAt, v.UpdatedAt)
+		case schemas.Finding_userAttributes:
+			return deserializeUserAttributeList(d, schemas.Finding_userAttributes, &v.UserAttributes)
+		}
+		return nil
+	})
+}
+
 // This data type is used as a request parameter in the ListFindings action.
 type FindingFilter struct {
 
@@ -681,6 +1661,51 @@ type FindingFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FindingFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentIdList(s, schemas.FindingFilter_agentIds, v.AgentIds)
+	serializeAttributeList(s, schemas.FindingFilter_attributes, v.Attributes)
+	serializeAutoScalingGroupList(s, schemas.FindingFilter_autoScalingGroups, v.AutoScalingGroups)
+	if v.CreationTimeRange != nil {
+		s.WriteStruct(schemas.FindingFilter_creationTimeRange)
+		v.CreationTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRuleNameList(s, schemas.FindingFilter_ruleNames, v.RuleNames)
+	serializeFilterRulesPackageArnList(s, schemas.FindingFilter_rulesPackageArns, v.RulesPackageArns)
+	serializeSeverityList(s, schemas.FindingFilter_severities, v.Severities)
+	serializeAttributeList(s, schemas.FindingFilter_userAttributes, v.UserAttributes)
+}
+func (v *FindingFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingFilter_agentIds:
+			return deserializeAgentIdList(d, schemas.FindingFilter_agentIds, &v.AgentIds)
+		case schemas.FindingFilter_attributes:
+			return deserializeAttributeList(d, schemas.FindingFilter_attributes, &v.Attributes)
+		case schemas.FindingFilter_autoScalingGroups:
+			return deserializeAutoScalingGroupList(d, schemas.FindingFilter_autoScalingGroups, &v.AutoScalingGroups)
+		case schemas.FindingFilter_creationTimeRange:
+			v.CreationTimeRange = &TimestampRange{}
+			return v.CreationTimeRange.Deserialize(d)
+		case schemas.FindingFilter_ruleNames:
+			return deserializeRuleNameList(d, schemas.FindingFilter_ruleNames, &v.RuleNames)
+		case schemas.FindingFilter_rulesPackageArns:
+			return deserializeFilterRulesPackageArnList(d, schemas.FindingFilter_rulesPackageArns, &v.RulesPackageArns)
+		case schemas.FindingFilter_severities:
+			return deserializeSeverityList(d, schemas.FindingFilter_severities, &v.Severities)
+		case schemas.FindingFilter_userAttributes:
+			return deserializeAttributeList(d, schemas.FindingFilter_userAttributes, &v.UserAttributes)
+		}
+		return nil
+	})
+}
+
 // This data type is used in the Finding data type.
 type InspectorServiceAttributes struct {
 
@@ -696,6 +1721,37 @@ type InspectorServiceAttributes struct {
 	RulesPackageArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InspectorServiceAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InspectorServiceAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InspectorServiceAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.InspectorServiceAttributes_assessmentRunArn, *v.AssessmentRunArn)
+	}
+	if v.RulesPackageArn != nil {
+		s.WriteString(schemas.InspectorServiceAttributes_rulesPackageArn, *v.RulesPackageArn)
+	}
+	s.WriteInt32(schemas.InspectorServiceAttributes_schemaVersion, v.SchemaVersion)
+}
+func (v *InspectorServiceAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InspectorServiceAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InspectorServiceAttributes_assessmentRunArn:
+			v.AssessmentRunArn = new(string)
+			return d.ReadString(schemas.InspectorServiceAttributes_assessmentRunArn, v.AssessmentRunArn)
+		case schemas.InspectorServiceAttributes_rulesPackageArn:
+			v.RulesPackageArn = new(string)
+			return d.ReadString(schemas.InspectorServiceAttributes_rulesPackageArn, v.RulesPackageArn)
+		case schemas.InspectorServiceAttributes_schemaVersion:
+			return d.ReadInt32(schemas.InspectorServiceAttributes_schemaVersion, &v.SchemaVersion)
+		}
+		return nil
+	})
 }
 
 // Contains information about the network interfaces interacting with an EC2
@@ -737,6 +1793,73 @@ type NetworkInterface struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkInterface) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkInterface) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpv6Addresses(s, schemas.NetworkInterface_ipv6Addresses, v.Ipv6Addresses)
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.NetworkInterface_networkInterfaceId, *v.NetworkInterfaceId)
+	}
+	if v.PrivateDnsName != nil {
+		s.WriteString(schemas.NetworkInterface_privateDnsName, *v.PrivateDnsName)
+	}
+	if v.PrivateIpAddress != nil {
+		s.WriteString(schemas.NetworkInterface_privateIpAddress, *v.PrivateIpAddress)
+	}
+	serializePrivateIpAddresses(s, schemas.NetworkInterface_privateIpAddresses, v.PrivateIpAddresses)
+	if v.PublicDnsName != nil {
+		s.WriteString(schemas.NetworkInterface_publicDnsName, *v.PublicDnsName)
+	}
+	if v.PublicIp != nil {
+		s.WriteString(schemas.NetworkInterface_publicIp, *v.PublicIp)
+	}
+	serializeSecurityGroups(s, schemas.NetworkInterface_securityGroups, v.SecurityGroups)
+	if v.SubnetId != nil {
+		s.WriteString(schemas.NetworkInterface_subnetId, *v.SubnetId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.NetworkInterface_vpcId, *v.VpcId)
+	}
+}
+func (v *NetworkInterface) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkInterface_ipv6Addresses:
+			return deserializeIpv6Addresses(d, schemas.NetworkInterface_ipv6Addresses, &v.Ipv6Addresses)
+		case schemas.NetworkInterface_networkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.NetworkInterface_networkInterfaceId, v.NetworkInterfaceId)
+		case schemas.NetworkInterface_privateDnsName:
+			v.PrivateDnsName = new(string)
+			return d.ReadString(schemas.NetworkInterface_privateDnsName, v.PrivateDnsName)
+		case schemas.NetworkInterface_privateIpAddress:
+			v.PrivateIpAddress = new(string)
+			return d.ReadString(schemas.NetworkInterface_privateIpAddress, v.PrivateIpAddress)
+		case schemas.NetworkInterface_privateIpAddresses:
+			return deserializePrivateIpAddresses(d, schemas.NetworkInterface_privateIpAddresses, &v.PrivateIpAddresses)
+		case schemas.NetworkInterface_publicDnsName:
+			v.PublicDnsName = new(string)
+			return d.ReadString(schemas.NetworkInterface_publicDnsName, v.PublicDnsName)
+		case schemas.NetworkInterface_publicIp:
+			v.PublicIp = new(string)
+			return d.ReadString(schemas.NetworkInterface_publicIp, v.PublicIp)
+		case schemas.NetworkInterface_securityGroups:
+			return deserializeSecurityGroups(d, schemas.NetworkInterface_securityGroups, &v.SecurityGroups)
+		case schemas.NetworkInterface_subnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.NetworkInterface_subnetId, v.SubnetId)
+		case schemas.NetworkInterface_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.NetworkInterface_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Contains information about a private IP address associated with a network
 // interface. This data type is used as a response element in the DescribeFindingsaction.
 type PrivateIp struct {
@@ -748,6 +1871,34 @@ type PrivateIp struct {
 	PrivateIpAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrivateIp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateIp)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateIp) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrivateDnsName != nil {
+		s.WriteString(schemas.PrivateIp_privateDnsName, *v.PrivateDnsName)
+	}
+	if v.PrivateIpAddress != nil {
+		s.WriteString(schemas.PrivateIp_privateIpAddress, *v.PrivateIpAddress)
+	}
+}
+func (v *PrivateIp) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateIp, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateIp_privateDnsName:
+			v.PrivateDnsName = new(string)
+			return d.ReadString(schemas.PrivateIp_privateDnsName, v.PrivateDnsName)
+		case schemas.PrivateIp_privateIpAddress:
+			v.PrivateIpAddress = new(string)
+			return d.ReadString(schemas.PrivateIp_privateIpAddress, v.PrivateIpAddress)
+		}
+		return nil
+	})
 }
 
 // Contains information about a resource group. The resource group defines a set
@@ -774,6 +1925,37 @@ type ResourceGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceGroup_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ResourceGroup_createdAt, *v.CreatedAt)
+	}
+	serializeResourceGroupTags(s, schemas.ResourceGroup_tags, v.Tags)
+}
+func (v *ResourceGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceGroup_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceGroup_arn, v.Arn)
+		case schemas.ResourceGroup_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceGroup_createdAt, v.CreatedAt)
+		case schemas.ResourceGroup_tags:
+			return deserializeResourceGroupTags(d, schemas.ResourceGroup_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // This data type is used as one of the elements of the ResourceGroup data type.
 type ResourceGroupTag struct {
 
@@ -786,6 +1968,34 @@ type ResourceGroupTag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceGroupTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceGroupTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceGroupTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ResourceGroupTag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceGroupTag_value, *v.Value)
+	}
+}
+func (v *ResourceGroupTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceGroupTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceGroupTag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResourceGroupTag_key, v.Key)
+		case schemas.ResourceGroupTag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceGroupTag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Contains information about an Amazon Inspector rules package. This data type is
@@ -818,6 +2028,52 @@ type RulesPackage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RulesPackage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RulesPackage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RulesPackage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RulesPackage_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RulesPackage_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RulesPackage_name, *v.Name)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.RulesPackage_provider, *v.Provider)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.RulesPackage_version, *v.Version)
+	}
+}
+func (v *RulesPackage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RulesPackage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RulesPackage_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RulesPackage_arn, v.Arn)
+		case schemas.RulesPackage_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RulesPackage_description, v.Description)
+		case schemas.RulesPackage_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RulesPackage_name, v.Name)
+		case schemas.RulesPackage_provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.RulesPackage_provider, v.Provider)
+		case schemas.RulesPackage_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.RulesPackage_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // This data type contains key-value pairs that identify various Amazon resources.
 type Scope struct {
 
@@ -828,6 +2084,38 @@ type Scope struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Scope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Scope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Scope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != "" {
+		s.WriteString(schemas.Scope_key, string(v.Key))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Scope_value, *v.Value)
+	}
+}
+func (v *Scope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Scope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Scope_key:
+			var ev string
+			if err := d.ReadString(schemas.Scope_key, &ev); err != nil {
+				return err
+			}
+			v.Key = ScopeType(ev)
+			return nil
+		case schemas.Scope_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Scope_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Contains information about a security group associated with a network
@@ -841,6 +2129,34 @@ type SecurityGroup struct {
 	GroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.SecurityGroup_groupId, *v.GroupId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.SecurityGroup_groupName, *v.GroupName)
+	}
+}
+func (v *SecurityGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityGroup_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.SecurityGroup_groupId, v.GroupId)
+		case schemas.SecurityGroup_groupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.SecurityGroup_groupName, v.GroupName)
+		}
+		return nil
+	})
 }
 
 // This data type is used as a response element in the ListEventSubscriptions action.
@@ -866,6 +2182,37 @@ type Subscription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Subscription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subscription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subscription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventSubscriptionList(s, schemas.Subscription_eventSubscriptions, v.EventSubscriptions)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.Subscription_resourceArn, *v.ResourceArn)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.Subscription_topicArn, *v.TopicArn)
+	}
+}
+func (v *Subscription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subscription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subscription_eventSubscriptions:
+			return deserializeEventSubscriptionList(d, schemas.Subscription_eventSubscriptions, &v.EventSubscriptions)
+		case schemas.Subscription_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.Subscription_resourceArn, v.ResourceArn)
+		case schemas.Subscription_topicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.Subscription_topicArn, v.TopicArn)
+		}
+		return nil
+	})
+}
+
 // A key and value pair. This data type is used as a request parameter in the SetTagsForResource
 // action and a response element in the ListTagsForResourceaction.
 type Tag struct {
@@ -879,6 +2226,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The metadata about the Amazon Inspector application data metrics collected by
@@ -901,6 +2276,40 @@ type TelemetryMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TelemetryMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TelemetryMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TelemetryMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.TelemetryMetadata_count, *v.Count)
+	}
+	if v.DataSize != nil {
+		s.WriteInt64(schemas.TelemetryMetadata_dataSize, *v.DataSize)
+	}
+	if v.MessageType != nil {
+		s.WriteString(schemas.TelemetryMetadata_messageType, *v.MessageType)
+	}
+}
+func (v *TelemetryMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TelemetryMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TelemetryMetadata_count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.TelemetryMetadata_count, v.Count)
+		case schemas.TelemetryMetadata_dataSize:
+			v.DataSize = new(int64)
+			return d.ReadInt64(schemas.TelemetryMetadata_dataSize, v.DataSize)
+		case schemas.TelemetryMetadata_messageType:
+			v.MessageType = new(string)
+			return d.ReadString(schemas.TelemetryMetadata_messageType, v.MessageType)
+		}
+		return nil
+	})
+}
+
 // This data type is used in the AssessmentRunFilter data type.
 type TimestampRange struct {
 
@@ -911,6 +2320,34 @@ type TimestampRange struct {
 	EndDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimestampRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestampRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestampRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginDate != nil {
+		s.WriteTime(schemas.TimestampRange_beginDate, *v.BeginDate)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.TimestampRange_endDate, *v.EndDate)
+	}
+}
+func (v *TimestampRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestampRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestampRange_beginDate:
+			v.BeginDate = new(time.Time)
+			return d.ReadTime(schemas.TimestampRange_beginDate, v.BeginDate)
+		case schemas.TimestampRange_endDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.TimestampRange_endDate, v.EndDate)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

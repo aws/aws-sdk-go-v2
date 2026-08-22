@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type UnshareDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnshareDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnshareDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnshareDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UnshareDirectoryRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.UnshareTarget != nil {
+		s.WriteStruct(schemas.UnshareDirectoryRequest_UnshareTarget)
+		v.UnshareTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UnshareDirectoryOutput struct {
 
 	// Identifier of the directory stored in the directory consumer account that is to
@@ -53,13 +72,32 @@ type UnshareDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnshareDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnshareDirectoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnshareDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SharedDirectoryId != nil {
+		s.WriteString(schemas.UnshareDirectoryResult_SharedDirectoryId, *v.SharedDirectoryId)
+	}
+}
+func (v *UnshareDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnshareDirectoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnshareDirectoryResult_SharedDirectoryId:
+			v.SharedDirectoryId = new(string)
+			return d.ReadString(schemas.UnshareDirectoryResult_SharedDirectoryId, v.SharedDirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnshareDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnshareDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnshareDirectory, schemas.UnshareDirectoryRequest, schemas.UnshareDirectoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUnshareDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnshareDirectory, schemas.UnshareDirectoryRequest, schemas.UnshareDirectoryResult), output: &UnshareDirectoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

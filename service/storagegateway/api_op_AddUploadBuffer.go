@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type AddUploadBufferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddUploadBufferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddUploadBufferInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddUploadBufferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiskIds(s, schemas.AddUploadBufferInput_DiskIds, v.DiskIds)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AddUploadBufferInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type AddUploadBufferOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -59,13 +74,32 @@ type AddUploadBufferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddUploadBufferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddUploadBufferOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddUploadBufferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AddUploadBufferOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *AddUploadBufferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddUploadBufferOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddUploadBufferOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.AddUploadBufferOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddUploadBufferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddUploadBuffer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddUploadBuffer, schemas.AddUploadBufferInput, schemas.AddUploadBufferOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddUploadBuffer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddUploadBuffer, schemas.AddUploadBufferInput, schemas.AddUploadBufferOutput), output: &AddUploadBufferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

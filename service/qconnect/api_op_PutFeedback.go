@@ -4,7 +4,9 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,25 @@ type PutFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.PutFeedbackRequest_assistantId, *v.AssistantId)
+	}
+	serializeContentFeedbackData(s, schemas.PutFeedbackRequest_contentFeedback, v.ContentFeedback)
+	if v.TargetId != nil {
+		s.WriteString(schemas.PutFeedbackRequest_targetId, *v.TargetId)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.PutFeedbackRequest_targetType, string(v.TargetType))
+	}
+}
+
 type PutFeedbackOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
@@ -83,13 +104,57 @@ type PutFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantArn != nil {
+		s.WriteString(schemas.PutFeedbackResponse_assistantArn, *v.AssistantArn)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.PutFeedbackResponse_assistantId, *v.AssistantId)
+	}
+	serializeContentFeedbackData(s, schemas.PutFeedbackResponse_contentFeedback, v.ContentFeedback)
+	if v.TargetId != nil {
+		s.WriteString(schemas.PutFeedbackResponse_targetId, *v.TargetId)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.PutFeedbackResponse_targetType, string(v.TargetType))
+	}
+}
+func (v *PutFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutFeedbackResponse_assistantArn:
+			v.AssistantArn = new(string)
+			return d.ReadString(schemas.PutFeedbackResponse_assistantArn, v.AssistantArn)
+		case schemas.PutFeedbackResponse_assistantId:
+			v.AssistantId = new(string)
+			return d.ReadString(schemas.PutFeedbackResponse_assistantId, v.AssistantId)
+		case schemas.PutFeedbackResponse_contentFeedback:
+			return deserializeContentFeedbackData(d, schemas.PutFeedbackResponse_contentFeedback, &v.ContentFeedback)
+		case schemas.PutFeedbackResponse_targetId:
+			v.TargetId = new(string)
+			return d.ReadString(schemas.PutFeedbackResponse_targetId, v.TargetId)
+		case schemas.PutFeedbackResponse_targetType:
+			var ev string
+			if err := d.ReadString(schemas.PutFeedbackResponse_targetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = types.TargetType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFeedback, schemas.PutFeedbackRequest, schemas.PutFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFeedback, schemas.PutFeedbackRequest, schemas.PutFeedbackResponse), output: &PutFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

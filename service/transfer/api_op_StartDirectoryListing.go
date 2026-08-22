@@ -4,6 +4,8 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,27 @@ type StartDirectoryListingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDirectoryListingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDirectoryListingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDirectoryListingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.StartDirectoryListingRequest_ConnectorId, *v.ConnectorId)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.StartDirectoryListingRequest_MaxItems, *v.MaxItems)
+	}
+	if v.OutputDirectoryPath != nil {
+		s.WriteString(schemas.StartDirectoryListingRequest_OutputDirectoryPath, *v.OutputDirectoryPath)
+	}
+	if v.RemoteDirectoryPath != nil {
+		s.WriteString(schemas.StartDirectoryListingRequest_RemoteDirectoryPath, *v.RemoteDirectoryPath)
+	}
+}
+
 type StartDirectoryListingOutput struct {
 
 	// Returns a unique identifier for the directory listing call.
@@ -99,13 +122,38 @@ type StartDirectoryListingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDirectoryListingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDirectoryListingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDirectoryListingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListingId != nil {
+		s.WriteString(schemas.StartDirectoryListingResponse_ListingId, *v.ListingId)
+	}
+	if v.OutputFileName != nil {
+		s.WriteString(schemas.StartDirectoryListingResponse_OutputFileName, *v.OutputFileName)
+	}
+}
+func (v *StartDirectoryListingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDirectoryListingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDirectoryListingResponse_ListingId:
+			v.ListingId = new(string)
+			return d.ReadString(schemas.StartDirectoryListingResponse_ListingId, v.ListingId)
+		case schemas.StartDirectoryListingResponse_OutputFileName:
+			v.OutputFileName = new(string)
+			return d.ReadString(schemas.StartDirectoryListingResponse_OutputFileName, v.OutputFileName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDirectoryListingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDirectoryListing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDirectoryListing, schemas.StartDirectoryListingRequest, schemas.StartDirectoryListingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDirectoryListing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDirectoryListing, schemas.StartDirectoryListingRequest, schemas.StartDirectoryListingResponse), output: &StartDirectoryListingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

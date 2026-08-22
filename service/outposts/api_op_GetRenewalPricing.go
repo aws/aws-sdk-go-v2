@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetRenewalPricingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRenewalPricingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRenewalPricingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRenewalPricingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.GetRenewalPricingInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+}
+
 type GetRenewalPricingOutput struct {
 
 	// The pricing options for the specified Outpost.
@@ -48,13 +62,39 @@ type GetRenewalPricingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRenewalPricingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRenewalPricingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRenewalPricingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePricingOptionList(s, schemas.GetRenewalPricingOutput_PricingOptions, v.PricingOptions)
+	if v.PricingResult != "" {
+		s.WriteString(schemas.GetRenewalPricingOutput_PricingResult, string(v.PricingResult))
+	}
+}
+func (v *GetRenewalPricingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRenewalPricingOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRenewalPricingOutput_PricingOptions:
+			return deserializePricingOptionList(d, schemas.GetRenewalPricingOutput_PricingOptions, &v.PricingOptions)
+		case schemas.GetRenewalPricingOutput_PricingResult:
+			var ev string
+			if err := d.ReadString(schemas.GetRenewalPricingOutput_PricingResult, &ev); err != nil {
+				return err
+			}
+			v.PricingResult = types.PricingResult(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRenewalPricingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRenewalPricing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRenewalPricing, schemas.GetRenewalPricingInput, schemas.GetRenewalPricingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRenewalPricing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRenewalPricing, schemas.GetRenewalPricingInput, schemas.GetRenewalPricingOutput), output: &GetRenewalPricingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

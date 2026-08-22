@@ -5,7 +5,9 @@ package marketplacecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,38 @@ type ListEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListEntitiesRequest_Catalog, *v.Catalog)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.ListEntitiesRequest_EntityType, *v.EntityType)
+	}
+	serializeEntityTypeFilters(s, schemas.ListEntitiesRequest_EntityTypeFilters, v.EntityTypeFilters)
+	serializeEntityTypeSort(s, schemas.ListEntitiesRequest_EntityTypeSort, v.EntityTypeSort)
+	serializeFilterList(s, schemas.ListEntitiesRequest_FilterList, v.FilterList)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntitiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.OwnershipType != "" {
+		s.WriteString(schemas.ListEntitiesRequest_OwnershipType, string(v.OwnershipType))
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListEntitiesRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListEntitiesOutput struct {
 
 	// Array of EntitySummary objects.
@@ -87,13 +121,35 @@ type ListEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntitySummaryList(s, schemas.ListEntitiesResponse_EntitySummaryList, v.EntitySummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitiesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntitiesResponse_EntitySummaryList:
+			return deserializeEntitySummaryList(d, schemas.ListEntitiesResponse_EntitySummaryList, &v.EntitySummaryList)
+		case schemas.ListEntitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntities, schemas.ListEntitiesRequest, schemas.ListEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntities, schemas.ListEntitiesRequest, schemas.ListEntitiesResponse), output: &ListEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type AssociateTransitGatewayConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTransitGatewayConnectPeerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTransitGatewayConnectPeerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTransitGatewayConnectPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.AssociateTransitGatewayConnectPeerRequest_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.AssociateTransitGatewayConnectPeerRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.AssociateTransitGatewayConnectPeerRequest_LinkId, *v.LinkId)
+	}
+	if v.TransitGatewayConnectPeerArn != nil {
+		s.WriteString(schemas.AssociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn, *v.TransitGatewayConnectPeerArn)
+	}
+}
+
 type AssociateTransitGatewayConnectPeerOutput struct {
 
 	// The transit gateway Connect peer association.
@@ -65,13 +88,34 @@ type AssociateTransitGatewayConnectPeerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTransitGatewayConnectPeerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTransitGatewayConnectPeerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTransitGatewayConnectPeerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransitGatewayConnectPeerAssociation != nil {
+		s.WriteStruct(schemas.AssociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation)
+		v.TransitGatewayConnectPeerAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateTransitGatewayConnectPeerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateTransitGatewayConnectPeerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation:
+			v.TransitGatewayConnectPeerAssociation = &types.TransitGatewayConnectPeerAssociation{}
+			return v.TransitGatewayConnectPeerAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateTransitGatewayConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTransitGatewayConnectPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTransitGatewayConnectPeer, schemas.AssociateTransitGatewayConnectPeerRequest, schemas.AssociateTransitGatewayConnectPeerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateTransitGatewayConnectPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTransitGatewayConnectPeer, schemas.AssociateTransitGatewayConnectPeerRequest, schemas.AssociateTransitGatewayConnectPeerResponse), output: &AssociateTransitGatewayConnectPeerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

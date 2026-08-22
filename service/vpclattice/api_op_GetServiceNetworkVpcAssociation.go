@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,28 @@ type GetServiceNetworkVpcAssociationInput struct {
 	ServiceNetworkVpcAssociationIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetServiceNetworkVpcAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceNetworkVpcAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceNetworkVpcAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceNetworkVpcAssociationIdentifier != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationRequest_serviceNetworkVpcAssociationIdentifier, *v.ServiceNetworkVpcAssociationIdentifier)
+	}
+}
+func (v *GetServiceNetworkVpcAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceNetworkVpcAssociationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceNetworkVpcAssociationRequest_serviceNetworkVpcAssociationIdentifier:
+			v.ServiceNetworkVpcAssociationIdentifier = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationRequest_serviceNetworkVpcAssociationIdentifier, v.ServiceNetworkVpcAssociationIdentifier)
+		}
+		return nil
+	})
 }
 
 type GetServiceNetworkVpcAssociationOutput struct {
@@ -89,13 +113,119 @@ type GetServiceNetworkVpcAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceNetworkVpcAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceNetworkVpcAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceNetworkVpcAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetServiceNetworkVpcAssociationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_createdBy, *v.CreatedBy)
+	}
+	if v.DnsOptions != nil {
+		s.WriteStruct(schemas.GetServiceNetworkVpcAssociationResponse_dnsOptions)
+		v.DnsOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_failureCode, *v.FailureCode)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetServiceNetworkVpcAssociationResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.PrivateDnsEnabled != nil {
+		s.WriteBool(schemas.GetServiceNetworkVpcAssociationResponse_privateDnsEnabled, *v.PrivateDnsEnabled)
+	}
+	serializeSecurityGroupList(s, schemas.GetServiceNetworkVpcAssociationResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.ServiceNetworkArn != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkArn, *v.ServiceNetworkArn)
+	}
+	if v.ServiceNetworkId != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkId, *v.ServiceNetworkId)
+	}
+	if v.ServiceNetworkName != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkName, *v.ServiceNetworkName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_status, string(v.Status))
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_vpcId, *v.VpcId)
+	}
+}
+func (v *GetServiceNetworkVpcAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceNetworkVpcAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceNetworkVpcAssociationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_arn, v.Arn)
+		case schemas.GetServiceNetworkVpcAssociationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetServiceNetworkVpcAssociationResponse_createdAt, v.CreatedAt)
+		case schemas.GetServiceNetworkVpcAssociationResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_createdBy, v.CreatedBy)
+		case schemas.GetServiceNetworkVpcAssociationResponse_dnsOptions:
+			v.DnsOptions = &types.DnsOptions{}
+			return v.DnsOptions.Deserialize(d)
+		case schemas.GetServiceNetworkVpcAssociationResponse_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_failureCode, v.FailureCode)
+		case schemas.GetServiceNetworkVpcAssociationResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_failureMessage, v.FailureMessage)
+		case schemas.GetServiceNetworkVpcAssociationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_id, v.Id)
+		case schemas.GetServiceNetworkVpcAssociationResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetServiceNetworkVpcAssociationResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetServiceNetworkVpcAssociationResponse_privateDnsEnabled:
+			v.PrivateDnsEnabled = new(bool)
+			return d.ReadBool(schemas.GetServiceNetworkVpcAssociationResponse_privateDnsEnabled, v.PrivateDnsEnabled)
+		case schemas.GetServiceNetworkVpcAssociationResponse_securityGroupIds:
+			return deserializeSecurityGroupList(d, schemas.GetServiceNetworkVpcAssociationResponse_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkArn:
+			v.ServiceNetworkArn = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkArn, v.ServiceNetworkArn)
+		case schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkId:
+			v.ServiceNetworkId = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkId, v.ServiceNetworkId)
+		case schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkName:
+			v.ServiceNetworkName = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkName, v.ServiceNetworkName)
+		case schemas.GetServiceNetworkVpcAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceNetworkVpcAssociationStatus(ev)
+			return nil
+		case schemas.GetServiceNetworkVpcAssociationResponse_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.GetServiceNetworkVpcAssociationResponse_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceNetworkVpcAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceNetworkVpcAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceNetworkVpcAssociation, schemas.GetServiceNetworkVpcAssociationRequest, schemas.GetServiceNetworkVpcAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceNetworkVpcAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceNetworkVpcAssociation, schemas.GetServiceNetworkVpcAssociationRequest, schemas.GetServiceNetworkVpcAssociationResponse), output: &GetServiceNetworkVpcAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

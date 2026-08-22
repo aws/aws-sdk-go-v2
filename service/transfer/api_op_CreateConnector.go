@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -109,6 +111,42 @@ type CreateConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRole != nil {
+		s.WriteString(schemas.CreateConnectorRequest_AccessRole, *v.AccessRole)
+	}
+	if v.As2Config != nil {
+		s.WriteStruct(schemas.CreateConnectorRequest_As2Config)
+		v.As2Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeConnectorEgressConfig(s, schemas.CreateConnectorRequest_EgressConfig, v.EgressConfig)
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateConnectorRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.LoggingRole != nil {
+		s.WriteString(schemas.CreateConnectorRequest_LoggingRole, *v.LoggingRole)
+	}
+	if v.SecurityPolicyName != nil {
+		s.WriteString(schemas.CreateConnectorRequest_SecurityPolicyName, *v.SecurityPolicyName)
+	}
+	if v.SftpConfig != nil {
+		s.WriteStruct(schemas.CreateConnectorRequest_SftpConfig)
+		v.SftpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateConnectorRequest_Tags, v.Tags)
+	if v.Url != nil {
+		s.WriteString(schemas.CreateConnectorRequest_Url, *v.Url)
+	}
+}
+
 type CreateConnectorOutput struct {
 
 	// The unique identifier for the connector, returned after the API call succeeds.
@@ -122,13 +160,32 @@ type CreateConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.CreateConnectorResponse_ConnectorId, *v.ConnectorId)
+	}
+}
+func (v *CreateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorResponse_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.CreateConnectorResponse_ConnectorId, v.ConnectorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorRequest, schemas.CreateConnectorResponse), output: &CreateConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

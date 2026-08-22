@@ -5,7 +5,9 @@ package signer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,42 @@ type ListSigningJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsRevoked != false {
+		s.WriteBool(schemas.ListSigningJobsRequest_isRevoked, v.IsRevoked)
+	}
+	if v.JobInvoker != nil {
+		s.WriteString(schemas.ListSigningJobsRequest_jobInvoker, *v.JobInvoker)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSigningJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.ListSigningJobsRequest_platformId, *v.PlatformId)
+	}
+	if v.RequestedBy != nil {
+		s.WriteString(schemas.ListSigningJobsRequest_requestedBy, *v.RequestedBy)
+	}
+	if v.SignatureExpiresAfter != nil {
+		s.WriteTime(schemas.ListSigningJobsRequest_signatureExpiresAfter, *v.SignatureExpiresAfter)
+	}
+	if v.SignatureExpiresBefore != nil {
+		s.WriteTime(schemas.ListSigningJobsRequest_signatureExpiresBefore, *v.SignatureExpiresBefore)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListSigningJobsRequest_status, string(v.Status))
+	}
+}
+
 type ListSigningJobsOutput struct {
 
 	// A list of your signing jobs.
@@ -87,13 +125,35 @@ type ListSigningJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSigningJobs(s, schemas.ListSigningJobsResponse_jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSigningJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSigningJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSigningJobsResponse_jobs:
+			return deserializeSigningJobs(d, schemas.ListSigningJobsResponse_jobs, &v.Jobs)
+		case schemas.ListSigningJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSigningJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSigningJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSigningJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningJobs, schemas.ListSigningJobsRequest, schemas.ListSigningJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSigningJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningJobs, schemas.ListSigningJobsRequest, schemas.ListSigningJobsResponse), output: &ListSigningJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

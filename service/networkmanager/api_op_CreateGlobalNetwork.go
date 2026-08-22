@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,19 @@ type CreateGlobalNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlobalNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlobalNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlobalNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGlobalNetworkRequest_Description, *v.Description)
+	}
+	serializeTagList(s, schemas.CreateGlobalNetworkRequest_Tags, v.Tags)
+}
+
 type CreateGlobalNetworkOutput struct {
 
 	// Information about the global network object.
@@ -48,13 +63,34 @@ type CreateGlobalNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlobalNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlobalNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlobalNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetwork != nil {
+		s.WriteStruct(schemas.CreateGlobalNetworkResponse_GlobalNetwork)
+		v.GlobalNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGlobalNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGlobalNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGlobalNetworkResponse_GlobalNetwork:
+			v.GlobalNetwork = &types.GlobalNetwork{}
+			return v.GlobalNetwork.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGlobalNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalNetwork, schemas.CreateGlobalNetworkRequest, schemas.CreateGlobalNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGlobalNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalNetwork, schemas.CreateGlobalNetworkRequest, schemas.CreateGlobalNetworkResponse), output: &CreateGlobalNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

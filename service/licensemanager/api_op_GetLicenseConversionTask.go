@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetLicenseConversionTaskInput struct {
 	LicenseConversionTaskId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLicenseConversionTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseConversionTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseConversionTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseConversionTaskId != nil {
+		s.WriteString(schemas.GetLicenseConversionTaskRequest_LicenseConversionTaskId, *v.LicenseConversionTaskId)
+	}
 }
 
 type GetLicenseConversionTaskOutput struct {
@@ -71,13 +85,88 @@ type GetLicenseConversionTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLicenseConversionTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseConversionTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseConversionTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationLicenseContext != nil {
+		s.WriteStruct(schemas.GetLicenseConversionTaskResponse_DestinationLicenseContext)
+		v.DestinationLicenseContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetLicenseConversionTaskResponse_EndTime, *v.EndTime)
+	}
+	if v.LicenseConversionTaskId != nil {
+		s.WriteString(schemas.GetLicenseConversionTaskResponse_LicenseConversionTaskId, *v.LicenseConversionTaskId)
+	}
+	if v.LicenseConversionTime != nil {
+		s.WriteTime(schemas.GetLicenseConversionTaskResponse_LicenseConversionTime, *v.LicenseConversionTime)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetLicenseConversionTaskResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.SourceLicenseContext != nil {
+		s.WriteStruct(schemas.GetLicenseConversionTaskResponse_SourceLicenseContext)
+		v.SourceLicenseContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetLicenseConversionTaskResponse_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetLicenseConversionTaskResponse_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetLicenseConversionTaskResponse_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *GetLicenseConversionTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLicenseConversionTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLicenseConversionTaskResponse_DestinationLicenseContext:
+			v.DestinationLicenseContext = &types.LicenseConversionContext{}
+			return v.DestinationLicenseContext.Deserialize(d)
+		case schemas.GetLicenseConversionTaskResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetLicenseConversionTaskResponse_EndTime, v.EndTime)
+		case schemas.GetLicenseConversionTaskResponse_LicenseConversionTaskId:
+			v.LicenseConversionTaskId = new(string)
+			return d.ReadString(schemas.GetLicenseConversionTaskResponse_LicenseConversionTaskId, v.LicenseConversionTaskId)
+		case schemas.GetLicenseConversionTaskResponse_LicenseConversionTime:
+			v.LicenseConversionTime = new(time.Time)
+			return d.ReadTime(schemas.GetLicenseConversionTaskResponse_LicenseConversionTime, v.LicenseConversionTime)
+		case schemas.GetLicenseConversionTaskResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetLicenseConversionTaskResponse_ResourceArn, v.ResourceArn)
+		case schemas.GetLicenseConversionTaskResponse_SourceLicenseContext:
+			v.SourceLicenseContext = &types.LicenseConversionContext{}
+			return v.SourceLicenseContext.Deserialize(d)
+		case schemas.GetLicenseConversionTaskResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetLicenseConversionTaskResponse_StartTime, v.StartTime)
+		case schemas.GetLicenseConversionTaskResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetLicenseConversionTaskResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LicenseConversionTaskStatus(ev)
+			return nil
+		case schemas.GetLicenseConversionTaskResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetLicenseConversionTaskResponse_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLicenseConversionTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLicenseConversionTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseConversionTask, schemas.GetLicenseConversionTaskRequest, schemas.GetLicenseConversionTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLicenseConversionTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseConversionTask, schemas.GetLicenseConversionTaskRequest, schemas.GetLicenseConversionTaskResponse), output: &GetLicenseConversionTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

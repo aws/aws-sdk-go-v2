@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,6 +62,32 @@ type UpdateStorageProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStorageProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStorageProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStorageProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateStorageProfileRequest_clientToken, *v.ClientToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateStorageProfileRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateStorageProfileRequest_farmId, *v.FarmId)
+	}
+	serializeFileSystemLocationsList(s, schemas.UpdateStorageProfileRequest_fileSystemLocationsToAdd, v.FileSystemLocationsToAdd)
+	serializeFileSystemLocationsList(s, schemas.UpdateStorageProfileRequest_fileSystemLocationsToRemove, v.FileSystemLocationsToRemove)
+	if v.OsFamily != "" {
+		s.WriteString(schemas.UpdateStorageProfileRequest_osFamily, string(v.OsFamily))
+	}
+	if v.StorageProfileId != nil {
+		s.WriteString(schemas.UpdateStorageProfileRequest_storageProfileId, *v.StorageProfileId)
+	}
+}
+
 type UpdateStorageProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +95,26 @@ type UpdateStorageProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStorageProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStorageProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStorageProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateStorageProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStorageProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStorageProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStorageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStorageProfile, schemas.UpdateStorageProfileRequest, schemas.UpdateStorageProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateStorageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStorageProfile, schemas.UpdateStorageProfileRequest, schemas.UpdateStorageProfileResponse), output: &UpdateStorageProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

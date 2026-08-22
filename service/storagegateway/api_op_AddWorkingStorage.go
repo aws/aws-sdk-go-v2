@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,19 @@ type AddWorkingStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddWorkingStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddWorkingStorageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddWorkingStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiskIds(s, schemas.AddWorkingStorageInput_DiskIds, v.DiskIds)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AddWorkingStorageInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway for
 // which working storage was configured.
 type AddWorkingStorageOutput struct {
@@ -67,13 +82,32 @@ type AddWorkingStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddWorkingStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddWorkingStorageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddWorkingStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AddWorkingStorageOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *AddWorkingStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddWorkingStorageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddWorkingStorageOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.AddWorkingStorageOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddWorkingStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddWorkingStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddWorkingStorage, schemas.AddWorkingStorageInput, schemas.AddWorkingStorageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddWorkingStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddWorkingStorage, schemas.AddWorkingStorageInput, schemas.AddWorkingStorageOutput), output: &AddWorkingStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

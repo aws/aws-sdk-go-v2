@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,39 @@ type ConnectDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectSettings != nil {
+		s.WriteStruct(schemas.ConnectDirectoryRequest_ConnectSettings)
+		v.ConnectSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ConnectDirectoryRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ConnectDirectoryRequest_Name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.ConnectDirectoryRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.ConnectDirectoryRequest_Password, *v.Password)
+	}
+	if v.ShortName != nil {
+		s.WriteString(schemas.ConnectDirectoryRequest_ShortName, *v.ShortName)
+	}
+	if v.Size != "" {
+		s.WriteString(schemas.ConnectDirectoryRequest_Size, string(v.Size))
+	}
+	serializeTags(s, schemas.ConnectDirectoryRequest_Tags, v.Tags)
+}
+
 // Contains the results of the ConnectDirectory operation.
 type ConnectDirectoryOutput struct {
 
@@ -82,13 +117,32 @@ type ConnectDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectDirectoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ConnectDirectoryResult_DirectoryId, *v.DirectoryId)
+	}
+}
+func (v *ConnectDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectDirectoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectDirectoryResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.ConnectDirectoryResult_DirectoryId, v.DirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConnectDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConnectDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConnectDirectory, schemas.ConnectDirectoryRequest, schemas.ConnectDirectoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConnectDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConnectDirectory, schemas.ConnectDirectoryRequest, schemas.ConnectDirectoryResult), output: &ConnectDirectoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

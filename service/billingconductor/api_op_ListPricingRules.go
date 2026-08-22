@@ -5,7 +5,9 @@ package billingconductor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,48 @@ type ListPricingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListPricingRulesInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListPricingRulesInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPricingRulesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPricingRulesInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPricingRulesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingRulesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingRulesInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListPricingRulesInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListPricingRulesInput_Filters:
+			v.Filters = &types.ListPricingRulesFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListPricingRulesInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPricingRulesInput_MaxResults, v.MaxResults)
+		case schemas.ListPricingRulesInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPricingRulesInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListPricingRulesOutput struct {
 
 	//  The billing period for which the described pricing rules are applicable.
@@ -62,13 +106,41 @@ type ListPricingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricingRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListPricingRulesOutput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPricingRulesOutput_NextToken, *v.NextToken)
+	}
+	serializePricingRuleList(s, schemas.ListPricingRulesOutput_PricingRules, v.PricingRules)
+}
+func (v *ListPricingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingRulesOutput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListPricingRulesOutput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListPricingRulesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPricingRulesOutput_NextToken, v.NextToken)
+		case schemas.ListPricingRulesOutput_PricingRules:
+			return deserializePricingRuleList(d, schemas.ListPricingRulesOutput_PricingRules, &v.PricingRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPricingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPricingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPricingRules, schemas.ListPricingRulesInput, schemas.ListPricingRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPricingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPricingRules, schemas.ListPricingRulesInput, schemas.ListPricingRulesOutput), output: &ListPricingRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

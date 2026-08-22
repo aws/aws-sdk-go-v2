@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type UpdateVTLDeviceTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVTLDeviceTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVTLDeviceTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVTLDeviceTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceType != nil {
+		s.WriteString(schemas.UpdateVTLDeviceTypeInput_DeviceType, *v.DeviceType)
+	}
+	if v.VTLDeviceARN != nil {
+		s.WriteString(schemas.UpdateVTLDeviceTypeInput_VTLDeviceARN, *v.VTLDeviceARN)
+	}
+}
+
 // UpdateVTLDeviceTypeOutput
 type UpdateVTLDeviceTypeOutput struct {
 
@@ -55,13 +72,32 @@ type UpdateVTLDeviceTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVTLDeviceTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVTLDeviceTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVTLDeviceTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VTLDeviceARN != nil {
+		s.WriteString(schemas.UpdateVTLDeviceTypeOutput_VTLDeviceARN, *v.VTLDeviceARN)
+	}
+}
+func (v *UpdateVTLDeviceTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVTLDeviceTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVTLDeviceTypeOutput_VTLDeviceARN:
+			v.VTLDeviceARN = new(string)
+			return d.ReadString(schemas.UpdateVTLDeviceTypeOutput_VTLDeviceARN, v.VTLDeviceARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVTLDeviceTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVTLDeviceType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVTLDeviceType, schemas.UpdateVTLDeviceTypeInput, schemas.UpdateVTLDeviceTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateVTLDeviceType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVTLDeviceType, schemas.UpdateVTLDeviceTypeInput, schemas.UpdateVTLDeviceTypeOutput), output: &UpdateVTLDeviceTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteStorageVirtualMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStorageVirtualMachineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStorageVirtualMachineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStorageVirtualMachineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteStorageVirtualMachineRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.DeleteStorageVirtualMachineRequest_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+}
+
 type DeleteStorageVirtualMachineOutput struct {
 
 	// Describes the lifecycle state of the SVM being deleted.
@@ -56,13 +73,42 @@ type DeleteStorageVirtualMachineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStorageVirtualMachineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStorageVirtualMachineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStorageVirtualMachineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DeleteStorageVirtualMachineResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.DeleteStorageVirtualMachineResponse_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+}
+func (v *DeleteStorageVirtualMachineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStorageVirtualMachineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteStorageVirtualMachineResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DeleteStorageVirtualMachineResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.StorageVirtualMachineLifecycle(ev)
+			return nil
+		case schemas.DeleteStorageVirtualMachineResponse_StorageVirtualMachineId:
+			v.StorageVirtualMachineId = new(string)
+			return d.ReadString(schemas.DeleteStorageVirtualMachineResponse_StorageVirtualMachineId, v.StorageVirtualMachineId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStorageVirtualMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStorageVirtualMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStorageVirtualMachine, schemas.DeleteStorageVirtualMachineRequest, schemas.DeleteStorageVirtualMachineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteStorageVirtualMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStorageVirtualMachine, schemas.DeleteStorageVirtualMachineRequest, schemas.DeleteStorageVirtualMachineResponse), output: &DeleteStorageVirtualMachineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

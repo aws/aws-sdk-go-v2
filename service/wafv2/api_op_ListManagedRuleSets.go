@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ListManagedRuleSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedRuleSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedRuleSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedRuleSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListManagedRuleSetsRequest_Limit, *v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListManagedRuleSetsRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.ListManagedRuleSetsRequest_Scope, string(v.Scope))
+	}
+}
+
 type ListManagedRuleSetsOutput struct {
 
 	// Your managed rule sets. If you specified a Limit in your request, this might
@@ -80,13 +100,35 @@ type ListManagedRuleSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedRuleSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedRuleSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedRuleSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedRuleSetSummaries(s, schemas.ListManagedRuleSetsResponse_ManagedRuleSets, v.ManagedRuleSets)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListManagedRuleSetsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListManagedRuleSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedRuleSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedRuleSetsResponse_ManagedRuleSets:
+			return deserializeManagedRuleSetSummaries(d, schemas.ListManagedRuleSetsResponse_ManagedRuleSets, &v.ManagedRuleSets)
+		case schemas.ListManagedRuleSetsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListManagedRuleSetsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedRuleSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListManagedRuleSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedRuleSets, schemas.ListManagedRuleSetsRequest, schemas.ListManagedRuleSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListManagedRuleSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedRuleSets, schemas.ListManagedRuleSetsRequest, schemas.ListManagedRuleSetsResponse), output: &ListManagedRuleSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

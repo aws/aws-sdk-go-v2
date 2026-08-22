@@ -5,7 +5,9 @@ package transfer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListWebAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWebAppsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWebAppsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWebAppsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWebAppsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWebAppsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListWebAppsOutput struct {
 
 	// Returns, for each listed web app, a structure that contains details for the web
@@ -61,13 +78,35 @@ type ListWebAppsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWebAppsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWebAppsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWebAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWebAppsResponse_NextToken, *v.NextToken)
+	}
+	serializeListedWebApps(s, schemas.ListWebAppsResponse_WebApps, v.WebApps)
+}
+func (v *ListWebAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWebAppsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWebAppsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWebAppsResponse_NextToken, v.NextToken)
+		case schemas.ListWebAppsResponse_WebApps:
+			return deserializeListedWebApps(d, schemas.ListWebAppsResponse_WebApps, &v.WebApps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWebAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWebApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebApps, schemas.ListWebAppsRequest, schemas.ListWebAppsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListWebApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebApps, schemas.ListWebAppsRequest, schemas.ListWebAppsResponse), output: &ListWebAppsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

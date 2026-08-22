@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -214,6 +216,114 @@ type StartBuildBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBuildBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBuildBatchInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBuildBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactsOverride != nil {
+		s.WriteStruct(schemas.StartBuildBatchInput_artifactsOverride)
+		v.ArtifactsOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BuildBatchConfigOverride != nil {
+		s.WriteStruct(schemas.StartBuildBatchInput_buildBatchConfigOverride)
+		v.BuildBatchConfigOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BuildTimeoutInMinutesOverride != nil {
+		s.WriteInt32(schemas.StartBuildBatchInput_buildTimeoutInMinutesOverride, *v.BuildTimeoutInMinutesOverride)
+	}
+	if v.BuildspecOverride != nil {
+		s.WriteString(schemas.StartBuildBatchInput_buildspecOverride, *v.BuildspecOverride)
+	}
+	if v.CacheOverride != nil {
+		s.WriteStruct(schemas.StartBuildBatchInput_cacheOverride)
+		v.CacheOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CertificateOverride != nil {
+		s.WriteString(schemas.StartBuildBatchInput_certificateOverride, *v.CertificateOverride)
+	}
+	if v.ComputeTypeOverride != "" {
+		s.WriteString(schemas.StartBuildBatchInput_computeTypeOverride, string(v.ComputeTypeOverride))
+	}
+	if v.DebugSessionEnabled != nil {
+		s.WriteBool(schemas.StartBuildBatchInput_debugSessionEnabled, *v.DebugSessionEnabled)
+	}
+	if v.EncryptionKeyOverride != nil {
+		s.WriteString(schemas.StartBuildBatchInput_encryptionKeyOverride, *v.EncryptionKeyOverride)
+	}
+	if v.EnvironmentTypeOverride != "" {
+		s.WriteString(schemas.StartBuildBatchInput_environmentTypeOverride, string(v.EnvironmentTypeOverride))
+	}
+	serializeEnvironmentVariables(s, schemas.StartBuildBatchInput_environmentVariablesOverride, v.EnvironmentVariablesOverride)
+	if v.GitCloneDepthOverride != nil {
+		s.WriteInt32(schemas.StartBuildBatchInput_gitCloneDepthOverride, *v.GitCloneDepthOverride)
+	}
+	if v.GitSubmodulesConfigOverride != nil {
+		s.WriteStruct(schemas.StartBuildBatchInput_gitSubmodulesConfigOverride)
+		v.GitSubmodulesConfigOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartBuildBatchInput_idempotencyToken, *v.IdempotencyToken)
+	}
+	if v.ImageOverride != nil {
+		s.WriteString(schemas.StartBuildBatchInput_imageOverride, *v.ImageOverride)
+	}
+	if v.ImagePullCredentialsTypeOverride != "" {
+		s.WriteString(schemas.StartBuildBatchInput_imagePullCredentialsTypeOverride, string(v.ImagePullCredentialsTypeOverride))
+	}
+	if v.InsecureSslOverride != nil {
+		s.WriteBool(schemas.StartBuildBatchInput_insecureSslOverride, *v.InsecureSslOverride)
+	}
+	if v.LogsConfigOverride != nil {
+		s.WriteStruct(schemas.StartBuildBatchInput_logsConfigOverride)
+		v.LogsConfigOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivilegedModeOverride != nil {
+		s.WriteBool(schemas.StartBuildBatchInput_privilegedModeOverride, *v.PrivilegedModeOverride)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.StartBuildBatchInput_projectName, *v.ProjectName)
+	}
+	if v.QueuedTimeoutInMinutesOverride != nil {
+		s.WriteInt32(schemas.StartBuildBatchInput_queuedTimeoutInMinutesOverride, *v.QueuedTimeoutInMinutesOverride)
+	}
+	if v.RegistryCredentialOverride != nil {
+		s.WriteStruct(schemas.StartBuildBatchInput_registryCredentialOverride)
+		v.RegistryCredentialOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportBuildBatchStatusOverride != nil {
+		s.WriteBool(schemas.StartBuildBatchInput_reportBuildBatchStatusOverride, *v.ReportBuildBatchStatusOverride)
+	}
+	serializeProjectArtifactsList(s, schemas.StartBuildBatchInput_secondaryArtifactsOverride, v.SecondaryArtifactsOverride)
+	serializeProjectSources(s, schemas.StartBuildBatchInput_secondarySourcesOverride, v.SecondarySourcesOverride)
+	serializeProjectSecondarySourceVersions(s, schemas.StartBuildBatchInput_secondarySourcesVersionOverride, v.SecondarySourcesVersionOverride)
+	if v.ServiceRoleOverride != nil {
+		s.WriteString(schemas.StartBuildBatchInput_serviceRoleOverride, *v.ServiceRoleOverride)
+	}
+	if v.SourceAuthOverride != nil {
+		s.WriteStruct(schemas.StartBuildBatchInput_sourceAuthOverride)
+		v.SourceAuthOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceLocationOverride != nil {
+		s.WriteString(schemas.StartBuildBatchInput_sourceLocationOverride, *v.SourceLocationOverride)
+	}
+	if v.SourceTypeOverride != "" {
+		s.WriteString(schemas.StartBuildBatchInput_sourceTypeOverride, string(v.SourceTypeOverride))
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.StartBuildBatchInput_sourceVersion, *v.SourceVersion)
+	}
+}
+
 type StartBuildBatchOutput struct {
 
 	// A BuildBatch object that contains information about the batch build.
@@ -225,13 +335,34 @@ type StartBuildBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBuildBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBuildBatchOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBuildBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildBatch != nil {
+		s.WriteStruct(schemas.StartBuildBatchOutput_buildBatch)
+		v.BuildBatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartBuildBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBuildBatchOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBuildBatchOutput_buildBatch:
+			v.BuildBatch = &types.BuildBatch{}
+			return v.BuildBatch.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartBuildBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBuildBatch, schemas.StartBuildBatchInput, schemas.StartBuildBatchOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartBuildBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBuildBatch, schemas.StartBuildBatchInput, schemas.StartBuildBatchOutput), output: &StartBuildBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

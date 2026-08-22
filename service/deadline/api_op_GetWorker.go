@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,24 @@ type GetWorkerInput struct {
 	WorkerId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWorkerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetWorkerRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetWorkerRequest_fleetId, *v.FleetId)
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.GetWorkerRequest_workerId, *v.WorkerId)
+	}
 }
 
 // Mixin that adds an optional ARN field to response structures. Apply to
@@ -99,13 +119,94 @@ type GetWorkerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetWorkerResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetWorkerResponse_createdBy, *v.CreatedBy)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetWorkerResponse_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetWorkerResponse_fleetId, *v.FleetId)
+	}
+	if v.HostProperties != nil {
+		s.WriteStruct(schemas.GetWorkerResponse_hostProperties)
+		v.HostProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Log != nil {
+		s.WriteStruct(schemas.GetWorkerResponse_log)
+		v.Log.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetWorkerResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetWorkerResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetWorkerResponse_updatedBy, *v.UpdatedBy)
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.GetWorkerResponse_workerId, *v.WorkerId)
+	}
+}
+func (v *GetWorkerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkerResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetWorkerResponse_createdAt, v.CreatedAt)
+		case schemas.GetWorkerResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetWorkerResponse_createdBy, v.CreatedBy)
+		case schemas.GetWorkerResponse_farmId:
+			v.FarmId = new(string)
+			return d.ReadString(schemas.GetWorkerResponse_farmId, v.FarmId)
+		case schemas.GetWorkerResponse_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GetWorkerResponse_fleetId, v.FleetId)
+		case schemas.GetWorkerResponse_hostProperties:
+			v.HostProperties = &types.HostPropertiesResponse{}
+			return v.HostProperties.Deserialize(d)
+		case schemas.GetWorkerResponse_log:
+			v.Log = &types.LogConfiguration{}
+			return v.Log.Deserialize(d)
+		case schemas.GetWorkerResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkerResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkerStatus(ev)
+			return nil
+		case schemas.GetWorkerResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetWorkerResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetWorkerResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetWorkerResponse_updatedBy, v.UpdatedBy)
+		case schemas.GetWorkerResponse_workerId:
+			v.WorkerId = new(string)
+			return d.ReadString(schemas.GetWorkerResponse_workerId, v.WorkerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorker, schemas.GetWorkerRequest, schemas.GetWorkerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorker, schemas.GetWorkerRequest, schemas.GetWorkerResponse), output: &GetWorkerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

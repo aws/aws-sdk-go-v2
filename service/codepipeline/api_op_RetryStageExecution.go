@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,27 @@ type RetryStageExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryStageExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryStageExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryStageExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.RetryStageExecutionInput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.RetryStageExecutionInput_pipelineName, *v.PipelineName)
+	}
+	if v.RetryMode != "" {
+		s.WriteString(schemas.RetryStageExecutionInput_retryMode, string(v.RetryMode))
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.RetryStageExecutionInput_stageName, *v.StageName)
+	}
+}
+
 // Represents the output of a RetryStageExecution action.
 type RetryStageExecutionOutput struct {
 
@@ -70,13 +93,32 @@ type RetryStageExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryStageExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryStageExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryStageExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.RetryStageExecutionOutput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+}
+func (v *RetryStageExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryStageExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryStageExecutionOutput_pipelineExecutionId:
+			v.PipelineExecutionId = new(string)
+			return d.ReadString(schemas.RetryStageExecutionOutput_pipelineExecutionId, v.PipelineExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetryStageExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetryStageExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryStageExecution, schemas.RetryStageExecutionInput, schemas.RetryStageExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRetryStageExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryStageExecution, schemas.RetryStageExecutionInput, schemas.RetryStageExecutionOutput), output: &RetryStageExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

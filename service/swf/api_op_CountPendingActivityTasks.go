@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,23 @@ type CountPendingActivityTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CountPendingActivityTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CountPendingActivityTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountPendingActivityTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.CountPendingActivityTasksInput_domain, *v.Domain)
+	}
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.CountPendingActivityTasksInput_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains the count of tasks in a task list.
 type CountPendingActivityTasksOutput struct {
 
@@ -80,13 +99,34 @@ type CountPendingActivityTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CountPendingActivityTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PendingTaskCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountPendingActivityTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.PendingTaskCount_count, v.Count)
+	if v.Truncated != false {
+		s.WriteBool(schemas.PendingTaskCount_truncated, v.Truncated)
+	}
+}
+func (v *CountPendingActivityTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PendingTaskCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PendingTaskCount_count:
+			return d.ReadInt32(schemas.PendingTaskCount_count, &v.Count)
+		case schemas.PendingTaskCount_truncated:
+			return d.ReadBool(schemas.PendingTaskCount_truncated, &v.Truncated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCountPendingActivityTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCountPendingActivityTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CountPendingActivityTasks, schemas.CountPendingActivityTasksInput, schemas.PendingTaskCount)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCountPendingActivityTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CountPendingActivityTasks, schemas.CountPendingActivityTasksInput, schemas.PendingTaskCount), output: &CountPendingActivityTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type UpdateRadiusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRadiusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRadiusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRadiusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateRadiusRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.RadiusSettings != nil {
+		s.WriteStruct(schemas.UpdateRadiusRequest_RadiusSettings)
+		v.RadiusSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains the results of the UpdateRadius operation.
 type UpdateRadiusOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -50,13 +69,26 @@ type UpdateRadiusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRadiusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRadiusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRadiusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRadiusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRadiusResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRadiusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRadius{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRadius, schemas.UpdateRadiusRequest, schemas.UpdateRadiusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRadius{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRadius, schemas.UpdateRadiusRequest, schemas.UpdateRadiusResult), output: &UpdateRadiusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,18 @@ type AdvertiseByoipCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdvertiseByoipCidrInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvertiseByoipCidrRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvertiseByoipCidrInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidr != nil {
+		s.WriteString(schemas.AdvertiseByoipCidrRequest_Cidr, *v.Cidr)
+	}
+}
+
 type AdvertiseByoipCidrOutput struct {
 
 	// Information about the address range.
@@ -60,13 +74,34 @@ type AdvertiseByoipCidrOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdvertiseByoipCidrOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvertiseByoipCidrResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvertiseByoipCidrOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByoipCidr != nil {
+		s.WriteStruct(schemas.AdvertiseByoipCidrResponse_ByoipCidr)
+		v.ByoipCidr.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdvertiseByoipCidrOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdvertiseByoipCidrResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdvertiseByoipCidrResponse_ByoipCidr:
+			v.ByoipCidr = &types.ByoipCidr{}
+			return v.ByoipCidr.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdvertiseByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdvertiseByoipCidr{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdvertiseByoipCidr, schemas.AdvertiseByoipCidrRequest, schemas.AdvertiseByoipCidrResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdvertiseByoipCidr{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdvertiseByoipCidr, schemas.AdvertiseByoipCidrRequest, schemas.AdvertiseByoipCidrResponse), output: &AdvertiseByoipCidrOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

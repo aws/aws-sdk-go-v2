@@ -5,7 +5,9 @@ package codepipeline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,28 @@ type ListDeployActionExecutionTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeployActionExecutionTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeployActionExecutionTargetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeployActionExecutionTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionExecutionId != nil {
+		s.WriteString(schemas.ListDeployActionExecutionTargetsInput_actionExecutionId, *v.ActionExecutionId)
+	}
+	serializeTargetFilterList(s, schemas.ListDeployActionExecutionTargetsInput_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDeployActionExecutionTargetsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeployActionExecutionTargetsInput_nextToken, *v.NextToken)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.ListDeployActionExecutionTargetsInput_pipelineName, *v.PipelineName)
+	}
+}
+
 type ListDeployActionExecutionTargetsOutput struct {
 
 	// An identifier that was returned from the previous list action types call, which
@@ -64,13 +88,35 @@ type ListDeployActionExecutionTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeployActionExecutionTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeployActionExecutionTargetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeployActionExecutionTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeployActionExecutionTargetsOutput_nextToken, *v.NextToken)
+	}
+	serializeDeployActionExecutionTargetList(s, schemas.ListDeployActionExecutionTargetsOutput_targets, v.Targets)
+}
+func (v *ListDeployActionExecutionTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeployActionExecutionTargetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeployActionExecutionTargetsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeployActionExecutionTargetsOutput_nextToken, v.NextToken)
+		case schemas.ListDeployActionExecutionTargetsOutput_targets:
+			return deserializeDeployActionExecutionTargetList(d, schemas.ListDeployActionExecutionTargetsOutput_targets, &v.Targets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeployActionExecutionTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDeployActionExecutionTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeployActionExecutionTargets, schemas.ListDeployActionExecutionTargetsInput, schemas.ListDeployActionExecutionTargetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDeployActionExecutionTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeployActionExecutionTargets, schemas.ListDeployActionExecutionTargetsInput, schemas.ListDeployActionExecutionTargetsOutput), output: &ListDeployActionExecutionTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

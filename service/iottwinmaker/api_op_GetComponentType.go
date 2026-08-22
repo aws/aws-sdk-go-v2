@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,34 @@ type GetComponentTypeInput struct {
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetComponentTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentTypeId != nil {
+		s.WriteString(schemas.GetComponentTypeRequest_componentTypeId, *v.ComponentTypeId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetComponentTypeRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetComponentTypeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentTypeRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentTypeRequest_componentTypeId:
+			v.ComponentTypeId = new(string)
+			return d.ReadString(schemas.GetComponentTypeRequest_componentTypeId, v.ComponentTypeId)
+		case schemas.GetComponentTypeRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetComponentTypeRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 type GetComponentTypeOutput struct {
@@ -118,13 +148,115 @@ type GetComponentTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetComponentTypeResponse_arn, *v.Arn)
+	}
+	if v.ComponentTypeId != nil {
+		s.WriteString(schemas.GetComponentTypeResponse_componentTypeId, *v.ComponentTypeId)
+	}
+	if v.ComponentTypeName != nil {
+		s.WriteString(schemas.GetComponentTypeResponse_componentTypeName, *v.ComponentTypeName)
+	}
+	serializeCompositeComponentTypesResponse(s, schemas.GetComponentTypeResponse_compositeComponentTypes, v.CompositeComponentTypes)
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.GetComponentTypeResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetComponentTypeResponse_description, *v.Description)
+	}
+	serializeExtendsFrom(s, schemas.GetComponentTypeResponse_extendsFrom, v.ExtendsFrom)
+	serializeFunctionsResponse(s, schemas.GetComponentTypeResponse_functions, v.Functions)
+	if v.IsAbstract != nil {
+		s.WriteBool(schemas.GetComponentTypeResponse_isAbstract, *v.IsAbstract)
+	}
+	if v.IsSchemaInitialized != nil {
+		s.WriteBool(schemas.GetComponentTypeResponse_isSchemaInitialized, *v.IsSchemaInitialized)
+	}
+	if v.IsSingleton != nil {
+		s.WriteBool(schemas.GetComponentTypeResponse_isSingleton, *v.IsSingleton)
+	}
+	serializePropertyDefinitionsResponse(s, schemas.GetComponentTypeResponse_propertyDefinitions, v.PropertyDefinitions)
+	serializePropertyGroupsResponse(s, schemas.GetComponentTypeResponse_propertyGroups, v.PropertyGroups)
+	if v.Status != nil {
+		s.WriteStruct(schemas.GetComponentTypeResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SyncSource != nil {
+		s.WriteString(schemas.GetComponentTypeResponse_syncSource, *v.SyncSource)
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.GetComponentTypeResponse_updateDateTime, *v.UpdateDateTime)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetComponentTypeResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetComponentTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentTypeResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetComponentTypeResponse_arn, v.Arn)
+		case schemas.GetComponentTypeResponse_componentTypeId:
+			v.ComponentTypeId = new(string)
+			return d.ReadString(schemas.GetComponentTypeResponse_componentTypeId, v.ComponentTypeId)
+		case schemas.GetComponentTypeResponse_componentTypeName:
+			v.ComponentTypeName = new(string)
+			return d.ReadString(schemas.GetComponentTypeResponse_componentTypeName, v.ComponentTypeName)
+		case schemas.GetComponentTypeResponse_compositeComponentTypes:
+			return deserializeCompositeComponentTypesResponse(d, schemas.GetComponentTypeResponse_compositeComponentTypes, &v.CompositeComponentTypes)
+		case schemas.GetComponentTypeResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetComponentTypeResponse_creationDateTime, v.CreationDateTime)
+		case schemas.GetComponentTypeResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetComponentTypeResponse_description, v.Description)
+		case schemas.GetComponentTypeResponse_extendsFrom:
+			return deserializeExtendsFrom(d, schemas.GetComponentTypeResponse_extendsFrom, &v.ExtendsFrom)
+		case schemas.GetComponentTypeResponse_functions:
+			return deserializeFunctionsResponse(d, schemas.GetComponentTypeResponse_functions, &v.Functions)
+		case schemas.GetComponentTypeResponse_isAbstract:
+			v.IsAbstract = new(bool)
+			return d.ReadBool(schemas.GetComponentTypeResponse_isAbstract, v.IsAbstract)
+		case schemas.GetComponentTypeResponse_isSchemaInitialized:
+			v.IsSchemaInitialized = new(bool)
+			return d.ReadBool(schemas.GetComponentTypeResponse_isSchemaInitialized, v.IsSchemaInitialized)
+		case schemas.GetComponentTypeResponse_isSingleton:
+			v.IsSingleton = new(bool)
+			return d.ReadBool(schemas.GetComponentTypeResponse_isSingleton, v.IsSingleton)
+		case schemas.GetComponentTypeResponse_propertyDefinitions:
+			return deserializePropertyDefinitionsResponse(d, schemas.GetComponentTypeResponse_propertyDefinitions, &v.PropertyDefinitions)
+		case schemas.GetComponentTypeResponse_propertyGroups:
+			return deserializePropertyGroupsResponse(d, schemas.GetComponentTypeResponse_propertyGroups, &v.PropertyGroups)
+		case schemas.GetComponentTypeResponse_status:
+			v.Status = &types.Status{}
+			return v.Status.Deserialize(d)
+		case schemas.GetComponentTypeResponse_syncSource:
+			v.SyncSource = new(string)
+			return d.ReadString(schemas.GetComponentTypeResponse_syncSource, v.SyncSource)
+		case schemas.GetComponentTypeResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetComponentTypeResponse_updateDateTime, v.UpdateDateTime)
+		case schemas.GetComponentTypeResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetComponentTypeResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComponentTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponentType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponentType, schemas.GetComponentTypeRequest, schemas.GetComponentTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetComponentType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponentType, schemas.GetComponentTypeRequest, schemas.GetComponentTypeResponse), output: &GetComponentTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

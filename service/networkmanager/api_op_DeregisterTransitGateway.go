@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeregisterTransitGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTransitGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTransitGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTransitGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.DeregisterTransitGatewayRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.TransitGatewayArn != nil {
+		s.WriteString(schemas.DeregisterTransitGatewayRequest_TransitGatewayArn, *v.TransitGatewayArn)
+	}
+}
+
 type DeregisterTransitGatewayOutput struct {
 
 	// The transit gateway registration information.
@@ -52,13 +69,34 @@ type DeregisterTransitGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTransitGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTransitGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTransitGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransitGatewayRegistration != nil {
+		s.WriteStruct(schemas.DeregisterTransitGatewayResponse_TransitGatewayRegistration)
+		v.TransitGatewayRegistration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeregisterTransitGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterTransitGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterTransitGatewayResponse_TransitGatewayRegistration:
+			v.TransitGatewayRegistration = &types.TransitGatewayRegistration{}
+			return v.TransitGatewayRegistration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterTransitGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTransitGateway, schemas.DeregisterTransitGatewayRequest, schemas.DeregisterTransitGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterTransitGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTransitGateway, schemas.DeregisterTransitGatewayRequest, schemas.DeregisterTransitGatewayResponse), output: &DeregisterTransitGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

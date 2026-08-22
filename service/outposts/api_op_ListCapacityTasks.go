@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type ListCapacityTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityTaskStatusList(s, schemas.ListCapacityTasksInput_CapacityTaskStatusFilter, v.CapacityTaskStatusFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCapacityTasksInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapacityTasksInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostIdentifierFilter != nil {
+		s.WriteString(schemas.ListCapacityTasksInput_OutpostIdentifierFilter, *v.OutpostIdentifierFilter)
+	}
+}
+
 type ListCapacityTasksOutput struct {
 
 	// Lists all the capacity tasks.
@@ -61,13 +82,35 @@ type ListCapacityTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityTasksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityTaskList(s, schemas.ListCapacityTasksOutput_CapacityTasks, v.CapacityTasks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapacityTasksOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCapacityTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCapacityTasksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCapacityTasksOutput_CapacityTasks:
+			return deserializeCapacityTaskList(d, schemas.ListCapacityTasksOutput_CapacityTasks, &v.CapacityTasks)
+		case schemas.ListCapacityTasksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCapacityTasksOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCapacityTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCapacityTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityTasks, schemas.ListCapacityTasksInput, schemas.ListCapacityTasksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCapacityTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityTasks, schemas.ListCapacityTasksInput, schemas.ListCapacityTasksOutput), output: &ListCapacityTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

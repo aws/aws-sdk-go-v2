@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,22 @@ type GetKMSEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKMSEncryptionKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKMSEncryptionKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetKMSEncryptionKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetKMSEncryptionKeyOutput struct {
 
 	// The KMS encryption key.
@@ -40,13 +58,34 @@ type GetKMSEncryptionKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKMSEncryptionKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKMSEncryptionKeyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKMSEncryptionKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKey != nil {
+		s.WriteStruct(schemas.GetKMSEncryptionKeyResult_kmsKey)
+		v.KmsKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetKMSEncryptionKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetKMSEncryptionKeyResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetKMSEncryptionKeyResult_kmsKey:
+			v.KmsKey = &types.KMSKey{}
+			return v.KmsKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetKMSEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetKMSEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKMSEncryptionKey, nil, schemas.GetKMSEncryptionKeyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetKMSEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKMSEncryptionKey, nil, schemas.GetKMSEncryptionKeyResult), output: &GetKMSEncryptionKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

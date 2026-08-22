@@ -5,7 +5,9 @@ package codebuild
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,27 @@ type ListSharedProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedProjectsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSharedProjectsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedProjectsInput_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListSharedProjectsInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListSharedProjectsInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListSharedProjectsOutput struct {
 
 	//  During a previous call, the maximum number of items that can be returned is
@@ -81,13 +104,35 @@ type ListSharedProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedProjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedProjectsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedProjectsOutput_nextToken, *v.NextToken)
+	}
+	serializeProjectArns(s, schemas.ListSharedProjectsOutput_projects, v.Projects)
+}
+func (v *ListSharedProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSharedProjectsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSharedProjectsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSharedProjectsOutput_nextToken, v.NextToken)
+		case schemas.ListSharedProjectsOutput_projects:
+			return deserializeProjectArns(d, schemas.ListSharedProjectsOutput_projects, &v.Projects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSharedProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSharedProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedProjects, schemas.ListSharedProjectsInput, schemas.ListSharedProjectsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSharedProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedProjects, schemas.ListSharedProjectsInput, schemas.ListSharedProjectsOutput), output: &ListSharedProjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

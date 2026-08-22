@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,28 @@ type GetDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceIdList(s, schemas.GetDevicesRequest_DeviceIds, v.DeviceIds)
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetDevicesRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDevicesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDevicesRequest_NextToken, *v.NextToken)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.GetDevicesRequest_SiteId, *v.SiteId)
+	}
+}
+
 type GetDevicesOutput struct {
 
 	// The devices.
@@ -61,13 +85,35 @@ type GetDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceList(s, schemas.GetDevicesResponse_Devices, v.Devices)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDevicesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDevicesResponse_Devices:
+			return deserializeDeviceList(d, schemas.GetDevicesResponse_Devices, &v.Devices)
+		case schemas.GetDevicesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDevicesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevices, schemas.GetDevicesRequest, schemas.GetDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevices, schemas.GetDevicesRequest, schemas.GetDevicesResponse), output: &GetDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
