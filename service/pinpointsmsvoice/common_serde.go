@@ -43,6 +43,7 @@ func serializeEventTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func deserializeConfigurationSets(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -56,6 +57,7 @@ func deserializeConfigurationSets(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeEventDestinations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventDestination) error {
+	*v = make([]types.EventDestination, 0)
 	var vv types.EventDestination
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EventDestination{}
@@ -69,6 +71,7 @@ func deserializeEventDestinations(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeEventTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventType) error {
+	*v = make([]types.EventType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

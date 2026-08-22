@@ -308,6 +308,7 @@ func serializeUserList(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func deserializeAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Account) error {
+	*v = make([]types.Account, 0)
 	var vv types.Account
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Account{}
@@ -321,6 +322,7 @@ func deserializeAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeBotList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Bot) error {
+	*v = make([]types.Bot, 0)
 	var vv types.Bot
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Bot{}
@@ -334,6 +336,7 @@ func deserializeBotList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeE164PhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -347,6 +350,7 @@ func deserializeE164PhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeInviteList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Invite) error {
+	*v = make([]types.Invite, 0)
 	var vv types.Invite
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Invite{}
@@ -360,6 +364,7 @@ func deserializeInviteList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeLicenseList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.License) error {
+	*v = make([]types.License, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -373,6 +378,7 @@ func deserializeLicenseList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeMemberErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MemberError) error {
+	*v = make([]types.MemberError, 0)
 	var vv types.MemberError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MemberError{}
@@ -386,6 +392,7 @@ func deserializeMemberErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeMembershipItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MembershipItem) error {
+	*v = make([]types.MembershipItem, 0)
 	var vv types.MembershipItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MembershipItem{}
@@ -399,6 +406,7 @@ func deserializeMembershipItemList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeNonEmptyStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -412,6 +420,7 @@ func deserializeNonEmptyStringList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeOrderedPhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OrderedPhoneNumber) error {
+	*v = make([]types.OrderedPhoneNumber, 0)
 	var vv types.OrderedPhoneNumber
 	return smithy.ReadList(d, s, func() error {
 		vv = types.OrderedPhoneNumber{}
@@ -425,6 +434,7 @@ func deserializeOrderedPhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializePhoneNumberAssociationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PhoneNumberAssociation) error {
+	*v = make([]types.PhoneNumberAssociation, 0)
 	var vv types.PhoneNumberAssociation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PhoneNumberAssociation{}
@@ -438,6 +448,7 @@ func deserializePhoneNumberAssociationList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializePhoneNumberCountriesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PhoneNumberCountry) error {
+	*v = make([]types.PhoneNumberCountry, 0)
 	var vv types.PhoneNumberCountry
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PhoneNumberCountry{}
@@ -451,6 +462,7 @@ func deserializePhoneNumberCountriesList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializePhoneNumberErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PhoneNumberError) error {
+	*v = make([]types.PhoneNumberError, 0)
 	var vv types.PhoneNumberError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PhoneNumberError{}
@@ -464,6 +476,7 @@ func deserializePhoneNumberErrorList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializePhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PhoneNumber) error {
+	*v = make([]types.PhoneNumber, 0)
 	var vv types.PhoneNumber
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PhoneNumber{}
@@ -477,6 +490,7 @@ func deserializePhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializePhoneNumberOrderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PhoneNumberOrder) error {
+	*v = make([]types.PhoneNumberOrder, 0)
 	var vv types.PhoneNumberOrder
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PhoneNumberOrder{}
@@ -490,6 +504,7 @@ func deserializePhoneNumberOrderList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializePhoneNumberTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PhoneNumberType) error {
+	*v = make([]types.PhoneNumberType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -503,6 +518,7 @@ func deserializePhoneNumberTypeList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeRoomList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Room) error {
+	*v = make([]types.Room, 0)
 	var vv types.Room
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Room{}
@@ -516,6 +532,7 @@ func deserializeRoomList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 }
 
 func deserializeRoomMembershipList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RoomMembership) error {
+	*v = make([]types.RoomMembership, 0)
 	var vv types.RoomMembership
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RoomMembership{}
@@ -529,6 +546,7 @@ func deserializeRoomMembershipList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeSigninDelegateGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SigninDelegateGroup) error {
+	*v = make([]types.SigninDelegateGroup, 0)
 	var vv types.SigninDelegateGroup
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SigninDelegateGroup{}
@@ -542,6 +560,7 @@ func deserializeSigninDelegateGroupList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeUpdatePhoneNumberRequestItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UpdatePhoneNumberRequestItem) error {
+	*v = make([]types.UpdatePhoneNumberRequestItem, 0)
 	var vv types.UpdatePhoneNumberRequestItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.UpdatePhoneNumberRequestItem{}
@@ -555,6 +574,7 @@ func deserializeUpdatePhoneNumberRequestItemList(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeUpdateUserRequestItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UpdateUserRequestItem) error {
+	*v = make([]types.UpdateUserRequestItem, 0)
 	var vv types.UpdateUserRequestItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.UpdateUserRequestItem{}
@@ -568,6 +588,7 @@ func deserializeUpdateUserRequestItemList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeUserEmailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -581,6 +602,7 @@ func deserializeUserEmailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeUserErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UserError) error {
+	*v = make([]types.UserError, 0)
 	var vv types.UserError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.UserError{}
@@ -594,6 +616,7 @@ func deserializeUserErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeUserIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -607,6 +630,7 @@ func deserializeUserIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeUserList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.User) error {
+	*v = make([]types.User, 0)
 	var vv types.User
 	return smithy.ReadList(d, s, func() error {
 		vv = types.User{}

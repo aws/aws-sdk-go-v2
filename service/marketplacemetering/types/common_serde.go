@@ -59,6 +59,7 @@ func serializeUsageRecordResultList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -72,6 +73,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 }
 
 func deserializeUsageAllocations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UsageAllocation) error {
+	*v = make([]UsageAllocation, 0)
 	var vv UsageAllocation
 	return smithy.ReadList(d, s, func() error {
 		vv = UsageAllocation{}
@@ -85,6 +87,7 @@ func deserializeUsageAllocations(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeUsageRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UsageRecord) error {
+	*v = make([]UsageRecord, 0)
 	var vv UsageRecord
 	return smithy.ReadList(d, s, func() error {
 		vv = UsageRecord{}
@@ -98,6 +101,7 @@ func deserializeUsageRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeUsageRecordResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UsageRecordResult) error {
+	*v = make([]UsageRecordResult, 0)
 	var vv UsageRecordResult
 	return smithy.ReadList(d, s, func() error {
 		vv = UsageRecordResult{}

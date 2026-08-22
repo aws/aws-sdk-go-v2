@@ -21,6 +21,7 @@ func serializeTimeSeries(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func deserializeTimeSeries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataPoint) error {
+	*v = make([]types.DataPoint, 0)
 	var vv types.DataPoint
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DataPoint{}

@@ -1154,6 +1154,7 @@ func serializeVolumeRecommendations(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func deserializeAccountEnrollmentStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AccountEnrollmentStatus) error {
+	*v = make([]types.AccountEnrollmentStatus, 0)
 	var vv types.AccountEnrollmentStatus
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AccountEnrollmentStatus{}
@@ -1167,6 +1168,7 @@ func deserializeAccountEnrollmentStatuses(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeAccountIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1180,6 +1182,7 @@ func deserializeAccountIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeAutoScalingGroupArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1193,6 +1196,7 @@ func deserializeAutoScalingGroupArns(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeAutoScalingGroupRecommendationOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AutoScalingGroupRecommendationOption) error {
+	*v = make([]types.AutoScalingGroupRecommendationOption, 0)
 	var vv types.AutoScalingGroupRecommendationOption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AutoScalingGroupRecommendationOption{}
@@ -1206,6 +1210,7 @@ func deserializeAutoScalingGroupRecommendationOptions(d smithy.ShapeDeserializer
 }
 
 func deserializeAutoScalingGroupRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AutoScalingGroupRecommendation) error {
+	*v = make([]types.AutoScalingGroupRecommendation, 0)
 	var vv types.AutoScalingGroupRecommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AutoScalingGroupRecommendation{}
@@ -1219,6 +1224,7 @@ func deserializeAutoScalingGroupRecommendations(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeContainerConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContainerConfiguration) error {
+	*v = make([]types.ContainerConfiguration, 0)
 	var vv types.ContainerConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ContainerConfiguration{}
@@ -1232,6 +1238,7 @@ func deserializeContainerConfigurations(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeContainerRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContainerRecommendation) error {
+	*v = make([]types.ContainerRecommendation, 0)
 	var vv types.ContainerRecommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ContainerRecommendation{}
@@ -1245,6 +1252,7 @@ func deserializeContainerRecommendations(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeCpuVendorArchitectures(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CpuVendorArchitecture) error {
+	*v = make([]types.CpuVendorArchitecture, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1258,6 +1266,7 @@ func deserializeCpuVendorArchitectures(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeEBSFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EBSFilter) error {
+	*v = make([]types.EBSFilter, 0)
 	var vv types.EBSFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EBSFilter{}
@@ -1271,6 +1280,7 @@ func deserializeEBSFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeEBSUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EBSUtilizationMetric) error {
+	*v = make([]types.EBSUtilizationMetric, 0)
 	var vv types.EBSUtilizationMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EBSUtilizationMetric{}
@@ -1284,6 +1294,7 @@ func deserializeEBSUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeECSServiceProjectedMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ECSServiceProjectedMetric) error {
+	*v = make([]types.ECSServiceProjectedMetric, 0)
 	var vv types.ECSServiceProjectedMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ECSServiceProjectedMetric{}
@@ -1297,6 +1308,7 @@ func deserializeECSServiceProjectedMetrics(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeECSServiceProjectedUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ECSServiceProjectedUtilizationMetric) error {
+	*v = make([]types.ECSServiceProjectedUtilizationMetric, 0)
 	var vv types.ECSServiceProjectedUtilizationMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ECSServiceProjectedUtilizationMetric{}
@@ -1310,6 +1322,7 @@ func deserializeECSServiceProjectedUtilizationMetrics(d smithy.ShapeDeserializer
 }
 
 func deserializeECSServiceRecommendationFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ECSServiceRecommendationFilter) error {
+	*v = make([]types.ECSServiceRecommendationFilter, 0)
 	var vv types.ECSServiceRecommendationFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ECSServiceRecommendationFilter{}
@@ -1323,6 +1336,7 @@ func deserializeECSServiceRecommendationFilters(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeECSServiceRecommendationFindingReasonCodes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ECSServiceRecommendationFindingReasonCode) error {
+	*v = make([]types.ECSServiceRecommendationFindingReasonCode, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1336,6 +1350,7 @@ func deserializeECSServiceRecommendationFindingReasonCodes(d smithy.ShapeDeseria
 }
 
 func deserializeECSServiceRecommendationOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ECSServiceRecommendationOption) error {
+	*v = make([]types.ECSServiceRecommendationOption, 0)
 	var vv types.ECSServiceRecommendationOption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ECSServiceRecommendationOption{}
@@ -1349,6 +1364,7 @@ func deserializeECSServiceRecommendationOptions(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeECSServiceRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ECSServiceRecommendation) error {
+	*v = make([]types.ECSServiceRecommendation, 0)
 	var vv types.ECSServiceRecommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ECSServiceRecommendation{}
@@ -1362,6 +1378,7 @@ func deserializeECSServiceRecommendations(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeECSServiceRecommendedOptionProjectedMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ECSServiceRecommendedOptionProjectedMetric) error {
+	*v = make([]types.ECSServiceRecommendedOptionProjectedMetric, 0)
 	var vv types.ECSServiceRecommendedOptionProjectedMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ECSServiceRecommendedOptionProjectedMetric{}
@@ -1375,6 +1392,7 @@ func deserializeECSServiceRecommendedOptionProjectedMetrics(d smithy.ShapeDeseri
 }
 
 func deserializeECSServiceUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ECSServiceUtilizationMetric) error {
+	*v = make([]types.ECSServiceUtilizationMetric, 0)
 	var vv types.ECSServiceUtilizationMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ECSServiceUtilizationMetric{}
@@ -1388,6 +1406,7 @@ func deserializeECSServiceUtilizationMetrics(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeEffectivePreferredResources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EffectivePreferredResource) error {
+	*v = make([]types.EffectivePreferredResource, 0)
 	var vv types.EffectivePreferredResource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EffectivePreferredResource{}
@@ -1401,6 +1420,7 @@ func deserializeEffectivePreferredResources(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeEnrollmentFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EnrollmentFilter) error {
+	*v = make([]types.EnrollmentFilter, 0)
 	var vv types.EnrollmentFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EnrollmentFilter{}
@@ -1414,6 +1434,7 @@ func deserializeEnrollmentFilters(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeExportableAutoScalingGroupFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportableAutoScalingGroupField) error {
+	*v = make([]types.ExportableAutoScalingGroupField, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1427,6 +1448,7 @@ func deserializeExportableAutoScalingGroupFields(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeExportableECSServiceFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportableECSServiceField) error {
+	*v = make([]types.ExportableECSServiceField, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1440,6 +1462,7 @@ func deserializeExportableECSServiceFields(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeExportableIdleFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportableIdleField) error {
+	*v = make([]types.ExportableIdleField, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1453,6 +1476,7 @@ func deserializeExportableIdleFields(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeExportableInstanceFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportableInstanceField) error {
+	*v = make([]types.ExportableInstanceField, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1466,6 +1490,7 @@ func deserializeExportableInstanceFields(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeExportableLambdaFunctionFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportableLambdaFunctionField) error {
+	*v = make([]types.ExportableLambdaFunctionField, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1479,6 +1504,7 @@ func deserializeExportableLambdaFunctionFields(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeExportableLicenseFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportableLicenseField) error {
+	*v = make([]types.ExportableLicenseField, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1492,6 +1518,7 @@ func deserializeExportableLicenseFields(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeExportableRDSDBFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportableRDSDBField) error {
+	*v = make([]types.ExportableRDSDBField, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1505,6 +1532,7 @@ func deserializeExportableRDSDBFields(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeExportableVolumeFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportableVolumeField) error {
+	*v = make([]types.ExportableVolumeField, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1518,6 +1546,7 @@ func deserializeExportableVolumeFields(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Filter) error {
+	*v = make([]types.Filter, 0)
 	var vv types.Filter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Filter{}
@@ -1531,6 +1560,7 @@ func deserializeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1544,6 +1574,7 @@ func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeFunctionArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1557,6 +1588,7 @@ func deserializeFunctionArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeGetRecommendationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GetRecommendationError) error {
+	*v = make([]types.GetRecommendationError, 0)
 	var vv types.GetRecommendationError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GetRecommendationError{}
@@ -1570,6 +1602,7 @@ func deserializeGetRecommendationErrors(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeGpus(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Gpu) error {
+	*v = make([]types.Gpu, 0)
 	var vv types.Gpu
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Gpu{}
@@ -1583,6 +1616,7 @@ func deserializeGpus(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Gp
 }
 
 func deserializeIdleDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IdleDimension) error {
+	*v = make([]types.IdleDimension, 0)
 	var vv types.IdleDimension
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IdleDimension{}
@@ -1596,6 +1630,7 @@ func deserializeIdleDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeIdleDimensionValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1609,6 +1644,7 @@ func deserializeIdleDimensionValues(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeIdleRecommendationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IdleRecommendationError) error {
+	*v = make([]types.IdleRecommendationError, 0)
 	var vv types.IdleRecommendationError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IdleRecommendationError{}
@@ -1622,6 +1658,7 @@ func deserializeIdleRecommendationErrors(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeIdleRecommendationFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IdleRecommendationFilter) error {
+	*v = make([]types.IdleRecommendationFilter, 0)
 	var vv types.IdleRecommendationFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IdleRecommendationFilter{}
@@ -1635,6 +1672,7 @@ func deserializeIdleRecommendationFilters(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeIdleRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IdleRecommendation) error {
+	*v = make([]types.IdleRecommendation, 0)
 	var vv types.IdleRecommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IdleRecommendation{}
@@ -1648,6 +1686,7 @@ func deserializeIdleRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeIdleSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IdleSummary) error {
+	*v = make([]types.IdleSummary, 0)
 	var vv types.IdleSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IdleSummary{}
@@ -1661,6 +1700,7 @@ func deserializeIdleSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeIdleUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IdleUtilizationMetric) error {
+	*v = make([]types.IdleUtilizationMetric, 0)
 	var vv types.IdleUtilizationMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IdleUtilizationMetric{}
@@ -1674,6 +1714,7 @@ func deserializeIdleUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeInferredWorkloadSavings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InferredWorkloadSaving) error {
+	*v = make([]types.InferredWorkloadSaving, 0)
 	var vv types.InferredWorkloadSaving
 	return smithy.ReadList(d, s, func() error {
 		vv = types.InferredWorkloadSaving{}
@@ -1687,6 +1728,7 @@ func deserializeInferredWorkloadSavings(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeInferredWorkloadTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InferredWorkloadType) error {
+	*v = make([]types.InferredWorkloadType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1700,6 +1742,7 @@ func deserializeInferredWorkloadTypes(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeInstanceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1713,6 +1756,7 @@ func deserializeInstanceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeInstanceRecommendationFindingReasonCodes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InstanceRecommendationFindingReasonCode) error {
+	*v = make([]types.InstanceRecommendationFindingReasonCode, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1726,6 +1770,7 @@ func deserializeInstanceRecommendationFindingReasonCodes(d smithy.ShapeDeseriali
 }
 
 func deserializeInstanceRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InstanceRecommendation) error {
+	*v = make([]types.InstanceRecommendation, 0)
 	var vv types.InstanceRecommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.InstanceRecommendation{}
@@ -1739,6 +1784,7 @@ func deserializeInstanceRecommendations(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeJobFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.JobFilter) error {
+	*v = make([]types.JobFilter, 0)
 	var vv types.JobFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.JobFilter{}
@@ -1752,6 +1798,7 @@ func deserializeJobFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeJobIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1765,6 +1812,7 @@ func deserializeJobIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string
 }
 
 func deserializeLambdaFunctionMemoryProjectedMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LambdaFunctionMemoryProjectedMetric) error {
+	*v = make([]types.LambdaFunctionMemoryProjectedMetric, 0)
 	var vv types.LambdaFunctionMemoryProjectedMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LambdaFunctionMemoryProjectedMetric{}
@@ -1778,6 +1826,7 @@ func deserializeLambdaFunctionMemoryProjectedMetrics(d smithy.ShapeDeserializer,
 }
 
 func deserializeLambdaFunctionMemoryRecommendationOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LambdaFunctionMemoryRecommendationOption) error {
+	*v = make([]types.LambdaFunctionMemoryRecommendationOption, 0)
 	var vv types.LambdaFunctionMemoryRecommendationOption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LambdaFunctionMemoryRecommendationOption{}
@@ -1791,6 +1840,7 @@ func deserializeLambdaFunctionMemoryRecommendationOptions(d smithy.ShapeDeserial
 }
 
 func deserializeLambdaFunctionRecommendationFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LambdaFunctionRecommendationFilter) error {
+	*v = make([]types.LambdaFunctionRecommendationFilter, 0)
 	var vv types.LambdaFunctionRecommendationFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LambdaFunctionRecommendationFilter{}
@@ -1804,6 +1854,7 @@ func deserializeLambdaFunctionRecommendationFilters(d smithy.ShapeDeserializer, 
 }
 
 func deserializeLambdaFunctionRecommendationFindingReasonCodes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LambdaFunctionRecommendationFindingReasonCode) error {
+	*v = make([]types.LambdaFunctionRecommendationFindingReasonCode, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1817,6 +1868,7 @@ func deserializeLambdaFunctionRecommendationFindingReasonCodes(d smithy.ShapeDes
 }
 
 func deserializeLambdaFunctionRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LambdaFunctionRecommendation) error {
+	*v = make([]types.LambdaFunctionRecommendation, 0)
 	var vv types.LambdaFunctionRecommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LambdaFunctionRecommendation{}
@@ -1830,6 +1882,7 @@ func deserializeLambdaFunctionRecommendations(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeLambdaFunctionUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LambdaFunctionUtilizationMetric) error {
+	*v = make([]types.LambdaFunctionUtilizationMetric, 0)
 	var vv types.LambdaFunctionUtilizationMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LambdaFunctionUtilizationMetric{}
@@ -1843,6 +1896,7 @@ func deserializeLambdaFunctionUtilizationMetrics(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeLicenseFindingReasonCodes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LicenseFindingReasonCode) error {
+	*v = make([]types.LicenseFindingReasonCode, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1856,6 +1910,7 @@ func deserializeLicenseFindingReasonCodes(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeLicenseRecommendationFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LicenseRecommendationFilter) error {
+	*v = make([]types.LicenseRecommendationFilter, 0)
 	var vv types.LicenseRecommendationFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LicenseRecommendationFilter{}
@@ -1869,6 +1924,7 @@ func deserializeLicenseRecommendationFilters(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeLicenseRecommendationOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LicenseRecommendationOption) error {
+	*v = make([]types.LicenseRecommendationOption, 0)
 	var vv types.LicenseRecommendationOption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LicenseRecommendationOption{}
@@ -1882,6 +1938,7 @@ func deserializeLicenseRecommendationOptions(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeLicenseRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LicenseRecommendation) error {
+	*v = make([]types.LicenseRecommendation, 0)
 	var vv types.LicenseRecommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LicenseRecommendation{}
@@ -1895,6 +1952,7 @@ func deserializeLicenseRecommendations(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeMetricsSource(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricSource) error {
+	*v = make([]types.MetricSource, 0)
 	var vv types.MetricSource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MetricSource{}
@@ -1908,6 +1966,7 @@ func deserializeMetricsSource(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeMetricValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]float64) error {
+	*v = make([]float64, 0)
 	var vv float64
 	return smithy.ReadList(d, s, func() error {
 
@@ -1921,6 +1980,7 @@ func deserializeMetricValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeMixedInstanceTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1934,6 +1994,7 @@ func deserializeMixedInstanceTypes(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializePlatformDifferences(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PlatformDifference) error {
+	*v = make([]types.PlatformDifference, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1947,6 +2008,7 @@ func deserializePlatformDifferences(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializePreferredResources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PreferredResource) error {
+	*v = make([]types.PreferredResource, 0)
 	var vv types.PreferredResource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PreferredResource{}
@@ -1960,6 +2022,7 @@ func deserializePreferredResources(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializePreferredResourceValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1973,6 +2036,7 @@ func deserializePreferredResourceValues(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeProjectedMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ProjectedMetric) error {
+	*v = make([]types.ProjectedMetric, 0)
 	var vv types.ProjectedMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ProjectedMetric{}
@@ -1986,6 +2050,7 @@ func deserializeProjectedMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeProjectedUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UtilizationMetric) error {
+	*v = make([]types.UtilizationMetric, 0)
 	var vv types.UtilizationMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.UtilizationMetric{}
@@ -1999,6 +2064,7 @@ func deserializeProjectedUtilizationMetrics(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeRDSDatabaseProjectedMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSDatabaseProjectedMetric) error {
+	*v = make([]types.RDSDatabaseProjectedMetric, 0)
 	var vv types.RDSDatabaseProjectedMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RDSDatabaseProjectedMetric{}
@@ -2012,6 +2078,7 @@ func deserializeRDSDatabaseProjectedMetrics(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeRDSDatabaseRecommendedOptionProjectedMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSDatabaseRecommendedOptionProjectedMetric) error {
+	*v = make([]types.RDSDatabaseRecommendedOptionProjectedMetric, 0)
 	var vv types.RDSDatabaseRecommendedOptionProjectedMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RDSDatabaseRecommendedOptionProjectedMetric{}
@@ -2025,6 +2092,7 @@ func deserializeRDSDatabaseRecommendedOptionProjectedMetrics(d smithy.ShapeDeser
 }
 
 func deserializeRDSDBInstanceRecommendationOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSDBInstanceRecommendationOption) error {
+	*v = make([]types.RDSDBInstanceRecommendationOption, 0)
 	var vv types.RDSDBInstanceRecommendationOption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RDSDBInstanceRecommendationOption{}
@@ -2038,6 +2106,7 @@ func deserializeRDSDBInstanceRecommendationOptions(d smithy.ShapeDeserializer, s
 }
 
 func deserializeRDSDBProjectedUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSDBUtilizationMetric) error {
+	*v = make([]types.RDSDBUtilizationMetric, 0)
 	var vv types.RDSDBUtilizationMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RDSDBUtilizationMetric{}
@@ -2051,6 +2120,7 @@ func deserializeRDSDBProjectedUtilizationMetrics(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeRDSDBRecommendationFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSDBRecommendationFilter) error {
+	*v = make([]types.RDSDBRecommendationFilter, 0)
 	var vv types.RDSDBRecommendationFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RDSDBRecommendationFilter{}
@@ -2064,6 +2134,7 @@ func deserializeRDSDBRecommendationFilters(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeRDSDBRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSDBRecommendation) error {
+	*v = make([]types.RDSDBRecommendation, 0)
 	var vv types.RDSDBRecommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RDSDBRecommendation{}
@@ -2077,6 +2148,7 @@ func deserializeRDSDBRecommendations(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeRDSDBStorageRecommendationOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSDBStorageRecommendationOption) error {
+	*v = make([]types.RDSDBStorageRecommendationOption, 0)
 	var vv types.RDSDBStorageRecommendationOption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RDSDBStorageRecommendationOption{}
@@ -2090,6 +2162,7 @@ func deserializeRDSDBStorageRecommendationOptions(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeRDSDBUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSDBUtilizationMetric) error {
+	*v = make([]types.RDSDBUtilizationMetric, 0)
 	var vv types.RDSDBUtilizationMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RDSDBUtilizationMetric{}
@@ -2103,6 +2176,7 @@ func deserializeRDSDBUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeRDSInstanceFindingReasonCodes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSInstanceFindingReasonCode) error {
+	*v = make([]types.RDSInstanceFindingReasonCode, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2116,6 +2190,7 @@ func deserializeRDSInstanceFindingReasonCodes(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeRDSStorageFindingReasonCodes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RDSStorageFindingReasonCode) error {
+	*v = make([]types.RDSStorageFindingReasonCode, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2129,6 +2204,7 @@ func deserializeRDSStorageFindingReasonCodes(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeReasonCodeSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ReasonCodeSummary) error {
+	*v = make([]types.ReasonCodeSummary, 0)
 	var vv types.ReasonCodeSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ReasonCodeSummary{}
@@ -2142,6 +2218,7 @@ func deserializeReasonCodeSummaries(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeRecommendationExportJobs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RecommendationExportJob) error {
+	*v = make([]types.RecommendationExportJob, 0)
 	var vv types.RecommendationExportJob
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RecommendationExportJob{}
@@ -2155,6 +2232,7 @@ func deserializeRecommendationExportJobs(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeRecommendationOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InstanceRecommendationOption) error {
+	*v = make([]types.InstanceRecommendationOption, 0)
 	var vv types.InstanceRecommendationOption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.InstanceRecommendationOption{}
@@ -2168,6 +2246,7 @@ func deserializeRecommendationOptions(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeRecommendationPreferenceNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RecommendationPreferenceName) error {
+	*v = make([]types.RecommendationPreferenceName, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2181,6 +2260,7 @@ func deserializeRecommendationPreferenceNames(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeRecommendationPreferencesDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RecommendationPreferencesDetail) error {
+	*v = make([]types.RecommendationPreferencesDetail, 0)
 	var vv types.RecommendationPreferencesDetail
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RecommendationPreferencesDetail{}
@@ -2194,6 +2274,7 @@ func deserializeRecommendationPreferencesDetails(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeRecommendationSources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RecommendationSource) error {
+	*v = make([]types.RecommendationSource, 0)
 	var vv types.RecommendationSource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RecommendationSource{}
@@ -2207,6 +2288,7 @@ func deserializeRecommendationSources(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeRecommendationSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RecommendationSummary) error {
+	*v = make([]types.RecommendationSummary, 0)
 	var vv types.RecommendationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RecommendationSummary{}
@@ -2220,6 +2302,7 @@ func deserializeRecommendationSummaries(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeRecommendedOptionProjectedMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RecommendedOptionProjectedMetric) error {
+	*v = make([]types.RecommendedOptionProjectedMetric, 0)
 	var vv types.RecommendedOptionProjectedMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RecommendedOptionProjectedMetric{}
@@ -2233,6 +2316,7 @@ func deserializeRecommendedOptionProjectedMetrics(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeResourceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2246,6 +2330,7 @@ func deserializeResourceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeServiceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2259,6 +2344,7 @@ func deserializeServiceArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 }
 
 func deserializeSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Summary) error {
+	*v = make([]types.Summary, 0)
 	var vv types.Summary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Summary{}
@@ -2272,6 +2358,7 @@ func deserializeSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -2285,6 +2372,7 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Ta
 }
 
 func deserializeTimestamps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]time.Time) error {
+	*v = make([]time.Time, 0)
 	var vv time.Time
 	return smithy.ReadList(d, s, func() error {
 
@@ -2298,6 +2386,7 @@ func deserializeTimestamps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ti
 }
 
 func deserializeUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UtilizationMetric) error {
+	*v = make([]types.UtilizationMetric, 0)
 	var vv types.UtilizationMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = types.UtilizationMetric{}
@@ -2311,6 +2400,7 @@ func deserializeUtilizationMetrics(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeUtilizationPreferences(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UtilizationPreference) error {
+	*v = make([]types.UtilizationPreference, 0)
 	var vv types.UtilizationPreference
 	return smithy.ReadList(d, s, func() error {
 		vv = types.UtilizationPreference{}
@@ -2324,6 +2414,7 @@ func deserializeUtilizationPreferences(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeVolumeArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2337,6 +2428,7 @@ func deserializeVolumeArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeVolumeRecommendationOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VolumeRecommendationOption) error {
+	*v = make([]types.VolumeRecommendationOption, 0)
 	var vv types.VolumeRecommendationOption
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VolumeRecommendationOption{}
@@ -2350,6 +2442,7 @@ func deserializeVolumeRecommendationOptions(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeVolumeRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VolumeRecommendation) error {
+	*v = make([]types.VolumeRecommendation, 0)
 	var vv types.VolumeRecommendation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VolumeRecommendation{}

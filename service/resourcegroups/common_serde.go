@@ -269,6 +269,7 @@ func serializeTagSyncTaskList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func deserializeFailedResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FailedResource) error {
+	*v = make([]types.FailedResource, 0)
 	var vv types.FailedResource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.FailedResource{}
@@ -282,6 +283,7 @@ func deserializeFailedResourceList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeGroupConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GroupConfigurationItem) error {
+	*v = make([]types.GroupConfigurationItem, 0)
 	var vv types.GroupConfigurationItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GroupConfigurationItem{}
@@ -295,6 +297,7 @@ func deserializeGroupConfigurationList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeGroupConfigurationParameterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -308,6 +311,7 @@ func deserializeGroupConfigurationParameterValueList(d smithy.ShapeDeserializer,
 }
 
 func deserializeGroupFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GroupFilter) error {
+	*v = make([]types.GroupFilter, 0)
 	var vv types.GroupFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GroupFilter{}
@@ -321,6 +325,7 @@ func deserializeGroupFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeGroupFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -334,6 +339,7 @@ func deserializeGroupFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeGroupIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GroupIdentifier) error {
+	*v = make([]types.GroupIdentifier, 0)
 	var vv types.GroupIdentifier
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GroupIdentifier{}
@@ -347,6 +353,7 @@ func deserializeGroupIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeGroupingStatusesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GroupingStatusesItem) error {
+	*v = make([]types.GroupingStatusesItem, 0)
 	var vv types.GroupingStatusesItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GroupingStatusesItem{}
@@ -360,6 +367,7 @@ func deserializeGroupingStatusesList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Group) error {
+	*v = make([]types.Group, 0)
 	var vv types.Group
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Group{}
@@ -373,6 +381,7 @@ func deserializeGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeGroupParameterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GroupConfigurationParameter) error {
+	*v = make([]types.GroupConfigurationParameter, 0)
 	var vv types.GroupConfigurationParameter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.GroupConfigurationParameter{}
@@ -386,6 +395,7 @@ func deserializeGroupParameterList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeListGroupingStatusesFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ListGroupingStatusesFilter) error {
+	*v = make([]types.ListGroupingStatusesFilter, 0)
 	var vv types.ListGroupingStatusesFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ListGroupingStatusesFilter{}
@@ -399,6 +409,7 @@ func deserializeListGroupingStatusesFilterList(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeListGroupingStatusesFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -412,6 +423,7 @@ func deserializeListGroupingStatusesFilterValues(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeListGroupResourcesItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ListGroupResourcesItem) error {
+	*v = make([]types.ListGroupResourcesItem, 0)
 	var vv types.ListGroupResourcesItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ListGroupResourcesItem{}
@@ -425,6 +437,7 @@ func deserializeListGroupResourcesItemList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeListTagSyncTasksFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ListTagSyncTasksFilter) error {
+	*v = make([]types.ListTagSyncTasksFilter, 0)
 	var vv types.ListTagSyncTasksFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ListTagSyncTasksFilter{}
@@ -438,6 +451,7 @@ func deserializeListTagSyncTasksFilterList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializePendingResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PendingResource) error {
+	*v = make([]types.PendingResource, 0)
 	var vv types.PendingResource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PendingResource{}
@@ -451,6 +465,7 @@ func deserializePendingResourceList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeQueryErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QueryError) error {
+	*v = make([]types.QueryError, 0)
 	var vv types.QueryError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.QueryError{}
@@ -464,6 +479,7 @@ func deserializeQueryErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeResourceArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -477,6 +493,7 @@ func deserializeResourceArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeResourceFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceFilter) error {
+	*v = make([]types.ResourceFilter, 0)
 	var vv types.ResourceFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ResourceFilter{}
@@ -490,6 +507,7 @@ func deserializeResourceFilterList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeResourceFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -503,6 +521,7 @@ func deserializeResourceFilterValues(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeResourceIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceIdentifier) error {
+	*v = make([]types.ResourceIdentifier, 0)
 	var vv types.ResourceIdentifier
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ResourceIdentifier{}
@@ -516,6 +535,7 @@ func deserializeResourceIdentifierList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -529,6 +549,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagSyncTaskList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TagSyncTaskItem) error {
+	*v = make([]types.TagSyncTaskItem, 0)
 	var vv types.TagSyncTaskItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TagSyncTaskItem{}

@@ -97,6 +97,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func deserializeAppInstanceAdminList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AppInstanceAdminSummary) error {
+	*v = make([]types.AppInstanceAdminSummary, 0)
 	var vv types.AppInstanceAdminSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AppInstanceAdminSummary{}
@@ -110,6 +111,7 @@ func deserializeAppInstanceAdminList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeAppInstanceBotList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AppInstanceBotSummary) error {
+	*v = make([]types.AppInstanceBotSummary, 0)
 	var vv types.AppInstanceBotSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AppInstanceBotSummary{}
@@ -123,6 +125,7 @@ func deserializeAppInstanceBotList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeAppInstanceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AppInstanceSummary) error {
+	*v = make([]types.AppInstanceSummary, 0)
 	var vv types.AppInstanceSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AppInstanceSummary{}
@@ -136,6 +139,7 @@ func deserializeAppInstanceList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeAppInstanceUserEndpointSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AppInstanceUserEndpointSummary) error {
+	*v = make([]types.AppInstanceUserEndpointSummary, 0)
 	var vv types.AppInstanceUserEndpointSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AppInstanceUserEndpointSummary{}
@@ -149,6 +153,7 @@ func deserializeAppInstanceUserEndpointSummaryList(d smithy.ShapeDeserializer, s
 }
 
 func deserializeAppInstanceUserList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AppInstanceUserSummary) error {
+	*v = make([]types.AppInstanceUserSummary, 0)
 	var vv types.AppInstanceUserSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AppInstanceUserSummary{}
@@ -162,6 +167,7 @@ func deserializeAppInstanceUserList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -175,6 +181,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}

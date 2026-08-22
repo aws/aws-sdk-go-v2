@@ -337,6 +337,7 @@ func serializeTargetRegions(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func deserializeBaselines(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BaselineSummary) error {
+	*v = make([]BaselineSummary, 0)
 	var vv BaselineSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = BaselineSummary{}
@@ -350,6 +351,7 @@ func deserializeBaselines(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Bas
 }
 
 func deserializeControlIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -363,6 +365,7 @@ func deserializeControlIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeControlOperations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ControlOperationSummary) error {
+	*v = make([]ControlOperationSummary, 0)
 	var vv ControlOperationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ControlOperationSummary{}
@@ -376,6 +379,7 @@ func deserializeControlOperations(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeControlOperationStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ControlOperationStatus) error {
+	*v = make([]ControlOperationStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -389,6 +393,7 @@ func deserializeControlOperationStatuses(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeControlOperationTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ControlOperationType) error {
+	*v = make([]ControlOperationType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -402,6 +407,7 @@ func deserializeControlOperationTypes(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeDriftStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DriftStatus) error {
+	*v = make([]DriftStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -415,6 +421,7 @@ func deserializeDriftStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeEnabledBaselineBaselineIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -428,6 +435,7 @@ func deserializeEnabledBaselineBaselineIdentifiers(d smithy.ShapeDeserializer, s
 }
 
 func deserializeEnabledBaselineDriftStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnabledBaselineDriftStatus) error {
+	*v = make([]EnabledBaselineDriftStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -441,6 +449,7 @@ func deserializeEnabledBaselineDriftStatuses(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeEnabledBaselineEnablementStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnablementStatus) error {
+	*v = make([]EnablementStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -454,6 +463,7 @@ func deserializeEnabledBaselineEnablementStatuses(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeEnabledBaselineParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnabledBaselineParameter) error {
+	*v = make([]EnabledBaselineParameter, 0)
 	var vv EnabledBaselineParameter
 	return smithy.ReadList(d, s, func() error {
 		vv = EnabledBaselineParameter{}
@@ -467,6 +477,7 @@ func deserializeEnabledBaselineParameters(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeEnabledBaselineParameterSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnabledBaselineParameterSummary) error {
+	*v = make([]EnabledBaselineParameterSummary, 0)
 	var vv EnabledBaselineParameterSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = EnabledBaselineParameterSummary{}
@@ -480,6 +491,7 @@ func deserializeEnabledBaselineParameterSummaries(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeEnabledBaselineParentIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -493,6 +505,7 @@ func deserializeEnabledBaselineParentIdentifiers(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeEnabledBaselines(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnabledBaselineSummary) error {
+	*v = make([]EnabledBaselineSummary, 0)
 	var vv EnabledBaselineSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = EnabledBaselineSummary{}
@@ -506,6 +519,7 @@ func deserializeEnabledBaselines(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeEnabledBaselineTargetIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -519,6 +533,7 @@ func deserializeEnabledBaselineTargetIdentifiers(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeEnabledControlIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -532,6 +547,7 @@ func deserializeEnabledControlIdentifiers(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeEnabledControlParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnabledControlParameter) error {
+	*v = make([]EnabledControlParameter, 0)
 	var vv EnabledControlParameter
 	return smithy.ReadList(d, s, func() error {
 		vv = EnabledControlParameter{}
@@ -545,6 +561,7 @@ func deserializeEnabledControlParameters(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeEnabledControlParameterSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnabledControlParameterSummary) error {
+	*v = make([]EnabledControlParameterSummary, 0)
 	var vv EnabledControlParameterSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = EnabledControlParameterSummary{}
@@ -558,6 +575,7 @@ func deserializeEnabledControlParameterSummaries(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeEnabledControls(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnabledControlSummary) error {
+	*v = make([]EnabledControlSummary, 0)
 	var vv EnabledControlSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = EnabledControlSummary{}
@@ -571,6 +589,7 @@ func deserializeEnabledControls(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeEnablementStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnablementStatus) error {
+	*v = make([]EnablementStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -584,6 +603,7 @@ func deserializeEnablementStatuses(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeLandingZoneOperations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LandingZoneOperationSummary) error {
+	*v = make([]LandingZoneOperationSummary, 0)
 	var vv LandingZoneOperationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = LandingZoneOperationSummary{}
@@ -597,6 +617,7 @@ func deserializeLandingZoneOperations(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeLandingZoneOperationStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LandingZoneOperationStatus) error {
+	*v = make([]LandingZoneOperationStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -610,6 +631,7 @@ func deserializeLandingZoneOperationStatuses(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeLandingZoneOperationTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LandingZoneOperationType) error {
+	*v = make([]LandingZoneOperationType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -623,6 +645,7 @@ func deserializeLandingZoneOperationTypes(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeLandingZoneSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LandingZoneSummary) error {
+	*v = make([]LandingZoneSummary, 0)
 	var vv LandingZoneSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = LandingZoneSummary{}
@@ -636,6 +659,7 @@ func deserializeLandingZoneSummaries(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeParentIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -649,6 +673,7 @@ func deserializeParentIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeRemediationTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RemediationType) error {
+	*v = make([]RemediationType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -662,6 +687,7 @@ func deserializeRemediationTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -675,6 +701,7 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeTargetIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -688,6 +715,7 @@ func deserializeTargetIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeTargetRegions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Region) error {
+	*v = make([]Region, 0)
 	var vv Region
 	return smithy.ReadList(d, s, func() error {
 		vv = Region{}

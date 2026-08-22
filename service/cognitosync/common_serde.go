@@ -82,6 +82,7 @@ func serializeRecordPatchList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func deserializeApplicationArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -95,6 +96,7 @@ func deserializeApplicationArnList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeDatasetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Dataset) error {
+	*v = make([]types.Dataset, 0)
 	var vv types.Dataset
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Dataset{}
@@ -108,6 +110,7 @@ func deserializeDatasetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeIdentityPoolUsageList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IdentityPoolUsage) error {
+	*v = make([]types.IdentityPoolUsage, 0)
 	var vv types.IdentityPoolUsage
 	return smithy.ReadList(d, s, func() error {
 		vv = types.IdentityPoolUsage{}
@@ -121,6 +124,7 @@ func deserializeIdentityPoolUsageList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeMergedDatasetNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -134,6 +138,7 @@ func deserializeMergedDatasetNameList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Record) error {
+	*v = make([]types.Record, 0)
 	var vv types.Record
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Record{}
@@ -147,6 +152,7 @@ func deserializeRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeRecordPatchList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RecordPatch) error {
+	*v = make([]types.RecordPatch, 0)
 	var vv types.RecordPatch
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RecordPatch{}

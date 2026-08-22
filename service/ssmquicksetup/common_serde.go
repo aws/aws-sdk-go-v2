@@ -147,6 +147,7 @@ func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Ta
 }
 
 func deserializeConfigurationDefinitionsInputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConfigurationDefinitionInput) error {
+	*v = make([]types.ConfigurationDefinitionInput, 0)
 	var vv types.ConfigurationDefinitionInput
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ConfigurationDefinitionInput{}
@@ -160,6 +161,7 @@ func deserializeConfigurationDefinitionsInputList(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeConfigurationDefinitionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConfigurationDefinition) error {
+	*v = make([]types.ConfigurationDefinition, 0)
 	var vv types.ConfigurationDefinition
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ConfigurationDefinition{}
@@ -173,6 +175,7 @@ func deserializeConfigurationDefinitionsList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeConfigurationDefinitionSummariesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConfigurationDefinitionSummary) error {
+	*v = make([]types.ConfigurationDefinitionSummary, 0)
 	var vv types.ConfigurationDefinitionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ConfigurationDefinitionSummary{}
@@ -186,6 +189,7 @@ func deserializeConfigurationDefinitionSummariesList(d smithy.ShapeDeserializer,
 }
 
 func deserializeConfigurationManagerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConfigurationManagerSummary) error {
+	*v = make([]types.ConfigurationManagerSummary, 0)
 	var vv types.ConfigurationManagerSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ConfigurationManagerSummary{}
@@ -199,6 +203,7 @@ func deserializeConfigurationManagerList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeConfigurationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConfigurationSummary) error {
+	*v = make([]types.ConfigurationSummary, 0)
 	var vv types.ConfigurationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ConfigurationSummary{}
@@ -212,6 +217,7 @@ func deserializeConfigurationsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeFiltersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Filter) error {
+	*v = make([]types.Filter, 0)
 	var vv types.Filter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Filter{}
@@ -225,6 +231,7 @@ func deserializeFiltersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -238,6 +245,7 @@ func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeQuickSetupTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QuickSetupTypeOutput) error {
+	*v = make([]types.QuickSetupTypeOutput, 0)
 	var vv types.QuickSetupTypeOutput
 	return smithy.ReadList(d, s, func() error {
 		vv = types.QuickSetupTypeOutput{}
@@ -251,6 +259,7 @@ func deserializeQuickSetupTypeList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeStatusSummariesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StatusSummary) error {
+	*v = make([]types.StatusSummary, 0)
 	var vv types.StatusSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.StatusSummary{}
@@ -264,6 +273,7 @@ func deserializeStatusSummariesList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -277,6 +287,7 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TagEntry) error {
+	*v = make([]types.TagEntry, 0)
 	var vv types.TagEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TagEntry{}

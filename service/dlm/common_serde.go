@@ -331,6 +331,7 @@ func serializeVariableTagsList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func deserializeActionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Action) error {
+	*v = make([]types.Action, 0)
 	var vv types.Action
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Action{}
@@ -344,6 +345,7 @@ func deserializeActionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeAvailabilityZoneIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -357,6 +359,7 @@ func deserializeAvailabilityZoneIdList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeAvailabilityZoneList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -370,6 +373,7 @@ func deserializeAvailabilityZoneList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeCrossRegionCopyActionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CrossRegionCopyAction) error {
+	*v = make([]types.CrossRegionCopyAction, 0)
 	var vv types.CrossRegionCopyAction
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CrossRegionCopyAction{}
@@ -383,6 +387,7 @@ func deserializeCrossRegionCopyActionList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeCrossRegionCopyRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CrossRegionCopyRule) error {
+	*v = make([]types.CrossRegionCopyRule, 0)
 	var vv types.CrossRegionCopyRule
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CrossRegionCopyRule{}
@@ -396,6 +401,7 @@ func deserializeCrossRegionCopyRules(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeCrossRegionCopyTargetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CrossRegionCopyTarget) error {
+	*v = make([]types.CrossRegionCopyTarget, 0)
 	var vv types.CrossRegionCopyTarget
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CrossRegionCopyTarget{}
@@ -409,6 +415,7 @@ func deserializeCrossRegionCopyTargetList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeExcludeDataVolumeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -422,6 +429,7 @@ func deserializeExcludeDataVolumeTagList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeExcludeTagsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -435,6 +443,7 @@ func deserializeExcludeTagsList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeExcludeVolumeTypesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -448,6 +457,7 @@ func deserializeExcludeVolumeTypesList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeLifecyclePolicySummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LifecyclePolicySummary) error {
+	*v = make([]types.LifecyclePolicySummary, 0)
 	var vv types.LifecyclePolicySummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LifecyclePolicySummary{}
@@ -461,6 +471,7 @@ func deserializeLifecyclePolicySummaryList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeParameterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -474,6 +485,7 @@ func deserializeParameterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializePolicyIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -487,6 +499,7 @@ func deserializePolicyIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeResourceLocationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceLocationValues) error {
+	*v = make([]types.ResourceLocationValues, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -500,6 +513,7 @@ func deserializeResourceLocationList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeResourceTypeValuesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceTypeValues) error {
+	*v = make([]types.ResourceTypeValues, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -513,6 +527,7 @@ func deserializeResourceTypeValuesList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeScheduleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Schedule) error {
+	*v = make([]types.Schedule, 0)
 	var vv types.Schedule
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Schedule{}
@@ -526,6 +541,7 @@ func deserializeScheduleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeScriptsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Script) error {
+	*v = make([]types.Script, 0)
 	var vv types.Script
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Script{}
@@ -539,6 +555,7 @@ func deserializeScriptsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeShareRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ShareRule) error {
+	*v = make([]types.ShareRule, 0)
 	var vv types.ShareRule
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ShareRule{}
@@ -552,6 +569,7 @@ func deserializeShareRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeShareTargetAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -565,6 +583,7 @@ func deserializeShareTargetAccountList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeSnapshotOwnerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -578,6 +597,7 @@ func deserializeSnapshotOwnerList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeStagesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StageValues) error {
+	*v = make([]types.StageValues, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -591,6 +611,7 @@ func deserializeStagesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -604,6 +625,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagsToAddFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -617,6 +639,7 @@ func deserializeTagsToAddFilterList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeTagsToAddList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -630,6 +653,7 @@ func deserializeTagsToAddList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeTargetTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -643,6 +667,7 @@ func deserializeTargetTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeTargetTagsFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -656,6 +681,7 @@ func deserializeTargetTagsFilterList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeTimesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -669,6 +695,7 @@ func deserializeTimesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeVariableTagsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}

@@ -294,6 +294,7 @@ func serializeTargetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Ta
 }
 
 func deserializeBatchCreateChannelMembershipErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchCreateChannelMembershipError) error {
+	*v = make([]BatchCreateChannelMembershipError, 0)
 	var vv BatchCreateChannelMembershipError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchCreateChannelMembershipError{}
@@ -307,6 +308,7 @@ func deserializeBatchCreateChannelMembershipErrors(d smithy.ShapeDeserializer, s
 }
 
 func deserializeChannelAssociatedWithFlowSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelAssociatedWithFlowSummary) error {
+	*v = make([]ChannelAssociatedWithFlowSummary, 0)
 	var vv ChannelAssociatedWithFlowSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelAssociatedWithFlowSummary{}
@@ -320,6 +322,7 @@ func deserializeChannelAssociatedWithFlowSummaryList(d smithy.ShapeDeserializer,
 }
 
 func deserializeChannelBanSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelBanSummary) error {
+	*v = make([]ChannelBanSummary, 0)
 	var vv ChannelBanSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelBanSummary{}
@@ -333,6 +336,7 @@ func deserializeChannelBanSummaryList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeChannelFlowSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelFlowSummary) error {
+	*v = make([]ChannelFlowSummary, 0)
 	var vv ChannelFlowSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelFlowSummary{}
@@ -346,6 +350,7 @@ func deserializeChannelFlowSummaryList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeChannelMemberArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -359,6 +364,7 @@ func deserializeChannelMemberArns(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeChannelMembershipForAppInstanceUserSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelMembershipForAppInstanceUserSummary) error {
+	*v = make([]ChannelMembershipForAppInstanceUserSummary, 0)
 	var vv ChannelMembershipForAppInstanceUserSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelMembershipForAppInstanceUserSummary{}
@@ -372,6 +378,7 @@ func deserializeChannelMembershipForAppInstanceUserSummaryList(d smithy.ShapeDes
 }
 
 func deserializeChannelMembershipSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelMembershipSummary) error {
+	*v = make([]ChannelMembershipSummary, 0)
 	var vv ChannelMembershipSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelMembershipSummary{}
@@ -385,6 +392,7 @@ func deserializeChannelMembershipSummaryList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeChannelMessageSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelMessageSummary) error {
+	*v = make([]ChannelMessageSummary, 0)
 	var vv ChannelMessageSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelMessageSummary{}
@@ -398,6 +406,7 @@ func deserializeChannelMessageSummaryList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeChannelModeratedByAppInstanceUserSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelModeratedByAppInstanceUserSummary) error {
+	*v = make([]ChannelModeratedByAppInstanceUserSummary, 0)
 	var vv ChannelModeratedByAppInstanceUserSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelModeratedByAppInstanceUserSummary{}
@@ -411,6 +420,7 @@ func deserializeChannelModeratedByAppInstanceUserSummaryList(d smithy.ShapeDeser
 }
 
 func deserializeChannelModeratorArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -424,6 +434,7 @@ func deserializeChannelModeratorArns(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeChannelModeratorSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelModeratorSummary) error {
+	*v = make([]ChannelModeratorSummary, 0)
 	var vv ChannelModeratorSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelModeratorSummary{}
@@ -437,6 +448,7 @@ func deserializeChannelModeratorSummaryList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeChannelSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelSummary) error {
+	*v = make([]ChannelSummary, 0)
 	var vv ChannelSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ChannelSummary{}
@@ -450,6 +462,7 @@ func deserializeChannelSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeMemberArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -463,6 +476,7 @@ func deserializeMemberArns(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeMembers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Identity) error {
+	*v = make([]Identity, 0)
 	var vv Identity
 	return smithy.ReadList(d, s, func() error {
 		vv = Identity{}
@@ -476,6 +490,7 @@ func deserializeMembers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Ident
 }
 
 func deserializeMessageAttributeStringValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -489,6 +504,7 @@ func deserializeMessageAttributeStringValues(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeProcessorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Processor) error {
+	*v = make([]Processor, 0)
 	var vv Processor
 	return smithy.ReadList(d, s, func() error {
 		vv = Processor{}
@@ -502,6 +518,7 @@ func deserializeProcessorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeSearchFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SearchField) error {
+	*v = make([]SearchField, 0)
 	var vv SearchField
 	return smithy.ReadList(d, s, func() error {
 		vv = SearchField{}
@@ -515,6 +532,7 @@ func deserializeSearchFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeSearchFieldValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -528,6 +546,7 @@ func deserializeSearchFieldValues(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeStreamingConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]StreamingConfiguration) error {
+	*v = make([]StreamingConfiguration, 0)
 	var vv StreamingConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = StreamingConfiguration{}
@@ -541,6 +560,7 @@ func deserializeStreamingConfigurationList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeSubChannelSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SubChannelSummary) error {
+	*v = make([]SubChannelSummary, 0)
 	var vv SubChannelSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = SubChannelSummary{}
@@ -554,6 +574,7 @@ func deserializeSubChannelSummaryList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -567,6 +588,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -580,6 +602,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 }
 
 func deserializeTargetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Target) error {
+	*v = make([]Target, 0)
 	var vv Target
 	return smithy.ReadList(d, s, func() error {
 		vv = Target{}
