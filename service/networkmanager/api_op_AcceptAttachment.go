@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type AcceptAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.AcceptAttachmentRequest_AttachmentId, *v.AttachmentId)
+	}
+}
+
 type AcceptAttachmentOutput struct {
 
 	// The response to the attachment request.
@@ -48,13 +62,34 @@ type AcceptAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attachment != nil {
+		s.WriteStruct(schemas.AcceptAttachmentResponse_Attachment)
+		v.Attachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AcceptAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptAttachmentResponse_Attachment:
+			v.Attachment = &types.Attachment{}
+			return v.Attachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAttachment, schemas.AcceptAttachmentRequest, schemas.AcceptAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAttachment, schemas.AcceptAttachmentRequest, schemas.AcceptAttachmentResponse), output: &AcceptAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -31,6 +31,7 @@ func serializeFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func deserializeEntitlementList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Entitlement) error {
+	*v = make([]Entitlement, 0)
 	var vv Entitlement
 	return smithy.ReadList(d, s, func() error {
 		vv = Entitlement{}
@@ -44,6 +45,7 @@ func deserializeEntitlementList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

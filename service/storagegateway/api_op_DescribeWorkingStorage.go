@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DescribeWorkingStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkingStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkingStorageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkingStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeWorkingStorageInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 // A JSON object containing the following fields:
 type DescribeWorkingStorageOutput struct {
 
@@ -70,13 +84,45 @@ type DescribeWorkingStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkingStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkingStorageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkingStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiskIds(s, schemas.DescribeWorkingStorageOutput_DiskIds, v.DiskIds)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeWorkingStorageOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.WorkingStorageAllocatedInBytes != 0 {
+		s.WriteInt64(schemas.DescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes, v.WorkingStorageAllocatedInBytes)
+	}
+	if v.WorkingStorageUsedInBytes != 0 {
+		s.WriteInt64(schemas.DescribeWorkingStorageOutput_WorkingStorageUsedInBytes, v.WorkingStorageUsedInBytes)
+	}
+}
+func (v *DescribeWorkingStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkingStorageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkingStorageOutput_DiskIds:
+			return deserializeDiskIds(d, schemas.DescribeWorkingStorageOutput_DiskIds, &v.DiskIds)
+		case schemas.DescribeWorkingStorageOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DescribeWorkingStorageOutput_GatewayARN, v.GatewayARN)
+		case schemas.DescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes:
+			return d.ReadInt64(schemas.DescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes, &v.WorkingStorageAllocatedInBytes)
+		case schemas.DescribeWorkingStorageOutput_WorkingStorageUsedInBytes:
+			return d.ReadInt64(schemas.DescribeWorkingStorageOutput_WorkingStorageUsedInBytes, &v.WorkingStorageUsedInBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkingStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkingStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkingStorage, schemas.DescribeWorkingStorageInput, schemas.DescribeWorkingStorageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkingStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkingStorage, schemas.DescribeWorkingStorageInput, schemas.DescribeWorkingStorageOutput), output: &DescribeWorkingStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

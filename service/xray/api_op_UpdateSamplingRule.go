@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,20 @@ type UpdateSamplingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSamplingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSamplingRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSamplingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SamplingRuleUpdate != nil {
+		s.WriteStruct(schemas.UpdateSamplingRuleRequest_SamplingRuleUpdate)
+		v.SamplingRuleUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSamplingRuleOutput struct {
 
 	// The updated rule definition and metadata.
@@ -45,13 +61,34 @@ type UpdateSamplingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSamplingRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSamplingRuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSamplingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SamplingRuleRecord != nil {
+		s.WriteStruct(schemas.UpdateSamplingRuleResult_SamplingRuleRecord)
+		v.SamplingRuleRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSamplingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSamplingRuleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSamplingRuleResult_SamplingRuleRecord:
+			v.SamplingRuleRecord = &types.SamplingRuleRecord{}
+			return v.SamplingRuleRecord.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSamplingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSamplingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSamplingRule, schemas.UpdateSamplingRuleRequest, schemas.UpdateSamplingRuleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSamplingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSamplingRule, schemas.UpdateSamplingRuleRequest, schemas.UpdateSamplingRuleResult), output: &UpdateSamplingRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

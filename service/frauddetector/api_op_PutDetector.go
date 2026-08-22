@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,25 @@ type PutDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PutDetectorRequest_description, *v.Description)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.PutDetectorRequest_detectorId, *v.DetectorId)
+	}
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.PutDetectorRequest_eventTypeName, *v.EventTypeName)
+	}
+	serializetagList(s, schemas.PutDetectorRequest_tags, v.Tags)
+}
+
 type PutDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +73,26 @@ type PutDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDetectorResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDetectorResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDetector, schemas.PutDetectorRequest, schemas.PutDetectorResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDetector, schemas.PutDetectorRequest, schemas.PutDetectorResult), output: &PutDetectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

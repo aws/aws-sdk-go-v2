@@ -4,7 +4,9 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,18 @@ type GetContactInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactInformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactInformationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetContactInformationRequest_AccountId, *v.AccountId)
+	}
+}
+
 type GetContactInformationOutput struct {
 
 	// Contains the details of the primary contact information associated with an
@@ -67,13 +81,34 @@ type GetContactInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactInformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactInformationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactInformation != nil {
+		s.WriteStruct(schemas.GetContactInformationResponse_ContactInformation)
+		v.ContactInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetContactInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContactInformationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContactInformationResponse_ContactInformation:
+			v.ContactInformation = &types.ContactInformation{}
+			return v.ContactInformation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContactInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContactInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactInformation, schemas.GetContactInformationRequest, schemas.GetContactInformationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContactInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactInformation, schemas.GetContactInformationRequest, schemas.GetContactInformationResponse), output: &GetContactInformationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -141,6 +143,31 @@ type UpdateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIPSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIPSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIPAddresses(s, schemas.UpdateIPSetRequest_Addresses, v.Addresses)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIPSetRequest_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateIPSetRequest_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.UpdateIPSetRequest_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateIPSetRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.UpdateIPSetRequest_Scope, string(v.Scope))
+	}
+}
+
 type UpdateIPSetOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update
@@ -153,13 +180,32 @@ type UpdateIPSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIPSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIPSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIPSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextLockToken != nil {
+		s.WriteString(schemas.UpdateIPSetResponse_NextLockToken, *v.NextLockToken)
+	}
+}
+func (v *UpdateIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIPSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIPSetResponse_NextLockToken:
+			v.NextLockToken = new(string)
+			return d.ReadString(schemas.UpdateIPSetResponse_NextLockToken, v.NextLockToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIPSet, schemas.UpdateIPSetRequest, schemas.UpdateIPSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIPSet, schemas.UpdateIPSetRequest, schemas.UpdateIPSetResponse), output: &UpdateIPSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

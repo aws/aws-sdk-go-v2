@@ -4,6 +4,8 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeletePlaybackRestrictionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlaybackRestrictionPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePlaybackRestrictionPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlaybackRestrictionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeletePlaybackRestrictionPolicyRequest_arn, *v.Arn)
+	}
+}
+
 type DeletePlaybackRestrictionPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeletePlaybackRestrictionPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlaybackRestrictionPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlaybackRestrictionPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePlaybackRestrictionPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePlaybackRestrictionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePlaybackRestrictionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlaybackRestrictionPolicy, schemas.DeletePlaybackRestrictionPolicyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePlaybackRestrictionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlaybackRestrictionPolicy, schemas.DeletePlaybackRestrictionPolicyRequest, nil), output: &DeletePlaybackRestrictionPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

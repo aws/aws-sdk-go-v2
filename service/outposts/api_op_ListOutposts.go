@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type ListOutpostsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutpostsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutpostsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutpostsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZoneList(s, schemas.ListOutpostsInput_AvailabilityZoneFilter, v.AvailabilityZoneFilter)
+	serializeAvailabilityZoneIdList(s, schemas.ListOutpostsInput_AvailabilityZoneIdFilter, v.AvailabilityZoneIdFilter)
+	serializeLifeCycleStatusList(s, schemas.ListOutpostsInput_LifeCycleStatusFilter, v.LifeCycleStatusFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOutpostsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutpostsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListOutpostsOutput struct {
 
 	// The pagination token.
@@ -64,13 +84,35 @@ type ListOutpostsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutpostsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutpostsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutpostsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutpostsOutput_NextToken, *v.NextToken)
+	}
+	serializeoutpostListDefinition(s, schemas.ListOutpostsOutput_Outposts, v.Outposts)
+}
+func (v *ListOutpostsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOutpostsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOutpostsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOutpostsOutput_NextToken, v.NextToken)
+		case schemas.ListOutpostsOutput_Outposts:
+			return deserializeoutpostListDefinition(d, schemas.ListOutpostsOutput_Outposts, &v.Outposts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOutpostsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOutposts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutposts, schemas.ListOutpostsInput, schemas.ListOutpostsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOutposts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutposts, schemas.ListOutpostsInput, schemas.ListOutpostsOutput), output: &ListOutpostsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

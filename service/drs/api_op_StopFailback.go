@@ -4,6 +4,8 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type StopFailbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopFailbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopFailbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopFailbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryInstanceID != nil {
+		s.WriteString(schemas.StopFailbackRequest_recoveryInstanceID, *v.RecoveryInstanceID)
+	}
+}
+func (v *StopFailbackInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopFailbackRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopFailbackRequest_recoveryInstanceID:
+			v.RecoveryInstanceID = new(string)
+			return d.ReadString(schemas.StopFailbackRequest_recoveryInstanceID, v.RecoveryInstanceID)
+		}
+		return nil
+	})
+}
+
 type StopFailbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +65,26 @@ type StopFailbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopFailbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopFailbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopFailbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopFailbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopFailback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopFailback, schemas.StopFailbackRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopFailback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopFailback, schemas.StopFailbackRequest, nil), output: &StopFailbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

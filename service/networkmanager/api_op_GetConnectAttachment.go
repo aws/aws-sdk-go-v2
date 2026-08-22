@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetConnectAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.GetConnectAttachmentRequest_AttachmentId, *v.AttachmentId)
+	}
+}
+
 type GetConnectAttachmentOutput struct {
 
 	// Details about the Connect attachment.
@@ -45,13 +59,34 @@ type GetConnectAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectAttachment != nil {
+		s.WriteStruct(schemas.GetConnectAttachmentResponse_ConnectAttachment)
+		v.ConnectAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConnectAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectAttachmentResponse_ConnectAttachment:
+			v.ConnectAttachment = &types.ConnectAttachment{}
+			return v.ConnectAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectAttachment, schemas.GetConnectAttachmentRequest, schemas.GetConnectAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnectAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectAttachment, schemas.GetConnectAttachmentRequest, schemas.GetConnectAttachmentResponse), output: &GetConnectAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

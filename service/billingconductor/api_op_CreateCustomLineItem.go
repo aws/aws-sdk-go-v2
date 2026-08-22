@@ -5,7 +5,9 @@ package billingconductor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,89 @@ type CreateCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomLineItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomLineItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomLineItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CreateCustomLineItemInput_AccountId, *v.AccountId)
+	}
+	if v.BillingGroupArn != nil {
+		s.WriteString(schemas.CreateCustomLineItemInput_BillingGroupArn, *v.BillingGroupArn)
+	}
+	if v.BillingPeriodRange != nil {
+		s.WriteStruct(schemas.CreateCustomLineItemInput_BillingPeriodRange)
+		v.BillingPeriodRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChargeDetails != nil {
+		s.WriteStruct(schemas.CreateCustomLineItemInput_ChargeDetails)
+		v.ChargeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCustomLineItemInput_ClientToken, *v.ClientToken)
+	}
+	if v.ComputationRule != "" {
+		s.WriteString(schemas.CreateCustomLineItemInput_ComputationRule, string(v.ComputationRule))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCustomLineItemInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCustomLineItemInput_Name, *v.Name)
+	}
+	if v.PresentationDetails != nil {
+		s.WriteStruct(schemas.CreateCustomLineItemInput_PresentationDetails)
+		v.PresentationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateCustomLineItemInput_Tags, v.Tags)
+}
+func (v *CreateCustomLineItemInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomLineItemInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomLineItemInput_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.CreateCustomLineItemInput_AccountId, v.AccountId)
+		case schemas.CreateCustomLineItemInput_BillingGroupArn:
+			v.BillingGroupArn = new(string)
+			return d.ReadString(schemas.CreateCustomLineItemInput_BillingGroupArn, v.BillingGroupArn)
+		case schemas.CreateCustomLineItemInput_BillingPeriodRange:
+			v.BillingPeriodRange = &types.CustomLineItemBillingPeriodRange{}
+			return v.BillingPeriodRange.Deserialize(d)
+		case schemas.CreateCustomLineItemInput_ChargeDetails:
+			v.ChargeDetails = &types.CustomLineItemChargeDetails{}
+			return v.ChargeDetails.Deserialize(d)
+		case schemas.CreateCustomLineItemInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateCustomLineItemInput_ClientToken, v.ClientToken)
+		case schemas.CreateCustomLineItemInput_ComputationRule:
+			var ev string
+			if err := d.ReadString(schemas.CreateCustomLineItemInput_ComputationRule, &ev); err != nil {
+				return err
+			}
+			v.ComputationRule = types.ComputationRuleEnum(ev)
+			return nil
+		case schemas.CreateCustomLineItemInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateCustomLineItemInput_Description, v.Description)
+		case schemas.CreateCustomLineItemInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCustomLineItemInput_Name, v.Name)
+		case schemas.CreateCustomLineItemInput_PresentationDetails:
+			v.PresentationDetails = &types.PresentationObject{}
+			return v.PresentationDetails.Deserialize(d)
+		case schemas.CreateCustomLineItemInput_Tags:
+			return deserializeTagMap(d, schemas.CreateCustomLineItemInput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateCustomLineItemOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the created custom line item.
@@ -91,13 +176,32 @@ type CreateCustomLineItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomLineItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomLineItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomLineItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateCustomLineItemOutput_Arn, *v.Arn)
+	}
+}
+func (v *CreateCustomLineItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomLineItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomLineItemOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateCustomLineItemOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomLineItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomLineItem, schemas.CreateCustomLineItemInput, schemas.CreateCustomLineItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomLineItem, schemas.CreateCustomLineItemInput, schemas.CreateCustomLineItemOutput), output: &CreateCustomLineItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

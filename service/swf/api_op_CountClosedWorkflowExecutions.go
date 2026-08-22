@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -106,6 +108,48 @@ type CountClosedWorkflowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CountClosedWorkflowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CountClosedWorkflowExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountClosedWorkflowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloseStatusFilter != nil {
+		s.WriteStruct(schemas.CountClosedWorkflowExecutionsInput_closeStatusFilter)
+		v.CloseStatusFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloseTimeFilter != nil {
+		s.WriteStruct(schemas.CountClosedWorkflowExecutionsInput_closeTimeFilter)
+		v.CloseTimeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.CountClosedWorkflowExecutionsInput_domain, *v.Domain)
+	}
+	if v.ExecutionFilter != nil {
+		s.WriteStruct(schemas.CountClosedWorkflowExecutionsInput_executionFilter)
+		v.ExecutionFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTimeFilter != nil {
+		s.WriteStruct(schemas.CountClosedWorkflowExecutionsInput_startTimeFilter)
+		v.StartTimeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TagFilter != nil {
+		s.WriteStruct(schemas.CountClosedWorkflowExecutionsInput_tagFilter)
+		v.TagFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeFilter != nil {
+		s.WriteStruct(schemas.CountClosedWorkflowExecutionsInput_typeFilter)
+		v.TypeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains the count of workflow executions returned from CountOpenWorkflowExecutions or CountClosedWorkflowExecutions
 type CountClosedWorkflowExecutionsOutput struct {
 
@@ -124,13 +168,34 @@ type CountClosedWorkflowExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CountClosedWorkflowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountClosedWorkflowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.WorkflowExecutionCount_count, v.Count)
+	if v.Truncated != false {
+		s.WriteBool(schemas.WorkflowExecutionCount_truncated, v.Truncated)
+	}
+}
+func (v *CountClosedWorkflowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionCount_count:
+			return d.ReadInt32(schemas.WorkflowExecutionCount_count, &v.Count)
+		case schemas.WorkflowExecutionCount_truncated:
+			return d.ReadBool(schemas.WorkflowExecutionCount_truncated, &v.Truncated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCountClosedWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCountClosedWorkflowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CountClosedWorkflowExecutions, schemas.CountClosedWorkflowExecutionsInput, schemas.WorkflowExecutionCount)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCountClosedWorkflowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CountClosedWorkflowExecutions, schemas.CountClosedWorkflowExecutionsInput, schemas.WorkflowExecutionCount), output: &CountClosedWorkflowExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

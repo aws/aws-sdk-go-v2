@@ -4,7 +4,9 @@ package translate
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type GetTerminologyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTerminologyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTerminologyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTerminologyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetTerminologyRequest_Name, *v.Name)
+	}
+	if v.TerminologyDataFormat != "" {
+		s.WriteString(schemas.GetTerminologyRequest_TerminologyDataFormat, string(v.TerminologyDataFormat))
+	}
+}
+
 type GetTerminologyOutput struct {
 
 	// The Amazon S3 location of a file that provides any errors or warnings that were
@@ -77,13 +94,50 @@ type GetTerminologyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTerminologyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTerminologyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTerminologyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuxiliaryDataLocation != nil {
+		s.WriteStruct(schemas.GetTerminologyResponse_AuxiliaryDataLocation)
+		v.AuxiliaryDataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TerminologyDataLocation != nil {
+		s.WriteStruct(schemas.GetTerminologyResponse_TerminologyDataLocation)
+		v.TerminologyDataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TerminologyProperties != nil {
+		s.WriteStruct(schemas.GetTerminologyResponse_TerminologyProperties)
+		v.TerminologyProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTerminologyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTerminologyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTerminologyResponse_AuxiliaryDataLocation:
+			v.AuxiliaryDataLocation = &types.TerminologyDataLocation{}
+			return v.AuxiliaryDataLocation.Deserialize(d)
+		case schemas.GetTerminologyResponse_TerminologyDataLocation:
+			v.TerminologyDataLocation = &types.TerminologyDataLocation{}
+			return v.TerminologyDataLocation.Deserialize(d)
+		case schemas.GetTerminologyResponse_TerminologyProperties:
+			v.TerminologyProperties = &types.TerminologyProperties{}
+			return v.TerminologyProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTerminology{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTerminology, schemas.GetTerminologyRequest, schemas.GetTerminologyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTerminology{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTerminology, schemas.GetTerminologyRequest, schemas.GetTerminologyResponse), output: &GetTerminologyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

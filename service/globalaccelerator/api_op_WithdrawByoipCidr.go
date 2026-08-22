@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type WithdrawByoipCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WithdrawByoipCidrInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WithdrawByoipCidrRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WithdrawByoipCidrInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidr != nil {
+		s.WriteString(schemas.WithdrawByoipCidrRequest_Cidr, *v.Cidr)
+	}
+}
+
 type WithdrawByoipCidrOutput struct {
 
 	// Information about the BYOIP address pool.
@@ -58,13 +72,34 @@ type WithdrawByoipCidrOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WithdrawByoipCidrOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WithdrawByoipCidrResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WithdrawByoipCidrOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByoipCidr != nil {
+		s.WriteStruct(schemas.WithdrawByoipCidrResponse_ByoipCidr)
+		v.ByoipCidr.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WithdrawByoipCidrOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WithdrawByoipCidrResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WithdrawByoipCidrResponse_ByoipCidr:
+			v.ByoipCidr = &types.ByoipCidr{}
+			return v.ByoipCidr.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationWithdrawByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpWithdrawByoipCidr{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.WithdrawByoipCidr, schemas.WithdrawByoipCidrRequest, schemas.WithdrawByoipCidrResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpWithdrawByoipCidr{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.WithdrawByoipCidr, schemas.WithdrawByoipCidrRequest, schemas.WithdrawByoipCidrResponse), output: &WithdrawByoipCidrOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

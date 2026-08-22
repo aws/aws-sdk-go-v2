@@ -4,7 +4,9 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetCorsPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCorsPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCorsPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCorsPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.GetCorsPolicyInput_ContainerName, *v.ContainerName)
+	}
+}
+
 type GetCorsPolicyOutput struct {
 
 	// The CORS policy assigned to the container.
@@ -52,13 +66,29 @@ type GetCorsPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCorsPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCorsPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCorsPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCorsPolicy(s, schemas.GetCorsPolicyOutput_CorsPolicy, v.CorsPolicy)
+}
+func (v *GetCorsPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCorsPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCorsPolicyOutput_CorsPolicy:
+			return deserializeCorsPolicy(d, schemas.GetCorsPolicyOutput_CorsPolicy, &v.CorsPolicy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCorsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCorsPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCorsPolicy, schemas.GetCorsPolicyInput, schemas.GetCorsPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCorsPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCorsPolicy, schemas.GetCorsPolicyInput, schemas.GetCorsPolicyOutput), output: &GetCorsPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

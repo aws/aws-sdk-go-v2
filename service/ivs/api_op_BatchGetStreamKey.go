@@ -4,7 +4,9 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,25 @@ type BatchGetStreamKeyInput struct {
 	Arns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchGetStreamKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetStreamKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetStreamKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStreamKeyArnList(s, schemas.BatchGetStreamKeyRequest_arns, v.Arns)
+}
+func (v *BatchGetStreamKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetStreamKeyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetStreamKeyRequest_arns:
+			return deserializeStreamKeyArnList(d, schemas.BatchGetStreamKeyRequest_arns, &v.Arns)
+		}
+		return nil
+	})
 }
 
 type BatchGetStreamKeyOutput struct {
@@ -83,13 +104,74 @@ type BatchGetStreamKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetStreamKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetStreamKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetStreamKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	serializeBatchErrors(s, schemas.BatchGetStreamKeyResponse_errors, v.Errors)
+	serializeStreamKeys(s, schemas.BatchGetStreamKeyResponse_streamKeys, v.StreamKeys)
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *BatchGetStreamKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetStreamKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetStreamKeyResponse_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.BatchGetStreamKeyResponse_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.BatchGetStreamKeyResponse_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_cacheControl, v.CacheControl)
+		case schemas.BatchGetStreamKeyResponse_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.BatchGetStreamKeyResponse_errors:
+			return deserializeBatchErrors(d, schemas.BatchGetStreamKeyResponse_errors, &v.Errors)
+		case schemas.BatchGetStreamKeyResponse_streamKeys:
+			return deserializeStreamKeys(d, schemas.BatchGetStreamKeyResponse_streamKeys, &v.StreamKeys)
+		case schemas.BatchGetStreamKeyResponse_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.BatchGetStreamKeyResponse_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.BatchGetStreamKeyResponse_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetStreamKey, schemas.BatchGetStreamKeyRequest, schemas.BatchGetStreamKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetStreamKey, schemas.BatchGetStreamKeyRequest, schemas.BatchGetStreamKeyResponse), output: &BatchGetStreamKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

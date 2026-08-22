@@ -5,7 +5,9 @@ package codepipeline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,29 @@ type ListRuleExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRuleExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRuleExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRuleExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListRuleExecutionsInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRuleExecutionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRuleExecutionsInput_nextToken, *v.NextToken)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.ListRuleExecutionsInput_pipelineName, *v.PipelineName)
+	}
+}
+
 type ListRuleExecutionsOutput struct {
 
 	// A token that can be used in the next ListRuleExecutions call. To view all items
@@ -66,13 +91,35 @@ type ListRuleExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRuleExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRuleExecutionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRuleExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRuleExecutionsOutput_nextToken, *v.NextToken)
+	}
+	serializeRuleExecutionDetailList(s, schemas.ListRuleExecutionsOutput_ruleExecutionDetails, v.RuleExecutionDetails)
+}
+func (v *ListRuleExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRuleExecutionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRuleExecutionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRuleExecutionsOutput_nextToken, v.NextToken)
+		case schemas.ListRuleExecutionsOutput_ruleExecutionDetails:
+			return deserializeRuleExecutionDetailList(d, schemas.ListRuleExecutionsOutput_ruleExecutionDetails, &v.RuleExecutionDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRuleExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRuleExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuleExecutions, schemas.ListRuleExecutionsInput, schemas.ListRuleExecutionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRuleExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuleExecutions, schemas.ListRuleExecutionsInput, schemas.ListRuleExecutionsOutput), output: &ListRuleExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

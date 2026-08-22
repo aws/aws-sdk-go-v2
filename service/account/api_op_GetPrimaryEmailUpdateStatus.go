@@ -4,7 +4,9 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,18 @@ type GetPrimaryEmailUpdateStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPrimaryEmailUpdateStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPrimaryEmailUpdateStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPrimaryEmailUpdateStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetPrimaryEmailUpdateStatusRequest_AccountId, *v.AccountId)
+	}
+}
+
 type GetPrimaryEmailUpdateStatusOutput struct {
 
 	// The status of the most recent primary email update request.
@@ -69,13 +83,42 @@ type GetPrimaryEmailUpdateStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPrimaryEmailUpdateStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPrimaryEmailUpdateStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPrimaryEmailUpdateStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetPrimaryEmailUpdateStatusResponse_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetPrimaryEmailUpdateStatusResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetPrimaryEmailUpdateStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPrimaryEmailUpdateStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPrimaryEmailUpdateStatusResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetPrimaryEmailUpdateStatusResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrimaryEmailUpdateStatus(ev)
+			return nil
+		case schemas.GetPrimaryEmailUpdateStatusResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPrimaryEmailUpdateStatusResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPrimaryEmailUpdateStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPrimaryEmailUpdateStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrimaryEmailUpdateStatus, schemas.GetPrimaryEmailUpdateStatusRequest, schemas.GetPrimaryEmailUpdateStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPrimaryEmailUpdateStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrimaryEmailUpdateStatus, schemas.GetPrimaryEmailUpdateStatusRequest, schemas.GetPrimaryEmailUpdateStatusResponse), output: &GetPrimaryEmailUpdateStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

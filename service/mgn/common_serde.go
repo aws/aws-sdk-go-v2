@@ -1138,6 +1138,7 @@ func serializeWavesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func deserializeActionIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1151,6 +1152,7 @@ func deserializeActionIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeApplicationIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1164,6 +1166,7 @@ func deserializeApplicationIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeApplicationIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1177,6 +1180,7 @@ func deserializeApplicationIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeApplicationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Application) error {
+	*v = make([]types.Application, 0)
 	var vv types.Application
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Application{}
@@ -1190,6 +1194,7 @@ func deserializeApplicationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeAssociateSourceServersRequestSourceServerIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1203,6 +1208,7 @@ func deserializeAssociateSourceServersRequestSourceServerIDs(d smithy.ShapeDeser
 }
 
 func deserializeCodeGenerationOutputFormatTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CodeGenerationOutputFormatType) error {
+	*v = make([]types.CodeGenerationOutputFormatType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1216,6 +1222,7 @@ func deserializeCodeGenerationOutputFormatTypes(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeConflictExceptionErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ErrorDetails) error {
+	*v = make([]types.ErrorDetails, 0)
 	var vv types.ErrorDetails
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ErrorDetails{}
@@ -1229,6 +1236,7 @@ func deserializeConflictExceptionErrors(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeConnectorIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1242,6 +1250,7 @@ func deserializeConnectorIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeConnectorsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Connector) error {
+	*v = make([]types.Connector, 0)
 	var vv types.Connector
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Connector{}
@@ -1255,6 +1264,7 @@ func deserializeConnectorsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeCpus(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CPU) error {
+	*v = make([]types.CPU, 0)
 	var vv types.CPU
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CPU{}
@@ -1268,6 +1278,7 @@ func deserializeCpus(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CP
 }
 
 func deserializeDataReplicationInfoReplicatedDisks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataReplicationInfoReplicatedDisk) error {
+	*v = make([]types.DataReplicationInfoReplicatedDisk, 0)
 	var vv types.DataReplicationInfoReplicatedDisk
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DataReplicationInfoReplicatedDisk{}
@@ -1281,6 +1292,7 @@ func deserializeDataReplicationInfoReplicatedDisks(d smithy.ShapeDeserializer, s
 }
 
 func deserializeDataReplicationInitiationSteps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DataReplicationInitiationStep) error {
+	*v = make([]types.DataReplicationInitiationStep, 0)
 	var vv types.DataReplicationInitiationStep
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DataReplicationInitiationStep{}
@@ -1294,6 +1306,7 @@ func deserializeDataReplicationInitiationSteps(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeDescribeJobsRequestFiltersJobIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1307,6 +1320,7 @@ func deserializeDescribeJobsRequestFiltersJobIDs(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeDescribeSourceServersRequestApplicationIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1320,6 +1334,7 @@ func deserializeDescribeSourceServersRequestApplicationIDs(d smithy.ShapeDeseria
 }
 
 func deserializeDescribeSourceServersRequestFiltersIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1333,6 +1348,7 @@ func deserializeDescribeSourceServersRequestFiltersIDs(d smithy.ShapeDeserialize
 }
 
 func deserializeDisassociateSourceServersRequestSourceServerIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1346,6 +1362,7 @@ func deserializeDisassociateSourceServersRequestSourceServerIDs(d smithy.ShapeDe
 }
 
 func deserializeDisks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Disk) error {
+	*v = make([]types.Disk, 0)
 	var vv types.Disk
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Disk{}
@@ -1359,6 +1376,7 @@ func deserializeDisks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.D
 }
 
 func deserializeExportErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportTaskError) error {
+	*v = make([]types.ExportTaskError, 0)
 	var vv types.ExportTaskError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ExportTaskError{}
@@ -1372,6 +1390,7 @@ func deserializeExportErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeExportsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExportTask) error {
+	*v = make([]types.ExportTask, 0)
 	var vv types.ExportTask
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ExportTask{}
@@ -1385,6 +1404,7 @@ func deserializeExportsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeImportErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ImportTaskError) error {
+	*v = make([]types.ImportTaskError, 0)
 	var vv types.ImportTaskError
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ImportTaskError{}
@@ -1398,6 +1418,7 @@ func deserializeImportErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeImportFileEnrichmentsIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1411,6 +1432,7 @@ func deserializeImportFileEnrichmentsIDsFilter(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeImportFileEnrichmentsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ImportFileEnrichment) error {
+	*v = make([]types.ImportFileEnrichment, 0)
 	var vv types.ImportFileEnrichment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ImportFileEnrichment{}
@@ -1424,6 +1446,7 @@ func deserializeImportFileEnrichmentsList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeImportIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1437,6 +1460,7 @@ func deserializeImportIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeImportList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ImportTask) error {
+	*v = make([]types.ImportTask, 0)
 	var vv types.ImportTask
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ImportTask{}
@@ -1450,6 +1474,7 @@ func deserializeImportList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeIPsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1463,6 +1488,7 @@ func deserializeIPsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeJobLogs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.JobLog) error {
+	*v = make([]types.JobLog, 0)
 	var vv types.JobLog
 	return smithy.ReadList(d, s, func() error {
 		vv = types.JobLog{}
@@ -1476,6 +1502,7 @@ func deserializeJobLogs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeJobsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Job) error {
+	*v = make([]types.Job, 0)
 	var vv types.Job
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Job{}
@@ -1489,6 +1516,7 @@ func deserializeJobsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 }
 
 func deserializeLastKnownChecksList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LastKnownCheck) error {
+	*v = make([]types.LastKnownCheck, 0)
 	var vv types.LastKnownCheck
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LastKnownCheck{}
@@ -1502,6 +1530,7 @@ func deserializeLastKnownChecksList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeLaunchConfigurationTemplateIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1515,6 +1544,7 @@ func deserializeLaunchConfigurationTemplateIDs(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeLaunchConfigurationTemplates(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LaunchConfigurationTemplate) error {
+	*v = make([]types.LaunchConfigurationTemplate, 0)
 	var vv types.LaunchConfigurationTemplate
 	return smithy.ReadList(d, s, func() error {
 		vv = types.LaunchConfigurationTemplate{}
@@ -1528,6 +1558,7 @@ func deserializeLaunchConfigurationTemplates(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeLifeCycleStates(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LifeCycleState) error {
+	*v = make([]types.LifeCycleState, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1541,6 +1572,7 @@ func deserializeLifeCycleStates(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeListExportsRequestFiltersExportIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1554,6 +1586,7 @@ func deserializeListExportsRequestFiltersExportIDs(d smithy.ShapeDeserializer, s
 }
 
 func deserializeListNetworkMigrationAnalysesIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1567,6 +1600,7 @@ func deserializeListNetworkMigrationAnalysesIDsFilter(d smithy.ShapeDeserializer
 }
 
 func deserializeListNetworkMigrationCodeGenerationSegmentsIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1580,6 +1614,7 @@ func deserializeListNetworkMigrationCodeGenerationSegmentsIDsFilter(d smithy.Sha
 }
 
 func deserializeListNetworkMigrationCodeGenerationsIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1593,6 +1628,7 @@ func deserializeListNetworkMigrationCodeGenerationsIDsFilter(d smithy.ShapeDeser
 }
 
 func deserializeListNetworkMigrationDeployerJobIDsFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1606,6 +1642,7 @@ func deserializeListNetworkMigrationDeployerJobIDsFilters(d smithy.ShapeDeserial
 }
 
 func deserializeListNetworkMigrationMapperSegmentConstructsIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1619,6 +1656,7 @@ func deserializeListNetworkMigrationMapperSegmentConstructsIDsFilter(d smithy.Sh
 }
 
 func deserializeListNetworkMigrationMapperSegmentConstructTypesFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1632,6 +1670,7 @@ func deserializeListNetworkMigrationMapperSegmentConstructTypesFilter(d smithy.S
 }
 
 func deserializeListNetworkMigrationMapperSegmentsIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1645,6 +1684,7 @@ func deserializeListNetworkMigrationMapperSegmentsIDsFilter(d smithy.ShapeDeseri
 }
 
 func deserializeListNetworkMigrationMappingsIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1658,6 +1698,7 @@ func deserializeListNetworkMigrationMappingsIDsFilter(d smithy.ShapeDeserializer
 }
 
 func deserializeListNetworkMigrationMappingUpdatesIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1671,6 +1712,7 @@ func deserializeListNetworkMigrationMappingUpdatesIDsFilter(d smithy.ShapeDeseri
 }
 
 func deserializeManagedAccounts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ManagedAccount) error {
+	*v = make([]types.ManagedAccount, 0)
 	var vv types.ManagedAccount
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ManagedAccount{}
@@ -1684,6 +1726,7 @@ func deserializeManagedAccounts(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeMergeConstructs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MergeConstruct) error {
+	*v = make([]types.MergeConstruct, 0)
 	var vv types.MergeConstruct
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MergeConstruct{}
@@ -1697,6 +1740,7 @@ func deserializeMergeConstructs(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeNetworkInterfaces(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkInterface) error {
+	*v = make([]types.NetworkInterface, 0)
 	var vv types.NetworkInterface
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkInterface{}
@@ -1710,6 +1754,7 @@ func deserializeNetworkInterfaces(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeNetworkMigrationAnalysesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationAnalysisJobDetails) error {
+	*v = make([]types.NetworkMigrationAnalysisJobDetails, 0)
 	var vv types.NetworkMigrationAnalysisJobDetails
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationAnalysisJobDetails{}
@@ -1723,6 +1768,7 @@ func deserializeNetworkMigrationAnalysesList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeNetworkMigrationAnalysisResultsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationAnalysisResult) error {
+	*v = make([]types.NetworkMigrationAnalysisResult, 0)
 	var vv types.NetworkMigrationAnalysisResult
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationAnalysisResult{}
@@ -1736,6 +1782,7 @@ func deserializeNetworkMigrationAnalysisResultsList(d smithy.ShapeDeserializer, 
 }
 
 func deserializeNetworkMigrationCodeGenerationArtifacts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationCodeGenerationArtifact) error {
+	*v = make([]types.NetworkMigrationCodeGenerationArtifact, 0)
 	var vv types.NetworkMigrationCodeGenerationArtifact
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationCodeGenerationArtifact{}
@@ -1749,6 +1796,7 @@ func deserializeNetworkMigrationCodeGenerationArtifacts(d smithy.ShapeDeserializ
 }
 
 func deserializeNetworkMigrationCodeGenerationSegmentsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationCodeGenerationSegment) error {
+	*v = make([]types.NetworkMigrationCodeGenerationSegment, 0)
 	var vv types.NetworkMigrationCodeGenerationSegment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationCodeGenerationSegment{}
@@ -1762,6 +1810,7 @@ func deserializeNetworkMigrationCodeGenerationSegmentsList(d smithy.ShapeDeseria
 }
 
 func deserializeNetworkMigrationCodeGenerationsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationCodeGenerationJobDetails) error {
+	*v = make([]types.NetworkMigrationCodeGenerationJobDetails, 0)
 	var vv types.NetworkMigrationCodeGenerationJobDetails
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationCodeGenerationJobDetails{}
@@ -1775,6 +1824,7 @@ func deserializeNetworkMigrationCodeGenerationsList(d smithy.ShapeDeserializer, 
 }
 
 func deserializeNetworkMigrationDefinitionSummariesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationDefinitionSummary) error {
+	*v = make([]types.NetworkMigrationDefinitionSummary, 0)
 	var vv types.NetworkMigrationDefinitionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationDefinitionSummary{}
@@ -1788,6 +1838,7 @@ func deserializeNetworkMigrationDefinitionSummariesList(d smithy.ShapeDeserializ
 }
 
 func deserializeNetworkMigrationDefintionsIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1801,6 +1852,7 @@ func deserializeNetworkMigrationDefintionsIDsFilter(d smithy.ShapeDeserializer, 
 }
 
 func deserializeNetworkMigrationDeployedStacksList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationDeployedStackDetails) error {
+	*v = make([]types.NetworkMigrationDeployedStackDetails, 0)
 	var vv types.NetworkMigrationDeployedStackDetails
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationDeployedStackDetails{}
@@ -1814,6 +1866,7 @@ func deserializeNetworkMigrationDeployedStacksList(d smithy.ShapeDeserializer, s
 }
 
 func deserializeNetworkMigrationDeployerJobList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationDeployerJobDetails) error {
+	*v = make([]types.NetworkMigrationDeployerJobDetails, 0)
 	var vv types.NetworkMigrationDeployerJobDetails
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationDeployerJobDetails{}
@@ -1827,6 +1880,7 @@ func deserializeNetworkMigrationDeployerJobList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeNetworkMigrationExecutionIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1840,6 +1894,7 @@ func deserializeNetworkMigrationExecutionIDsFilter(d smithy.ShapeDeserializer, s
 }
 
 func deserializeNetworkMigrationExecutionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationExecution) error {
+	*v = make([]types.NetworkMigrationExecution, 0)
 	var vv types.NetworkMigrationExecution
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationExecution{}
@@ -1853,6 +1908,7 @@ func deserializeNetworkMigrationExecutionsList(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeNetworkMigrationExecutionStatusesFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExecutionStatus) error {
+	*v = make([]types.ExecutionStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1866,6 +1922,7 @@ func deserializeNetworkMigrationExecutionStatusesFilter(d smithy.ShapeDeserializ
 }
 
 func deserializeNetworkMigrationFailedResourcesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationFailedResourceDetails) error {
+	*v = make([]types.NetworkMigrationFailedResourceDetails, 0)
 	var vv types.NetworkMigrationFailedResourceDetails
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationFailedResourceDetails{}
@@ -1879,6 +1936,7 @@ func deserializeNetworkMigrationFailedResourcesList(d smithy.ShapeDeserializer, 
 }
 
 func deserializeNetworkMigrationMapperSegmentConstructs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationMapperSegmentConstruct) error {
+	*v = make([]types.NetworkMigrationMapperSegmentConstruct, 0)
 	var vv types.NetworkMigrationMapperSegmentConstruct
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationMapperSegmentConstruct{}
@@ -1892,6 +1950,7 @@ func deserializeNetworkMigrationMapperSegmentConstructs(d smithy.ShapeDeserializ
 }
 
 func deserializeNetworkMigrationMapperSegmentsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationMapperSegment) error {
+	*v = make([]types.NetworkMigrationMapperSegment, 0)
 	var vv types.NetworkMigrationMapperSegment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationMapperSegment{}
@@ -1905,6 +1964,7 @@ func deserializeNetworkMigrationMapperSegmentsList(d smithy.ShapeDeserializer, s
 }
 
 func deserializeNetworkMigrationMappingsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationMappingJobDetails) error {
+	*v = make([]types.NetworkMigrationMappingJobDetails, 0)
 	var vv types.NetworkMigrationMappingJobDetails
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationMappingJobDetails{}
@@ -1918,6 +1978,7 @@ func deserializeNetworkMigrationMappingsList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeNetworkMigrationMappingUpdatesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NetworkMigrationMappingUpdateJobDetails) error {
+	*v = make([]types.NetworkMigrationMappingUpdateJobDetails, 0)
 	var vv types.NetworkMigrationMappingUpdateJobDetails
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NetworkMigrationMappingUpdateJobDetails{}
@@ -1931,6 +1992,7 @@ func deserializeNetworkMigrationMappingUpdatesList(d smithy.ShapeDeserializer, s
 }
 
 func deserializeParticipatingServers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ParticipatingServer) error {
+	*v = make([]types.ParticipatingServer, 0)
 	var vv types.ParticipatingServer
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ParticipatingServer{}
@@ -1944,6 +2006,7 @@ func deserializeParticipatingServers(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializePostLaunchActionsLaunchStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.JobPostLaunchActionsLaunchStatus) error {
+	*v = make([]types.JobPostLaunchActionsLaunchStatus, 0)
 	var vv types.JobPostLaunchActionsLaunchStatus
 	return smithy.ReadList(d, s, func() error {
 		vv = types.JobPostLaunchActionsLaunchStatus{}
@@ -1957,6 +2020,7 @@ func deserializePostLaunchActionsLaunchStatusList(d smithy.ShapeDeserializer, s 
 }
 
 func deserializereferencedSegmentsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1970,6 +2034,7 @@ func deserializereferencedSegmentsList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeReplicationConfigurationReplicatedDisks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ReplicationConfigurationReplicatedDisk) error {
+	*v = make([]types.ReplicationConfigurationReplicatedDisk, 0)
 	var vv types.ReplicationConfigurationReplicatedDisk
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ReplicationConfigurationReplicatedDisk{}
@@ -1983,6 +2048,7 @@ func deserializeReplicationConfigurationReplicatedDisks(d smithy.ShapeDeserializ
 }
 
 func deserializeReplicationConfigurationTemplateIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1996,6 +2062,7 @@ func deserializeReplicationConfigurationTemplateIDs(d smithy.ShapeDeserializer, 
 }
 
 func deserializeReplicationConfigurationTemplates(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ReplicationConfigurationTemplate) error {
+	*v = make([]types.ReplicationConfigurationTemplate, 0)
 	var vv types.ReplicationConfigurationTemplate
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ReplicationConfigurationTemplate{}
@@ -2009,6 +2076,7 @@ func deserializeReplicationConfigurationTemplates(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeReplicationServersSecurityGroupsIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2022,6 +2090,7 @@ func deserializeReplicationServersSecurityGroupsIDs(d smithy.ShapeDeserializer, 
 }
 
 func deserializeReplicationTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ReplicationType) error {
+	*v = make([]types.ReplicationType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2035,6 +2104,7 @@ func deserializeReplicationTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeSourceConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SourceConfiguration) error {
+	*v = make([]types.SourceConfiguration, 0)
 	var vv types.SourceConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SourceConfiguration{}
@@ -2048,6 +2118,7 @@ func deserializeSourceConfigurationList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeSourceServerActionDocuments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SourceServerActionDocument) error {
+	*v = make([]types.SourceServerActionDocument, 0)
 	var vv types.SourceServerActionDocument
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SourceServerActionDocument{}
@@ -2061,6 +2132,7 @@ func deserializeSourceServerActionDocuments(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeSourceServersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SourceServer) error {
+	*v = make([]types.SourceServer, 0)
 	var vv types.SourceServer
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SourceServer{}
@@ -2074,6 +2146,7 @@ func deserializeSourceServersList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeSplitConstructs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SplitConstruct) error {
+	*v = make([]types.SplitConstruct, 0)
 	var vv types.SplitConstruct
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SplitConstruct{}
@@ -2087,6 +2160,7 @@ func deserializeSplitConstructs(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeSsmDocuments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SsmDocument) error {
+	*v = make([]types.SsmDocument, 0)
 	var vv types.SsmDocument
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SsmDocument{}
@@ -2100,6 +2174,7 @@ func deserializeSsmDocuments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeSsmParameterStoreParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SsmParameterStoreParameter) error {
+	*v = make([]types.SsmParameterStoreParameter, 0)
 	var vv types.SsmParameterStoreParameter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SsmParameterStoreParameter{}
@@ -2113,6 +2188,7 @@ func deserializeSsmParameterStoreParameters(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeStartCutoverRequestSourceServerIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2126,6 +2202,7 @@ func deserializeStartCutoverRequestSourceServerIDs(d smithy.ShapeDeserializer, s
 }
 
 func deserializeStartNetworkMigrationMappingUpdateConstructs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StartNetworkMigrationMappingUpdateConstruct) error {
+	*v = make([]types.StartNetworkMigrationMappingUpdateConstruct, 0)
 	var vv types.StartNetworkMigrationMappingUpdateConstruct
 	return smithy.ReadList(d, s, func() error {
 		vv = types.StartNetworkMigrationMappingUpdateConstruct{}
@@ -2139,6 +2216,7 @@ func deserializeStartNetworkMigrationMappingUpdateConstructs(d smithy.ShapeDeser
 }
 
 func deserializeStartNetworkMigrationMappingUpdateSegments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StartNetworkMigrationMappingUpdateSegment) error {
+	*v = make([]types.StartNetworkMigrationMappingUpdateSegment, 0)
 	var vv types.StartNetworkMigrationMappingUpdateSegment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.StartNetworkMigrationMappingUpdateSegment{}
@@ -2152,6 +2230,7 @@ func deserializeStartNetworkMigrationMappingUpdateSegments(d smithy.ShapeDeseria
 }
 
 func deserializeStartTestRequestSourceServerIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2165,6 +2244,7 @@ func deserializeStartTestRequestSourceServerIDs(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2178,6 +2258,7 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeTemplateActionDocuments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TemplateActionDocument) error {
+	*v = make([]types.TemplateActionDocument, 0)
 	var vv types.TemplateActionDocument
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TemplateActionDocument{}
@@ -2191,6 +2272,7 @@ func deserializeTemplateActionDocuments(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeTerminateTargetInstancesRequestSourceServerIDs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2204,6 +2286,7 @@ func deserializeTerminateTargetInstancesRequestSourceServerIDs(d smithy.ShapeDes
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionField) error {
+	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ValidationExceptionField{}
@@ -2217,6 +2300,7 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeVcenterClientList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VcenterClient) error {
+	*v = make([]types.VcenterClient, 0)
 	var vv types.VcenterClient
 	return smithy.ReadList(d, s, func() error {
 		vv = types.VcenterClient{}
@@ -2230,6 +2314,7 @@ func deserializeVcenterClientList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeVpcIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2243,6 +2328,7 @@ func deserializeVpcIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeWaveIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -2256,6 +2342,7 @@ func deserializeWaveIDsFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeWavesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Wave) error {
+	*v = make([]types.Wave, 0)
 	var vv types.Wave
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Wave{}

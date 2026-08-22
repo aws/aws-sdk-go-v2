@@ -4,7 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -28,6 +30,22 @@ func (c *Client) GetIndex(ctx context.Context, params *GetIndexInput, optFns ...
 
 type GetIndexInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type GetIndexOutput struct {
@@ -75,13 +93,73 @@ type GetIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIndexOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetIndexOutput_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetIndexOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetIndexOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	serializeRegionList(s, schemas.GetIndexOutput_ReplicatingFrom, v.ReplicatingFrom)
+	serializeRegionList(s, schemas.GetIndexOutput_ReplicatingTo, v.ReplicatingTo)
+	if v.State != "" {
+		s.WriteString(schemas.GetIndexOutput_State, string(v.State))
+	}
+	serializeTagMap(s, schemas.GetIndexOutput_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.GetIndexOutput_Type, string(v.Type))
+	}
+}
+func (v *GetIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIndexOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIndexOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetIndexOutput_Arn, v.Arn)
+		case schemas.GetIndexOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetIndexOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetIndexOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetIndexOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetIndexOutput_ReplicatingFrom:
+			return deserializeRegionList(d, schemas.GetIndexOutput_ReplicatingFrom, &v.ReplicatingFrom)
+		case schemas.GetIndexOutput_ReplicatingTo:
+			return deserializeRegionList(d, schemas.GetIndexOutput_ReplicatingTo, &v.ReplicatingTo)
+		case schemas.GetIndexOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.GetIndexOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.IndexState(ev)
+			return nil
+		case schemas.GetIndexOutput_Tags:
+			return deserializeTagMap(d, schemas.GetIndexOutput_Tags, &v.Tags)
+		case schemas.GetIndexOutput_Type:
+			var ev string
+			if err := d.ReadString(schemas.GetIndexOutput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IndexType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIndex, nil, schemas.GetIndexOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIndex, nil, schemas.GetIndexOutput), output: &GetIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

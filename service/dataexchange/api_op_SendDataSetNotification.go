@@ -5,7 +5,9 @@ package dataexchange
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,37 @@ type SendDataSetNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDataSetNotificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendDataSetNotificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDataSetNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendDataSetNotificationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.SendDataSetNotificationRequest_Comment, *v.Comment)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.SendDataSetNotificationRequest_DataSetId, *v.DataSetId)
+	}
+	if v.Details != nil {
+		s.WriteStruct(schemas.SendDataSetNotificationRequest_Details)
+		v.Details.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.SendDataSetNotificationRequest_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SendDataSetNotificationRequest_Type, string(v.Type))
+	}
+}
+
 type SendDataSetNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +95,26 @@ type SendDataSetNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDataSetNotificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendDataSetNotificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDataSetNotificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendDataSetNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendDataSetNotificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendDataSetNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendDataSetNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDataSetNotification, schemas.SendDataSetNotificationRequest, schemas.SendDataSetNotificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendDataSetNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDataSetNotification, schemas.SendDataSetNotificationRequest, schemas.SendDataSetNotificationResponse), output: &SendDataSetNotificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

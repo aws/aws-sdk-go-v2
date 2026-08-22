@@ -4,7 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -101,6 +103,38 @@ type UpdateIndexTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateIndexTypeInput_Arn, *v.Arn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateIndexTypeInput_Type, string(v.Type))
+	}
+}
+func (v *UpdateIndexTypeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIndexTypeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIndexTypeInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateIndexTypeInput_Arn, v.Arn)
+		case schemas.UpdateIndexTypeInput_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIndexTypeInput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IndexType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateIndexTypeOutput struct {
 
 	// The [Amazon resource name (ARN)] of the index that you updated.
@@ -124,13 +158,58 @@ type UpdateIndexTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateIndexTypeOutput_Arn, *v.Arn)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateIndexTypeOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateIndexTypeOutput_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateIndexTypeOutput_Type, string(v.Type))
+	}
+}
+func (v *UpdateIndexTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIndexTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIndexTypeOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateIndexTypeOutput_Arn, v.Arn)
+		case schemas.UpdateIndexTypeOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateIndexTypeOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateIndexTypeOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIndexTypeOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.IndexState(ev)
+			return nil
+		case schemas.UpdateIndexTypeOutput_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIndexTypeOutput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IndexType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIndexTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIndexType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexType, schemas.UpdateIndexTypeInput, schemas.UpdateIndexTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIndexType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexType, schemas.UpdateIndexTypeInput, schemas.UpdateIndexTypeOutput), output: &UpdateIndexTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

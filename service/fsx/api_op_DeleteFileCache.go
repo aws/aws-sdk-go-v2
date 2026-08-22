@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DeleteFileCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteFileCacheRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileCacheId != nil {
+		s.WriteString(schemas.DeleteFileCacheRequest_FileCacheId, *v.FileCacheId)
+	}
+}
+
 type DeleteFileCacheOutput struct {
 
 	// The ID of the cache that's being deleted.
@@ -65,13 +82,42 @@ type DeleteFileCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileCacheId != nil {
+		s.WriteString(schemas.DeleteFileCacheResponse_FileCacheId, *v.FileCacheId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DeleteFileCacheResponse_Lifecycle, string(v.Lifecycle))
+	}
+}
+func (v *DeleteFileCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileCacheResponse_FileCacheId:
+			v.FileCacheId = new(string)
+			return d.ReadString(schemas.DeleteFileCacheResponse_FileCacheId, v.FileCacheId)
+		case schemas.DeleteFileCacheResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFileCacheResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.FileCacheLifecycle(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFileCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFileCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFileCache, schemas.DeleteFileCacheRequest, schemas.DeleteFileCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFileCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFileCache, schemas.DeleteFileCacheRequest, schemas.DeleteFileCacheResponse), output: &DeleteFileCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

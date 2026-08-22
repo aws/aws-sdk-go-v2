@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,35 @@ type UpdateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bandwidth != nil {
+		s.WriteStruct(schemas.UpdateLinkRequest_Bandwidth)
+		v.Bandwidth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLinkRequest_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.UpdateLinkRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.UpdateLinkRequest_LinkId, *v.LinkId)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.UpdateLinkRequest_Provider, *v.Provider)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.UpdateLinkRequest_Type, *v.Type)
+	}
+}
+
 type UpdateLinkOutput struct {
 
 	// Information about the link.
@@ -69,13 +100,34 @@ type UpdateLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Link != nil {
+		s.WriteStruct(schemas.UpdateLinkResponse_Link)
+		v.Link.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLinkResponse_Link:
+			v.Link = &types.Link{}
+			return v.Link.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLink, schemas.UpdateLinkRequest, schemas.UpdateLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLink, schemas.UpdateLinkRequest, schemas.UpdateLinkResponse), output: &UpdateLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DisableLDAPSInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableLDAPSInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableLDAPSRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableLDAPSInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DisableLDAPSRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DisableLDAPSRequest_Type, string(v.Type))
+	}
+}
+
 type DisableLDAPSOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DisableLDAPSOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableLDAPSOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableLDAPSResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableLDAPSOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableLDAPSOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableLDAPSResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableLDAPSMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableLDAPS{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableLDAPS, schemas.DisableLDAPSRequest, schemas.DisableLDAPSResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableLDAPS{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableLDAPS, schemas.DisableLDAPSRequest, schemas.DisableLDAPSResult), output: &DisableLDAPSOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

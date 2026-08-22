@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchGetBuildBatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetBuildBatchesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetBuildBatchesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetBuildBatchesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuildBatchIds(s, schemas.BatchGetBuildBatchesInput_ids, v.Ids)
+}
+
 type BatchGetBuildBatchesOutput struct {
 
 	// An array of BuildBatch objects that represent the retrieved batch builds.
@@ -48,13 +60,32 @@ type BatchGetBuildBatchesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetBuildBatchesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetBuildBatchesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetBuildBatchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuildBatches(s, schemas.BatchGetBuildBatchesOutput_buildBatches, v.BuildBatches)
+	serializeBuildBatchIds(s, schemas.BatchGetBuildBatchesOutput_buildBatchesNotFound, v.BuildBatchesNotFound)
+}
+func (v *BatchGetBuildBatchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetBuildBatchesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetBuildBatchesOutput_buildBatches:
+			return deserializeBuildBatches(d, schemas.BatchGetBuildBatchesOutput_buildBatches, &v.BuildBatches)
+		case schemas.BatchGetBuildBatchesOutput_buildBatchesNotFound:
+			return deserializeBuildBatchIds(d, schemas.BatchGetBuildBatchesOutput_buildBatchesNotFound, &v.BuildBatchesNotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetBuildBatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetBuildBatches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetBuildBatches, schemas.BatchGetBuildBatchesInput, schemas.BatchGetBuildBatchesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetBuildBatches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetBuildBatches, schemas.BatchGetBuildBatchesInput, schemas.BatchGetBuildBatchesOutput), output: &BatchGetBuildBatchesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

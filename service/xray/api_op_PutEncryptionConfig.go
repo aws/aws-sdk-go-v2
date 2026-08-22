@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type PutEncryptionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEncryptionConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEncryptionConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEncryptionConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.PutEncryptionConfigRequest_KeyId, *v.KeyId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PutEncryptionConfigRequest_Type, string(v.Type))
+	}
+}
+
 type PutEncryptionConfigOutput struct {
 
 	// The new encryption configuration.
@@ -61,13 +78,34 @@ type PutEncryptionConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEncryptionConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEncryptionConfigResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEncryptionConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.PutEncryptionConfigResult_EncryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutEncryptionConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEncryptionConfigResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEncryptionConfigResult_EncryptionConfig:
+			v.EncryptionConfig = &types.EncryptionConfig{}
+			return v.EncryptionConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEncryptionConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEncryptionConfig, schemas.PutEncryptionConfigRequest, schemas.PutEncryptionConfigResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEncryptionConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEncryptionConfig, schemas.PutEncryptionConfigRequest, schemas.PutEncryptionConfigResult), output: &PutEncryptionConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,21 @@ type DeleteKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteKeyInDays != nil {
+		s.WriteInt32(schemas.DeleteKeyInput_DeleteKeyInDays, *v.DeleteKeyInDays)
+	}
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.DeleteKeyInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+}
+
 type DeleteKeyOutput struct {
 
 	// The KeyARN of the key that is scheduled for deletion.
@@ -82,13 +99,34 @@ type DeleteKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.DeleteKeyOutput_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteKeyOutput_Key:
+			v.Key = &types.Key{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKey, schemas.DeleteKeyInput, schemas.DeleteKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKey, schemas.DeleteKeyInput, schemas.DeleteKeyOutput), output: &DeleteKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

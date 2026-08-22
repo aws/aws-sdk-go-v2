@@ -5,7 +5,9 @@ package cloudcontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -105,6 +107,52 @@ type CreateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateResourceInput_ClientToken, *v.ClientToken)
+	}
+	if v.DesiredState != nil {
+		s.WriteString(schemas.CreateResourceInput_DesiredState, *v.DesiredState)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateResourceInput_RoleArn, *v.RoleArn)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.CreateResourceInput_TypeName, *v.TypeName)
+	}
+	if v.TypeVersionId != nil {
+		s.WriteString(schemas.CreateResourceInput_TypeVersionId, *v.TypeVersionId)
+	}
+}
+func (v *CreateResourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateResourceInput_ClientToken, v.ClientToken)
+		case schemas.CreateResourceInput_DesiredState:
+			v.DesiredState = new(string)
+			return d.ReadString(schemas.CreateResourceInput_DesiredState, v.DesiredState)
+		case schemas.CreateResourceInput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CreateResourceInput_RoleArn, v.RoleArn)
+		case schemas.CreateResourceInput_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.CreateResourceInput_TypeName, v.TypeName)
+		case schemas.CreateResourceInput_TypeVersionId:
+			v.TypeVersionId = new(string)
+			return d.ReadString(schemas.CreateResourceInput_TypeVersionId, v.TypeVersionId)
+		}
+		return nil
+	})
+}
+
 type CreateResourceOutput struct {
 
 	// Represents the current status of the resource creation request.
@@ -122,13 +170,34 @@ type CreateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProgressEvent != nil {
+		s.WriteStruct(schemas.CreateResourceOutput_ProgressEvent)
+		v.ProgressEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceOutput_ProgressEvent:
+			v.ProgressEvent = &types.ProgressEvent{}
+			return v.ProgressEvent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResource, schemas.CreateResourceInput, schemas.CreateResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResource, schemas.CreateResourceInput, schemas.CreateResourceOutput), output: &CreateResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,27 @@ type GetInsightImpactGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightImpactGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightImpactGraphRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightImpactGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetInsightImpactGraphRequest_EndTime, *v.EndTime)
+	}
+	if v.InsightId != nil {
+		s.WriteString(schemas.GetInsightImpactGraphRequest_InsightId, *v.InsightId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInsightImpactGraphRequest_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetInsightImpactGraphRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetInsightImpactGraphOutput struct {
 
 	// The provided end time.
@@ -84,13 +107,65 @@ type GetInsightImpactGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightImpactGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightImpactGraphResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightImpactGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetInsightImpactGraphResult_EndTime, *v.EndTime)
+	}
+	if v.InsightId != nil {
+		s.WriteString(schemas.GetInsightImpactGraphResult_InsightId, *v.InsightId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInsightImpactGraphResult_NextToken, *v.NextToken)
+	}
+	if v.ServiceGraphEndTime != nil {
+		s.WriteTime(schemas.GetInsightImpactGraphResult_ServiceGraphEndTime, *v.ServiceGraphEndTime)
+	}
+	if v.ServiceGraphStartTime != nil {
+		s.WriteTime(schemas.GetInsightImpactGraphResult_ServiceGraphStartTime, *v.ServiceGraphStartTime)
+	}
+	serializeInsightImpactGraphServiceList(s, schemas.GetInsightImpactGraphResult_Services, v.Services)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetInsightImpactGraphResult_StartTime, *v.StartTime)
+	}
+}
+func (v *GetInsightImpactGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInsightImpactGraphResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInsightImpactGraphResult_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetInsightImpactGraphResult_EndTime, v.EndTime)
+		case schemas.GetInsightImpactGraphResult_InsightId:
+			v.InsightId = new(string)
+			return d.ReadString(schemas.GetInsightImpactGraphResult_InsightId, v.InsightId)
+		case schemas.GetInsightImpactGraphResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetInsightImpactGraphResult_NextToken, v.NextToken)
+		case schemas.GetInsightImpactGraphResult_ServiceGraphEndTime:
+			v.ServiceGraphEndTime = new(time.Time)
+			return d.ReadTime(schemas.GetInsightImpactGraphResult_ServiceGraphEndTime, v.ServiceGraphEndTime)
+		case schemas.GetInsightImpactGraphResult_ServiceGraphStartTime:
+			v.ServiceGraphStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetInsightImpactGraphResult_ServiceGraphStartTime, v.ServiceGraphStartTime)
+		case schemas.GetInsightImpactGraphResult_Services:
+			return deserializeInsightImpactGraphServiceList(d, schemas.GetInsightImpactGraphResult_Services, &v.Services)
+		case schemas.GetInsightImpactGraphResult_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetInsightImpactGraphResult_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInsightImpactGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInsightImpactGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightImpactGraph, schemas.GetInsightImpactGraphRequest, schemas.GetInsightImpactGraphResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInsightImpactGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightImpactGraph, schemas.GetInsightImpactGraphRequest, schemas.GetInsightImpactGraphResult), output: &GetInsightImpactGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

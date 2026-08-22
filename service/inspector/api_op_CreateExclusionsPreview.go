@@ -4,6 +4,8 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type CreateExclusionsPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExclusionsPreviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExclusionsPreviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExclusionsPreviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentTemplateArn != nil {
+		s.WriteString(schemas.CreateExclusionsPreviewRequest_assessmentTemplateArn, *v.AssessmentTemplateArn)
+	}
+}
+
 type CreateExclusionsPreviewOutput struct {
 
 	// Specifies the unique identifier of the requested exclusions preview. You can
@@ -51,13 +65,32 @@ type CreateExclusionsPreviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExclusionsPreviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExclusionsPreviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExclusionsPreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreviewToken != nil {
+		s.WriteString(schemas.CreateExclusionsPreviewResponse_previewToken, *v.PreviewToken)
+	}
+}
+func (v *CreateExclusionsPreviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExclusionsPreviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExclusionsPreviewResponse_previewToken:
+			v.PreviewToken = new(string)
+			return d.ReadString(schemas.CreateExclusionsPreviewResponse_previewToken, v.PreviewToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExclusionsPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateExclusionsPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExclusionsPreview, schemas.CreateExclusionsPreviewRequest, schemas.CreateExclusionsPreviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateExclusionsPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExclusionsPreview, schemas.CreateExclusionsPreviewRequest, schemas.CreateExclusionsPreviewResponse), output: &CreateExclusionsPreviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

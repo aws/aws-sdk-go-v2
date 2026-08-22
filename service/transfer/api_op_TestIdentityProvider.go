@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -99,6 +101,30 @@ type TestIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestIdentityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.TestIdentityProviderRequest_ServerId, *v.ServerId)
+	}
+	if v.ServerProtocol != "" {
+		s.WriteString(schemas.TestIdentityProviderRequest_ServerProtocol, string(v.ServerProtocol))
+	}
+	if v.SourceIp != nil {
+		s.WriteString(schemas.TestIdentityProviderRequest_SourceIp, *v.SourceIp)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.TestIdentityProviderRequest_UserName, *v.UserName)
+	}
+	if v.UserPassword != nil {
+		s.WriteString(schemas.TestIdentityProviderRequest_UserPassword, *v.UserPassword)
+	}
+}
+
 type TestIdentityProviderOutput struct {
 
 	// The HTTP status code that is the response from your API Gateway or your Lambda
@@ -127,13 +153,47 @@ type TestIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestIdentityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestIdentityProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestIdentityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TestIdentityProviderResponse_Message, *v.Message)
+	}
+	if v.Response != nil {
+		s.WriteString(schemas.TestIdentityProviderResponse_Response, *v.Response)
+	}
+	s.WriteInt32(schemas.TestIdentityProviderResponse_StatusCode, v.StatusCode)
+	if v.Url != nil {
+		s.WriteString(schemas.TestIdentityProviderResponse_Url, *v.Url)
+	}
+}
+func (v *TestIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestIdentityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestIdentityProviderResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TestIdentityProviderResponse_Message, v.Message)
+		case schemas.TestIdentityProviderResponse_Response:
+			v.Response = new(string)
+			return d.ReadString(schemas.TestIdentityProviderResponse_Response, v.Response)
+		case schemas.TestIdentityProviderResponse_StatusCode:
+			return d.ReadInt32(schemas.TestIdentityProviderResponse_StatusCode, &v.StatusCode)
+		case schemas.TestIdentityProviderResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.TestIdentityProviderResponse_Url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestIdentityProvider, schemas.TestIdentityProviderRequest, schemas.TestIdentityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTestIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestIdentityProvider, schemas.TestIdentityProviderRequest, schemas.TestIdentityProviderResponse), output: &TestIdentityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

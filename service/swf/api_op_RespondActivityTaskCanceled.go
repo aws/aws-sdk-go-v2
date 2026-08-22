@@ -4,6 +4,8 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,21 @@ type RespondActivityTaskCanceledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RespondActivityTaskCanceledInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RespondActivityTaskCanceledInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RespondActivityTaskCanceledInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.RespondActivityTaskCanceledInput_details, *v.Details)
+	}
+	if v.TaskToken != nil {
+		s.WriteString(schemas.RespondActivityTaskCanceledInput_taskToken, *v.TaskToken)
+	}
+}
+
 type RespondActivityTaskCanceledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,13 +97,26 @@ type RespondActivityTaskCanceledOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RespondActivityTaskCanceledOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RespondActivityTaskCanceledOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RespondActivityTaskCanceledOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRespondActivityTaskCanceledMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRespondActivityTaskCanceled{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RespondActivityTaskCanceled, schemas.RespondActivityTaskCanceledInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRespondActivityTaskCanceled{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RespondActivityTaskCanceled, schemas.RespondActivityTaskCanceledInput, nil), output: &RespondActivityTaskCanceledOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

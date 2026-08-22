@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteTapeArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTapeArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTapeArchiveInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTapeArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BypassGovernanceRetention != false {
+		s.WriteBool(schemas.DeleteTapeArchiveInput_BypassGovernanceRetention, v.BypassGovernanceRetention)
+	}
+	if v.TapeARN != nil {
+		s.WriteString(schemas.DeleteTapeArchiveInput_TapeARN, *v.TapeARN)
+	}
+}
+
 // DeleteTapeArchiveOutput
 type DeleteTapeArchiveOutput struct {
 
@@ -55,13 +72,32 @@ type DeleteTapeArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTapeArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTapeArchiveOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTapeArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TapeARN != nil {
+		s.WriteString(schemas.DeleteTapeArchiveOutput_TapeARN, *v.TapeARN)
+	}
+}
+func (v *DeleteTapeArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTapeArchiveOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTapeArchiveOutput_TapeARN:
+			v.TapeARN = new(string)
+			return d.ReadString(schemas.DeleteTapeArchiveOutput_TapeARN, v.TapeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTapeArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTapeArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTapeArchive, schemas.DeleteTapeArchiveInput, schemas.DeleteTapeArchiveOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTapeArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTapeArchive, schemas.DeleteTapeArchiveInput, schemas.DeleteTapeArchiveOutput), output: &DeleteTapeArchiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

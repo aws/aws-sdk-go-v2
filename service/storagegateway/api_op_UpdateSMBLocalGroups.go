@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type UpdateSMBLocalGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSMBLocalGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSMBLocalGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSMBLocalGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateSMBLocalGroupsInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.SMBLocalGroups != nil {
+		s.WriteStruct(schemas.UpdateSMBLocalGroupsInput_SMBLocalGroups)
+		v.SMBLocalGroups.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSMBLocalGroupsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -54,13 +73,32 @@ type UpdateSMBLocalGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSMBLocalGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSMBLocalGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSMBLocalGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateSMBLocalGroupsOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *UpdateSMBLocalGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSMBLocalGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSMBLocalGroupsOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.UpdateSMBLocalGroupsOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSMBLocalGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSMBLocalGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSMBLocalGroups, schemas.UpdateSMBLocalGroupsInput, schemas.UpdateSMBLocalGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSMBLocalGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSMBLocalGroups, schemas.UpdateSMBLocalGroupsInput, schemas.UpdateSMBLocalGroupsOutput), output: &UpdateSMBLocalGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

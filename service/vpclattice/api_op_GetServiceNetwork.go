@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetServiceNetworkInput struct {
 	ServiceNetworkIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetServiceNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceNetworkIdentifier != nil {
+		s.WriteString(schemas.GetServiceNetworkRequest_serviceNetworkIdentifier, *v.ServiceNetworkIdentifier)
+	}
+}
+func (v *GetServiceNetworkInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceNetworkRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceNetworkRequest_serviceNetworkIdentifier:
+			v.ServiceNetworkIdentifier = new(string)
+			return d.ReadString(schemas.GetServiceNetworkRequest_serviceNetworkIdentifier, v.ServiceNetworkIdentifier)
+		}
+		return nil
+	})
 }
 
 type GetServiceNetworkOutput struct {
@@ -70,13 +94,86 @@ type GetServiceNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetServiceNetworkResponse_arn, *v.Arn)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.GetServiceNetworkResponse_authType, string(v.AuthType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetServiceNetworkResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetServiceNetworkResponse_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetServiceNetworkResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetServiceNetworkResponse_name, *v.Name)
+	}
+	if v.NumberOfAssociatedServices != nil {
+		s.WriteInt64(schemas.GetServiceNetworkResponse_numberOfAssociatedServices, *v.NumberOfAssociatedServices)
+	}
+	if v.NumberOfAssociatedVPCs != nil {
+		s.WriteInt64(schemas.GetServiceNetworkResponse_numberOfAssociatedVPCs, *v.NumberOfAssociatedVPCs)
+	}
+	if v.SharingConfig != nil {
+		s.WriteStruct(schemas.GetServiceNetworkResponse_sharingConfig)
+		v.SharingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceNetworkResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResponse_arn, v.Arn)
+		case schemas.GetServiceNetworkResponse_authType:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceNetworkResponse_authType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.AuthType(ev)
+			return nil
+		case schemas.GetServiceNetworkResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetServiceNetworkResponse_createdAt, v.CreatedAt)
+		case schemas.GetServiceNetworkResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResponse_id, v.Id)
+		case schemas.GetServiceNetworkResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetServiceNetworkResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetServiceNetworkResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetServiceNetworkResponse_name, v.Name)
+		case schemas.GetServiceNetworkResponse_numberOfAssociatedServices:
+			v.NumberOfAssociatedServices = new(int64)
+			return d.ReadInt64(schemas.GetServiceNetworkResponse_numberOfAssociatedServices, v.NumberOfAssociatedServices)
+		case schemas.GetServiceNetworkResponse_numberOfAssociatedVPCs:
+			v.NumberOfAssociatedVPCs = new(int64)
+			return d.ReadInt64(schemas.GetServiceNetworkResponse_numberOfAssociatedVPCs, v.NumberOfAssociatedVPCs)
+		case schemas.GetServiceNetworkResponse_sharingConfig:
+			v.SharingConfig = &types.SharingConfig{}
+			return v.SharingConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceNetwork, schemas.GetServiceNetworkRequest, schemas.GetServiceNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceNetwork, schemas.GetServiceNetworkRequest, schemas.GetServiceNetworkResponse), output: &GetServiceNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,21 @@ type StartPrimaryEmailUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPrimaryEmailUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPrimaryEmailUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPrimaryEmailUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.StartPrimaryEmailUpdateRequest_AccountId, *v.AccountId)
+	}
+	if v.PrimaryEmail != nil {
+		s.WriteString(schemas.StartPrimaryEmailUpdateRequest_PrimaryEmail, *v.PrimaryEmail)
+	}
+}
+
 type StartPrimaryEmailUpdateOutput struct {
 
 	// The status of the primary email update request.
@@ -67,13 +84,36 @@ type StartPrimaryEmailUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPrimaryEmailUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPrimaryEmailUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPrimaryEmailUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.StartPrimaryEmailUpdateResponse_Status, string(v.Status))
+	}
+}
+func (v *StartPrimaryEmailUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPrimaryEmailUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPrimaryEmailUpdateResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartPrimaryEmailUpdateResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrimaryEmailUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPrimaryEmailUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPrimaryEmailUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPrimaryEmailUpdate, schemas.StartPrimaryEmailUpdateRequest, schemas.StartPrimaryEmailUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartPrimaryEmailUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPrimaryEmailUpdate, schemas.StartPrimaryEmailUpdateRequest, schemas.StartPrimaryEmailUpdateResponse), output: &StartPrimaryEmailUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

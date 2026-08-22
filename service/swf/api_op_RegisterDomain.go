@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,25 @@ type RegisterDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDomainInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.RegisterDomainInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RegisterDomainInput_name, *v.Name)
+	}
+	serializeResourceTagList(s, schemas.RegisterDomainInput_tags, v.Tags)
+	if v.WorkflowExecutionRetentionPeriodInDays != nil {
+		s.WriteString(schemas.RegisterDomainInput_workflowExecutionRetentionPeriodInDays, *v.WorkflowExecutionRetentionPeriodInDays)
+	}
+}
+
 type RegisterDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,13 +112,26 @@ type RegisterDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDomain, schemas.RegisterDomainInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRegisterDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDomain, schemas.RegisterDomainInput, nil), output: &RegisterDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

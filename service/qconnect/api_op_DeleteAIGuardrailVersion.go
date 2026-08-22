@@ -4,6 +4,8 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteAIGuardrailVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIGuardrailVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIGuardrailVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIGuardrailVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiGuardrailId != nil {
+		s.WriteString(schemas.DeleteAIGuardrailVersionRequest_aiGuardrailId, *v.AiGuardrailId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.DeleteAIGuardrailVersionRequest_assistantId, *v.AssistantId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DeleteAIGuardrailVersionRequest_versionNumber, *v.VersionNumber)
+	}
+}
+
 type DeleteAIGuardrailVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DeleteAIGuardrailVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIGuardrailVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIGuardrailVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIGuardrailVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAIGuardrailVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAIGuardrailVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAIGuardrailVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAIGuardrailVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIGuardrailVersion, schemas.DeleteAIGuardrailVersionRequest, schemas.DeleteAIGuardrailVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAIGuardrailVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIGuardrailVersion, schemas.DeleteAIGuardrailVersionRequest, schemas.DeleteAIGuardrailVersionResponse), output: &DeleteAIGuardrailVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

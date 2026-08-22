@@ -1,0 +1,11 @@
+200
+Access-Control-Allow-Origin: __AccessControlAllowOrigin__
+Access-Control-Expose-Headers: __AccessControlExposeHeaders__
+Cache-Control: __CacheControl__
+Content-Security-Policy: __ContentSecurityPolicy__
+Content-Type: application/json
+Strict-Transport-Security: __StrictTransportSecurity__
+X-Content-Type-Options: __XContentTypeOptions__
+X-Frame-Options: __XFrameOptions__
+
+{"errors":[{"arn":"__Arn__","code":"__Code__","message":"__Message__"},{"arn":"__Arn__","code":"__Code__","message":"__Message__"}],"streamKeys":[{"arn":"__Arn__","channelArn":"__ChannelArn__","tags":{"key0":"__Value__"},"value":"__Value__"},{"arn":"__Arn__","channelArn":"__ChannelArn__","tags":{"key0":"__Value__"},"value":"__Value__"}]}

@@ -5,7 +5,9 @@ package voiceid
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,46 @@ type CreateWatchlistInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWatchlistInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWatchlistRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWatchlistInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWatchlistRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWatchlistRequest_Description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateWatchlistRequest_DomainId, *v.DomainId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWatchlistRequest_Name, *v.Name)
+	}
+}
+func (v *CreateWatchlistInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWatchlistRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWatchlistRequest_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateWatchlistRequest_ClientToken, v.ClientToken)
+		case schemas.CreateWatchlistRequest_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateWatchlistRequest_Description, v.Description)
+		case schemas.CreateWatchlistRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateWatchlistRequest_DomainId, v.DomainId)
+		case schemas.CreateWatchlistRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateWatchlistRequest_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type CreateWatchlistOutput struct {
 
 	// Information about the newly created watchlist.
@@ -61,13 +103,34 @@ type CreateWatchlistOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWatchlistOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWatchlistResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWatchlistOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Watchlist != nil {
+		s.WriteStruct(schemas.CreateWatchlistResponse_Watchlist)
+		v.Watchlist.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWatchlistOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWatchlistResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWatchlistResponse_Watchlist:
+			v.Watchlist = &types.Watchlist{}
+			return v.Watchlist.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWatchlistMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateWatchlist{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWatchlist, schemas.CreateWatchlistRequest, schemas.CreateWatchlistResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateWatchlist{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWatchlist, schemas.CreateWatchlistRequest, schemas.CreateWatchlistResponse), output: &CreateWatchlistOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

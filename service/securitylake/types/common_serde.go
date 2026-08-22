@@ -296,6 +296,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func deserializeAccessTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AccessType) error {
+	*v = make([]AccessType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -309,6 +310,7 @@ func deserializeAccessTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -322,6 +324,7 @@ func deserializeAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 }
 
 func deserializeAwsLogSourceConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AwsLogSourceConfiguration) error {
+	*v = make([]AwsLogSourceConfiguration, 0)
 	var vv AwsLogSourceConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = AwsLogSourceConfiguration{}
@@ -335,6 +338,7 @@ func deserializeAwsLogSourceConfigurationList(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeAwsLogSourceResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AwsLogSourceResource) error {
+	*v = make([]AwsLogSourceResource, 0)
 	var vv AwsLogSourceResource
 	return smithy.ReadList(d, s, func() error {
 		vv = AwsLogSourceResource{}
@@ -348,6 +352,7 @@ func deserializeAwsLogSourceResourceList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeDataLakeAutoEnableNewAccountConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataLakeAutoEnableNewAccountConfiguration) error {
+	*v = make([]DataLakeAutoEnableNewAccountConfiguration, 0)
 	var vv DataLakeAutoEnableNewAccountConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = DataLakeAutoEnableNewAccountConfiguration{}
@@ -361,6 +366,7 @@ func deserializeDataLakeAutoEnableNewAccountConfigurationList(d smithy.ShapeDese
 }
 
 func deserializeDataLakeConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataLakeConfiguration) error {
+	*v = make([]DataLakeConfiguration, 0)
 	var vv DataLakeConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = DataLakeConfiguration{}
@@ -374,6 +380,7 @@ func deserializeDataLakeConfigurationList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeDataLakeExceptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataLakeException) error {
+	*v = make([]DataLakeException, 0)
 	var vv DataLakeException
 	return smithy.ReadList(d, s, func() error {
 		vv = DataLakeException{}
@@ -387,6 +394,7 @@ func deserializeDataLakeExceptionList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeDataLakeLifecycleTransitionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataLakeLifecycleTransition) error {
+	*v = make([]DataLakeLifecycleTransition, 0)
 	var vv DataLakeLifecycleTransition
 	return smithy.ReadList(d, s, func() error {
 		vv = DataLakeLifecycleTransition{}
@@ -400,6 +408,7 @@ func deserializeDataLakeLifecycleTransitionList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeDataLakeResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataLakeResource) error {
+	*v = make([]DataLakeResource, 0)
 	var vv DataLakeResource
 	return smithy.ReadList(d, s, func() error {
 		vv = DataLakeResource{}
@@ -413,6 +422,7 @@ func deserializeDataLakeResourceList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeDataLakeSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataLakeSource) error {
+	*v = make([]DataLakeSource, 0)
 	var vv DataLakeSource
 	return smithy.ReadList(d, s, func() error {
 		vv = DataLakeSource{}
@@ -426,6 +436,7 @@ func deserializeDataLakeSourceList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeDataLakeSourceStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DataLakeSourceStatus) error {
+	*v = make([]DataLakeSourceStatus, 0)
 	var vv DataLakeSourceStatus
 	return smithy.ReadList(d, s, func() error {
 		vv = DataLakeSourceStatus{}
@@ -439,6 +450,7 @@ func deserializeDataLakeSourceStatusList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeLogSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LogSource) error {
+	*v = make([]LogSource, 0)
 	var vv LogSource
 	return smithy.ReadList(d, s, func() error {
 		vv = LogSource{}
@@ -452,6 +464,7 @@ func deserializeLogSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeLogSourceResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LogSourceResource) error {
+	*v = make([]LogSourceResource, 0)
 	var vv LogSourceResource
 	return smithy.ReadList(d, s, func() error {
 
@@ -465,6 +478,7 @@ func deserializeLogSourceResourceList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeOcsfEventClassList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -478,6 +492,7 @@ func deserializeOcsfEventClassList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -491,6 +506,7 @@ func deserializeRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeSubscriberResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SubscriberResource) error {
+	*v = make([]SubscriberResource, 0)
 	var vv SubscriberResource
 	return smithy.ReadList(d, s, func() error {
 		vv = SubscriberResource{}
@@ -504,6 +520,7 @@ func deserializeSubscriberResourceList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -517,6 +534,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}

@@ -5,7 +5,9 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,30 @@ type CreatePublicDnsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePublicDnsNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePublicDnsNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePublicDnsNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreatePublicDnsNamespaceRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePublicDnsNamespaceRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePublicDnsNamespaceRequest_Name, *v.Name)
+	}
+	if v.Properties != nil {
+		s.WriteStruct(schemas.CreatePublicDnsNamespaceRequest_Properties)
+		v.Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreatePublicDnsNamespaceRequest_Tags, v.Tags)
+}
+
 type CreatePublicDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
@@ -81,13 +107,32 @@ type CreatePublicDnsNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePublicDnsNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePublicDnsNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePublicDnsNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.CreatePublicDnsNamespaceResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *CreatePublicDnsNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePublicDnsNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePublicDnsNamespaceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.CreatePublicDnsNamespaceResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePublicDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePublicDnsNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePublicDnsNamespace, schemas.CreatePublicDnsNamespaceRequest, schemas.CreatePublicDnsNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePublicDnsNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePublicDnsNamespace, schemas.CreatePublicDnsNamespaceRequest, schemas.CreatePublicDnsNamespaceResponse), output: &CreatePublicDnsNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

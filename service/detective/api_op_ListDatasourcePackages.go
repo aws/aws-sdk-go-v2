@@ -5,7 +5,9 @@ package detective
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListDatasourcePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasourcePackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasourcePackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasourcePackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.ListDatasourcePackagesRequest_GraphArn, *v.GraphArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasourcePackagesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasourcePackagesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDatasourcePackagesOutput struct {
 
 	// Details on the data source packages active in the behavior graph.
@@ -59,13 +79,35 @@ type ListDatasourcePackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasourcePackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasourcePackagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasourcePackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasourcePackageIngestDetails(s, schemas.ListDatasourcePackagesResponse_DatasourcePackages, v.DatasourcePackages)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasourcePackagesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasourcePackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasourcePackagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasourcePackagesResponse_DatasourcePackages:
+			return deserializeDatasourcePackageIngestDetails(d, schemas.ListDatasourcePackagesResponse_DatasourcePackages, &v.DatasourcePackages)
+		case schemas.ListDatasourcePackagesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasourcePackagesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasourcePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatasourcePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasourcePackages, schemas.ListDatasourcePackagesRequest, schemas.ListDatasourcePackagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatasourcePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasourcePackages, schemas.ListDatasourcePackagesRequest, schemas.ListDatasourcePackagesResponse), output: &ListDatasourcePackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

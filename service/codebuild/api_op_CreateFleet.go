@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -212,6 +214,57 @@ type CreateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseCapacity != nil {
+		s.WriteInt32(schemas.CreateFleetInput_baseCapacity, *v.BaseCapacity)
+	}
+	if v.ComputeConfiguration != nil {
+		s.WriteStruct(schemas.CreateFleetInput_computeConfiguration)
+		v.ComputeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputeType != "" {
+		s.WriteString(schemas.CreateFleetInput_computeType, string(v.ComputeType))
+	}
+	if v.EnvironmentType != "" {
+		s.WriteString(schemas.CreateFleetInput_environmentType, string(v.EnvironmentType))
+	}
+	if v.FleetServiceRole != nil {
+		s.WriteString(schemas.CreateFleetInput_fleetServiceRole, *v.FleetServiceRole)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.CreateFleetInput_imageId, *v.ImageId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFleetInput_name, *v.Name)
+	}
+	if v.OverflowBehavior != "" {
+		s.WriteString(schemas.CreateFleetInput_overflowBehavior, string(v.OverflowBehavior))
+	}
+	if v.ProxyConfiguration != nil {
+		s.WriteStruct(schemas.CreateFleetInput_proxyConfiguration)
+		v.ProxyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScalingConfiguration != nil {
+		s.WriteStruct(schemas.CreateFleetInput_scalingConfiguration)
+		v.ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateFleetInput_tags, v.Tags)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateFleetInput_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateFleetOutput struct {
 
 	// Information about the compute fleet
@@ -223,13 +276,34 @@ type CreateFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fleet != nil {
+		s.WriteStruct(schemas.CreateFleetOutput_fleet)
+		v.Fleet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFleetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFleetOutput_fleet:
+			v.Fleet = &types.Fleet{}
+			return v.Fleet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleet, schemas.CreateFleetInput, schemas.CreateFleetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleet, schemas.CreateFleetInput, schemas.CreateFleetOutput), output: &CreateFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

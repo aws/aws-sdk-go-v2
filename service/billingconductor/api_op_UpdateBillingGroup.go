@@ -4,7 +4,9 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,66 @@ type UpdateBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBillingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillingGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountGrouping != nil {
+		s.WriteStruct(schemas.UpdateBillingGroupInput_AccountGrouping)
+		v.AccountGrouping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateBillingGroupInput_Arn, *v.Arn)
+	}
+	if v.ComputationPreference != nil {
+		s.WriteStruct(schemas.UpdateBillingGroupInput_ComputationPreference)
+		v.ComputationPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBillingGroupInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateBillingGroupInput_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateBillingGroupInput_Status, string(v.Status))
+	}
+}
+func (v *UpdateBillingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBillingGroupInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBillingGroupInput_AccountGrouping:
+			v.AccountGrouping = &types.UpdateBillingGroupAccountGrouping{}
+			return v.AccountGrouping.Deserialize(d)
+		case schemas.UpdateBillingGroupInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupInput_Arn, v.Arn)
+		case schemas.UpdateBillingGroupInput_ComputationPreference:
+			v.ComputationPreference = &types.ComputationPreference{}
+			return v.ComputationPreference.Deserialize(d)
+		case schemas.UpdateBillingGroupInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupInput_Description, v.Description)
+		case schemas.UpdateBillingGroupInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupInput_Name, v.Name)
+		case schemas.UpdateBillingGroupInput_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBillingGroupInput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BillingGroupStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateBillingGroupOutput struct {
 
 	// Specifies if the billing group has automatic account association ( AutoAssociate
@@ -91,13 +153,90 @@ type UpdateBillingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBillingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillingGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountGrouping != nil {
+		s.WriteStruct(schemas.UpdateBillingGroupOutput_AccountGrouping)
+		v.AccountGrouping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateBillingGroupOutput_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBillingGroupOutput_Description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.UpdateBillingGroupOutput_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateBillingGroupOutput_Name, *v.Name)
+	}
+	if v.PricingPlanArn != nil {
+		s.WriteString(schemas.UpdateBillingGroupOutput_PricingPlanArn, *v.PricingPlanArn)
+	}
+	if v.PrimaryAccountId != nil {
+		s.WriteString(schemas.UpdateBillingGroupOutput_PrimaryAccountId, *v.PrimaryAccountId)
+	}
+	if v.Size != 0 {
+		s.WriteInt64(schemas.UpdateBillingGroupOutput_Size, v.Size)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateBillingGroupOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.UpdateBillingGroupOutput_StatusReason, *v.StatusReason)
+	}
+}
+func (v *UpdateBillingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBillingGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBillingGroupOutput_AccountGrouping:
+			v.AccountGrouping = &types.UpdateBillingGroupAccountGrouping{}
+			return v.AccountGrouping.Deserialize(d)
+		case schemas.UpdateBillingGroupOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupOutput_Arn, v.Arn)
+		case schemas.UpdateBillingGroupOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupOutput_Description, v.Description)
+		case schemas.UpdateBillingGroupOutput_LastModifiedTime:
+			return d.ReadInt64(schemas.UpdateBillingGroupOutput_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.UpdateBillingGroupOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupOutput_Name, v.Name)
+		case schemas.UpdateBillingGroupOutput_PricingPlanArn:
+			v.PricingPlanArn = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupOutput_PricingPlanArn, v.PricingPlanArn)
+		case schemas.UpdateBillingGroupOutput_PrimaryAccountId:
+			v.PrimaryAccountId = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupOutput_PrimaryAccountId, v.PrimaryAccountId)
+		case schemas.UpdateBillingGroupOutput_Size:
+			return d.ReadInt64(schemas.UpdateBillingGroupOutput_Size, &v.Size)
+		case schemas.UpdateBillingGroupOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBillingGroupOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BillingGroupStatus(ev)
+			return nil
+		case schemas.UpdateBillingGroupOutput_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupOutput_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillingGroup, schemas.UpdateBillingGroupInput, schemas.UpdateBillingGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillingGroup, schemas.UpdateBillingGroupInput, schemas.UpdateBillingGroupOutput), output: &UpdateBillingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

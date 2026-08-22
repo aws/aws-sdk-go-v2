@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShineFrontendService_20170701.TranslateDocument
+
+{"AppliedSettings":{"Brevity":"ON","Formality":"FORMAL","Profanity":"MASK"},"AppliedTerminologies":[{"Name":"__Name__","Terms":[{"SourceText":"__SourceText__","TargetText":"__TargetText__"},{"SourceText":"__SourceText__","TargetText":"__TargetText__"}]},{"Name":"__Name__","Terms":[{"SourceText":"__SourceText__","TargetText":"__TargetText__"},{"SourceText":"__SourceText__","TargetText":"__TargetText__"}]}],"SourceLanguageCode":"__SourceLanguageCode__","TargetLanguageCode":"__TargetLanguageCode__","TranslatedDocument":{"Content":"YmxvYg=="}}

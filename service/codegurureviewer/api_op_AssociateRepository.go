@@ -5,7 +5,9 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,29 @@ type AssociateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateRepositoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.AssociateRepositoryRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.KMSKeyDetails != nil {
+		s.WriteStruct(schemas.AssociateRepositoryRequest_KMSKeyDetails)
+		v.KMSKeyDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Repository != nil {
+		s.WriteStruct(schemas.AssociateRepositoryRequest_Repository)
+		v.Repository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.AssociateRepositoryRequest_Tags, v.Tags)
+}
+
 type AssociateRepositoryOutput struct {
 
 	// Information about the repository association.
@@ -104,13 +129,37 @@ type AssociateRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateRepositoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryAssociation != nil {
+		s.WriteStruct(schemas.AssociateRepositoryResponse_RepositoryAssociation)
+		v.RepositoryAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.AssociateRepositoryResponse_Tags, v.Tags)
+}
+func (v *AssociateRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateRepositoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateRepositoryResponse_RepositoryAssociation:
+			v.RepositoryAssociation = &types.RepositoryAssociation{}
+			return v.RepositoryAssociation.Deserialize(d)
+		case schemas.AssociateRepositoryResponse_Tags:
+			return deserializeTagMap(d, schemas.AssociateRepositoryResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateRepository, schemas.AssociateRepositoryRequest, schemas.AssociateRepositoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateRepository, schemas.AssociateRepositoryRequest, schemas.AssociateRepositoryResponse), output: &AssociateRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

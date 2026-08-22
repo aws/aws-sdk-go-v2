@@ -5,7 +5,9 @@ package xray
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type BatchGetTracesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTracesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTracesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTracesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchGetTracesRequest_NextToken, *v.NextToken)
+	}
+	serializeTraceIdList(s, schemas.BatchGetTracesRequest_TraceIds, v.TraceIds)
+}
+
 type BatchGetTracesOutput struct {
 
 	// Pagination token.
@@ -60,13 +75,38 @@ type BatchGetTracesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTracesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTracesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTracesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.BatchGetTracesResult_NextToken, *v.NextToken)
+	}
+	serializeTraceList(s, schemas.BatchGetTracesResult_Traces, v.Traces)
+	serializeUnprocessedTraceIdList(s, schemas.BatchGetTracesResult_UnprocessedTraceIds, v.UnprocessedTraceIds)
+}
+func (v *BatchGetTracesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetTracesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetTracesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.BatchGetTracesResult_NextToken, v.NextToken)
+		case schemas.BatchGetTracesResult_Traces:
+			return deserializeTraceList(d, schemas.BatchGetTracesResult_Traces, &v.Traces)
+		case schemas.BatchGetTracesResult_UnprocessedTraceIds:
+			return deserializeUnprocessedTraceIdList(d, schemas.BatchGetTracesResult_UnprocessedTraceIds, &v.UnprocessedTraceIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetTracesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetTraces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTraces, schemas.BatchGetTracesRequest, schemas.BatchGetTracesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetTraces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTraces, schemas.BatchGetTracesRequest, schemas.BatchGetTracesResult), output: &BatchGetTracesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

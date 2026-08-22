@@ -5,7 +5,9 @@ package billingconductor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,48 @@ type ListBillingGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListBillingGroupsInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListBillingGroupsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBillingGroupsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillingGroupsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBillingGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingGroupsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingGroupsInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListBillingGroupsInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListBillingGroupsInput_Filters:
+			v.Filters = &types.ListBillingGroupsFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListBillingGroupsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListBillingGroupsInput_MaxResults, v.MaxResults)
+		case schemas.ListBillingGroupsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillingGroupsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListBillingGroupsOutput struct {
 
 	// A list of BillingGroupListElement retrieved.
@@ -59,13 +103,35 @@ type ListBillingGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillingGroupList(s, schemas.ListBillingGroupsOutput_BillingGroups, v.BillingGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillingGroupsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBillingGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingGroupsOutput_BillingGroups:
+			return deserializeBillingGroupList(d, schemas.ListBillingGroupsOutput_BillingGroups, &v.BillingGroups)
+		case schemas.ListBillingGroupsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillingGroupsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBillingGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBillingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingGroups, schemas.ListBillingGroupsInput, schemas.ListBillingGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBillingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingGroups, schemas.ListBillingGroupsInput, schemas.ListBillingGroupsOutput), output: &ListBillingGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

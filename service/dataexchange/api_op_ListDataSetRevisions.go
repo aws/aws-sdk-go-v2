@@ -5,7 +5,9 @@ package dataexchange
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,39 @@ type ListDataSetRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSetRevisionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSetRevisionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSetRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ListDataSetRevisionsRequest_DataSetId, *v.DataSetId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListDataSetRevisionsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSetRevisionsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataSetRevisionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataSetRevisionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataSetRevisionsRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ListDataSetRevisionsRequest_DataSetId, v.DataSetId)
+		case schemas.ListDataSetRevisionsRequest_MaxResults:
+			return d.ReadInt32(schemas.ListDataSetRevisionsRequest_MaxResults, &v.MaxResults)
+		case schemas.ListDataSetRevisionsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataSetRevisionsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListDataSetRevisionsOutput struct {
 
 	// The token value retrieved from a previous call to access the next page of
@@ -58,13 +93,35 @@ type ListDataSetRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSetRevisionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSetRevisionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSetRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSetRevisionsResponse_NextToken, *v.NextToken)
+	}
+	serializeListOfRevisionEntry(s, schemas.ListDataSetRevisionsResponse_Revisions, v.Revisions)
+}
+func (v *ListDataSetRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataSetRevisionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataSetRevisionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataSetRevisionsResponse_NextToken, v.NextToken)
+		case schemas.ListDataSetRevisionsResponse_Revisions:
+			return deserializeListOfRevisionEntry(d, schemas.ListDataSetRevisionsResponse_Revisions, &v.Revisions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataSetRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSetRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSetRevisions, schemas.ListDataSetRevisionsRequest, schemas.ListDataSetRevisionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSetRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSetRevisions, schemas.ListDataSetRevisionsRequest, schemas.ListDataSetRevisionsResponse), output: &ListDataSetRevisionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

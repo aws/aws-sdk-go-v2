@@ -5,7 +5,9 @@ package ivsrealtime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListPublicKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPublicKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPublicKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPublicKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPublicKeysRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPublicKeysRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListPublicKeysOutput struct {
 
 	// List of the matching public keys (summary information only).
@@ -55,13 +72,35 @@ type ListPublicKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPublicKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPublicKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPublicKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPublicKeysResponse_nextToken, *v.NextToken)
+	}
+	serializePublicKeyList(s, schemas.ListPublicKeysResponse_publicKeys, v.PublicKeys)
+}
+func (v *ListPublicKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPublicKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPublicKeysResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPublicKeysResponse_nextToken, v.NextToken)
+		case schemas.ListPublicKeysResponse_publicKeys:
+			return deserializePublicKeyList(d, schemas.ListPublicKeysResponse_publicKeys, &v.PublicKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPublicKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPublicKeys, schemas.ListPublicKeysRequest, schemas.ListPublicKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPublicKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPublicKeys, schemas.ListPublicKeysRequest, schemas.ListPublicKeysResponse), output: &ListPublicKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

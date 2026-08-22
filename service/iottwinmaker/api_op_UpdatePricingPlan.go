@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,35 @@ type UpdatePricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePricingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePricingPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePricingBundles(s, schemas.UpdatePricingPlanRequest_bundleNames, v.BundleNames)
+	if v.PricingMode != "" {
+		s.WriteString(schemas.UpdatePricingPlanRequest_pricingMode, string(v.PricingMode))
+	}
+}
+func (v *UpdatePricingPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePricingPlanRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePricingPlanRequest_bundleNames:
+			return deserializePricingBundles(d, schemas.UpdatePricingPlanRequest_bundleNames, &v.BundleNames)
+		case schemas.UpdatePricingPlanRequest_pricingMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePricingPlanRequest_pricingMode, &ev); err != nil {
+				return err
+			}
+			v.PricingMode = types.PricingMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdatePricingPlanOutput struct {
 
 	// Update the current pricing plan.
@@ -55,13 +86,42 @@ type UpdatePricingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePricingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePricingPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePricingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentPricingPlan != nil {
+		s.WriteStruct(schemas.UpdatePricingPlanResponse_currentPricingPlan)
+		v.CurrentPricingPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PendingPricingPlan != nil {
+		s.WriteStruct(schemas.UpdatePricingPlanResponse_pendingPricingPlan)
+		v.PendingPricingPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePricingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePricingPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePricingPlanResponse_currentPricingPlan:
+			v.CurrentPricingPlan = &types.PricingPlan{}
+			return v.CurrentPricingPlan.Deserialize(d)
+		case schemas.UpdatePricingPlanResponse_pendingPricingPlan:
+			v.PendingPricingPlan = &types.PricingPlan{}
+			return v.PendingPricingPlan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePricingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePricingPlan, schemas.UpdatePricingPlanRequest, schemas.UpdatePricingPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePricingPlan, schemas.UpdatePricingPlanRequest, schemas.UpdatePricingPlanResponse), output: &UpdatePricingPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

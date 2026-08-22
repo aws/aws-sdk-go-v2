@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CloudApiService.CancelResourceRequest
+
+{"ProgressEvent":{"ErrorCode":"NotUpdatable","EventTime":946684800,"HooksRequestToken":"__HooksRequestToken__","Identifier":"__Identifier__","Operation":"CREATE","OperationStatus":"PENDING","RequestToken":"__RequestToken__","ResourceModel":"__ResourceModel__","RetryAfter":946684800,"StatusMessage":"__StatusMessage__","TypeName":"__TypeName__"}}

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -22,6 +24,46 @@ type AccountAssociationsListElement struct {
 	BillingGroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountAssociationsListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountAssociationsListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountAssociationsListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountEmail != nil {
+		s.WriteString(schemas.AccountAssociationsListElement_AccountEmail, *v.AccountEmail)
+	}
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountAssociationsListElement_AccountId, *v.AccountId)
+	}
+	if v.AccountName != nil {
+		s.WriteString(schemas.AccountAssociationsListElement_AccountName, *v.AccountName)
+	}
+	if v.BillingGroupArn != nil {
+		s.WriteString(schemas.AccountAssociationsListElement_BillingGroupArn, *v.BillingGroupArn)
+	}
+}
+func (v *AccountAssociationsListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountAssociationsListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountAssociationsListElement_AccountEmail:
+			v.AccountEmail = new(string)
+			return d.ReadString(schemas.AccountAssociationsListElement_AccountEmail, v.AccountEmail)
+		case schemas.AccountAssociationsListElement_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountAssociationsListElement_AccountId, v.AccountId)
+		case schemas.AccountAssociationsListElement_AccountName:
+			v.AccountName = new(string)
+			return d.ReadString(schemas.AccountAssociationsListElement_AccountName, v.AccountName)
+		case schemas.AccountAssociationsListElement_BillingGroupArn:
+			v.BillingGroupArn = new(string)
+			return d.ReadString(schemas.AccountAssociationsListElement_BillingGroupArn, v.BillingGroupArn)
+		}
+		return nil
+	})
 }
 
 // The set of accounts that will be under the billing group. The set of accounts
@@ -44,6 +86,37 @@ type AccountGrouping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountGrouping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountGrouping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountGrouping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoAssociate != nil {
+		s.WriteBool(schemas.AccountGrouping_AutoAssociate, *v.AutoAssociate)
+	}
+	serializeAccountIdList(s, schemas.AccountGrouping_LinkedAccountIds, v.LinkedAccountIds)
+	if v.ResponsibilityTransferArn != nil {
+		s.WriteString(schemas.AccountGrouping_ResponsibilityTransferArn, *v.ResponsibilityTransferArn)
+	}
+}
+func (v *AccountGrouping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountGrouping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountGrouping_AutoAssociate:
+			v.AutoAssociate = new(bool)
+			return d.ReadBool(schemas.AccountGrouping_AutoAssociate, v.AutoAssociate)
+		case schemas.AccountGrouping_LinkedAccountIds:
+			return deserializeAccountIdList(d, schemas.AccountGrouping_LinkedAccountIds, &v.LinkedAccountIds)
+		case schemas.AccountGrouping_ResponsibilityTransferArn:
+			v.ResponsibilityTransferArn = new(string)
+			return d.ReadString(schemas.AccountGrouping_ResponsibilityTransferArn, v.ResponsibilityTransferArn)
+		}
+		return nil
+	})
+}
+
 // A representation of a resource association error.
 type AssociateResourceError struct {
 
@@ -56,6 +129,38 @@ type AssociateResourceError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AssociateResourceError_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.AssociateResourceError_Reason, string(v.Reason))
+	}
+}
+func (v *AssociateResourceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResourceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResourceError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AssociateResourceError_Message, v.Message)
+		case schemas.AssociateResourceError_Reason:
+			var ev string
+			if err := d.ReadString(schemas.AssociateResourceError_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = AssociateResourceErrorReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A resource association result for a percentage custom line item.
 type AssociateResourceResponseElement struct {
 
@@ -66,6 +171,36 @@ type AssociateResourceResponseElement struct {
 	Error *AssociateResourceError
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssociateResourceResponseElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceResponseElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceResponseElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociateResourceResponseElement_Arn, *v.Arn)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.AssociateResourceResponseElement_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateResourceResponseElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResourceResponseElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResourceResponseElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociateResourceResponseElement_Arn, v.Arn)
+		case schemas.AssociateResourceResponseElement_Error:
+			v.Error = &AssociateResourceError{}
+			return v.Error.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The key-value pair that represents the attribute by which the
@@ -82,6 +217,34 @@ type Attribute struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Attribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Attribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Attribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Attribute_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Attribute_Value, *v.Value)
+	}
+}
+func (v *Attribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Attribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Attribute_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Attribute_Key, v.Key)
+		case schemas.Attribute_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Attribute_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A summary report of actual Amazon Web Services charges and calculated Amazon
@@ -108,6 +271,58 @@ type BillingGroupCostReportElement struct {
 	ProformaCost *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BillingGroupCostReportElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingGroupCostReportElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingGroupCostReportElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSCost != nil {
+		s.WriteString(schemas.BillingGroupCostReportElement_AWSCost, *v.AWSCost)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.BillingGroupCostReportElement_Arn, *v.Arn)
+	}
+	if v.Currency != nil {
+		s.WriteString(schemas.BillingGroupCostReportElement_Currency, *v.Currency)
+	}
+	if v.Margin != nil {
+		s.WriteString(schemas.BillingGroupCostReportElement_Margin, *v.Margin)
+	}
+	if v.MarginPercentage != nil {
+		s.WriteString(schemas.BillingGroupCostReportElement_MarginPercentage, *v.MarginPercentage)
+	}
+	if v.ProformaCost != nil {
+		s.WriteString(schemas.BillingGroupCostReportElement_ProformaCost, *v.ProformaCost)
+	}
+}
+func (v *BillingGroupCostReportElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingGroupCostReportElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingGroupCostReportElement_AWSCost:
+			v.AWSCost = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportElement_AWSCost, v.AWSCost)
+		case schemas.BillingGroupCostReportElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportElement_Arn, v.Arn)
+		case schemas.BillingGroupCostReportElement_Currency:
+			v.Currency = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportElement_Currency, v.Currency)
+		case schemas.BillingGroupCostReportElement_Margin:
+			v.Margin = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportElement_Margin, v.Margin)
+		case schemas.BillingGroupCostReportElement_MarginPercentage:
+			v.MarginPercentage = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportElement_MarginPercentage, v.MarginPercentage)
+		case schemas.BillingGroupCostReportElement_ProformaCost:
+			v.ProformaCost = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportElement_ProformaCost, v.ProformaCost)
+		}
+		return nil
+	})
 }
 
 // A paginated call to retrieve a list of summary reports of actual Amazon Web
@@ -142,6 +357,61 @@ type BillingGroupCostReportResultElement struct {
 	ProformaCost *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BillingGroupCostReportResultElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingGroupCostReportResultElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingGroupCostReportResultElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSCost != nil {
+		s.WriteString(schemas.BillingGroupCostReportResultElement_AWSCost, *v.AWSCost)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.BillingGroupCostReportResultElement_Arn, *v.Arn)
+	}
+	serializeAttributesList(s, schemas.BillingGroupCostReportResultElement_Attributes, v.Attributes)
+	if v.Currency != nil {
+		s.WriteString(schemas.BillingGroupCostReportResultElement_Currency, *v.Currency)
+	}
+	if v.Margin != nil {
+		s.WriteString(schemas.BillingGroupCostReportResultElement_Margin, *v.Margin)
+	}
+	if v.MarginPercentage != nil {
+		s.WriteString(schemas.BillingGroupCostReportResultElement_MarginPercentage, *v.MarginPercentage)
+	}
+	if v.ProformaCost != nil {
+		s.WriteString(schemas.BillingGroupCostReportResultElement_ProformaCost, *v.ProformaCost)
+	}
+}
+func (v *BillingGroupCostReportResultElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingGroupCostReportResultElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingGroupCostReportResultElement_AWSCost:
+			v.AWSCost = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportResultElement_AWSCost, v.AWSCost)
+		case schemas.BillingGroupCostReportResultElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportResultElement_Arn, v.Arn)
+		case schemas.BillingGroupCostReportResultElement_Attributes:
+			return deserializeAttributesList(d, schemas.BillingGroupCostReportResultElement_Attributes, &v.Attributes)
+		case schemas.BillingGroupCostReportResultElement_Currency:
+			v.Currency = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportResultElement_Currency, v.Currency)
+		case schemas.BillingGroupCostReportResultElement_Margin:
+			v.Margin = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportResultElement_Margin, v.Margin)
+		case schemas.BillingGroupCostReportResultElement_MarginPercentage:
+			v.MarginPercentage = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportResultElement_MarginPercentage, v.MarginPercentage)
+		case schemas.BillingGroupCostReportResultElement_ProformaCost:
+			v.ProformaCost = new(string)
+			return d.ReadString(schemas.BillingGroupCostReportResultElement_ProformaCost, v.ProformaCost)
+		}
+		return nil
+	})
 }
 
 // A representation of a billing group.
@@ -189,6 +459,103 @@ type BillingGroupListElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BillingGroupListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingGroupListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingGroupListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountGrouping != nil {
+		s.WriteStruct(schemas.BillingGroupListElement_AccountGrouping)
+		v.AccountGrouping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.BillingGroupListElement_Arn, *v.Arn)
+	}
+	if v.BillingGroupType != "" {
+		s.WriteString(schemas.BillingGroupListElement_BillingGroupType, string(v.BillingGroupType))
+	}
+	if v.ComputationPreference != nil {
+		s.WriteStruct(schemas.BillingGroupListElement_ComputationPreference)
+		v.ComputationPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != 0 {
+		s.WriteInt64(schemas.BillingGroupListElement_CreationTime, v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.BillingGroupListElement_Description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.BillingGroupListElement_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BillingGroupListElement_Name, *v.Name)
+	}
+	if v.PrimaryAccountId != nil {
+		s.WriteString(schemas.BillingGroupListElement_PrimaryAccountId, *v.PrimaryAccountId)
+	}
+	if v.Size != 0 {
+		s.WriteInt64(schemas.BillingGroupListElement_Size, v.Size)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.BillingGroupListElement_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.BillingGroupListElement_StatusReason, *v.StatusReason)
+	}
+}
+func (v *BillingGroupListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingGroupListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingGroupListElement_AccountGrouping:
+			v.AccountGrouping = &ListBillingGroupAccountGrouping{}
+			return v.AccountGrouping.Deserialize(d)
+		case schemas.BillingGroupListElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.BillingGroupListElement_Arn, v.Arn)
+		case schemas.BillingGroupListElement_BillingGroupType:
+			var ev string
+			if err := d.ReadString(schemas.BillingGroupListElement_BillingGroupType, &ev); err != nil {
+				return err
+			}
+			v.BillingGroupType = BillingGroupType(ev)
+			return nil
+		case schemas.BillingGroupListElement_ComputationPreference:
+			v.ComputationPreference = &ComputationPreference{}
+			return v.ComputationPreference.Deserialize(d)
+		case schemas.BillingGroupListElement_CreationTime:
+			return d.ReadInt64(schemas.BillingGroupListElement_CreationTime, &v.CreationTime)
+		case schemas.BillingGroupListElement_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.BillingGroupListElement_Description, v.Description)
+		case schemas.BillingGroupListElement_LastModifiedTime:
+			return d.ReadInt64(schemas.BillingGroupListElement_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.BillingGroupListElement_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BillingGroupListElement_Name, v.Name)
+		case schemas.BillingGroupListElement_PrimaryAccountId:
+			v.PrimaryAccountId = new(string)
+			return d.ReadString(schemas.BillingGroupListElement_PrimaryAccountId, v.PrimaryAccountId)
+		case schemas.BillingGroupListElement_Size:
+			return d.ReadInt64(schemas.BillingGroupListElement_Size, &v.Size)
+		case schemas.BillingGroupListElement_Status:
+			var ev string
+			if err := d.ReadString(schemas.BillingGroupListElement_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = BillingGroupStatus(ev)
+			return nil
+		case schemas.BillingGroupListElement_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.BillingGroupListElement_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
 // A time range for which the margin summary is effective. The time range can be
 // up to 12 months.
 type BillingPeriodRange struct {
@@ -210,6 +577,34 @@ type BillingPeriodRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BillingPeriodRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingPeriodRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingPeriodRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExclusiveEndBillingPeriod != nil {
+		s.WriteString(schemas.BillingPeriodRange_ExclusiveEndBillingPeriod, *v.ExclusiveEndBillingPeriod)
+	}
+	if v.InclusiveStartBillingPeriod != nil {
+		s.WriteString(schemas.BillingPeriodRange_InclusiveStartBillingPeriod, *v.InclusiveStartBillingPeriod)
+	}
+}
+func (v *BillingPeriodRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingPeriodRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingPeriodRange_ExclusiveEndBillingPeriod:
+			v.ExclusiveEndBillingPeriod = new(string)
+			return d.ReadString(schemas.BillingPeriodRange_ExclusiveEndBillingPeriod, v.ExclusiveEndBillingPeriod)
+		case schemas.BillingPeriodRange_InclusiveStartBillingPeriod:
+			v.InclusiveStartBillingPeriod = new(string)
+			return d.ReadString(schemas.BillingPeriodRange_InclusiveStartBillingPeriod, v.InclusiveStartBillingPeriod)
+		}
+		return nil
+	})
+}
+
 // The preferences and settings that will be used to compute the Amazon Web
 // Services charges for a billing group.
 type ComputationPreference struct {
@@ -223,6 +618,28 @@ type ComputationPreference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComputationPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputationPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComputationPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PricingPlanArn != nil {
+		s.WriteString(schemas.ComputationPreference_PricingPlanArn, *v.PricingPlanArn)
+	}
+}
+func (v *ComputationPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComputationPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComputationPreference_PricingPlanArn:
+			v.PricingPlanArn = new(string)
+			return d.ReadString(schemas.ComputationPreference_PricingPlanArn, v.PricingPlanArn)
+		}
+		return nil
+	})
+}
+
 // The possible Amazon Web Services Free Tier configurations.
 type CreateFreeTierConfig struct {
 
@@ -234,6 +651,28 @@ type CreateFreeTierConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFreeTierConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFreeTierConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFreeTierConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activated != nil {
+		s.WriteBool(schemas.CreateFreeTierConfig_Activated, *v.Activated)
+	}
+}
+func (v *CreateFreeTierConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFreeTierConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFreeTierConfig_Activated:
+			v.Activated = new(bool)
+			return d.ReadBool(schemas.CreateFreeTierConfig_Activated, v.Activated)
+		}
+		return nil
+	})
+}
+
 // The set of tiering configurations for the pricing rule.
 type CreateTieringInput struct {
 
@@ -243,6 +682,30 @@ type CreateTieringInput struct {
 	FreeTier *CreateFreeTierConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateTieringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTieringInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTieringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FreeTier != nil {
+		s.WriteStruct(schemas.CreateTieringInput_FreeTier)
+		v.FreeTier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTieringInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTieringInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTieringInput_FreeTier:
+			v.FreeTier = &CreateFreeTierConfig{}
+			return v.FreeTier.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The billing period range in which the custom line item request will be applied.
@@ -259,6 +722,34 @@ type CustomLineItemBillingPeriodRange struct {
 	ExclusiveEndBillingPeriod *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomLineItemBillingPeriodRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLineItemBillingPeriodRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLineItemBillingPeriodRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExclusiveEndBillingPeriod != nil {
+		s.WriteString(schemas.CustomLineItemBillingPeriodRange_ExclusiveEndBillingPeriod, *v.ExclusiveEndBillingPeriod)
+	}
+	if v.InclusiveStartBillingPeriod != nil {
+		s.WriteString(schemas.CustomLineItemBillingPeriodRange_InclusiveStartBillingPeriod, *v.InclusiveStartBillingPeriod)
+	}
+}
+func (v *CustomLineItemBillingPeriodRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLineItemBillingPeriodRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLineItemBillingPeriodRange_ExclusiveEndBillingPeriod:
+			v.ExclusiveEndBillingPeriod = new(string)
+			return d.ReadString(schemas.CustomLineItemBillingPeriodRange_ExclusiveEndBillingPeriod, v.ExclusiveEndBillingPeriod)
+		case schemas.CustomLineItemBillingPeriodRange_InclusiveStartBillingPeriod:
+			v.InclusiveStartBillingPeriod = new(string)
+			return d.ReadString(schemas.CustomLineItemBillingPeriodRange_InclusiveStartBillingPeriod, v.InclusiveStartBillingPeriod)
+		}
+		return nil
+	})
 }
 
 // The charge details of a custom line item. It should contain only one of Flat or
@@ -285,6 +776,51 @@ type CustomLineItemChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomLineItemChargeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLineItemChargeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLineItemChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Flat != nil {
+		s.WriteStruct(schemas.CustomLineItemChargeDetails_Flat)
+		v.Flat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLineItemFiltersList(s, schemas.CustomLineItemChargeDetails_LineItemFilters, v.LineItemFilters)
+	if v.Percentage != nil {
+		s.WriteStruct(schemas.CustomLineItemChargeDetails_Percentage)
+		v.Percentage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CustomLineItemChargeDetails_Type, string(v.Type))
+	}
+}
+func (v *CustomLineItemChargeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLineItemChargeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLineItemChargeDetails_Flat:
+			v.Flat = &CustomLineItemFlatChargeDetails{}
+			return v.Flat.Deserialize(d)
+		case schemas.CustomLineItemChargeDetails_LineItemFilters:
+			return deserializeLineItemFiltersList(d, schemas.CustomLineItemChargeDetails_LineItemFilters, &v.LineItemFilters)
+		case schemas.CustomLineItemChargeDetails_Percentage:
+			v.Percentage = &CustomLineItemPercentageChargeDetails{}
+			return v.Percentage.Deserialize(d)
+		case schemas.CustomLineItemChargeDetails_Type:
+			var ev string
+			if err := d.ReadString(schemas.CustomLineItemChargeDetails_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CustomLineItemType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A representation of the charge details that are associated with a flat custom
 // line item.
 type CustomLineItemFlatChargeDetails struct {
@@ -295,6 +831,28 @@ type CustomLineItemFlatChargeDetails struct {
 	ChargeValue *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomLineItemFlatChargeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLineItemFlatChargeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLineItemFlatChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeValue != nil {
+		s.WriteFloat64(schemas.CustomLineItemFlatChargeDetails_ChargeValue, *v.ChargeValue)
+	}
+}
+func (v *CustomLineItemFlatChargeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLineItemFlatChargeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLineItemFlatChargeDetails_ChargeValue:
+			v.ChargeValue = new(float64)
+			return d.ReadFloat64(schemas.CustomLineItemFlatChargeDetails_ChargeValue, v.ChargeValue)
+		}
+		return nil
+	})
 }
 
 // A representation of a custom line item.
@@ -349,6 +907,109 @@ type CustomLineItemListElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomLineItemListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLineItemListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLineItemListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CustomLineItemListElement_AccountId, *v.AccountId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CustomLineItemListElement_Arn, *v.Arn)
+	}
+	if v.AssociationSize != 0 {
+		s.WriteInt64(schemas.CustomLineItemListElement_AssociationSize, v.AssociationSize)
+	}
+	if v.BillingGroupArn != nil {
+		s.WriteString(schemas.CustomLineItemListElement_BillingGroupArn, *v.BillingGroupArn)
+	}
+	if v.ChargeDetails != nil {
+		s.WriteStruct(schemas.CustomLineItemListElement_ChargeDetails)
+		v.ChargeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputationRule != "" {
+		s.WriteString(schemas.CustomLineItemListElement_ComputationRule, string(v.ComputationRule))
+	}
+	if v.CreationTime != 0 {
+		s.WriteInt64(schemas.CustomLineItemListElement_CreationTime, v.CreationTime)
+	}
+	if v.CurrencyCode != "" {
+		s.WriteString(schemas.CustomLineItemListElement_CurrencyCode, string(v.CurrencyCode))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CustomLineItemListElement_Description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.CustomLineItemListElement_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CustomLineItemListElement_Name, *v.Name)
+	}
+	if v.PresentationDetails != nil {
+		s.WriteStruct(schemas.CustomLineItemListElement_PresentationDetails)
+		v.PresentationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.CustomLineItemListElement_ProductCode, *v.ProductCode)
+	}
+}
+func (v *CustomLineItemListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLineItemListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLineItemListElement_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.CustomLineItemListElement_AccountId, v.AccountId)
+		case schemas.CustomLineItemListElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CustomLineItemListElement_Arn, v.Arn)
+		case schemas.CustomLineItemListElement_AssociationSize:
+			return d.ReadInt64(schemas.CustomLineItemListElement_AssociationSize, &v.AssociationSize)
+		case schemas.CustomLineItemListElement_BillingGroupArn:
+			v.BillingGroupArn = new(string)
+			return d.ReadString(schemas.CustomLineItemListElement_BillingGroupArn, v.BillingGroupArn)
+		case schemas.CustomLineItemListElement_ChargeDetails:
+			v.ChargeDetails = &ListCustomLineItemChargeDetails{}
+			return v.ChargeDetails.Deserialize(d)
+		case schemas.CustomLineItemListElement_ComputationRule:
+			var ev string
+			if err := d.ReadString(schemas.CustomLineItemListElement_ComputationRule, &ev); err != nil {
+				return err
+			}
+			v.ComputationRule = ComputationRuleEnum(ev)
+			return nil
+		case schemas.CustomLineItemListElement_CreationTime:
+			return d.ReadInt64(schemas.CustomLineItemListElement_CreationTime, &v.CreationTime)
+		case schemas.CustomLineItemListElement_CurrencyCode:
+			var ev string
+			if err := d.ReadString(schemas.CustomLineItemListElement_CurrencyCode, &ev); err != nil {
+				return err
+			}
+			v.CurrencyCode = CurrencyCode(ev)
+			return nil
+		case schemas.CustomLineItemListElement_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CustomLineItemListElement_Description, v.Description)
+		case schemas.CustomLineItemListElement_LastModifiedTime:
+			return d.ReadInt64(schemas.CustomLineItemListElement_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.CustomLineItemListElement_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CustomLineItemListElement_Name, v.Name)
+		case schemas.CustomLineItemListElement_PresentationDetails:
+			v.PresentationDetails = &PresentationObject{}
+			return v.PresentationDetails.Deserialize(d)
+		case schemas.CustomLineItemListElement_ProductCode:
+			v.ProductCode = new(string)
+			return d.ReadString(schemas.CustomLineItemListElement_ProductCode, v.ProductCode)
+		}
+		return nil
+	})
+}
+
 // A representation of the charge details that are associated with a percentage
 // custom line item.
 type CustomLineItemPercentageChargeDetails struct {
@@ -363,6 +1024,31 @@ type CustomLineItemPercentageChargeDetails struct {
 	AssociatedValues []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomLineItemPercentageChargeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLineItemPercentageChargeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLineItemPercentageChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomLineItemAssociationsList(s, schemas.CustomLineItemPercentageChargeDetails_AssociatedValues, v.AssociatedValues)
+	if v.PercentageValue != nil {
+		s.WriteFloat64(schemas.CustomLineItemPercentageChargeDetails_PercentageValue, *v.PercentageValue)
+	}
+}
+func (v *CustomLineItemPercentageChargeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLineItemPercentageChargeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLineItemPercentageChargeDetails_AssociatedValues:
+			return deserializeCustomLineItemAssociationsList(d, schemas.CustomLineItemPercentageChargeDetails_AssociatedValues, &v.AssociatedValues)
+		case schemas.CustomLineItemPercentageChargeDetails_PercentageValue:
+			v.PercentageValue = new(float64)
+			return d.ReadFloat64(schemas.CustomLineItemPercentageChargeDetails_PercentageValue, v.PercentageValue)
+		}
+		return nil
+	})
 }
 
 // A representation of a custom line item version.
@@ -424,6 +1110,126 @@ type CustomLineItemVersionListElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomLineItemVersionListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomLineItemVersionListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomLineItemVersionListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CustomLineItemVersionListElement_AccountId, *v.AccountId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CustomLineItemVersionListElement_Arn, *v.Arn)
+	}
+	if v.AssociationSize != 0 {
+		s.WriteInt64(schemas.CustomLineItemVersionListElement_AssociationSize, v.AssociationSize)
+	}
+	if v.BillingGroupArn != nil {
+		s.WriteString(schemas.CustomLineItemVersionListElement_BillingGroupArn, *v.BillingGroupArn)
+	}
+	if v.ChargeDetails != nil {
+		s.WriteStruct(schemas.CustomLineItemVersionListElement_ChargeDetails)
+		v.ChargeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputationRule != "" {
+		s.WriteString(schemas.CustomLineItemVersionListElement_ComputationRule, string(v.ComputationRule))
+	}
+	if v.CreationTime != 0 {
+		s.WriteInt64(schemas.CustomLineItemVersionListElement_CreationTime, v.CreationTime)
+	}
+	if v.CurrencyCode != "" {
+		s.WriteString(schemas.CustomLineItemVersionListElement_CurrencyCode, string(v.CurrencyCode))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CustomLineItemVersionListElement_Description, *v.Description)
+	}
+	if v.EndBillingPeriod != nil {
+		s.WriteString(schemas.CustomLineItemVersionListElement_EndBillingPeriod, *v.EndBillingPeriod)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.CustomLineItemVersionListElement_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CustomLineItemVersionListElement_Name, *v.Name)
+	}
+	if v.PresentationDetails != nil {
+		s.WriteStruct(schemas.CustomLineItemVersionListElement_PresentationDetails)
+		v.PresentationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.CustomLineItemVersionListElement_ProductCode, *v.ProductCode)
+	}
+	if v.StartBillingPeriod != nil {
+		s.WriteString(schemas.CustomLineItemVersionListElement_StartBillingPeriod, *v.StartBillingPeriod)
+	}
+	if v.StartTime != 0 {
+		s.WriteInt64(schemas.CustomLineItemVersionListElement_StartTime, v.StartTime)
+	}
+}
+func (v *CustomLineItemVersionListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomLineItemVersionListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomLineItemVersionListElement_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.CustomLineItemVersionListElement_AccountId, v.AccountId)
+		case schemas.CustomLineItemVersionListElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CustomLineItemVersionListElement_Arn, v.Arn)
+		case schemas.CustomLineItemVersionListElement_AssociationSize:
+			return d.ReadInt64(schemas.CustomLineItemVersionListElement_AssociationSize, &v.AssociationSize)
+		case schemas.CustomLineItemVersionListElement_BillingGroupArn:
+			v.BillingGroupArn = new(string)
+			return d.ReadString(schemas.CustomLineItemVersionListElement_BillingGroupArn, v.BillingGroupArn)
+		case schemas.CustomLineItemVersionListElement_ChargeDetails:
+			v.ChargeDetails = &ListCustomLineItemChargeDetails{}
+			return v.ChargeDetails.Deserialize(d)
+		case schemas.CustomLineItemVersionListElement_ComputationRule:
+			var ev string
+			if err := d.ReadString(schemas.CustomLineItemVersionListElement_ComputationRule, &ev); err != nil {
+				return err
+			}
+			v.ComputationRule = ComputationRuleEnum(ev)
+			return nil
+		case schemas.CustomLineItemVersionListElement_CreationTime:
+			return d.ReadInt64(schemas.CustomLineItemVersionListElement_CreationTime, &v.CreationTime)
+		case schemas.CustomLineItemVersionListElement_CurrencyCode:
+			var ev string
+			if err := d.ReadString(schemas.CustomLineItemVersionListElement_CurrencyCode, &ev); err != nil {
+				return err
+			}
+			v.CurrencyCode = CurrencyCode(ev)
+			return nil
+		case schemas.CustomLineItemVersionListElement_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CustomLineItemVersionListElement_Description, v.Description)
+		case schemas.CustomLineItemVersionListElement_EndBillingPeriod:
+			v.EndBillingPeriod = new(string)
+			return d.ReadString(schemas.CustomLineItemVersionListElement_EndBillingPeriod, v.EndBillingPeriod)
+		case schemas.CustomLineItemVersionListElement_LastModifiedTime:
+			return d.ReadInt64(schemas.CustomLineItemVersionListElement_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.CustomLineItemVersionListElement_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CustomLineItemVersionListElement_Name, v.Name)
+		case schemas.CustomLineItemVersionListElement_PresentationDetails:
+			v.PresentationDetails = &PresentationObject{}
+			return v.PresentationDetails.Deserialize(d)
+		case schemas.CustomLineItemVersionListElement_ProductCode:
+			v.ProductCode = new(string)
+			return d.ReadString(schemas.CustomLineItemVersionListElement_ProductCode, v.ProductCode)
+		case schemas.CustomLineItemVersionListElement_StartBillingPeriod:
+			v.StartBillingPeriod = new(string)
+			return d.ReadString(schemas.CustomLineItemVersionListElement_StartBillingPeriod, v.StartBillingPeriod)
+		case schemas.CustomLineItemVersionListElement_StartTime:
+			return d.ReadInt64(schemas.CustomLineItemVersionListElement_StartTime, &v.StartTime)
+		}
+		return nil
+	})
+}
+
 // A resource disassociation result for a percentage custom line item.
 type DisassociateResourceResponseElement struct {
 
@@ -436,6 +1242,36 @@ type DisassociateResourceResponseElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResourceResponseElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResourceResponseElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResourceResponseElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociateResourceResponseElement_Arn, *v.Arn)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.DisassociateResourceResponseElement_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateResourceResponseElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateResourceResponseElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateResourceResponseElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociateResourceResponseElement_Arn, v.Arn)
+		case schemas.DisassociateResourceResponseElement_Error:
+			v.Error = &AssociateResourceError{}
+			return v.Error.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The possible Amazon Web Services Free Tier configurations.
 type FreeTierConfig struct {
 
@@ -445,6 +1281,28 @@ type FreeTierConfig struct {
 	Activated *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *FreeTierConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FreeTierConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FreeTierConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activated != nil {
+		s.WriteBool(schemas.FreeTierConfig_Activated, *v.Activated)
+	}
+}
+func (v *FreeTierConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FreeTierConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FreeTierConfig_Activated:
+			v.Activated = new(bool)
+			return d.ReadBool(schemas.FreeTierConfig_Activated, v.Activated)
+		}
+		return nil
+	})
 }
 
 // A representation of the line item filter for your custom line item. You can use
@@ -476,6 +1334,48 @@ type LineItemFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LineItemFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LineItemFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LineItemFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attribute != "" {
+		s.WriteString(schemas.LineItemFilter_Attribute, string(v.Attribute))
+	}
+	serializeAttributeValueList(s, schemas.LineItemFilter_AttributeValues, v.AttributeValues)
+	if v.MatchOption != "" {
+		s.WriteString(schemas.LineItemFilter_MatchOption, string(v.MatchOption))
+	}
+	serializeLineItemFilterValuesList(s, schemas.LineItemFilter_Values, v.Values)
+}
+func (v *LineItemFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LineItemFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LineItemFilter_Attribute:
+			var ev string
+			if err := d.ReadString(schemas.LineItemFilter_Attribute, &ev); err != nil {
+				return err
+			}
+			v.Attribute = LineItemFilterAttributeName(ev)
+			return nil
+		case schemas.LineItemFilter_AttributeValues:
+			return deserializeAttributeValueList(d, schemas.LineItemFilter_AttributeValues, &v.AttributeValues)
+		case schemas.LineItemFilter_MatchOption:
+			var ev string
+			if err := d.ReadString(schemas.LineItemFilter_MatchOption, &ev); err != nil {
+				return err
+			}
+			v.MatchOption = MatchOption(ev)
+			return nil
+		case schemas.LineItemFilter_Values:
+			return deserializeLineItemFilterValuesList(d, schemas.LineItemFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // The filter on the account ID of the linked account, or any of the following:
 //
 // MONITORED : linked accounts that are associated to billing groups.
@@ -504,6 +1404,37 @@ type ListAccountAssociationsFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountAssociationsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountAssociationsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountAssociationsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListAccountAssociationsFilter_AccountId, *v.AccountId)
+	}
+	serializeAccountIdFilterList(s, schemas.ListAccountAssociationsFilter_AccountIds, v.AccountIds)
+	if v.Association != nil {
+		s.WriteString(schemas.ListAccountAssociationsFilter_Association, *v.Association)
+	}
+}
+func (v *ListAccountAssociationsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountAssociationsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountAssociationsFilter_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ListAccountAssociationsFilter_AccountId, v.AccountId)
+		case schemas.ListAccountAssociationsFilter_AccountIds:
+			return deserializeAccountIdFilterList(d, schemas.ListAccountAssociationsFilter_AccountIds, &v.AccountIds)
+		case schemas.ListAccountAssociationsFilter_Association:
+			v.Association = new(string)
+			return d.ReadString(schemas.ListAccountAssociationsFilter_Association, v.Association)
+		}
+		return nil
+	})
+}
+
 // Specifies if the billing group has the following features enabled.
 type ListBillingGroupAccountGrouping struct {
 
@@ -518,6 +1449,34 @@ type ListBillingGroupAccountGrouping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingGroupAccountGrouping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingGroupAccountGrouping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingGroupAccountGrouping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoAssociate != nil {
+		s.WriteBool(schemas.ListBillingGroupAccountGrouping_AutoAssociate, *v.AutoAssociate)
+	}
+	if v.ResponsibilityTransferArn != nil {
+		s.WriteString(schemas.ListBillingGroupAccountGrouping_ResponsibilityTransferArn, *v.ResponsibilityTransferArn)
+	}
+}
+func (v *ListBillingGroupAccountGrouping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingGroupAccountGrouping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingGroupAccountGrouping_AutoAssociate:
+			v.AutoAssociate = new(bool)
+			return d.ReadBool(schemas.ListBillingGroupAccountGrouping_AutoAssociate, v.AutoAssociate)
+		case schemas.ListBillingGroupAccountGrouping_ResponsibilityTransferArn:
+			v.ResponsibilityTransferArn = new(string)
+			return d.ReadString(schemas.ListBillingGroupAccountGrouping_ResponsibilityTransferArn, v.ResponsibilityTransferArn)
+		}
+		return nil
+	})
+}
+
 // The filter used to retrieve specific BillingGroupCostReportElements .
 type ListBillingGroupCostReportsFilter struct {
 
@@ -526,6 +1485,25 @@ type ListBillingGroupCostReportsFilter struct {
 	BillingGroupArns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListBillingGroupCostReportsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingGroupCostReportsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingGroupCostReportsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillingGroupArnList(s, schemas.ListBillingGroupCostReportsFilter_BillingGroupArns, v.BillingGroupArns)
+}
+func (v *ListBillingGroupCostReportsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingGroupCostReportsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingGroupCostReportsFilter_BillingGroupArns:
+			return deserializeBillingGroupArnList(d, schemas.ListBillingGroupCostReportsFilter_BillingGroupArns, &v.BillingGroupArns)
+		}
+		return nil
+	})
 }
 
 // The filter that specifies the billing groups and pricing plans to retrieve
@@ -561,6 +1539,52 @@ type ListBillingGroupsFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingGroupsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingGroupsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingGroupsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillingGroupArnList(s, schemas.ListBillingGroupsFilter_Arns, v.Arns)
+	if v.AutoAssociate != nil {
+		s.WriteBool(schemas.ListBillingGroupsFilter_AutoAssociate, *v.AutoAssociate)
+	}
+	serializeBillingGroupTypeList(s, schemas.ListBillingGroupsFilter_BillingGroupTypes, v.BillingGroupTypes)
+	serializeStringSearches(s, schemas.ListBillingGroupsFilter_Names, v.Names)
+	if v.PricingPlan != nil {
+		s.WriteString(schemas.ListBillingGroupsFilter_PricingPlan, *v.PricingPlan)
+	}
+	serializePrimaryAccountIdList(s, schemas.ListBillingGroupsFilter_PrimaryAccountIds, v.PrimaryAccountIds)
+	serializeResponsibilityTransferArnsList(s, schemas.ListBillingGroupsFilter_ResponsibilityTransferArns, v.ResponsibilityTransferArns)
+	serializeBillingGroupStatusList(s, schemas.ListBillingGroupsFilter_Statuses, v.Statuses)
+}
+func (v *ListBillingGroupsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingGroupsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingGroupsFilter_Arns:
+			return deserializeBillingGroupArnList(d, schemas.ListBillingGroupsFilter_Arns, &v.Arns)
+		case schemas.ListBillingGroupsFilter_AutoAssociate:
+			v.AutoAssociate = new(bool)
+			return d.ReadBool(schemas.ListBillingGroupsFilter_AutoAssociate, v.AutoAssociate)
+		case schemas.ListBillingGroupsFilter_BillingGroupTypes:
+			return deserializeBillingGroupTypeList(d, schemas.ListBillingGroupsFilter_BillingGroupTypes, &v.BillingGroupTypes)
+		case schemas.ListBillingGroupsFilter_Names:
+			return deserializeStringSearches(d, schemas.ListBillingGroupsFilter_Names, &v.Names)
+		case schemas.ListBillingGroupsFilter_PricingPlan:
+			v.PricingPlan = new(string)
+			return d.ReadString(schemas.ListBillingGroupsFilter_PricingPlan, v.PricingPlan)
+		case schemas.ListBillingGroupsFilter_PrimaryAccountIds:
+			return deserializePrimaryAccountIdList(d, schemas.ListBillingGroupsFilter_PrimaryAccountIds, &v.PrimaryAccountIds)
+		case schemas.ListBillingGroupsFilter_ResponsibilityTransferArns:
+			return deserializeResponsibilityTransferArnsList(d, schemas.ListBillingGroupsFilter_ResponsibilityTransferArns, &v.ResponsibilityTransferArns)
+		case schemas.ListBillingGroupsFilter_Statuses:
+			return deserializeBillingGroupStatusList(d, schemas.ListBillingGroupsFilter_Statuses, &v.Statuses)
+		}
+		return nil
+	})
+}
+
 // A representation of the charge details of a custom line item.
 type ListCustomLineItemChargeDetails struct {
 
@@ -584,6 +1608,51 @@ type ListCustomLineItemChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomLineItemChargeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemChargeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Flat != nil {
+		s.WriteStruct(schemas.ListCustomLineItemChargeDetails_Flat)
+		v.Flat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLineItemFiltersList(s, schemas.ListCustomLineItemChargeDetails_LineItemFilters, v.LineItemFilters)
+	if v.Percentage != nil {
+		s.WriteStruct(schemas.ListCustomLineItemChargeDetails_Percentage)
+		v.Percentage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListCustomLineItemChargeDetails_Type, string(v.Type))
+	}
+}
+func (v *ListCustomLineItemChargeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemChargeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemChargeDetails_Flat:
+			v.Flat = &ListCustomLineItemFlatChargeDetails{}
+			return v.Flat.Deserialize(d)
+		case schemas.ListCustomLineItemChargeDetails_LineItemFilters:
+			return deserializeLineItemFiltersList(d, schemas.ListCustomLineItemChargeDetails_LineItemFilters, &v.LineItemFilters)
+		case schemas.ListCustomLineItemChargeDetails_Percentage:
+			v.Percentage = &ListCustomLineItemPercentageChargeDetails{}
+			return v.Percentage.Deserialize(d)
+		case schemas.ListCustomLineItemChargeDetails_Type:
+			var ev string
+			if err := d.ReadString(schemas.ListCustomLineItemChargeDetails_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CustomLineItemType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	A representation of the charge details that are associated with a flat custom
 //
 // line item.
@@ -595,6 +1664,28 @@ type ListCustomLineItemFlatChargeDetails struct {
 	ChargeValue *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListCustomLineItemFlatChargeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemFlatChargeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemFlatChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeValue != nil {
+		s.WriteFloat64(schemas.ListCustomLineItemFlatChargeDetails_ChargeValue, *v.ChargeValue)
+	}
+}
+func (v *ListCustomLineItemFlatChargeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemFlatChargeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemFlatChargeDetails_ChargeValue:
+			v.ChargeValue = new(float64)
+			return d.ReadFloat64(schemas.ListCustomLineItemFlatChargeDetails_ChargeValue, v.ChargeValue)
+		}
+		return nil
+	})
 }
 
 //	A representation of the charge details that are associated with a percentage
@@ -609,6 +1700,28 @@ type ListCustomLineItemPercentageChargeDetails struct {
 	PercentageValue *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListCustomLineItemPercentageChargeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemPercentageChargeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemPercentageChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PercentageValue != nil {
+		s.WriteFloat64(schemas.ListCustomLineItemPercentageChargeDetails_PercentageValue, *v.PercentageValue)
+	}
+}
+func (v *ListCustomLineItemPercentageChargeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemPercentageChargeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemPercentageChargeDetails_PercentageValue:
+			v.PercentageValue = new(float64)
+			return d.ReadFloat64(schemas.ListCustomLineItemPercentageChargeDetails_PercentageValue, v.PercentageValue)
+		}
+		return nil
+	})
 }
 
 // A filter that specifies the custom line items and billing groups to retrieve
@@ -631,6 +1744,34 @@ type ListCustomLineItemsFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomLineItemsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.ListCustomLineItemsFilter_AccountIds, v.AccountIds)
+	serializeCustomLineItemArns(s, schemas.ListCustomLineItemsFilter_Arns, v.Arns)
+	serializeBillingGroupArnList(s, schemas.ListCustomLineItemsFilter_BillingGroups, v.BillingGroups)
+	serializeCustomLineItemNameList(s, schemas.ListCustomLineItemsFilter_Names, v.Names)
+}
+func (v *ListCustomLineItemsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemsFilter_AccountIds:
+			return deserializeAccountIdList(d, schemas.ListCustomLineItemsFilter_AccountIds, &v.AccountIds)
+		case schemas.ListCustomLineItemsFilter_Arns:
+			return deserializeCustomLineItemArns(d, schemas.ListCustomLineItemsFilter_Arns, &v.Arns)
+		case schemas.ListCustomLineItemsFilter_BillingGroups:
+			return deserializeBillingGroupArnList(d, schemas.ListCustomLineItemsFilter_BillingGroups, &v.BillingGroups)
+		case schemas.ListCustomLineItemsFilter_Names:
+			return deserializeCustomLineItemNameList(d, schemas.ListCustomLineItemsFilter_Names, &v.Names)
+		}
+		return nil
+	})
+}
+
 // A billing period filter that specifies the custom line item versions to
 // retrieve.
 type ListCustomLineItemVersionsBillingPeriodRangeFilter struct {
@@ -646,6 +1787,34 @@ type ListCustomLineItemVersionsBillingPeriodRangeFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomLineItemVersionsBillingPeriodRangeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemVersionsBillingPeriodRangeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemVersionsBillingPeriodRangeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndBillingPeriod != nil {
+		s.WriteString(schemas.ListCustomLineItemVersionsBillingPeriodRangeFilter_EndBillingPeriod, *v.EndBillingPeriod)
+	}
+	if v.StartBillingPeriod != nil {
+		s.WriteString(schemas.ListCustomLineItemVersionsBillingPeriodRangeFilter_StartBillingPeriod, *v.StartBillingPeriod)
+	}
+}
+func (v *ListCustomLineItemVersionsBillingPeriodRangeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemVersionsBillingPeriodRangeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemVersionsBillingPeriodRangeFilter_EndBillingPeriod:
+			v.EndBillingPeriod = new(string)
+			return d.ReadString(schemas.ListCustomLineItemVersionsBillingPeriodRangeFilter_EndBillingPeriod, v.EndBillingPeriod)
+		case schemas.ListCustomLineItemVersionsBillingPeriodRangeFilter_StartBillingPeriod:
+			v.StartBillingPeriod = new(string)
+			return d.ReadString(schemas.ListCustomLineItemVersionsBillingPeriodRangeFilter_StartBillingPeriod, v.StartBillingPeriod)
+		}
+		return nil
+	})
+}
+
 // A filter that specifies the billing period range where the custom line item
 // versions reside.
 type ListCustomLineItemVersionsFilter struct {
@@ -656,6 +1825,30 @@ type ListCustomLineItemVersionsFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomLineItemVersionsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemVersionsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemVersionsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriodRange != nil {
+		s.WriteStruct(schemas.ListCustomLineItemVersionsFilter_BillingPeriodRange)
+		v.BillingPeriodRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListCustomLineItemVersionsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemVersionsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemVersionsFilter_BillingPeriodRange:
+			v.BillingPeriodRange = &ListCustomLineItemVersionsBillingPeriodRangeFilter{}
+			return v.BillingPeriodRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The filter that specifies the Amazon Resource Names (ARNs) of pricing plans, to
 // retrieve pricing plan information.
 type ListPricingPlansFilter struct {
@@ -664,6 +1857,25 @@ type ListPricingPlansFilter struct {
 	Arns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListPricingPlansFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingPlansFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingPlansFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePricingPlanArns(s, schemas.ListPricingPlansFilter_Arns, v.Arns)
+}
+func (v *ListPricingPlansFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingPlansFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingPlansFilter_Arns:
+			return deserializePricingPlanArns(d, schemas.ListPricingPlansFilter_Arns, &v.Arns)
+		}
+		return nil
+	})
 }
 
 //	The filter that specifies criteria that the pricing rules returned by the
@@ -678,6 +1890,25 @@ type ListPricingRulesFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricingRulesFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingRulesFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingRulesFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePricingRuleArns(s, schemas.ListPricingRulesFilter_Arns, v.Arns)
+}
+func (v *ListPricingRulesFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingRulesFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingRulesFilter_Arns:
+			return deserializePricingRuleArns(d, schemas.ListPricingRulesFilter_Arns, &v.Arns)
+		}
+		return nil
+	})
+}
+
 //	A filter that specifies the type of resource associations that should be
 //
 // retrieved for a custom line item.
@@ -688,6 +1919,32 @@ type ListResourcesAssociatedToCustomLineItemFilter struct {
 	Relationship CustomLineItemRelationship
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListResourcesAssociatedToCustomLineItemFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesAssociatedToCustomLineItemFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesAssociatedToCustomLineItemFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Relationship != "" {
+		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemFilter_Relationship, string(v.Relationship))
+	}
+}
+func (v *ListResourcesAssociatedToCustomLineItemFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourcesAssociatedToCustomLineItemFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourcesAssociatedToCustomLineItemFilter_Relationship:
+			var ev string
+			if err := d.ReadString(schemas.ListResourcesAssociatedToCustomLineItemFilter_Relationship, &ev); err != nil {
+				return err
+			}
+			v.Relationship = CustomLineItemRelationship(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A representation of a resource association for a custom line item.
@@ -706,6 +1963,44 @@ type ListResourcesAssociatedToCustomLineItemResponseElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourcesAssociatedToCustomLineItemResponseElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesAssociatedToCustomLineItemResponseElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesAssociatedToCustomLineItemResponseElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemResponseElement_Arn, *v.Arn)
+	}
+	if v.EndBillingPeriod != nil {
+		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemResponseElement_EndBillingPeriod, *v.EndBillingPeriod)
+	}
+	if v.Relationship != "" {
+		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemResponseElement_Relationship, string(v.Relationship))
+	}
+}
+func (v *ListResourcesAssociatedToCustomLineItemResponseElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourcesAssociatedToCustomLineItemResponseElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourcesAssociatedToCustomLineItemResponseElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListResourcesAssociatedToCustomLineItemResponseElement_Arn, v.Arn)
+		case schemas.ListResourcesAssociatedToCustomLineItemResponseElement_EndBillingPeriod:
+			v.EndBillingPeriod = new(string)
+			return d.ReadString(schemas.ListResourcesAssociatedToCustomLineItemResponseElement_EndBillingPeriod, v.EndBillingPeriod)
+		case schemas.ListResourcesAssociatedToCustomLineItemResponseElement_Relationship:
+			var ev string
+			if err := d.ReadString(schemas.ListResourcesAssociatedToCustomLineItemResponseElement_Relationship, &ev); err != nil {
+				return err
+			}
+			v.Relationship = CustomLineItemRelationship(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	An object that defines how custom line item charges are presented in the bill,
 //
 // containing specifications for service presentation.
@@ -719,6 +2014,28 @@ type PresentationObject struct {
 	Service *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PresentationObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PresentationObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PresentationObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteString(schemas.PresentationObject_Service, *v.Service)
+	}
+}
+func (v *PresentationObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PresentationObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PresentationObject_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.PresentationObject_Service, v.Service)
+		}
+		return nil
+	})
 }
 
 // A representation of a pricing plan.
@@ -745,6 +2062,55 @@ type PricingPlanListElement struct {
 	Size int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *PricingPlanListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PricingPlanListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PricingPlanListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PricingPlanListElement_Arn, *v.Arn)
+	}
+	if v.CreationTime != 0 {
+		s.WriteInt64(schemas.PricingPlanListElement_CreationTime, v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PricingPlanListElement_Description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.PricingPlanListElement_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PricingPlanListElement_Name, *v.Name)
+	}
+	if v.Size != 0 {
+		s.WriteInt64(schemas.PricingPlanListElement_Size, v.Size)
+	}
+}
+func (v *PricingPlanListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PricingPlanListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PricingPlanListElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PricingPlanListElement_Arn, v.Arn)
+		case schemas.PricingPlanListElement_CreationTime:
+			return d.ReadInt64(schemas.PricingPlanListElement_CreationTime, &v.CreationTime)
+		case schemas.PricingPlanListElement_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PricingPlanListElement_Description, v.Description)
+		case schemas.PricingPlanListElement_LastModifiedTime:
+			return d.ReadInt64(schemas.PricingPlanListElement_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.PricingPlanListElement_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PricingPlanListElement_Name, v.Name)
+		case schemas.PricingPlanListElement_Size:
+			return d.ReadInt64(schemas.PricingPlanListElement_Size, &v.Size)
+		}
+		return nil
+	})
 }
 
 // A representation of a pricing rule.
@@ -808,6 +2174,113 @@ type PricingRuleListElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PricingRuleListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PricingRuleListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PricingRuleListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PricingRuleListElement_Arn, *v.Arn)
+	}
+	if v.AssociatedPricingPlanCount != 0 {
+		s.WriteInt64(schemas.PricingRuleListElement_AssociatedPricingPlanCount, v.AssociatedPricingPlanCount)
+	}
+	if v.BillingEntity != nil {
+		s.WriteString(schemas.PricingRuleListElement_BillingEntity, *v.BillingEntity)
+	}
+	if v.CreationTime != 0 {
+		s.WriteInt64(schemas.PricingRuleListElement_CreationTime, v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PricingRuleListElement_Description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.PricingRuleListElement_LastModifiedTime, v.LastModifiedTime)
+	}
+	if v.ModifierPercentage != nil {
+		s.WriteFloat64(schemas.PricingRuleListElement_ModifierPercentage, *v.ModifierPercentage)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PricingRuleListElement_Name, *v.Name)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.PricingRuleListElement_Operation, *v.Operation)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.PricingRuleListElement_Scope, string(v.Scope))
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.PricingRuleListElement_Service, *v.Service)
+	}
+	if v.Tiering != nil {
+		s.WriteStruct(schemas.PricingRuleListElement_Tiering)
+		v.Tiering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PricingRuleListElement_Type, string(v.Type))
+	}
+	if v.UsageType != nil {
+		s.WriteString(schemas.PricingRuleListElement_UsageType, *v.UsageType)
+	}
+}
+func (v *PricingRuleListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PricingRuleListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PricingRuleListElement_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PricingRuleListElement_Arn, v.Arn)
+		case schemas.PricingRuleListElement_AssociatedPricingPlanCount:
+			return d.ReadInt64(schemas.PricingRuleListElement_AssociatedPricingPlanCount, &v.AssociatedPricingPlanCount)
+		case schemas.PricingRuleListElement_BillingEntity:
+			v.BillingEntity = new(string)
+			return d.ReadString(schemas.PricingRuleListElement_BillingEntity, v.BillingEntity)
+		case schemas.PricingRuleListElement_CreationTime:
+			return d.ReadInt64(schemas.PricingRuleListElement_CreationTime, &v.CreationTime)
+		case schemas.PricingRuleListElement_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PricingRuleListElement_Description, v.Description)
+		case schemas.PricingRuleListElement_LastModifiedTime:
+			return d.ReadInt64(schemas.PricingRuleListElement_LastModifiedTime, &v.LastModifiedTime)
+		case schemas.PricingRuleListElement_ModifierPercentage:
+			v.ModifierPercentage = new(float64)
+			return d.ReadFloat64(schemas.PricingRuleListElement_ModifierPercentage, v.ModifierPercentage)
+		case schemas.PricingRuleListElement_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PricingRuleListElement_Name, v.Name)
+		case schemas.PricingRuleListElement_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.PricingRuleListElement_Operation, v.Operation)
+		case schemas.PricingRuleListElement_Scope:
+			var ev string
+			if err := d.ReadString(schemas.PricingRuleListElement_Scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = PricingRuleScope(ev)
+			return nil
+		case schemas.PricingRuleListElement_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.PricingRuleListElement_Service, v.Service)
+		case schemas.PricingRuleListElement_Tiering:
+			v.Tiering = &Tiering{}
+			return v.Tiering.Deserialize(d)
+		case schemas.PricingRuleListElement_Type:
+			var ev string
+			if err := d.ReadString(schemas.PricingRuleListElement_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = PricingRuleType(ev)
+			return nil
+		case schemas.PricingRuleListElement_UsageType:
+			v.UsageType = new(string)
+			return d.ReadString(schemas.PricingRuleListElement_UsageType, v.UsageType)
+		}
+		return nil
+	})
+}
+
 // A structure that defines string search parameters.
 type StringSearch struct {
 
@@ -824,6 +2297,38 @@ type StringSearch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StringSearch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StringSearch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StringSearch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SearchOption != "" {
+		s.WriteString(schemas.StringSearch_SearchOption, string(v.SearchOption))
+	}
+	if v.SearchValue != nil {
+		s.WriteString(schemas.StringSearch_SearchValue, *v.SearchValue)
+	}
+}
+func (v *StringSearch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StringSearch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StringSearch_SearchOption:
+			var ev string
+			if err := d.ReadString(schemas.StringSearch_SearchOption, &ev); err != nil {
+				return err
+			}
+			v.SearchOption = SearchOption(ev)
+			return nil
+		case schemas.StringSearch_SearchValue:
+			v.SearchValue = new(string)
+			return d.ReadString(schemas.StringSearch_SearchValue, v.SearchValue)
+		}
+		return nil
+	})
+}
+
 // The set of tiering configurations for the pricing rule.
 type Tiering struct {
 
@@ -833,6 +2338,30 @@ type Tiering struct {
 	FreeTier *FreeTierConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tiering) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tiering)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tiering) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FreeTier != nil {
+		s.WriteStruct(schemas.Tiering_FreeTier)
+		v.FreeTier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Tiering) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tiering, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tiering_FreeTier:
+			v.FreeTier = &FreeTierConfig{}
+			return v.FreeTier.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies if the billing group has the following features enabled.
@@ -848,6 +2377,34 @@ type UpdateBillingGroupAccountGrouping struct {
 	ResponsibilityTransferArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateBillingGroupAccountGrouping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillingGroupAccountGrouping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillingGroupAccountGrouping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoAssociate != nil {
+		s.WriteBool(schemas.UpdateBillingGroupAccountGrouping_AutoAssociate, *v.AutoAssociate)
+	}
+	if v.ResponsibilityTransferArn != nil {
+		s.WriteString(schemas.UpdateBillingGroupAccountGrouping_ResponsibilityTransferArn, *v.ResponsibilityTransferArn)
+	}
+}
+func (v *UpdateBillingGroupAccountGrouping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBillingGroupAccountGrouping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBillingGroupAccountGrouping_AutoAssociate:
+			v.AutoAssociate = new(bool)
+			return d.ReadBool(schemas.UpdateBillingGroupAccountGrouping_AutoAssociate, v.AutoAssociate)
+		case schemas.UpdateBillingGroupAccountGrouping_ResponsibilityTransferArn:
+			v.ResponsibilityTransferArn = new(string)
+			return d.ReadString(schemas.UpdateBillingGroupAccountGrouping_ResponsibilityTransferArn, v.ResponsibilityTransferArn)
+		}
+		return nil
+	})
 }
 
 //	A representation of the new charge details of a custom line item. This should
@@ -869,6 +2426,41 @@ type UpdateCustomLineItemChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomLineItemChargeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomLineItemChargeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomLineItemChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Flat != nil {
+		s.WriteStruct(schemas.UpdateCustomLineItemChargeDetails_Flat)
+		v.Flat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLineItemFiltersList(s, schemas.UpdateCustomLineItemChargeDetails_LineItemFilters, v.LineItemFilters)
+	if v.Percentage != nil {
+		s.WriteStruct(schemas.UpdateCustomLineItemChargeDetails_Percentage)
+		v.Percentage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCustomLineItemChargeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCustomLineItemChargeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCustomLineItemChargeDetails_Flat:
+			v.Flat = &UpdateCustomLineItemFlatChargeDetails{}
+			return v.Flat.Deserialize(d)
+		case schemas.UpdateCustomLineItemChargeDetails_LineItemFilters:
+			return deserializeLineItemFiltersList(d, schemas.UpdateCustomLineItemChargeDetails_LineItemFilters, &v.LineItemFilters)
+		case schemas.UpdateCustomLineItemChargeDetails_Percentage:
+			v.Percentage = &UpdateCustomLineItemPercentageChargeDetails{}
+			return v.Percentage.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	A representation of the new charge details that are associated with a flat
 //
 // custom line item.
@@ -880,6 +2472,28 @@ type UpdateCustomLineItemFlatChargeDetails struct {
 	ChargeValue *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateCustomLineItemFlatChargeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomLineItemFlatChargeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomLineItemFlatChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeValue != nil {
+		s.WriteFloat64(schemas.UpdateCustomLineItemFlatChargeDetails_ChargeValue, *v.ChargeValue)
+	}
+}
+func (v *UpdateCustomLineItemFlatChargeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCustomLineItemFlatChargeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCustomLineItemFlatChargeDetails_ChargeValue:
+			v.ChargeValue = new(float64)
+			return d.ReadFloat64(schemas.UpdateCustomLineItemFlatChargeDetails_ChargeValue, v.ChargeValue)
+		}
+		return nil
+	})
 }
 
 //	A representation of the new charge details that are associated with a
@@ -896,6 +2510,28 @@ type UpdateCustomLineItemPercentageChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomLineItemPercentageChargeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomLineItemPercentageChargeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomLineItemPercentageChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PercentageValue != nil {
+		s.WriteFloat64(schemas.UpdateCustomLineItemPercentageChargeDetails_PercentageValue, *v.PercentageValue)
+	}
+}
+func (v *UpdateCustomLineItemPercentageChargeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCustomLineItemPercentageChargeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCustomLineItemPercentageChargeDetails_PercentageValue:
+			v.PercentageValue = new(float64)
+			return d.ReadFloat64(schemas.UpdateCustomLineItemPercentageChargeDetails_PercentageValue, v.PercentageValue)
+		}
+		return nil
+	})
+}
+
 // The possible Amazon Web Services Free Tier configurations.
 type UpdateFreeTierConfig struct {
 
@@ -907,6 +2543,28 @@ type UpdateFreeTierConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFreeTierConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFreeTierConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFreeTierConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activated != nil {
+		s.WriteBool(schemas.UpdateFreeTierConfig_Activated, *v.Activated)
+	}
+}
+func (v *UpdateFreeTierConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFreeTierConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFreeTierConfig_Activated:
+			v.Activated = new(bool)
+			return d.ReadBool(schemas.UpdateFreeTierConfig_Activated, v.Activated)
+		}
+		return nil
+	})
+}
+
 // The set of tiering configurations for the pricing rule.
 type UpdateTieringInput struct {
 
@@ -916,6 +2574,30 @@ type UpdateTieringInput struct {
 	FreeTier *UpdateFreeTierConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateTieringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTieringInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTieringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FreeTier != nil {
+		s.WriteStruct(schemas.UpdateTieringInput_FreeTier)
+		v.FreeTier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTieringInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTieringInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTieringInput_FreeTier:
+			v.FreeTier = &UpdateFreeTierConfig{}
+			return v.FreeTier.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The field's information of a request that resulted in an exception.
@@ -932,6 +2614,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
+		case schemas.ValidationExceptionField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

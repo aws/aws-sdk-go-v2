@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type ListCustomRoutingPortMappingsByDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomRoutingPortMappingsByDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomRoutingPortMappingsByDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomRoutingPortMappingsByDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationAddress != nil {
+		s.WriteString(schemas.ListCustomRoutingPortMappingsByDestinationRequest_DestinationAddress, *v.DestinationAddress)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.ListCustomRoutingPortMappingsByDestinationRequest_EndpointId, *v.EndpointId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomRoutingPortMappingsByDestinationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomRoutingPortMappingsByDestinationRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCustomRoutingPortMappingsByDestinationOutput struct {
 
 	// The port mappings for the endpoint IP address that you specified in the request.
@@ -68,13 +91,35 @@ type ListCustomRoutingPortMappingsByDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomRoutingPortMappingsByDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomRoutingPortMappingsByDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomRoutingPortMappingsByDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDestinationPortMappings(s, schemas.ListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings, v.DestinationPortMappings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomRoutingPortMappingsByDestinationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomRoutingPortMappingsByDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomRoutingPortMappingsByDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings:
+			return deserializeDestinationPortMappings(d, schemas.ListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings, &v.DestinationPortMappings)
+		case schemas.ListCustomRoutingPortMappingsByDestinationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomRoutingPortMappingsByDestinationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomRoutingPortMappingsByDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomRoutingPortMappingsByDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomRoutingPortMappingsByDestination, schemas.ListCustomRoutingPortMappingsByDestinationRequest, schemas.ListCustomRoutingPortMappingsByDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCustomRoutingPortMappingsByDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomRoutingPortMappingsByDestination, schemas.ListCustomRoutingPortMappingsByDestinationRequest, schemas.ListCustomRoutingPortMappingsByDestinationResponse), output: &ListCustomRoutingPortMappingsByDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

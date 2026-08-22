@@ -4,6 +4,8 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StartAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssessmentRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssessmentRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssessmentRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunName != nil {
+		s.WriteString(schemas.StartAssessmentRunRequest_assessmentRunName, *v.AssessmentRunName)
+	}
+	if v.AssessmentTemplateArn != nil {
+		s.WriteString(schemas.StartAssessmentRunRequest_assessmentTemplateArn, *v.AssessmentTemplateArn)
+	}
+}
+
 type StartAssessmentRunOutput struct {
 
 	// The ARN of the assessment run that has been started.
@@ -52,13 +69,32 @@ type StartAssessmentRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssessmentRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssessmentRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssessmentRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.StartAssessmentRunResponse_assessmentRunArn, *v.AssessmentRunArn)
+	}
+}
+func (v *StartAssessmentRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAssessmentRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAssessmentRunResponse_assessmentRunArn:
+			v.AssessmentRunArn = new(string)
+			return d.ReadString(schemas.StartAssessmentRunResponse_assessmentRunArn, v.AssessmentRunArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssessmentRun, schemas.StartAssessmentRunRequest, schemas.StartAssessmentRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssessmentRun, schemas.StartAssessmentRunRequest, schemas.StartAssessmentRunResponse), output: &StartAssessmentRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

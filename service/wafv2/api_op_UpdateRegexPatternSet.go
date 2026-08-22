@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -105,6 +107,31 @@ type UpdateRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegexPatternSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRegexPatternSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegexPatternSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRegexPatternSetRequest_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateRegexPatternSetRequest_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.UpdateRegexPatternSetRequest_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRegexPatternSetRequest_Name, *v.Name)
+	}
+	serializeRegularExpressionList(s, schemas.UpdateRegexPatternSetRequest_RegularExpressionList, v.RegularExpressionList)
+	if v.Scope != "" {
+		s.WriteString(schemas.UpdateRegexPatternSetRequest_Scope, string(v.Scope))
+	}
+}
+
 type UpdateRegexPatternSetOutput struct {
 
 	// A token used for optimistic locking. WAF returns this token to your update
@@ -117,13 +144,32 @@ type UpdateRegexPatternSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRegexPatternSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRegexPatternSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRegexPatternSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextLockToken != nil {
+		s.WriteString(schemas.UpdateRegexPatternSetResponse_NextLockToken, *v.NextLockToken)
+	}
+}
+func (v *UpdateRegexPatternSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRegexPatternSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRegexPatternSetResponse_NextLockToken:
+			v.NextLockToken = new(string)
+			return d.ReadString(schemas.UpdateRegexPatternSetResponse_NextLockToken, v.NextLockToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRegexPatternSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegexPatternSet, schemas.UpdateRegexPatternSetRequest, schemas.UpdateRegexPatternSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRegexPatternSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRegexPatternSet, schemas.UpdateRegexPatternSetRequest, schemas.UpdateRegexPatternSetResponse), output: &UpdateRegexPatternSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

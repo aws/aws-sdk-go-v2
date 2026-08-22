@@ -4,7 +4,9 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,31 @@ type GetAssociatedResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociatedResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociatedResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociatedResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.GetAssociatedResourceRequest_application, *v.Application)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAssociatedResourceRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAssociatedResourceRequest_nextToken, *v.NextToken)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.GetAssociatedResourceRequest_resource, *v.Resource)
+	}
+	serializeGetAssociatedResourceFilter(s, schemas.GetAssociatedResourceRequest_resourceTagStatus, v.ResourceTagStatus)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetAssociatedResourceRequest_resourceType, string(v.ResourceType))
+	}
+}
+
 type GetAssociatedResourceOutput struct {
 
 	//  The result of the application that's tag applied to a resource.
@@ -73,13 +100,45 @@ type GetAssociatedResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociatedResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociatedResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociatedResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationTagResult != nil {
+		s.WriteStruct(schemas.GetAssociatedResourceResponse_applicationTagResult)
+		v.ApplicationTagResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOptions(s, schemas.GetAssociatedResourceResponse_options, v.Options)
+	if v.Resource != nil {
+		s.WriteStruct(schemas.GetAssociatedResourceResponse_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssociatedResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssociatedResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssociatedResourceResponse_applicationTagResult:
+			v.ApplicationTagResult = &types.ApplicationTagResult{}
+			return v.ApplicationTagResult.Deserialize(d)
+		case schemas.GetAssociatedResourceResponse_options:
+			return deserializeOptions(d, schemas.GetAssociatedResourceResponse_options, &v.Options)
+		case schemas.GetAssociatedResourceResponse_resource:
+			v.Resource = &types.Resource{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssociatedResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssociatedResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociatedResource, schemas.GetAssociatedResourceRequest, schemas.GetAssociatedResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssociatedResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociatedResource, schemas.GetAssociatedResourceRequest, schemas.GetAssociatedResourceResponse), output: &GetAssociatedResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

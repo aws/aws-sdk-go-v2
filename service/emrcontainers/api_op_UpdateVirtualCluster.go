@@ -5,7 +5,9 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,26 @@ type UpdateVirtualClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateVirtualClusterRequest_clientToken, *v.ClientToken)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateVirtualClusterRequest_id, *v.Id)
+	}
+	if v.SchedulerConfiguration != nil {
+		s.WriteStruct(schemas.UpdateVirtualClusterRequest_schedulerConfiguration)
+		v.SchedulerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains the virtual cluster returned after a successful update request.
 type UpdateVirtualClusterOutput struct {
 
@@ -66,13 +88,34 @@ type UpdateVirtualClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualCluster != nil {
+		s.WriteStruct(schemas.UpdateVirtualClusterResponse_virtualCluster)
+		v.VirtualCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateVirtualClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVirtualClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVirtualClusterResponse_virtualCluster:
+			v.VirtualCluster = &types.VirtualCluster{}
+			return v.VirtualCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVirtualCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualCluster, schemas.UpdateVirtualClusterRequest, schemas.UpdateVirtualClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVirtualCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualCluster, schemas.UpdateVirtualClusterRequest, schemas.UpdateVirtualClusterResponse), output: &UpdateVirtualClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

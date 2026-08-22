@@ -4,7 +4,9 @@ package iotsecuretunneling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,26 @@ type RotateTunnelAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateTunnelAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateTunnelAccessTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateTunnelAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientMode != "" {
+		s.WriteString(schemas.RotateTunnelAccessTokenRequest_clientMode, string(v.ClientMode))
+	}
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.RotateTunnelAccessTokenRequest_destinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TunnelId != nil {
+		s.WriteString(schemas.RotateTunnelAccessTokenRequest_tunnelId, *v.TunnelId)
+	}
+}
+
 type RotateTunnelAccessTokenOutput struct {
 
 	// The client access token that the destination local proxy uses to connect to IoT
@@ -72,13 +94,44 @@ type RotateTunnelAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateTunnelAccessTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateTunnelAccessTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateTunnelAccessTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationAccessToken != nil {
+		s.WriteString(schemas.RotateTunnelAccessTokenResponse_destinationAccessToken, *v.DestinationAccessToken)
+	}
+	if v.SourceAccessToken != nil {
+		s.WriteString(schemas.RotateTunnelAccessTokenResponse_sourceAccessToken, *v.SourceAccessToken)
+	}
+	if v.TunnelArn != nil {
+		s.WriteString(schemas.RotateTunnelAccessTokenResponse_tunnelArn, *v.TunnelArn)
+	}
+}
+func (v *RotateTunnelAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RotateTunnelAccessTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RotateTunnelAccessTokenResponse_destinationAccessToken:
+			v.DestinationAccessToken = new(string)
+			return d.ReadString(schemas.RotateTunnelAccessTokenResponse_destinationAccessToken, v.DestinationAccessToken)
+		case schemas.RotateTunnelAccessTokenResponse_sourceAccessToken:
+			v.SourceAccessToken = new(string)
+			return d.ReadString(schemas.RotateTunnelAccessTokenResponse_sourceAccessToken, v.SourceAccessToken)
+		case schemas.RotateTunnelAccessTokenResponse_tunnelArn:
+			v.TunnelArn = new(string)
+			return d.ReadString(schemas.RotateTunnelAccessTokenResponse_tunnelArn, v.TunnelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRotateTunnelAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRotateTunnelAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateTunnelAccessToken, schemas.RotateTunnelAccessTokenRequest, schemas.RotateTunnelAccessTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRotateTunnelAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateTunnelAccessToken, schemas.RotateTunnelAccessTokenRequest, schemas.RotateTunnelAccessTokenResponse), output: &RotateTunnelAccessTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

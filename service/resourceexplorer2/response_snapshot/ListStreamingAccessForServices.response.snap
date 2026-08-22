@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","StreamingAccessForServices":[{"CreatedAt":"2000-01-01T00:00:00Z","ServicePrincipal":"__ServicePrincipal__"},{"CreatedAt":"2000-01-01T00:00:00Z","ServicePrincipal":"__ServicePrincipal__"}]}

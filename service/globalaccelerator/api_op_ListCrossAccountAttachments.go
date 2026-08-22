@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListCrossAccountAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCrossAccountAttachmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCrossAccountAttachmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCrossAccountAttachmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCrossAccountAttachmentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCrossAccountAttachmentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCrossAccountAttachmentsOutput struct {
 
 	// Information about the cross-account attachments.
@@ -53,13 +70,35 @@ type ListCrossAccountAttachmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCrossAccountAttachmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCrossAccountAttachmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCrossAccountAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachments(s, schemas.ListCrossAccountAttachmentsResponse_CrossAccountAttachments, v.CrossAccountAttachments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCrossAccountAttachmentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCrossAccountAttachmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCrossAccountAttachmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCrossAccountAttachmentsResponse_CrossAccountAttachments:
+			return deserializeAttachments(d, schemas.ListCrossAccountAttachmentsResponse_CrossAccountAttachments, &v.CrossAccountAttachments)
+		case schemas.ListCrossAccountAttachmentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCrossAccountAttachmentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCrossAccountAttachmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCrossAccountAttachments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrossAccountAttachments, schemas.ListCrossAccountAttachmentsRequest, schemas.ListCrossAccountAttachmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCrossAccountAttachments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrossAccountAttachments, schemas.ListCrossAccountAttachmentsRequest, schemas.ListCrossAccountAttachmentsResponse), output: &ListCrossAccountAttachmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

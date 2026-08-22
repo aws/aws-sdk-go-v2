@@ -4,6 +4,8 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,40 @@ type RevokeRevisionInput struct {
 	RevocationComment *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RevokeRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeRevisionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.RevokeRevisionRequest_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.RevokeRevisionRequest_RevisionId, *v.RevisionId)
+	}
+	if v.RevocationComment != nil {
+		s.WriteString(schemas.RevokeRevisionRequest_RevocationComment, *v.RevocationComment)
+	}
+}
+func (v *RevokeRevisionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeRevisionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokeRevisionRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.RevokeRevisionRequest_DataSetId, v.DataSetId)
+		case schemas.RevokeRevisionRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.RevokeRevisionRequest_RevisionId, v.RevisionId)
+		case schemas.RevokeRevisionRequest_RevocationComment:
+			v.RevocationComment = new(string)
+			return d.ReadString(schemas.RevokeRevisionRequest_RevocationComment, v.RevocationComment)
+		}
+		return nil
+	})
 }
 
 type RevokeRevisionOutput struct {
@@ -95,13 +131,90 @@ type RevokeRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeRevisionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RevokeRevisionResponse_Arn, *v.Arn)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.RevokeRevisionResponse_Comment, *v.Comment)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RevokeRevisionResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.RevokeRevisionResponse_DataSetId, *v.DataSetId)
+	}
+	if v.Finalized != false {
+		s.WriteBool(schemas.RevokeRevisionResponse_Finalized, v.Finalized)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RevokeRevisionResponse_Id, *v.Id)
+	}
+	if v.RevocationComment != nil {
+		s.WriteString(schemas.RevokeRevisionResponse_RevocationComment, *v.RevocationComment)
+	}
+	if v.Revoked != false {
+		s.WriteBool(schemas.RevokeRevisionResponse_Revoked, v.Revoked)
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.RevokeRevisionResponse_RevokedAt, *v.RevokedAt)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.RevokeRevisionResponse_SourceId, *v.SourceId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RevokeRevisionResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *RevokeRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeRevisionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokeRevisionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RevokeRevisionResponse_Arn, v.Arn)
+		case schemas.RevokeRevisionResponse_Comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.RevokeRevisionResponse_Comment, v.Comment)
+		case schemas.RevokeRevisionResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RevokeRevisionResponse_CreatedAt, v.CreatedAt)
+		case schemas.RevokeRevisionResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.RevokeRevisionResponse_DataSetId, v.DataSetId)
+		case schemas.RevokeRevisionResponse_Finalized:
+			return d.ReadBool(schemas.RevokeRevisionResponse_Finalized, &v.Finalized)
+		case schemas.RevokeRevisionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RevokeRevisionResponse_Id, v.Id)
+		case schemas.RevokeRevisionResponse_RevocationComment:
+			v.RevocationComment = new(string)
+			return d.ReadString(schemas.RevokeRevisionResponse_RevocationComment, v.RevocationComment)
+		case schemas.RevokeRevisionResponse_Revoked:
+			return d.ReadBool(schemas.RevokeRevisionResponse_Revoked, &v.Revoked)
+		case schemas.RevokeRevisionResponse_RevokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.RevokeRevisionResponse_RevokedAt, v.RevokedAt)
+		case schemas.RevokeRevisionResponse_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.RevokeRevisionResponse_SourceId, v.SourceId)
+		case schemas.RevokeRevisionResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RevokeRevisionResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeRevision, schemas.RevokeRevisionRequest, schemas.RevokeRevisionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeRevision, schemas.RevokeRevisionRequest, schemas.RevokeRevisionResponse), output: &RevokeRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,34 @@ type OptOutSpeakerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OptOutSpeakerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptOutSpeakerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OptOutSpeakerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.OptOutSpeakerRequest_DomainId, *v.DomainId)
+	}
+	if v.SpeakerId != nil {
+		s.WriteString(schemas.OptOutSpeakerRequest_SpeakerId, *v.SpeakerId)
+	}
+}
+func (v *OptOutSpeakerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OptOutSpeakerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OptOutSpeakerRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.OptOutSpeakerRequest_DomainId, v.DomainId)
+		case schemas.OptOutSpeakerRequest_SpeakerId:
+			v.SpeakerId = new(string)
+			return d.ReadString(schemas.OptOutSpeakerRequest_SpeakerId, v.SpeakerId)
+		}
+		return nil
+	})
+}
+
 type OptOutSpeakerOutput struct {
 
 	// Details about the opted-out speaker.
@@ -55,13 +85,34 @@ type OptOutSpeakerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OptOutSpeakerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptOutSpeakerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OptOutSpeakerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Speaker != nil {
+		s.WriteStruct(schemas.OptOutSpeakerResponse_Speaker)
+		v.Speaker.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OptOutSpeakerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OptOutSpeakerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OptOutSpeakerResponse_Speaker:
+			v.Speaker = &types.Speaker{}
+			return v.Speaker.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOptOutSpeakerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpOptOutSpeaker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptOutSpeaker, schemas.OptOutSpeakerRequest, schemas.OptOutSpeakerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpOptOutSpeaker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptOutSpeaker, schemas.OptOutSpeakerRequest, schemas.OptOutSpeakerResponse), output: &OptOutSpeakerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

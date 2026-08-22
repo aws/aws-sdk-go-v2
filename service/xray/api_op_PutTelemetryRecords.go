@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,25 @@ type PutTelemetryRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTelemetryRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTelemetryRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTelemetryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2InstanceId != nil {
+		s.WriteString(schemas.PutTelemetryRecordsRequest_EC2InstanceId, *v.EC2InstanceId)
+	}
+	if v.Hostname != nil {
+		s.WriteString(schemas.PutTelemetryRecordsRequest_Hostname, *v.Hostname)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.PutTelemetryRecordsRequest_ResourceARN, *v.ResourceARN)
+	}
+	serializeTelemetryRecordList(s, schemas.PutTelemetryRecordsRequest_TelemetryRecords, v.TelemetryRecords)
+}
+
 type PutTelemetryRecordsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +71,26 @@ type PutTelemetryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTelemetryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTelemetryRecordsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTelemetryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutTelemetryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTelemetryRecordsResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTelemetryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTelemetryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTelemetryRecords, schemas.PutTelemetryRecordsRequest, schemas.PutTelemetryRecordsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTelemetryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTelemetryRecords, schemas.PutTelemetryRecordsRequest, schemas.PutTelemetryRecordsResult), output: &PutTelemetryRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

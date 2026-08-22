@@ -649,6 +649,7 @@ func serializeTargetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Ta
 }
 
 func deserializeApprovalList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Approval) error {
+	*v = make([]Approval, 0)
 	var vv Approval
 	return smithy.ReadList(d, s, func() error {
 		vv = Approval{}
@@ -662,6 +663,7 @@ func deserializeApprovalList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeApprovalRulesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ApprovalRule) error {
+	*v = make([]ApprovalRule, 0)
 	var vv ApprovalRule
 	return smithy.ReadList(d, s, func() error {
 		vv = ApprovalRule{}
@@ -675,6 +677,7 @@ func deserializeApprovalRulesList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeApprovalRulesNotSatisfiedList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -688,6 +691,7 @@ func deserializeApprovalRulesNotSatisfiedList(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeApprovalRulesSatisfiedList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -701,6 +705,7 @@ func deserializeApprovalRulesSatisfiedList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeApprovalRuleTemplateNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -714,6 +719,7 @@ func deserializeApprovalRuleTemplateNameList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeBatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchAssociateApprovalRuleTemplateWithRepositoriesError) error {
+	*v = make([]BatchAssociateApprovalRuleTemplateWithRepositoriesError, 0)
 	var vv BatchAssociateApprovalRuleTemplateWithRepositoriesError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchAssociateApprovalRuleTemplateWithRepositoriesError{}
@@ -727,6 +733,7 @@ func deserializeBatchAssociateApprovalRuleTemplateWithRepositoriesErrorsList(d s
 }
 
 func deserializeBatchDescribeMergeConflictsErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchDescribeMergeConflictsError) error {
+	*v = make([]BatchDescribeMergeConflictsError, 0)
 	var vv BatchDescribeMergeConflictsError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchDescribeMergeConflictsError{}
@@ -740,6 +747,7 @@ func deserializeBatchDescribeMergeConflictsErrors(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeBatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchDisassociateApprovalRuleTemplateFromRepositoriesError) error {
+	*v = make([]BatchDisassociateApprovalRuleTemplateFromRepositoriesError, 0)
 	var vv BatchDisassociateApprovalRuleTemplateFromRepositoriesError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchDisassociateApprovalRuleTemplateFromRepositoriesError{}
@@ -753,6 +761,7 @@ func deserializeBatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList(
 }
 
 func deserializeBatchGetCommitsErrorsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchGetCommitsError) error {
+	*v = make([]BatchGetCommitsError, 0)
 	var vv BatchGetCommitsError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchGetCommitsError{}
@@ -766,6 +775,7 @@ func deserializeBatchGetCommitsErrorsList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeBatchGetRepositoriesErrorsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BatchGetRepositoriesError) error {
+	*v = make([]BatchGetRepositoriesError, 0)
 	var vv BatchGetRepositoriesError
 	return smithy.ReadList(d, s, func() error {
 		vv = BatchGetRepositoriesError{}
@@ -779,6 +789,7 @@ func deserializeBatchGetRepositoriesErrorsList(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeBranchNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -792,6 +803,7 @@ func deserializeBranchNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeCallerReactions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -805,6 +817,7 @@ func deserializeCallerReactions(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeComments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Comment) error {
+	*v = make([]Comment, 0)
 	var vv Comment
 	return smithy.ReadList(d, s, func() error {
 		vv = Comment{}
@@ -818,6 +831,7 @@ func deserializeComments(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Comm
 }
 
 func deserializeCommentsForComparedCommitData(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CommentsForComparedCommit) error {
+	*v = make([]CommentsForComparedCommit, 0)
 	var vv CommentsForComparedCommit
 	return smithy.ReadList(d, s, func() error {
 		vv = CommentsForComparedCommit{}
@@ -831,6 +845,7 @@ func deserializeCommentsForComparedCommitData(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeCommentsForPullRequestData(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CommentsForPullRequest) error {
+	*v = make([]CommentsForPullRequest, 0)
 	var vv CommentsForPullRequest
 	return smithy.ReadList(d, s, func() error {
 		vv = CommentsForPullRequest{}
@@ -844,6 +859,7 @@ func deserializeCommentsForPullRequestData(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeCommitIdsInputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -857,6 +873,7 @@ func deserializeCommitIdsInputList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeCommitObjectsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Commit) error {
+	*v = make([]Commit, 0)
 	var vv Commit
 	return smithy.ReadList(d, s, func() error {
 		vv = Commit{}
@@ -870,6 +887,7 @@ func deserializeCommitObjectsList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeConflictMetadataList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConflictMetadata) error {
+	*v = make([]ConflictMetadata, 0)
 	var vv ConflictMetadata
 	return smithy.ReadList(d, s, func() error {
 		vv = ConflictMetadata{}
@@ -883,6 +901,7 @@ func deserializeConflictMetadataList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeConflicts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Conflict) error {
+	*v = make([]Conflict, 0)
 	var vv Conflict
 	return smithy.ReadList(d, s, func() error {
 		vv = Conflict{}
@@ -896,6 +915,7 @@ func deserializeConflicts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Con
 }
 
 func deserializeDeleteFileEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DeleteFileEntry) error {
+	*v = make([]DeleteFileEntry, 0)
 	var vv DeleteFileEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = DeleteFileEntry{}
@@ -909,6 +929,7 @@ func deserializeDeleteFileEntries(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeDiffChangeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DiffChange) error {
+	*v = make([]DiffChange, 0)
 	var vv DiffChange
 	return smithy.ReadList(d, s, func() error {
 		vv = DiffChange{}
@@ -922,6 +943,7 @@ func deserializeDiffChangeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeDifferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Difference) error {
+	*v = make([]Difference, 0)
 	var vv Difference
 	return smithy.ReadList(d, s, func() error {
 		vv = Difference{}
@@ -935,6 +957,7 @@ func deserializeDifferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeDiffHunkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DiffHunk) error {
+	*v = make([]DiffHunk, 0)
 	var vv DiffHunk
 	return smithy.ReadList(d, s, func() error {
 		vv = DiffHunk{}
@@ -948,6 +971,7 @@ func deserializeDiffHunkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeFileList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]File) error {
+	*v = make([]File, 0)
 	var vv File
 	return smithy.ReadList(d, s, func() error {
 		vv = File{}
@@ -961,6 +985,7 @@ func deserializeFileList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]File
 }
 
 func deserializeFilePaths(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -974,6 +999,7 @@ func deserializeFilePaths(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeFilesMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FileMetadata) error {
+	*v = make([]FileMetadata, 0)
 	var vv FileMetadata
 	return smithy.ReadList(d, s, func() error {
 		vv = FileMetadata{}
@@ -987,6 +1013,7 @@ func deserializeFilesMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeFolderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Folder) error {
+	*v = make([]Folder, 0)
 	var vv Folder
 	return smithy.ReadList(d, s, func() error {
 		vv = Folder{}
@@ -1000,6 +1027,7 @@ func deserializeFolderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Fo
 }
 
 func deserializeMergeHunks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MergeHunk) error {
+	*v = make([]MergeHunk, 0)
 	var vv MergeHunk
 	return smithy.ReadList(d, s, func() error {
 		vv = MergeHunk{}
@@ -1013,6 +1041,7 @@ func deserializeMergeHunks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Me
 }
 
 func deserializeMergeOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MergeOptionTypeEnum) error {
+	*v = make([]MergeOptionTypeEnum, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1026,6 +1055,7 @@ func deserializeMergeOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeParentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1039,6 +1069,7 @@ func deserializeParentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializePullRequestEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PullRequestEvent) error {
+	*v = make([]PullRequestEvent, 0)
 	var vv PullRequestEvent
 	return smithy.ReadList(d, s, func() error {
 		vv = PullRequestEvent{}
@@ -1052,6 +1083,7 @@ func deserializePullRequestEventList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializePullRequestIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1065,6 +1097,7 @@ func deserializePullRequestIdList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializePullRequestTargetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PullRequestTarget) error {
+	*v = make([]PullRequestTarget, 0)
 	var vv PullRequestTarget
 	return smithy.ReadList(d, s, func() error {
 		vv = PullRequestTarget{}
@@ -1078,6 +1111,7 @@ func deserializePullRequestTargetList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializePutFileEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PutFileEntry) error {
+	*v = make([]PutFileEntry, 0)
 	var vv PutFileEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = PutFileEntry{}
@@ -1091,6 +1125,7 @@ func deserializePutFileEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeReactionsForCommentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReactionForComment) error {
+	*v = make([]ReactionForComment, 0)
 	var vv ReactionForComment
 	return smithy.ReadList(d, s, func() error {
 		vv = ReactionForComment{}
@@ -1104,6 +1139,7 @@ func deserializeReactionsForCommentList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeReactionUsersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1117,6 +1153,7 @@ func deserializeReactionUsersList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeReplaceContentEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ReplaceContentEntry) error {
+	*v = make([]ReplaceContentEntry, 0)
 	var vv ReplaceContentEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = ReplaceContentEntry{}
@@ -1130,6 +1167,7 @@ func deserializeReplaceContentEntries(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeRepositoryMetadataList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RepositoryMetadata) error {
+	*v = make([]RepositoryMetadata, 0)
 	var vv RepositoryMetadata
 	return smithy.ReadList(d, s, func() error {
 		vv = RepositoryMetadata{}
@@ -1143,6 +1181,7 @@ func deserializeRepositoryMetadataList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeRepositoryNameIdPairList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RepositoryNameIdPair) error {
+	*v = make([]RepositoryNameIdPair, 0)
 	var vv RepositoryNameIdPair
 	return smithy.ReadList(d, s, func() error {
 		vv = RepositoryNameIdPair{}
@@ -1156,6 +1195,7 @@ func deserializeRepositoryNameIdPairList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeRepositoryNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1169,6 +1209,7 @@ func deserializeRepositoryNameList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeRepositoryNotFoundList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1182,6 +1223,7 @@ func deserializeRepositoryNotFoundList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeRepositoryTriggerEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RepositoryTriggerEventEnum) error {
+	*v = make([]RepositoryTriggerEventEnum, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1195,6 +1237,7 @@ func deserializeRepositoryTriggerEventList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeRepositoryTriggerExecutionFailureList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RepositoryTriggerExecutionFailure) error {
+	*v = make([]RepositoryTriggerExecutionFailure, 0)
 	var vv RepositoryTriggerExecutionFailure
 	return smithy.ReadList(d, s, func() error {
 		vv = RepositoryTriggerExecutionFailure{}
@@ -1208,6 +1251,7 @@ func deserializeRepositoryTriggerExecutionFailureList(d smithy.ShapeDeserializer
 }
 
 func deserializeRepositoryTriggerNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1221,6 +1265,7 @@ func deserializeRepositoryTriggerNameList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeRepositoryTriggersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RepositoryTrigger) error {
+	*v = make([]RepositoryTrigger, 0)
 	var vv RepositoryTrigger
 	return smithy.ReadList(d, s, func() error {
 		vv = RepositoryTrigger{}
@@ -1234,6 +1279,7 @@ func deserializeRepositoryTriggersList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeRevisionChildren(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1247,6 +1293,7 @@ func deserializeRevisionChildren(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeRevisionDag(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FileVersion) error {
+	*v = make([]FileVersion, 0)
 	var vv FileVersion
 	return smithy.ReadList(d, s, func() error {
 		vv = FileVersion{}
@@ -1260,6 +1307,7 @@ func deserializeRevisionDag(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]F
 }
 
 func deserializeSetFileModeEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SetFileModeEntry) error {
+	*v = make([]SetFileModeEntry, 0)
 	var vv SetFileModeEntry
 	return smithy.ReadList(d, s, func() error {
 		vv = SetFileModeEntry{}
@@ -1273,6 +1321,7 @@ func deserializeSetFileModeEntries(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeSubModuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SubModule) error {
+	*v = make([]SubModule, 0)
 	var vv SubModule
 	return smithy.ReadList(d, s, func() error {
 		vv = SubModule{}
@@ -1286,6 +1335,7 @@ func deserializeSubModuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeSymbolicLinkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SymbolicLink) error {
+	*v = make([]SymbolicLink, 0)
 	var vv SymbolicLink
 	return smithy.ReadList(d, s, func() error {
 		vv = SymbolicLink{}
@@ -1299,6 +1349,7 @@ func deserializeSymbolicLinkList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeTagKeysList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1312,6 +1363,7 @@ func deserializeTagKeysList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 }
 
 func deserializeTargetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Target) error {
+	*v = make([]Target, 0)
 	var vv Target
 	return smithy.ReadList(d, s, func() error {
 		vv = Target{}

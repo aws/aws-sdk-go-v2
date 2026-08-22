@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,27 @@ type DisableStageTransitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableStageTransitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableStageTransitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableStageTransitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineName != nil {
+		s.WriteString(schemas.DisableStageTransitionInput_pipelineName, *v.PipelineName)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.DisableStageTransitionInput_reason, *v.Reason)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.DisableStageTransitionInput_stageName, *v.StageName)
+	}
+	if v.TransitionType != "" {
+		s.WriteString(schemas.DisableStageTransitionInput_transitionType, string(v.TransitionType))
+	}
+}
+
 type DisableStageTransitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +88,26 @@ type DisableStageTransitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableStageTransitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableStageTransitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableStageTransitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableStageTransitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableStageTransition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableStageTransition, schemas.DisableStageTransitionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableStageTransition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableStageTransition, schemas.DisableStageTransitionInput, nil), output: &DisableStageTransitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

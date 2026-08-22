@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.DescribeEndpointGroupRequest_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+}
+
 type DescribeEndpointGroupOutput struct {
 
 	// The description of an endpoint group.
@@ -45,13 +59,34 @@ type DescribeEndpointGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointGroup != nil {
+		s.WriteStruct(schemas.DescribeEndpointGroupResponse_EndpointGroup)
+		v.EndpointGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEndpointGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEndpointGroupResponse_EndpointGroup:
+			v.EndpointGroup = &types.EndpointGroup{}
+			return v.EndpointGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointGroup, schemas.DescribeEndpointGroupRequest, schemas.DescribeEndpointGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointGroup, schemas.DescribeEndpointGroupRequest, schemas.DescribeEndpointGroupResponse), output: &DescribeEndpointGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,18 @@ type DeleteCustomRoutingAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomRoutingAcceleratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomRoutingAcceleratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomRoutingAcceleratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.DeleteCustomRoutingAcceleratorRequest_AcceleratorArn, *v.AcceleratorArn)
+	}
+}
+
 type DeleteCustomRoutingAcceleratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +71,26 @@ type DeleteCustomRoutingAcceleratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomRoutingAcceleratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomRoutingAcceleratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomRoutingAcceleratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomRoutingAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCustomRoutingAccelerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomRoutingAccelerator, schemas.DeleteCustomRoutingAcceleratorRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCustomRoutingAccelerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomRoutingAccelerator, schemas.DeleteCustomRoutingAcceleratorRequest, nil), output: &DeleteCustomRoutingAcceleratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

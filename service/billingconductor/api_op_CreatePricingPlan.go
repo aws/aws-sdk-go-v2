@@ -5,6 +5,8 @@ package billingconductor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,46 @@ type CreatePricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePricingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePricingPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePricingPlanInput_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePricingPlanInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePricingPlanInput_Name, *v.Name)
+	}
+	serializePricingRuleArnsInput(s, schemas.CreatePricingPlanInput_PricingRuleArns, v.PricingRuleArns)
+	serializeTagMap(s, schemas.CreatePricingPlanInput_Tags, v.Tags)
+}
+func (v *CreatePricingPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePricingPlanInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePricingPlanInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreatePricingPlanInput_ClientToken, v.ClientToken)
+		case schemas.CreatePricingPlanInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreatePricingPlanInput_Description, v.Description)
+		case schemas.CreatePricingPlanInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreatePricingPlanInput_Name, v.Name)
+		case schemas.CreatePricingPlanInput_PricingRuleArns:
+			return deserializePricingRuleArnsInput(d, schemas.CreatePricingPlanInput_PricingRuleArns, &v.PricingRuleArns)
+		case schemas.CreatePricingPlanInput_Tags:
+			return deserializeTagMap(d, schemas.CreatePricingPlanInput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreatePricingPlanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created pricing plan.
@@ -64,13 +106,32 @@ type CreatePricingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePricingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePricingPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePricingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePricingPlanOutput_Arn, *v.Arn)
+	}
+}
+func (v *CreatePricingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePricingPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePricingPlanOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreatePricingPlanOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePricingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePricingPlan, schemas.CreatePricingPlanInput, schemas.CreatePricingPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePricingPlan, schemas.CreatePricingPlanInput, schemas.CreatePricingPlanOutput), output: &CreatePricingPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,22 @@ type ListTapesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTapesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTapesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTapesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListTapesInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListTapesInput_Marker, *v.Marker)
+	}
+	serializeTapeARNs(s, schemas.ListTapesInput_TapeARNs, v.TapeARNs)
+}
+
 // A JSON object containing the following fields:
 //
 // # ListTapesOutput$Marker
@@ -81,13 +99,35 @@ type ListTapesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTapesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTapesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTapesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListTapesOutput_Marker, *v.Marker)
+	}
+	serializeTapeInfos(s, schemas.ListTapesOutput_TapeInfos, v.TapeInfos)
+}
+func (v *ListTapesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTapesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTapesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListTapesOutput_Marker, v.Marker)
+		case schemas.ListTapesOutput_TapeInfos:
+			return deserializeTapeInfos(d, schemas.ListTapesOutput_TapeInfos, &v.TapeInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTapesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTapes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTapes, schemas.ListTapesInput, schemas.ListTapesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTapes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTapes, schemas.ListTapesInput, schemas.ListTapesOutput), output: &ListTapesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type SetSMBGuestPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSMBGuestPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSMBGuestPasswordInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSMBGuestPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.SetSMBGuestPasswordInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.SetSMBGuestPasswordInput_Password, *v.Password)
+	}
+}
+
 type SetSMBGuestPasswordOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -54,13 +71,32 @@ type SetSMBGuestPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSMBGuestPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSMBGuestPasswordOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSMBGuestPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.SetSMBGuestPasswordOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *SetSMBGuestPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetSMBGuestPasswordOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetSMBGuestPasswordOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.SetSMBGuestPasswordOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetSMBGuestPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetSMBGuestPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSMBGuestPassword, schemas.SetSMBGuestPasswordInput, schemas.SetSMBGuestPasswordOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetSMBGuestPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSMBGuestPassword, schemas.SetSMBGuestPasswordInput, schemas.SetSMBGuestPasswordOutput), output: &SetSMBGuestPasswordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

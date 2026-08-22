@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PerformanceInsightsv20180227.GetResourceMetrics
+
+{"AlignedEndTime":946684800,"AlignedStartTime":946684800,"Identifier":"__Identifier__","MetricList":[{"DataPoints":[{"Timestamp":946684800,"Value":1},{"Timestamp":946684800,"Value":1}],"Key":{"Dimensions":{"key0":"__Value__"},"Metric":"__Metric__"}},{"DataPoints":[{"Timestamp":946684800,"Value":1},{"Timestamp":946684800,"Value":1}],"Key":{"Dimensions":{"key0":"__Value__"},"Metric":"__Metric__"}}],"NextToken":"__NextToken__"}

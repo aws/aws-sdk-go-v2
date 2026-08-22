@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type BatchGetCommandExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCommandExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCommandExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCommandExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommandExecutionIds(s, schemas.BatchGetCommandExecutionsInput_commandExecutionIds, v.CommandExecutionIds)
+	if v.SandboxId != nil {
+		s.WriteString(schemas.BatchGetCommandExecutionsInput_sandboxId, *v.SandboxId)
+	}
+}
+
 type BatchGetCommandExecutionsOutput struct {
 
 	// Information about the requested command executions.
@@ -53,13 +68,32 @@ type BatchGetCommandExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCommandExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCommandExecutionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCommandExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommandExecutions(s, schemas.BatchGetCommandExecutionsOutput_commandExecutions, v.CommandExecutions)
+	serializeCommandExecutionIds(s, schemas.BatchGetCommandExecutionsOutput_commandExecutionsNotFound, v.CommandExecutionsNotFound)
+}
+func (v *BatchGetCommandExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCommandExecutionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCommandExecutionsOutput_commandExecutions:
+			return deserializeCommandExecutions(d, schemas.BatchGetCommandExecutionsOutput_commandExecutions, &v.CommandExecutions)
+		case schemas.BatchGetCommandExecutionsOutput_commandExecutionsNotFound:
+			return deserializeCommandExecutionIds(d, schemas.BatchGetCommandExecutionsOutput_commandExecutionsNotFound, &v.CommandExecutionsNotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCommandExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetCommandExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCommandExecutions, schemas.BatchGetCommandExecutionsInput, schemas.BatchGetCommandExecutionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetCommandExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCommandExecutions, schemas.BatchGetCommandExecutionsInput, schemas.BatchGetCommandExecutionsOutput), output: &BatchGetCommandExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

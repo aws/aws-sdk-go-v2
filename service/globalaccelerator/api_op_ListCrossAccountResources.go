@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListCrossAccountResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCrossAccountResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCrossAccountResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCrossAccountResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.ListCrossAccountResourcesRequest_AcceleratorArn, *v.AcceleratorArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCrossAccountResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCrossAccountResourcesRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceOwnerAwsAccountId != nil {
+		s.WriteString(schemas.ListCrossAccountResourcesRequest_ResourceOwnerAwsAccountId, *v.ResourceOwnerAwsAccountId)
+	}
+}
+
 type ListCrossAccountResourcesOutput struct {
 
 	// The cross-account resources used with an accelerator.
@@ -61,13 +84,35 @@ type ListCrossAccountResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCrossAccountResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCrossAccountResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCrossAccountResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCrossAccountResources(s, schemas.ListCrossAccountResourcesResponse_CrossAccountResources, v.CrossAccountResources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCrossAccountResourcesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCrossAccountResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCrossAccountResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCrossAccountResourcesResponse_CrossAccountResources:
+			return deserializeCrossAccountResources(d, schemas.ListCrossAccountResourcesResponse_CrossAccountResources, &v.CrossAccountResources)
+		case schemas.ListCrossAccountResourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCrossAccountResourcesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCrossAccountResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCrossAccountResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrossAccountResources, schemas.ListCrossAccountResourcesRequest, schemas.ListCrossAccountResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCrossAccountResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrossAccountResources, schemas.ListCrossAccountResourcesRequest, schemas.ListCrossAccountResourcesResponse), output: &ListCrossAccountResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

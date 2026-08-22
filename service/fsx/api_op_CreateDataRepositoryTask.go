@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -127,6 +129,39 @@ type CreateDataRepositoryTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataRepositoryTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataRepositoryTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataRepositoryTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityToRelease != nil {
+		s.WriteInt64(schemas.CreateDataRepositoryTaskRequest_CapacityToRelease, *v.CapacityToRelease)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateDataRepositoryTaskRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.CreateDataRepositoryTaskRequest_FileSystemId, *v.FileSystemId)
+	}
+	serializeDataRepositoryTaskPaths(s, schemas.CreateDataRepositoryTaskRequest_Paths, v.Paths)
+	if v.ReleaseConfiguration != nil {
+		s.WriteStruct(schemas.CreateDataRepositoryTaskRequest_ReleaseConfiguration)
+		v.ReleaseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Report != nil {
+		s.WriteStruct(schemas.CreateDataRepositoryTaskRequest_Report)
+		v.Report.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateDataRepositoryTaskRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateDataRepositoryTaskRequest_Type, string(v.Type))
+	}
+}
+
 type CreateDataRepositoryTaskOutput struct {
 
 	// The description of the data repository task that you just created.
@@ -138,13 +173,34 @@ type CreateDataRepositoryTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataRepositoryTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataRepositoryTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataRepositoryTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataRepositoryTask != nil {
+		s.WriteStruct(schemas.CreateDataRepositoryTaskResponse_DataRepositoryTask)
+		v.DataRepositoryTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDataRepositoryTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataRepositoryTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataRepositoryTaskResponse_DataRepositoryTask:
+			v.DataRepositoryTask = &types.DataRepositoryTask{}
+			return v.DataRepositoryTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataRepositoryTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataRepositoryTask, schemas.CreateDataRepositoryTaskRequest, schemas.CreateDataRepositoryTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataRepositoryTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataRepositoryTask, schemas.CreateDataRepositoryTaskRequest, schemas.CreateDataRepositoryTaskResponse), output: &CreateDataRepositoryTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

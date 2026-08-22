@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type DescribeGlobalNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalNetworksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalNetworksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlobalNetworkIdList(s, schemas.DescribeGlobalNetworksRequest_GlobalNetworkIds, v.GlobalNetworkIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeGlobalNetworksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGlobalNetworksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeGlobalNetworksOutput struct {
 
 	// Information about the global networks.
@@ -56,13 +74,35 @@ type DescribeGlobalNetworksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalNetworksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalNetworksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlobalNetworkList(s, schemas.DescribeGlobalNetworksResponse_GlobalNetworks, v.GlobalNetworks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGlobalNetworksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeGlobalNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGlobalNetworksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGlobalNetworksResponse_GlobalNetworks:
+			return deserializeGlobalNetworkList(d, schemas.DescribeGlobalNetworksResponse_GlobalNetworks, &v.GlobalNetworks)
+		case schemas.DescribeGlobalNetworksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeGlobalNetworksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGlobalNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGlobalNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalNetworks, schemas.DescribeGlobalNetworksRequest, schemas.DescribeGlobalNetworksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGlobalNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalNetworks, schemas.DescribeGlobalNetworksRequest, schemas.DescribeGlobalNetworksResponse), output: &DescribeGlobalNetworksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

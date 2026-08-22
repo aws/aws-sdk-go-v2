@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DescribeExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.DescribeExecutionRequest_ExecutionId, *v.ExecutionId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.DescribeExecutionRequest_WorkflowId, *v.WorkflowId)
+	}
+}
+
 type DescribeExecutionOutput struct {
 
 	// The structure that contains the details of the workflow' execution.
@@ -64,13 +81,40 @@ type DescribeExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Execution != nil {
+		s.WriteStruct(schemas.DescribeExecutionResponse_Execution)
+		v.Execution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.DescribeExecutionResponse_WorkflowId, *v.WorkflowId)
+	}
+}
+func (v *DescribeExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExecutionResponse_Execution:
+			v.Execution = &types.DescribedExecution{}
+			return v.Execution.Deserialize(d)
+		case schemas.DescribeExecutionResponse_WorkflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.DescribeExecutionResponse_WorkflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExecution, schemas.DescribeExecutionRequest, schemas.DescribeExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExecution, schemas.DescribeExecutionRequest, schemas.DescribeExecutionResponse), output: &DescribeExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

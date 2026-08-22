@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,43 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.AccessDeniedException_canRetry, *v.CanRetry)
+	}
+	if v.ErrorCode_ != "" {
+		s.WriteString(schemas.AccessDeniedException_errorCode, string(v.ErrorCode_))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.AccessDeniedException_canRetry, v.CanRetry)
+		case schemas.AccessDeniedException_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.AccessDeniedException_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode_ = AccessDeniedErrorCode(ev)
+			return nil
+		case schemas.AccessDeniedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You started an assessment run, but one of the instances is already
 // participating in another assessment run.
@@ -68,6 +106,42 @@ func (e *AgentsAlreadyRunningAssessmentException) ErrorCode() string {
 func (e *AgentsAlreadyRunningAssessmentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *AgentsAlreadyRunningAssessmentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentsAlreadyRunningAssessmentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentsAlreadyRunningAssessmentException) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentAlreadyRunningAssessmentList(s, schemas.AgentsAlreadyRunningAssessmentException_agents, v.Agents)
+	if v.AgentsTruncated != nil {
+		s.WriteBool(schemas.AgentsAlreadyRunningAssessmentException_agentsTruncated, *v.AgentsTruncated)
+	}
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.AgentsAlreadyRunningAssessmentException_canRetry, *v.CanRetry)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AgentsAlreadyRunningAssessmentException_message, *v.Message)
+	}
+}
+func (v *AgentsAlreadyRunningAssessmentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentsAlreadyRunningAssessmentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentsAlreadyRunningAssessmentException_agents:
+			return deserializeAgentAlreadyRunningAssessmentList(d, schemas.AgentsAlreadyRunningAssessmentException_agents, &v.Agents)
+		case schemas.AgentsAlreadyRunningAssessmentException_agentsTruncated:
+			v.AgentsTruncated = new(bool)
+			return d.ReadBool(schemas.AgentsAlreadyRunningAssessmentException_agentsTruncated, v.AgentsTruncated)
+		case schemas.AgentsAlreadyRunningAssessmentException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.AgentsAlreadyRunningAssessmentException_canRetry, v.CanRetry)
+		case schemas.AgentsAlreadyRunningAssessmentException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AgentsAlreadyRunningAssessmentException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You cannot perform a specified action if an assessment run is currently in
 // progress.
@@ -99,6 +173,42 @@ func (e *AssessmentRunInProgressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AssessmentRunInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AssessmentRunInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentRunInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentRunInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentRunInProgressArnList(s, schemas.AssessmentRunInProgressException_assessmentRunArns, v.AssessmentRunArns)
+	if v.AssessmentRunArnsTruncated != nil {
+		s.WriteBool(schemas.AssessmentRunInProgressException_assessmentRunArnsTruncated, *v.AssessmentRunArnsTruncated)
+	}
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.AssessmentRunInProgressException_canRetry, *v.CanRetry)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AssessmentRunInProgressException_message, *v.Message)
+	}
+}
+func (v *AssessmentRunInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentRunInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentRunInProgressException_assessmentRunArns:
+			return deserializeAssessmentRunInProgressArnList(d, schemas.AssessmentRunInProgressException_assessmentRunArns, &v.AssessmentRunArns)
+		case schemas.AssessmentRunInProgressException_assessmentRunArnsTruncated:
+			v.AssessmentRunArnsTruncated = new(bool)
+			return d.ReadBool(schemas.AssessmentRunInProgressException_assessmentRunArnsTruncated, v.AssessmentRunArnsTruncated)
+		case schemas.AssessmentRunInProgressException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.AssessmentRunInProgressException_canRetry, v.CanRetry)
+		case schemas.AssessmentRunInProgressException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AssessmentRunInProgressException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Internal server error.
 type InternalException struct {
@@ -127,6 +237,33 @@ func (e *InternalException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.InternalException_canRetry, *v.CanRetry)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InternalException_message, *v.Message)
+	}
+}
+func (v *InternalException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.InternalException_canRetry, v.CanRetry)
+		case schemas.InternalException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Inspector cannot assume the cross-account role that it needs to list
 // your EC2 instances during the assessment run.
@@ -157,6 +294,43 @@ func (e *InvalidCrossAccountRoleException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidCrossAccountRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidCrossAccountRoleException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidCrossAccountRoleException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidCrossAccountRoleException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.InvalidCrossAccountRoleException_canRetry, *v.CanRetry)
+	}
+	if v.ErrorCode_ != "" {
+		s.WriteString(schemas.InvalidCrossAccountRoleException_errorCode, string(v.ErrorCode_))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidCrossAccountRoleException_message, *v.Message)
+	}
+}
+func (v *InvalidCrossAccountRoleException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidCrossAccountRoleException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidCrossAccountRoleException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.InvalidCrossAccountRoleException_canRetry, v.CanRetry)
+		case schemas.InvalidCrossAccountRoleException_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.InvalidCrossAccountRoleException_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode_ = InvalidCrossAccountRoleErrorCode(ev)
+			return nil
+		case schemas.InvalidCrossAccountRoleException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidCrossAccountRoleException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because an invalid or out-of-range value was supplied
 // for an input parameter.
@@ -187,6 +361,43 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInputException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidInputException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidInputException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.InvalidInputException_canRetry, *v.CanRetry)
+	}
+	if v.ErrorCode_ != "" {
+		s.WriteString(schemas.InvalidInputException_errorCode, string(v.ErrorCode_))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidInputException_message, *v.Message)
+	}
+}
+func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInputException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.InvalidInputException_canRetry, v.CanRetry)
+		case schemas.InvalidInputException_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.InvalidInputException_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode_ = InvalidInputErrorCode(ev)
+			return nil
+		case schemas.InvalidInputException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInputException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it attempted to create resources beyond the
 // current AWS account limits. The error code describes the limit exceeded.
@@ -217,6 +428,43 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.LimitExceededException_canRetry, *v.CanRetry)
+	}
+	if v.ErrorCode_ != "" {
+		s.WriteString(schemas.LimitExceededException_errorCode, string(v.ErrorCode_))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.LimitExceededException_canRetry, v.CanRetry)
+		case schemas.LimitExceededException_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.LimitExceededException_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode_ = LimitExceededErrorCode(ev)
+			return nil
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it referenced an entity that does not exist.
 // The error code describes the entity.
@@ -247,6 +495,43 @@ func (e *NoSuchEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoSuchEntityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoSuchEntityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoSuchEntityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.NoSuchEntityException_canRetry, *v.CanRetry)
+	}
+	if v.ErrorCode_ != "" {
+		s.WriteString(schemas.NoSuchEntityException_errorCode, string(v.ErrorCode_))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.NoSuchEntityException_message, *v.Message)
+	}
+}
+func (v *NoSuchEntityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoSuchEntityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoSuchEntityException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.NoSuchEntityException_canRetry, v.CanRetry)
+		case schemas.NoSuchEntityException_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.NoSuchEntityException_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode_ = NoSuchEntityErrorCode(ev)
+			return nil
+		case schemas.NoSuchEntityException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoSuchEntityException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request is rejected. The specified assessment template is currently
 // generating an exclusions preview.
@@ -275,6 +560,27 @@ func (e *PreviewGenerationInProgressException) ErrorCode() string {
 }
 func (e *PreviewGenerationInProgressException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *PreviewGenerationInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreviewGenerationInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreviewGenerationInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PreviewGenerationInProgressException_message, *v.Message)
+	}
+}
+func (v *PreviewGenerationInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreviewGenerationInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreviewGenerationInProgressException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PreviewGenerationInProgressException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The serice is temporary unavailable.
@@ -305,6 +611,33 @@ func (e *ServiceTemporarilyUnavailableException) ErrorCode() string {
 }
 func (e *ServiceTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *ServiceTemporarilyUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceTemporarilyUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceTemporarilyUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.ServiceTemporarilyUnavailableException_canRetry, *v.CanRetry)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceTemporarilyUnavailableException_message, *v.Message)
+	}
+}
+func (v *ServiceTemporarilyUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceTemporarilyUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceTemporarilyUnavailableException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.ServiceTemporarilyUnavailableException_canRetry, v.CanRetry)
+		case schemas.ServiceTemporarilyUnavailableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceTemporarilyUnavailableException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Used by the GetAssessmentReport API. The request was rejected because you tried to generate a
@@ -338,3 +671,30 @@ func (e *UnsupportedFeatureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedFeatureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedFeatureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedFeatureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanRetry != nil {
+		s.WriteBool(schemas.UnsupportedFeatureException_canRetry, *v.CanRetry)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedFeatureException_message, *v.Message)
+	}
+}
+func (v *UnsupportedFeatureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedFeatureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedFeatureException_canRetry:
+			v.CanRetry = new(bool)
+			return d.ReadBool(schemas.UnsupportedFeatureException_canRetry, v.CanRetry)
+		case schemas.UnsupportedFeatureException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedFeatureException_message, v.Message)
+		}
+		return nil
+	})
+}

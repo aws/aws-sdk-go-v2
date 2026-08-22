@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,28 @@ type CreateLicenseConversionTaskForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseConversionTaskForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseConversionTaskForResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseConversionTaskForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationLicenseContext != nil {
+		s.WriteStruct(schemas.CreateLicenseConversionTaskForResourceRequest_DestinationLicenseContext)
+		v.DestinationLicenseContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateLicenseConversionTaskForResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.SourceLicenseContext != nil {
+		s.WriteStruct(schemas.CreateLicenseConversionTaskForResourceRequest_SourceLicenseContext)
+		v.SourceLicenseContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateLicenseConversionTaskForResourceOutput struct {
 
 	// The ID of the created license type conversion task.
@@ -63,13 +87,32 @@ type CreateLicenseConversionTaskForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseConversionTaskForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseConversionTaskForResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseConversionTaskForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseConversionTaskId != nil {
+		s.WriteString(schemas.CreateLicenseConversionTaskForResourceResponse_LicenseConversionTaskId, *v.LicenseConversionTaskId)
+	}
+}
+func (v *CreateLicenseConversionTaskForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLicenseConversionTaskForResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLicenseConversionTaskForResourceResponse_LicenseConversionTaskId:
+			v.LicenseConversionTaskId = new(string)
+			return d.ReadString(schemas.CreateLicenseConversionTaskForResourceResponse_LicenseConversionTaskId, v.LicenseConversionTaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLicenseConversionTaskForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLicenseConversionTaskForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseConversionTaskForResource, schemas.CreateLicenseConversionTaskForResourceRequest, schemas.CreateLicenseConversionTaskForResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLicenseConversionTaskForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseConversionTaskForResource, schemas.CreateLicenseConversionTaskForResourceRequest, schemas.CreateLicenseConversionTaskForResourceResponse), output: &CreateLicenseConversionTaskForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

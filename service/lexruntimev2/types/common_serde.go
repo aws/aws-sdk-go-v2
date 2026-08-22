@@ -96,6 +96,7 @@ func serializeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []Slot) 
 }
 
 func deserializeActiveContextsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ActiveContext) error {
+	*v = make([]ActiveContext, 0)
 	var vv ActiveContext
 	return smithy.ReadList(d, s, func() error {
 		vv = ActiveContext{}
@@ -109,6 +110,7 @@ func deserializeActiveContextsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeButtonsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Button) error {
+	*v = make([]Button, 0)
 	var vv Button
 	return smithy.ReadList(d, s, func() error {
 		vv = Button{}
@@ -122,6 +124,7 @@ func deserializeButtonsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]B
 }
 
 func deserializeInterpretations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Interpretation) error {
+	*v = make([]Interpretation, 0)
 	var vv Interpretation
 	return smithy.ReadList(d, s, func() error {
 		vv = Interpretation{}
@@ -135,6 +138,7 @@ func deserializeInterpretations(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Message) error {
+	*v = make([]Message, 0)
 	var vv Message
 	return smithy.ReadList(d, s, func() error {
 		vv = Message{}
@@ -148,6 +152,7 @@ func deserializeMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Mess
 }
 
 func deserializeRuntimeHintValuesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RuntimeHintValue) error {
+	*v = make([]RuntimeHintValue, 0)
 	var vv RuntimeHintValue
 	return smithy.ReadList(d, s, func() error {
 		vv = RuntimeHintValue{}
@@ -161,6 +166,7 @@ func deserializeRuntimeHintValuesList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -174,6 +180,7 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Slot) error {
+	*v = make([]Slot, 0)
 	var vv Slot
 	return smithy.ReadList(d, s, func() error {
 		vv = Slot{}

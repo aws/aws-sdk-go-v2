@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type GetDetectorVersionInput struct {
 	DetectorVersionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDetectorVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDetectorVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDetectorVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetDetectorVersionRequest_detectorId, *v.DetectorId)
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteString(schemas.GetDetectorVersionRequest_detectorVersionId, *v.DetectorVersionId)
+	}
 }
 
 type GetDetectorVersionOutput struct {
@@ -88,13 +105,91 @@ type GetDetectorVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDetectorVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDetectorVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDetectorVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDetectorVersionResult_arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteString(schemas.GetDetectorVersionResult_createdTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetDetectorVersionResult_description, *v.Description)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetDetectorVersionResult_detectorId, *v.DetectorId)
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteString(schemas.GetDetectorVersionResult_detectorVersionId, *v.DetectorVersionId)
+	}
+	serializeListOfStrings(s, schemas.GetDetectorVersionResult_externalModelEndpoints, v.ExternalModelEndpoints)
+	if v.LastUpdatedTime != nil {
+		s.WriteString(schemas.GetDetectorVersionResult_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	serializeListOfModelVersions(s, schemas.GetDetectorVersionResult_modelVersions, v.ModelVersions)
+	if v.RuleExecutionMode != "" {
+		s.WriteString(schemas.GetDetectorVersionResult_ruleExecutionMode, string(v.RuleExecutionMode))
+	}
+	serializeRuleList(s, schemas.GetDetectorVersionResult_rules, v.Rules)
+	if v.Status != "" {
+		s.WriteString(schemas.GetDetectorVersionResult_status, string(v.Status))
+	}
+}
+func (v *GetDetectorVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDetectorVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDetectorVersionResult_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDetectorVersionResult_arn, v.Arn)
+		case schemas.GetDetectorVersionResult_createdTime:
+			v.CreatedTime = new(string)
+			return d.ReadString(schemas.GetDetectorVersionResult_createdTime, v.CreatedTime)
+		case schemas.GetDetectorVersionResult_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDetectorVersionResult_description, v.Description)
+		case schemas.GetDetectorVersionResult_detectorId:
+			v.DetectorId = new(string)
+			return d.ReadString(schemas.GetDetectorVersionResult_detectorId, v.DetectorId)
+		case schemas.GetDetectorVersionResult_detectorVersionId:
+			v.DetectorVersionId = new(string)
+			return d.ReadString(schemas.GetDetectorVersionResult_detectorVersionId, v.DetectorVersionId)
+		case schemas.GetDetectorVersionResult_externalModelEndpoints:
+			return deserializeListOfStrings(d, schemas.GetDetectorVersionResult_externalModelEndpoints, &v.ExternalModelEndpoints)
+		case schemas.GetDetectorVersionResult_lastUpdatedTime:
+			v.LastUpdatedTime = new(string)
+			return d.ReadString(schemas.GetDetectorVersionResult_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GetDetectorVersionResult_modelVersions:
+			return deserializeListOfModelVersions(d, schemas.GetDetectorVersionResult_modelVersions, &v.ModelVersions)
+		case schemas.GetDetectorVersionResult_ruleExecutionMode:
+			var ev string
+			if err := d.ReadString(schemas.GetDetectorVersionResult_ruleExecutionMode, &ev); err != nil {
+				return err
+			}
+			v.RuleExecutionMode = types.RuleExecutionMode(ev)
+			return nil
+		case schemas.GetDetectorVersionResult_rules:
+			return deserializeRuleList(d, schemas.GetDetectorVersionResult_rules, &v.Rules)
+		case schemas.GetDetectorVersionResult_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDetectorVersionResult_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DetectorVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDetectorVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDetectorVersion, schemas.GetDetectorVersionRequest, schemas.GetDetectorVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDetectorVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDetectorVersion, schemas.GetDetectorVersionRequest, schemas.GetDetectorVersionResult), output: &GetDetectorVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

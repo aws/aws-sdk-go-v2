@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,133 @@ type UpdateReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReplicationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReplicationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReplicationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociateDefaultSecurityGroup != nil {
+		s.WriteBool(schemas.UpdateReplicationConfigurationRequest_associateDefaultSecurityGroup, *v.AssociateDefaultSecurityGroup)
+	}
+	if v.AutoReplicateNewDisks != nil {
+		s.WriteBool(schemas.UpdateReplicationConfigurationRequest_autoReplicateNewDisks, *v.AutoReplicateNewDisks)
+	}
+	if v.BandwidthThrottling != 0 {
+		s.WriteInt64(schemas.UpdateReplicationConfigurationRequest_bandwidthThrottling, v.BandwidthThrottling)
+	}
+	if v.CreatePublicIP != nil {
+		s.WriteBool(schemas.UpdateReplicationConfigurationRequest_createPublicIP, *v.CreatePublicIP)
+	}
+	if v.DataPlaneRouting != "" {
+		s.WriteString(schemas.UpdateReplicationConfigurationRequest_dataPlaneRouting, string(v.DataPlaneRouting))
+	}
+	if v.DefaultLargeStagingDiskType != "" {
+		s.WriteString(schemas.UpdateReplicationConfigurationRequest_defaultLargeStagingDiskType, string(v.DefaultLargeStagingDiskType))
+	}
+	if v.EbsEncryption != "" {
+		s.WriteString(schemas.UpdateReplicationConfigurationRequest_ebsEncryption, string(v.EbsEncryption))
+	}
+	if v.EbsEncryptionKeyArn != nil {
+		s.WriteString(schemas.UpdateReplicationConfigurationRequest_ebsEncryptionKeyArn, *v.EbsEncryptionKeyArn)
+	}
+	if v.InternetProtocol != "" {
+		s.WriteString(schemas.UpdateReplicationConfigurationRequest_internetProtocol, string(v.InternetProtocol))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateReplicationConfigurationRequest_name, *v.Name)
+	}
+	serializePITPolicy(s, schemas.UpdateReplicationConfigurationRequest_pitPolicy, v.PitPolicy)
+	serializeReplicationConfigurationReplicatedDisks(s, schemas.UpdateReplicationConfigurationRequest_replicatedDisks, v.ReplicatedDisks)
+	if v.ReplicationServerInstanceType != nil {
+		s.WriteString(schemas.UpdateReplicationConfigurationRequest_replicationServerInstanceType, *v.ReplicationServerInstanceType)
+	}
+	serializeReplicationServersSecurityGroupsIDs(s, schemas.UpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.UpdateReplicationConfigurationRequest_sourceServerID, *v.SourceServerID)
+	}
+	if v.StagingAreaSubnetId != nil {
+		s.WriteString(schemas.UpdateReplicationConfigurationRequest_stagingAreaSubnetId, *v.StagingAreaSubnetId)
+	}
+	serializeTagsMap(s, schemas.UpdateReplicationConfigurationRequest_stagingAreaTags, v.StagingAreaTags)
+	if v.UseDedicatedReplicationServer != nil {
+		s.WriteBool(schemas.UpdateReplicationConfigurationRequest_useDedicatedReplicationServer, *v.UseDedicatedReplicationServer)
+	}
+}
+func (v *UpdateReplicationConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateReplicationConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateReplicationConfigurationRequest_associateDefaultSecurityGroup:
+			v.AssociateDefaultSecurityGroup = new(bool)
+			return d.ReadBool(schemas.UpdateReplicationConfigurationRequest_associateDefaultSecurityGroup, v.AssociateDefaultSecurityGroup)
+		case schemas.UpdateReplicationConfigurationRequest_autoReplicateNewDisks:
+			v.AutoReplicateNewDisks = new(bool)
+			return d.ReadBool(schemas.UpdateReplicationConfigurationRequest_autoReplicateNewDisks, v.AutoReplicateNewDisks)
+		case schemas.UpdateReplicationConfigurationRequest_bandwidthThrottling:
+			return d.ReadInt64(schemas.UpdateReplicationConfigurationRequest_bandwidthThrottling, &v.BandwidthThrottling)
+		case schemas.UpdateReplicationConfigurationRequest_createPublicIP:
+			v.CreatePublicIP = new(bool)
+			return d.ReadBool(schemas.UpdateReplicationConfigurationRequest_createPublicIP, v.CreatePublicIP)
+		case schemas.UpdateReplicationConfigurationRequest_dataPlaneRouting:
+			var ev string
+			if err := d.ReadString(schemas.UpdateReplicationConfigurationRequest_dataPlaneRouting, &ev); err != nil {
+				return err
+			}
+			v.DataPlaneRouting = types.ReplicationConfigurationDataPlaneRouting(ev)
+			return nil
+		case schemas.UpdateReplicationConfigurationRequest_defaultLargeStagingDiskType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateReplicationConfigurationRequest_defaultLargeStagingDiskType, &ev); err != nil {
+				return err
+			}
+			v.DefaultLargeStagingDiskType = types.ReplicationConfigurationDefaultLargeStagingDiskType(ev)
+			return nil
+		case schemas.UpdateReplicationConfigurationRequest_ebsEncryption:
+			var ev string
+			if err := d.ReadString(schemas.UpdateReplicationConfigurationRequest_ebsEncryption, &ev); err != nil {
+				return err
+			}
+			v.EbsEncryption = types.ReplicationConfigurationEbsEncryption(ev)
+			return nil
+		case schemas.UpdateReplicationConfigurationRequest_ebsEncryptionKeyArn:
+			v.EbsEncryptionKeyArn = new(string)
+			return d.ReadString(schemas.UpdateReplicationConfigurationRequest_ebsEncryptionKeyArn, v.EbsEncryptionKeyArn)
+		case schemas.UpdateReplicationConfigurationRequest_internetProtocol:
+			var ev string
+			if err := d.ReadString(schemas.UpdateReplicationConfigurationRequest_internetProtocol, &ev); err != nil {
+				return err
+			}
+			v.InternetProtocol = types.InternetProtocol(ev)
+			return nil
+		case schemas.UpdateReplicationConfigurationRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateReplicationConfigurationRequest_name, v.Name)
+		case schemas.UpdateReplicationConfigurationRequest_pitPolicy:
+			return deserializePITPolicy(d, schemas.UpdateReplicationConfigurationRequest_pitPolicy, &v.PitPolicy)
+		case schemas.UpdateReplicationConfigurationRequest_replicatedDisks:
+			return deserializeReplicationConfigurationReplicatedDisks(d, schemas.UpdateReplicationConfigurationRequest_replicatedDisks, &v.ReplicatedDisks)
+		case schemas.UpdateReplicationConfigurationRequest_replicationServerInstanceType:
+			v.ReplicationServerInstanceType = new(string)
+			return d.ReadString(schemas.UpdateReplicationConfigurationRequest_replicationServerInstanceType, v.ReplicationServerInstanceType)
+		case schemas.UpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs:
+			return deserializeReplicationServersSecurityGroupsIDs(d, schemas.UpdateReplicationConfigurationRequest_replicationServersSecurityGroupsIDs, &v.ReplicationServersSecurityGroupsIDs)
+		case schemas.UpdateReplicationConfigurationRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.UpdateReplicationConfigurationRequest_sourceServerID, v.SourceServerID)
+		case schemas.UpdateReplicationConfigurationRequest_stagingAreaSubnetId:
+			v.StagingAreaSubnetId = new(string)
+			return d.ReadString(schemas.UpdateReplicationConfigurationRequest_stagingAreaSubnetId, v.StagingAreaSubnetId)
+		case schemas.UpdateReplicationConfigurationRequest_stagingAreaTags:
+			return deserializeTagsMap(d, schemas.UpdateReplicationConfigurationRequest_stagingAreaTags, &v.StagingAreaTags)
+		case schemas.UpdateReplicationConfigurationRequest_useDedicatedReplicationServer:
+			v.UseDedicatedReplicationServer = new(bool)
+			return d.ReadBool(schemas.UpdateReplicationConfigurationRequest_useDedicatedReplicationServer, v.UseDedicatedReplicationServer)
+		}
+		return nil
+	})
+}
+
 type UpdateReplicationConfigurationOutput struct {
 
 	// Whether to associate the default Elastic Disaster Recovery Security group with
@@ -157,13 +286,137 @@ type UpdateReplicationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReplicationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReplicationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociateDefaultSecurityGroup != nil {
+		s.WriteBool(schemas.ReplicationConfiguration_associateDefaultSecurityGroup, *v.AssociateDefaultSecurityGroup)
+	}
+	if v.AutoReplicateNewDisks != nil {
+		s.WriteBool(schemas.ReplicationConfiguration_autoReplicateNewDisks, *v.AutoReplicateNewDisks)
+	}
+	if v.BandwidthThrottling != 0 {
+		s.WriteInt64(schemas.ReplicationConfiguration_bandwidthThrottling, v.BandwidthThrottling)
+	}
+	if v.CreatePublicIP != nil {
+		s.WriteBool(schemas.ReplicationConfiguration_createPublicIP, *v.CreatePublicIP)
+	}
+	if v.DataPlaneRouting != "" {
+		s.WriteString(schemas.ReplicationConfiguration_dataPlaneRouting, string(v.DataPlaneRouting))
+	}
+	if v.DefaultLargeStagingDiskType != "" {
+		s.WriteString(schemas.ReplicationConfiguration_defaultLargeStagingDiskType, string(v.DefaultLargeStagingDiskType))
+	}
+	if v.EbsEncryption != "" {
+		s.WriteString(schemas.ReplicationConfiguration_ebsEncryption, string(v.EbsEncryption))
+	}
+	if v.EbsEncryptionKeyArn != nil {
+		s.WriteString(schemas.ReplicationConfiguration_ebsEncryptionKeyArn, *v.EbsEncryptionKeyArn)
+	}
+	if v.InternetProtocol != "" {
+		s.WriteString(schemas.ReplicationConfiguration_internetProtocol, string(v.InternetProtocol))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ReplicationConfiguration_name, *v.Name)
+	}
+	serializePITPolicy(s, schemas.ReplicationConfiguration_pitPolicy, v.PitPolicy)
+	serializeReplicationConfigurationReplicatedDisks(s, schemas.ReplicationConfiguration_replicatedDisks, v.ReplicatedDisks)
+	if v.ReplicationServerInstanceType != nil {
+		s.WriteString(schemas.ReplicationConfiguration_replicationServerInstanceType, *v.ReplicationServerInstanceType)
+	}
+	serializeReplicationServersSecurityGroupsIDs(s, schemas.ReplicationConfiguration_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.ReplicationConfiguration_sourceServerID, *v.SourceServerID)
+	}
+	if v.StagingAreaSubnetId != nil {
+		s.WriteString(schemas.ReplicationConfiguration_stagingAreaSubnetId, *v.StagingAreaSubnetId)
+	}
+	serializeTagsMap(s, schemas.ReplicationConfiguration_stagingAreaTags, v.StagingAreaTags)
+	if v.UseDedicatedReplicationServer != nil {
+		s.WriteBool(schemas.ReplicationConfiguration_useDedicatedReplicationServer, *v.UseDedicatedReplicationServer)
+	}
+}
+func (v *UpdateReplicationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationConfiguration_associateDefaultSecurityGroup:
+			v.AssociateDefaultSecurityGroup = new(bool)
+			return d.ReadBool(schemas.ReplicationConfiguration_associateDefaultSecurityGroup, v.AssociateDefaultSecurityGroup)
+		case schemas.ReplicationConfiguration_autoReplicateNewDisks:
+			v.AutoReplicateNewDisks = new(bool)
+			return d.ReadBool(schemas.ReplicationConfiguration_autoReplicateNewDisks, v.AutoReplicateNewDisks)
+		case schemas.ReplicationConfiguration_bandwidthThrottling:
+			return d.ReadInt64(schemas.ReplicationConfiguration_bandwidthThrottling, &v.BandwidthThrottling)
+		case schemas.ReplicationConfiguration_createPublicIP:
+			v.CreatePublicIP = new(bool)
+			return d.ReadBool(schemas.ReplicationConfiguration_createPublicIP, v.CreatePublicIP)
+		case schemas.ReplicationConfiguration_dataPlaneRouting:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationConfiguration_dataPlaneRouting, &ev); err != nil {
+				return err
+			}
+			v.DataPlaneRouting = types.ReplicationConfigurationDataPlaneRouting(ev)
+			return nil
+		case schemas.ReplicationConfiguration_defaultLargeStagingDiskType:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationConfiguration_defaultLargeStagingDiskType, &ev); err != nil {
+				return err
+			}
+			v.DefaultLargeStagingDiskType = types.ReplicationConfigurationDefaultLargeStagingDiskType(ev)
+			return nil
+		case schemas.ReplicationConfiguration_ebsEncryption:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationConfiguration_ebsEncryption, &ev); err != nil {
+				return err
+			}
+			v.EbsEncryption = types.ReplicationConfigurationEbsEncryption(ev)
+			return nil
+		case schemas.ReplicationConfiguration_ebsEncryptionKeyArn:
+			v.EbsEncryptionKeyArn = new(string)
+			return d.ReadString(schemas.ReplicationConfiguration_ebsEncryptionKeyArn, v.EbsEncryptionKeyArn)
+		case schemas.ReplicationConfiguration_internetProtocol:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationConfiguration_internetProtocol, &ev); err != nil {
+				return err
+			}
+			v.InternetProtocol = types.InternetProtocol(ev)
+			return nil
+		case schemas.ReplicationConfiguration_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ReplicationConfiguration_name, v.Name)
+		case schemas.ReplicationConfiguration_pitPolicy:
+			return deserializePITPolicy(d, schemas.ReplicationConfiguration_pitPolicy, &v.PitPolicy)
+		case schemas.ReplicationConfiguration_replicatedDisks:
+			return deserializeReplicationConfigurationReplicatedDisks(d, schemas.ReplicationConfiguration_replicatedDisks, &v.ReplicatedDisks)
+		case schemas.ReplicationConfiguration_replicationServerInstanceType:
+			v.ReplicationServerInstanceType = new(string)
+			return d.ReadString(schemas.ReplicationConfiguration_replicationServerInstanceType, v.ReplicationServerInstanceType)
+		case schemas.ReplicationConfiguration_replicationServersSecurityGroupsIDs:
+			return deserializeReplicationServersSecurityGroupsIDs(d, schemas.ReplicationConfiguration_replicationServersSecurityGroupsIDs, &v.ReplicationServersSecurityGroupsIDs)
+		case schemas.ReplicationConfiguration_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.ReplicationConfiguration_sourceServerID, v.SourceServerID)
+		case schemas.ReplicationConfiguration_stagingAreaSubnetId:
+			v.StagingAreaSubnetId = new(string)
+			return d.ReadString(schemas.ReplicationConfiguration_stagingAreaSubnetId, v.StagingAreaSubnetId)
+		case schemas.ReplicationConfiguration_stagingAreaTags:
+			return deserializeTagsMap(d, schemas.ReplicationConfiguration_stagingAreaTags, &v.StagingAreaTags)
+		case schemas.ReplicationConfiguration_useDedicatedReplicationServer:
+			v.UseDedicatedReplicationServer = new(bool)
+			return d.ReadBool(schemas.ReplicationConfiguration_useDedicatedReplicationServer, v.UseDedicatedReplicationServer)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReplicationConfiguration, schemas.UpdateReplicationConfigurationRequest, schemas.ReplicationConfiguration)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReplicationConfiguration, schemas.UpdateReplicationConfigurationRequest, schemas.ReplicationConfiguration), output: &UpdateReplicationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

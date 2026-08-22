@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,19 @@ type UpdateIndexingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexingRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateIndexingRuleRequest_Name, *v.Name)
+	}
+	serializeIndexingRuleValueUpdate(s, schemas.UpdateIndexingRuleRequest_Rule, v.Rule)
+}
+
 type UpdateIndexingRuleOutput struct {
 
 	//  Updated indexing rule.
@@ -55,13 +70,34 @@ type UpdateIndexingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexingRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexingRuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexingRule != nil {
+		s.WriteStruct(schemas.UpdateIndexingRuleResult_IndexingRule)
+		v.IndexingRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateIndexingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIndexingRuleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIndexingRuleResult_IndexingRule:
+			v.IndexingRule = &types.IndexingRule{}
+			return v.IndexingRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIndexingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIndexingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexingRule, schemas.UpdateIndexingRuleRequest, schemas.UpdateIndexingRuleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIndexingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexingRule, schemas.UpdateIndexingRuleRequest, schemas.UpdateIndexingRuleResult), output: &UpdateIndexingRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

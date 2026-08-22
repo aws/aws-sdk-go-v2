@@ -4,6 +4,8 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,24 @@ type RequestCancelWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestCancelWorkflowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestCancelWorkflowExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestCancelWorkflowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.RequestCancelWorkflowExecutionInput_domain, *v.Domain)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.RequestCancelWorkflowExecutionInput_runId, *v.RunId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.RequestCancelWorkflowExecutionInput_workflowId, *v.WorkflowId)
+	}
+}
+
 type RequestCancelWorkflowExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +98,26 @@ type RequestCancelWorkflowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestCancelWorkflowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestCancelWorkflowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RequestCancelWorkflowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRequestCancelWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRequestCancelWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestCancelWorkflowExecution, schemas.RequestCancelWorkflowExecutionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRequestCancelWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestCancelWorkflowExecution, schemas.RequestCancelWorkflowExecutionInput, nil), output: &RequestCancelWorkflowExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

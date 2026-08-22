@@ -4,6 +4,8 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteCustomRoutingEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomRoutingEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomRoutingEndpointGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomRoutingEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.DeleteCustomRoutingEndpointGroupRequest_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+}
+
 type DeleteCustomRoutingEndpointGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteCustomRoutingEndpointGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomRoutingEndpointGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomRoutingEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomRoutingEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomRoutingEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCustomRoutingEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomRoutingEndpointGroup, schemas.DeleteCustomRoutingEndpointGroupRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCustomRoutingEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomRoutingEndpointGroup, schemas.DeleteCustomRoutingEndpointGroupRequest, nil), output: &DeleteCustomRoutingEndpointGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

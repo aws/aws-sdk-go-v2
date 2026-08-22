@@ -4,7 +4,9 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,29 @@ type UpdateAssistantAIAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssistantAIAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssistantAIAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssistantAIAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiAgentType != "" {
+		s.WriteString(schemas.UpdateAssistantAIAgentRequest_aiAgentType, string(v.AiAgentType))
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.UpdateAssistantAIAgentRequest_assistantId, *v.AssistantId)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateAssistantAIAgentRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrchestratorUseCase != nil {
+		s.WriteString(schemas.UpdateAssistantAIAgentRequest_orchestratorUseCase, *v.OrchestratorUseCase)
+	}
+}
+
 type UpdateAssistantAIAgentOutput struct {
 
 	// The assistant data.
@@ -62,13 +87,34 @@ type UpdateAssistantAIAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssistantAIAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssistantAIAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssistantAIAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assistant != nil {
+		s.WriteStruct(schemas.UpdateAssistantAIAgentResponse_assistant)
+		v.Assistant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssistantAIAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssistantAIAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssistantAIAgentResponse_assistant:
+			v.Assistant = &types.AssistantData{}
+			return v.Assistant.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssistantAIAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssistantAIAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssistantAIAgent, schemas.UpdateAssistantAIAgentRequest, schemas.UpdateAssistantAIAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssistantAIAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssistantAIAgent, schemas.UpdateAssistantAIAgentRequest, schemas.UpdateAssistantAIAgentResponse), output: &UpdateAssistantAIAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

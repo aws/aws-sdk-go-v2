@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,26 @@ type AddRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.AddRegionRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.AddRegionRequest_RegionName, *v.RegionName)
+	}
+	if v.VPCSettings != nil {
+		s.WriteStruct(schemas.AddRegionRequest_VPCSettings)
+		v.VPCSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AddRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +74,26 @@ type AddRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddRegionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddRegionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddRegionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddRegionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddRegion, schemas.AddRegionRequest, schemas.AddRegionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddRegion, schemas.AddRegionRequest, schemas.AddRegionResult), output: &AddRegionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

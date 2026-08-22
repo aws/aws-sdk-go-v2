@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type CancelBatchImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelBatchImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelBatchImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelBatchImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelBatchImportJobRequest_jobId, *v.JobId)
+	}
+}
+
 type CancelBatchImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type CancelBatchImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelBatchImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelBatchImportJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelBatchImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelBatchImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelBatchImportJobResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelBatchImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelBatchImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelBatchImportJob, schemas.CancelBatchImportJobRequest, schemas.CancelBatchImportJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelBatchImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelBatchImportJob, schemas.CancelBatchImportJobRequest, schemas.CancelBatchImportJobResult), output: &CancelBatchImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type UpdateSMBFileShareVisibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSMBFileShareVisibilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSMBFileShareVisibilityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSMBFileShareVisibilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSharesVisible != nil {
+		s.WriteBool(schemas.UpdateSMBFileShareVisibilityInput_FileSharesVisible, *v.FileSharesVisible)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateSMBFileShareVisibilityInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type UpdateSMBFileShareVisibilityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -52,13 +69,32 @@ type UpdateSMBFileShareVisibilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSMBFileShareVisibilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSMBFileShareVisibilityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSMBFileShareVisibilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateSMBFileShareVisibilityOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *UpdateSMBFileShareVisibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSMBFileShareVisibilityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSMBFileShareVisibilityOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.UpdateSMBFileShareVisibilityOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSMBFileShareVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSMBFileShareVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSMBFileShareVisibility, schemas.UpdateSMBFileShareVisibilityInput, schemas.UpdateSMBFileShareVisibilityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSMBFileShareVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSMBFileShareVisibility, schemas.UpdateSMBFileShareVisibilityInput, schemas.UpdateSMBFileShareVisibilityOutput), output: &UpdateSMBFileShareVisibilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -154,6 +156,45 @@ type IssueCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IssueCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IssueCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IssueCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiPassthrough != nil {
+		s.WriteStruct(schemas.IssueCertificateRequest_ApiPassthrough)
+		v.ApiPassthrough.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.IssueCertificateRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.Csr != nil {
+		s.WriteBlob(schemas.IssueCertificateRequest_Csr, v.Csr)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.IssueCertificateRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.SigningAlgorithm != "" {
+		s.WriteString(schemas.IssueCertificateRequest_SigningAlgorithm, string(v.SigningAlgorithm))
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.IssueCertificateRequest_TemplateArn, *v.TemplateArn)
+	}
+	if v.Validity != nil {
+		s.WriteStruct(schemas.IssueCertificateRequest_Validity)
+		v.Validity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidityNotBefore != nil {
+		s.WriteStruct(schemas.IssueCertificateRequest_ValidityNotBefore)
+		v.ValidityNotBefore.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type IssueCertificateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the issued certificate and the certificate
@@ -168,13 +209,32 @@ type IssueCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IssueCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IssueCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IssueCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.IssueCertificateResponse_CertificateArn, *v.CertificateArn)
+	}
+}
+func (v *IssueCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IssueCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IssueCertificateResponse_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.IssueCertificateResponse_CertificateArn, v.CertificateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIssueCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIssueCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IssueCertificate, schemas.IssueCertificateRequest, schemas.IssueCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpIssueCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IssueCertificate, schemas.IssueCertificateRequest, schemas.IssueCertificateResponse), output: &IssueCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

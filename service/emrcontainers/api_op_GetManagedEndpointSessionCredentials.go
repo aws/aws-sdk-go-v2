@@ -5,7 +5,9 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,36 @@ type GetManagedEndpointSessionCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedEndpointSessionCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedEndpointSessionCredentialsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedEndpointSessionCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_clientToken, *v.ClientToken)
+	}
+	if v.CredentialType != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_credentialType, *v.CredentialType)
+	}
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.GetManagedEndpointSessionCredentialsRequest_durationInSeconds, *v.DurationInSeconds)
+	}
+	if v.EndpointIdentifier != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_endpointIdentifier, *v.EndpointIdentifier)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.LogContext != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_logContext, *v.LogContext)
+	}
+	if v.VirtualClusterIdentifier != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_virtualClusterIdentifier, *v.VirtualClusterIdentifier)
+	}
+}
+
 type GetManagedEndpointSessionCredentialsOutput struct {
 
 	// The structure containing the session credentials.
@@ -83,13 +115,44 @@ type GetManagedEndpointSessionCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedEndpointSessionCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedEndpointSessionCredentialsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedEndpointSessionCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCredentials(s, schemas.GetManagedEndpointSessionCredentialsResponse_credentials, v.Credentials)
+	serializeCredentials(s, schemas.GetManagedEndpointSessionCredentialsResponse_endpointCredentials, v.EndpointCredentials)
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.GetManagedEndpointSessionCredentialsResponse_expiresAt, *v.ExpiresAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsResponse_id, *v.Id)
+	}
+}
+func (v *GetManagedEndpointSessionCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedEndpointSessionCredentialsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedEndpointSessionCredentialsResponse_credentials:
+			return deserializeCredentials(d, schemas.GetManagedEndpointSessionCredentialsResponse_credentials, &v.Credentials)
+		case schemas.GetManagedEndpointSessionCredentialsResponse_endpointCredentials:
+			return deserializeCredentials(d, schemas.GetManagedEndpointSessionCredentialsResponse_endpointCredentials, &v.EndpointCredentials)
+		case schemas.GetManagedEndpointSessionCredentialsResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.GetManagedEndpointSessionCredentialsResponse_expiresAt, v.ExpiresAt)
+		case schemas.GetManagedEndpointSessionCredentialsResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetManagedEndpointSessionCredentialsResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedEndpointSessionCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedEndpointSessionCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedEndpointSessionCredentials, schemas.GetManagedEndpointSessionCredentialsRequest, schemas.GetManagedEndpointSessionCredentialsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedEndpointSessionCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedEndpointSessionCredentials, schemas.GetManagedEndpointSessionCredentialsRequest, schemas.GetManagedEndpointSessionCredentialsResponse), output: &GetManagedEndpointSessionCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

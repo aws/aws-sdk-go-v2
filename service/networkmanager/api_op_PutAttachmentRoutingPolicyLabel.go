@@ -5,6 +5,8 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type PutAttachmentRoutingPolicyLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttachmentRoutingPolicyLabelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttachmentRoutingPolicyLabelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttachmentRoutingPolicyLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelRequest_AttachmentId, *v.AttachmentId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+}
+
 type PutAttachmentRoutingPolicyLabelOutput struct {
 
 	// The ID of the attachment that received the routing policy label.
@@ -65,13 +88,44 @@ type PutAttachmentRoutingPolicyLabelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttachmentRoutingPolicyLabelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttachmentRoutingPolicyLabelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttachmentRoutingPolicyLabelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelResponse_AttachmentId, *v.AttachmentId)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelResponse_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+}
+func (v *PutAttachmentRoutingPolicyLabelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAttachmentRoutingPolicyLabelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAttachmentRoutingPolicyLabelResponse_AttachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.PutAttachmentRoutingPolicyLabelResponse_AttachmentId, v.AttachmentId)
+		case schemas.PutAttachmentRoutingPolicyLabelResponse_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.PutAttachmentRoutingPolicyLabelResponse_CoreNetworkId, v.CoreNetworkId)
+		case schemas.PutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel:
+			v.RoutingPolicyLabel = new(string)
+			return d.ReadString(schemas.PutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel, v.RoutingPolicyLabel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAttachmentRoutingPolicyLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAttachmentRoutingPolicyLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttachmentRoutingPolicyLabel, schemas.PutAttachmentRoutingPolicyLabelRequest, schemas.PutAttachmentRoutingPolicyLabelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAttachmentRoutingPolicyLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttachmentRoutingPolicyLabel, schemas.PutAttachmentRoutingPolicyLabelRequest, schemas.PutAttachmentRoutingPolicyLabelResponse), output: &PutAttachmentRoutingPolicyLabelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

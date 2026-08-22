@@ -4,7 +4,9 @@ package translate
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,32 @@ type TranslateDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranslateDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslateDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslateDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteStruct(schemas.TranslateDocumentRequest_Document)
+		v.Document.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.TranslateDocumentRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceLanguageCode != nil {
+		s.WriteString(schemas.TranslateDocumentRequest_SourceLanguageCode, *v.SourceLanguageCode)
+	}
+	if v.TargetLanguageCode != nil {
+		s.WriteString(schemas.TranslateDocumentRequest_TargetLanguageCode, *v.TargetLanguageCode)
+	}
+	serializeResourceNameList(s, schemas.TranslateDocumentRequest_TerminologyNames, v.TerminologyNames)
+}
+
 type TranslateDocumentOutput struct {
 
 	// The language code of the source document.
@@ -133,13 +161,57 @@ type TranslateDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranslateDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslateDocumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslateDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppliedSettings != nil {
+		s.WriteStruct(schemas.TranslateDocumentResponse_AppliedSettings)
+		v.AppliedSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAppliedTerminologyList(s, schemas.TranslateDocumentResponse_AppliedTerminologies, v.AppliedTerminologies)
+	if v.SourceLanguageCode != nil {
+		s.WriteString(schemas.TranslateDocumentResponse_SourceLanguageCode, *v.SourceLanguageCode)
+	}
+	if v.TargetLanguageCode != nil {
+		s.WriteString(schemas.TranslateDocumentResponse_TargetLanguageCode, *v.TargetLanguageCode)
+	}
+	if v.TranslatedDocument != nil {
+		s.WriteStruct(schemas.TranslateDocumentResponse_TranslatedDocument)
+		v.TranslatedDocument.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TranslateDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranslateDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranslateDocumentResponse_AppliedSettings:
+			v.AppliedSettings = &types.TranslationSettings{}
+			return v.AppliedSettings.Deserialize(d)
+		case schemas.TranslateDocumentResponse_AppliedTerminologies:
+			return deserializeAppliedTerminologyList(d, schemas.TranslateDocumentResponse_AppliedTerminologies, &v.AppliedTerminologies)
+		case schemas.TranslateDocumentResponse_SourceLanguageCode:
+			v.SourceLanguageCode = new(string)
+			return d.ReadString(schemas.TranslateDocumentResponse_SourceLanguageCode, v.SourceLanguageCode)
+		case schemas.TranslateDocumentResponse_TargetLanguageCode:
+			v.TargetLanguageCode = new(string)
+			return d.ReadString(schemas.TranslateDocumentResponse_TargetLanguageCode, v.TargetLanguageCode)
+		case schemas.TranslateDocumentResponse_TranslatedDocument:
+			v.TranslatedDocument = &types.TranslatedDocument{}
+			return v.TranslatedDocument.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTranslateDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTranslateDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslateDocument, schemas.TranslateDocumentRequest, schemas.TranslateDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTranslateDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslateDocument, schemas.TranslateDocumentRequest, schemas.TranslateDocumentResponse), output: &TranslateDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

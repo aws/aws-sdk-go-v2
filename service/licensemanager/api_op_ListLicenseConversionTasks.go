@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,22 @@ type ListLicenseConversionTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLicenseConversionTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLicenseConversionTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLicenseConversionTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListLicenseConversionTasksRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLicenseConversionTasksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLicenseConversionTasksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLicenseConversionTasksOutput struct {
 
 	// Information about the license configuration tasks for your account.
@@ -52,13 +70,35 @@ type ListLicenseConversionTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLicenseConversionTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLicenseConversionTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLicenseConversionTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLicenseConversionTasks(s, schemas.ListLicenseConversionTasksResponse_LicenseConversionTasks, v.LicenseConversionTasks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLicenseConversionTasksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLicenseConversionTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLicenseConversionTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLicenseConversionTasksResponse_LicenseConversionTasks:
+			return deserializeLicenseConversionTasks(d, schemas.ListLicenseConversionTasksResponse_LicenseConversionTasks, &v.LicenseConversionTasks)
+		case schemas.ListLicenseConversionTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLicenseConversionTasksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLicenseConversionTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLicenseConversionTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLicenseConversionTasks, schemas.ListLicenseConversionTasksRequest, schemas.ListLicenseConversionTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLicenseConversionTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLicenseConversionTasks, schemas.ListLicenseConversionTasksRequest, schemas.ListLicenseConversionTasksResponse), output: &ListLicenseConversionTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

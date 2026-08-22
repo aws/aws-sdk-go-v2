@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type DescribeAssessmentTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssessmentTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssessmentTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssessmentTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDescribeArnList(s, schemas.DescribeAssessmentTargetsRequest_assessmentTargetArns, v.AssessmentTargetArns)
+}
+
 type DescribeAssessmentTargetsOutput struct {
 
 	// Information about the assessment targets.
@@ -54,13 +66,32 @@ type DescribeAssessmentTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssessmentTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssessmentTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssessmentTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentTargetList(s, schemas.DescribeAssessmentTargetsResponse_assessmentTargets, v.AssessmentTargets)
+	serializeFailedItems(s, schemas.DescribeAssessmentTargetsResponse_failedItems, v.FailedItems)
+}
+func (v *DescribeAssessmentTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssessmentTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssessmentTargetsResponse_assessmentTargets:
+			return deserializeAssessmentTargetList(d, schemas.DescribeAssessmentTargetsResponse_assessmentTargets, &v.AssessmentTargets)
+		case schemas.DescribeAssessmentTargetsResponse_failedItems:
+			return deserializeFailedItems(d, schemas.DescribeAssessmentTargetsResponse_failedItems, &v.FailedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssessmentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAssessmentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssessmentTargets, schemas.DescribeAssessmentTargetsRequest, schemas.DescribeAssessmentTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAssessmentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssessmentTargets, schemas.DescribeAssessmentTargetsRequest, schemas.DescribeAssessmentTargetsResponse), output: &DescribeAssessmentTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

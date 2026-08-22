@@ -4,6 +4,8 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type GetPublicKeyCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPublicKeyCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPublicKeyCertificateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPublicKeyCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.GetPublicKeyCertificateInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+}
+
 type GetPublicKeyCertificateOutput struct {
 
 	// The public key component of the asymmetric key pair in a certificate PEM format
@@ -68,13 +82,38 @@ type GetPublicKeyCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPublicKeyCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPublicKeyCertificateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPublicKeyCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyCertificate != nil {
+		s.WriteString(schemas.GetPublicKeyCertificateOutput_KeyCertificate, *v.KeyCertificate)
+	}
+	if v.KeyCertificateChain != nil {
+		s.WriteString(schemas.GetPublicKeyCertificateOutput_KeyCertificateChain, *v.KeyCertificateChain)
+	}
+}
+func (v *GetPublicKeyCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPublicKeyCertificateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPublicKeyCertificateOutput_KeyCertificate:
+			v.KeyCertificate = new(string)
+			return d.ReadString(schemas.GetPublicKeyCertificateOutput_KeyCertificate, v.KeyCertificate)
+		case schemas.GetPublicKeyCertificateOutput_KeyCertificateChain:
+			v.KeyCertificateChain = new(string)
+			return d.ReadString(schemas.GetPublicKeyCertificateOutput_KeyCertificateChain, v.KeyCertificateChain)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPublicKeyCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPublicKeyCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPublicKeyCertificate, schemas.GetPublicKeyCertificateInput, schemas.GetPublicKeyCertificateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPublicKeyCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPublicKeyCertificate, schemas.GetPublicKeyCertificateInput, schemas.GetPublicKeyCertificateOutput), output: &GetPublicKeyCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

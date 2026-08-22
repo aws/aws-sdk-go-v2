@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetDomainVerificationInput struct {
 	DomainVerificationIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDomainVerificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainVerificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainVerificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainVerificationIdentifier != nil {
+		s.WriteString(schemas.GetDomainVerificationRequest_domainVerificationIdentifier, *v.DomainVerificationIdentifier)
+	}
 }
 
 type GetDomainVerificationOutput struct {
@@ -79,13 +93,77 @@ type GetDomainVerificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainVerificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainVerificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainVerificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDomainVerificationResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetDomainVerificationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDomainVerificationResponse_domainName, *v.DomainName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetDomainVerificationResponse_id, *v.Id)
+	}
+	if v.LastVerifiedTime != nil {
+		s.WriteTime(schemas.GetDomainVerificationResponse_lastVerifiedTime, *v.LastVerifiedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDomainVerificationResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetDomainVerificationResponse_tags, v.Tags)
+	if v.TxtMethodConfig != nil {
+		s.WriteStruct(schemas.GetDomainVerificationResponse_txtMethodConfig)
+		v.TxtMethodConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDomainVerificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainVerificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainVerificationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDomainVerificationResponse_arn, v.Arn)
+		case schemas.GetDomainVerificationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDomainVerificationResponse_createdAt, v.CreatedAt)
+		case schemas.GetDomainVerificationResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetDomainVerificationResponse_domainName, v.DomainName)
+		case schemas.GetDomainVerificationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDomainVerificationResponse_id, v.Id)
+		case schemas.GetDomainVerificationResponse_lastVerifiedTime:
+			v.LastVerifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetDomainVerificationResponse_lastVerifiedTime, v.LastVerifiedTime)
+		case schemas.GetDomainVerificationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDomainVerificationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VerificationStatus(ev)
+			return nil
+		case schemas.GetDomainVerificationResponse_tags:
+			return deserializeTagMap(d, schemas.GetDomainVerificationResponse_tags, &v.Tags)
+		case schemas.GetDomainVerificationResponse_txtMethodConfig:
+			v.TxtMethodConfig = &types.TxtMethodConfig{}
+			return v.TxtMethodConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainVerification, schemas.GetDomainVerificationRequest, schemas.GetDomainVerificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainVerification, schemas.GetDomainVerificationRequest, schemas.GetDomainVerificationResponse), output: &GetDomainVerificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

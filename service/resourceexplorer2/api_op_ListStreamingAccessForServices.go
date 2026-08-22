@@ -5,7 +5,9 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type ListStreamingAccessForServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamingAccessForServicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamingAccessForServicesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamingAccessForServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStreamingAccessForServicesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamingAccessForServicesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListStreamingAccessForServicesOutput struct {
 
 	// A list of Amazon Web Services services that have streaming access to your
@@ -67,13 +84,35 @@ type ListStreamingAccessForServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamingAccessForServicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamingAccessForServicesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamingAccessForServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamingAccessForServicesOutput_NextToken, *v.NextToken)
+	}
+	serializeStreamingAccessDetailsList(s, schemas.ListStreamingAccessForServicesOutput_StreamingAccessForServices, v.StreamingAccessForServices)
+}
+func (v *ListStreamingAccessForServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamingAccessForServicesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamingAccessForServicesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamingAccessForServicesOutput_NextToken, v.NextToken)
+		case schemas.ListStreamingAccessForServicesOutput_StreamingAccessForServices:
+			return deserializeStreamingAccessDetailsList(d, schemas.ListStreamingAccessForServicesOutput_StreamingAccessForServices, &v.StreamingAccessForServices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamingAccessForServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStreamingAccessForServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamingAccessForServices, schemas.ListStreamingAccessForServicesInput, schemas.ListStreamingAccessForServicesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStreamingAccessForServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamingAccessForServices, schemas.ListStreamingAccessForServicesInput, schemas.ListStreamingAccessForServicesOutput), output: &ListStreamingAccessForServicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

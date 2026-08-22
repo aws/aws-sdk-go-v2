@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListSitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSitesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSitesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSitesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSitesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSitesInput_NextToken, *v.NextToken)
+	}
+	serializeCityList(s, schemas.ListSitesInput_OperatingAddressCityFilter, v.OperatingAddressCityFilter)
+	serializeCountryCodeList(s, schemas.ListSitesInput_OperatingAddressCountryCodeFilter, v.OperatingAddressCountryCodeFilter)
+	serializeStateOrRegionList(s, schemas.ListSitesInput_OperatingAddressStateOrRegionFilter, v.OperatingAddressStateOrRegionFilter)
+}
+
 type ListSitesOutput struct {
 
 	// The pagination token.
@@ -65,13 +85,35 @@ type ListSitesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSitesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSitesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSitesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSitesOutput_NextToken, *v.NextToken)
+	}
+	serializesiteListDefinition(s, schemas.ListSitesOutput_Sites, v.Sites)
+}
+func (v *ListSitesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSitesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSitesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSitesOutput_NextToken, v.NextToken)
+		case schemas.ListSitesOutput_Sites:
+			return deserializesiteListDefinition(d, schemas.ListSitesOutput_Sites, &v.Sites)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSites{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSites, schemas.ListSitesInput, schemas.ListSitesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSites{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSites, schemas.ListSitesInput, schemas.ListSitesOutput), output: &ListSitesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

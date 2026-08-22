@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,31 @@ type UpdateQuoteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQuoteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQuoteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQuoteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CountryCode != nil {
+		s.WriteString(schemas.UpdateQuoteInput_CountryCode, *v.CountryCode)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateQuoteInput_Description, *v.Description)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.UpdateQuoteInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+	if v.QuoteIdentifier != nil {
+		s.WriteString(schemas.UpdateQuoteInput_QuoteIdentifier, *v.QuoteIdentifier)
+	}
+	serializeQuoteCapacityList(s, schemas.UpdateQuoteInput_RequestedCapacities, v.RequestedCapacities)
+	serializeQuoteConstraintList(s, schemas.UpdateQuoteInput_RequestedConstraints, v.RequestedConstraints)
+	serializePaymentOptionList(s, schemas.UpdateQuoteInput_RequestedPaymentOptions, v.RequestedPaymentOptions)
+	serializePaymentTermList(s, schemas.UpdateQuoteInput_RequestedPaymentTerms, v.RequestedPaymentTerms)
+}
+
 type UpdateQuoteOutput struct {
 
 	// Information about the updated quote.
@@ -68,13 +95,34 @@ type UpdateQuoteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQuoteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQuoteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQuoteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Quote != nil {
+		s.WriteStruct(schemas.UpdateQuoteOutput_Quote)
+		v.Quote.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateQuoteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQuoteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQuoteOutput_Quote:
+			v.Quote = &types.Quote{}
+			return v.Quote.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQuoteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQuote{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuote, schemas.UpdateQuoteInput, schemas.UpdateQuoteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQuote{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuote, schemas.UpdateQuoteInput, schemas.UpdateQuoteOutput), output: &UpdateQuoteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

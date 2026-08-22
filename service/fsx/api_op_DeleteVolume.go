@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,31 @@ type DeleteVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteVolumeRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.DeleteVolumeRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.DeleteVolumeRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.DeleteVolumeRequest_VolumeId, *v.VolumeId)
+	}
+}
+
 type DeleteVolumeOutput struct {
 
 	// The lifecycle state of the volume being deleted. If the DeleteVolume operation
@@ -67,13 +94,50 @@ type DeleteVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DeleteVolumeResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.OntapResponse != nil {
+		s.WriteStruct(schemas.DeleteVolumeResponse_OntapResponse)
+		v.OntapResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.DeleteVolumeResponse_VolumeId, *v.VolumeId)
+	}
+}
+func (v *DeleteVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVolumeResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DeleteVolumeResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.VolumeLifecycle(ev)
+			return nil
+		case schemas.DeleteVolumeResponse_OntapResponse:
+			v.OntapResponse = &types.DeleteVolumeOntapResponse{}
+			return v.OntapResponse.Deserialize(d)
+		case schemas.DeleteVolumeResponse_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.DeleteVolumeResponse_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVolume, schemas.DeleteVolumeRequest, schemas.DeleteVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVolume, schemas.DeleteVolumeRequest, schemas.DeleteVolumeResponse), output: &DeleteVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

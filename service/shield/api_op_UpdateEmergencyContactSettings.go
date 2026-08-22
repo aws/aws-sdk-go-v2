@@ -4,7 +4,9 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type UpdateEmergencyContactSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmergencyContactSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmergencyContactSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmergencyContactSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEmergencyContactList(s, schemas.UpdateEmergencyContactSettingsRequest_EmergencyContactList, v.EmergencyContactList)
+}
+
 type UpdateEmergencyContactSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +59,26 @@ type UpdateEmergencyContactSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmergencyContactSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmergencyContactSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmergencyContactSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateEmergencyContactSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEmergencyContactSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEmergencyContactSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEmergencyContactSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmergencyContactSettings, schemas.UpdateEmergencyContactSettingsRequest, schemas.UpdateEmergencyContactSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEmergencyContactSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmergencyContactSettings, schemas.UpdateEmergencyContactSettingsRequest, schemas.UpdateEmergencyContactSettingsResponse), output: &UpdateEmergencyContactSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

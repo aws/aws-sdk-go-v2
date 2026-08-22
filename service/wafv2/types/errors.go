@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *WAFAssociatedItemException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFAssociatedItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFAssociatedItemException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFAssociatedItemException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFAssociatedItemException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFAssociatedItemException_Message, *v.Message)
+	}
+}
+func (v *WAFAssociatedItemException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFAssociatedItemException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFAssociatedItemException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFAssociatedItemException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because you are inspecting the web request body, headers,
 // or cookies without specifying how to handle oversize components. Rules that
@@ -70,6 +92,27 @@ func (e *WAFConfigurationWarningException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFConfigurationWarningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFConfigurationWarningException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFConfigurationWarningException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFConfigurationWarningException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFConfigurationWarningException_Message, *v.Message)
+	}
+}
+func (v *WAFConfigurationWarningException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFConfigurationWarningException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFConfigurationWarningException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFConfigurationWarningException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // WAF couldn’t perform the operation because the resource that you tried to save
 // is a duplicate of an existing one.
@@ -97,6 +140,27 @@ func (e *WAFDuplicateItemException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFDuplicateItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFDuplicateItemException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFDuplicateItemException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFDuplicateItemException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFDuplicateItemException_Message, *v.Message)
+	}
+}
+func (v *WAFDuplicateItemException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFDuplicateItemException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFDuplicateItemException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFDuplicateItemException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because the specified version for the managed rule group
 // has expired. You can retrieve the available versions for the managed rule group
@@ -126,6 +190,27 @@ func (e *WAFExpiredManagedRuleGroupVersionException) ErrorCode() string {
 }
 func (e *WAFExpiredManagedRuleGroupVersionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *WAFExpiredManagedRuleGroupVersionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFExpiredManagedRuleGroupVersionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFExpiredManagedRuleGroupVersionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFExpiredManagedRuleGroupVersionException_Message, *v.Message)
+	}
+}
+func (v *WAFExpiredManagedRuleGroupVersionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFExpiredManagedRuleGroupVersionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFExpiredManagedRuleGroupVersionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFExpiredManagedRuleGroupVersionException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The operation failed because the specified WAF feature isn't supported by the
@@ -158,6 +243,30 @@ func (e *WAFFeatureNotIncludedInPricingPlanException) ErrorCode() string {
 func (e *WAFFeatureNotIncludedInPricingPlanException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *WAFFeatureNotIncludedInPricingPlanException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFFeatureNotIncludedInPricingPlanException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFFeatureNotIncludedInPricingPlanException) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDisallowedFeatures(s, schemas.WAFFeatureNotIncludedInPricingPlanException_DisallowedFeatures, v.DisallowedFeatures)
+	if v.Message != nil {
+		s.WriteString(schemas.WAFFeatureNotIncludedInPricingPlanException_Message, *v.Message)
+	}
+}
+func (v *WAFFeatureNotIncludedInPricingPlanException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFFeatureNotIncludedInPricingPlanException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFFeatureNotIncludedInPricingPlanException_DisallowedFeatures:
+			return deserializeDisallowedFeatures(d, schemas.WAFFeatureNotIncludedInPricingPlanException_DisallowedFeatures, &v.DisallowedFeatures)
+		case schemas.WAFFeatureNotIncludedInPricingPlanException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFFeatureNotIncludedInPricingPlanException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your request is valid, but WAF couldn’t perform the operation because of a
 // system problem. Retry your request.
@@ -185,6 +294,27 @@ func (e *WAFInternalErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *WAFInternalErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInternalErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInternalErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFInternalErrorException_Message, *v.Message)
+	}
+}
+func (v *WAFInternalErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInternalErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInternalErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFInternalErrorException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation isn't valid.
 type WAFInvalidOperationException struct {
@@ -211,6 +341,27 @@ func (e *WAFInvalidOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFInvalidOperationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInvalidOperationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInvalidOperationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFInvalidOperationException_Message, *v.Message)
+	}
+}
+func (v *WAFInvalidOperationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInvalidOperationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInvalidOperationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFInvalidOperationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because WAF didn't recognize a parameter in the request.
 // For example:
@@ -253,6 +404,49 @@ func (e *WAFInvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFInvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Field != "" {
+		s.WriteString(schemas.WAFInvalidParameterException_Field, string(v.Field))
+	}
+	if v.Parameter != nil {
+		s.WriteString(schemas.WAFInvalidParameterException_Parameter, *v.Parameter)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.WAFInvalidParameterException_Reason, *v.Reason)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.WAFInvalidParameterException_message, *v.Message)
+	}
+}
+func (v *WAFInvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInvalidParameterException_Field:
+			var ev string
+			if err := d.ReadString(schemas.WAFInvalidParameterException_Field, &ev); err != nil {
+				return err
+			}
+			v.Field = ParameterExceptionField(ev)
+			return nil
+		case schemas.WAFInvalidParameterException_Parameter:
+			v.Parameter = new(string)
+			return d.ReadString(schemas.WAFInvalidParameterException_Parameter, v.Parameter)
+		case schemas.WAFInvalidParameterException_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.WAFInvalidParameterException_Reason, v.Reason)
+		case schemas.WAFInvalidParameterException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFInvalidParameterException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation failed because the specified policy isn't in the proper format.
 //
@@ -300,6 +494,27 @@ func (e *WAFInvalidPermissionPolicyException) ErrorCode() string {
 func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *WAFInvalidPermissionPolicyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInvalidPermissionPolicyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInvalidPermissionPolicyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFInvalidPermissionPolicyException_Message, *v.Message)
+	}
+}
+func (v *WAFInvalidPermissionPolicyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInvalidPermissionPolicyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInvalidPermissionPolicyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFInvalidPermissionPolicyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // WAF couldn’t perform the operation because the resource that you requested
 // isn’t valid. Check the resource, and try again.
@@ -327,6 +542,27 @@ func (e *WAFInvalidResourceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFInvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFInvalidResourceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFInvalidResourceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFInvalidResourceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFInvalidResourceException_Message, *v.Message)
+	}
+}
+func (v *WAFInvalidResourceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFInvalidResourceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFInvalidResourceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFInvalidResourceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // WAF couldn’t perform the operation because you exceeded your resource limit.
 // For example, the maximum number of WebACL objects that you can create for an
@@ -360,6 +596,33 @@ func (e *WAFLimitsExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFLimitsExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFLimitsExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFLimitsExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFLimitsExceededException_Message, *v.Message)
+	}
+	if v.SourceType != nil {
+		s.WriteString(schemas.WAFLimitsExceededException_SourceType, *v.SourceType)
+	}
+}
+func (v *WAFLimitsExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFLimitsExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFLimitsExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFLimitsExceededException_Message, v.Message)
+		case schemas.WAFLimitsExceededException_SourceType:
+			v.SourceType = new(string)
+			return d.ReadString(schemas.WAFLimitsExceededException_SourceType, v.SourceType)
+		}
+		return nil
+	})
+}
 
 // The operation failed because you don't have the permissions that your logging
 // configuration requires. For information, see [Logging web ACL traffic information]in the WAF Developer Guide.
@@ -391,6 +654,27 @@ func (e *WAFLogDestinationPermissionIssueException) ErrorCode() string {
 func (e *WAFLogDestinationPermissionIssueException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *WAFLogDestinationPermissionIssueException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFLogDestinationPermissionIssueException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFLogDestinationPermissionIssueException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFLogDestinationPermissionIssueException_Message, *v.Message)
+	}
+}
+func (v *WAFLogDestinationPermissionIssueException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFLogDestinationPermissionIssueException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFLogDestinationPermissionIssueException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFLogDestinationPermissionIssueException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // WAF couldn’t perform the operation because your resource doesn't exist. If
 // you've just created a resource that you're using in this operation, you might
@@ -420,6 +704,27 @@ func (e *WAFNonexistentItemException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFNonexistentItemException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFNonexistentItemException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFNonexistentItemException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFNonexistentItemException_Message, *v.Message)
+	}
+}
+func (v *WAFNonexistentItemException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFNonexistentItemException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFNonexistentItemException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFNonexistentItemException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // WAF couldn’t save your changes because you tried to update or delete a resource
 // that has changed since you last retrieved it. Get the resource again, make any
@@ -448,6 +753,27 @@ func (e *WAFOptimisticLockException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFOptimisticLockException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFOptimisticLockException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFOptimisticLockException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFOptimisticLockException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFOptimisticLockException_Message, *v.Message)
+	}
+}
+func (v *WAFOptimisticLockException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFOptimisticLockException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFOptimisticLockException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFOptimisticLockException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // WAF is not able to access the service linked role. This can be caused by a
 // previous PutLoggingConfiguration request, which can lock the service linked
@@ -483,6 +809,27 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorCode() string {
 func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *WAFServiceLinkedRoleErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFServiceLinkedRoleErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFServiceLinkedRoleErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFServiceLinkedRoleErrorException_message, *v.Message)
+	}
+}
+func (v *WAFServiceLinkedRoleErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFServiceLinkedRoleErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFServiceLinkedRoleErrorException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFServiceLinkedRoleErrorException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You tried to use a managed rule group that's available by subscription, but you
 // aren't subscribed to it yet.
@@ -510,6 +857,27 @@ func (e *WAFSubscriptionNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFSubscriptionNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFSubscriptionNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFSubscriptionNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFSubscriptionNotFoundException_Message, *v.Message)
+	}
+}
+func (v *WAFSubscriptionNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFSubscriptionNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFSubscriptionNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFSubscriptionNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An error occurred during the tagging operation. Retry your request.
 type WAFTagOperationException struct {
@@ -536,6 +904,27 @@ func (e *WAFTagOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFTagOperationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFTagOperationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFTagOperationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFTagOperationException_Message, *v.Message)
+	}
+}
+func (v *WAFTagOperationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFTagOperationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFTagOperationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFTagOperationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // WAF couldn’t perform your tagging operation because of an internal error. Retry
 // your request.
@@ -564,6 +953,27 @@ func (e *WAFTagOperationInternalErrorException) ErrorCode() string {
 }
 func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *WAFTagOperationInternalErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFTagOperationInternalErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFTagOperationInternalErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFTagOperationInternalErrorException_Message, *v.Message)
+	}
+}
+func (v *WAFTagOperationInternalErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFTagOperationInternalErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFTagOperationInternalErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFTagOperationInternalErrorException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // WAF couldn’t retrieve a resource that you specified for this operation. If
@@ -595,6 +1005,27 @@ func (e *WAFUnavailableEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFUnavailableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *WAFUnavailableEntityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFUnavailableEntityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFUnavailableEntityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFUnavailableEntityException_Message, *v.Message)
+	}
+}
+func (v *WAFUnavailableEntityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFUnavailableEntityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFUnavailableEntityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFUnavailableEntityException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The rule that you've named doesn't aggregate solely on the IP address or solely
 // on the forwarded IP address. This call is only available for rate-based rules
@@ -624,4 +1055,25 @@ func (e *WAFUnsupportedAggregateKeyTypeException) ErrorCode() string {
 }
 func (e *WAFUnsupportedAggregateKeyTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *WAFUnsupportedAggregateKeyTypeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WAFUnsupportedAggregateKeyTypeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WAFUnsupportedAggregateKeyTypeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WAFUnsupportedAggregateKeyTypeException_Message, *v.Message)
+	}
+}
+func (v *WAFUnsupportedAggregateKeyTypeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WAFUnsupportedAggregateKeyTypeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WAFUnsupportedAggregateKeyTypeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WAFUnsupportedAggregateKeyTypeException_Message, v.Message)
+		}
+		return nil
+	})
 }

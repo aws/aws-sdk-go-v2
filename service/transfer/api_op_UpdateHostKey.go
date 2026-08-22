@@ -4,6 +4,8 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type UpdateHostKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHostKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHostKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHostKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateHostKeyRequest_Description, *v.Description)
+	}
+	if v.HostKeyId != nil {
+		s.WriteString(schemas.UpdateHostKeyRequest_HostKeyId, *v.HostKeyId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.UpdateHostKeyRequest_ServerId, *v.ServerId)
+	}
+}
+
 type UpdateHostKeyOutput struct {
 
 	// Returns the host key identifier for the updated host key.
@@ -62,13 +82,38 @@ type UpdateHostKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHostKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHostKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHostKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostKeyId != nil {
+		s.WriteString(schemas.UpdateHostKeyResponse_HostKeyId, *v.HostKeyId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.UpdateHostKeyResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *UpdateHostKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHostKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateHostKeyResponse_HostKeyId:
+			v.HostKeyId = new(string)
+			return d.ReadString(schemas.UpdateHostKeyResponse_HostKeyId, v.HostKeyId)
+		case schemas.UpdateHostKeyResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.UpdateHostKeyResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHostKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHostKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHostKey, schemas.UpdateHostKeyRequest, schemas.UpdateHostKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateHostKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHostKey, schemas.UpdateHostKeyRequest, schemas.UpdateHostKeyResponse), output: &UpdateHostKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

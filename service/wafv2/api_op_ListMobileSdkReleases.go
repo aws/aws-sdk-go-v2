@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type ListMobileSdkReleasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMobileSdkReleasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMobileSdkReleasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMobileSdkReleasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListMobileSdkReleasesRequest_Limit, *v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListMobileSdkReleasesRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.ListMobileSdkReleasesRequest_Platform, string(v.Platform))
+	}
+}
+
 type ListMobileSdkReleasesOutput struct {
 
 	// When you request a list of objects with a Limit setting, if the number of
@@ -71,13 +91,35 @@ type ListMobileSdkReleasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMobileSdkReleasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMobileSdkReleasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMobileSdkReleasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListMobileSdkReleasesResponse_NextMarker, *v.NextMarker)
+	}
+	serializeReleaseSummaries(s, schemas.ListMobileSdkReleasesResponse_ReleaseSummaries, v.ReleaseSummaries)
+}
+func (v *ListMobileSdkReleasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMobileSdkReleasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMobileSdkReleasesResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListMobileSdkReleasesResponse_NextMarker, v.NextMarker)
+		case schemas.ListMobileSdkReleasesResponse_ReleaseSummaries:
+			return deserializeReleaseSummaries(d, schemas.ListMobileSdkReleasesResponse_ReleaseSummaries, &v.ReleaseSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMobileSdkReleasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMobileSdkReleases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMobileSdkReleases, schemas.ListMobileSdkReleasesRequest, schemas.ListMobileSdkReleasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMobileSdkReleases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMobileSdkReleases, schemas.ListMobileSdkReleasesRequest, schemas.ListMobileSdkReleasesResponse), output: &ListMobileSdkReleasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

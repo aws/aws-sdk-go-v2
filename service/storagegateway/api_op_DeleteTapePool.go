@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteTapePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTapePoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTapePoolInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTapePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolARN != nil {
+		s.WriteString(schemas.DeleteTapePoolInput_PoolARN, *v.PoolARN)
+	}
+}
+
 type DeleteTapePoolOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom tape pool being deleted.
@@ -46,13 +60,32 @@ type DeleteTapePoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTapePoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTapePoolOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTapePoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolARN != nil {
+		s.WriteString(schemas.DeleteTapePoolOutput_PoolARN, *v.PoolARN)
+	}
+}
+func (v *DeleteTapePoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTapePoolOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTapePoolOutput_PoolARN:
+			v.PoolARN = new(string)
+			return d.ReadString(schemas.DeleteTapePoolOutput_PoolARN, v.PoolARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTapePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTapePool, schemas.DeleteTapePoolInput, schemas.DeleteTapePoolOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTapePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTapePool, schemas.DeleteTapePoolInput, schemas.DeleteTapePoolOutput), output: &DeleteTapePoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

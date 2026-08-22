@@ -4,6 +4,8 @@ package signer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,27 @@ type RevokeSigningProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeSigningProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeSigningProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeSigningProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EffectiveTime != nil {
+		s.WriteTime(schemas.RevokeSigningProfileRequest_effectiveTime, *v.EffectiveTime)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.RevokeSigningProfileRequest_profileName, *v.ProfileName)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.RevokeSigningProfileRequest_profileVersion, *v.ProfileVersion)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.RevokeSigningProfileRequest_reason, *v.Reason)
+	}
+}
+
 type RevokeSigningProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +87,26 @@ type RevokeSigningProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeSigningProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeSigningProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RevokeSigningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeSigningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSigningProfile, schemas.RevokeSigningProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeSigningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSigningProfile, schemas.RevokeSigningProfileRequest, nil), output: &RevokeSigningProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,22 @@ type GetDefaultViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetDefaultViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetDefaultViewOutput struct {
 
 	// The [Amazon resource name (ARN)] of the view that is the current default for the Amazon Web Services Region
@@ -43,13 +61,32 @@ type GetDefaultViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDefaultViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViewArn != nil {
+		s.WriteString(schemas.GetDefaultViewOutput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *GetDefaultViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDefaultViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDefaultViewOutput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.GetDefaultViewOutput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDefaultViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDefaultView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultView, nil, schemas.GetDefaultViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDefaultView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultView, nil, schemas.GetDefaultViewOutput), output: &GetDefaultViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

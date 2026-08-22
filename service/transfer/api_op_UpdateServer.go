@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -301,6 +303,72 @@ type UpdateServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteString(schemas.UpdateServerRequest_Certificate, *v.Certificate)
+	}
+	if v.EndpointDetails != nil {
+		s.WriteStruct(schemas.UpdateServerRequest_EndpointDetails)
+		v.EndpointDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointType != "" {
+		s.WriteString(schemas.UpdateServerRequest_EndpointType, string(v.EndpointType))
+	}
+	if v.HostKey != nil {
+		s.WriteString(schemas.UpdateServerRequest_HostKey, *v.HostKey)
+	}
+	if v.IdentityProviderDetails != nil {
+		s.WriteStruct(schemas.UpdateServerRequest_IdentityProviderDetails)
+		v.IdentityProviderDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityProviderType != "" {
+		s.WriteString(schemas.UpdateServerRequest_IdentityProviderType, string(v.IdentityProviderType))
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.UpdateServerRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.LoggingRole != nil {
+		s.WriteString(schemas.UpdateServerRequest_LoggingRole, *v.LoggingRole)
+	}
+	if v.PostAuthenticationLoginBanner != nil {
+		s.WriteString(schemas.UpdateServerRequest_PostAuthenticationLoginBanner, *v.PostAuthenticationLoginBanner)
+	}
+	if v.PreAuthenticationLoginBanner != nil {
+		s.WriteString(schemas.UpdateServerRequest_PreAuthenticationLoginBanner, *v.PreAuthenticationLoginBanner)
+	}
+	if v.ProtocolDetails != nil {
+		s.WriteStruct(schemas.UpdateServerRequest_ProtocolDetails)
+		v.ProtocolDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProtocols(s, schemas.UpdateServerRequest_Protocols, v.Protocols)
+	if v.S3StorageOptions != nil {
+		s.WriteStruct(schemas.UpdateServerRequest_S3StorageOptions)
+		v.S3StorageOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityPolicyName != nil {
+		s.WriteString(schemas.UpdateServerRequest_SecurityPolicyName, *v.SecurityPolicyName)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.UpdateServerRequest_ServerId, *v.ServerId)
+	}
+	serializeStructuredLogDestinations(s, schemas.UpdateServerRequest_StructuredLogDestinations, v.StructuredLogDestinations)
+	if v.WorkflowDetails != nil {
+		s.WriteStruct(schemas.UpdateServerRequest_WorkflowDetails)
+		v.WorkflowDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateServerOutput struct {
 
 	// A system-assigned unique identifier for a server that the Transfer Family user
@@ -315,13 +383,32 @@ type UpdateServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.UpdateServerResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *UpdateServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServerResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.UpdateServerResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServer, schemas.UpdateServerRequest, schemas.UpdateServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServer, schemas.UpdateServerRequest, schemas.UpdateServerResponse), output: &UpdateServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

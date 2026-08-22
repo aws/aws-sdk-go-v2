@@ -4,6 +4,8 @@ package emrcontainers
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteManagedEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteManagedEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteManagedEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteManagedEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteManagedEndpointRequest_id, *v.Id)
+	}
+	if v.VirtualClusterId != nil {
+		s.WriteString(schemas.DeleteManagedEndpointRequest_virtualClusterId, *v.VirtualClusterId)
+	}
+}
+
 type DeleteManagedEndpointOutput struct {
 
 	// The output displays the ID of the managed endpoint.
@@ -54,13 +71,38 @@ type DeleteManagedEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteManagedEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteManagedEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteManagedEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteManagedEndpointResponse_id, *v.Id)
+	}
+	if v.VirtualClusterId != nil {
+		s.WriteString(schemas.DeleteManagedEndpointResponse_virtualClusterId, *v.VirtualClusterId)
+	}
+}
+func (v *DeleteManagedEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteManagedEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteManagedEndpointResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteManagedEndpointResponse_id, v.Id)
+		case schemas.DeleteManagedEndpointResponse_virtualClusterId:
+			v.VirtualClusterId = new(string)
+			return d.ReadString(schemas.DeleteManagedEndpointResponse_virtualClusterId, v.VirtualClusterId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteManagedEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteManagedEndpoint, schemas.DeleteManagedEndpointRequest, schemas.DeleteManagedEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteManagedEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteManagedEndpoint, schemas.DeleteManagedEndpointRequest, schemas.DeleteManagedEndpointResponse), output: &DeleteManagedEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

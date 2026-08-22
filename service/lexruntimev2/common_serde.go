@@ -97,6 +97,7 @@ func serializeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.
 }
 
 func deserializeActiveContextsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ActiveContext) error {
+	*v = make([]types.ActiveContext, 0)
 	var vv types.ActiveContext
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ActiveContext{}
@@ -110,6 +111,7 @@ func deserializeActiveContextsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeButtonsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Button) error {
+	*v = make([]types.Button, 0)
 	var vv types.Button
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Button{}
@@ -123,6 +125,7 @@ func deserializeButtonsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeInterpretations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Interpretation) error {
+	*v = make([]types.Interpretation, 0)
 	var vv types.Interpretation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Interpretation{}
@@ -136,6 +139,7 @@ func deserializeInterpretations(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Message) error {
+	*v = make([]types.Message, 0)
 	var vv types.Message
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Message{}
@@ -149,6 +153,7 @@ func deserializeMessages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 }
 
 func deserializeRuntimeHintValuesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RuntimeHintValue) error {
+	*v = make([]types.RuntimeHintValue, 0)
 	var vv types.RuntimeHintValue
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RuntimeHintValue{}
@@ -162,6 +167,7 @@ func deserializeRuntimeHintValuesList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -175,6 +181,7 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Slot) error {
+	*v = make([]types.Slot, 0)
 	var vv types.Slot
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Slot{}

@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,25 @@ type DescribeSharedDirectoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSharedDirectoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSharedDirectoriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSharedDirectoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeSharedDirectoriesRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSharedDirectoriesRequest_NextToken, *v.NextToken)
+	}
+	if v.OwnerDirectoryId != nil {
+		s.WriteString(schemas.DescribeSharedDirectoriesRequest_OwnerDirectoryId, *v.OwnerDirectoryId)
+	}
+	serializeDirectoryIds(s, schemas.DescribeSharedDirectoriesRequest_SharedDirectoryIds, v.SharedDirectoryIds)
+}
+
 type DescribeSharedDirectoriesOutput struct {
 
 	// If not null, token that indicates that more results are available. Pass this
@@ -61,13 +82,35 @@ type DescribeSharedDirectoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSharedDirectoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSharedDirectoriesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSharedDirectoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSharedDirectoriesResult_NextToken, *v.NextToken)
+	}
+	serializeSharedDirectories(s, schemas.DescribeSharedDirectoriesResult_SharedDirectories, v.SharedDirectories)
+}
+func (v *DescribeSharedDirectoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSharedDirectoriesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSharedDirectoriesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSharedDirectoriesResult_NextToken, v.NextToken)
+		case schemas.DescribeSharedDirectoriesResult_SharedDirectories:
+			return deserializeSharedDirectories(d, schemas.DescribeSharedDirectoriesResult_SharedDirectories, &v.SharedDirectories)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSharedDirectories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSharedDirectories, schemas.DescribeSharedDirectoriesRequest, schemas.DescribeSharedDirectoriesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSharedDirectories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSharedDirectories, schemas.DescribeSharedDirectoriesRequest, schemas.DescribeSharedDirectoriesResult), output: &DescribeSharedDirectoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type RejectSharedDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectSharedDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectSharedDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectSharedDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SharedDirectoryId != nil {
+		s.WriteString(schemas.RejectSharedDirectoryRequest_SharedDirectoryId, *v.SharedDirectoryId)
+	}
+}
+
 type RejectSharedDirectoryOutput struct {
 
 	// Identifier of the shared directory in the directory consumer account.
@@ -46,13 +60,32 @@ type RejectSharedDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectSharedDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectSharedDirectoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectSharedDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SharedDirectoryId != nil {
+		s.WriteString(schemas.RejectSharedDirectoryResult_SharedDirectoryId, *v.SharedDirectoryId)
+	}
+}
+func (v *RejectSharedDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectSharedDirectoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectSharedDirectoryResult_SharedDirectoryId:
+			v.SharedDirectoryId = new(string)
+			return d.ReadString(schemas.RejectSharedDirectoryResult_SharedDirectoryId, v.SharedDirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectSharedDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectSharedDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectSharedDirectory, schemas.RejectSharedDirectoryRequest, schemas.RejectSharedDirectoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRejectSharedDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectSharedDirectory, schemas.RejectSharedDirectoryRequest, schemas.RejectSharedDirectoryResult), output: &RejectSharedDirectoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

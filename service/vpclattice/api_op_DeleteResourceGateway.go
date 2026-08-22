@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteResourceGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceGatewayIdentifier != nil {
+		s.WriteString(schemas.DeleteResourceGatewayRequest_resourceGatewayIdentifier, *v.ResourceGatewayIdentifier)
+	}
+}
+
 type DeleteResourceGatewayOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource gateway.
@@ -54,13 +68,54 @@ type DeleteResourceGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteResourceGatewayResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteResourceGatewayResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteResourceGatewayResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteResourceGatewayResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteResourceGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourceGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourceGatewayResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteResourceGatewayResponse_arn, v.Arn)
+		case schemas.DeleteResourceGatewayResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteResourceGatewayResponse_id, v.Id)
+		case schemas.DeleteResourceGatewayResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteResourceGatewayResponse_name, v.Name)
+		case schemas.DeleteResourceGatewayResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteResourceGatewayResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceGatewayStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourceGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourceGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceGateway, schemas.DeleteResourceGatewayRequest, schemas.DeleteResourceGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResourceGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceGateway, schemas.DeleteResourceGatewayRequest, schemas.DeleteResourceGatewayResponse), output: &DeleteResourceGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

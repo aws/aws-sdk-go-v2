@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -74,6 +76,24 @@ type GetParametersForExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersForExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersForExportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersForExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyMaterialType != "" {
+		s.WriteString(schemas.GetParametersForExportInput_KeyMaterialType, string(v.KeyMaterialType))
+	}
+	if v.ReuseLastGeneratedToken != nil {
+		s.WriteBool(schemas.GetParametersForExportInput_ReuseLastGeneratedToken, *v.ReuseLastGeneratedToken)
+	}
+	if v.SigningKeyAlgorithm != "" {
+		s.WriteString(schemas.GetParametersForExportInput_SigningKeyAlgorithm, string(v.SigningKeyAlgorithm))
+	}
+}
+
 type GetParametersForExportOutput struct {
 
 	// The export token to initiate key export from Amazon Web Services Payment
@@ -112,13 +132,60 @@ type GetParametersForExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParametersForExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParametersForExportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParametersForExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportToken != nil {
+		s.WriteString(schemas.GetParametersForExportOutput_ExportToken, *v.ExportToken)
+	}
+	if v.ParametersValidUntilTimestamp != nil {
+		s.WriteTime(schemas.GetParametersForExportOutput_ParametersValidUntilTimestamp, *v.ParametersValidUntilTimestamp)
+	}
+	if v.SigningKeyAlgorithm != "" {
+		s.WriteString(schemas.GetParametersForExportOutput_SigningKeyAlgorithm, string(v.SigningKeyAlgorithm))
+	}
+	if v.SigningKeyCertificate != nil {
+		s.WriteString(schemas.GetParametersForExportOutput_SigningKeyCertificate, *v.SigningKeyCertificate)
+	}
+	if v.SigningKeyCertificateChain != nil {
+		s.WriteString(schemas.GetParametersForExportOutput_SigningKeyCertificateChain, *v.SigningKeyCertificateChain)
+	}
+}
+func (v *GetParametersForExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParametersForExportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParametersForExportOutput_ExportToken:
+			v.ExportToken = new(string)
+			return d.ReadString(schemas.GetParametersForExportOutput_ExportToken, v.ExportToken)
+		case schemas.GetParametersForExportOutput_ParametersValidUntilTimestamp:
+			v.ParametersValidUntilTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetParametersForExportOutput_ParametersValidUntilTimestamp, v.ParametersValidUntilTimestamp)
+		case schemas.GetParametersForExportOutput_SigningKeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.GetParametersForExportOutput_SigningKeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.SigningKeyAlgorithm = types.KeyAlgorithm(ev)
+			return nil
+		case schemas.GetParametersForExportOutput_SigningKeyCertificate:
+			v.SigningKeyCertificate = new(string)
+			return d.ReadString(schemas.GetParametersForExportOutput_SigningKeyCertificate, v.SigningKeyCertificate)
+		case schemas.GetParametersForExportOutput_SigningKeyCertificateChain:
+			v.SigningKeyCertificateChain = new(string)
+			return d.ReadString(schemas.GetParametersForExportOutput_SigningKeyCertificateChain, v.SigningKeyCertificateChain)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParametersForExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetParametersForExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersForExport, schemas.GetParametersForExportInput, schemas.GetParametersForExportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetParametersForExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParametersForExport, schemas.GetParametersForExportInput, schemas.GetParametersForExportOutput), output: &GetParametersForExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

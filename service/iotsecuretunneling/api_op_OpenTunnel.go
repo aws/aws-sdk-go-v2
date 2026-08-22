@@ -4,7 +4,9 @@ package iotsecuretunneling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,29 @@ type OpenTunnelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenTunnelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenTunnelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenTunnelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.OpenTunnelRequest_description, *v.Description)
+	}
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.OpenTunnelRequest_destinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.OpenTunnelRequest_tags, v.Tags)
+	if v.TimeoutConfig != nil {
+		s.WriteStruct(schemas.OpenTunnelRequest_timeoutConfig)
+		v.TimeoutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type OpenTunnelOutput struct {
 
 	// The access token the destination local proxy uses to connect to IoT Secure
@@ -67,13 +92,50 @@ type OpenTunnelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenTunnelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenTunnelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenTunnelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationAccessToken != nil {
+		s.WriteString(schemas.OpenTunnelResponse_destinationAccessToken, *v.DestinationAccessToken)
+	}
+	if v.SourceAccessToken != nil {
+		s.WriteString(schemas.OpenTunnelResponse_sourceAccessToken, *v.SourceAccessToken)
+	}
+	if v.TunnelArn != nil {
+		s.WriteString(schemas.OpenTunnelResponse_tunnelArn, *v.TunnelArn)
+	}
+	if v.TunnelId != nil {
+		s.WriteString(schemas.OpenTunnelResponse_tunnelId, *v.TunnelId)
+	}
+}
+func (v *OpenTunnelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenTunnelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenTunnelResponse_destinationAccessToken:
+			v.DestinationAccessToken = new(string)
+			return d.ReadString(schemas.OpenTunnelResponse_destinationAccessToken, v.DestinationAccessToken)
+		case schemas.OpenTunnelResponse_sourceAccessToken:
+			v.SourceAccessToken = new(string)
+			return d.ReadString(schemas.OpenTunnelResponse_sourceAccessToken, v.SourceAccessToken)
+		case schemas.OpenTunnelResponse_tunnelArn:
+			v.TunnelArn = new(string)
+			return d.ReadString(schemas.OpenTunnelResponse_tunnelArn, v.TunnelArn)
+		case schemas.OpenTunnelResponse_tunnelId:
+			v.TunnelId = new(string)
+			return d.ReadString(schemas.OpenTunnelResponse_tunnelId, v.TunnelId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOpenTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOpenTunnel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OpenTunnel, schemas.OpenTunnelRequest, schemas.OpenTunnelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpOpenTunnel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OpenTunnel, schemas.OpenTunnelRequest, schemas.OpenTunnelResponse), output: &OpenTunnelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.ListProfiles
+
+{"NextToken":"__NextToken__","Profiles":[{"Arn":"__Arn__","As2Id":"__As2Id__","ProfileId":"__ProfileId__","ProfileType":"LOCAL"},{"Arn":"__Arn__","As2Id":"__As2Id__","ProfileId":"__ProfileId__","ProfileType":"LOCAL"}]}

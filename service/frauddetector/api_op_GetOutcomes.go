@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type GetOutcomesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutcomesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutcomesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutcomesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetOutcomesRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetOutcomesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOutcomesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetOutcomesOutput struct {
 
 	// The next page token for subsequent requests.
@@ -57,13 +77,35 @@ type GetOutcomesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutcomesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutcomesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutcomesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOutcomesResult_nextToken, *v.NextToken)
+	}
+	serializeOutcomeList(s, schemas.GetOutcomesResult_outcomes, v.Outcomes)
+}
+func (v *GetOutcomesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOutcomesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOutcomesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetOutcomesResult_nextToken, v.NextToken)
+		case schemas.GetOutcomesResult_outcomes:
+			return deserializeOutcomeList(d, schemas.GetOutcomesResult_outcomes, &v.Outcomes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOutcomesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOutcomes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutcomes, schemas.GetOutcomesRequest, schemas.GetOutcomesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOutcomes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutcomes, schemas.GetOutcomesRequest, schemas.GetOutcomesResult), output: &GetOutcomesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

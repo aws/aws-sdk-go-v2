@@ -5,7 +5,9 @@ package translate
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListTerminologiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTerminologiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTerminologiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTerminologiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTerminologiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTerminologiesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTerminologiesOutput struct {
 
 	//  If the response to the ListTerminologies was truncated, the NextToken fetches
@@ -52,13 +69,35 @@ type ListTerminologiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTerminologiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTerminologiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTerminologiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTerminologiesResponse_NextToken, *v.NextToken)
+	}
+	serializeTerminologyPropertiesList(s, schemas.ListTerminologiesResponse_TerminologyPropertiesList, v.TerminologyPropertiesList)
+}
+func (v *ListTerminologiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTerminologiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTerminologiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTerminologiesResponse_NextToken, v.NextToken)
+		case schemas.ListTerminologiesResponse_TerminologyPropertiesList:
+			return deserializeTerminologyPropertiesList(d, schemas.ListTerminologiesResponse_TerminologyPropertiesList, &v.TerminologyPropertiesList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTerminologiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTerminologies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTerminologies, schemas.ListTerminologiesRequest, schemas.ListTerminologiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTerminologies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTerminologies, schemas.ListTerminologiesRequest, schemas.ListTerminologiesResponse), output: &ListTerminologiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

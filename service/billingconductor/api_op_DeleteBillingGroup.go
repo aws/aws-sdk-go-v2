@@ -4,6 +4,8 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBillingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBillingGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBillingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteBillingGroupInput_Arn, *v.Arn)
+	}
+}
+func (v *DeleteBillingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBillingGroupInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBillingGroupInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteBillingGroupInput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DeleteBillingGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted billing group.
@@ -44,13 +68,32 @@ type DeleteBillingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBillingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBillingGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBillingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteBillingGroupOutput_Arn, *v.Arn)
+	}
+}
+func (v *DeleteBillingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBillingGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBillingGroupOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteBillingGroupOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBillingGroup, schemas.DeleteBillingGroupInput, schemas.DeleteBillingGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBillingGroup, schemas.DeleteBillingGroupInput, schemas.DeleteBillingGroupOutput), output: &DeleteBillingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

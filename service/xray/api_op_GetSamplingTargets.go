@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,17 @@ type GetSamplingTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSamplingTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSamplingTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSamplingTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSamplingBoostStatisticsDocumentList(s, schemas.GetSamplingTargetsRequest_SamplingBoostStatisticsDocuments, v.SamplingBoostStatisticsDocuments)
+	serializeSamplingStatisticsDocumentList(s, schemas.GetSamplingTargetsRequest_SamplingStatisticsDocuments, v.SamplingStatisticsDocuments)
+}
+
 type GetSamplingTargetsOutput struct {
 
 	// The last time a user changed the sampling rule configuration. If the sampling
@@ -67,13 +80,41 @@ type GetSamplingTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSamplingTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSamplingTargetsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSamplingTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastRuleModification != nil {
+		s.WriteTime(schemas.GetSamplingTargetsResult_LastRuleModification, *v.LastRuleModification)
+	}
+	serializeSamplingTargetDocumentList(s, schemas.GetSamplingTargetsResult_SamplingTargetDocuments, v.SamplingTargetDocuments)
+	serializeUnprocessedStatisticsList(s, schemas.GetSamplingTargetsResult_UnprocessedBoostStatistics, v.UnprocessedBoostStatistics)
+	serializeUnprocessedStatisticsList(s, schemas.GetSamplingTargetsResult_UnprocessedStatistics, v.UnprocessedStatistics)
+}
+func (v *GetSamplingTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSamplingTargetsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSamplingTargetsResult_LastRuleModification:
+			v.LastRuleModification = new(time.Time)
+			return d.ReadTime(schemas.GetSamplingTargetsResult_LastRuleModification, v.LastRuleModification)
+		case schemas.GetSamplingTargetsResult_SamplingTargetDocuments:
+			return deserializeSamplingTargetDocumentList(d, schemas.GetSamplingTargetsResult_SamplingTargetDocuments, &v.SamplingTargetDocuments)
+		case schemas.GetSamplingTargetsResult_UnprocessedBoostStatistics:
+			return deserializeUnprocessedStatisticsList(d, schemas.GetSamplingTargetsResult_UnprocessedBoostStatistics, &v.UnprocessedBoostStatistics)
+		case schemas.GetSamplingTargetsResult_UnprocessedStatistics:
+			return deserializeUnprocessedStatisticsList(d, schemas.GetSamplingTargetsResult_UnprocessedStatistics, &v.UnprocessedStatistics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSamplingTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSamplingTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSamplingTargets, schemas.GetSamplingTargetsRequest, schemas.GetSamplingTargetsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSamplingTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSamplingTargets, schemas.GetSamplingTargetsRequest, schemas.GetSamplingTargetsResult), output: &GetSamplingTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

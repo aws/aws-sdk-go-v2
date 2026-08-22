@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -115,6 +117,22 @@ type AddIpRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddIpRoutesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddIpRoutesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddIpRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.AddIpRoutesRequest_DirectoryId, *v.DirectoryId)
+	}
+	serializeIpRoutes(s, schemas.AddIpRoutesRequest_IpRoutes, v.IpRoutes)
+	if v.UpdateSecurityGroupForDirectoryControllers != false {
+		s.WriteBool(schemas.AddIpRoutesRequest_UpdateSecurityGroupForDirectoryControllers, v.UpdateSecurityGroupForDirectoryControllers)
+	}
+}
+
 type AddIpRoutesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -122,13 +140,26 @@ type AddIpRoutesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddIpRoutesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddIpRoutesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddIpRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddIpRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddIpRoutesResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddIpRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddIpRoutes, schemas.AddIpRoutesRequest, schemas.AddIpRoutesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddIpRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddIpRoutes, schemas.AddIpRoutesRequest, schemas.AddIpRoutesResult), output: &AddIpRoutesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

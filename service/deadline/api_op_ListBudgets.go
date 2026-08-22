@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,27 @@ type ListBudgetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBudgetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBudgetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBudgetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListBudgetsRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBudgetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBudgetsRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListBudgetsRequest_status, string(v.Status))
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListBudgetsOutput struct {
 
@@ -69,13 +92,35 @@ type ListBudgetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBudgetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBudgetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBudgetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBudgetSummaries(s, schemas.ListBudgetsResponse_budgets, v.Budgets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBudgetsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBudgetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBudgetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBudgetsResponse_budgets:
+			return deserializeBudgetSummaries(d, schemas.ListBudgetsResponse_budgets, &v.Budgets)
+		case schemas.ListBudgetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBudgetsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBudgetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBudgets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBudgets, schemas.ListBudgetsRequest, schemas.ListBudgetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBudgets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBudgets, schemas.ListBudgetsRequest, schemas.ListBudgetsResponse), output: &ListBudgetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ivsrealtime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,35 @@ type CreateIngestConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIngestConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIngestConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIngestConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParticipantAttributes(s, schemas.CreateIngestConfigurationRequest_attributes, v.Attributes)
+	if v.IngestProtocol != "" {
+		s.WriteString(schemas.CreateIngestConfigurationRequest_ingestProtocol, string(v.IngestProtocol))
+	}
+	if v.InsecureIngest != false {
+		s.WriteBool(schemas.CreateIngestConfigurationRequest_insecureIngest, v.InsecureIngest)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIngestConfigurationRequest_name, *v.Name)
+	}
+	if v.RedundantIngest != false {
+		s.WriteBool(schemas.CreateIngestConfigurationRequest_redundantIngest, v.RedundantIngest)
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.CreateIngestConfigurationRequest_stageArn, *v.StageArn)
+	}
+	serializeTags(s, schemas.CreateIngestConfigurationRequest_tags, v.Tags)
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateIngestConfigurationRequest_userId, *v.UserId)
+	}
+}
+
 type CreateIngestConfigurationOutput struct {
 
 	// The IngestConfiguration that was created.
@@ -84,13 +115,34 @@ type CreateIngestConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIngestConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIngestConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIngestConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IngestConfiguration != nil {
+		s.WriteStruct(schemas.CreateIngestConfigurationResponse_ingestConfiguration)
+		v.IngestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateIngestConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIngestConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIngestConfigurationResponse_ingestConfiguration:
+			v.IngestConfiguration = &types.IngestConfiguration{}
+			return v.IngestConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIngestConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIngestConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngestConfiguration, schemas.CreateIngestConfigurationRequest, schemas.CreateIngestConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIngestConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngestConfiguration, schemas.CreateIngestConfigurationRequest, schemas.CreateIngestConfigurationResponse), output: &CreateIngestConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

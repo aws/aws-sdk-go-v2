@@ -4,7 +4,9 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type AcceptPrimaryEmailUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptPrimaryEmailUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptPrimaryEmailUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptPrimaryEmailUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AcceptPrimaryEmailUpdateRequest_AccountId, *v.AccountId)
+	}
+	if v.Otp != nil {
+		s.WriteString(schemas.AcceptPrimaryEmailUpdateRequest_Otp, *v.Otp)
+	}
+	if v.PrimaryEmail != nil {
+		s.WriteString(schemas.AcceptPrimaryEmailUpdateRequest_PrimaryEmail, *v.PrimaryEmail)
+	}
+}
+
 type AcceptPrimaryEmailUpdateOutput struct {
 
 	// Retrieves the status of the accepted primary email update request.
@@ -73,13 +93,36 @@ type AcceptPrimaryEmailUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptPrimaryEmailUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptPrimaryEmailUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptPrimaryEmailUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.AcceptPrimaryEmailUpdateResponse_Status, string(v.Status))
+	}
+}
+func (v *AcceptPrimaryEmailUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptPrimaryEmailUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptPrimaryEmailUpdateResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.AcceptPrimaryEmailUpdateResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrimaryEmailUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptPrimaryEmailUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptPrimaryEmailUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPrimaryEmailUpdate, schemas.AcceptPrimaryEmailUpdateRequest, schemas.AcceptPrimaryEmailUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptPrimaryEmailUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPrimaryEmailUpdate, schemas.AcceptPrimaryEmailUpdateRequest, schemas.AcceptPrimaryEmailUpdateResponse), output: &AcceptPrimaryEmailUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

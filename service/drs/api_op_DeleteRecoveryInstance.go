@@ -4,6 +4,8 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DeleteRecoveryInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecoveryInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecoveryInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecoveryInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryInstanceID != nil {
+		s.WriteString(schemas.DeleteRecoveryInstanceRequest_recoveryInstanceID, *v.RecoveryInstanceID)
+	}
+}
+func (v *DeleteRecoveryInstanceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecoveryInstanceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRecoveryInstanceRequest_recoveryInstanceID:
+			v.RecoveryInstanceID = new(string)
+			return d.ReadString(schemas.DeleteRecoveryInstanceRequest_recoveryInstanceID, v.RecoveryInstanceID)
+		}
+		return nil
+	})
+}
+
 type DeleteRecoveryInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +66,26 @@ type DeleteRecoveryInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecoveryInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecoveryInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRecoveryInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecoveryInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecoveryInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecoveryInstance, schemas.DeleteRecoveryInstanceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRecoveryInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecoveryInstance, schemas.DeleteRecoveryInstanceRequest, nil), output: &DeleteRecoveryInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

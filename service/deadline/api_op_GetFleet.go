@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,6 +44,21 @@ type GetFleetInput struct {
 	FleetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetFleetRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetFleetRequest_fleetId, *v.FleetId)
+	}
 }
 
 // Mixin that adds an optional ARN field to response structures. Apply to
@@ -143,13 +160,149 @@ type GetFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingStatus != "" {
+		s.WriteString(schemas.GetFleetResponse_autoScalingStatus, string(v.AutoScalingStatus))
+	}
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.GetFleetResponse_capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFleetConfiguration(s, schemas.GetFleetResponse_configuration, v.Configuration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetFleetResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetFleetResponse_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFleetResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetFleetResponse_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetFleetResponse_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetFleetResponse_fleetId, *v.FleetId)
+	}
+	if v.HostConfiguration != nil {
+		s.WriteStruct(schemas.GetFleetResponse_hostConfiguration)
+		v.HostConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxWorkerCount != nil {
+		s.WriteInt32(schemas.GetFleetResponse_maxWorkerCount, *v.MaxWorkerCount)
+	}
+	if v.MinWorkerCount != nil {
+		s.WriteInt32(schemas.GetFleetResponse_minWorkerCount, *v.MinWorkerCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetFleetResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetFleetResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetFleetResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.TargetWorkerCount != nil {
+		s.WriteInt32(schemas.GetFleetResponse_targetWorkerCount, *v.TargetWorkerCount)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetFleetResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetFleetResponse_updatedBy, *v.UpdatedBy)
+	}
+	if v.WorkerCount != nil {
+		s.WriteInt32(schemas.GetFleetResponse_workerCount, *v.WorkerCount)
+	}
+}
+func (v *GetFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFleetResponse_autoScalingStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetFleetResponse_autoScalingStatus, &ev); err != nil {
+				return err
+			}
+			v.AutoScalingStatus = types.AutoScalingStatus(ev)
+			return nil
+		case schemas.GetFleetResponse_capabilities:
+			v.Capabilities = &types.FleetCapabilities{}
+			return v.Capabilities.Deserialize(d)
+		case schemas.GetFleetResponse_configuration:
+			return deserializeFleetConfiguration(d, schemas.GetFleetResponse_configuration, &v.Configuration)
+		case schemas.GetFleetResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFleetResponse_createdAt, v.CreatedAt)
+		case schemas.GetFleetResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetFleetResponse_createdBy, v.CreatedBy)
+		case schemas.GetFleetResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFleetResponse_description, v.Description)
+		case schemas.GetFleetResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetFleetResponse_displayName, v.DisplayName)
+		case schemas.GetFleetResponse_farmId:
+			v.FarmId = new(string)
+			return d.ReadString(schemas.GetFleetResponse_farmId, v.FarmId)
+		case schemas.GetFleetResponse_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GetFleetResponse_fleetId, v.FleetId)
+		case schemas.GetFleetResponse_hostConfiguration:
+			v.HostConfiguration = &types.HostConfiguration{}
+			return v.HostConfiguration.Deserialize(d)
+		case schemas.GetFleetResponse_maxWorkerCount:
+			v.MaxWorkerCount = new(int32)
+			return d.ReadInt32(schemas.GetFleetResponse_maxWorkerCount, v.MaxWorkerCount)
+		case schemas.GetFleetResponse_minWorkerCount:
+			v.MinWorkerCount = new(int32)
+			return d.ReadInt32(schemas.GetFleetResponse_minWorkerCount, v.MinWorkerCount)
+		case schemas.GetFleetResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetFleetResponse_roleArn, v.RoleArn)
+		case schemas.GetFleetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetFleetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FleetStatus(ev)
+			return nil
+		case schemas.GetFleetResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetFleetResponse_statusMessage, v.StatusMessage)
+		case schemas.GetFleetResponse_targetWorkerCount:
+			v.TargetWorkerCount = new(int32)
+			return d.ReadInt32(schemas.GetFleetResponse_targetWorkerCount, v.TargetWorkerCount)
+		case schemas.GetFleetResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFleetResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetFleetResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetFleetResponse_updatedBy, v.UpdatedBy)
+		case schemas.GetFleetResponse_workerCount:
+			v.WorkerCount = new(int32)
+			return d.ReadInt32(schemas.GetFleetResponse_workerCount, v.WorkerCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFleet, schemas.GetFleetRequest, schemas.GetFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFleet, schemas.GetFleetRequest, schemas.GetFleetResponse), output: &GetFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

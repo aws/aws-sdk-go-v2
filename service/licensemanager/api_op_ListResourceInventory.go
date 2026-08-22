@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,22 @@ type ListResourceInventoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceInventoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceInventoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceInventoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInventoryFilterList(s, schemas.ListResourceInventoryRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceInventoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceInventoryRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResourceInventoryOutput struct {
 
 	// Token for the next set of results.
@@ -72,13 +90,35 @@ type ListResourceInventoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceInventoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceInventoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceInventoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceInventoryResponse_NextToken, *v.NextToken)
+	}
+	serializeResourceInventoryList(s, schemas.ListResourceInventoryResponse_ResourceInventoryList, v.ResourceInventoryList)
+}
+func (v *ListResourceInventoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceInventoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceInventoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceInventoryResponse_NextToken, v.NextToken)
+		case schemas.ListResourceInventoryResponse_ResourceInventoryList:
+			return deserializeResourceInventoryList(d, schemas.ListResourceInventoryResponse_ResourceInventoryList, &v.ResourceInventoryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceInventoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceInventory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceInventory, schemas.ListResourceInventoryRequest, schemas.ListResourceInventoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourceInventory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceInventory, schemas.ListResourceInventoryRequest, schemas.ListResourceInventoryResponse), output: &ListResourceInventoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

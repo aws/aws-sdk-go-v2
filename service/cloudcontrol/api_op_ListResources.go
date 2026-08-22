@@ -5,7 +5,9 @@ package cloudcontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,58 @@ type ListResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourcesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourcesInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceModel != nil {
+		s.WriteString(schemas.ListResourcesInput_ResourceModel, *v.ResourceModel)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ListResourcesInput_RoleArn, *v.RoleArn)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.ListResourcesInput_TypeName, *v.TypeName)
+	}
+	if v.TypeVersionId != nil {
+		s.WriteString(schemas.ListResourcesInput_TypeVersionId, *v.TypeVersionId)
+	}
+}
+func (v *ListResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourcesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourcesInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListResourcesInput_MaxResults, v.MaxResults)
+		case schemas.ListResourcesInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourcesInput_NextToken, v.NextToken)
+		case schemas.ListResourcesInput_ResourceModel:
+			v.ResourceModel = new(string)
+			return d.ReadString(schemas.ListResourcesInput_ResourceModel, v.ResourceModel)
+		case schemas.ListResourcesInput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ListResourcesInput_RoleArn, v.RoleArn)
+		case schemas.ListResourcesInput_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.ListResourcesInput_TypeName, v.TypeName)
+		case schemas.ListResourcesInput_TypeVersionId:
+			v.TypeVersionId = new(string)
+			return d.ReadString(schemas.ListResourcesInput_TypeVersionId, v.TypeVersionId)
+		}
+		return nil
+	})
+}
+
 type ListResourcesOutput struct {
 
 	// If the request doesn't return all of the remaining results, NextToken is set to
@@ -97,13 +151,41 @@ type ListResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourcesOutput_NextToken, *v.NextToken)
+	}
+	serializeResourceDescriptions(s, schemas.ListResourcesOutput_ResourceDescriptions, v.ResourceDescriptions)
+	if v.TypeName != nil {
+		s.WriteString(schemas.ListResourcesOutput_TypeName, *v.TypeName)
+	}
+}
+func (v *ListResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourcesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourcesOutput_NextToken, v.NextToken)
+		case schemas.ListResourcesOutput_ResourceDescriptions:
+			return deserializeResourceDescriptions(d, schemas.ListResourcesOutput_ResourceDescriptions, &v.ResourceDescriptions)
+		case schemas.ListResourcesOutput_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.ListResourcesOutput_TypeName, v.TypeName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResources, schemas.ListResourcesInput, schemas.ListResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResources, schemas.ListResourcesInput, schemas.ListResourcesOutput), output: &ListResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

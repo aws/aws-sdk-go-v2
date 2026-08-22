@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"contentSummaries":[{"contentArn":"__ContentArn__","contentId":"__ContentId__","contentType":"__ContentType__","knowledgeBaseArn":"__KnowledgeBaseArn__","knowledgeBaseId":"__KnowledgeBaseId__","metadata":{"key0":"__Value__"},"name":"__Name__","revisionId":"__RevisionId__","status":"CREATE_IN_PROGRESS","tags":{"key0":"__Value__"},"title":"__Title__"},{"contentArn":"__ContentArn__","contentId":"__ContentId__","contentType":"__ContentType__","knowledgeBaseArn":"__KnowledgeBaseArn__","knowledgeBaseId":"__KnowledgeBaseId__","metadata":{"key0":"__Value__"},"name":"__Name__","revisionId":"__RevisionId__","status":"CREATE_IN_PROGRESS","tags":{"key0":"__Value__"},"title":"__Title__"}],"nextToken":"__NextToken__"}

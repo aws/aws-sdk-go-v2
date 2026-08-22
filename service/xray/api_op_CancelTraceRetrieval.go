@@ -4,6 +4,8 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type CancelTraceRetrievalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTraceRetrievalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTraceRetrievalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTraceRetrievalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetrievalToken != nil {
+		s.WriteString(schemas.CancelTraceRetrievalRequest_RetrievalToken, *v.RetrievalToken)
+	}
+}
+
 type CancelTraceRetrievalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type CancelTraceRetrievalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTraceRetrievalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTraceRetrievalResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTraceRetrievalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelTraceRetrievalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelTraceRetrievalResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelTraceRetrievalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelTraceRetrieval{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTraceRetrieval, schemas.CancelTraceRetrievalRequest, schemas.CancelTraceRetrievalResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelTraceRetrieval{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTraceRetrieval, schemas.CancelTraceRetrievalRequest, schemas.CancelTraceRetrievalResult), output: &CancelTraceRetrievalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

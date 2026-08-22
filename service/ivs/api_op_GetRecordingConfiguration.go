@@ -4,7 +4,9 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetRecordingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecordingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecordingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecordingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRecordingConfigurationRequest_arn, *v.Arn)
+	}
+}
+func (v *GetRecordingConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecordingConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecordingConfigurationRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetRecordingConfigurationRequest_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type GetRecordingConfigurationOutput struct {
 
 	//
@@ -45,13 +69,34 @@ type GetRecordingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecordingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecordingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecordingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordingConfiguration != nil {
+		s.WriteStruct(schemas.GetRecordingConfigurationResponse_recordingConfiguration)
+		v.RecordingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRecordingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecordingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecordingConfigurationResponse_recordingConfiguration:
+			v.RecordingConfiguration = &types.RecordingConfiguration{}
+			return v.RecordingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecordingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecordingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecordingConfiguration, schemas.GetRecordingConfigurationRequest, schemas.GetRecordingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecordingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecordingConfiguration, schemas.GetRecordingConfigurationRequest, schemas.GetRecordingConfigurationResponse), output: &GetRecordingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

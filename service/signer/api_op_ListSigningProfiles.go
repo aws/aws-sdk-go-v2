@@ -5,7 +5,9 @@ package signer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type ListSigningProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeCanceled != false {
+		s.WriteBool(schemas.ListSigningProfilesRequest_includeCanceled, v.IncludeCanceled)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSigningProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningProfilesRequest_nextToken, *v.NextToken)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.ListSigningProfilesRequest_platformId, *v.PlatformId)
+	}
+	serializeStatuses(s, schemas.ListSigningProfilesRequest_statuses, v.Statuses)
+}
+
 type ListSigningProfilesOutput struct {
 
 	// Value for specifying the next set of paginated results to return.
@@ -71,13 +95,35 @@ type ListSigningProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSigningProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSigningProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSigningProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSigningProfilesResponse_nextToken, *v.NextToken)
+	}
+	serializeSigningProfiles(s, schemas.ListSigningProfilesResponse_profiles, v.Profiles)
+}
+func (v *ListSigningProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSigningProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSigningProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSigningProfilesResponse_nextToken, v.NextToken)
+		case schemas.ListSigningProfilesResponse_profiles:
+			return deserializeSigningProfiles(d, schemas.ListSigningProfilesResponse_profiles, &v.Profiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSigningProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSigningProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningProfiles, schemas.ListSigningProfilesRequest, schemas.ListSigningProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSigningProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSigningProfiles, schemas.ListSigningProfilesRequest, schemas.ListSigningProfilesResponse), output: &ListSigningProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

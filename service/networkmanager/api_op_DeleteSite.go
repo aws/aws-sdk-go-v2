@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSiteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSiteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSiteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.DeleteSiteRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.DeleteSiteRequest_SiteId, *v.SiteId)
+	}
+}
+
 type DeleteSiteOutput struct {
 
 	// Information about the site.
@@ -50,13 +67,34 @@ type DeleteSiteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSiteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSiteResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSiteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Site != nil {
+		s.WriteStruct(schemas.DeleteSiteResponse_Site)
+		v.Site.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteSiteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSiteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSiteResponse_Site:
+			v.Site = &types.Site{}
+			return v.Site.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSite{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSite, schemas.DeleteSiteRequest, schemas.DeleteSiteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSite{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSite, schemas.DeleteSiteRequest, schemas.DeleteSiteResponse), output: &DeleteSiteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

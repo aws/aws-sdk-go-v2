@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","creationDateTime":946684800,"entityId":"__EntityId__","state":"CREATING"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.ImportSshPublicKey
+
+{"ServerId":"__ServerId__","SshPublicKeyId":"__SshPublicKeyId__","UserName":"__UserName__"}

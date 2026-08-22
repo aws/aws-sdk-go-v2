@@ -4,6 +4,8 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type StartAccessLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAccessLoggingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAccessLoggingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAccessLoggingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.StartAccessLoggingInput_ContainerName, *v.ContainerName)
+	}
+}
+
 type StartAccessLoggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type StartAccessLoggingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAccessLoggingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAccessLoggingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAccessLoggingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartAccessLoggingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAccessLoggingOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAccessLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAccessLogging{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAccessLogging, schemas.StartAccessLoggingInput, schemas.StartAccessLoggingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartAccessLogging{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAccessLogging, schemas.StartAccessLoggingInput, schemas.StartAccessLoggingOutput), output: &StartAccessLoggingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteCoreNetworkPrefixListAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCoreNetworkPrefixListAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCoreNetworkPrefixListAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCoreNetworkPrefixListAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.DeleteCoreNetworkPrefixListAssociationRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PrefixListArn != nil {
+		s.WriteString(schemas.DeleteCoreNetworkPrefixListAssociationRequest_PrefixListArn, *v.PrefixListArn)
+	}
+}
+
 type DeleteCoreNetworkPrefixListAssociationOutput struct {
 
 	// The ID of the core network from which the prefix list association was deleted.
@@ -52,13 +69,38 @@ type DeleteCoreNetworkPrefixListAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCoreNetworkPrefixListAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCoreNetworkPrefixListAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCoreNetworkPrefixListAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.DeleteCoreNetworkPrefixListAssociationResponse_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PrefixListArn != nil {
+		s.WriteString(schemas.DeleteCoreNetworkPrefixListAssociationResponse_PrefixListArn, *v.PrefixListArn)
+	}
+}
+func (v *DeleteCoreNetworkPrefixListAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCoreNetworkPrefixListAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCoreNetworkPrefixListAssociationResponse_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.DeleteCoreNetworkPrefixListAssociationResponse_CoreNetworkId, v.CoreNetworkId)
+		case schemas.DeleteCoreNetworkPrefixListAssociationResponse_PrefixListArn:
+			v.PrefixListArn = new(string)
+			return d.ReadString(schemas.DeleteCoreNetworkPrefixListAssociationResponse_PrefixListArn, v.PrefixListArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCoreNetworkPrefixListAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCoreNetworkPrefixListAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCoreNetworkPrefixListAssociation, schemas.DeleteCoreNetworkPrefixListAssociationRequest, schemas.DeleteCoreNetworkPrefixListAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCoreNetworkPrefixListAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCoreNetworkPrefixListAssociation, schemas.DeleteCoreNetworkPrefixListAssociationRequest, schemas.DeleteCoreNetworkPrefixListAssociationResponse), output: &DeleteCoreNetworkPrefixListAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

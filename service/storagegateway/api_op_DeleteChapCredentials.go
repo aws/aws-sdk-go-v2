@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DeleteChapCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChapCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChapCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChapCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitiatorName != nil {
+		s.WriteString(schemas.DeleteChapCredentialsInput_InitiatorName, *v.InitiatorName)
+	}
+	if v.TargetARN != nil {
+		s.WriteString(schemas.DeleteChapCredentialsInput_TargetARN, *v.TargetARN)
+	}
+}
+
 // A JSON object containing the following fields:
 type DeleteChapCredentialsOutput struct {
 
@@ -61,13 +78,38 @@ type DeleteChapCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChapCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChapCredentialsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChapCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitiatorName != nil {
+		s.WriteString(schemas.DeleteChapCredentialsOutput_InitiatorName, *v.InitiatorName)
+	}
+	if v.TargetARN != nil {
+		s.WriteString(schemas.DeleteChapCredentialsOutput_TargetARN, *v.TargetARN)
+	}
+}
+func (v *DeleteChapCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteChapCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteChapCredentialsOutput_InitiatorName:
+			v.InitiatorName = new(string)
+			return d.ReadString(schemas.DeleteChapCredentialsOutput_InitiatorName, v.InitiatorName)
+		case schemas.DeleteChapCredentialsOutput_TargetARN:
+			v.TargetARN = new(string)
+			return d.ReadString(schemas.DeleteChapCredentialsOutput_TargetARN, v.TargetARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteChapCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChapCredentials, schemas.DeleteChapCredentialsInput, schemas.DeleteChapCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteChapCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChapCredentials, schemas.DeleteChapCredentialsInput, schemas.DeleteChapCredentialsOutput), output: &DeleteChapCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,23 @@ type ListDistributedGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDistributedGrantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDistributedGrantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDistributedGrantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListDistributedGrantsRequest_Filters, v.Filters)
+	serializeArnList(s, schemas.ListDistributedGrantsRequest_GrantArns, v.GrantArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDistributedGrantsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDistributedGrantsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDistributedGrantsOutput struct {
 
 	// Distributed grant details.
@@ -65,13 +84,35 @@ type ListDistributedGrantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDistributedGrantsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDistributedGrantsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDistributedGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrantList(s, schemas.ListDistributedGrantsResponse_Grants, v.Grants)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDistributedGrantsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDistributedGrantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDistributedGrantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDistributedGrantsResponse_Grants:
+			return deserializeGrantList(d, schemas.ListDistributedGrantsResponse_Grants, &v.Grants)
+		case schemas.ListDistributedGrantsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDistributedGrantsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDistributedGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDistributedGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDistributedGrants, schemas.ListDistributedGrantsRequest, schemas.ListDistributedGrantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDistributedGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDistributedGrants, schemas.ListDistributedGrantsRequest, schemas.ListDistributedGrantsResponse), output: &ListDistributedGrantsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

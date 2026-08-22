@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.DescribeS3AccessPointAttachments
+
+{"__type":"S3AccessPointAttachmentNotFound","Message":"__Message__"}

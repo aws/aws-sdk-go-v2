@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,30 @@ type UpdateArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateArchiveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveName != nil {
+		s.WriteString(schemas.UpdateArchiveRequest_ArchiveName, *v.ArchiveName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateArchiveRequest_Description, *v.Description)
+	}
+	if v.EventPattern != nil {
+		s.WriteString(schemas.UpdateArchiveRequest_EventPattern, *v.EventPattern)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.UpdateArchiveRequest_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.UpdateArchiveRequest_RetentionDays, *v.RetentionDays)
+	}
+}
+
 type UpdateArchiveOutput struct {
 
 	// The ARN of the archive.
@@ -83,13 +109,54 @@ type UpdateArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateArchiveResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveArn != nil {
+		s.WriteString(schemas.UpdateArchiveResponse_ArchiveArn, *v.ArchiveArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateArchiveResponse_CreationTime, *v.CreationTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateArchiveResponse_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.UpdateArchiveResponse_StateReason, *v.StateReason)
+	}
+}
+func (v *UpdateArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateArchiveResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateArchiveResponse_ArchiveArn:
+			v.ArchiveArn = new(string)
+			return d.ReadString(schemas.UpdateArchiveResponse_ArchiveArn, v.ArchiveArn)
+		case schemas.UpdateArchiveResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateArchiveResponse_CreationTime, v.CreationTime)
+		case schemas.UpdateArchiveResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateArchiveResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ArchiveState(ev)
+			return nil
+		case schemas.UpdateArchiveResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.UpdateArchiveResponse_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateArchive, schemas.UpdateArchiveRequest, schemas.UpdateArchiveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateArchive, schemas.UpdateArchiveRequest, schemas.UpdateArchiveResponse), output: &UpdateArchiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

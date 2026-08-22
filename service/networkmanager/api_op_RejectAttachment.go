@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type RejectAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.RejectAttachmentRequest_AttachmentId, *v.AttachmentId)
+	}
+}
+
 type RejectAttachmentOutput struct {
 
 	// Describes the rejected attachment request.
@@ -45,13 +59,34 @@ type RejectAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attachment != nil {
+		s.WriteStruct(schemas.RejectAttachmentResponse_Attachment)
+		v.Attachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RejectAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectAttachmentResponse_Attachment:
+			v.Attachment = &types.Attachment{}
+			return v.Attachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectAttachment, schemas.RejectAttachmentRequest, schemas.RejectAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectAttachment, schemas.RejectAttachmentRequest, schemas.RejectAttachmentResponse), output: &RejectAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

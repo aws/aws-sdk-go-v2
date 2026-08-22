@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,25 @@ type GetSitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSitesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSitesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSitesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetSitesRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSitesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSitesRequest_NextToken, *v.NextToken)
+	}
+	serializeSiteIdList(s, schemas.GetSitesRequest_SiteIds, v.SiteIds)
+}
+
 type GetSitesOutput struct {
 
 	// The token for the next page of results.
@@ -58,13 +79,35 @@ type GetSitesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSitesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSitesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSitesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSitesResponse_NextToken, *v.NextToken)
+	}
+	serializeSiteList(s, schemas.GetSitesResponse_Sites, v.Sites)
+}
+func (v *GetSitesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSitesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSitesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSitesResponse_NextToken, v.NextToken)
+		case schemas.GetSitesResponse_Sites:
+			return deserializeSiteList(d, schemas.GetSitesResponse_Sites, &v.Sites)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSites{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSites, schemas.GetSitesRequest, schemas.GetSitesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSites{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSites, schemas.GetSitesRequest, schemas.GetSitesResponse), output: &GetSitesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

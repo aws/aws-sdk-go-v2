@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -26,6 +28,38 @@ type AccessDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccessDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLocation != nil {
+		s.WriteStruct(schemas.AccessDescription_AccessLocation)
+		v.AccessLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AccessMethod != nil {
+		s.WriteStruct(schemas.AccessDescription_AccessMethod)
+		v.AccessMethod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AccessDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDescription_AccessLocation:
+			v.AccessLocation = &GeneralName{}
+			return v.AccessLocation.Deserialize(d)
+		case schemas.AccessDescription_AccessMethod:
+			v.AccessMethod = &AccessMethod{}
+			return v.AccessMethod.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the type and format of extension access. Only one of
 // CustomObjectIdentifier or AccessMethodType may be provided. Providing both
 // results in InvalidArgsException .
@@ -42,6 +76,38 @@ type AccessMethod struct {
 	CustomObjectIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccessMethod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessMethod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessMethod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessMethodType != "" {
+		s.WriteString(schemas.AccessMethod_AccessMethodType, string(v.AccessMethodType))
+	}
+	if v.CustomObjectIdentifier != nil {
+		s.WriteString(schemas.AccessMethod_CustomObjectIdentifier, *v.CustomObjectIdentifier)
+	}
+}
+func (v *AccessMethod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessMethod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessMethod_AccessMethodType:
+			var ev string
+			if err := d.ReadString(schemas.AccessMethod_AccessMethodType, &ev); err != nil {
+				return err
+			}
+			v.AccessMethodType = AccessMethodType(ev)
+			return nil
+		case schemas.AccessMethod_CustomObjectIdentifier:
+			v.CustomObjectIdentifier = new(string)
+			return d.ReadString(schemas.AccessMethod_CustomObjectIdentifier, v.CustomObjectIdentifier)
+		}
+		return nil
+	})
 }
 
 // Contains X.509 certificate information to be placed in an issued certificate.
@@ -67,6 +133,38 @@ type ApiPassthrough struct {
 	Subject *ASN1Subject
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApiPassthrough) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiPassthrough)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiPassthrough) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Extensions != nil {
+		s.WriteStruct(schemas.ApiPassthrough_Extensions)
+		v.Extensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Subject != nil {
+		s.WriteStruct(schemas.ApiPassthrough_Subject)
+		v.Subject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApiPassthrough) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiPassthrough, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiPassthrough_Extensions:
+			v.Extensions = &Extensions{}
+			return v.Extensions.Deserialize(d)
+		case schemas.ApiPassthrough_Subject:
+			v.Subject = &ASN1Subject{}
+			return v.Subject.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains information about the certificate subject. The Subject field in the
@@ -143,6 +241,109 @@ type ASN1Subject struct {
 	Title *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ASN1Subject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ASN1Subject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ASN1Subject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommonName != nil {
+		s.WriteString(schemas.ASN1Subject_CommonName, *v.CommonName)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.ASN1Subject_Country, *v.Country)
+	}
+	serializeCustomAttributeList(s, schemas.ASN1Subject_CustomAttributes, v.CustomAttributes)
+	if v.DistinguishedNameQualifier != nil {
+		s.WriteString(schemas.ASN1Subject_DistinguishedNameQualifier, *v.DistinguishedNameQualifier)
+	}
+	if v.GenerationQualifier != nil {
+		s.WriteString(schemas.ASN1Subject_GenerationQualifier, *v.GenerationQualifier)
+	}
+	if v.GivenName != nil {
+		s.WriteString(schemas.ASN1Subject_GivenName, *v.GivenName)
+	}
+	if v.Initials != nil {
+		s.WriteString(schemas.ASN1Subject_Initials, *v.Initials)
+	}
+	if v.Locality != nil {
+		s.WriteString(schemas.ASN1Subject_Locality, *v.Locality)
+	}
+	if v.Organization != nil {
+		s.WriteString(schemas.ASN1Subject_Organization, *v.Organization)
+	}
+	if v.OrganizationalUnit != nil {
+		s.WriteString(schemas.ASN1Subject_OrganizationalUnit, *v.OrganizationalUnit)
+	}
+	if v.Pseudonym != nil {
+		s.WriteString(schemas.ASN1Subject_Pseudonym, *v.Pseudonym)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.ASN1Subject_SerialNumber, *v.SerialNumber)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.ASN1Subject_State, *v.State)
+	}
+	if v.Surname != nil {
+		s.WriteString(schemas.ASN1Subject_Surname, *v.Surname)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ASN1Subject_Title, *v.Title)
+	}
+}
+func (v *ASN1Subject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ASN1Subject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ASN1Subject_CommonName:
+			v.CommonName = new(string)
+			return d.ReadString(schemas.ASN1Subject_CommonName, v.CommonName)
+		case schemas.ASN1Subject_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.ASN1Subject_Country, v.Country)
+		case schemas.ASN1Subject_CustomAttributes:
+			return deserializeCustomAttributeList(d, schemas.ASN1Subject_CustomAttributes, &v.CustomAttributes)
+		case schemas.ASN1Subject_DistinguishedNameQualifier:
+			v.DistinguishedNameQualifier = new(string)
+			return d.ReadString(schemas.ASN1Subject_DistinguishedNameQualifier, v.DistinguishedNameQualifier)
+		case schemas.ASN1Subject_GenerationQualifier:
+			v.GenerationQualifier = new(string)
+			return d.ReadString(schemas.ASN1Subject_GenerationQualifier, v.GenerationQualifier)
+		case schemas.ASN1Subject_GivenName:
+			v.GivenName = new(string)
+			return d.ReadString(schemas.ASN1Subject_GivenName, v.GivenName)
+		case schemas.ASN1Subject_Initials:
+			v.Initials = new(string)
+			return d.ReadString(schemas.ASN1Subject_Initials, v.Initials)
+		case schemas.ASN1Subject_Locality:
+			v.Locality = new(string)
+			return d.ReadString(schemas.ASN1Subject_Locality, v.Locality)
+		case schemas.ASN1Subject_Organization:
+			v.Organization = new(string)
+			return d.ReadString(schemas.ASN1Subject_Organization, v.Organization)
+		case schemas.ASN1Subject_OrganizationalUnit:
+			v.OrganizationalUnit = new(string)
+			return d.ReadString(schemas.ASN1Subject_OrganizationalUnit, v.OrganizationalUnit)
+		case schemas.ASN1Subject_Pseudonym:
+			v.Pseudonym = new(string)
+			return d.ReadString(schemas.ASN1Subject_Pseudonym, v.Pseudonym)
+		case schemas.ASN1Subject_SerialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.ASN1Subject_SerialNumber, v.SerialNumber)
+		case schemas.ASN1Subject_State:
+			v.State = new(string)
+			return d.ReadString(schemas.ASN1Subject_State, v.State)
+		case schemas.ASN1Subject_Surname:
+			v.Surname = new(string)
+			return d.ReadString(schemas.ASN1Subject_Surname, v.Surname)
+		case schemas.ASN1Subject_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ASN1Subject_Title, v.Title)
+		}
+		return nil
+	})
 }
 
 // Contains information about your private certificate authority (CA). Your
@@ -229,6 +430,136 @@ type CertificateAuthority struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CertificateAuthority) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateAuthority)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateAuthority) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CertificateAuthority_Arn, *v.Arn)
+	}
+	if v.CertificateAuthorityConfiguration != nil {
+		s.WriteStruct(schemas.CertificateAuthority_CertificateAuthorityConfiguration)
+		v.CertificateAuthorityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CertificateAuthority_CreatedAt, *v.CreatedAt)
+	}
+	if v.FailureReason != "" {
+		s.WriteString(schemas.CertificateAuthority_FailureReason, string(v.FailureReason))
+	}
+	if v.KeyStorageSecurityStandard != "" {
+		s.WriteString(schemas.CertificateAuthority_KeyStorageSecurityStandard, string(v.KeyStorageSecurityStandard))
+	}
+	if v.LastStateChangeAt != nil {
+		s.WriteTime(schemas.CertificateAuthority_LastStateChangeAt, *v.LastStateChangeAt)
+	}
+	if v.NotAfter != nil {
+		s.WriteTime(schemas.CertificateAuthority_NotAfter, *v.NotAfter)
+	}
+	if v.NotBefore != nil {
+		s.WriteTime(schemas.CertificateAuthority_NotBefore, *v.NotBefore)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.CertificateAuthority_OwnerAccount, *v.OwnerAccount)
+	}
+	if v.RestorableUntil != nil {
+		s.WriteTime(schemas.CertificateAuthority_RestorableUntil, *v.RestorableUntil)
+	}
+	if v.RevocationConfiguration != nil {
+		s.WriteStruct(schemas.CertificateAuthority_RevocationConfiguration)
+		v.RevocationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Serial != nil {
+		s.WriteString(schemas.CertificateAuthority_Serial, *v.Serial)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CertificateAuthority_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CertificateAuthority_Type, string(v.Type))
+	}
+	if v.UsageMode != "" {
+		s.WriteString(schemas.CertificateAuthority_UsageMode, string(v.UsageMode))
+	}
+}
+func (v *CertificateAuthority) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateAuthority, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateAuthority_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CertificateAuthority_Arn, v.Arn)
+		case schemas.CertificateAuthority_CertificateAuthorityConfiguration:
+			v.CertificateAuthorityConfiguration = &CertificateAuthorityConfiguration{}
+			return v.CertificateAuthorityConfiguration.Deserialize(d)
+		case schemas.CertificateAuthority_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateAuthority_CreatedAt, v.CreatedAt)
+		case schemas.CertificateAuthority_FailureReason:
+			var ev string
+			if err := d.ReadString(schemas.CertificateAuthority_FailureReason, &ev); err != nil {
+				return err
+			}
+			v.FailureReason = FailureReason(ev)
+			return nil
+		case schemas.CertificateAuthority_KeyStorageSecurityStandard:
+			var ev string
+			if err := d.ReadString(schemas.CertificateAuthority_KeyStorageSecurityStandard, &ev); err != nil {
+				return err
+			}
+			v.KeyStorageSecurityStandard = KeyStorageSecurityStandard(ev)
+			return nil
+		case schemas.CertificateAuthority_LastStateChangeAt:
+			v.LastStateChangeAt = new(time.Time)
+			return d.ReadTime(schemas.CertificateAuthority_LastStateChangeAt, v.LastStateChangeAt)
+		case schemas.CertificateAuthority_NotAfter:
+			v.NotAfter = new(time.Time)
+			return d.ReadTime(schemas.CertificateAuthority_NotAfter, v.NotAfter)
+		case schemas.CertificateAuthority_NotBefore:
+			v.NotBefore = new(time.Time)
+			return d.ReadTime(schemas.CertificateAuthority_NotBefore, v.NotBefore)
+		case schemas.CertificateAuthority_OwnerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.CertificateAuthority_OwnerAccount, v.OwnerAccount)
+		case schemas.CertificateAuthority_RestorableUntil:
+			v.RestorableUntil = new(time.Time)
+			return d.ReadTime(schemas.CertificateAuthority_RestorableUntil, v.RestorableUntil)
+		case schemas.CertificateAuthority_RevocationConfiguration:
+			v.RevocationConfiguration = &RevocationConfiguration{}
+			return v.RevocationConfiguration.Deserialize(d)
+		case schemas.CertificateAuthority_Serial:
+			v.Serial = new(string)
+			return d.ReadString(schemas.CertificateAuthority_Serial, v.Serial)
+		case schemas.CertificateAuthority_Status:
+			var ev string
+			if err := d.ReadString(schemas.CertificateAuthority_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CertificateAuthorityStatus(ev)
+			return nil
+		case schemas.CertificateAuthority_Type:
+			var ev string
+			if err := d.ReadString(schemas.CertificateAuthority_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CertificateAuthorityType(ev)
+			return nil
+		case schemas.CertificateAuthority_UsageMode:
+			var ev string
+			if err := d.ReadString(schemas.CertificateAuthority_UsageMode, &ev); err != nil {
+				return err
+			}
+			v.UsageMode = CertificateAuthorityUsageMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains configuration information for your private certificate authority (CA).
 // This includes information about the class of public key algorithm and the key
 // pair that your private CA creates when it issues a certificate. It also includes
@@ -265,6 +596,58 @@ type CertificateAuthorityConfiguration struct {
 	CsrExtensions *CsrExtensions
 
 	noSmithyDocumentSerde
+}
+
+func (v *CertificateAuthorityConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateAuthorityConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateAuthorityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CsrExtensions != nil {
+		s.WriteStruct(schemas.CertificateAuthorityConfiguration_CsrExtensions)
+		v.CsrExtensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyAlgorithm != "" {
+		s.WriteString(schemas.CertificateAuthorityConfiguration_KeyAlgorithm, string(v.KeyAlgorithm))
+	}
+	if v.SigningAlgorithm != "" {
+		s.WriteString(schemas.CertificateAuthorityConfiguration_SigningAlgorithm, string(v.SigningAlgorithm))
+	}
+	if v.Subject != nil {
+		s.WriteStruct(schemas.CertificateAuthorityConfiguration_Subject)
+		v.Subject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CertificateAuthorityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateAuthorityConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateAuthorityConfiguration_CsrExtensions:
+			v.CsrExtensions = &CsrExtensions{}
+			return v.CsrExtensions.Deserialize(d)
+		case schemas.CertificateAuthorityConfiguration_KeyAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.CertificateAuthorityConfiguration_KeyAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.KeyAlgorithm = KeyAlgorithm(ev)
+			return nil
+		case schemas.CertificateAuthorityConfiguration_SigningAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.CertificateAuthorityConfiguration_SigningAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.SigningAlgorithm = SigningAlgorithm(ev)
+			return nil
+		case schemas.CertificateAuthorityConfiguration_Subject:
+			v.Subject = &ASN1Subject{}
+			return v.Subject.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains configuration information for a certificate revocation list (CRL).
@@ -431,6 +814,80 @@ type CrlConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CrlConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrlConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrlConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrlDistributionPointExtensionConfiguration != nil {
+		s.WriteStruct(schemas.CrlConfiguration_CrlDistributionPointExtensionConfiguration)
+		v.CrlDistributionPointExtensionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CrlType != "" {
+		s.WriteString(schemas.CrlConfiguration_CrlType, string(v.CrlType))
+	}
+	if v.CustomCname != nil {
+		s.WriteString(schemas.CrlConfiguration_CustomCname, *v.CustomCname)
+	}
+	if v.CustomPath != nil {
+		s.WriteString(schemas.CrlConfiguration_CustomPath, *v.CustomPath)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CrlConfiguration_Enabled, *v.Enabled)
+	}
+	if v.ExpirationInDays != nil {
+		s.WriteInt32(schemas.CrlConfiguration_ExpirationInDays, *v.ExpirationInDays)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.CrlConfiguration_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3ObjectAcl != "" {
+		s.WriteString(schemas.CrlConfiguration_S3ObjectAcl, string(v.S3ObjectAcl))
+	}
+}
+func (v *CrlConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrlConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrlConfiguration_CrlDistributionPointExtensionConfiguration:
+			v.CrlDistributionPointExtensionConfiguration = &CrlDistributionPointExtensionConfiguration{}
+			return v.CrlDistributionPointExtensionConfiguration.Deserialize(d)
+		case schemas.CrlConfiguration_CrlType:
+			var ev string
+			if err := d.ReadString(schemas.CrlConfiguration_CrlType, &ev); err != nil {
+				return err
+			}
+			v.CrlType = CrlType(ev)
+			return nil
+		case schemas.CrlConfiguration_CustomCname:
+			v.CustomCname = new(string)
+			return d.ReadString(schemas.CrlConfiguration_CustomCname, v.CustomCname)
+		case schemas.CrlConfiguration_CustomPath:
+			v.CustomPath = new(string)
+			return d.ReadString(schemas.CrlConfiguration_CustomPath, v.CustomPath)
+		case schemas.CrlConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CrlConfiguration_Enabled, v.Enabled)
+		case schemas.CrlConfiguration_ExpirationInDays:
+			v.ExpirationInDays = new(int32)
+			return d.ReadInt32(schemas.CrlConfiguration_ExpirationInDays, v.ExpirationInDays)
+		case schemas.CrlConfiguration_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.CrlConfiguration_S3BucketName, v.S3BucketName)
+		case schemas.CrlConfiguration_S3ObjectAcl:
+			var ev string
+			if err := d.ReadString(schemas.CrlConfiguration_S3ObjectAcl, &ev); err != nil {
+				return err
+			}
+			v.S3ObjectAcl = S3ObjectAcl(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains configuration information for the default behavior of the CRL
 // Distribution Point (CDP) extension in certificates issued by your CA. This
 // extension contains a link to download the CRL, so you can check whether a
@@ -456,6 +913,28 @@ type CrlDistributionPointExtensionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CrlDistributionPointExtensionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrlDistributionPointExtensionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrlDistributionPointExtensionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OmitExtension != nil {
+		s.WriteBool(schemas.CrlDistributionPointExtensionConfiguration_OmitExtension, *v.OmitExtension)
+	}
+}
+func (v *CrlDistributionPointExtensionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrlDistributionPointExtensionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrlDistributionPointExtensionConfiguration_OmitExtension:
+			v.OmitExtension = new(bool)
+			return d.ReadBool(schemas.CrlDistributionPointExtensionConfiguration_OmitExtension, v.OmitExtension)
+		}
+		return nil
+	})
+}
+
 // Describes the certificate extensions to be added to the certificate signing
 // request (CSR).
 type CsrExtensions struct {
@@ -473,6 +952,33 @@ type CsrExtensions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CsrExtensions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CsrExtensions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CsrExtensions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyUsage != nil {
+		s.WriteStruct(schemas.CsrExtensions_KeyUsage)
+		v.KeyUsage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAccessDescriptionList(s, schemas.CsrExtensions_SubjectInformationAccess, v.SubjectInformationAccess)
+}
+func (v *CsrExtensions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CsrExtensions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CsrExtensions_KeyUsage:
+			v.KeyUsage = &KeyUsage{}
+			return v.KeyUsage.Deserialize(d)
+		case schemas.CsrExtensions_SubjectInformationAccess:
+			return deserializeAccessDescriptionList(d, schemas.CsrExtensions_SubjectInformationAccess, &v.SubjectInformationAccess)
+		}
+		return nil
+	})
+}
+
 // Defines the X.500 relative distinguished name (RDN).
 type CustomAttribute struct {
 
@@ -488,6 +994,34 @@ type CustomAttribute struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.CustomAttribute_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CustomAttribute_Value, *v.Value)
+	}
+}
+func (v *CustomAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomAttribute_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.CustomAttribute_ObjectIdentifier, v.ObjectIdentifier)
+		case schemas.CustomAttribute_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CustomAttribute_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Specifies the X.509 extension information for a certificate.
@@ -516,6 +1050,40 @@ type CustomExtension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomExtension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomExtension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomExtension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Critical != nil {
+		s.WriteBool(schemas.CustomExtension_Critical, *v.Critical)
+	}
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.CustomExtension_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CustomExtension_Value, *v.Value)
+	}
+}
+func (v *CustomExtension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomExtension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomExtension_Critical:
+			v.Critical = new(bool)
+			return d.ReadBool(schemas.CustomExtension_Critical, v.Critical)
+		case schemas.CustomExtension_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.CustomExtension_ObjectIdentifier, v.ObjectIdentifier)
+		case schemas.CustomExtension_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CustomExtension_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes an Electronic Data Interchange (EDI) entity as described in as
 // defined in [Subject Alternative Name]in RFC 5280.
 //
@@ -533,6 +1101,34 @@ type EdiPartyName struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EdiPartyName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EdiPartyName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EdiPartyName) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NameAssigner != nil {
+		s.WriteString(schemas.EdiPartyName_NameAssigner, *v.NameAssigner)
+	}
+	if v.PartyName != nil {
+		s.WriteString(schemas.EdiPartyName_PartyName, *v.PartyName)
+	}
+}
+func (v *EdiPartyName) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EdiPartyName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EdiPartyName_NameAssigner:
+			v.NameAssigner = new(string)
+			return d.ReadString(schemas.EdiPartyName_NameAssigner, v.NameAssigner)
+		case schemas.EdiPartyName_PartyName:
+			v.PartyName = new(string)
+			return d.ReadString(schemas.EdiPartyName_PartyName, v.PartyName)
+		}
+		return nil
+	})
+}
+
 // Specifies additional purposes for which the certified public key may be used
 // other than basic purposes indicated in the KeyUsage extension.
 type ExtendedKeyUsage struct {
@@ -546,6 +1142,38 @@ type ExtendedKeyUsage struct {
 	ExtendedKeyUsageType ExtendedKeyUsageType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExtendedKeyUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendedKeyUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendedKeyUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtendedKeyUsageObjectIdentifier != nil {
+		s.WriteString(schemas.ExtendedKeyUsage_ExtendedKeyUsageObjectIdentifier, *v.ExtendedKeyUsageObjectIdentifier)
+	}
+	if v.ExtendedKeyUsageType != "" {
+		s.WriteString(schemas.ExtendedKeyUsage_ExtendedKeyUsageType, string(v.ExtendedKeyUsageType))
+	}
+}
+func (v *ExtendedKeyUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtendedKeyUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtendedKeyUsage_ExtendedKeyUsageObjectIdentifier:
+			v.ExtendedKeyUsageObjectIdentifier = new(string)
+			return d.ReadString(schemas.ExtendedKeyUsage_ExtendedKeyUsageObjectIdentifier, v.ExtendedKeyUsageObjectIdentifier)
+		case schemas.ExtendedKeyUsage_ExtendedKeyUsageType:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedKeyUsage_ExtendedKeyUsageType, &ev); err != nil {
+				return err
+			}
+			v.ExtendedKeyUsageType = ExtendedKeyUsageType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains X.509 extension information for a certificate.
@@ -584,6 +1212,42 @@ type Extensions struct {
 	SubjectAlternativeNames []GeneralName
 
 	noSmithyDocumentSerde
+}
+
+func (v *Extensions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Extensions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Extensions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificatePolicyList(s, schemas.Extensions_CertificatePolicies, v.CertificatePolicies)
+	serializeCustomExtensionList(s, schemas.Extensions_CustomExtensions, v.CustomExtensions)
+	serializeExtendedKeyUsageList(s, schemas.Extensions_ExtendedKeyUsage, v.ExtendedKeyUsage)
+	if v.KeyUsage != nil {
+		s.WriteStruct(schemas.Extensions_KeyUsage)
+		v.KeyUsage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGeneralNameList(s, schemas.Extensions_SubjectAlternativeNames, v.SubjectAlternativeNames)
+}
+func (v *Extensions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Extensions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Extensions_CertificatePolicies:
+			return deserializeCertificatePolicyList(d, schemas.Extensions_CertificatePolicies, &v.CertificatePolicies)
+		case schemas.Extensions_CustomExtensions:
+			return deserializeCustomExtensionList(d, schemas.Extensions_CustomExtensions, &v.CustomExtensions)
+		case schemas.Extensions_ExtendedKeyUsage:
+			return deserializeExtendedKeyUsageList(d, schemas.Extensions_ExtendedKeyUsage, &v.ExtendedKeyUsage)
+		case schemas.Extensions_KeyUsage:
+			v.KeyUsage = &KeyUsage{}
+			return v.KeyUsage.Deserialize(d)
+		case schemas.Extensions_SubjectAlternativeNames:
+			return deserializeGeneralNameList(d, schemas.Extensions_SubjectAlternativeNames, &v.SubjectAlternativeNames)
+		}
+		return nil
+	})
 }
 
 // Describes an ASN.1 X.400 GeneralName as defined in [RFC 5280]. Only one of the following
@@ -627,6 +1291,76 @@ type GeneralName struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeneralName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneralName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeneralName) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryName != nil {
+		s.WriteStruct(schemas.GeneralName_DirectoryName)
+		v.DirectoryName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.GeneralName_DnsName, *v.DnsName)
+	}
+	if v.EdiPartyName != nil {
+		s.WriteStruct(schemas.GeneralName_EdiPartyName)
+		v.EdiPartyName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.GeneralName_IpAddress, *v.IpAddress)
+	}
+	if v.OtherName != nil {
+		s.WriteStruct(schemas.GeneralName_OtherName)
+		v.OtherName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegisteredId != nil {
+		s.WriteString(schemas.GeneralName_RegisteredId, *v.RegisteredId)
+	}
+	if v.Rfc822Name != nil {
+		s.WriteString(schemas.GeneralName_Rfc822Name, *v.Rfc822Name)
+	}
+	if v.UniformResourceIdentifier != nil {
+		s.WriteString(schemas.GeneralName_UniformResourceIdentifier, *v.UniformResourceIdentifier)
+	}
+}
+func (v *GeneralName) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeneralName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeneralName_DirectoryName:
+			v.DirectoryName = &ASN1Subject{}
+			return v.DirectoryName.Deserialize(d)
+		case schemas.GeneralName_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.GeneralName_DnsName, v.DnsName)
+		case schemas.GeneralName_EdiPartyName:
+			v.EdiPartyName = &EdiPartyName{}
+			return v.EdiPartyName.Deserialize(d)
+		case schemas.GeneralName_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.GeneralName_IpAddress, v.IpAddress)
+		case schemas.GeneralName_OtherName:
+			v.OtherName = &OtherName{}
+			return v.OtherName.Deserialize(d)
+		case schemas.GeneralName_RegisteredId:
+			v.RegisteredId = new(string)
+			return d.ReadString(schemas.GeneralName_RegisteredId, v.RegisteredId)
+		case schemas.GeneralName_Rfc822Name:
+			v.Rfc822Name = new(string)
+			return d.ReadString(schemas.GeneralName_Rfc822Name, v.Rfc822Name)
+		case schemas.GeneralName_UniformResourceIdentifier:
+			v.UniformResourceIdentifier = new(string)
+			return d.ReadString(schemas.GeneralName_UniformResourceIdentifier, v.UniformResourceIdentifier)
+		}
+		return nil
+	})
+}
+
 // Defines one or more purposes for which the key contained in the certificate can
 // be used. Default value for each option is false.
 type KeyUsage struct {
@@ -661,6 +1395,67 @@ type KeyUsage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeyUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CRLSign != false {
+		s.WriteBool(schemas.KeyUsage_CRLSign, v.CRLSign)
+	}
+	if v.DataEncipherment != false {
+		s.WriteBool(schemas.KeyUsage_DataEncipherment, v.DataEncipherment)
+	}
+	if v.DecipherOnly != false {
+		s.WriteBool(schemas.KeyUsage_DecipherOnly, v.DecipherOnly)
+	}
+	if v.DigitalSignature != false {
+		s.WriteBool(schemas.KeyUsage_DigitalSignature, v.DigitalSignature)
+	}
+	if v.EncipherOnly != false {
+		s.WriteBool(schemas.KeyUsage_EncipherOnly, v.EncipherOnly)
+	}
+	if v.KeyAgreement != false {
+		s.WriteBool(schemas.KeyUsage_KeyAgreement, v.KeyAgreement)
+	}
+	if v.KeyCertSign != false {
+		s.WriteBool(schemas.KeyUsage_KeyCertSign, v.KeyCertSign)
+	}
+	if v.KeyEncipherment != false {
+		s.WriteBool(schemas.KeyUsage_KeyEncipherment, v.KeyEncipherment)
+	}
+	if v.NonRepudiation != false {
+		s.WriteBool(schemas.KeyUsage_NonRepudiation, v.NonRepudiation)
+	}
+}
+func (v *KeyUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyUsage_CRLSign:
+			return d.ReadBool(schemas.KeyUsage_CRLSign, &v.CRLSign)
+		case schemas.KeyUsage_DataEncipherment:
+			return d.ReadBool(schemas.KeyUsage_DataEncipherment, &v.DataEncipherment)
+		case schemas.KeyUsage_DecipherOnly:
+			return d.ReadBool(schemas.KeyUsage_DecipherOnly, &v.DecipherOnly)
+		case schemas.KeyUsage_DigitalSignature:
+			return d.ReadBool(schemas.KeyUsage_DigitalSignature, &v.DigitalSignature)
+		case schemas.KeyUsage_EncipherOnly:
+			return d.ReadBool(schemas.KeyUsage_EncipherOnly, &v.EncipherOnly)
+		case schemas.KeyUsage_KeyAgreement:
+			return d.ReadBool(schemas.KeyUsage_KeyAgreement, &v.KeyAgreement)
+		case schemas.KeyUsage_KeyCertSign:
+			return d.ReadBool(schemas.KeyUsage_KeyCertSign, &v.KeyCertSign)
+		case schemas.KeyUsage_KeyEncipherment:
+			return d.ReadBool(schemas.KeyUsage_KeyEncipherment, &v.KeyEncipherment)
+		case schemas.KeyUsage_NonRepudiation:
+			return d.ReadBool(schemas.KeyUsage_NonRepudiation, &v.NonRepudiation)
+		}
+		return nil
+	})
+}
+
 // Contains information to enable and configure Online Certificate Status Protocol
 // (OCSP) for validating certificate revocation status.
 //
@@ -693,6 +1488,34 @@ type OcspConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OcspConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OcspConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OcspConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.OcspConfiguration_Enabled, *v.Enabled)
+	}
+	if v.OcspCustomCname != nil {
+		s.WriteString(schemas.OcspConfiguration_OcspCustomCname, *v.OcspCustomCname)
+	}
+}
+func (v *OcspConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OcspConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OcspConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.OcspConfiguration_Enabled, v.Enabled)
+		case schemas.OcspConfiguration_OcspCustomCname:
+			v.OcspCustomCname = new(string)
+			return d.ReadString(schemas.OcspConfiguration_OcspCustomCname, v.OcspCustomCname)
+		}
+		return nil
+	})
+}
+
 // Defines a custom ASN.1 X.400 GeneralName using an object identifier (OID) and
 // value. The OID must satisfy the regular expression shown below. For more
 // information, see NIST's definition of [Object Identifier (OID)].
@@ -711,6 +1534,34 @@ type OtherName struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OtherName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OtherName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OtherName) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TypeId != nil {
+		s.WriteString(schemas.OtherName_TypeId, *v.TypeId)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.OtherName_Value, *v.Value)
+	}
+}
+func (v *OtherName) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OtherName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OtherName_TypeId:
+			v.TypeId = new(string)
+			return d.ReadString(schemas.OtherName_TypeId, v.TypeId)
+		case schemas.OtherName_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.OtherName_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Permissions designate which private CA actions can be performed by an Amazon
@@ -748,6 +1599,55 @@ type Permission struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Permission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Permission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Permission) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionList(s, schemas.Permission_Actions, v.Actions)
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.Permission_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Permission_CreatedAt, *v.CreatedAt)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.Permission_Policy, *v.Policy)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.Permission_Principal, *v.Principal)
+	}
+	if v.SourceAccount != nil {
+		s.WriteString(schemas.Permission_SourceAccount, *v.SourceAccount)
+	}
+}
+func (v *Permission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Permission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Permission_Actions:
+			return deserializeActionList(d, schemas.Permission_Actions, &v.Actions)
+		case schemas.Permission_CertificateAuthorityArn:
+			v.CertificateAuthorityArn = new(string)
+			return d.ReadString(schemas.Permission_CertificateAuthorityArn, v.CertificateAuthorityArn)
+		case schemas.Permission_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Permission_CreatedAt, v.CreatedAt)
+		case schemas.Permission_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.Permission_Policy, v.Policy)
+		case schemas.Permission_Principal:
+			v.Principal = new(string)
+			return d.ReadString(schemas.Permission_Principal, v.Principal)
+		case schemas.Permission_SourceAccount:
+			v.SourceAccount = new(string)
+			return d.ReadString(schemas.Permission_SourceAccount, v.SourceAccount)
+		}
+		return nil
+	})
+}
+
 // Defines the X.509 CertificatePolicies extension.
 type PolicyInformation struct {
 
@@ -764,6 +1664,31 @@ type PolicyInformation struct {
 	PolicyQualifiers []PolicyQualifierInfo
 
 	noSmithyDocumentSerde
+}
+
+func (v *PolicyInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertPolicyId != nil {
+		s.WriteString(schemas.PolicyInformation_CertPolicyId, *v.CertPolicyId)
+	}
+	serializePolicyQualifierInfoList(s, schemas.PolicyInformation_PolicyQualifiers, v.PolicyQualifiers)
+}
+func (v *PolicyInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyInformation_CertPolicyId:
+			v.CertPolicyId = new(string)
+			return d.ReadString(schemas.PolicyInformation_CertPolicyId, v.CertPolicyId)
+		case schemas.PolicyInformation_PolicyQualifiers:
+			return deserializePolicyQualifierInfoList(d, schemas.PolicyInformation_PolicyQualifiers, &v.PolicyQualifiers)
+		}
+		return nil
+	})
 }
 
 // Modifies the CertPolicyId of a PolicyInformation object with a qualifier.
@@ -785,6 +1710,40 @@ type PolicyQualifierInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicyQualifierInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyQualifierInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyQualifierInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyQualifierId != "" {
+		s.WriteString(schemas.PolicyQualifierInfo_PolicyQualifierId, string(v.PolicyQualifierId))
+	}
+	if v.Qualifier != nil {
+		s.WriteStruct(schemas.PolicyQualifierInfo_Qualifier)
+		v.Qualifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PolicyQualifierInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyQualifierInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyQualifierInfo_PolicyQualifierId:
+			var ev string
+			if err := d.ReadString(schemas.PolicyQualifierInfo_PolicyQualifierId, &ev); err != nil {
+				return err
+			}
+			v.PolicyQualifierId = PolicyQualifierId(ev)
+			return nil
+		case schemas.PolicyQualifierInfo_Qualifier:
+			v.Qualifier = &Qualifier{}
+			return v.Qualifier.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines a PolicyInformation qualifier. Amazon Web Services Private CA supports
 // the [certification practice statement (CPS) qualifier]defined in RFC 5280.
 //
@@ -798,6 +1757,28 @@ type Qualifier struct {
 	CpsUri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Qualifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Qualifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Qualifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CpsUri != nil {
+		s.WriteString(schemas.Qualifier_CpsUri, *v.CpsUri)
+	}
+}
+func (v *Qualifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Qualifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Qualifier_CpsUri:
+			v.CpsUri = new(string)
+			return d.ReadString(schemas.Qualifier_CpsUri, v.CpsUri)
+		}
+		return nil
+	})
 }
 
 // Certificate revocation information used by the [CreateCertificateAuthority] and [UpdateCertificateAuthority] actions. Your private
@@ -828,6 +1809,38 @@ type RevocationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevocationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevocationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevocationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrlConfiguration != nil {
+		s.WriteStruct(schemas.RevocationConfiguration_CrlConfiguration)
+		v.CrlConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OcspConfiguration != nil {
+		s.WriteStruct(schemas.RevocationConfiguration_OcspConfiguration)
+		v.OcspConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RevocationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevocationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevocationConfiguration_CrlConfiguration:
+			v.CrlConfiguration = &CrlConfiguration{}
+			return v.CrlConfiguration.Deserialize(d)
+		case schemas.RevocationConfiguration_OcspConfiguration:
+			v.OcspConfiguration = &OcspConfiguration{}
+			return v.OcspConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Tags are labels that you can use to identify and organize your private CAs.
 // Each tag consists of a key and an optional value. You can associate up to 50
 // tags with a private CA. To add one or more tags to a private CA, call the [TagCertificateAuthority]
@@ -846,6 +1859,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Validity specifies the period of time during which a certificate is valid.
@@ -905,6 +1946,38 @@ type Validity struct {
 	Value *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Validity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Validity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Validity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.Validity_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteInt64(schemas.Validity_Value, *v.Value)
+	}
+}
+func (v *Validity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Validity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Validity_Type:
+			var ev string
+			if err := d.ReadString(schemas.Validity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ValidityPeriodType(ev)
+			return nil
+		case schemas.Validity_Value:
+			v.Value = new(int64)
+			return d.ReadInt64(schemas.Validity_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -5,7 +5,9 @@ package mediapackagevod
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListPackagingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPackagingConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPackagingConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPackagingConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPackagingConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPackagingConfigurationsRequest_NextToken, *v.NextToken)
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.ListPackagingConfigurationsRequest_PackagingGroupId, *v.PackagingGroupId)
+	}
+}
+
 type ListPackagingConfigurationsOutput struct {
 
 	// A token that can be used to resume pagination from the end of the collection.
@@ -54,13 +74,35 @@ type ListPackagingConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPackagingConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPackagingConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPackagingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPackagingConfigurationsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfPackagingConfiguration(s, schemas.ListPackagingConfigurationsResponse_PackagingConfigurations, v.PackagingConfigurations)
+}
+func (v *ListPackagingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPackagingConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPackagingConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPackagingConfigurationsResponse_NextToken, v.NextToken)
+		case schemas.ListPackagingConfigurationsResponse_PackagingConfigurations:
+			return deserialize__listOfPackagingConfiguration(d, schemas.ListPackagingConfigurationsResponse_PackagingConfigurations, &v.PackagingConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPackagingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackagingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackagingConfigurations, schemas.ListPackagingConfigurationsRequest, schemas.ListPackagingConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackagingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackagingConfigurations, schemas.ListPackagingConfigurationsRequest, schemas.ListPackagingConfigurationsResponse), output: &ListPackagingConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

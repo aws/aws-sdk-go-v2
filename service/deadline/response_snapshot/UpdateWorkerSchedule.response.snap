@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assignedSessions":{"key0":{"jobId":"__JobId__","logConfiguration":{"error":"__Error__","logDriver":"__LogDriver__","options":{"key0":"__Value__"},"parameters":{"key0":"__Value__"}},"queueId":"__QueueId__","sessionActions":[{"definition":{"envEnter":{"environmentId":"__EnvironmentId__"}},"sessionActionId":"__SessionActionId__"},{"definition":{"envEnter":{"environmentId":"__EnvironmentId__"}},"sessionActionId":"__SessionActionId__"}]}},"cancelSessionActions":{"key0":["__Member__","__Member__"]},"desiredWorkerStatus":"STOPPED","updateIntervalSeconds":1}

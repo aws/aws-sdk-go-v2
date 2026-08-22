@@ -4,7 +4,9 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,24 @@ type DisassociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.DisassociateResourceRequest_application, *v.Application)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.DisassociateResourceRequest_resource, *v.Resource)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.DisassociateResourceRequest_resourceType, string(v.ResourceType))
+	}
+}
+
 type DisassociateResourceOutput struct {
 
 	// The Amazon resource name (ARN) that specifies the application.
@@ -87,13 +107,38 @@ type DisassociateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.DisassociateResourceResponse_applicationArn, *v.ApplicationArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DisassociateResourceResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *DisassociateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateResourceResponse_applicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.DisassociateResourceResponse_applicationArn, v.ApplicationArn)
+		case schemas.DisassociateResourceResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DisassociateResourceResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResource, schemas.DisassociateResourceRequest, schemas.DisassociateResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResource, schemas.DisassociateResourceRequest, schemas.DisassociateResourceResponse), output: &DisassociateResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

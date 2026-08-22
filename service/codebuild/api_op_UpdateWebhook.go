@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,33 @@ type UpdateWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebhookInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebhookInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebhookInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchFilter != nil {
+		s.WriteString(schemas.UpdateWebhookInput_branchFilter, *v.BranchFilter)
+	}
+	if v.BuildType != "" {
+		s.WriteString(schemas.UpdateWebhookInput_buildType, string(v.BuildType))
+	}
+	serializeFilterGroups(s, schemas.UpdateWebhookInput_filterGroups, v.FilterGroups)
+	if v.ProjectName != nil {
+		s.WriteString(schemas.UpdateWebhookInput_projectName, *v.ProjectName)
+	}
+	if v.PullRequestBuildPolicy != nil {
+		s.WriteStruct(schemas.UpdateWebhookInput_pullRequestBuildPolicy)
+		v.PullRequestBuildPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RotateSecret != false {
+		s.WriteBool(schemas.UpdateWebhookInput_rotateSecret, v.RotateSecret)
+	}
+}
+
 type UpdateWebhookOutput struct {
 
 	//  Information about a repository's webhook that is associated with a project in
@@ -80,13 +109,34 @@ type UpdateWebhookOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebhookOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebhookOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebhookOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Webhook != nil {
+		s.WriteStruct(schemas.UpdateWebhookOutput_webhook)
+		v.Webhook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWebhookOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWebhookOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWebhookOutput_webhook:
+			v.Webhook = &types.Webhook{}
+			return v.Webhook.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWebhook{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebhook, schemas.UpdateWebhookInput, schemas.UpdateWebhookOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWebhook{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebhook, schemas.UpdateWebhookInput, schemas.UpdateWebhookOutput), output: &UpdateWebhookOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

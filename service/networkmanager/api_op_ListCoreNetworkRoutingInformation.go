@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,35 @@ type ListCoreNetworkRoutingInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworkRoutingInformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworkRoutingInformationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworkRoutingInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_CommunityMatches, v.CommunityMatches)
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_EdgeLocation, *v.EdgeLocation)
+	}
+	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactAsPathMatches, v.ExactAsPathMatches)
+	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches, v.LocalPreferenceMatches)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCoreNetworkRoutingInformationRequest_MaxResults, *v.MaxResults)
+	}
+	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_MedMatches, v.MedMatches)
+	serializeFilterMap(s, schemas.ListCoreNetworkRoutingInformationRequest_NextHopFilters, v.NextHopFilters)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_NextToken, *v.NextToken)
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_SegmentName, *v.SegmentName)
+	}
+}
+
 type ListCoreNetworkRoutingInformationOutput struct {
 
 	// The list of routing information for the core network.
@@ -82,13 +113,35 @@ type ListCoreNetworkRoutingInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworkRoutingInformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworkRoutingInformationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworkRoutingInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCoreNetworkRoutingInformationList(s, schemas.ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation, v.CoreNetworkRoutingInformation)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworkRoutingInformationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCoreNetworkRoutingInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoreNetworkRoutingInformationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation:
+			return deserializeCoreNetworkRoutingInformationList(d, schemas.ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation, &v.CoreNetworkRoutingInformation)
+		case schemas.ListCoreNetworkRoutingInformationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoreNetworkRoutingInformationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoreNetworkRoutingInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoreNetworkRoutingInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworkRoutingInformation, schemas.ListCoreNetworkRoutingInformationRequest, schemas.ListCoreNetworkRoutingInformationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoreNetworkRoutingInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworkRoutingInformation, schemas.ListCoreNetworkRoutingInformationRequest, schemas.ListCoreNetworkRoutingInformationResponse), output: &ListCoreNetworkRoutingInformationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

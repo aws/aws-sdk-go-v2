@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -27,6 +29,40 @@ type ActiveDirectoryBackupAttributes struct {
 	ResourceARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActiveDirectoryBackupAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveDirectoryBackupAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveDirectoryBackupAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryId != nil {
+		s.WriteString(schemas.ActiveDirectoryBackupAttributes_ActiveDirectoryId, *v.ActiveDirectoryId)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.ActiveDirectoryBackupAttributes_DomainName, *v.DomainName)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ActiveDirectoryBackupAttributes_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *ActiveDirectoryBackupAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveDirectoryBackupAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveDirectoryBackupAttributes_ActiveDirectoryId:
+			v.ActiveDirectoryId = new(string)
+			return d.ReadString(schemas.ActiveDirectoryBackupAttributes_ActiveDirectoryId, v.ActiveDirectoryId)
+		case schemas.ActiveDirectoryBackupAttributes_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ActiveDirectoryBackupAttributes_DomainName, v.DomainName)
+		case schemas.ActiveDirectoryBackupAttributes_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.ActiveDirectoryBackupAttributes_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
 }
 
 // Describes a specific Amazon FSx administrative action for the current Windows,
@@ -191,6 +227,104 @@ type AdministrativeAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdministrativeAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdministrativeAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdministrativeAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdministrativeActionType != "" {
+		s.WriteString(schemas.AdministrativeAction_AdministrativeActionType, string(v.AdministrativeActionType))
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.AdministrativeAction_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AdministrativeAction_Message, *v.Message)
+	}
+	if v.ProgressPercent != nil {
+		s.WriteInt32(schemas.AdministrativeAction_ProgressPercent, *v.ProgressPercent)
+	}
+	if v.RemainingTransferBytes != nil {
+		s.WriteInt64(schemas.AdministrativeAction_RemainingTransferBytes, *v.RemainingTransferBytes)
+	}
+	if v.RequestTime != nil {
+		s.WriteTime(schemas.AdministrativeAction_RequestTime, *v.RequestTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AdministrativeAction_Status, string(v.Status))
+	}
+	if v.TargetFileSystemValues != nil {
+		s.WriteStruct(schemas.AdministrativeAction_TargetFileSystemValues)
+		v.TargetFileSystemValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetSnapshotValues != nil {
+		s.WriteStruct(schemas.AdministrativeAction_TargetSnapshotValues)
+		v.TargetSnapshotValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetVolumeValues != nil {
+		s.WriteStruct(schemas.AdministrativeAction_TargetVolumeValues)
+		v.TargetVolumeValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalTransferBytes != nil {
+		s.WriteInt64(schemas.AdministrativeAction_TotalTransferBytes, *v.TotalTransferBytes)
+	}
+}
+func (v *AdministrativeAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdministrativeAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdministrativeAction_AdministrativeActionType:
+			var ev string
+			if err := d.ReadString(schemas.AdministrativeAction_AdministrativeActionType, &ev); err != nil {
+				return err
+			}
+			v.AdministrativeActionType = AdministrativeActionType(ev)
+			return nil
+		case schemas.AdministrativeAction_FailureDetails:
+			v.FailureDetails = &AdministrativeActionFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.AdministrativeAction_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AdministrativeAction_Message, v.Message)
+		case schemas.AdministrativeAction_ProgressPercent:
+			v.ProgressPercent = new(int32)
+			return d.ReadInt32(schemas.AdministrativeAction_ProgressPercent, v.ProgressPercent)
+		case schemas.AdministrativeAction_RemainingTransferBytes:
+			v.RemainingTransferBytes = new(int64)
+			return d.ReadInt64(schemas.AdministrativeAction_RemainingTransferBytes, v.RemainingTransferBytes)
+		case schemas.AdministrativeAction_RequestTime:
+			v.RequestTime = new(time.Time)
+			return d.ReadTime(schemas.AdministrativeAction_RequestTime, v.RequestTime)
+		case schemas.AdministrativeAction_Status:
+			var ev string
+			if err := d.ReadString(schemas.AdministrativeAction_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.AdministrativeAction_TargetFileSystemValues:
+			v.TargetFileSystemValues = &FileSystem{}
+			return v.TargetFileSystemValues.Deserialize(d)
+		case schemas.AdministrativeAction_TargetSnapshotValues:
+			v.TargetSnapshotValues = &Snapshot{}
+			return v.TargetSnapshotValues.Deserialize(d)
+		case schemas.AdministrativeAction_TargetVolumeValues:
+			v.TargetVolumeValues = &Volume{}
+			return v.TargetVolumeValues.Deserialize(d)
+		case schemas.AdministrativeAction_TotalTransferBytes:
+			v.TotalTransferBytes = new(int64)
+			return d.ReadInt64(schemas.AdministrativeAction_TotalTransferBytes, v.TotalTransferBytes)
+		}
+		return nil
+	})
+}
+
 // Provides information about a failed administrative action.
 type AdministrativeActionFailureDetails struct {
 
@@ -198,6 +332,28 @@ type AdministrativeActionFailureDetails struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdministrativeActionFailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdministrativeActionFailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdministrativeActionFailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AdministrativeActionFailureDetails_Message, *v.Message)
+	}
+}
+func (v *AdministrativeActionFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdministrativeActionFailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdministrativeActionFailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AdministrativeActionFailureDetails_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Used to specify configuration options for a volume’s storage aggregate or
@@ -227,6 +383,31 @@ type AggregateConfiguration struct {
 	TotalConstituents *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AggregateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AggregateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AggregateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregates(s, schemas.AggregateConfiguration_Aggregates, v.Aggregates)
+	if v.TotalConstituents != nil {
+		s.WriteInt32(schemas.AggregateConfiguration_TotalConstituents, *v.TotalConstituents)
+	}
+}
+func (v *AggregateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AggregateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AggregateConfiguration_Aggregates:
+			return deserializeAggregates(d, schemas.AggregateConfiguration_Aggregates, &v.Aggregates)
+		case schemas.AggregateConfiguration_TotalConstituents:
+			v.TotalConstituents = new(int32)
+			return d.ReadInt32(schemas.AggregateConfiguration_TotalConstituents, v.TotalConstituents)
+		}
+		return nil
+	})
 }
 
 // A DNS alias that is associated with the file system. You can use a DNS alias to
@@ -274,6 +455,38 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Alias) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Alias)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Alias) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.Alias_Lifecycle, string(v.Lifecycle))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Alias_Name, *v.Name)
+	}
+}
+func (v *Alias) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Alias, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Alias_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.Alias_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = AliasLifecycle(ev)
+			return nil
+		case schemas.Alias_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Alias_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Sets the autocommit period of files in an FSx for ONTAP SnapLock volume, which
 // determines how long the files must remain unmodified before they're
 // automatically transitioned to the write once, read many (WORM) state.
@@ -307,6 +520,38 @@ type AutocommitPeriod struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutocommitPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutocommitPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutocommitPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.AutocommitPeriod_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteInt32(schemas.AutocommitPeriod_Value, *v.Value)
+	}
+}
+func (v *AutocommitPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutocommitPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutocommitPeriod_Type:
+			var ev string
+			if err := d.ReadString(schemas.AutocommitPeriod_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = AutocommitPeriodType(ev)
+			return nil
+		case schemas.AutocommitPeriod_Value:
+			v.Value = new(int32)
+			return d.ReadInt32(schemas.AutocommitPeriod_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes a data repository association's automatic export policy. The
 // AutoExportPolicy defines the types of updated objects on the file system that
 // will be automatically exported to the data repository. As you create, modify, or
@@ -334,6 +579,25 @@ type AutoExportPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoExportPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoExportPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoExportPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventTypes(s, schemas.AutoExportPolicy_Events, v.Events)
+}
+func (v *AutoExportPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoExportPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoExportPolicy_Events:
+			return deserializeEventTypes(d, schemas.AutoExportPolicy_Events, &v.Events)
+		}
+		return nil
+	})
+}
+
 // Describes the data repository association's automatic import policy. The
 // AutoImportPolicy defines how Amazon FSx keeps your file metadata and directory
 // listings up to date by importing changes to your Amazon FSx for Lustre file
@@ -358,6 +622,25 @@ type AutoImportPolicy struct {
 	Events []EventType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutoImportPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoImportPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoImportPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventTypes(s, schemas.AutoImportPolicy_Events, v.Events)
+}
+func (v *AutoImportPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoImportPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoImportPolicy_Events:
+			return deserializeEventTypes(d, schemas.AutoImportPolicy_Events, &v.Events)
+		}
+		return nil
+	})
 }
 
 // A backup of an Amazon FSx for Windows File Server, Amazon FSx for Lustre file
@@ -451,6 +734,141 @@ type Backup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Backup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Backup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Backup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.Backup_BackupId, *v.BackupId)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Backup_CreationTime, *v.CreationTime)
+	}
+	if v.DirectoryInformation != nil {
+		s.WriteStruct(schemas.Backup_DirectoryInformation)
+		v.DirectoryInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.Backup_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileSystem != nil {
+		s.WriteStruct(schemas.Backup_FileSystem)
+		v.FileSystem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.Backup_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.Backup_Lifecycle, string(v.Lifecycle))
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.Backup_OwnerId, *v.OwnerId)
+	}
+	if v.ProgressPercent != nil {
+		s.WriteInt32(schemas.Backup_ProgressPercent, *v.ProgressPercent)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.Backup_ResourceARN, *v.ResourceARN)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.Backup_ResourceType, string(v.ResourceType))
+	}
+	if v.SizeInBytes != nil {
+		s.WriteInt64(schemas.Backup_SizeInBytes, *v.SizeInBytes)
+	}
+	if v.SourceBackupId != nil {
+		s.WriteString(schemas.Backup_SourceBackupId, *v.SourceBackupId)
+	}
+	if v.SourceBackupRegion != nil {
+		s.WriteString(schemas.Backup_SourceBackupRegion, *v.SourceBackupRegion)
+	}
+	serializeTags(s, schemas.Backup_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.Backup_Type, string(v.Type))
+	}
+	if v.Volume != nil {
+		s.WriteStruct(schemas.Backup_Volume)
+		v.Volume.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Backup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Backup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Backup_BackupId:
+			v.BackupId = new(string)
+			return d.ReadString(schemas.Backup_BackupId, v.BackupId)
+		case schemas.Backup_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Backup_CreationTime, v.CreationTime)
+		case schemas.Backup_DirectoryInformation:
+			v.DirectoryInformation = &ActiveDirectoryBackupAttributes{}
+			return v.DirectoryInformation.Deserialize(d)
+		case schemas.Backup_FailureDetails:
+			v.FailureDetails = &BackupFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.Backup_FileSystem:
+			v.FileSystem = &FileSystem{}
+			return v.FileSystem.Deserialize(d)
+		case schemas.Backup_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.Backup_KmsKeyId, v.KmsKeyId)
+		case schemas.Backup_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.Backup_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = BackupLifecycle(ev)
+			return nil
+		case schemas.Backup_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.Backup_OwnerId, v.OwnerId)
+		case schemas.Backup_ProgressPercent:
+			v.ProgressPercent = new(int32)
+			return d.ReadInt32(schemas.Backup_ProgressPercent, v.ProgressPercent)
+		case schemas.Backup_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.Backup_ResourceARN, v.ResourceARN)
+		case schemas.Backup_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.Backup_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		case schemas.Backup_SizeInBytes:
+			v.SizeInBytes = new(int64)
+			return d.ReadInt64(schemas.Backup_SizeInBytes, v.SizeInBytes)
+		case schemas.Backup_SourceBackupId:
+			v.SourceBackupId = new(string)
+			return d.ReadString(schemas.Backup_SourceBackupId, v.SourceBackupId)
+		case schemas.Backup_SourceBackupRegion:
+			v.SourceBackupRegion = new(string)
+			return d.ReadString(schemas.Backup_SourceBackupRegion, v.SourceBackupRegion)
+		case schemas.Backup_Tags:
+			return deserializeTags(d, schemas.Backup_Tags, &v.Tags)
+		case schemas.Backup_Type:
+			var ev string
+			if err := d.ReadString(schemas.Backup_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = BackupType(ev)
+			return nil
+		case schemas.Backup_Volume:
+			v.Volume = &Volume{}
+			return v.Volume.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // If backup creation fails, this structure contains the details of that failure.
 type BackupFailureDetails struct {
 
@@ -458,6 +876,28 @@ type BackupFailureDetails struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BackupFailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupFailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupFailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BackupFailureDetails_Message, *v.Message)
+	}
+}
+func (v *BackupFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupFailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupFailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BackupFailureDetails_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Provides a report detailing the data repository task results of the files
@@ -499,6 +939,54 @@ type CompletionReport struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompletionReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompletionReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompletionReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CompletionReport_Enabled, *v.Enabled)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CompletionReport_Format, string(v.Format))
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.CompletionReport_Path, *v.Path)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.CompletionReport_Scope, string(v.Scope))
+	}
+}
+func (v *CompletionReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompletionReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompletionReport_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CompletionReport_Enabled, v.Enabled)
+		case schemas.CompletionReport_Format:
+			var ev string
+			if err := d.ReadString(schemas.CompletionReport_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = ReportFormat(ev)
+			return nil
+		case schemas.CompletionReport_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.CompletionReport_Path, v.Path)
+		case schemas.CompletionReport_Scope:
+			var ev string
+			if err := d.ReadString(schemas.CompletionReport_Scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = ReportScope(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Used to specify the configuration options for an FSx for ONTAP volume's storage
 // aggregate or aggregates.
 type CreateAggregateConfiguration struct {
@@ -513,6 +1001,31 @@ type CreateAggregateConfiguration struct {
 	ConstituentsPerAggregate *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateAggregateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAggregateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAggregateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregates(s, schemas.CreateAggregateConfiguration_Aggregates, v.Aggregates)
+	if v.ConstituentsPerAggregate != nil {
+		s.WriteInt32(schemas.CreateAggregateConfiguration_ConstituentsPerAggregate, *v.ConstituentsPerAggregate)
+	}
+}
+func (v *CreateAggregateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAggregateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAggregateConfiguration_Aggregates:
+			return deserializeAggregates(d, schemas.CreateAggregateConfiguration_Aggregates, &v.Aggregates)
+		case schemas.CreateAggregateConfiguration_ConstituentsPerAggregate:
+			v.ConstituentsPerAggregate = new(int32)
+			return d.ReadInt32(schemas.CreateAggregateConfiguration_ConstituentsPerAggregate, v.ConstituentsPerAggregate)
+		}
+		return nil
+	})
 }
 
 // Specifies the FSx for ONTAP volume that the S3 access point will be attached
@@ -534,6 +1047,36 @@ type CreateAndAttachS3AccessPointOntapConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAndAttachS3AccessPointOntapConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAndAttachS3AccessPointOntapConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAndAttachS3AccessPointOntapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemIdentity != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointOntapConfiguration_FileSystemIdentity)
+		v.FileSystemIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.CreateAndAttachS3AccessPointOntapConfiguration_VolumeId, *v.VolumeId)
+	}
+}
+func (v *CreateAndAttachS3AccessPointOntapConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAndAttachS3AccessPointOntapConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAndAttachS3AccessPointOntapConfiguration_FileSystemIdentity:
+			v.FileSystemIdentity = &OntapFileSystemIdentity{}
+			return v.FileSystemIdentity.Deserialize(d)
+		case schemas.CreateAndAttachS3AccessPointOntapConfiguration_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.CreateAndAttachS3AccessPointOntapConfiguration_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
+
 // Specifies the FSx for OpenZFS volume that the S3 access point will be attached
 // to, and the file system user identity.
 type CreateAndAttachS3AccessPointOpenZFSConfiguration struct {
@@ -553,6 +1096,36 @@ type CreateAndAttachS3AccessPointOpenZFSConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAndAttachS3AccessPointOpenZFSConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAndAttachS3AccessPointOpenZFSConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAndAttachS3AccessPointOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemIdentity != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointOpenZFSConfiguration_FileSystemIdentity)
+		v.FileSystemIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.CreateAndAttachS3AccessPointOpenZFSConfiguration_VolumeId, *v.VolumeId)
+	}
+}
+func (v *CreateAndAttachS3AccessPointOpenZFSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAndAttachS3AccessPointOpenZFSConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAndAttachS3AccessPointOpenZFSConfiguration_FileSystemIdentity:
+			v.FileSystemIdentity = &OpenZFSFileSystemIdentity{}
+			return v.FileSystemIdentity.Deserialize(d)
+		case schemas.CreateAndAttachS3AccessPointOpenZFSConfiguration_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.CreateAndAttachS3AccessPointOpenZFSConfiguration_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
+
 // Used to create an S3 access point that accepts requests only from a virtual
 // private cloud (VPC) to restrict data access to a private network.
 type CreateAndAttachS3AccessPointS3Configuration struct {
@@ -568,6 +1141,36 @@ type CreateAndAttachS3AccessPointS3Configuration struct {
 	VpcConfiguration *S3AccessPointVpcConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateAndAttachS3AccessPointS3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAndAttachS3AccessPointS3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAndAttachS3AccessPointS3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.CreateAndAttachS3AccessPointS3Configuration_Policy, *v.Policy)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.CreateAndAttachS3AccessPointS3Configuration_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAndAttachS3AccessPointS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAndAttachS3AccessPointS3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAndAttachS3AccessPointS3Configuration_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.CreateAndAttachS3AccessPointS3Configuration_Policy, v.Policy)
+		case schemas.CreateAndAttachS3AccessPointS3Configuration_VpcConfiguration:
+			v.VpcConfiguration = &S3AccessPointVpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The Amazon File Cache configuration for the cache that you are creating.
@@ -597,6 +1200,52 @@ type CreateFileCacheLustreConfiguration struct {
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateFileCacheLustreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileCacheLustreConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileCacheLustreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.CreateFileCacheLustreConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileCacheLustreConfiguration_MetadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerUnitStorageThroughput != nil {
+		s.WriteInt32(schemas.CreateFileCacheLustreConfiguration_PerUnitStorageThroughput, *v.PerUnitStorageThroughput)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.CreateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *CreateFileCacheLustreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileCacheLustreConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileCacheLustreConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileCacheLustreConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = FileCacheLustreDeploymentType(ev)
+			return nil
+		case schemas.CreateFileCacheLustreConfiguration_MetadataConfiguration:
+			v.MetadataConfiguration = &FileCacheLustreMetadataConfiguration{}
+			return v.MetadataConfiguration.Deserialize(d)
+		case schemas.CreateFileCacheLustreConfiguration_PerUnitStorageThroughput:
+			v.PerUnitStorageThroughput = new(int32)
+			return d.ReadInt32(schemas.CreateFileCacheLustreConfiguration_PerUnitStorageThroughput, v.PerUnitStorageThroughput)
+		case schemas.CreateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.CreateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
 }
 
 // The Lustre configuration for the file system being created.
@@ -825,6 +1474,154 @@ type CreateFileSystemLustreConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemLustreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemLustreConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemLustreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoImportPolicy != "" {
+		s.WriteString(schemas.CreateFileSystemLustreConfiguration_AutoImportPolicy, string(v.AutoImportPolicy))
+	}
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.CreateFileSystemLustreConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.CreateFileSystemLustreConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.CreateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DataCompressionType != "" {
+		s.WriteString(schemas.CreateFileSystemLustreConfiguration_DataCompressionType, string(v.DataCompressionType))
+	}
+	if v.DataReadCacheConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemLustreConfiguration_DataReadCacheConfiguration)
+		v.DataReadCacheConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.CreateFileSystemLustreConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.DriveCacheType != "" {
+		s.WriteString(schemas.CreateFileSystemLustreConfiguration_DriveCacheType, string(v.DriveCacheType))
+	}
+	if v.EfaEnabled != nil {
+		s.WriteBool(schemas.CreateFileSystemLustreConfiguration_EfaEnabled, *v.EfaEnabled)
+	}
+	if v.ExportPath != nil {
+		s.WriteString(schemas.CreateFileSystemLustreConfiguration_ExportPath, *v.ExportPath)
+	}
+	if v.ImportPath != nil {
+		s.WriteString(schemas.CreateFileSystemLustreConfiguration_ImportPath, *v.ImportPath)
+	}
+	if v.ImportedFileChunkSize != nil {
+		s.WriteInt32(schemas.CreateFileSystemLustreConfiguration_ImportedFileChunkSize, *v.ImportedFileChunkSize)
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemLustreConfiguration_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemLustreConfiguration_MetadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerUnitStorageThroughput != nil {
+		s.WriteInt32(schemas.CreateFileSystemLustreConfiguration_PerUnitStorageThroughput, *v.PerUnitStorageThroughput)
+	}
+	if v.RootSquashConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemLustreConfiguration_RootSquashConfiguration)
+		v.RootSquashConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.CreateFileSystemLustreConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.CreateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *CreateFileSystemLustreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileSystemLustreConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileSystemLustreConfiguration_AutoImportPolicy:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileSystemLustreConfiguration_AutoImportPolicy, &ev); err != nil {
+				return err
+			}
+			v.AutoImportPolicy = AutoImportPolicyType(ev)
+			return nil
+		case schemas.CreateFileSystemLustreConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemLustreConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.CreateFileSystemLustreConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.CreateFileSystemLustreConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.CreateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.CreateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.CreateFileSystemLustreConfiguration_DataCompressionType:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileSystemLustreConfiguration_DataCompressionType, &ev); err != nil {
+				return err
+			}
+			v.DataCompressionType = DataCompressionType(ev)
+			return nil
+		case schemas.CreateFileSystemLustreConfiguration_DataReadCacheConfiguration:
+			v.DataReadCacheConfiguration = &LustreReadCacheConfiguration{}
+			return v.DataReadCacheConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemLustreConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileSystemLustreConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = LustreDeploymentType(ev)
+			return nil
+		case schemas.CreateFileSystemLustreConfiguration_DriveCacheType:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileSystemLustreConfiguration_DriveCacheType, &ev); err != nil {
+				return err
+			}
+			v.DriveCacheType = DriveCacheType(ev)
+			return nil
+		case schemas.CreateFileSystemLustreConfiguration_EfaEnabled:
+			v.EfaEnabled = new(bool)
+			return d.ReadBool(schemas.CreateFileSystemLustreConfiguration_EfaEnabled, v.EfaEnabled)
+		case schemas.CreateFileSystemLustreConfiguration_ExportPath:
+			v.ExportPath = new(string)
+			return d.ReadString(schemas.CreateFileSystemLustreConfiguration_ExportPath, v.ExportPath)
+		case schemas.CreateFileSystemLustreConfiguration_ImportPath:
+			v.ImportPath = new(string)
+			return d.ReadString(schemas.CreateFileSystemLustreConfiguration_ImportPath, v.ImportPath)
+		case schemas.CreateFileSystemLustreConfiguration_ImportedFileChunkSize:
+			v.ImportedFileChunkSize = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemLustreConfiguration_ImportedFileChunkSize, v.ImportedFileChunkSize)
+		case schemas.CreateFileSystemLustreConfiguration_LogConfiguration:
+			v.LogConfiguration = &LustreLogCreateConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemLustreConfiguration_MetadataConfiguration:
+			v.MetadataConfiguration = &CreateFileSystemLustreMetadataConfiguration{}
+			return v.MetadataConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemLustreConfiguration_PerUnitStorageThroughput:
+			v.PerUnitStorageThroughput = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemLustreConfiguration_PerUnitStorageThroughput, v.PerUnitStorageThroughput)
+		case schemas.CreateFileSystemLustreConfiguration_RootSquashConfiguration:
+			v.RootSquashConfiguration = &LustreRootSquashConfiguration{}
+			return v.RootSquashConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemLustreConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemLustreConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.CreateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.CreateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // The Lustre metadata performance configuration for the creation of an Amazon FSx
 // for Lustre file system using a PERSISTENT_2 deployment type. The configuration
 // uses a Metadata IOPS value to set the maximum rate of metadata disk IOPS
@@ -865,6 +1662,38 @@ type CreateFileSystemLustreMetadataConfiguration struct {
 	Iops *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateFileSystemLustreMetadataConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemLustreMetadataConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemLustreMetadataConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Iops != nil {
+		s.WriteInt32(schemas.CreateFileSystemLustreMetadataConfiguration_Iops, *v.Iops)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.CreateFileSystemLustreMetadataConfiguration_Mode, string(v.Mode))
+	}
+}
+func (v *CreateFileSystemLustreMetadataConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileSystemLustreMetadataConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileSystemLustreMetadataConfiguration_Iops:
+			v.Iops = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemLustreMetadataConfiguration_Iops, v.Iops)
+		case schemas.CreateFileSystemLustreMetadataConfiguration_Mode:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileSystemLustreMetadataConfiguration_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = MetadataConfigurationMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The ONTAP configuration properties of the FSx for ONTAP file system that you
@@ -1024,6 +1853,103 @@ type CreateFileSystemOntapConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemOntapConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemOntapConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemOntapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.CreateFileSystemOntapConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.CreateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.CreateFileSystemOntapConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.DiskIopsConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemOntapConfiguration_DiskIopsConfiguration)
+		v.DiskIopsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointIpAddressRange != nil {
+		s.WriteString(schemas.CreateFileSystemOntapConfiguration_EndpointIpAddressRange, *v.EndpointIpAddressRange)
+	}
+	if v.EndpointIpv6AddressRange != nil {
+		s.WriteString(schemas.CreateFileSystemOntapConfiguration_EndpointIpv6AddressRange, *v.EndpointIpv6AddressRange)
+	}
+	if v.FsxAdminPassword != nil {
+		s.WriteString(schemas.CreateFileSystemOntapConfiguration_FsxAdminPassword, *v.FsxAdminPassword)
+	}
+	if v.HAPairs != nil {
+		s.WriteInt32(schemas.CreateFileSystemOntapConfiguration_HAPairs, *v.HAPairs)
+	}
+	if v.PreferredSubnetId != nil {
+		s.WriteString(schemas.CreateFileSystemOntapConfiguration_PreferredSubnetId, *v.PreferredSubnetId)
+	}
+	serializeRouteTableIds(s, schemas.CreateFileSystemOntapConfiguration_RouteTableIds, v.RouteTableIds)
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.CreateFileSystemOntapConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.ThroughputCapacityPerHAPair != nil {
+		s.WriteInt32(schemas.CreateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair, *v.ThroughputCapacityPerHAPair)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.CreateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *CreateFileSystemOntapConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileSystemOntapConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileSystemOntapConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemOntapConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.CreateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.CreateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.CreateFileSystemOntapConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileSystemOntapConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = OntapDeploymentType(ev)
+			return nil
+		case schemas.CreateFileSystemOntapConfiguration_DiskIopsConfiguration:
+			v.DiskIopsConfiguration = &DiskIopsConfiguration{}
+			return v.DiskIopsConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemOntapConfiguration_EndpointIpAddressRange:
+			v.EndpointIpAddressRange = new(string)
+			return d.ReadString(schemas.CreateFileSystemOntapConfiguration_EndpointIpAddressRange, v.EndpointIpAddressRange)
+		case schemas.CreateFileSystemOntapConfiguration_EndpointIpv6AddressRange:
+			v.EndpointIpv6AddressRange = new(string)
+			return d.ReadString(schemas.CreateFileSystemOntapConfiguration_EndpointIpv6AddressRange, v.EndpointIpv6AddressRange)
+		case schemas.CreateFileSystemOntapConfiguration_FsxAdminPassword:
+			v.FsxAdminPassword = new(string)
+			return d.ReadString(schemas.CreateFileSystemOntapConfiguration_FsxAdminPassword, v.FsxAdminPassword)
+		case schemas.CreateFileSystemOntapConfiguration_HAPairs:
+			v.HAPairs = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemOntapConfiguration_HAPairs, v.HAPairs)
+		case schemas.CreateFileSystemOntapConfiguration_PreferredSubnetId:
+			v.PreferredSubnetId = new(string)
+			return d.ReadString(schemas.CreateFileSystemOntapConfiguration_PreferredSubnetId, v.PreferredSubnetId)
+		case schemas.CreateFileSystemOntapConfiguration_RouteTableIds:
+			return deserializeRouteTableIds(d, schemas.CreateFileSystemOntapConfiguration_RouteTableIds, &v.RouteTableIds)
+		case schemas.CreateFileSystemOntapConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemOntapConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.CreateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair:
+			v.ThroughputCapacityPerHAPair = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair, v.ThroughputCapacityPerHAPair)
+		case schemas.CreateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.CreateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // The Amazon FSx for OpenZFS configuration properties for the file system that
 // you are creating.
 type CreateFileSystemOpenZFSConfiguration struct {
@@ -1154,6 +2080,113 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemOpenZFSConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemOpenZFSConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.CreateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.CreateFileSystemOpenZFSConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.CopyTagsToVolumes != nil {
+		s.WriteBool(schemas.CreateFileSystemOpenZFSConfiguration_CopyTagsToVolumes, *v.CopyTagsToVolumes)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.CreateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.CreateFileSystemOpenZFSConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.DiskIopsConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemOpenZFSConfiguration_DiskIopsConfiguration)
+		v.DiskIopsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointIpAddressRange != nil {
+		s.WriteString(schemas.CreateFileSystemOpenZFSConfiguration_EndpointIpAddressRange, *v.EndpointIpAddressRange)
+	}
+	if v.EndpointIpv6AddressRange != nil {
+		s.WriteString(schemas.CreateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange, *v.EndpointIpv6AddressRange)
+	}
+	if v.PreferredSubnetId != nil {
+		s.WriteString(schemas.CreateFileSystemOpenZFSConfiguration_PreferredSubnetId, *v.PreferredSubnetId)
+	}
+	if v.ReadCacheConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemOpenZFSConfiguration_ReadCacheConfiguration)
+		v.ReadCacheConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RootVolumeConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemOpenZFSConfiguration_RootVolumeConfiguration)
+		v.RootVolumeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRouteTableIds(s, schemas.CreateFileSystemOpenZFSConfiguration_RouteTableIds, v.RouteTableIds)
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.CreateFileSystemOpenZFSConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.CreateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *CreateFileSystemOpenZFSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileSystemOpenZFSConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.CreateFileSystemOpenZFSConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.CreateFileSystemOpenZFSConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.CreateFileSystemOpenZFSConfiguration_CopyTagsToVolumes:
+			v.CopyTagsToVolumes = new(bool)
+			return d.ReadBool(schemas.CreateFileSystemOpenZFSConfiguration_CopyTagsToVolumes, v.CopyTagsToVolumes)
+		case schemas.CreateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.CreateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.CreateFileSystemOpenZFSConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileSystemOpenZFSConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = OpenZFSDeploymentType(ev)
+			return nil
+		case schemas.CreateFileSystemOpenZFSConfiguration_DiskIopsConfiguration:
+			v.DiskIopsConfiguration = &DiskIopsConfiguration{}
+			return v.DiskIopsConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemOpenZFSConfiguration_EndpointIpAddressRange:
+			v.EndpointIpAddressRange = new(string)
+			return d.ReadString(schemas.CreateFileSystemOpenZFSConfiguration_EndpointIpAddressRange, v.EndpointIpAddressRange)
+		case schemas.CreateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange:
+			v.EndpointIpv6AddressRange = new(string)
+			return d.ReadString(schemas.CreateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange, v.EndpointIpv6AddressRange)
+		case schemas.CreateFileSystemOpenZFSConfiguration_PreferredSubnetId:
+			v.PreferredSubnetId = new(string)
+			return d.ReadString(schemas.CreateFileSystemOpenZFSConfiguration_PreferredSubnetId, v.PreferredSubnetId)
+		case schemas.CreateFileSystemOpenZFSConfiguration_ReadCacheConfiguration:
+			v.ReadCacheConfiguration = &OpenZFSReadCacheConfiguration{}
+			return v.ReadCacheConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemOpenZFSConfiguration_RootVolumeConfiguration:
+			v.RootVolumeConfiguration = &OpenZFSCreateRootVolumeConfiguration{}
+			return v.RootVolumeConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemOpenZFSConfiguration_RouteTableIds:
+			return deserializeRouteTableIds(d, schemas.CreateFileSystemOpenZFSConfiguration_RouteTableIds, &v.RouteTableIds)
+		case schemas.CreateFileSystemOpenZFSConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemOpenZFSConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.CreateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.CreateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // The configuration object for the Microsoft Windows file system used in
 // CreateFileSystem and CreateFileSystemFromBackup operations.
 type CreateFileSystemWindowsConfiguration struct {
@@ -1272,6 +2305,109 @@ type CreateFileSystemWindowsConfiguration struct {
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateFileSystemWindowsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemWindowsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemWindowsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryId != nil {
+		s.WriteString(schemas.CreateFileSystemWindowsConfiguration_ActiveDirectoryId, *v.ActiveDirectoryId)
+	}
+	serializeAlternateDNSNames(s, schemas.CreateFileSystemWindowsConfiguration_Aliases, v.Aliases)
+	if v.AuditLogConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemWindowsConfiguration_AuditLogConfiguration)
+		v.AuditLogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.CreateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.CreateFileSystemWindowsConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.CreateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.CreateFileSystemWindowsConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.DiskIopsConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemWindowsConfiguration_DiskIopsConfiguration)
+		v.DiskIopsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FsrmConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemWindowsConfiguration_FsrmConfiguration)
+		v.FsrmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreferredSubnetId != nil {
+		s.WriteString(schemas.CreateFileSystemWindowsConfiguration_PreferredSubnetId, *v.PreferredSubnetId)
+	}
+	if v.SelfManagedActiveDirectoryConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration)
+		v.SelfManagedActiveDirectoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.CreateFileSystemWindowsConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.CreateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *CreateFileSystemWindowsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileSystemWindowsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileSystemWindowsConfiguration_ActiveDirectoryId:
+			v.ActiveDirectoryId = new(string)
+			return d.ReadString(schemas.CreateFileSystemWindowsConfiguration_ActiveDirectoryId, v.ActiveDirectoryId)
+		case schemas.CreateFileSystemWindowsConfiguration_Aliases:
+			return deserializeAlternateDNSNames(d, schemas.CreateFileSystemWindowsConfiguration_Aliases, &v.Aliases)
+		case schemas.CreateFileSystemWindowsConfiguration_AuditLogConfiguration:
+			v.AuditLogConfiguration = &WindowsAuditLogCreateConfiguration{}
+			return v.AuditLogConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.CreateFileSystemWindowsConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.CreateFileSystemWindowsConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.CreateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.CreateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.CreateFileSystemWindowsConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.CreateFileSystemWindowsConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = WindowsDeploymentType(ev)
+			return nil
+		case schemas.CreateFileSystemWindowsConfiguration_DiskIopsConfiguration:
+			v.DiskIopsConfiguration = &DiskIopsConfiguration{}
+			return v.DiskIopsConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemWindowsConfiguration_FsrmConfiguration:
+			v.FsrmConfiguration = &WindowsFsrmConfiguration{}
+			return v.FsrmConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemWindowsConfiguration_PreferredSubnetId:
+			v.PreferredSubnetId = new(string)
+			return d.ReadString(schemas.CreateFileSystemWindowsConfiguration_PreferredSubnetId, v.PreferredSubnetId)
+		case schemas.CreateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration:
+			v.SelfManagedActiveDirectoryConfiguration = &SelfManagedActiveDirectoryConfiguration{}
+			return v.SelfManagedActiveDirectoryConfiguration.Deserialize(d)
+		case schemas.CreateFileSystemWindowsConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.CreateFileSystemWindowsConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.CreateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.CreateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration of the ONTAP volume that you are creating.
@@ -1405,6 +2541,118 @@ type CreateOntapVolumeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOntapVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOntapVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOntapVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateConfiguration != nil {
+		s.WriteStruct(schemas.CreateOntapVolumeConfiguration_AggregateConfiguration)
+		v.AggregateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.CreateOntapVolumeConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.JunctionPath != nil {
+		s.WriteString(schemas.CreateOntapVolumeConfiguration_JunctionPath, *v.JunctionPath)
+	}
+	if v.OntapVolumeType != "" {
+		s.WriteString(schemas.CreateOntapVolumeConfiguration_OntapVolumeType, string(v.OntapVolumeType))
+	}
+	if v.SecurityStyle != "" {
+		s.WriteString(schemas.CreateOntapVolumeConfiguration_SecurityStyle, string(v.SecurityStyle))
+	}
+	if v.SizeInBytes != nil {
+		s.WriteInt64(schemas.CreateOntapVolumeConfiguration_SizeInBytes, *v.SizeInBytes)
+	}
+	if v.SizeInMegabytes != nil {
+		s.WriteInt32(schemas.CreateOntapVolumeConfiguration_SizeInMegabytes, *v.SizeInMegabytes)
+	}
+	if v.SnaplockConfiguration != nil {
+		s.WriteStruct(schemas.CreateOntapVolumeConfiguration_SnaplockConfiguration)
+		v.SnaplockConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotPolicy != nil {
+		s.WriteString(schemas.CreateOntapVolumeConfiguration_SnapshotPolicy, *v.SnapshotPolicy)
+	}
+	if v.StorageEfficiencyEnabled != nil {
+		s.WriteBool(schemas.CreateOntapVolumeConfiguration_StorageEfficiencyEnabled, *v.StorageEfficiencyEnabled)
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.CreateOntapVolumeConfiguration_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+	if v.TieringPolicy != nil {
+		s.WriteStruct(schemas.CreateOntapVolumeConfiguration_TieringPolicy)
+		v.TieringPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeStyle != "" {
+		s.WriteString(schemas.CreateOntapVolumeConfiguration_VolumeStyle, string(v.VolumeStyle))
+	}
+}
+func (v *CreateOntapVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOntapVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOntapVolumeConfiguration_AggregateConfiguration:
+			v.AggregateConfiguration = &CreateAggregateConfiguration{}
+			return v.AggregateConfiguration.Deserialize(d)
+		case schemas.CreateOntapVolumeConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.CreateOntapVolumeConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.CreateOntapVolumeConfiguration_JunctionPath:
+			v.JunctionPath = new(string)
+			return d.ReadString(schemas.CreateOntapVolumeConfiguration_JunctionPath, v.JunctionPath)
+		case schemas.CreateOntapVolumeConfiguration_OntapVolumeType:
+			var ev string
+			if err := d.ReadString(schemas.CreateOntapVolumeConfiguration_OntapVolumeType, &ev); err != nil {
+				return err
+			}
+			v.OntapVolumeType = InputOntapVolumeType(ev)
+			return nil
+		case schemas.CreateOntapVolumeConfiguration_SecurityStyle:
+			var ev string
+			if err := d.ReadString(schemas.CreateOntapVolumeConfiguration_SecurityStyle, &ev); err != nil {
+				return err
+			}
+			v.SecurityStyle = SecurityStyle(ev)
+			return nil
+		case schemas.CreateOntapVolumeConfiguration_SizeInBytes:
+			v.SizeInBytes = new(int64)
+			return d.ReadInt64(schemas.CreateOntapVolumeConfiguration_SizeInBytes, v.SizeInBytes)
+		case schemas.CreateOntapVolumeConfiguration_SizeInMegabytes:
+			v.SizeInMegabytes = new(int32)
+			return d.ReadInt32(schemas.CreateOntapVolumeConfiguration_SizeInMegabytes, v.SizeInMegabytes)
+		case schemas.CreateOntapVolumeConfiguration_SnaplockConfiguration:
+			v.SnaplockConfiguration = &CreateSnaplockConfiguration{}
+			return v.SnaplockConfiguration.Deserialize(d)
+		case schemas.CreateOntapVolumeConfiguration_SnapshotPolicy:
+			v.SnapshotPolicy = new(string)
+			return d.ReadString(schemas.CreateOntapVolumeConfiguration_SnapshotPolicy, v.SnapshotPolicy)
+		case schemas.CreateOntapVolumeConfiguration_StorageEfficiencyEnabled:
+			v.StorageEfficiencyEnabled = new(bool)
+			return d.ReadBool(schemas.CreateOntapVolumeConfiguration_StorageEfficiencyEnabled, v.StorageEfficiencyEnabled)
+		case schemas.CreateOntapVolumeConfiguration_StorageVirtualMachineId:
+			v.StorageVirtualMachineId = new(string)
+			return d.ReadString(schemas.CreateOntapVolumeConfiguration_StorageVirtualMachineId, v.StorageVirtualMachineId)
+		case schemas.CreateOntapVolumeConfiguration_TieringPolicy:
+			v.TieringPolicy = &TieringPolicy{}
+			return v.TieringPolicy.Deserialize(d)
+		case schemas.CreateOntapVolumeConfiguration_VolumeStyle:
+			var ev string
+			if err := d.ReadString(schemas.CreateOntapVolumeConfiguration_VolumeStyle, &ev); err != nil {
+				return err
+			}
+			v.VolumeStyle = VolumeStyle(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The snapshot configuration to use when creating an Amazon FSx for OpenZFS
 // volume from a snapshot.
 type CreateOpenZFSOriginSnapshotConfiguration struct {
@@ -1441,6 +2689,38 @@ type CreateOpenZFSOriginSnapshotConfiguration struct {
 	SnapshotARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateOpenZFSOriginSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOpenZFSOriginSnapshotConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOpenZFSOriginSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyStrategy != "" {
+		s.WriteString(schemas.CreateOpenZFSOriginSnapshotConfiguration_CopyStrategy, string(v.CopyStrategy))
+	}
+	if v.SnapshotARN != nil {
+		s.WriteString(schemas.CreateOpenZFSOriginSnapshotConfiguration_SnapshotARN, *v.SnapshotARN)
+	}
+}
+func (v *CreateOpenZFSOriginSnapshotConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOpenZFSOriginSnapshotConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOpenZFSOriginSnapshotConfiguration_CopyStrategy:
+			var ev string
+			if err := d.ReadString(schemas.CreateOpenZFSOriginSnapshotConfiguration_CopyStrategy, &ev); err != nil {
+				return err
+			}
+			v.CopyStrategy = OpenZFSCopyStrategy(ev)
+			return nil
+		case schemas.CreateOpenZFSOriginSnapshotConfiguration_SnapshotARN:
+			v.SnapshotARN = new(string)
+			return d.ReadString(schemas.CreateOpenZFSOriginSnapshotConfiguration_SnapshotARN, v.SnapshotARN)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration of the Amazon FSx for OpenZFS volume that you are
@@ -1534,6 +2814,82 @@ type CreateOpenZFSVolumeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOpenZFSVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOpenZFSVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOpenZFSVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyTagsToSnapshots != nil {
+		s.WriteBool(schemas.CreateOpenZFSVolumeConfiguration_CopyTagsToSnapshots, *v.CopyTagsToSnapshots)
+	}
+	if v.DataCompressionType != "" {
+		s.WriteString(schemas.CreateOpenZFSVolumeConfiguration_DataCompressionType, string(v.DataCompressionType))
+	}
+	serializeOpenZFSNfsExports(s, schemas.CreateOpenZFSVolumeConfiguration_NfsExports, v.NfsExports)
+	if v.OriginSnapshot != nil {
+		s.WriteStruct(schemas.CreateOpenZFSVolumeConfiguration_OriginSnapshot)
+		v.OriginSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentVolumeId != nil {
+		s.WriteString(schemas.CreateOpenZFSVolumeConfiguration_ParentVolumeId, *v.ParentVolumeId)
+	}
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.CreateOpenZFSVolumeConfiguration_ReadOnly, *v.ReadOnly)
+	}
+	if v.RecordSizeKiB != nil {
+		s.WriteInt32(schemas.CreateOpenZFSVolumeConfiguration_RecordSizeKiB, *v.RecordSizeKiB)
+	}
+	if v.StorageCapacityQuotaGiB != nil {
+		s.WriteInt32(schemas.CreateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB, *v.StorageCapacityQuotaGiB)
+	}
+	if v.StorageCapacityReservationGiB != nil {
+		s.WriteInt32(schemas.CreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB, *v.StorageCapacityReservationGiB)
+	}
+	serializeOpenZFSUserAndGroupQuotas(s, schemas.CreateOpenZFSVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+}
+func (v *CreateOpenZFSVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOpenZFSVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOpenZFSVolumeConfiguration_CopyTagsToSnapshots:
+			v.CopyTagsToSnapshots = new(bool)
+			return d.ReadBool(schemas.CreateOpenZFSVolumeConfiguration_CopyTagsToSnapshots, v.CopyTagsToSnapshots)
+		case schemas.CreateOpenZFSVolumeConfiguration_DataCompressionType:
+			var ev string
+			if err := d.ReadString(schemas.CreateOpenZFSVolumeConfiguration_DataCompressionType, &ev); err != nil {
+				return err
+			}
+			v.DataCompressionType = OpenZFSDataCompressionType(ev)
+			return nil
+		case schemas.CreateOpenZFSVolumeConfiguration_NfsExports:
+			return deserializeOpenZFSNfsExports(d, schemas.CreateOpenZFSVolumeConfiguration_NfsExports, &v.NfsExports)
+		case schemas.CreateOpenZFSVolumeConfiguration_OriginSnapshot:
+			v.OriginSnapshot = &CreateOpenZFSOriginSnapshotConfiguration{}
+			return v.OriginSnapshot.Deserialize(d)
+		case schemas.CreateOpenZFSVolumeConfiguration_ParentVolumeId:
+			v.ParentVolumeId = new(string)
+			return d.ReadString(schemas.CreateOpenZFSVolumeConfiguration_ParentVolumeId, v.ParentVolumeId)
+		case schemas.CreateOpenZFSVolumeConfiguration_ReadOnly:
+			v.ReadOnly = new(bool)
+			return d.ReadBool(schemas.CreateOpenZFSVolumeConfiguration_ReadOnly, v.ReadOnly)
+		case schemas.CreateOpenZFSVolumeConfiguration_RecordSizeKiB:
+			v.RecordSizeKiB = new(int32)
+			return d.ReadInt32(schemas.CreateOpenZFSVolumeConfiguration_RecordSizeKiB, v.RecordSizeKiB)
+		case schemas.CreateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB:
+			v.StorageCapacityQuotaGiB = new(int32)
+			return d.ReadInt32(schemas.CreateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB, v.StorageCapacityQuotaGiB)
+		case schemas.CreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB:
+			v.StorageCapacityReservationGiB = new(int32)
+			return d.ReadInt32(schemas.CreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB, v.StorageCapacityReservationGiB)
+		case schemas.CreateOpenZFSVolumeConfiguration_UserAndGroupQuotas:
+			return deserializeOpenZFSUserAndGroupQuotas(d, schemas.CreateOpenZFSVolumeConfiguration_UserAndGroupQuotas, &v.UserAndGroupQuotas)
+		}
+		return nil
+	})
+}
+
 // Defines the SnapLock configuration when creating an FSx for ONTAP SnapLock
 // volume.
 type CreateSnaplockConfiguration struct {
@@ -1599,6 +2955,70 @@ type CreateSnaplockConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSnaplockConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnaplockConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnaplockConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditLogVolume != nil {
+		s.WriteBool(schemas.CreateSnaplockConfiguration_AuditLogVolume, *v.AuditLogVolume)
+	}
+	if v.AutocommitPeriod != nil {
+		s.WriteStruct(schemas.CreateSnaplockConfiguration_AutocommitPeriod)
+		v.AutocommitPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivilegedDelete != "" {
+		s.WriteString(schemas.CreateSnaplockConfiguration_PrivilegedDelete, string(v.PrivilegedDelete))
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.CreateSnaplockConfiguration_RetentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnaplockType != "" {
+		s.WriteString(schemas.CreateSnaplockConfiguration_SnaplockType, string(v.SnaplockType))
+	}
+	if v.VolumeAppendModeEnabled != nil {
+		s.WriteBool(schemas.CreateSnaplockConfiguration_VolumeAppendModeEnabled, *v.VolumeAppendModeEnabled)
+	}
+}
+func (v *CreateSnaplockConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSnaplockConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSnaplockConfiguration_AuditLogVolume:
+			v.AuditLogVolume = new(bool)
+			return d.ReadBool(schemas.CreateSnaplockConfiguration_AuditLogVolume, v.AuditLogVolume)
+		case schemas.CreateSnaplockConfiguration_AutocommitPeriod:
+			v.AutocommitPeriod = &AutocommitPeriod{}
+			return v.AutocommitPeriod.Deserialize(d)
+		case schemas.CreateSnaplockConfiguration_PrivilegedDelete:
+			var ev string
+			if err := d.ReadString(schemas.CreateSnaplockConfiguration_PrivilegedDelete, &ev); err != nil {
+				return err
+			}
+			v.PrivilegedDelete = PrivilegedDelete(ev)
+			return nil
+		case schemas.CreateSnaplockConfiguration_RetentionPeriod:
+			v.RetentionPeriod = &SnaplockRetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.CreateSnaplockConfiguration_SnaplockType:
+			var ev string
+			if err := d.ReadString(schemas.CreateSnaplockConfiguration_SnaplockType, &ev); err != nil {
+				return err
+			}
+			v.SnaplockType = SnaplockType(ev)
+			return nil
+		case schemas.CreateSnaplockConfiguration_VolumeAppendModeEnabled:
+			v.VolumeAppendModeEnabled = new(bool)
+			return d.ReadBool(schemas.CreateSnaplockConfiguration_VolumeAppendModeEnabled, v.VolumeAppendModeEnabled)
+		}
+		return nil
+	})
+}
+
 // The configuration that Amazon FSx uses to join the ONTAP storage virtual
 // machine (SVM) to your self-managed (including on-premises) Microsoft Active
 // Directory directory.
@@ -1620,6 +3040,36 @@ type CreateSvmActiveDirectoryConfiguration struct {
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateSvmActiveDirectoryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSvmActiveDirectoryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSvmActiveDirectoryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetBiosName != nil {
+		s.WriteString(schemas.CreateSvmActiveDirectoryConfiguration_NetBiosName, *v.NetBiosName)
+	}
+	if v.SelfManagedActiveDirectoryConfiguration != nil {
+		s.WriteStruct(schemas.CreateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration)
+		v.SelfManagedActiveDirectoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSvmActiveDirectoryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSvmActiveDirectoryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSvmActiveDirectoryConfiguration_NetBiosName:
+			v.NetBiosName = new(string)
+			return d.ReadString(schemas.CreateSvmActiveDirectoryConfiguration_NetBiosName, v.NetBiosName)
+		case schemas.CreateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration:
+			v.SelfManagedActiveDirectoryConfiguration = &SelfManagedActiveDirectoryConfiguration{}
+			return v.SelfManagedActiveDirectoryConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration of a data repository association that links an Amazon FSx for
@@ -1782,6 +3232,122 @@ type DataRepositoryAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataRepositoryAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DataRepositoryAssociation_AssociationId, *v.AssociationId)
+	}
+	if v.BatchImportMetaDataOnCreate != nil {
+		s.WriteBool(schemas.DataRepositoryAssociation_BatchImportMetaDataOnCreate, *v.BatchImportMetaDataOnCreate)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DataRepositoryAssociation_CreationTime, *v.CreationTime)
+	}
+	if v.DataRepositoryPath != nil {
+		s.WriteString(schemas.DataRepositoryAssociation_DataRepositoryPath, *v.DataRepositoryPath)
+	}
+	serializeSubDirectoriesPaths(s, schemas.DataRepositoryAssociation_DataRepositorySubdirectories, v.DataRepositorySubdirectories)
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.DataRepositoryAssociation_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileCacheId != nil {
+		s.WriteString(schemas.DataRepositoryAssociation_FileCacheId, *v.FileCacheId)
+	}
+	if v.FileCachePath != nil {
+		s.WriteString(schemas.DataRepositoryAssociation_FileCachePath, *v.FileCachePath)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DataRepositoryAssociation_FileSystemId, *v.FileSystemId)
+	}
+	if v.FileSystemPath != nil {
+		s.WriteString(schemas.DataRepositoryAssociation_FileSystemPath, *v.FileSystemPath)
+	}
+	if v.ImportedFileChunkSize != nil {
+		s.WriteInt32(schemas.DataRepositoryAssociation_ImportedFileChunkSize, *v.ImportedFileChunkSize)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DataRepositoryAssociation_Lifecycle, string(v.Lifecycle))
+	}
+	if v.NFS != nil {
+		s.WriteStruct(schemas.DataRepositoryAssociation_NFS)
+		v.NFS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.DataRepositoryAssociation_ResourceARN, *v.ResourceARN)
+	}
+	if v.S3 != nil {
+		s.WriteStruct(schemas.DataRepositoryAssociation_S3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.DataRepositoryAssociation_Tags, v.Tags)
+}
+func (v *DataRepositoryAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryAssociation_AssociationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.DataRepositoryAssociation_AssociationId, v.AssociationId)
+		case schemas.DataRepositoryAssociation_BatchImportMetaDataOnCreate:
+			v.BatchImportMetaDataOnCreate = new(bool)
+			return d.ReadBool(schemas.DataRepositoryAssociation_BatchImportMetaDataOnCreate, v.BatchImportMetaDataOnCreate)
+		case schemas.DataRepositoryAssociation_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DataRepositoryAssociation_CreationTime, v.CreationTime)
+		case schemas.DataRepositoryAssociation_DataRepositoryPath:
+			v.DataRepositoryPath = new(string)
+			return d.ReadString(schemas.DataRepositoryAssociation_DataRepositoryPath, v.DataRepositoryPath)
+		case schemas.DataRepositoryAssociation_DataRepositorySubdirectories:
+			return deserializeSubDirectoriesPaths(d, schemas.DataRepositoryAssociation_DataRepositorySubdirectories, &v.DataRepositorySubdirectories)
+		case schemas.DataRepositoryAssociation_FailureDetails:
+			v.FailureDetails = &DataRepositoryFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.DataRepositoryAssociation_FileCacheId:
+			v.FileCacheId = new(string)
+			return d.ReadString(schemas.DataRepositoryAssociation_FileCacheId, v.FileCacheId)
+		case schemas.DataRepositoryAssociation_FileCachePath:
+			v.FileCachePath = new(string)
+			return d.ReadString(schemas.DataRepositoryAssociation_FileCachePath, v.FileCachePath)
+		case schemas.DataRepositoryAssociation_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.DataRepositoryAssociation_FileSystemId, v.FileSystemId)
+		case schemas.DataRepositoryAssociation_FileSystemPath:
+			v.FileSystemPath = new(string)
+			return d.ReadString(schemas.DataRepositoryAssociation_FileSystemPath, v.FileSystemPath)
+		case schemas.DataRepositoryAssociation_ImportedFileChunkSize:
+			v.ImportedFileChunkSize = new(int32)
+			return d.ReadInt32(schemas.DataRepositoryAssociation_ImportedFileChunkSize, v.ImportedFileChunkSize)
+		case schemas.DataRepositoryAssociation_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DataRepositoryAssociation_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = DataRepositoryLifecycle(ev)
+			return nil
+		case schemas.DataRepositoryAssociation_NFS:
+			v.NFS = &NFSDataRepositoryConfiguration{}
+			return v.NFS.Deserialize(d)
+		case schemas.DataRepositoryAssociation_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.DataRepositoryAssociation_ResourceARN, v.ResourceARN)
+		case schemas.DataRepositoryAssociation_S3:
+			v.S3 = &S3DataRepositoryConfiguration{}
+			return v.S3.Deserialize(d)
+		case schemas.DataRepositoryAssociation_Tags:
+			return deserializeTags(d, schemas.DataRepositoryAssociation_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The data repository configuration object for Lustre file systems returned in
 // the response of the CreateFileSystem operation.
 //
@@ -1861,6 +3427,68 @@ type DataRepositoryConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataRepositoryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoImportPolicy != "" {
+		s.WriteString(schemas.DataRepositoryConfiguration_AutoImportPolicy, string(v.AutoImportPolicy))
+	}
+	if v.ExportPath != nil {
+		s.WriteString(schemas.DataRepositoryConfiguration_ExportPath, *v.ExportPath)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.DataRepositoryConfiguration_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportPath != nil {
+		s.WriteString(schemas.DataRepositoryConfiguration_ImportPath, *v.ImportPath)
+	}
+	if v.ImportedFileChunkSize != nil {
+		s.WriteInt32(schemas.DataRepositoryConfiguration_ImportedFileChunkSize, *v.ImportedFileChunkSize)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DataRepositoryConfiguration_Lifecycle, string(v.Lifecycle))
+	}
+}
+func (v *DataRepositoryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryConfiguration_AutoImportPolicy:
+			var ev string
+			if err := d.ReadString(schemas.DataRepositoryConfiguration_AutoImportPolicy, &ev); err != nil {
+				return err
+			}
+			v.AutoImportPolicy = AutoImportPolicyType(ev)
+			return nil
+		case schemas.DataRepositoryConfiguration_ExportPath:
+			v.ExportPath = new(string)
+			return d.ReadString(schemas.DataRepositoryConfiguration_ExportPath, v.ExportPath)
+		case schemas.DataRepositoryConfiguration_FailureDetails:
+			v.FailureDetails = &DataRepositoryFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.DataRepositoryConfiguration_ImportPath:
+			v.ImportPath = new(string)
+			return d.ReadString(schemas.DataRepositoryConfiguration_ImportPath, v.ImportPath)
+		case schemas.DataRepositoryConfiguration_ImportedFileChunkSize:
+			v.ImportedFileChunkSize = new(int32)
+			return d.ReadInt32(schemas.DataRepositoryConfiguration_ImportedFileChunkSize, v.ImportedFileChunkSize)
+		case schemas.DataRepositoryConfiguration_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DataRepositoryConfiguration_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = DataRepositoryLifecycle(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides detailed information about the data repository if its Lifecycle is set
 // to MISCONFIGURED or FAILED .
 type DataRepositoryFailureDetails struct {
@@ -1869,6 +3497,28 @@ type DataRepositoryFailureDetails struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataRepositoryFailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryFailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryFailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DataRepositoryFailureDetails_Message, *v.Message)
+	}
+}
+func (v *DataRepositoryFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryFailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryFailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DataRepositoryFailureDetails_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // A description of the data repository task.
@@ -2000,6 +3650,128 @@ type DataRepositoryTask struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataRepositoryTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityToRelease != nil {
+		s.WriteInt64(schemas.DataRepositoryTask_CapacityToRelease, *v.CapacityToRelease)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DataRepositoryTask_CreationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DataRepositoryTask_EndTime, *v.EndTime)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.DataRepositoryTask_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileCacheId != nil {
+		s.WriteString(schemas.DataRepositoryTask_FileCacheId, *v.FileCacheId)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.DataRepositoryTask_FileSystemId, *v.FileSystemId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DataRepositoryTask_Lifecycle, string(v.Lifecycle))
+	}
+	serializeDataRepositoryTaskPaths(s, schemas.DataRepositoryTask_Paths, v.Paths)
+	if v.ReleaseConfiguration != nil {
+		s.WriteStruct(schemas.DataRepositoryTask_ReleaseConfiguration)
+		v.ReleaseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Report != nil {
+		s.WriteStruct(schemas.DataRepositoryTask_Report)
+		v.Report.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.DataRepositoryTask_ResourceARN, *v.ResourceARN)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DataRepositoryTask_StartTime, *v.StartTime)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.DataRepositoryTask_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.DataRepositoryTask_Tags, v.Tags)
+	if v.TaskId != nil {
+		s.WriteString(schemas.DataRepositoryTask_TaskId, *v.TaskId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DataRepositoryTask_Type, string(v.Type))
+	}
+}
+func (v *DataRepositoryTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryTask_CapacityToRelease:
+			v.CapacityToRelease = new(int64)
+			return d.ReadInt64(schemas.DataRepositoryTask_CapacityToRelease, v.CapacityToRelease)
+		case schemas.DataRepositoryTask_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DataRepositoryTask_CreationTime, v.CreationTime)
+		case schemas.DataRepositoryTask_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DataRepositoryTask_EndTime, v.EndTime)
+		case schemas.DataRepositoryTask_FailureDetails:
+			v.FailureDetails = &DataRepositoryTaskFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.DataRepositoryTask_FileCacheId:
+			v.FileCacheId = new(string)
+			return d.ReadString(schemas.DataRepositoryTask_FileCacheId, v.FileCacheId)
+		case schemas.DataRepositoryTask_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.DataRepositoryTask_FileSystemId, v.FileSystemId)
+		case schemas.DataRepositoryTask_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DataRepositoryTask_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = DataRepositoryTaskLifecycle(ev)
+			return nil
+		case schemas.DataRepositoryTask_Paths:
+			return deserializeDataRepositoryTaskPaths(d, schemas.DataRepositoryTask_Paths, &v.Paths)
+		case schemas.DataRepositoryTask_ReleaseConfiguration:
+			v.ReleaseConfiguration = &ReleaseConfiguration{}
+			return v.ReleaseConfiguration.Deserialize(d)
+		case schemas.DataRepositoryTask_Report:
+			v.Report = &CompletionReport{}
+			return v.Report.Deserialize(d)
+		case schemas.DataRepositoryTask_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.DataRepositoryTask_ResourceARN, v.ResourceARN)
+		case schemas.DataRepositoryTask_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DataRepositoryTask_StartTime, v.StartTime)
+		case schemas.DataRepositoryTask_Status:
+			v.Status = &DataRepositoryTaskStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.DataRepositoryTask_Tags:
+			return deserializeTags(d, schemas.DataRepositoryTask_Tags, &v.Tags)
+		case schemas.DataRepositoryTask_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.DataRepositoryTask_TaskId, v.TaskId)
+		case schemas.DataRepositoryTask_Type:
+			var ev string
+			if err := d.ReadString(schemas.DataRepositoryTask_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DataRepositoryTaskType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides information about why a data repository task failed. Only populated
 // when the task Lifecycle is set to FAILED .
 type DataRepositoryTaskFailureDetails struct {
@@ -2008,6 +3780,28 @@ type DataRepositoryTaskFailureDetails struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataRepositoryTaskFailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryTaskFailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryTaskFailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DataRepositoryTaskFailureDetails_Message, *v.Message)
+	}
+}
+func (v *DataRepositoryTaskFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryTaskFailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryTaskFailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DataRepositoryTaskFailureDetails_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // (Optional) An array of filter objects you can use to filter the response of
@@ -2033,6 +3827,35 @@ type DataRepositoryTaskFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataRepositoryTaskFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryTaskFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryTaskFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.DataRepositoryTaskFilter_Name, string(v.Name))
+	}
+	serializeDataRepositoryTaskFilterValues(s, schemas.DataRepositoryTaskFilter_Values, v.Values)
+}
+func (v *DataRepositoryTaskFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryTaskFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryTaskFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.DataRepositoryTaskFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = DataRepositoryTaskFilterName(ev)
+			return nil
+		case schemas.DataRepositoryTaskFilter_Values:
+			return deserializeDataRepositoryTaskFilterValues(d, schemas.DataRepositoryTaskFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Provides the task status showing a running total of the total number of files
@@ -2062,6 +3885,52 @@ type DataRepositoryTaskStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataRepositoryTaskStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryTaskStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryTaskStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailedCount != nil {
+		s.WriteInt64(schemas.DataRepositoryTaskStatus_FailedCount, *v.FailedCount)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.DataRepositoryTaskStatus_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.ReleasedCapacity != nil {
+		s.WriteInt64(schemas.DataRepositoryTaskStatus_ReleasedCapacity, *v.ReleasedCapacity)
+	}
+	if v.SucceededCount != nil {
+		s.WriteInt64(schemas.DataRepositoryTaskStatus_SucceededCount, *v.SucceededCount)
+	}
+	if v.TotalCount != nil {
+		s.WriteInt64(schemas.DataRepositoryTaskStatus_TotalCount, *v.TotalCount)
+	}
+}
+func (v *DataRepositoryTaskStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryTaskStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryTaskStatus_FailedCount:
+			v.FailedCount = new(int64)
+			return d.ReadInt64(schemas.DataRepositoryTaskStatus_FailedCount, v.FailedCount)
+		case schemas.DataRepositoryTaskStatus_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DataRepositoryTaskStatus_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.DataRepositoryTaskStatus_ReleasedCapacity:
+			v.ReleasedCapacity = new(int64)
+			return d.ReadInt64(schemas.DataRepositoryTaskStatus_ReleasedCapacity, v.ReleasedCapacity)
+		case schemas.DataRepositoryTaskStatus_SucceededCount:
+			v.SucceededCount = new(int64)
+			return d.ReadInt64(schemas.DataRepositoryTaskStatus_SucceededCount, v.SucceededCount)
+		case schemas.DataRepositoryTaskStatus_TotalCount:
+			v.TotalCount = new(int64)
+			return d.ReadInt64(schemas.DataRepositoryTaskStatus_TotalCount, v.TotalCount)
+		}
+		return nil
+	})
+}
+
 // The configuration object for the Amazon FSx for Lustre file system being
 // deleted in the DeleteFileSystem operation.
 type DeleteFileSystemLustreConfiguration struct {
@@ -2083,6 +3952,31 @@ type DeleteFileSystemLustreConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileSystemLustreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileSystemLustreConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemLustreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTags(s, schemas.DeleteFileSystemLustreConfiguration_FinalBackupTags, v.FinalBackupTags)
+	if v.SkipFinalBackup != nil {
+		s.WriteBool(schemas.DeleteFileSystemLustreConfiguration_SkipFinalBackup, *v.SkipFinalBackup)
+	}
+}
+func (v *DeleteFileSystemLustreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileSystemLustreConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileSystemLustreConfiguration_FinalBackupTags:
+			return deserializeTags(d, schemas.DeleteFileSystemLustreConfiguration_FinalBackupTags, &v.FinalBackupTags)
+		case schemas.DeleteFileSystemLustreConfiguration_SkipFinalBackup:
+			v.SkipFinalBackup = new(bool)
+			return d.ReadBool(schemas.DeleteFileSystemLustreConfiguration_SkipFinalBackup, v.SkipFinalBackup)
+		}
+		return nil
+	})
+}
+
 // The response object for the Amazon FSx for Lustre file system being deleted in
 // the DeleteFileSystem operation.
 type DeleteFileSystemLustreResponse struct {
@@ -2094,6 +3988,31 @@ type DeleteFileSystemLustreResponse struct {
 	FinalBackupTags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteFileSystemLustreResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileSystemLustreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemLustreResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FinalBackupId != nil {
+		s.WriteString(schemas.DeleteFileSystemLustreResponse_FinalBackupId, *v.FinalBackupId)
+	}
+	serializeTags(s, schemas.DeleteFileSystemLustreResponse_FinalBackupTags, v.FinalBackupTags)
+}
+func (v *DeleteFileSystemLustreResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileSystemLustreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileSystemLustreResponse_FinalBackupId:
+			v.FinalBackupId = new(string)
+			return d.ReadString(schemas.DeleteFileSystemLustreResponse_FinalBackupId, v.FinalBackupId)
+		case schemas.DeleteFileSystemLustreResponse_FinalBackupTags:
+			return deserializeTags(d, schemas.DeleteFileSystemLustreResponse_FinalBackupTags, &v.FinalBackupTags)
+		}
+		return nil
+	})
 }
 
 // The configuration object for the Amazon FSx for OpenZFS file system used in the
@@ -2117,6 +4036,34 @@ type DeleteFileSystemOpenZFSConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileSystemOpenZFSConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileSystemOpenZFSConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTags(s, schemas.DeleteFileSystemOpenZFSConfiguration_FinalBackupTags, v.FinalBackupTags)
+	serializeDeleteFileSystemOpenZFSOptions(s, schemas.DeleteFileSystemOpenZFSConfiguration_Options, v.Options)
+	if v.SkipFinalBackup != nil {
+		s.WriteBool(schemas.DeleteFileSystemOpenZFSConfiguration_SkipFinalBackup, *v.SkipFinalBackup)
+	}
+}
+func (v *DeleteFileSystemOpenZFSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileSystemOpenZFSConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileSystemOpenZFSConfiguration_FinalBackupTags:
+			return deserializeTags(d, schemas.DeleteFileSystemOpenZFSConfiguration_FinalBackupTags, &v.FinalBackupTags)
+		case schemas.DeleteFileSystemOpenZFSConfiguration_Options:
+			return deserializeDeleteFileSystemOpenZFSOptions(d, schemas.DeleteFileSystemOpenZFSConfiguration_Options, &v.Options)
+		case schemas.DeleteFileSystemOpenZFSConfiguration_SkipFinalBackup:
+			v.SkipFinalBackup = new(bool)
+			return d.ReadBool(schemas.DeleteFileSystemOpenZFSConfiguration_SkipFinalBackup, v.SkipFinalBackup)
+		}
+		return nil
+	})
+}
+
 // The response object for the Amazon FSx for OpenZFS file system that's being
 // deleted in the DeleteFileSystem operation.
 type DeleteFileSystemOpenZFSResponse struct {
@@ -2128,6 +4075,31 @@ type DeleteFileSystemOpenZFSResponse struct {
 	FinalBackupTags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteFileSystemOpenZFSResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileSystemOpenZFSResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemOpenZFSResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FinalBackupId != nil {
+		s.WriteString(schemas.DeleteFileSystemOpenZFSResponse_FinalBackupId, *v.FinalBackupId)
+	}
+	serializeTags(s, schemas.DeleteFileSystemOpenZFSResponse_FinalBackupTags, v.FinalBackupTags)
+}
+func (v *DeleteFileSystemOpenZFSResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileSystemOpenZFSResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileSystemOpenZFSResponse_FinalBackupId:
+			v.FinalBackupId = new(string)
+			return d.ReadString(schemas.DeleteFileSystemOpenZFSResponse_FinalBackupId, v.FinalBackupId)
+		case schemas.DeleteFileSystemOpenZFSResponse_FinalBackupTags:
+			return deserializeTags(d, schemas.DeleteFileSystemOpenZFSResponse_FinalBackupTags, &v.FinalBackupTags)
+		}
+		return nil
+	})
 }
 
 // The configuration object for the Microsoft Windows file system used in the
@@ -2146,6 +4118,31 @@ type DeleteFileSystemWindowsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileSystemWindowsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileSystemWindowsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemWindowsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTags(s, schemas.DeleteFileSystemWindowsConfiguration_FinalBackupTags, v.FinalBackupTags)
+	if v.SkipFinalBackup != nil {
+		s.WriteBool(schemas.DeleteFileSystemWindowsConfiguration_SkipFinalBackup, *v.SkipFinalBackup)
+	}
+}
+func (v *DeleteFileSystemWindowsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileSystemWindowsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileSystemWindowsConfiguration_FinalBackupTags:
+			return deserializeTags(d, schemas.DeleteFileSystemWindowsConfiguration_FinalBackupTags, &v.FinalBackupTags)
+		case schemas.DeleteFileSystemWindowsConfiguration_SkipFinalBackup:
+			v.SkipFinalBackup = new(bool)
+			return d.ReadBool(schemas.DeleteFileSystemWindowsConfiguration_SkipFinalBackup, v.SkipFinalBackup)
+		}
+		return nil
+	})
+}
+
 // The response object for the Microsoft Windows file system used in the
 // DeleteFileSystem operation.
 type DeleteFileSystemWindowsResponse struct {
@@ -2157,6 +4154,31 @@ type DeleteFileSystemWindowsResponse struct {
 	FinalBackupTags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteFileSystemWindowsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileSystemWindowsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileSystemWindowsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FinalBackupId != nil {
+		s.WriteString(schemas.DeleteFileSystemWindowsResponse_FinalBackupId, *v.FinalBackupId)
+	}
+	serializeTags(s, schemas.DeleteFileSystemWindowsResponse_FinalBackupTags, v.FinalBackupTags)
+}
+func (v *DeleteFileSystemWindowsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileSystemWindowsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileSystemWindowsResponse_FinalBackupId:
+			v.FinalBackupId = new(string)
+			return d.ReadString(schemas.DeleteFileSystemWindowsResponse_FinalBackupId, v.FinalBackupId)
+		case schemas.DeleteFileSystemWindowsResponse_FinalBackupTags:
+			return deserializeTags(d, schemas.DeleteFileSystemWindowsResponse_FinalBackupTags, &v.FinalBackupTags)
+		}
+		return nil
+	})
 }
 
 // Use to specify skipping a final backup, adding tags to a final backup, or
@@ -2185,6 +4207,37 @@ type DeleteVolumeOntapConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeOntapConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeOntapConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeOntapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BypassSnaplockEnterpriseRetention != nil {
+		s.WriteBool(schemas.DeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention, *v.BypassSnaplockEnterpriseRetention)
+	}
+	serializeTags(s, schemas.DeleteVolumeOntapConfiguration_FinalBackupTags, v.FinalBackupTags)
+	if v.SkipFinalBackup != nil {
+		s.WriteBool(schemas.DeleteVolumeOntapConfiguration_SkipFinalBackup, *v.SkipFinalBackup)
+	}
+}
+func (v *DeleteVolumeOntapConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVolumeOntapConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention:
+			v.BypassSnaplockEnterpriseRetention = new(bool)
+			return d.ReadBool(schemas.DeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention, v.BypassSnaplockEnterpriseRetention)
+		case schemas.DeleteVolumeOntapConfiguration_FinalBackupTags:
+			return deserializeTags(d, schemas.DeleteVolumeOntapConfiguration_FinalBackupTags, &v.FinalBackupTags)
+		case schemas.DeleteVolumeOntapConfiguration_SkipFinalBackup:
+			v.SkipFinalBackup = new(bool)
+			return d.ReadBool(schemas.DeleteVolumeOntapConfiguration_SkipFinalBackup, v.SkipFinalBackup)
+		}
+		return nil
+	})
+}
+
 // The response object for the Amazon FSx for NetApp ONTAP volume being deleted in
 // the DeleteVolume operation.
 type DeleteVolumeOntapResponse struct {
@@ -2198,6 +4251,31 @@ type DeleteVolumeOntapResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeOntapResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeOntapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeOntapResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FinalBackupId != nil {
+		s.WriteString(schemas.DeleteVolumeOntapResponse_FinalBackupId, *v.FinalBackupId)
+	}
+	serializeTags(s, schemas.DeleteVolumeOntapResponse_FinalBackupTags, v.FinalBackupTags)
+}
+func (v *DeleteVolumeOntapResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVolumeOntapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVolumeOntapResponse_FinalBackupId:
+			v.FinalBackupId = new(string)
+			return d.ReadString(schemas.DeleteVolumeOntapResponse_FinalBackupId, v.FinalBackupId)
+		case schemas.DeleteVolumeOntapResponse_FinalBackupTags:
+			return deserializeTags(d, schemas.DeleteVolumeOntapResponse_FinalBackupTags, &v.FinalBackupTags)
+		}
+		return nil
+	})
+}
+
 // A value that specifies whether to delete all child volumes and snapshots.
 type DeleteVolumeOpenZFSConfiguration struct {
 
@@ -2206,6 +4284,25 @@ type DeleteVolumeOpenZFSConfiguration struct {
 	Options []DeleteOpenZFSVolumeOption
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteVolumeOpenZFSConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeOpenZFSConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeleteOpenZFSVolumeOptions(s, schemas.DeleteVolumeOpenZFSConfiguration_Options, v.Options)
+}
+func (v *DeleteVolumeOpenZFSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVolumeOpenZFSConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVolumeOpenZFSConfiguration_Options:
+			return deserializeDeleteOpenZFSVolumeOptions(d, schemas.DeleteVolumeOpenZFSConfiguration_Options, &v.Options)
+		}
+		return nil
+	})
 }
 
 // The SSD IOPS (input/output operations per second) configuration for an Amazon
@@ -2234,6 +4331,38 @@ type DiskIopsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiskIopsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiskIopsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiskIopsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Iops != nil {
+		s.WriteInt64(schemas.DiskIopsConfiguration_Iops, *v.Iops)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.DiskIopsConfiguration_Mode, string(v.Mode))
+	}
+}
+func (v *DiskIopsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiskIopsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiskIopsConfiguration_Iops:
+			v.Iops = new(int64)
+			return d.ReadInt64(schemas.DiskIopsConfiguration_Iops, v.Iops)
+		case schemas.DiskIopsConfiguration_Mode:
+			var ev string
+			if err := d.ReadString(schemas.DiskIopsConfiguration_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = DiskIopsConfigurationMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Defines the minimum amount of time since last access for a file to be eligible
 // for release. Only files that have been exported to S3 and that were last
 // accessed or modified before this point-in-time are eligible to be released from
@@ -2257,6 +4386,38 @@ type DurationSinceLastAccess struct {
 	Value *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *DurationSinceLastAccess) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DurationSinceLastAccess)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DurationSinceLastAccess) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Unit != "" {
+		s.WriteString(schemas.DurationSinceLastAccess_Unit, string(v.Unit))
+	}
+	if v.Value != nil {
+		s.WriteInt64(schemas.DurationSinceLastAccess_Value, *v.Value)
+	}
+}
+func (v *DurationSinceLastAccess) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DurationSinceLastAccess, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DurationSinceLastAccess_Unit:
+			var ev string
+			if err := d.ReadString(schemas.DurationSinceLastAccess_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = Unit(ev)
+			return nil
+		case schemas.DurationSinceLastAccess_Value:
+			v.Value = new(int64)
+			return d.ReadInt64(schemas.DurationSinceLastAccess_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A description of a specific Amazon File Cache resource, which is a response
@@ -2342,6 +4503,121 @@ type FileCache struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileCache) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileCache)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileCache) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FileCache_CreationTime, *v.CreationTime)
+	}
+	if v.DNSName != nil {
+		s.WriteString(schemas.FileCache_DNSName, *v.DNSName)
+	}
+	serializeDataRepositoryAssociationIds(s, schemas.FileCache_DataRepositoryAssociationIds, v.DataRepositoryAssociationIds)
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.FileCache_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileCacheId != nil {
+		s.WriteString(schemas.FileCache_FileCacheId, *v.FileCacheId)
+	}
+	if v.FileCacheType != "" {
+		s.WriteString(schemas.FileCache_FileCacheType, string(v.FileCacheType))
+	}
+	if v.FileCacheTypeVersion != nil {
+		s.WriteString(schemas.FileCache_FileCacheTypeVersion, *v.FileCacheTypeVersion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.FileCache_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.FileCache_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LustreConfiguration != nil {
+		s.WriteStruct(schemas.FileCache_LustreConfiguration)
+		v.LustreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeNetworkInterfaceIds(s, schemas.FileCache_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	if v.OwnerId != nil {
+		s.WriteString(schemas.FileCache_OwnerId, *v.OwnerId)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.FileCache_ResourceARN, *v.ResourceARN)
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.FileCache_StorageCapacity, *v.StorageCapacity)
+	}
+	serializeSubnetIds(s, schemas.FileCache_SubnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.FileCache_VpcId, *v.VpcId)
+	}
+}
+func (v *FileCache) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileCache, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileCache_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FileCache_CreationTime, v.CreationTime)
+		case schemas.FileCache_DNSName:
+			v.DNSName = new(string)
+			return d.ReadString(schemas.FileCache_DNSName, v.DNSName)
+		case schemas.FileCache_DataRepositoryAssociationIds:
+			return deserializeDataRepositoryAssociationIds(d, schemas.FileCache_DataRepositoryAssociationIds, &v.DataRepositoryAssociationIds)
+		case schemas.FileCache_FailureDetails:
+			v.FailureDetails = &FileCacheFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.FileCache_FileCacheId:
+			v.FileCacheId = new(string)
+			return d.ReadString(schemas.FileCache_FileCacheId, v.FileCacheId)
+		case schemas.FileCache_FileCacheType:
+			var ev string
+			if err := d.ReadString(schemas.FileCache_FileCacheType, &ev); err != nil {
+				return err
+			}
+			v.FileCacheType = FileCacheType(ev)
+			return nil
+		case schemas.FileCache_FileCacheTypeVersion:
+			v.FileCacheTypeVersion = new(string)
+			return d.ReadString(schemas.FileCache_FileCacheTypeVersion, v.FileCacheTypeVersion)
+		case schemas.FileCache_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.FileCache_KmsKeyId, v.KmsKeyId)
+		case schemas.FileCache_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.FileCache_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = FileCacheLifecycle(ev)
+			return nil
+		case schemas.FileCache_LustreConfiguration:
+			v.LustreConfiguration = &FileCacheLustreConfiguration{}
+			return v.LustreConfiguration.Deserialize(d)
+		case schemas.FileCache_NetworkInterfaceIds:
+			return deserializeNetworkInterfaceIds(d, schemas.FileCache_NetworkInterfaceIds, &v.NetworkInterfaceIds)
+		case schemas.FileCache_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.FileCache_OwnerId, v.OwnerId)
+		case schemas.FileCache_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.FileCache_ResourceARN, v.ResourceARN)
+		case schemas.FileCache_StorageCapacity:
+			v.StorageCapacity = new(int32)
+			return d.ReadInt32(schemas.FileCache_StorageCapacity, v.StorageCapacity)
+		case schemas.FileCache_SubnetIds:
+			return deserializeSubnetIds(d, schemas.FileCache_SubnetIds, &v.SubnetIds)
+		case schemas.FileCache_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.FileCache_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // The response object for the Amazon File Cache resource being created in the
@@ -2436,6 +4712,130 @@ type FileCacheCreating struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileCacheCreating) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileCacheCreating)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileCacheCreating) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyTagsToDataRepositoryAssociations != nil {
+		s.WriteBool(schemas.FileCacheCreating_CopyTagsToDataRepositoryAssociations, *v.CopyTagsToDataRepositoryAssociations)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FileCacheCreating_CreationTime, *v.CreationTime)
+	}
+	if v.DNSName != nil {
+		s.WriteString(schemas.FileCacheCreating_DNSName, *v.DNSName)
+	}
+	serializeDataRepositoryAssociationIds(s, schemas.FileCacheCreating_DataRepositoryAssociationIds, v.DataRepositoryAssociationIds)
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.FileCacheCreating_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileCacheId != nil {
+		s.WriteString(schemas.FileCacheCreating_FileCacheId, *v.FileCacheId)
+	}
+	if v.FileCacheType != "" {
+		s.WriteString(schemas.FileCacheCreating_FileCacheType, string(v.FileCacheType))
+	}
+	if v.FileCacheTypeVersion != nil {
+		s.WriteString(schemas.FileCacheCreating_FileCacheTypeVersion, *v.FileCacheTypeVersion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.FileCacheCreating_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.FileCacheCreating_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LustreConfiguration != nil {
+		s.WriteStruct(schemas.FileCacheCreating_LustreConfiguration)
+		v.LustreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeNetworkInterfaceIds(s, schemas.FileCacheCreating_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	if v.OwnerId != nil {
+		s.WriteString(schemas.FileCacheCreating_OwnerId, *v.OwnerId)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.FileCacheCreating_ResourceARN, *v.ResourceARN)
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.FileCacheCreating_StorageCapacity, *v.StorageCapacity)
+	}
+	serializeSubnetIds(s, schemas.FileCacheCreating_SubnetIds, v.SubnetIds)
+	serializeTags(s, schemas.FileCacheCreating_Tags, v.Tags)
+	if v.VpcId != nil {
+		s.WriteString(schemas.FileCacheCreating_VpcId, *v.VpcId)
+	}
+}
+func (v *FileCacheCreating) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileCacheCreating, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileCacheCreating_CopyTagsToDataRepositoryAssociations:
+			v.CopyTagsToDataRepositoryAssociations = new(bool)
+			return d.ReadBool(schemas.FileCacheCreating_CopyTagsToDataRepositoryAssociations, v.CopyTagsToDataRepositoryAssociations)
+		case schemas.FileCacheCreating_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FileCacheCreating_CreationTime, v.CreationTime)
+		case schemas.FileCacheCreating_DNSName:
+			v.DNSName = new(string)
+			return d.ReadString(schemas.FileCacheCreating_DNSName, v.DNSName)
+		case schemas.FileCacheCreating_DataRepositoryAssociationIds:
+			return deserializeDataRepositoryAssociationIds(d, schemas.FileCacheCreating_DataRepositoryAssociationIds, &v.DataRepositoryAssociationIds)
+		case schemas.FileCacheCreating_FailureDetails:
+			v.FailureDetails = &FileCacheFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.FileCacheCreating_FileCacheId:
+			v.FileCacheId = new(string)
+			return d.ReadString(schemas.FileCacheCreating_FileCacheId, v.FileCacheId)
+		case schemas.FileCacheCreating_FileCacheType:
+			var ev string
+			if err := d.ReadString(schemas.FileCacheCreating_FileCacheType, &ev); err != nil {
+				return err
+			}
+			v.FileCacheType = FileCacheType(ev)
+			return nil
+		case schemas.FileCacheCreating_FileCacheTypeVersion:
+			v.FileCacheTypeVersion = new(string)
+			return d.ReadString(schemas.FileCacheCreating_FileCacheTypeVersion, v.FileCacheTypeVersion)
+		case schemas.FileCacheCreating_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.FileCacheCreating_KmsKeyId, v.KmsKeyId)
+		case schemas.FileCacheCreating_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.FileCacheCreating_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = FileCacheLifecycle(ev)
+			return nil
+		case schemas.FileCacheCreating_LustreConfiguration:
+			v.LustreConfiguration = &FileCacheLustreConfiguration{}
+			return v.LustreConfiguration.Deserialize(d)
+		case schemas.FileCacheCreating_NetworkInterfaceIds:
+			return deserializeNetworkInterfaceIds(d, schemas.FileCacheCreating_NetworkInterfaceIds, &v.NetworkInterfaceIds)
+		case schemas.FileCacheCreating_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.FileCacheCreating_OwnerId, v.OwnerId)
+		case schemas.FileCacheCreating_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.FileCacheCreating_ResourceARN, v.ResourceARN)
+		case schemas.FileCacheCreating_StorageCapacity:
+			v.StorageCapacity = new(int32)
+			return d.ReadInt32(schemas.FileCacheCreating_StorageCapacity, v.StorageCapacity)
+		case schemas.FileCacheCreating_SubnetIds:
+			return deserializeSubnetIds(d, schemas.FileCacheCreating_SubnetIds, &v.SubnetIds)
+		case schemas.FileCacheCreating_Tags:
+			return deserializeTags(d, schemas.FileCacheCreating_Tags, &v.Tags)
+		case schemas.FileCacheCreating_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.FileCacheCreating_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // The configuration for a data repository association (DRA) to be created during
 // the Amazon File Cache resource creation. The DRA links the cache to either an
 // Amazon S3 bucket or prefix, or a Network File System (NFS) data repository that
@@ -2501,6 +4901,45 @@ type FileCacheDataRepositoryAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileCacheDataRepositoryAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileCacheDataRepositoryAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileCacheDataRepositoryAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataRepositoryPath != nil {
+		s.WriteString(schemas.FileCacheDataRepositoryAssociation_DataRepositoryPath, *v.DataRepositoryPath)
+	}
+	serializeSubDirectoriesPaths(s, schemas.FileCacheDataRepositoryAssociation_DataRepositorySubdirectories, v.DataRepositorySubdirectories)
+	if v.FileCachePath != nil {
+		s.WriteString(schemas.FileCacheDataRepositoryAssociation_FileCachePath, *v.FileCachePath)
+	}
+	if v.NFS != nil {
+		s.WriteStruct(schemas.FileCacheDataRepositoryAssociation_NFS)
+		v.NFS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FileCacheDataRepositoryAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileCacheDataRepositoryAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileCacheDataRepositoryAssociation_DataRepositoryPath:
+			v.DataRepositoryPath = new(string)
+			return d.ReadString(schemas.FileCacheDataRepositoryAssociation_DataRepositoryPath, v.DataRepositoryPath)
+		case schemas.FileCacheDataRepositoryAssociation_DataRepositorySubdirectories:
+			return deserializeSubDirectoriesPaths(d, schemas.FileCacheDataRepositoryAssociation_DataRepositorySubdirectories, &v.DataRepositorySubdirectories)
+		case schemas.FileCacheDataRepositoryAssociation_FileCachePath:
+			v.FileCachePath = new(string)
+			return d.ReadString(schemas.FileCacheDataRepositoryAssociation_FileCachePath, v.FileCachePath)
+		case schemas.FileCacheDataRepositoryAssociation_NFS:
+			v.NFS = &FileCacheNFSConfiguration{}
+			return v.NFS.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure providing details of any failures that occurred.
 type FileCacheFailureDetails struct {
 
@@ -2508,6 +4947,28 @@ type FileCacheFailureDetails struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileCacheFailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileCacheFailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileCacheFailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FileCacheFailureDetails_Message, *v.Message)
+	}
+}
+func (v *FileCacheFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileCacheFailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileCacheFailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FileCacheFailureDetails_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The configuration for the Amazon File Cache resource.
@@ -2544,6 +5005,66 @@ type FileCacheLustreConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileCacheLustreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileCacheLustreConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileCacheLustreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.FileCacheLustreConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.FileCacheLustreConfiguration_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.FileCacheLustreConfiguration_MetadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MountName != nil {
+		s.WriteString(schemas.FileCacheLustreConfiguration_MountName, *v.MountName)
+	}
+	if v.PerUnitStorageThroughput != nil {
+		s.WriteInt32(schemas.FileCacheLustreConfiguration_PerUnitStorageThroughput, *v.PerUnitStorageThroughput)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.FileCacheLustreConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *FileCacheLustreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileCacheLustreConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileCacheLustreConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.FileCacheLustreConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = FileCacheLustreDeploymentType(ev)
+			return nil
+		case schemas.FileCacheLustreConfiguration_LogConfiguration:
+			v.LogConfiguration = &LustreLogConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
+		case schemas.FileCacheLustreConfiguration_MetadataConfiguration:
+			v.MetadataConfiguration = &FileCacheLustreMetadataConfiguration{}
+			return v.MetadataConfiguration.Deserialize(d)
+		case schemas.FileCacheLustreConfiguration_MountName:
+			v.MountName = new(string)
+			return d.ReadString(schemas.FileCacheLustreConfiguration_MountName, v.MountName)
+		case schemas.FileCacheLustreConfiguration_PerUnitStorageThroughput:
+			v.PerUnitStorageThroughput = new(int32)
+			return d.ReadInt32(schemas.FileCacheLustreConfiguration_PerUnitStorageThroughput, v.PerUnitStorageThroughput)
+		case schemas.FileCacheLustreConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.FileCacheLustreConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // The configuration for a Lustre MDT (Metadata Target) storage volume. The
 // metadata on Amazon File Cache is managed by a Lustre Metadata Server (MDS) while
 // the actual metadata is persisted on an MDT.
@@ -2556,6 +5077,28 @@ type FileCacheLustreMetadataConfiguration struct {
 	StorageCapacity *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileCacheLustreMetadataConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileCacheLustreMetadataConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileCacheLustreMetadataConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.FileCacheLustreMetadataConfiguration_StorageCapacity, *v.StorageCapacity)
+	}
+}
+func (v *FileCacheLustreMetadataConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileCacheLustreMetadataConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileCacheLustreMetadataConfiguration_StorageCapacity:
+			v.StorageCapacity = new(int32)
+			return d.ReadInt32(schemas.FileCacheLustreMetadataConfiguration_StorageCapacity, v.StorageCapacity)
+		}
+		return nil
+	})
 }
 
 // The configuration for an NFS data repository association (DRA) created during
@@ -2576,6 +5119,35 @@ type FileCacheNFSConfiguration struct {
 	DnsIps []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileCacheNFSConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileCacheNFSConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileCacheNFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRepositoryDnsIps(s, schemas.FileCacheNFSConfiguration_DnsIps, v.DnsIps)
+	if v.Version != "" {
+		s.WriteString(schemas.FileCacheNFSConfiguration_Version, string(v.Version))
+	}
+}
+func (v *FileCacheNFSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileCacheNFSConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileCacheNFSConfiguration_DnsIps:
+			return deserializeRepositoryDnsIps(d, schemas.FileCacheNFSConfiguration_DnsIps, &v.DnsIps)
+		case schemas.FileCacheNFSConfiguration_Version:
+			var ev string
+			if err := d.ReadString(schemas.FileCacheNFSConfiguration_Version, &ev); err != nil {
+				return err
+			}
+			v.Version = NfsVersion(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A description of a specific Amazon FSx file system.
@@ -2720,6 +5292,168 @@ type FileSystem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileSystem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdministrativeActions(s, schemas.FileSystem_AdministrativeActions, v.AdministrativeActions)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FileSystem_CreationTime, *v.CreationTime)
+	}
+	if v.DNSName != nil {
+		s.WriteString(schemas.FileSystem_DNSName, *v.DNSName)
+	}
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.FileSystem_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.FileSystem_FileSystemId, *v.FileSystemId)
+	}
+	if v.FileSystemType != "" {
+		s.WriteString(schemas.FileSystem_FileSystemType, string(v.FileSystemType))
+	}
+	if v.FileSystemTypeVersion != nil {
+		s.WriteString(schemas.FileSystem_FileSystemTypeVersion, *v.FileSystemTypeVersion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.FileSystem_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.FileSystem_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LustreConfiguration != nil {
+		s.WriteStruct(schemas.FileSystem_LustreConfiguration)
+		v.LustreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeNetworkInterfaceIds(s, schemas.FileSystem_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	if v.NetworkType != "" {
+		s.WriteString(schemas.FileSystem_NetworkType, string(v.NetworkType))
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.FileSystem_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.FileSystem_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.FileSystem_OwnerId, *v.OwnerId)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.FileSystem_ResourceARN, *v.ResourceARN)
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.FileSystem_StorageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.FileSystem_StorageType, string(v.StorageType))
+	}
+	serializeSubnetIds(s, schemas.FileSystem_SubnetIds, v.SubnetIds)
+	serializeTags(s, schemas.FileSystem_Tags, v.Tags)
+	if v.VpcId != nil {
+		s.WriteString(schemas.FileSystem_VpcId, *v.VpcId)
+	}
+	if v.WindowsConfiguration != nil {
+		s.WriteStruct(schemas.FileSystem_WindowsConfiguration)
+		v.WindowsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FileSystem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystem_AdministrativeActions:
+			return deserializeAdministrativeActions(d, schemas.FileSystem_AdministrativeActions, &v.AdministrativeActions)
+		case schemas.FileSystem_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FileSystem_CreationTime, v.CreationTime)
+		case schemas.FileSystem_DNSName:
+			v.DNSName = new(string)
+			return d.ReadString(schemas.FileSystem_DNSName, v.DNSName)
+		case schemas.FileSystem_FailureDetails:
+			v.FailureDetails = &FileSystemFailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.FileSystem_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.FileSystem_FileSystemId, v.FileSystemId)
+		case schemas.FileSystem_FileSystemType:
+			var ev string
+			if err := d.ReadString(schemas.FileSystem_FileSystemType, &ev); err != nil {
+				return err
+			}
+			v.FileSystemType = FileSystemType(ev)
+			return nil
+		case schemas.FileSystem_FileSystemTypeVersion:
+			v.FileSystemTypeVersion = new(string)
+			return d.ReadString(schemas.FileSystem_FileSystemTypeVersion, v.FileSystemTypeVersion)
+		case schemas.FileSystem_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.FileSystem_KmsKeyId, v.KmsKeyId)
+		case schemas.FileSystem_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.FileSystem_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = FileSystemLifecycle(ev)
+			return nil
+		case schemas.FileSystem_LustreConfiguration:
+			v.LustreConfiguration = &LustreFileSystemConfiguration{}
+			return v.LustreConfiguration.Deserialize(d)
+		case schemas.FileSystem_NetworkInterfaceIds:
+			return deserializeNetworkInterfaceIds(d, schemas.FileSystem_NetworkInterfaceIds, &v.NetworkInterfaceIds)
+		case schemas.FileSystem_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.FileSystem_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.FileSystem_OntapConfiguration:
+			v.OntapConfiguration = &OntapFileSystemConfiguration{}
+			return v.OntapConfiguration.Deserialize(d)
+		case schemas.FileSystem_OpenZFSConfiguration:
+			v.OpenZFSConfiguration = &OpenZFSFileSystemConfiguration{}
+			return v.OpenZFSConfiguration.Deserialize(d)
+		case schemas.FileSystem_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.FileSystem_OwnerId, v.OwnerId)
+		case schemas.FileSystem_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.FileSystem_ResourceARN, v.ResourceARN)
+		case schemas.FileSystem_StorageCapacity:
+			v.StorageCapacity = new(int32)
+			return d.ReadInt32(schemas.FileSystem_StorageCapacity, v.StorageCapacity)
+		case schemas.FileSystem_StorageType:
+			var ev string
+			if err := d.ReadString(schemas.FileSystem_StorageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = StorageType(ev)
+			return nil
+		case schemas.FileSystem_SubnetIds:
+			return deserializeSubnetIds(d, schemas.FileSystem_SubnetIds, &v.SubnetIds)
+		case schemas.FileSystem_Tags:
+			return deserializeTags(d, schemas.FileSystem_Tags, &v.Tags)
+		case schemas.FileSystem_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.FileSystem_VpcId, v.VpcId)
+		case schemas.FileSystem_WindowsConfiguration:
+			v.WindowsConfiguration = &WindowsFileSystemConfiguration{}
+			return v.WindowsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An Amazon FSx for NetApp ONTAP file system has two endpoints that are used to
 // access data or to manage the file system using the NetApp ONTAP CLI, REST API,
 // or NetApp SnapMirror. They are the Management and Intercluster endpoints.
@@ -2735,6 +5469,34 @@ type FileSystemEndpoint struct {
 	Ipv6Addresses []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileSystemEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DNSName != nil {
+		s.WriteString(schemas.FileSystemEndpoint_DNSName, *v.DNSName)
+	}
+	serializeOntapEndpointIpAddresses(s, schemas.FileSystemEndpoint_IpAddresses, v.IpAddresses)
+	serializeOntapEndpointIpAddresses(s, schemas.FileSystemEndpoint_Ipv6Addresses, v.Ipv6Addresses)
+}
+func (v *FileSystemEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemEndpoint_DNSName:
+			v.DNSName = new(string)
+			return d.ReadString(schemas.FileSystemEndpoint_DNSName, v.DNSName)
+		case schemas.FileSystemEndpoint_IpAddresses:
+			return deserializeOntapEndpointIpAddresses(d, schemas.FileSystemEndpoint_IpAddresses, &v.IpAddresses)
+		case schemas.FileSystemEndpoint_Ipv6Addresses:
+			return deserializeOntapEndpointIpAddresses(d, schemas.FileSystemEndpoint_Ipv6Addresses, &v.Ipv6Addresses)
+		}
+		return nil
+	})
 }
 
 // An Amazon FSx for NetApp ONTAP file system has the following endpoints that are
@@ -2753,6 +5515,38 @@ type FileSystemEndpoints struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileSystemEndpoints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemEndpoints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemEndpoints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Intercluster != nil {
+		s.WriteStruct(schemas.FileSystemEndpoints_Intercluster)
+		v.Intercluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Management != nil {
+		s.WriteStruct(schemas.FileSystemEndpoints_Management)
+		v.Management.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FileSystemEndpoints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemEndpoints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemEndpoints_Intercluster:
+			v.Intercluster = &FileSystemEndpoint{}
+			return v.Intercluster.Deserialize(d)
+		case schemas.FileSystemEndpoints_Management:
+			v.Management = &FileSystemEndpoint{}
+			return v.Management.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure providing details of any failures that occurred.
 type FileSystemFailureDetails struct {
 
@@ -2760,6 +5554,28 @@ type FileSystemFailureDetails struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileSystemFailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemFailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemFailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FileSystemFailureDetails_Message, *v.Message)
+	}
+}
+func (v *FileSystemFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemFailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemFailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FileSystemFailureDetails_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The Lustre metadata performance configuration of an Amazon FSx for Lustre file
@@ -2791,6 +5607,38 @@ type FileSystemLustreMetadataConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileSystemLustreMetadataConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemLustreMetadataConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemLustreMetadataConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Iops != nil {
+		s.WriteInt32(schemas.FileSystemLustreMetadataConfiguration_Iops, *v.Iops)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.FileSystemLustreMetadataConfiguration_Mode, string(v.Mode))
+	}
+}
+func (v *FileSystemLustreMetadataConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemLustreMetadataConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemLustreMetadataConfiguration_Iops:
+			v.Iops = new(int32)
+			return d.ReadInt32(schemas.FileSystemLustreMetadataConfiguration_Iops, v.Iops)
+		case schemas.FileSystemLustreMetadataConfiguration_Mode:
+			var ev string
+			if err := d.ReadString(schemas.FileSystemLustreMetadataConfiguration_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = MetadataConfigurationMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A filter used to restrict the results of describe calls. You can use multiple
 // filters to return results that meet all applied filter requirements.
 type Filter struct {
@@ -2805,6 +5653,35 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.Filter_Name, string(v.Name))
+	}
+	serializeFilterValues(s, schemas.Filter_Values, v.Values)
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Name:
+			var ev string
+			if err := d.ReadString(schemas.Filter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = FilterName(ev)
+			return nil
+		case schemas.Filter_Values:
+			return deserializeFilterValues(d, schemas.Filter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes why a resource lifecycle state changed.
 type LifecycleTransitionReason struct {
 
@@ -2812,6 +5689,28 @@ type LifecycleTransitionReason struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LifecycleTransitionReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LifecycleTransitionReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LifecycleTransitionReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LifecycleTransitionReason_Message, *v.Message)
+	}
+}
+func (v *LifecycleTransitionReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LifecycleTransitionReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LifecycleTransitionReason_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LifecycleTransitionReason_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The configuration for the Amazon FSx for Lustre file system.
@@ -2938,6 +5837,140 @@ type LustreFileSystemConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LustreFileSystemConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LustreFileSystemConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LustreFileSystemConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.LustreFileSystemConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.LustreFileSystemConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.LustreFileSystemConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DataCompressionType != "" {
+		s.WriteString(schemas.LustreFileSystemConfiguration_DataCompressionType, string(v.DataCompressionType))
+	}
+	if v.DataReadCacheConfiguration != nil {
+		s.WriteStruct(schemas.LustreFileSystemConfiguration_DataReadCacheConfiguration)
+		v.DataReadCacheConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataRepositoryConfiguration != nil {
+		s.WriteStruct(schemas.LustreFileSystemConfiguration_DataRepositoryConfiguration)
+		v.DataRepositoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.LustreFileSystemConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.DriveCacheType != "" {
+		s.WriteString(schemas.LustreFileSystemConfiguration_DriveCacheType, string(v.DriveCacheType))
+	}
+	if v.EfaEnabled != nil {
+		s.WriteBool(schemas.LustreFileSystemConfiguration_EfaEnabled, *v.EfaEnabled)
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.LustreFileSystemConfiguration_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.LustreFileSystemConfiguration_MetadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MountName != nil {
+		s.WriteString(schemas.LustreFileSystemConfiguration_MountName, *v.MountName)
+	}
+	if v.PerUnitStorageThroughput != nil {
+		s.WriteInt32(schemas.LustreFileSystemConfiguration_PerUnitStorageThroughput, *v.PerUnitStorageThroughput)
+	}
+	if v.RootSquashConfiguration != nil {
+		s.WriteStruct(schemas.LustreFileSystemConfiguration_RootSquashConfiguration)
+		v.RootSquashConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.LustreFileSystemConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.LustreFileSystemConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *LustreFileSystemConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LustreFileSystemConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LustreFileSystemConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.LustreFileSystemConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.LustreFileSystemConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.LustreFileSystemConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.LustreFileSystemConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.LustreFileSystemConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.LustreFileSystemConfiguration_DataCompressionType:
+			var ev string
+			if err := d.ReadString(schemas.LustreFileSystemConfiguration_DataCompressionType, &ev); err != nil {
+				return err
+			}
+			v.DataCompressionType = DataCompressionType(ev)
+			return nil
+		case schemas.LustreFileSystemConfiguration_DataReadCacheConfiguration:
+			v.DataReadCacheConfiguration = &LustreReadCacheConfiguration{}
+			return v.DataReadCacheConfiguration.Deserialize(d)
+		case schemas.LustreFileSystemConfiguration_DataRepositoryConfiguration:
+			v.DataRepositoryConfiguration = &DataRepositoryConfiguration{}
+			return v.DataRepositoryConfiguration.Deserialize(d)
+		case schemas.LustreFileSystemConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.LustreFileSystemConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = LustreDeploymentType(ev)
+			return nil
+		case schemas.LustreFileSystemConfiguration_DriveCacheType:
+			var ev string
+			if err := d.ReadString(schemas.LustreFileSystemConfiguration_DriveCacheType, &ev); err != nil {
+				return err
+			}
+			v.DriveCacheType = DriveCacheType(ev)
+			return nil
+		case schemas.LustreFileSystemConfiguration_EfaEnabled:
+			v.EfaEnabled = new(bool)
+			return d.ReadBool(schemas.LustreFileSystemConfiguration_EfaEnabled, v.EfaEnabled)
+		case schemas.LustreFileSystemConfiguration_LogConfiguration:
+			v.LogConfiguration = &LustreLogConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
+		case schemas.LustreFileSystemConfiguration_MetadataConfiguration:
+			v.MetadataConfiguration = &FileSystemLustreMetadataConfiguration{}
+			return v.MetadataConfiguration.Deserialize(d)
+		case schemas.LustreFileSystemConfiguration_MountName:
+			v.MountName = new(string)
+			return d.ReadString(schemas.LustreFileSystemConfiguration_MountName, v.MountName)
+		case schemas.LustreFileSystemConfiguration_PerUnitStorageThroughput:
+			v.PerUnitStorageThroughput = new(int32)
+			return d.ReadInt32(schemas.LustreFileSystemConfiguration_PerUnitStorageThroughput, v.PerUnitStorageThroughput)
+		case schemas.LustreFileSystemConfiguration_RootSquashConfiguration:
+			v.RootSquashConfiguration = &LustreRootSquashConfiguration{}
+			return v.RootSquashConfiguration.Deserialize(d)
+		case schemas.LustreFileSystemConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.LustreFileSystemConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.LustreFileSystemConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.LustreFileSystemConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // The configuration for Lustre logging used to write the enabled logging events
 // for your Amazon FSx for Lustre file system or Amazon File Cache resource to
 // Amazon CloudWatch Logs.
@@ -2966,6 +5999,38 @@ type LustreLogConfiguration struct {
 	Destination *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LustreLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LustreLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LustreLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.LustreLogConfiguration_Destination, *v.Destination)
+	}
+	if v.Level != "" {
+		s.WriteString(schemas.LustreLogConfiguration_Level, string(v.Level))
+	}
+}
+func (v *LustreLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LustreLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LustreLogConfiguration_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.LustreLogConfiguration_Destination, v.Destination)
+		case schemas.LustreLogConfiguration_Level:
+			var ev string
+			if err := d.ReadString(schemas.LustreLogConfiguration_Level, &ev); err != nil {
+				return err
+			}
+			v.Level = LustreAccessAuditLogLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Lustre logging configuration used when creating or updating an Amazon FSx
@@ -3016,6 +6081,38 @@ type LustreLogCreateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LustreLogCreateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LustreLogCreateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LustreLogCreateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.LustreLogCreateConfiguration_Destination, *v.Destination)
+	}
+	if v.Level != "" {
+		s.WriteString(schemas.LustreLogCreateConfiguration_Level, string(v.Level))
+	}
+}
+func (v *LustreLogCreateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LustreLogCreateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LustreLogCreateConfiguration_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.LustreLogCreateConfiguration_Destination, v.Destination)
+		case schemas.LustreLogCreateConfiguration_Level:
+			var ev string
+			if err := d.ReadString(schemas.LustreLogCreateConfiguration_Level, &ev); err != nil {
+				return err
+			}
+			v.Level = LustreAccessAuditLogLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The configuration for the optional provisioned SSD read cache on Amazon FSx
 //
 // for Lustre file systems that use the Intelligent-Tiering storage class.
@@ -3042,6 +6139,38 @@ type LustreReadCacheConfiguration struct {
 	SizingMode LustreReadCacheSizingMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *LustreReadCacheConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LustreReadCacheConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LustreReadCacheConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SizeGiB != nil {
+		s.WriteInt32(schemas.LustreReadCacheConfiguration_SizeGiB, *v.SizeGiB)
+	}
+	if v.SizingMode != "" {
+		s.WriteString(schemas.LustreReadCacheConfiguration_SizingMode, string(v.SizingMode))
+	}
+}
+func (v *LustreReadCacheConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LustreReadCacheConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LustreReadCacheConfiguration_SizeGiB:
+			v.SizeGiB = new(int32)
+			return d.ReadInt32(schemas.LustreReadCacheConfiguration_SizeGiB, v.SizeGiB)
+		case schemas.LustreReadCacheConfiguration_SizingMode:
+			var ev string
+			if err := d.ReadString(schemas.LustreReadCacheConfiguration_SizingMode, &ev); err != nil {
+				return err
+			}
+			v.SizingMode = LustreReadCacheSizingMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configuration for Lustre root squash used to restrict root-level access
@@ -3086,6 +6215,31 @@ type LustreRootSquashConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LustreRootSquashConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LustreRootSquashConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LustreRootSquashConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLustreNoSquashNids(s, schemas.LustreRootSquashConfiguration_NoSquashNids, v.NoSquashNids)
+	if v.RootSquash != nil {
+		s.WriteString(schemas.LustreRootSquashConfiguration_RootSquash, *v.RootSquash)
+	}
+}
+func (v *LustreRootSquashConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LustreRootSquashConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LustreRootSquashConfiguration_NoSquashNids:
+			return deserializeLustreNoSquashNids(d, schemas.LustreRootSquashConfiguration_NoSquashNids, &v.NoSquashNids)
+		case schemas.LustreRootSquashConfiguration_RootSquash:
+			v.RootSquash = new(string)
+			return d.ReadString(schemas.LustreRootSquashConfiguration_RootSquash, v.RootSquash)
+		}
+		return nil
+	})
+}
+
 // The configuration for a data repository association that links an Amazon File
 // Cache resource to an NFS data repository.
 type NFSDataRepositoryConfiguration struct {
@@ -3107,6 +6261,43 @@ type NFSDataRepositoryConfiguration struct {
 	DnsIps []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NFSDataRepositoryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NFSDataRepositoryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NFSDataRepositoryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoExportPolicy != nil {
+		s.WriteStruct(schemas.NFSDataRepositoryConfiguration_AutoExportPolicy)
+		v.AutoExportPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRepositoryDnsIps(s, schemas.NFSDataRepositoryConfiguration_DnsIps, v.DnsIps)
+	if v.Version != "" {
+		s.WriteString(schemas.NFSDataRepositoryConfiguration_Version, string(v.Version))
+	}
+}
+func (v *NFSDataRepositoryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NFSDataRepositoryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NFSDataRepositoryConfiguration_AutoExportPolicy:
+			v.AutoExportPolicy = &AutoExportPolicy{}
+			return v.AutoExportPolicy.Deserialize(d)
+		case schemas.NFSDataRepositoryConfiguration_DnsIps:
+			return deserializeRepositoryDnsIps(d, schemas.NFSDataRepositoryConfiguration_DnsIps, &v.DnsIps)
+		case schemas.NFSDataRepositoryConfiguration_Version:
+			var ev string
+			if err := d.ReadString(schemas.NFSDataRepositoryConfiguration_Version, &ev); err != nil {
+				return err
+			}
+			v.Version = NfsVersion(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Configuration for the FSx for NetApp ONTAP file system.
@@ -3245,6 +6436,111 @@ type OntapFileSystemConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OntapFileSystemConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OntapFileSystemConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OntapFileSystemConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.OntapFileSystemConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.OntapFileSystemConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.OntapFileSystemConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.DiskIopsConfiguration != nil {
+		s.WriteStruct(schemas.OntapFileSystemConfiguration_DiskIopsConfiguration)
+		v.DiskIopsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointIpAddressRange != nil {
+		s.WriteString(schemas.OntapFileSystemConfiguration_EndpointIpAddressRange, *v.EndpointIpAddressRange)
+	}
+	if v.EndpointIpv6AddressRange != nil {
+		s.WriteString(schemas.OntapFileSystemConfiguration_EndpointIpv6AddressRange, *v.EndpointIpv6AddressRange)
+	}
+	if v.Endpoints != nil {
+		s.WriteStruct(schemas.OntapFileSystemConfiguration_Endpoints)
+		v.Endpoints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FsxAdminPassword != nil {
+		s.WriteString(schemas.OntapFileSystemConfiguration_FsxAdminPassword, *v.FsxAdminPassword)
+	}
+	if v.HAPairs != nil {
+		s.WriteInt32(schemas.OntapFileSystemConfiguration_HAPairs, *v.HAPairs)
+	}
+	if v.PreferredSubnetId != nil {
+		s.WriteString(schemas.OntapFileSystemConfiguration_PreferredSubnetId, *v.PreferredSubnetId)
+	}
+	serializeRouteTableIds(s, schemas.OntapFileSystemConfiguration_RouteTableIds, v.RouteTableIds)
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.OntapFileSystemConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.ThroughputCapacityPerHAPair != nil {
+		s.WriteInt32(schemas.OntapFileSystemConfiguration_ThroughputCapacityPerHAPair, *v.ThroughputCapacityPerHAPair)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.OntapFileSystemConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *OntapFileSystemConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OntapFileSystemConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OntapFileSystemConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.OntapFileSystemConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.OntapFileSystemConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.OntapFileSystemConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.OntapFileSystemConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.OntapFileSystemConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = OntapDeploymentType(ev)
+			return nil
+		case schemas.OntapFileSystemConfiguration_DiskIopsConfiguration:
+			v.DiskIopsConfiguration = &DiskIopsConfiguration{}
+			return v.DiskIopsConfiguration.Deserialize(d)
+		case schemas.OntapFileSystemConfiguration_EndpointIpAddressRange:
+			v.EndpointIpAddressRange = new(string)
+			return d.ReadString(schemas.OntapFileSystemConfiguration_EndpointIpAddressRange, v.EndpointIpAddressRange)
+		case schemas.OntapFileSystemConfiguration_EndpointIpv6AddressRange:
+			v.EndpointIpv6AddressRange = new(string)
+			return d.ReadString(schemas.OntapFileSystemConfiguration_EndpointIpv6AddressRange, v.EndpointIpv6AddressRange)
+		case schemas.OntapFileSystemConfiguration_Endpoints:
+			v.Endpoints = &FileSystemEndpoints{}
+			return v.Endpoints.Deserialize(d)
+		case schemas.OntapFileSystemConfiguration_FsxAdminPassword:
+			v.FsxAdminPassword = new(string)
+			return d.ReadString(schemas.OntapFileSystemConfiguration_FsxAdminPassword, v.FsxAdminPassword)
+		case schemas.OntapFileSystemConfiguration_HAPairs:
+			v.HAPairs = new(int32)
+			return d.ReadInt32(schemas.OntapFileSystemConfiguration_HAPairs, v.HAPairs)
+		case schemas.OntapFileSystemConfiguration_PreferredSubnetId:
+			v.PreferredSubnetId = new(string)
+			return d.ReadString(schemas.OntapFileSystemConfiguration_PreferredSubnetId, v.PreferredSubnetId)
+		case schemas.OntapFileSystemConfiguration_RouteTableIds:
+			return deserializeRouteTableIds(d, schemas.OntapFileSystemConfiguration_RouteTableIds, &v.RouteTableIds)
+		case schemas.OntapFileSystemConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.OntapFileSystemConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.OntapFileSystemConfiguration_ThroughputCapacityPerHAPair:
+			v.ThroughputCapacityPerHAPair = new(int32)
+			return d.ReadInt32(schemas.OntapFileSystemConfiguration_ThroughputCapacityPerHAPair, v.ThroughputCapacityPerHAPair)
+		case schemas.OntapFileSystemConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.OntapFileSystemConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // Specifies the file system user identity that will be used for authorizing all
 // file access requests that are made using the S3 access point. The identity can
 // be either a UNIX user or a Windows user.
@@ -3265,6 +6561,48 @@ type OntapFileSystemIdentity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OntapFileSystemIdentity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OntapFileSystemIdentity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OntapFileSystemIdentity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.OntapFileSystemIdentity_Type, string(v.Type))
+	}
+	if v.UnixUser != nil {
+		s.WriteStruct(schemas.OntapFileSystemIdentity_UnixUser)
+		v.UnixUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WindowsUser != nil {
+		s.WriteStruct(schemas.OntapFileSystemIdentity_WindowsUser)
+		v.WindowsUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OntapFileSystemIdentity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OntapFileSystemIdentity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OntapFileSystemIdentity_Type:
+			var ev string
+			if err := d.ReadString(schemas.OntapFileSystemIdentity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = OntapFileSystemUserType(ev)
+			return nil
+		case schemas.OntapFileSystemIdentity_UnixUser:
+			v.UnixUser = &OntapUnixFileSystemUser{}
+			return v.UnixUser.Deserialize(d)
+		case schemas.OntapFileSystemIdentity_WindowsUser:
+			v.WindowsUser = &OntapWindowsFileSystemUser{}
+			return v.WindowsUser.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The FSx for ONTAP UNIX file system user that is used for authorizing all file
 // access requests that are made using the S3 access point.
 type OntapUnixFileSystemUser struct {
@@ -3275,6 +6613,28 @@ type OntapUnixFileSystemUser struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OntapUnixFileSystemUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OntapUnixFileSystemUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OntapUnixFileSystemUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.OntapUnixFileSystemUser_Name, *v.Name)
+	}
+}
+func (v *OntapUnixFileSystemUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OntapUnixFileSystemUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OntapUnixFileSystemUser_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OntapUnixFileSystemUser_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The configuration of an Amazon FSx for NetApp ONTAP volume.
@@ -3390,6 +6750,140 @@ type OntapVolumeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OntapVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OntapVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OntapVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateConfiguration != nil {
+		s.WriteStruct(schemas.OntapVolumeConfiguration_AggregateConfiguration)
+		v.AggregateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.OntapVolumeConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.FlexCacheEndpointType != "" {
+		s.WriteString(schemas.OntapVolumeConfiguration_FlexCacheEndpointType, string(v.FlexCacheEndpointType))
+	}
+	if v.JunctionPath != nil {
+		s.WriteString(schemas.OntapVolumeConfiguration_JunctionPath, *v.JunctionPath)
+	}
+	if v.OntapVolumeType != "" {
+		s.WriteString(schemas.OntapVolumeConfiguration_OntapVolumeType, string(v.OntapVolumeType))
+	}
+	if v.SecurityStyle != "" {
+		s.WriteString(schemas.OntapVolumeConfiguration_SecurityStyle, string(v.SecurityStyle))
+	}
+	if v.SizeInBytes != nil {
+		s.WriteInt64(schemas.OntapVolumeConfiguration_SizeInBytes, *v.SizeInBytes)
+	}
+	if v.SizeInMegabytes != nil {
+		s.WriteInt32(schemas.OntapVolumeConfiguration_SizeInMegabytes, *v.SizeInMegabytes)
+	}
+	if v.SnaplockConfiguration != nil {
+		s.WriteStruct(schemas.OntapVolumeConfiguration_SnaplockConfiguration)
+		v.SnaplockConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotPolicy != nil {
+		s.WriteString(schemas.OntapVolumeConfiguration_SnapshotPolicy, *v.SnapshotPolicy)
+	}
+	if v.StorageEfficiencyEnabled != nil {
+		s.WriteBool(schemas.OntapVolumeConfiguration_StorageEfficiencyEnabled, *v.StorageEfficiencyEnabled)
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.OntapVolumeConfiguration_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+	if v.StorageVirtualMachineRoot != nil {
+		s.WriteBool(schemas.OntapVolumeConfiguration_StorageVirtualMachineRoot, *v.StorageVirtualMachineRoot)
+	}
+	if v.TieringPolicy != nil {
+		s.WriteStruct(schemas.OntapVolumeConfiguration_TieringPolicy)
+		v.TieringPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UUID != nil {
+		s.WriteString(schemas.OntapVolumeConfiguration_UUID, *v.UUID)
+	}
+	if v.VolumeStyle != "" {
+		s.WriteString(schemas.OntapVolumeConfiguration_VolumeStyle, string(v.VolumeStyle))
+	}
+}
+func (v *OntapVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OntapVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OntapVolumeConfiguration_AggregateConfiguration:
+			v.AggregateConfiguration = &AggregateConfiguration{}
+			return v.AggregateConfiguration.Deserialize(d)
+		case schemas.OntapVolumeConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.OntapVolumeConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.OntapVolumeConfiguration_FlexCacheEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.OntapVolumeConfiguration_FlexCacheEndpointType, &ev); err != nil {
+				return err
+			}
+			v.FlexCacheEndpointType = FlexCacheEndpointType(ev)
+			return nil
+		case schemas.OntapVolumeConfiguration_JunctionPath:
+			v.JunctionPath = new(string)
+			return d.ReadString(schemas.OntapVolumeConfiguration_JunctionPath, v.JunctionPath)
+		case schemas.OntapVolumeConfiguration_OntapVolumeType:
+			var ev string
+			if err := d.ReadString(schemas.OntapVolumeConfiguration_OntapVolumeType, &ev); err != nil {
+				return err
+			}
+			v.OntapVolumeType = OntapVolumeType(ev)
+			return nil
+		case schemas.OntapVolumeConfiguration_SecurityStyle:
+			var ev string
+			if err := d.ReadString(schemas.OntapVolumeConfiguration_SecurityStyle, &ev); err != nil {
+				return err
+			}
+			v.SecurityStyle = SecurityStyle(ev)
+			return nil
+		case schemas.OntapVolumeConfiguration_SizeInBytes:
+			v.SizeInBytes = new(int64)
+			return d.ReadInt64(schemas.OntapVolumeConfiguration_SizeInBytes, v.SizeInBytes)
+		case schemas.OntapVolumeConfiguration_SizeInMegabytes:
+			v.SizeInMegabytes = new(int32)
+			return d.ReadInt32(schemas.OntapVolumeConfiguration_SizeInMegabytes, v.SizeInMegabytes)
+		case schemas.OntapVolumeConfiguration_SnaplockConfiguration:
+			v.SnaplockConfiguration = &SnaplockConfiguration{}
+			return v.SnaplockConfiguration.Deserialize(d)
+		case schemas.OntapVolumeConfiguration_SnapshotPolicy:
+			v.SnapshotPolicy = new(string)
+			return d.ReadString(schemas.OntapVolumeConfiguration_SnapshotPolicy, v.SnapshotPolicy)
+		case schemas.OntapVolumeConfiguration_StorageEfficiencyEnabled:
+			v.StorageEfficiencyEnabled = new(bool)
+			return d.ReadBool(schemas.OntapVolumeConfiguration_StorageEfficiencyEnabled, v.StorageEfficiencyEnabled)
+		case schemas.OntapVolumeConfiguration_StorageVirtualMachineId:
+			v.StorageVirtualMachineId = new(string)
+			return d.ReadString(schemas.OntapVolumeConfiguration_StorageVirtualMachineId, v.StorageVirtualMachineId)
+		case schemas.OntapVolumeConfiguration_StorageVirtualMachineRoot:
+			v.StorageVirtualMachineRoot = new(bool)
+			return d.ReadBool(schemas.OntapVolumeConfiguration_StorageVirtualMachineRoot, v.StorageVirtualMachineRoot)
+		case schemas.OntapVolumeConfiguration_TieringPolicy:
+			v.TieringPolicy = &TieringPolicy{}
+			return v.TieringPolicy.Deserialize(d)
+		case schemas.OntapVolumeConfiguration_UUID:
+			v.UUID = new(string)
+			return d.ReadString(schemas.OntapVolumeConfiguration_UUID, v.UUID)
+		case schemas.OntapVolumeConfiguration_VolumeStyle:
+			var ev string
+			if err := d.ReadString(schemas.OntapVolumeConfiguration_VolumeStyle, &ev); err != nil {
+				return err
+			}
+			v.VolumeStyle = VolumeStyle(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The FSx for ONTAP Windows file system user that is used for authorizing all
 // file access requests that are made using the S3 access point.
 type OntapWindowsFileSystemUser struct {
@@ -3401,6 +6895,28 @@ type OntapWindowsFileSystemUser struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OntapWindowsFileSystemUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OntapWindowsFileSystemUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OntapWindowsFileSystemUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.OntapWindowsFileSystemUser_Name, *v.Name)
+	}
+}
+func (v *OntapWindowsFileSystemUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OntapWindowsFileSystemUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OntapWindowsFileSystemUser_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OntapWindowsFileSystemUser_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Specifies who can mount an OpenZFS file system and the options available while
@@ -3433,6 +6949,31 @@ type OpenZFSClientConfiguration struct {
 	Options []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenZFSClientConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSClientConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSClientConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Clients != nil {
+		s.WriteString(schemas.OpenZFSClientConfiguration_Clients, *v.Clients)
+	}
+	serializeOpenZFSNfsExportOptions(s, schemas.OpenZFSClientConfiguration_Options, v.Options)
+}
+func (v *OpenZFSClientConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSClientConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSClientConfiguration_Clients:
+			v.Clients = new(string)
+			return d.ReadString(schemas.OpenZFSClientConfiguration_Clients, v.Clients)
+		case schemas.OpenZFSClientConfiguration_Options:
+			return deserializeOpenZFSNfsExportOptions(d, schemas.OpenZFSClientConfiguration_Options, &v.Options)
+		}
+		return nil
+	})
 }
 
 // The configuration of an Amazon FSx for OpenZFS root volume.
@@ -3483,6 +7024,56 @@ type OpenZFSCreateRootVolumeConfiguration struct {
 	UserAndGroupQuotas []OpenZFSUserOrGroupQuota
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenZFSCreateRootVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSCreateRootVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSCreateRootVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyTagsToSnapshots != nil {
+		s.WriteBool(schemas.OpenZFSCreateRootVolumeConfiguration_CopyTagsToSnapshots, *v.CopyTagsToSnapshots)
+	}
+	if v.DataCompressionType != "" {
+		s.WriteString(schemas.OpenZFSCreateRootVolumeConfiguration_DataCompressionType, string(v.DataCompressionType))
+	}
+	serializeOpenZFSNfsExports(s, schemas.OpenZFSCreateRootVolumeConfiguration_NfsExports, v.NfsExports)
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.OpenZFSCreateRootVolumeConfiguration_ReadOnly, *v.ReadOnly)
+	}
+	if v.RecordSizeKiB != nil {
+		s.WriteInt32(schemas.OpenZFSCreateRootVolumeConfiguration_RecordSizeKiB, *v.RecordSizeKiB)
+	}
+	serializeOpenZFSUserAndGroupQuotas(s, schemas.OpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+}
+func (v *OpenZFSCreateRootVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSCreateRootVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSCreateRootVolumeConfiguration_CopyTagsToSnapshots:
+			v.CopyTagsToSnapshots = new(bool)
+			return d.ReadBool(schemas.OpenZFSCreateRootVolumeConfiguration_CopyTagsToSnapshots, v.CopyTagsToSnapshots)
+		case schemas.OpenZFSCreateRootVolumeConfiguration_DataCompressionType:
+			var ev string
+			if err := d.ReadString(schemas.OpenZFSCreateRootVolumeConfiguration_DataCompressionType, &ev); err != nil {
+				return err
+			}
+			v.DataCompressionType = OpenZFSDataCompressionType(ev)
+			return nil
+		case schemas.OpenZFSCreateRootVolumeConfiguration_NfsExports:
+			return deserializeOpenZFSNfsExports(d, schemas.OpenZFSCreateRootVolumeConfiguration_NfsExports, &v.NfsExports)
+		case schemas.OpenZFSCreateRootVolumeConfiguration_ReadOnly:
+			v.ReadOnly = new(bool)
+			return d.ReadBool(schemas.OpenZFSCreateRootVolumeConfiguration_ReadOnly, v.ReadOnly)
+		case schemas.OpenZFSCreateRootVolumeConfiguration_RecordSizeKiB:
+			v.RecordSizeKiB = new(int32)
+			return d.ReadInt32(schemas.OpenZFSCreateRootVolumeConfiguration_RecordSizeKiB, v.RecordSizeKiB)
+		case schemas.OpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas:
+			return deserializeOpenZFSUserAndGroupQuotas(d, schemas.OpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas, &v.UserAndGroupQuotas)
+		}
+		return nil
+	})
 }
 
 // The configuration for the Amazon FSx for OpenZFS file system.
@@ -3579,6 +7170,123 @@ type OpenZFSFileSystemConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenZFSFileSystemConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSFileSystemConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSFileSystemConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.OpenZFSFileSystemConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.OpenZFSFileSystemConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.CopyTagsToVolumes != nil {
+		s.WriteBool(schemas.OpenZFSFileSystemConfiguration_CopyTagsToVolumes, *v.CopyTagsToVolumes)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.OpenZFSFileSystemConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.OpenZFSFileSystemConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.DiskIopsConfiguration != nil {
+		s.WriteStruct(schemas.OpenZFSFileSystemConfiguration_DiskIopsConfiguration)
+		v.DiskIopsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointIpAddress != nil {
+		s.WriteString(schemas.OpenZFSFileSystemConfiguration_EndpointIpAddress, *v.EndpointIpAddress)
+	}
+	if v.EndpointIpAddressRange != nil {
+		s.WriteString(schemas.OpenZFSFileSystemConfiguration_EndpointIpAddressRange, *v.EndpointIpAddressRange)
+	}
+	if v.EndpointIpv6Address != nil {
+		s.WriteString(schemas.OpenZFSFileSystemConfiguration_EndpointIpv6Address, *v.EndpointIpv6Address)
+	}
+	if v.EndpointIpv6AddressRange != nil {
+		s.WriteString(schemas.OpenZFSFileSystemConfiguration_EndpointIpv6AddressRange, *v.EndpointIpv6AddressRange)
+	}
+	if v.PreferredSubnetId != nil {
+		s.WriteString(schemas.OpenZFSFileSystemConfiguration_PreferredSubnetId, *v.PreferredSubnetId)
+	}
+	if v.ReadCacheConfiguration != nil {
+		s.WriteStruct(schemas.OpenZFSFileSystemConfiguration_ReadCacheConfiguration)
+		v.ReadCacheConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RootVolumeId != nil {
+		s.WriteString(schemas.OpenZFSFileSystemConfiguration_RootVolumeId, *v.RootVolumeId)
+	}
+	serializeRouteTableIds(s, schemas.OpenZFSFileSystemConfiguration_RouteTableIds, v.RouteTableIds)
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.OpenZFSFileSystemConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.OpenZFSFileSystemConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *OpenZFSFileSystemConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSFileSystemConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSFileSystemConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.OpenZFSFileSystemConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.OpenZFSFileSystemConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.OpenZFSFileSystemConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.OpenZFSFileSystemConfiguration_CopyTagsToVolumes:
+			v.CopyTagsToVolumes = new(bool)
+			return d.ReadBool(schemas.OpenZFSFileSystemConfiguration_CopyTagsToVolumes, v.CopyTagsToVolumes)
+		case schemas.OpenZFSFileSystemConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.OpenZFSFileSystemConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.OpenZFSFileSystemConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.OpenZFSFileSystemConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = OpenZFSDeploymentType(ev)
+			return nil
+		case schemas.OpenZFSFileSystemConfiguration_DiskIopsConfiguration:
+			v.DiskIopsConfiguration = &DiskIopsConfiguration{}
+			return v.DiskIopsConfiguration.Deserialize(d)
+		case schemas.OpenZFSFileSystemConfiguration_EndpointIpAddress:
+			v.EndpointIpAddress = new(string)
+			return d.ReadString(schemas.OpenZFSFileSystemConfiguration_EndpointIpAddress, v.EndpointIpAddress)
+		case schemas.OpenZFSFileSystemConfiguration_EndpointIpAddressRange:
+			v.EndpointIpAddressRange = new(string)
+			return d.ReadString(schemas.OpenZFSFileSystemConfiguration_EndpointIpAddressRange, v.EndpointIpAddressRange)
+		case schemas.OpenZFSFileSystemConfiguration_EndpointIpv6Address:
+			v.EndpointIpv6Address = new(string)
+			return d.ReadString(schemas.OpenZFSFileSystemConfiguration_EndpointIpv6Address, v.EndpointIpv6Address)
+		case schemas.OpenZFSFileSystemConfiguration_EndpointIpv6AddressRange:
+			v.EndpointIpv6AddressRange = new(string)
+			return d.ReadString(schemas.OpenZFSFileSystemConfiguration_EndpointIpv6AddressRange, v.EndpointIpv6AddressRange)
+		case schemas.OpenZFSFileSystemConfiguration_PreferredSubnetId:
+			v.PreferredSubnetId = new(string)
+			return d.ReadString(schemas.OpenZFSFileSystemConfiguration_PreferredSubnetId, v.PreferredSubnetId)
+		case schemas.OpenZFSFileSystemConfiguration_ReadCacheConfiguration:
+			v.ReadCacheConfiguration = &OpenZFSReadCacheConfiguration{}
+			return v.ReadCacheConfiguration.Deserialize(d)
+		case schemas.OpenZFSFileSystemConfiguration_RootVolumeId:
+			v.RootVolumeId = new(string)
+			return d.ReadString(schemas.OpenZFSFileSystemConfiguration_RootVolumeId, v.RootVolumeId)
+		case schemas.OpenZFSFileSystemConfiguration_RouteTableIds:
+			return deserializeRouteTableIds(d, schemas.OpenZFSFileSystemConfiguration_RouteTableIds, &v.RouteTableIds)
+		case schemas.OpenZFSFileSystemConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.OpenZFSFileSystemConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.OpenZFSFileSystemConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.OpenZFSFileSystemConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // Specifies the file system user identity that will be used for authorizing all
 // file access requests that are made using the S3 access point.
 type OpenZFSFileSystemIdentity struct {
@@ -3594,6 +7302,40 @@ type OpenZFSFileSystemIdentity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenZFSFileSystemIdentity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSFileSystemIdentity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSFileSystemIdentity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PosixUser != nil {
+		s.WriteStruct(schemas.OpenZFSFileSystemIdentity_PosixUser)
+		v.PosixUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.OpenZFSFileSystemIdentity_Type, string(v.Type))
+	}
+}
+func (v *OpenZFSFileSystemIdentity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSFileSystemIdentity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSFileSystemIdentity_PosixUser:
+			v.PosixUser = &OpenZFSPosixFileSystemUser{}
+			return v.PosixUser.Deserialize(d)
+		case schemas.OpenZFSFileSystemIdentity_Type:
+			var ev string
+			if err := d.ReadString(schemas.OpenZFSFileSystemIdentity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = OpenZFSFileSystemUserType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Network File System (NFS) configurations for mounting an Amazon FSx for
 // OpenZFS file system.
 type OpenZFSNfsExport struct {
@@ -3605,6 +7347,25 @@ type OpenZFSNfsExport struct {
 	ClientConfigurations []OpenZFSClientConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenZFSNfsExport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSNfsExport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSNfsExport) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOpenZFSClientConfigurations(s, schemas.OpenZFSNfsExport_ClientConfigurations, v.ClientConfigurations)
+}
+func (v *OpenZFSNfsExport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSNfsExport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSNfsExport_ClientConfigurations:
+			return deserializeOpenZFSClientConfigurations(d, schemas.OpenZFSNfsExport_ClientConfigurations, &v.ClientConfigurations)
+		}
+		return nil
+	})
 }
 
 // The snapshot configuration used when creating an Amazon FSx for OpenZFS volume
@@ -3637,6 +7398,38 @@ type OpenZFSOriginSnapshotConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenZFSOriginSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSOriginSnapshotConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSOriginSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyStrategy != "" {
+		s.WriteString(schemas.OpenZFSOriginSnapshotConfiguration_CopyStrategy, string(v.CopyStrategy))
+	}
+	if v.SnapshotARN != nil {
+		s.WriteString(schemas.OpenZFSOriginSnapshotConfiguration_SnapshotARN, *v.SnapshotARN)
+	}
+}
+func (v *OpenZFSOriginSnapshotConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSOriginSnapshotConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSOriginSnapshotConfiguration_CopyStrategy:
+			var ev string
+			if err := d.ReadString(schemas.OpenZFSOriginSnapshotConfiguration_CopyStrategy, &ev); err != nil {
+				return err
+			}
+			v.CopyStrategy = OpenZFSCopyStrategy(ev)
+			return nil
+		case schemas.OpenZFSOriginSnapshotConfiguration_SnapshotARN:
+			v.SnapshotARN = new(string)
+			return d.ReadString(schemas.OpenZFSOriginSnapshotConfiguration_SnapshotARN, v.SnapshotARN)
+		}
+		return nil
+	})
+}
+
 // The FSx for OpenZFS file system user that is used for authorizing all file
 // access requests that are made using the S3 access point.
 type OpenZFSPosixFileSystemUser struct {
@@ -3655,6 +7448,37 @@ type OpenZFSPosixFileSystemUser struct {
 	SecondaryGids []int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenZFSPosixFileSystemUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSPosixFileSystemUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSPosixFileSystemUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Gid != nil {
+		s.WriteInt64(schemas.OpenZFSPosixFileSystemUser_Gid, *v.Gid)
+	}
+	serializeFileSystemSecondaryGIDs(s, schemas.OpenZFSPosixFileSystemUser_SecondaryGids, v.SecondaryGids)
+	if v.Uid != nil {
+		s.WriteInt64(schemas.OpenZFSPosixFileSystemUser_Uid, *v.Uid)
+	}
+}
+func (v *OpenZFSPosixFileSystemUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSPosixFileSystemUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSPosixFileSystemUser_Gid:
+			v.Gid = new(int64)
+			return d.ReadInt64(schemas.OpenZFSPosixFileSystemUser_Gid, v.Gid)
+		case schemas.OpenZFSPosixFileSystemUser_SecondaryGids:
+			return deserializeFileSystemSecondaryGIDs(d, schemas.OpenZFSPosixFileSystemUser_SecondaryGids, &v.SecondaryGids)
+		case schemas.OpenZFSPosixFileSystemUser_Uid:
+			v.Uid = new(int64)
+			return d.ReadInt64(schemas.OpenZFSPosixFileSystemUser_Uid, v.Uid)
+		}
+		return nil
+	})
 }
 
 //	The configuration for the optional provisioned SSD read cache on Amazon FSx
@@ -3680,6 +7504,38 @@ type OpenZFSReadCacheConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenZFSReadCacheConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSReadCacheConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSReadCacheConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SizeGiB != nil {
+		s.WriteInt32(schemas.OpenZFSReadCacheConfiguration_SizeGiB, *v.SizeGiB)
+	}
+	if v.SizingMode != "" {
+		s.WriteString(schemas.OpenZFSReadCacheConfiguration_SizingMode, string(v.SizingMode))
+	}
+}
+func (v *OpenZFSReadCacheConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSReadCacheConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSReadCacheConfiguration_SizeGiB:
+			v.SizeGiB = new(int32)
+			return d.ReadInt32(schemas.OpenZFSReadCacheConfiguration_SizeGiB, v.SizeGiB)
+		case schemas.OpenZFSReadCacheConfiguration_SizingMode:
+			var ev string
+			if err := d.ReadString(schemas.OpenZFSReadCacheConfiguration_SizingMode, &ev); err != nil {
+				return err
+			}
+			v.SizingMode = OpenZFSReadCacheSizingMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Used to configure quotas that define how much storage a user or group can use
 // on an FSx for OpenZFS volume. For more information, see [Volume properties]in the FSx for OpenZFS
 // User Guide.
@@ -3703,6 +7559,44 @@ type OpenZFSUserOrGroupQuota struct {
 	Type OpenZFSQuotaType
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenZFSUserOrGroupQuota) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSUserOrGroupQuota)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSUserOrGroupQuota) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteInt32(schemas.OpenZFSUserOrGroupQuota_Id, *v.Id)
+	}
+	if v.StorageCapacityQuotaGiB != nil {
+		s.WriteInt32(schemas.OpenZFSUserOrGroupQuota_StorageCapacityQuotaGiB, *v.StorageCapacityQuotaGiB)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.OpenZFSUserOrGroupQuota_Type, string(v.Type))
+	}
+}
+func (v *OpenZFSUserOrGroupQuota) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSUserOrGroupQuota, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSUserOrGroupQuota_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.OpenZFSUserOrGroupQuota_Id, v.Id)
+		case schemas.OpenZFSUserOrGroupQuota_StorageCapacityQuotaGiB:
+			v.StorageCapacityQuotaGiB = new(int32)
+			return d.ReadInt32(schemas.OpenZFSUserOrGroupQuota_StorageCapacityQuotaGiB, v.StorageCapacityQuotaGiB)
+		case schemas.OpenZFSUserOrGroupQuota_Type:
+			var ev string
+			if err := d.ReadString(schemas.OpenZFSUserOrGroupQuota_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = OpenZFSQuotaType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configuration of an Amazon FSx for OpenZFS volume.
@@ -3816,6 +7710,134 @@ type OpenZFSVolumeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenZFSVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenZFSVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenZFSVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyStrategy != "" {
+		s.WriteString(schemas.OpenZFSVolumeConfiguration_CopyStrategy, string(v.CopyStrategy))
+	}
+	if v.CopyTagsToSnapshots != nil {
+		s.WriteBool(schemas.OpenZFSVolumeConfiguration_CopyTagsToSnapshots, *v.CopyTagsToSnapshots)
+	}
+	if v.DataCompressionType != "" {
+		s.WriteString(schemas.OpenZFSVolumeConfiguration_DataCompressionType, string(v.DataCompressionType))
+	}
+	if v.DeleteClonedVolumes != nil {
+		s.WriteBool(schemas.OpenZFSVolumeConfiguration_DeleteClonedVolumes, *v.DeleteClonedVolumes)
+	}
+	if v.DeleteIntermediateData != nil {
+		s.WriteBool(schemas.OpenZFSVolumeConfiguration_DeleteIntermediateData, *v.DeleteIntermediateData)
+	}
+	if v.DeleteIntermediateSnaphots != nil {
+		s.WriteBool(schemas.OpenZFSVolumeConfiguration_DeleteIntermediateSnaphots, *v.DeleteIntermediateSnaphots)
+	}
+	if v.DestinationSnapshot != nil {
+		s.WriteString(schemas.OpenZFSVolumeConfiguration_DestinationSnapshot, *v.DestinationSnapshot)
+	}
+	serializeOpenZFSNfsExports(s, schemas.OpenZFSVolumeConfiguration_NfsExports, v.NfsExports)
+	if v.OriginSnapshot != nil {
+		s.WriteStruct(schemas.OpenZFSVolumeConfiguration_OriginSnapshot)
+		v.OriginSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentVolumeId != nil {
+		s.WriteString(schemas.OpenZFSVolumeConfiguration_ParentVolumeId, *v.ParentVolumeId)
+	}
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.OpenZFSVolumeConfiguration_ReadOnly, *v.ReadOnly)
+	}
+	if v.RecordSizeKiB != nil {
+		s.WriteInt32(schemas.OpenZFSVolumeConfiguration_RecordSizeKiB, *v.RecordSizeKiB)
+	}
+	if v.RestoreToSnapshot != nil {
+		s.WriteString(schemas.OpenZFSVolumeConfiguration_RestoreToSnapshot, *v.RestoreToSnapshot)
+	}
+	if v.SourceSnapshotARN != nil {
+		s.WriteString(schemas.OpenZFSVolumeConfiguration_SourceSnapshotARN, *v.SourceSnapshotARN)
+	}
+	if v.StorageCapacityQuotaGiB != nil {
+		s.WriteInt32(schemas.OpenZFSVolumeConfiguration_StorageCapacityQuotaGiB, *v.StorageCapacityQuotaGiB)
+	}
+	if v.StorageCapacityReservationGiB != nil {
+		s.WriteInt32(schemas.OpenZFSVolumeConfiguration_StorageCapacityReservationGiB, *v.StorageCapacityReservationGiB)
+	}
+	serializeOpenZFSUserAndGroupQuotas(s, schemas.OpenZFSVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+	if v.VolumePath != nil {
+		s.WriteString(schemas.OpenZFSVolumeConfiguration_VolumePath, *v.VolumePath)
+	}
+}
+func (v *OpenZFSVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenZFSVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenZFSVolumeConfiguration_CopyStrategy:
+			var ev string
+			if err := d.ReadString(schemas.OpenZFSVolumeConfiguration_CopyStrategy, &ev); err != nil {
+				return err
+			}
+			v.CopyStrategy = OpenZFSCopyStrategy(ev)
+			return nil
+		case schemas.OpenZFSVolumeConfiguration_CopyTagsToSnapshots:
+			v.CopyTagsToSnapshots = new(bool)
+			return d.ReadBool(schemas.OpenZFSVolumeConfiguration_CopyTagsToSnapshots, v.CopyTagsToSnapshots)
+		case schemas.OpenZFSVolumeConfiguration_DataCompressionType:
+			var ev string
+			if err := d.ReadString(schemas.OpenZFSVolumeConfiguration_DataCompressionType, &ev); err != nil {
+				return err
+			}
+			v.DataCompressionType = OpenZFSDataCompressionType(ev)
+			return nil
+		case schemas.OpenZFSVolumeConfiguration_DeleteClonedVolumes:
+			v.DeleteClonedVolumes = new(bool)
+			return d.ReadBool(schemas.OpenZFSVolumeConfiguration_DeleteClonedVolumes, v.DeleteClonedVolumes)
+		case schemas.OpenZFSVolumeConfiguration_DeleteIntermediateData:
+			v.DeleteIntermediateData = new(bool)
+			return d.ReadBool(schemas.OpenZFSVolumeConfiguration_DeleteIntermediateData, v.DeleteIntermediateData)
+		case schemas.OpenZFSVolumeConfiguration_DeleteIntermediateSnaphots:
+			v.DeleteIntermediateSnaphots = new(bool)
+			return d.ReadBool(schemas.OpenZFSVolumeConfiguration_DeleteIntermediateSnaphots, v.DeleteIntermediateSnaphots)
+		case schemas.OpenZFSVolumeConfiguration_DestinationSnapshot:
+			v.DestinationSnapshot = new(string)
+			return d.ReadString(schemas.OpenZFSVolumeConfiguration_DestinationSnapshot, v.DestinationSnapshot)
+		case schemas.OpenZFSVolumeConfiguration_NfsExports:
+			return deserializeOpenZFSNfsExports(d, schemas.OpenZFSVolumeConfiguration_NfsExports, &v.NfsExports)
+		case schemas.OpenZFSVolumeConfiguration_OriginSnapshot:
+			v.OriginSnapshot = &OpenZFSOriginSnapshotConfiguration{}
+			return v.OriginSnapshot.Deserialize(d)
+		case schemas.OpenZFSVolumeConfiguration_ParentVolumeId:
+			v.ParentVolumeId = new(string)
+			return d.ReadString(schemas.OpenZFSVolumeConfiguration_ParentVolumeId, v.ParentVolumeId)
+		case schemas.OpenZFSVolumeConfiguration_ReadOnly:
+			v.ReadOnly = new(bool)
+			return d.ReadBool(schemas.OpenZFSVolumeConfiguration_ReadOnly, v.ReadOnly)
+		case schemas.OpenZFSVolumeConfiguration_RecordSizeKiB:
+			v.RecordSizeKiB = new(int32)
+			return d.ReadInt32(schemas.OpenZFSVolumeConfiguration_RecordSizeKiB, v.RecordSizeKiB)
+		case schemas.OpenZFSVolumeConfiguration_RestoreToSnapshot:
+			v.RestoreToSnapshot = new(string)
+			return d.ReadString(schemas.OpenZFSVolumeConfiguration_RestoreToSnapshot, v.RestoreToSnapshot)
+		case schemas.OpenZFSVolumeConfiguration_SourceSnapshotARN:
+			v.SourceSnapshotARN = new(string)
+			return d.ReadString(schemas.OpenZFSVolumeConfiguration_SourceSnapshotARN, v.SourceSnapshotARN)
+		case schemas.OpenZFSVolumeConfiguration_StorageCapacityQuotaGiB:
+			v.StorageCapacityQuotaGiB = new(int32)
+			return d.ReadInt32(schemas.OpenZFSVolumeConfiguration_StorageCapacityQuotaGiB, v.StorageCapacityQuotaGiB)
+		case schemas.OpenZFSVolumeConfiguration_StorageCapacityReservationGiB:
+			v.StorageCapacityReservationGiB = new(int32)
+			return d.ReadInt32(schemas.OpenZFSVolumeConfiguration_StorageCapacityReservationGiB, v.StorageCapacityReservationGiB)
+		case schemas.OpenZFSVolumeConfiguration_UserAndGroupQuotas:
+			return deserializeOpenZFSUserAndGroupQuotas(d, schemas.OpenZFSVolumeConfiguration_UserAndGroupQuotas, &v.UserAndGroupQuotas)
+		case schemas.OpenZFSVolumeConfiguration_VolumePath:
+			v.VolumePath = new(string)
+			return d.ReadString(schemas.OpenZFSVolumeConfiguration_VolumePath, v.VolumePath)
+		}
+		return nil
+	})
+}
+
 // The configuration that specifies a minimum amount of time since last access for
 // an exported file to be eligible for release from an Amazon FSx for Lustre file
 // system. Only files that were last accessed before this point-in-time can be
@@ -3840,6 +7862,30 @@ type ReleaseConfiguration struct {
 	DurationSinceLastAccess *DurationSinceLastAccess
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReleaseConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReleaseConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReleaseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationSinceLastAccess != nil {
+		s.WriteStruct(schemas.ReleaseConfiguration_DurationSinceLastAccess)
+		v.DurationSinceLastAccess.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReleaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReleaseConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReleaseConfiguration_DurationSinceLastAccess:
+			v.DurationSinceLastAccess = &DurationSinceLastAccess{}
+			return v.DurationSinceLastAccess.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the retention period of an FSx for ONTAP SnapLock volume. After it is
@@ -3879,6 +7925,38 @@ type RetentionPeriod struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetentionPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetentionPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetentionPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.RetentionPeriod_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteInt32(schemas.RetentionPeriod_Value, *v.Value)
+	}
+}
+func (v *RetentionPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetentionPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetentionPeriod_Type:
+			var ev string
+			if err := d.ReadString(schemas.RetentionPeriod_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RetentionPeriodType(ev)
+			return nil
+		case schemas.RetentionPeriod_Value:
+			v.Value = new(int32)
+			return d.ReadInt32(schemas.RetentionPeriod_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes the S3 access point configuration of the S3 access point attachment.
 type S3AccessPoint struct {
 
@@ -3892,6 +7970,42 @@ type S3AccessPoint struct {
 	VpcConfiguration *S3AccessPointVpcConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3AccessPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3AccessPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3AccessPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.S3AccessPoint_Alias, *v.Alias)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.S3AccessPoint_ResourceARN, *v.ResourceARN)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.S3AccessPoint_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *S3AccessPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3AccessPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3AccessPoint_Alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.S3AccessPoint_Alias, v.Alias)
+		case schemas.S3AccessPoint_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.S3AccessPoint_ResourceARN, v.ResourceARN)
+		case schemas.S3AccessPoint_VpcConfiguration:
+			v.VpcConfiguration = &S3AccessPointVpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An S3 access point attached to an Amazon FSx volume.
@@ -3938,6 +8052,86 @@ type S3AccessPointAttachment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3AccessPointAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3AccessPointAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3AccessPointAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.S3AccessPointAttachment_CreationTime, *v.CreationTime)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.S3AccessPointAttachment_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LifecycleTransitionReason != nil {
+		s.WriteStruct(schemas.S3AccessPointAttachment_LifecycleTransitionReason)
+		v.LifecycleTransitionReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.S3AccessPointAttachment_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.S3AccessPointAttachment_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.S3AccessPointAttachment_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3AccessPoint != nil {
+		s.WriteStruct(schemas.S3AccessPointAttachment_S3AccessPoint)
+		v.S3AccessPoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.S3AccessPointAttachment_Type, string(v.Type))
+	}
+}
+func (v *S3AccessPointAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3AccessPointAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3AccessPointAttachment_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.S3AccessPointAttachment_CreationTime, v.CreationTime)
+		case schemas.S3AccessPointAttachment_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.S3AccessPointAttachment_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = S3AccessPointAttachmentLifecycle(ev)
+			return nil
+		case schemas.S3AccessPointAttachment_LifecycleTransitionReason:
+			v.LifecycleTransitionReason = &LifecycleTransitionReason{}
+			return v.LifecycleTransitionReason.Deserialize(d)
+		case schemas.S3AccessPointAttachment_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.S3AccessPointAttachment_Name, v.Name)
+		case schemas.S3AccessPointAttachment_OntapConfiguration:
+			v.OntapConfiguration = &S3AccessPointOntapConfiguration{}
+			return v.OntapConfiguration.Deserialize(d)
+		case schemas.S3AccessPointAttachment_OpenZFSConfiguration:
+			v.OpenZFSConfiguration = &S3AccessPointOpenZFSConfiguration{}
+			return v.OpenZFSConfiguration.Deserialize(d)
+		case schemas.S3AccessPointAttachment_S3AccessPoint:
+			v.S3AccessPoint = &S3AccessPoint{}
+			return v.S3AccessPoint.Deserialize(d)
+		case schemas.S3AccessPointAttachment_Type:
+			var ev string
+			if err := d.ReadString(schemas.S3AccessPointAttachment_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = S3AccessPointAttachmentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A set of Name and Values pairs used to view a select set of S3 access point
 // attachments.
 type S3AccessPointAttachmentsFilter struct {
@@ -3949,6 +8143,35 @@ type S3AccessPointAttachmentsFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3AccessPointAttachmentsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3AccessPointAttachmentsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3AccessPointAttachmentsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.S3AccessPointAttachmentsFilter_Name, string(v.Name))
+	}
+	serializeS3AccessPointAttachmentsFilterValues(s, schemas.S3AccessPointAttachmentsFilter_Values, v.Values)
+}
+func (v *S3AccessPointAttachmentsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3AccessPointAttachmentsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3AccessPointAttachmentsFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.S3AccessPointAttachmentsFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = S3AccessPointAttachmentsFilterName(ev)
+			return nil
+		case schemas.S3AccessPointAttachmentsFilter_Values:
+			return deserializeS3AccessPointAttachmentsFilterValues(d, schemas.S3AccessPointAttachmentsFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes the FSx for ONTAP attachment configuration of an S3 access point
@@ -3965,6 +8188,36 @@ type S3AccessPointOntapConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3AccessPointOntapConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3AccessPointOntapConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3AccessPointOntapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemIdentity != nil {
+		s.WriteStruct(schemas.S3AccessPointOntapConfiguration_FileSystemIdentity)
+		v.FileSystemIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.S3AccessPointOntapConfiguration_VolumeId, *v.VolumeId)
+	}
+}
+func (v *S3AccessPointOntapConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3AccessPointOntapConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3AccessPointOntapConfiguration_FileSystemIdentity:
+			v.FileSystemIdentity = &OntapFileSystemIdentity{}
+			return v.FileSystemIdentity.Deserialize(d)
+		case schemas.S3AccessPointOntapConfiguration_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.S3AccessPointOntapConfiguration_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
+
 // Describes the FSx for OpenZFS attachment configuration of an S3 access point
 // attachment.
 type S3AccessPointOpenZFSConfiguration struct {
@@ -3979,6 +8232,36 @@ type S3AccessPointOpenZFSConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3AccessPointOpenZFSConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3AccessPointOpenZFSConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3AccessPointOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemIdentity != nil {
+		s.WriteStruct(schemas.S3AccessPointOpenZFSConfiguration_FileSystemIdentity)
+		v.FileSystemIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.S3AccessPointOpenZFSConfiguration_VolumeId, *v.VolumeId)
+	}
+}
+func (v *S3AccessPointOpenZFSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3AccessPointOpenZFSConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3AccessPointOpenZFSConfiguration_FileSystemIdentity:
+			v.FileSystemIdentity = &OpenZFSFileSystemIdentity{}
+			return v.FileSystemIdentity.Deserialize(d)
+		case schemas.S3AccessPointOpenZFSConfiguration_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.S3AccessPointOpenZFSConfiguration_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
+
 // If included, Amazon S3 restricts access to this access point to requests from
 // the specified virtual private cloud (VPC).
 type S3AccessPointVpcConfiguration struct {
@@ -3988,6 +8271,28 @@ type S3AccessPointVpcConfiguration struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3AccessPointVpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3AccessPointVpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3AccessPointVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcId != nil {
+		s.WriteString(schemas.S3AccessPointVpcConfiguration_VpcId, *v.VpcId)
+	}
+}
+func (v *S3AccessPointVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3AccessPointVpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3AccessPointVpcConfiguration_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.S3AccessPointVpcConfiguration_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // The configuration for an Amazon S3 data repository linked to an Amazon FSx for
@@ -4012,6 +8317,38 @@ type S3DataRepositoryConfiguration struct {
 	AutoImportPolicy *AutoImportPolicy
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3DataRepositoryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DataRepositoryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DataRepositoryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoExportPolicy != nil {
+		s.WriteStruct(schemas.S3DataRepositoryConfiguration_AutoExportPolicy)
+		v.AutoExportPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoImportPolicy != nil {
+		s.WriteStruct(schemas.S3DataRepositoryConfiguration_AutoImportPolicy)
+		v.AutoImportPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *S3DataRepositoryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DataRepositoryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DataRepositoryConfiguration_AutoExportPolicy:
+			v.AutoExportPolicy = &AutoExportPolicy{}
+			return v.AutoExportPolicy.Deserialize(d)
+		case schemas.S3DataRepositoryConfiguration_AutoImportPolicy:
+			v.AutoImportPolicy = &AutoImportPolicy{}
+			return v.AutoImportPolicy.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration of the self-managed Microsoft Active Directory (AD) directory
@@ -4045,6 +8382,55 @@ type SelfManagedActiveDirectoryAttributes struct {
 	UserName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SelfManagedActiveDirectoryAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelfManagedActiveDirectoryAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelfManagedActiveDirectoryAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDnsIps(s, schemas.SelfManagedActiveDirectoryAttributes_DnsIps, v.DnsIps)
+	if v.DomainJoinServiceAccountSecret != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret, *v.DomainJoinServiceAccountSecret)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryAttributes_DomainName, *v.DomainName)
+	}
+	if v.FileSystemAdministratorsGroup != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryAttributes_FileSystemAdministratorsGroup, *v.FileSystemAdministratorsGroup)
+	}
+	if v.OrganizationalUnitDistinguishedName != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryAttributes_OrganizationalUnitDistinguishedName, *v.OrganizationalUnitDistinguishedName)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryAttributes_UserName, *v.UserName)
+	}
+}
+func (v *SelfManagedActiveDirectoryAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelfManagedActiveDirectoryAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelfManagedActiveDirectoryAttributes_DnsIps:
+			return deserializeDnsIps(d, schemas.SelfManagedActiveDirectoryAttributes_DnsIps, &v.DnsIps)
+		case schemas.SelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret:
+			v.DomainJoinServiceAccountSecret = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret, v.DomainJoinServiceAccountSecret)
+		case schemas.SelfManagedActiveDirectoryAttributes_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryAttributes_DomainName, v.DomainName)
+		case schemas.SelfManagedActiveDirectoryAttributes_FileSystemAdministratorsGroup:
+			v.FileSystemAdministratorsGroup = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryAttributes_FileSystemAdministratorsGroup, v.FileSystemAdministratorsGroup)
+		case schemas.SelfManagedActiveDirectoryAttributes_OrganizationalUnitDistinguishedName:
+			v.OrganizationalUnitDistinguishedName = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryAttributes_OrganizationalUnitDistinguishedName, v.OrganizationalUnitDistinguishedName)
+		case schemas.SelfManagedActiveDirectoryAttributes_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryAttributes_UserName, v.UserName)
+		}
+		return nil
+	})
 }
 
 // The configuration that Amazon FSx uses to join a FSx for Windows File Server
@@ -4121,6 +8507,61 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SelfManagedActiveDirectoryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelfManagedActiveDirectoryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelfManagedActiveDirectoryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDnsIps(s, schemas.SelfManagedActiveDirectoryConfiguration_DnsIps, v.DnsIps)
+	if v.DomainJoinServiceAccountSecret != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret, *v.DomainJoinServiceAccountSecret)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfiguration_DomainName, *v.DomainName)
+	}
+	if v.FileSystemAdministratorsGroup != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfiguration_FileSystemAdministratorsGroup, *v.FileSystemAdministratorsGroup)
+	}
+	if v.OrganizationalUnitDistinguishedName != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfiguration_OrganizationalUnitDistinguishedName, *v.OrganizationalUnitDistinguishedName)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfiguration_Password, *v.Password)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfiguration_UserName, *v.UserName)
+	}
+}
+func (v *SelfManagedActiveDirectoryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelfManagedActiveDirectoryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelfManagedActiveDirectoryConfiguration_DnsIps:
+			return deserializeDnsIps(d, schemas.SelfManagedActiveDirectoryConfiguration_DnsIps, &v.DnsIps)
+		case schemas.SelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret:
+			v.DomainJoinServiceAccountSecret = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret, v.DomainJoinServiceAccountSecret)
+		case schemas.SelfManagedActiveDirectoryConfiguration_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfiguration_DomainName, v.DomainName)
+		case schemas.SelfManagedActiveDirectoryConfiguration_FileSystemAdministratorsGroup:
+			v.FileSystemAdministratorsGroup = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfiguration_FileSystemAdministratorsGroup, v.FileSystemAdministratorsGroup)
+		case schemas.SelfManagedActiveDirectoryConfiguration_OrganizationalUnitDistinguishedName:
+			v.OrganizationalUnitDistinguishedName = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfiguration_OrganizationalUnitDistinguishedName, v.OrganizationalUnitDistinguishedName)
+		case schemas.SelfManagedActiveDirectoryConfiguration_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfiguration_Password, v.Password)
+		case schemas.SelfManagedActiveDirectoryConfiguration_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfiguration_UserName, v.UserName)
+		}
+		return nil
+	})
+}
+
 // Specifies changes you are making to the self-managed Microsoft Active Directory
 // configuration to which an FSx for Windows File Server file system or an FSx for
 // ONTAP SVM is joined.
@@ -4163,6 +8604,61 @@ type SelfManagedActiveDirectoryConfigurationUpdates struct {
 	UserName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SelfManagedActiveDirectoryConfigurationUpdates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelfManagedActiveDirectoryConfigurationUpdates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelfManagedActiveDirectoryConfigurationUpdates) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDnsIps(s, schemas.SelfManagedActiveDirectoryConfigurationUpdates_DnsIps, v.DnsIps)
+	if v.DomainJoinServiceAccountSecret != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret, *v.DomainJoinServiceAccountSecret)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_DomainName, *v.DomainName)
+	}
+	if v.FileSystemAdministratorsGroup != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_FileSystemAdministratorsGroup, *v.FileSystemAdministratorsGroup)
+	}
+	if v.OrganizationalUnitDistinguishedName != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_OrganizationalUnitDistinguishedName, *v.OrganizationalUnitDistinguishedName)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_Password, *v.Password)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_UserName, *v.UserName)
+	}
+}
+func (v *SelfManagedActiveDirectoryConfigurationUpdates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelfManagedActiveDirectoryConfigurationUpdates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelfManagedActiveDirectoryConfigurationUpdates_DnsIps:
+			return deserializeDnsIps(d, schemas.SelfManagedActiveDirectoryConfigurationUpdates_DnsIps, &v.DnsIps)
+		case schemas.SelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret:
+			v.DomainJoinServiceAccountSecret = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret, v.DomainJoinServiceAccountSecret)
+		case schemas.SelfManagedActiveDirectoryConfigurationUpdates_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_DomainName, v.DomainName)
+		case schemas.SelfManagedActiveDirectoryConfigurationUpdates_FileSystemAdministratorsGroup:
+			v.FileSystemAdministratorsGroup = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_FileSystemAdministratorsGroup, v.FileSystemAdministratorsGroup)
+		case schemas.SelfManagedActiveDirectoryConfigurationUpdates_OrganizationalUnitDistinguishedName:
+			v.OrganizationalUnitDistinguishedName = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_OrganizationalUnitDistinguishedName, v.OrganizationalUnitDistinguishedName)
+		case schemas.SelfManagedActiveDirectoryConfigurationUpdates_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_Password, v.Password)
+		case schemas.SelfManagedActiveDirectoryConfigurationUpdates_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.SelfManagedActiveDirectoryConfigurationUpdates_UserName, v.UserName)
+		}
+		return nil
+	})
 }
 
 // Specifies the SnapLock configuration for an FSx for ONTAP SnapLock volume.
@@ -4227,6 +8723,70 @@ type SnaplockConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnaplockConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnaplockConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnaplockConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditLogVolume != nil {
+		s.WriteBool(schemas.SnaplockConfiguration_AuditLogVolume, *v.AuditLogVolume)
+	}
+	if v.AutocommitPeriod != nil {
+		s.WriteStruct(schemas.SnaplockConfiguration_AutocommitPeriod)
+		v.AutocommitPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivilegedDelete != "" {
+		s.WriteString(schemas.SnaplockConfiguration_PrivilegedDelete, string(v.PrivilegedDelete))
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.SnaplockConfiguration_RetentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnaplockType != "" {
+		s.WriteString(schemas.SnaplockConfiguration_SnaplockType, string(v.SnaplockType))
+	}
+	if v.VolumeAppendModeEnabled != nil {
+		s.WriteBool(schemas.SnaplockConfiguration_VolumeAppendModeEnabled, *v.VolumeAppendModeEnabled)
+	}
+}
+func (v *SnaplockConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnaplockConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnaplockConfiguration_AuditLogVolume:
+			v.AuditLogVolume = new(bool)
+			return d.ReadBool(schemas.SnaplockConfiguration_AuditLogVolume, v.AuditLogVolume)
+		case schemas.SnaplockConfiguration_AutocommitPeriod:
+			v.AutocommitPeriod = &AutocommitPeriod{}
+			return v.AutocommitPeriod.Deserialize(d)
+		case schemas.SnaplockConfiguration_PrivilegedDelete:
+			var ev string
+			if err := d.ReadString(schemas.SnaplockConfiguration_PrivilegedDelete, &ev); err != nil {
+				return err
+			}
+			v.PrivilegedDelete = PrivilegedDelete(ev)
+			return nil
+		case schemas.SnaplockConfiguration_RetentionPeriod:
+			v.RetentionPeriod = &SnaplockRetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.SnaplockConfiguration_SnaplockType:
+			var ev string
+			if err := d.ReadString(schemas.SnaplockConfiguration_SnaplockType, &ev); err != nil {
+				return err
+			}
+			v.SnaplockType = SnaplockType(ev)
+			return nil
+		case schemas.SnaplockConfiguration_VolumeAppendModeEnabled:
+			v.VolumeAppendModeEnabled = new(bool)
+			return d.ReadBool(schemas.SnaplockConfiguration_VolumeAppendModeEnabled, v.VolumeAppendModeEnabled)
+		}
+		return nil
+	})
+}
+
 // The configuration to set the retention period of an FSx for ONTAP SnapLock
 // volume. The retention period includes default, maximum, and minimum settings.
 // For more information, see [Working with the retention period in SnapLock].
@@ -4255,6 +8815,46 @@ type SnaplockRetentionPeriod struct {
 	MinimumRetention *RetentionPeriod
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnaplockRetentionPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnaplockRetentionPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnaplockRetentionPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultRetention != nil {
+		s.WriteStruct(schemas.SnaplockRetentionPeriod_DefaultRetention)
+		v.DefaultRetention.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumRetention != nil {
+		s.WriteStruct(schemas.SnaplockRetentionPeriod_MaximumRetention)
+		v.MaximumRetention.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinimumRetention != nil {
+		s.WriteStruct(schemas.SnaplockRetentionPeriod_MinimumRetention)
+		v.MinimumRetention.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SnaplockRetentionPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnaplockRetentionPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnaplockRetentionPeriod_DefaultRetention:
+			v.DefaultRetention = &RetentionPeriod{}
+			return v.DefaultRetention.Deserialize(d)
+		case schemas.SnaplockRetentionPeriod_MaximumRetention:
+			v.MaximumRetention = &RetentionPeriod{}
+			return v.MaximumRetention.Deserialize(d)
+		case schemas.SnaplockRetentionPeriod_MinimumRetention:
+			v.MinimumRetention = &RetentionPeriod{}
+			return v.MinimumRetention.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A snapshot of an Amazon FSx for OpenZFS volume.
@@ -4306,6 +8906,76 @@ type Snapshot struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Snapshot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Snapshot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Snapshot) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdministrativeActions(s, schemas.Snapshot_AdministrativeActions, v.AdministrativeActions)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Snapshot_CreationTime, *v.CreationTime)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.Snapshot_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LifecycleTransitionReason != nil {
+		s.WriteStruct(schemas.Snapshot_LifecycleTransitionReason)
+		v.LifecycleTransitionReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Snapshot_Name, *v.Name)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.Snapshot_ResourceARN, *v.ResourceARN)
+	}
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.Snapshot_SnapshotId, *v.SnapshotId)
+	}
+	serializeTags(s, schemas.Snapshot_Tags, v.Tags)
+	if v.VolumeId != nil {
+		s.WriteString(schemas.Snapshot_VolumeId, *v.VolumeId)
+	}
+}
+func (v *Snapshot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Snapshot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Snapshot_AdministrativeActions:
+			return deserializeAdministrativeActions(d, schemas.Snapshot_AdministrativeActions, &v.AdministrativeActions)
+		case schemas.Snapshot_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Snapshot_CreationTime, v.CreationTime)
+		case schemas.Snapshot_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.Snapshot_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = SnapshotLifecycle(ev)
+			return nil
+		case schemas.Snapshot_LifecycleTransitionReason:
+			v.LifecycleTransitionReason = &LifecycleTransitionReason{}
+			return v.LifecycleTransitionReason.Deserialize(d)
+		case schemas.Snapshot_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Snapshot_Name, v.Name)
+		case schemas.Snapshot_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.Snapshot_ResourceARN, v.ResourceARN)
+		case schemas.Snapshot_SnapshotId:
+			v.SnapshotId = new(string)
+			return d.ReadString(schemas.Snapshot_SnapshotId, v.SnapshotId)
+		case schemas.Snapshot_Tags:
+			return deserializeTags(d, schemas.Snapshot_Tags, &v.Tags)
+		case schemas.Snapshot_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.Snapshot_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
+
 // A filter used to restrict the results of DescribeSnapshots calls. You can use
 // multiple filters to return results that meet all applied filter requirements.
 type SnapshotFilter struct {
@@ -4318,6 +8988,35 @@ type SnapshotFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnapshotFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.SnapshotFilter_Name, string(v.Name))
+	}
+	serializeSnapshotFilterValues(s, schemas.SnapshotFilter_Values, v.Values)
+}
+func (v *SnapshotFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = SnapshotFilterName(ev)
+			return nil
+		case schemas.SnapshotFilter_Values:
+			return deserializeSnapshotFilterValues(d, schemas.SnapshotFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM)
@@ -4387,6 +9086,115 @@ type StorageVirtualMachine struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StorageVirtualMachine) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageVirtualMachine)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageVirtualMachine) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryConfiguration != nil {
+		s.WriteStruct(schemas.StorageVirtualMachine_ActiveDirectoryConfiguration)
+		v.ActiveDirectoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.StorageVirtualMachine_CreationTime, *v.CreationTime)
+	}
+	if v.Endpoints != nil {
+		s.WriteStruct(schemas.StorageVirtualMachine_Endpoints)
+		v.Endpoints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.StorageVirtualMachine_FileSystemId, *v.FileSystemId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.StorageVirtualMachine_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LifecycleTransitionReason != nil {
+		s.WriteStruct(schemas.StorageVirtualMachine_LifecycleTransitionReason)
+		v.LifecycleTransitionReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StorageVirtualMachine_Name, *v.Name)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.StorageVirtualMachine_ResourceARN, *v.ResourceARN)
+	}
+	if v.RootVolumeSecurityStyle != "" {
+		s.WriteString(schemas.StorageVirtualMachine_RootVolumeSecurityStyle, string(v.RootVolumeSecurityStyle))
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.StorageVirtualMachine_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+	if v.Subtype != "" {
+		s.WriteString(schemas.StorageVirtualMachine_Subtype, string(v.Subtype))
+	}
+	serializeTags(s, schemas.StorageVirtualMachine_Tags, v.Tags)
+	if v.UUID != nil {
+		s.WriteString(schemas.StorageVirtualMachine_UUID, *v.UUID)
+	}
+}
+func (v *StorageVirtualMachine) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageVirtualMachine, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageVirtualMachine_ActiveDirectoryConfiguration:
+			v.ActiveDirectoryConfiguration = &SvmActiveDirectoryConfiguration{}
+			return v.ActiveDirectoryConfiguration.Deserialize(d)
+		case schemas.StorageVirtualMachine_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StorageVirtualMachine_CreationTime, v.CreationTime)
+		case schemas.StorageVirtualMachine_Endpoints:
+			v.Endpoints = &SvmEndpoints{}
+			return v.Endpoints.Deserialize(d)
+		case schemas.StorageVirtualMachine_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.StorageVirtualMachine_FileSystemId, v.FileSystemId)
+		case schemas.StorageVirtualMachine_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.StorageVirtualMachine_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = StorageVirtualMachineLifecycle(ev)
+			return nil
+		case schemas.StorageVirtualMachine_LifecycleTransitionReason:
+			v.LifecycleTransitionReason = &LifecycleTransitionReason{}
+			return v.LifecycleTransitionReason.Deserialize(d)
+		case schemas.StorageVirtualMachine_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StorageVirtualMachine_Name, v.Name)
+		case schemas.StorageVirtualMachine_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.StorageVirtualMachine_ResourceARN, v.ResourceARN)
+		case schemas.StorageVirtualMachine_RootVolumeSecurityStyle:
+			var ev string
+			if err := d.ReadString(schemas.StorageVirtualMachine_RootVolumeSecurityStyle, &ev); err != nil {
+				return err
+			}
+			v.RootVolumeSecurityStyle = StorageVirtualMachineRootVolumeSecurityStyle(ev)
+			return nil
+		case schemas.StorageVirtualMachine_StorageVirtualMachineId:
+			v.StorageVirtualMachineId = new(string)
+			return d.ReadString(schemas.StorageVirtualMachine_StorageVirtualMachineId, v.StorageVirtualMachineId)
+		case schemas.StorageVirtualMachine_Subtype:
+			var ev string
+			if err := d.ReadString(schemas.StorageVirtualMachine_Subtype, &ev); err != nil {
+				return err
+			}
+			v.Subtype = StorageVirtualMachineSubtype(ev)
+			return nil
+		case schemas.StorageVirtualMachine_Tags:
+			return deserializeTags(d, schemas.StorageVirtualMachine_Tags, &v.Tags)
+		case schemas.StorageVirtualMachine_UUID:
+			v.UUID = new(string)
+			return d.ReadString(schemas.StorageVirtualMachine_UUID, v.UUID)
+		}
+		return nil
+	})
+}
+
 // A filter used to restrict the results of describe calls for Amazon FSx for
 // NetApp ONTAP storage virtual machines (SVMs). You can use multiple filters to
 // return results that meet all applied filter requirements.
@@ -4400,6 +9208,35 @@ type StorageVirtualMachineFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StorageVirtualMachineFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageVirtualMachineFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageVirtualMachineFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.StorageVirtualMachineFilter_Name, string(v.Name))
+	}
+	serializeStorageVirtualMachineFilterValues(s, schemas.StorageVirtualMachineFilter_Values, v.Values)
+}
+func (v *StorageVirtualMachineFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageVirtualMachineFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageVirtualMachineFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.StorageVirtualMachineFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = StorageVirtualMachineFilterName(ev)
+			return nil
+		case schemas.StorageVirtualMachineFilter_Values:
+			return deserializeStorageVirtualMachineFilterValues(d, schemas.StorageVirtualMachineFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes the Microsoft Active Directory (AD) directory configuration to which
@@ -4418,6 +9255,36 @@ type SvmActiveDirectoryConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SvmActiveDirectoryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SvmActiveDirectoryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SvmActiveDirectoryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetBiosName != nil {
+		s.WriteString(schemas.SvmActiveDirectoryConfiguration_NetBiosName, *v.NetBiosName)
+	}
+	if v.SelfManagedActiveDirectoryConfiguration != nil {
+		s.WriteStruct(schemas.SvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration)
+		v.SelfManagedActiveDirectoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SvmActiveDirectoryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SvmActiveDirectoryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SvmActiveDirectoryConfiguration_NetBiosName:
+			v.NetBiosName = new(string)
+			return d.ReadString(schemas.SvmActiveDirectoryConfiguration_NetBiosName, v.NetBiosName)
+		case schemas.SvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration:
+			v.SelfManagedActiveDirectoryConfiguration = &SelfManagedActiveDirectoryAttributes{}
+			return v.SelfManagedActiveDirectoryConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has four endpoints
 // that are used to access data or to manage the SVM using the NetApp ONTAP CLI,
 // REST API, or NetApp CloudManager. They are the Iscsi , Management , Nfs , and
@@ -4434,6 +9301,34 @@ type SvmEndpoint struct {
 	Ipv6Addresses []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SvmEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SvmEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SvmEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DNSName != nil {
+		s.WriteString(schemas.SvmEndpoint_DNSName, *v.DNSName)
+	}
+	serializeOntapEndpointIpAddresses(s, schemas.SvmEndpoint_IpAddresses, v.IpAddresses)
+	serializeOntapEndpointIpAddresses(s, schemas.SvmEndpoint_Ipv6Addresses, v.Ipv6Addresses)
+}
+func (v *SvmEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SvmEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SvmEndpoint_DNSName:
+			v.DNSName = new(string)
+			return d.ReadString(schemas.SvmEndpoint_DNSName, v.DNSName)
+		case schemas.SvmEndpoint_IpAddresses:
+			return deserializeOntapEndpointIpAddresses(d, schemas.SvmEndpoint_IpAddresses, &v.IpAddresses)
+		case schemas.SvmEndpoint_Ipv6Addresses:
+			return deserializeOntapEndpointIpAddresses(d, schemas.SvmEndpoint_Ipv6Addresses, &v.Ipv6Addresses)
+		}
+		return nil
+	})
 }
 
 // An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has the following
@@ -4458,6 +9353,54 @@ type SvmEndpoints struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SvmEndpoints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SvmEndpoints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SvmEndpoints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Iscsi != nil {
+		s.WriteStruct(schemas.SvmEndpoints_Iscsi)
+		v.Iscsi.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Management != nil {
+		s.WriteStruct(schemas.SvmEndpoints_Management)
+		v.Management.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Nfs != nil {
+		s.WriteStruct(schemas.SvmEndpoints_Nfs)
+		v.Nfs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Smb != nil {
+		s.WriteStruct(schemas.SvmEndpoints_Smb)
+		v.Smb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SvmEndpoints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SvmEndpoints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SvmEndpoints_Iscsi:
+			v.Iscsi = &SvmEndpoint{}
+			return v.Iscsi.Deserialize(d)
+		case schemas.SvmEndpoints_Management:
+			v.Management = &SvmEndpoint{}
+			return v.Management.Deserialize(d)
+		case schemas.SvmEndpoints_Nfs:
+			v.Nfs = &SvmEndpoint{}
+			return v.Nfs.Deserialize(d)
+		case schemas.SvmEndpoints_Smb:
+			v.Smb = &SvmEndpoint{}
+			return v.Smb.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies a key-value pair for a resource tag.
 type Tag struct {
 
@@ -4476,6 +9419,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
@@ -4522,6 +9493,38 @@ type TieringPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TieringPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TieringPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TieringPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoolingPeriod != nil {
+		s.WriteInt32(schemas.TieringPolicy_CoolingPeriod, *v.CoolingPeriod)
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.TieringPolicy_Name, string(v.Name))
+	}
+}
+func (v *TieringPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TieringPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TieringPolicy_CoolingPeriod:
+			v.CoolingPeriod = new(int32)
+			return d.ReadInt32(schemas.TieringPolicy_CoolingPeriod, v.CoolingPeriod)
+		case schemas.TieringPolicy_Name:
+			var ev string
+			if err := d.ReadString(schemas.TieringPolicy_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = TieringPolicyName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration update for an Amazon File Cache resource.
 type UpdateFileCacheLustreConfiguration struct {
 
@@ -4533,6 +9536,28 @@ type UpdateFileCacheLustreConfiguration struct {
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateFileCacheLustreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileCacheLustreConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileCacheLustreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.UpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *UpdateFileCacheLustreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFileCacheLustreConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.UpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
 }
 
 // The configuration object for Amazon FSx for Lustre file systems used in the
@@ -4640,6 +9665,104 @@ type UpdateFileSystemLustreConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFileSystemLustreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileSystemLustreConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileSystemLustreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoImportPolicy != "" {
+		s.WriteString(schemas.UpdateFileSystemLustreConfiguration_AutoImportPolicy, string(v.AutoImportPolicy))
+	}
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.UpdateFileSystemLustreConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.UpdateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DataCompressionType != "" {
+		s.WriteString(schemas.UpdateFileSystemLustreConfiguration_DataCompressionType, string(v.DataCompressionType))
+	}
+	if v.DataReadCacheConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemLustreConfiguration_DataReadCacheConfiguration)
+		v.DataReadCacheConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemLustreConfiguration_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemLustreConfiguration_MetadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerUnitStorageThroughput != nil {
+		s.WriteInt32(schemas.UpdateFileSystemLustreConfiguration_PerUnitStorageThroughput, *v.PerUnitStorageThroughput)
+	}
+	if v.RootSquashConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemLustreConfiguration_RootSquashConfiguration)
+		v.RootSquashConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.UpdateFileSystemLustreConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.UpdateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *UpdateFileSystemLustreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFileSystemLustreConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFileSystemLustreConfiguration_AutoImportPolicy:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFileSystemLustreConfiguration_AutoImportPolicy, &ev); err != nil {
+				return err
+			}
+			v.AutoImportPolicy = AutoImportPolicyType(ev)
+			return nil
+		case schemas.UpdateFileSystemLustreConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemLustreConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.UpdateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.UpdateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.UpdateFileSystemLustreConfiguration_DataCompressionType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFileSystemLustreConfiguration_DataCompressionType, &ev); err != nil {
+				return err
+			}
+			v.DataCompressionType = DataCompressionType(ev)
+			return nil
+		case schemas.UpdateFileSystemLustreConfiguration_DataReadCacheConfiguration:
+			v.DataReadCacheConfiguration = &LustreReadCacheConfiguration{}
+			return v.DataReadCacheConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemLustreConfiguration_LogConfiguration:
+			v.LogConfiguration = &LustreLogCreateConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemLustreConfiguration_MetadataConfiguration:
+			v.MetadataConfiguration = &UpdateFileSystemLustreMetadataConfiguration{}
+			return v.MetadataConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemLustreConfiguration_PerUnitStorageThroughput:
+			v.PerUnitStorageThroughput = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemLustreConfiguration_PerUnitStorageThroughput, v.PerUnitStorageThroughput)
+		case schemas.UpdateFileSystemLustreConfiguration_RootSquashConfiguration:
+			v.RootSquashConfiguration = &LustreRootSquashConfiguration{}
+			return v.RootSquashConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemLustreConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemLustreConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.UpdateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.UpdateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // The Lustre metadata performance configuration update for an Amazon FSx for
 // Lustre file system using a PERSISTENT_2 deployment type. You can request an
 // increase in your file system's Metadata IOPS and/or switch your file system's
@@ -4681,6 +9804,38 @@ type UpdateFileSystemLustreMetadataConfiguration struct {
 	Mode MetadataConfigurationMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateFileSystemLustreMetadataConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileSystemLustreMetadataConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileSystemLustreMetadataConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Iops != nil {
+		s.WriteInt32(schemas.UpdateFileSystemLustreMetadataConfiguration_Iops, *v.Iops)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.UpdateFileSystemLustreMetadataConfiguration_Mode, string(v.Mode))
+	}
+}
+func (v *UpdateFileSystemLustreMetadataConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFileSystemLustreMetadataConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFileSystemLustreMetadataConfiguration_Iops:
+			v.Iops = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemLustreMetadataConfiguration_Iops, v.Iops)
+		case schemas.UpdateFileSystemLustreMetadataConfiguration_Mode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFileSystemLustreMetadataConfiguration_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = MetadataConfigurationMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configuration updates for an Amazon FSx for NetApp ONTAP file system.
@@ -4797,6 +9952,84 @@ type UpdateFileSystemOntapConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFileSystemOntapConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileSystemOntapConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileSystemOntapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouteTableIds(s, schemas.UpdateFileSystemOntapConfiguration_AddRouteTableIds, v.AddRouteTableIds)
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.UpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.UpdateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DiskIopsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemOntapConfiguration_DiskIopsConfiguration)
+		v.DiskIopsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointIpv6AddressRange != nil {
+		s.WriteString(schemas.UpdateFileSystemOntapConfiguration_EndpointIpv6AddressRange, *v.EndpointIpv6AddressRange)
+	}
+	if v.FsxAdminPassword != nil {
+		s.WriteString(schemas.UpdateFileSystemOntapConfiguration_FsxAdminPassword, *v.FsxAdminPassword)
+	}
+	if v.HAPairs != nil {
+		s.WriteInt32(schemas.UpdateFileSystemOntapConfiguration_HAPairs, *v.HAPairs)
+	}
+	serializeRouteTableIds(s, schemas.UpdateFileSystemOntapConfiguration_RemoveRouteTableIds, v.RemoveRouteTableIds)
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.UpdateFileSystemOntapConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.ThroughputCapacityPerHAPair != nil {
+		s.WriteInt32(schemas.UpdateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair, *v.ThroughputCapacityPerHAPair)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.UpdateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *UpdateFileSystemOntapConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFileSystemOntapConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFileSystemOntapConfiguration_AddRouteTableIds:
+			return deserializeRouteTableIds(d, schemas.UpdateFileSystemOntapConfiguration_AddRouteTableIds, &v.AddRouteTableIds)
+		case schemas.UpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.UpdateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.UpdateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.UpdateFileSystemOntapConfiguration_DiskIopsConfiguration:
+			v.DiskIopsConfiguration = &DiskIopsConfiguration{}
+			return v.DiskIopsConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemOntapConfiguration_EndpointIpv6AddressRange:
+			v.EndpointIpv6AddressRange = new(string)
+			return d.ReadString(schemas.UpdateFileSystemOntapConfiguration_EndpointIpv6AddressRange, v.EndpointIpv6AddressRange)
+		case schemas.UpdateFileSystemOntapConfiguration_FsxAdminPassword:
+			v.FsxAdminPassword = new(string)
+			return d.ReadString(schemas.UpdateFileSystemOntapConfiguration_FsxAdminPassword, v.FsxAdminPassword)
+		case schemas.UpdateFileSystemOntapConfiguration_HAPairs:
+			v.HAPairs = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemOntapConfiguration_HAPairs, v.HAPairs)
+		case schemas.UpdateFileSystemOntapConfiguration_RemoveRouteTableIds:
+			return deserializeRouteTableIds(d, schemas.UpdateFileSystemOntapConfiguration_RemoveRouteTableIds, &v.RemoveRouteTableIds)
+		case schemas.UpdateFileSystemOntapConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemOntapConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.UpdateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair:
+			v.ThroughputCapacityPerHAPair = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair, v.ThroughputCapacityPerHAPair)
+		case schemas.UpdateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.UpdateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // The configuration updates for an Amazon FSx for OpenZFS file system.
 type UpdateFileSystemOpenZFSConfiguration struct {
 
@@ -4878,6 +10111,86 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFileSystemOpenZFSConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileSystemOpenZFSConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileSystemOpenZFSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouteTableIds(s, schemas.UpdateFileSystemOpenZFSConfiguration_AddRouteTableIds, v.AddRouteTableIds)
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.UpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.UpdateFileSystemOpenZFSConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.CopyTagsToVolumes != nil {
+		s.WriteBool(schemas.UpdateFileSystemOpenZFSConfiguration_CopyTagsToVolumes, *v.CopyTagsToVolumes)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.UpdateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DiskIopsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemOpenZFSConfiguration_DiskIopsConfiguration)
+		v.DiskIopsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointIpv6AddressRange != nil {
+		s.WriteString(schemas.UpdateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange, *v.EndpointIpv6AddressRange)
+	}
+	if v.ReadCacheConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemOpenZFSConfiguration_ReadCacheConfiguration)
+		v.ReadCacheConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRouteTableIds(s, schemas.UpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds, v.RemoveRouteTableIds)
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.UpdateFileSystemOpenZFSConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.UpdateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *UpdateFileSystemOpenZFSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFileSystemOpenZFSConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFileSystemOpenZFSConfiguration_AddRouteTableIds:
+			return deserializeRouteTableIds(d, schemas.UpdateFileSystemOpenZFSConfiguration_AddRouteTableIds, &v.AddRouteTableIds)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.UpdateFileSystemOpenZFSConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_CopyTagsToVolumes:
+			v.CopyTagsToVolumes = new(bool)
+			return d.ReadBool(schemas.UpdateFileSystemOpenZFSConfiguration_CopyTagsToVolumes, v.CopyTagsToVolumes)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.UpdateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_DiskIopsConfiguration:
+			v.DiskIopsConfiguration = &DiskIopsConfiguration{}
+			return v.DiskIopsConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange:
+			v.EndpointIpv6AddressRange = new(string)
+			return d.ReadString(schemas.UpdateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange, v.EndpointIpv6AddressRange)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_ReadCacheConfiguration:
+			v.ReadCacheConfiguration = &OpenZFSReadCacheConfiguration{}
+			return v.ReadCacheConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds:
+			return deserializeRouteTableIds(d, schemas.UpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds, &v.RemoveRouteTableIds)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemOpenZFSConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.UpdateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.UpdateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // Updates the configuration for an existing Amazon FSx for Windows File Server
 // file system. Amazon FSx only overwrites existing properties with non-null values
 // provided in the request.
@@ -4931,6 +10244,78 @@ type UpdateFileSystemWindowsConfiguration struct {
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateFileSystemWindowsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileSystemWindowsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileSystemWindowsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditLogConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemWindowsConfiguration_AuditLogConfiguration)
+		v.AuditLogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.UpdateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.UpdateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DiskIopsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemWindowsConfiguration_DiskIopsConfiguration)
+		v.DiskIopsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FsrmConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemWindowsConfiguration_FsrmConfiguration)
+		v.FsrmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelfManagedActiveDirectoryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration)
+		v.SelfManagedActiveDirectoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.UpdateFileSystemWindowsConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.UpdateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *UpdateFileSystemWindowsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFileSystemWindowsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFileSystemWindowsConfiguration_AuditLogConfiguration:
+			v.AuditLogConfiguration = &WindowsAuditLogCreateConfiguration{}
+			return v.AuditLogConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.UpdateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.UpdateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.UpdateFileSystemWindowsConfiguration_DiskIopsConfiguration:
+			v.DiskIopsConfiguration = &DiskIopsConfiguration{}
+			return v.DiskIopsConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemWindowsConfiguration_FsrmConfiguration:
+			v.FsrmConfiguration = &WindowsFsrmConfiguration{}
+			return v.FsrmConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration:
+			v.SelfManagedActiveDirectoryConfiguration = &SelfManagedActiveDirectoryConfigurationUpdates{}
+			return v.SelfManagedActiveDirectoryConfiguration.Deserialize(d)
+		case schemas.UpdateFileSystemWindowsConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.UpdateFileSystemWindowsConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.UpdateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.UpdateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
 }
 
 // Used to specify changes to the ONTAP configuration for the volume you are
@@ -4995,6 +10380,84 @@ type UpdateOntapVolumeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOntapVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOntapVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOntapVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.UpdateOntapVolumeConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.JunctionPath != nil {
+		s.WriteString(schemas.UpdateOntapVolumeConfiguration_JunctionPath, *v.JunctionPath)
+	}
+	if v.SecurityStyle != "" {
+		s.WriteString(schemas.UpdateOntapVolumeConfiguration_SecurityStyle, string(v.SecurityStyle))
+	}
+	if v.SizeInBytes != nil {
+		s.WriteInt64(schemas.UpdateOntapVolumeConfiguration_SizeInBytes, *v.SizeInBytes)
+	}
+	if v.SizeInMegabytes != nil {
+		s.WriteInt32(schemas.UpdateOntapVolumeConfiguration_SizeInMegabytes, *v.SizeInMegabytes)
+	}
+	if v.SnaplockConfiguration != nil {
+		s.WriteStruct(schemas.UpdateOntapVolumeConfiguration_SnaplockConfiguration)
+		v.SnaplockConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotPolicy != nil {
+		s.WriteString(schemas.UpdateOntapVolumeConfiguration_SnapshotPolicy, *v.SnapshotPolicy)
+	}
+	if v.StorageEfficiencyEnabled != nil {
+		s.WriteBool(schemas.UpdateOntapVolumeConfiguration_StorageEfficiencyEnabled, *v.StorageEfficiencyEnabled)
+	}
+	if v.TieringPolicy != nil {
+		s.WriteStruct(schemas.UpdateOntapVolumeConfiguration_TieringPolicy)
+		v.TieringPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateOntapVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOntapVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOntapVolumeConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.UpdateOntapVolumeConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.UpdateOntapVolumeConfiguration_JunctionPath:
+			v.JunctionPath = new(string)
+			return d.ReadString(schemas.UpdateOntapVolumeConfiguration_JunctionPath, v.JunctionPath)
+		case schemas.UpdateOntapVolumeConfiguration_SecurityStyle:
+			var ev string
+			if err := d.ReadString(schemas.UpdateOntapVolumeConfiguration_SecurityStyle, &ev); err != nil {
+				return err
+			}
+			v.SecurityStyle = SecurityStyle(ev)
+			return nil
+		case schemas.UpdateOntapVolumeConfiguration_SizeInBytes:
+			v.SizeInBytes = new(int64)
+			return d.ReadInt64(schemas.UpdateOntapVolumeConfiguration_SizeInBytes, v.SizeInBytes)
+		case schemas.UpdateOntapVolumeConfiguration_SizeInMegabytes:
+			v.SizeInMegabytes = new(int32)
+			return d.ReadInt32(schemas.UpdateOntapVolumeConfiguration_SizeInMegabytes, v.SizeInMegabytes)
+		case schemas.UpdateOntapVolumeConfiguration_SnaplockConfiguration:
+			v.SnaplockConfiguration = &UpdateSnaplockConfiguration{}
+			return v.SnaplockConfiguration.Deserialize(d)
+		case schemas.UpdateOntapVolumeConfiguration_SnapshotPolicy:
+			v.SnapshotPolicy = new(string)
+			return d.ReadString(schemas.UpdateOntapVolumeConfiguration_SnapshotPolicy, v.SnapshotPolicy)
+		case schemas.UpdateOntapVolumeConfiguration_StorageEfficiencyEnabled:
+			v.StorageEfficiencyEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateOntapVolumeConfiguration_StorageEfficiencyEnabled, v.StorageEfficiencyEnabled)
+		case schemas.UpdateOntapVolumeConfiguration_TieringPolicy:
+			v.TieringPolicy = &TieringPolicy{}
+			return v.TieringPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Used to specify changes to the OpenZFS configuration for the volume that you
 // are updating.
 type UpdateOpenZFSVolumeConfiguration struct {
@@ -5046,6 +10509,62 @@ type UpdateOpenZFSVolumeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOpenZFSVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpenZFSVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpenZFSVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataCompressionType != "" {
+		s.WriteString(schemas.UpdateOpenZFSVolumeConfiguration_DataCompressionType, string(v.DataCompressionType))
+	}
+	serializeOpenZFSNfsExports(s, schemas.UpdateOpenZFSVolumeConfiguration_NfsExports, v.NfsExports)
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.UpdateOpenZFSVolumeConfiguration_ReadOnly, *v.ReadOnly)
+	}
+	if v.RecordSizeKiB != nil {
+		s.WriteInt32(schemas.UpdateOpenZFSVolumeConfiguration_RecordSizeKiB, *v.RecordSizeKiB)
+	}
+	if v.StorageCapacityQuotaGiB != nil {
+		s.WriteInt32(schemas.UpdateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB, *v.StorageCapacityQuotaGiB)
+	}
+	if v.StorageCapacityReservationGiB != nil {
+		s.WriteInt32(schemas.UpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB, *v.StorageCapacityReservationGiB)
+	}
+	serializeOpenZFSUserAndGroupQuotas(s, schemas.UpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas, v.UserAndGroupQuotas)
+}
+func (v *UpdateOpenZFSVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOpenZFSVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOpenZFSVolumeConfiguration_DataCompressionType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateOpenZFSVolumeConfiguration_DataCompressionType, &ev); err != nil {
+				return err
+			}
+			v.DataCompressionType = OpenZFSDataCompressionType(ev)
+			return nil
+		case schemas.UpdateOpenZFSVolumeConfiguration_NfsExports:
+			return deserializeOpenZFSNfsExports(d, schemas.UpdateOpenZFSVolumeConfiguration_NfsExports, &v.NfsExports)
+		case schemas.UpdateOpenZFSVolumeConfiguration_ReadOnly:
+			v.ReadOnly = new(bool)
+			return d.ReadBool(schemas.UpdateOpenZFSVolumeConfiguration_ReadOnly, v.ReadOnly)
+		case schemas.UpdateOpenZFSVolumeConfiguration_RecordSizeKiB:
+			v.RecordSizeKiB = new(int32)
+			return d.ReadInt32(schemas.UpdateOpenZFSVolumeConfiguration_RecordSizeKiB, v.RecordSizeKiB)
+		case schemas.UpdateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB:
+			v.StorageCapacityQuotaGiB = new(int32)
+			return d.ReadInt32(schemas.UpdateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB, v.StorageCapacityQuotaGiB)
+		case schemas.UpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB:
+			v.StorageCapacityReservationGiB = new(int32)
+			return d.ReadInt32(schemas.UpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB, v.StorageCapacityReservationGiB)
+		case schemas.UpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas:
+			return deserializeOpenZFSUserAndGroupQuotas(d, schemas.UpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas, &v.UserAndGroupQuotas)
+		}
+		return nil
+	})
+}
+
 // Updates the SnapLock configuration for an existing FSx for ONTAP volume.
 type UpdateSnaplockConfiguration struct {
 
@@ -5090,6 +10609,60 @@ type UpdateSnaplockConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSnaplockConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSnaplockConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSnaplockConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditLogVolume != nil {
+		s.WriteBool(schemas.UpdateSnaplockConfiguration_AuditLogVolume, *v.AuditLogVolume)
+	}
+	if v.AutocommitPeriod != nil {
+		s.WriteStruct(schemas.UpdateSnaplockConfiguration_AutocommitPeriod)
+		v.AutocommitPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivilegedDelete != "" {
+		s.WriteString(schemas.UpdateSnaplockConfiguration_PrivilegedDelete, string(v.PrivilegedDelete))
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.UpdateSnaplockConfiguration_RetentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeAppendModeEnabled != nil {
+		s.WriteBool(schemas.UpdateSnaplockConfiguration_VolumeAppendModeEnabled, *v.VolumeAppendModeEnabled)
+	}
+}
+func (v *UpdateSnaplockConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSnaplockConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSnaplockConfiguration_AuditLogVolume:
+			v.AuditLogVolume = new(bool)
+			return d.ReadBool(schemas.UpdateSnaplockConfiguration_AuditLogVolume, v.AuditLogVolume)
+		case schemas.UpdateSnaplockConfiguration_AutocommitPeriod:
+			v.AutocommitPeriod = &AutocommitPeriod{}
+			return v.AutocommitPeriod.Deserialize(d)
+		case schemas.UpdateSnaplockConfiguration_PrivilegedDelete:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSnaplockConfiguration_PrivilegedDelete, &ev); err != nil {
+				return err
+			}
+			v.PrivilegedDelete = PrivilegedDelete(ev)
+			return nil
+		case schemas.UpdateSnaplockConfiguration_RetentionPeriod:
+			v.RetentionPeriod = &SnaplockRetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.UpdateSnaplockConfiguration_VolumeAppendModeEnabled:
+			v.VolumeAppendModeEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateSnaplockConfiguration_VolumeAppendModeEnabled, v.VolumeAppendModeEnabled)
+		}
+		return nil
+	})
+}
+
 // Specifies updates to an FSx for ONTAP storage virtual machine's (SVM) Microsoft
 // Active Directory (AD) configuration. Note that account credentials are not
 // returned in the response payload.
@@ -5105,6 +10678,36 @@ type UpdateSvmActiveDirectoryConfiguration struct {
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfigurationUpdates
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateSvmActiveDirectoryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSvmActiveDirectoryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSvmActiveDirectoryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetBiosName != nil {
+		s.WriteString(schemas.UpdateSvmActiveDirectoryConfiguration_NetBiosName, *v.NetBiosName)
+	}
+	if v.SelfManagedActiveDirectoryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration)
+		v.SelfManagedActiveDirectoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSvmActiveDirectoryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSvmActiveDirectoryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSvmActiveDirectoryConfiguration_NetBiosName:
+			v.NetBiosName = new(string)
+			return d.ReadString(schemas.UpdateSvmActiveDirectoryConfiguration_NetBiosName, v.NetBiosName)
+		case schemas.UpdateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration:
+			v.SelfManagedActiveDirectoryConfiguration = &SelfManagedActiveDirectoryConfigurationUpdates{}
+			return v.SelfManagedActiveDirectoryConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon FSx volume.
@@ -5171,6 +10774,102 @@ type Volume struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Volume) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Volume)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Volume) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdministrativeActions(s, schemas.Volume_AdministrativeActions, v.AdministrativeActions)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Volume_CreationTime, *v.CreationTime)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.Volume_FileSystemId, *v.FileSystemId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.Volume_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LifecycleTransitionReason != nil {
+		s.WriteStruct(schemas.Volume_LifecycleTransitionReason)
+		v.LifecycleTransitionReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Volume_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.Volume_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.Volume_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.Volume_ResourceARN, *v.ResourceARN)
+	}
+	serializeTags(s, schemas.Volume_Tags, v.Tags)
+	if v.VolumeId != nil {
+		s.WriteString(schemas.Volume_VolumeId, *v.VolumeId)
+	}
+	if v.VolumeType != "" {
+		s.WriteString(schemas.Volume_VolumeType, string(v.VolumeType))
+	}
+}
+func (v *Volume) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Volume, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Volume_AdministrativeActions:
+			return deserializeAdministrativeActions(d, schemas.Volume_AdministrativeActions, &v.AdministrativeActions)
+		case schemas.Volume_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Volume_CreationTime, v.CreationTime)
+		case schemas.Volume_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.Volume_FileSystemId, v.FileSystemId)
+		case schemas.Volume_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.Volume_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = VolumeLifecycle(ev)
+			return nil
+		case schemas.Volume_LifecycleTransitionReason:
+			v.LifecycleTransitionReason = &LifecycleTransitionReason{}
+			return v.LifecycleTransitionReason.Deserialize(d)
+		case schemas.Volume_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Volume_Name, v.Name)
+		case schemas.Volume_OntapConfiguration:
+			v.OntapConfiguration = &OntapVolumeConfiguration{}
+			return v.OntapConfiguration.Deserialize(d)
+		case schemas.Volume_OpenZFSConfiguration:
+			v.OpenZFSConfiguration = &OpenZFSVolumeConfiguration{}
+			return v.OpenZFSConfiguration.Deserialize(d)
+		case schemas.Volume_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.Volume_ResourceARN, v.ResourceARN)
+		case schemas.Volume_Tags:
+			return deserializeTags(d, schemas.Volume_Tags, &v.Tags)
+		case schemas.Volume_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.Volume_VolumeId, v.VolumeId)
+		case schemas.Volume_VolumeType:
+			var ev string
+			if err := d.ReadString(schemas.Volume_VolumeType, &ev); err != nil {
+				return err
+			}
+			v.VolumeType = VolumeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A filter used to restrict the results of describe calls for Amazon FSx for
 // NetApp ONTAP or Amazon FSx for OpenZFS volumes. You can use multiple filters to
 // return results that meet all applied filter requirements.
@@ -5184,6 +10883,35 @@ type VolumeFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VolumeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VolumeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VolumeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.VolumeFilter_Name, string(v.Name))
+	}
+	serializeVolumeFilterValues(s, schemas.VolumeFilter_Values, v.Values)
+}
+func (v *VolumeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VolumeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VolumeFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.VolumeFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = VolumeFilterName(ev)
+			return nil
+		case schemas.VolumeFilter_Values:
+			return deserializeVolumeFilterValues(d, schemas.VolumeFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // The configuration that Amazon FSx for Windows File Server uses to audit and log
@@ -5236,6 +10964,48 @@ type WindowsAuditLogConfiguration struct {
 	AuditLogDestination *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WindowsAuditLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WindowsAuditLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WindowsAuditLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditLogDestination != nil {
+		s.WriteString(schemas.WindowsAuditLogConfiguration_AuditLogDestination, *v.AuditLogDestination)
+	}
+	if v.FileAccessAuditLogLevel != "" {
+		s.WriteString(schemas.WindowsAuditLogConfiguration_FileAccessAuditLogLevel, string(v.FileAccessAuditLogLevel))
+	}
+	if v.FileShareAccessAuditLogLevel != "" {
+		s.WriteString(schemas.WindowsAuditLogConfiguration_FileShareAccessAuditLogLevel, string(v.FileShareAccessAuditLogLevel))
+	}
+}
+func (v *WindowsAuditLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WindowsAuditLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WindowsAuditLogConfiguration_AuditLogDestination:
+			v.AuditLogDestination = new(string)
+			return d.ReadString(schemas.WindowsAuditLogConfiguration_AuditLogDestination, v.AuditLogDestination)
+		case schemas.WindowsAuditLogConfiguration_FileAccessAuditLogLevel:
+			var ev string
+			if err := d.ReadString(schemas.WindowsAuditLogConfiguration_FileAccessAuditLogLevel, &ev); err != nil {
+				return err
+			}
+			v.FileAccessAuditLogLevel = WindowsAccessAuditLogLevel(ev)
+			return nil
+		case schemas.WindowsAuditLogConfiguration_FileShareAccessAuditLogLevel:
+			var ev string
+			if err := d.ReadString(schemas.WindowsAuditLogConfiguration_FileShareAccessAuditLogLevel, &ev); err != nil {
+				return err
+			}
+			v.FileShareAccessAuditLogLevel = WindowsAccessAuditLogLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Windows file access auditing configuration used when creating or updating
@@ -5296,6 +11066,48 @@ type WindowsAuditLogCreateConfiguration struct {
 	AuditLogDestination *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WindowsAuditLogCreateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WindowsAuditLogCreateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WindowsAuditLogCreateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditLogDestination != nil {
+		s.WriteString(schemas.WindowsAuditLogCreateConfiguration_AuditLogDestination, *v.AuditLogDestination)
+	}
+	if v.FileAccessAuditLogLevel != "" {
+		s.WriteString(schemas.WindowsAuditLogCreateConfiguration_FileAccessAuditLogLevel, string(v.FileAccessAuditLogLevel))
+	}
+	if v.FileShareAccessAuditLogLevel != "" {
+		s.WriteString(schemas.WindowsAuditLogCreateConfiguration_FileShareAccessAuditLogLevel, string(v.FileShareAccessAuditLogLevel))
+	}
+}
+func (v *WindowsAuditLogCreateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WindowsAuditLogCreateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WindowsAuditLogCreateConfiguration_AuditLogDestination:
+			v.AuditLogDestination = new(string)
+			return d.ReadString(schemas.WindowsAuditLogCreateConfiguration_AuditLogDestination, v.AuditLogDestination)
+		case schemas.WindowsAuditLogCreateConfiguration_FileAccessAuditLogLevel:
+			var ev string
+			if err := d.ReadString(schemas.WindowsAuditLogCreateConfiguration_FileAccessAuditLogLevel, &ev); err != nil {
+				return err
+			}
+			v.FileAccessAuditLogLevel = WindowsAccessAuditLogLevel(ev)
+			return nil
+		case schemas.WindowsAuditLogCreateConfiguration_FileShareAccessAuditLogLevel:
+			var ev string
+			if err := d.ReadString(schemas.WindowsAuditLogCreateConfiguration_FileShareAccessAuditLogLevel, &ev); err != nil {
+				return err
+			}
+			v.FileShareAccessAuditLogLevel = WindowsAccessAuditLogLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configuration for this Microsoft Windows file system.
@@ -5430,6 +11242,130 @@ type WindowsFileSystemConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WindowsFileSystemConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WindowsFileSystemConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WindowsFileSystemConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryId != nil {
+		s.WriteString(schemas.WindowsFileSystemConfiguration_ActiveDirectoryId, *v.ActiveDirectoryId)
+	}
+	serializeAliases(s, schemas.WindowsFileSystemConfiguration_Aliases, v.Aliases)
+	if v.AuditLogConfiguration != nil {
+		s.WriteStruct(schemas.WindowsFileSystemConfiguration_AuditLogConfiguration)
+		v.AuditLogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutomaticBackupRetentionDays != nil {
+		s.WriteInt32(schemas.WindowsFileSystemConfiguration_AutomaticBackupRetentionDays, *v.AutomaticBackupRetentionDays)
+	}
+	if v.CopyTagsToBackups != nil {
+		s.WriteBool(schemas.WindowsFileSystemConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
+	}
+	if v.DailyAutomaticBackupStartTime != nil {
+		s.WriteString(schemas.WindowsFileSystemConfiguration_DailyAutomaticBackupStartTime, *v.DailyAutomaticBackupStartTime)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.WindowsFileSystemConfiguration_DeploymentType, string(v.DeploymentType))
+	}
+	if v.DiskIopsConfiguration != nil {
+		s.WriteStruct(schemas.WindowsFileSystemConfiguration_DiskIopsConfiguration)
+		v.DiskIopsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FsrmConfiguration != nil {
+		s.WriteStruct(schemas.WindowsFileSystemConfiguration_FsrmConfiguration)
+		v.FsrmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFileSystemMaintenanceOperations(s, schemas.WindowsFileSystemConfiguration_MaintenanceOperationsInProgress, v.MaintenanceOperationsInProgress)
+	if v.PreferredFileServerIp != nil {
+		s.WriteString(schemas.WindowsFileSystemConfiguration_PreferredFileServerIp, *v.PreferredFileServerIp)
+	}
+	if v.PreferredFileServerIpv6 != nil {
+		s.WriteString(schemas.WindowsFileSystemConfiguration_PreferredFileServerIpv6, *v.PreferredFileServerIpv6)
+	}
+	if v.PreferredSubnetId != nil {
+		s.WriteString(schemas.WindowsFileSystemConfiguration_PreferredSubnetId, *v.PreferredSubnetId)
+	}
+	if v.RemoteAdministrationEndpoint != nil {
+		s.WriteString(schemas.WindowsFileSystemConfiguration_RemoteAdministrationEndpoint, *v.RemoteAdministrationEndpoint)
+	}
+	if v.SelfManagedActiveDirectoryConfiguration != nil {
+		s.WriteStruct(schemas.WindowsFileSystemConfiguration_SelfManagedActiveDirectoryConfiguration)
+		v.SelfManagedActiveDirectoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThroughputCapacity != nil {
+		s.WriteInt32(schemas.WindowsFileSystemConfiguration_ThroughputCapacity, *v.ThroughputCapacity)
+	}
+	if v.WeeklyMaintenanceStartTime != nil {
+		s.WriteString(schemas.WindowsFileSystemConfiguration_WeeklyMaintenanceStartTime, *v.WeeklyMaintenanceStartTime)
+	}
+}
+func (v *WindowsFileSystemConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WindowsFileSystemConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WindowsFileSystemConfiguration_ActiveDirectoryId:
+			v.ActiveDirectoryId = new(string)
+			return d.ReadString(schemas.WindowsFileSystemConfiguration_ActiveDirectoryId, v.ActiveDirectoryId)
+		case schemas.WindowsFileSystemConfiguration_Aliases:
+			return deserializeAliases(d, schemas.WindowsFileSystemConfiguration_Aliases, &v.Aliases)
+		case schemas.WindowsFileSystemConfiguration_AuditLogConfiguration:
+			v.AuditLogConfiguration = &WindowsAuditLogConfiguration{}
+			return v.AuditLogConfiguration.Deserialize(d)
+		case schemas.WindowsFileSystemConfiguration_AutomaticBackupRetentionDays:
+			v.AutomaticBackupRetentionDays = new(int32)
+			return d.ReadInt32(schemas.WindowsFileSystemConfiguration_AutomaticBackupRetentionDays, v.AutomaticBackupRetentionDays)
+		case schemas.WindowsFileSystemConfiguration_CopyTagsToBackups:
+			v.CopyTagsToBackups = new(bool)
+			return d.ReadBool(schemas.WindowsFileSystemConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
+		case schemas.WindowsFileSystemConfiguration_DailyAutomaticBackupStartTime:
+			v.DailyAutomaticBackupStartTime = new(string)
+			return d.ReadString(schemas.WindowsFileSystemConfiguration_DailyAutomaticBackupStartTime, v.DailyAutomaticBackupStartTime)
+		case schemas.WindowsFileSystemConfiguration_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.WindowsFileSystemConfiguration_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = WindowsDeploymentType(ev)
+			return nil
+		case schemas.WindowsFileSystemConfiguration_DiskIopsConfiguration:
+			v.DiskIopsConfiguration = &DiskIopsConfiguration{}
+			return v.DiskIopsConfiguration.Deserialize(d)
+		case schemas.WindowsFileSystemConfiguration_FsrmConfiguration:
+			v.FsrmConfiguration = &WindowsFsrmConfiguration{}
+			return v.FsrmConfiguration.Deserialize(d)
+		case schemas.WindowsFileSystemConfiguration_MaintenanceOperationsInProgress:
+			return deserializeFileSystemMaintenanceOperations(d, schemas.WindowsFileSystemConfiguration_MaintenanceOperationsInProgress, &v.MaintenanceOperationsInProgress)
+		case schemas.WindowsFileSystemConfiguration_PreferredFileServerIp:
+			v.PreferredFileServerIp = new(string)
+			return d.ReadString(schemas.WindowsFileSystemConfiguration_PreferredFileServerIp, v.PreferredFileServerIp)
+		case schemas.WindowsFileSystemConfiguration_PreferredFileServerIpv6:
+			v.PreferredFileServerIpv6 = new(string)
+			return d.ReadString(schemas.WindowsFileSystemConfiguration_PreferredFileServerIpv6, v.PreferredFileServerIpv6)
+		case schemas.WindowsFileSystemConfiguration_PreferredSubnetId:
+			v.PreferredSubnetId = new(string)
+			return d.ReadString(schemas.WindowsFileSystemConfiguration_PreferredSubnetId, v.PreferredSubnetId)
+		case schemas.WindowsFileSystemConfiguration_RemoteAdministrationEndpoint:
+			v.RemoteAdministrationEndpoint = new(string)
+			return d.ReadString(schemas.WindowsFileSystemConfiguration_RemoteAdministrationEndpoint, v.RemoteAdministrationEndpoint)
+		case schemas.WindowsFileSystemConfiguration_SelfManagedActiveDirectoryConfiguration:
+			v.SelfManagedActiveDirectoryConfiguration = &SelfManagedActiveDirectoryAttributes{}
+			return v.SelfManagedActiveDirectoryConfiguration.Deserialize(d)
+		case schemas.WindowsFileSystemConfiguration_ThroughputCapacity:
+			v.ThroughputCapacity = new(int32)
+			return d.ReadInt32(schemas.WindowsFileSystemConfiguration_ThroughputCapacity, v.ThroughputCapacity)
+		case schemas.WindowsFileSystemConfiguration_WeeklyMaintenanceStartTime:
+			v.WeeklyMaintenanceStartTime = new(string)
+			return d.ReadString(schemas.WindowsFileSystemConfiguration_WeeklyMaintenanceStartTime, v.WeeklyMaintenanceStartTime)
+		}
+		return nil
+	})
+}
+
 // The File Server Resource Manager (FSRM) configuration that Amazon FSx for
 // Windows File Server uses for the file system. When FSRM is enabled, you can
 // manage and monitor storage quotas, file screening, storage reports, and file
@@ -5457,6 +11393,34 @@ type WindowsFsrmConfiguration struct {
 	EventLogDestination *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WindowsFsrmConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WindowsFsrmConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WindowsFsrmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventLogDestination != nil {
+		s.WriteString(schemas.WindowsFsrmConfiguration_EventLogDestination, *v.EventLogDestination)
+	}
+	if v.FsrmServiceEnabled != nil {
+		s.WriteBool(schemas.WindowsFsrmConfiguration_FsrmServiceEnabled, *v.FsrmServiceEnabled)
+	}
+}
+func (v *WindowsFsrmConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WindowsFsrmConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WindowsFsrmConfiguration_EventLogDestination:
+			v.EventLogDestination = new(string)
+			return d.ReadString(schemas.WindowsFsrmConfiguration_EventLogDestination, v.EventLogDestination)
+		case schemas.WindowsFsrmConfiguration_FsrmServiceEnabled:
+			v.FsrmServiceEnabled = new(bool)
+			return d.ReadBool(schemas.WindowsFsrmConfiguration_FsrmServiceEnabled, v.FsrmServiceEnabled)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

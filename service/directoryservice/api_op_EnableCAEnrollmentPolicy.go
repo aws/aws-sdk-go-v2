@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type EnableCAEnrollmentPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableCAEnrollmentPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableCAEnrollmentPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableCAEnrollmentPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.EnableCAEnrollmentPolicyRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.PcaConnectorArn != nil {
+		s.WriteString(schemas.EnableCAEnrollmentPolicyRequest_PcaConnectorArn, *v.PcaConnectorArn)
+	}
+}
+
 // Contains the results of the EnableCAEnrollmentPolicy operation.
 type EnableCAEnrollmentPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -59,13 +76,26 @@ type EnableCAEnrollmentPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableCAEnrollmentPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableCAEnrollmentPolicyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableCAEnrollmentPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableCAEnrollmentPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableCAEnrollmentPolicyResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableCAEnrollmentPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableCAEnrollmentPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableCAEnrollmentPolicy, schemas.EnableCAEnrollmentPolicyRequest, schemas.EnableCAEnrollmentPolicyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableCAEnrollmentPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableCAEnrollmentPolicy, schemas.EnableCAEnrollmentPolicyRequest, schemas.EnableCAEnrollmentPolicyResult), output: &EnableCAEnrollmentPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

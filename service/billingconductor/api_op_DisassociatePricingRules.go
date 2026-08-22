@@ -4,6 +4,8 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,31 @@ type DisassociatePricingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePricingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePricingRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePricingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociatePricingRulesInput_Arn, *v.Arn)
+	}
+	serializePricingRuleArnsNonEmptyInput(s, schemas.DisassociatePricingRulesInput_PricingRuleArns, v.PricingRuleArns)
+}
+func (v *DisassociatePricingRulesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociatePricingRulesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociatePricingRulesInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociatePricingRulesInput_Arn, v.Arn)
+		case schemas.DisassociatePricingRulesInput_PricingRuleArns:
+			return deserializePricingRuleArnsNonEmptyInput(d, schemas.DisassociatePricingRulesInput_PricingRuleArns, &v.PricingRuleArns)
+		}
+		return nil
+	})
+}
+
 type DisassociatePricingRulesOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the pricing plan that the pricing rules
@@ -52,13 +79,32 @@ type DisassociatePricingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePricingRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePricingRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePricingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociatePricingRulesOutput_Arn, *v.Arn)
+	}
+}
+func (v *DisassociatePricingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociatePricingRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociatePricingRulesOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociatePricingRulesOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociatePricingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociatePricingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePricingRules, schemas.DisassociatePricingRulesInput, schemas.DisassociatePricingRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociatePricingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePricingRules, schemas.DisassociatePricingRulesInput, schemas.DisassociatePricingRulesOutput), output: &DisassociatePricingRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

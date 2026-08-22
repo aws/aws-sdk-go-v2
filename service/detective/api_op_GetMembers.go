@@ -4,7 +4,9 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,19 @@ type GetMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.GetMembersRequest_AccountIds, v.AccountIds)
+	if v.GraphArn != nil {
+		s.WriteString(schemas.GetMembersRequest_GraphArn, *v.GraphArn)
+	}
+}
+
 type GetMembersOutput struct {
 
 	// The member account details that Detective is returning in response to the
@@ -63,13 +78,32 @@ type GetMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberDetailList(s, schemas.GetMembersResponse_MemberDetails, v.MemberDetails)
+	serializeUnprocessedAccountList(s, schemas.GetMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *GetMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMembersResponse_MemberDetails:
+			return deserializeMemberDetailList(d, schemas.GetMembersResponse_MemberDetails, &v.MemberDetails)
+		case schemas.GetMembersResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccountList(d, schemas.GetMembersResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMembers, schemas.GetMembersRequest, schemas.GetMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMembers, schemas.GetMembersRequest, schemas.GetMembersResponse), output: &GetMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

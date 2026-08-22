@@ -5,7 +5,9 @@ package paymentcryptography
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,24 @@ type ListKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeysInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyState != "" {
+		s.WriteString(schemas.ListKeysInput_KeyState, string(v.KeyState))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListKeysInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeysInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListKeysOutput struct {
 
 	// The list of keys created within the caller's Amazon Web Services account and
@@ -86,13 +106,35 @@ type ListKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeysOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeySummaryList(s, schemas.ListKeysOutput_Keys, v.Keys)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeysOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeysOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeysOutput_Keys:
+			return deserializeKeySummaryList(d, schemas.ListKeysOutput_Keys, &v.Keys)
+		case schemas.ListKeysOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeysOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeys, schemas.ListKeysInput, schemas.ListKeysOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeys, schemas.ListKeysInput, schemas.ListKeysOutput), output: &ListKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

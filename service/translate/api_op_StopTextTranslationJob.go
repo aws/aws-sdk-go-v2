@@ -4,7 +4,9 @@ package translate
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type StopTextTranslationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTextTranslationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTextTranslationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTextTranslationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopTextTranslationJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopTextTranslationJobOutput struct {
 
 	// The job ID of the stopped batch translation job.
@@ -57,13 +71,42 @@ type StopTextTranslationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTextTranslationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTextTranslationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTextTranslationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopTextTranslationJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StopTextTranslationJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StopTextTranslationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopTextTranslationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopTextTranslationJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopTextTranslationJobResponse_JobId, v.JobId)
+		case schemas.StopTextTranslationJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopTextTranslationJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTextTranslationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTextTranslationJob, schemas.StopTextTranslationJobRequest, schemas.StopTextTranslationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopTextTranslationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTextTranslationJob, schemas.StopTextTranslationJobRequest, schemas.StopTextTranslationJobResponse), output: &StopTextTranslationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

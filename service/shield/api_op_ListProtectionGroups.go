@@ -5,7 +5,9 @@ package shield
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,26 @@ type ListProtectionGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectionGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectionGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectionGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InclusionFilters != nil {
+		s.WriteStruct(schemas.ListProtectionGroupsRequest_InclusionFilters)
+		v.InclusionFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtectionGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectionGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListProtectionGroupsOutput struct {
 
 	//
@@ -94,13 +116,35 @@ type ListProtectionGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectionGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectionGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectionGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeProtectionGroups(s, schemas.ListProtectionGroupsResponse_ProtectionGroups, v.ProtectionGroups)
+}
+func (v *ListProtectionGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectionGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectionGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectionGroupsResponse_NextToken, v.NextToken)
+		case schemas.ListProtectionGroupsResponse_ProtectionGroups:
+			return deserializeProtectionGroups(d, schemas.ListProtectionGroupsResponse_ProtectionGroups, &v.ProtectionGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtectionGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProtectionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectionGroups, schemas.ListProtectionGroupsRequest, schemas.ListProtectionGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProtectionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectionGroups, schemas.ListProtectionGroupsRequest, schemas.ListProtectionGroupsResponse), output: &ListProtectionGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

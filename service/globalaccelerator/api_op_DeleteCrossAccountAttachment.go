@@ -4,6 +4,8 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DeleteCrossAccountAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCrossAccountAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCrossAccountAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCrossAccountAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentArn != nil {
+		s.WriteString(schemas.DeleteCrossAccountAttachmentRequest_AttachmentArn, *v.AttachmentArn)
+	}
+}
+
 type DeleteCrossAccountAttachmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +61,26 @@ type DeleteCrossAccountAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCrossAccountAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCrossAccountAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCrossAccountAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCrossAccountAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCrossAccountAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCrossAccountAttachment, schemas.DeleteCrossAccountAttachmentRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCrossAccountAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCrossAccountAttachment, schemas.DeleteCrossAccountAttachmentRequest, nil), output: &DeleteCrossAccountAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type DescribeResourceGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourceGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourceGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourceGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDescribeArnList(s, schemas.DescribeResourceGroupsRequest_resourceGroupArns, v.ResourceGroupArns)
+}
+
 type DescribeResourceGroupsOutput struct {
 
 	// Resource group details that cannot be described. An error code is provided for
@@ -54,13 +66,32 @@ type DescribeResourceGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourceGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourceGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourceGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedItems(s, schemas.DescribeResourceGroupsResponse_failedItems, v.FailedItems)
+	serializeResourceGroupList(s, schemas.DescribeResourceGroupsResponse_resourceGroups, v.ResourceGroups)
+}
+func (v *DescribeResourceGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResourceGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResourceGroupsResponse_failedItems:
+			return deserializeFailedItems(d, schemas.DescribeResourceGroupsResponse_failedItems, &v.FailedItems)
+		case schemas.DescribeResourceGroupsResponse_resourceGroups:
+			return deserializeResourceGroupList(d, schemas.DescribeResourceGroupsResponse_resourceGroups, &v.ResourceGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResourceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeResourceGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourceGroups, schemas.DescribeResourceGroupsRequest, schemas.DescribeResourceGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeResourceGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourceGroups, schemas.DescribeResourceGroupsRequest, schemas.DescribeResourceGroupsResponse), output: &DescribeResourceGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

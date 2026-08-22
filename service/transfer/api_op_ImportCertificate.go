@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -110,6 +112,37 @@ type ImportCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDate != nil {
+		s.WriteTime(schemas.ImportCertificateRequest_ActiveDate, *v.ActiveDate)
+	}
+	if v.Certificate != nil {
+		s.WriteString(schemas.ImportCertificateRequest_Certificate, *v.Certificate)
+	}
+	if v.CertificateChain != nil {
+		s.WriteString(schemas.ImportCertificateRequest_CertificateChain, *v.CertificateChain)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ImportCertificateRequest_Description, *v.Description)
+	}
+	if v.InactiveDate != nil {
+		s.WriteTime(schemas.ImportCertificateRequest_InactiveDate, *v.InactiveDate)
+	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.ImportCertificateRequest_PrivateKey, *v.PrivateKey)
+	}
+	serializeTags(s, schemas.ImportCertificateRequest_Tags, v.Tags)
+	if v.Usage != "" {
+		s.WriteString(schemas.ImportCertificateRequest_Usage, string(v.Usage))
+	}
+}
+
 type ImportCertificateOutput struct {
 
 	// An array of identifiers for the imported certificates. You use this identifier
@@ -124,13 +157,32 @@ type ImportCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.ImportCertificateResponse_CertificateId, *v.CertificateId)
+	}
+}
+func (v *ImportCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportCertificateResponse_CertificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.ImportCertificateResponse_CertificateId, v.CertificateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCertificate, schemas.ImportCertificateRequest, schemas.ImportCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCertificate, schemas.ImportCertificateRequest, schemas.ImportCertificateResponse), output: &ImportCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

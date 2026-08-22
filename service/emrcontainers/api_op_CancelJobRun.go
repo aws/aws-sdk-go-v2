@@ -4,6 +4,8 @@ package emrcontainers
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type CancelJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CancelJobRunRequest_id, *v.Id)
+	}
+	if v.VirtualClusterId != nil {
+		s.WriteString(schemas.CancelJobRunRequest_virtualClusterId, *v.VirtualClusterId)
+	}
+}
+
 type CancelJobRunOutput struct {
 
 	// The output contains the ID of the cancelled job run.
@@ -53,13 +70,38 @@ type CancelJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CancelJobRunResponse_id, *v.Id)
+	}
+	if v.VirtualClusterId != nil {
+		s.WriteString(schemas.CancelJobRunResponse_virtualClusterId, *v.VirtualClusterId)
+	}
+}
+func (v *CancelJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelJobRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelJobRunResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CancelJobRunResponse_id, v.Id)
+		case schemas.CancelJobRunResponse_virtualClusterId:
+			v.VirtualClusterId = new(string)
+			return d.ReadString(schemas.CancelJobRunResponse_virtualClusterId, v.VirtualClusterId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJobRun, schemas.CancelJobRunRequest, schemas.CancelJobRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJobRun, schemas.CancelJobRunRequest, schemas.CancelJobRunResponse), output: &CancelJobRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

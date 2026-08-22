@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -48,6 +50,27 @@ type CreateMetadataTransferJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMetadataTransferJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMetadataTransferJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMetadataTransferJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMetadataTransferJobRequest_description, *v.Description)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.CreateMetadataTransferJobRequest_destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetadataTransferJobId != nil {
+		s.WriteString(schemas.CreateMetadataTransferJobRequest_metadataTransferJobId, *v.MetadataTransferJobId)
+	}
+	serializeSourceConfigurations(s, schemas.CreateMetadataTransferJobRequest_sources, v.Sources)
+}
+
 type CreateMetadataTransferJobOutput struct {
 
 	// The metadata transfer job ARN.
@@ -76,13 +99,52 @@ type CreateMetadataTransferJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMetadataTransferJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMetadataTransferJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMetadataTransferJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateMetadataTransferJobResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateMetadataTransferJobResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.MetadataTransferJobId != nil {
+		s.WriteString(schemas.CreateMetadataTransferJobResponse_metadataTransferJobId, *v.MetadataTransferJobId)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CreateMetadataTransferJobResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMetadataTransferJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMetadataTransferJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMetadataTransferJobResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateMetadataTransferJobResponse_arn, v.Arn)
+		case schemas.CreateMetadataTransferJobResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateMetadataTransferJobResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateMetadataTransferJobResponse_metadataTransferJobId:
+			v.MetadataTransferJobId = new(string)
+			return d.ReadString(schemas.CreateMetadataTransferJobResponse_metadataTransferJobId, v.MetadataTransferJobId)
+		case schemas.CreateMetadataTransferJobResponse_status:
+			v.Status = &types.MetadataTransferJobStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMetadataTransferJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMetadataTransferJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMetadataTransferJob, schemas.CreateMetadataTransferJobRequest, schemas.CreateMetadataTransferJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMetadataTransferJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMetadataTransferJob, schemas.CreateMetadataTransferJobRequest, schemas.CreateMetadataTransferJobResponse), output: &CreateMetadataTransferJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

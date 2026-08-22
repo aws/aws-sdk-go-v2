@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListFileSystemAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileSystemAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileSystemAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileSystemAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ListFileSystemAssociationsInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListFileSystemAssociationsInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListFileSystemAssociationsInput_Marker, *v.Marker)
+	}
+}
+
 type ListFileSystemAssociationsOutput struct {
 
 	// An array of information about the Amazon FSx gateway's file system associations.
@@ -64,13 +84,41 @@ type ListFileSystemAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileSystemAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileSystemAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileSystemAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileSystemAssociationSummaryList(s, schemas.ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList, v.FileSystemAssociationSummaryList)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListFileSystemAssociationsOutput_Marker, *v.Marker)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListFileSystemAssociationsOutput_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListFileSystemAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFileSystemAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList:
+			return deserializeFileSystemAssociationSummaryList(d, schemas.ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList, &v.FileSystemAssociationSummaryList)
+		case schemas.ListFileSystemAssociationsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListFileSystemAssociationsOutput_Marker, v.Marker)
+		case schemas.ListFileSystemAssociationsOutput_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListFileSystemAssociationsOutput_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFileSystemAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFileSystemAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileSystemAssociations, schemas.ListFileSystemAssociationsInput, schemas.ListFileSystemAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFileSystemAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileSystemAssociations, schemas.ListFileSystemAssociationsInput, schemas.ListFileSystemAssociationsOutput), output: &ListFileSystemAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

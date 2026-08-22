@@ -5,7 +5,9 @@ package dataexchange
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,45 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ListJobsRequest_DataSetId, *v.DataSetId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListJobsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ListJobsRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *ListJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.ListJobsRequest_DataSetId, v.DataSetId)
+		case schemas.ListJobsRequest_MaxResults:
+			return d.ReadInt32(schemas.ListJobsRequest_MaxResults, &v.MaxResults)
+		case schemas.ListJobsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobsRequest_NextToken, v.NextToken)
+		case schemas.ListJobsRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ListJobsRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 type ListJobsOutput struct {
 
 	// The jobs listed by the request.
@@ -58,13 +99,35 @@ type ListJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfJobEntry(s, schemas.ListJobsResponse_Jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsResponse_Jobs:
+			return deserializeListOfJobEntry(d, schemas.ListJobsResponse_Jobs, &v.Jobs)
+		case schemas.ListJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsRequest, schemas.ListJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsRequest, schemas.ListJobsResponse), output: &ListJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

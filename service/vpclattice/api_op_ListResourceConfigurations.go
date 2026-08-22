@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,30 @@ type ListResourceConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainVerificationIdentifier != nil {
+		s.WriteString(schemas.ListResourceConfigurationsRequest_domainVerificationIdentifier, *v.DomainVerificationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceConfigurationsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceConfigurationGroupIdentifier != nil {
+		s.WriteString(schemas.ListResourceConfigurationsRequest_resourceConfigurationGroupIdentifier, *v.ResourceConfigurationGroupIdentifier)
+	}
+	if v.ResourceGatewayIdentifier != nil {
+		s.WriteString(schemas.ListResourceConfigurationsRequest_resourceGatewayIdentifier, *v.ResourceGatewayIdentifier)
+	}
+}
+
 type ListResourceConfigurationsOutput struct {
 
 	// Information about the resource configurations.
@@ -60,13 +86,35 @@ type ListResourceConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceConfigurationSummaryList(s, schemas.ListResourceConfigurationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceConfigurationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListResourceConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceConfigurationsResponse_items:
+			return deserializeResourceConfigurationSummaryList(d, schemas.ListResourceConfigurationsResponse_items, &v.Items)
+		case schemas.ListResourceConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceConfigurationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceConfigurations, schemas.ListResourceConfigurationsRequest, schemas.ListResourceConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourceConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceConfigurations, schemas.ListResourceConfigurationsRequest, schemas.ListResourceConfigurationsResponse), output: &ListResourceConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

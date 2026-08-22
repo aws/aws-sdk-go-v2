@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListCoreNetworkPolicyVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworkPolicyVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworkPolicyVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworkPolicyVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ListCoreNetworkPolicyVersionsRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCoreNetworkPolicyVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworkPolicyVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCoreNetworkPolicyVersionsOutput struct {
 
 	// Describes core network policy versions.
@@ -55,13 +75,35 @@ type ListCoreNetworkPolicyVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworkPolicyVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworkPolicyVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworkPolicyVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCoreNetworkPolicyVersionList(s, schemas.ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions, v.CoreNetworkPolicyVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworkPolicyVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCoreNetworkPolicyVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoreNetworkPolicyVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions:
+			return deserializeCoreNetworkPolicyVersionList(d, schemas.ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions, &v.CoreNetworkPolicyVersions)
+		case schemas.ListCoreNetworkPolicyVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoreNetworkPolicyVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoreNetworkPolicyVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoreNetworkPolicyVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworkPolicyVersions, schemas.ListCoreNetworkPolicyVersionsRequest, schemas.ListCoreNetworkPolicyVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoreNetworkPolicyVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworkPolicyVersions, schemas.ListCoreNetworkPolicyVersionsRequest, schemas.ListCoreNetworkPolicyVersionsResponse), output: &ListCoreNetworkPolicyVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

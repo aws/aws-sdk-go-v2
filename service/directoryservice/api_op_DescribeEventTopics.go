@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,19 @@ type DescribeEventTopicsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventTopicsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventTopicsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventTopicsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeEventTopicsRequest_DirectoryId, *v.DirectoryId)
+	}
+	serializeTopicNames(s, schemas.DescribeEventTopicsRequest_TopicNames, v.TopicNames)
+}
+
 // The result of a DescribeEventTopic request.
 type DescribeEventTopicsOutput struct {
 
@@ -57,13 +72,29 @@ type DescribeEventTopicsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventTopicsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventTopicsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventTopicsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventTopics(s, schemas.DescribeEventTopicsResult_EventTopics, v.EventTopics)
+}
+func (v *DescribeEventTopicsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventTopicsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventTopicsResult_EventTopics:
+			return deserializeEventTopics(d, schemas.DescribeEventTopicsResult_EventTopics, &v.EventTopics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventTopicsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventTopics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventTopics, schemas.DescribeEventTopicsRequest, schemas.DescribeEventTopicsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventTopics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventTopics, schemas.DescribeEventTopicsRequest, schemas.DescribeEventTopicsResult), output: &DescribeEventTopicsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

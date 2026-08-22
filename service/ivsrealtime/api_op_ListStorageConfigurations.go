@@ -5,7 +5,9 @@ package ivsrealtime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListStorageConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStorageConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStorageConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStorageConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStorageConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStorageConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListStorageConfigurationsOutput struct {
 
 	// List of the matching storage configurations.
@@ -56,13 +73,35 @@ type ListStorageConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStorageConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStorageConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStorageConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStorageConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	serializeStorageConfigurationSummaryList(s, schemas.ListStorageConfigurationsResponse_storageConfigurations, v.StorageConfigurations)
+}
+func (v *ListStorageConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStorageConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStorageConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStorageConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListStorageConfigurationsResponse_storageConfigurations:
+			return deserializeStorageConfigurationSummaryList(d, schemas.ListStorageConfigurationsResponse_storageConfigurations, &v.StorageConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStorageConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStorageConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStorageConfigurations, schemas.ListStorageConfigurationsRequest, schemas.ListStorageConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStorageConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStorageConfigurations, schemas.ListStorageConfigurationsRequest, schemas.ListStorageConfigurationsResponse), output: &ListStorageConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

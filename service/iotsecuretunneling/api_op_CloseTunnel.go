@@ -4,6 +4,8 @@ package iotsecuretunneling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type CloseTunnelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloseTunnelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloseTunnelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloseTunnelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Delete != nil {
+		s.WriteBool(schemas.CloseTunnelRequest_delete, *v.Delete)
+	}
+	if v.TunnelId != nil {
+		s.WriteString(schemas.CloseTunnelRequest_tunnelId, *v.TunnelId)
+	}
+}
+
 type CloseTunnelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type CloseTunnelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloseTunnelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloseTunnelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloseTunnelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CloseTunnelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloseTunnelResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCloseTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCloseTunnel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloseTunnel, schemas.CloseTunnelRequest, schemas.CloseTunnelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCloseTunnel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloseTunnel, schemas.CloseTunnelRequest, schemas.CloseTunnelResponse), output: &CloseTunnelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

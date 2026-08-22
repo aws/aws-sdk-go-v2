@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"recoveryPlan":{"createdAt":"__CreatedAt__","description":"__Description__","name":"__Name__","recoveryPlanArn":"__RecoveryPlanArn__","status":"ACTIVE","tags":{"key0":"__Value__"},"updatedAt":"__UpdatedAt__"}}

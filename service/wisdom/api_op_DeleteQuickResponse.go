@@ -4,6 +4,8 @@ package wisdom
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteQuickResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQuickResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQuickResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQuickResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteQuickResponseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.QuickResponseId != nil {
+		s.WriteString(schemas.DeleteQuickResponseRequest_quickResponseId, *v.QuickResponseId)
+	}
+}
+
 type DeleteQuickResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteQuickResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQuickResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQuickResponseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQuickResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteQuickResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteQuickResponseResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteQuickResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteQuickResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQuickResponse, schemas.DeleteQuickResponseRequest, schemas.DeleteQuickResponseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteQuickResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQuickResponse, schemas.DeleteQuickResponseRequest, schemas.DeleteQuickResponseResponse), output: &DeleteQuickResponseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

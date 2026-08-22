@@ -1,0 +1,5 @@
+500
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CloudApiService.CancelResourceRequest
+
+{"__type":"ConcurrentModificationException","Message":"__Message__"}

@@ -4,7 +4,9 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type GetContentAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentAssociationId != nil {
+		s.WriteString(schemas.GetContentAssociationRequest_contentAssociationId, *v.ContentAssociationId)
+	}
+	if v.ContentId != nil {
+		s.WriteString(schemas.GetContentAssociationRequest_contentId, *v.ContentId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetContentAssociationRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type GetContentAssociationOutput struct {
 
 	// The association between Amazon Q in Connect content and another resource.
@@ -61,13 +81,34 @@ type GetContentAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentAssociation != nil {
+		s.WriteStruct(schemas.GetContentAssociationResponse_contentAssociation)
+		v.ContentAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetContentAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContentAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContentAssociationResponse_contentAssociation:
+			v.ContentAssociation = &types.ContentAssociationData{}
+			return v.ContentAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContentAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContentAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContentAssociation, schemas.GetContentAssociationRequest, schemas.GetContentAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContentAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContentAssociation, schemas.GetContentAssociationRequest, schemas.GetContentAssociationResponse), output: &GetContentAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

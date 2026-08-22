@@ -4,6 +4,8 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,28 @@ type DeleteViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViewArn != nil {
+		s.WriteString(schemas.DeleteViewInput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *DeleteViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteViewInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteViewInput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.DeleteViewInput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
+
 type DeleteViewOutput struct {
 
 	// The [Amazon resource name (ARN)] of the view that you successfully deleted.
@@ -52,13 +76,32 @@ type DeleteViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViewArn != nil {
+		s.WriteString(schemas.DeleteViewOutput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *DeleteViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteViewOutput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.DeleteViewOutput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteView, schemas.DeleteViewInput, schemas.DeleteViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteView, schemas.DeleteViewInput, schemas.DeleteViewOutput), output: &DeleteViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

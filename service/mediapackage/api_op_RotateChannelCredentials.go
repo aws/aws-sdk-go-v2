@@ -4,7 +4,9 @@ package mediapackage
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type RotateChannelCredentialsInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RotateChannelCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateChannelCredentialsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateChannelCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.RotateChannelCredentialsRequest_Id, *v.Id)
+	}
 }
 
 type RotateChannelCredentialsOutput struct {
@@ -70,13 +84,77 @@ type RotateChannelCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateChannelCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateChannelCredentialsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateChannelCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RotateChannelCredentialsResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.RotateChannelCredentialsResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RotateChannelCredentialsResponse_Description, *v.Description)
+	}
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.RotateChannelCredentialsResponse_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HlsIngest != nil {
+		s.WriteStruct(schemas.RotateChannelCredentialsResponse_HlsIngest)
+		v.HlsIngest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RotateChannelCredentialsResponse_Id, *v.Id)
+	}
+	if v.IngressAccessLogs != nil {
+		s.WriteStruct(schemas.RotateChannelCredentialsResponse_IngressAccessLogs)
+		v.IngressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.RotateChannelCredentialsResponse_Tags, v.Tags)
+}
+func (v *RotateChannelCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RotateChannelCredentialsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RotateChannelCredentialsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RotateChannelCredentialsResponse_Arn, v.Arn)
+		case schemas.RotateChannelCredentialsResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.RotateChannelCredentialsResponse_CreatedAt, v.CreatedAt)
+		case schemas.RotateChannelCredentialsResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RotateChannelCredentialsResponse_Description, v.Description)
+		case schemas.RotateChannelCredentialsResponse_EgressAccessLogs:
+			v.EgressAccessLogs = &types.EgressAccessLogs{}
+			return v.EgressAccessLogs.Deserialize(d)
+		case schemas.RotateChannelCredentialsResponse_HlsIngest:
+			v.HlsIngest = &types.HlsIngest{}
+			return v.HlsIngest.Deserialize(d)
+		case schemas.RotateChannelCredentialsResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RotateChannelCredentialsResponse_Id, v.Id)
+		case schemas.RotateChannelCredentialsResponse_IngressAccessLogs:
+			v.IngressAccessLogs = &types.IngressAccessLogs{}
+			return v.IngressAccessLogs.Deserialize(d)
+		case schemas.RotateChannelCredentialsResponse_Tags:
+			return deserializeTags(d, schemas.RotateChannelCredentialsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRotateChannelCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRotateChannelCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateChannelCredentials, schemas.RotateChannelCredentialsRequest, schemas.RotateChannelCredentialsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRotateChannelCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateChannelCredentials, schemas.RotateChannelCredentialsRequest, schemas.RotateChannelCredentialsResponse), output: &RotateChannelCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

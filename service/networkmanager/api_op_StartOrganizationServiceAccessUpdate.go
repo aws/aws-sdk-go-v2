@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type StartOrganizationServiceAccessUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOrganizationServiceAccessUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOrganizationServiceAccessUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOrganizationServiceAccessUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.StartOrganizationServiceAccessUpdateRequest_Action, *v.Action)
+	}
+}
+
 type StartOrganizationServiceAccessUpdateOutput struct {
 
 	// The status of the service access update request for an Amazon Web Services
@@ -47,13 +61,34 @@ type StartOrganizationServiceAccessUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOrganizationServiceAccessUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOrganizationServiceAccessUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOrganizationServiceAccessUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationStatus != nil {
+		s.WriteStruct(schemas.StartOrganizationServiceAccessUpdateResponse_OrganizationStatus)
+		v.OrganizationStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartOrganizationServiceAccessUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOrganizationServiceAccessUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartOrganizationServiceAccessUpdateResponse_OrganizationStatus:
+			v.OrganizationStatus = &types.OrganizationStatus{}
+			return v.OrganizationStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOrganizationServiceAccessUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOrganizationServiceAccessUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOrganizationServiceAccessUpdate, schemas.StartOrganizationServiceAccessUpdateRequest, schemas.StartOrganizationServiceAccessUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartOrganizationServiceAccessUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOrganizationServiceAccessUpdate, schemas.StartOrganizationServiceAccessUpdateRequest, schemas.StartOrganizationServiceAccessUpdateResponse), output: &StartOrganizationServiceAccessUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

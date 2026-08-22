@@ -4,6 +4,8 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,21 @@ type RespondActivityTaskCompletedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RespondActivityTaskCompletedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RespondActivityTaskCompletedInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RespondActivityTaskCompletedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Result != nil {
+		s.WriteString(schemas.RespondActivityTaskCompletedInput_result, *v.Result)
+	}
+	if v.TaskToken != nil {
+		s.WriteString(schemas.RespondActivityTaskCompletedInput_taskToken, *v.TaskToken)
+	}
+}
+
 type RespondActivityTaskCompletedOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,13 +96,26 @@ type RespondActivityTaskCompletedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RespondActivityTaskCompletedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RespondActivityTaskCompletedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RespondActivityTaskCompletedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRespondActivityTaskCompletedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRespondActivityTaskCompleted{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RespondActivityTaskCompleted, schemas.RespondActivityTaskCompletedInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRespondActivityTaskCompleted{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RespondActivityTaskCompleted, schemas.RespondActivityTaskCompletedInput, nil), output: &RespondActivityTaskCompletedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

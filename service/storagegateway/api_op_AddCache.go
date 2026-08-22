@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,19 @@ type AddCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddCacheInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiskIds(s, schemas.AddCacheInput_DiskIds, v.DiskIds)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AddCacheInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type AddCacheOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -60,13 +75,32 @@ type AddCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddCacheOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AddCacheOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *AddCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddCacheOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddCacheOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.AddCacheOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddCache, schemas.AddCacheInput, schemas.AddCacheOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddCache, schemas.AddCacheInput, schemas.AddCacheOutput), output: &AddCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

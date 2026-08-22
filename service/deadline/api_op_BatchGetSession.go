@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,16 @@ type BatchGetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetSessionIdentifiers(s, schemas.BatchGetSessionRequest_identifiers, v.Identifiers)
+}
+
 type BatchGetSessionOutput struct {
 
 	// A list of errors for sessions that could not be retrieved.
@@ -61,13 +73,32 @@ type BatchGetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetSessionErrors(s, schemas.BatchGetSessionResponse_errors, v.Errors)
+	serializeBatchGetSessionItems(s, schemas.BatchGetSessionResponse_sessions, v.Sessions)
+}
+func (v *BatchGetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSessionResponse_errors:
+			return deserializeBatchGetSessionErrors(d, schemas.BatchGetSessionResponse_errors, &v.Errors)
+		case schemas.BatchGetSessionResponse_sessions:
+			return deserializeBatchGetSessionItems(d, schemas.BatchGetSessionResponse_sessions, &v.Sessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSession, schemas.BatchGetSessionRequest, schemas.BatchGetSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSession, schemas.BatchGetSessionRequest, schemas.BatchGetSessionResponse), output: &BatchGetSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

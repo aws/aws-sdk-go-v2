@@ -5,7 +5,9 @@ package billingconductor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,42 @@ type ListAccountAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListAccountAssociationsInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListAccountAssociationsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountAssociationsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAccountAssociationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountAssociationsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountAssociationsInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListAccountAssociationsInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListAccountAssociationsInput_Filters:
+			v.Filters = &types.ListAccountAssociationsFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListAccountAssociationsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountAssociationsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAccountAssociationsOutput struct {
 
 	//  The list of linked accounts in the payer account.
@@ -64,13 +102,35 @@ type ListAccountAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountAssociationsList(s, schemas.ListAccountAssociationsOutput_LinkedAccounts, v.LinkedAccounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountAssociationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAccountAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountAssociationsOutput_LinkedAccounts:
+			return deserializeAccountAssociationsList(d, schemas.ListAccountAssociationsOutput_LinkedAccounts, &v.LinkedAccounts)
+		case schemas.ListAccountAssociationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountAssociationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccountAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssociations, schemas.ListAccountAssociationsInput, schemas.ListAccountAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccountAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssociations, schemas.ListAccountAssociationsInput, schemas.ListAccountAssociationsOutput), output: &ListAccountAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,34 @@ type UpdateEventBusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventBusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventBusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventBusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.UpdateEventBusRequest_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEventBusRequest_Description, *v.Description)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.UpdateEventBusRequest_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateEventBusRequest_LogConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEventBusRequest_Name, *v.Name)
+	}
+}
+
 type UpdateEventBusOutput struct {
 
 	// The event bus Amazon Resource Name (ARN).
@@ -125,13 +155,66 @@ type UpdateEventBusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventBusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventBusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventBusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateEventBusResponse_Arn, *v.Arn)
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.UpdateEventBusResponse_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEventBusResponse_Description, *v.Description)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.UpdateEventBusResponse_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateEventBusResponse_LogConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEventBusResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateEventBusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventBusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEventBusResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateEventBusResponse_Arn, v.Arn)
+		case schemas.UpdateEventBusResponse_DeadLetterConfig:
+			v.DeadLetterConfig = &types.DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.UpdateEventBusResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateEventBusResponse_Description, v.Description)
+		case schemas.UpdateEventBusResponse_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.UpdateEventBusResponse_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.UpdateEventBusResponse_LogConfig:
+			v.LogConfig = &types.LogConfig{}
+			return v.LogConfig.Deserialize(d)
+		case schemas.UpdateEventBusResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateEventBusResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEventBus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventBus, schemas.UpdateEventBusRequest, schemas.UpdateEventBusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEventBus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventBus, schemas.UpdateEventBusRequest, schemas.UpdateEventBusResponse), output: &UpdateEventBusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

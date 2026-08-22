@@ -4,6 +4,8 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteLaunchConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLaunchConfigurationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLaunchConfigurationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLaunchConfigurationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchConfigurationTemplateID != nil {
+		s.WriteString(schemas.DeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID, *v.LaunchConfigurationTemplateID)
+	}
+}
+func (v *DeleteLaunchConfigurationTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLaunchConfigurationTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID:
+			v.LaunchConfigurationTemplateID = new(string)
+			return d.ReadString(schemas.DeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID, v.LaunchConfigurationTemplateID)
+		}
+		return nil
+	})
+}
+
 type DeleteLaunchConfigurationTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +64,26 @@ type DeleteLaunchConfigurationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLaunchConfigurationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLaunchConfigurationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLaunchConfigurationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLaunchConfigurationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLaunchConfigurationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLaunchConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLaunchConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLaunchConfigurationTemplate, schemas.DeleteLaunchConfigurationTemplateRequest, schemas.DeleteLaunchConfigurationTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLaunchConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLaunchConfigurationTemplate, schemas.DeleteLaunchConfigurationTemplateRequest, schemas.DeleteLaunchConfigurationTemplateResponse), output: &DeleteLaunchConfigurationTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

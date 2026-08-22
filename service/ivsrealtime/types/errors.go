@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -41,6 +42,75 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.AccessDeniedException_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.AccessDeniedException_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.AccessDeniedException_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.AccessDeniedException_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	if v.ExceptionMessage != nil {
+		s.WriteString(schemas.AccessDeniedException_exceptionMessage, *v.ExceptionMessage)
+	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.AccessDeniedException_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XAmznErrorType != nil {
+		s.WriteString(schemas.AccessDeniedException_xAmznErrorType, *v.XAmznErrorType)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.AccessDeniedException_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.AccessDeniedException_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.AccessDeniedException_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.AccessDeniedException_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.AccessDeniedException_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.AccessDeniedException_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.AccessDeniedException_cacheControl, v.CacheControl)
+		case schemas.AccessDeniedException_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.AccessDeniedException_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.AccessDeniedException_exceptionMessage:
+			v.ExceptionMessage = new(string)
+			return d.ReadString(schemas.AccessDeniedException_exceptionMessage, v.ExceptionMessage)
+		case schemas.AccessDeniedException_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.AccessDeniedException_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.AccessDeniedException_xAmznErrorType:
+			v.XAmznErrorType = new(string)
+			return d.ReadString(schemas.AccessDeniedException_xAmznErrorType, v.XAmznErrorType)
+		case schemas.AccessDeniedException_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.AccessDeniedException_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.AccessDeniedException_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.AccessDeniedException_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 
 type ConflictException struct {
 	Message *string
@@ -76,6 +146,75 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.ConflictException_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.ConflictException_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.ConflictException_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.ConflictException_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	if v.ExceptionMessage != nil {
+		s.WriteString(schemas.ConflictException_exceptionMessage, *v.ExceptionMessage)
+	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.ConflictException_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XAmznErrorType != nil {
+		s.WriteString(schemas.ConflictException_xAmznErrorType, *v.XAmznErrorType)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.ConflictException_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.ConflictException_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.ConflictException_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.ConflictException_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.ConflictException_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.ConflictException_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.ConflictException_cacheControl, v.CacheControl)
+		case schemas.ConflictException_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.ConflictException_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.ConflictException_exceptionMessage:
+			v.ExceptionMessage = new(string)
+			return d.ReadString(schemas.ConflictException_exceptionMessage, v.ExceptionMessage)
+		case schemas.ConflictException_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.ConflictException_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.ConflictException_xAmznErrorType:
+			v.XAmznErrorType = new(string)
+			return d.ReadString(schemas.ConflictException_xAmznErrorType, v.XAmznErrorType)
+		case schemas.ConflictException_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.ConflictException_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.ConflictException_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.ConflictException_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 
 type InternalServerException struct {
 	Message *string
@@ -111,6 +250,75 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.InternalServerException_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.InternalServerException_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.InternalServerException_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.InternalServerException_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	if v.ExceptionMessage != nil {
+		s.WriteString(schemas.InternalServerException_exceptionMessage, *v.ExceptionMessage)
+	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.InternalServerException_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XAmznErrorType != nil {
+		s.WriteString(schemas.InternalServerException_xAmznErrorType, *v.XAmznErrorType)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.InternalServerException_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.InternalServerException_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.InternalServerException_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.InternalServerException_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.InternalServerException_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.InternalServerException_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.InternalServerException_cacheControl, v.CacheControl)
+		case schemas.InternalServerException_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.InternalServerException_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.InternalServerException_exceptionMessage:
+			v.ExceptionMessage = new(string)
+			return d.ReadString(schemas.InternalServerException_exceptionMessage, v.ExceptionMessage)
+		case schemas.InternalServerException_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.InternalServerException_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.InternalServerException_xAmznErrorType:
+			v.XAmznErrorType = new(string)
+			return d.ReadString(schemas.InternalServerException_xAmznErrorType, v.XAmznErrorType)
+		case schemas.InternalServerException_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.InternalServerException_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.InternalServerException_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.InternalServerException_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 
 type PendingVerification struct {
 	Message *string
@@ -146,6 +354,75 @@ func (e *PendingVerification) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PendingVerification) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PendingVerification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PendingVerification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PendingVerification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.PendingVerification_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.PendingVerification_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.PendingVerification_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.PendingVerification_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	if v.ExceptionMessage != nil {
+		s.WriteString(schemas.PendingVerification_exceptionMessage, *v.ExceptionMessage)
+	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.PendingVerification_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XAmznErrorType != nil {
+		s.WriteString(schemas.PendingVerification_xAmznErrorType, *v.XAmznErrorType)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.PendingVerification_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.PendingVerification_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *PendingVerification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PendingVerification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PendingVerification_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.PendingVerification_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.PendingVerification_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.PendingVerification_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.PendingVerification_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.PendingVerification_cacheControl, v.CacheControl)
+		case schemas.PendingVerification_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.PendingVerification_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.PendingVerification_exceptionMessage:
+			v.ExceptionMessage = new(string)
+			return d.ReadString(schemas.PendingVerification_exceptionMessage, v.ExceptionMessage)
+		case schemas.PendingVerification_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.PendingVerification_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.PendingVerification_xAmznErrorType:
+			v.XAmznErrorType = new(string)
+			return d.ReadString(schemas.PendingVerification_xAmznErrorType, v.XAmznErrorType)
+		case schemas.PendingVerification_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.PendingVerification_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.PendingVerification_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.PendingVerification_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 
 type ResourceNotFoundException struct {
 	Message *string
@@ -181,6 +458,75 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.ResourceNotFoundException_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.ResourceNotFoundException_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.ResourceNotFoundException_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.ResourceNotFoundException_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	if v.ExceptionMessage != nil {
+		s.WriteString(schemas.ResourceNotFoundException_exceptionMessage, *v.ExceptionMessage)
+	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.ResourceNotFoundException_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XAmznErrorType != nil {
+		s.WriteString(schemas.ResourceNotFoundException_xAmznErrorType, *v.XAmznErrorType)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.ResourceNotFoundException_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.ResourceNotFoundException_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.ResourceNotFoundException_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.ResourceNotFoundException_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_cacheControl, v.CacheControl)
+		case schemas.ResourceNotFoundException_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.ResourceNotFoundException_exceptionMessage:
+			v.ExceptionMessage = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_exceptionMessage, v.ExceptionMessage)
+		case schemas.ResourceNotFoundException_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.ResourceNotFoundException_xAmznErrorType:
+			v.XAmznErrorType = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_xAmznErrorType, v.XAmznErrorType)
+		case schemas.ResourceNotFoundException_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.ResourceNotFoundException_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 
 type ServiceQuotaExceededException struct {
 	Message *string
@@ -216,6 +562,75 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	if v.ExceptionMessage != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_exceptionMessage, *v.ExceptionMessage)
+	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XAmznErrorType != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_xAmznErrorType, *v.XAmznErrorType)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.ServiceQuotaExceededException_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.ServiceQuotaExceededException_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_cacheControl, v.CacheControl)
+		case schemas.ServiceQuotaExceededException_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.ServiceQuotaExceededException_exceptionMessage:
+			v.ExceptionMessage = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_exceptionMessage, v.ExceptionMessage)
+		case schemas.ServiceQuotaExceededException_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.ServiceQuotaExceededException_xAmznErrorType:
+			v.XAmznErrorType = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_xAmznErrorType, v.XAmznErrorType)
+		case schemas.ServiceQuotaExceededException_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.ServiceQuotaExceededException_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 
 type ValidationException struct {
 	Message *string
@@ -251,3 +666,72 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.ValidationException_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.ValidationException_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.ValidationException_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.ValidationException_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	if v.ExceptionMessage != nil {
+		s.WriteString(schemas.ValidationException_exceptionMessage, *v.ExceptionMessage)
+	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.ValidationException_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XAmznErrorType != nil {
+		s.WriteString(schemas.ValidationException_xAmznErrorType, *v.XAmznErrorType)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.ValidationException_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.ValidationException_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.ValidationException_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.ValidationException_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.ValidationException_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.ValidationException_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.ValidationException_cacheControl, v.CacheControl)
+		case schemas.ValidationException_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.ValidationException_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.ValidationException_exceptionMessage:
+			v.ExceptionMessage = new(string)
+			return d.ReadString(schemas.ValidationException_exceptionMessage, v.ExceptionMessage)
+		case schemas.ValidationException_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.ValidationException_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.ValidationException_xAmznErrorType:
+			v.XAmznErrorType = new(string)
+			return d.ReadString(schemas.ValidationException_xAmznErrorType, v.XAmznErrorType)
+		case schemas.ValidationException_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.ValidationException_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.ValidationException_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.ValidationException_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}

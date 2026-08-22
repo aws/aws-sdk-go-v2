@@ -4,6 +4,8 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,34 @@ type GetRevisionInput struct {
 	RevisionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevisionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.GetRevisionRequest_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.GetRevisionRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *GetRevisionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRevisionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRevisionRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.GetRevisionRequest_DataSetId, v.DataSetId)
+		case schemas.GetRevisionRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.GetRevisionRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 type GetRevisionOutput struct {
@@ -92,13 +122,93 @@ type GetRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevisionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRevisionResponse_Arn, *v.Arn)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.GetRevisionResponse_Comment, *v.Comment)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetRevisionResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.GetRevisionResponse_DataSetId, *v.DataSetId)
+	}
+	if v.Finalized != false {
+		s.WriteBool(schemas.GetRevisionResponse_Finalized, v.Finalized)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetRevisionResponse_Id, *v.Id)
+	}
+	if v.RevocationComment != nil {
+		s.WriteString(schemas.GetRevisionResponse_RevocationComment, *v.RevocationComment)
+	}
+	if v.Revoked != false {
+		s.WriteBool(schemas.GetRevisionResponse_Revoked, v.Revoked)
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.GetRevisionResponse_RevokedAt, *v.RevokedAt)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.GetRevisionResponse_SourceId, *v.SourceId)
+	}
+	serializeMapOf__string(s, schemas.GetRevisionResponse_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetRevisionResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRevisionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRevisionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetRevisionResponse_Arn, v.Arn)
+		case schemas.GetRevisionResponse_Comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.GetRevisionResponse_Comment, v.Comment)
+		case schemas.GetRevisionResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRevisionResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetRevisionResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.GetRevisionResponse_DataSetId, v.DataSetId)
+		case schemas.GetRevisionResponse_Finalized:
+			return d.ReadBool(schemas.GetRevisionResponse_Finalized, &v.Finalized)
+		case schemas.GetRevisionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetRevisionResponse_Id, v.Id)
+		case schemas.GetRevisionResponse_RevocationComment:
+			v.RevocationComment = new(string)
+			return d.ReadString(schemas.GetRevisionResponse_RevocationComment, v.RevocationComment)
+		case schemas.GetRevisionResponse_Revoked:
+			return d.ReadBool(schemas.GetRevisionResponse_Revoked, &v.Revoked)
+		case schemas.GetRevisionResponse_RevokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRevisionResponse_RevokedAt, v.RevokedAt)
+		case schemas.GetRevisionResponse_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.GetRevisionResponse_SourceId, v.SourceId)
+		case schemas.GetRevisionResponse_Tags:
+			return deserializeMapOf__string(d, schemas.GetRevisionResponse_Tags, &v.Tags)
+		case schemas.GetRevisionResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRevisionResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevision, schemas.GetRevisionRequest, schemas.GetRevisionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevision, schemas.GetRevisionRequest, schemas.GetRevisionResponse), output: &GetRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DeletePricingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePricingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePricingRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePricingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeletePricingRuleInput_Arn, *v.Arn)
+	}
+}
+func (v *DeletePricingRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePricingRuleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePricingRuleInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeletePricingRuleInput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DeletePricingRuleOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the deleted pricing rule.
@@ -46,13 +70,32 @@ type DeletePricingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePricingRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePricingRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePricingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeletePricingRuleOutput_Arn, *v.Arn)
+	}
+}
+func (v *DeletePricingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePricingRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePricingRuleOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeletePricingRuleOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePricingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePricingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePricingRule, schemas.DeletePricingRuleInput, schemas.DeletePricingRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePricingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePricingRule, schemas.DeletePricingRuleInput, schemas.DeletePricingRuleOutput), output: &DeletePricingRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

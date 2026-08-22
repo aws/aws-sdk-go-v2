@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type PutPartnerEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPartnerEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPartnerEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPartnerEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePutPartnerEventsRequestEntryList(s, schemas.PutPartnerEventsRequest_Entries, v.Entries)
+}
+
 type PutPartnerEventsOutput struct {
 
 	// The results for each event entry the partner submitted in this request. If the
@@ -61,13 +73,34 @@ type PutPartnerEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPartnerEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPartnerEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPartnerEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePutPartnerEventsResultEntryList(s, schemas.PutPartnerEventsResponse_Entries, v.Entries)
+	if v.FailedEntryCount != 0 {
+		s.WriteInt32(schemas.PutPartnerEventsResponse_FailedEntryCount, v.FailedEntryCount)
+	}
+}
+func (v *PutPartnerEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutPartnerEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutPartnerEventsResponse_Entries:
+			return deserializePutPartnerEventsResultEntryList(d, schemas.PutPartnerEventsResponse_Entries, &v.Entries)
+		case schemas.PutPartnerEventsResponse_FailedEntryCount:
+			return d.ReadInt32(schemas.PutPartnerEventsResponse_FailedEntryCount, &v.FailedEntryCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutPartnerEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutPartnerEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPartnerEvents, schemas.PutPartnerEventsRequest, schemas.PutPartnerEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutPartnerEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPartnerEvents, schemas.PutPartnerEventsRequest, schemas.PutPartnerEventsResponse), output: &PutPartnerEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

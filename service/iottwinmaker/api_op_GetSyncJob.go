@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,34 @@ type GetSyncJobInput struct {
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSyncJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSyncJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSyncJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SyncSource != nil {
+		s.WriteString(schemas.GetSyncJobRequest_syncSource, *v.SyncSource)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetSyncJobRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetSyncJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSyncJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSyncJobRequest_syncSource:
+			v.SyncSource = new(string)
+			return d.ReadString(schemas.GetSyncJobRequest_syncSource, v.SyncSource)
+		case schemas.GetSyncJobRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetSyncJobRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 type GetSyncJobOutput struct {
@@ -87,13 +117,70 @@ type GetSyncJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSyncJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSyncJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSyncJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetSyncJobResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.GetSyncJobResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.GetSyncJobResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SyncRole != nil {
+		s.WriteString(schemas.GetSyncJobResponse_syncRole, *v.SyncRole)
+	}
+	if v.SyncSource != nil {
+		s.WriteString(schemas.GetSyncJobResponse_syncSource, *v.SyncSource)
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.GetSyncJobResponse_updateDateTime, *v.UpdateDateTime)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetSyncJobResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetSyncJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSyncJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSyncJobResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetSyncJobResponse_arn, v.Arn)
+		case schemas.GetSyncJobResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetSyncJobResponse_creationDateTime, v.CreationDateTime)
+		case schemas.GetSyncJobResponse_status:
+			v.Status = &types.SyncJobStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.GetSyncJobResponse_syncRole:
+			v.SyncRole = new(string)
+			return d.ReadString(schemas.GetSyncJobResponse_syncRole, v.SyncRole)
+		case schemas.GetSyncJobResponse_syncSource:
+			v.SyncSource = new(string)
+			return d.ReadString(schemas.GetSyncJobResponse_syncSource, v.SyncSource)
+		case schemas.GetSyncJobResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetSyncJobResponse_updateDateTime, v.UpdateDateTime)
+		case schemas.GetSyncJobResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetSyncJobResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSyncJob, schemas.GetSyncJobRequest, schemas.GetSyncJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSyncJob, schemas.GetSyncJobRequest, schemas.GetSyncJobResponse), output: &GetSyncJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

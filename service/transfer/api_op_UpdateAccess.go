@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -137,6 +139,39 @@ type UpdateAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalId != nil {
+		s.WriteString(schemas.UpdateAccessRequest_ExternalId, *v.ExternalId)
+	}
+	if v.HomeDirectory != nil {
+		s.WriteString(schemas.UpdateAccessRequest_HomeDirectory, *v.HomeDirectory)
+	}
+	serializeHomeDirectoryMappings(s, schemas.UpdateAccessRequest_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	if v.HomeDirectoryType != "" {
+		s.WriteString(schemas.UpdateAccessRequest_HomeDirectoryType, string(v.HomeDirectoryType))
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.UpdateAccessRequest_Policy, *v.Policy)
+	}
+	if v.PosixProfile != nil {
+		s.WriteStruct(schemas.UpdateAccessRequest_PosixProfile)
+		v.PosixProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.UpdateAccessRequest_Role, *v.Role)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.UpdateAccessRequest_ServerId, *v.ServerId)
+	}
+}
+
 type UpdateAccessOutput struct {
 
 	// The external identifier of the group whose users have access to your Amazon S3
@@ -157,13 +192,38 @@ type UpdateAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalId != nil {
+		s.WriteString(schemas.UpdateAccessResponse_ExternalId, *v.ExternalId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.UpdateAccessResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *UpdateAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccessResponse_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.UpdateAccessResponse_ExternalId, v.ExternalId)
+		case schemas.UpdateAccessResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.UpdateAccessResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccess, schemas.UpdateAccessRequest, schemas.UpdateAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccess, schemas.UpdateAccessRequest, schemas.UpdateAccessResponse), output: &UpdateAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteResourceEndpointAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceEndpointAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceEndpointAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceEndpointAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceEndpointAssociationIdentifier != nil {
+		s.WriteString(schemas.DeleteResourceEndpointAssociationRequest_resourceEndpointAssociationIdentifier, *v.ResourceEndpointAssociationIdentifier)
+	}
+}
+
 type DeleteResourceEndpointAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the association.
@@ -58,13 +72,56 @@ type DeleteResourceEndpointAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceEndpointAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceEndpointAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceEndpointAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteResourceEndpointAssociationResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteResourceEndpointAssociationResponse_id, *v.Id)
+	}
+	if v.ResourceConfigurationArn != nil {
+		s.WriteString(schemas.DeleteResourceEndpointAssociationResponse_resourceConfigurationArn, *v.ResourceConfigurationArn)
+	}
+	if v.ResourceConfigurationId != nil {
+		s.WriteString(schemas.DeleteResourceEndpointAssociationResponse_resourceConfigurationId, *v.ResourceConfigurationId)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.DeleteResourceEndpointAssociationResponse_vpcEndpointId, *v.VpcEndpointId)
+	}
+}
+func (v *DeleteResourceEndpointAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourceEndpointAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourceEndpointAssociationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteResourceEndpointAssociationResponse_arn, v.Arn)
+		case schemas.DeleteResourceEndpointAssociationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteResourceEndpointAssociationResponse_id, v.Id)
+		case schemas.DeleteResourceEndpointAssociationResponse_resourceConfigurationArn:
+			v.ResourceConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteResourceEndpointAssociationResponse_resourceConfigurationArn, v.ResourceConfigurationArn)
+		case schemas.DeleteResourceEndpointAssociationResponse_resourceConfigurationId:
+			v.ResourceConfigurationId = new(string)
+			return d.ReadString(schemas.DeleteResourceEndpointAssociationResponse_resourceConfigurationId, v.ResourceConfigurationId)
+		case schemas.DeleteResourceEndpointAssociationResponse_vpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.DeleteResourceEndpointAssociationResponse_vpcEndpointId, v.VpcEndpointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourceEndpointAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourceEndpointAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceEndpointAssociation, schemas.DeleteResourceEndpointAssociationRequest, schemas.DeleteResourceEndpointAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResourceEndpointAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceEndpointAssociation, schemas.DeleteResourceEndpointAssociationRequest, schemas.DeleteResourceEndpointAssociationResponse), output: &DeleteResourceEndpointAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,31 @@ type CreateOrderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLineItemRequestListDefinition(s, schemas.CreateOrderInput_LineItems, v.LineItems)
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.CreateOrderInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.CreateOrderInput_PaymentOption, string(v.PaymentOption))
+	}
+	if v.PaymentTerm != "" {
+		s.WriteString(schemas.CreateOrderInput_PaymentTerm, string(v.PaymentTerm))
+	}
+	if v.QuoteIdentifier != nil {
+		s.WriteString(schemas.CreateOrderInput_QuoteIdentifier, *v.QuoteIdentifier)
+	}
+	if v.QuoteOptionIdentifier != nil {
+		s.WriteString(schemas.CreateOrderInput_QuoteOptionIdentifier, *v.QuoteOptionIdentifier)
+	}
+}
+
 type CreateOrderOutput struct {
 
 	// Information about this order.
@@ -62,13 +89,34 @@ type CreateOrderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrderOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Order != nil {
+		s.WriteStruct(schemas.CreateOrderOutput_Order)
+		v.Order.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOrderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOrderOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOrderOutput_Order:
+			v.Order = &types.Order{}
+			return v.Order.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrder, schemas.CreateOrderInput, schemas.CreateOrderOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrder, schemas.CreateOrderInput, schemas.CreateOrderOutput), output: &CreateOrderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

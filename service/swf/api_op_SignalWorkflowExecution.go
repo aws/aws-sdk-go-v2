@@ -4,6 +4,8 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,30 @@ type SignalWorkflowExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignalWorkflowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignalWorkflowExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalWorkflowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.SignalWorkflowExecutionInput_domain, *v.Domain)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.SignalWorkflowExecutionInput_input, *v.Input)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.SignalWorkflowExecutionInput_runId, *v.RunId)
+	}
+	if v.SignalName != nil {
+		s.WriteString(schemas.SignalWorkflowExecutionInput_signalName, *v.SignalName)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.SignalWorkflowExecutionInput_workflowId, *v.WorkflowId)
+	}
+}
+
 type SignalWorkflowExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -86,13 +112,26 @@ type SignalWorkflowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignalWorkflowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalWorkflowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SignalWorkflowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSignalWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSignalWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignalWorkflowExecution, schemas.SignalWorkflowExecutionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSignalWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignalWorkflowExecution, schemas.SignalWorkflowExecutionInput, nil), output: &SignalWorkflowExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

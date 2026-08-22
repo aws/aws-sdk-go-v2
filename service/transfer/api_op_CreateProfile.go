@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,23 @@ type CreateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.As2Id != nil {
+		s.WriteString(schemas.CreateProfileRequest_As2Id, *v.As2Id)
+	}
+	serializeCertificateIds(s, schemas.CreateProfileRequest_CertificateIds, v.CertificateIds)
+	if v.ProfileType != "" {
+		s.WriteString(schemas.CreateProfileRequest_ProfileType, string(v.ProfileType))
+	}
+	serializeTags(s, schemas.CreateProfileRequest_Tags, v.Tags)
+}
+
 type CreateProfileOutput struct {
 
 	// The unique identifier for the AS2 profile, returned after the API call succeeds.
@@ -70,13 +89,32 @@ type CreateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.CreateProfileResponse_ProfileId, *v.ProfileId)
+	}
+}
+func (v *CreateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProfileResponse_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.CreateProfileResponse_ProfileId, v.ProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfile, schemas.CreateProfileRequest, schemas.CreateProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfile, schemas.CreateProfileRequest, schemas.CreateProfileResponse), output: &CreateProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

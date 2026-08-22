@@ -5,6 +5,8 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,6 +55,52 @@ type UpdateSceneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSceneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSceneRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSceneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSceneCapabilities(s, schemas.UpdateSceneRequest_capabilities, v.Capabilities)
+	if v.ContentLocation != nil {
+		s.WriteString(schemas.UpdateSceneRequest_contentLocation, *v.ContentLocation)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSceneRequest_description, *v.Description)
+	}
+	if v.SceneId != nil {
+		s.WriteString(schemas.UpdateSceneRequest_sceneId, *v.SceneId)
+	}
+	serializeSceneMetadataMap(s, schemas.UpdateSceneRequest_sceneMetadata, v.SceneMetadata)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateSceneRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *UpdateSceneInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSceneRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSceneRequest_capabilities:
+			return deserializeSceneCapabilities(d, schemas.UpdateSceneRequest_capabilities, &v.Capabilities)
+		case schemas.UpdateSceneRequest_contentLocation:
+			v.ContentLocation = new(string)
+			return d.ReadString(schemas.UpdateSceneRequest_contentLocation, v.ContentLocation)
+		case schemas.UpdateSceneRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSceneRequest_description, v.Description)
+		case schemas.UpdateSceneRequest_sceneId:
+			v.SceneId = new(string)
+			return d.ReadString(schemas.UpdateSceneRequest_sceneId, v.SceneId)
+		case schemas.UpdateSceneRequest_sceneMetadata:
+			return deserializeSceneMetadataMap(d, schemas.UpdateSceneRequest_sceneMetadata, &v.SceneMetadata)
+		case schemas.UpdateSceneRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.UpdateSceneRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type UpdateSceneOutput struct {
 
 	// The date and time when the scene was last updated.
@@ -66,13 +114,32 @@ type UpdateSceneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSceneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSceneResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSceneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.UpdateSceneResponse_updateDateTime, *v.UpdateDateTime)
+	}
+}
+func (v *UpdateSceneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSceneResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSceneResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSceneResponse_updateDateTime, v.UpdateDateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSceneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateScene{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScene, schemas.UpdateSceneRequest, schemas.UpdateSceneResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateScene{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScene, schemas.UpdateSceneRequest, schemas.UpdateSceneResponse), output: &UpdateSceneOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,30 @@ type ListSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListSessionsRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ListSessionsRequest_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSessionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionsRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListSessionsRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListSessionsOutput struct {
 
@@ -76,13 +102,35 @@ type ListSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionsResponse_nextToken, *v.NextToken)
+	}
+	serializeSessionSummaries(s, schemas.ListSessionsResponse_sessions, v.Sessions)
+}
+func (v *ListSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSessionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSessionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSessionsResponse_nextToken, v.NextToken)
+		case schemas.ListSessionsResponse_sessions:
+			return deserializeSessionSummaries(d, schemas.ListSessionsResponse_sessions, &v.Sessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessions, schemas.ListSessionsRequest, schemas.ListSessionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessions, schemas.ListSessionsRequest, schemas.ListSessionsResponse), output: &ListSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

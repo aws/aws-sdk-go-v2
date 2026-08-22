@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,40 @@ type ListListenersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListListenersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListListenersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListListenersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListListenersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListListenersRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceIdentifier != nil {
+		s.WriteString(schemas.ListListenersRequest_serviceIdentifier, *v.ServiceIdentifier)
+	}
+}
+func (v *ListListenersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListListenersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListListenersRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListListenersRequest_maxResults, v.MaxResults)
+		case schemas.ListListenersRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListListenersRequest_nextToken, v.NextToken)
+		case schemas.ListListenersRequest_serviceIdentifier:
+			v.ServiceIdentifier = new(string)
+			return d.ReadString(schemas.ListListenersRequest_serviceIdentifier, v.ServiceIdentifier)
+		}
+		return nil
+	})
+}
+
 type ListListenersOutput struct {
 
 	// Information about the listeners.
@@ -58,13 +94,35 @@ type ListListenersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListListenersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListListenersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListListenersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListenerSummaryList(s, schemas.ListListenersResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListListenersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListListenersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListListenersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListListenersResponse_items:
+			return deserializeListenerSummaryList(d, schemas.ListListenersResponse_items, &v.Items)
+		case schemas.ListListenersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListListenersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListListeners{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListListeners, schemas.ListListenersRequest, schemas.ListListenersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListListeners{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListListeners, schemas.ListListenersRequest, schemas.ListListenersResponse), output: &ListListenersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

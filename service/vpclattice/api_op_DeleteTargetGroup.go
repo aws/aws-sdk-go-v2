@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DeleteTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTargetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTargetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTargetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetGroupIdentifier != nil {
+		s.WriteString(schemas.DeleteTargetGroupRequest_targetGroupIdentifier, *v.TargetGroupIdentifier)
+	}
+}
+func (v *DeleteTargetGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTargetGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTargetGroupRequest_targetGroupIdentifier:
+			v.TargetGroupIdentifier = new(string)
+			return d.ReadString(schemas.DeleteTargetGroupRequest_targetGroupIdentifier, v.TargetGroupIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteTargetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the target group.
@@ -54,13 +78,48 @@ type DeleteTargetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTargetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTargetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTargetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteTargetGroupResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteTargetGroupResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteTargetGroupResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteTargetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTargetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTargetGroupResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteTargetGroupResponse_arn, v.Arn)
+		case schemas.DeleteTargetGroupResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteTargetGroupResponse_id, v.Id)
+		case schemas.DeleteTargetGroupResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteTargetGroupResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TargetGroupStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTargetGroup, schemas.DeleteTargetGroupRequest, schemas.DeleteTargetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTargetGroup, schemas.DeleteTargetGroupRequest, schemas.DeleteTargetGroupResponse), output: &DeleteTargetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

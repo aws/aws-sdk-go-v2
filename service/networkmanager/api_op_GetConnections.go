@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,28 @@ type GetConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionIdList(s, schemas.GetConnectionsRequest_ConnectionIds, v.ConnectionIds)
+	if v.DeviceId != nil {
+		s.WriteString(schemas.GetConnectionsRequest_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetConnectionsRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetConnectionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetConnectionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetConnectionsOutput struct {
 
 	// Information about the connections.
@@ -61,13 +85,35 @@ type GetConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionList(s, schemas.GetConnectionsResponse_Connections, v.Connections)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetConnectionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectionsResponse_Connections:
+			return deserializeConnectionList(d, schemas.GetConnectionsResponse_Connections, &v.Connections)
+		case schemas.GetConnectionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetConnectionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnections, schemas.GetConnectionsRequest, schemas.GetConnectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnections, schemas.GetConnectionsRequest, schemas.GetConnectionsResponse), output: &GetConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

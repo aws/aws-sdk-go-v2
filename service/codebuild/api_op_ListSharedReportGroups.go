@@ -5,7 +5,9 @@ package codebuild
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,27 @@ type ListSharedReportGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedReportGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedReportGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedReportGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSharedReportGroupsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedReportGroupsInput_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListSharedReportGroupsInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListSharedReportGroupsInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListSharedReportGroupsOutput struct {
 
 	//  During a previous call, the maximum number of items that can be returned is
@@ -81,13 +104,35 @@ type ListSharedReportGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedReportGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedReportGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedReportGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedReportGroupsOutput_nextToken, *v.NextToken)
+	}
+	serializeReportGroupArns(s, schemas.ListSharedReportGroupsOutput_reportGroups, v.ReportGroups)
+}
+func (v *ListSharedReportGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSharedReportGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSharedReportGroupsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSharedReportGroupsOutput_nextToken, v.NextToken)
+		case schemas.ListSharedReportGroupsOutput_reportGroups:
+			return deserializeReportGroupArns(d, schemas.ListSharedReportGroupsOutput_reportGroups, &v.ReportGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSharedReportGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSharedReportGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedReportGroups, schemas.ListSharedReportGroupsInput, schemas.ListSharedReportGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSharedReportGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedReportGroups, schemas.ListSharedReportGroupsInput, schemas.ListSharedReportGroupsOutput), output: &ListSharedReportGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

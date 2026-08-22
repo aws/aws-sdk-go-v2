@@ -4,6 +4,8 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DeleteReportGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReportGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReportGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReportGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteReportGroupInput_arn, *v.Arn)
+	}
+	if v.DeleteReports != false {
+		s.WriteBool(schemas.DeleteReportGroupInput_deleteReports, v.DeleteReports)
+	}
+}
+
 type DeleteReportGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +70,26 @@ type DeleteReportGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReportGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReportGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReportGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteReportGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReportGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteReportGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReportGroup, schemas.DeleteReportGroupInput, schemas.DeleteReportGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteReportGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReportGroup, schemas.DeleteReportGroupInput, schemas.DeleteReportGroupOutput), output: &DeleteReportGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,28 @@ type CreateComputerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.CreateComputerRequest_ComputerAttributes, v.ComputerAttributes)
+	if v.ComputerName != nil {
+		s.WriteString(schemas.CreateComputerRequest_ComputerName, *v.ComputerName)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateComputerRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.OrganizationalUnitDistinguishedName != nil {
+		s.WriteString(schemas.CreateComputerRequest_OrganizationalUnitDistinguishedName, *v.OrganizationalUnitDistinguishedName)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.CreateComputerRequest_Password, *v.Password)
+	}
+}
+
 // Contains the results for the CreateComputer operation.
 type CreateComputerOutput struct {
 
@@ -66,13 +90,34 @@ type CreateComputerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputerResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Computer != nil {
+		s.WriteStruct(schemas.CreateComputerResult_Computer)
+		v.Computer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateComputerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComputerResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComputerResult_Computer:
+			v.Computer = &types.Computer{}
+			return v.Computer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComputerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateComputer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputer, schemas.CreateComputerRequest, schemas.CreateComputerResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateComputer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputer, schemas.CreateComputerRequest, schemas.CreateComputerResult), output: &CreateComputerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

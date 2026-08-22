@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DeleteFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.DeleteFileShareInput_FileShareARN, *v.FileShareARN)
+	}
+	if v.ForceDelete != false {
+		s.WriteBool(schemas.DeleteFileShareInput_ForceDelete, v.ForceDelete)
+	}
+}
+
 // DeleteFileShareOutput
 type DeleteFileShareOutput struct {
 
@@ -56,13 +73,32 @@ type DeleteFileShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.DeleteFileShareOutput_FileShareARN, *v.FileShareARN)
+	}
+}
+func (v *DeleteFileShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileShareOutput_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.DeleteFileShareOutput_FileShareARN, v.FileShareARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFileShare, schemas.DeleteFileShareInput, schemas.DeleteFileShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFileShare, schemas.DeleteFileShareInput, schemas.DeleteFileShareOutput), output: &DeleteFileShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

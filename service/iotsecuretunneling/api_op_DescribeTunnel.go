@@ -4,7 +4,9 @@ package iotsecuretunneling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DescribeTunnelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTunnelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTunnelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTunnelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TunnelId != nil {
+		s.WriteString(schemas.DescribeTunnelRequest_tunnelId, *v.TunnelId)
+	}
+}
+
 type DescribeTunnelOutput struct {
 
 	// The tunnel being described.
@@ -49,13 +63,34 @@ type DescribeTunnelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTunnelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTunnelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTunnelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tunnel != nil {
+		s.WriteStruct(schemas.DescribeTunnelResponse_tunnel)
+		v.Tunnel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTunnelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTunnelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTunnelResponse_tunnel:
+			v.Tunnel = &types.Tunnel{}
+			return v.Tunnel.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTunnel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTunnel, schemas.DescribeTunnelRequest, schemas.DescribeTunnelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTunnel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTunnel, schemas.DescribeTunnelRequest, schemas.DescribeTunnelResponse), output: &DescribeTunnelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

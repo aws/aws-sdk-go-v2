@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,25 @@ type DescribeTrustsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrustsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrustsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrustsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeTrustsRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeTrustsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeTrustsRequest_NextToken, *v.NextToken)
+	}
+	serializeTrustIds(s, schemas.DescribeTrustsRequest_TrustIds, v.TrustIds)
+}
+
 // The result of a DescribeTrust request.
 type DescribeTrustsOutput struct {
 
@@ -75,13 +96,35 @@ type DescribeTrustsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrustsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrustsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrustsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeTrustsResult_NextToken, *v.NextToken)
+	}
+	serializeTrusts(s, schemas.DescribeTrustsResult_Trusts, v.Trusts)
+}
+func (v *DescribeTrustsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrustsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrustsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeTrustsResult_NextToken, v.NextToken)
+		case schemas.DescribeTrustsResult_Trusts:
+			return deserializeTrusts(d, schemas.DescribeTrustsResult_Trusts, &v.Trusts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrustsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrusts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrusts, schemas.DescribeTrustsRequest, schemas.DescribeTrustsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrusts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrusts, schemas.DescribeTrustsRequest, schemas.DescribeTrustsResult), output: &DescribeTrustsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

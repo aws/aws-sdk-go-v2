@@ -4,6 +4,8 @@ package signer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,33 @@ type AddProfilePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddProfilePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddProfilePermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddProfilePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.AddProfilePermissionRequest_action, *v.Action)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.AddProfilePermissionRequest_principal, *v.Principal)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.AddProfilePermissionRequest_profileName, *v.ProfileName)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.AddProfilePermissionRequest_profileVersion, *v.ProfileVersion)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.AddProfilePermissionRequest_revisionId, *v.RevisionId)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.AddProfilePermissionRequest_statementId, *v.StatementId)
+	}
+}
+
 type AddProfilePermissionOutput struct {
 
 	// A unique identifier for the current profile revision.
@@ -83,13 +112,32 @@ type AddProfilePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddProfilePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddProfilePermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddProfilePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RevisionId != nil {
+		s.WriteString(schemas.AddProfilePermissionResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *AddProfilePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddProfilePermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddProfilePermissionResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.AddProfilePermissionResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddProfilePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddProfilePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddProfilePermission, schemas.AddProfilePermissionRequest, schemas.AddProfilePermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddProfilePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddProfilePermission, schemas.AddProfilePermissionRequest, schemas.AddProfilePermissionResponse), output: &AddProfilePermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

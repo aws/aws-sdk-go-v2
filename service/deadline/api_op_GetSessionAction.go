@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -50,6 +52,27 @@ type GetSessionActionInput struct {
 	SessionActionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSessionActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetSessionActionRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetSessionActionRequest_jobId, *v.JobId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetSessionActionRequest_queueId, *v.QueueId)
+	}
+	if v.SessionActionId != nil {
+		s.WriteString(schemas.GetSessionActionRequest_sessionActionId, *v.SessionActionId)
+	}
 }
 
 type GetSessionActionOutput struct {
@@ -106,13 +129,93 @@ type GetSessionActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcquiredLimits(s, schemas.GetSessionActionResponse_acquiredLimits, v.AcquiredLimits)
+	serializeSessionActionDefinition(s, schemas.GetSessionActionResponse_definition, v.Definition)
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetSessionActionResponse_endedAt, *v.EndedAt)
+	}
+	serializeTaskRunManifestPropertiesListResponse(s, schemas.GetSessionActionResponse_manifests, v.Manifests)
+	if v.ProcessExitCode != nil {
+		s.WriteInt32(schemas.GetSessionActionResponse_processExitCode, *v.ProcessExitCode)
+	}
+	if v.ProgressMessage != nil {
+		s.WriteString(schemas.GetSessionActionResponse_progressMessage, *v.ProgressMessage)
+	}
+	if v.ProgressPercent != nil {
+		s.WriteFloat32(schemas.GetSessionActionResponse_progressPercent, *v.ProgressPercent)
+	}
+	if v.SessionActionId != nil {
+		s.WriteString(schemas.GetSessionActionResponse_sessionActionId, *v.SessionActionId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionActionResponse_sessionId, *v.SessionId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetSessionActionResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSessionActionResponse_status, string(v.Status))
+	}
+	if v.WorkerUpdatedAt != nil {
+		s.WriteTime(schemas.GetSessionActionResponse_workerUpdatedAt, *v.WorkerUpdatedAt)
+	}
+}
+func (v *GetSessionActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionActionResponse_acquiredLimits:
+			return deserializeAcquiredLimits(d, schemas.GetSessionActionResponse_acquiredLimits, &v.AcquiredLimits)
+		case schemas.GetSessionActionResponse_definition:
+			return deserializeSessionActionDefinition(d, schemas.GetSessionActionResponse_definition, &v.Definition)
+		case schemas.GetSessionActionResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSessionActionResponse_endedAt, v.EndedAt)
+		case schemas.GetSessionActionResponse_manifests:
+			return deserializeTaskRunManifestPropertiesListResponse(d, schemas.GetSessionActionResponse_manifests, &v.Manifests)
+		case schemas.GetSessionActionResponse_processExitCode:
+			v.ProcessExitCode = new(int32)
+			return d.ReadInt32(schemas.GetSessionActionResponse_processExitCode, v.ProcessExitCode)
+		case schemas.GetSessionActionResponse_progressMessage:
+			v.ProgressMessage = new(string)
+			return d.ReadString(schemas.GetSessionActionResponse_progressMessage, v.ProgressMessage)
+		case schemas.GetSessionActionResponse_progressPercent:
+			v.ProgressPercent = new(float32)
+			return d.ReadFloat32(schemas.GetSessionActionResponse_progressPercent, v.ProgressPercent)
+		case schemas.GetSessionActionResponse_sessionActionId:
+			v.SessionActionId = new(string)
+			return d.ReadString(schemas.GetSessionActionResponse_sessionActionId, v.SessionActionId)
+		case schemas.GetSessionActionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetSessionActionResponse_sessionId, v.SessionId)
+		case schemas.GetSessionActionResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSessionActionResponse_startedAt, v.StartedAt)
+		case schemas.GetSessionActionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionActionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SessionActionStatus(ev)
+			return nil
+		case schemas.GetSessionActionResponse_workerUpdatedAt:
+			v.WorkerUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSessionActionResponse_workerUpdatedAt, v.WorkerUpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionAction, schemas.GetSessionActionRequest, schemas.GetSessionActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSessionAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionAction, schemas.GetSessionActionRequest, schemas.GetSessionActionResponse), output: &GetSessionActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

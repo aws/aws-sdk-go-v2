@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -84,6 +86,90 @@ type Accelerator struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Accelerator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Accelerator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Accelerator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.Accelerator_AcceleratorArn, *v.AcceleratorArn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.Accelerator_CreatedTime, *v.CreatedTime)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.Accelerator_DnsName, *v.DnsName)
+	}
+	if v.DualStackDnsName != nil {
+		s.WriteString(schemas.Accelerator_DualStackDnsName, *v.DualStackDnsName)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.Accelerator_Enabled, *v.Enabled)
+	}
+	serializeAcceleratorEvents(s, schemas.Accelerator_Events, v.Events)
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.Accelerator_IpAddressType, string(v.IpAddressType))
+	}
+	serializeIpSets(s, schemas.Accelerator_IpSets, v.IpSets)
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.Accelerator_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Accelerator_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Accelerator_Status, string(v.Status))
+	}
+}
+func (v *Accelerator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Accelerator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Accelerator_AcceleratorArn:
+			v.AcceleratorArn = new(string)
+			return d.ReadString(schemas.Accelerator_AcceleratorArn, v.AcceleratorArn)
+		case schemas.Accelerator_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.Accelerator_CreatedTime, v.CreatedTime)
+		case schemas.Accelerator_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.Accelerator_DnsName, v.DnsName)
+		case schemas.Accelerator_DualStackDnsName:
+			v.DualStackDnsName = new(string)
+			return d.ReadString(schemas.Accelerator_DualStackDnsName, v.DualStackDnsName)
+		case schemas.Accelerator_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.Accelerator_Enabled, v.Enabled)
+		case schemas.Accelerator_Events:
+			return deserializeAcceleratorEvents(d, schemas.Accelerator_Events, &v.Events)
+		case schemas.Accelerator_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.Accelerator_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = IpAddressType(ev)
+			return nil
+		case schemas.Accelerator_IpSets:
+			return deserializeIpSets(d, schemas.Accelerator_IpSets, &v.IpSets)
+		case schemas.Accelerator_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.Accelerator_LastModifiedTime, v.LastModifiedTime)
+		case schemas.Accelerator_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Accelerator_Name, v.Name)
+		case schemas.Accelerator_Status:
+			var ev string
+			if err := d.ReadString(schemas.Accelerator_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AcceleratorStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Attributes of an accelerator.
 type AcceleratorAttributes struct {
 
@@ -112,6 +198,40 @@ type AcceleratorAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceleratorAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceleratorAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceleratorAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowLogsEnabled != nil {
+		s.WriteBool(schemas.AcceleratorAttributes_FlowLogsEnabled, *v.FlowLogsEnabled)
+	}
+	if v.FlowLogsS3Bucket != nil {
+		s.WriteString(schemas.AcceleratorAttributes_FlowLogsS3Bucket, *v.FlowLogsS3Bucket)
+	}
+	if v.FlowLogsS3Prefix != nil {
+		s.WriteString(schemas.AcceleratorAttributes_FlowLogsS3Prefix, *v.FlowLogsS3Prefix)
+	}
+}
+func (v *AcceleratorAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceleratorAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceleratorAttributes_FlowLogsEnabled:
+			v.FlowLogsEnabled = new(bool)
+			return d.ReadBool(schemas.AcceleratorAttributes_FlowLogsEnabled, v.FlowLogsEnabled)
+		case schemas.AcceleratorAttributes_FlowLogsS3Bucket:
+			v.FlowLogsS3Bucket = new(string)
+			return d.ReadString(schemas.AcceleratorAttributes_FlowLogsS3Bucket, v.FlowLogsS3Bucket)
+		case schemas.AcceleratorAttributes_FlowLogsS3Prefix:
+			v.FlowLogsS3Prefix = new(string)
+			return d.ReadString(schemas.AcceleratorAttributes_FlowLogsS3Prefix, v.FlowLogsS3Prefix)
+		}
+		return nil
+	})
+}
+
 // A complex type that contains a Timestamp value and Message for changes that you
 // make to an accelerator in Global Accelerator. Messages stored here provide
 // progress or error information when you update an accelerator from IPv4 to
@@ -129,6 +249,34 @@ type AcceleratorEvent struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *AcceleratorEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceleratorEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceleratorEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AcceleratorEvent_Message, *v.Message)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.AcceleratorEvent_Timestamp, *v.Timestamp)
+	}
+}
+func (v *AcceleratorEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceleratorEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceleratorEvent_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AcceleratorEvent_Message, v.Message)
+		case schemas.AcceleratorEvent_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.AcceleratorEvent_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // A cross-account attachment in Global Accelerator. A cross-account attachment
@@ -155,6 +303,52 @@ type Attachment struct {
 	Resources []Resource
 
 	noSmithyDocumentSerde
+}
+
+func (v *Attachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Attachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Attachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentArn != nil {
+		s.WriteString(schemas.Attachment_AttachmentArn, *v.AttachmentArn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.Attachment_CreatedTime, *v.CreatedTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.Attachment_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Attachment_Name, *v.Name)
+	}
+	serializePrincipals(s, schemas.Attachment_Principals, v.Principals)
+	serializeResources(s, schemas.Attachment_Resources, v.Resources)
+}
+func (v *Attachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Attachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Attachment_AttachmentArn:
+			v.AttachmentArn = new(string)
+			return d.ReadString(schemas.Attachment_AttachmentArn, v.AttachmentArn)
+		case schemas.Attachment_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.Attachment_CreatedTime, v.CreatedTime)
+		case schemas.Attachment_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.Attachment_LastModifiedTime, v.LastModifiedTime)
+		case schemas.Attachment_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Attachment_Name, v.Name)
+		case schemas.Attachment_Principals:
+			return deserializePrincipals(d, schemas.Attachment_Principals, &v.Principals)
+		case schemas.Attachment_Resources:
+			return deserializeResources(d, schemas.Attachment_Resources, &v.Resources)
+		}
+		return nil
+	})
 }
 
 // Information about an IP address range that is provisioned for use with your
@@ -220,6 +414,41 @@ type ByoipCidr struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ByoipCidr) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByoipCidr)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByoipCidr) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidr != nil {
+		s.WriteString(schemas.ByoipCidr_Cidr, *v.Cidr)
+	}
+	serializeByoipCidrEvents(s, schemas.ByoipCidr_Events, v.Events)
+	if v.State != "" {
+		s.WriteString(schemas.ByoipCidr_State, string(v.State))
+	}
+}
+func (v *ByoipCidr) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByoipCidr, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByoipCidr_Cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.ByoipCidr_Cidr, v.Cidr)
+		case schemas.ByoipCidr_Events:
+			return deserializeByoipCidrEvents(d, schemas.ByoipCidr_Events, &v.Events)
+		case schemas.ByoipCidr_State:
+			var ev string
+			if err := d.ReadString(schemas.ByoipCidr_State, &ev); err != nil {
+				return err
+			}
+			v.State = ByoipCidrState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A complex type that contains a Message and a Timestamp value for changes that
 // you make in the status of an IP address range that you bring to Global
 // Accelerator through bring your own IP address (BYOIP).
@@ -235,6 +464,34 @@ type ByoipCidrEvent struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ByoipCidrEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByoipCidrEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByoipCidrEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ByoipCidrEvent_Message, *v.Message)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.ByoipCidrEvent_Timestamp, *v.Timestamp)
+	}
+}
+func (v *ByoipCidrEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByoipCidrEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByoipCidrEvent_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ByoipCidrEvent_Message, v.Message)
+		case schemas.ByoipCidrEvent_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.ByoipCidrEvent_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // Provides authorization for Amazon to bring a specific IP address range to a
@@ -256,6 +513,34 @@ type CidrAuthorizationContext struct {
 	Signature *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CidrAuthorizationContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CidrAuthorizationContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CidrAuthorizationContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CidrAuthorizationContext_Message, *v.Message)
+	}
+	if v.Signature != nil {
+		s.WriteString(schemas.CidrAuthorizationContext_Signature, *v.Signature)
+	}
+}
+func (v *CidrAuthorizationContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CidrAuthorizationContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CidrAuthorizationContext_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CidrAuthorizationContext_Message, v.Message)
+		case schemas.CidrAuthorizationContext_Signature:
+			v.Signature = new(string)
+			return d.ReadString(schemas.CidrAuthorizationContext_Signature, v.Signature)
+		}
+		return nil
+	})
 }
 
 // An endpoint (Amazon Web Services resource) or an IP address range, in CIDR
@@ -288,6 +573,40 @@ type CrossAccountResource struct {
 	EndpointId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CrossAccountResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossAccountResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossAccountResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentArn != nil {
+		s.WriteString(schemas.CrossAccountResource_AttachmentArn, *v.AttachmentArn)
+	}
+	if v.Cidr != nil {
+		s.WriteString(schemas.CrossAccountResource_Cidr, *v.Cidr)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.CrossAccountResource_EndpointId, *v.EndpointId)
+	}
+}
+func (v *CrossAccountResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossAccountResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossAccountResource_AttachmentArn:
+			v.AttachmentArn = new(string)
+			return d.ReadString(schemas.CrossAccountResource_AttachmentArn, v.AttachmentArn)
+		case schemas.CrossAccountResource_Cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.CrossAccountResource_Cidr, v.Cidr)
+		case schemas.CrossAccountResource_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.CrossAccountResource_EndpointId, v.EndpointId)
+		}
+		return nil
+	})
 }
 
 // Attributes of a custom routing accelerator.
@@ -344,6 +663,81 @@ type CustomRoutingAccelerator struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomRoutingAccelerator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRoutingAccelerator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRoutingAccelerator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.CustomRoutingAccelerator_AcceleratorArn, *v.AcceleratorArn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.CustomRoutingAccelerator_CreatedTime, *v.CreatedTime)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.CustomRoutingAccelerator_DnsName, *v.DnsName)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CustomRoutingAccelerator_Enabled, *v.Enabled)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CustomRoutingAccelerator_IpAddressType, string(v.IpAddressType))
+	}
+	serializeIpSets(s, schemas.CustomRoutingAccelerator_IpSets, v.IpSets)
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.CustomRoutingAccelerator_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CustomRoutingAccelerator_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CustomRoutingAccelerator_Status, string(v.Status))
+	}
+}
+func (v *CustomRoutingAccelerator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRoutingAccelerator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRoutingAccelerator_AcceleratorArn:
+			v.AcceleratorArn = new(string)
+			return d.ReadString(schemas.CustomRoutingAccelerator_AcceleratorArn, v.AcceleratorArn)
+		case schemas.CustomRoutingAccelerator_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.CustomRoutingAccelerator_CreatedTime, v.CreatedTime)
+		case schemas.CustomRoutingAccelerator_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.CustomRoutingAccelerator_DnsName, v.DnsName)
+		case schemas.CustomRoutingAccelerator_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CustomRoutingAccelerator_Enabled, v.Enabled)
+		case schemas.CustomRoutingAccelerator_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.CustomRoutingAccelerator_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = IpAddressType(ev)
+			return nil
+		case schemas.CustomRoutingAccelerator_IpSets:
+			return deserializeIpSets(d, schemas.CustomRoutingAccelerator_IpSets, &v.IpSets)
+		case schemas.CustomRoutingAccelerator_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.CustomRoutingAccelerator_LastModifiedTime, v.LastModifiedTime)
+		case schemas.CustomRoutingAccelerator_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CustomRoutingAccelerator_Name, v.Name)
+		case schemas.CustomRoutingAccelerator_Status:
+			var ev string
+			if err := d.ReadString(schemas.CustomRoutingAccelerator_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CustomRoutingAcceleratorStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Attributes of a custom routing accelerator.
 type CustomRoutingAcceleratorAttributes struct {
 
@@ -373,6 +767,40 @@ type CustomRoutingAcceleratorAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomRoutingAcceleratorAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRoutingAcceleratorAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRoutingAcceleratorAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowLogsEnabled != nil {
+		s.WriteBool(schemas.CustomRoutingAcceleratorAttributes_FlowLogsEnabled, *v.FlowLogsEnabled)
+	}
+	if v.FlowLogsS3Bucket != nil {
+		s.WriteString(schemas.CustomRoutingAcceleratorAttributes_FlowLogsS3Bucket, *v.FlowLogsS3Bucket)
+	}
+	if v.FlowLogsS3Prefix != nil {
+		s.WriteString(schemas.CustomRoutingAcceleratorAttributes_FlowLogsS3Prefix, *v.FlowLogsS3Prefix)
+	}
+}
+func (v *CustomRoutingAcceleratorAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRoutingAcceleratorAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRoutingAcceleratorAttributes_FlowLogsEnabled:
+			v.FlowLogsEnabled = new(bool)
+			return d.ReadBool(schemas.CustomRoutingAcceleratorAttributes_FlowLogsEnabled, v.FlowLogsEnabled)
+		case schemas.CustomRoutingAcceleratorAttributes_FlowLogsS3Bucket:
+			v.FlowLogsS3Bucket = new(string)
+			return d.ReadString(schemas.CustomRoutingAcceleratorAttributes_FlowLogsS3Bucket, v.FlowLogsS3Bucket)
+		case schemas.CustomRoutingAcceleratorAttributes_FlowLogsS3Prefix:
+			v.FlowLogsS3Prefix = new(string)
+			return d.ReadString(schemas.CustomRoutingAcceleratorAttributes_FlowLogsS3Prefix, v.FlowLogsS3Prefix)
+		}
+		return nil
+	})
+}
+
 // For a custom routing accelerator, sets the port range and protocol for all
 // endpoints (virtual private cloud subnets) in an endpoint group to accept client
 // traffic on.
@@ -399,6 +827,37 @@ type CustomRoutingDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomRoutingDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRoutingDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRoutingDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromPort != nil {
+		s.WriteInt32(schemas.CustomRoutingDestinationConfiguration_FromPort, *v.FromPort)
+	}
+	serializeCustomRoutingProtocols(s, schemas.CustomRoutingDestinationConfiguration_Protocols, v.Protocols)
+	if v.ToPort != nil {
+		s.WriteInt32(schemas.CustomRoutingDestinationConfiguration_ToPort, *v.ToPort)
+	}
+}
+func (v *CustomRoutingDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRoutingDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRoutingDestinationConfiguration_FromPort:
+			v.FromPort = new(int32)
+			return d.ReadInt32(schemas.CustomRoutingDestinationConfiguration_FromPort, v.FromPort)
+		case schemas.CustomRoutingDestinationConfiguration_Protocols:
+			return deserializeCustomRoutingProtocols(d, schemas.CustomRoutingDestinationConfiguration_Protocols, &v.Protocols)
+		case schemas.CustomRoutingDestinationConfiguration_ToPort:
+			v.ToPort = new(int32)
+			return d.ReadInt32(schemas.CustomRoutingDestinationConfiguration_ToPort, v.ToPort)
+		}
+		return nil
+	})
+}
+
 // For a custom routing accelerator, describes the port range and protocol for all
 // endpoints (virtual private cloud subnets) in an endpoint group to accept client
 // traffic on.
@@ -419,6 +878,37 @@ type CustomRoutingDestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomRoutingDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRoutingDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRoutingDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromPort != nil {
+		s.WriteInt32(schemas.CustomRoutingDestinationDescription_FromPort, *v.FromPort)
+	}
+	serializeProtocols(s, schemas.CustomRoutingDestinationDescription_Protocols, v.Protocols)
+	if v.ToPort != nil {
+		s.WriteInt32(schemas.CustomRoutingDestinationDescription_ToPort, *v.ToPort)
+	}
+}
+func (v *CustomRoutingDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRoutingDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRoutingDestinationDescription_FromPort:
+			v.FromPort = new(int32)
+			return d.ReadInt32(schemas.CustomRoutingDestinationDescription_FromPort, v.FromPort)
+		case schemas.CustomRoutingDestinationDescription_Protocols:
+			return deserializeProtocols(d, schemas.CustomRoutingDestinationDescription_Protocols, &v.Protocols)
+		case schemas.CustomRoutingDestinationDescription_ToPort:
+			v.ToPort = new(int32)
+			return d.ReadInt32(schemas.CustomRoutingDestinationDescription_ToPort, v.ToPort)
+		}
+		return nil
+	})
+}
+
 // The list of endpoint objects. For custom routing, this is a list of virtual
 // private cloud (VPC) subnet IDs.
 type CustomRoutingEndpointConfiguration struct {
@@ -435,6 +925,34 @@ type CustomRoutingEndpointConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomRoutingEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRoutingEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRoutingEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentArn != nil {
+		s.WriteString(schemas.CustomRoutingEndpointConfiguration_AttachmentArn, *v.AttachmentArn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.CustomRoutingEndpointConfiguration_EndpointId, *v.EndpointId)
+	}
+}
+func (v *CustomRoutingEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRoutingEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRoutingEndpointConfiguration_AttachmentArn:
+			v.AttachmentArn = new(string)
+			return d.ReadString(schemas.CustomRoutingEndpointConfiguration_AttachmentArn, v.AttachmentArn)
+		case schemas.CustomRoutingEndpointConfiguration_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.CustomRoutingEndpointConfiguration_EndpointId, v.EndpointId)
+		}
+		return nil
+	})
+}
+
 // A complex type for an endpoint for a custom routing accelerator. Each endpoint
 // group can include one or more endpoints, which are virtual private cloud (VPC)
 // subnets.
@@ -445,6 +963,28 @@ type CustomRoutingEndpointDescription struct {
 	EndpointId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomRoutingEndpointDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRoutingEndpointDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRoutingEndpointDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointId != nil {
+		s.WriteString(schemas.CustomRoutingEndpointDescription_EndpointId, *v.EndpointId)
+	}
+}
+func (v *CustomRoutingEndpointDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRoutingEndpointDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRoutingEndpointDescription_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.CustomRoutingEndpointDescription_EndpointId, v.EndpointId)
+		}
+		return nil
+	})
 }
 
 // A complex type for the endpoint group for a custom routing accelerator. An
@@ -470,6 +1010,40 @@ type CustomRoutingEndpointGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomRoutingEndpointGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRoutingEndpointGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRoutingEndpointGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomRoutingDestinationDescriptions(s, schemas.CustomRoutingEndpointGroup_DestinationDescriptions, v.DestinationDescriptions)
+	serializeCustomRoutingEndpointDescriptions(s, schemas.CustomRoutingEndpointGroup_EndpointDescriptions, v.EndpointDescriptions)
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.CustomRoutingEndpointGroup_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+	if v.EndpointGroupRegion != nil {
+		s.WriteString(schemas.CustomRoutingEndpointGroup_EndpointGroupRegion, *v.EndpointGroupRegion)
+	}
+}
+func (v *CustomRoutingEndpointGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRoutingEndpointGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRoutingEndpointGroup_DestinationDescriptions:
+			return deserializeCustomRoutingDestinationDescriptions(d, schemas.CustomRoutingEndpointGroup_DestinationDescriptions, &v.DestinationDescriptions)
+		case schemas.CustomRoutingEndpointGroup_EndpointDescriptions:
+			return deserializeCustomRoutingEndpointDescriptions(d, schemas.CustomRoutingEndpointGroup_EndpointDescriptions, &v.EndpointDescriptions)
+		case schemas.CustomRoutingEndpointGroup_EndpointGroupArn:
+			v.EndpointGroupArn = new(string)
+			return d.ReadString(schemas.CustomRoutingEndpointGroup_EndpointGroupArn, v.EndpointGroupArn)
+		case schemas.CustomRoutingEndpointGroup_EndpointGroupRegion:
+			v.EndpointGroupRegion = new(string)
+			return d.ReadString(schemas.CustomRoutingEndpointGroup_EndpointGroupRegion, v.EndpointGroupRegion)
+		}
+		return nil
+	})
+}
+
 // A complex type for a listener for a custom routing accelerator.
 type CustomRoutingListener struct {
 
@@ -484,6 +1058,31 @@ type CustomRoutingListener struct {
 	PortRanges []PortRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomRoutingListener) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRoutingListener)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRoutingListener) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.CustomRoutingListener_ListenerArn, *v.ListenerArn)
+	}
+	serializePortRanges(s, schemas.CustomRoutingListener_PortRanges, v.PortRanges)
+}
+func (v *CustomRoutingListener) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRoutingListener, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRoutingListener_ListenerArn:
+			v.ListenerArn = new(string)
+			return d.ReadString(schemas.CustomRoutingListener_ListenerArn, v.ListenerArn)
+		case schemas.CustomRoutingListener_PortRanges:
+			return deserializePortRanges(d, schemas.CustomRoutingListener_PortRanges, &v.PortRanges)
+		}
+		return nil
+	})
 }
 
 // The port mappings for a specified endpoint IP address (destination).
@@ -520,6 +1119,77 @@ type DestinationPortMapping struct {
 	IpAddressType IpAddressType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DestinationPortMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationPortMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationPortMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.DestinationPortMapping_AcceleratorArn, *v.AcceleratorArn)
+	}
+	serializeSocketAddresses(s, schemas.DestinationPortMapping_AcceleratorSocketAddresses, v.AcceleratorSocketAddresses)
+	if v.DestinationSocketAddress != nil {
+		s.WriteStruct(schemas.DestinationPortMapping_DestinationSocketAddress)
+		v.DestinationSocketAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationTrafficState != "" {
+		s.WriteString(schemas.DestinationPortMapping_DestinationTrafficState, string(v.DestinationTrafficState))
+	}
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.DestinationPortMapping_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+	if v.EndpointGroupRegion != nil {
+		s.WriteString(schemas.DestinationPortMapping_EndpointGroupRegion, *v.EndpointGroupRegion)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.DestinationPortMapping_EndpointId, *v.EndpointId)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.DestinationPortMapping_IpAddressType, string(v.IpAddressType))
+	}
+}
+func (v *DestinationPortMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationPortMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationPortMapping_AcceleratorArn:
+			v.AcceleratorArn = new(string)
+			return d.ReadString(schemas.DestinationPortMapping_AcceleratorArn, v.AcceleratorArn)
+		case schemas.DestinationPortMapping_AcceleratorSocketAddresses:
+			return deserializeSocketAddresses(d, schemas.DestinationPortMapping_AcceleratorSocketAddresses, &v.AcceleratorSocketAddresses)
+		case schemas.DestinationPortMapping_DestinationSocketAddress:
+			v.DestinationSocketAddress = &SocketAddress{}
+			return v.DestinationSocketAddress.Deserialize(d)
+		case schemas.DestinationPortMapping_DestinationTrafficState:
+			var ev string
+			if err := d.ReadString(schemas.DestinationPortMapping_DestinationTrafficState, &ev); err != nil {
+				return err
+			}
+			v.DestinationTrafficState = CustomRoutingDestinationTrafficState(ev)
+			return nil
+		case schemas.DestinationPortMapping_EndpointGroupArn:
+			v.EndpointGroupArn = new(string)
+			return d.ReadString(schemas.DestinationPortMapping_EndpointGroupArn, v.EndpointGroupArn)
+		case schemas.DestinationPortMapping_EndpointGroupRegion:
+			v.EndpointGroupRegion = new(string)
+			return d.ReadString(schemas.DestinationPortMapping_EndpointGroupRegion, v.EndpointGroupRegion)
+		case schemas.DestinationPortMapping_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.DestinationPortMapping_EndpointId, v.EndpointId)
+		case schemas.DestinationPortMapping_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.DestinationPortMapping_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = IpAddressType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A complex type for endpoints. A resource must be valid and active when you add
@@ -573,6 +1243,46 @@ type EndpointConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentArn != nil {
+		s.WriteString(schemas.EndpointConfiguration_AttachmentArn, *v.AttachmentArn)
+	}
+	if v.ClientIPPreservationEnabled != nil {
+		s.WriteBool(schemas.EndpointConfiguration_ClientIPPreservationEnabled, *v.ClientIPPreservationEnabled)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.EndpointConfiguration_EndpointId, *v.EndpointId)
+	}
+	if v.Weight != nil {
+		s.WriteInt32(schemas.EndpointConfiguration_Weight, *v.Weight)
+	}
+}
+func (v *EndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointConfiguration_AttachmentArn:
+			v.AttachmentArn = new(string)
+			return d.ReadString(schemas.EndpointConfiguration_AttachmentArn, v.AttachmentArn)
+		case schemas.EndpointConfiguration_ClientIPPreservationEnabled:
+			v.ClientIPPreservationEnabled = new(bool)
+			return d.ReadBool(schemas.EndpointConfiguration_ClientIPPreservationEnabled, v.ClientIPPreservationEnabled)
+		case schemas.EndpointConfiguration_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.EndpointConfiguration_EndpointId, v.EndpointId)
+		case schemas.EndpointConfiguration_Weight:
+			v.Weight = new(int32)
+			return d.ReadInt32(schemas.EndpointConfiguration_Weight, v.Weight)
+		}
+		return nil
+	})
+}
+
 // A complex type for an endpoint. Each endpoint group can include one or more
 // endpoints, such as load balancers.
 type EndpointDescription struct {
@@ -622,6 +1332,56 @@ type EndpointDescription struct {
 	Weight *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientIPPreservationEnabled != nil {
+		s.WriteBool(schemas.EndpointDescription_ClientIPPreservationEnabled, *v.ClientIPPreservationEnabled)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.EndpointDescription_EndpointId, *v.EndpointId)
+	}
+	if v.HealthReason != nil {
+		s.WriteString(schemas.EndpointDescription_HealthReason, *v.HealthReason)
+	}
+	if v.HealthState != "" {
+		s.WriteString(schemas.EndpointDescription_HealthState, string(v.HealthState))
+	}
+	if v.Weight != nil {
+		s.WriteInt32(schemas.EndpointDescription_Weight, *v.Weight)
+	}
+}
+func (v *EndpointDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointDescription_ClientIPPreservationEnabled:
+			v.ClientIPPreservationEnabled = new(bool)
+			return d.ReadBool(schemas.EndpointDescription_ClientIPPreservationEnabled, v.ClientIPPreservationEnabled)
+		case schemas.EndpointDescription_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.EndpointDescription_EndpointId, v.EndpointId)
+		case schemas.EndpointDescription_HealthReason:
+			v.HealthReason = new(string)
+			return d.ReadString(schemas.EndpointDescription_HealthReason, v.HealthReason)
+		case schemas.EndpointDescription_HealthState:
+			var ev string
+			if err := d.ReadString(schemas.EndpointDescription_HealthState, &ev); err != nil {
+				return err
+			}
+			v.HealthState = HealthState(ev)
+			return nil
+		case schemas.EndpointDescription_Weight:
+			v.Weight = new(int32)
+			return d.ReadInt32(schemas.EndpointDescription_Weight, v.Weight)
+		}
+		return nil
+	})
 }
 
 // A complex type for the endpoint group. An Amazon Web Services Region can have
@@ -682,6 +1442,80 @@ type EndpointGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointDescriptions(s, schemas.EndpointGroup_EndpointDescriptions, v.EndpointDescriptions)
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.EndpointGroup_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+	if v.EndpointGroupRegion != nil {
+		s.WriteString(schemas.EndpointGroup_EndpointGroupRegion, *v.EndpointGroupRegion)
+	}
+	if v.HealthCheckIntervalSeconds != nil {
+		s.WriteInt32(schemas.EndpointGroup_HealthCheckIntervalSeconds, *v.HealthCheckIntervalSeconds)
+	}
+	if v.HealthCheckPath != nil {
+		s.WriteString(schemas.EndpointGroup_HealthCheckPath, *v.HealthCheckPath)
+	}
+	if v.HealthCheckPort != nil {
+		s.WriteInt32(schemas.EndpointGroup_HealthCheckPort, *v.HealthCheckPort)
+	}
+	if v.HealthCheckProtocol != "" {
+		s.WriteString(schemas.EndpointGroup_HealthCheckProtocol, string(v.HealthCheckProtocol))
+	}
+	serializePortOverrides(s, schemas.EndpointGroup_PortOverrides, v.PortOverrides)
+	if v.ThresholdCount != nil {
+		s.WriteInt32(schemas.EndpointGroup_ThresholdCount, *v.ThresholdCount)
+	}
+	if v.TrafficDialPercentage != nil {
+		s.WriteFloat32(schemas.EndpointGroup_TrafficDialPercentage, *v.TrafficDialPercentage)
+	}
+}
+func (v *EndpointGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointGroup_EndpointDescriptions:
+			return deserializeEndpointDescriptions(d, schemas.EndpointGroup_EndpointDescriptions, &v.EndpointDescriptions)
+		case schemas.EndpointGroup_EndpointGroupArn:
+			v.EndpointGroupArn = new(string)
+			return d.ReadString(schemas.EndpointGroup_EndpointGroupArn, v.EndpointGroupArn)
+		case schemas.EndpointGroup_EndpointGroupRegion:
+			v.EndpointGroupRegion = new(string)
+			return d.ReadString(schemas.EndpointGroup_EndpointGroupRegion, v.EndpointGroupRegion)
+		case schemas.EndpointGroup_HealthCheckIntervalSeconds:
+			v.HealthCheckIntervalSeconds = new(int32)
+			return d.ReadInt32(schemas.EndpointGroup_HealthCheckIntervalSeconds, v.HealthCheckIntervalSeconds)
+		case schemas.EndpointGroup_HealthCheckPath:
+			v.HealthCheckPath = new(string)
+			return d.ReadString(schemas.EndpointGroup_HealthCheckPath, v.HealthCheckPath)
+		case schemas.EndpointGroup_HealthCheckPort:
+			v.HealthCheckPort = new(int32)
+			return d.ReadInt32(schemas.EndpointGroup_HealthCheckPort, v.HealthCheckPort)
+		case schemas.EndpointGroup_HealthCheckProtocol:
+			var ev string
+			if err := d.ReadString(schemas.EndpointGroup_HealthCheckProtocol, &ev); err != nil {
+				return err
+			}
+			v.HealthCheckProtocol = HealthCheckProtocol(ev)
+			return nil
+		case schemas.EndpointGroup_PortOverrides:
+			return deserializePortOverrides(d, schemas.EndpointGroup_PortOverrides, &v.PortOverrides)
+		case schemas.EndpointGroup_ThresholdCount:
+			v.ThresholdCount = new(int32)
+			return d.ReadInt32(schemas.EndpointGroup_ThresholdCount, v.ThresholdCount)
+		case schemas.EndpointGroup_TrafficDialPercentage:
+			v.TrafficDialPercentage = new(float32)
+			return d.ReadFloat32(schemas.EndpointGroup_TrafficDialPercentage, v.TrafficDialPercentage)
+		}
+		return nil
+	})
+}
+
 // A complex type for an endpoint. Specifies information about the endpoint to
 // remove from the endpoint group.
 type EndpointIdentifier struct {
@@ -707,6 +1541,34 @@ type EndpointIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientIPPreservationEnabled != nil {
+		s.WriteBool(schemas.EndpointIdentifier_ClientIPPreservationEnabled, *v.ClientIPPreservationEnabled)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.EndpointIdentifier_EndpointId, *v.EndpointId)
+	}
+}
+func (v *EndpointIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointIdentifier_ClientIPPreservationEnabled:
+			v.ClientIPPreservationEnabled = new(bool)
+			return d.ReadBool(schemas.EndpointIdentifier_ClientIPPreservationEnabled, v.ClientIPPreservationEnabled)
+		case schemas.EndpointIdentifier_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.EndpointIdentifier_EndpointId, v.EndpointId)
+		}
+		return nil
+	})
+}
+
 // A complex type for the set of IP addresses for an accelerator.
 type IpSet struct {
 
@@ -723,6 +1585,41 @@ type IpSet struct {
 	IpFamily *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IpSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddressFamily != "" {
+		s.WriteString(schemas.IpSet_IpAddressFamily, string(v.IpAddressFamily))
+	}
+	serializeIpAddresses(s, schemas.IpSet_IpAddresses, v.IpAddresses)
+	if v.IpFamily != nil {
+		s.WriteString(schemas.IpSet_IpFamily, *v.IpFamily)
+	}
+}
+func (v *IpSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpSet_IpAddressFamily:
+			var ev string
+			if err := d.ReadString(schemas.IpSet_IpAddressFamily, &ev); err != nil {
+				return err
+			}
+			v.IpAddressFamily = IpAddressFamily(ev)
+			return nil
+		case schemas.IpSet_IpAddresses:
+			return deserializeIpAddresses(d, schemas.IpSet_IpAddresses, &v.IpAddresses)
+		case schemas.IpSet_IpFamily:
+			v.IpFamily = new(string)
+			return d.ReadString(schemas.IpSet_IpFamily, v.IpFamily)
+		}
+		return nil
+	})
 }
 
 // A complex type for a listener.
@@ -761,6 +1658,51 @@ type Listener struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Listener) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Listener)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Listener) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientAffinity != "" {
+		s.WriteString(schemas.Listener_ClientAffinity, string(v.ClientAffinity))
+	}
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.Listener_ListenerArn, *v.ListenerArn)
+	}
+	serializePortRanges(s, schemas.Listener_PortRanges, v.PortRanges)
+	if v.Protocol != "" {
+		s.WriteString(schemas.Listener_Protocol, string(v.Protocol))
+	}
+}
+func (v *Listener) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Listener, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Listener_ClientAffinity:
+			var ev string
+			if err := d.ReadString(schemas.Listener_ClientAffinity, &ev); err != nil {
+				return err
+			}
+			v.ClientAffinity = ClientAffinity(ev)
+			return nil
+		case schemas.Listener_ListenerArn:
+			v.ListenerArn = new(string)
+			return d.ReadString(schemas.Listener_ListenerArn, v.ListenerArn)
+		case schemas.Listener_PortRanges:
+			return deserializePortRanges(d, schemas.Listener_PortRanges, &v.PortRanges)
+		case schemas.Listener_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.Listener_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Returns the ports and associated IP addresses and ports of Amazon EC2 instances
 // in your virtual private cloud (VPC) subnets. Custom routing is a port mapping
 // protocol in Global Accelerator that statically associates port ranges with VPC
@@ -792,6 +1734,61 @@ type PortMapping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PortMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PortMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PortMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorPort != nil {
+		s.WriteInt32(schemas.PortMapping_AcceleratorPort, *v.AcceleratorPort)
+	}
+	if v.DestinationSocketAddress != nil {
+		s.WriteStruct(schemas.PortMapping_DestinationSocketAddress)
+		v.DestinationSocketAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationTrafficState != "" {
+		s.WriteString(schemas.PortMapping_DestinationTrafficState, string(v.DestinationTrafficState))
+	}
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.PortMapping_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.PortMapping_EndpointId, *v.EndpointId)
+	}
+	serializeCustomRoutingProtocols(s, schemas.PortMapping_Protocols, v.Protocols)
+}
+func (v *PortMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PortMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PortMapping_AcceleratorPort:
+			v.AcceleratorPort = new(int32)
+			return d.ReadInt32(schemas.PortMapping_AcceleratorPort, v.AcceleratorPort)
+		case schemas.PortMapping_DestinationSocketAddress:
+			v.DestinationSocketAddress = &SocketAddress{}
+			return v.DestinationSocketAddress.Deserialize(d)
+		case schemas.PortMapping_DestinationTrafficState:
+			var ev string
+			if err := d.ReadString(schemas.PortMapping_DestinationTrafficState, &ev); err != nil {
+				return err
+			}
+			v.DestinationTrafficState = CustomRoutingDestinationTrafficState(ev)
+			return nil
+		case schemas.PortMapping_EndpointGroupArn:
+			v.EndpointGroupArn = new(string)
+			return d.ReadString(schemas.PortMapping_EndpointGroupArn, v.EndpointGroupArn)
+		case schemas.PortMapping_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.PortMapping_EndpointId, v.EndpointId)
+		case schemas.PortMapping_Protocols:
+			return deserializeCustomRoutingProtocols(d, schemas.PortMapping_Protocols, &v.Protocols)
+		}
+		return nil
+	})
+}
+
 // Override specific listener ports used to route traffic to endpoints that are
 // part of an endpoint group. For example, you can create a port override in which
 // the listener receives user traffic on ports 80 and 443, but your accelerator
@@ -814,6 +1811,34 @@ type PortOverride struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PortOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PortOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PortOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointPort != nil {
+		s.WriteInt32(schemas.PortOverride_EndpointPort, *v.EndpointPort)
+	}
+	if v.ListenerPort != nil {
+		s.WriteInt32(schemas.PortOverride_ListenerPort, *v.ListenerPort)
+	}
+}
+func (v *PortOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PortOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PortOverride_EndpointPort:
+			v.EndpointPort = new(int32)
+			return d.ReadInt32(schemas.PortOverride_EndpointPort, v.EndpointPort)
+		case schemas.PortOverride_ListenerPort:
+			v.ListenerPort = new(int32)
+			return d.ReadInt32(schemas.PortOverride_ListenerPort, v.ListenerPort)
+		}
+		return nil
+	})
+}
+
 // A complex type for a range of ports for a listener.
 type PortRange struct {
 
@@ -824,6 +1849,34 @@ type PortRange struct {
 	ToPort *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PortRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PortRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PortRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromPort != nil {
+		s.WriteInt32(schemas.PortRange_FromPort, *v.FromPort)
+	}
+	if v.ToPort != nil {
+		s.WriteInt32(schemas.PortRange_ToPort, *v.ToPort)
+	}
+}
+func (v *PortRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PortRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PortRange_FromPort:
+			v.FromPort = new(int32)
+			return d.ReadInt32(schemas.PortRange_FromPort, v.FromPort)
+		case schemas.PortRange_ToPort:
+			v.ToPort = new(int32)
+			return d.ReadInt32(schemas.PortRange_ToPort, v.ToPort)
+		}
+		return nil
+	})
 }
 
 // A resource is one of the following: the ARN for an Amazon Web Services resource
@@ -854,6 +1907,40 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidr != nil {
+		s.WriteString(schemas.Resource_Cidr, *v.Cidr)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.Resource_EndpointId, *v.EndpointId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Resource_Region, *v.Region)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_Cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.Resource_Cidr, v.Cidr)
+		case schemas.Resource_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.Resource_EndpointId, v.EndpointId)
+		case schemas.Resource_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Resource_Region, v.Region)
+		}
+		return nil
+	})
+}
+
 // An IP address/port combination.
 type SocketAddress struct {
 
@@ -864,6 +1951,34 @@ type SocketAddress struct {
 	Port *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SocketAddress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SocketAddress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SocketAddress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteString(schemas.SocketAddress_IpAddress, *v.IpAddress)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.SocketAddress_Port, *v.Port)
+	}
+}
+func (v *SocketAddress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SocketAddress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SocketAddress_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.SocketAddress_IpAddress, v.IpAddress)
+		case schemas.SocketAddress_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.SocketAddress_Port, v.Port)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains a Tag key and Tag value.
@@ -880,6 +1995,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

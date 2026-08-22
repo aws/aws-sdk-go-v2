@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type EnableRadiusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableRadiusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableRadiusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableRadiusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.EnableRadiusRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.RadiusSettings != nil {
+		s.WriteStruct(schemas.EnableRadiusRequest_RadiusSettings)
+		v.RadiusSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains the results of the EnableRadius operation.
 type EnableRadiusOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -49,13 +68,26 @@ type EnableRadiusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableRadiusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableRadiusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableRadiusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableRadiusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableRadiusResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableRadiusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableRadius{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableRadius, schemas.EnableRadiusRequest, schemas.EnableRadiusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableRadius{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableRadius, schemas.EnableRadiusRequest, schemas.EnableRadiusResult), output: &EnableRadiusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

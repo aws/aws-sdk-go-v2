@@ -4,7 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,22 @@ type GetAccountLevelServiceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountLevelServiceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountLevelServiceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetAccountLevelServiceConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetAccountLevelServiceConfigurationOutput struct {
 
 	// Details about the organization, and whether configuration is ENABLED or DISABLED
@@ -42,13 +60,34 @@ type GetAccountLevelServiceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountLevelServiceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountLevelServiceConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountLevelServiceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrgConfiguration != nil {
+		s.WriteStruct(schemas.GetAccountLevelServiceConfigurationOutput_OrgConfiguration)
+		v.OrgConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAccountLevelServiceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountLevelServiceConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountLevelServiceConfigurationOutput_OrgConfiguration:
+			v.OrgConfiguration = &types.OrgConfiguration{}
+			return v.OrgConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountLevelServiceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountLevelServiceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountLevelServiceConfiguration, nil, schemas.GetAccountLevelServiceConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountLevelServiceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountLevelServiceConfiguration, nil, schemas.GetAccountLevelServiceConfigurationOutput), output: &GetAccountLevelServiceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

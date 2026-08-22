@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type DetachAndDeleteS3AccessPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachAndDeleteS3AccessPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachAndDeleteS3AccessPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachAndDeleteS3AccessPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DetachAndDeleteS3AccessPointRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DetachAndDeleteS3AccessPointRequest_Name, *v.Name)
+	}
+}
+
 type DetachAndDeleteS3AccessPointOutput struct {
 
 	// The lifecycle status of the S3 access point attachment.
@@ -61,13 +78,42 @@ type DetachAndDeleteS3AccessPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachAndDeleteS3AccessPointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachAndDeleteS3AccessPointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachAndDeleteS3AccessPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DetachAndDeleteS3AccessPointResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DetachAndDeleteS3AccessPointResponse_Name, *v.Name)
+	}
+}
+func (v *DetachAndDeleteS3AccessPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachAndDeleteS3AccessPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetachAndDeleteS3AccessPointResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DetachAndDeleteS3AccessPointResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.S3AccessPointAttachmentLifecycle(ev)
+			return nil
+		case schemas.DetachAndDeleteS3AccessPointResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DetachAndDeleteS3AccessPointResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachAndDeleteS3AccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachAndDeleteS3AccessPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachAndDeleteS3AccessPoint, schemas.DetachAndDeleteS3AccessPointRequest, schemas.DetachAndDeleteS3AccessPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetachAndDeleteS3AccessPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachAndDeleteS3AccessPoint, schemas.DetachAndDeleteS3AccessPointRequest, schemas.DetachAndDeleteS3AccessPointResponse), output: &DetachAndDeleteS3AccessPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

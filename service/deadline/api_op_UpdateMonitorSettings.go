@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,19 @@ type UpdateMonitorSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitorSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitorSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitorSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorId != nil {
+		s.WriteString(schemas.UpdateMonitorSettingsRequest_monitorId, *v.MonitorId)
+	}
+	serializeSettingsMap(s, schemas.UpdateMonitorSettingsRequest_settings, v.Settings)
+}
+
 type UpdateMonitorSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +66,26 @@ type UpdateMonitorSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitorSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitorSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitorSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateMonitorSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMonitorSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMonitorSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMonitorSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitorSettings, schemas.UpdateMonitorSettingsRequest, schemas.UpdateMonitorSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMonitorSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitorSettings, schemas.UpdateMonitorSettingsRequest, schemas.UpdateMonitorSettingsResponse), output: &UpdateMonitorSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

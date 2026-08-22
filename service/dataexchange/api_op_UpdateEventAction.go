@@ -4,7 +4,9 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,36 @@ type UpdateEventActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.UpdateEventActionRequest_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventActionId != nil {
+		s.WriteString(schemas.UpdateEventActionRequest_EventActionId, *v.EventActionId)
+	}
+}
+func (v *UpdateEventActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEventActionRequest_Action:
+			v.Action = &types.Action{}
+			return v.Action.Deserialize(d)
+		case schemas.UpdateEventActionRequest_EventActionId:
+			v.EventActionId = new(string)
+			return d.ReadString(schemas.UpdateEventActionRequest_EventActionId, v.EventActionId)
+		}
+		return nil
+	})
+}
+
 type UpdateEventActionOutput struct {
 
 	// What occurs after a certain event.
@@ -64,13 +96,66 @@ type UpdateEventActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.UpdateEventActionResponse_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateEventActionResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateEventActionResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Event != nil {
+		s.WriteStruct(schemas.UpdateEventActionResponse_Event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateEventActionResponse_Id, *v.Id)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateEventActionResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateEventActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEventActionResponse_Action:
+			v.Action = &types.Action{}
+			return v.Action.Deserialize(d)
+		case schemas.UpdateEventActionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateEventActionResponse_Arn, v.Arn)
+		case schemas.UpdateEventActionResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEventActionResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateEventActionResponse_Event:
+			v.Event = &types.Event{}
+			return v.Event.Deserialize(d)
+		case schemas.UpdateEventActionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateEventActionResponse_Id, v.Id)
+		case schemas.UpdateEventActionResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEventActionResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEventAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventAction, schemas.UpdateEventActionRequest, schemas.UpdateEventActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEventAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventAction, schemas.UpdateEventActionRequest, schemas.UpdateEventActionResponse), output: &UpdateEventActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

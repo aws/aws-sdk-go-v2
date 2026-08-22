@@ -4,7 +4,9 @@ package wisdom
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wisdom/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,34 @@ type GetContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentId != nil {
+		s.WriteString(schemas.GetContentRequest_contentId, *v.ContentId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetContentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+func (v *GetContentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContentRequest_contentId:
+			v.ContentId = new(string)
+			return d.ReadString(schemas.GetContentRequest_contentId, v.ContentId)
+		case schemas.GetContentRequest_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.GetContentRequest_knowledgeBaseId, v.KnowledgeBaseId)
+		}
+		return nil
+	})
+}
+
 type GetContentOutput struct {
 
 	// The content.
@@ -53,13 +83,34 @@ type GetContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteStruct(schemas.GetContentResponse_content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContentResponse_content:
+			v.Content = &types.ContentData{}
+			return v.Content.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContent, schemas.GetContentRequest, schemas.GetContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContent, schemas.GetContentRequest, schemas.GetContentResponse), output: &GetContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

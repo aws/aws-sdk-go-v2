@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteCoreNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCoreNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCoreNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCoreNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.DeleteCoreNetworkRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+}
+
 type DeleteCoreNetworkOutput struct {
 
 	// Information about the deleted core network.
@@ -46,13 +60,34 @@ type DeleteCoreNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCoreNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCoreNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCoreNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetwork != nil {
+		s.WriteStruct(schemas.DeleteCoreNetworkResponse_CoreNetwork)
+		v.CoreNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteCoreNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCoreNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCoreNetworkResponse_CoreNetwork:
+			v.CoreNetwork = &types.CoreNetwork{}
+			return v.CoreNetwork.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCoreNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCoreNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCoreNetwork, schemas.DeleteCoreNetworkRequest, schemas.DeleteCoreNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCoreNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCoreNetwork, schemas.DeleteCoreNetworkRequest, schemas.DeleteCoreNetworkResponse), output: &DeleteCoreNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

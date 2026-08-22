@@ -224,6 +224,7 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func deserializeListOfKitchenSinks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]KitchenSink) error {
+	*v = make([]KitchenSink, 0)
 	var vv KitchenSink
 	return smithy.ReadList(d, s, func() error {
 		vv = KitchenSink{}
@@ -237,6 +238,7 @@ func deserializeListOfKitchenSinks(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeListOfListOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[][]string) error {
+	*v = make([][]string, 0)
 	var vv []string
 	return smithy.ReadList(d, s, func() error {
 		vv = nil
@@ -250,6 +252,7 @@ func deserializeListOfListOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeListOfMapsOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]map[string]string) error {
+	*v = make([]map[string]string, 0)
 	var vv map[string]string
 	return smithy.ReadList(d, s, func() error {
 		vv = nil
@@ -263,6 +266,7 @@ func deserializeListOfMapsOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeListOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -276,6 +280,7 @@ func deserializeListOfStrings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeListOfStructs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SimpleStruct) error {
+	*v = make([]SimpleStruct, 0)
 	var vv SimpleStruct
 	return smithy.ReadList(d, s, func() error {
 		vv = SimpleStruct{}
@@ -289,6 +294,7 @@ func deserializeListOfStructs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeFooEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FooEnum) error {
+	*v = make([]FooEnum, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -302,6 +308,7 @@ func deserializeFooEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]F
 }
 
 func deserializeFooEnumSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FooEnum) error {
+	*v = make([]FooEnum, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -315,6 +322,7 @@ func deserializeFooEnumSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Fo
 }
 
 func deserializeIntegerEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IntegerEnum) error {
+	*v = make([]IntegerEnum, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
 
@@ -328,6 +336,7 @@ func deserializeIntegerEnumList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeIntegerEnumSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IntegerEnum) error {
+	*v = make([]IntegerEnum, 0)
 	var vv int32
 	return smithy.ReadList(d, s, func() error {
 
@@ -341,6 +350,7 @@ func deserializeIntegerEnumSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeSparseStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]*string) error {
+	*v = make([]*string, 0)
 	return smithy.ReadList(d, s, func() error {
 		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
 			return err
@@ -363,6 +373,7 @@ func deserializeSparseStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

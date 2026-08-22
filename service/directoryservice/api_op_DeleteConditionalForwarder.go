@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteConditionalForwarderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConditionalForwarderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConditionalForwarderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConditionalForwarderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DeleteConditionalForwarderRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.RemoteDomainName != nil {
+		s.WriteString(schemas.DeleteConditionalForwarderRequest_RemoteDomainName, *v.RemoteDomainName)
+	}
+}
+
 // The result of a DeleteConditionalForwarder request.
 type DeleteConditionalForwarderOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -49,13 +66,26 @@ type DeleteConditionalForwarderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConditionalForwarderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConditionalForwarderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConditionalForwarderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConditionalForwarderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConditionalForwarderResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConditionalForwarderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConditionalForwarder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConditionalForwarder, schemas.DeleteConditionalForwarderRequest, schemas.DeleteConditionalForwarderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteConditionalForwarder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConditionalForwarder, schemas.DeleteConditionalForwarderRequest, schemas.DeleteConditionalForwarderResult), output: &DeleteConditionalForwarderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

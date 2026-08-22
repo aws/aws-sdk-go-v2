@@ -4,7 +4,9 @@ package ivsrealtime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetStorageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStorageConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStorageConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStorageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetStorageConfigurationRequest_arn, *v.Arn)
+	}
+}
+
 type GetStorageConfigurationOutput struct {
 
 	// The StorageConfiguration that was returned.
@@ -45,13 +59,34 @@ type GetStorageConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStorageConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStorageConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStorageConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageConfiguration != nil {
+		s.WriteStruct(schemas.GetStorageConfigurationResponse_storageConfiguration)
+		v.StorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetStorageConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStorageConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStorageConfigurationResponse_storageConfiguration:
+			v.StorageConfiguration = &types.StorageConfiguration{}
+			return v.StorageConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStorageConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStorageConfiguration, schemas.GetStorageConfigurationRequest, schemas.GetStorageConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStorageConfiguration, schemas.GetStorageConfigurationRequest, schemas.GetStorageConfigurationResponse), output: &GetStorageConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

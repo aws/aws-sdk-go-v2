@@ -4,6 +4,8 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type UpdateNetworkResourceMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkResourceMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkResourceMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkResourceMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.UpdateNetworkResourceMetadataRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	serializeNetworkResourceMetadataMap(s, schemas.UpdateNetworkResourceMetadataRequest_Metadata, v.Metadata)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateNetworkResourceMetadataRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type UpdateNetworkResourceMetadataOutput struct {
 
 	// The updated resource metadata.
@@ -57,13 +75,35 @@ type UpdateNetworkResourceMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkResourceMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkResourceMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkResourceMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkResourceMetadataMap(s, schemas.UpdateNetworkResourceMetadataResponse_Metadata, v.Metadata)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateNetworkResourceMetadataResponse_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *UpdateNetworkResourceMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNetworkResourceMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNetworkResourceMetadataResponse_Metadata:
+			return deserializeNetworkResourceMetadataMap(d, schemas.UpdateNetworkResourceMetadataResponse_Metadata, &v.Metadata)
+		case schemas.UpdateNetworkResourceMetadataResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.UpdateNetworkResourceMetadataResponse_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNetworkResourceMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNetworkResourceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkResourceMetadata, schemas.UpdateNetworkResourceMetadataRequest, schemas.UpdateNetworkResourceMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNetworkResourceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkResourceMetadata, schemas.UpdateNetworkResourceMetadataRequest, schemas.UpdateNetworkResourceMetadataResponse), output: &UpdateNetworkResourceMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type ListCacheReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCacheReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCacheReportsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCacheReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListCacheReportsInput_Marker, *v.Marker)
+	}
+}
+
 type ListCacheReportsOutput struct {
 
 	// A list of existing cache reports for all file shares associated with your
@@ -55,13 +69,35 @@ type ListCacheReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCacheReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCacheReportsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCacheReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCacheReportList(s, schemas.ListCacheReportsOutput_CacheReportList, v.CacheReportList)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListCacheReportsOutput_Marker, *v.Marker)
+	}
+}
+func (v *ListCacheReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCacheReportsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCacheReportsOutput_CacheReportList:
+			return deserializeCacheReportList(d, schemas.ListCacheReportsOutput_CacheReportList, &v.CacheReportList)
+		case schemas.ListCacheReportsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListCacheReportsOutput_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCacheReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCacheReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCacheReports, schemas.ListCacheReportsInput, schemas.ListCacheReportsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCacheReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCacheReports, schemas.ListCacheReportsInput, schemas.ListCacheReportsOutput), output: &ListCacheReportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

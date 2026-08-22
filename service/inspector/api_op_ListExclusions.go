@@ -5,6 +5,8 @@ package inspector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListExclusionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExclusionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExclusionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExclusionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.ListExclusionsRequest_assessmentRunArn, *v.AssessmentRunArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExclusionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExclusionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListExclusionsOutput struct {
 
 	// A list of exclusions' ARNs returned by the action.
@@ -64,13 +84,35 @@ type ListExclusionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExclusionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExclusionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExclusionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListReturnedArnList(s, schemas.ListExclusionsResponse_exclusionArns, v.ExclusionArns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExclusionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExclusionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExclusionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExclusionsResponse_exclusionArns:
+			return deserializeListReturnedArnList(d, schemas.ListExclusionsResponse_exclusionArns, &v.ExclusionArns)
+		case schemas.ListExclusionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExclusionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExclusionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListExclusions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExclusions, schemas.ListExclusionsRequest, schemas.ListExclusionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListExclusions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExclusions, schemas.ListExclusionsRequest, schemas.ListExclusionsResponse), output: &ListExclusionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

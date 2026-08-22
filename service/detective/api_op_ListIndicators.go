@@ -4,7 +4,9 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,30 @@ type ListIndicatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIndicatorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIndicatorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIndicatorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.ListIndicatorsRequest_GraphArn, *v.GraphArn)
+	}
+	if v.IndicatorType != "" {
+		s.WriteString(schemas.ListIndicatorsRequest_IndicatorType, string(v.IndicatorType))
+	}
+	if v.InvestigationId != nil {
+		s.WriteString(schemas.ListIndicatorsRequest_InvestigationId, *v.InvestigationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIndicatorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIndicatorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIndicatorsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the behavior graph.
@@ -83,13 +109,47 @@ type ListIndicatorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIndicatorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIndicatorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIndicatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.ListIndicatorsResponse_GraphArn, *v.GraphArn)
+	}
+	serializeIndicators(s, schemas.ListIndicatorsResponse_Indicators, v.Indicators)
+	if v.InvestigationId != nil {
+		s.WriteString(schemas.ListIndicatorsResponse_InvestigationId, *v.InvestigationId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIndicatorsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIndicatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIndicatorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIndicatorsResponse_GraphArn:
+			v.GraphArn = new(string)
+			return d.ReadString(schemas.ListIndicatorsResponse_GraphArn, v.GraphArn)
+		case schemas.ListIndicatorsResponse_Indicators:
+			return deserializeIndicators(d, schemas.ListIndicatorsResponse_Indicators, &v.Indicators)
+		case schemas.ListIndicatorsResponse_InvestigationId:
+			v.InvestigationId = new(string)
+			return d.ReadString(schemas.ListIndicatorsResponse_InvestigationId, v.InvestigationId)
+		case schemas.ListIndicatorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIndicatorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIndicatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIndicators{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndicators, schemas.ListIndicatorsRequest, schemas.ListIndicatorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIndicators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndicators, schemas.ListIndicatorsRequest, schemas.ListIndicatorsResponse), output: &ListIndicatorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

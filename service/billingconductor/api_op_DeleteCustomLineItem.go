@@ -4,7 +4,9 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,36 @@ type DeleteCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomLineItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomLineItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomLineItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteCustomLineItemInput_Arn, *v.Arn)
+	}
+	if v.BillingPeriodRange != nil {
+		s.WriteStruct(schemas.DeleteCustomLineItemInput_BillingPeriodRange)
+		v.BillingPeriodRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteCustomLineItemInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomLineItemInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCustomLineItemInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteCustomLineItemInput_Arn, v.Arn)
+		case schemas.DeleteCustomLineItemInput_BillingPeriodRange:
+			v.BillingPeriodRange = &types.CustomLineItemBillingPeriodRange{}
+			return v.BillingPeriodRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type DeleteCustomLineItemOutput struct {
 
 	// The ARN of the deleted custom line item.
@@ -50,13 +82,32 @@ type DeleteCustomLineItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomLineItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomLineItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomLineItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteCustomLineItemOutput_Arn, *v.Arn)
+	}
+}
+func (v *DeleteCustomLineItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomLineItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCustomLineItemOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteCustomLineItemOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomLineItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomLineItem, schemas.DeleteCustomLineItemInput, schemas.DeleteCustomLineItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomLineItem, schemas.DeleteCustomLineItemInput, schemas.DeleteCustomLineItemOutput), output: &DeleteCustomLineItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

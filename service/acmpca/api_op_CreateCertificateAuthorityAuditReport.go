@@ -4,7 +4,9 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type CreateCertificateAuthorityAuditReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateAuthorityAuditReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateAuthorityAuditReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateAuthorityAuditReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditReportResponseFormat != "" {
+		s.WriteString(schemas.CreateCertificateAuthorityAuditReportRequest_AuditReportResponseFormat, string(v.AuditReportResponseFormat))
+	}
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.CreateCertificateAuthorityAuditReportRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.CreateCertificateAuthorityAuditReportRequest_S3BucketName, *v.S3BucketName)
+	}
+}
+
 type CreateCertificateAuthorityAuditReportOutput struct {
 
 	// An alphanumeric string that contains a report identifier.
@@ -76,13 +96,38 @@ type CreateCertificateAuthorityAuditReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateAuthorityAuditReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateAuthorityAuditReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateAuthorityAuditReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditReportId != nil {
+		s.WriteString(schemas.CreateCertificateAuthorityAuditReportResponse_AuditReportId, *v.AuditReportId)
+	}
+	if v.S3Key != nil {
+		s.WriteString(schemas.CreateCertificateAuthorityAuditReportResponse_S3Key, *v.S3Key)
+	}
+}
+func (v *CreateCertificateAuthorityAuditReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCertificateAuthorityAuditReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCertificateAuthorityAuditReportResponse_AuditReportId:
+			v.AuditReportId = new(string)
+			return d.ReadString(schemas.CreateCertificateAuthorityAuditReportResponse_AuditReportId, v.AuditReportId)
+		case schemas.CreateCertificateAuthorityAuditReportResponse_S3Key:
+			v.S3Key = new(string)
+			return d.ReadString(schemas.CreateCertificateAuthorityAuditReportResponse_S3Key, v.S3Key)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCertificateAuthorityAuditReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCertificateAuthorityAuditReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateAuthorityAuditReport, schemas.CreateCertificateAuthorityAuditReportRequest, schemas.CreateCertificateAuthorityAuditReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCertificateAuthorityAuditReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateAuthorityAuditReport, schemas.CreateCertificateAuthorityAuditReportRequest, schemas.CreateCertificateAuthorityAuditReportResponse), output: &CreateCertificateAuthorityAuditReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

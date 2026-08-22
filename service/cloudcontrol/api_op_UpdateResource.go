@@ -5,7 +5,9 @@ package cloudcontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -121,6 +123,58 @@ type UpdateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateResourceInput_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateResourceInput_Identifier, *v.Identifier)
+	}
+	if v.PatchDocument != nil {
+		s.WriteString(schemas.UpdateResourceInput_PatchDocument, *v.PatchDocument)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateResourceInput_RoleArn, *v.RoleArn)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.UpdateResourceInput_TypeName, *v.TypeName)
+	}
+	if v.TypeVersionId != nil {
+		s.WriteString(schemas.UpdateResourceInput_TypeVersionId, *v.TypeVersionId)
+	}
+}
+func (v *UpdateResourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResourceInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_ClientToken, v.ClientToken)
+		case schemas.UpdateResourceInput_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_Identifier, v.Identifier)
+		case schemas.UpdateResourceInput_PatchDocument:
+			v.PatchDocument = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_PatchDocument, v.PatchDocument)
+		case schemas.UpdateResourceInput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_RoleArn, v.RoleArn)
+		case schemas.UpdateResourceInput_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_TypeName, v.TypeName)
+		case schemas.UpdateResourceInput_TypeVersionId:
+			v.TypeVersionId = new(string)
+			return d.ReadString(schemas.UpdateResourceInput_TypeVersionId, v.TypeVersionId)
+		}
+		return nil
+	})
+}
+
 type UpdateResourceOutput struct {
 
 	// Represents the current status of the resource update request.
@@ -137,13 +191,34 @@ type UpdateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProgressEvent != nil {
+		s.WriteStruct(schemas.UpdateResourceOutput_ProgressEvent)
+		v.ProgressEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResourceOutput_ProgressEvent:
+			v.ProgressEvent = &types.ProgressEvent{}
+			return v.ProgressEvent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResource, schemas.UpdateResourceInput, schemas.UpdateResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResource, schemas.UpdateResourceInput, schemas.UpdateResourceOutput), output: &UpdateResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

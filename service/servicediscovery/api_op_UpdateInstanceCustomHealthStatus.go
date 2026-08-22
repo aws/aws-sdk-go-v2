@@ -4,7 +4,9 @@ package servicediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,24 @@ type UpdateInstanceCustomHealthStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceCustomHealthStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceCustomHealthStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceCustomHealthStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateInstanceCustomHealthStatusRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.UpdateInstanceCustomHealthStatusRequest_ServiceId, *v.ServiceId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateInstanceCustomHealthStatusRequest_Status, string(v.Status))
+	}
+}
+
 type UpdateInstanceCustomHealthStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +86,26 @@ type UpdateInstanceCustomHealthStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceCustomHealthStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceCustomHealthStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateInstanceCustomHealthStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInstanceCustomHealthStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateInstanceCustomHealthStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceCustomHealthStatus, schemas.UpdateInstanceCustomHealthStatusRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateInstanceCustomHealthStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceCustomHealthStatus, schemas.UpdateInstanceCustomHealthStatusRequest, nil), output: &UpdateInstanceCustomHealthStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

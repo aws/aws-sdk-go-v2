@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -104,6 +106,38 @@ type CreateEventBusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventBusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventBusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventBusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.CreateEventBusRequest_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEventBusRequest_Description, *v.Description)
+	}
+	if v.EventSourceName != nil {
+		s.WriteString(schemas.CreateEventBusRequest_EventSourceName, *v.EventSourceName)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.CreateEventBusRequest_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.CreateEventBusRequest_LogConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEventBusRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateEventBusRequest_Tags, v.Tags)
+}
+
 type CreateEventBusOutput struct {
 
 	// Configuration details of the Amazon SQS queue for EventBridge to use as a
@@ -141,13 +175,60 @@ type CreateEventBusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventBusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventBusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventBusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.CreateEventBusResponse_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEventBusResponse_Description, *v.Description)
+	}
+	if v.EventBusArn != nil {
+		s.WriteString(schemas.CreateEventBusResponse_EventBusArn, *v.EventBusArn)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.CreateEventBusResponse_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.CreateEventBusResponse_LogConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEventBusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventBusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventBusResponse_DeadLetterConfig:
+			v.DeadLetterConfig = &types.DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.CreateEventBusResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateEventBusResponse_Description, v.Description)
+		case schemas.CreateEventBusResponse_EventBusArn:
+			v.EventBusArn = new(string)
+			return d.ReadString(schemas.CreateEventBusResponse_EventBusArn, v.EventBusArn)
+		case schemas.CreateEventBusResponse_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.CreateEventBusResponse_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.CreateEventBusResponse_LogConfig:
+			v.LogConfig = &types.LogConfig{}
+			return v.LogConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEventBus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventBus, schemas.CreateEventBusRequest, schemas.CreateEventBusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEventBus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventBus, schemas.CreateEventBusRequest, schemas.CreateEventBusResponse), output: &CreateEventBusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

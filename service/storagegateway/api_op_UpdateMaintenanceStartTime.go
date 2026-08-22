@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,35 @@ type UpdateMaintenanceStartTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMaintenanceStartTimeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMaintenanceStartTimeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMaintenanceStartTimeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfMonth != nil {
+		s.WriteInt32(schemas.UpdateMaintenanceStartTimeInput_DayOfMonth, *v.DayOfMonth)
+	}
+	if v.DayOfWeek != nil {
+		s.WriteInt32(schemas.UpdateMaintenanceStartTimeInput_DayOfWeek, *v.DayOfWeek)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateMaintenanceStartTimeInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.HourOfDay != nil {
+		s.WriteInt32(schemas.UpdateMaintenanceStartTimeInput_HourOfDay, *v.HourOfDay)
+	}
+	if v.MinuteOfHour != nil {
+		s.WriteInt32(schemas.UpdateMaintenanceStartTimeInput_MinuteOfHour, *v.MinuteOfHour)
+	}
+	if v.SoftwareUpdatePreferences != nil {
+		s.WriteStruct(schemas.UpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences)
+		v.SoftwareUpdatePreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
 // maintenance start time is updated.
 type UpdateMaintenanceStartTimeOutput struct {
@@ -105,13 +136,32 @@ type UpdateMaintenanceStartTimeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMaintenanceStartTimeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMaintenanceStartTimeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMaintenanceStartTimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateMaintenanceStartTimeOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *UpdateMaintenanceStartTimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMaintenanceStartTimeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMaintenanceStartTimeOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.UpdateMaintenanceStartTimeOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMaintenanceStartTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMaintenanceStartTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMaintenanceStartTime, schemas.UpdateMaintenanceStartTimeInput, schemas.UpdateMaintenanceStartTimeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMaintenanceStartTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMaintenanceStartTime, schemas.UpdateMaintenanceStartTimeInput, schemas.UpdateMaintenanceStartTimeOutput), output: &UpdateMaintenanceStartTimeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

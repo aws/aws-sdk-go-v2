@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"actionTaken":"START_SYNC","applicationArn":"__ApplicationArn__","resourceArn":"__ResourceArn__"}

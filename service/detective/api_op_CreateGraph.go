@@ -4,6 +4,8 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,16 @@ type CreateGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGraphRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagMap(s, schemas.CreateGraphRequest_Tags, v.Tags)
+}
+
 type CreateGraphOutput struct {
 
 	// The ARN of the new behavior graph.
@@ -57,13 +69,32 @@ type CreateGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGraphResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.CreateGraphResponse_GraphArn, *v.GraphArn)
+	}
+}
+func (v *CreateGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGraphResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGraphResponse_GraphArn:
+			v.GraphArn = new(string)
+			return d.ReadString(schemas.CreateGraphResponse_GraphArn, v.GraphArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGraph, schemas.CreateGraphRequest, schemas.CreateGraphResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGraph, schemas.CreateGraphRequest, schemas.CreateGraphResponse), output: &CreateGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

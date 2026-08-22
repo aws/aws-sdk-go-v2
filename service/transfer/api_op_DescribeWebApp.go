@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DescribeWebAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWebAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWebAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWebAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebAppId != nil {
+		s.WriteString(schemas.DescribeWebAppRequest_WebAppId, *v.WebAppId)
+	}
+}
+
 type DescribeWebAppOutput struct {
 
 	// Returns a structure that contains the details of the web app.
@@ -53,13 +67,34 @@ type DescribeWebAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWebAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWebAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWebAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebApp != nil {
+		s.WriteStruct(schemas.DescribeWebAppResponse_WebApp)
+		v.WebApp.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWebAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWebAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWebAppResponse_WebApp:
+			v.WebApp = &types.DescribedWebApp{}
+			return v.WebApp.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWebAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWebApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWebApp, schemas.DescribeWebAppRequest, schemas.DescribeWebAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWebApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWebApp, schemas.DescribeWebAppRequest, schemas.DescribeWebAppResponse), output: &DescribeWebAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

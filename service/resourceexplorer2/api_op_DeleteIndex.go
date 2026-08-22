@@ -4,7 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,28 @@ type DeleteIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIndexInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteIndexInput_Arn, *v.Arn)
+	}
+}
+func (v *DeleteIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIndexInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteIndexInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteIndexInput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DeleteIndexOutput struct {
 
 	// The [Amazon resource name (ARN)] of the index that you successfully started the deletion process.
@@ -68,13 +92,48 @@ type DeleteIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIndexOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteIndexOutput_Arn, *v.Arn)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DeleteIndexOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteIndexOutput_State, string(v.State))
+	}
+}
+func (v *DeleteIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIndexOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteIndexOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteIndexOutput_Arn, v.Arn)
+		case schemas.DeleteIndexOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteIndexOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DeleteIndexOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteIndexOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.IndexState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIndex, schemas.DeleteIndexInput, schemas.DeleteIndexOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIndex, schemas.DeleteIndexInput, schemas.DeleteIndexOutput), output: &DeleteIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

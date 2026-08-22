@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,26 @@ type PollForActivityTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForActivityTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForActivityTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForActivityTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.PollForActivityTaskInput_domain, *v.Domain)
+	}
+	if v.Identity != nil {
+		s.WriteString(schemas.PollForActivityTaskInput_identity, *v.Identity)
+	}
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.PollForActivityTaskInput_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Unit of work sent to an activity worker.
 type PollForActivityTaskOutput struct {
 
@@ -118,13 +140,63 @@ type PollForActivityTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForActivityTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForActivityTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityId != nil {
+		s.WriteString(schemas.ActivityTask_activityId, *v.ActivityId)
+	}
+	if v.ActivityType != nil {
+		s.WriteStruct(schemas.ActivityTask_activityType)
+		v.ActivityType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.ActivityTask_input, *v.Input)
+	}
+	s.WriteInt64(schemas.ActivityTask_startedEventId, v.StartedEventId)
+	if v.TaskToken != nil {
+		s.WriteString(schemas.ActivityTask_taskToken, *v.TaskToken)
+	}
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.ActivityTask_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PollForActivityTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTask_activityId:
+			v.ActivityId = new(string)
+			return d.ReadString(schemas.ActivityTask_activityId, v.ActivityId)
+		case schemas.ActivityTask_activityType:
+			v.ActivityType = &types.ActivityType{}
+			return v.ActivityType.Deserialize(d)
+		case schemas.ActivityTask_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.ActivityTask_input, v.Input)
+		case schemas.ActivityTask_startedEventId:
+			return d.ReadInt64(schemas.ActivityTask_startedEventId, &v.StartedEventId)
+		case schemas.ActivityTask_taskToken:
+			v.TaskToken = new(string)
+			return d.ReadString(schemas.ActivityTask_taskToken, v.TaskToken)
+		case schemas.ActivityTask_workflowExecution:
+			v.WorkflowExecution = &types.WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPollForActivityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPollForActivityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForActivityTask, schemas.PollForActivityTaskInput, schemas.ActivityTask)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPollForActivityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForActivityTask, schemas.PollForActivityTaskInput, schemas.ActivityTask), output: &PollForActivityTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

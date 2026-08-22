@@ -4,7 +4,9 @@ package pi
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type GetResourceMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetResourceMetadataRequest_Identifier, *v.Identifier)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.GetResourceMetadataRequest_ServiceType, string(v.ServiceType))
+	}
+}
+
 type GetResourceMetadataOutput struct {
 
 	// The metadata for different features. For example, the metadata might indicate
@@ -63,13 +80,35 @@ type GetResourceMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeatureMetadataMap(s, schemas.GetResourceMetadataResponse_Features, v.Features)
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetResourceMetadataResponse_Identifier, *v.Identifier)
+	}
+}
+func (v *GetResourceMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceMetadataResponse_Features:
+			return deserializeFeatureMetadataMap(d, schemas.GetResourceMetadataResponse_Features, &v.Features)
+		case schemas.GetResourceMetadataResponse_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.GetResourceMetadataResponse_Identifier, v.Identifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceMetadata, schemas.GetResourceMetadataRequest, schemas.GetResourceMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResourceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceMetadata, schemas.GetResourceMetadataRequest, schemas.GetResourceMetadataResponse), output: &GetResourceMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

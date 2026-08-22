@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,34 @@ type GetSceneInput struct {
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSceneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSceneRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSceneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SceneId != nil {
+		s.WriteString(schemas.GetSceneRequest_sceneId, *v.SceneId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetSceneRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetSceneInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSceneRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSceneRequest_sceneId:
+			v.SceneId = new(string)
+			return d.ReadString(schemas.GetSceneRequest_sceneId, v.SceneId)
+		case schemas.GetSceneRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetSceneRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 type GetSceneOutput struct {
@@ -95,13 +125,85 @@ type GetSceneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSceneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSceneResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSceneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetSceneResponse_arn, *v.Arn)
+	}
+	serializeSceneCapabilities(s, schemas.GetSceneResponse_capabilities, v.Capabilities)
+	if v.ContentLocation != nil {
+		s.WriteString(schemas.GetSceneResponse_contentLocation, *v.ContentLocation)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.GetSceneResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetSceneResponse_description, *v.Description)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetSceneResponse_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGeneratedSceneMetadataMap(s, schemas.GetSceneResponse_generatedSceneMetadata, v.GeneratedSceneMetadata)
+	if v.SceneId != nil {
+		s.WriteString(schemas.GetSceneResponse_sceneId, *v.SceneId)
+	}
+	serializeSceneMetadataMap(s, schemas.GetSceneResponse_sceneMetadata, v.SceneMetadata)
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.GetSceneResponse_updateDateTime, *v.UpdateDateTime)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetSceneResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetSceneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSceneResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSceneResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetSceneResponse_arn, v.Arn)
+		case schemas.GetSceneResponse_capabilities:
+			return deserializeSceneCapabilities(d, schemas.GetSceneResponse_capabilities, &v.Capabilities)
+		case schemas.GetSceneResponse_contentLocation:
+			v.ContentLocation = new(string)
+			return d.ReadString(schemas.GetSceneResponse_contentLocation, v.ContentLocation)
+		case schemas.GetSceneResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetSceneResponse_creationDateTime, v.CreationDateTime)
+		case schemas.GetSceneResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSceneResponse_description, v.Description)
+		case schemas.GetSceneResponse_error:
+			v.Error = &types.SceneError{}
+			return v.Error.Deserialize(d)
+		case schemas.GetSceneResponse_generatedSceneMetadata:
+			return deserializeGeneratedSceneMetadataMap(d, schemas.GetSceneResponse_generatedSceneMetadata, &v.GeneratedSceneMetadata)
+		case schemas.GetSceneResponse_sceneId:
+			v.SceneId = new(string)
+			return d.ReadString(schemas.GetSceneResponse_sceneId, v.SceneId)
+		case schemas.GetSceneResponse_sceneMetadata:
+			return deserializeSceneMetadataMap(d, schemas.GetSceneResponse_sceneMetadata, &v.SceneMetadata)
+		case schemas.GetSceneResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetSceneResponse_updateDateTime, v.UpdateDateTime)
+		case schemas.GetSceneResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetSceneResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSceneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetScene{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScene, schemas.GetSceneRequest, schemas.GetSceneResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetScene{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScene, schemas.GetSceneRequest, schemas.GetSceneResponse), output: &GetSceneOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

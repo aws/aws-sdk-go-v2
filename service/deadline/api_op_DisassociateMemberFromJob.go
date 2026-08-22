@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type DisassociateMemberFromJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberFromJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberFromJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberFromJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.DisassociateMemberFromJobRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DisassociateMemberFromJobRequest_jobId, *v.JobId)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.DisassociateMemberFromJobRequest_principalId, *v.PrincipalId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.DisassociateMemberFromJobRequest_queueId, *v.QueueId)
+	}
+}
+
 type DisassociateMemberFromJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +80,26 @@ type DisassociateMemberFromJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMemberFromJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMemberFromJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMemberFromJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateMemberFromJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateMemberFromJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateMemberFromJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateMemberFromJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMemberFromJob, schemas.DisassociateMemberFromJobRequest, schemas.DisassociateMemberFromJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateMemberFromJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMemberFromJob, schemas.DisassociateMemberFromJobRequest, schemas.DisassociateMemberFromJobResponse), output: &DisassociateMemberFromJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

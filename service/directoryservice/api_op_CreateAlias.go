@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type CreateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.CreateAliasRequest_Alias, *v.Alias)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateAliasRequest_DirectoryId, *v.DirectoryId)
+	}
+}
+
 // Contains the results of the CreateAlias operation.
 type CreateAliasOutput struct {
 
@@ -63,13 +80,38 @@ type CreateAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAliasResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.CreateAliasResult_Alias, *v.Alias)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateAliasResult_DirectoryId, *v.DirectoryId)
+	}
+}
+func (v *CreateAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAliasResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAliasResult_Alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.CreateAliasResult_Alias, v.Alias)
+		case schemas.CreateAliasResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.CreateAliasResult_DirectoryId, v.DirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAlias, schemas.CreateAliasRequest, schemas.CreateAliasResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAlias, schemas.CreateAliasRequest, schemas.CreateAliasResult), output: &CreateAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

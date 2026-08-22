@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type DescribeTapeArchivesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTapeArchivesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTapeArchivesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTapeArchivesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeTapeArchivesInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTapeArchivesInput_Marker, *v.Marker)
+	}
+	serializeTapeARNs(s, schemas.DescribeTapeArchivesInput_TapeARNs, v.TapeARNs)
+}
+
 // DescribeTapeArchivesOutput
 type DescribeTapeArchivesOutput struct {
 
@@ -70,13 +88,35 @@ type DescribeTapeArchivesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTapeArchivesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTapeArchivesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTapeArchivesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTapeArchivesOutput_Marker, *v.Marker)
+	}
+	serializeTapeArchives(s, schemas.DescribeTapeArchivesOutput_TapeArchives, v.TapeArchives)
+}
+func (v *DescribeTapeArchivesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTapeArchivesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTapeArchivesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeTapeArchivesOutput_Marker, v.Marker)
+		case schemas.DescribeTapeArchivesOutput_TapeArchives:
+			return deserializeTapeArchives(d, schemas.DescribeTapeArchivesOutput_TapeArchives, &v.TapeArchives)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTapeArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTapeArchives{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTapeArchives, schemas.DescribeTapeArchivesInput, schemas.DescribeTapeArchivesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTapeArchives{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTapeArchives, schemas.DescribeTapeArchivesInput, schemas.DescribeTapeArchivesOutput), output: &DescribeTapeArchivesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

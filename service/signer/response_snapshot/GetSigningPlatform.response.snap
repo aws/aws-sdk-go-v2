@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"category":"AWSIoT","displayName":"__DisplayName__","maxSizeInMB":1,"partner":"__Partner__","platformId":"__PlatformId__","revocationSupported":true,"signingConfiguration":{"encryptionAlgorithmOptions":{"allowedValues":["RSA","RSA"],"defaultValue":"RSA"},"hashAlgorithmOptions":{"allowedValues":["SHA1","SHA1"],"defaultValue":"SHA1"}},"signingImageFormat":{"defaultFormat":"JSON","supportedFormats":["JSON","JSON"]},"target":"__Target__"}

@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,34 @@ type UpdateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateVolumeRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateVolumeRequest_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.UpdateVolumeRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.UpdateVolumeRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.UpdateVolumeRequest_VolumeId, *v.VolumeId)
+	}
+}
+
 type UpdateVolumeOutput struct {
 
 	// A description of the volume just updated. Returned after a successful
@@ -65,13 +95,34 @@ type UpdateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Volume != nil {
+		s.WriteStruct(schemas.UpdateVolumeResponse_Volume)
+		v.Volume.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVolumeResponse_Volume:
+			v.Volume = &types.Volume{}
+			return v.Volume.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVolume, schemas.UpdateVolumeRequest, schemas.UpdateVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVolume, schemas.UpdateVolumeRequest, schemas.UpdateVolumeResponse), output: &UpdateVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

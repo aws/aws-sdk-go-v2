@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -61,6 +63,88 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Address) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Address)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Address) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressLine1 != nil {
+		s.WriteString(schemas.Address_AddressLine1, *v.AddressLine1)
+	}
+	if v.AddressLine2 != nil {
+		s.WriteString(schemas.Address_AddressLine2, *v.AddressLine2)
+	}
+	if v.AddressLine3 != nil {
+		s.WriteString(schemas.Address_AddressLine3, *v.AddressLine3)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.Address_City, *v.City)
+	}
+	if v.ContactName != nil {
+		s.WriteString(schemas.Address_ContactName, *v.ContactName)
+	}
+	if v.ContactPhoneNumber != nil {
+		s.WriteString(schemas.Address_ContactPhoneNumber, *v.ContactPhoneNumber)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.Address_CountryCode, *v.CountryCode)
+	}
+	if v.DistrictOrCounty != nil {
+		s.WriteString(schemas.Address_DistrictOrCounty, *v.DistrictOrCounty)
+	}
+	if v.Municipality != nil {
+		s.WriteString(schemas.Address_Municipality, *v.Municipality)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.Address_PostalCode, *v.PostalCode)
+	}
+	if v.StateOrRegion != nil {
+		s.WriteString(schemas.Address_StateOrRegion, *v.StateOrRegion)
+	}
+}
+func (v *Address) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Address, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Address_AddressLine1:
+			v.AddressLine1 = new(string)
+			return d.ReadString(schemas.Address_AddressLine1, v.AddressLine1)
+		case schemas.Address_AddressLine2:
+			v.AddressLine2 = new(string)
+			return d.ReadString(schemas.Address_AddressLine2, v.AddressLine2)
+		case schemas.Address_AddressLine3:
+			v.AddressLine3 = new(string)
+			return d.ReadString(schemas.Address_AddressLine3, v.AddressLine3)
+		case schemas.Address_City:
+			v.City = new(string)
+			return d.ReadString(schemas.Address_City, v.City)
+		case schemas.Address_ContactName:
+			v.ContactName = new(string)
+			return d.ReadString(schemas.Address_ContactName, v.ContactName)
+		case schemas.Address_ContactPhoneNumber:
+			v.ContactPhoneNumber = new(string)
+			return d.ReadString(schemas.Address_ContactPhoneNumber, v.ContactPhoneNumber)
+		case schemas.Address_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.Address_CountryCode, v.CountryCode)
+		case schemas.Address_DistrictOrCounty:
+			v.DistrictOrCounty = new(string)
+			return d.ReadString(schemas.Address_DistrictOrCounty, v.DistrictOrCounty)
+		case schemas.Address_Municipality:
+			v.Municipality = new(string)
+			return d.ReadString(schemas.Address_Municipality, v.Municipality)
+		case schemas.Address_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.Address_PostalCode, v.PostalCode)
+		case schemas.Address_StateOrRegion:
+			v.StateOrRegion = new(string)
+			return d.ReadString(schemas.Address_StateOrRegion, v.StateOrRegion)
+		}
+		return nil
+	})
+}
+
 // Information about hardware assets.
 type AssetInfo struct {
 
@@ -81,6 +165,60 @@ type AssetInfo struct {
 	RackId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssetInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.AssetInfo_AssetId, *v.AssetId)
+	}
+	if v.AssetLocation != nil {
+		s.WriteStruct(schemas.AssetInfo_AssetLocation)
+		v.AssetLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.AssetInfo_AssetType, string(v.AssetType))
+	}
+	if v.ComputeAttributes != nil {
+		s.WriteStruct(schemas.AssetInfo_ComputeAttributes)
+		v.ComputeAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RackId != nil {
+		s.WriteString(schemas.AssetInfo_RackId, *v.RackId)
+	}
+}
+func (v *AssetInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetInfo_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.AssetInfo_AssetId, v.AssetId)
+		case schemas.AssetInfo_AssetLocation:
+			v.AssetLocation = &AssetLocation{}
+			return v.AssetLocation.Deserialize(d)
+		case schemas.AssetInfo_AssetType:
+			var ev string
+			if err := d.ReadString(schemas.AssetInfo_AssetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = AssetType(ev)
+			return nil
+		case schemas.AssetInfo_ComputeAttributes:
+			v.ComputeAttributes = &ComputeAttributes{}
+			return v.ComputeAttributes.Deserialize(d)
+		case schemas.AssetInfo_RackId:
+			v.RackId = new(string)
+			return d.ReadString(schemas.AssetInfo_RackId, v.RackId)
+		}
+		return nil
+	})
 }
 
 // An Amazon EC2 instance.
@@ -105,6 +243,56 @@ type AssetInstance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssetInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AssetInstance_AccountId, *v.AccountId)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.AssetInstance_AssetId, *v.AssetId)
+	}
+	if v.AwsServiceName != "" {
+		s.WriteString(schemas.AssetInstance_AwsServiceName, string(v.AwsServiceName))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssetInstance_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.AssetInstance_InstanceType, *v.InstanceType)
+	}
+}
+func (v *AssetInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetInstance_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AssetInstance_AccountId, v.AccountId)
+		case schemas.AssetInstance_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.AssetInstance_AssetId, v.AssetId)
+		case schemas.AssetInstance_AwsServiceName:
+			var ev string
+			if err := d.ReadString(schemas.AssetInstance_AwsServiceName, &ev); err != nil {
+				return err
+			}
+			v.AwsServiceName = AWSServiceName(ev)
+			return nil
+		case schemas.AssetInstance_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.AssetInstance_InstanceId, v.InstanceId)
+		case schemas.AssetInstance_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.AssetInstance_InstanceType, v.InstanceType)
+		}
+		return nil
+	})
+}
+
 // The capacity for each instance type.
 type AssetInstanceTypeCapacity struct {
 
@@ -121,6 +309,31 @@ type AssetInstanceTypeCapacity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssetInstanceTypeCapacity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetInstanceTypeCapacity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetInstanceTypeCapacity) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.AssetInstanceTypeCapacity_Count, v.Count)
+	if v.InstanceType != nil {
+		s.WriteString(schemas.AssetInstanceTypeCapacity_InstanceType, *v.InstanceType)
+	}
+}
+func (v *AssetInstanceTypeCapacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetInstanceTypeCapacity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetInstanceTypeCapacity_Count:
+			return d.ReadInt32(schemas.AssetInstanceTypeCapacity_Count, &v.Count)
+		case schemas.AssetInstanceTypeCapacity_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.AssetInstanceTypeCapacity_InstanceType, v.InstanceType)
+		}
+		return nil
+	})
+}
+
 // Information about the position of the asset in a rack.
 type AssetLocation struct {
 
@@ -128,6 +341,28 @@ type AssetLocation struct {
 	RackElevation *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssetLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RackElevation != nil {
+		s.WriteFloat32(schemas.AssetLocation_RackElevation, *v.RackElevation)
+	}
+}
+func (v *AssetLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetLocation_RackElevation:
+			v.RackElevation = new(float32)
+			return d.ReadFloat32(schemas.AssetLocation_RackElevation, v.RackElevation)
+		}
+		return nil
+	})
 }
 
 // A running Amazon EC2 instance that can be stopped to free up capacity needed to
@@ -146,6 +381,44 @@ type BlockingInstance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BlockingInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlockingInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlockingInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BlockingInstance_AccountId, *v.AccountId)
+	}
+	if v.AwsServiceName != "" {
+		s.WriteString(schemas.BlockingInstance_AwsServiceName, string(v.AwsServiceName))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BlockingInstance_InstanceId, *v.InstanceId)
+	}
+}
+func (v *BlockingInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlockingInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlockingInstance_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BlockingInstance_AccountId, v.AccountId)
+		case schemas.BlockingInstance_AwsServiceName:
+			var ev string
+			if err := d.ReadString(schemas.BlockingInstance_AwsServiceName, &ev); err != nil {
+				return err
+			}
+			v.AwsServiceName = AWSServiceName(ev)
+			return nil
+		case schemas.BlockingInstance_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.BlockingInstance_InstanceId, v.InstanceId)
+		}
+		return nil
+	})
+}
+
 // A summary of the capacity changes for a quote option.
 type CapacitySummary struct {
 
@@ -161,6 +434,31 @@ type CapacitySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapacitySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacitySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacitySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQuoteCapacityList(s, schemas.CapacitySummary_CapacityChange, v.CapacityChange)
+	serializeQuoteCapacityList(s, schemas.CapacitySummary_ExistingCapacities, v.ExistingCapacities)
+	serializeQuoteCapacityList(s, schemas.CapacitySummary_FinalCapacities, v.FinalCapacities)
+}
+func (v *CapacitySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacitySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacitySummary_CapacityChange:
+			return deserializeQuoteCapacityList(d, schemas.CapacitySummary_CapacityChange, &v.CapacityChange)
+		case schemas.CapacitySummary_ExistingCapacities:
+			return deserializeQuoteCapacityList(d, schemas.CapacitySummary_ExistingCapacities, &v.ExistingCapacities)
+		case schemas.CapacitySummary_FinalCapacities:
+			return deserializeQuoteCapacityList(d, schemas.CapacitySummary_FinalCapacities, &v.FinalCapacities)
+		}
+		return nil
+	})
+}
+
 // The capacity tasks that failed.
 type CapacityTaskFailure struct {
 
@@ -173,6 +471,38 @@ type CapacityTaskFailure struct {
 	Type CapacityTaskFailureType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CapacityTaskFailure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityTaskFailure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityTaskFailure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.CapacityTaskFailure_Reason, *v.Reason)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CapacityTaskFailure_Type, string(v.Type))
+	}
+}
+func (v *CapacityTaskFailure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityTaskFailure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityTaskFailure_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.CapacityTaskFailure_Reason, v.Reason)
+		case schemas.CapacityTaskFailure_Type:
+			var ev string
+			if err := d.ReadString(schemas.CapacityTaskFailure_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CapacityTaskFailureType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The summary of the capacity task.
@@ -207,6 +537,74 @@ type CapacityTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapacityTaskSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityTaskSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.CapacityTaskSummary_AssetId, *v.AssetId)
+	}
+	if v.CapacityTaskId != nil {
+		s.WriteString(schemas.CapacityTaskSummary_CapacityTaskId, *v.CapacityTaskId)
+	}
+	if v.CapacityTaskStatus != "" {
+		s.WriteString(schemas.CapacityTaskSummary_CapacityTaskStatus, string(v.CapacityTaskStatus))
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.CapacityTaskSummary_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CapacityTaskSummary_CreationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.CapacityTaskSummary_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.OrderId != nil {
+		s.WriteString(schemas.CapacityTaskSummary_OrderId, *v.OrderId)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.CapacityTaskSummary_OutpostId, *v.OutpostId)
+	}
+}
+func (v *CapacityTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityTaskSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityTaskSummary_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.CapacityTaskSummary_AssetId, v.AssetId)
+		case schemas.CapacityTaskSummary_CapacityTaskId:
+			v.CapacityTaskId = new(string)
+			return d.ReadString(schemas.CapacityTaskSummary_CapacityTaskId, v.CapacityTaskId)
+		case schemas.CapacityTaskSummary_CapacityTaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.CapacityTaskSummary_CapacityTaskStatus, &ev); err != nil {
+				return err
+			}
+			v.CapacityTaskStatus = CapacityTaskStatus(ev)
+			return nil
+		case schemas.CapacityTaskSummary_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.CapacityTaskSummary_CompletionDate, v.CompletionDate)
+		case schemas.CapacityTaskSummary_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CapacityTaskSummary_CreationDate, v.CreationDate)
+		case schemas.CapacityTaskSummary_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.CapacityTaskSummary_LastModifiedDate, v.LastModifiedDate)
+		case schemas.CapacityTaskSummary_OrderId:
+			v.OrderId = new(string)
+			return d.ReadString(schemas.CapacityTaskSummary_OrderId, v.OrderId)
+		case schemas.CapacityTaskSummary_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.CapacityTaskSummary_OutpostId, v.OutpostId)
+		}
+		return nil
+	})
+}
+
 // Information about a catalog item.
 type CatalogItem struct {
 
@@ -232,6 +630,59 @@ type CatalogItem struct {
 	WeightLbs *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CatalogItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CatalogItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CatalogItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogItemId != nil {
+		s.WriteString(schemas.CatalogItem_CatalogItemId, *v.CatalogItemId)
+	}
+	serializeEC2CapacityListDefinition(s, schemas.CatalogItem_EC2Capacities, v.EC2Capacities)
+	if v.ItemStatus != "" {
+		s.WriteString(schemas.CatalogItem_ItemStatus, string(v.ItemStatus))
+	}
+	if v.PowerKva != nil {
+		s.WriteFloat32(schemas.CatalogItem_PowerKva, *v.PowerKva)
+	}
+	serializeSupportedStorageList(s, schemas.CatalogItem_SupportedStorage, v.SupportedStorage)
+	serializeSupportedUplinkGbpsListDefinition(s, schemas.CatalogItem_SupportedUplinkGbps, v.SupportedUplinkGbps)
+	if v.WeightLbs != nil {
+		s.WriteInt32(schemas.CatalogItem_WeightLbs, *v.WeightLbs)
+	}
+}
+func (v *CatalogItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CatalogItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CatalogItem_CatalogItemId:
+			v.CatalogItemId = new(string)
+			return d.ReadString(schemas.CatalogItem_CatalogItemId, v.CatalogItemId)
+		case schemas.CatalogItem_EC2Capacities:
+			return deserializeEC2CapacityListDefinition(d, schemas.CatalogItem_EC2Capacities, &v.EC2Capacities)
+		case schemas.CatalogItem_ItemStatus:
+			var ev string
+			if err := d.ReadString(schemas.CatalogItem_ItemStatus, &ev); err != nil {
+				return err
+			}
+			v.ItemStatus = CatalogItemStatus(ev)
+			return nil
+		case schemas.CatalogItem_PowerKva:
+			v.PowerKva = new(float32)
+			return d.ReadFloat32(schemas.CatalogItem_PowerKva, v.PowerKva)
+		case schemas.CatalogItem_SupportedStorage:
+			return deserializeSupportedStorageList(d, schemas.CatalogItem_SupportedStorage, &v.SupportedStorage)
+		case schemas.CatalogItem_SupportedUplinkGbps:
+			return deserializeSupportedUplinkGbpsListDefinition(d, schemas.CatalogItem_SupportedUplinkGbps, &v.SupportedUplinkGbps)
+		case schemas.CatalogItem_WeightLbs:
+			v.WeightLbs = new(int32)
+			return d.ReadInt32(schemas.CatalogItem_WeightLbs, v.WeightLbs)
+		}
+		return nil
+	})
 }
 
 // Information about compute hardware assets.
@@ -271,6 +722,50 @@ type ComputeAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComputeAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComputeAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostId != nil {
+		s.WriteString(schemas.ComputeAttributes_HostId, *v.HostId)
+	}
+	serializeInstanceFamilies(s, schemas.ComputeAttributes_InstanceFamilies, v.InstanceFamilies)
+	serializeAssetInstanceCapacityList(s, schemas.ComputeAttributes_InstanceTypeCapacities, v.InstanceTypeCapacities)
+	if v.MaxVcpus != nil {
+		s.WriteInt32(schemas.ComputeAttributes_MaxVcpus, *v.MaxVcpus)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ComputeAttributes_State, string(v.State))
+	}
+}
+func (v *ComputeAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComputeAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComputeAttributes_HostId:
+			v.HostId = new(string)
+			return d.ReadString(schemas.ComputeAttributes_HostId, v.HostId)
+		case schemas.ComputeAttributes_InstanceFamilies:
+			return deserializeInstanceFamilies(d, schemas.ComputeAttributes_InstanceFamilies, &v.InstanceFamilies)
+		case schemas.ComputeAttributes_InstanceTypeCapacities:
+			return deserializeAssetInstanceCapacityList(d, schemas.ComputeAttributes_InstanceTypeCapacities, &v.InstanceTypeCapacities)
+		case schemas.ComputeAttributes_MaxVcpus:
+			v.MaxVcpus = new(int32)
+			return d.ReadInt32(schemas.ComputeAttributes_MaxVcpus, v.MaxVcpus)
+		case schemas.ComputeAttributes_State:
+			var ev string
+			if err := d.ReadString(schemas.ComputeAttributes_State, &ev); err != nil {
+				return err
+			}
+			v.State = ComputeAssetState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about a connection.
 type ConnectionDetails struct {
 
@@ -293,6 +788,55 @@ type ConnectionDetails struct {
 	ServerTunnelAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCIDRList(s, schemas.ConnectionDetails_AllowedIps, v.AllowedIps)
+	if v.ClientPublicKey != nil {
+		s.WriteString(schemas.ConnectionDetails_ClientPublicKey, *v.ClientPublicKey)
+	}
+	if v.ClientTunnelAddress != nil {
+		s.WriteString(schemas.ConnectionDetails_ClientTunnelAddress, *v.ClientTunnelAddress)
+	}
+	if v.ServerEndpoint != nil {
+		s.WriteString(schemas.ConnectionDetails_ServerEndpoint, *v.ServerEndpoint)
+	}
+	if v.ServerPublicKey != nil {
+		s.WriteString(schemas.ConnectionDetails_ServerPublicKey, *v.ServerPublicKey)
+	}
+	if v.ServerTunnelAddress != nil {
+		s.WriteString(schemas.ConnectionDetails_ServerTunnelAddress, *v.ServerTunnelAddress)
+	}
+}
+func (v *ConnectionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionDetails_AllowedIps:
+			return deserializeCIDRList(d, schemas.ConnectionDetails_AllowedIps, &v.AllowedIps)
+		case schemas.ConnectionDetails_ClientPublicKey:
+			v.ClientPublicKey = new(string)
+			return d.ReadString(schemas.ConnectionDetails_ClientPublicKey, v.ClientPublicKey)
+		case schemas.ConnectionDetails_ClientTunnelAddress:
+			v.ClientTunnelAddress = new(string)
+			return d.ReadString(schemas.ConnectionDetails_ClientTunnelAddress, v.ClientTunnelAddress)
+		case schemas.ConnectionDetails_ServerEndpoint:
+			v.ServerEndpoint = new(string)
+			return d.ReadString(schemas.ConnectionDetails_ServerEndpoint, v.ServerEndpoint)
+		case schemas.ConnectionDetails_ServerPublicKey:
+			v.ServerPublicKey = new(string)
+			return d.ReadString(schemas.ConnectionDetails_ServerPublicKey, v.ServerPublicKey)
+		case schemas.ConnectionDetails_ServerTunnelAddress:
+			v.ServerTunnelAddress = new(string)
+			return d.ReadString(schemas.ConnectionDetails_ServerTunnelAddress, v.ServerTunnelAddress)
+		}
+		return nil
+	})
 }
 
 // Information about an instance type that can be ordered for an Outpost,
@@ -318,6 +862,48 @@ type DetailedInstanceTypeItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetailedInstanceTypeItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetailedInstanceTypeItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetailedInstanceTypeItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFormFactorConfigList(s, schemas.DetailedInstanceTypeItem_FormFactorConfigs, v.FormFactorConfigs)
+	if v.InstanceType != nil {
+		s.WriteString(schemas.DetailedInstanceTypeItem_InstanceType, *v.InstanceType)
+	}
+	if v.MemoryInMib != 0 {
+		s.WriteInt32(schemas.DetailedInstanceTypeItem_MemoryInMib, v.MemoryInMib)
+	}
+	if v.NetworkPerformance != nil {
+		s.WriteString(schemas.DetailedInstanceTypeItem_NetworkPerformance, *v.NetworkPerformance)
+	}
+	if v.VCPUs != nil {
+		s.WriteInt32(schemas.DetailedInstanceTypeItem_VCPUs, *v.VCPUs)
+	}
+}
+func (v *DetailedInstanceTypeItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetailedInstanceTypeItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetailedInstanceTypeItem_FormFactorConfigs:
+			return deserializeFormFactorConfigList(d, schemas.DetailedInstanceTypeItem_FormFactorConfigs, &v.FormFactorConfigs)
+		case schemas.DetailedInstanceTypeItem_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.DetailedInstanceTypeItem_InstanceType, v.InstanceType)
+		case schemas.DetailedInstanceTypeItem_MemoryInMib:
+			return d.ReadInt32(schemas.DetailedInstanceTypeItem_MemoryInMib, &v.MemoryInMib)
+		case schemas.DetailedInstanceTypeItem_NetworkPerformance:
+			v.NetworkPerformance = new(string)
+			return d.ReadString(schemas.DetailedInstanceTypeItem_NetworkPerformance, v.NetworkPerformance)
+		case schemas.DetailedInstanceTypeItem_VCPUs:
+			v.VCPUs = new(int32)
+			return d.ReadInt32(schemas.DetailedInstanceTypeItem_VCPUs, v.VCPUs)
+		}
+		return nil
+	})
+}
+
 // Information about EC2 capacity.
 type EC2Capacity struct {
 
@@ -331,6 +917,40 @@ type EC2Capacity struct {
 	Quantity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EC2Capacity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2Capacity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2Capacity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Family != nil {
+		s.WriteString(schemas.EC2Capacity_Family, *v.Family)
+	}
+	if v.MaxSize != nil {
+		s.WriteString(schemas.EC2Capacity_MaxSize, *v.MaxSize)
+	}
+	if v.Quantity != nil {
+		s.WriteString(schemas.EC2Capacity_Quantity, *v.Quantity)
+	}
+}
+func (v *EC2Capacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2Capacity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2Capacity_Family:
+			v.Family = new(string)
+			return d.ReadString(schemas.EC2Capacity_Family, v.Family)
+		case schemas.EC2Capacity_MaxSize:
+			v.MaxSize = new(string)
+			return d.ReadString(schemas.EC2Capacity_MaxSize, v.MaxSize)
+		case schemas.EC2Capacity_Quantity:
+			v.Quantity = new(string)
+			return d.ReadString(schemas.EC2Capacity_Quantity, v.Quantity)
+		}
+		return nil
+	})
 }
 
 // A supported form factor and Outpost generation configuration for an instance
@@ -347,6 +967,42 @@ type FormFactorConfig struct {
 	OutpostGeneration OutpostGeneration
 
 	noSmithyDocumentSerde
+}
+
+func (v *FormFactorConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FormFactorConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FormFactorConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FormFactor != "" {
+		s.WriteString(schemas.FormFactorConfig_FormFactor, string(v.FormFactor))
+	}
+	if v.OutpostGeneration != "" {
+		s.WriteString(schemas.FormFactorConfig_OutpostGeneration, string(v.OutpostGeneration))
+	}
+}
+func (v *FormFactorConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FormFactorConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FormFactorConfig_FormFactor:
+			var ev string
+			if err := d.ReadString(schemas.FormFactorConfig_FormFactor, &ev); err != nil {
+				return err
+			}
+			v.FormFactor = FormFactor(ev)
+			return nil
+		case schemas.FormFactorConfig_OutpostGeneration:
+			var ev string
+			if err := d.ReadString(schemas.FormFactorConfig_OutpostGeneration, &ev); err != nil {
+				return err
+			}
+			v.OutpostGeneration = OutpostGeneration(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // User-specified instances that must not be stopped. These instances will not
@@ -367,6 +1023,31 @@ type InstancesToExclude struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstancesToExclude) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstancesToExclude)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstancesToExclude) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.InstancesToExclude_AccountIds, v.AccountIds)
+	serializeInstanceIdList(s, schemas.InstancesToExclude_Instances, v.Instances)
+	serializeAWSServiceNameList(s, schemas.InstancesToExclude_Services, v.Services)
+}
+func (v *InstancesToExclude) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstancesToExclude, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstancesToExclude_AccountIds:
+			return deserializeAccountIdList(d, schemas.InstancesToExclude_AccountIds, &v.AccountIds)
+		case schemas.InstancesToExclude_Instances:
+			return deserializeInstanceIdList(d, schemas.InstancesToExclude_Instances, &v.Instances)
+		case schemas.InstancesToExclude_Services:
+			return deserializeAWSServiceNameList(d, schemas.InstancesToExclude_Services, &v.Services)
+		}
+		return nil
+	})
+}
+
 // The instance type that you specify determines the combination of CPU, memory,
 // storage, and networking capacity.
 type InstanceTypeCapacity struct {
@@ -384,6 +1065,31 @@ type InstanceTypeCapacity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceTypeCapacity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceTypeCapacity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceTypeCapacity) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.InstanceTypeCapacity_Count, v.Count)
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceTypeCapacity_InstanceType, *v.InstanceType)
+	}
+}
+func (v *InstanceTypeCapacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceTypeCapacity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceTypeCapacity_Count:
+			return d.ReadInt32(schemas.InstanceTypeCapacity_Count, &v.Count)
+		case schemas.InstanceTypeCapacity_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceTypeCapacity_InstanceType, v.InstanceType)
+		}
+		return nil
+	})
+}
+
 // Information about an instance type.
 type InstanceTypeItem struct {
 
@@ -394,6 +1100,34 @@ type InstanceTypeItem struct {
 	VCPUs *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceTypeItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceTypeItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceTypeItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceTypeItem_InstanceType, *v.InstanceType)
+	}
+	if v.VCPUs != nil {
+		s.WriteInt32(schemas.InstanceTypeItem_VCPUs, *v.VCPUs)
+	}
+}
+func (v *InstanceTypeItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceTypeItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceTypeItem_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceTypeItem_InstanceType, v.InstanceType)
+		case schemas.InstanceTypeItem_VCPUs:
+			v.VCPUs = new(int32)
+			return d.ReadInt32(schemas.InstanceTypeItem_VCPUs, v.VCPUs)
+		}
+		return nil
+	})
 }
 
 // Information about a line item.
@@ -426,6 +1160,73 @@ type LineItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LineItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LineItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LineItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLineItemAssetInformationList(s, schemas.LineItem_AssetInformationList, v.AssetInformationList)
+	if v.CatalogItemId != nil {
+		s.WriteString(schemas.LineItem_CatalogItemId, *v.CatalogItemId)
+	}
+	if v.LineItemId != nil {
+		s.WriteString(schemas.LineItem_LineItemId, *v.LineItemId)
+	}
+	if v.PreviousLineItemId != nil {
+		s.WriteString(schemas.LineItem_PreviousLineItemId, *v.PreviousLineItemId)
+	}
+	if v.PreviousOrderId != nil {
+		s.WriteString(schemas.LineItem_PreviousOrderId, *v.PreviousOrderId)
+	}
+	if v.Quantity != nil {
+		s.WriteInt32(schemas.LineItem_Quantity, *v.Quantity)
+	}
+	if v.ShipmentInformation != nil {
+		s.WriteStruct(schemas.LineItem_ShipmentInformation)
+		v.ShipmentInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LineItem_Status, string(v.Status))
+	}
+}
+func (v *LineItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LineItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LineItem_AssetInformationList:
+			return deserializeLineItemAssetInformationList(d, schemas.LineItem_AssetInformationList, &v.AssetInformationList)
+		case schemas.LineItem_CatalogItemId:
+			v.CatalogItemId = new(string)
+			return d.ReadString(schemas.LineItem_CatalogItemId, v.CatalogItemId)
+		case schemas.LineItem_LineItemId:
+			v.LineItemId = new(string)
+			return d.ReadString(schemas.LineItem_LineItemId, v.LineItemId)
+		case schemas.LineItem_PreviousLineItemId:
+			v.PreviousLineItemId = new(string)
+			return d.ReadString(schemas.LineItem_PreviousLineItemId, v.PreviousLineItemId)
+		case schemas.LineItem_PreviousOrderId:
+			v.PreviousOrderId = new(string)
+			return d.ReadString(schemas.LineItem_PreviousOrderId, v.PreviousOrderId)
+		case schemas.LineItem_Quantity:
+			v.Quantity = new(int32)
+			return d.ReadInt32(schemas.LineItem_Quantity, v.Quantity)
+		case schemas.LineItem_ShipmentInformation:
+			v.ShipmentInformation = &ShipmentInformation{}
+			return v.ShipmentInformation.Deserialize(d)
+		case schemas.LineItem_Status:
+			var ev string
+			if err := d.ReadString(schemas.LineItem_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = LineItemStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about a line item asset.
 type LineItemAssetInformation struct {
 
@@ -439,6 +1240,31 @@ type LineItemAssetInformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LineItemAssetInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LineItemAssetInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LineItemAssetInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.LineItemAssetInformation_AssetId, *v.AssetId)
+	}
+	serializeMacAddressList(s, schemas.LineItemAssetInformation_MacAddressList, v.MacAddressList)
+}
+func (v *LineItemAssetInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LineItemAssetInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LineItemAssetInformation_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.LineItemAssetInformation_AssetId, v.AssetId)
+		case schemas.LineItemAssetInformation_MacAddressList:
+			return deserializeMacAddressList(d, schemas.LineItemAssetInformation_MacAddressList, &v.MacAddressList)
+		}
+		return nil
+	})
+}
+
 // Information about a line item request.
 type LineItemRequest struct {
 
@@ -449,6 +1275,34 @@ type LineItemRequest struct {
 	Quantity *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LineItemRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LineItemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LineItemRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogItemId != nil {
+		s.WriteString(schemas.LineItemRequest_CatalogItemId, *v.CatalogItemId)
+	}
+	if v.Quantity != nil {
+		s.WriteInt32(schemas.LineItemRequest_Quantity, *v.Quantity)
+	}
+}
+func (v *LineItemRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LineItemRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LineItemRequest_CatalogItemId:
+			v.CatalogItemId = new(string)
+			return d.ReadString(schemas.LineItemRequest_CatalogItemId, v.CatalogItemId)
+		case schemas.LineItemRequest_Quantity:
+			v.Quantity = new(int32)
+			return d.ReadInt32(schemas.LineItemRequest_Quantity, v.Quantity)
+		}
+		return nil
+	})
 }
 
 // Information about an order.
@@ -504,6 +1358,101 @@ type Order struct {
 	Status OrderStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *Order) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Order)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Order) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLineItemListDefinition(s, schemas.Order_LineItems, v.LineItems)
+	if v.OrderFulfilledDate != nil {
+		s.WriteTime(schemas.Order_OrderFulfilledDate, *v.OrderFulfilledDate)
+	}
+	if v.OrderId != nil {
+		s.WriteString(schemas.Order_OrderId, *v.OrderId)
+	}
+	if v.OrderSubmissionDate != nil {
+		s.WriteTime(schemas.Order_OrderSubmissionDate, *v.OrderSubmissionDate)
+	}
+	if v.OrderType != "" {
+		s.WriteString(schemas.Order_OrderType, string(v.OrderType))
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.Order_OutpostId, *v.OutpostId)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.Order_PaymentOption, string(v.PaymentOption))
+	}
+	if v.PaymentTerm != "" {
+		s.WriteString(schemas.Order_PaymentTerm, string(v.PaymentTerm))
+	}
+	if v.QuoteIdentifier != nil {
+		s.WriteString(schemas.Order_QuoteIdentifier, *v.QuoteIdentifier)
+	}
+	if v.QuoteOptionIdentifier != nil {
+		s.WriteString(schemas.Order_QuoteOptionIdentifier, *v.QuoteOptionIdentifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Order_Status, string(v.Status))
+	}
+}
+func (v *Order) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Order, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Order_LineItems:
+			return deserializeLineItemListDefinition(d, schemas.Order_LineItems, &v.LineItems)
+		case schemas.Order_OrderFulfilledDate:
+			v.OrderFulfilledDate = new(time.Time)
+			return d.ReadTime(schemas.Order_OrderFulfilledDate, v.OrderFulfilledDate)
+		case schemas.Order_OrderId:
+			v.OrderId = new(string)
+			return d.ReadString(schemas.Order_OrderId, v.OrderId)
+		case schemas.Order_OrderSubmissionDate:
+			v.OrderSubmissionDate = new(time.Time)
+			return d.ReadTime(schemas.Order_OrderSubmissionDate, v.OrderSubmissionDate)
+		case schemas.Order_OrderType:
+			var ev string
+			if err := d.ReadString(schemas.Order_OrderType, &ev); err != nil {
+				return err
+			}
+			v.OrderType = OrderType(ev)
+			return nil
+		case schemas.Order_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.Order_OutpostId, v.OutpostId)
+		case schemas.Order_PaymentOption:
+			var ev string
+			if err := d.ReadString(schemas.Order_PaymentOption, &ev); err != nil {
+				return err
+			}
+			v.PaymentOption = PaymentOption(ev)
+			return nil
+		case schemas.Order_PaymentTerm:
+			var ev string
+			if err := d.ReadString(schemas.Order_PaymentTerm, &ev); err != nil {
+				return err
+			}
+			v.PaymentTerm = PaymentTerm(ev)
+			return nil
+		case schemas.Order_QuoteIdentifier:
+			v.QuoteIdentifier = new(string)
+			return d.ReadString(schemas.Order_QuoteIdentifier, v.QuoteIdentifier)
+		case schemas.Order_QuoteOptionIdentifier:
+			v.QuoteOptionIdentifier = new(string)
+			return d.ReadString(schemas.Order_QuoteOptionIdentifier, v.QuoteOptionIdentifier)
+		case schemas.Order_Status:
+			var ev string
+			if err := d.ReadString(schemas.Order_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OrderStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A requirement that must be met before an order can be submitted for a quote.
@@ -569,6 +1518,48 @@ type OrderingRequirement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OrderingRequirement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrderingRequirement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrderingRequirement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrderingRequirementType != "" {
+		s.WriteString(schemas.OrderingRequirement_OrderingRequirementType, string(v.OrderingRequirementType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OrderingRequirement_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.OrderingRequirement_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *OrderingRequirement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrderingRequirement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrderingRequirement_OrderingRequirementType:
+			var ev string
+			if err := d.ReadString(schemas.OrderingRequirement_OrderingRequirementType, &ev); err != nil {
+				return err
+			}
+			v.OrderingRequirementType = OrderingRequirementType(ev)
+			return nil
+		case schemas.OrderingRequirement_Status:
+			var ev string
+			if err := d.ReadString(schemas.OrderingRequirement_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OrderingRequirementStatus(ev)
+			return nil
+		case schemas.OrderingRequirement_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.OrderingRequirement_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // A summary of line items in your order.
 type OrderSummary struct {
 
@@ -608,6 +1599,69 @@ type OrderSummary struct {
 	Status OrderStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrderSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrderSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrderSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLineItemStatusCounts(s, schemas.OrderSummary_LineItemCountsByStatus, v.LineItemCountsByStatus)
+	if v.OrderFulfilledDate != nil {
+		s.WriteTime(schemas.OrderSummary_OrderFulfilledDate, *v.OrderFulfilledDate)
+	}
+	if v.OrderId != nil {
+		s.WriteString(schemas.OrderSummary_OrderId, *v.OrderId)
+	}
+	if v.OrderSubmissionDate != nil {
+		s.WriteTime(schemas.OrderSummary_OrderSubmissionDate, *v.OrderSubmissionDate)
+	}
+	if v.OrderType != "" {
+		s.WriteString(schemas.OrderSummary_OrderType, string(v.OrderType))
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.OrderSummary_OutpostId, *v.OutpostId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OrderSummary_Status, string(v.Status))
+	}
+}
+func (v *OrderSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrderSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrderSummary_LineItemCountsByStatus:
+			return deserializeLineItemStatusCounts(d, schemas.OrderSummary_LineItemCountsByStatus, &v.LineItemCountsByStatus)
+		case schemas.OrderSummary_OrderFulfilledDate:
+			v.OrderFulfilledDate = new(time.Time)
+			return d.ReadTime(schemas.OrderSummary_OrderFulfilledDate, v.OrderFulfilledDate)
+		case schemas.OrderSummary_OrderId:
+			v.OrderId = new(string)
+			return d.ReadString(schemas.OrderSummary_OrderId, v.OrderId)
+		case schemas.OrderSummary_OrderSubmissionDate:
+			v.OrderSubmissionDate = new(time.Time)
+			return d.ReadTime(schemas.OrderSummary_OrderSubmissionDate, v.OrderSubmissionDate)
+		case schemas.OrderSummary_OrderType:
+			var ev string
+			if err := d.ReadString(schemas.OrderSummary_OrderType, &ev); err != nil {
+				return err
+			}
+			v.OrderType = OrderType(ev)
+			return nil
+		case schemas.OrderSummary_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.OrderSummary_OutpostId, v.OutpostId)
+		case schemas.OrderSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.OrderSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OrderStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about an Outpost.
@@ -652,6 +1706,95 @@ type Outpost struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Outpost) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Outpost)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Outpost) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.Outpost_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.Outpost_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Outpost_Description, *v.Description)
+	}
+	if v.LifeCycleStatus != nil {
+		s.WriteString(schemas.Outpost_LifeCycleStatus, *v.LifeCycleStatus)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Outpost_Name, *v.Name)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.Outpost_OutpostArn, *v.OutpostArn)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.Outpost_OutpostId, *v.OutpostId)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.Outpost_OwnerId, *v.OwnerId)
+	}
+	if v.SiteArn != nil {
+		s.WriteString(schemas.Outpost_SiteArn, *v.SiteArn)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.Outpost_SiteId, *v.SiteId)
+	}
+	if v.SupportedHardwareType != "" {
+		s.WriteString(schemas.Outpost_SupportedHardwareType, string(v.SupportedHardwareType))
+	}
+	serializeTagMap(s, schemas.Outpost_Tags, v.Tags)
+}
+func (v *Outpost) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Outpost, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Outpost_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.Outpost_AvailabilityZone, v.AvailabilityZone)
+		case schemas.Outpost_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.Outpost_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.Outpost_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Outpost_Description, v.Description)
+		case schemas.Outpost_LifeCycleStatus:
+			v.LifeCycleStatus = new(string)
+			return d.ReadString(schemas.Outpost_LifeCycleStatus, v.LifeCycleStatus)
+		case schemas.Outpost_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Outpost_Name, v.Name)
+		case schemas.Outpost_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.Outpost_OutpostArn, v.OutpostArn)
+		case schemas.Outpost_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.Outpost_OutpostId, v.OutpostId)
+		case schemas.Outpost_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.Outpost_OwnerId, v.OwnerId)
+		case schemas.Outpost_SiteArn:
+			v.SiteArn = new(string)
+			return d.ReadString(schemas.Outpost_SiteArn, v.SiteArn)
+		case schemas.Outpost_SiteId:
+			v.SiteId = new(string)
+			return d.ReadString(schemas.Outpost_SiteId, v.SiteId)
+		case schemas.Outpost_SupportedHardwareType:
+			var ev string
+			if err := d.ReadString(schemas.Outpost_SupportedHardwareType, &ev); err != nil {
+				return err
+			}
+			v.SupportedHardwareType = SupportedHardwareType(ev)
+			return nil
+		case schemas.Outpost_Tags:
+			return deserializeTagMap(d, schemas.Outpost_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // A pricing option for the specified Outpost.
 type PricingOption struct {
 
@@ -662,6 +1805,40 @@ type PricingOption struct {
 	SubscriptionPricingDetails *SubscriptionPricingDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *PricingOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PricingOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PricingOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PricingType != "" {
+		s.WriteString(schemas.PricingOption_PricingType, string(v.PricingType))
+	}
+	if v.SubscriptionPricingDetails != nil {
+		s.WriteStruct(schemas.PricingOption_SubscriptionPricingDetails)
+		v.SubscriptionPricingDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PricingOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PricingOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PricingOption_PricingType:
+			var ev string
+			if err := d.ReadString(schemas.PricingOption_PricingType, &ev); err != nil {
+				return err
+			}
+			v.PricingType = QuotePricingType(ev)
+			return nil
+		case schemas.PricingOption_SubscriptionPricingDetails:
+			v.SubscriptionPricingDetails = &SubscriptionPricingDetails{}
+			return v.SubscriptionPricingDetails.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about the private connectivity configuration for an Outpost.
@@ -687,6 +1864,47 @@ type PrivateConnectivityConfig struct {
 	VpcInformationList []VpcInformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrivateConnectivityConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateConnectivityConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateConnectivityConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrivateConnectivityStatus != "" {
+		s.WriteString(schemas.PrivateConnectivityConfig_PrivateConnectivityStatus, string(v.PrivateConnectivityStatus))
+	}
+	if v.ProvisioningRoleArn != nil {
+		s.WriteString(schemas.PrivateConnectivityConfig_ProvisioningRoleArn, *v.ProvisioningRoleArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.PrivateConnectivityConfig_RoleArn, *v.RoleArn)
+	}
+	serializeVpcInformationList(s, schemas.PrivateConnectivityConfig_VpcInformationList, v.VpcInformationList)
+}
+func (v *PrivateConnectivityConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateConnectivityConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateConnectivityConfig_PrivateConnectivityStatus:
+			var ev string
+			if err := d.ReadString(schemas.PrivateConnectivityConfig_PrivateConnectivityStatus, &ev); err != nil {
+				return err
+			}
+			v.PrivateConnectivityStatus = PrivateConnectivityStatus(ev)
+			return nil
+		case schemas.PrivateConnectivityConfig_ProvisioningRoleArn:
+			v.ProvisioningRoleArn = new(string)
+			return d.ReadString(schemas.PrivateConnectivityConfig_ProvisioningRoleArn, v.ProvisioningRoleArn)
+		case schemas.PrivateConnectivityConfig_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.PrivateConnectivityConfig_RoleArn, v.RoleArn)
+		case schemas.PrivateConnectivityConfig_VpcInformationList:
+			return deserializeVpcInformationList(d, schemas.PrivateConnectivityConfig_VpcInformationList, &v.VpcInformationList)
+		}
+		return nil
+	})
 }
 
 // Information about a quote for an Outpost. A quote provides pricing and
@@ -752,6 +1970,104 @@ type Quote struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Quote) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Quote)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Quote) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Quote_AccountId, *v.AccountId)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.Quote_CountryCode, *v.CountryCode)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.Quote_CreatedDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Quote_Description, *v.Description)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.Quote_ExpirationDate, *v.ExpirationDate)
+	}
+	serializeOrderingRequirementList(s, schemas.Quote_OrderingRequirements, v.OrderingRequirements)
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.Quote_OutpostArn, *v.OutpostArn)
+	}
+	if v.QuoteId != nil {
+		s.WriteString(schemas.Quote_QuoteId, *v.QuoteId)
+	}
+	serializeQuoteOptionList(s, schemas.Quote_QuoteOptions, v.QuoteOptions)
+	if v.QuoteStatus != "" {
+		s.WriteString(schemas.Quote_QuoteStatus, string(v.QuoteStatus))
+	}
+	serializeQuoteCapacityList(s, schemas.Quote_RequestedCapacities, v.RequestedCapacities)
+	serializeQuoteConstraintList(s, schemas.Quote_RequestedConstraints, v.RequestedConstraints)
+	serializePaymentOptionList(s, schemas.Quote_RequestedPaymentOptions, v.RequestedPaymentOptions)
+	serializePaymentTermList(s, schemas.Quote_RequestedPaymentTerms, v.RequestedPaymentTerms)
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.Quote_StatusMessage, *v.StatusMessage)
+	}
+	if v.SubmittedOrderId != nil {
+		s.WriteString(schemas.Quote_SubmittedOrderId, *v.SubmittedOrderId)
+	}
+}
+func (v *Quote) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Quote, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Quote_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Quote_AccountId, v.AccountId)
+		case schemas.Quote_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.Quote_CountryCode, v.CountryCode)
+		case schemas.Quote_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.Quote_CreatedDate, v.CreatedDate)
+		case schemas.Quote_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Quote_Description, v.Description)
+		case schemas.Quote_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.Quote_ExpirationDate, v.ExpirationDate)
+		case schemas.Quote_OrderingRequirements:
+			return deserializeOrderingRequirementList(d, schemas.Quote_OrderingRequirements, &v.OrderingRequirements)
+		case schemas.Quote_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.Quote_OutpostArn, v.OutpostArn)
+		case schemas.Quote_QuoteId:
+			v.QuoteId = new(string)
+			return d.ReadString(schemas.Quote_QuoteId, v.QuoteId)
+		case schemas.Quote_QuoteOptions:
+			return deserializeQuoteOptionList(d, schemas.Quote_QuoteOptions, &v.QuoteOptions)
+		case schemas.Quote_QuoteStatus:
+			var ev string
+			if err := d.ReadString(schemas.Quote_QuoteStatus, &ev); err != nil {
+				return err
+			}
+			v.QuoteStatus = QuoteStatus(ev)
+			return nil
+		case schemas.Quote_RequestedCapacities:
+			return deserializeQuoteCapacityList(d, schemas.Quote_RequestedCapacities, &v.RequestedCapacities)
+		case schemas.Quote_RequestedConstraints:
+			return deserializeQuoteConstraintList(d, schemas.Quote_RequestedConstraints, &v.RequestedConstraints)
+		case schemas.Quote_RequestedPaymentOptions:
+			return deserializePaymentOptionList(d, schemas.Quote_RequestedPaymentOptions, &v.RequestedPaymentOptions)
+		case schemas.Quote_RequestedPaymentTerms:
+			return deserializePaymentTermList(d, schemas.Quote_RequestedPaymentTerms, &v.RequestedPaymentTerms)
+		case schemas.Quote_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.Quote_StatusMessage, v.StatusMessage)
+		case schemas.Quote_SubmittedOrderId:
+			v.SubmittedOrderId = new(string)
+			return d.ReadString(schemas.Quote_SubmittedOrderId, v.SubmittedOrderId)
+		}
+		return nil
+	})
+}
+
 // A capacity requirement for a quote. Specifies the type of capacity, the unit,
 // and the quantity.
 type QuoteCapacity struct {
@@ -772,6 +2088,44 @@ type QuoteCapacity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuoteCapacity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuoteCapacity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuoteCapacity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Quantity != nil {
+		s.WriteFloat32(schemas.QuoteCapacity_Quantity, *v.Quantity)
+	}
+	if v.QuoteCapacityType != "" {
+		s.WriteString(schemas.QuoteCapacity_QuoteCapacityType, string(v.QuoteCapacityType))
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.QuoteCapacity_Unit, *v.Unit)
+	}
+}
+func (v *QuoteCapacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuoteCapacity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuoteCapacity_Quantity:
+			v.Quantity = new(float32)
+			return d.ReadFloat32(schemas.QuoteCapacity_Quantity, v.Quantity)
+		case schemas.QuoteCapacity_QuoteCapacityType:
+			var ev string
+			if err := d.ReadString(schemas.QuoteCapacity_QuoteCapacityType, &ev); err != nil {
+				return err
+			}
+			v.QuoteCapacityType = QuoteCapacityType(ev)
+			return nil
+		case schemas.QuoteCapacity_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.QuoteCapacity_Unit, v.Unit)
+		}
+		return nil
+	})
+}
+
 // A physical constraint for a quote.
 type QuoteConstraint struct {
 
@@ -783,6 +2137,38 @@ type QuoteConstraint struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *QuoteConstraint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuoteConstraint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuoteConstraint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuoteConstraintType != "" {
+		s.WriteString(schemas.QuoteConstraint_QuoteConstraintType, string(v.QuoteConstraintType))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.QuoteConstraint_Value, *v.Value)
+	}
+}
+func (v *QuoteConstraint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuoteConstraint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuoteConstraint_QuoteConstraintType:
+			var ev string
+			if err := d.ReadString(schemas.QuoteConstraint_QuoteConstraintType, &ev); err != nil {
+				return err
+			}
+			v.QuoteConstraintType = QuoteConstraintType(ev)
+			return nil
+		case schemas.QuoteConstraint_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.QuoteConstraint_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A configuration and pricing option for a quote. Each option includes the
@@ -808,6 +2194,45 @@ type QuoteOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuoteOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuoteOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuoteOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQuoteCapacityList(s, schemas.QuoteOption_Capacities, v.Capacities)
+	if v.CapacitySummary != nil {
+		s.WriteStruct(schemas.QuoteOption_CapacitySummary)
+		v.CapacitySummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePricingOptionList(s, schemas.QuoteOption_PricingOptions, v.PricingOptions)
+	if v.QuoteOptionIdentifier != nil {
+		s.WriteString(schemas.QuoteOption_QuoteOptionIdentifier, *v.QuoteOptionIdentifier)
+	}
+	serializeQuoteSpecificationList(s, schemas.QuoteOption_Specifications, v.Specifications)
+}
+func (v *QuoteOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuoteOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuoteOption_Capacities:
+			return deserializeQuoteCapacityList(d, schemas.QuoteOption_Capacities, &v.Capacities)
+		case schemas.QuoteOption_CapacitySummary:
+			v.CapacitySummary = &CapacitySummary{}
+			return v.CapacitySummary.Deserialize(d)
+		case schemas.QuoteOption_PricingOptions:
+			return deserializePricingOptionList(d, schemas.QuoteOption_PricingOptions, &v.PricingOptions)
+		case schemas.QuoteOption_QuoteOptionIdentifier:
+			v.QuoteOptionIdentifier = new(string)
+			return d.ReadString(schemas.QuoteOption_QuoteOptionIdentifier, v.QuoteOptionIdentifier)
+		case schemas.QuoteOption_Specifications:
+			return deserializeQuoteSpecificationList(d, schemas.QuoteOption_Specifications, &v.Specifications)
+		}
+		return nil
+	})
+}
+
 // A physical specification for a quote option. Describes the rack or server
 // configuration that would be deployed.
 type QuoteSpecification struct {
@@ -827,6 +2252,56 @@ type QuoteSpecification struct {
 	ServerSpecificationDetails *ServerSpecificationDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *QuoteSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuoteSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuoteSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExistingRackSpecificationDetails != nil {
+		s.WriteStruct(schemas.QuoteSpecification_ExistingRackSpecificationDetails)
+		v.ExistingRackSpecificationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FinalRackSpecificationDetails != nil {
+		s.WriteStruct(schemas.QuoteSpecification_FinalRackSpecificationDetails)
+		v.FinalRackSpecificationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuoteSpecificationType != "" {
+		s.WriteString(schemas.QuoteSpecification_QuoteSpecificationType, string(v.QuoteSpecificationType))
+	}
+	if v.ServerSpecificationDetails != nil {
+		s.WriteStruct(schemas.QuoteSpecification_ServerSpecificationDetails)
+		v.ServerSpecificationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *QuoteSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuoteSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuoteSpecification_ExistingRackSpecificationDetails:
+			v.ExistingRackSpecificationDetails = &RackSpecificationDetails{}
+			return v.ExistingRackSpecificationDetails.Deserialize(d)
+		case schemas.QuoteSpecification_FinalRackSpecificationDetails:
+			v.FinalRackSpecificationDetails = &RackSpecificationDetails{}
+			return v.FinalRackSpecificationDetails.Deserialize(d)
+		case schemas.QuoteSpecification_QuoteSpecificationType:
+			var ev string
+			if err := d.ReadString(schemas.QuoteSpecification_QuoteSpecificationType, &ev); err != nil {
+				return err
+			}
+			v.QuoteSpecificationType = QuoteSpecificationType(ev)
+			return nil
+		case schemas.QuoteSpecification_ServerSpecificationDetails:
+			v.ServerSpecificationDetails = &ServerSpecificationDetails{}
+			return v.ServerSpecificationDetails.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Summary information about a quote.
@@ -880,6 +2355,101 @@ type QuoteSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuoteSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuoteSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuoteSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.QuoteSummary_AccountId, *v.AccountId)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.QuoteSummary_CountryCode, *v.CountryCode)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.QuoteSummary_CreatedDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.QuoteSummary_Description, *v.Description)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.QuoteSummary_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.QuoteSummary_OutpostArn, *v.OutpostArn)
+	}
+	if v.QuoteId != nil {
+		s.WriteString(schemas.QuoteSummary_QuoteId, *v.QuoteId)
+	}
+	serializeQuoteOptionList(s, schemas.QuoteSummary_QuoteOptions, v.QuoteOptions)
+	if v.QuoteStatus != "" {
+		s.WriteString(schemas.QuoteSummary_QuoteStatus, string(v.QuoteStatus))
+	}
+	serializeQuoteCapacityList(s, schemas.QuoteSummary_RequestedCapacities, v.RequestedCapacities)
+	serializeQuoteConstraintList(s, schemas.QuoteSummary_RequestedConstraints, v.RequestedConstraints)
+	serializePaymentOptionList(s, schemas.QuoteSummary_RequestedPaymentOptions, v.RequestedPaymentOptions)
+	serializePaymentTermList(s, schemas.QuoteSummary_RequestedPaymentTerms, v.RequestedPaymentTerms)
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.QuoteSummary_StatusMessage, *v.StatusMessage)
+	}
+	if v.SubmittedOrderId != nil {
+		s.WriteString(schemas.QuoteSummary_SubmittedOrderId, *v.SubmittedOrderId)
+	}
+}
+func (v *QuoteSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuoteSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuoteSummary_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.QuoteSummary_AccountId, v.AccountId)
+		case schemas.QuoteSummary_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.QuoteSummary_CountryCode, v.CountryCode)
+		case schemas.QuoteSummary_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.QuoteSummary_CreatedDate, v.CreatedDate)
+		case schemas.QuoteSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.QuoteSummary_Description, v.Description)
+		case schemas.QuoteSummary_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.QuoteSummary_ExpirationDate, v.ExpirationDate)
+		case schemas.QuoteSummary_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.QuoteSummary_OutpostArn, v.OutpostArn)
+		case schemas.QuoteSummary_QuoteId:
+			v.QuoteId = new(string)
+			return d.ReadString(schemas.QuoteSummary_QuoteId, v.QuoteId)
+		case schemas.QuoteSummary_QuoteOptions:
+			return deserializeQuoteOptionList(d, schemas.QuoteSummary_QuoteOptions, &v.QuoteOptions)
+		case schemas.QuoteSummary_QuoteStatus:
+			var ev string
+			if err := d.ReadString(schemas.QuoteSummary_QuoteStatus, &ev); err != nil {
+				return err
+			}
+			v.QuoteStatus = QuoteStatus(ev)
+			return nil
+		case schemas.QuoteSummary_RequestedCapacities:
+			return deserializeQuoteCapacityList(d, schemas.QuoteSummary_RequestedCapacities, &v.RequestedCapacities)
+		case schemas.QuoteSummary_RequestedConstraints:
+			return deserializeQuoteConstraintList(d, schemas.QuoteSummary_RequestedConstraints, &v.RequestedConstraints)
+		case schemas.QuoteSummary_RequestedPaymentOptions:
+			return deserializePaymentOptionList(d, schemas.QuoteSummary_RequestedPaymentOptions, &v.RequestedPaymentOptions)
+		case schemas.QuoteSummary_RequestedPaymentTerms:
+			return deserializePaymentTermList(d, schemas.QuoteSummary_RequestedPaymentTerms, &v.RequestedPaymentTerms)
+		case schemas.QuoteSummary_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.QuoteSummary_StatusMessage, v.StatusMessage)
+		case schemas.QuoteSummary_SubmittedOrderId:
+			v.SubmittedOrderId = new(string)
+			return d.ReadString(schemas.QuoteSummary_SubmittedOrderId, v.SubmittedOrderId)
+		}
+		return nil
+	})
+}
+
 //	Information about the physical and logistical details for racks at sites. For
 //
 // more information about hardware requirements for racks, see [Network readiness checklist]in the Amazon Web
@@ -924,6 +2494,112 @@ type RackPhysicalProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RackPhysicalProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RackPhysicalProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RackPhysicalProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FiberOpticCableType != "" {
+		s.WriteString(schemas.RackPhysicalProperties_FiberOpticCableType, string(v.FiberOpticCableType))
+	}
+	if v.MaximumSupportedWeightLbs != "" {
+		s.WriteString(schemas.RackPhysicalProperties_MaximumSupportedWeightLbs, string(v.MaximumSupportedWeightLbs))
+	}
+	if v.OpticalStandard != "" {
+		s.WriteString(schemas.RackPhysicalProperties_OpticalStandard, string(v.OpticalStandard))
+	}
+	if v.PowerConnector != "" {
+		s.WriteString(schemas.RackPhysicalProperties_PowerConnector, string(v.PowerConnector))
+	}
+	if v.PowerDrawKva != "" {
+		s.WriteString(schemas.RackPhysicalProperties_PowerDrawKva, string(v.PowerDrawKva))
+	}
+	if v.PowerFeedDrop != "" {
+		s.WriteString(schemas.RackPhysicalProperties_PowerFeedDrop, string(v.PowerFeedDrop))
+	}
+	if v.PowerPhase != "" {
+		s.WriteString(schemas.RackPhysicalProperties_PowerPhase, string(v.PowerPhase))
+	}
+	if v.UplinkCount != "" {
+		s.WriteString(schemas.RackPhysicalProperties_UplinkCount, string(v.UplinkCount))
+	}
+	if v.UplinkGbps != "" {
+		s.WriteString(schemas.RackPhysicalProperties_UplinkGbps, string(v.UplinkGbps))
+	}
+}
+func (v *RackPhysicalProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RackPhysicalProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RackPhysicalProperties_FiberOpticCableType:
+			var ev string
+			if err := d.ReadString(schemas.RackPhysicalProperties_FiberOpticCableType, &ev); err != nil {
+				return err
+			}
+			v.FiberOpticCableType = FiberOpticCableType(ev)
+			return nil
+		case schemas.RackPhysicalProperties_MaximumSupportedWeightLbs:
+			var ev string
+			if err := d.ReadString(schemas.RackPhysicalProperties_MaximumSupportedWeightLbs, &ev); err != nil {
+				return err
+			}
+			v.MaximumSupportedWeightLbs = MaximumSupportedWeightLbs(ev)
+			return nil
+		case schemas.RackPhysicalProperties_OpticalStandard:
+			var ev string
+			if err := d.ReadString(schemas.RackPhysicalProperties_OpticalStandard, &ev); err != nil {
+				return err
+			}
+			v.OpticalStandard = OpticalStandard(ev)
+			return nil
+		case schemas.RackPhysicalProperties_PowerConnector:
+			var ev string
+			if err := d.ReadString(schemas.RackPhysicalProperties_PowerConnector, &ev); err != nil {
+				return err
+			}
+			v.PowerConnector = PowerConnector(ev)
+			return nil
+		case schemas.RackPhysicalProperties_PowerDrawKva:
+			var ev string
+			if err := d.ReadString(schemas.RackPhysicalProperties_PowerDrawKva, &ev); err != nil {
+				return err
+			}
+			v.PowerDrawKva = PowerDrawKva(ev)
+			return nil
+		case schemas.RackPhysicalProperties_PowerFeedDrop:
+			var ev string
+			if err := d.ReadString(schemas.RackPhysicalProperties_PowerFeedDrop, &ev); err != nil {
+				return err
+			}
+			v.PowerFeedDrop = PowerFeedDrop(ev)
+			return nil
+		case schemas.RackPhysicalProperties_PowerPhase:
+			var ev string
+			if err := d.ReadString(schemas.RackPhysicalProperties_PowerPhase, &ev); err != nil {
+				return err
+			}
+			v.PowerPhase = PowerPhase(ev)
+			return nil
+		case schemas.RackPhysicalProperties_UplinkCount:
+			var ev string
+			if err := d.ReadString(schemas.RackPhysicalProperties_UplinkCount, &ev); err != nil {
+				return err
+			}
+			v.UplinkCount = UplinkCount(ev)
+			return nil
+		case schemas.RackPhysicalProperties_UplinkGbps:
+			var ev string
+			if err := d.ReadString(schemas.RackPhysicalProperties_UplinkGbps, &ev); err != nil {
+				return err
+			}
+			v.UplinkGbps = UplinkGbps(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The physical specification details for a rack in a quote option.
 type RackSpecificationDetails struct {
 
@@ -963,6 +2639,81 @@ type RackSpecificationDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RackSpecificationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RackSpecificationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RackSpecificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEC2CapacityListDefinition(s, schemas.RackSpecificationDetails_EC2Capacities, v.EC2Capacities)
+	if v.RackDepthInches != nil {
+		s.WriteFloat32(schemas.RackSpecificationDetails_RackDepthInches, *v.RackDepthInches)
+	}
+	if v.RackHeightInches != nil {
+		s.WriteFloat32(schemas.RackSpecificationDetails_RackHeightInches, *v.RackHeightInches)
+	}
+	if v.RackId != nil {
+		s.WriteString(schemas.RackSpecificationDetails_RackId, *v.RackId)
+	}
+	if v.RackPowerDrawKva != nil {
+		s.WriteFloat32(schemas.RackSpecificationDetails_RackPowerDrawKva, *v.RackPowerDrawKva)
+	}
+	if v.RackUnitHeight != "" {
+		s.WriteString(schemas.RackSpecificationDetails_RackUnitHeight, string(v.RackUnitHeight))
+	}
+	if v.RackUse != "" {
+		s.WriteString(schemas.RackSpecificationDetails_RackUse, string(v.RackUse))
+	}
+	if v.RackWeightLbs != nil {
+		s.WriteFloat32(schemas.RackSpecificationDetails_RackWeightLbs, *v.RackWeightLbs)
+	}
+	if v.RackWidthInches != nil {
+		s.WriteFloat32(schemas.RackSpecificationDetails_RackWidthInches, *v.RackWidthInches)
+	}
+}
+func (v *RackSpecificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RackSpecificationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RackSpecificationDetails_EC2Capacities:
+			return deserializeEC2CapacityListDefinition(d, schemas.RackSpecificationDetails_EC2Capacities, &v.EC2Capacities)
+		case schemas.RackSpecificationDetails_RackDepthInches:
+			v.RackDepthInches = new(float32)
+			return d.ReadFloat32(schemas.RackSpecificationDetails_RackDepthInches, v.RackDepthInches)
+		case schemas.RackSpecificationDetails_RackHeightInches:
+			v.RackHeightInches = new(float32)
+			return d.ReadFloat32(schemas.RackSpecificationDetails_RackHeightInches, v.RackHeightInches)
+		case schemas.RackSpecificationDetails_RackId:
+			v.RackId = new(string)
+			return d.ReadString(schemas.RackSpecificationDetails_RackId, v.RackId)
+		case schemas.RackSpecificationDetails_RackPowerDrawKva:
+			v.RackPowerDrawKva = new(float32)
+			return d.ReadFloat32(schemas.RackSpecificationDetails_RackPowerDrawKva, v.RackPowerDrawKva)
+		case schemas.RackSpecificationDetails_RackUnitHeight:
+			var ev string
+			if err := d.ReadString(schemas.RackSpecificationDetails_RackUnitHeight, &ev); err != nil {
+				return err
+			}
+			v.RackUnitHeight = RackUnitHeight(ev)
+			return nil
+		case schemas.RackSpecificationDetails_RackUse:
+			var ev string
+			if err := d.ReadString(schemas.RackSpecificationDetails_RackUse, &ev); err != nil {
+				return err
+			}
+			v.RackUse = QuoteRackUseType(ev)
+			return nil
+		case schemas.RackSpecificationDetails_RackWeightLbs:
+			v.RackWeightLbs = new(float32)
+			return d.ReadFloat32(schemas.RackSpecificationDetails_RackWeightLbs, v.RackWeightLbs)
+		case schemas.RackSpecificationDetails_RackWidthInches:
+			v.RackWidthInches = new(float32)
+			return d.ReadFloat32(schemas.RackSpecificationDetails_RackWidthInches, v.RackWidthInches)
+		}
+		return nil
+	})
+}
+
 // The physical specification details for a server in a quote option.
 type ServerSpecificationDetails struct {
 
@@ -994,6 +2745,65 @@ type ServerSpecificationDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServerSpecificationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerSpecificationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerSpecificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEC2CapacityListDefinition(s, schemas.ServerSpecificationDetails_EC2Capacities, v.EC2Capacities)
+	if v.RackUnitHeight != "" {
+		s.WriteString(schemas.ServerSpecificationDetails_RackUnitHeight, string(v.RackUnitHeight))
+	}
+	if v.ServerDepthInches != nil {
+		s.WriteFloat32(schemas.ServerSpecificationDetails_ServerDepthInches, *v.ServerDepthInches)
+	}
+	if v.ServerHeightInches != nil {
+		s.WriteFloat32(schemas.ServerSpecificationDetails_ServerHeightInches, *v.ServerHeightInches)
+	}
+	if v.ServerPowerDrawKva != nil {
+		s.WriteFloat32(schemas.ServerSpecificationDetails_ServerPowerDrawKva, *v.ServerPowerDrawKva)
+	}
+	if v.ServerWeightLbs != nil {
+		s.WriteFloat32(schemas.ServerSpecificationDetails_ServerWeightLbs, *v.ServerWeightLbs)
+	}
+	if v.ServerWidthInches != nil {
+		s.WriteFloat32(schemas.ServerSpecificationDetails_ServerWidthInches, *v.ServerWidthInches)
+	}
+}
+func (v *ServerSpecificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerSpecificationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerSpecificationDetails_EC2Capacities:
+			return deserializeEC2CapacityListDefinition(d, schemas.ServerSpecificationDetails_EC2Capacities, &v.EC2Capacities)
+		case schemas.ServerSpecificationDetails_RackUnitHeight:
+			var ev string
+			if err := d.ReadString(schemas.ServerSpecificationDetails_RackUnitHeight, &ev); err != nil {
+				return err
+			}
+			v.RackUnitHeight = RackUnitHeight(ev)
+			return nil
+		case schemas.ServerSpecificationDetails_ServerDepthInches:
+			v.ServerDepthInches = new(float32)
+			return d.ReadFloat32(schemas.ServerSpecificationDetails_ServerDepthInches, v.ServerDepthInches)
+		case schemas.ServerSpecificationDetails_ServerHeightInches:
+			v.ServerHeightInches = new(float32)
+			return d.ReadFloat32(schemas.ServerSpecificationDetails_ServerHeightInches, v.ServerHeightInches)
+		case schemas.ServerSpecificationDetails_ServerPowerDrawKva:
+			v.ServerPowerDrawKva = new(float32)
+			return d.ReadFloat32(schemas.ServerSpecificationDetails_ServerPowerDrawKva, v.ServerPowerDrawKva)
+		case schemas.ServerSpecificationDetails_ServerWeightLbs:
+			v.ServerWeightLbs = new(float32)
+			return d.ReadFloat32(schemas.ServerSpecificationDetails_ServerWeightLbs, v.ServerWeightLbs)
+		case schemas.ServerSpecificationDetails_ServerWidthInches:
+			v.ServerWidthInches = new(float32)
+			return d.ReadFloat32(schemas.ServerSpecificationDetails_ServerWidthInches, v.ServerWidthInches)
+		}
+		return nil
+	})
+}
+
 // Information about a line item shipment.
 type ShipmentInformation struct {
 
@@ -1004,6 +2814,38 @@ type ShipmentInformation struct {
 	ShipmentTrackingNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ShipmentInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShipmentInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShipmentInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShipmentCarrier != "" {
+		s.WriteString(schemas.ShipmentInformation_ShipmentCarrier, string(v.ShipmentCarrier))
+	}
+	if v.ShipmentTrackingNumber != nil {
+		s.WriteString(schemas.ShipmentInformation_ShipmentTrackingNumber, *v.ShipmentTrackingNumber)
+	}
+}
+func (v *ShipmentInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShipmentInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShipmentInformation_ShipmentCarrier:
+			var ev string
+			if err := d.ReadString(schemas.ShipmentInformation_ShipmentCarrier, &ev); err != nil {
+				return err
+			}
+			v.ShipmentCarrier = ShipmentCarrier(ev)
+			return nil
+		case schemas.ShipmentInformation_ShipmentTrackingNumber:
+			v.ShipmentTrackingNumber = new(string)
+			return d.ReadString(schemas.ShipmentInformation_ShipmentTrackingNumber, v.ShipmentTrackingNumber)
+		}
+		return nil
+	})
 }
 
 // Information about a site.
@@ -1044,6 +2886,87 @@ type Site struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Site) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Site)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Site) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Site_AccountId, *v.AccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Site_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Site_Name, *v.Name)
+	}
+	if v.Notes != nil {
+		s.WriteString(schemas.Site_Notes, *v.Notes)
+	}
+	if v.OperatingAddressCity != nil {
+		s.WriteString(schemas.Site_OperatingAddressCity, *v.OperatingAddressCity)
+	}
+	if v.OperatingAddressCountryCode != nil {
+		s.WriteString(schemas.Site_OperatingAddressCountryCode, *v.OperatingAddressCountryCode)
+	}
+	if v.OperatingAddressStateOrRegion != nil {
+		s.WriteString(schemas.Site_OperatingAddressStateOrRegion, *v.OperatingAddressStateOrRegion)
+	}
+	if v.RackPhysicalProperties != nil {
+		s.WriteStruct(schemas.Site_RackPhysicalProperties)
+		v.RackPhysicalProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SiteArn != nil {
+		s.WriteString(schemas.Site_SiteArn, *v.SiteArn)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.Site_SiteId, *v.SiteId)
+	}
+	serializeTagMap(s, schemas.Site_Tags, v.Tags)
+}
+func (v *Site) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Site, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Site_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Site_AccountId, v.AccountId)
+		case schemas.Site_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Site_Description, v.Description)
+		case schemas.Site_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Site_Name, v.Name)
+		case schemas.Site_Notes:
+			v.Notes = new(string)
+			return d.ReadString(schemas.Site_Notes, v.Notes)
+		case schemas.Site_OperatingAddressCity:
+			v.OperatingAddressCity = new(string)
+			return d.ReadString(schemas.Site_OperatingAddressCity, v.OperatingAddressCity)
+		case schemas.Site_OperatingAddressCountryCode:
+			v.OperatingAddressCountryCode = new(string)
+			return d.ReadString(schemas.Site_OperatingAddressCountryCode, v.OperatingAddressCountryCode)
+		case schemas.Site_OperatingAddressStateOrRegion:
+			v.OperatingAddressStateOrRegion = new(string)
+			return d.ReadString(schemas.Site_OperatingAddressStateOrRegion, v.OperatingAddressStateOrRegion)
+		case schemas.Site_RackPhysicalProperties:
+			v.RackPhysicalProperties = &RackPhysicalProperties{}
+			return v.RackPhysicalProperties.Deserialize(d)
+		case schemas.Site_SiteArn:
+			v.SiteArn = new(string)
+			return d.ReadString(schemas.Site_SiteArn, v.SiteArn)
+		case schemas.Site_SiteId:
+			v.SiteId = new(string)
+			return d.ReadString(schemas.Site_SiteId, v.SiteId)
+		case schemas.Site_Tags:
+			return deserializeTagMap(d, schemas.Site_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Provides information about your Amazon Web Services Outposts subscriptions.
@@ -1096,6 +3019,85 @@ type Subscription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Subscription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subscription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subscription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginDate != nil {
+		s.WriteTime(schemas.Subscription_BeginDate, *v.BeginDate)
+	}
+	if v.Currency != "" {
+		s.WriteString(schemas.Subscription_Currency, string(v.Currency))
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.Subscription_EndDate, *v.EndDate)
+	}
+	if v.MonthlyRecurringPrice != nil {
+		s.WriteFloat64(schemas.Subscription_MonthlyRecurringPrice, *v.MonthlyRecurringPrice)
+	}
+	serializeOrderIdList(s, schemas.Subscription_OrderIds, v.OrderIds)
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.Subscription_SubscriptionId, *v.SubscriptionId)
+	}
+	if v.SubscriptionStatus != "" {
+		s.WriteString(schemas.Subscription_SubscriptionStatus, string(v.SubscriptionStatus))
+	}
+	if v.SubscriptionType != "" {
+		s.WriteString(schemas.Subscription_SubscriptionType, string(v.SubscriptionType))
+	}
+	if v.UpfrontPrice != nil {
+		s.WriteFloat64(schemas.Subscription_UpfrontPrice, *v.UpfrontPrice)
+	}
+}
+func (v *Subscription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subscription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subscription_BeginDate:
+			v.BeginDate = new(time.Time)
+			return d.ReadTime(schemas.Subscription_BeginDate, v.BeginDate)
+		case schemas.Subscription_Currency:
+			var ev string
+			if err := d.ReadString(schemas.Subscription_Currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = CurrencyCode(ev)
+			return nil
+		case schemas.Subscription_EndDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.Subscription_EndDate, v.EndDate)
+		case schemas.Subscription_MonthlyRecurringPrice:
+			v.MonthlyRecurringPrice = new(float64)
+			return d.ReadFloat64(schemas.Subscription_MonthlyRecurringPrice, v.MonthlyRecurringPrice)
+		case schemas.Subscription_OrderIds:
+			return deserializeOrderIdList(d, schemas.Subscription_OrderIds, &v.OrderIds)
+		case schemas.Subscription_SubscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.Subscription_SubscriptionId, v.SubscriptionId)
+		case schemas.Subscription_SubscriptionStatus:
+			var ev string
+			if err := d.ReadString(schemas.Subscription_SubscriptionStatus, &ev); err != nil {
+				return err
+			}
+			v.SubscriptionStatus = SubscriptionStatus(ev)
+			return nil
+		case schemas.Subscription_SubscriptionType:
+			var ev string
+			if err := d.ReadString(schemas.Subscription_SubscriptionType, &ev); err != nil {
+				return err
+			}
+			v.SubscriptionType = SubscriptionType(ev)
+			return nil
+		case schemas.Subscription_UpfrontPrice:
+			v.UpfrontPrice = new(float64)
+			return d.ReadFloat64(schemas.Subscription_UpfrontPrice, v.UpfrontPrice)
+		}
+		return nil
+	})
+}
+
 // The pricing details for a subscription.
 type SubscriptionPricingDetails struct {
 
@@ -1117,6 +3119,64 @@ type SubscriptionPricingDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscriptionPricingDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscriptionPricingDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscriptionPricingDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.SubscriptionPricingDetails_Currency, string(v.Currency))
+	}
+	if v.MonthlyRecurringPrice != nil {
+		s.WriteFloat32(schemas.SubscriptionPricingDetails_MonthlyRecurringPrice, *v.MonthlyRecurringPrice)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.SubscriptionPricingDetails_PaymentOption, string(v.PaymentOption))
+	}
+	if v.PaymentTerm != "" {
+		s.WriteString(schemas.SubscriptionPricingDetails_PaymentTerm, string(v.PaymentTerm))
+	}
+	if v.UpfrontPrice != nil {
+		s.WriteFloat32(schemas.SubscriptionPricingDetails_UpfrontPrice, *v.UpfrontPrice)
+	}
+}
+func (v *SubscriptionPricingDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscriptionPricingDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubscriptionPricingDetails_Currency:
+			var ev string
+			if err := d.ReadString(schemas.SubscriptionPricingDetails_Currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = CurrencyCode(ev)
+			return nil
+		case schemas.SubscriptionPricingDetails_MonthlyRecurringPrice:
+			v.MonthlyRecurringPrice = new(float32)
+			return d.ReadFloat32(schemas.SubscriptionPricingDetails_MonthlyRecurringPrice, v.MonthlyRecurringPrice)
+		case schemas.SubscriptionPricingDetails_PaymentOption:
+			var ev string
+			if err := d.ReadString(schemas.SubscriptionPricingDetails_PaymentOption, &ev); err != nil {
+				return err
+			}
+			v.PaymentOption = PaymentOption(ev)
+			return nil
+		case schemas.SubscriptionPricingDetails_PaymentTerm:
+			var ev string
+			if err := d.ReadString(schemas.SubscriptionPricingDetails_PaymentTerm, &ev); err != nil {
+				return err
+			}
+			v.PaymentTerm = PaymentTerm(ev)
+			return nil
+		case schemas.SubscriptionPricingDetails_UpfrontPrice:
+			v.UpfrontPrice = new(float32)
+			return d.ReadFloat32(schemas.SubscriptionPricingDetails_UpfrontPrice, v.UpfrontPrice)
+		}
+		return nil
+	})
+}
+
 // Information about a VPC used for private connectivity, including its subnets
 // and an associated VPC endpoint.
 type VpcInformation struct {
@@ -1134,6 +3194,37 @@ type VpcInformation struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubnetIds(s, schemas.VpcInformation_SubnetIds, v.SubnetIds)
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.VpcInformation_VpcEndpointId, *v.VpcEndpointId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcInformation_VpcId, *v.VpcId)
+	}
+}
+func (v *VpcInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcInformation_SubnetIds:
+			return deserializeSubnetIds(d, schemas.VpcInformation_SubnetIds, &v.SubnetIds)
+		case schemas.VpcInformation_VpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.VpcInformation_VpcEndpointId, v.VpcEndpointId)
+		case schemas.VpcInformation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcInformation_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

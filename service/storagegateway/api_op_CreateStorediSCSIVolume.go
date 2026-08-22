@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -123,6 +125,38 @@ type CreateStorediSCSIVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorediSCSIVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorediSCSIVolumeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorediSCSIVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiskId != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_DiskId, *v.DiskId)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.KMSEncrypted != nil {
+		s.WriteBool(schemas.CreateStorediSCSIVolumeInput_KMSEncrypted, *v.KMSEncrypted)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_KMSKey, *v.KMSKey)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_NetworkInterfaceId, *v.NetworkInterfaceId)
+	}
+	s.WriteBool(schemas.CreateStorediSCSIVolumeInput_PreserveExistingData, v.PreserveExistingData)
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_SnapshotId, *v.SnapshotId)
+	}
+	serializeTags(s, schemas.CreateStorediSCSIVolumeInput_Tags, v.Tags)
+	if v.TargetName != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeInput_TargetName, *v.TargetName)
+	}
+}
+
 // A JSON object containing the following fields:
 type CreateStorediSCSIVolumeOutput struct {
 
@@ -142,13 +176,43 @@ type CreateStorediSCSIVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorediSCSIVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorediSCSIVolumeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorediSCSIVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetARN != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeOutput_TargetARN, *v.TargetARN)
+	}
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.CreateStorediSCSIVolumeOutput_VolumeARN, *v.VolumeARN)
+	}
+	if v.VolumeSizeInBytes != 0 {
+		s.WriteInt64(schemas.CreateStorediSCSIVolumeOutput_VolumeSizeInBytes, v.VolumeSizeInBytes)
+	}
+}
+func (v *CreateStorediSCSIVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStorediSCSIVolumeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStorediSCSIVolumeOutput_TargetARN:
+			v.TargetARN = new(string)
+			return d.ReadString(schemas.CreateStorediSCSIVolumeOutput_TargetARN, v.TargetARN)
+		case schemas.CreateStorediSCSIVolumeOutput_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.CreateStorediSCSIVolumeOutput_VolumeARN, v.VolumeARN)
+		case schemas.CreateStorediSCSIVolumeOutput_VolumeSizeInBytes:
+			return d.ReadInt64(schemas.CreateStorediSCSIVolumeOutput_VolumeSizeInBytes, &v.VolumeSizeInBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStorediSCSIVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStorediSCSIVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorediSCSIVolume, schemas.CreateStorediSCSIVolumeInput, schemas.CreateStorediSCSIVolumeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateStorediSCSIVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorediSCSIVolume, schemas.CreateStorediSCSIVolumeInput, schemas.CreateStorediSCSIVolumeOutput), output: &CreateStorediSCSIVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,28 @@ type UpdateListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateListRequest_description, *v.Description)
+	}
+	serializeElementsList(s, schemas.UpdateListRequest_elements, v.Elements)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateListRequest_name, *v.Name)
+	}
+	if v.UpdateMode != "" {
+		s.WriteString(schemas.UpdateListRequest_updateMode, string(v.UpdateMode))
+	}
+	if v.VariableType != nil {
+		s.WriteString(schemas.UpdateListRequest_variableType, *v.VariableType)
+	}
+}
+
 type UpdateListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +91,26 @@ type UpdateListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateListResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateListResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateList, schemas.UpdateListRequest, schemas.UpdateListResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateList, schemas.UpdateListRequest, schemas.UpdateListResult), output: &UpdateListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

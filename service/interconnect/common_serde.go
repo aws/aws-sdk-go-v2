@@ -149,6 +149,7 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func deserializeAttachPointDescriptorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AttachPointDescriptor) error {
+	*v = make([]types.AttachPointDescriptor, 0)
 	var vv types.AttachPointDescriptor
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AttachPointDescriptor{}
@@ -162,6 +163,7 @@ func deserializeAttachPointDescriptorList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeBandwidthList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -175,6 +177,7 @@ func deserializeBandwidthList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeConnectionSummariesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConnectionSummary) error {
+	*v = make([]types.ConnectionSummary, 0)
 	var vv types.ConnectionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ConnectionSummary{}
@@ -188,6 +191,7 @@ func deserializeConnectionSummariesList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Environment) error {
+	*v = make([]types.Environment, 0)
 	var vv types.Environment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Environment{}
@@ -201,6 +205,7 @@ func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

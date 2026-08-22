@@ -4,7 +4,9 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type EvaluateSessionInput struct {
 	SessionNameOrId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluateSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.EvaluateSessionRequest_DomainId, *v.DomainId)
+	}
+	if v.SessionNameOrId != nil {
+		s.WriteString(schemas.EvaluateSessionRequest_SessionNameOrId, *v.SessionNameOrId)
+	}
+}
+func (v *EvaluateSessionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluateSessionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluateSessionRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.EvaluateSessionRequest_DomainId, v.DomainId)
+		case schemas.EvaluateSessionRequest_SessionNameOrId:
+			v.SessionNameOrId = new(string)
+			return d.ReadString(schemas.EvaluateSessionRequest_SessionNameOrId, v.SessionNameOrId)
+		}
+		return nil
+	})
 }
 
 type EvaluateSessionOutput struct {
@@ -76,13 +106,70 @@ type EvaluateSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationResult != nil {
+		s.WriteStruct(schemas.EvaluateSessionResponse_AuthenticationResult)
+		v.AuthenticationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.EvaluateSessionResponse_DomainId, *v.DomainId)
+	}
+	if v.FraudDetectionResult != nil {
+		s.WriteStruct(schemas.EvaluateSessionResponse_FraudDetectionResult)
+		v.FraudDetectionResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.EvaluateSessionResponse_SessionId, *v.SessionId)
+	}
+	if v.SessionName != nil {
+		s.WriteString(schemas.EvaluateSessionResponse_SessionName, *v.SessionName)
+	}
+	if v.StreamingStatus != "" {
+		s.WriteString(schemas.EvaluateSessionResponse_StreamingStatus, string(v.StreamingStatus))
+	}
+}
+func (v *EvaluateSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluateSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluateSessionResponse_AuthenticationResult:
+			v.AuthenticationResult = &types.AuthenticationResult{}
+			return v.AuthenticationResult.Deserialize(d)
+		case schemas.EvaluateSessionResponse_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.EvaluateSessionResponse_DomainId, v.DomainId)
+		case schemas.EvaluateSessionResponse_FraudDetectionResult:
+			v.FraudDetectionResult = &types.FraudDetectionResult{}
+			return v.FraudDetectionResult.Deserialize(d)
+		case schemas.EvaluateSessionResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.EvaluateSessionResponse_SessionId, v.SessionId)
+		case schemas.EvaluateSessionResponse_SessionName:
+			v.SessionName = new(string)
+			return d.ReadString(schemas.EvaluateSessionResponse_SessionName, v.SessionName)
+		case schemas.EvaluateSessionResponse_StreamingStatus:
+			var ev string
+			if err := d.ReadString(schemas.EvaluateSessionResponse_StreamingStatus, &ev); err != nil {
+				return err
+			}
+			v.StreamingStatus = types.StreamingStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEvaluateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpEvaluateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateSession, schemas.EvaluateSessionRequest, schemas.EvaluateSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpEvaluateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateSession, schemas.EvaluateSessionRequest, schemas.EvaluateSessionResponse), output: &EvaluateSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

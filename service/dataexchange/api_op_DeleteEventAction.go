@@ -4,6 +4,8 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteEventActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventActionId != nil {
+		s.WriteString(schemas.DeleteEventActionRequest_EventActionId, *v.EventActionId)
+	}
+}
+func (v *DeleteEventActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEventActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEventActionRequest_EventActionId:
+			v.EventActionId = new(string)
+			return d.ReadString(schemas.DeleteEventActionRequest_EventActionId, v.EventActionId)
+		}
+		return nil
+	})
+}
+
 type DeleteEventActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +64,26 @@ type DeleteEventActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEventActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEventActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEventAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventAction, schemas.DeleteEventActionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEventAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventAction, schemas.DeleteEventActionRequest, nil), output: &DeleteEventActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

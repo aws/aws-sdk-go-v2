@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,20 @@ type UpdateLicenseSpecificationsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLicenseSpecificationsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLicenseSpecificationsForResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLicenseSpecificationsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLicenseSpecifications(s, schemas.UpdateLicenseSpecificationsForResourceRequest_AddLicenseSpecifications, v.AddLicenseSpecifications)
+	serializeLicenseSpecifications(s, schemas.UpdateLicenseSpecificationsForResourceRequest_RemoveLicenseSpecifications, v.RemoveLicenseSpecifications)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateLicenseSpecificationsForResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type UpdateLicenseSpecificationsForResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +69,26 @@ type UpdateLicenseSpecificationsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLicenseSpecificationsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLicenseSpecificationsForResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLicenseSpecificationsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLicenseSpecificationsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLicenseSpecificationsForResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLicenseSpecificationsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLicenseSpecificationsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLicenseSpecificationsForResource, schemas.UpdateLicenseSpecificationsForResourceRequest, schemas.UpdateLicenseSpecificationsForResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLicenseSpecificationsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLicenseSpecificationsForResource, schemas.UpdateLicenseSpecificationsForResourceRequest, schemas.UpdateLicenseSpecificationsForResourceResponse), output: &UpdateLicenseSpecificationsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

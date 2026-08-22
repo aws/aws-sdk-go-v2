@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,25 @@ type UpdateCrossAccountAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCrossAccountAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCrossAccountAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCrossAccountAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePrincipals(s, schemas.UpdateCrossAccountAttachmentRequest_AddPrincipals, v.AddPrincipals)
+	serializeResources(s, schemas.UpdateCrossAccountAttachmentRequest_AddResources, v.AddResources)
+	if v.AttachmentArn != nil {
+		s.WriteString(schemas.UpdateCrossAccountAttachmentRequest_AttachmentArn, *v.AttachmentArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCrossAccountAttachmentRequest_Name, *v.Name)
+	}
+	serializePrincipals(s, schemas.UpdateCrossAccountAttachmentRequest_RemovePrincipals, v.RemovePrincipals)
+	serializeResources(s, schemas.UpdateCrossAccountAttachmentRequest_RemoveResources, v.RemoveResources)
+}
+
 type UpdateCrossAccountAttachmentOutput struct {
 
 	// Information about the updated cross-account attachment.
@@ -86,13 +107,34 @@ type UpdateCrossAccountAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCrossAccountAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCrossAccountAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCrossAccountAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountAttachment != nil {
+		s.WriteStruct(schemas.UpdateCrossAccountAttachmentResponse_CrossAccountAttachment)
+		v.CrossAccountAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCrossAccountAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCrossAccountAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCrossAccountAttachmentResponse_CrossAccountAttachment:
+			v.CrossAccountAttachment = &types.Attachment{}
+			return v.CrossAccountAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCrossAccountAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCrossAccountAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCrossAccountAttachment, schemas.UpdateCrossAccountAttachmentRequest, schemas.UpdateCrossAccountAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCrossAccountAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCrossAccountAttachment, schemas.UpdateCrossAccountAttachmentRequest, schemas.UpdateCrossAccountAttachmentResponse), output: &UpdateCrossAccountAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

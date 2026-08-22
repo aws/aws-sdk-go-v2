@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,39 @@ type UpdateDirectorySetupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDirectorySetupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDirectorySetupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDirectorySetupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateSnapshotBeforeUpdate != nil {
+		s.WriteBool(schemas.UpdateDirectorySetupRequest_CreateSnapshotBeforeUpdate, *v.CreateSnapshotBeforeUpdate)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateDirectorySetupRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.DirectorySizeUpdateSettings != nil {
+		s.WriteStruct(schemas.UpdateDirectorySetupRequest_DirectorySizeUpdateSettings)
+		v.DirectorySizeUpdateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkUpdateSettings != nil {
+		s.WriteStruct(schemas.UpdateDirectorySetupRequest_NetworkUpdateSettings)
+		v.NetworkUpdateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OSUpdateSettings != nil {
+		s.WriteStruct(schemas.UpdateDirectorySetupRequest_OSUpdateSettings)
+		v.OSUpdateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateType != "" {
+		s.WriteString(schemas.UpdateDirectorySetupRequest_UpdateType, string(v.UpdateType))
+	}
+}
+
 type UpdateDirectorySetupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +93,26 @@ type UpdateDirectorySetupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDirectorySetupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDirectorySetupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDirectorySetupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDirectorySetupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDirectorySetupResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDirectorySetupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDirectorySetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDirectorySetup, schemas.UpdateDirectorySetupRequest, schemas.UpdateDirectorySetupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDirectorySetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDirectorySetup, schemas.UpdateDirectorySetupRequest, schemas.UpdateDirectorySetupResult), output: &UpdateDirectorySetupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

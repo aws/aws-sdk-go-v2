@@ -5,7 +5,9 @@ package translate
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListParallelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListParallelDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListParallelDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListParallelDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListParallelDataRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListParallelDataRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListParallelDataOutput struct {
 
 	// The string to use in a subsequent request to get the next page of results in a
@@ -52,13 +69,35 @@ type ListParallelDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListParallelDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListParallelDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListParallelDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListParallelDataResponse_NextToken, *v.NextToken)
+	}
+	serializeParallelDataPropertiesList(s, schemas.ListParallelDataResponse_ParallelDataPropertiesList, v.ParallelDataPropertiesList)
+}
+func (v *ListParallelDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListParallelDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListParallelDataResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListParallelDataResponse_NextToken, v.NextToken)
+		case schemas.ListParallelDataResponse_ParallelDataPropertiesList:
+			return deserializeParallelDataPropertiesList(d, schemas.ListParallelDataResponse_ParallelDataPropertiesList, &v.ParallelDataPropertiesList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListParallelData, schemas.ListParallelDataRequest, schemas.ListParallelDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListParallelData, schemas.ListParallelDataRequest, schemas.ListParallelDataResponse), output: &ListParallelDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

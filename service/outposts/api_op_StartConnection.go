@@ -4,6 +4,8 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,25 @@ type StartConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.StartConnectionRequest_AssetId, *v.AssetId)
+	}
+	if v.ClientPublicKey != nil {
+		s.WriteString(schemas.StartConnectionRequest_ClientPublicKey, *v.ClientPublicKey)
+	}
+	if v.DeviceSerialNumber != nil {
+		s.WriteString(schemas.StartConnectionRequest_DeviceSerialNumber, *v.DeviceSerialNumber)
+	}
+	s.WriteInt32(schemas.StartConnectionRequest_NetworkInterfaceDeviceIndex, v.NetworkInterfaceDeviceIndex)
+}
+
 type StartConnectionOutput struct {
 
 	//  The ID of the connection.
@@ -69,13 +90,38 @@ type StartConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.StartConnectionResponse_ConnectionId, *v.ConnectionId)
+	}
+	if v.UnderlayIpAddress != nil {
+		s.WriteString(schemas.StartConnectionResponse_UnderlayIpAddress, *v.UnderlayIpAddress)
+	}
+}
+func (v *StartConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartConnectionResponse_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.StartConnectionResponse_ConnectionId, v.ConnectionId)
+		case schemas.StartConnectionResponse_UnderlayIpAddress:
+			v.UnderlayIpAddress = new(string)
+			return d.ReadString(schemas.StartConnectionResponse_UnderlayIpAddress, v.UnderlayIpAddress)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConnection, schemas.StartConnectionRequest, schemas.StartConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConnection, schemas.StartConnectionRequest, schemas.StartConnectionResponse), output: &StartConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

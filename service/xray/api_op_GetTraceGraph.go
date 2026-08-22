@@ -5,7 +5,9 @@ package xray
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type GetTraceGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTraceGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTraceGraphRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTraceGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTraceGraphRequest_NextToken, *v.NextToken)
+	}
+	serializeTraceIdList(s, schemas.GetTraceGraphRequest_TraceIds, v.TraceIds)
+}
+
 type GetTraceGraphOutput struct {
 
 	// Pagination token.
@@ -52,13 +67,35 @@ type GetTraceGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTraceGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTraceGraphResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTraceGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTraceGraphResult_NextToken, *v.NextToken)
+	}
+	serializeServiceList(s, schemas.GetTraceGraphResult_Services, v.Services)
+}
+func (v *GetTraceGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTraceGraphResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTraceGraphResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTraceGraphResult_NextToken, v.NextToken)
+		case schemas.GetTraceGraphResult_Services:
+			return deserializeServiceList(d, schemas.GetTraceGraphResult_Services, &v.Services)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTraceGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTraceGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTraceGraph, schemas.GetTraceGraphRequest, schemas.GetTraceGraphResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTraceGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTraceGraph, schemas.GetTraceGraphRequest, schemas.GetTraceGraphResult), output: &GetTraceGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

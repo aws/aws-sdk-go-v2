@@ -4,6 +4,8 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetContainerPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.GetContainerPolicyInput_ContainerName, *v.ContainerName)
+	}
+}
+
 type GetContainerPolicyOutput struct {
 
 	// The contents of the access policy.
@@ -49,13 +63,32 @@ type GetContainerPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.GetContainerPolicyOutput_Policy, *v.Policy)
+	}
+}
+func (v *GetContainerPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContainerPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContainerPolicyOutput_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetContainerPolicyOutput_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContainerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContainerPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerPolicy, schemas.GetContainerPolicyInput, schemas.GetContainerPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetContainerPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerPolicy, schemas.GetContainerPolicyInput, schemas.GetContainerPolicyOutput), output: &GetContainerPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

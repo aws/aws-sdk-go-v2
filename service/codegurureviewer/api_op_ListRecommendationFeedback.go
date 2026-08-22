@@ -5,7 +5,9 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,26 @@ type ListRecommendationFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReviewArn != nil {
+		s.WriteString(schemas.ListRecommendationFeedbackRequest_CodeReviewArn, *v.CodeReviewArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendationFeedbackRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationFeedbackRequest_NextToken, *v.NextToken)
+	}
+	serializeRecommendationIds(s, schemas.ListRecommendationFeedbackRequest_RecommendationIds, v.RecommendationIds)
+	serializeUserIds(s, schemas.ListRecommendationFeedbackRequest_UserIds, v.UserIds)
+}
+
 type ListRecommendationFeedbackOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -79,13 +101,35 @@ type ListRecommendationFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationFeedbackResponse_NextToken, *v.NextToken)
+	}
+	serializeRecommendationFeedbackSummaries(s, schemas.ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries, v.RecommendationFeedbackSummaries)
+}
+func (v *ListRecommendationFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationFeedbackResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationFeedbackResponse_NextToken, v.NextToken)
+		case schemas.ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries:
+			return deserializeRecommendationFeedbackSummaries(d, schemas.ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries, &v.RecommendationFeedbackSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecommendationFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationFeedback, schemas.ListRecommendationFeedbackRequest, schemas.ListRecommendationFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecommendationFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationFeedback, schemas.ListRecommendationFeedbackRequest, schemas.ListRecommendationFeedbackResponse), output: &ListRecommendationFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,28 @@ type ListMetadataTransferJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetadataTransferJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetadataTransferJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetadataTransferJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationType != "" {
+		s.WriteString(schemas.ListMetadataTransferJobsRequest_destinationType, string(v.DestinationType))
+	}
+	serializeListMetadataTransferJobsFilters(s, schemas.ListMetadataTransferJobsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMetadataTransferJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetadataTransferJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.ListMetadataTransferJobsRequest_sourceType, string(v.SourceType))
+	}
+}
+
 type ListMetadataTransferJobsOutput struct {
 
 	// The metadata transfer job summaries.
@@ -66,13 +90,35 @@ type ListMetadataTransferJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetadataTransferJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetadataTransferJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetadataTransferJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetadataTransferJobSummaries(s, schemas.ListMetadataTransferJobsResponse_metadataTransferJobSummaries, v.MetadataTransferJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetadataTransferJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMetadataTransferJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMetadataTransferJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMetadataTransferJobsResponse_metadataTransferJobSummaries:
+			return deserializeMetadataTransferJobSummaries(d, schemas.ListMetadataTransferJobsResponse_metadataTransferJobSummaries, &v.MetadataTransferJobSummaries)
+		case schemas.ListMetadataTransferJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMetadataTransferJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMetadataTransferJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMetadataTransferJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetadataTransferJobs, schemas.ListMetadataTransferJobsRequest, schemas.ListMetadataTransferJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMetadataTransferJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetadataTransferJobs, schemas.ListMetadataTransferJobsRequest, schemas.ListMetadataTransferJobsResponse), output: &ListMetadataTransferJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

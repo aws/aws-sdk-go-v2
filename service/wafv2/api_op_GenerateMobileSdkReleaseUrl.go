@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type GenerateMobileSdkReleaseUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateMobileSdkReleaseUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateMobileSdkReleaseUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateMobileSdkReleaseUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Platform != "" {
+		s.WriteString(schemas.GenerateMobileSdkReleaseUrlRequest_Platform, string(v.Platform))
+	}
+	if v.ReleaseVersion != nil {
+		s.WriteString(schemas.GenerateMobileSdkReleaseUrlRequest_ReleaseVersion, *v.ReleaseVersion)
+	}
+}
+
 type GenerateMobileSdkReleaseUrlOutput struct {
 
 	// The presigned download URL for the specified SDK release.
@@ -57,13 +74,32 @@ type GenerateMobileSdkReleaseUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateMobileSdkReleaseUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateMobileSdkReleaseUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateMobileSdkReleaseUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Url != nil {
+		s.WriteString(schemas.GenerateMobileSdkReleaseUrlResponse_Url, *v.Url)
+	}
+}
+func (v *GenerateMobileSdkReleaseUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateMobileSdkReleaseUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateMobileSdkReleaseUrlResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.GenerateMobileSdkReleaseUrlResponse_Url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateMobileSdkReleaseUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGenerateMobileSdkReleaseUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMobileSdkReleaseUrl, schemas.GenerateMobileSdkReleaseUrlRequest, schemas.GenerateMobileSdkReleaseUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGenerateMobileSdkReleaseUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMobileSdkReleaseUrl, schemas.GenerateMobileSdkReleaseUrlRequest, schemas.GenerateMobileSdkReleaseUrlResponse), output: &GenerateMobileSdkReleaseUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

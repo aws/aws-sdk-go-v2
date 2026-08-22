@@ -4,7 +4,9 @@ package cloudwatchevents
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type CancelReplayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelReplayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelReplayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelReplayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplayName != nil {
+		s.WriteString(schemas.CancelReplayRequest_ReplayName, *v.ReplayName)
+	}
+}
+
 type CancelReplayOutput struct {
 
 	// The ARN of the replay to cancel.
@@ -51,13 +65,48 @@ type CancelReplayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelReplayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelReplayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelReplayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplayArn != nil {
+		s.WriteString(schemas.CancelReplayResponse_ReplayArn, *v.ReplayArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CancelReplayResponse_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.CancelReplayResponse_StateReason, *v.StateReason)
+	}
+}
+func (v *CancelReplayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelReplayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelReplayResponse_ReplayArn:
+			v.ReplayArn = new(string)
+			return d.ReadString(schemas.CancelReplayResponse_ReplayArn, v.ReplayArn)
+		case schemas.CancelReplayResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CancelReplayResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ReplayState(ev)
+			return nil
+		case schemas.CancelReplayResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.CancelReplayResponse_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelReplay{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelReplay, schemas.CancelReplayRequest, schemas.CancelReplayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelReplay{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelReplay, schemas.CancelReplayRequest, schemas.CancelReplayResponse), output: &CancelReplayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

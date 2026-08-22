@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeCustomRoutingAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomRoutingAcceleratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomRoutingAcceleratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomRoutingAcceleratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.DescribeCustomRoutingAcceleratorRequest_AcceleratorArn, *v.AcceleratorArn)
+	}
+}
+
 type DescribeCustomRoutingAcceleratorOutput struct {
 
 	// The description of the custom routing accelerator.
@@ -45,13 +59,34 @@ type DescribeCustomRoutingAcceleratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomRoutingAcceleratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomRoutingAcceleratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomRoutingAcceleratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accelerator != nil {
+		s.WriteStruct(schemas.DescribeCustomRoutingAcceleratorResponse_Accelerator)
+		v.Accelerator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCustomRoutingAcceleratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCustomRoutingAcceleratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCustomRoutingAcceleratorResponse_Accelerator:
+			v.Accelerator = &types.CustomRoutingAccelerator{}
+			return v.Accelerator.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCustomRoutingAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCustomRoutingAccelerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomRoutingAccelerator, schemas.DescribeCustomRoutingAcceleratorRequest, schemas.DescribeCustomRoutingAcceleratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCustomRoutingAccelerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomRoutingAccelerator, schemas.DescribeCustomRoutingAcceleratorRequest, schemas.DescribeCustomRoutingAcceleratorResponse), output: &DescribeCustomRoutingAcceleratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

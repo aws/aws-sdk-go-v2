@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,17 @@ type AddAttributesToFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddAttributesToFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddAttributesToFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddAttributesToFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserAttributeList(s, schemas.AddAttributesToFindingsRequest_attributes, v.Attributes)
+	serializeAddRemoveAttributesFindingArnList(s, schemas.AddAttributesToFindingsRequest_findingArns, v.FindingArns)
+}
+
 type AddAttributesToFindingsOutput struct {
 
 	// Attribute details that cannot be described. An error code is provided for each
@@ -54,13 +67,29 @@ type AddAttributesToFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddAttributesToFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddAttributesToFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddAttributesToFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedItems(s, schemas.AddAttributesToFindingsResponse_failedItems, v.FailedItems)
+}
+func (v *AddAttributesToFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddAttributesToFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddAttributesToFindingsResponse_failedItems:
+			return deserializeFailedItems(d, schemas.AddAttributesToFindingsResponse_failedItems, &v.FailedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddAttributesToFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddAttributesToFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddAttributesToFindings, schemas.AddAttributesToFindingsRequest, schemas.AddAttributesToFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddAttributesToFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddAttributesToFindings, schemas.AddAttributesToFindingsRequest, schemas.AddAttributesToFindingsResponse), output: &AddAttributesToFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

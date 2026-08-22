@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,38 @@ type PutExternalModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutExternalModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutExternalModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutExternalModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputConfiguration != nil {
+		s.WriteStruct(schemas.PutExternalModelRequest_inputConfiguration)
+		v.InputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvokeModelEndpointRoleArn != nil {
+		s.WriteString(schemas.PutExternalModelRequest_invokeModelEndpointRoleArn, *v.InvokeModelEndpointRoleArn)
+	}
+	if v.ModelEndpoint != nil {
+		s.WriteString(schemas.PutExternalModelRequest_modelEndpoint, *v.ModelEndpoint)
+	}
+	if v.ModelEndpointStatus != "" {
+		s.WriteString(schemas.PutExternalModelRequest_modelEndpointStatus, string(v.ModelEndpointStatus))
+	}
+	if v.ModelSource != "" {
+		s.WriteString(schemas.PutExternalModelRequest_modelSource, string(v.ModelSource))
+	}
+	if v.OutputConfiguration != nil {
+		s.WriteStruct(schemas.PutExternalModelRequest_outputConfiguration)
+		v.OutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializetagList(s, schemas.PutExternalModelRequest_tags, v.Tags)
+}
+
 type PutExternalModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,13 +105,26 @@ type PutExternalModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutExternalModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutExternalModelResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutExternalModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutExternalModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutExternalModelResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutExternalModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutExternalModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutExternalModel, schemas.PutExternalModelRequest, schemas.PutExternalModelResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutExternalModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutExternalModel, schemas.PutExternalModelRequest, schemas.PutExternalModelResult), output: &PutExternalModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

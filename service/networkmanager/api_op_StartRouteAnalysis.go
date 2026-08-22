@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,34 @@ type StartRouteAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRouteAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRouteAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRouteAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.StartRouteAnalysisRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.StartRouteAnalysisRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.IncludeReturnPath != false {
+		s.WriteBool(schemas.StartRouteAnalysisRequest_IncludeReturnPath, v.IncludeReturnPath)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.StartRouteAnalysisRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UseMiddleboxes != false {
+		s.WriteBool(schemas.StartRouteAnalysisRequest_UseMiddleboxes, v.UseMiddleboxes)
+	}
+}
+
 type StartRouteAnalysisOutput struct {
 
 	// The route analysis.
@@ -65,13 +95,34 @@ type StartRouteAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRouteAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRouteAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRouteAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouteAnalysis != nil {
+		s.WriteStruct(schemas.StartRouteAnalysisResponse_RouteAnalysis)
+		v.RouteAnalysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartRouteAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRouteAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRouteAnalysisResponse_RouteAnalysis:
+			v.RouteAnalysis = &types.RouteAnalysis{}
+			return v.RouteAnalysis.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRouteAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRouteAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRouteAnalysis, schemas.StartRouteAnalysisRequest, schemas.StartRouteAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRouteAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRouteAnalysis, schemas.StartRouteAnalysisRequest, schemas.StartRouteAnalysisResponse), output: &StartRouteAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
