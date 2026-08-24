@@ -51,6 +51,14 @@ func TestAllowedQueryHoisting(t *testing.T) {
 			Header:      "X-Amz-Checksum-Somefuturealgorithm",
 			ExpectHoist: false,
 		},
+		// x-amz-checksum-mode is a read-side request flag on GetObject/HeadObject,
+		// not a checksum value header. It must be hoisted (not signed) so presigned
+		// GET URLs work with plain HTTP clients that never send the header.
+		// Regression test for https://github.com/aws/aws-sdk-go-v2/issues/3528.
+		"checksum mode": {
+			Header:      "X-Amz-Checksum-Mode",
+			ExpectHoist: true,
+		},
 	}
 
 	for name, c := range cases {
