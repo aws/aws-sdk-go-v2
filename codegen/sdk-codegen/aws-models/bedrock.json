@@ -382,6 +382,15 @@
                 "smithy.api#documentation": "<p>Contains a summary of an advanced prompt optimization job.</p>"
             }
         },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationModelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}|))|(arn:aws(|-us-gov|-cn|-iso|-iso-b|-iso-f):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:application-inference-profile/[a-zA-Z0-9-:.]+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b|-iso-f):bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:inference-profile/[a-zA-Z0-9-:.]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))$"
+            }
+        },
         "com.amazonaws.bedrock#AdvancedPromptOptimizationOutputConfig": {
             "type": "structure",
             "members": {
@@ -19461,9 +19470,9 @@
             "type": "structure",
             "members": {
                 "modelId": {
-                    "target": "com.amazonaws.bedrock#BedrockModelId",
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the model to use for optimization.</p>",
+                        "smithy.api#documentation": "<p>The model to use for optimization. The value depends on the resource that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html\">Models at a glance</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a cross-Region (system-defined) inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for inference profiles</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an application inference profile, specify its full ARN, including the account ID and Region.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },

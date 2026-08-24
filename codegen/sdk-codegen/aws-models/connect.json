@@ -48172,6 +48172,78 @@
                 }
             }
         },
+        "com.amazonaws.connect#RealTimeContactAnalysisExtractedInformationContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.connect#RealTimeContactAnalysisExtractedInformationFailureCode": {
+            "type": "enum",
+            "members": {
+                "QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUOTA_EXCEEDED"
+                    }
+                },
+                "INSUFFICIENT_CONVERSATION_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_CONVERSATION_CONTENT"
+                    }
+                },
+                "FAILED_SAFETY_GUIDELINES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_SAFETY_GUIDELINES"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "MAX_PACKAGE_FEATURE_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX_PACKAGE_FEATURE_ONLY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#RealTimeContactAnalysisExtractedInformationValue": {
+            "type": "structure",
+            "members": {
+                "Content": {
+                    "target": "com.amazonaws.connect#RealTimeContactAnalysisExtractedInformationContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text content of the extracted value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PointsOfInterest": {
+                    "target": "com.amazonaws.connect#RealTimeContactAnalysisTranscriptItemsWithCharacterOffsets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sections in the conversation that indicate where the extracted value was found.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An individual value extracted from the conversation, including its content and the locations where it\n   was found.</p>"
+            }
+        },
+        "com.amazonaws.connect#RealTimeContactAnalysisExtractedInformationValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RealTimeContactAnalysisExtractedInformationValue"
+            }
+        },
         "com.amazonaws.connect#RealTimeContactAnalysisId256": {
             "type": "string",
             "traits": {
@@ -48441,6 +48513,46 @@
                 "smithy.api#documentation": "<p>Segment type describing a contact event.</p>"
             }
         },
+        "com.amazonaws.connect#RealTimeContactAnalysisSegmentExtractedInformation": {
+            "type": "structure",
+            "members": {
+                "ExtractionDefinitionId": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the extraction definition that produced this result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionName": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the extraction definition that produced this result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionDisplayLabel": {
+                    "target": "com.amazonaws.connect#ExtractionDefinitionDisplayLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display label of the extraction definition that produced this result.</p>"
+                    }
+                },
+                "ExtractedValues": {
+                    "target": "com.amazonaws.connect#RealTimeContactAnalysisExtractedInformationValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of values extracted from the conversation for this extraction definition. This field is empty when a\n   <code>FailureCode</code> is present.</p>"
+                    }
+                },
+                "FailureCode": {
+                    "target": "com.amazonaws.connect#RealTimeContactAnalysisExtractedInformationFailureCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the information failed to be extracted, one of the following failure codes occurs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached your service quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: Information extraction requires a conversation with at least\n     one turn from each participant.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_SAFETY_GUIDELINES</code>: The extracted information cannot be provided because it failed to meet\n     system safety guidelines.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code>: Internal system error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAX_PACKAGE_FEATURE_ONLY</code>: Information extraction is only available in Amazon Connect Customer instances.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Segment containing information extracted from the conversation. Each segment represents the results for a\n   single extraction definition.</p>"
+            }
+        },
         "com.amazonaws.connect#RealTimeContactAnalysisSegmentIssues": {
             "type": "structure",
             "members": {
@@ -48588,6 +48700,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PostContactSummary"
                     }
+                },
+                "ExtractedInformation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExtractedInformation"
+                    }
                 }
             }
         },
@@ -48599,7 +48717,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 6
+                    "max": 7
                 }
             }
         },
@@ -48797,6 +48915,12 @@
                     "target": "com.amazonaws.connect#RealTimeContactAnalysisSegmentPostContactSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the post-contact summary.</p>"
+                    }
+                },
+                "ExtractedInformation": {
+                    "target": "com.amazonaws.connect#RealTimeContactAnalysisSegmentExtractedInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The extracted information from the conversation.</p>"
                     }
                 }
             },

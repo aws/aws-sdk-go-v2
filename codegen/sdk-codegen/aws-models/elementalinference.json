@@ -496,6 +496,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that you specified in the request. This property is absent if you didn't specify an IAM role. </p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.elementalinference#FeedStatus",
                     "traits": {
@@ -1089,6 +1095,9 @@
             "type": "service",
             "version": "2018-11-14",
             "operations": [
+                {
+                    "target": "com.amazonaws.elementalinference#GetFixture"
+                },
                 {
                     "target": "com.amazonaws.elementalinference#ListTagsForResource"
                 },
@@ -2588,6 +2597,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that Elemental Inference assumes. Elemental Inference uses this role to access resources in your account on your behalf. This property is absent if the feed doesn't have an IAM role. </p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.elementalinference#FeedStatus",
                     "traits": {
@@ -2613,6 +2628,115 @@
                     "target": "com.amazonaws.elementalinference#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the tags, if any, for the feed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFixture": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#GetFixtureRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#GetFixtureResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#GatewayTimedOutException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a fixture"
+                },
+                "smithy.api#documentation": "<p>Retrieves information about the specified fixture (a sports event, such as a specific basketball game). You obtain a fixtureId from SearchFixtures, or from the clipping output of a feed. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/fixtures/{fixtureId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFixtureRequest": {
+            "type": "structure",
+            "members": {
+                "fixtureId": {
+                    "target": "com.amazonaws.elementalinference#FixtureId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the fixture to retrieve, as returned by SearchFixtures.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFixtureResponse": {
+            "type": "structure",
+            "members": {
+                "fixtureId": {
+                    "target": "com.amazonaws.elementalinference#FixtureId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID that you specified in the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fixture, as provided by the data source. For example, the names of the two competing teams. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fixtureGroup": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group that the fixture belongs to, such as the competition, league, or tournament. The data source doesn't provide this information for every fixture. </p>"
+                    }
+                },
+                "scheduledStart": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduled start time of the fixture, as provided by the data source. The actual start time might differ. </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the fixture in its lifecycle, as provided by the data source. For example, Scheduled or Completed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "competitors": {
+                    "target": "com.amazonaws.elementalinference#CompetitorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the competitors (the teams or individuals) in the fixture.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -3858,6 +3982,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The array of outputs in the feed. You might have left this array unchanged, or you might have changed it. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accessRoleArn": {
+                    "target": "com.amazonaws.elementalinference#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role for the feed, after the update. This property is absent if the feed doesn't have an IAM role. </p>"
                     }
                 },
                 "status": {

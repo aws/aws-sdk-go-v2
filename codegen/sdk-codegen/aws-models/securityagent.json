@@ -723,6 +723,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of integrated repositories associated with the pentest.</p>"
                     }
+                },
+                "trustedCaCertificates": {
+                    "target": "com.amazonaws.securityagent#TrustedCaCertificateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust anchors used to validate target endpoint TLS certificates. Provide these for endpoints served by a private or internal certificate authority (CA), an intermediate CA, or a self-signed certificate.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2442,6 +2448,43 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>A Bitbucket workspace slug that identifies a workspace.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#CaCertificatePem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A PEM-encoded X.509 certificate.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.securityagent#CaCertificateSource": {
+            "type": "union",
+            "members": {
+                "inlinePem": {
+                    "target": "com.amazonaws.securityagent#CaCertificatePem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A PEM-encoded X.509 certificate supplied inline.</p>"
+                    }
+                },
+                "artifactId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The artifact ID of an uploaded certificate file.</p>"
+                    }
+                },
+                "s3Location": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location URI of a customer-staged certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of a trusted CA certificate. Exactly one member must be set.</p>"
             }
         },
         "com.amazonaws.securityagent#Category": {
@@ -10082,6 +10125,12 @@
                         "smithy.api#documentation": "<p>The list of integrated repositories associated with the pentest job.</p>"
                     }
                 },
+                "trustedCaCertificates": {
+                    "target": "com.amazonaws.securityagent#TrustedCaCertificateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trust anchors used to validate target endpoint TLS certificates during the pentest job.</p>"
+                    }
+                },
                 "codeRemediationStrategy": {
                     "target": "com.amazonaws.securityagent#CodeRemediationStrategy",
                     "traits": {
@@ -14216,6 +14265,28 @@
                 "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.securityagent#TrustedCaCertificate": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.securityagent#CaCertificateSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source that AWS Security Agent reads the certificate from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A trust anchor used when validating a target endpoint's TLS certificate.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.securityagent#TrustedCaCertificateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#TrustedCaCertificate"
             }
         },
         "com.amazonaws.securityagent#UntagResource": {

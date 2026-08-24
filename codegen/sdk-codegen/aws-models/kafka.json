@@ -5391,6 +5391,26 @@
                 "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>"
             }
         },
+        "com.amazonaws.kafka#JwtSigningAlgorithm": {
+            "type": "enum",
+            "members": {
+                "RS256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RS256"
+                    }
+                },
+                "ES384": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ES384"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The algorithm used to sign the STS JWT assertion.</p>"
+            }
+        },
         "com.amazonaws.kafka#Kafka": {
             "type": "service",
             "version": "2018-11-14",
@@ -6907,6 +6927,13 @@
                         "smithy.api#documentation": "<p>Details for mTLS client authentication.</p>",
                         "smithy.api#jsonName": "mTLS"
                     }
+                },
+                "SaslOAuthBearer": {
+                    "target": "com.amazonaws.kafka#KafkaClusterSaslOAuthBearerAuthentication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for SASL/OAUTHBEARER client authentication.</p>",
+                        "smithy.api#jsonName": "saslOAuthBearer"
+                    }
                 }
             },
             "traits": {
@@ -7040,6 +7067,150 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details for mTLS client authentication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterOAuthClientCredentials": {
+            "type": "structure",
+            "members": {
+                "TokenRequestSecretArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the OAuth client credentials.</p>",
+                        "smithy.api#jsonName": "tokenRequestSecretArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for SASL/OAUTHBEARER using standard client_credentials grant.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterOAuthClientCredentialsAssertion": {
+            "type": "structure",
+            "members": {
+                "Audience": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The audience for the JWT client assertion.</p>",
+                        "smithy.api#jsonName": "audience",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningAlgorithm": {
+                    "target": "com.amazonaws.kafka#JwtSigningAlgorithm",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The signing algorithm for the JWT client assertion.</p>",
+                        "smithy.api#jsonName": "signingAlgorithm",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TokenRequestSecretArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the signing key.</p>",
+                        "smithy.api#jsonName": "tokenRequestSecretArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterOAuthIamJwtBearer": {
+            "type": "structure",
+            "members": {
+                "Audience": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The audience for the JWT Bearer assertion.</p>",
+                        "smithy.api#jsonName": "audience",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningAlgorithm": {
+                    "target": "com.amazonaws.kafka#JwtSigningAlgorithm",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The signing algorithm for the JWT Bearer assertion.</p>",
+                        "smithy.api#jsonName": "signingAlgorithm",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TokenRequestSecretArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret containing the signing key.</p>",
+                        "smithy.api#jsonName": "tokenRequestSecretArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for SASL/OAUTHBEARER using JWT Bearer assertion grant.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterSaslOAuthBearerAuthentication": {
+            "type": "structure",
+            "members": {
+                "TokenEndpointUrl": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer tokens per RFC 6749.</p>",
+                        "smithy.api#jsonName": "tokenEndpointUrl",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientCredentials": {
+                    "target": "com.amazonaws.kafka#KafkaClusterOAuthClientCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for SASL/OAUTHBEARER using standard client_credentials grant.</p>",
+                        "smithy.api#jsonName": "clientCredentials"
+                    }
+                },
+                "IamJwtBearer": {
+                    "target": "com.amazonaws.kafka#KafkaClusterOAuthIamJwtBearer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC 7523).</p>",
+                        "smithy.api#jsonName": "iamJwtBearer"
+                    }
+                },
+                "ClientCredentialsAssertion": {
+                    "target": "com.amazonaws.kafka#KafkaClusterOAuthClientCredentialsAssertion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion.</p>",
+                        "smithy.api#jsonName": "clientCredentialsAssertion"
+                    }
+                },
+                "TokenEndpointAuthenticationMethod": {
+                    "target": "com.amazonaws.kafka#TokenEndpointAuthenticationMethod",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>How client credentials are sent to the identity provider. Valid values are POST, BASIC, or NONE.</p>",
+                        "smithy.api#jsonName": "tokenEndpointAuthenticationMethod",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>OAuth scope to request.</p>",
+                        "smithy.api#jsonName": "scope"
+                    }
+                },
+                "TokenEndpointTlsCertificateArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Secrets Manager ARN containing a custom CA certificate for the identity provider.</p>",
+                        "smithy.api#jsonName": "tokenEndpointTlsCertificateArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for SASL/OAUTHBEARER client authentication.</p>"
             }
         },
         "com.amazonaws.kafka#KafkaClusterSaslScramAuthentication": {
@@ -10542,6 +10713,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details for client authentication using TLS.</p>"
+            }
+        },
+        "com.amazonaws.kafka#TokenEndpointAuthenticationMethod": {
+            "type": "enum",
+            "members": {
+                "POST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POST"
+                    }
+                },
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>How client credentials are sent to the identity provider's token endpoint.</p>"
             }
         },
         "com.amazonaws.kafka#TooManyRequestsException": {

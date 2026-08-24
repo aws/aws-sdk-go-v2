@@ -1,6 +1,33 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.launchwizard#AccountConstraint": {
+            "type": "union",
+            "members": {
+                "managementAccount": {
+                    "target": "com.amazonaws.launchwizard#ManagementAccountConstraint"
+                },
+                "delegatedAdmin": {
+                    "target": "com.amazonaws.launchwizard#DelegatedAdminConstraint"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A constraint on which AWS account a deployment can be initiated from. Specify one of the supported constraint types."
+            }
+        },
+        "com.amazonaws.launchwizard#AccountConstraintsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.launchwizard#AccountConstraint"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.launchwizard#AllowedValues": {
             "type": "list",
             "member": {
@@ -155,6 +182,21 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.launchwizard#DelegatedAdminConstraint": {
+            "type": "structure",
+            "members": {
+                "servicePrincipal": {
+                    "target": "com.amazonaws.launchwizard#ServicePrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "The service principal for which the account must be a delegated administrator. For example, `stacksets.cloudformation.amazonaws.com`.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The deployment must be initiated from a delegated administrator account for the specified service principal."
             }
         },
         "com.amazonaws.launchwizard#DeleteDeployment": {
@@ -472,6 +514,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of the deployment event.</p>"
                     }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.launchwizard#DeploymentEventMetadata"
                 }
             },
             "traits": {
@@ -482,6 +527,40 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.launchwizard#DeploymentEventDataSummary"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentEventMetadata": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.launchwizard#DeploymentEventMetadataKey"
+            },
+            "value": {
+                "target": "com.amazonaws.launchwizard#DeploymentEventMetadataValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "A map of metadata key-value pairs associated with a deployment event.\nFor error detection events, contains workload context and log excerpts used for troubleshooting.",
+                "smithy.api#length": {
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentEventMetadataKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
+            }
+        },
+        "com.amazonaws.launchwizard#DeploymentEventMetadataValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
             }
         },
         "com.amazonaws.launchwizard#DeploymentFilter": {
@@ -2786,6 +2865,13 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.launchwizard#ManagementAccountConstraint": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "The deployment must be initiated from the AWS Organizations management account."
+            }
+        },
         "com.amazonaws.launchwizard#MaxDeploymentEventResults": {
             "type": "integer",
             "traits": {
@@ -2857,6 +2943,16 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.launchwizard#ServicePrincipalType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-z0-9.-]+\\.amazonaws\\.com(\\.cn)?$"
+            }
+        },
         "com.amazonaws.launchwizard#SettingsSet": {
             "type": "resource",
             "identifiers": {
@@ -2890,7 +2986,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9 _.:/=+@-]+$"
             }
         },
         "com.amazonaws.launchwizard#TagKeyList": {
@@ -2982,7 +3078,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z+-=._:/]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9 _.:/=+@-]*$"
             }
         },
         "com.amazonaws.launchwizard#Tags": {
@@ -3294,6 +3390,12 @@
                         "smithy.api#documentation": "<p>The status of a workload.</p> <p> <i>You can list deployments in the <code>DISABLED</code> status.</i> </p>"
                     }
                 },
+                "accountConstraints": {
+                    "target": "com.amazonaws.launchwizard#AccountConstraintsList",
+                    "traits": {
+                        "smithy.api#documentation": "Optional list of constraints describing what kind of AWS account is allowed to deploy this workload or deployment pattern. Within a single list the semantics are OR: an account satisfies the list if it satisfies any entry. Workload-level and pattern-level lists combine with AND at deployment time. An absent or empty list at this level means no constraint at this level."
+                    }
+                },
                 "description": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -3342,6 +3444,12 @@
                     "target": "com.amazonaws.launchwizard#WorkloadStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the workload.</p>"
+                    }
+                },
+                "accountConstraints": {
+                    "target": "com.amazonaws.launchwizard#AccountConstraintsList",
+                    "traits": {
+                        "smithy.api#documentation": "Optional list of constraints describing what kind of AWS account is allowed to deploy this workload or deployment pattern. Within a single list the semantics are OR: an account satisfies the list if it satisfies any entry. Workload-level and pattern-level lists combine with AND at deployment time. An absent or empty list at this level means no constraint at this level."
                     }
                 }
             },
@@ -3428,6 +3536,12 @@
                         "smithy.api#documentation": "<p>The status message of the deployment pattern.</p>"
                     }
                 },
+                "accountConstraints": {
+                    "target": "com.amazonaws.launchwizard#AccountConstraintsList",
+                    "traits": {
+                        "smithy.api#documentation": "Optional list of constraints describing what kind of AWS account is allowed to deploy this workload or deployment pattern. Within a single list the semantics are OR: an account satisfies the list if it satisfies any entry. Workload-level and pattern-level lists combine with AND at deployment time. An absent or empty list at this level means no constraint at this level."
+                    }
+                },
                 "specifications": {
                     "target": "com.amazonaws.launchwizard#DeploymentSpecificationsData",
                     "traits": {
@@ -3488,6 +3602,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A message about a workload deployment pattern's status.</p>"
+                    }
+                },
+                "accountConstraints": {
+                    "target": "com.amazonaws.launchwizard#AccountConstraintsList",
+                    "traits": {
+                        "smithy.api#documentation": "Optional list of constraints describing what kind of AWS account is allowed to deploy this workload or deployment pattern. Within a single list the semantics are OR: an account satisfies the list if it satisfies any entry. Workload-level and pattern-level lists combine with AND at deployment time. An absent or empty list at this level means no constraint at this level."
                     }
                 }
             },
