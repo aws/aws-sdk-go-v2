@@ -1,3 +1,7 @@
+# v1.18.0 (2026-08-24)
+
+* **Feature**: Added accountConstraints and patternType to GetWorkload, ListWorkloads, GetWorkloadDeploymentPattern and ListWorkloadDeploymentPatterns for Launch Wizard
+
 # v1.17.7 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

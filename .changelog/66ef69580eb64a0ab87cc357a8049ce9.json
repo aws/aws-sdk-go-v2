@@ -1,8 +1,0 @@
-{
-    "id": "66ef6958-0eb6-4a0a-b87c-c357a8049ce9",
-    "type": "feature",
-    "description": "Adding private and self-signed certificate configuration support for penetration tests",
-    "modules": [
-        "service/securityagent"
-    ]
-}

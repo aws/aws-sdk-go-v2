@@ -1,8 +1,0 @@
-{
-    "id": "2696616c-acd3-48f0-9f3f-73cd1a358d35",
-    "type": "feature",
-    "description": "Adds support for specifying an inference profile ID or ARN, or an application inference profile ARN as the target model in CreateAdvancedPromptOptimizationJob.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

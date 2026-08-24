@@ -1,3 +1,7 @@
+# v1.190.0 (2026-08-24)
+
+* **Feature**: This release adds the ExtractedInformation segment to the ListRealtimeContactAnalysisSegmentsV2 API, enabling customers to retrieve information extracted from real-time contact analysis.
+
 # v1.189.1 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

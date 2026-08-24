@@ -1,3 +1,7 @@
+# v1.59.0 (2026-08-24)
+
+* **Feature**: Amazon MSK Replicator now supports OAuth authentication when connecting to external Apache Kafka clusters, enabling customers to replicate data from clusters that require OAuth for client authentication. This new capability is supported in all AWS Regions where MSK Express brokers are available.
+
 # v1.58.3 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

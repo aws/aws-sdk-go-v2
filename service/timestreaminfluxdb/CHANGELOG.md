@@ -1,3 +1,7 @@
+# v1.24.0 (2026-08-24)
+
+* **Feature**: Service-managed parameter groups now only apply optimized defaults to DB Clusters automatically. New field effectiveDbParameterGroupIdentifier surfaces the parameter group actually applied.
+
 # v1.23.4 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

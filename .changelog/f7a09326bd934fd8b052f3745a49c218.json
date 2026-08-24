@@ -1,8 +1,0 @@
-{
-    "id": "f7a09326-bd93-4fd8-b052-f3745a49c218",
-    "type": "documentation",
-    "description": "Doc Update, Add note that UpdatePolicy applies only to EC2 managed compute environments",
-    "modules": [
-        "service/batch"
-    ]
-}

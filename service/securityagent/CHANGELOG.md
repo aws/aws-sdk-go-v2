@@ -1,3 +1,7 @@
+# v1.12.0 (2026-08-24)
+
+* **Feature**: Adding private and self-signed certificate configuration support for penetration tests
+
 # v1.11.2 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

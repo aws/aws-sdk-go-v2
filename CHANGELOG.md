@@ -1,3 +1,25 @@
+# Release (2026-08-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.70.1](service/batch/CHANGELOG.md#v1701-2026-08-24)
+  * **Documentation**: Doc Update, Add note that UpdatePolicy applies only to EC2 managed compute environments
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.67.0](service/bedrock/CHANGELOG.md#v1670-2026-08-24)
+  * **Feature**: Adds support for specifying an inference profile ID or ARN, or an application inference profile ARN as the target model in CreateAdvancedPromptOptimizationJob.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.190.0](service/connect/CHANGELOG.md#v11900-2026-08-24)
+  * **Feature**: This release adds the ExtractedInformation segment to the ListRealtimeContactAnalysisSegmentsV2 API, enabling customers to retrieve information extracted from real-time contact analysis.
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.37.0](service/connectcontactlens/CHANGELOG.md#v1370-2026-08-24)
+  * **Feature**: This release adds the ExtractedInformation segment to the ListRealtimeContactAnalysisSegments API, enabling customers to retrieve information extracted from real-time contact analysis.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.7.0](service/elementalinference/CHANGELOG.md#v170-2026-08-24)
+  * **Feature**: Added support for the GetFixture API, enabling customers to retrieve the details of a fixture from its fixture ID, and added the access role ARN to the CreateFeed, GetFeed, and UpdateFeed responses.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.59.0](service/kafka/CHANGELOG.md#v1590-2026-08-24)
+  * **Feature**: Amazon MSK Replicator now supports OAuth authentication when connecting to external Apache Kafka clusters, enabling customers to replicate data from clusters that require OAuth for client authentication. This new capability is supported in all AWS Regions where MSK Express brokers are available.
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.18.0](service/launchwizard/CHANGELOG.md#v1180-2026-08-24)
+  * **Feature**: Added accountConstraints and patternType to GetWorkload, ListWorkloads, GetWorkloadDeploymentPattern and ListWorkloadDeploymentPatterns for Launch Wizard
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.12.0](service/securityagent/CHANGELOG.md#v1120-2026-08-24)
+  * **Feature**: Adding private and self-signed certificate configuration support for penetration tests
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.24.0](service/timestreaminfluxdb/CHANGELOG.md#v1240-2026-08-24)
+  * **Feature**: Service-managed parameter groups now only apply optimized defaults to DB Clusters automatically. New field effectiveDbParameterGroupIdentifier surfaces the parameter group actually applied.
+
 # Release (2026-08-21)
 
 ## Module Highlights

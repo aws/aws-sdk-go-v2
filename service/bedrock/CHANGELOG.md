@@ -1,3 +1,7 @@
+# v1.67.0 (2026-08-24)
+
+* **Feature**: Adds support for specifying an inference profile ID or ARN, or an application inference profile ARN as the target model in CreateAdvancedPromptOptimizationJob.
+
 # v1.66.7 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

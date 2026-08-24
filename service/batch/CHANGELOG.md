@@ -1,3 +1,7 @@
+# v1.70.1 (2026-08-24)
+
+* **Documentation**: Doc Update, Add note that UpdatePolicy applies only to EC2 managed compute environments
+
 # v1.70.0 (2026-08-20)
 
 * **Feature**: AWS Batch now supports a new compute environment type that provides fully managed EC2 capacity with broader compute flexibility than Fargate, including GPU instances, bare metal, and specific instance type selection, without infrastructure management overhead.
